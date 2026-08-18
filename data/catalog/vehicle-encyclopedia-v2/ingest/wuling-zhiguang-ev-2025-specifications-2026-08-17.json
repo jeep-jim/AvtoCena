@@ -1,0 +1,443 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-sgmw-wuling-zhiguang-ev-spec",
+          "type": "manufacturer_technical_document",
+          "title": "五菱之光EV参数配置",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://www.sgmw.com.cn/carDetail?id=275",
+          "documentId": "SGMW carDetail 275",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "bodyTypes",
+            "name",
+            "market",
+            "bodyType",
+            "powertrainKind",
+            "drive",
+            "motorPeakKw",
+            "rangeKm",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "grossWeightKg",
+            "seats",
+            "topSpeedKmh"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Exact three-column manufacturer table. Battery values are not mapped because gross, usable or rated basis is not stated. The table's 16/30 kW rated/peak row contributes only the explicit 30 kW peak value; rated power is not treated as legal 30-minute power. The range test standard is not stated and is not inferred."
+        },
+        {
+          "id": "src-sgmw-wuling-zhiguang-ev-launch-history-2025",
+          "type": "manufacturer",
+          "title": "上汽通用五菱一季度实销377257辆",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=50227",
+          "documentId": "SGMW portal 50227",
+          "documentDate": "2025-04-02",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "productionFrom",
+            "yearFrom",
+            "name",
+            "bodyTypes",
+            "powertrainKinds",
+            "bodyType"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official sales record explicitly states that Zhiguang EV launched in February 2025 and identifies it as a new-energy microvan."
+        },
+        {
+          "id": "src-sgmw-wuling-zhiguang-ev-305-launch-2025",
+          "type": "manufacturer",
+          "title": "全球新能源商用车引领者！五菱红标7月销量49,020辆",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=51893",
+          "documentId": "SGMW portal 51893",
+          "documentDate": "2025-08-06",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "yearFrom",
+            "rangeKm"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official sales record states that the 305 km Progress grade launched on 2025-07-23."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/zhiguang",
+          "brandId": "wuling",
+          "canonicalName": "Zhiguang",
+          "slug": "zhiguang",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 之光",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-red-current-zh-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "powertrainKinds": [
+            "BEV",
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-red-current-zh-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "SGMW's official China current-range page supplies the exact source identity; the public Latin name is a conservative review-only romanization."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-zhiguang-ev-launch-history-2025",
+              "fields": [
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Van is the normalized public body classification for SGMW's explicitly described new-energy microvan; the current family retains BEV and ICE forms."
+            }
+          ],
+          "researchNotes": [
+            "Current model identity only: production start, generation, body and exact specification require a model-specific manufacturer page before pricing use.",
+            "Trim or generation labels such as Macaron, GAMEBOY, Cabrio and New Hongguang S are not duplicated as standalone models.",
+            "Three exact 2025 Zhiguang EV configurations are staged below; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/zhiguang/ev-2025",
+          "modelId": "wuling/zhiguang",
+          "name": "EV (2025)",
+          "aliases": [
+            {
+              "value": "之光EV",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-zhiguang-ev-launch-history-2025"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2025-02",
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-zhiguang-ev-launch-history-2025",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW records a February 2025 launch and describes the vehicle as a new-energy microvan, normalized to Van."
+            }
+          ],
+          "researchNotes": [
+            "Powertrain-edition container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/zhiguang/ev-2025/standard-201-km",
+          "modelId": "wuling/zhiguang",
+          "generationId": "wuling/zhiguang/ev-2025",
+          "faceliftId": null,
+          "name": "Standard 201 km",
+          "aliases": [
+            {
+              "value": "标准型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-zhiguang-ev-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Van",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 30,
+          "rangeKm": 201,
+          "lengthMm": 3685,
+          "widthMm": 1530,
+          "heightMm": 1750,
+          "wheelbaseMm": 2600,
+          "grossWeightKg": 1220,
+          "seats": 4,
+          "topSpeedKmh": 100,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-zhiguang-ev-launch-history-2025",
+              "fields": [
+                "yearFrom",
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official record confirms the 2025 launch year and microvan classification, normalized to Van."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-zhiguang-ev-spec",
+              "fields": [
+                "name",
+                "market",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "grossWeightKg",
+                "seats",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's three-column Zhiguang EV table; rear-mounted rear drive is normalized to RWD."
+            }
+          ],
+          "researchNotes": [
+            "Battery capacity is intentionally not assigned to gross, usable or rated capacity without an explicit basis.",
+            "The source does not state the range test standard. Its 16 kW rated motor value is not stored as legal 30-minute power; only the exact 30 kW peak value is mapped."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/zhiguang/ev-2025/comfort-201-km",
+          "modelId": "wuling/zhiguang",
+          "generationId": "wuling/zhiguang/ev-2025",
+          "faceliftId": null,
+          "name": "Comfort 201 km",
+          "aliases": [
+            {
+              "value": "舒适型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-zhiguang-ev-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Van",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 30,
+          "rangeKm": 201,
+          "lengthMm": 3685,
+          "widthMm": 1530,
+          "heightMm": 1765,
+          "wheelbaseMm": 2600,
+          "grossWeightKg": 1220,
+          "seats": 4,
+          "topSpeedKmh": 100,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-zhiguang-ev-launch-history-2025",
+              "fields": [
+                "yearFrom",
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official record confirms the 2025 launch year and microvan classification, normalized to Van."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-zhiguang-ev-spec",
+              "fields": [
+                "name",
+                "market",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "grossWeightKg",
+                "seats",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's three-column Zhiguang EV table; rear-mounted rear drive is normalized to RWD."
+            }
+          ],
+          "researchNotes": [
+            "Battery capacity is intentionally not assigned to gross, usable or rated capacity without an explicit basis.",
+            "The source does not state the range test standard. Its 16 kW rated motor value is not stored as legal 30-minute power; only the exact 30 kW peak value is mapped."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/zhiguang/ev-2025/progress-305-km",
+          "modelId": "wuling/zhiguang",
+          "generationId": "wuling/zhiguang/ev-2025",
+          "faceliftId": null,
+          "name": "Progress 305 km",
+          "aliases": [
+            {
+              "value": "进取型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-zhiguang-ev-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Van",
+          "powertrainKind": "BEV",
+          "drive": "RWD",
+          "motorPeakKw": 30,
+          "rangeKm": 305,
+          "lengthMm": 3685,
+          "widthMm": 1530,
+          "heightMm": 1765,
+          "wheelbaseMm": 2600,
+          "grossWeightKg": 1350,
+          "seats": 4,
+          "topSpeedKmh": 100,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-zhiguang-ev-launch-history-2025",
+              "fields": [
+                "yearFrom",
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official record confirms the 2025 launch year and microvan classification, normalized to Van."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-zhiguang-ev-305-launch-2025",
+              "fields": [
+                "name",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW explicitly records the 305 km Progress grade launch."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-zhiguang-ev-spec",
+              "fields": [
+                "name",
+                "market",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "grossWeightKg",
+                "seats",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's three-column Zhiguang EV table; rear-mounted rear drive is normalized to RWD."
+            }
+          ],
+          "researchNotes": [
+            "Battery capacity is intentionally not assigned to gross, usable or rated capacity without an explicit basis.",
+            "The source does not state the range test standard. Its 16 kW rated motor value is not stored as legal 30-minute power; only the exact 30 kW peak value is mapped."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

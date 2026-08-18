@@ -1,0 +1,981 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-hima-aito-current-range-2026",
+          "type": "manufacturer",
+          "title": "HIMA AITO current official model range",
+          "publisher": "Huawei Device Co., Ltd. / HIMA",
+          "url": "https://hima.auto/wenjie/",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "notes": "Official current AITO/问界 range page. Only explicit model, SUV and BEV/range-extender categories are retained; headline ranges and acceleration values are not promoted to generic variants.",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-hima-luxeed-current-range-2026",
+          "type": "manufacturer",
+          "title": "HIMA LUXEED current official model range",
+          "publisher": "Huawei Device Co., Ltd. / HIMA",
+          "url": "https://hima.auto/zhijie/",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "notes": "Official current LUXEED/智界 range page for S7, R7 and V9 identity and explicit vehicle/powertrain categories.",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-hima-maextro-current-range-2026",
+          "type": "manufacturer",
+          "title": "HIMA Maextro current official model range",
+          "publisher": "Huawei Device Co., Ltd. / HIMA",
+          "url": "https://hima.auto/zunjie/",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "notes": "Official current Maextro/尊界 range page for S800, V800 and V680. V800/V680 powertrain types are not retained because the range headline alone does not define the system architecture.",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-hima-shangjie-current-range-2026",
+          "type": "manufacturer",
+          "title": "HIMA SHANGJIE current official model range",
+          "publisher": "Huawei Device Co., Ltd. / HIMA",
+          "url": "https://hima.auto/shangjie/",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "notes": "Official current SHANGJIE/尚界 page for H5 and Z7. Z7T is retained only from Huawei's explicit model-year inventory without inferred body or powertrain fields.",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-hima-stelato-current-range-2026",
+          "type": "manufacturer",
+          "title": "HIMA STELATO current official model range",
+          "publisher": "Huawei Device Co., Ltd. / HIMA",
+          "url": "https://hima.auto/xiangjie/",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "notes": "Official current STELATO/享界 range page for S9 and S9T identity and explicit BEV/range-extender categories.",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "status": "active",
+          "license": null
+        },
+        {
+          "id": "src-huawei-hicar-current-models-2026",
+          "type": "authoritative_catalog",
+          "title": "Huawei HiCar supported vehicle model inventory",
+          "publisher": "Huawei Consumer Business Group",
+          "url": "https://consumer.huawei.com/cn/phones/hicar/available-car/",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom"
+          ],
+          "confidence": "high",
+          "notes": "Official Huawei compatibility inventory used for exact Chinese HIMA model names and explicitly listed model years. It is not used as a source for unlisted vehicle specifications.",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "status": "active",
+          "license": null
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "aito/m5",
+          "brandId": "aito",
+          "canonicalName": "M5",
+          "slug": "m5",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "问界 M5",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026",
+                "src-hima-aito-current-range-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2022",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "EREV",
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official compatibility inventory explicitly lists this Chinese model identity and any retained first model year."
+            },
+            {
+              "sourceId": "src-hima-aito-current-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current HIMA brand page explicitly lists this model and the retained vehicle/powertrain categories."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "aito/m6",
+          "brandId": "aito",
+          "canonicalName": "M6",
+          "slug": "m6",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "问界 M6",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026",
+                "src-hima-aito-current-range-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2026",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "EREV",
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official compatibility inventory explicitly lists this Chinese model identity and any retained first model year."
+            },
+            {
+              "sourceId": "src-hima-aito-current-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current HIMA brand page explicitly lists this model and the retained vehicle/powertrain categories."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "aito/m7",
+          "brandId": "aito",
+          "canonicalName": "M7",
+          "slug": "m7",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "问界 M7",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026",
+                "src-hima-aito-current-range-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2022",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "EREV",
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official compatibility inventory explicitly lists this Chinese model identity and any retained first model year."
+            },
+            {
+              "sourceId": "src-hima-aito-current-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current HIMA brand page explicitly lists this model and the retained vehicle/powertrain categories."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "aito/m8",
+          "brandId": "aito",
+          "canonicalName": "M8",
+          "slug": "m8",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "问界 M8",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026",
+                "src-hima-aito-current-range-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2025",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "EREV",
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official compatibility inventory explicitly lists this Chinese model identity and any retained first model year."
+            },
+            {
+              "sourceId": "src-hima-aito-current-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current HIMA brand page explicitly lists this model and the retained vehicle/powertrain categories."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "luxeed/r7",
+          "brandId": "luxeed",
+          "canonicalName": "R7",
+          "slug": "r7",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "智界 R7",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026",
+                "src-hima-luxeed-current-range-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2024",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "EREV",
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official compatibility inventory explicitly lists this Chinese model identity and any retained first model year."
+            },
+            {
+              "sourceId": "src-hima-luxeed-current-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current HIMA brand page explicitly lists this model and the retained vehicle/powertrain categories."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "luxeed/s7",
+          "brandId": "luxeed",
+          "canonicalName": "S7",
+          "slug": "s7",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "智界 S7",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026",
+                "src-hima-luxeed-current-range-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2024",
+          "productionTo": null,
+          "bodyTypes": [
+            "Sedan"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official compatibility inventory explicitly lists this Chinese model identity and any retained first model year."
+            },
+            {
+              "sourceId": "src-hima-luxeed-current-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current HIMA brand page explicitly lists this model and the retained vehicle/powertrain categories."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "luxeed/v9",
+          "brandId": "luxeed",
+          "canonicalName": "V9",
+          "slug": "v9",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "智界 V9",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026",
+                "src-hima-luxeed-current-range-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2026",
+          "productionTo": null,
+          "bodyTypes": [
+            "MPV"
+          ],
+          "powertrainKinds": [
+            "EREV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official compatibility inventory explicitly lists this Chinese model identity and any retained first model year."
+            },
+            {
+              "sourceId": "src-hima-luxeed-current-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current HIMA brand page explicitly lists this model and the retained vehicle/powertrain categories."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "maextro/s800",
+          "brandId": "maextro",
+          "canonicalName": "S800",
+          "slug": "s800",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "尊界 S800",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026",
+                "src-hima-maextro-current-range-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2025",
+          "productionTo": null,
+          "bodyTypes": [
+            "Sedan"
+          ],
+          "powertrainKinds": [
+            "EREV",
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official compatibility inventory explicitly lists this Chinese model identity and any retained first model year."
+            },
+            {
+              "sourceId": "src-hima-maextro-current-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current HIMA brand page explicitly lists this model and the retained vehicle/powertrain categories."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "maextro/v680",
+          "brandId": "maextro",
+          "canonicalName": "V680",
+          "slug": "v680",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "尊界 V680",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-hima-maextro-current-range-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "MPV"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-hima-maextro-current-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current HIMA brand page explicitly lists this model and the retained vehicle/powertrain categories."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "maextro/v800",
+          "brandId": "maextro",
+          "canonicalName": "V800",
+          "slug": "v800",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "尊界 V800",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-hima-maextro-current-range-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "MPV"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-hima-maextro-current-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current HIMA brand page explicitly lists this model and the retained vehicle/powertrain categories."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "shangjie/h5",
+          "brandId": "shangjie",
+          "canonicalName": "H5",
+          "slug": "h5",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "尚界 H5",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026",
+                "src-hima-shangjie-current-range-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2025",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "EREV",
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official compatibility inventory explicitly lists this Chinese model identity and any retained first model year."
+            },
+            {
+              "sourceId": "src-hima-shangjie-current-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current HIMA brand page explicitly lists this model and the retained vehicle/powertrain categories."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "shangjie/z7",
+          "brandId": "shangjie",
+          "canonicalName": "Z7",
+          "slug": "z7",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "尚界 Z7",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026",
+                "src-hima-shangjie-current-range-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2026",
+          "productionTo": null,
+          "bodyTypes": [
+            "Sportback"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official compatibility inventory explicitly lists this Chinese model identity and any retained first model year."
+            },
+            {
+              "sourceId": "src-hima-shangjie-current-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current HIMA brand page explicitly lists this model and the retained vehicle/powertrain categories."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "shangjie/z7t",
+          "brandId": "shangjie",
+          "canonicalName": "Z7T",
+          "slug": "z7t",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "尚界 Z7T",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2026",
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official compatibility inventory explicitly lists this Chinese model identity and any retained first model year."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "stelato/s9",
+          "brandId": "stelato",
+          "canonicalName": "S9",
+          "slug": "s9",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "享界 S9",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026",
+                "src-hima-stelato-current-range-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2024",
+          "productionTo": null,
+          "bodyTypes": [
+            "Sedan"
+          ],
+          "powertrainKinds": [
+            "EREV",
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official compatibility inventory explicitly lists this Chinese model identity and any retained first model year."
+            },
+            {
+              "sourceId": "src-hima-stelato-current-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current HIMA brand page explicitly lists this model and the retained vehicle/powertrain categories."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "stelato/s9t",
+          "brandId": "stelato",
+          "canonicalName": "S9T",
+          "slug": "s9t",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "享界 S9T",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026",
+                "src-hima-stelato-current-range-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2025",
+          "productionTo": null,
+          "bodyTypes": [
+            "Station wagon"
+          ],
+          "powertrainKinds": [
+            "EREV",
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official compatibility inventory explicitly lists this Chinese model identity and any retained first model year."
+            },
+            {
+              "sourceId": "src-hima-stelato-current-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current HIMA brand page explicitly lists this model and the retained vehicle/powertrain categories."
+            }
+          ],
+          "researchNotes": [
+            "Current 2020-2026 high-demand China model identity; review-only until exact generations, configurations and media pass approval.",
+            "Headline maximum range or acceleration values are not attached to a generic model or invented variant."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

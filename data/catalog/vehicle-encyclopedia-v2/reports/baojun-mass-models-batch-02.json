@@ -1,0 +1,66 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-18",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 8,
+    "newModels": 2,
+    "replacedModels": 2,
+    "newGenerations": 5,
+    "newVariants": 14
+  },
+  "modelIds": [
+    "baojun/valli",
+    "baojun/kiwi-ev",
+    "baojun/yunduo",
+    "baojun/e6"
+  ],
+  "generationIds": [
+    "baojun/valli/2021-launch",
+    "baojun/kiwi-ev/2021-launch",
+    "baojun/kiwi-ev/2023-model-year",
+    "baojun/yunduo/2023-launch",
+    "baojun/e6/2026-model-year"
+  ],
+  "variantIds": [
+    "baojun/valli/2021-launch/moganshan-valley-mt-elite",
+    "baojun/valli/2021-launch/ili-pasture-cvt-luxury",
+    "baojun/valli/2021-launch/dali-sky-cvt-premium",
+    "baojun/valli/2021-launch/nagqu-stars-cvt-flagship",
+    "baojun/kiwi-ev/2021-launch/designer",
+    "baojun/kiwi-ev/2021-launch/artist",
+    "baojun/kiwi-ev/2023-model-year/trend",
+    "baojun/kiwi-ev/2023-model-year/luxury",
+    "baojun/kiwi-ev/2023-model-year/dji-edition",
+    "baojun/yunduo/2023-launch/360-plus",
+    "baojun/yunduo/2023-launch/360-pro",
+    "baojun/yunduo/2023-launch/460-pro",
+    "baojun/yunduo/2023-launch/460-max",
+    "baojun/e6/2026-model-year/500km-enjoyment"
+  ],
+  "perModel": {
+    "baojun/valli": {
+      "variants": 4
+    },
+    "baojun/kiwi-ev": {
+      "variants": 5
+    },
+    "baojun/yunduo": {
+      "variants": 4
+    },
+    "baojun/e6": {
+      "variants": 1
+    }
+  },
+  "policy": {
+    "groupedMassModelBatch": true,
+    "officialManufacturerSourcesOnly": true,
+    "EnglishCanonicalNames": true,
+    "localizedSourceNamesRetainedAsAliases": true,
+    "unspecifiedBatteryBasisRejected": true,
+    "unstatedRangeCycleRejected": true,
+    "numericTrimNamesNotAssumedToBeRange": true,
+    "motorPeakNotPower30Min": true,
+    "automaticPublicationReady": false
+  }
+}

@@ -1,0 +1,7110 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 11,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-a152469afa10872f49a4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 74,
+      "commercialNames": [
+        "320I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bf9234711382f3727ae",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 75,
+      "commercialNames": [
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d1e03517a2045eb9351",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 80,
+      "commercialNames": [
+        "320I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6ec7087a372870ad895",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 81,
+      "commercialNames": [
+        "318I",
+        "320I",
+        "320I XDRIVE",
+        "330I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-834d844c1a44b313d719",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 84,
+      "commercialNames": [
+        "318I",
+        "320I",
+        "320I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62d1f3d118c4be64c014",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 85,
+      "commercialNames": [
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe9685c54efec40ecc07",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 90,
+      "commercialNames": [
+        "320I",
+        "320I XDRIVE",
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a865599ce591907683e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 91,
+      "commercialNames": [
+        "320I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-114cd34b233985b9b18d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 92,
+      "commercialNames": [
+        "330I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1def4af07e01bb16d706",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 95,
+      "commercialNames": [
+        "320I XDRIVE",
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ebff5d549b2a9e487889",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 96,
+      "commercialNames": [
+        "330I",
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20145d1c21f0f6acf2dc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 110,
+      "commercialNames": [
+        "318I",
+        "320I",
+        "320I XDRIVE",
+        "330I",
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-21dd55316bed89d26e89",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 116,
+      "commercialNames": [
+        "318I",
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2426eca7d98c18993f25",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 117,
+      "commercialNames": [
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b5fbf288bf2d45396b7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 121,
+      "commercialNames": [
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e274a462c46462917bae",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 132,
+      "commercialNames": [
+        "318I",
+        "320I XDRIVE",
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5eb8095a907e6354c25c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 136,
+      "commercialNames": [
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4556f32422ac9418b78b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 137,
+      "commercialNames": [
+        "320I XDRIVE",
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-324e309ebad0f8bf06a9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 140,
+      "commercialNames": [
+        "320I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95af03361bbc141f4abe",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 145,
+      "commercialNames": [
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ed0c495b6a1f55ddfbf",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 210,
+      "commercialNames": [
+        "320I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20aace73c0acba290aa2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 220,
+      "commercialNames": [
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50d16b92b9e56388f99e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 270,
+      "commercialNames": [
+        "320I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-215915cbb30ecaa2fedb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2993,
+      "powerKw": 210,
+      "commercialNames": [
+        "330D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b44304f19edb0b49b1d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ae3384c0a08f396ccad",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "320E",
+        "320E XDRIVE",
+        "330E",
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a44a4a400dd6b7cec23e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 49,
+      "commercialNames": [
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a582daaa7fd8afeb4115",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 61,
+      "commercialNames": [
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-029015e3822d383beb22",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 67,
+      "commercialNames": [
+        "320E",
+        "330E",
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc6f33959030735066cc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 68,
+      "commercialNames": [
+        "320E",
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b2acb47423bfe51b0e5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 72,
+      "commercialNames": [
+        "320E",
+        "330E",
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba88cc6146cd8b806282",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 73,
+      "commercialNames": [
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bd134b89a56151162ab",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 81,
+      "commercialNames": [
+        "330E",
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9089d11e161d47fd6a45",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 84,
+      "commercialNames": [
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-852f782b37db24daa4bd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 85,
+      "commercialNames": [
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9545bafa6036e8ceec9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 88,
+      "commercialNames": [
+        "320E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f09e872b9f844e33741b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 90,
+      "commercialNames": [
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c07db90583081e80f35",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 91,
+      "commercialNames": [
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c90fb0a1e35babf227ac",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 95,
+      "commercialNames": [
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aab378f6d9bd2fb342fd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 110,
+      "commercialNames": [
+        "320E",
+        "330E",
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94234c545aeefd92b671",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 112,
+      "commercialNames": [
+        "320E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0dcc226e62568a754822",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 115,
+      "commercialNames": [
+        "330E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98de7fe04642d5ff3d82",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 117,
+      "commercialNames": [
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b748865cf82779a05aa6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 121,
+      "commercialNames": [
+        "320E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24e3013db34df298cafe",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 131,
+      "commercialNames": [
+        "320E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f1ddc1244ba5c66e2b5a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 132,
+      "commercialNames": [
+        "330E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7c1063f1a8306e0e934",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 138,
+      "commercialNames": [
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d943ab9dab19634d47b3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 140,
+      "commercialNames": [
+        "320E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-369dd4d0dc09a10b9058",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 147,
+      "commercialNames": [
+        "330E",
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ae02cbd075fb85d5d41",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 180,
+      "commercialNames": [
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05c0a6e100b6c22ef948",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 250,
+      "commercialNames": [
+        "320E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-874e80fb755528627245",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 265,
+      "commercialNames": [
+        "330E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12e9859bcf3cae12414c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 250,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc8c964520618053744b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1597,
+      "powerKw": 140,
+      "commercialNames": [
+        "320I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47feb75b24fe68b9042c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2993,
+      "powerKw": 353,
+      "commercialNames": [
+        "BMW 318D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2115be7bf59e53f1f018",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1198,
+      "powerKw": 135,
+      "commercialNames": [
+        "330E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06acb4f30159eb87a024",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2993,
+      "powerKw": null,
+      "commercialNames": [
+        "318D XDRIVE",
+        "320D XDRIVE",
+        "330D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 109,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c01474edfa87f511b92b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "318D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68ae8c93ba8ec972ae9c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 46,
+      "commercialNames": [
+        "330E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06cca31482d0bf778288",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "420D",
+        "420D GRAN COUPE M SPORT AUTO",
+        "420D GRAN COUPE SPORT AUTO",
+        "420D M SPORT",
+        "420D M SPORT AUTO",
+        "420D M SPORT MHEV AUTO",
+        "420D M SPORT PRO ED MHEV AUTO",
+        "420D SPORT",
+        "420D SPORT AUTO",
+        "420D XDRIVE",
+        "420D XDRIVE GRAN COUPE SE AUTO",
+        "420D XDRIVE GRAN COUPE SPORT A",
+        "420D XDRIVE GRANCOUPE MSPORT A",
+        "420D XDRIVE M SPORT AUTO",
+        "420D XDRIVE M SPORT MHEV AUTO",
+        "420D XDRIVE SPORT AUTO",
+        "420D XDRVE MSPRT PRO ED MHEV A"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 1401,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a88cde7b8dbb55fd51a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 120,
+      "commercialNames": [
+        "420d",
+        "420D",
+        "420d xDrive"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 875,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf82b74b7bf909ccc909",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "420 D",
+        "420 D X DRIVE",
+        "420D",
+        "420d",
+        "420D CABRIO F33 B47",
+        "420D CABRIO G23 B47",
+        "420D COUPé F32 B47",
+        "420D COUPé G22 B47",
+        "420D COUPE G22 B47",
+        "420D GRAN COUPé F36 B47",
+        "420D GRAN COUPE G26 B47",
+        "420D GRAN COUPE XDRIVE G26 B47",
+        "420D X DRIVE",
+        "420D XDRIVE",
+        "420d xDrive",
+        "420D XDRIVE COUPé G22 B47",
+        "420D XDRIVE COUPE G22 B47",
+        "420D XDRIVE G26 B47",
+        "420D XDRIVE GRAN COUPé F36 B47",
+        "420D XDRIVE GRAN COUPE G26 B47",
+        "420D XDRIVE GRAN COUPÚ F36 B47",
+        "M440I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 56,
+      "registrations": 45295,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ce342f0ff3e32a563e7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2998,
+      "powerKw": 140,
+      "commercialNames": [
+        "420D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dec95d2cffe147441ba4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1597,
+      "powerKw": 125,
+      "commercialNames": [
+        "420I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64db3b58f63b242450ca",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "420D",
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-355ee7d888fefac79674",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "420I",
+        "420I GRAN COUPE M SPORT",
+        "420I GRAN COUPE M SPORT AUTO",
+        "420I GRAN COUPE SPORT",
+        "420I GRAN COUPE SPORT AUTO",
+        "420I M SPORT",
+        "420I M SPORT AUTO",
+        "420I M SPORT PRO EDITION AUTO",
+        "420I SPORT",
+        "420I SPORT AUTO",
+        "420I XDRIVE",
+        "420I XDRIVE GRAN COUPE SPORT A",
+        "420I XDRIVE GRANCOUPE MSPORT A",
+        "420I XDRIVE M SPORT A",
+        "420I XDRIVE SPORT AUTO"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 2539,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2641360c80423793fa31",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 120,
+      "commercialNames": [
+        "420i"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 128,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-659f8d1b61a628676133",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 135,
+      "commercialNames": [
+        "420 I",
+        "420D",
+        "420I",
+        "420i",
+        "420I CABRIO F33 B48",
+        "420I CABRIO G23 B48",
+        "420I COUPé G22 B48",
+        "420I COUPE G22 B48",
+        "420I GRAN COUPé F36 B48",
+        "420I GRAN COUPE G26 B48",
+        "420I X DRIVE",
+        "420I XDRIVE",
+        "420i xDrive",
+        "420I XDRIVE COUPé G22 B48",
+        "420I XDRIVE COUPE G22 B48",
+        "420I XDRIVE GRAN COUPé F36 B48"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 41,
+      "registrations": 32102,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08bb37a297cba1cafc2d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2998,
+      "powerKw": null,
+      "commercialNames": [
+        "M440I XDRIVE",
+        "M440I XDRIVE MHEV AUTO"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 392,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d10f47bf26fdc600100b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2998,
+      "powerKw": 275,
+      "commercialNames": [
+        "M440I X DRIVE",
+        "M440I XDRIVE",
+        "M440i xDrive",
+        "M440I XDRIVE CABRIO G23 B58",
+        "M440I XDRIVE COUP",
+        "M440I XDRIVE COUPé G22 B58",
+        "M440I XDRIVE COUPE G22 B58",
+        "M440I XDRIVE GRAN COUPE G26 B5"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 26183,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1838cfac51d4fd70d609",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2998,
+      "powerKw": 285,
+      "commercialNames": [
+        "M440I X DRIVE",
+        "M440I XDRIVE",
+        "M440I XDRIVE GRAN COOPER",
+        "M440I XDRIVE GRAN COUPE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 370,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b46a94653631674592cf",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 135,
+      "commercialNames": [
+        "420D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ab3c1a7a12443018552",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 150,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c29bb66c3ff5dc479039",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1995,
+      "powerKw": 120,
+      "commercialNames": [
+        "420D",
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54493daea0ce11c75fe0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 125,
+      "commercialNames": [
+        "420I",
+        "420I GRAN COUPE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e1efae90376b69fb332",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "420I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95551b160349aaf25a76",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2998,
+      "powerKw": 125,
+      "commercialNames": [
+        "M440I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8f60d20becff1ac19923",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2998,
+      "powerKw": 275,
+      "commercialNames": [
+        "M440i xDrive",
+        "M440I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bfb444311da04e66966c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 147,
+      "commercialNames": [
+        "420D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe3d9bc1a5b0c11c40ef",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1997,
+      "powerKw": 179,
+      "commercialNames": [
+        "4 SERIES"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87d7a230f05c35010de1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 180,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49a8bbf0c1b8f5c18ff1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2988,
+      "powerKw": 275,
+      "commercialNames": [
+        "M440I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b9317a2740c8bb47de2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1998,
+      "powerKw": 140,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-873c4669fa99486c7842",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2993,
+      "powerKw": 210,
+      "commercialNames": [
+        "420D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d1fb15035e65f336c0ff",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2993,
+      "powerKw": 250,
+      "commercialNames": [
+        "M440I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-96ae0983f2f49dcfa9b0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "420D",
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 33,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89fdf048fe946e4f9b7c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 49,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1cd3a3215bfd93ae0c6a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 53,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5e8ec9832b6dc1eec105",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 55,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d75b2312ab0dc16d34e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 59,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dbd30d968272f26722f0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 61,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d3d0f4f6abd950772d2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 62,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-168b78fcf25e0654010c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 67,
+      "commercialNames": [
+        "420D",
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb0a196c663dd8f8744f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 68,
+      "commercialNames": [
+        "420D",
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3abf01a89b679ec7c5c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 69,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53bf11ad1ec2493be6b8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 70,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08b1898a2ba760e37787",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 72,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-794e35d64ebde0a8a811",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 73,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ab3b93c49d3584d7160",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 74,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4fadf576954d5e57cb0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 79,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f405cb7174ae7ee943a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 80,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1fca411b700385d51538",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 81,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-218e4cd15dcdb84f86ec",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 84,
+      "commercialNames": [
+        "420D",
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-820f99a84627231283b5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 85,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-23c57856e408ba19d210",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 90,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a89610d8b0836bdceffe",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 91,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a84dc8a3613607edf25b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 92,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a72626725d192a8db1ca",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 95,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c7c3cb980ead5b80ddc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 96,
+      "commercialNames": [
+        "420D",
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f4c78dc1be9e2070ae8b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "420D",
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c352d62d1a45977df10d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 112,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f82888de3d01fff663d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 116,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fef1e0083dbfcdc81b97",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 117,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-273337f6da6da67a3df7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 121,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8fc89126de47c6c97c0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 131,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15151648f21a4c744282",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 132,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-008de2c260df4f0efb62",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 135,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d80c3dd8895470a78663",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 136,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd5c0f6ff3fc16b1b1e4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "420D",
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 372,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b3717f4f265cb410f55",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 143,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36e30d2e17aada361833",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 145,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0aa604d562b5e74f1ce2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 147,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ffcf4d23b3af96125ef2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 148,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8bb7e864f4f8e66fe180",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 150,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ee99076b13cd4bd4bd9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 155,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9337f4673d577e124e29",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 187,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3e51d06071fd6dde2c3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 195,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f6c55b4e6ad2d4cf34e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 210,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-816d4fbdea15e6b1f2f9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 228,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5787b77d8906512faa5a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 243,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a307933a1606daf14b9d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 245,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a5a80a4caa8b8a93863",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 260,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0099b99ee9dccda6fd32",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 275,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-18c62e830ab68102d0f1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 280,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cd8304c1bbb54ef9e08",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 294,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bf365184b2dde23d332",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 320,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a7d910522bbb3209a6c0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 349,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e020289d7522e7b5fa57",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 430,
+      "commercialNames": [
+        "420D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9102b61c055b1ce90eaf",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 67,
+      "commercialNames": [
+        "420I",
+        "420I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4c9e25c927aa69950d2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 70,
+      "commercialNames": [
+        "420I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-73920d48a21ffba544e6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 81,
+      "commercialNames": [
+        "420I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0d885f357cca30564e6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 95,
+      "commercialNames": [
+        "420I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eeb4c7fc5a9a45965f59",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 132,
+      "commercialNames": [
+        "420I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0a6ae631493720df01d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 140,
+      "commercialNames": [
+        "420I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a02f40fb0eb0e47b0a1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 210,
+      "commercialNames": [
+        "420I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6edef42b3684c0a6e6d2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2998,
+      "powerKw": 280,
+      "commercialNames": [
+        "M440I XDRIVE",
+        "M440I XDRIVE CABRIO",
+        "M440I XDRIVE GRAN COUPE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 295,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e7ef8fa49b7cc3e6c037",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": null,
+      "commercialNames": [
+        "M440I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4df1ce3587719036ab0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 67,
+      "commercialNames": [
+        "M440I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-18a4586a20d18222828d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 69,
+      "commercialNames": [
+        "M440I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2bc8b40162169a1b0061",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 84,
+      "commercialNames": [
+        "M440I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67b55942fd65be30c35b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 110,
+      "commercialNames": [
+        "M440I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a7216cda22cb79d782f4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 114,
+      "commercialNames": [
+        "M440I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f43bfc9def9a1356c99",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2998,
+      "powerKw": 280,
+      "commercialNames": [
+        "M440I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a589d5afe2abf8c760e5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 85,
+      "commercialNames": [
+        "420I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2cb5ec38f8c0f36a31d1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "4 Series",
+      "modelId": "bmw/4-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2998,
+      "powerKw": 74,
+      "commercialNames": [
+        "M440I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b4ad8ca4f0b27bbf62e8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "520 D",
+        "520D",
+        "520D M SPORT AUTO",
+        "520D M SPORT EDITION MHEV AUTO",
+        "520D M SPORT MHEV AUTO",
+        "520D SE AUTO",
+        "520D SE MHEV AUTO",
+        "520D XDRIVE",
+        "520D XDRIVE M SPORT AUTO",
+        "520D XDRIVE M SPORT ED MHEV A",
+        "520D XDRIVE M SPORT MHEV AUTO",
+        "520D XDRIVE SE AUTO",
+        "520D XDRIVE SE MHEV AUTO"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 6281,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2042891f748e2aa74308",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 120,
+      "commercialNames": [
+        "520d",
+        "520D",
+        "520d xDrive"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 1371,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ea216fde2fae2d532197",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "520 D X DRIVE",
+        "520D",
+        "520d",
+        "520D DRIVE",
+        "520D LIMOUSINE G30 B47",
+        "520D LIMOUSINE G30 XD5",
+        "520D TOURING G31 B47",
+        "520D TOURING G31 XD5",
+        "520D XDRIVE",
+        "520d xDrive",
+        "520D XDRIVE LIMOUSINE G30 B47",
+        "520D XDRIVE LIMOUSINE G30 XD5",
+        "520D XDRIVE TOURING G31 B47",
+        "520D XDRIVE TOURING G31 XD5",
+        "520i xDrive"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 39,
+      "registrations": 87342,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-630f9d5db6f30dd9cae8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1998,
+      "powerKw": 185,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28ff03d04e4bd29b9184",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": null,
+      "commercialNames": [
+        "530D XDRIVE M SPORT AUTO",
+        "530D XDRIVE M SPORT ED MHEV A",
+        "530D XDRIVE M SPORT MHEV AUTO",
+        "530D XDRIVE SE AUTO",
+        "530D XDRIVE SE MHEV AUTO",
+        "540D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1423,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae4bd0d0df2135eb314e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 183,
+      "commercialNames": [
+        "530D XDRIVE",
+        "530d xDrive",
+        "540D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 2186,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49028aa8d523132e9b1b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 195,
+      "commercialNames": [
+        "520d xDrive",
+        "530 D XDRIVE",
+        "530D XDRIVE",
+        "530d xDrive",
+        "530D XDRIVE LIMOUSINE G30 B57",
+        "530D XDRIVE TOURING G31 B57"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 6790,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbd51e086d6402d6d115",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 210,
+      "commercialNames": [
+        "520D XDRIVE",
+        "530 D XDRIVE",
+        "530D XDRIVE",
+        "530d xDrive",
+        "530D xDrive",
+        "530D XDRIVE LIMOUSINE G30 B57",
+        "530D XDRIVE TOURING G31 B57",
+        "540D XDRIVE",
+        "540D XDRIVE LIMOUSINE G60 B57",
+        "540D XDRIVE TOURING G61 B57"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 28,
+      "registrations": 32592,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e72060359358d7860d43",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 235,
+      "commercialNames": [
+        "540D XDRIVE",
+        "540d xDrive",
+        "540D XDRIVE LIMOUSINE G30 B57",
+        "540D XDRIVE TOURING G31 B57"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 2026,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d99a8026d6721356b8ff",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 250,
+      "commercialNames": [
+        "540D XDRIVE",
+        "540d xDrive",
+        "540D XDRIVE LIMOUSINE G30 B57",
+        "540D XDRIVE TOURING G31 B57"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 12697,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-03bcacece382ef70a476",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2996,
+      "powerKw": 210,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e65a47bdaea7755548b5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "520D",
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7bb6da9b023cc5a5f5dd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 103,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6220531917e90652456",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1597,
+      "powerKw": 125,
+      "commercialNames": [
+        "520i"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25882775ab0b034c516f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1997,
+      "powerKw": 135,
+      "commercialNames": [
+        "520I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd92be17cdd7cd0913d9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1997,
+      "powerKw": 140,
+      "commercialNames": [
+        "520I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64a1424f5abc7067587a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1997,
+      "powerKw": 180,
+      "commercialNames": [
+        "5 SERIES"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f71b29d5cdf154798d5a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "520D XDRIVE",
+        "520I",
+        "520I M SPORT AUTO",
+        "520I M SPORT EDITION MHEV AUTO",
+        "520I M SPORT MHEV AUTO",
+        "520I SE AUTO",
+        "520I SE MHEV AUTO",
+        "530E",
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 1914,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d498efa546165d3415d0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 120,
+      "commercialNames": [
+        "520i",
+        "520I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 556,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94a9a0832731b93db797",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 125,
+      "commercialNames": [
+        "520I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44db37ee928569249cb4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 135,
+      "commercialNames": [
+        "520I",
+        "520I LIMOUSINE G30 B48",
+        "520I TOURING G31 B48",
+        "530E",
+        "530E XDRIVE",
+        "530E XDRIVE IPERFORMANCE"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 10805,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0291e09dacd3d4e15aa6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2993,
+      "powerKw": 210,
+      "commercialNames": [
+        "530d xDrive",
+        "540D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 51,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53bda779645748460946",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1997,
+      "powerKw": 135,
+      "commercialNames": [
+        "530E XDRIVE IPERFORMANCE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9eba192abf43d98a33c0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "530E",
+        "530E M SPORT AUTO",
+        "530E M SPORT EDITION AUTO",
+        "530E SE AUTO",
+        "530E XDRIVE",
+        "530E XDRIVE M SPORT AUTO",
+        "530E XDRIVE M SPORT EDITION A",
+        "530E XDRIVE SE AUTO"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 1351,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f7073ca2633e02afaaa",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1998,
+      "powerKw": 55,
+      "commercialNames": [
+        "530E",
+        "530E IPERFORMANCE",
+        "530E XDRIVE",
+        "530E XDRIVE IPERFORMANCE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 186,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77c43074cabb00d649c6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1998,
+      "powerKw": 120,
+      "commercialNames": [
+        "530e",
+        "530E",
+        "530e iPerformance",
+        "530e xDrive",
+        "530E XDRIVE",
+        "530e xDrive iPerformance"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 1381,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27b1b5c85e55039c2517",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1998,
+      "powerKw": 135,
+      "commercialNames": [
+        "530 E",
+        "530E",
+        "530e",
+        "530e iPerfomance",
+        "530E IPERFORMANCE",
+        "530e iPerformance",
+        "530E IPERGORMANCE",
+        "530E LIMOUSINE G30 XB1",
+        "530E TOURING G31 XB1",
+        "530E XDRIVE",
+        "530e xDrive iPerformance",
+        "530E XDRIVE LIMOUSINE G30 XB1",
+        "530E XDRIVE TOURING G31 XB1"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 39,
+      "registrations": 60884,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f84aa4019b080ff4cfc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1998,
+      "powerKw": 185,
+      "commercialNames": [
+        "530E IPERFORMANCE",
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 64,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50a48a9e52608e3b8237",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "520D",
+        "520D XDRIVE",
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ddb7fa22b40135431f1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 145,
+      "commercialNames": [
+        "520D",
+        "520D LIMOUSINE G60 B47",
+        "520D TOURING G61 B47",
+        "520D XDRIVE",
+        "520D XDRIVE LIMOUSINE G60 B47",
+        "520D XDRIVE TOURING G61 B47",
+        "520I"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 28539,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-59bbbb86e33f8be8f1f2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 150,
+      "commercialNames": [
+        "520D",
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecb9d0429c814d6cf3f2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1998,
+      "powerKw": 145,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a11bf68add1abb70057a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 61,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a76040b1f792d2bb9400",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 61,
+      "commercialNames": [
+        "520I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f052bc81f043bf1aba3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 140,
+      "commercialNames": [
+        "520D",
+        "520D XDRIVE",
+        "520I",
+        "520I LIMOUSINE G60 B48",
+        "520I TOURING",
+        "530E",
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 7073,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6944f7be64c7e9a7eac",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "520I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f2f0a5bbb4e98640e3d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1998,
+      "powerKw": 80,
+      "commercialNames": [
+        "530E",
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e191a76d966ad0b9385",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1998,
+      "powerKw": 140,
+      "commercialNames": [
+        "520I",
+        "530 E",
+        "530E",
+        "530E LIMOUSINE G60 XB1",
+        "530E TOURING G61 XB1",
+        "530E XDRIVE",
+        "530E XDRIVE LIMOUSINE G60 XB1",
+        "530E XDRIVE TOURING G61 XB1"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 18904,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c57384ac78d80efac207",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 180,
+      "commercialNames": [
+        "520I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-101c29634a267c4f80ee",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 185,
+      "commercialNames": [
+        "5 SERIES"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8173301c13cdc213ea87",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2998,
+      "powerKw": 245,
+      "commercialNames": [
+        "540D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-10249dd4cb7031a54759",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 135,
+      "commercialNames": [
+        "520D",
+        "520D TOURING"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-071b7f99555b93c0d356",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "520D",
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c131629d9971c4925f8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 61,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-58f5d27d47f28e79cb85",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 67,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd58d37c301d75308db1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 70,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79ab8a5a974f09c0acbe",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 72,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f90b54fda187a4a5c56c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 73,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e865151c46b3dc026534",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 74,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae731648872c279460b8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 81,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c078704f17157c33241a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 84,
+      "commercialNames": [
+        "520D",
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b61250b6bb507c922176",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 85,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae26c0a3ace4f2425eec",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 91,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b8fd2049ecb03326ef7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 92,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6be0c1c0e82c492a35f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 95,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22d4375f57aff0f1b6c4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 96,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a714548494d729feb77",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac5ba9b6eed1109762b8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 120,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c111d6220a5a953549c0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 131,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5c2f59322e91fd96dc69",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 132,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2d6994d98337d88fa92",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 148,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd155c423605b5446b13",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 243,
+      "commercialNames": [
+        "520D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eb0f7cc336bc2446dd27",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 294,
+      "commercialNames": [
+        "520D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b27454af8c71f1208e1e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": null,
+      "commercialNames": [
+        "530D XDRIVE",
+        "540D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f676a5fe7e216e38ebe7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 51,
+      "commercialNames": [
+        "540D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6207ed7a28f6caabe2c1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 55,
+      "commercialNames": [
+        "540D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8130cfcaf8d8babf3b79",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 62,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a959962a0c319fbae8a3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 67,
+      "commercialNames": [
+        "530D XDRIVE",
+        "540D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-19140abc7fff38d8df6a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 72,
+      "commercialNames": [
+        "540D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c586abff4ad70bc24ec",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 75,
+      "commercialNames": [
+        "540D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd133f55dfbb0c47c43d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 81,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30d37deb68c09dd145c8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 84,
+      "commercialNames": [
+        "530D XDRIVE",
+        "540D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1e0d7a8835f52465298",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 85,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74667124fcf807a3a7a9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 90,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c06c1979f77a6ff8d08",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 91,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-330c055bf2cdb9bbba04",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 95,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27d9e11de226b47680bc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 110,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bd81f25e1243fc92f4c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 112,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-308190b2b7a23444eb91",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 114,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56cd8199fe51de31998d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 117,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef0e28324d31f1e61f20",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 136,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2df8c7dab03decbf37b6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 210,
+      "commercialNames": [
+        "530D XDRIVE",
+        "540D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 104,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e108b0363b2199de266",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 270,
+      "commercialNames": [
+        "530D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09091b8e96f918fca729",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "520 D",
+        "520I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-372d345ce73516329a06",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 67,
+      "commercialNames": [
+        "520I",
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4f45871b0657ba9e7b0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 68,
+      "commercialNames": [
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4708c87e3b206d070742",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 70,
+      "commercialNames": [
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a75476358213eecb3ff",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 81,
+      "commercialNames": [
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f985da6edb9d1eb0499",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 90,
+      "commercialNames": [
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9c89a70a33b2344886fb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 91,
+      "commercialNames": [
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5c05d46bb937dcb8934",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 96,
+      "commercialNames": [
+        "520I",
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86d3a98642dfbb838726",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 110,
+      "commercialNames": [
+        "520I",
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b6ae840c5cc00ae3e45",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 112,
+      "commercialNames": [
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9c1b4dad536217abcf1f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 117,
+      "commercialNames": [
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee820bb4bf6b9e4e5062",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "5 Series",
+      "modelId": "bmw/5-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 132,
+      "commercialNames": [
+        "530E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

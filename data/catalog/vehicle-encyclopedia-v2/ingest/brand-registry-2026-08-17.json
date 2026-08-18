@@ -1,0 +1,3459 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-drom-brand-catalog-index-2026",
+          "type": "authoritative_catalog",
+          "title": "Каталог автомобилей — марки",
+          "publisher": "Drom",
+          "url": "https://www.drom.ru/catalog/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "high",
+          "status": "active",
+          "license": null,
+          "notes": "The catalog index displayed an exact brand-name match for 181 of the 185 current AvtoCena catalog brands. It is used only as an identity seed, not as proof of country, model range or technical specifications."
+        },
+        {
+          "id": "src-wikidata-eagle-automobile-brand-q1203417",
+          "type": "wikidata",
+          "title": "Eagle",
+          "publisher": "Wikidata",
+          "url": "https://www.wikidata.org/wiki/Q1203417",
+          "documentId": "Q1203417",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "countries"
+          ],
+          "confidence": "high",
+          "status": "active",
+          "license": "CC0 1.0",
+          "notes": "Wikidata identifies Eagle as an automobile marque from the United States. The record is retained as a long-tail identity seed."
+        },
+        {
+          "id": "src-li-auto-about-2026",
+          "type": "manufacturer",
+          "title": "Hello! We Are Li Auto",
+          "publisher": "Li Auto",
+          "url": "https://www.liauto.com/about.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer page explicitly uses Li Auto as the brand name. Country is intentionally left unresolved in this identity-only seed."
+        },
+        {
+          "id": "src-neta-auto-prnewswire-2024",
+          "type": "secondary_reference",
+          "title": "NETA V-II Makes Stunning Debut at Bangkok",
+          "publisher": "NETA AUTO / PR Newswire",
+          "url": "https://www.prnewswire.com/apac/news-releases/neta-v-ii-makes-stunning-debut-at-bangkok-as-brand-continues-flourishing-in-thailand-302102661.html",
+          "documentId": null,
+          "documentDate": "2024-03-28",
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "high",
+          "status": "active",
+          "license": null,
+          "notes": "Manufacturer-origin press release distributed by PR Newswire includes an About NETA Auto section. It supports only the English brand identity in this seed."
+        },
+        {
+          "id": "src-proton-about-us-2026",
+          "type": "manufacturer",
+          "title": "PROTON — About Us",
+          "publisher": "PROTON Holdings Berhad",
+          "url": "https://www.proton.com/corporate/about-us",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "countries"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official company page describes PROTON as Malaysia's national car project and automotive brand."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "brand",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "212",
+          "canonicalName": "212",
+          "slug": "212",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ac-cars",
+          "canonicalName": "AC",
+          "slug": "ac",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "alpina",
+          "canonicalName": "Alpina",
+          "slug": "alpina",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "amc",
+          "canonicalName": "AMC",
+          "slug": "amc",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "aro",
+          "canonicalName": "Aro",
+          "slug": "aro",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "asia",
+          "canonicalName": "Asia",
+          "slug": "asia",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "borgward",
+          "canonicalName": "Borgward",
+          "slug": "borgward",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "brilliance",
+          "canonicalName": "Brilliance",
+          "slug": "brilliance",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "changfeng",
+          "canonicalName": "Changfeng",
+          "slug": "changfeng",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "changhe",
+          "canonicalName": "Changhe",
+          "slug": "changhe",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "chrysler",
+          "canonicalName": "Chrysler",
+          "slug": "chrysler",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "coda",
+          "canonicalName": "Coda",
+          "slug": "coda",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "cupra",
+          "canonicalName": "Cupra",
+          "slug": "cupra",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "dacia",
+          "canonicalName": "Dacia",
+          "slug": "dacia",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "dadi",
+          "canonicalName": "Dadi",
+          "slug": "dadi",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "daewoo",
+          "canonicalName": "Daewoo",
+          "slug": "daewoo",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "datsun",
+          "canonicalName": "Datsun",
+          "slug": "datsun",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "dayun",
+          "canonicalName": "Dayun",
+          "slug": "dayun",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "deepal",
+          "canonicalName": "Deepal",
+          "slug": "deepal",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "denza",
+          "canonicalName": "Denza",
+          "slug": "denza",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "dodge",
+          "canonicalName": "Dodge",
+          "slug": "dodge",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "dongfeng",
+          "canonicalName": "Dongfeng",
+          "slug": "dongfeng",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "eagle",
+          "canonicalName": "Eagle",
+          "slug": "eagle",
+          "aliases": [],
+          "countries": [
+            "United States"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-wikidata-eagle-automobile-brand-q1203417",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity and country; models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "esteo",
+          "canonicalName": "ESTEO",
+          "slug": "esteo",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "exeed",
+          "canonicalName": "EXEED",
+          "slug": "exeed",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "faw",
+          "canonicalName": "FAW",
+          "slug": "faw",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ferrari",
+          "canonicalName": "Ferrari",
+          "slug": "ferrari",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "fiat",
+          "canonicalName": "Fiat",
+          "slug": "fiat",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "fisker",
+          "canonicalName": "Fisker",
+          "slug": "fisker",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "forthing",
+          "canonicalName": "Forthing",
+          "slug": "forthing",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "foton",
+          "canonicalName": "Foton",
+          "slug": "foton",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "gac",
+          "canonicalName": "GAC",
+          "slug": "gac",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "genesis",
+          "canonicalName": "Genesis",
+          "slug": "genesis",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "geo",
+          "canonicalName": "Geo",
+          "slug": "geo",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "gmc",
+          "canonicalName": "GMC",
+          "slug": "gmc",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "great-wall",
+          "canonicalName": "Great Wall",
+          "slug": "great-wall",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "hafei",
+          "canonicalName": "Hafei",
+          "slug": "hafei",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "haima",
+          "canonicalName": "Haima",
+          "slug": "haima",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "hawtai",
+          "canonicalName": "Hawtai",
+          "slug": "hawtai",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "hiphi",
+          "canonicalName": "HiPhi",
+          "slug": "hiphi",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "hongqi",
+          "canonicalName": "Hongqi",
+          "slug": "hongqi",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "hozon",
+          "canonicalName": "Hozon",
+          "slug": "hozon",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "huanghai",
+          "canonicalName": "Huanghai",
+          "slug": "huanghai",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "hummer",
+          "canonicalName": "Hummer",
+          "slug": "hummer",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "icar",
+          "canonicalName": "iCAR",
+          "slug": "icar",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "im-motors",
+          "canonicalName": "IM Motors",
+          "slug": "im-motors",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "infiniti",
+          "canonicalName": "Infiniti",
+          "slug": "infiniti",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "iran-khodro",
+          "canonicalName": "Iran Khodro",
+          "slug": "iran-khodro",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "isuzu",
+          "canonicalName": "Isuzu",
+          "slug": "isuzu",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "iveco",
+          "canonicalName": "IVECO",
+          "slug": "iveco",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jac",
+          "canonicalName": "JAC",
+          "slug": "jac",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jaecoo",
+          "canonicalName": "Jaecoo",
+          "slug": "jaecoo",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jaguar",
+          "canonicalName": "Jaguar",
+          "slug": "jaguar",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jeep",
+          "canonicalName": "Jeep",
+          "slug": "jeep",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jeland",
+          "canonicalName": "Jeland",
+          "slug": "jeland",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jetour",
+          "canonicalName": "Jetour",
+          "slug": "jetour",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jetta",
+          "canonicalName": "Jetta",
+          "slug": "jetta",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jinbei",
+          "canonicalName": "Jinbei",
+          "slug": "jinbei",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jmc",
+          "canonicalName": "JMC",
+          "slug": "jmc",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "kaiyi",
+          "canonicalName": "Kaiyi",
+          "slug": "kaiyi",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "kgm",
+          "canonicalName": "KGM",
+          "slug": "kgm",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "knewstar",
+          "canonicalName": "Knewstar",
+          "slug": "knewstar",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lamborghini",
+          "canonicalName": "Lamborghini",
+          "slug": "lamborghini",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lancia",
+          "canonicalName": "Lancia",
+          "slug": "lancia",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "land-rover",
+          "canonicalName": "Land Rover",
+          "slug": "land-rover",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "landwind",
+          "canonicalName": "Landwind",
+          "slug": "landwind",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "leapmotor",
+          "canonicalName": "Leapmotor",
+          "slug": "leapmotor",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "li-auto",
+          "canonicalName": "Li Auto",
+          "slug": "li-auto",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-li-auto-about-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lifan",
+          "canonicalName": "Lifan",
+          "slug": "lifan",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lincoln",
+          "canonicalName": "Lincoln",
+          "slug": "lincoln",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "livan",
+          "canonicalName": "Livan",
+          "slug": "livan",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lotus",
+          "canonicalName": "Lotus",
+          "slug": "lotus",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lucid",
+          "canonicalName": "Lucid",
+          "slug": "lucid",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "luxgen",
+          "canonicalName": "Luxgen",
+          "slug": "luxgen",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lynk-and-co",
+          "canonicalName": "Lynk & Co",
+          "slug": "lynk-and-co",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "m-hero",
+          "canonicalName": "M-Hero",
+          "slug": "m-hero",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "maextro",
+          "canonicalName": "Maextro",
+          "slug": "maextro",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "maserati",
+          "canonicalName": "Maserati",
+          "slug": "maserati",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "maxus",
+          "canonicalName": "Maxus",
+          "slug": "maxus",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "maybach",
+          "canonicalName": "Maybach",
+          "slug": "maybach",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mclaren",
+          "canonicalName": "McLaren",
+          "slug": "mclaren",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mercury",
+          "canonicalName": "Mercury",
+          "slug": "mercury",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mg-motor",
+          "canonicalName": "MG",
+          "slug": "mg",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mini",
+          "canonicalName": "MINI",
+          "slug": "mini",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mitsuoka",
+          "canonicalName": "Mitsuoka",
+          "slug": "mitsuoka",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "morgan",
+          "canonicalName": "Morgan",
+          "slug": "morgan",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "neta",
+          "canonicalName": "Neta",
+          "slug": "neta",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-neta-auto-prnewswire-2024",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nio",
+          "canonicalName": "Nio",
+          "slug": "nio",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "oldsmobile",
+          "canonicalName": "Oldsmobile",
+          "slug": "oldsmobile",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "omoda",
+          "canonicalName": "OMODA",
+          "slug": "omoda",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "opel",
+          "canonicalName": "Opel",
+          "slug": "opel",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ora",
+          "canonicalName": "ORA",
+          "slug": "ora",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "oshan",
+          "canonicalName": "Oshan",
+          "slug": "oshan",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "oting",
+          "canonicalName": "Oting",
+          "slug": "oting",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "peugeot",
+          "canonicalName": "Peugeot",
+          "slug": "peugeot",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "plymouth",
+          "canonicalName": "Plymouth",
+          "slug": "plymouth",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "polar-stone",
+          "canonicalName": "Polar Stone",
+          "slug": "polar-stone",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "polestar",
+          "canonicalName": "Polestar",
+          "slug": "polestar",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "pontiac",
+          "canonicalName": "Pontiac",
+          "slug": "pontiac",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "proton",
+          "canonicalName": "Proton",
+          "slug": "proton",
+          "aliases": [],
+          "countries": [
+            "Malaysia"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-proton-about-us-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Source-backed brand identity and country; models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ram",
+          "canonicalName": "RAM",
+          "slug": "ram",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ravon",
+          "canonicalName": "Ravon",
+          "slug": "ravon",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "renault",
+          "canonicalName": "Renault",
+          "slug": "renault",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "renault-samsung",
+          "canonicalName": "Renault Samsung",
+          "slug": "renault-samsung",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "rising-auto",
+          "canonicalName": "Rising Auto",
+          "slug": "rising-auto",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "rivian",
+          "canonicalName": "Rivian",
+          "slug": "rivian",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "roewe",
+          "canonicalName": "Roewe",
+          "slug": "roewe",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "rolls-royce",
+          "canonicalName": "Rolls-Royce",
+          "slug": "rolls-royce",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "rover",
+          "canonicalName": "Rover",
+          "slug": "rover",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "rox",
+          "canonicalName": "Rox",
+          "slug": "rox",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "saab",
+          "canonicalName": "Saab",
+          "slug": "saab",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "saipa",
+          "canonicalName": "SAIPA",
+          "slug": "saipa",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "saturn",
+          "canonicalName": "Saturn",
+          "slug": "saturn",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "scion",
+          "canonicalName": "Scion",
+          "slug": "scion",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "seat",
+          "canonicalName": "SEAT",
+          "slug": "seat",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "seres",
+          "canonicalName": "Seres",
+          "slug": "seres",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "shuanghuan",
+          "canonicalName": "Shuanghuan",
+          "slug": "shuanghuan",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "skoda",
+          "canonicalName": "Skoda",
+          "slug": "skoda",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "skywell",
+          "canonicalName": "Skywell",
+          "slug": "skywell",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "smart",
+          "canonicalName": "Smart",
+          "slug": "smart",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "soueast",
+          "canonicalName": "Soueast",
+          "slug": "soueast",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ssangyong",
+          "canonicalName": "SsangYong",
+          "slug": "ssangyong",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "swm",
+          "canonicalName": "SWM",
+          "slug": "swm",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "tank",
+          "canonicalName": "Tank",
+          "slug": "tank",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "tata",
+          "canonicalName": "TATA",
+          "slug": "tata",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "tianma",
+          "canonicalName": "Tianma",
+          "slug": "tianma",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "tianye",
+          "canonicalName": "Tianye",
+          "slug": "tianye",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "trabant",
+          "canonicalName": "Trabant",
+          "slug": "trabant",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "umo",
+          "canonicalName": "Umo",
+          "slug": "umo",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "vauxhall",
+          "canonicalName": "Vauxhall",
+          "slug": "vauxhall",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "venucia",
+          "canonicalName": "Venucia",
+          "slug": "venucia",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "vgv",
+          "canonicalName": "VGV",
+          "slug": "vgv",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "voyah",
+          "canonicalName": "Voyah",
+          "slug": "voyah",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wartburg",
+          "canonicalName": "Wartburg",
+          "slug": "wartburg",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "weltmeister",
+          "canonicalName": "Weltmeister",
+          "slug": "weltmeister",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wey",
+          "canonicalName": "WEY",
+          "slug": "wey",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "willys",
+          "canonicalName": "Willys",
+          "slug": "willys",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling",
+          "canonicalName": "Wuling",
+          "slug": "wuling",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "xiaomi",
+          "canonicalName": "Xiaomi",
+          "slug": "xiaomi",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "xin-kai",
+          "canonicalName": "Xin Kai",
+          "slug": "xin-kai",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "xpeng",
+          "canonicalName": "XPeng",
+          "slug": "xpeng",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "yema",
+          "canonicalName": "Yema",
+          "slug": "yema",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "zeekr",
+          "canonicalName": "Zeekr",
+          "slug": "zeekr",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "zotye",
+          "canonicalName": "Zotye",
+          "slug": "zotye",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "zx-auto",
+          "canonicalName": "ZX",
+          "slug": "zx",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

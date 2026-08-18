@@ -1,0 +1,3697 @@
+{
+  "schemaVersion": 2,
+  "entityType": "facelift",
+  "chunk": 1,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "acura/tlx/drom-generation-1/facelift-1",
+      "generationId": "acura/tlx/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-a59fc68204ca5133"
+          ]
+        }
+      ],
+      "productionFrom": "2017-04",
+      "productionTo": "2020-08",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-a59fc68204ca5133",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "audi/q2/drom-generation-1/facelift-1",
+      "generationId": "audi/q2/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-b79e6cb8ac14138f"
+          ]
+        }
+      ],
+      "productionFrom": "2020-09",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-b79e6cb8ac14138f",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "audi/q3/drom-generation-1/facelift-1",
+      "generationId": "audi/q3/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-0b9ac16d1ad56521"
+          ]
+        }
+      ],
+      "productionFrom": "2017-03",
+      "productionTo": "2020-07",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-0b9ac16d1ad56521",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "audi/q7/drom-generation-2/facelift-1",
+      "generationId": "audi/q7/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-8f268cfaca60f7ce"
+          ]
+        }
+      ],
+      "productionFrom": "2019-06",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-8f268cfaca60f7ce",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "audi/q8/drom-generation-1/facelift-1",
+      "generationId": "audi/q8/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-eed2b17074d14d06"
+          ]
+        }
+      ],
+      "productionFrom": "2023-09",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-eed2b17074d14d06",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "audi/s3/drom-generation-3/facelift-1",
+      "generationId": "audi/s3/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-3c3e14c3592e2d0f"
+          ]
+        }
+      ],
+      "productionFrom": "2016-04",
+      "productionTo": "2021-04",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-3c3e14c3592e2d0f",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "audi/s3/drom-generation-4/facelift-1",
+      "generationId": "audi/s3/drom-generation-4",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "4 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-3c3e14c3592e2d0f"
+          ]
+        }
+      ],
+      "productionFrom": "2024-04",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-3c3e14c3592e2d0f",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "audi/s4/drom-generation-6/facelift-1",
+      "generationId": "audi/s4/drom-generation-6",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "6 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-edf3286680ec69f0"
+          ]
+        }
+      ],
+      "productionFrom": "2020-10",
+      "productionTo": "2025-02",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-edf3286680ec69f0",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "audi/sq5/drom-generation-2/facelift-1",
+      "generationId": "audi/sq5/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-83cfa4d28bfae9de"
+          ]
+        }
+      ],
+      "productionFrom": "2020-06",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-83cfa4d28bfae9de",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "bmw/i4/g26/2024-update",
+      "generationId": "bmw/i4/g26",
+      "name": "2024 model update",
+      "aliases": [],
+      "productionFrom": "2024-07",
+      "productionTo": null,
+      "status": "verified",
+      "evidence": [
+        {
+          "sourceId": "src-bmw-i4-update-2024",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "BMW states that production of the updated models begins in July 2024."
+        }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "bmw/m2/drom-generation-1/facelift-1",
+      "generationId": "bmw/m2/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-0bdd6c425164c28a"
+          ]
+        }
+      ],
+      "productionFrom": "2017-05",
+      "productionTo": "2022-12",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-0bdd6c425164c28a",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "bmw/m3/drom-generation-5/facelift-1",
+      "generationId": "bmw/m3/drom-generation-5",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "5 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-542c6568550cb7ef"
+          ]
+        }
+      ],
+      "productionFrom": "2017-01",
+      "productionTo": "2021-04",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-542c6568550cb7ef",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "bmw/m3/drom-generation-6/facelift-1",
+      "generationId": "bmw/m3/drom-generation-6",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "6 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-542c6568550cb7ef"
+          ]
+        }
+      ],
+      "productionFrom": "2022-08",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-542c6568550cb7ef",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "bmw/m4/drom-generation-1/facelift-1",
+      "generationId": "bmw/m4/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-6c7c1d85e9fdb5fb"
+          ]
+        }
+      ],
+      "productionFrom": "2017-03",
+      "productionTo": "2021-04",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-6c7c1d85e9fdb5fb",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "bmw/m4/drom-generation-2/facelift-1",
+      "generationId": "bmw/m4/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-6c7c1d85e9fdb5fb"
+          ]
+        }
+      ],
+      "productionFrom": "2023-05",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-6c7c1d85e9fdb5fb",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "bmw/m5/drom-generation-6/facelift-1",
+      "generationId": "bmw/m5/drom-generation-6",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "6 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-66369ae657086229"
+          ]
+        }
+      ],
+      "productionFrom": "2020-06",
+      "productionTo": "2024-11",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-66369ae657086229",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "bmw/x4/drom-generation-2/facelift-1",
+      "generationId": "bmw/x4/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-0eaa6b637b116ca6"
+          ]
+        }
+      ],
+      "productionFrom": "2021-06",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-0eaa6b637b116ca6",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "citroen/ds4/drom-generation-1/facelift-1",
+      "generationId": "citroen/ds4/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-1a98fe3e9661ac2a"
+          ]
+        }
+      ],
+      "productionFrom": "2016-07",
+      "productionTo": "2021-12",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-1a98fe3e9661ac2a",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "dacia/duster/drom-generation-2/facelift-1",
+      "generationId": "dacia/duster/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-fd221d63fc686579"
+          ]
+        }
+      ],
+      "productionFrom": "2021-09",
+      "productionTo": "2024-03",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-fd221d63fc686579",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "dacia/logan/drom-generation-2/facelift-1",
+      "generationId": "dacia/logan/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-8b08c7acce59b6fd"
+          ]
+        }
+      ],
+      "productionFrom": "2016-09",
+      "productionTo": "2020-09",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-8b08c7acce59b6fd",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "dacia/logan/drom-generation-3/facelift-1",
+      "generationId": "dacia/logan/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-8b08c7acce59b6fd"
+          ]
+        }
+      ],
+      "productionFrom": "2022-06",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-8b08c7acce59b6fd",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "dacia/sandero/drom-generation-2/facelift-1",
+      "generationId": "dacia/sandero/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-509ac2ae51643b7f"
+          ]
+        }
+      ],
+      "productionFrom": "2017-01",
+      "productionTo": "2020-08",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-509ac2ae51643b7f",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "dacia/sandero/drom-generation-3/facelift-1",
+      "generationId": "dacia/sandero/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-509ac2ae51643b7f"
+          ]
+        }
+      ],
+      "productionFrom": "2022-06",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-509ac2ae51643b7f",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "daihatsu/tanto/japan-2019/update-2022",
+      "generationId": "daihatsu/tanto/japan-2019",
+      "name": "2022 product update",
+      "aliases": [],
+      "productionFrom": "2022-10",
+      "productionTo": null,
+      "status": "verified",
+      "evidence": [
+        {
+          "sourceId": "src-daihatsu-tanto-japan-update-2022",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": null
+        }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "dodge/journey/drom-generation-1/facelift-1",
+      "generationId": "dodge/journey/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-500d5f0f2287d04e"
+          ]
+        }
+      ],
+      "productionFrom": "2010-10",
+      "productionTo": "2020-12",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-500d5f0f2287d04e",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "fiat/500/drom-generation-2/facelift-1",
+      "generationId": "fiat/500/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-dd2059e1417234ec"
+          ]
+        }
+      ],
+      "productionFrom": "2015-07",
+      "productionTo": "2024-08",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-dd2059e1417234ec",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "ford/ecosport/drom-generation-2/facelift-1",
+      "generationId": "ford/ecosport/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-fbeea4ef9a7b8b72"
+          ]
+        }
+      ],
+      "productionFrom": "2017-04",
+      "productionTo": "2023-08",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-fbeea4ef9a7b8b72",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "ford/escape/drom-generation-4/facelift-1",
+      "generationId": "ford/escape/drom-generation-4",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "4 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-23552d0b41cd6fc3"
+          ]
+        }
+      ],
+      "productionFrom": "2022-10",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-23552d0b41cd6fc3",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "ford/explorer/drom-generation-6/facelift-1",
+      "generationId": "ford/explorer/drom-generation-6",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "6 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-b95025a735fb1e20"
+          ]
+        }
+      ],
+      "productionFrom": "2022-03",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-b95025a735fb1e20",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "ford/galaxy/drom-generation-3/facelift-1",
+      "generationId": "ford/galaxy/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-29235df9d282d0c3"
+          ]
+        }
+      ],
+      "productionFrom": "2019-08",
+      "productionTo": "2023-04",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-29235df9d282d0c3",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "ford/ka/drom-generation-3/facelift-1",
+      "generationId": "ford/ka/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-b6259587b2b5f7cb"
+          ]
+        }
+      ],
+      "productionFrom": "2018-02",
+      "productionTo": "2021-08",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-b6259587b2b5f7cb",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "ford/kuga/drom-generation-3/facelift-1",
+      "generationId": "ford/kuga/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-1febdfd5729fd4ae"
+          ]
+        }
+      ],
+      "productionFrom": "2024-01",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-1febdfd5729fd4ae",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "ford/s-max/drom-generation-2/facelift-1",
+      "generationId": "ford/s-max/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-a6f577cb33071396"
+          ]
+        }
+      ],
+      "productionFrom": "2019-11",
+      "productionTo": "2023-04",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-a6f577cb33071396",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "haval/jolion/drom-generation-1/facelift-1",
+      "generationId": "haval/jolion/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-d1a1731bc85d4ab3"
+          ]
+        }
+      ],
+      "productionFrom": "2024-02",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-d1a1731bc85d4ab3",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "honda/fit/japan-2020/facelift-2022",
+      "generationId": "honda/fit/japan-2020",
+      "name": "2022 facelift",
+      "aliases": [],
+      "productionFrom": "2022-10",
+      "productionTo": null,
+      "status": "verified",
+      "evidence": [
+        {
+          "sourceId": "src-honda-fit-japan-facelift-2022",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": null
+        }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "honda/grace/drom-generation-1/facelift-1",
+      "generationId": "honda/grace/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-52d4805cc9ce6966"
+          ]
+        }
+      ],
+      "productionFrom": "2017-05",
+      "productionTo": "2020-07",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-52d4805cc9ce6966",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "honda/hr-v/drom-generation-2/facelift-1",
+      "generationId": "honda/hr-v/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-77e5575ff0e40340"
+          ]
+        }
+      ],
+      "productionFrom": "2018-09",
+      "productionTo": "2022-05",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-77e5575ff0e40340",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "honda/jazz/drom-generation-2/facelift-1",
+      "generationId": "honda/jazz/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-aecd56a19d8caa48"
+          ]
+        }
+      ],
+      "productionFrom": "2011-04",
+      "productionTo": "2015-08",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-aecd56a19d8caa48",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "honda/jazz/drom-generation-3/facelift-1",
+      "generationId": "honda/jazz/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-aecd56a19d8caa48"
+          ]
+        }
+      ],
+      "productionFrom": "2017-09",
+      "productionTo": "2020-01",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-aecd56a19d8caa48",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "honda/n-box/japan-2017/facelift-2020",
+      "generationId": "honda/n-box/japan-2017",
+      "name": "2020 facelift",
+      "aliases": [],
+      "productionFrom": "2020-12",
+      "productionTo": "2023-09",
+      "status": "verified",
+      "evidence": [
+        {
+          "sourceId": "src-honda-n-box-japan-facelift-2020",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": null
+        },
+        {
+          "sourceId": "src-honda-n-box-second-generation-spec-2023",
+          "fields": [
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": null
+        }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "honda/n-box/japan-2023/facelift-2026",
+      "generationId": "honda/n-box/japan-2023",
+      "name": "2026 facelift",
+      "aliases": [],
+      "productionFrom": "2026-07",
+      "productionTo": null,
+      "status": "verified",
+      "evidence": [
+        {
+          "sourceId": "src-honda-n-box-japan-facelift-2026",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": null
+        }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "honda/n-one/japan-2020/update-2025",
+      "generationId": "honda/n-one/japan-2020",
+      "name": "November 2025 update",
+      "aliases": [],
+      "productionFrom": "2025-11",
+      "productionTo": null,
+      "status": "verified",
+      "evidence": [
+        {
+          "sourceId": "src-honda-n-one-japan-update-2025",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Honda released the updated range on 21 November 2025."
+        }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "honda/n-wgn/japan-2019/update-2025",
+      "generationId": "honda/n-wgn/japan-2019",
+      "name": "September 2025 update",
+      "aliases": [],
+      "productionFrom": "2025-09",
+      "productionTo": null,
+      "status": "verified",
+      "evidence": [
+        {
+          "sourceId": "src-honda-n-wgn-japan-update-2025",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Honda released the updated N-WGN range on 26 September 2025."
+        }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "honda/vezel/japan-2021/facelift-2024",
+      "generationId": "honda/vezel/japan-2021",
+      "name": "April 2024 minor model change",
+      "aliases": [],
+      "productionFrom": "2024-04",
+      "productionTo": null,
+      "status": "verified",
+      "evidence": [
+        {
+          "sourceId": "src-honda-vezel-japan-minor-change-2024",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Honda released the minor-model-changed Vezel on 26 April 2024."
+        }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "hyundai/i10/drom-generation-3/facelift-1",
+      "generationId": "hyundai/i10/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-a580344f5e74066e"
+          ]
+        }
+      ],
+      "productionFrom": "2023-01",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-a580344f5e74066e",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "hyundai/i20/drom-generation-2/facelift-1",
+      "generationId": "hyundai/i20/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-d6b7c79db5b0cace"
+          ]
+        }
+      ],
+      "productionFrom": "2018-06",
+      "productionTo": "2020-03",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-d6b7c79db5b0cace",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "hyundai/ix35/drom-generation-2/facelift-1",
+      "generationId": "hyundai/ix35/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-d26356bb52ea5a3c"
+          ]
+        }
+      ],
+      "productionFrom": "2020-11",
+      "productionTo": "2023-04",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-d26356bb52ea5a3c",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "hyundai/kona/drom-generation-1/facelift-1",
+      "generationId": "hyundai/kona/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-2f2365bc8b0015a7"
+          ]
+        }
+      ],
+      "productionFrom": "2020-10",
+      "productionTo": "2023-08",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-2f2365bc8b0015a7",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "jaguar/e-pace/drom-generation-1/facelift-1",
+      "generationId": "jaguar/e-pace/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-468a1a0ef517f5f4"
+          ]
+        }
+      ],
+      "productionFrom": "2020-10",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-468a1a0ef517f5f4",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "jaguar/xf/drom-generation-2/facelift-1",
+      "generationId": "jaguar/xf/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-2e04b23257393734"
+          ]
+        }
+      ],
+      "productionFrom": "2020-10",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-2e04b23257393734",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "jeep/cherokee/drom-generation-5/facelift-1",
+      "generationId": "jeep/cherokee/drom-generation-5",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "5 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-21651f366c29ae1e"
+          ]
+        }
+      ],
+      "productionFrom": "2017-12",
+      "productionTo": "2025-07",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-21651f366c29ae1e",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "jeep/compass/drom-generation-2/facelift-1",
+      "generationId": "jeep/compass/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-de721aaf966e52ec"
+          ]
+        }
+      ],
+      "productionFrom": "2020-11",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-de721aaf966e52ec",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "jeep/renegade/drom-generation-1/facelift-1",
+      "generationId": "jeep/renegade/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-56ff3d939c055bd7"
+          ]
+        }
+      ],
+      "productionFrom": "2018-06",
+      "productionTo": "2023-09",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-56ff3d939c055bd7",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "kia/optima/drom-generation-4/facelift-1",
+      "generationId": "kia/optima/drom-generation-4",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "4 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-384038231f14c1b7"
+          ]
+        }
+      ],
+      "productionFrom": "2018-07",
+      "productionTo": "2021-07",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-384038231f14c1b7",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "kia/picanto/drom-generation-3/facelift-1",
+      "generationId": "kia/picanto/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-e82f9aeeb7a3e5f9"
+          ]
+        }
+      ],
+      "productionFrom": "2020-06",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-e82f9aeeb7a3e5f9",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "kia/rio/drom-generation-4/facelift-1",
+      "generationId": "kia/rio/drom-generation-4",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "4 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-ce6e55e646af018b"
+          ]
+        }
+      ],
+      "productionFrom": "2020-08",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-ce6e55e646af018b",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "kia/soul/drom-generation-3/facelift-1",
+      "generationId": "kia/soul/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-b6382f050e09e424"
+          ]
+        }
+      ],
+      "productionFrom": "2022-05",
+      "productionTo": "2025-10",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-b6382f050e09e424",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "kia/stonic/drom-generation-1/facelift-1",
+      "generationId": "kia/stonic/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-f064badccfb8dbc7"
+          ]
+        }
+      ],
+      "productionFrom": "2020-08",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-f064badccfb8dbc7",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "mazda/axela/drom-generation-3/facelift-1",
+      "generationId": "mazda/axela/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-16dc947d5a80b83d"
+          ]
+        }
+      ],
+      "productionFrom": "2016-07",
+      "productionTo": "2019-05",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The source facelift label and observed production range are preserved; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "mazda/cx-3/drom-generation-1/facelift-1",
+      "generationId": "mazda/cx-3/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-5a32f1a121b0a9b3"
+          ]
+        }
+      ],
+      "productionFrom": "2018-03",
+      "productionTo": "2026-02",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-5a32f1a121b0a9b3",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "mazda/cx-8/drom-generation-1/facelift-1",
+      "generationId": "mazda/cx-8/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-90f47bfda34fdde6"
+          ]
+        }
+      ],
+      "productionFrom": "2022-11",
+      "productionTo": "2023-12",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-90f47bfda34fdde6",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "mazda/mazda2/japan-2019/update-2023",
+      "generationId": "mazda/mazda2/japan-2019",
+      "name": "2023 product update",
+      "aliases": [],
+      "productionFrom": "2023-12",
+      "productionTo": null,
+      "status": "verified",
+      "evidence": [
+        {
+          "sourceId": "src-mazda2-japan-update-2023",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": null
+        }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "mazda/verisa/drom-generation-1/facelift-1",
+      "generationId": "mazda/verisa/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-9c94080f5d5f38eb"
+          ]
+        }
+      ],
+      "productionFrom": "2006-08",
+      "productionTo": "2015-09",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-9c94080f5d5f38eb",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "mercedes-benz/v-class/w447/2023-update",
+      "generationId": "mercedes-benz/v-class/w447",
+      "name": "2023 mid-size range update",
+      "aliases": [],
+      "productionFrom": null,
+      "productionTo": null,
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-mercedes-mid-size-vans-update-2023",
+          "fields": [
+            "name"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Mercedes-Benz presented the updated V-Class range on 27 July 2023; production boundaries are not inferred from the presentation date."
+        }
+      ],
+      "researchNotes": [
+        "productionFrom remains null until an official production or type-approval boundary is sourced."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "mercedes-benz/vito/w447/2023-update",
+      "generationId": "mercedes-benz/vito/w447",
+      "name": "2023 mid-size range update",
+      "aliases": [],
+      "productionFrom": null,
+      "productionTo": null,
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-mercedes-mid-size-vans-update-2023",
+          "fields": [
+            "name"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Mercedes-Benz presented the updated Vito range on 27 July 2023; production boundaries are not inferred from the presentation date."
+        }
+      ],
+      "researchNotes": [
+        "productionFrom remains null until an official production or type-approval boundary is sourced."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "mini/countryman/drom-generation-2/facelift-1",
+      "generationId": "mini/countryman/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-d0efe4cd08f7f174"
+          ]
+        }
+      ],
+      "productionFrom": "2020-05",
+      "productionTo": "2023-10",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-d0efe4cd08f7f174",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "mitsubishi/asx/drom-generation-1/facelift-1",
+      "generationId": "mitsubishi/asx/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-2e0d2bc0c062d7ec"
+          ]
+        }
+      ],
+      "productionFrom": "2012-10",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-2e0d2bc0c062d7ec",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "mitsubishi/asx/drom-generation-2/facelift-1",
+      "generationId": "mitsubishi/asx/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-2e0d2bc0c062d7ec"
+          ]
+        }
+      ],
+      "productionFrom": "2024-04",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-2e0d2bc0c062d7ec",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "mitsubishi/triton/drom-generation-5/facelift-1",
+      "generationId": "mitsubishi/triton/drom-generation-5",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "5 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-fd0eec6a91423d83"
+          ]
+        }
+      ],
+      "productionFrom": "2018-01",
+      "productionTo": "2023-06",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-fd0eec6a91423d83",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "mitsubishi/xpander/drom-generation-1/facelift-1",
+      "generationId": "mitsubishi/xpander/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-12770f438c634d61"
+          ]
+        }
+      ],
+      "productionFrom": "2021-11",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-12770f438c634d61",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "nissan/almera/drom-generation-3/facelift-1",
+      "generationId": "nissan/almera/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-da34d7fabc2a8187"
+          ]
+        }
+      ],
+      "productionFrom": "2014-01",
+      "productionTo": "2019-10",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-da34d7fabc2a8187",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "nissan/almera/drom-generation-4/facelift-1",
+      "generationId": "nissan/almera/drom-generation-4",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "4 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-da34d7fabc2a8187"
+          ]
+        }
+      ],
+      "productionFrom": "2023-05",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-da34d7fabc2a8187",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "nissan/juke/drom-generation-1/facelift-1",
+      "generationId": "nissan/juke/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-00ab667331684479"
+          ]
+        }
+      ],
+      "productionFrom": "2014-03",
+      "productionTo": "2020-01",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-00ab667331684479",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "nissan/juke/drom-generation-2/facelift-1",
+      "generationId": "nissan/juke/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-00ab667331684479"
+          ]
+        }
+      ],
+      "productionFrom": "2024-02",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-00ab667331684479",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "nissan/qashqai/drom-generation-2/facelift-1",
+      "generationId": "nissan/qashqai/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-fafcc9392a12382a"
+          ]
+        }
+      ],
+      "productionFrom": "2017-03",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-fafcc9392a12382a",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "peugeot/2008/drom-generation-1/facelift-1",
+      "generationId": "peugeot/2008/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-9b72e29666ee5ecd"
+          ]
+        }
+      ],
+      "productionFrom": "2016-09",
+      "productionTo": "2020-08",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-9b72e29666ee5ecd",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "peugeot/2008/drom-generation-2/facelift-1",
+      "generationId": "peugeot/2008/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-9b72e29666ee5ecd"
+          ]
+        }
+      ],
+      "productionFrom": "2023-10",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-9b72e29666ee5ecd",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "peugeot/208/drom-generation-1/facelift-1",
+      "generationId": "peugeot/208/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-5b935c780b194d76"
+          ]
+        }
+      ],
+      "productionFrom": "2015-10",
+      "productionTo": "2020-06",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-5b935c780b194d76",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "peugeot/208/drom-generation-2/facelift-1",
+      "generationId": "peugeot/208/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-5b935c780b194d76"
+          ]
+        }
+      ],
+      "productionFrom": "2023-09",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-5b935c780b194d76",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "peugeot/3008/drom-generation-2/facelift-1",
+      "generationId": "peugeot/3008/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-09c8f41c66484a60"
+          ]
+        }
+      ],
+      "productionFrom": "2020-09",
+      "productionTo": "2025-06",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-09c8f41c66484a60",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "peugeot/5008/drom-generation-2/facelift-1",
+      "generationId": "peugeot/5008/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-160949dbaf4edded"
+          ]
+        }
+      ],
+      "productionFrom": "2020-09",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-160949dbaf4edded",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "renault/captur/drom-generation-1/facelift-1",
+      "generationId": "renault/captur/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-2d1a136bccbc528d"
+          ]
+        }
+      ],
+      "productionFrom": "2018-03",
+      "productionTo": "2021-01",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-2d1a136bccbc528d",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "renault/captur/drom-generation-2/facelift-1",
+      "generationId": "renault/captur/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-2d1a136bccbc528d"
+          ]
+        }
+      ],
+      "productionFrom": "2024-04",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-2d1a136bccbc528d",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "seat/arona/drom-generation-1/facelift-1",
+      "generationId": "seat/arona/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-db024ce44e032273"
+          ]
+        }
+      ],
+      "productionFrom": "2021-04",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-db024ce44e032273",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "seat/leon/drom-generation-3/facelift-1",
+      "generationId": "seat/leon/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-11cd6e810fb29c5b"
+          ]
+        }
+      ],
+      "productionFrom": "2016-11",
+      "productionTo": "2020-03",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-11cd6e810fb29c5b",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "skoda/kamiq/drom-generation-1/facelift-1",
+      "generationId": "skoda/kamiq/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-d409945fae17d511"
+          ]
+        }
+      ],
+      "productionFrom": "2023-08",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-d409945fae17d511",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "skoda/karoq/drom-generation-1/facelift-1",
+      "generationId": "skoda/karoq/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-fa032c0c6b15c380"
+          ]
+        }
+      ],
+      "productionFrom": "2021-11",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-fa032c0c6b15c380",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "skoda/kodiaq/drom-generation-1/facelift-1",
+      "generationId": "skoda/kodiaq/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-2f192c189de0e852"
+          ]
+        }
+      ],
+      "productionFrom": "2021-04",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-2f192c189de0e852",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "skoda/rapid/drom-generation-1/facelift-1",
+      "generationId": "skoda/rapid/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-13398b05d8e89c55"
+          ]
+        }
+      ],
+      "productionFrom": "2017-02",
+      "productionTo": "2020-02",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-13398b05d8e89c55",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "skoda/scala/drom-generation-1/facelift-1",
+      "generationId": "skoda/scala/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-55069bc38636c0e8"
+          ]
+        }
+      ],
+      "productionFrom": "2023-08",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-55069bc38636c0e8",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "suzuki/vitara/drom-generation-4/facelift-1",
+      "generationId": "suzuki/vitara/drom-generation-4",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "4 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-82a091990fbd360c"
+          ]
+        }
+      ],
+      "productionFrom": "2018-10",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-82a091990fbd360c",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "toyota/allion/drom-generation-2/facelift-1",
+      "generationId": "toyota/allion/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-c3c2d4e7ad7c1b13"
+          ]
+        }
+      ],
+      "productionFrom": "2010-04",
+      "productionTo": "2021-03",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-c3c2d4e7ad7c1b13",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "toyota/alphard/drom-generation-2/facelift-1",
+      "generationId": "toyota/alphard/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-0121c90491d2fec9"
+          ]
+        }
+      ],
+      "productionFrom": "2011-09",
+      "productionTo": "2015-02",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-0121c90491d2fec9",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "toyota/alphard/drom-generation-3/facelift-1",
+      "generationId": "toyota/alphard/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-0121c90491d2fec9"
+          ]
+        }
+      ],
+      "productionFrom": "2017-12",
+      "productionTo": "2023-05",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-0121c90491d2fec9",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "toyota/c-hr/drom-generation-1/facelift-1",
+      "generationId": "toyota/c-hr/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-af67d25ce75688dc"
+          ]
+        }
+      ],
+      "productionFrom": "2019-09",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-af67d25ce75688dc",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "toyota/rush/drom-generation-1/facelift-1",
+      "generationId": "toyota/rush/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-d63ee572bf831204"
+          ]
+        }
+      ],
+      "productionFrom": "2008-11",
+      "productionTo": "2016-03",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-d63ee572bf831204",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "toyota/verso/drom-generation-1/facelift-1",
+      "generationId": "toyota/verso/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-3f5d7eac59f606ad"
+          ]
+        }
+      ],
+      "productionFrom": "2012-11",
+      "productionTo": "2017-10",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-3f5d7eac59f606ad",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volkswagen/caravelle/drom-generation-6/facelift-1",
+      "generationId": "volkswagen/caravelle/drom-generation-6",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "6 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-52877a6a7885c562"
+          ]
+        }
+      ],
+      "productionFrom": "2019-02",
+      "productionTo": "2022-12",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-52877a6a7885c562",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volkswagen/golf/eighth-generation/2024-update",
+      "generationId": "volkswagen/golf/eighth-generation",
+      "name": "2024 model update",
+      "aliases": [],
+      "productionFrom": "2024-04",
+      "productionTo": null,
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-volkswagen-golf-update-production-2024",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Volkswagen dates the start of series production of the revamped eighth-generation Golf to 12 April 2024."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed; the full pre-/post-update variant split remains open."
+      ],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "volkswagen/lavida/drom-generation-3/facelift-1",
+      "generationId": "volkswagen/lavida/drom-generation-3",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "3 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-e75f551be882ccbb"
+          ]
+        }
+      ],
+      "productionFrom": "2022-04",
+      "productionTo": "2025-11",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-e75f551be882ccbb",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The source facelift label and observed production range are preserved; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volkswagen/sharan/drom-generation-2/facelift-1",
+      "generationId": "volkswagen/sharan/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-889a2ff23c251ee0"
+          ]
+        }
+      ],
+      "productionFrom": "2015-05",
+      "productionTo": "2022-10",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-889a2ff23c251ee0",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volkswagen/t-cross/drom-generation-1/facelift-1",
+      "generationId": "volkswagen/t-cross/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-45373d68d747c607"
+          ]
+        }
+      ],
+      "productionFrom": "2023-07",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-45373d68d747c607",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volkswagen/t-roc/drom-generation-1/facelift-1",
+      "generationId": "volkswagen/t-roc/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-ab6c3485046c39c8"
+          ]
+        }
+      ],
+      "productionFrom": "2020-11",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-ab6c3485046c39c8",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volvo/v40/drom-generation-2/facelift-1",
+      "generationId": "volvo/v40/drom-generation-2",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "2 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-362da72c0db9d902"
+          ]
+        }
+      ],
+      "productionFrom": "2016-07",
+      "productionTo": "2020-12",
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-362da72c0db9d902",
+          "fields": [
+            "name",
+            "productionFrom",
+            "productionTo"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "volvo/xc40/drom-generation-1/facelift-1",
+      "generationId": "volvo/xc40/drom-generation-1",
+      "name": "Facelift",
+      "aliases": [
+        {
+          "value": "1 поколение, рестайлинг",
+          "kind": "localized",
+          "safe": false,
+          "language": "ru",
+          "market": null,
+          "sourceIds": [
+            "src-drom-catalog-9a30d477acb57b3b"
+          ]
+        }
+      ],
+      "productionFrom": "2022-02",
+      "productionTo": null,
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-drom-catalog-9a30d477acb57b3b",
+          "fields": [
+            "name",
+            "productionFrom"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "The facelift label and its observed production range are retained from exact legacy source records; the public label is normalized to English."
+        }
+      ],
+      "researchNotes": [
+        "Review-only facelift boundary; no trim or market applicability is inferred."
+      ],
+      "updatedAt": "2026-08-17"
+    }
+  ]
+}

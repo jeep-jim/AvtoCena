@@ -1,0 +1,30 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 1,
+    "replacedModels": 1,
+    "newGenerations": 1,
+    "newVariants": 6
+  },
+  "modelId": "wuling/starlight-s",
+  "generationIds": [
+    "wuling/starlight-s/2025-model-year"
+  ],
+  "variantIds": [
+    "wuling/starlight-s/2025-model-year/60-km-advanced",
+    "wuling/starlight-s/2025-model-year/130-km-leading",
+    "wuling/starlight-s/2025-model-year/130-km-flagship",
+    "wuling/starlight-s/2025-model-year/130-km-high-power-flagship",
+    "wuling/starlight-s/2025-model-year/510-km-leading",
+    "wuling/starlight-s/2025-model-year/510-km-flagship"
+  ],
+  "policy": {
+    "exactManufacturerColumnsOnly": true,
+    "batteryBasisUnspecifiedAndRejected": true,
+    "motorPeakNotPower30Min": true,
+    "modelYearNotPlatformGeneration": true,
+    "automaticPublicationReady": false
+  }
+}

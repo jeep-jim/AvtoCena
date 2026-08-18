@@ -1,0 +1,7237 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 10,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-a556392c667ae172e651",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 67,
+      "commercialNames": [
+        "120I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bfc1a24b2018125ff836",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 81,
+      "commercialNames": [
+        "120I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e00d67d7147c45a9ac1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 84,
+      "commercialNames": [
+        "120I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a97e551d08361a0d50c3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 90,
+      "commercialNames": [
+        "120I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c3da68fa522b275d03fb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 110,
+      "commercialNames": [
+        "120I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2c76d552fe2593b9197",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "120D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-399ee64231fc41fe6a4b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 221,
+      "commercialNames": [
+        "M1 35I XDRIVE",
+        "M135I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4728961e18a142ffa365",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "120D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fae07f4db3c0be7209f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "e85",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "120"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2cc775b2ca2f4959d642",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1596,
+      "powerKw": 85,
+      "commercialNames": [
+        "116I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a6350624d51ef8fc9de",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 100,
+      "commercialNames": [
+        "116I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-419ec8686483fb880ddb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "120"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c63a5eb6503e8823359",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "1 Series",
+      "modelId": "bmw/1-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 115,
+      "commercialNames": [
+        "120"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 337,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b683ec87a442c1031849",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1489,
+      "powerKw": 110,
+      "commercialNames": [
+        "220I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 68,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-343b5fbbd048e5a8df13",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 110,
+      "commercialNames": [
+        "218D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c3a93d1c86082f5a4f4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "218D",
+        "218D ACTIVE TOURER",
+        "218D LUXURY",
+        "218D LUXURY AUTO",
+        "218D M SPORT",
+        "218D M SPORT AUTO",
+        "218D SE",
+        "218D SE AUTO",
+        "218D SPORT",
+        "218D SPORT AUTO"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 714,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2302687ae4d306a4e3b0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 100,
+      "commercialNames": [
+        "218d",
+        "218D",
+        "218D A. TOURER",
+        "218d Active Tourer",
+        "218D ACTIVE TOURER",
+        "218D GRAN TOURER",
+        "218d Gran Tourer"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 1197,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f447f21853dc5bf47a6d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "218d",
+        "218D",
+        "218D A. TOURER",
+        "218D ACTIVE",
+        "218D ACTIVE TOURER",
+        "218d Active Tourer",
+        "218D ACTIVE TOURER F45 B47",
+        "218D ACTIVE TOURER U06 B47",
+        "218D CABRIO F23 B47",
+        "218D GRAN COUPé F44 B47",
+        "218D GRAN COUPE F44 B47",
+        "218D GRAN COUPE F74 B47",
+        "218D GRAN TOURE",
+        "218D GRAN TOURER",
+        "218D GRAN TOURER F46 B47",
+        "218D GRANTOURER",
+        "218D X DRAIVE GRAN T",
+        "218D XDRIVE",
+        "218D XDRIVE ACTIVE TOURE",
+        "218D XDRIVE ACTIVE TOURER",
+        "218d xDrive Active Tourer",
+        "218D XDRIVE ACTIVE TOURER F45",
+        "218D XDRIVE GRAN TOURER",
+        "218D XDRIVE GRAN TOURER F46 B4",
+        "218I ACTIVE TOURER",
+        "218I GRAN TOURER",
+        "220I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 64,
+      "registrations": 54971,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad7f00254e4c2cbd295c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "218D LUXURY AUTO",
+        "218D M SPORT AUTO",
+        "218D SE",
+        "218D SPORT"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2902bb7bf13caafd102",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6da407c3ade8157e1b7d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1489,
+      "powerKw": 110,
+      "commercialNames": [
+        "220I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 60,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e9dd3ba80d2be8e8077",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": 103,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-65fc56e64ee805dba361",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "218I",
+        "218I ACTIVE TOURER",
+        "218I LUXURY",
+        "218I LUXURY AUTO",
+        "218I M SPORT",
+        "218I M SPORT AUTO",
+        "218I SE",
+        "218I SE AUTO",
+        "218I SPORT",
+        "218I SPORT AUTO",
+        "220I ACTIVE TOURER",
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 6287,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79bfa9e74ffbc19aa920",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 80,
+      "commercialNames": [
+        "218I ACTIVE TOURER",
+        "218I GRAN TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f66310d2077753e453e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "218 I",
+        "218 I ACTIVE TOURER",
+        "218D ACTIVE TOURER",
+        "218I",
+        "218i",
+        "218I A TOURER",
+        "218I A. TOURER",
+        "218I ACTIVE",
+        "218I ACTIVE TOURER",
+        "218i Active Tourer",
+        "218I ACTIVE TOURER F45 B38",
+        "218I ACTIVE TOURER U06 B38",
+        "218I CABRIO F23 B38",
+        "218I COUPé F22 B38",
+        "218I GRAN COUPé F44 B38",
+        "218I GRAN COUPE F44 B38",
+        "218I GRAN TOURER",
+        "218i Gran Tourer",
+        "218I GRAN TOURER F46 B38",
+        "218I GRANTOURER",
+        "220i Active Tourer",
+        "220I ACTIVE TOURER",
+        "220I XDRIVE",
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 59,
+      "registrations": 71990,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0de3f0ce4e70efe750a5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 103,
+      "commercialNames": [
+        "218D GRAN TOURER",
+        "218I",
+        "218i",
+        "218I ACTIVE TOURER",
+        "218I ACTIVE TOURER F45 B38",
+        "218I GRAN COUPé F44 B38",
+        "218I GRAN TOURER",
+        "218i Gran Tourer",
+        "218I GRAN TOURER F46 B38",
+        "218I GRANTOURER",
+        "BMW 218I"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 19,
+      "registrations": 25817,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08075590b8bc021d72de",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 110,
+      "commercialNames": [
+        "218I",
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 45,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14ae6672b728d263f52d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1799,
+      "powerKw": 100,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a1d8b44888f99e68318",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0cd2cb87fee21d315522",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "218I",
+        "218I M SPORT AUTO",
+        "218I SPORT",
+        "218I SPORT AUTO",
+        "220I",
+        "220I LUXURY AUTO",
+        "220I M SPORT AUTO",
+        "220I SE AUTO",
+        "220I SPORT AUTO"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 897,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bafd9890d0ab4c0d2cf6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 100,
+      "commercialNames": [
+        "218 I",
+        "218i",
+        "218I",
+        "218I CABRIO F23 B48",
+        "218I COUPé F22 B48"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 2844,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc8132c62e47607411bc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 131,
+      "commercialNames": [
+        "220I",
+        "220i",
+        "220I ACTIVE",
+        "220I ACTIVE T.",
+        "220i Active Tourer",
+        "220I ACTIVE TOURER",
+        "220I ACTIVE TOURER F45 B48",
+        "220I GRAN COUPé F44 B48",
+        "220I GRAN COUPE F44 B48",
+        "220I GRAN TOURER",
+        "220i Gran Tourer",
+        "220I GRAN TOURER F46 B48",
+        "220I GRANTOURER",
+        "220I XDRIVE",
+        "220i xDrive",
+        "220I XDRIVE GRAN COUPé F44 B48",
+        "220I XDRIVE GRAN COUPE F44 B48"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 37,
+      "registrations": 11801,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b6b04603859c6559449",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 135,
+      "commercialNames": [
+        "218I",
+        "220i",
+        "220I",
+        "220I CABRIO F23 B48",
+        "220I COUPé F22 B48",
+        "220I COUPE G42 B48"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 11368,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-988a08cd1d8d5f1309e0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 141,
+      "commercialNames": [
+        "220I",
+        "220i Active Tourer",
+        "220I ACTIVE TOURER",
+        "220I GRAN TOURER",
+        "220i Gran Tourer",
+        "220I GRAN TOURER F46 B48",
+        "220I GRANTOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 3549,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6582cb52957a67b1149",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 170,
+      "commercialNames": [
+        "218I XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-970f8fcc891d51fdec72",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1489,
+      "powerKw": 115,
+      "commercialNames": [
+        "220I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d663450763abf64bafe",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 115,
+      "commercialNames": [
+        "218D ACTIVE TOURER",
+        "218I ACTIVE TOURER",
+        "220I",
+        "220I A TOURER",
+        "220I A. TOURER",
+        "220I ACTIVE TOURER",
+        "220I ACTIVE TOURER U06 B38",
+        "220I ATIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 12804,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f678c8d0fabf52637fd8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 103,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5e65d8a45f7756b389f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 115,
+      "commercialNames": [
+        "218I",
+        "218I COUPE G42 B48"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 2660,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecd962ace08e0856fdae",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "218D ACTIVE TOURER",
+        "218I ACTIVE TOURER",
+        "220I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-905f5e15fdd5cd6bf6bb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": 272,
+      "commercialNames": [
+        "2 SERIES"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08628dd3ce4fa4250700",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "218I GRAN TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-417af5c221329e6c26db",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1996,
+      "powerKw": 135,
+      "commercialNames": [
+        "220 I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eaccd0c9b3631d349ea5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "225e xDrive Active Tourer",
+        "225E XDRIVE ACTIVE TOURER",
+        "225E XDRIVE ACTIVE TOURER U06"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 19893,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a198b9afc5a1ecf26e6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1599,
+      "powerKw": 110,
+      "commercialNames": [
+        "218D ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecb862bf6c66eab0e60a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 61,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-802238cce63c9f20cb63",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 67,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d567f8a06ae6d7a2ac3d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 68,
+      "commercialNames": [
+        "218D ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2fe2671aecb33f8e34ca",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 69,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3e86bca1450894a6ece",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 70,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b48567339a73fa6e079b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 81,
+      "commercialNames": [
+        "218D",
+        "218D ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e01a33ecd8b4f6de6420",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 85,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25166d13cb214e722f0f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 95,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cae2f9d80ebb609c2aa8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 96,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92689277729d509fa895",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 112,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-945e3eebce0cf73acd06",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 116,
+      "commercialNames": [
+        "218D XDRIVE GRAN TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e78288f1f98f4475d07",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 117,
+      "commercialNames": [
+        "218D",
+        "218D ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-810cd888aab9901be391",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 120,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8adfc64b22a4b0148691",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 132,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3f6226807223c7b76bc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 135,
+      "commercialNames": [
+        "218D ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e82aa294483717433acf",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ed8c1e3dd1dd79409654",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 141,
+      "commercialNames": [
+        "218D ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00e19c661d377d656722",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 145,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5016a4e88b485665a109",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 147,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bfd86a2182935b456610",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 210,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a76cb34fb09804e72196",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 360,
+      "commercialNames": [
+        "218D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ece9ab45778ba3ff81e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 49,
+      "commercialNames": [
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6534412d41eff093f396",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 61,
+      "commercialNames": [
+        "218I",
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e466a5a7081c8bee5a27",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 62,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ff3355d852f7a9ac37c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 67,
+      "commercialNames": [
+        "218I",
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab665782e7414eae4393",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 68,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f785c22acebc2ab50f20",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 73,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a2d471aa83611916353",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 81,
+      "commercialNames": [
+        "218I",
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-514cbb80846580375191",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 84,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf8435b9a3120a0514cf",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 85,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7ff0cb2863afe31d2c3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 91,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2755433b217d0465211d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 95,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b58e8821e160dd85ac6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 96,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f25230ceaf1cc1bb5a87",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 112,
+      "commercialNames": [
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe1d42e6088cb1490611",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 116,
+      "commercialNames": [
+        "218I",
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e573e478f12a4e9ca8af",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 117,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3fac790eab0d1d755acb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 120,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf9c2f6018adb0cc41d5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 132,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b9ec4643bcc5ed25e3d6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 136,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7677aa6b712bd6786b40",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 140,
+      "commercialNames": [
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a3a8f0460c190c83ce9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 141,
+      "commercialNames": [
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7569722accd996c8f656",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 145,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7bd3548b3ad3bf0fab0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 147,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a62339568a48b5bbca1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 148,
+      "commercialNames": [
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45c3eb09e3087d453920",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 173,
+      "commercialNames": [
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a87873dcbf7f46fc0f5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 190,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-705b4770ab7f4bcae77c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 206,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f264af5db44edce81634",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 210,
+      "commercialNames": [
+        "218I",
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0adf3b70cbdd47ffdb19",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 243,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c6b73798694b03132e3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 294,
+      "commercialNames": [
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a975cf616a3e10ca8be",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 67,
+      "commercialNames": [
+        "220I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b3d1f0d020785eae1d3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 68,
+      "commercialNames": [
+        "220I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-095c8375f099bff3bcb1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 80,
+      "commercialNames": [
+        "220I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7fbe99d989f2684f04d5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 81,
+      "commercialNames": [
+        "220I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7dfff6a7b8bbdd16d899",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 85,
+      "commercialNames": [
+        "220I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61aa94ae53f5bd6ce810",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 91,
+      "commercialNames": [
+        "220I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5339874c4918cdd41f9e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 140,
+      "commercialNames": [
+        "220I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-442c6d5820f856d6b13d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 270,
+      "commercialNames": [
+        "220I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c578edbcf851a8135dce",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2998,
+      "powerKw": 115,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b617c3299cde1b01b938",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": null,
+      "commercialNames": [
+        "220I ACTIVE TOURER",
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2250bb10f29b9a91c8a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 53,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbb4fc44d0d22c07d142",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 55,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dadf2e5ec1fceed0b46d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 61,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d5edfd5e07a909bca25",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 62,
+      "commercialNames": [
+        "220I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-728ae2c301583988b888",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 67,
+      "commercialNames": [
+        "220I ACTIVE TOURER",
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b341ce120b45ba122828",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 69,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e4c3ae6b6e73dc91735",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 70,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91ab22e7b6388371830f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 72,
+      "commercialNames": [
+        "220I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eec3995c100ff0d63ea2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 80,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fbdef9476c51c4ecd1ce",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 81,
+      "commercialNames": [
+        "220I ACTIVE TOURER",
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6bbb67d37ca21bd109b8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 95,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ddb36e4c90dc6a72abf6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 96,
+      "commercialNames": [
+        "220I ACTIVE TOURER",
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3749635bf09303ccfe64",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 110,
+      "commercialNames": [
+        "220I ACTIVE TOURER",
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1658be2a55c6d26ee5d7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 135,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf8d13ff0237d91db739",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 140,
+      "commercialNames": [
+        "220I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ceb3ae8d493cb3f911f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 147,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9780581eeafe44802a21",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 150,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6315d7d51c5082758e45",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 165,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-607c6ac894b52999bf8d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 404,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36856ccb4d14cc680e02",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 100,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-59817cdbd3c1c08ae5f6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 135,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ac1bf5a7279be73500c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 225,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70c8cbb910915aa145f6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 60,
+      "commercialNames": [
+        "225E XDRIVE ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d21a06d4f1313e911d0a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1499,
+      "powerKw": 115,
+      "commercialNames": [
+        "220I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ab286e01492dbedc6fb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 10,
+      "commercialNames": [
+        "220I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-145839712ecfe241c120",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1499,
+      "powerKw": 74,
+      "commercialNames": [
+        "218I ACTIVE TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a8bf79d5a9d9063a860",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 58,
+      "commercialNames": [
+        "218I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4bb6d392a3f939edfde4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "2 Series",
+      "modelId": "bmw/2-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 4395,
+      "powerKw": null,
+      "commercialNames": [
+        "218I GRAN TOURER"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c92d1a893c4cfbbb9847",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1955,
+      "powerKw": 140,
+      "commercialNames": [
+        "320d"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de679059be7f7f3bb9c9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "318D",
+        "318D M SPORT",
+        "318D M SPORT AUTO",
+        "318D M SPORT MHEV AUTO",
+        "318D SE",
+        "318D SE AUTO",
+        "318D SE MHEV AUTO",
+        "318D SPORT",
+        "318D SPORT AUTO",
+        "318D SPORT MHEV AUTO",
+        "318I",
+        "320D",
+        "320D M SPORT",
+        "320D M SPORT + EDITION",
+        "320D M SPORT + EDITION AUTO",
+        "320D M SPORT + EDITION MHEV A",
+        "320D M SPORT AUTO",
+        "320D M SPORT GT AUTO",
+        "320D M SPORT MHEV AUTO",
+        "320D M SPORT PRO ED MHEV AUTO",
+        "320D SE",
+        "320D SE AUTO",
+        "320D SE MHEV AUTO",
+        "320D SPORT",
+        "320D SPORT AUTO",
+        "320D SPORT MHEV AUTO",
+        "320D XDRIVE",
+        "320D XDRIVE M SPORT + ED AUTO",
+        "320D XDRIVE M SPORT AUTO",
+        "320D XDRIVE M SPORT MHEV AUTO",
+        "320D XDRIVE M SPORT+ ED MHEV A",
+        "320D XDRIVE SE AUTO",
+        "320D XDRIVE SE GT AUTO",
+        "320D XDRIVE SE MHEV AUTO",
+        "320D XDRIVE SPORT AUTO",
+        "320D XDRIVE SPORT MHEV AUTO",
+        "320D XDRVE MSPRT PRO ED MHEV A",
+        "330D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 39,
+      "registrations": 5618,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-713b10de0e962aa48587",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 100,
+      "commercialNames": [
+        "318d",
+        "318D",
+        "320D",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 6284,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e22b955e4e1e6b8cba61",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "318 D",
+        "318D",
+        "318D GRAN TURISMO F34 B47",
+        "318D LIMOUSINE G20 B47",
+        "318D LIMOUSINE MX G20 B47",
+        "318D TOURING G21 B47",
+        "318I"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 69293,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35c29337bb720247597d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 120,
+      "commercialNames": [
+        "320D",
+        "320d",
+        "320D EFFICIENT DYMICS",
+        "320d Efficient Dynamics",
+        "320D EFFICIENT DYNAMICS",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 1112,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b9096eb7e55b3542182",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 130,
+      "commercialNames": [
+        "320D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b263c4795113922b698",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 135,
+      "commercialNames": [
+        "320D",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f1346e736e27719edb3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "318D",
+        "320 D",
+        "320 D X DRIVE",
+        "320D",
+        "320d",
+        "320D GRAN TURISMO F34 B47",
+        "320D LIMOUSINE B47 G20",
+        "320D LIMOUSINE G20 B47",
+        "320D LIMOUSINE G20 XD5",
+        "320D LIMOUSINE MX G20 B47",
+        "320D LIMOUSINE MX G20 XD5",
+        "320D TOURING G21 B47",
+        "320D TOURING G21 XD5",
+        "320D XDRIVE",
+        "320d xDrive",
+        "320D XDRIVE GRAN TURISMO F34 B",
+        "320D XDRIVE LIMOUSINE G20 B47",
+        "320D XDRIVE LIMOUSINE G20 XD5",
+        "320D XDRIVE LIMOUSINE MX G20 B",
+        "320D XDRIVE LIMOUSINE MX G20 X",
+        "320D XDRIVE TOURING G21 B47",
+        "320D XDRIVE TOURING G21 XD5",
+        "320I XDRIVE",
+        "330d xDrive",
+        "330D XDRIVE",
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 79,
+      "registrations": 167484,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-827348ff53f47c9657de",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 190,
+      "commercialNames": [
+        "330D XDRIVE",
+        "330d xDrive"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 115,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7895119851b29d5fa979",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 195,
+      "commercialNames": [
+        "330 D XDRIVE",
+        "330 D XDRIVE AUT",
+        "330D XDRIVE",
+        "330d xDrive"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5255,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2dcdff962b1a78d182f3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 210,
+      "commercialNames": [
+        "318D",
+        "330 / / D XDRIVE AUT",
+        "330 / / D XDRIVE AUT.",
+        "330 D XDRIVE",
+        "330D XDRIVE",
+        "330d xDrive"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 11464,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fdf0605be6fe03b549bd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2993,
+      "powerKw": 230,
+      "commercialNames": [
+        "330I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3622f6602be2a98337a0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2996,
+      "powerKw": 210,
+      "commercialNames": [
+        "330D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37c0065a6251c7686fab",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "320D",
+        "320D XDRIVE",
+        "320d xDrive"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 341,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-404463b3f13a4904f30b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1499,
+      "powerKw": 100,
+      "commercialNames": [
+        "318 I",
+        "318i",
+        "318I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 220,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f6734fed6f2db3ea488",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 125,
+      "commercialNames": [
+        "320I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f94cbee1f493d4df6873",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1796,
+      "powerKw": 84,
+      "commercialNames": [
+        "3 SERIES"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d1ab105ff71a59bbccd",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1991,
+      "powerKw": 95,
+      "commercialNames": [
+        "BMW 320I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14cdb564341be7ad7dad",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 140,
+      "commercialNames": [
+        "320D",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 100,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2951ac913ce5df794e37",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "318I",
+        "318I M SPORT AUTO",
+        "318I SE AUTO",
+        "318I SPORT AUTO",
+        "320E",
+        "320I",
+        "320I M SPORT + EDITION AUTO",
+        "320I M SPORT AUTO",
+        "320I M SPORT GT AUTO",
+        "320I M SPORT PRO EDITION AUTO",
+        "320I SE AUTO",
+        "320I SE GT AUTO",
+        "320I SPORT AUTO",
+        "320I XDRIVE",
+        "320I XDRIVE M SPORT + ED A",
+        "320I XDRIVE M SPORT AUTO",
+        "320I XDRIVE SE AUTO",
+        "320I XDRIVE SPORT AUTO",
+        "330E",
+        "330E XDRIVE",
+        "330I",
+        "330I M SPORT + EDITION AUTO",
+        "330I M SPORT AUTO",
+        "330I M SPORT PRO EDITION AUTO",
+        "330I SPORT AUTO",
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 31,
+      "registrations": 7970,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5ea9715f2786156f9d6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 115,
+      "commercialNames": [
+        "318 / / I",
+        "318 I",
+        "318I",
+        "318i",
+        "318I LIMOUSINE G20 B48",
+        "318I LIMOUSINE MX G20 B48",
+        "318I TOURING",
+        "318I TOURING G21 B48",
+        "320I"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 31,
+      "registrations": 43546,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a091ed240ff43bf993c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 120,
+      "commercialNames": [
+        "318I",
+        "320E",
+        "320E XDRIVE",
+        "320i",
+        "320i xDrive",
+        "320I XDRIVE",
+        "330E",
+        "330I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 145,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d31ac9847542d5bf4bee",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 135,
+      "commercialNames": [
+        "320E",
+        "320I",
+        "320i",
+        "320I GRAN TURISMO",
+        "320I LIMOUSINE G20 B48",
+        "320I LIMOUSINE MX G20 B48",
+        "320I TOURING G21 B48",
+        "320I XDRIVE",
+        "320I XDRIVE GRAN TURISMO F34 B",
+        "320I XDRIVE LIMOUSINE G20 B48",
+        "320I XDRIVE LIMOUSINE MX G20 B",
+        "330e",
+        "330E",
+        "330E XDRIVE",
+        "330I XDRIVE",
+        "BMW 320I"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 53,
+      "registrations": 51339,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6fc562bd7e4e894d947",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 185,
+      "commercialNames": [
+        "330i",
+        "330I",
+        "330i xDrive"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 371,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9cea5ca66ae819e0153c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 190,
+      "commercialNames": [
+        "320I",
+        "330I",
+        "330i",
+        "330I LIMOUSINE G20 B48",
+        "330I TOURING G21 B48",
+        "330i xDrive",
+        "330I XDRIVE",
+        "330I XDRIVE LIMOUSINE G20 B48",
+        "330I XDRIVE TOURING G21 B48"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 26,
+      "registrations": 22780,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b66604d04f4e8184c31",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1998,
+      "powerKw": 55,
+      "commercialNames": [
+        "330E",
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 490,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f567e3f98148a89ffbc9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1998,
+      "powerKw": 120,
+      "commercialNames": [
+        "320E",
+        "320e",
+        "320E LIMOUSINE G20 XB1",
+        "320E LIMOUSINE MX G20 XB1",
+        "320E TOURING G21 XB1",
+        "320E XDRIVE",
+        "320e xDrive",
+        "320E XDRIVE TOURING G21 XB1",
+        "330E",
+        "330E XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 32200,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c21311970c5f47c9852",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1998,
+      "powerKw": 135,
+      "commercialNames": [
+        "320I",
+        "330 / / E AUT.",
+        "330 / / E XDRIVE AUT",
+        "330 / / E XDRIVE AUT.",
+        "330 E",
+        "330 E AUT",
+        "330 E XDRIVE",
+        "330E",
+        "330e",
+        "330E XDRIVE",
+        "330e xDrive"
+      ],
+      "sourceMakeNames": [
+        "B M W",
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 25,
+      "registrations": 124220,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d17247a760ce3f627c84",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 150,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5dee010d0b19acf3585",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 158,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb9b6cbd6cc5e64fbf57",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 240,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1abec00e4dc4a0bc4f27",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 280,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-089ae88b87a541530887",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 300,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6545f1f667afed0f9c69",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 320,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47cf452059c1a41a2539",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 360,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aeed384abf75a39636ac",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 460,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d21aa5496967781068a7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1998,
+      "powerKw": 190,
+      "commercialNames": [
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d149619f3361750ec351",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2996,
+      "powerKw": 195,
+      "commercialNames": [
+        "330D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3405a3fa31ae293588c9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 4709,
+      "powerKw": 140,
+      "commercialNames": [
+        "320 D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aa461d9d86d6e7c29b36",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "318d",
+        "318D",
+        "320D",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 41,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2e3014a8a6426910484",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 2993,
+      "powerKw": 210,
+      "commercialNames": [
+        "330D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7cc1d3645e82bdd43595",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1597,
+      "powerKw": 125,
+      "commercialNames": [
+        "320I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2d605a331665c74a9e2",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "318d",
+        "318D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-203dddf6eecfe1586349",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 100,
+      "commercialNames": [
+        "318I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a3428a3687e9a69dd3b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "320I",
+        "320I XDRIVE",
+        "330I",
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-279f431172b8dcb3ef7d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 105,
+      "commercialNames": [
+        "318 D",
+        "318D"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1a888f5f7173d7173fe",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2996,
+      "powerKw": 225,
+      "commercialNames": [
+        "3 SERIES"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4f54dbcf4bb8b38178e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 135,
+      "commercialNames": [
+        "330E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01af1b486599a13dbd07",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 95,
+      "commercialNames": [
+        "318I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a342c3e57f74e5b17b8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 180,
+      "commercialNames": [
+        "318I",
+        "330I",
+        "330I LIMOUSINE G20 B48",
+        "330I LIMOUSINE MX G20 B48",
+        "330I TOURING G21 B48",
+        "330I XDRIVE",
+        "330I XDRIVE LIMOUSINE G20 B48",
+        "330I XDRIVE LIMOUSINE MX G20 B",
+        "330I XDRIVE TOURING G21 B48"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 8423,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-066550cb768f3b68ed4c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 187,
+      "commercialNames": [
+        "3 SERIES"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae840f8e6a2e6f1853c5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 225,
+      "commercialNames": [
+        "3 SERIES"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f4de204441667affb21",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2996,
+      "powerKw": 160,
+      "commercialNames": [
+        "3 SERIES"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e54b63e6a0c7d71ca7f7",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2996,
+      "powerKw": 172,
+      "commercialNames": [
+        "3 SERIES"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4cc25f736c44f3cb490",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2996,
+      "powerKw": 250,
+      "commercialNames": [
+        "3 SERIES"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6689528862de9b3008bc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1998,
+      "powerKw": 13,
+      "commercialNames": [
+        "330E"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1486123ef1311e032ee1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2993,
+      "powerKw": 250,
+      "commercialNames": [
+        "330I",
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00c4aa0f009c57765e70",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "318D",
+        "320D",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 38,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d672502211647eedf90d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 49,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f020f52480b6df26f3d8",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 52,
+      "commercialNames": [
+        "320D",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4d64bff9f48ebcd7112",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 59,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4580ba74146956245049",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 61,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7007a15be899d1cdfeb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 67,
+      "commercialNames": [
+        "318D",
+        "320D",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 46,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ed2f2a3615c6b1534b0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 68,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3001f77175704c08c71f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 69,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c0b2900e06af23bbf6f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 70,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-797222f464e164127ca9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 72,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de86f2b9b10ce35c9994",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 73,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05e2d17c4c586091ee8c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 74,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d5ef18567061c84b381",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 75,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4d1ac93e2ca6ab45fff",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 79,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a6e17b454b5139b27ac",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 80,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-78634b806e16fbb91a02",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 81,
+      "commercialNames": [
+        "320D",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5e3eaedd920b0172e5b5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 84,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc480720d91140a32b92",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 85,
+      "commercialNames": [
+        "318D",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b51c65f51f8592c1d0a6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 88,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e9afb5a84f139c480f0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 90,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ffe8eaab368785b05f81",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 91,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1004977375888adbb05",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 92,
+      "commercialNames": [
+        "318D",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e7bb239a143ec3c1e579",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 95,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b19b539ed23de43a3c22",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 96,
+      "commercialNames": [
+        "318D",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-34af4746eb7cd4e28b2a",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 112,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-876574457b3e168a97da",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 117,
+      "commercialNames": [
+        "318D",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-48cd686117eccbda4ee3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 120,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27955c0404648e2ab36e",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 131,
+      "commercialNames": [
+        "318D",
+        "320D",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d888bd5d9066b9b083bb",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 132,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db8f79529173e7118f34",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 135,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30e289d648a373b1cc34",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 136,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ea6e2c0ba4830cc8d81",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 141,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-32367ba709485741dc42",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 143,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8aa41825cb96a5de54d4",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 145,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4d65f0532cfbfc9acf1",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 147,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-716fd413732f718b71a9",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 150,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9b88e8006578f819dd5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 165,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ff71cd9f328a39e11a58",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 170,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67772b5027ee37e26b17",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 180,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30f969c23cba8f07f52b",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 185,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e319251458769c150b6c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 190,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fc2aecbc76e487d9e7f",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 193,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ee3c238e4a8ec955fa3",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 206,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a17d985b0b7864775dbf",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 210,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35e7640e022a939d5735",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 221,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0bd706f8fc0717da0438",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 228,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e58d853042e83dccc3bc",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 243,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a237caa459aea0284731",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 270,
+      "commercialNames": [
+        "318D",
+        "320D",
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0516f247008f13c6ad5",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 1995,
+      "powerKw": 430,
+      "commercialNames": [
+        "320D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad10dd6402badd77f533",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 67,
+      "commercialNames": [
+        "330D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9259f112afeacd5af350",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 70,
+      "commercialNames": [
+        "330D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe520d4ed52b83042e97",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 91,
+      "commercialNames": [
+        "330D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf25f79897f106684d88",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 2993,
+      "powerKw": 112,
+      "commercialNames": [
+        "330D XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf598a4f1c4dd6df0dc0",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 49,
+      "commercialNames": [
+        "320I",
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-694985a2475df6783945",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 61,
+      "commercialNames": [
+        "318I",
+        "320I XDRIVE",
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-789f7485a46bfe0a1d1c",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 67,
+      "commercialNames": [
+        "318I",
+        "320I",
+        "320I XDRIVE",
+        "330I",
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 33,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91fb3f1d769476dbff54",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 68,
+      "commercialNames": [
+        "320I"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a4dda32c19cfb9b86c6",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 69,
+      "commercialNames": [
+        "320I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e9350d06f3a7868847d",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 70,
+      "commercialNames": [
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9d174ba3d2487f3f611",
+      "brandId": "bmw",
+      "brand": "BMW",
+      "canonicalModel": "3 Series",
+      "modelId": "bmw/3-series",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 72,
+      "commercialNames": [
+        "320I XDRIVE",
+        "330I XDRIVE"
+      ],
+      "sourceMakeNames": [
+        "BMW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

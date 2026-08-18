@@ -1,0 +1,7271 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 77,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-e29112847ea81a9c6f5f",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Tivoli",
+      "modelId": "ssangyong/tivoli",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1490,
+      "powerKw": 120,
+      "commercialNames": [
+        "TIVOLI"
+      ],
+      "sourceMakeNames": [
+        "SSANG YONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4180adedf633192327e7",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Tivoli",
+      "modelId": "ssangyong/tivoli",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 11,
+      "commercialNames": [
+        "TIVOLI"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c6a8b7c1e1b437dcf3a",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Tivoli",
+      "modelId": "ssangyong/tivoli",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 58,
+      "commercialNames": [
+        "TIVOLI"
+      ],
+      "sourceMakeNames": [
+        "SSANG YONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab1f274d53691a618570",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Tivoli",
+      "modelId": "ssangyong/tivoli",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 124,
+      "commercialNames": [
+        "TIVOLI"
+      ],
+      "sourceMakeNames": [
+        "SSANG YONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d8ac835fdd956595f9b",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Tivoli",
+      "modelId": "ssangyong/tivoli",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 120,
+      "commercialNames": [
+        "SSANG YONG TIVOLI"
+      ],
+      "sourceMakeNames": [
+        "SSANG YONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-754de7f4fa5dbd18a8cb",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": null,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf86936ab471a6548837",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 55,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aeca486ff6acfac86025",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 61,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f83592a6dba3001610e",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 67,
+      "commercialNames": [
+        "SSANGYONG TORRES",
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e3b1cf11452711d606c",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 68,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df8d0a6b4db1e64db18a",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 69,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b40d6a4d0fafbd328d15",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 72,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0438e7b3c1ae0addea6a",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 75,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87c948437a9b8da7b385",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 81,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e40b2ab571a0d2d40e2",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 84,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4531ba20c9f5bc6cdd05",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 85,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0aa3767031edd67813d5",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 88,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df698c1220f72428e31f",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 90,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3a7ff417c959b7fc22e",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 91,
+      "commercialNames": [
+        "SSANGYONG TORRES",
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f48d17c1e76ef631585",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 92,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db074573d7c86888a325",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 95,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2acd785f827ef50ef05e",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 96,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-816ea277860df19a73f6",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 110,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b34a37fb09cc3cb9f79",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 112,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7aaa28701de5f4b01e1b",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 116,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3325d96d58641559d3cc",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 120,
+      "commercialNames": [
+        "SSANG YONG TORRES",
+        "SSANGYONG TORRES",
+        "TORRES",
+        "TORRES / 1.5 / T / AWD AUT.",
+        "TORRES / 15 / T / AWD AUT",
+        "TORRES 1.5 T AWD AUT."
+      ],
+      "sourceMakeNames": [
+        "SSANG YONG",
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 4314,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-939880b58914723e0aee",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 131,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb8d895627b543b324df",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 132,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6e127ebce1384948db5",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 147,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00c548e8e1d98b1b89e8",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 180,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b52ea0e5769964385c3",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 210,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbe30133c18786f2e294",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 228,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a15d57760c15043eb74c",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 320,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e8b5deaf4fb9c361f2b",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "TORRES EVX"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 117,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf4d7a02dd6043ff4eca",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 66,
+      "commercialNames": [
+        "TORRES EVX"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 91,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c26010303d7929dd4323",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 152,
+      "commercialNames": [
+        "TORRES EVX"
+      ],
+      "sourceMakeNames": [
+        "SSANG YONG",
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 477,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f81e4c20f6b1233758c9",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1497,
+      "powerKw": 120,
+      "commercialNames": [
+        "SSANGYONG TORRES",
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 662,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77ee2023ffd02ab85903",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1497,
+      "powerKw": 127,
+      "commercialNames": [
+        "TORRES"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 27,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db9a272161edd19c477e",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Torres",
+      "modelId": "ssangyong/torres",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "TORRES EVX"
+      ],
+      "sourceMakeNames": [
+        "SSANG YONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8400308f9ade242438cb",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Xlv",
+      "modelId": "ssangyong/xlv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1597,
+      "powerKw": 85,
+      "commercialNames": [
+        "SSANGYONG XLV",
+        "SSANGYONGXLV",
+        "XLV"
+      ],
+      "sourceMakeNames": [
+        "SSANG YONG",
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 54,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f39888d182f5ce0e7769",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Xlv",
+      "modelId": "ssangyong/xlv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1597,
+      "powerKw": 85,
+      "commercialNames": [
+        "XLV"
+      ],
+      "sourceMakeNames": [
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e328f4ca533064d3a40",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Xlv",
+      "modelId": "ssangyong/xlv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1597,
+      "powerKw": 94,
+      "commercialNames": [
+        "SsangYong XLV",
+        "SSANGYONG XLV",
+        "XLV"
+      ],
+      "sourceMakeNames": [
+        "SSANG YONG",
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 140,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35516ff566b2dd28dac3",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Xlv",
+      "modelId": "ssangyong/xlv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1597,
+      "powerKw": 94,
+      "commercialNames": [
+        "SsangYong XLV"
+      ],
+      "sourceMakeNames": [
+        "SSANG YONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0a59f4ed87e0d75a509",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Xlv",
+      "modelId": "ssangyong/xlv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1597,
+      "powerKw": 94,
+      "commercialNames": [
+        "SsangYong XLV",
+        "SSANGYONG XLV",
+        "SSANGYONGXLV",
+        "XLV"
+      ],
+      "sourceMakeNames": [
+        "SSANG YONG",
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 145,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd9388544cbbb4176d82",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Xlv",
+      "modelId": "ssangyong/xlv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1497,
+      "powerKw": 120,
+      "commercialNames": [
+        "SsangYong XLV",
+        "XLV"
+      ],
+      "sourceMakeNames": [
+        "SSANG YONG",
+        "SSANGYONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89f4f565864e92fef1e2",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Xlv",
+      "modelId": "ssangyong/xlv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1497,
+      "powerKw": 120,
+      "commercialNames": [
+        "SsangYong XLV"
+      ],
+      "sourceMakeNames": [
+        "SSANG YONG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe70c80da9df0a5a9ec6",
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "canonicalModel": "Xlv",
+      "modelId": "ssangyong/xlv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1497,
+      "powerKw": 120,
+      "commercialNames": [
+        "SsangYong XLV",
+        "SSANGYONG XLV",
+        "SSANGYONG XLV OD SSANGYONG TI",
+        "SSANGYONG XLV OD. SSANGYONG TI",
+        "Ssangyong XLV or Ssangyong TIVOLI GRAND",
+        "SSANGYONG XLV OR SSANGYONG TIVOLLI GRAND",
+        "SSANGYONG XLV SSANGYONG TIVOL",
+        "XLV"
+      ],
+      "sourceMakeNames": [
+        "SSANG YONG",
+        "SSANGYONG",
+        "Ssangyong"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 1973,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94a3a98e1d148183c163",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Ascent",
+      "modelId": "subaru/ascent",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2387,
+      "powerKw": null,
+      "commercialNames": [
+        "ASCENT"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3be54675796e084d9fc",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Ascent",
+      "modelId": "subaru/ascent",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 2387,
+      "powerKw": null,
+      "commercialNames": [
+        "ASCENT"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a5d9a2008c069b13827",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Ascent",
+      "modelId": "subaru/ascent",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2387,
+      "powerKw": 191,
+      "commercialNames": [
+        "ASCENT"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab087621217f63355e46",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Brz",
+      "modelId": "subaru/brz",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "BRZ SE LUX LTD",
+        "BRZ SE LUX LTD AUTO"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fba1dbd1c066482ac52",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Brz",
+      "modelId": "subaru/brz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 147,
+      "commercialNames": [
+        "BRZ",
+        "BRZ SE LUX",
+        "BRZ SE LUX LTD"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 778,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b112508a796760736102",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Brz",
+      "modelId": "subaru/brz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 140,
+      "commercialNames": [
+        "BRZ"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e2929f4e69adb187e688",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Brz",
+      "modelId": "subaru/brz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 1998,
+      "powerKw": 140,
+      "commercialNames": [
+        "BRZ"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54ae79d4050355e69943",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Brz",
+      "modelId": "subaru/brz",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2387,
+      "powerKw": 172,
+      "commercialNames": [
+        "BRZ",
+        "BRZ 2 4I-L 6MT FINAL EDITION",
+        "BRZ 2,4I-L 6MT FINAL EDITION",
+        "BRZ 24I-L 6MT FINAL EDITION",
+        "BRZ HIGH / 2.4 /",
+        "BRZ TOUGE"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 1574,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-180078d869e90c4819aa",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Crosstrek",
+      "modelId": "subaru/crosstrek",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 107,
+      "commercialNames": [
+        "CROSSTREK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-582ba754b722832c44da",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Crosstrek",
+      "modelId": "subaru/crosstrek",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 109,
+      "commercialNames": [
+        "CROSSTREK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a96798552956f22773d0",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Crosstrek",
+      "modelId": "subaru/crosstrek",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 112,
+      "commercialNames": [
+        "CROSSTREK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-29e33bba51b6eb5b7bc3",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Crosstrek",
+      "modelId": "subaru/crosstrek",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2000,
+      "powerKw": 149,
+      "commercialNames": [
+        "CROSSTREK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00139e2157a40150e01e",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Crosstrek",
+      "modelId": "subaru/crosstrek",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 100,
+      "commercialNames": [
+        "CROSSTREK",
+        "CROSSTREK / XUV-MHEV 2.0 / I-L ES CVT AWD",
+        "CROSSTREK / XUV-MHEV 2.0 / I-S ES CVT AWD",
+        "CROSSTREK 2 0I-S MHEV CVT PREMIUM",
+        "CROSSTREK 2 0I-S MHEV CVT STYLE XTRA",
+        "CROSSTREK 2,0I-S MHEV CVT PREMIUM",
+        "CROSSTREK 2,0I-S MHEV CVT STYLE",
+        "CROSSTREK 2,0I-S MHEV CVT STYLE XTRA",
+        "CROSSTREK 20I-L MHEV CVT STYLE",
+        "CROSSTREK 20I-S MHEV CVT PREMIUM",
+        "CROSSTREK 20I-S MHEV CVT STYLE XTRA",
+        "CROSSTREK XUV-MHEV 2.0 I-L ES CVT AWD",
+        "CROSSTREK XUV-MHEV 2.0 I-S ES CVT AWD"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 8292,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a21972e7265cb2b31ab",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Crosstrek",
+      "modelId": "subaru/crosstrek",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "CROSSTREK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-69a0dd450218437c13ef",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Crosstrek",
+      "modelId": "subaru/crosstrek",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1955,
+      "powerKw": 100,
+      "commercialNames": [
+        "CROSSTREK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77b77745b76b6ab30e58",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Crosstrek",
+      "modelId": "subaru/crosstrek",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 1000,
+      "commercialNames": [
+        "CROSSTREK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a94fafb184aadb77f7f3",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Crosstrek",
+      "modelId": "subaru/crosstrek",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1995,
+      "powerKw": 100,
+      "commercialNames": [
+        "CROSSTREK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 42,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-65a934f7e6ec2f4c769f",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Crosstrek",
+      "modelId": "subaru/crosstrek",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "CROSSTREK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 338,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f09b19302c1b69e0cb7",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Crosstrek",
+      "modelId": "subaru/crosstrek",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 58,
+      "commercialNames": [
+        "CROSSTREK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a725876e76c13ab33f6",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "FORESTER"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7bed458b280306e3c108",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "FORESTER",
+        "FORESTER I XE PREM SYM AWD CVT",
+        "FORESTER I XE SYMM-CAL AWD CVT"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ac3a65062dd1fdc3926",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1994,
+      "powerKw": 110,
+      "commercialNames": [
+        "FORESTER",
+        "SUBARU FORESTER 2.0",
+        "SUBARU FORESTER 20"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80b9edb8718ae16eb990",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": null,
+      "commercialNames": [
+        "FORESTER",
+        "FORESTER I XE PREM SYM AWD CVT"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 272,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-988ab717a9aba1040560",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "FORESTER",
+        "FORESTER 2 0I-MHEV BLACK EDITION",
+        "FORESTER 2 0I-MHEV PREMIUM",
+        "FORESTER 2 0I-MHEV PURE",
+        "FORESTER 2 0I-MHEV STYLE X-TRA",
+        "FORESTER 2 0I-MHEV STYLE XTRA",
+        "FORESTER 2 0I-SPT MHEV SPORT EDITION",
+        "FORESTER 2,0I-MHEV BLACK EDITION",
+        "FORESTER 2,0i-MHEV Premium",
+        "FORESTER 2,0I-MHEV PREMIUM",
+        "FORESTER 2,0i-MHEV Pure",
+        "FORESTER 2,0i-MHEV Style",
+        "FORESTER 2,0I-MHEV STYLE X-TRA",
+        "FORESTER 2,0i-Spt MHEV Sport Edition",
+        "FORESTER 2.0i-MHEV Premium",
+        "FORESTER 2.0i-MHEV Pure",
+        "FORESTER 2.0i-MHEV Style Xtra",
+        "FORESTER 2.0i-Spt MHEV Sport Edition",
+        "FORESTER 20i CVT Classic",
+        "FORESTER 20i CVT Premium",
+        "FORESTER 20i CVT Style",
+        "FORESTER 20I-MHEV BLACK EDITION",
+        "FORESTER 20i-MHEV Premium",
+        "FORESTER 20I-MHEV PREMIUM",
+        "FORESTER 20i-MHEV Pure",
+        "FORESTER 20I-MHEV PURE",
+        "FORESTER 20i-MHEV Style",
+        "FORESTER 20I-MHEV STYLE X-TRA",
+        "FORESTER 20i-Spt MHEV Sport Edition",
+        "FORESTER 20I-SPT MHEV SPORT EDITION",
+        "FORESTER HEV / 2.0 / I-L ES AWD CVT",
+        "FORESTER HEV / 2.0 / I-S ES AWD CVT",
+        "FORESTER HEV / 2.0 / I-SPORT ES AWD CVT",
+        "FORESTER HEV / 20 / I-L ES AWD CVT",
+        "FORESTER HEV / 20 / I-S ES AWD CVT",
+        "FORESTER HEV / 20 / I-SPORT ES AWD CVT",
+        "FORESTER HEV 20 I-L ES AWD CVT",
+        "FORESTER HEV 20 I-S ES AWD CVT",
+        "FORESTER I XE E BOXER AWD CVT",
+        "FORESTER I XE PREM SYM AWD CVT",
+        "FORESTER I XE PRM EBXR AWD CVT",
+        "FORESTER I XE SYMM-CAL AWD CVT"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 53,
+      "registrations": 32409,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1690646e6055ccf64f0",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "FORESTER"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f7bdeff9795bdbd7280",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 1994,
+      "powerKw": 110,
+      "commercialNames": [
+        "FORESTER"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a6db8c1467782556adcb",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "FORESTER",
+        "FORESTER HEV / 2.0 / I-L ES AWD CVT"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24db9253a17dec00be6f",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1998,
+      "powerKw": 13,
+      "commercialNames": [
+        "FORESTER"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7cf8013ce79baea6881d",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2457,
+      "powerKw": 168,
+      "commercialNames": [
+        "FORESTER"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e1e0a6e178645097f85",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2498,
+      "powerKw": 128,
+      "commercialNames": [
+        "FORESTER"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f77ab56f33b3154b505",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2498,
+      "powerKw": 129,
+      "commercialNames": [
+        "FORESTER"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df1351aceaa6a29eacf1",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2498,
+      "powerKw": 134,
+      "commercialNames": [
+        "FORESTER"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-472262c82a0f7457d6f5",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 177,
+      "commercialNames": [
+        "FORESTER"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39c5796a4c67bddbbac4",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1995,
+      "powerKw": 100,
+      "commercialNames": [
+        "FORESTER",
+        "FORESTER 2,0I-MHEV ADVENTURE",
+        "FORESTER 2,0I-MHEV PREMIUM",
+        "FORESTER 2,0I-MHEV STYLE",
+        "FORESTER 2,0I-MHEV STYLE X-TRA",
+        "FORESTER 20I-MHEV STYLE X-TRA",
+        "FORESTER HEV / 2.0 / I-L EU AWD CVT",
+        "FORESTER HEV 2.0 I-L EU AWD CVT",
+        "FORESTER HEV 2.0 I-S EU AWD CVT",
+        "FORESTER HEV 2.0 I-SPTEU AWD CVT"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 4743,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-130569ca703f720a6a49",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1955,
+      "powerKw": 100,
+      "commercialNames": [
+        "FORESTER"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4754d9c35d632405b1b7",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Forester",
+      "modelId": "subaru/forester",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1995,
+      "powerKw": 100,
+      "commercialNames": [
+        "FORESTER"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 85,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ceaedc9da27b0faa9233",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "IMPREZA",
+        "IMPREZA/XV"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45155a86c40e393adc09",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1600,
+      "powerKw": 84,
+      "commercialNames": [
+        "IMPREZA",
+        "IMPREZA / WAGON 1.6 / I ES CVT AWD",
+        "IMPREZA / WAGON 1.6 / I-S ES CVT AWD",
+        "Impreza 1.6i CVT Pure",
+        "Impreza 16i CVT Classic",
+        "IMPREZA I SE SYM AWD CVT",
+        "IMPREZA XV",
+        "IMPREZA, XV"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 1219,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1eab00640c47de54339f",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "IMPREZA",
+        "IMPREZA / WAGON 20 / I-S ES CVT AWD",
+        "Impreza 2,0i-MHEV Style Navi",
+        "Impreza 2.0i-MHEV Style Navi",
+        "Impreza 20i-MHEV Style Navi",
+        "IMPREZA WAGON",
+        "IMPREZA WAGON 20 I-S ES CVT AWD",
+        "IMPREZA XV",
+        "IMPREZA, XV"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 15,
+      "registrations": 1308,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4093ee4e880f1ee8f2b2",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1600,
+      "powerKw": 84,
+      "commercialNames": [
+        "IMPREZA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-081932b61a4478f2b64f",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1994,
+      "powerKw": 165,
+      "commercialNames": [
+        "IMPREZA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eaeb969073286cdd5c5a",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 1994,
+      "powerKw": 165,
+      "commercialNames": [
+        "IMPREZA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4983362c6d8806e12877",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1998,
+      "powerKw": 108,
+      "commercialNames": [
+        "IMPREZA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56cd217a490870cdd15a",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1994,
+      "powerKw": 110,
+      "commercialNames": [
+        "IMPREZA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f84208d16605cc26f532",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 100,
+      "commercialNames": [
+        "IMPREZA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 227,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7cecb41bbae78f3167bc",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 112,
+      "commercialNames": [
+        "IMPREZA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0a9a806f2e17258c4f2",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 138,
+      "commercialNames": [
+        "IMPREZA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-afae3aec54894b62fbb5",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2457,
+      "powerKw": 221,
+      "commercialNames": [
+        "IMPREZA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c7fcc806bc2dc542952",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2488,
+      "powerKw": 112,
+      "commercialNames": [
+        "IMPREZA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2fa27ba405b3fe8c354d",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2500,
+      "powerKw": 127,
+      "commercialNames": [
+        "IMPREZA WAGON"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22dd2d8d1051e28ccfba",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Impreza",
+      "modelId": "subaru/impreza",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1994,
+      "powerKw": 160,
+      "commercialNames": [
+        "IMPREZA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fbfa74d81a9ac3e14122",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Justy",
+      "modelId": "subaru/justy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1328,
+      "powerKw": 69,
+      "commercialNames": [
+        "JUSTY",
+        "JUSTY G3X"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fdb88baafbd0c052c8ed",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Legacy",
+      "modelId": "subaru/legacy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "LEGACY"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d6ec96eb1d4425f24e5",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Legacy",
+      "modelId": "subaru/legacy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3630,
+      "powerKw": 191,
+      "commercialNames": [
+        "LEGACY"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f4dcf87504d650f9d89",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Legacy",
+      "modelId": "subaru/legacy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1994,
+      "powerKw": 110,
+      "commercialNames": [
+        "LEGACY"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0f5d01bb92cfb4bb041",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Legacy",
+      "modelId": "subaru/legacy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2457,
+      "powerKw": 127,
+      "commercialNames": [
+        "LEGACY"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d59dc9cac7483352db69",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Legacy",
+      "modelId": "subaru/legacy",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2498,
+      "powerKw": 129,
+      "commercialNames": [
+        "LEGACY"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-116b42676b6afe8bc925",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Levorg",
+      "modelId": "subaru/levorg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "LEVORG",
+        "Levorg 20i CVT Premium",
+        "LEVORG GT SYMMETRICAL AWD CVT"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1051,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d1e6cba34419775310f",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Levorg",
+      "modelId": "subaru/levorg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "LEVORG"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd14b9cbc472a75baa5e",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 2498,
+      "powerKw": 129,
+      "commercialNames": [
+        "OUTBACK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 55,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4e1fff6213558c27a033",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "OUTBACK",
+        "OUTBACK SE PREM SYM AWD CVT"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09a07574bb069b8f08d0",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2498,
+      "powerKw": null,
+      "commercialNames": [
+        "OUTBACK",
+        "OUTBACK SE PREM SYM AWD CVT"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 217,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83e351cb45029fcadf7f",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2498,
+      "powerKw": 124,
+      "commercialNames": [
+        "OUTBACK",
+        "OUTBACK / 2.5 / I-F ES CVT AWD",
+        "OUTBACK / 2.5 / I-G ES CVT AWD",
+        "OUTBACK / 2.5 / I-T ES CVT AWD",
+        "OUTBACK 2 5I-F CVT ES ADVENTURE",
+        "OUTBACK 2 5I-L CVT ES STYLE",
+        "OUTBACK 2 5I-L CVT ES TOURING",
+        "OUTBACK 2 5I-T CVT ES PREMIUM",
+        "OUTBACK 2,5i-F CVT ES Adventure",
+        "OUTBACK 2,5I-F CVT ES ADVENTURE",
+        "OUTBACK 2,5I-G CVT ES GEYSER EDITION",
+        "OUTBACK 2,5i-L CVT ES Premium",
+        "OUTBACK 2,5I-L CVT ES STYLE",
+        "OUTBACK 2,5i-L CVT ES Touring",
+        "OUTBACK 2,5I-L CVT ES TOURING",
+        "OUTBACK 2,5I-T CVT ES GEYSER EDITION",
+        "OUTBACK 2,5i-T CVT ES Premium",
+        "OUTBACK 2,5I-T CVT ES PREMIUM",
+        "OUTBACK 2.5 / / I-F ES CVT AWD",
+        "OUTBACK 2.5 / / I-L ES CVT AWD",
+        "OUTBACK 2.5 / / I-T ES CVT AWD",
+        "OUTBACK 2.5 I-G ES CVT AWD",
+        "OUTBACK 2.5 I-L ES CVT AWD",
+        "OUTBACK 2.5 I-T ES CVT AWD",
+        "OUTBACK 2.5i-F CVT ES Adventure",
+        "OUTBACK 2.5i-L CVT ES Style",
+        "OUTBACK 2.5i-L CVT ES Touring",
+        "OUTBACK 2.5i-T CVT ES Premium",
+        "OUTBACK 25 / / I-F ES CVT AWD",
+        "OUTBACK 25 / / I-L ES CVT AWD",
+        "OUTBACK 25 / / I-T ES CVT AWD",
+        "OUTBACK 25I-F CVT ES ADVENTURE",
+        "OUTBACK 25I-G CVT ES GEYSER EDITION",
+        "OUTBACK 25I-L CVT ES STYLE",
+        "OUTBACK 25I-L CVT ES TOURING",
+        "OUTBACK 25I-T CVT ES PREMIUM"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 45,
+      "registrations": 21589,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79df5f0c59fedcf8acbe",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2498,
+      "powerKw": 129,
+      "commercialNames": [
+        "OUTBACK",
+        "OUTBACK / 2.5 / I-S CVT AWD",
+        "OUTBACK 2,5i CVT Comfort",
+        "OUTBACK 2,5i CVT Premium",
+        "OUTBACK 2,5i CVT Special Edition",
+        "OUTBACK 25 I-S CVT AWD",
+        "OUTBACK 25i CVT Comfort",
+        "OUTBACK 25i CVT Premium",
+        "OUTBACK 25i CVT Special Edition",
+        "OUTBACK 25i-X CVT Limited Edition",
+        "OUTBACK SE PREM SYM AWD CVT",
+        "OUTBACK SE SYMMETRICAL AWD CVT"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 14,
+      "registrations": 9585,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-509f4175343724e09d06",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "E85",
+      "engineCc": 2498,
+      "powerKw": 124,
+      "commercialNames": [
+        "OUTBACK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 10590,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0b7f8d9e21bf3ba97f7",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 2498,
+      "powerKw": 124,
+      "commercialNames": [
+        "OUTBACK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36deec93956189bf83de",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 2498,
+      "powerKw": 129,
+      "commercialNames": [
+        "OUTBACK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-633d77c787605b065a33",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "OUTBACK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8f0256f5d60dba77880",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "E85",
+      "engineCc": 2498,
+      "powerKw": 193,
+      "commercialNames": [
+        "OUTBACK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-feb3be5f613815dee892",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2457,
+      "powerKw": 110,
+      "commercialNames": [
+        "OUTBACK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74270535ddcc569d9873",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2498,
+      "powerKw": 134,
+      "commercialNames": [
+        "OUTBACK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17548076e36a11da1b2e",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3604,
+      "powerKw": 183,
+      "commercialNames": [
+        "OUTBACK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3867e357b3cb3d44fad",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2498,
+      "powerKw": 125,
+      "commercialNames": [
+        "OUTBACK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e09737cf0ebf0b020c1e",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Outback",
+      "modelId": "subaru/outback",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2387,
+      "powerKw": 191,
+      "commercialNames": [
+        "OUTBACK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a27e4054a44523376df",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Solterra",
+      "modelId": "subaru/solterra",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "SOLTERRA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a3d051bd1f2af19dabc",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Solterra",
+      "modelId": "subaru/solterra",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 59,
+      "commercialNames": [
+        "SOLTERRA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-233368cf2be3aa52ca00",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Solterra",
+      "modelId": "subaru/solterra",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "SOLTERRA",
+        "SOLTERRA BEV Premium",
+        "SOLTERRA BEV PREMIUM",
+        "SOLTERRA BEV STYLE"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 1454,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6c056d26f92cf9c838f8",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Solterra",
+      "modelId": "subaru/solterra",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 118,
+      "commercialNames": [
+        "SOLTERRA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 183,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c24de9c970870651a99c",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Solterra",
+      "modelId": "subaru/solterra",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "SOLTERRA",
+        "SOLTERRA BEV STYLE"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 3036,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8255b2cdc84ddfa91551",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Solterra",
+      "modelId": "subaru/solterra",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 136,
+      "commercialNames": [
+        "SOLTERRA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-889656328f4cd475af06",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Solterra",
+      "modelId": "subaru/solterra",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 167,
+      "commercialNames": [
+        "SOLTERRA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 342,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50c2a7d82af2de06c52a",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Solterra",
+      "modelId": "subaru/solterra",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 334,
+      "commercialNames": [
+        "SOLTERRA"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a95a8d98134ddb57085",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Uncharted",
+      "modelId": "subaru/uncharted",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 136,
+      "commercialNames": [
+        "UNCHARTED"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fce8baffe2c467a0f639",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Wrx",
+      "modelId": "subaru/wrx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "WRX"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4bfdbc9ee5281094a0b",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Wrx",
+      "modelId": "subaru/wrx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2387,
+      "powerKw": 202,
+      "commercialNames": [
+        "WRX"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38d19f973859c3d65586",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Wrx",
+      "modelId": "subaru/wrx",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 197,
+      "commercialNames": [
+        "WRX"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0564537246bb7c6fcde7",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Wrx",
+      "modelId": "subaru/wrx",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2457,
+      "powerKw": 221,
+      "commercialNames": [
+        "WRX STI"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f4bd82d690a30e9018d",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Xv",
+      "modelId": "subaru/xv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "XV",
+        "XV I SE PREMIUM SYM AWD CVT",
+        "XV I SE SYMMETRICAL AWD CVT"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a01e443dc3be323d9a08",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Xv",
+      "modelId": "subaru/xv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1600,
+      "powerKw": 84,
+      "commercialNames": [
+        "SUBARU XV",
+        "XV",
+        "XV / WAGON 1.6 / I ES CVT AWD",
+        "XV / WAGON 1.6 / I-S ES CVT AWD",
+        "XV / WAGON 16 / I-S ES CVT AWD",
+        "XV 1 6I CVT STYLE",
+        "XV 1 6I CVT STYLE XTRA",
+        "XV 1,6i CVT Style",
+        "XV 1,6i CVT Style Navi",
+        "XV 1,6i CVT Style Xtra",
+        "XV 1.6i CVT Style",
+        "XV 1.6i CVT Style Xtra",
+        "XV 16i CVT Comfort",
+        "XV 16i CVT Premium",
+        "XV 16i CVT Pure",
+        "XV 16i CVT Style",
+        "XV 16i CVT Style Navi",
+        "XV I SE PREMIUM SYM AWD CVT",
+        "XV I SE SYMMETRICAL AWD CVT",
+        "XV WAGON 16 I ES CVT AWD",
+        "XV WAGON 16 I-S ES CVT AWD"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 30,
+      "registrations": 15882,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3d190cff963933aaffb4",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Xv",
+      "modelId": "subaru/xv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "SUBARU XV",
+        "XV",
+        "XV / WAGON 2.0 / I-S ES CVT AWD",
+        "XV / WAGON 20 / I-S ES CVT AWD",
+        "XV 2 0I-MHEV PREMIUM",
+        "XV 2 0I-MHEV STYLE",
+        "XV 2 0I-MHEV STYLE XTRA",
+        "XV 2,0i MHEV CVT Premium",
+        "XV 2,0i-MHEV Premium",
+        "XV 2,0i-MHEV Style",
+        "XV 2,0i-MHEV Style Navi",
+        "XV 2,0i-MHEV Style Xtra",
+        "XV 2.0i-MHEV Premium",
+        "XV 2.0i-MHEV Style",
+        "XV 2.0i-MHEV Style Xtra",
+        "XV 20i-MHEV Premium",
+        "XV 20i-MHEV Style",
+        "XV 20i-MHEV Style Navi",
+        "XV I SE E BOXER AWD CVT",
+        "XV I SE PREM E BOXER AWD CVT",
+        "XV WAGON 20 I-S ES CVT AWD"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 19494,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99beaba463c7e6edb53a",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Xv",
+      "modelId": "subaru/xv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1600,
+      "powerKw": 84,
+      "commercialNames": [
+        "XV"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e882ecbd44aefb1f965",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Xv",
+      "modelId": "subaru/xv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "XV"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ce957bf27dee14b7b0d",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Xv",
+      "modelId": "subaru/xv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "XV"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0bfc9183227df43fda1",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Xv",
+      "modelId": "subaru/xv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 122,
+      "commercialNames": [
+        "XV"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b3d0fa3b7714ca466427",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Xv",
+      "modelId": "subaru/xv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1995,
+      "powerKw": 124,
+      "commercialNames": [
+        "XV"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-360a71b037eb15eec3ad",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Xv",
+      "modelId": "subaru/xv",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2457,
+      "powerKw": 110,
+      "commercialNames": [
+        "XV CROSSTREK"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4bfddf9b39f5b55314a4",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Xv",
+      "modelId": "subaru/xv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2498,
+      "powerKw": 124,
+      "commercialNames": [
+        "XV"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-afb86f8c2b4a1ac1238b",
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "canonicalModel": "Xv",
+      "modelId": "subaru/xv",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1998,
+      "powerKw": 108,
+      "commercialNames": [
+        "XV"
+      ],
+      "sourceMakeNames": [
+        "SUBARU"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-021404754bab1bb8752a",
+      "brandId": "suda",
+      "brand": "Suda",
+      "canonicalModel": "SA01",
+      "modelId": "suda/sa01",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 50,
+      "commercialNames": [
+        "SUDA SA01"
+      ],
+      "sourceMakeNames": [
+        "SUDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24d640bb826cc674eab1",
+      "brandId": "suda",
+      "brand": "Suda",
+      "canonicalModel": "SA01",
+      "modelId": "suda/sa01",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 60,
+      "commercialNames": [
+        "SUDA SA01"
+      ],
+      "sourceMakeNames": [
+        "SUDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 44,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15206523ec5b9d98d040",
+      "brandId": "suda",
+      "brand": "Suda",
+      "canonicalModel": "SA01",
+      "modelId": "suda/sa01",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "SUDA SA01"
+      ],
+      "sourceMakeNames": [
+        "SUDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b8749591e2f15939ccb",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Across",
+      "modelId": "suzuki/across",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2487,
+      "powerKw": 134,
+      "commercialNames": [
+        "ACROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 110,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05f80c5b391a01d60a33",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Across",
+      "modelId": "suzuki/across",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2487,
+      "powerKw": 136,
+      "commercialNames": [
+        "ACROSS",
+        "SUZUKI ACROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 51,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-885fdbb514123507379e",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Across",
+      "modelId": "suzuki/across",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2487,
+      "powerKw": null,
+      "commercialNames": [
+        "ACROSS E-FOUR"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 280,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e13815c4907003e32037",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Across",
+      "modelId": "suzuki/across",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2487,
+      "powerKw": 64,
+      "commercialNames": [
+        "SUZUKI ACROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 30,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66a2b01ca9cea3b709fc",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Across",
+      "modelId": "suzuki/across",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2487,
+      "powerKw": 134,
+      "commercialNames": [
+        "ACROSS",
+        "SUZUKI ACROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 169,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bfb8996d187696d6432",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Across",
+      "modelId": "suzuki/across",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2487,
+      "powerKw": 136,
+      "commercialNames": [
+        "ACROSS",
+        "ACROSS / 2.5 / 4WD PLUGIN HIBRID / PHEV",
+        "ACROSS 2.5 4WD PLUGIN HIBRID PHEV",
+        "ACROSS 25 4WD PLUGIN HIBRID",
+        "SUZUKI ACROSS",
+        "SUZUKI SUZUKI ACROSS",
+        "Suzuki SUZUKI ACROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 13776,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e573f16625dc06d621ac",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Baleno",
+      "modelId": "suzuki/baleno",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 82,
+      "commercialNames": [
+        "BALENO"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 256,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4427fe31bc8475f8a1ab",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Baleno",
+      "modelId": "suzuki/baleno",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": 66,
+      "commercialNames": [
+        "BALENO",
+        "Suzuki BALENO"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3784,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-853f5a5d7cac402fe6fd",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Celerio",
+      "modelId": "suzuki/celerio",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 50,
+      "commercialNames": [
+        "CELERIO",
+        "SUZUKI CELERIO"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3101,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24470db21c225db9aa7c",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "E Vitara",
+      "modelId": "suzuki/e-vitara",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 64,
+      "commercialNames": [
+        "E VITARA"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-518ea9dd8335139f32b0",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "E Vitara",
+      "modelId": "suzuki/e-vitara",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 95,
+      "commercialNames": [
+        "E VITARA"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-10d62db1c8dd2f8c0adc",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "E Vitara",
+      "modelId": "suzuki/e-vitara",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 105,
+      "commercialNames": [
+        "E VITARA"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b68383e5babdb055663b",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "E Vitara",
+      "modelId": "suzuki/e-vitara",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 106,
+      "commercialNames": [
+        "E VITARA"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-354a8afbc09cbaa7c8d9",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "E Vitara",
+      "modelId": "suzuki/e-vitara",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 128,
+      "commercialNames": [
+        "E VITARA"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 766,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd32eeb7e71217e40bb8",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "E Vitara",
+      "modelId": "suzuki/e-vitara",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 135,
+      "commercialNames": [
+        "E VITARA"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 21,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-254da5fe405d76b2af15",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "E Vitara",
+      "modelId": "suzuki/e-vitara",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 175,
+      "commercialNames": [
+        "E VITARA"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc1ed95d2d698c07a277",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "E Vitara",
+      "modelId": "suzuki/e-vitara",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 176,
+      "commercialNames": [
+        "E VITARA"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be1136a84feedf9ee102",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Grand Vitara",
+      "modelId": "suzuki/grand-vitara",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1586,
+      "powerKw": 78,
+      "commercialNames": [
+        "GRAND VITARA"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-10805083bbce9c18cc50",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Grand Vitara",
+      "modelId": "suzuki/grand-vitara",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1870,
+      "powerKw": 95,
+      "commercialNames": [
+        "GRAND VITARA"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a91596fdc9c7d22c69d5",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Grand Vitara",
+      "modelId": "suzuki/grand-vitara",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2495,
+      "powerKw": 106,
+      "commercialNames": [
+        "GRAND VITARA"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1586de0434fc747b72e0",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Grand Vitara",
+      "modelId": "suzuki/grand-vitara",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1590,
+      "powerKw": 69,
+      "commercialNames": [
+        "GRAND VITARA"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e96a2d833b454b530055",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Ignis",
+      "modelId": "suzuki/ignis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1242,
+      "powerKw": 66,
+      "commercialNames": [
+        "IGNIS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-03513f7740dc4484cf6d",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Ignis",
+      "modelId": "suzuki/ignis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": null,
+      "commercialNames": [
+        "IGNIS",
+        "IGNIS SZ-T DUALJET MHEV",
+        "IGNIS SZ-T DUALJET MHEV CVT",
+        "IGNIS SZ3 DUALJET MHEV",
+        "IGNIS SZ5 DUALJET MHEV",
+        "IGNIS SZ5 DUALJET MHEV ALLGRIP",
+        "IGNIS SZ5 DUALJET MHEV CVT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 7030,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-267a1c0dd9a7412e1a5f",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Ignis",
+      "modelId": "suzuki/ignis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 2,
+      "commercialNames": [
+        "IGNIS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71d7e23fc39948f65d77",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Ignis",
+      "modelId": "suzuki/ignis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 61,
+      "commercialNames": [
+        "IGNIS",
+        "IGNIS / 1.2 / 4WD MT / 4 / L / MHEV",
+        "IGNIS / 1.2 / AUT. / 4 / L / MHEV",
+        "IGNIS / 1.2 / MT / 4 / L",
+        "IGNIS / 1.2 / MT / 4 / L / MHEV",
+        "IGNIS / 1.2 / MT / 5 / L",
+        "IGNIS / 1.2 / MT / 5 / L / MHEV",
+        "IGNIS / 1.2 / MT / 5 / L2 / MHEV",
+        "IGNIS 1.2 AUT. 4 L MHEV",
+        "IGNIS 1.2 MT 4 L MHEV",
+        "IGNIS 12 4WD MT 4 L",
+        "IGNIS 12 AUT 4 L",
+        "IGNIS 12 MT 4 L",
+        "IGNIS 12 MT 5 L",
+        "Suzuki IGNIS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 31,
+      "registrations": 191577,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2feec76a4a699cea9a1e",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Ignis",
+      "modelId": "suzuki/ignis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 66,
+      "commercialNames": [
+        "IGNIS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1fbebe1c2043320d9ae6",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Ignis",
+      "modelId": "suzuki/ignis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": null,
+      "commercialNames": [
+        "IGNIS",
+        "IGNIS SZ-T DUALJET",
+        "IGNIS SZ-T DUALJET AUTO",
+        "IGNIS SZ-T DUALJET SHVS",
+        "IGNIS SZ3 DUALJET",
+        "IGNIS SZ3 DUALJET SHVS",
+        "IGNIS SZ5 DUALJET AUTO",
+        "IGNIS SZ5 DUALJET SHVS",
+        "IGNIS SZ5 DUALJET SHVS ALLGRIP"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 11,
+      "registrations": 5493,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d9538943bc7a0489e6a6",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Ignis",
+      "modelId": "suzuki/ignis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": 66,
+      "commercialNames": [
+        "IGNIS",
+        "Ignis",
+        "IGNIS 12 4WD MT2 4",
+        "IGNIS 12 MT2 4",
+        "IGNIS 12 MT2 5",
+        "SUZUKI IGNIS",
+        "Suzuki IGNIS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 27863,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3477526bc368374957eb",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Ignis",
+      "modelId": "suzuki/ignis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1197,
+      "powerKw": 61,
+      "commercialNames": [
+        "Ignis",
+        "IGNIS",
+        "Suzuki IGNIS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 483,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39235546006b6744cc5b",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Ignis",
+      "modelId": "suzuki/ignis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1242,
+      "powerKw": 66,
+      "commercialNames": [
+        "Suzuki IGNIS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26ab7b32590bc812f94b",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Ignis",
+      "modelId": "suzuki/ignis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1497,
+      "powerKw": 61,
+      "commercialNames": [
+        "IGNIS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-325b1e4a10e468135dcf",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Ignis",
+      "modelId": "suzuki/ignis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1197,
+      "powerKw": 58,
+      "commercialNames": [
+        "IGNIS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53258b1107dc620e1086",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Ignis",
+      "modelId": "suzuki/ignis",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1197,
+      "powerKw": 85,
+      "commercialNames": [
+        "IGNIS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e8eff3f47bae92d295a",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Jimny",
+      "modelId": "suzuki/jimny",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1461,
+      "powerKw": 63,
+      "commercialNames": [
+        "JIMNY"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d02014a3d53858db5c3",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Jimny",
+      "modelId": "suzuki/jimny",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1328,
+      "powerKw": 62,
+      "commercialNames": [
+        "JIMNY"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e89179ec0cb4c53bcdc",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Jimny",
+      "modelId": "suzuki/jimny",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1462,
+      "powerKw": null,
+      "commercialNames": [
+        "JIMNY SZ4 4X4",
+        "JIMNY SZ5 4X4",
+        "JIMNY SZ5 4X4 AUTO"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1798,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-204bf21706ded38a9a6d",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Jimny",
+      "modelId": "suzuki/jimny",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1462,
+      "powerKw": 75,
+      "commercialNames": [
+        "JIMNY",
+        "JIMNY 02",
+        "JIMNY 15 4WD MT L",
+        "JIMNY ALLGRIP",
+        "JIMNY GAN 06",
+        "JIMNY GL",
+        "JIMNY GLX",
+        "JIMNY OLMEDO Z-MODE",
+        "JIMNY OLMEDO ZMODE",
+        "JIMNY OLMEDO ZMODE GAN #05",
+        "JIMNY OLMEDO ZMODE GAN #08",
+        "JIMNY OLMEDO ZMODE GAN #09",
+        "JIMNY OLMEDO ZMODE GAN #10",
+        "JIMNY OLMEDO ZMODE GAN #11",
+        "JIMNY OLMEDO ZMODE GAN #12",
+        "JIMNY OLMEDO ZMODE GAN #14",
+        "JIMNY OLMEDO ZMODE GAN #16",
+        "JIMNY OLMEDO ZMODE GAN #18",
+        "JIMNY OLMEDO ZMODE GAN #20",
+        "JIMNY OLMEDO ZMODE GAN#15",
+        "JIMNY OLMEDO ZMODE GAN#19",
+        "JIMNY OLMEDO ZMODE ZANFI",
+        "JIMNY OLMEDO ZMODE ZANFI GAN#04",
+        "JIMNY OLMEDO ZMODE ZANFI GAN#13",
+        "JIMNY-OLMEDO Z-MODE",
+        "SUZUKI JIMNY",
+        "Suzuki JIMNY",
+        "SUZUKI JIMNY ALLGRIP"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 35,
+      "registrations": 19966,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d9ed3b9e33a4c577c5b",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Jimny",
+      "modelId": "suzuki/jimny",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 658,
+      "powerKw": 47,
+      "commercialNames": [
+        "JIMNY"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ad8db6b243404674f136",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Jimny",
+      "modelId": "suzuki/jimny",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1328,
+      "powerKw": 63,
+      "commercialNames": [
+        "JIMNY"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0dbcf046746ffc1a6445",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Jimny",
+      "modelId": "suzuki/jimny",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1462,
+      "powerKw": 77,
+      "commercialNames": [
+        "JIMNY"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91e3c2232100935dddbe",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1373,
+      "powerKw": 10,
+      "commercialNames": [
+        "S-CROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 984,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eeb3366e949b0468925c",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1373,
+      "powerKw": 95,
+      "commercialNames": [
+        "S - CROSS",
+        "S_CROSS",
+        "S-CROSS",
+        "S-CROSS 1.4 4WD MHEV",
+        "S-CROSS 1.4 BOOSTERJET PREMIUM HYBRID",
+        "S-CROSS 1.4 MHEV"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 22409,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-80f2c4230c0d52f3d97e",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1462,
+      "powerKw": 75,
+      "commercialNames": [
+        "S - CROSS",
+        "S-CROSS",
+        "S-CROSS 1.5 4WD AUT. HEV"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 5144,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6316da7a1bdf2c9238be",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1373,
+      "powerKw": 12,
+      "commercialNames": [
+        "S-CROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1651,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca2d26250abe3563fe32",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1373,
+      "powerKw": 85,
+      "commercialNames": [
+        "S-CROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2c6bf1491f079ea0578",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1462,
+      "powerKw": 24,
+      "commercialNames": [
+        "S-CROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 169,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dab41ad92a0b48060285",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1373,
+      "powerKw": 95,
+      "commercialNames": [
+        "S-CROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1089,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-69c411f9888c7c398bea",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1373,
+      "powerKw": null,
+      "commercialNames": [
+        "S-CROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 756,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-643bbbd286fe263c68e8",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1373,
+      "powerKw": 80,
+      "commercialNames": [
+        "S-CROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3524,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-840c3c6d2beb40dc2478",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1373,
+      "powerKw": 81,
+      "commercialNames": [
+        "S - CROSS",
+        "S-CROSS",
+        "S-CROSS 1.4 4WD AUT. MHEV",
+        "S-CROSS 1.4 4WD MHEV",
+        "S-CROSS 1.4 AUT. MHEV",
+        "S-CROSS 1.4 MHEV"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 4345,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f5b3b2b69f5f2ae6144",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1462,
+      "powerKw": null,
+      "commercialNames": [
+        "S-CROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 37,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1ce027483ffba82a9d1",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1462,
+      "powerKw": 152,
+      "commercialNames": [
+        "S-CROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2550e71ae9610bd056eb",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1373,
+      "powerKw": null,
+      "commercialNames": [
+        "S-CROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-876c3d2fdc6c507ce712",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1373,
+      "powerKw": 81,
+      "commercialNames": [
+        "S-CROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 376,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67dc4b0da8913a40065f",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1462,
+      "powerKw": null,
+      "commercialNames": [
+        "S-CROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a3bf2a69e040e8505a8",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "S-Cross",
+      "modelId": "suzuki/s-cross",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1462,
+      "powerKw": 75,
+      "commercialNames": [
+        "S-CROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 134,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71489f232ce2ba26928a",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swace",
+      "modelId": "suzuki/swace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": null,
+      "commercialNames": [
+        "SUZUKI SWACE",
+        "SWACE",
+        "SWACE SZ-T HEV CVT",
+        "SWACE SZ5 HEV CVT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 530,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee67dc64ae0aa49dd0e2",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swace",
+      "modelId": "suzuki/swace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 53,
+      "commercialNames": [
+        "SUZUKI SWACE",
+        "SWACE"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1485,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16e28c933387cebcee20",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swace",
+      "modelId": "suzuki/swace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "Suzuki SUZUKI SWACE",
+        "SUZUKI SWACE",
+        "SWACE",
+        "SWACE / 1.8 / HIBRID CVT / HEV",
+        "SWACE 1.8 HIBRID CVT HEV",
+        "SWACE 18 HIBRID CVT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 24484,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f153e2187a08abadede8",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swace",
+      "modelId": "suzuki/swace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "Suzuki SWACE",
+        "SUZUKI SWACE",
+        "SWACE"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 267,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a47dda1e5799a3d60e05",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swace",
+      "modelId": "suzuki/swace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1798,
+      "powerKw": 72,
+      "commercialNames": [
+        "SWACE"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7cfb8f36591417ba7d27",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swace",
+      "modelId": "suzuki/swace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1798,
+      "powerKw": 70,
+      "commercialNames": [
+        "SUZUKI SWACE"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 996,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93539dc28a2169c30196",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 55,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3412474061b399b4fe5d",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1197,
+      "powerKw": 61,
+      "commercialNames": [
+        "Suzuki SWIFT",
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 27,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a18d6ad2a151e38f2cf",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1242,
+      "powerKw": 66,
+      "commercialNames": [
+        "Suzuki SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-487e2ea37cab866348f8",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1242,
+      "powerKw": 66,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f4fb325b4a4bdf1916a9",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "SWIFT SZ-T BOOSTERJET",
+        "SWIFT SZ5 BOOSTERJET AUTO",
+        "SWIFT SZ5 BOOSTERJET SHVS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 654,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8ecd39c4aa24af075dd4",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 82,
+      "commercialNames": [
+        "SUZUKI SWIFT",
+        "SWIFT",
+        "SWIFT 10",
+        "SWIFT 10 AUT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1773,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-34f13086f902accff56d",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": null,
+      "commercialNames": [
+        "SWIFT",
+        "SWIFT SZ-L DUALJET MHEV",
+        "SWIFT SZ-T DUALJET MHEV",
+        "SWIFT SZ-T DUALJET MHEV CVT",
+        "SWIFT SZ5 DUALJET MHEV",
+        "SWIFT SZ5 DUALJET MHEV ALLGRIP",
+        "SWIFT SZ5 DUALJET MHEV CVT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 7559,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4020c06d92841321a3a",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 61,
+      "commercialNames": [
+        "Suzuki SWIFT",
+        "SWIFT",
+        "SWIFT / 1.2 / 4WD / MT / L",
+        "SWIFT / 1.2 / 4WD / MT / L / MHEV",
+        "SWIFT / 1.2 / 4WD / MT / MHEV",
+        "SWIFT / 1.2 / AUT. / L / MHEV",
+        "SWIFT / 1.2 / AUT. / MHEV",
+        "SWIFT / 1.2 / MT / L / MHEV",
+        "SWIFT / 1.2 / MT / MHEV",
+        "SWIFT 1.2 4WD MT L MHEV",
+        "SWIFT 1.2 4WD MT MHEV",
+        "SWIFT 1.2 AUT. MHEV",
+        "SWIFT 1.2 MT MHEV",
+        "SWIFT 12 4WD MT L",
+        "SWIFT 12 MT L"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 28,
+      "registrations": 239537,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-29033ea2279caec4da46",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": null,
+      "commercialNames": [
+        "SWIFT",
+        "SWIFT ATTITUDE DUALJET",
+        "SWIFT ATTITUDE DUALJET SHVS",
+        "SWIFT SZ-T DUALJET SHVS",
+        "SWIFT SZ3 DUALJET",
+        "SWIFT SZ3 DUALJET SHVS",
+        "SWIFT SZ5 DUALJET SHVS ALLGRIP"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 14512,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd8e23e954e103203b77",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": 2,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d16c91ccaa09e377c662",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": 66,
+      "commercialNames": [
+        "SUZUKI SWIFT",
+        "Suzuki SWIFT",
+        "SWIFT",
+        "SWIFT / 1.2",
+        "SWIFT / 1.2 / 4WD / MT2 / L",
+        "SWIFT 12",
+        "SWIFT 12 4WD MT L",
+        "SWIFT 12 4WD MT2 L"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 10,
+      "registrations": 50028,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5558aaec87511681763",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1242,
+      "powerKw": 69,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-335ecfec279d78fab4b5",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1372,
+      "powerKw": 95,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f9b6c1c8ef546528705",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1373,
+      "powerKw": 10,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 905,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31a8c231ad65d049983c",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1373,
+      "powerKw": 95,
+      "commercialNames": [
+        "Suzuki SWIFT",
+        "SWIFT",
+        "SWIFT / 1.4 / SPORT / MHEV"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 25912,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8af26ff054a2aa6e2e48",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1373,
+      "powerKw": 103,
+      "commercialNames": [
+        "SUZUKI SWIFT",
+        "SWIFT",
+        "SWIFT 14 SPORT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 587,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ccfc3573caf72a23a395",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1242,
+      "powerKw": 66,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 47,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-21ff5b384c58003be263",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1248,
+      "powerKw": 51,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6852c149d4e37a03b315",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 998,
+      "powerKw": 82,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c64048d0866cd84ac612",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1197,
+      "powerKw": 61,
+      "commercialNames": [
+        "Suzuki SWIFT",
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 798,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4519d8014ad7f8077a1",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1373,
+      "powerKw": 95,
+      "commercialNames": [
+        "Suzuki SWIFT",
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee8198f6d42d939502b6",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 60,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 24295,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d726911b74d8a13fc67",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cfbedb92f07d5e9a246b",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1373,
+      "powerKw": null,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70785738d38c0bba3e95",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1197,
+      "powerKw": 60,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 282,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-338dda34134c9bb07602",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1197,
+      "powerKw": null,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9540544c4d919d958bd",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1197,
+      "powerKw": 46,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d232f5899ef74468b357",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1197,
+      "powerKw": 62,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3eda1df369eaeabdae9b",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1197,
+      "powerKw": 118,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16d45b3994f12e8b57d5",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift",
+      "modelId": "suzuki/swift",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1197,
+      "powerKw": null,
+      "commercialNames": [
+        "SWIFT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b392e3aa3ee7728a245",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift Sport",
+      "modelId": "suzuki/swift-sport",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1373,
+      "powerKw": null,
+      "commercialNames": [
+        "SWIFT SPORT BOOSTERJET",
+        "SWIFT SPORT BOOSTERJET MHEV"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 926,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-adc8d22e1832c50fa70e",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift Sport",
+      "modelId": "suzuki/swift-sport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1586,
+      "powerKw": 100,
+      "commercialNames": [
+        "SWIFT SPORT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-76faef015736d532af6c",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift Sport",
+      "modelId": "suzuki/swift-sport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1373,
+      "powerKw": 95,
+      "commercialNames": [
+        "SWIFT SPORT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83878156d3ce67333d83",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "Swift Sport",
+      "modelId": "suzuki/swift-sport",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1371,
+      "powerKw": 103,
+      "commercialNames": [
+        "SWIFT SPORT"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-81d228ae524019b31e84",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "SX4",
+      "modelId": "suzuki/sx4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1373,
+      "powerKw": 103,
+      "commercialNames": [
+        "Suzuki SX4"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7763d4c656d04d30dc73",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "SX4",
+      "modelId": "suzuki/sx4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 998,
+      "powerKw": 82,
+      "commercialNames": [
+        "SX4"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 28,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8776cb60b38c3418de2",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "SX4",
+      "modelId": "suzuki/sx4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 1373,
+      "powerKw": 103,
+      "commercialNames": [
+        "SX4"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 104,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b1ec972cd23b2b42f5b",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "SX4",
+      "modelId": "suzuki/sx4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 82,
+      "commercialNames": [
+        "SUZUKI SX4",
+        "SX 4",
+        "SX4",
+        "SX4 10",
+        "SX4 10 4WD MT L",
+        "SX4 SUZUKI SX4"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI",
+        "Suzuki"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 2145,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-60768883f97827e5ae1c",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "SX4",
+      "modelId": "suzuki/sx4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1373,
+      "powerKw": 10,
+      "commercialNames": [
+        "SX4"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 2404,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a742a5085f0ebb0d2e9",
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "canonicalModel": "SX4",
+      "modelId": "suzuki/sx4",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1373,
+      "powerKw": 95,
+      "commercialNames": [
+        "Suzuki SX4",
+        "SUZUKI SX4",
+        "SX 4",
+        "SX4",
+        "SX4 / 1.4 / 4WD",
+        "SX4 / 1.4 / 4WD / AUT. / MHEV",
+        "SX4 / 1.4 / 4WD / MHEV",
+        "SX4 / 1.4 / 4WD MHEV",
+        "SX4 / 1.4 / AUT. / MHEV",
+        "SX4 / 1.4 / MHEV",
+        "SX4 1.4 4WD MHEV",
+        "SX4 14",
+        "SX4 14 4WD",
+        "SX4 SUZUKI",
+        "SX4 SUZUKI SX4",
+        "SX4 SUZUKI SX4 S - CROSS",
+        "SX4 SUZUKI SX4 S-C",
+        "SX4 SUZUKI SX4 S-Cross",
+        "SX4 SUZUKI SX4 S-CROSS",
+        "SX4-SUZUKI SX4-S-CROSS",
+        "SX4, SUZUKI SX4",
+        "SX4, SUZUKI SX4, S-C",
+        "SX4, SUZUKI SX4, S-CROSS",
+        "SX4,SUZUKI SX4",
+        "SX4,SUZUKI SX4,S-CROSS",
+        "SX4. SUZUKI SX4",
+        "SX4. SUZUKI SX4. S-CROSS",
+        "SX4.SUZUKI SX4",
+        "SX4.SUZUKI SX4.S-CROSS"
+      ],
+      "sourceMakeNames": [
+        "SUZUKI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 49,
+      "registrations": 141023,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

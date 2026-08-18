@@ -1,0 +1,7064 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 89,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-6da083be2a8591b6ed2c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-29b826655459a4229083",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 58,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36538469155d8ac448fe",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 62,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8853acc12995ed5e0744",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 92,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d4b7fb3ec04bc2121e9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 95,
+      "commercialNames": [
+        "TIGUAN L"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc772deb4590812a30bf",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan",
+      "modelId": "volkswagen/tiguan",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": 118,
+      "commercialNames": [
+        "TIGUAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e97c54ae46406f7a3304",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan Allspace",
+      "modelId": "volkswagen/tiguan-allspace",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGUAN ALLSPACE MATCH TDI",
+        "TIGUAN ALLSPACE MATCH TDI S-A",
+        "TIGUAN ALLSPACE R-LINE TDI",
+        "TIGUAN ALLSPACE RLINE TECH TDI",
+        "TIGUAN ALLSPACE SE NAV TDI",
+        "TIGUAN ALLSPACE SEL TDI",
+        "TIGUAN ALLSPACE SEL TDI 4M S-A",
+        "TIGUAN ALLSPACE SEL TDI S-A"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 2172,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8c9d6104153ca6afa45",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan Allspace",
+      "modelId": "volkswagen/tiguan-allspace",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGUAN ALLSPACE MATCH TSI EVO",
+        "TIGUAN ALLSPACE SEL TSI EVO SA"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 364,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47eb27580d971aee322a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan Allspace",
+      "modelId": "volkswagen/tiguan-allspace",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "TIGUAN ALLSPACE SEL TSI 4M S-A"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 76,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cdde78050e7bae24271c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan Allspace",
+      "modelId": "volkswagen/tiguan-allspace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 137,
+      "commercialNames": [
+        "TIGUAN ALLSPACE"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a767e8c6f70a1025bd4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Tiguan Allspace",
+      "modelId": "volkswagen/tiguan-allspace",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "TIGUAN ALLSPACE"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c85bf4c3e580dc7dac01",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-522cfc3c55f2244ba9ca",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": null,
+      "commercialNames": [
+        "TOUAREG",
+        "TOUAREG V6 BLACK EDITION TDI A",
+        "TOUAREG V6 R-LINE TDI AUTO",
+        "TOUAREG V6 R-LINE TECH TDI A",
+        "TOUAREG V6 SE TDI AUTO",
+        "TOUAREG V6 SEL TDI AUTO",
+        "TOUAREG V6 SEL TECH TDI AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 4116,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a5ea2f2fcafdd91189d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN V W"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1343,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31aca32ffd9da9883e1e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 170,
+      "commercialNames": [
+        "TOUAREG",
+        "TOUAREG / 3.0 / TDI 4M AUT.",
+        "TOUAREG / 30 / TDI 4M AUT",
+        "TOUAREG 30 TDI 4M AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 21410,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ebc55b99a96aca45c2fc",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 193,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7bc2e59fe444c3cb23ff",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 210,
+      "commercialNames": [
+        "TOUAREG",
+        "TOUAREG / 3.0 / TDI 4M AUT.",
+        "TOUAREG / 30 / TDI 4M AUT",
+        "TOUAREG 3.0 TDI 4M AUT.",
+        "TOUAREG 30 TDI 4M AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 31,
+      "registrations": 28797,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f344beabbca20620b17",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 3956,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 40,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53c87bbf0ea9f9898079",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 3956,
+      "powerKw": 310,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 801,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0335e30817583585140",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "TOUAREG",
+        "TOUAREG EHYBRID",
+        "TOUAREG R",
+        "TOUAREG V6 BLACK EDITION TSI A",
+        "TOUAREG V6 R-LINE TECH TSI A",
+        "TOUAREG V6 R-LINE TSI AUTO",
+        "TOUAREG V6 SEL TECH TSI AUTO",
+        "TOUAREG V6 SEL TSI AUTO"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 800,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cca729c343dd72930045",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 58,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-278137a403492d5b217a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "TOUAREG",
+        "TOUAREG / 3.0 / TSI 4M AUT.",
+        "TOUAREG / 30 / TSI 4M AUT",
+        "TOUAREG EHYBRID",
+        "TOUAREG R"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 3257,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f5c28321f183c380fc1d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3598,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d35733db206e4b99df63",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOUAREG",
+        "TOUAREG R"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 42,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af4dcb664a4768a064ff",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 250,
+      "commercialNames": [
+        "TOUAREG",
+        "TOUAREG EHYBRID",
+        "TOUAREG EHYBRID / 3.0 / TSI 4M AUT.",
+        "TOUAREG R",
+        "TOUAREG R / 3.0 / TSI 4M AUT.",
+        "TOUAREG R / 30 / TSI 4M AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN-VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 52,
+      "registrations": 16189,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53e85ae0347399c475ce",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54c86bff0c6cbd2dee30",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 183,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3dfdce54b0f760ee51ca",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 44,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4cbea273486863ad00cb",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 185,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc7f02b8182b9d638ce8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 340,
+      "commercialNames": [
+        "TOUAREG R"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39ef35bb13051b86fd1f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 165,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f48cdb4dfd8c23285c9a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 180,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b8bb052257b4104cb793",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 183,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 77,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc16307f48608c6e1d44",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2967,
+      "powerKw": 190,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-14dad68fb90d78e36220",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 180,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-663803915d1c57dd0ca8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 185,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c0364f71d2e28e5a406",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 2995,
+      "powerKw": 100,
+      "commercialNames": [
+        "TOUAREG",
+        "TOUAREG EHYBRID",
+        "TOUAREG R"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7cefc64a92548128498",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 49,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-169f02dd24a0a4cb1dc0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 51,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e067faae5837ac7b313",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 52,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-607c4786836cd0eae7e0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 53,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9317657bb7254b7014db",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 61,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b1f53c417564ad20a30",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 62,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c824cb20c3c74c0924f7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 67,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 91,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c12e36a183ffb0136aca",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 68,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51153aa0dcf7f72b28dd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 69,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9002dbb6a18514e5e610",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 70,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-929e6718831f00580be4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 72,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-621de9df54fbd287ad94",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 74,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57f93cc60a75c5d957c1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 75,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e3b741467203540df02",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 77,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6f78cf201a836c324dd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 79,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4edc089eff7475abe81f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 80,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a0c2aebcec6053a3971",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 81,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 26,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0e6ee4c0c1b4889b656d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 84,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac32cf965f840d226f57",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 88,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7dcab511a260dd355c95",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 90,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f2018594263787b98f7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 91,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eefbcf9cf14a5d2794a4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 92,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5046d6e61d387f9a16f9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 95,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91b7616af06172cb94f5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 96,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb3d34d5ccab72f310ea",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 110,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 42,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a75ed03e1e6a833c8c13",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 112,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4b0b28263af9812e1dd",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 114,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a170010800674ef0da6f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 116,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e963faa35d6ac5dd6d73",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 117,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7dbc426afe41083425b1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 120,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40753c912fc9b9b37821",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 129,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0632c8e188282796a97e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 131,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62cbd77f4122341ff3ee",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 132,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27093bb9e021a91a9495",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 135,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-318ff3abbbea99cda997",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 137,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3f8565d7ac564af6bfe",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 140,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f32a9488437feb3b19a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 141,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f9f420ce52f33446d9d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 142,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2e123261a4a1a619b26b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 143,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-64c52080ba943bda2278",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 145,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-002bc99eb86acf24b750",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 147,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d15f043daa2350e5fd62",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 148,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0996cceffb0e0509a11a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 150,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b3fc831f24e53834628",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 155,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b92c142c326a378b0a02",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 174,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71beac9f1eae1fc0054a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 206,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08d4d20d613ebc1c1326",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 228,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6138f93f5e31aa9e453",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 243,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fbf26ac403ead18508d3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 250,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba537d3446c083e99b0b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 270,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7d5d4cc71ebfd19308f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 280,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dc366d83eed04c576406",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 375,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db63e6212c2360a9b911",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 463,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c5e03d9c15ed96a437a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 470,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a339052460e7cc375d2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 520,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-721026dde0d5a665d8eb",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2967,
+      "powerKw": 250,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e989ebe3984d436dd78",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 61,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40cd4d6a1d64219dfefa",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 67,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de878d8967dddc96faac",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 69,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7946322044e1ee11fb1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 70,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a27607a94299cf4a39df",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 81,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c6359705bbe3dea186eb",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 84,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0afa1d29aafc1435f82",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 91,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a2694327f9bea189dcf",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 95,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-60cd40902f294342876b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 96,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22549a1719e24fea5f5c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 110,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ed3353063004a6c01b00",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 117,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6390775b3ee5b1cacf0c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 131,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5da811f021ca2051566",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 150,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4666b8acfd531526db4b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 195,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dbdc228cd337569c5764",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 210,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d42cfa2d52444e6502c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2995,
+      "powerKw": 228,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ac9b502c6d2d3f70944",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": null,
+      "commercialNames": [
+        "TOUAREG EHYBRID",
+        "TOUAREG R"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-22577332df387c67a15c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 49,
+      "commercialNames": [
+        "TOUAREG EHYBRID"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0461dbc98da3d21e028c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 61,
+      "commercialNames": [
+        "TOUAREG EHYBRID"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8492873bf791b5d8852",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 67,
+      "commercialNames": [
+        "TOUAREG EHYBRID",
+        "TOUAREG R"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-23b163725042b3e5c899",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 70,
+      "commercialNames": [
+        "TOUAREG R"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7cee5e73dbf60938ecfb",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 74,
+      "commercialNames": [
+        "TOUAREG R"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1040912fb85bfa213655",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 81,
+      "commercialNames": [
+        "TOUAREG EHYBRID"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-752fa2e5181d7b19c65e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 88,
+      "commercialNames": [
+        "TOUAREG EHYBRID"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b0f42c82bc96031b2ba3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 95,
+      "commercialNames": [
+        "TOUAREG R"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5aec34a9cd9faf0a12f7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 110,
+      "commercialNames": [
+        "TOUAREG R"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-363f67f16b88ea9893e9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 116,
+      "commercialNames": [
+        "TOUAREG R"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-23b12fef49f3a17c0926",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 131,
+      "commercialNames": [
+        "TOUAREG R"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c62d22dab013f0e4c49e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 132,
+      "commercialNames": [
+        "TOUAREG R"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8faed54d25bd99cb7ddb",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 140,
+      "commercialNames": [
+        "TOUAREG EHYBRID"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-23c9e75163dc7e42dbc5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 150,
+      "commercialNames": [
+        "TOUAREG EHYBRID"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c681518809a78697069a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2967,
+      "powerKw": 176,
+      "commercialNames": [
+        "TOUAREG"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-252f0d9236f8315756c2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touareg",
+      "modelId": "volkswagen/touareg",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2995,
+      "powerKw": 300,
+      "commercialNames": [
+        "TOUAREG R"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06dab1cfcf2c31b8733d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0f023af19804b696c79",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN AG",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3b127557a5e52c91ea2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOURAN",
+        "TOURAN 16 TDI AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 186,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56b18e3ca9d20cf1eb6f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1896,
+      "powerKw": 77,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN AG"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15f3f92f191721297df9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURAN",
+        "TOURAN HIGHLINE",
+        "TOURAN R-LINE TDI",
+        "TOURAN R-LINE TDI S-A",
+        "TOURAN S TDI S-A",
+        "TOURAN SE FAMILY TDI",
+        "TOURAN SE FAMILY TDI S-A",
+        "TOURAN SE TDI",
+        "TOURAN SE TDI S-A",
+        "TOURAN SEL TDI",
+        "TOURAN SEL TDI S-A"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 1368,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b7995befc1d2604fd621",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOURAN",
+        "TOURAN / 2.0 / TDI AUT.",
+        "TOURAN 20 TDI",
+        "TOURAN 20 TDI AUT"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 11156,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fa6d6ae9eeebb5f2893",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 90,
+      "commercialNames": [
+        "TOURAN",
+        "TOURAN / 2.0 / TDI",
+        "TOURAN / 20 / TDI",
+        "TOURAN 2.0 TDI"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 15644,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4632715a4a2b7f4885a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 103,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-978626038fc805852590",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "TOURAN",
+        "TOURAN / 2.0 / TDI",
+        "TOURAN / 2.0 / TDI AUT.",
+        "TOURAN / 20 / TDI AUT",
+        "TOURAN 2.0 TDI AUT.",
+        "TOURAN 20 TDI",
+        "TOURAN 20 TDI AUT"
+      ],
+      "sourceMakeNames": [
+        "Volkswagen",
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 66051,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-233c97bc4d3d38a8eef1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 140,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "Volkswagen",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 446,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf2fe3699eedb2718b96",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1968,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b48534d2b290d8372015",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-818ec0a29d56102bd4a5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURAN S TSI",
+        "TOURAN SE FAMILY TSI"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-02cd647bd9f2424fe40d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 60,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a68ff9c8d7e666453343",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "TOURAN",
+        "TOURAN R LINE TSI",
+        "TOURAN R LINE TSI S-A",
+        "TOURAN R-LINE TSI",
+        "TOURAN R-LINE TSI S-A",
+        "TOURAN SE FAMILY TSI",
+        "TOURAN SE FAMILY TSI S-A",
+        "TOURAN SE TSI",
+        "TOURAN SE TSI S-A",
+        "TOURAN SEL TSI",
+        "TOURAN SEL TSI S-A"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 3868,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d7a2d3817858874c72f9",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1486,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cdebecd8a2318375f1aa",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "TOURAN",
+        "Touran",
+        "TOURAN / 1.5 / TSI",
+        "TOURAN / 1.5 / TSI AUT.",
+        "TOURAN / 15 / TSI",
+        "TOURAN / 15 / TSI AUT",
+        "TOURAN 1.5 TSI",
+        "TOURAN 1.5 TSI AUT.",
+        "TOURAN 15 TSI",
+        "TOURAN 15 TSI AUT",
+        "TOURAN."
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 39,
+      "registrations": 92668,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1f5c828de0a674aa08c4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-90eee21a5b5be71e372b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1896,
+      "powerKw": 74,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b30e6df3ccd0440ea373",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8a2ff8d03f9367d9f90",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1390,
+      "powerKw": 103,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7beb0580eb4ff71f9522",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 77,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70b80a4bfd75cc9c98d0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 67,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dccf25a1ccb9d5fec949",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 70,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1370d195ef6ca1144f5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 84,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4794c1a9736a16a2e599",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 61,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6a8e637f8cfa8456aef",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 67,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62f48585cc75e107f670",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 68,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9e23c8fe7ecb78cd96c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 69,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1542a18625b4fcb9b48d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 70,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d04e7ac9e67ecd65cee5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 72,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-53891aad713872f44712",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 81,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09f21a34bd214e842ca6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 84,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0033513066d4577977f8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 90,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a6af7b0106fb5771e5e6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 91,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fbc9acef5edea8cebd72",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 95,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cec9ca2e3b9a11fbdb1a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 96,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bf33ff6580515ae3c65d",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 100,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-547dcc6487d788bc99df",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 112,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe7448280af9cdcc6475",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 116,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6a649c02e23e59813bb8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 117,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5be1a70cea362dfa5e7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 120,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-196d4c40d07e38d023e1",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 131,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5443155f21bdd5bfb6e3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 132,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-222586217e36ce8d6637",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 140,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b89a4705520fe3dcb435",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 198,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7289dd55a498c856b9e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 210,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a1f6303d99c240ee7a13",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Touran",
+      "modelId": "volkswagen/touran",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 230,
+      "commercialNames": [
+        "TOURAN"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e8b2e12218c9ec470172",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "UP",
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 4561,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3014c892e27745db67c3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 60,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 132,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c3884608bc11afd2db2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "UP",
+        "UP !",
+        "UP!",
+        "UP?",
+        "UP|"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 117460,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2732f96ae322d62d45e4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "UP",
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 956,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a4cfb9cb4b444e7f261",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "NG",
+      "engineCc": 999,
+      "powerKw": 50,
+      "commercialNames": [
+        "UP",
+        "UP!",
+        "UP! 10"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 13874,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef7ad1fcf384a950e280",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "NG-BIOMETHANE",
+      "engineCc": 999,
+      "powerKw": 50,
+      "commercialNames": [
+        "UP!",
+        "UP! 10"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 325,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3e332df60673bfdf3311",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2cf4e6149be88edeac51",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "UP",
+        "UP BEATS",
+        "UP BLACK EDITION",
+        "UP BY BEATS",
+        "UP BY BEATS TSI",
+        "UP GTI",
+        "UP R-LINE",
+        "UP WHITE EDITION",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 9,
+      "registrations": 4594,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40d844768c8403fd8ee5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 44,
+      "commercialNames": [
+        "UP",
+        "UP !",
+        "UP!",
+        "UP! 10",
+        "UP|"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 23695,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac58fde6448cdd0e0c91",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 48,
+      "commercialNames": [
+        "UP",
+        "UP!",
+        "UP! / 1.0 /",
+        "UP! 10"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN AG",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN,VW",
+        "VOLKSWAGEN. VW",
+        "VOLKSWAGEN.VW",
+        "VOLKSWAGENVW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 24,
+      "registrations": 96531,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fb63ec94c10597a89322",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 55,
+      "commercialNames": [
+        "UP",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 145,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1293ba68343a70f8f293",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 66,
+      "commercialNames": [
+        "UP!",
+        "UP! 10 TSI"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ee0f01be48dab6827d31",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "UP",
+        "UP!",
+        "UP! / / TSI",
+        "UP! TSI"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN",
+        "VOLKSWAGEN VW",
+        "VOLKSWAGEN, VW",
+        "VOLKSWAGEN. VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 7066,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33d7941457e4291af620",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "UP"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-75c9a26f10bda6cb0885",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 130,
+      "commercialNames": [
+        "UP"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b688cf25754de0836f8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "LPG",
+      "engineCc": 999,
+      "powerKw": 85,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c0f9bbf317a5f9f9ed8",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 69,
+      "commercialNames": [
+        "UP",
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f90e29d3d2fd12eeabf4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 49,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-342681f7b636245afcd7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 51,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e192fd834e444bf7155",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 52,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4bf0993b4be95cf5dd32",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 55,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a454ac319a1a178d539",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 59,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3bd116fe7bce4a9416c5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 111,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b085b7445bd14674cb79",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2259c9dbcac42f432c5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da7e7b0a86ee1e141687",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 72,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0c2d3dabd915341f12a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 73,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67bfe3ad516e42c2fbf2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a4ac3e87658828a1cef0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 77,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dcd9f1f320f049bf2168",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 79,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-374cf60a725a7b221934",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 80,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c96b2a3a589e489a0dc0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eeb99891eeb801b5f1f5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f254325474bae45337d5",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 88,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab1fba92b95c93b98daf",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-331739f8c810c01faae0",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 91,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-edf8688e4c121c42d08f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 92,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-005692afd0bf84d74588",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 95,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-676aa31b655449541ba4",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 96,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a26d58acc7aac2f6d8b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb91e48d96f4958e3199",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 112,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0dd31a23c395302189b2",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 114,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b75140ae573f668be93",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 116,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b49e0e561ac933b15129",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb2e1c4f73e34c06dfc6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 131,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-99ab7d24a9a94ccbfd35",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 132,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb566d75590014a10a08",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 135,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-309b7dba978959134eca",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 136,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d5db23db8a05db54d4c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 137,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-903c58130cfc5229869b",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8354259bbc5900e1b45",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 143,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85078eca65cd7b1f8368",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 145,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-886e640c06b7b615dd8c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 147,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef080e4eb7f26021cf59",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 148,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fe15747558d43db778a7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79f484ed0608ffb3e41c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 155,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8da475b89e41206888b6",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 173,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24a50c3c00599f076e4a",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 183,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-420c60396d2d8f2cd05e",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 185,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-42c980a7d138fd217b2f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 190,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f03c63364a08acdfab87",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 195,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-351ba52f571b982ec2e7",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 206,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0798fb54b542665f6b31",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9e6e1781f2d866b1db99",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 220,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f5b0cbc0395c1ac3c82",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 228,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47aa8b004896c186ab56",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 243,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6ca11e0de3a5b699728",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4c391bedb49879bf15f",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 270,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b6f2d99f56a139c57fad",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 320,
+      "commercialNames": [
+        "UP !",
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-681374f3a951a39b8eff",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 360,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-781ee76fb6cbd526e7ae",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 373,
+      "commercialNames": [
+        "UP !"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-489c5d2aca2151f86c88",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 390,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e95cae71c1ada6f6057",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 404,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61caa6eb2602092f00e3",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 44,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6e489e77f31cb173e2c",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "Up",
+      "modelId": "volkswagen/up",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "ng",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "UP!"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGENVW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-453c69865842198a6966",
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "canonicalModel": "XL1",
+      "modelId": "volkswagen/xl1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel/electric",
+      "engineCc": 829,
+      "powerKw": 35,
+      "commercialNames": [
+        "XL1"
+      ],
+      "sourceMakeNames": [
+        "VOLKSWAGEN, VW"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

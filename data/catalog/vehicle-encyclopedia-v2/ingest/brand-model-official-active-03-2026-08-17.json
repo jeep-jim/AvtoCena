@@ -1,0 +1,910 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-jmev-global-range-2026",
+          "type": "manufacturer",
+          "title": "JMEV official global brand and model range",
+          "publisher": "Jiangxi Jiangling Group Electric Vehicle Co., Ltd.",
+          "url": "https://en.jmev.com/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "countries",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official current brand/range page. Only explicit public English identities and explicitly listed vehicle categories or electric powertrains are retained."
+        },
+        {
+          "id": "src-micro-mobility-brand-2026",
+          "type": "manufacturer",
+          "title": "Micro Mobility official company and Microlino identity page",
+          "publisher": "Micro Mobility Systems AG",
+          "url": "https://www.micro-mobility.com/en/experience-micro/micro-mobility/micro-mobility",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "countries",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official current brand/range page. Only explicit public English identities and explicitly listed vehicle categories or electric powertrains are retained."
+        },
+        {
+          "id": "src-shineray-srm-brand-range-2026",
+          "type": "manufacturer",
+          "title": "Shineray Motors official SRM/Shineray brand and model range",
+          "publisher": "Shineray Group",
+          "url": "https://shineray.com/news/detail-103.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "countries",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official current brand/range page. Only explicit public English identities and explicitly listed vehicle categories or electric powertrains are retained."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "brand",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "jmev",
+          "canonicalName": "JMEV",
+          "slug": "jmev",
+          "aliases": [
+            {
+              "value": "Jiangxi Jiangling Group Electric Vehicle",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-jmev-global-range-2026"
+              ]
+            },
+            {
+              "value": "江铃集团新能源",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh",
+              "market": "China",
+              "sourceIds": [
+                "src-jmev-global-range-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "China"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-jmev-global-range-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official source establishes the active vehicle-brand identity, stable English/Latin public name and company origin."
+            }
+          ],
+          "researchNotes": [
+            "An authentic archived logo candidate exists, but its original source trace is incomplete; it is not staged as publication-ready media.",
+            "Identity remains isolated from production until logo rights and full model/generation review pass."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "micro",
+          "canonicalName": "Micro",
+          "slug": "micro",
+          "aliases": [
+            {
+              "value": "Micro Mobility Systems",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-micro-mobility-brand-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "Switzerland"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-micro-mobility-brand-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official source establishes the active vehicle-brand identity, stable English/Latin public name and company origin."
+            }
+          ],
+          "researchNotes": [
+            "An authentic archived logo candidate exists, but its original source trace is incomplete; it is not staged as publication-ready media.",
+            "Identity remains isolated from production until logo rights and full model/generation review pass."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray",
+          "canonicalName": "SRM Shineray",
+          "slug": "srm-shineray",
+          "aliases": [
+            {
+              "value": "SRM",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-shineray-srm-brand-range-2026"
+              ]
+            },
+            {
+              "value": "Shineray",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-shineray-srm-brand-range-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "China"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official source establishes the active vehicle-brand identity, stable English/Latin public name and company origin."
+            }
+          ],
+          "researchNotes": [
+            "An authentic archived logo candidate exists, but its original source trace is incomplete; it is not staged as publication-ready media.",
+            "Identity remains isolated from production until logo rights and full model/generation review pass."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "jmev/elight",
+          "brandId": "jmev",
+          "canonicalName": "ELIGHT",
+          "slug": "elight",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-jmev-global-range-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jmev/ev2",
+          "brandId": "jmev",
+          "canonicalName": "EV2",
+          "slug": "ev2",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-jmev-global-range-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jmev/ev3",
+          "brandId": "jmev",
+          "canonicalName": "EV3",
+          "slug": "ev3",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-jmev-global-range-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jmev/ewind",
+          "brandId": "jmev",
+          "canonicalName": "EWIND",
+          "slug": "ewind",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-jmev-global-range-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "micro/microlino",
+          "brandId": "micro",
+          "canonicalName": "Microlino",
+          "slug": "microlino",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-micro-mobility-brand-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/e3",
+          "brandId": "srm-shineray",
+          "canonicalName": "E3",
+          "slug": "e3",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Minivan"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/e3l",
+          "brandId": "srm-shineray",
+          "canonicalName": "E3L",
+          "slug": "e3l",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Minivan"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/m3",
+          "brandId": "srm-shineray",
+          "canonicalName": "M3",
+          "slug": "m3",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "MPV"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/m7",
+          "brandId": "srm-shineray",
+          "canonicalName": "M7",
+          "slug": "m7",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "MPV"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/t1",
+          "brandId": "srm-shineray",
+          "canonicalName": "T1",
+          "slug": "t1",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Mini truck"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/t1-ev",
+          "brandId": "srm-shineray",
+          "canonicalName": "T1 EV",
+          "slug": "t1-ev",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Mini truck"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/t3",
+          "brandId": "srm-shineray",
+          "canonicalName": "T3",
+          "slug": "t3",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Mini truck"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/t3-ev",
+          "brandId": "srm-shineray",
+          "canonicalName": "T3 EV",
+          "slug": "t3-ev",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Mini truck"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/t3l-ev",
+          "brandId": "srm-shineray",
+          "canonicalName": "T3L EV",
+          "slug": "t3l-ev",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Mini truck"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/t5",
+          "brandId": "srm-shineray",
+          "canonicalName": "T5",
+          "slug": "t5",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Mini truck"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/t5l-ev",
+          "brandId": "srm-shineray",
+          "canonicalName": "T5L EV",
+          "slug": "t5l-ev",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Mini truck"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/x30",
+          "brandId": "srm-shineray",
+          "canonicalName": "X30",
+          "slug": "x30",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Minivan"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/x30-ev",
+          "brandId": "srm-shineray",
+          "canonicalName": "X30 EV",
+          "slug": "x30-ev",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Minivan"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/x30l",
+          "brandId": "srm-shineray",
+          "canonicalName": "X30L",
+          "slug": "x30l",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Minivan"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "srm-shineray/x30l-ev",
+          "brandId": "srm-shineray",
+          "canonicalName": "X30L EV",
+          "slug": "x30l-ev",
+          "aliases": [],
+          "sourceNames": [],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Minivan"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-shineray-srm-brand-range-2026",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The official current range explicitly lists this English model identity and any retained category/powertrain designation."
+            }
+          ],
+          "researchNotes": [
+            "Active 2020-2026 identity checkpoint; no generation boundary, grade or unlisted technical value is inferred.",
+            "Review status blocks automatic pricing and public encyclopedia publication."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

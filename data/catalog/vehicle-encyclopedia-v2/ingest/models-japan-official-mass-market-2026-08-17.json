@@ -1,0 +1,1570 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-daihatsu-mira-e-s-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Mira e:S official Japan model page",
+          "publisher": "Daihatsu Motor Co., Ltd.",
+          "url": "https://www.daihatsu.co.jp/lineup/mira_e-s/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Mira e:S; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-daihatsu-move-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Move official Japan model page",
+          "publisher": "Daihatsu Motor Co., Ltd.",
+          "url": "https://www.daihatsu.co.jp/lineup/move/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Move; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-daihatsu-rocky-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Rocky official Japan model page",
+          "publisher": "Daihatsu Motor Co., Ltd.",
+          "url": "https://www.daihatsu.co.jp/lineup/rocky/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Rocky; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-daihatsu-taft-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Taft official Japan model page",
+          "publisher": "Daihatsu Motor Co., Ltd.",
+          "url": "https://www.daihatsu.co.jp/lineup/taft/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Taft; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-honda-step-wgn-japan-current-2026",
+          "type": "manufacturer",
+          "title": "STEP WGN official Japan model page",
+          "publisher": "Honda Motor Co., Ltd.",
+          "url": "https://www.honda.co.jp/STEPWGN/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies STEP WGN; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-mlit-passenger-33f67cea6daed0f1",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001259613.xlsx",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001259613.xlsx",
+          "documentId": "001259613.xlsx",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-93b9e6a0b69a3392",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001130189.xlsx",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001130189.xlsx",
+          "documentId": "001130189.xlsx",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-a9c19180ce23f1a9",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001130179.xlsx",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001130179.xlsx",
+          "documentId": "001130179.xlsx",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-nissan-serena-japan-current-2026",
+          "type": "manufacturer",
+          "title": "SERENA official Japan model page",
+          "publisher": "Nissan Motor Co., Ltd.",
+          "url": "https://www3.nissan.co.jp/vehicles/new/serena.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies SERENA; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-suzuki-alto-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Alto official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.suzuki.co.jp/car/alto/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Alto; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-suzuki-fronx-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Fronx official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.suzuki.co.jp/car/fronx/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Fronx; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-suzuki-hustler-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Hustler official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.suzuki.co.jp/car/hustler/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Hustler; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-suzuki-solio-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Solio official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.suzuki.co.jp/car/solio/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Solio; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-suzuki-spacia-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Spacia official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.suzuki.co.jp/car/spacia/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Spacia; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-suzuki-wagon-r-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Wagon R official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.suzuki.co.jp/car/wagonr/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Wagon R; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-toyota-alphard-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Alphard official Japan model page",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://toyota.jp/alphard/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Alphard; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-toyota-crown-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Crown official Japan model page",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://toyota.jp/crown/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Crown; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-toyota-harrier-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Harrier official Japan model page",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://toyota.jp/harrier/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Harrier; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-toyota-hiace-japan-current-2026",
+          "type": "manufacturer",
+          "title": "HiAce official Japan model page",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://toyota.jp/hiacevan/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies HiAce; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-toyota-noah-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Noah official Japan model page",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://toyota.jp/noah/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Noah; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-toyota-roomy-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Roomy official Japan model page",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://toyota.jp/roomy/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Roomy; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-toyota-vellfire-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Vellfire official Japan model page",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://toyota.jp/vellfire/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Vellfire; historical generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-toyota-voxy-japan-current-2026",
+          "type": "manufacturer",
+          "title": "Voxy official Japan model page",
+          "publisher": "Toyota Motor Corporation",
+          "url": "https://toyota.jp/voxy/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official current model page identifies Voxy; historical generation and production boundaries are not inferred."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "daihatsu/mira-e-s",
+          "brandId": "daihatsu",
+          "canonicalName": "Mira e:S",
+          "slug": "mira-e-s",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ミラ イース",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-daihatsu-mira-e-s-japan-current-2026",
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-0a08b4157aca6203",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-db106101d7d4ed04",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-eba2e67c2979bb93",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-f859ea48a4a0d9cd",
+                "src-mlit-passenger-fefd359dc42f8a6d"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-mira-e-s-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "daihatsu/move",
+          "brandId": "daihatsu",
+          "canonicalName": "Move",
+          "slug": "move",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ムーヴ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-daihatsu-move-japan-current-2026",
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-0a08b4157aca6203",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-eba2e67c2979bb93",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-move-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "daihatsu/rocky",
+          "brandId": "daihatsu",
+          "canonicalName": "Rocky",
+          "slug": "rocky",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ロッキー",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-daihatsu-rocky-japan-current-2026",
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-33f67cea6daed0f1",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-5615de0cd2580a2f",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-7ea71d814d77cbb8",
+                "src-mlit-passenger-8ecb1b07ea639549",
+                "src-mlit-passenger-a9c19180ce23f1a9",
+                "src-mlit-passenger-ad0384c0bee6960e",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f3dc7ac5cfae04d6"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-rocky-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "daihatsu/taft",
+          "brandId": "daihatsu",
+          "canonicalName": "Taft",
+          "slug": "taft",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "タフト",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-daihatsu-taft-japan-current-2026",
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-0a08b4157aca6203",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-eba2e67c2979bb93",
+                "src-mlit-passenger-fefd359dc42f8a6d"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-daihatsu-taft-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "honda/step-wgn",
+          "brandId": "honda",
+          "canonicalName": "STEP WGN",
+          "slug": "step-wgn",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ステップワゴン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-honda-step-wgn-japan-current-2026",
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-2c4e7a4bb82666b8",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-459a32ac7a8cac79",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-5615de0cd2580a2f",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-5fee9be36aef5b62",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-7ea71d814d77cbb8",
+                "src-mlit-passenger-86aba6aa586376c0",
+                "src-mlit-passenger-8ecb1b07ea639549",
+                "src-mlit-passenger-ad0384c0bee6960e",
+                "src-mlit-passenger-b45c99715bf7c11a",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-mlit-passenger-f76dd362812f82df"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-honda-step-wgn-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/serena",
+          "brandId": "nissan",
+          "canonicalName": "SERENA",
+          "slug": "serena",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "セレナ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-371951746ee3954d",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-8ecb1b07ea639549",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f14fef9166bd3a02",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-nissan-serena-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-nissan-serena-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/alto",
+          "brandId": "suzuki",
+          "canonicalName": "Alto",
+          "slug": "alto",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "アルト",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-13f1943f7ffcbbba",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-55df10fd58fc7e44",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-98ed273a30a89008",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d",
+                "src-suzuki-alto-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-alto-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/fronx",
+          "brandId": "suzuki",
+          "canonicalName": "Fronx",
+          "slug": "fronx",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "フロンクス",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-24cc8153255a1871",
+                "src-mlit-passenger-42957f184a35fa0a",
+                "src-mlit-passenger-8efefde3954f1c86",
+                "src-mlit-passenger-90513084ff38373f",
+                "src-mlit-passenger-d6852ab65d2071f7",
+                "src-mlit-passenger-e86e2169ba52022e",
+                "src-suzuki-fronx-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-fronx-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/hustler",
+          "brandId": "suzuki",
+          "canonicalName": "Hustler",
+          "slug": "hustler",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ハスラー",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-13f1943f7ffcbbba",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-55df10fd58fc7e44",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-98ed273a30a89008",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-db106101d7d4ed04",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d",
+                "src-suzuki-hustler-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-hustler-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/solio",
+          "brandId": "suzuki",
+          "canonicalName": "Solio",
+          "slug": "solio",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ソリオ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-4eb27bf1197af19c",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-6060628ed203d5b8",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-7ea71d814d77cbb8",
+                "src-mlit-passenger-8ecb1b07ea639549",
+                "src-mlit-passenger-ad0384c0bee6960e",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-suzuki-solio-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-solio-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/spacia",
+          "brandId": "suzuki",
+          "canonicalName": "Spacia",
+          "slug": "spacia",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "スペーシア",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-13f1943f7ffcbbba",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-55df10fd58fc7e44",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-98ed273a30a89008",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d",
+                "src-suzuki-spacia-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-spacia-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/wagon-r",
+          "brandId": "suzuki",
+          "canonicalName": "Wagon R",
+          "slug": "wagon-r",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ワゴンR",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-04eef249cd02b1b1",
+                "src-mlit-passenger-13f1943f7ffcbbba",
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-55df10fd58fc7e44",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-98ed273a30a89008",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-db106101d7d4ed04",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d",
+                "src-suzuki-wagon-r-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-wagon-r-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/alphard",
+          "brandId": "toyota",
+          "canonicalName": "Alphard",
+          "slug": "alphard",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "アルファード",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-mlit-passenger-f70840e7b69755b6",
+                "src-toyota-alphard-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-alphard-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/crown",
+          "brandId": "toyota",
+          "canonicalName": "Crown",
+          "slug": "crown",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "クラウン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-5615de0cd2580a2f",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-8ecb1b07ea639549",
+                "src-mlit-passenger-b45c99715bf7c11a",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-mlit-passenger-f70840e7b69755b6",
+                "src-toyota-crown-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-crown-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/harrier",
+          "brandId": "toyota",
+          "canonicalName": "Harrier",
+          "slug": "harrier",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ハリアー",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-8ecb1b07ea639549",
+                "src-mlit-passenger-ad0384c0bee6960e",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-mlit-passenger-f70840e7b69755b6",
+                "src-toyota-harrier-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-harrier-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/hiace",
+          "brandId": "toyota",
+          "canonicalName": "HiAce",
+          "slug": "hiace",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ハイエース",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-5f941a43ba93993a",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-mlit-passenger-7ea71d814d77cbb8",
+                "src-mlit-passenger-8ecb1b07ea639549",
+                "src-mlit-passenger-93b9e6a0b69a3392",
+                "src-mlit-passenger-ad0384c0bee6960e",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-mlit-passenger-f70840e7b69755b6",
+                "src-toyota-hiace-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-hiace-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/noah",
+          "brandId": "toyota",
+          "canonicalName": "Noah",
+          "slug": "noah",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ノア",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-mlit-passenger-f70840e7b69755b6",
+                "src-toyota-noah-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-noah-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/roomy",
+          "brandId": "toyota",
+          "canonicalName": "Roomy",
+          "slug": "roomy",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ルーミー",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-32e99d21b9bd8ee5",
+                "src-mlit-passenger-4e5eac78a8026cbf",
+                "src-mlit-passenger-7ea71d814d77cbb8",
+                "src-mlit-passenger-93b9e6a0b69a3392",
+                "src-mlit-passenger-ad0384c0bee6960e",
+                "src-mlit-passenger-b4cf291484c6a9ed",
+                "src-mlit-passenger-be927258fa5b27ce",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-ca668355aa0ef2b5",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-mlit-passenger-f70840e7b69755b6",
+                "src-toyota-roomy-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-roomy-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2020, 2021, 2022, 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/vellfire",
+          "brandId": "toyota",
+          "canonicalName": "Vellfire",
+          "slug": "vellfire",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ヴェルファイア",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-062f229997b9eff5",
+                "src-mlit-passenger-c9a81fe53189b4b8",
+                "src-mlit-passenger-f3dc7ac5cfae04d6",
+                "src-mlit-passenger-f70840e7b69755b6",
+                "src-toyota-vellfire-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-vellfire-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2023, 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/voxy",
+          "brandId": "toyota",
+          "canonicalName": "Voxy",
+          "slug": "voxy",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ヴォクシー",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-toyota-voxy-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-toyota-voxy-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Current official manufacturer model identity; the exact Japanese-market common name is retained as a sourced alias."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: not yet intersected.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

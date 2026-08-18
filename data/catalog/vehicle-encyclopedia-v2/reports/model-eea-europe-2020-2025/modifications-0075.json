@@ -1,0 +1,7064 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 75,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-bc492e5d81f51a4189a0",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Scala",
+      "modelId": "skoda/scala",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 467,
+      "commercialNames": [
+        "SCALA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-97bc7a8698aa4f8bdfed",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Scala",
+      "modelId": "skoda/scala",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": 70,
+      "commercialNames": [
+        "SCALA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 137,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e49a6bd6d9fb9b60d2e0",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Scala",
+      "modelId": "skoda/scala",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "ng",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "SCALA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-721fa02c85086e761031",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Scala",
+      "modelId": "skoda/scala",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "SCALA"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 42,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-593d1cc47beaa3345d7b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "SUPERB S TDI S-A",
+        "SUPERB SE L EXECUTIVE TDI S-A",
+        "SUPERB SE TDI S-A",
+        "SUPERB SE TECHNOLOGY TDI S-A"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 338,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e2044e46388abaf8232",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 88,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB 16 TDI AUT"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 2110,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-368a656c900d47488842",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": null,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB LAURIN &KLEM TDI 4X4 SA",
+        "SUPERB LAURIN &KLEMENT TDI S-A",
+        "SUPERB S TDI",
+        "SUPERB SE L EXEC TDI 4X4 S-A",
+        "SUPERB SE L EXECUTIVE TDI S-A",
+        "SUPERB SE L TDI",
+        "SUPERB SE L TDI 4X4 S-A",
+        "SUPERB SE L TDI S-A",
+        "SUPERB SE TDI",
+        "SUPERB SE TDI S-A",
+        "SUPERB SE TECHNOLOGY TDI",
+        "SUPERB SE TECHNOLOGY TDI S-A",
+        "SUPERB SPORTLINE + TDI",
+        "SUPERB SPORTLINE + TDI 4X4 S-A",
+        "SUPERB SPORTLINE + TDI S-A",
+        "SUPERB SPORTLINE TDI S-A"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 6408,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b83c32d0f8a68e7d66a",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 90,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB / 2.0 / TDI AUT."
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 2208,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8bc1475de18a5619182",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 103,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9c48c10721d3102bb2d4",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB / 2.0 / TDI",
+        "SUPERB / 2.0 / TDI AUT.",
+        "SUPERB / 20 / TDI",
+        "SUPERB / 20 / TDI AUT",
+        "SUPERB / COMBI 2.0 / TDI",
+        "SUPERB / COMBI 2.0 / TDI AUT.",
+        "SUPERB / COMBI 20 / TDI",
+        "SUPERB / COMBI 20 / TDI AUT",
+        "SUPERB 2.0 TDI AUT.",
+        "SUPERB 20 TDI",
+        "SUPERB 20 TDI AUT",
+        "SUPERB COMBI 2.0 TDI AUT.",
+        "SUPERB COMBI 20 TDI",
+        "SUPERB COMBI 20 TDI AUT"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 104060,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00f4446aac199d424e72",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 125,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2f0e2fa4f2a80dd6c82",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 140,
+      "commercialNames": [
+        "Superb",
+        "SUPERB",
+        "SUPERB / COMBI 2.0 / TDI 4X4 AUT.",
+        "SUPERB / COMBI 2.0 / TDI AUT.",
+        "SUPERB 20 TDI 4X4 AUT",
+        "SUPERB 20 TDI AUT",
+        "SUPERB COMBI 20 TDI 4X4 AUT",
+        "SUPERB COMBI 20 TDI AUT"
+      ],
+      "sourceMakeNames": [
+        "Skoda",
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 11,
+      "registrations": 25354,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1caf3743b195852b336f",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1968,
+      "powerKw": 147,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB / 2.0 / TDI 4X4 AUT.",
+        "SUPERB / 2.0 / TDI AUT.",
+        "SUPERB / 20 / TDI 4X4 AUT",
+        "SUPERB / 20 / TDI AUT",
+        "SUPERB / COMBI 2.0 / TDI 4X4 AUT.",
+        "SUPERB / COMBI 2.0 / TDI AUT.",
+        "SUPERB / COMBI 20 / TDI 4X4 AUT",
+        "SUPERB / COMBI 20 / TDI AUT",
+        "SUPERB COMBI 20 TDI 4X4 AUT",
+        "SUPERB COMBI 20 TDI AUT",
+        "SUPERB SCOUT / 2.0 / TDI 4X4 AUT.",
+        "SUPERB SCOUT / 20 / TDI 4X4 AUT"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 54908,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8cb1e7a297e5ea6a9cf3",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da0a0473bb0a2301ee10",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-15dca28779d4fb410cf2",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1968,
+      "powerKw": 140,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f3d35d1eb5fa5a99a1ec",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 115,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1049,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef8ebc7ec4de31aaa09c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB SE L EXECUTIVE TSI S-A",
+        "SUPERB SE L TSI",
+        "SUPERB SE L TSI S-A",
+        "SUPERB SE TECHNOLOGY TSI",
+        "SUPERB SE TECHNOLOGY TSI S-A",
+        "SUPERB SE TSI",
+        "SUPERB SE TSI S-A",
+        "SUPERB SPORTLINE + TSI S-A",
+        "SUPERB SPORTLINE TSI S-A"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 4366,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b986d2b02eb02bed4dc6",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB / 1.5 / TSI",
+        "SUPERB / 1.5 / TSI AUT.",
+        "SUPERB / 15 / TSI",
+        "SUPERB / 15 / TSI AUT",
+        "SUPERB / COMBI 1.5 / TSI",
+        "SUPERB / COMBI 1.5 / TSI AUT.",
+        "SUPERB / COMBI 15 / TSI",
+        "SUPERB / COMBI 15 / TSI AUT",
+        "SUPERB 1.5 TSI AUT.",
+        "SUPERB 15 TSI",
+        "SUPERB 15 TSI AUT",
+        "SUPERB COMBI 1.5 TSI AUT.",
+        "SUPERB COMBI 15 TSI",
+        "SUPERB COMBI 15 TSI AUT"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 38601,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a140ca325ea34ef77e4",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": null,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB LAURIN &KLEM TSI 4X4 SA",
+        "SUPERB LAURIN &KLEMENT TSI S-A",
+        "SUPERB SE L EXEC TSI 4X4 SA",
+        "SUPERB SE L TSI S-A",
+        "SUPERB SPORTLINE + TSI 4X4 S-A",
+        "SUPERB SPORTLINE + TSI S-A"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 3434,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2699b6e0ae4453ce5b78",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 140,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB / 2.0 / TSI AUT.",
+        "SUPERB / 20 / TSI AUT",
+        "SUPERB / COMBI 2.0 / TSI AUT.",
+        "SUPERB / COMBI 20 / TSI AUT",
+        "SUPERB 20 TSI AUT",
+        "SUPERB COMBI 20 TSI AUT"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "Skoda",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 18772,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cbcd890383f5b5887390",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 200,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB / COMBI 2.0 / TSI 4X4 AUT.",
+        "SUPERB 20 TSI 4X4 AUT",
+        "SUPERB COMBI 20 TSI 4X4 AUT"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 7,
+      "registrations": 5612,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-258ea28a1001ebb0385b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 206,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB / 2.0 / TSI 4X4 AUT.",
+        "SUPERB / 20 / TSI 4X4 AUT",
+        "SUPERB / COMBI 2.0 / TSI 4X4 AUT."
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "Skoda",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 9050,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-34068a0dcb51f764eaf6",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": null,
+      "commercialNames": [
+        "SUPERB L AND K IV PHEV S-A",
+        "SUPERB SE L IV PHEV S-A",
+        "SUPERB SE TECH IV PHEV S-A",
+        "SUPERB SPORTLINE + IV PHEV S-A"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 2422,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb6351aae55faed7acbb",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 55,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 360,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b4293cb5ac465c05a7e",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1395,
+      "powerKw": 115,
+      "commercialNames": [
+        "SKODA SUPERB",
+        "SUPERB",
+        "SUPERB / 1.4 / TSI AUT.",
+        "SUPERB / 14 / TSI AUT",
+        "SUPERB / COMBI 1.4 / TSI AUT.",
+        "SUPERB / COMBI 14 / TSI AUT",
+        "SUPERB 14 TSI AUT",
+        "SUPERB COMBI",
+        "SUPERB COMBI 14 TSI AUT"
+      ],
+      "sourceMakeNames": [
+        "SKODA",
+        "Skoda",
+        "ŠKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 62191,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8e2d22215f4b2e43864b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1395,
+      "powerKw": 115,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "Skoda"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd8a8935b7721832dd90",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "Skoda",
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d966c489d15bd1caae73",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1984,
+      "powerKw": 140,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "Skoda",
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-152523769e2474fef90a",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1984,
+      "powerKw": 206,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "Skoda"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77aec667fe47802d8df2",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1395,
+      "powerKw": 110,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0090e3794f02c4d7a1a1",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1798,
+      "powerKw": 132,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6d6ef13a356311063db",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1968,
+      "powerKw": 90,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "Skoda"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4cc805a60a7581794528",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "Skoda",
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 41,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98472b5e83a58fbfdcef",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1968,
+      "powerKw": 147,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "Skoda"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc4cd03e5f6853ffbaff",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 137,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-006647d3229fdab1b804",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1984,
+      "powerKw": 162,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6d17e17cc1a00f7cb66",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1498,
+      "powerKw": 110,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB / COMBI 1.5 / TSI AUT.",
+        "SUPERB 1.5 TSI AUT.",
+        "SUPERB COMBI 1.5 TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "Skoda",
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 15853,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac19f6379a2db26510d9",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1968,
+      "powerKw": 110,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "Skoda"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-553e11bc6cdca8f874d3",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1968,
+      "powerKw": 147,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "Skoda"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5a278ed54723a37be38",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 140,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "Skoda"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-100c09b6f300db34ec50",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1984,
+      "powerKw": 206,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "Skoda"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72c81181115008f13ef4",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 49,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-138444d9525843be04c2",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 51,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0334e13d2af7aa7fb278",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 53,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-721a6a0d1a5c5497686a",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 61,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1c1e210d47642696988",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 66,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fffe4cc849a9c120b2bf",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 67,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 103,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7595124833a1afb54677",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 68,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-703516916133df1af753",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 69,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a914550540cb1700877c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 70,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d2f406e04111db2325eb",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 72,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0a4dadcb8f343c5edd2",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 74,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0080a09b961b7a6f7968",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 77,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e68b42ceb098093d7f3d",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 79,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-08250da34bc3cdacd691",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 80,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-424736201bd25018c5db",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 81,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dbbd8ab6213557a34d67",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 84,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-76e3d5bf7d1d05200150",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 85,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bac11eb3360b6906bd87",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 88,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0192d2a15b0052eb2c48",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 91,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da6cb62cbae5e22b0a99",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 92,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a50a473f8e231cef1406",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 95,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91c914878a03f3495fed",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 96,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2d3378e19bf3895fa5b4",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 112,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ecae4be953378a088c35",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 114,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4e59336b0ee9067d09b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 116,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f96fa23ff63db88af00",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 117,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fadf418980716a074202",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 120,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5d6bcfa4ee1dd4d9d85",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 129,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-37ac680672167c6cb41d",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 131,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44eed4368efad25deb0f",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 132,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-17b636243621128b0472",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 136,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2997ccec7b5fb32f048",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 137,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c37e4494630506d6b78",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 141,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f67b0957705a33ae8a1c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 142,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB / 2.0 / TDI 4X4 AUT.",
+        "SUPERB / COMBI 2.0 / TDI 4X4 AUT.",
+        "SUPERB 2.0 TDI 4X4 AUT.",
+        "SUPERB COMBI",
+        "SUPERB COMBI 2.0 TDI 4X4 AUT."
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 15260,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-369feb1234c1aacf90cd",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 143,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd4a95ef20d6bd80f0c1",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 145,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d28aabbda9b243000dc",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 150,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e73a60133649dc0dc5f0",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 165,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-57f4444d26b80a895e20",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 173,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce8d13a4867f9a574b66",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 180,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16e0d9797463962f8fe3",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 183,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9954dc501966f2ef209a",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 184,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ceb99b85eef6aabcf9b9",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 190,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2773403d0ffee2eed36b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 192,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a3e9d265f462466dca5",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 210,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0aa6997fb6a45bb0a631",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 221,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0d914b7bd7ce03727d29",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 228,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-846c3b3d7d5817b14cb6",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 243,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-769c32f77e77710d46bf",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 245,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e95dedf17a6ee494691c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 250,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b57dff605023099ddab",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 320,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0bc4b8169bec2a72a896",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 370,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-974d289e06ab08692c39",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 375,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25b8a536be71fc2f1795",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 420,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ab4f40b3dcd0492b6b7",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 430,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-883b4df179fdb6974da4",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 49,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7361ec9475bddd787dd",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 61,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9f2eb58d5c9f9a200c64",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 62,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3f4d87975d035f29aa9",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 67,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9915ac27878d2efa131",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 68,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0c8556257b5eaad4a91e",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 69,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6cddc54cfe5290ca1fb2",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 70,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0911f372d4a8f91f128",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 72,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ebe33398380c401c023c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 80,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-06600e8fbb49ad180fa1",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 81,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-03d4513ade927b1790c0",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 84,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c90272b4b672107ec4b9",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 85,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e228218bc60baa3e4cb",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 90,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6f8bf002db038d9b412e",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 91,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-65ddd7002967350b3f3b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 96,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f9cf6aab28750c184083",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 112,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae1f0e10b9c501659a23",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 114,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24db983c8535e0fb0fab",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 116,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ca9421adcf1680f93bd",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 117,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-219030afa4d3a9a3d39f",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 131,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-550d04b21dd8a3611de7",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 132,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ca78a612acd746185044",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 136,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-67b33e218d2f3f91be57",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 150,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f017b542315d46afdc38",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 250,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-413dec31a76f099f7439",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 270,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41b37ddc8e3e24d085df",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 61,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09a58ede00edbc86ddfb",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 67,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 25,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8f15e709f58272c67cbf",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 68,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0a993256b1394853560",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 70,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d397c75adad671b2eb1c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 72,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6bf07c2ed3f6f5864543",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 75,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-738cb4ecce04e3f750a6",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 77,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-553916623bfb660c98b2",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 81,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-58cfc48f95706aed94f8",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 84,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0328525aa173d7d18a80",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 88,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9eb4f196dd9ee73597f5",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 91,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-196e97bbb3c83ae6dc40",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 95,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c834d78e024bd7eb7135",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 96,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0369d6b3d02c5b59b697",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 110,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4ba5035b44f1dcda33e",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 112,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-802375fa0480734b7dcb",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 116,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47e16461324a87f81365",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 117,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-104d558118823fe0f010",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 120,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77c6c227326a1d51d499",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 131,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1fd7de3068bd7d71f4d",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 132,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-527b6449403f80f58725",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 136,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8e76e2765bee5ac0b7b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 143,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fa03efd0e90f67ff01a5",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 145,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc44ee9a956bacc75ff9",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 150,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB 2.0 TSI AUT.",
+        "SUPERB COMBI",
+        "SUPERB COMBI 2.0 TSI AUT."
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1180,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a2b20047d649d72776c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 180,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f9e9e3564693bef7109",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 185,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-979b0f15c2e6b485056b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 195,
+      "commercialNames": [
+        "SUPERB",
+        "SUPERB / 2.0 / TSI 4X4 AUT.",
+        "SUPERB / COMBI 2.0 / TSI 4X4 AUT.",
+        "SUPERB 2.0 TSI 4X4 AUT.",
+        "SUPERB COMBI",
+        "SUPERB COMBI 2.0 TSI 4X4 AUT."
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 4785,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-71988095862b958ab21d",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 221,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-815bf5bee1cad0b3ed12",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 228,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ced3af248311c215d02c",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1984,
+      "powerKw": 250,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79a54d8a5c84485a5b8f",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1395,
+      "powerKw": 85,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47581e1858a22e4d1e5b",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1968,
+      "powerKw": 140,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae955b4c1c8a16e54c51",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 14,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2d7bf3cebee4714dc07",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Superb",
+      "modelId": "skoda/superb",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1498,
+      "powerKw": null,
+      "commercialNames": [
+        "SUPERB"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-77f3c60e54103d76b016",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Yeti",
+      "modelId": "skoda/yeti",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 77,
+      "commercialNames": [
+        "YETI"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5ab31e9ce200a4c75dc9",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Yeti",
+      "modelId": "skoda/yeti",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1197,
+      "powerKw": 81,
+      "commercialNames": [
+        "YETI"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-327a1f7c1dbcdbe2ecff",
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "canonicalModel": "Yeti",
+      "modelId": "skoda/yeti",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1968,
+      "powerKw": 81,
+      "commercialNames": [
+        "YETI"
+      ],
+      "sourceMakeNames": [
+        "SKODA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-10459ccf8316aca824ad",
+      "brandId": "skywell",
+      "brand": "Skywell",
+      "canonicalModel": "BE11",
+      "modelId": "skywell/be11",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "BE11"
+      ],
+      "sourceMakeNames": [
+        "SKYWELL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 308,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31a1ffa1b6195354b4a5",
+      "brandId": "skywell",
+      "brand": "Skywell",
+      "canonicalModel": "BE11",
+      "modelId": "skywell/be11",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 65,
+      "commercialNames": [
+        "BE11"
+      ],
+      "sourceMakeNames": [
+        "SKYWELL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4ca76d738a012988c980",
+      "brandId": "skywell",
+      "brand": "Skywell",
+      "canonicalModel": "ET5",
+      "modelId": "skywell/et5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "ET5"
+      ],
+      "sourceMakeNames": [
+        "SKYWELL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d137bc42b01cf07a717",
+      "brandId": "skywell",
+      "brand": "Skywell",
+      "canonicalModel": "ET5",
+      "modelId": "skywell/et5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 15,
+      "commercialNames": [
+        "ET5"
+      ],
+      "sourceMakeNames": [
+        "SKYWELL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d84ec2a33ad0fa38222",
+      "brandId": "skywell",
+      "brand": "Skywell",
+      "canonicalModel": "ET5",
+      "modelId": "skywell/et5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 65,
+      "commercialNames": [
+        "ET5"
+      ],
+      "sourceMakeNames": [
+        "SKYWELL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 138,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fc205c93d392205b9db",
+      "brandId": "skywell",
+      "brand": "Skywell",
+      "canonicalModel": "ET5",
+      "modelId": "skywell/et5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "ET5"
+      ],
+      "sourceMakeNames": [
+        "SKYWELL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 152,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91b5ffbcf5aff31cae1f",
+      "brandId": "skywell",
+      "brand": "Skywell",
+      "canonicalModel": "ET5",
+      "modelId": "skywell/et5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "ET5"
+      ],
+      "sourceMakeNames": [
+        "SKYWELL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9d4ee7e65cdcfc613e77",
+      "brandId": "skywell",
+      "brand": "Skywell",
+      "canonicalModel": "ET5",
+      "modelId": "skywell/et5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "ET5"
+      ],
+      "sourceMakeNames": [
+        "SKYWELL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f4a1862114e6f2045838",
+      "brandId": "skywell",
+      "brand": "Skywell",
+      "canonicalModel": "ET5",
+      "modelId": "skywell/et5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 112,
+      "commercialNames": [
+        "ET5"
+      ],
+      "sourceMakeNames": [
+        "SKYWELL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84fc60c34eb5b9a7b614",
+      "brandId": "skywell",
+      "brand": "Skywell",
+      "canonicalModel": "ET5",
+      "modelId": "skywell/et5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 210,
+      "commercialNames": [
+        "ET5"
+      ],
+      "sourceMakeNames": [
+        "SKYWELL"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-20d3e9824aafaee9dd5a",
+      "brandId": "skyworth",
+      "brand": "Skyworth",
+      "canonicalModel": "K",
+      "modelId": "skyworth/k",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "SKYWORTH K"
+      ],
+      "sourceMakeNames": [
+        "SKYWORTH"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e9a5a74c90e3035ce2db",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#1",
+      "modelId": "smart/1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "#1"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 274,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-07988ac90e67a701ca39",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#1",
+      "modelId": "smart/1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 116,
+      "commercialNames": [
+        "#1",
+        "1"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 308,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86ebbef06b401df5c87c",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#1",
+      "modelId": "smart/1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 200,
+      "commercialNames": [
+        "#1",
+        "1"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 19257,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b64241475a4a531862c",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#1",
+      "modelId": "smart/1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 315,
+      "commercialNames": [
+        "#1",
+        "1",
+        "SMART #1"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 5041,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43a9a5fd9c214ec4f8d5",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#1",
+      "modelId": "smart/1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "#1"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 208,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0046b0863e11de8c86f2",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#1",
+      "modelId": "smart/1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 115,
+      "commercialNames": [
+        "#1",
+        "1"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 178,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d09c4b84be38509bc691",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#1",
+      "modelId": "smart/1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 156,
+      "commercialNames": [
+        "#1"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d20ca86cf1bef9fbfef4",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#1",
+      "modelId": "smart/1",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 271,
+      "commercialNames": [
+        "#1",
+        "1"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 131,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b2b64c56b638f03ffd1",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#3",
+      "modelId": "smart/3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "#3"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1206b037902c12c159b1",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#3",
+      "modelId": "smart/3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 116,
+      "commercialNames": [
+        "#3",
+        "3"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 230,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50b9d554bcb47a2e1b46",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#3",
+      "modelId": "smart/3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 200,
+      "commercialNames": [
+        "#3",
+        "3"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 5883,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd23d2aa8ef99c733888",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#3",
+      "modelId": "smart/3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 315,
+      "commercialNames": [
+        "#3",
+        "3",
+        "SMART #3"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1547,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ddccdf4d11bad544ec8e",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#3",
+      "modelId": "smart/3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "#3"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 32,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d400e05b9521a819358",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#3",
+      "modelId": "smart/3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 75,
+      "commercialNames": [
+        "#3",
+        "3"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 247,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b60ac47efec191cf5888",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#3",
+      "modelId": "smart/3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 115,
+      "commercialNames": [
+        "#3",
+        "3"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 272,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-955742196cf4d3efd8b6",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#3",
+      "modelId": "smart/3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 271,
+      "commercialNames": [
+        "#3"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-939b3a067d0010034a8c",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#5",
+      "modelId": "smart/5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 78,
+      "commercialNames": [
+        "#5",
+        "5"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49a48a7bed712c22c8d3",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#5",
+      "modelId": "smart/5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "#5",
+        "5"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 83,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7353ca7b37ff06a14955",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#5",
+      "modelId": "smart/5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 122,
+      "commercialNames": [
+        "#5",
+        "5"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 55,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1bf7a9c0cbb44b491c2",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#5",
+      "modelId": "smart/5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "#5",
+        "5"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 177,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3d306204cf950ee157a",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#5",
+      "modelId": "smart/5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 165,
+      "commercialNames": [
+        "#5"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 440,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd9db804eb2e5f3cc581",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#5",
+      "modelId": "smart/5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 250,
+      "commercialNames": [
+        "#5"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 47,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d514f759295e93457476",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#5",
+      "modelId": "smart/5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 267,
+      "commercialNames": [
+        "#5"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 467,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d90bb0c2292ab70ee984",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#5",
+      "modelId": "smart/5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 432,
+      "commercialNames": [
+        "#5"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 348,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b587c42ce641171f0285",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "#5",
+      "modelId": "smart/5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 475,
+      "commercialNames": [
+        "\"#5\"",
+        "#5",
+        "5"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 1474,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7e27e5a61371ceca415",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Brabus",
+      "modelId": "smart/brabus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "BRABUS 92R EDITION 423"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-58927fb8ea2fe06fcd44",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Crossblade",
+      "modelId": "smart/crossblade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 599,
+      "powerKw": 52,
+      "commercialNames": [
+        "CROSSBLADE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e591a274d3eb5d4614a5",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Forfour",
+      "modelId": "smart/eq-forfour",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "EQ FORFOUR",
+        "EQ FORFOUR PASSION ADVANCED",
+        "EQ FORFOUR PRIME EXCLUSIVE",
+        "EQ FORFOUR PRIME PREMIUM 22 KW",
+        "EQ FORFOUR PULSE PREMIUM"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 8,
+      "registrations": 1703,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e7c23cc1e038c9b1e08c",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Forfour",
+      "modelId": "smart/eq-forfour",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 31,
+      "commercialNames": [
+        "EQ FORFOUR"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 93,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-002c25c779a8b8e70a08",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Forfour",
+      "modelId": "smart/eq-forfour",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 41,
+      "commercialNames": [
+        "EQ FORFOUR"
+      ],
+      "sourceMakeNames": [
+        "MCC SMART",
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 26035,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e1de3bf3e79fb348f8ba",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Forfour",
+      "modelId": "smart/eq-forfour",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 60,
+      "commercialNames": [
+        "EQ FORFOUR",
+        "EQ forfour",
+        "EQ FORFOUR //"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 5412,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-811cd376b3943140ebc5",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Forfour",
+      "modelId": "smart/eq-forfour",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 66,
+      "commercialNames": [
+        "EQ FORFOUR"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95257d6c4dae60975cec",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Forfour",
+      "modelId": "smart/eq-forfour",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "EQ FORFOUR"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-deabc2c6f6ada6cef76a",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Forfour",
+      "modelId": "smart/eq-forfour",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "EQ FORFOUR"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5893254cdf489d4d63d5",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Forfour",
+      "modelId": "smart/eq-forfour",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 116,
+      "commercialNames": [
+        "EQ FORFOUR"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9dc3fc540496595abf2",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "EQ FORTWO",
+        "EQ FORTWO CABRIO",
+        "EQ fortwo cabrio",
+        "EQ FORTWO COUPE",
+        "EQ FORTWO EDITION ONE",
+        "EQ FORTWO PASSION ADVANCED",
+        "EQ FORTWO PRIME EXCLUSIVE",
+        "EQ FORTWO PRIME PREMIUM 22 KW",
+        "EQ FORTWO PRIME PREMIUM+ 22 KW",
+        "EQ FORTWO PULSE PREMIUM"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 1653,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f842462fcd160d5ac2b3",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 31,
+      "commercialNames": [
+        "EQ FORTWO",
+        "EQ FORTWO CABRIO",
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 208,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a9390073fd2eb8e0046",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 41,
+      "commercialNames": [
+        "EQ FORTWO",
+        "EQ FORTWO CAB.",
+        "EQ FORTWO CABRIO",
+        "EQ FORTWO CARIO",
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "MCC SMART",
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 22,
+      "registrations": 82711,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1940b125459a19b6f584",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 60,
+      "commercialNames": [
+        "EQ FORTWO",
+        "EQ FORTWO / CABRIO /",
+        "EQ FORTWO / COUPE /",
+        "EQ FORTWO CABRIO",
+        "EQ FORTWO COUPE",
+        "EQ fortwo coupe"
+      ],
+      "sourceMakeNames": [
+        "MCC SMART",
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 19,
+      "registrations": 42567,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-42f8f9506914abd408af",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 68,
+      "commercialNames": [
+        "EQ FORTWO CABRIO",
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8fd88562d56ec253805f",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 61,
+      "commercialNames": [
+        "EQ FORTWO",
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2a7a0811797d3f81fb4",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 53,
+      "commercialNames": [
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-431b01e33b9246ca6378",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "EQ FORTWO CABRIO",
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6130a585581dd2ed607",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 69,
+      "commercialNames": [
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9cbd2c3c2ba99ce09190",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8165b41088106bdc75c9",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35e876c68735fef2992d",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ffa33e22a5925c64c1b9",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-69584fc7a32bd39994ea",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 95,
+      "commercialNames": [
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b7ed398197f3082ebfd",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0218e833acfcc3e87e3",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 112,
+      "commercialNames": [
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cb0c512324359502cddc",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "EQ FORTWO CABRIO",
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43a38416fbb93b8f95b7",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 215,
+      "commercialNames": [
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d20982b062f835aee7ab",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 600,
+      "commercialNames": [
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00b41b7974f731fa534e",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 66,
+      "commercialNames": [
+        "EQ FORTWO CABRIO"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5b707c7d03e0e7afce63",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "EQ Fortwo",
+      "modelId": "smart/eq-fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 130,
+      "commercialNames": [
+        "EQ FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b3bc28faad6ecdf4b95",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Forfour",
+      "modelId": "smart/forfour",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 41,
+      "commercialNames": [
+        "FORFOUR"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 502,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8888fcdb598dcb7876bb",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Forfour",
+      "modelId": "smart/forfour",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 898,
+      "powerKw": 66,
+      "commercialNames": [
+        "FORFOUR"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dee297c6e4edcb80f1eb",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Forfour",
+      "modelId": "smart/forfour",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 52,
+      "commercialNames": [
+        "FORFOUR"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 39,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-efd22a9b6cdb46d0b25d",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Forfour",
+      "modelId": "smart/forfour",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 60,
+      "commercialNames": [
+        "FORFOUR"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b36f5bd4374ec03fe3c0",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Forfour",
+      "modelId": "smart/forfour",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1493,
+      "powerKw": 50,
+      "commercialNames": [
+        "FORFOUR CDI"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56dc916e50f447837026",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Forfour Brabus",
+      "modelId": "smart/forfour-brabus",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1468,
+      "powerKw": 130,
+      "commercialNames": [
+        "FORFOUR BRABUS"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8331f014a179e44d85be",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Forfour Ed",
+      "modelId": "smart/forfour-ed",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 60,
+      "commercialNames": [
+        "FORFOUR ED"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-061fe8e1f61da9a26818",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Fortwo",
+      "modelId": "smart/fortwo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 41,
+      "commercialNames": [
+        "FORTWO",
+        "FORTWO CABRIO ED",
+        "FORTWO COUPE ED"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 2818,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-736799b1593a239cec3a",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Fortwo",
+      "modelId": "smart/fortwo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 60,
+      "commercialNames": [
+        "FORTWO",
+        "FORTWO CABRIO ED",
+        "FORTWO COUPE ED"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9c425d0d2280155b227f",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Fortwo",
+      "modelId": "smart/fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 66,
+      "commercialNames": [
+        "FORTWO COUPE ED"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3254a8bd068580369fe4",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Fortwo",
+      "modelId": "smart/fortwo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 898,
+      "powerKw": 66,
+      "commercialNames": [
+        "FORTWO",
+        "FORTWO CABRIO",
+        "FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 75,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2bbdb394ed5e3f5ce80f",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Fortwo",
+      "modelId": "smart/fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 898,
+      "powerKw": 80,
+      "commercialNames": [
+        "FORTWO COUPE BRABUS"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5eff571511e6a1366ac9",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Fortwo",
+      "modelId": "smart/fortwo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 45,
+      "commercialNames": [
+        "FORTWO",
+        "FORTWO COUPE",
+        "FORTWO COUPE MHD"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-69c16c2592568ffb55ff",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Fortwo",
+      "modelId": "smart/fortwo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 52,
+      "commercialNames": [
+        "FORTWO",
+        "FORTWO CABRIO",
+        "FORTWO CABRIO MHD",
+        "FORTWO COUPE",
+        "FORTWO COUPE MHD"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 63,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7351c64fd2430460aa9b",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Fortwo",
+      "modelId": "smart/fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 75,
+      "commercialNames": [
+        "FORTWO CABRIO BRABUS",
+        "FORTWO COUPE BRABUS"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9beec9f504a54f8cfcf7",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Fortwo",
+      "modelId": "smart/fortwo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": null,
+      "powerKw": 66,
+      "commercialNames": [
+        "FORTWO"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c04459b672f5c3d2dd01",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Fortwo",
+      "modelId": "smart/fortwo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "FORTWO"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-58fb7153e23159e91763",
+      "brandId": "smart",
+      "brand": "Smart",
+      "canonicalModel": "Fortwo",
+      "modelId": "smart/fortwo",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 698,
+      "powerKw": 45,
+      "commercialNames": [
+        "FORTWO COUPE"
+      ],
+      "sourceMakeNames": [
+        "SMART"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a3dd72c3662f07ef23db",
+      "brandId": "sportequipe",
+      "brand": "Sportequipe",
+      "canonicalModel": "5",
+      "modelId": "sportequipe/5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1498,
+      "powerKw": 86,
+      "commercialNames": [
+        "SPORTEQUIPE 5"
+      ],
+      "sourceMakeNames": [
+        "SPORTEQUIPE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b78ce0fbe6d1527bf8d",
+      "brandId": "sportequipe",
+      "brand": "Sportequipe",
+      "canonicalModel": "5",
+      "modelId": "sportequipe/5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1498,
+      "powerKw": 114,
+      "commercialNames": [
+        "SPORTEQUIPE 5"
+      ],
+      "sourceMakeNames": [
+        "SPORTEQUIPE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 74,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a583ed1781a9ac4c42bf",
+      "brandId": "sportequipe",
+      "brand": "Sportequipe",
+      "canonicalModel": "5",
+      "modelId": "sportequipe/5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 114,
+      "commercialNames": [
+        "SPORTEQUIPE 5"
+      ],
+      "sourceMakeNames": [
+        "SPORTEQUIPE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2336da0e0c11c4bea05",
+      "brandId": "sportequipe",
+      "brand": "Sportequipe",
+      "canonicalModel": "6",
+      "modelId": "sportequipe/6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1498,
+      "powerKw": 114,
+      "commercialNames": [
+        "SPORTEQUIPE 6"
+      ],
+      "sourceMakeNames": [
+        "SPORTEQUIPE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 566,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-496013dd7feb29dec8d8",
+      "brandId": "sportequipe",
+      "brand": "Sportequipe",
+      "canonicalModel": "6",
+      "modelId": "sportequipe/6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1498,
+      "powerKw": 114,
+      "commercialNames": [
+        "SPORTEQUIPE 6"
+      ],
+      "sourceMakeNames": [
+        "SPORTEQUIPE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 104,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24f30c84d9b80b205bbc",
+      "brandId": "sportequipe",
+      "brand": "Sportequipe",
+      "canonicalModel": "6",
+      "modelId": "sportequipe/6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 1598,
+      "powerKw": 137,
+      "commercialNames": [
+        "SPORTEQUIPE 6"
+      ],
+      "sourceMakeNames": [
+        "SPORTEQUIPE"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 741,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

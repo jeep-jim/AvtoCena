@@ -1,0 +1,1670 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "id": "src-gm-baojun-yun-hai-2026-launch-en",
+          "type": "manufacturer",
+          "title": "Baojun launches the 2026 Yun Hai SUV featuring enhanced comfort",
+          "url": "https://news.gm.com.cn/en/home.detail.html/Pages/news/cn/en/2025/jul/0717-baojun.html",
+          "documentId": "GM China Baojun Yun Hai 2026 launch EN",
+          "documentDate": "2025-07-17",
+          "language": "en",
+          "supportedFields": [
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "rangeKm"
+          ],
+          "notes": "Official English launch lists exactly five 2026 Yun Hai variants and establishes the SUV body and BEV/PHEV choices. Its range figures are retained without inventing an unstated certification cycle."
+        },
+        {
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "id": "src-sgmw-baojun-yunhai-current-spec",
+          "type": "manufacturer_technical_document",
+          "title": "宝骏云海参数配置",
+          "url": "https://www.sgmw.com.cn/carDetail?id=267",
+          "documentId": "SGMW carDetail 267",
+          "documentDate": null,
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "drive",
+            "icePowerKw",
+            "motorPeakKw",
+            "rangeKm",
+            "topSpeedKmh",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "curbWeightKg",
+            "seats",
+            "acChargeKw"
+          ],
+          "notes": "Official multi-column table supplies exact 2026 grade names and technical values. Battery energy lacks an explicit capacity basis and the pure-electric range row does not identify a cycle, so neither is over-interpreted."
+        },
+        {
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "id": "src-sgmw-baojun-yep-plus-2026-launch",
+          "type": "manufacturer",
+          "title": "大空间方盒子闯入七万级，宝骏悦也Plus 2026款正式上市",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=50930",
+          "documentId": "SGMW news 50930",
+          "documentDate": "2025-05-28",
+          "language": "zh-CN",
+          "supportedFields": [
+            "productionFrom",
+            "bodyTypes",
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "rangeKm"
+          ],
+          "notes": "Official release records the 2025-05-27 launch of the four exact 2026-model-year Yep Plus configurations."
+        },
+        {
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "id": "src-sgmw-baojun-yep-plus-current-spec",
+          "type": "manufacturer_technical_document",
+          "title": "宝骏悦也Plus参数配置",
+          "url": "https://www.sgmw.com.cn/carDetail?id=292",
+          "documentId": "SGMW carDetail 292",
+          "documentDate": null,
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "drive",
+            "motorPeakKw",
+            "rangeKm",
+            "topSpeedKmh",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "curbWeightKg",
+            "seats",
+            "acChargeKw"
+          ],
+          "notes": "Official table supplies exact 2026 grades and values. Battery energy has no declared gross/usable/rated basis and the range row has no certification cycle, so those interpretations remain empty."
+        },
+        {
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "id": "src-gm-baojun-xiang-jing-unveil-en-2024",
+          "type": "manufacturer",
+          "title": "Meet Baojun's Xiang Jing Intelligent Flagship Sedan",
+          "url": "https://news.gm.com.cn/en/home.detail.print.html/content/Pages/news/cn/en/2024/dec/1230-baojun.html",
+          "documentId": "GM China Baojun Xiang Jing reveal EN",
+          "documentDate": "2024-12-30",
+          "language": "en",
+          "supportedFields": [
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "bodyType",
+            "powertrainKind",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm"
+          ],
+          "notes": "Official English reveal uses the spaced source spelling Xiang Jing, identifies the flagship sedan as BEV/PHEV, supplies exact dimensions and records first production on 2024-12-29."
+        },
+        {
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "id": "src-sgmw-baojun-xiangjing-current-spec",
+          "type": "manufacturer_technical_document",
+          "title": "宝骏享境参数配置",
+          "url": "https://www.wuling.com/carDetail?id=280",
+          "documentId": "Wuling carDetail 280",
+          "documentDate": null,
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "drive",
+            "icePowerKw",
+            "motorPeakKw",
+            "rangeKm",
+            "rangeStandard",
+            "topSpeedKmh",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "tankCapacityL",
+            "acChargeKw"
+          ],
+          "notes": "Official four-column table supplies the exact launch grades and technical values, including explicit CLTC range. Battery energy remains unmapped because no gross/usable/rated basis is declared."
+        },
+        {
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "id": "src-sgmw-baojun-xiangjing-april-launch-plan-2025",
+          "type": "manufacturer",
+          "title": "上汽通用五菱一季度实销377257辆",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=50227",
+          "documentId": "SGMW news 50227",
+          "documentDate": "2025-04-02",
+          "language": "zh-CN",
+          "supportedFields": [
+            "productionFrom",
+            "bodyTypes",
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind"
+          ],
+          "notes": "Official company release states Xiangjing had entered production and would launch in April 2025, bounding the four public sale grades to the 2025 China lineup."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "baojun/yunhai",
+          "brandId": "baojun",
+          "canonicalName": "Yunhai",
+          "slug": "yunhai",
+          "aliases": [
+            {
+              "value": "Yun Hai",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-yun-hai-2026-launch-en"
+              ]
+            }
+          ],
+          "sourceNames": [
+            {
+              "value": "宝骏 云海",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-current-zh-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2024-09",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "BEV",
+            "PHEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-baojun-current-en-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW's official English current range supplies the public Latin identity."
+            },
+            {
+              "sourceId": "src-gm-baojun-yun-hai-2026-launch-en",
+              "fields": [
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the production start, body class and exact powertrain family."
+            }
+          ],
+          "researchNotes": [
+            "No edition or sales-channel suffix is promoted to a standalone model.",
+            "Publication and pricing remain disconnected until generation, exact specifications and canonical cover pass review.",
+            "Exact current configurations are staged below in a grouped mass-model batch; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yep-plus",
+          "brandId": "baojun",
+          "canonicalName": "Yep Plus",
+          "slug": "yep-plus",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "宝骏 悦也Plus",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-yep-plus-launch-2024"
+              ]
+            }
+          ],
+          "productionFrom": "2024-04",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-baojun-yep-plus-launch-2024",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The official 2024 release explicitly identifies Yueye Plus as a pure-electric SUV; Yep Plus is retained as a review-only public Latin normalization."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-yep-plus-launch-2024",
+              "fields": [
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the production start, body class and exact powertrain family."
+            }
+          ],
+          "researchNotes": [
+            "No edition or sales-channel suffix is promoted to a standalone model.",
+            "Publication and pricing remain disconnected until generation, exact specifications and canonical cover pass review.",
+            "Exact current configurations are staged below in a grouped mass-model batch; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/xiangjing",
+          "brandId": "baojun",
+          "canonicalName": "Xiangjing",
+          "slug": "xiangjing",
+          "aliases": [
+            {
+              "value": "Xiang Jing",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-xiang-jing-unveil-en-2024"
+              ]
+            }
+          ],
+          "sourceNames": [
+            {
+              "value": "宝骏 享境",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2024-12",
+          "productionTo": null,
+          "bodyTypes": [
+            "Sedan"
+          ],
+          "powertrainKinds": [
+            "BEV",
+            "PHEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            },
+            {
+              "sourceId": "src-gm-baojun-xiang-jing-unveil-en-2024",
+              "fields": [
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the production start, body class and exact powertrain family."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom.",
+            "Exact current configurations are staged below in a grouped mass-model batch; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-18"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "baojun/yunhai/2026-model-year",
+          "modelId": "baojun/yunhai",
+          "name": "2026 model year",
+          "aliases": [
+            {
+              "value": "宝骏云海2026款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-baojun-yun-hai-2026-launch-en"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2025-07",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-yun-hai-2026-launch-en",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the public lineup identity, launch month and body class."
+            }
+          ],
+          "researchNotes": [
+            "Public lineup container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yep-plus/2026-model-year",
+          "modelId": "baojun/yep-plus",
+          "name": "2026 model year",
+          "aliases": [
+            {
+              "value": "宝骏悦也Plus 2026款",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-yep-plus-2026-launch"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2025-05",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-baojun-yep-plus-2026-launch",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the public lineup identity, launch month and body class."
+            }
+          ],
+          "researchNotes": [
+            "Public lineup container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/xiangjing/launch-2025",
+          "modelId": "baojun/xiangjing",
+          "name": "Launch generation (2025)",
+          "aliases": [
+            {
+              "value": "宝骏享境",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-xiangjing-april-launch-plan-2025"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2025-04",
+          "productionTo": null,
+          "bodyTypes": [
+            "Sedan"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-baojun-xiangjing-april-launch-plan-2025",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer material establishes the public lineup identity, launch month and body class."
+            }
+          ],
+          "researchNotes": [
+            "Public lineup container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "baojun/yunhai/2026-model-year/2026-140km-phev-standard",
+          "modelId": "baojun/yunhai",
+          "generationId": "baojun/yunhai/2026-model-year",
+          "faceliftId": null,
+          "name": "2026 140 km PHEV Standard",
+          "aliases": [
+            {
+              "value": "2026款 140km 插混标准版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-yunhai-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "PHEV",
+          "drive": "FWD",
+          "icePowerKw": 78,
+          "motorPeakKw": 150,
+          "rangeKm": 140,
+          "topSpeedKmh": 170,
+          "lengthMm": 4590,
+          "widthMm": 1880,
+          "heightMm": 1608,
+          "wheelbaseMm": 2750,
+          "curbWeightKg": 1700,
+          "seats": 5,
+          "acChargeKw": 3.3,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-yun-hai-2026-launch-en",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch identifies this exact 2026 variant and its public range figure."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-yunhai-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "icePowerKw",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current table."
+            }
+          ],
+          "researchNotes": [
+            "The technical page does not state the range certification cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yunhai/2026-model-year/2026-500km-ev-standard",
+          "modelId": "baojun/yunhai",
+          "generationId": "baojun/yunhai/2026-model-year",
+          "faceliftId": null,
+          "name": "2026 500 km EV Standard",
+          "aliases": [
+            {
+              "value": "2026款 500km 纯电标准版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-yunhai-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 150,
+          "rangeKm": 500,
+          "topSpeedKmh": 170,
+          "lengthMm": 4541,
+          "widthMm": 1880,
+          "heightMm": 1608,
+          "wheelbaseMm": 2750,
+          "curbWeightKg": 1675,
+          "seats": 5,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-yun-hai-2026-launch-en",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch identifies this exact 2026 variant and its public range figure."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-yunhai-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current table."
+            }
+          ],
+          "researchNotes": [
+            "The technical page does not state the range certification cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yunhai/2026-model-year/2026-600km-ev-standard",
+          "modelId": "baojun/yunhai",
+          "generationId": "baojun/yunhai/2026-model-year",
+          "faceliftId": null,
+          "name": "2026 600 km EV Standard",
+          "aliases": [
+            {
+              "value": "2026款 600km 纯电标准版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-yunhai-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 150,
+          "rangeKm": 600,
+          "topSpeedKmh": 170,
+          "lengthMm": 4541,
+          "widthMm": 1880,
+          "heightMm": 1608,
+          "wheelbaseMm": 2750,
+          "curbWeightKg": 1760,
+          "seats": 5,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-yun-hai-2026-launch-en",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch identifies this exact 2026 variant and its public range figure."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-yunhai-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current table."
+            }
+          ],
+          "researchNotes": [
+            "The technical page does not state the range certification cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yunhai/2026-model-year/2026-500km-ev",
+          "modelId": "baojun/yunhai",
+          "generationId": "baojun/yunhai/2026-model-year",
+          "faceliftId": null,
+          "name": "2026 500 km EV",
+          "aliases": [
+            {
+              "value": "2026款 500km 纯电版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-yunhai-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 150,
+          "rangeKm": 500,
+          "topSpeedKmh": 170,
+          "lengthMm": 4541,
+          "widthMm": 1880,
+          "heightMm": 1608,
+          "wheelbaseMm": 2750,
+          "curbWeightKg": 1675,
+          "seats": 5,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-yun-hai-2026-launch-en",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch identifies this exact 2026 variant and its public range figure."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-yunhai-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current table."
+            }
+          ],
+          "researchNotes": [
+            "The technical page does not state the range certification cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yunhai/2026-model-year/2026-600km-ev",
+          "modelId": "baojun/yunhai",
+          "generationId": "baojun/yunhai/2026-model-year",
+          "faceliftId": null,
+          "name": "2026 600 km EV",
+          "aliases": [
+            {
+              "value": "2026款 600km 纯电版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-yunhai-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 150,
+          "rangeKm": 600,
+          "topSpeedKmh": 170,
+          "lengthMm": 4541,
+          "widthMm": 1880,
+          "heightMm": 1608,
+          "wheelbaseMm": 2750,
+          "curbWeightKg": 1760,
+          "seats": 5,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-yun-hai-2026-launch-en",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English launch identifies this exact 2026 variant and its public range figure."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-yunhai-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current table."
+            }
+          ],
+          "researchNotes": [
+            "The technical page does not state the range certification cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yep-plus/2026-model-year/2026-301km-flagship",
+          "modelId": "baojun/yep-plus",
+          "generationId": "baojun/yep-plus/2026-model-year",
+          "faceliftId": null,
+          "name": "2026 301 km Flagship",
+          "aliases": [
+            {
+              "value": "2026款 301km旗舰版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-yep-plus-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 75,
+          "rangeKm": 301,
+          "topSpeedKmh": 150,
+          "lengthMm": 3996,
+          "widthMm": 1760,
+          "heightMm": 1726,
+          "wheelbaseMm": 2560,
+          "curbWeightKg": 1255,
+          "seats": 5,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-baojun-yep-plus-2026-launch",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release lists this exact 2026-model-year configuration."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-yep-plus-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current table."
+            }
+          ],
+          "researchNotes": [
+            "The technical page does not state the range certification cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yep-plus/2026-model-year/2026-401km-flagship",
+          "modelId": "baojun/yep-plus",
+          "generationId": "baojun/yep-plus/2026-model-year",
+          "faceliftId": null,
+          "name": "2026 401 km Flagship",
+          "aliases": [
+            {
+              "value": "2026款 401km旗舰版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-yep-plus-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 75,
+          "rangeKm": 401,
+          "topSpeedKmh": 150,
+          "lengthMm": 3996,
+          "widthMm": 1760,
+          "heightMm": 1726,
+          "wheelbaseMm": 2560,
+          "curbWeightKg": 1325,
+          "seats": 5,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-baojun-yep-plus-2026-launch",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release lists this exact 2026-model-year configuration."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-yep-plus-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current table."
+            }
+          ],
+          "researchNotes": [
+            "The technical page does not state the range certification cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yep-plus/2026-model-year/2026-501km-flagship",
+          "modelId": "baojun/yep-plus",
+          "generationId": "baojun/yep-plus/2026-model-year",
+          "faceliftId": null,
+          "name": "2026 501 km Flagship",
+          "aliases": [
+            {
+              "value": "2026款 501km旗舰版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-yep-plus-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 75,
+          "rangeKm": 501,
+          "topSpeedKmh": 150,
+          "lengthMm": 3996,
+          "widthMm": 1760,
+          "heightMm": 1726,
+          "wheelbaseMm": 2560,
+          "curbWeightKg": 1410,
+          "seats": 5,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-baojun-yep-plus-2026-launch",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release lists this exact 2026-model-year configuration."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-yep-plus-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current table."
+            }
+          ],
+          "researchNotes": [
+            "The technical page does not state the range certification cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/yep-plus/2026-model-year/2026-501km-intelligent-premium",
+          "modelId": "baojun/yep-plus",
+          "generationId": "baojun/yep-plus/2026-model-year",
+          "faceliftId": null,
+          "name": "2026 501 km Intelligent Premium",
+          "aliases": [
+            {
+              "value": "2026款 501km智尊版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-yep-plus-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 75,
+          "rangeKm": 501,
+          "topSpeedKmh": 150,
+          "lengthMm": 3996,
+          "widthMm": 1760,
+          "heightMm": 1726,
+          "wheelbaseMm": 2560,
+          "curbWeightKg": 1410,
+          "seats": 5,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-baojun-yep-plus-2026-launch",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release lists this exact 2026-model-year configuration."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-yep-plus-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "seats",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's current table."
+            }
+          ],
+          "researchNotes": [
+            "The technical page does not state the range certification cycle or battery-capacity basis. Peak motor output is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/xiangjing/launch-2025/140km-phev-standard",
+          "modelId": "baojun/xiangjing",
+          "generationId": "baojun/xiangjing/launch-2025",
+          "faceliftId": null,
+          "name": "140 km PHEV Standard",
+          "aliases": [
+            {
+              "value": "140km 插混标准版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-xiangjing-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Sedan",
+          "powertrainKind": "PHEV",
+          "fuel": "Petrol",
+          "icePowerKw": 105,
+          "tankCapacityL": 53,
+          "drive": "FWD",
+          "motorPeakKw": 160,
+          "rangeKm": 140,
+          "rangeStandard": "CLTC",
+          "topSpeedKmh": 190,
+          "lengthMm": 5005,
+          "widthMm": 1900,
+          "heightMm": 1505,
+          "wheelbaseMm": 2900,
+          "acChargeKw": 3.3,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-xiang-jing-unveil-en-2024",
+              "fields": [
+                "bodyType",
+                "powertrainKind",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English reveal identifies the sedan, both powertrains and exact powertrain-specific dimensions."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-xiangjing-april-launch-plan-2025",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official company release bounds the public sale lineup to April 2025."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-xiangjing-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "icePowerKw",
+                "tankCapacityL",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's four-grade table."
+            }
+          ],
+          "researchNotes": [
+            "The manufacturer explicitly states CLTC range. Battery capacity remains empty because the table does not declare gross, usable or rated basis.",
+            "Peak motor output is never reused as legal 30-minute power; no engine displacement is rounded from the public 1.5T label."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/xiangjing/launch-2025/140km-phev-luxury",
+          "modelId": "baojun/xiangjing",
+          "generationId": "baojun/xiangjing/launch-2025",
+          "faceliftId": null,
+          "name": "140 km PHEV Luxury",
+          "aliases": [
+            {
+              "value": "140km 插混豪华版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-xiangjing-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Sedan",
+          "powertrainKind": "PHEV",
+          "fuel": "Petrol",
+          "icePowerKw": 105,
+          "tankCapacityL": 53,
+          "drive": "FWD",
+          "motorPeakKw": 160,
+          "rangeKm": 140,
+          "rangeStandard": "CLTC",
+          "topSpeedKmh": 190,
+          "lengthMm": 5005,
+          "widthMm": 1900,
+          "heightMm": 1505,
+          "wheelbaseMm": 2900,
+          "acChargeKw": 3.3,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-xiang-jing-unveil-en-2024",
+              "fields": [
+                "bodyType",
+                "powertrainKind",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English reveal identifies the sedan, both powertrains and exact powertrain-specific dimensions."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-xiangjing-april-launch-plan-2025",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official company release bounds the public sale lineup to April 2025."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-xiangjing-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "icePowerKw",
+                "tankCapacityL",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's four-grade table."
+            }
+          ],
+          "researchNotes": [
+            "The manufacturer explicitly states CLTC range. Battery capacity remains empty because the table does not declare gross, usable or rated basis.",
+            "Peak motor output is never reused as legal 30-minute power; no engine displacement is rounded from the public 1.5T label."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/xiangjing/launch-2025/600km-ev-standard",
+          "modelId": "baojun/xiangjing",
+          "generationId": "baojun/xiangjing/launch-2025",
+          "faceliftId": null,
+          "name": "600 km EV Standard",
+          "aliases": [
+            {
+              "value": "600km 纯电标准版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-xiangjing-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Sedan",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 186,
+          "rangeKm": 600,
+          "rangeStandard": "CLTC",
+          "topSpeedKmh": 170,
+          "lengthMm": 5005,
+          "widthMm": 1900,
+          "heightMm": 1490,
+          "wheelbaseMm": 2900,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-xiang-jing-unveil-en-2024",
+              "fields": [
+                "bodyType",
+                "powertrainKind",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English reveal identifies the sedan, both powertrains and exact powertrain-specific dimensions."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-xiangjing-april-launch-plan-2025",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official company release bounds the public sale lineup to April 2025."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-xiangjing-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's four-grade table."
+            }
+          ],
+          "researchNotes": [
+            "The manufacturer explicitly states CLTC range. Battery capacity remains empty because the table does not declare gross, usable or rated basis.",
+            "Peak motor output is never reused as legal 30-minute power; no engine displacement is rounded from the public 1.5T label."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "baojun/xiangjing/launch-2025/600km-ev-luxury",
+          "modelId": "baojun/xiangjing",
+          "generationId": "baojun/xiangjing/launch-2025",
+          "faceliftId": null,
+          "name": "600 km EV Luxury",
+          "aliases": [
+            {
+              "value": "600km 纯电豪华版",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-baojun-xiangjing-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Sedan",
+          "powertrainKind": "BEV",
+          "drive": "FWD",
+          "motorPeakKw": 186,
+          "rangeKm": 600,
+          "rangeStandard": "CLTC",
+          "topSpeedKmh": 170,
+          "lengthMm": 5005,
+          "widthMm": 1900,
+          "heightMm": 1490,
+          "wheelbaseMm": 2900,
+          "acChargeKw": 6.6,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-baojun-xiang-jing-unveil-en-2024",
+              "fields": [
+                "bodyType",
+                "powertrainKind",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English reveal identifies the sedan, both powertrains and exact powertrain-specific dimensions."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-xiangjing-april-launch-plan-2025",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official company release bounds the public sale lineup to April 2025."
+            },
+            {
+              "sourceId": "src-sgmw-baojun-xiangjing-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "drive",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "topSpeedKmh",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "acChargeKw"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from SGMW's four-grade table."
+            }
+          ],
+          "researchNotes": [
+            "The manufacturer explicitly states CLTC range. Battery capacity remains empty because the table does not declare gross, usable or rated basis.",
+            "Peak motor output is never reused as legal 30-minute power; no engine displacement is rounded from the public 1.5T label."
+          ],
+          "updatedAt": "2026-08-18"
+        }
+      ]
+    }
+  ]
+}

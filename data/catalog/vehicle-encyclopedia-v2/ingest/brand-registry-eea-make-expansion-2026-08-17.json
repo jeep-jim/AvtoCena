@@ -1,0 +1,400 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-kgm-actyon-global-2024",
+          "type": "manufacturer",
+          "title": "KGM confirms J120 model name as Actyon",
+          "publisher": "KGM Corp.",
+          "url": "https://m.kg-mobility.com/global/mediacenter/News/1305118_19810.html",
+          "documentId": null,
+          "documentDate": "2024-07-15",
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "aliases"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "KGM's official global media center identifies KGM as the public vehicle brand and KGM Corp. as the publisher; the EEA datasets independently retain KG MOBILITY as a registered source make spelling."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "brand",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "aiways",
+          "canonicalName": "Aiways",
+          "slug": "aiways",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "AIWAYS is an exact registered make value in the final EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "The isolated asset library contains exact 90 x 60 dark/light PNGs, but their original source trace and rights review are incomplete, so the logo publication gate remains blocked."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "caterham",
+          "canonicalName": "Caterham",
+          "slug": "caterham",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "CATERHAM is an exact registered make value in the final EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traceable 90 x 60 dark/light logos and full in-window model coverage remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "dfsk",
+          "canonicalName": "DFSK",
+          "slug": "dfsk",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "DFSK is an exact registered make value in the final EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traceable 90 x 60 dark/light logos and full in-window model coverage remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "dr-automobiles",
+          "canonicalName": "DR",
+          "slug": "dr",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "DR is an exact registered make value in the final EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traceable 90 x 60 dark/light logos and full in-window model coverage remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ds-automobiles",
+          "canonicalName": "DS Automobiles",
+          "slug": "ds-automobiles",
+          "aliases": [
+            {
+              "value": "DS",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "DS and DS AUTOMOBILES are separately retained registered make spellings in the final EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "Cross-brand EEA strings that combine Citroen and DS remain unresolved and are not accepted as aliases. Authentic source-traceable 90 x 60 dark/light logos remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ebro",
+          "canonicalName": "EBRO",
+          "slug": "ebro",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "EBRO is an exact registered make value in the provisional 2024 EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traceable 90 x 60 dark/light logos and full in-window model coverage remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "emc",
+          "canonicalName": "EMC",
+          "slug": "emc",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "EMC is an exact registered make value in the final EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traceable 90 x 60 dark/light logos and full in-window model coverage remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "evo",
+          "canonicalName": "EVO",
+          "slug": "evo",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "EVO is an exact registered make value in the provisional 2024 EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "The short marque name is retained exactly; it must not be merged with unrelated model-level Evolution/Evo trim text. Authentic source-traceable logos remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ineos",
+          "canonicalName": "INEOS",
+          "slug": "ineos",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "INEOS is an exact registered make value in the final 2023 EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traceable 90 x 60 dark/light logos and full in-window model coverage remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lada",
+          "canonicalName": "Lada",
+          "slug": "lada",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "LADA is an exact registered make value in the final EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "AVTOVAZ company-name rows remain unresolved until their vehicle-marque identity is independently proven. Authentic source-traceable logos remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mahindra",
+          "canonicalName": "Mahindra",
+          "slug": "mahindra",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "MAHINDRA is an exact registered make value in the final EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traceable 90 x 60 dark/light logos and full in-window model coverage remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "man",
+          "canonicalName": "MAN",
+          "slug": "man",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "MAN is an exact registered make value in the final EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "Retained because EEA passenger-car registrations include in-scope light-passenger derivatives; heavy commercial-only records remain outside this pass. Authentic source-traceable logos remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "skyworth",
+          "canonicalName": "Skyworth",
+          "slug": "skyworth",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SKYWORTH is an exact registered make value in the provisional 2024 EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "Skyworth is kept distinct from Skywell unless an authoritative rebadge relationship is recorded at model level. Authentic source-traceable logos remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "sportequipe",
+          "canonicalName": "Sportequipe",
+          "slug": "sportequipe",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SPORTEQUIPE is an exact registered make value in the final 2023 EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traceable 90 x 60 dark/light logos and full in-window model coverage remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "vinfast",
+          "canonicalName": "VinFast",
+          "slug": "vinfast",
+          "aliases": [],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "VINFAST is an exact registered make value in the final EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traceable 90 x 60 dark/light logos and full in-window model coverage remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

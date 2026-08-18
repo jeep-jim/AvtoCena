@@ -1,0 +1,29 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 2,
+    "replacedModels": 1,
+    "newGenerations": 1,
+    "newVariants": 4
+  },
+  "modelId": "wuling/starlight-560",
+  "generationIds": [
+    "wuling/starlight-560/launch-lineup-2026"
+  ],
+  "variantIds": [
+    "wuling/starlight-560/launch-lineup-2026/fuel-1-5t-6mt-comfort",
+    "wuling/starlight-560/launch-lineup-2026/fuel-1-5t-cvt-elite",
+    "wuling/starlight-560/launch-lineup-2026/phev-125-km-luxury",
+    "wuling/starlight-560/launch-lineup-2026/bev-500-km-luxury"
+  ],
+  "policy": {
+    "officialSourcesOnly": true,
+    "EnglishCanonicalLocalizedAliases": true,
+    "exactLaunchGradesOnly": true,
+    "unstatedSpecificationsRejected": true,
+    "unknownPhevRangeStandardRejected": true,
+    "automaticPublicationReady": false
+  }
+}

@@ -1,0 +1,742 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-sgmw-wuling-starlight-730-spec",
+          "type": "manufacturer_technical_document",
+          "title": "星光730参数配置",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://www.sgmw.com.cn/carDetail?id=309",
+          "documentId": "SGMW carDetail 309",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "market",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "transmission",
+            "gears",
+            "drive",
+            "powerHp",
+            "powerHpStandard",
+            "icePowerKw",
+            "motorPeakKw",
+            "rangeKm",
+            "rangeStandard",
+            "acChargeKw",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "curbWeightKg",
+            "grossWeightKg",
+            "tankCapacityL",
+            "seats",
+            "doors",
+            "topSpeedKmh"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Exact four-column manufacturer table for ICE, PHEV and BEV. Battery capacities are not mapped because gross, usable or rated basis is not stated. Maximum motor values are never reused as legal 30-minute power."
+        },
+        {
+          "id": "src-sgmw-wuling-starlight-730-launch-2025",
+          "type": "manufacturer",
+          "title": "7.3万元起售！星光730正式上市，为万千家庭开启幸福之门",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=53442",
+          "documentId": "SGMW portal 53442",
+          "documentDate": "2025-11-13",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "productionFrom",
+            "name",
+            "yearFrom",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official release states a 2025-11-12 launch and names the four ICE, PHEV and BEV launch configurations."
+        },
+        {
+          "id": "src-sgmw-wuling-starlight-730-exclusive-launch-2026",
+          "type": "manufacturer",
+          "title": "综合补贴价8.78万元起！星光730尊享型携7大核心升级正式上市",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://lu.sgmw.com.cn/portal/details.html?id=56043",
+          "documentId": "SGMW portal 56043",
+          "documentDate": "2026-04-28",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "market",
+            "yearFrom",
+            "powertrainKind",
+            "fuel",
+            "transmission",
+            "rangeKm",
+            "rangeStandard"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official release states that three Exclusive grades launched on 2026-04-27 and identifies their fuel, PHEV 125 km and BEV 500 km forms. Unstated technical values are left empty."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/starlight-730",
+          "brandId": "wuling",
+          "canonicalName": "Starlight 730",
+          "slug": "starlight-730",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 星光730",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2025-11",
+          "productionTo": null,
+          "bodyTypes": [
+            "MPV"
+          ],
+          "powertrainKinds": [
+            "ICE",
+            "PHEV",
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-launch-2025",
+              "fields": [
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW dates the launch to 2025-11-12 and identifies a seven-seat MPV with ICE, PHEV and BEV forms."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom.",
+            "Four launch configurations and three 2026 Exclusive grades are staged below; publication and pricing remain disconnected."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/starlight-730/launch-lineup-2025",
+          "modelId": "wuling/starlight-730",
+          "name": "Launch lineup (2025)",
+          "aliases": [],
+          "platformCodes": [],
+          "productionFrom": "2025-11",
+          "productionTo": null,
+          "bodyTypes": [
+            "MPV"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-launch-2025",
+              "fields": [
+                "name",
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "SGMW records the launch on 2025-11-12."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-spec",
+              "fields": [
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Every manufacturer column explicitly identifies a five-door, seven-seat MPV."
+            }
+          ],
+          "researchNotes": [
+            "Launch-lineup container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/starlight-730/launch-lineup-2025/fuel-1-5t-6mt-comfort",
+          "modelId": "wuling/starlight-730",
+          "generationId": "wuling/starlight-730/launch-lineup-2025",
+          "faceliftId": null,
+          "name": "Fuel 1.5T 6MT Comfort",
+          "aliases": [
+            {
+              "value": "燃油 1.5T 6MT 舒适型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-starlight-730-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "MPV",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "transmission": "6-speed manual",
+          "gears": 6,
+          "powerHp": 177,
+          "powerHpStandard": "PS",
+          "icePowerKw": 130,
+          "tankCapacityL": 52,
+          "drive": "FWD",
+          "lengthMm": 4910,
+          "widthMm": 1850,
+          "heightMm": 1760,
+          "wheelbaseMm": 2910,
+          "curbWeightKg": 1560,
+          "grossWeightKg": 2140,
+          "seats": 7,
+          "doors": 5,
+          "topSpeedKmh": 180,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-launch-2025",
+              "fields": [
+                "name",
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch record confirms the exact grade and 2025 launch year."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-spec",
+              "fields": [
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "transmission",
+                "gears",
+                "powerHp",
+                "powerHpStandard",
+                "icePowerKw",
+                "drive",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "tankCapacityL",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's four-column Starlight 730 table; front-engine/front-wheel drive is normalized to FWD."
+            }
+          ],
+          "researchNotes": [
+            "Nominal 1.5 L displacement is not converted into an exact engineCc value without a precise manufacturer displacement.",
+            "Battery capacity is intentionally not assigned to gross, usable or rated capacity without an explicit basis. Maximum motor power is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight-730/launch-lineup-2025/fuel-1-5t-cvt-elite",
+          "modelId": "wuling/starlight-730",
+          "generationId": "wuling/starlight-730/launch-lineup-2025",
+          "faceliftId": null,
+          "name": "Fuel 1.5T CVT Elite",
+          "aliases": [
+            {
+              "value": "燃油 1.5T CVT 精英型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-starlight-730-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "MPV",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "transmission": "CVT",
+          "powerHp": 177,
+          "powerHpStandard": "PS",
+          "icePowerKw": 130,
+          "tankCapacityL": 52,
+          "drive": "FWD",
+          "lengthMm": 4910,
+          "widthMm": 1850,
+          "heightMm": 1770,
+          "wheelbaseMm": 2910,
+          "curbWeightKg": 1610,
+          "grossWeightKg": 2200,
+          "seats": 7,
+          "doors": 5,
+          "topSpeedKmh": 180,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-launch-2025",
+              "fields": [
+                "name",
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch record confirms the exact grade and 2025 launch year."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-spec",
+              "fields": [
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "transmission",
+                "powerHp",
+                "powerHpStandard",
+                "icePowerKw",
+                "drive",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "tankCapacityL",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's four-column Starlight 730 table; front-engine/front-wheel drive is normalized to FWD."
+            }
+          ],
+          "researchNotes": [
+            "Nominal 1.5 L displacement is not converted into an exact engineCc value without a precise manufacturer displacement.",
+            "Battery capacity is intentionally not assigned to gross, usable or rated capacity without an explicit basis. Maximum motor power is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight-730/launch-lineup-2025/phev-125-km-luxury",
+          "modelId": "wuling/starlight-730",
+          "generationId": "wuling/starlight-730/launch-lineup-2025",
+          "faceliftId": null,
+          "name": "PHEV 125 km Luxury",
+          "aliases": [
+            {
+              "value": "插混 125km 豪华型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-starlight-730-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "MPV",
+          "powertrainKind": "PHEV",
+          "fuel": "Petrol",
+          "transmission": "E-CVT",
+          "icePowerKw": 78,
+          "motorPeakKw": 145,
+          "rangeKm": 125,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 3.3,
+          "tankCapacityL": 52,
+          "drive": "FWD",
+          "lengthMm": 4910,
+          "widthMm": 1850,
+          "heightMm": 1770,
+          "wheelbaseMm": 2910,
+          "curbWeightKg": 1818,
+          "grossWeightKg": 2415,
+          "seats": 7,
+          "doors": 5,
+          "topSpeedKmh": 170,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-launch-2025",
+              "fields": [
+                "name",
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch record confirms the exact grade and 2025 launch year."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-spec",
+              "fields": [
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "transmission",
+                "icePowerKw",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "drive",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "tankCapacityL",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's four-column Starlight 730 table; front-engine/front-wheel drive is normalized to FWD."
+            }
+          ],
+          "researchNotes": [
+            "Nominal 1.5 L displacement is not converted into an exact engineCc value without a precise manufacturer displacement.",
+            "Battery capacity is intentionally not assigned to gross, usable or rated capacity without an explicit basis. Maximum motor power is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight-730/launch-lineup-2025/bev-500-km-luxury",
+          "modelId": "wuling/starlight-730",
+          "generationId": "wuling/starlight-730/launch-lineup-2025",
+          "faceliftId": null,
+          "name": "BEV 500 km Luxury",
+          "aliases": [
+            {
+              "value": "纯电 500km 豪华型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-starlight-730-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "MPV",
+          "powertrainKind": "BEV",
+          "transmission": "Fixed-ratio",
+          "motorPeakKw": 100,
+          "rangeKm": 500,
+          "rangeStandard": "CLTC",
+          "acChargeKw": 6.6,
+          "drive": "FWD",
+          "lengthMm": 4910,
+          "widthMm": 1850,
+          "heightMm": 1770,
+          "wheelbaseMm": 2910,
+          "curbWeightKg": 1810,
+          "grossWeightKg": 2405,
+          "seats": 7,
+          "doors": 5,
+          "topSpeedKmh": 160,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-launch-2025",
+              "fields": [
+                "name",
+                "yearFrom"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch record confirms the exact grade and 2025 launch year."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-spec",
+              "fields": [
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "transmission",
+                "motorPeakKw",
+                "rangeKm",
+                "rangeStandard",
+                "acChargeKw",
+                "drive",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "grossWeightKg",
+                "seats",
+                "doors",
+                "topSpeedKmh"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values transcribed column-for-column from SGMW's four-column Starlight 730 table; front-engine/front-wheel drive is normalized to FWD."
+            }
+          ],
+          "researchNotes": [
+            "Nominal 1.5 L displacement is not converted into an exact engineCc value without a precise manufacturer displacement.",
+            "Battery capacity is intentionally not assigned to gross, usable or rated capacity without an explicit basis. Maximum motor power is never reused as legal 30-minute power."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight-730/launch-lineup-2025/fuel-1-5t-cvt-exclusive",
+          "modelId": "wuling/starlight-730",
+          "generationId": "wuling/starlight-730/launch-lineup-2025",
+          "faceliftId": null,
+          "name": "Fuel 1.5T CVT Exclusive",
+          "aliases": [
+            {
+              "value": "燃油1.5T CVT尊享型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-starlight-730-exclusive-launch-2026"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "MPV",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "transmission": "CVT",
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-spec",
+              "fields": [
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The model-specific manufacturer table identifies Starlight 730 as an MPV."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-exclusive-launch-2026",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "fuel",
+                "transmission"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official 2026 release confirms the exact Exclusive grade and only the stated powertrain/range fields; unstated specifications remain empty."
+            }
+          ],
+          "researchNotes": [
+            "Sparse official grade identity: no launch-lineup technical value is copied into this 2026 grade without a direct source."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight-730/launch-lineup-2025/phev-125-km-exclusive",
+          "modelId": "wuling/starlight-730",
+          "generationId": "wuling/starlight-730/launch-lineup-2025",
+          "faceliftId": null,
+          "name": "PHEV 125 km Exclusive",
+          "aliases": [
+            {
+              "value": "插混125 km尊享型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-starlight-730-exclusive-launch-2026"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "MPV",
+          "powertrainKind": "PHEV",
+          "fuel": "Petrol",
+          "rangeKm": 125,
+          "rangeStandard": "CLTC",
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-spec",
+              "fields": [
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The model-specific manufacturer table identifies Starlight 730 as an MPV."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-exclusive-launch-2026",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "fuel",
+                "rangeKm",
+                "rangeStandard"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official 2026 release confirms the exact Exclusive grade and only the stated powertrain/range fields; unstated specifications remain empty."
+            }
+          ],
+          "researchNotes": [
+            "Sparse official grade identity: no launch-lineup technical value is copied into this 2026 grade without a direct source."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight-730/launch-lineup-2025/bev-500-km-exclusive",
+          "modelId": "wuling/starlight-730",
+          "generationId": "wuling/starlight-730/launch-lineup-2025",
+          "faceliftId": null,
+          "name": "BEV 500 km Exclusive",
+          "aliases": [
+            {
+              "value": "纯电500km尊享型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-starlight-730-exclusive-launch-2026"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "MPV",
+          "powertrainKind": "BEV",
+          "rangeKm": 500,
+          "rangeStandard": "CLTC",
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-spec",
+              "fields": [
+                "bodyType"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The model-specific manufacturer table identifies Starlight 730 as an MPV."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-starlight-730-exclusive-launch-2026",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "powertrainKind",
+                "rangeKm",
+                "rangeStandard"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official 2026 release confirms the exact Exclusive grade and only the stated powertrain/range fields; unstated specifications remain empty."
+            }
+          ],
+          "researchNotes": [
+            "Sparse official grade identity: no launch-lineup technical value is copied into this 2026 grade without a direct source."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}
