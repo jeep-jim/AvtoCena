@@ -18,11 +18,10 @@ export function catalogEncyclopediaIdentityMode(raw = process.env.CATALOG_ENCYCL
 
 /**
  * Mode semantics:
- * - off: zero behavior/data change.
- * - shadow: keep public make/model untouched, but attach resolution metadata to
- *   operational data so coverage/unresolved queues can be audited.
- * - apply: use only the resolver's proven canonical make/model while retaining
- *   original source spelling in operational metadata.
+ * - off: zero behavior/data change and no V2 read.
+ * - shadow: keep public make/model untouched, but require a valid V2 resolver
+ *   and attach resolution metadata for coverage/unresolved audits.
+ * - apply: require a valid V2 resolver and use only proven canonical identity.
  */
 export function applyEncyclopediaIdentityForMode<T extends IdentityCarrier>(
   resolver: EncyclopediaIdentityResolver,
@@ -42,6 +41,6 @@ export async function applyConfiguredEncyclopediaIdentity<T extends IdentityCarr
   const mode = catalogEncyclopediaIdentityMode();
   if (mode === "off") return input;
   const resolver = await readEncyclopediaIdentityResolver();
-  if (!resolver) return input;
+  if (!resolver) throw new Error(`catalog_encyclopedia_identity_dataset_unavailable:${mode}`);
   return applyEncyclopediaIdentityForMode(resolver, input, mode);
 }
