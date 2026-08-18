@@ -10,9 +10,11 @@ const resolver = new EncyclopediaIdentityResolver({
 
 const input = { make: "AITO 问界", model: "问界 M9", operational: { raw: { make: "AITO 问界" } } };
 
-test("runtime mode defaults unknown values to off", () => {
-  assert.equal(catalogEncyclopediaIdentityMode(undefined), "off");
+test("runtime mode defaults to manifest-controlled auto and invalid overrides fail safe to off", () => {
+  assert.equal(catalogEncyclopediaIdentityMode(undefined), "auto");
+  assert.equal(catalogEncyclopediaIdentityMode(""), "auto");
   assert.equal(catalogEncyclopediaIdentityMode("garbage"), "off");
+  assert.equal(catalogEncyclopediaIdentityMode("off"), "off");
   assert.equal(catalogEncyclopediaIdentityMode(" SHADOW "), "shadow");
   assert.equal(catalogEncyclopediaIdentityMode("apply"), "apply");
 });
