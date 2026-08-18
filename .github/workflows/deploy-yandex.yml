@@ -14,6 +14,10 @@ concurrency:
   group: avtocena-production
   cancel-in-progress: true
 
+permissions:
+  contents: read
+  statuses: write
+
 env:
   IMAGE: cr.yandex/crp73he0q1blh1mujo4s/avtocena-web:${{ github.sha }}
 
@@ -156,3 +160,27 @@ jobs:
           jq -e '.result.isError == false' <<<"$mcp_search" >/dev/null
           jq -e '.result.structuredContent.items | length >= 1' <<<"$mcp_search" >/dev/null
           jq -e '.result.structuredContent.items[0].url | startswith("https://avtocena.com/cars/offer/")' <<<"$mcp_search" >/dev/null
+
+      - name: Mark Yandex deploy success
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -fsS -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+            -d '{"state":"success","context":"deploy/yandex","description":"Yandex deploy and live smoke passed"}' >/dev/null
+
+      - name: Mark Yandex deploy failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          curl -fsS -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+            -d '{"state":"failure","context":"deploy/yandex","description":"Yandex deploy or live smoke failed"}' >/dev/null
