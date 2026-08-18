@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import sharp from "sharp";
 import { getJsonStorage, readDataJson, StorageConflictError } from "../data";
 import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOffer, VehicleOffer } from "./types";
 import { hasCredibleOfferContent } from "./offer-quality";
@@ -11,6 +12,10 @@ import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./veh
 
 const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
+const IMAGE_MAX_WIDTH = Math.max(640, Number(process.env.CATALOG_IMAGE_MAX_WIDTH || 1600));
+const IMAGE_MAX_HEIGHT = Math.max(480, Number(process.env.CATALOG_IMAGE_MAX_HEIGHT || 1200));
+const IMAGE_WEBP_QUALITY = Math.max(55, Math.min(90, Number(process.env.CATALOG_IMAGE_WEBP_QUALITY || 78)));
+const IMAGE_OPTIMIZATION_DISABLED = String(process.env.CATALOG_IMAGE_OPTIMIZATION_DISABLED || "false").toLowerCase() === "true";
 const IMAGE_SOURCE_CACHE_VERSION = 1;
 const IMAGE_SOURCE_CACHE_SHARD_LIMIT = Math.max(100, Math.min(500, Number(process.env.CATALOG_IMAGE_SOURCE_CACHE_SHARD_LIMIT || 450)));
 const IMAGE_SOURCE_HOST_CONCURRENCY = Math.max(1, Math.min(8, Number(process.env.CATALOG_IMAGE_HOST_CONCURRENCY || 3)));
@@ -1187,6 +1192,23 @@ export async function readHomeCatalogSnapshot(perMarket = 6) {
 
 function isPrivateHost(hostname: string) { const h = hostname.toLowerCase(); if (["localhost", "0.0.0.0"].includes(h)) return true; if (/^(127\.|10\.|169\.254\.|192\.168\.)/.test(h)) return true; const m = h.match(/^172\.(\d+)\./); if (m && Number(m[1]) >= 16 && Number(m[1]) <= 31) return true; return h === "metadata.google.internal" || h === "169.254.169.254"; }
 export function assertSafeImageUrl(rawUrl: string) { const parsed = new URL(rawUrl); if (!["http:", "https:"].includes(parsed.protocol)) throw new Error("image_url_protocol_blocked"); if (isPrivateHost(parsed.hostname)) throw new Error("image_url_private_host_blocked"); if (!ALLOWED_IMAGE_HOSTS.some((re) => re.test(parsed.hostname))) throw new Error("image_url_host_not_allowed"); return parsed.toString(); }
+
+async function optimizeCatalogImage(input: Buffer, sourceMimeType: string) {
+  if (IMAGE_OPTIMIZATION_DISABLED) return { data: input, mimeType: sourceMimeType, extension: sourceMimeType.includes("png") ? "png" : sourceMimeType.includes("webp") ? "webp" : "jpg", width: undefined, height: undefined };
+  try {
+    const result = await sharp(input, { failOn: "warning", limitInputPixels: 40_000_000 })
+      .rotate()
+      .resize({ width: IMAGE_MAX_WIDTH, height: IMAGE_MAX_HEIGHT, fit: "inside", withoutEnlargement: true })
+      .webp({ quality: IMAGE_WEBP_QUALITY, effort: 4, smartSubsample: true })
+      .toBuffer({ resolveWithObject: true });
+    return { data: result.data, mimeType: "image/webp", extension: "webp", width: result.info.width, height: result.info.height };
+  } catch {
+    // A malformed but browser-decodable source image must not make the whole
+    // market publication fail. Keep the already size-bounded original.
+    return { data: input, mimeType: sourceMimeType, extension: sourceMimeType.includes("png") ? "png" : sourceMimeType.includes("webp") ? "webp" : "jpg", width: undefined, height: undefined };
+  }
+}
+
 export async function cacheImageFromUrl(url: string, market: string, init?: RequestInit): Promise<CatalogImage | null> {
   let safeUrl: string; try { safeUrl = assertSafeImageUrl(url); } catch { return null; }
   try {
@@ -1208,12 +1230,13 @@ export async function cacheImageFromUrl(url: string, market: string, init?: Requ
         if (!/^image\/(jpeg|png|webp)$/.test(mimeType)) return null;
         const len = Number(res.headers.get("content-length") || 0); if (len > IMAGE_MAX_BYTES) return null;
         const buf = Buffer.from(await res.arrayBuffer()); if (!buf.length || buf.length > IMAGE_MAX_BYTES) return null;
-        const checksum = crypto.createHash("sha256").update(buf).digest("hex"); const ext = mimeType.includes("png") ? "png" : mimeType.includes("webp") ? "webp" : "jpg"; const imageId = checksum.slice(0, 32); const objectKey = `catalog/images/${market}/${checksum}.${ext}`; const storage = getJsonStorage();
+        const optimized = await optimizeCatalogImage(buf, mimeType);
+        const checksum = crypto.createHash("sha256").update(optimized.data).digest("hex"); const imageId = checksum.slice(0, 32); const objectKey = `catalog/images/${market}/${checksum}.${optimized.extension}`; const storage = getJsonStorage();
         if (!(await storage.binaryExists?.(objectKey))) {
-          try { await storage.putBinary?.(objectKey, buf, mimeType, { ifNoneMatch: "*" }); }
+          try { await storage.putBinary?.(objectKey, optimized.data, optimized.mimeType, { ifNoneMatch: "*" }); }
           catch (error) { if (!(error instanceof StorageConflictError) || !(await storage.binaryExists?.(objectKey))) throw error; }
         }
-        const image = { id: imageId, url: publicImageUrl(imageId, objectKey), objectKey, checksum, mimeType, size: buf.length } satisfies CatalogImage;
+        const image = { id: imageId, url: publicImageUrl(imageId, objectKey), objectKey, checksum, mimeType: optimized.mimeType, size: optimized.data.length, width: optimized.width, height: optimized.height } satisfies CatalogImage;
         await rememberImageSource(safeUrl, image).catch(() => undefined);
         return image;
       } finally { clearTimeout(timeout); }

@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import fs from "node:fs";
 import os from "node:os";
 import path from "node:path";
+import sharp from "sharp";
 import test from "node:test";
 import { BeForwardPublicAdapter, Che168GlobalPublicAdapter, EncarDirectAdapter, JsonPartnerFeedAdapter, buildEncarImageUrl, buildEncarListUrl, normalizeEncarPrice, parseBeForwardStocklist, parseCsv } from "../apps/web/lib/catalog/adapters";
 import { persistCatalogOffers, searchOffers, publicOffer, CATALOG_CHUNK_SIZE, getOffer, cacheImageFromUrl, assertSafeImageUrl, resetImageSourceCacheForTests } from "../apps/web/lib/catalog/storage";
@@ -139,6 +140,31 @@ test("image source cache reuses the stored Object Storage image without download
     assert.notEqual(replaced?.objectKey, first?.objectKey);
     assert.equal(reusedReplacement?.objectKey, replaced?.objectKey);
     assert.equal(sourceDownloads, 2);
+  } finally {
+    (global as any).fetch = originalFetch;
+    process.chdir(cwd);
+    resetJsonStorageForTests();
+    resetImageSourceCacheForTests();
+    fs.rmSync(dir, { recursive: true, force: true });
+  }
+});
+
+test("valid catalog photos are resized and stored as webp", async () => {
+  const cwd = process.cwd();
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "avtocena-image-optimization-"));
+  const originalFetch = global.fetch;
+  const png = await sharp({ create: { width: 32, height: 24, channels: 3, background: { r: 220, g: 30, b: 30 } } }).png().toBuffer();
+  fs.mkdirSync(path.join(dir, "data"));
+  process.chdir(dir);
+  resetJsonStorageForTests();
+  resetImageSourceCacheForTests();
+  (global as any).fetch = async () => new Response(png, { status: 200, headers: { "content-type": "image/png" } });
+  try {
+    const optimized = await cacheImageFromUrl("https://ci.encar.com/carpicture/optimized.png", "korea");
+    assert.equal(optimized?.mimeType, "image/webp");
+    assert.match(String(optimized?.objectKey), /\.webp$/);
+    assert.ok(Number(optimized?.width) <= 1600);
+    assert.ok(Number(optimized?.height) <= 1200);
   } finally {
     (global as any).fetch = originalFetch;
     process.chdir(cwd);

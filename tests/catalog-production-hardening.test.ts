@@ -126,7 +126,7 @@ test("single recovery publisher preserves full maintenance state and enforces ta
   assert.match(singleRecoveryPublisher, /recovery_duplicate_id_in_full_state/);
 });
 
-test("daily cleanup keeps a three-day grace while emergency cleanup preserves the live generation", () => {
+test("daily cleanup keeps a three-day grace while emergency cleanup preserves both live manifests", () => {
   assert.match(dataStorage, /listObjects\?/);
   assert.match(dataStorage, /deletePrefix\?/);
   assert.match(dataStorage, /list-type/);
@@ -135,7 +135,9 @@ test("daily cleanup keeps a three-day grace while emergency cleanup preserves th
   assert.match(cleanup, /\.\.\.\(!EMERGENCY && internalGeneration/);
   assert.match(cleanup, /\.\.\.\(!EMERGENCY \? generationIds\.slice/);
   assert.match(cleanup, /includeInternal/);
-  assert.match(cleanup, /EMERGENCY\n    \? internalObjects/);
+  assert.match(cleanup, /protectedInternalPaths/);
+  assert.match(cleanup, /protectedInternalPaths\.has\(key\)/);
+  assert.match(cleanup, /readLiveImageKeys\(protectedGenerations, internalManifest, true\)/);
   assert.match(cleanup, /const oldEnough = EMERGENCY \|\|/);
   assert.match(cleanup, /storage\.deletePrefix\(`catalog\/generations\/\$\{generationId\}`\)/);
   assert.match(cleanup, /plannedBytes/);
