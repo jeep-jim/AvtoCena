@@ -32,14 +32,20 @@ function clean(value: unknown) {
 
 function identityFreeSnapshot(row: object) {
   const value = row as Record<string, unknown>;
-  const { make: _make, model: _model, operational: _operational, ...rest } = value;
-  return JSON.stringify(rest);
+  const { make: _make, model: _model, operational, ...rest } = value;
+  const operationalValue = operational && typeof operational === "object" && !Array.isArray(operational)
+    ? operational as Record<string, unknown>
+    : {};
+  const { encyclopediaIdentity: _identity, ...operationalRest } = operationalValue;
+  return JSON.stringify({ ...rest, operational: operationalRest });
 }
 
 /**
  * Dry-run canonical reprojection. It never writes storage and fails if the
- * identity application mutates any non-identity field. This is the safety gate
- * used before a live catalog generation may be rebuilt with Encyclopedia V2.
+ * identity application mutates any field except public make/model and the
+ * dedicated operational.encyclopediaIdentity audit metadata. IDs, pricing,
+ * images, source/raw payload, VIN/frame metadata and all other fields must stay
+ * byte-for-byte equivalent at this boundary.
  */
 export function planEncyclopediaIdentityReprojection<T extends IdentityRow>(
   resolver: EncyclopediaIdentityResolver,
