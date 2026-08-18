@@ -8,6 +8,7 @@ on:
     paths:
       - ".github/workflows/catalog-emergency-capacity-cleanup.yml"
       - "scripts/catalog-clean-failed-generations.mjs"
+      - "scripts/catalog-clean-object-storage.mjs"
 
 permissions:
   contents: read
@@ -34,6 +35,12 @@ env:
   CATALOG_FAILED_GENERATION_MAX_DELETES: "300000"
   CATALOG_FAILED_GENERATION_KEEP: "2"
   CATALOG_FAILED_GENERATION_PROTECT: "gen_1786426826475_e390aa80"
+  CATALOG_STORAGE_CLEANUP_REPORT: catalog-emergency-orphan-cleanup.json
+  CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"
+  CATALOG_STORAGE_EMERGENCY: "true"
+  CATALOG_STORAGE_KEEP_GENERATIONS: "0"
+  CATALOG_STORAGE_CLEANUP_MAX_DELETES: "300000"
+  CATALOG_STORAGE_DELETE_CONCURRENCY: "32"
   YC_OBJECT_STORAGE_DELETE_CONCURRENCY: "16"
 
 jobs:
@@ -53,10 +60,14 @@ jobs:
           node --import tsx --test tests/catalog-v2-market-recovery.test.ts
       - name: Remove only failed generations and orphan internal chunks
         run: npx tsx scripts/catalog-clean-failed-generations.mjs
+      - name: Remove unreferenced images while preserving both live manifests
+        run: npx tsx scripts/catalog-clean-object-storage.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: catalog-emergency-capacity-cleanup
-          path: catalog-emergency-capacity-cleanup.json
+          path: |
+            catalog-emergency-capacity-cleanup.json
+            catalog-emergency-orphan-cleanup.json
           if-no-files-found: warn
           retention-days: 7

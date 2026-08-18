@@ -119,10 +119,16 @@ if (!publicGeneration || !generationIds.length) {
   });
   const candidateSet = new Set(candidateGenerations);
   const generationDeleteObjects = generationObjects.filter((object) => candidateSet.has(generationIdFromKey(object.key)));
-  const internalDeleteObjects = EMERGENCY
-    ? internalObjects
-    : internalObjects.filter((object) => candidateGenerations.some((generationId) => String(object.key || "").includes(`/${generationId}-chunk-`)));
-  const liveImageKeys = await readLiveImageKeys(protectedGenerations, internalManifest, !EMERGENCY);
+  const protectedInternalPaths = new Set(Object.values(internalManifest?.sources || {})
+    .flatMap((source) => Array.isArray(source?.chunks) ? source.chunks.map(String) : []));
+  const internalDeleteObjects = internalObjects.filter((object) => {
+    const key = String(object?.key || "");
+    if (!key || protectedInternalPaths.has(key)) return false;
+    return EMERGENCY || candidateGenerations.some((generationId) => key.includes(`/${generationId}-chunk-`));
+  });
+  // Emergency capacity recovery may remove fresh orphans, but it must still
+  // preserve every gallery referenced by the current internal candidate pool.
+  const liveImageKeys = await readLiveImageKeys(protectedGenerations, internalManifest, true);
   const imageDeleteObjects = imageObjects.filter((object) => {
     const modifiedAt = objectAge(object.lastModified);
     const oldEnough = EMERGENCY || (modifiedAt > 0 && modifiedAt < cutoff);
