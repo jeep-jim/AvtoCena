@@ -24,7 +24,11 @@ type PageProps = { params: Promise<{ slug: string; model: string }> };
 type PublicKnowledgeRow = {
   id: string;
   source: string;
+  variantName?: string;
   generation?: string;
+  generationStatus?: string;
+  facelift?: string;
+  faceliftStatus?: string;
   yearFrom?: number;
   yearTo?: number;
   engineCc?: number;
@@ -32,9 +36,11 @@ type PublicKnowledgeRow = {
   transmission?: string;
   drive?: string;
   powertrainKind?: string;
-  powerHp: number;
+  powerHp?: number;
   powerKw?: number;
   icePowerKw?: number;
+  motorPeakKw?: number;
+  systemPowerKw?: number;
   power30MinKw?: number;
   utilizationPowerKw?: number;
 };
@@ -69,7 +75,7 @@ function totalThirtyMinute(row: { power30MinKw?: number; power30MinKwByMotor?: n
 }
 
 function knowledgeSignature(row: PublicKnowledgeRow) {
-  return [row.yearFrom || 0, row.yearTo || 0, row.engineCc || 0, vehicleKnowledgeCompact(row.fuel), vehicleKnowledgeCompact(row.generation), Math.round(row.powerHp * 10) / 10, Math.round(Number(row.power30MinKw || 0) * 100) / 100].join("|");
+  return [row.yearFrom || 0, row.yearTo || 0, row.engineCc || 0, vehicleKnowledgeCompact(row.fuel), vehicleKnowledgeCompact(row.generation), Math.round(Number(row.powerHp || 0) * 10) / 10, Math.round(Number(row.power30MinKw || 0) * 100) / 100].join("|");
 }
 
 function sourceLabel(source: string) {
@@ -78,6 +84,7 @@ function sourceLabel(source: string) {
   if (source.includes("drom")) return "Каталог модификаций";
   if (source.includes("consensus")) return "Подтверждено источниками";
   if (source.includes("manual")) return "Проверено АвтоЦена";
+  if (source.includes("encyclopedia_v2")) return "Энциклопедия V2 · verified";
   return "База АвтоЦена";
 }
 
@@ -113,12 +120,17 @@ export default async function ModelLandingPage({ params }: PageProps) {
   const makeKey = vehicleKnowledgeCompact(brand.name);
   const rows = new Map<string, PublicKnowledgeRow>();
   for (const variant of allVariants.filter((item) => item.active !== false && item.modelId === model.id)) {
-    const powerHp = Number(variant.powerHp || 0);
-    if (!powerHp) continue;
+    const powerHp = positive(variant.powerHp, 2_500);
+    const generationMeta = (variant as any).generationMeta as { name?: string; status?: string } | null | undefined;
+    const faceliftMeta = (variant as any).faceliftMeta as { name?: string; status?: string } | null | undefined;
     const row: PublicKnowledgeRow = {
       id: variant.id,
       source: variant.sourceType,
+      variantName: (variant as any).name,
       generation: variant.generation,
+      generationStatus: generationMeta?.status,
+      facelift: faceliftMeta?.name,
+      faceliftStatus: faceliftMeta?.status,
       yearFrom: variant.yearFrom,
       yearTo: variant.yearTo,
       engineCc: positive(variant.engineCc, 20_000),
@@ -127,8 +139,10 @@ export default async function ModelLandingPage({ params }: PageProps) {
       drive: variant.drive,
       powertrainKind: variant.powertrainKind,
       powerHp,
-      powerKw: positive(variant.powerKw, 4_000) || Math.round((powerHp / 1.35962) * 100) / 100,
+      powerKw: positive(variant.powerKw, 4_000) || (variant.sourceType !== "encyclopedia_v2" && powerHp ? Math.round((powerHp / 1.35962) * 100) / 100 : undefined),
       icePowerKw: positive(variant.icePowerKw, 4_000),
+      motorPeakKw: positive((variant as any).motorPeakKw, 4_000),
+      systemPowerKw: positive((variant as any).systemPowerKw, 4_000),
       power30MinKw: totalThirtyMinute(variant),
       utilizationPowerKw: positive(variant.utilizationPowerKw, 4_000),
     };
@@ -153,7 +167,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
     };
     if (!rows.has(knowledgeSignature(row))) rows.set(knowledgeSignature(row), row);
   }
-  const knowledgeRows = [...rows.values()].sort((left, right) => Number(right.yearTo || right.yearFrom || 0) - Number(left.yearTo || left.yearFrom || 0) || left.powerHp - right.powerHp);
+  const knowledgeRows = [...rows.values()].sort((left, right) => Number(right.yearTo || right.yearFrom || 0) - Number(left.yearTo || left.yearFrom || 0) || Number(left.powerHp || 0) - Number(right.powerHp || 0));
 
   const result = await searchOffers({ make: brand.name, model: model.model, pageSize: 48, sort: "updatedAt" });
   const offers = (result.items || []).filter((offer: any) => isCrediblePublicOffer(offer));
@@ -189,7 +203,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
     <section className="mx-auto w-full max-w-[1500px] px-4 py-8 md:px-8 md:py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <nav className="text-xs font-black uppercase tracking-[0.15em] text-[var(--ac-muted)]" aria-label="Хлебные крошки">
-        <Link href="/cars" className="hover:text-red-500">Каталог</Link><span className="mx-2">/</span><Link href={`/cars/brand/${brand.slug}`} className="hover:text-red-500">{brand.name}</Link><span className="mx-2">/</span><span>{model.model}</span>
+        <Link href="/cars" className="hover:text-red-500">Каталог</Link><span className="mx-2">/</span><Link href="/cars/encyclopedia" className="hover:text-red-500">Энциклопедия</Link><span className="mx-2">/</span><Link href={`/cars/brand/${brand.slug}`} className="hover:text-red-500">{brand.name}</Link><span className="mx-2">/</span><span>{model.model}</span>
       </nav>
 
       <header className="mt-5 grid gap-6 rounded-[2rem] bg-[var(--ac-surface)] p-5 md:grid-cols-[170px_minmax(0,1fr)] md:items-center md:p-8">
@@ -222,14 +236,19 @@ export default async function ModelLandingPage({ params }: PageProps) {
         </div>
         {knowledgeRows.length ? <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {knowledgeRows.map((row) => <article key={row.id} className="rounded-2xl bg-[var(--ac-surface-2)] p-4">
-            <div className="flex items-start justify-between gap-3"><div className="font-black">{row.generation || `${brand.name} ${model.model}`}</div><span className="text-[10px] font-black text-[var(--ac-muted)]">{sourceLabel(row.source)}</span></div>
+            <div className="flex items-start justify-between gap-3"><div className="font-black">{row.variantName || row.generation || `${brand.name} ${model.model}`}</div><span className="text-[10px] font-black text-[var(--ac-muted)]">{sourceLabel(row.source)}</span></div>
+            {row.generation ? <div className="mt-1 text-[11px] font-bold text-[var(--ac-muted)]">{row.generationStatus === "verified" ? "Поколение" : "Серия / период"}: {row.generation}</div> : null}
+            {row.facelift ? <div className="mt-1 text-[11px] font-bold text-[var(--ac-muted)]">{row.faceliftStatus === "verified" ? "Обновление" : "Срез / период"}: {row.facelift}</div> : null}
             <div className="mt-2 text-xs font-bold text-[var(--ac-muted)]">{yearRange(row.yearFrom, row.yearTo)}{row.engineCc ? ` · ${compactNumber(row.engineCc)} см³` : ""}{row.fuel ? ` · ${row.fuel}` : ""}</div>
-            <div className="mt-3 flex flex-wrap gap-2 text-xs font-black">
-              <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">{compactNumber(row.powerHp)} л.с.</span>
+            {(row.powerHp || row.powerKw || row.icePowerKw || row.motorPeakKw || row.systemPowerKw || row.power30MinKw || row.utilizationPowerKw) ? <div className="mt-3 flex flex-wrap gap-2 text-xs font-black">
+              {row.powerHp ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">{compactNumber(row.powerHp)} л.с.</span> : null}
               {row.powerKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">{compactNumber(row.powerKw)} кВт</span> : null}
+              {row.icePowerKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">ДВС: {compactNumber(row.icePowerKw)} кВт</span> : null}
+              {row.motorPeakKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">эл.мотор peak: {compactNumber(row.motorPeakKw)} кВт</span> : null}
+              {row.systemPowerKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">система max: {compactNumber(row.systemPowerKw)} кВт</span> : null}
               {row.power30MinKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">30 мин: {compactNumber(row.power30MinKw)} кВт</span> : null}
               {row.utilizationPowerKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">утиль: {compactNumber(row.utilizationPowerKw)} кВт</span> : null}
-            </div>
+            </div> : null}
             {(row.transmission || row.drive || row.powertrainKind) ? <div className="mt-3 text-[11px] font-bold text-[var(--ac-muted)]">{[row.powertrainKind, row.transmission, row.drive].filter(Boolean).join(" · ")}</div> : null}
           </article>)}
         </div> : <p className="mt-5 rounded-2xl bg-[var(--ac-surface-2)] p-4 text-sm font-bold text-[var(--ac-muted)]">Для этой модели пока сохранён только базовый каталог модели. Точная мощность появится автоматически после подтверждения модификации из объявления или официального источника.</p>}
