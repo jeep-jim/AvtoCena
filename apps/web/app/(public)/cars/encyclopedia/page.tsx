@@ -37,11 +37,13 @@ export default async function EncyclopediaPage() {
         <div className="text-xs font-black uppercase tracking-[0.2em] text-red-500">База знаний АвтоЦена</div>
         <h1 className="mt-3 max-w-5xl text-4xl font-black leading-[.95] tracking-[-0.05em] md:text-7xl">Энциклопедия автомобилей</h1>
         <p className="mt-5 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">Марки, модели, поколения и проверенные модификации в одной базе. Характеристики связаны с каталогом АвтоЦены: от страницы модели можно сразу перейти к актуальным автомобилям и расчёту под ключ.</p>
-        <div className="mt-7 grid grid-cols-2 gap-3 md:max-w-3xl md:grid-cols-3">
+        <div className="mt-7 grid grid-cols-2 gap-3 md:max-w-5xl md:grid-cols-4">
           <div className="rounded-2xl bg-[var(--ac-surface-2)] p-4"><div className="text-2xl font-black md:text-3xl">{CATALOG_BRANDS.length}</div><div className="mt-1 text-xs font-black uppercase tracking-wide text-[var(--ac-muted)]">марок сайта</div></div>
           <div className="rounded-2xl bg-[var(--ac-surface-2)] p-4"><div className="text-2xl font-black md:text-3xl">{stats.models.toLocaleString("ru-RU")}</div><div className="mt-1 text-xs font-black uppercase tracking-wide text-[var(--ac-muted)]">моделей</div></div>
-          <div className="col-span-2 rounded-2xl bg-[var(--ac-surface-2)] p-4 md:col-span-1"><div className="text-2xl font-black md:text-3xl">{stats.specifications.toLocaleString("ru-RU")}</div><div className="mt-1 text-xs font-black uppercase tracking-wide text-[var(--ac-muted)]">записей характеристик</div></div>
+          <div className="rounded-2xl bg-[var(--ac-surface-2)] p-4"><div className="text-2xl font-black md:text-3xl">{stats.specifications.toLocaleString("ru-RU")}</div><div className="mt-1 text-xs font-black uppercase tracking-wide text-[var(--ac-muted)]">записей характеристик</div></div>
+          <div className="rounded-2xl bg-[var(--ac-surface-2)] p-4"><div className="text-2xl font-black md:text-3xl">{stats.verifiedV2Specifications.toLocaleString("ru-RU")}</div><div className="mt-1 text-xs font-black uppercase tracking-wide text-[var(--ac-muted)]">verified V2</div></div>
         </div>
+        <p className="mt-3 text-xs font-bold text-[var(--ac-muted)]">Verified V2 — только записи, прошедшие проверку источников. Review-наблюдения не публикуются как подтверждённые характеристики.</p>
       </header>
 
       <section className="mt-8">
