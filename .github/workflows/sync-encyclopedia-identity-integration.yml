@@ -1,0 +1,31 @@
+name: Sync Encyclopedia Identity Integration
+
+on:
+  push:
+    branches:
+      - recovery/encyclopedia-v2-staging-20260818
+    paths:
+      - .github/workflows/sync-encyclopedia-identity-integration.yml
+
+permissions:
+  contents: write
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/catalog-encyclopedia-identity-resolver-20260818
+          fetch-depth: 0
+      - name: Merge current main into integration branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin main
+          git merge --no-edit origin/main
+          git push origin HEAD:feat/catalog-encyclopedia-identity-resolver-20260818
+          git log --oneline --decorate -5
