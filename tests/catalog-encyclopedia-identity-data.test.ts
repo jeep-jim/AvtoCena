@@ -2,7 +2,9 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { assertEncyclopediaIdentityDataset } from "../apps/web/lib/catalog/encyclopedia-identity-data";
 
-const alias = { value: "AITO 问界", kind: "localized", safe: true, sourceIds: ["src-aito"] };
+function makeAlias(value = "AITO 问界") {
+  return { value, kind: "localized", safe: true, sourceIds: ["src-aito"] };
+}
 
 function dataset() {
   return {
@@ -12,8 +14,8 @@ function dataset() {
       productionConnected: false,
       collections: { brand: { records: 1 }, model: { records: 1 } },
     },
-    brands: [{ id: "aito", canonicalName: "AITO", aliases: [alias] }],
-    models: [{ id: "aito/m9", brandId: "aito", canonicalName: "M9", aliases: [{ ...alias, value: "问界 M9" }], sourceNames: [] }],
+    brands: [{ id: "aito", canonicalName: "AITO", aliases: [makeAlias()] }],
+    models: [{ id: "aito/m9", brandId: "aito", canonicalName: "M9", aliases: [makeAlias("问界 M9")], sourceNames: [] }],
     searchEntries: [
       { entityType: "brand", entityId: "aito", brandId: "aito", term: "AITO", safe: true },
       { entityType: "model", entityId: "aito/m9", brandId: "aito", modelId: "aito/m9", term: "M9", safe: true },
