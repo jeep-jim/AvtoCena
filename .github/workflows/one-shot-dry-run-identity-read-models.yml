@@ -1,0 +1,57 @@
+name: One Shot Dry Run Identity Read Models
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/one-shot-dry-run-identity-read-models.yml
+
+permissions:
+  contents: write
+
+jobs:
+  dry-run:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+      CATALOG_ENCYCLOPEDIA_IDENTITY_PUBLISH_REPORT: /tmp/identity-read-model-dry-run.json
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/catalog-encyclopedia-identity-publish-20260818
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Validate V2 checkpoint
+        run: node scripts/vehicle-encyclopedia/validate.mjs
+      - name: Dry-run live current-generation identity projection
+        run: |
+          node scripts/catalog-publish-encyclopedia-identity-read-models.mjs
+          test -s /tmp/identity-read-model-dry-run.json
+          cat /tmp/identity-read-model-dry-run.json
+      - name: Persist report to recovery branch
+        shell: bash
+        run: |
+          set -euo pipefail
+          FEATURE_SHA="$(git rev-parse HEAD)"
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin recovery/encyclopedia-v2-staging-20260818
+          git worktree add /tmp/recovery origin/recovery/encyclopedia-v2-staging-20260818
+          cd /tmp/recovery
+          mkdir -p recovery-assets/encyclopedia-v2-20260818/audits
+          cp /tmp/identity-read-model-dry-run.json recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.json
+          printf 'feature_sha=%s\nstatus=success\nverified_at=%s\n' "$FEATURE_SHA" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.meta.txt
+          git add recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.json recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.meta.txt
+          git commit -m 'chore(recovery): record live identity read-model dry-run' || true
+          git push origin HEAD:recovery/encyclopedia-v2-staging-20260818
