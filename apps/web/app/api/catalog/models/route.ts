@@ -65,7 +65,7 @@ function contextualFilters(searchParams: URLSearchParams, make: string, includeM
   };
 }
 
-function hasInventoryContext(filters: ReturnType<typeof contextualFilters>) {
+function hasInventoryContext(filters: Record<string, unknown>) {
   return Object.values(filters).some((value) => value !== undefined && value !== "");
 }
 
