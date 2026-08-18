@@ -21,19 +21,21 @@ type EntityChunk<T> = {
   records?: T[];
 };
 
-type SearchIndex = {
-  schemaVersion?: number;
-  entries?: EncyclopediaSearchIdentityEntry[];
-};
-
 export type EncyclopediaIdentityDataset = {
   manifest: EncyclopediaManifest;
   brands: EncyclopediaBrandIdentity[];
   models: EncyclopediaModelIdentity[];
+  /**
+   * Optional compact exact terms. The catalog identity runtime deliberately
+   * does not load the global generated/search-index.json (80+ MB); canonical
+   * brand/model names plus source-traced safe aliases are sufficient for the
+   * first production identity phase. A compact index can be added later.
+   */
   searchEntries: EncyclopediaSearchIdentityEntry[];
 };
 
 const ROOT = "catalog/vehicle-encyclopedia-v2";
+let datasetCache: Promise<EncyclopediaIdentityDataset | null> | null = null;
 let resolverCache: Promise<EncyclopediaIdentityResolver | null> | null = null;
 
 function safeRoot() {
@@ -53,6 +55,7 @@ async function readEntityChunks<T>(root: string, entity: "brand" | "model") {
   const names = (await fs.readdir(directory))
     .filter((name) => name.startsWith(prefix) && name.endsWith(".json"))
     .sort((left, right) => left.localeCompare(right, "en"));
+  if (!names.length) throw new Error(`encyclopedia_identity_${entity}_chunks_missing`);
   const records: T[] = [];
   for (const name of names) {
     const chunk = await readJson<EntityChunk<T>>(path.join(directory, name));
@@ -152,21 +155,24 @@ export function assertEncyclopediaIdentityDataset(dataset: EncyclopediaIdentityD
   return dataset;
 }
 
-export async function readEncyclopediaIdentityDataset(): Promise<EncyclopediaIdentityDataset | null> {
+async function loadEncyclopediaIdentityDataset(): Promise<EncyclopediaIdentityDataset | null> {
   const root = safeRoot();
   try {
     const manifest = await readJson<EncyclopediaManifest>(path.join(root, "manifest.json"));
-    const [brands, models, search] = await Promise.all([
+    const [brands, models] = await Promise.all([
       readEntityChunks<EncyclopediaBrandIdentity>(root, "brand"),
       readEntityChunks<EncyclopediaModelIdentity>(root, "model"),
-      readJson<SearchIndex>(path.join(root, "generated", "search-index.json")),
     ]);
-    if (search.schemaVersion !== 2 || !Array.isArray(search.entries)) throw new Error("encyclopedia_identity_invalid_search_index");
-    return assertEncyclopediaIdentityDataset({ manifest, brands, models, searchEntries: search.entries });
+    return assertEncyclopediaIdentityDataset({ manifest, brands, models, searchEntries: [] });
   } catch (error: any) {
     if (error?.code === "ENOENT") return null;
     throw error;
   }
+}
+
+export async function readEncyclopediaIdentityDataset() {
+  if (!datasetCache) datasetCache = loadEncyclopediaIdentityDataset();
+  return datasetCache;
 }
 
 export async function readEncyclopediaIdentityResolver() {
@@ -183,6 +189,14 @@ export async function readEncyclopediaIdentityResolver() {
   return resolverCache;
 }
 
+export function assertEncyclopediaIdentityProductionConnected(dataset: EncyclopediaIdentityDataset) {
+  if (dataset.manifest.productionConnected !== true) {
+    throw new Error("catalog_encyclopedia_identity_production_not_connected");
+  }
+  return dataset;
+}
+
 export function resetEncyclopediaIdentityResolverCache() {
+  datasetCache = null;
   resolverCache = null;
 }
