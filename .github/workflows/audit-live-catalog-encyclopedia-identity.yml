@@ -50,19 +50,25 @@ jobs:
           npm run catalog:audit-encyclopedia-identity
           test -s "$CATALOG_ENCYCLOPEDIA_IDENTITY_AUDIT_OUTPUT"
           node -e 'const r=require(process.env.CATALOG_ENCYCLOPEDIA_IDENTITY_AUDIT_OUTPUT); console.log(JSON.stringify({catalog:r.catalog,resolution:r.resolution,duplicateClusters:r.duplicateMakeClusters?.length,reviewQueue:r.reviewQueue&&{queued:r.reviewQueue.queued,uniqueItems:r.reviewQueue.uniqueItems}},null,2))'
-      - name: Persist read-only audit report to recovery branch
+      - name: Persist read-only audit result to recovery branch
+        if: always()
+        env:
+          JOB_STATUS: ${{ job.status }}
         shell: bash
         run: |
           set -euo pipefail
-          VERIFIED_SHA="$(git rev-parse HEAD)"
+          VERIFIED_SHA="$(git rev-parse HEAD 2>/dev/null || echo unknown)"
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
           git fetch origin recovery/encyclopedia-v2-staging-20260818
           git worktree add /tmp/recovery origin/recovery/encyclopedia-v2-staging-20260818
           cd /tmp/recovery
           mkdir -p recovery-assets/encyclopedia-v2-20260818/audits
-          cp /tmp/catalog-encyclopedia-identity-audit.json recovery-assets/encyclopedia-v2-20260818/audits/live-catalog-identity-shadow.json
-          printf 'verified_feature_sha=%s\nstatus=success\nmode=shadow_read_only\n' "$VERIFIED_SHA" > recovery-assets/encyclopedia-v2-20260818/audits/live-catalog-identity-shadow.meta.txt
-          git add recovery-assets/encyclopedia-v2-20260818/audits/live-catalog-identity-shadow.json recovery-assets/encyclopedia-v2-20260818/audits/live-catalog-identity-shadow.meta.txt
-          git commit -m 'chore(recovery): record live catalog identity shadow audit'
+          if [ -s /tmp/catalog-encyclopedia-identity-audit.json ]; then
+            cp /tmp/catalog-encyclopedia-identity-audit.json recovery-assets/encyclopedia-v2-20260818/audits/live-catalog-identity-shadow.json
+          fi
+          printf 'verified_feature_sha=%s\nstatus=%s\nmode=shadow_read_only\nverified_at=%s\n' "$VERIFIED_SHA" "$JOB_STATUS" "$(date -u +%Y-%m-%dT%H:%M:%SZ)" > recovery-assets/encyclopedia-v2-20260818/audits/live-catalog-identity-shadow.meta.txt
+          git add recovery-assets/encyclopedia-v2-20260818/audits/live-catalog-identity-shadow.meta.txt
+          if [ -f recovery-assets/encyclopedia-v2-20260818/audits/live-catalog-identity-shadow.json ]; then git add recovery-assets/encyclopedia-v2-20260818/audits/live-catalog-identity-shadow.json; fi
+          git commit -m 'chore(recovery): record live catalog identity shadow audit result' || true
           git push origin HEAD:recovery/encyclopedia-v2-staging-20260818
