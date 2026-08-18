@@ -1,0 +1,52 @@
+name: Audit Encyclopedia Identity Collisions
+
+on:
+  push:
+    branches:
+      - recovery/encyclopedia-v2-staging-20260818
+    paths:
+      - .github/workflows/audit-encyclopedia-identity-collisions.yml
+
+permissions:
+  contents: write
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - name: Extract collision records
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE'
+          const fs = require('fs');
+          const path = require('path');
+          const dir = 'data/catalog/vehicle-encyclopedia-v2/chunks';
+          const wanted = new Set(['mazda/6e','mazda/mazda6e','xpeng/p7','xpeng/p7-plus']);
+          const found = [];
+          for (const file of fs.readdirSync(dir).filter(x => /^models-.*\.json$/.test(x)).sort()) {
+            const doc = JSON.parse(fs.readFileSync(path.join(dir,file),'utf8'));
+            for (const row of doc.records || []) if (wanted.has(row.id)) found.push({file, ...row});
+          }
+          if (found.length !== wanted.size) throw new Error(`collision_records_missing:${found.length}:${wanted.size}`);
+          fs.writeFileSync('/tmp/collision-records.json', JSON.stringify({records:found},null,2)+'\n');
+          console.log(JSON.stringify(found.map(x => ({id:x.id,canonicalName:x.canonicalName,aliases:x.aliases,sourceNames:x.sourceNames,status:x.status,evidence:x.evidence})),null,2));
+          NODE
+      - name: Save audit
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git fetch origin recovery/encyclopedia-v2-staging-20260818
+          git worktree add /tmp/recovery origin/recovery/encyclopedia-v2-staging-20260818
+          cd /tmp/recovery
+          mkdir -p recovery-assets/encyclopedia-v2-20260818/audits
+          cp /tmp/collision-records.json recovery-assets/encyclopedia-v2-20260818/audits/identity-collision-records.json
+          git add recovery-assets/encyclopedia-v2-20260818/audits/identity-collision-records.json
+          git commit -m 'chore(recovery): record V2 identity collision records' || true
+          git push origin HEAD:recovery/encyclopedia-v2-staging-20260818
