@@ -1,0 +1,5835 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "exactMlitSourceNamesOnly": true,
+    "manuallyReviewedEnglishCanonicalTarget": true,
+    "gradeAndPowertrainSuffixesRemainSourceSpellings": true,
+    "combinedMultiModelRowsRejected": true,
+    "wrongBrandRowsRejected": true,
+    "automaticPublicationReady": false
+  },
+  "totals": {
+    "reviewedModels": 87,
+    "updatedModels": 82,
+    "acceptedSourceNames": 182,
+    "rejectedSourceNames": 8,
+    "sourcesAdded": 0,
+    "referencedOfficialSources": 99
+  },
+  "accepted": [
+    {
+      "modelId": "abarth/124-spider",
+      "canonicalName": "124 Spider",
+      "sourceBrandId": "abarth",
+      "sourceName": "Abarth 124 Spider",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2023
+      ],
+      "typeCodes": [
+        "ABA-NF2EK",
+        "CBA-NF2EK"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "alfa-romeo/giulia",
+      "canonicalName": "Giulia",
+      "sourceBrandId": "alfa-romeo",
+      "sourceName": "ジュリア",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-95220",
+        "3DA-95222",
+        "ABA-95220"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-83a331a354633b98",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-511b995cd4ec2994",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-3a4c98b8689d0706",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-d1f03531cf04dd25"
+      ]
+    },
+    {
+      "modelId": "alfa-romeo/giulietta",
+      "canonicalName": "Giulietta",
+      "sourceBrandId": "alfa-romeo",
+      "sourceName": "ジュリエッタ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018
+      ],
+      "typeCodes": [
+        "ABA-940141"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640"
+      ]
+    },
+    {
+      "modelId": "alfa-romeo/junior",
+      "canonicalName": "Junior",
+      "sourceBrandId": "alfa-romeo",
+      "sourceName": "ジュニア イブリダ",
+      "observedInventoryYears": [
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3AA-FH1ARM"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-511b995cd4ec2994",
+        "src-mlit-passenger-24cc8153255a1871"
+      ]
+    },
+    {
+      "modelId": "alfa-romeo/mito",
+      "canonicalName": "Mito",
+      "sourceBrandId": "alfa-romeo",
+      "sourceName": "MiTo",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "ABA-955142"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "alfa-romeo/stelvio",
+      "canonicalName": "Stelvio",
+      "sourceBrandId": "alfa-romeo",
+      "sourceName": "ステルヴィオ",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-94920",
+        "3DA-94922",
+        "ABA-94920"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-aa042acc058a8a40",
+        "src-mlit-passenger-83a331a354633b98",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-511b995cd4ec2994",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-3a4c98b8689d0706",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-8067b791d32fade8",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-b6daeae0fcee39cd",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-5ec4d0281774cc11",
+        "src-mlit-passenger-7a08b1992059d315",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-d1f03531cf04dd25"
+      ]
+    },
+    {
+      "modelId": "alfa-romeo/tonale",
+      "canonicalName": "Tonale",
+      "sourceBrandId": "alfa-romeo",
+      "sourceName": "トナーレ",
+      "observedInventoryYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3AA-AV115"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-aa042acc058a8a40",
+        "src-mlit-passenger-511b995cd4ec2994",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7"
+      ]
+    },
+    {
+      "modelId": "citroen/berlingo",
+      "canonicalName": "Berlingo",
+      "sourceBrandId": "citroen",
+      "sourceName": "ベルランゴ",
+      "observedInventoryYears": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3DA-K9CYH01",
+        "3DA-K9CYH01L"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-45af9e90049ed51c",
+        "src-mlit-passenger-7b1a7270955ae816",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-b6daeae0fcee39cd",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-5ec4d0281774cc11",
+        "src-mlit-passenger-7a08b1992059d315",
+        "src-mlit-passenger-d1f03531cf04dd25",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "citroen/c3",
+      "canonicalName": "C3",
+      "sourceBrandId": "citroen",
+      "sourceName": "C3",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3AA-C2HN09",
+        "3BA-B6HN05",
+        "5AA-C2HN09",
+        "5BA-B6HN05",
+        "ABA-B6HN01"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-ec7b39d1416393d8",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "citroen/c3-aircross",
+      "canonicalName": "C3 Aircross",
+      "sourceBrandId": "citroen",
+      "sourceName": "C3 エアクロス",
+      "observedInventoryYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-A8HN05",
+        "3DA-A8YH01",
+        "5AA-C2HN09",
+        "5BA-A8HN05"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-ec7b39d1416393d8",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-dfc1d652c4d2274c",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "citroen/c3-aircross",
+      "canonicalName": "C3 Aircross",
+      "sourceBrandId": "citroen",
+      "sourceName": "C3エアクロス",
+      "observedInventoryYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-A8HN05",
+        "3DA-A8YH01",
+        "5AA-C2HN09",
+        "5BA-A8HN05"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-ec7b39d1416393d8",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-dfc1d652c4d2274c",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "citroen/c4",
+      "canonicalName": "C4",
+      "sourceBrandId": "citroen",
+      "sourceName": "C4",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3AA-C41HN09",
+        "3BA-C41HN05",
+        "3DA-C41YH01",
+        "5AA-C41HN09",
+        "LDA-B7BH01"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-45af9e90049ed51c",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-ec7b39d1416393d8",
+        "src-mlit-passenger-7b1a7270955ae816",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-b6daeae0fcee39cd",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-5ec4d0281774cc11",
+        "src-mlit-passenger-7a08b1992059d315"
+      ]
+    },
+    {
+      "modelId": "citroen/c4-picasso",
+      "canonicalName": "C4 Picasso",
+      "sourceBrandId": "citroen",
+      "sourceName": "C4 ピカソ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "typeCodes": [
+        "ABA-B785G01",
+        "ABA-B7875G01",
+        "LDA-B787AH01",
+        "LDA-B78AH01"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "citroen/c4-spacetourer",
+      "canonicalName": "C4 Spacetourer",
+      "sourceBrandId": "citroen",
+      "sourceName": "C4 スペースツアラー",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "typeCodes": [
+        "3BA-B7875G06",
+        "3DA-B787AH01",
+        "ABA-B7875G01",
+        "LDA-B787AH01"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-dfc1d652c4d2274c",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-3a4c98b8689d0706",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-d1f03531cf04dd25",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "citroen/c5-aircross",
+      "canonicalName": "C5 Aircross",
+      "sourceBrandId": "citroen",
+      "sourceName": "C5 エアクロス",
+      "observedInventoryYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-C845G06",
+        "3DA-C84AH01",
+        "5AA-CR3HN09"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-857b3412ea779a79",
+        "src-mlit-passenger-45af9e90049ed51c",
+        "src-mlit-passenger-ec7b39d1416393d8",
+        "src-mlit-passenger-dfc1d652c4d2274c",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-3a4c98b8689d0706",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-b6daeae0fcee39cd",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-5ec4d0281774cc11",
+        "src-mlit-passenger-7a08b1992059d315",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-d1f03531cf04dd25"
+      ]
+    },
+    {
+      "modelId": "citroen/c5-aircross",
+      "canonicalName": "C5 Aircross",
+      "sourceBrandId": "citroen",
+      "sourceName": "C5エアクロス",
+      "observedInventoryYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-C845G06",
+        "3DA-C84AH01",
+        "5AA-CR3HN09"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-857b3412ea779a79",
+        "src-mlit-passenger-45af9e90049ed51c",
+        "src-mlit-passenger-ec7b39d1416393d8",
+        "src-mlit-passenger-dfc1d652c4d2274c",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-3a4c98b8689d0706",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-b6daeae0fcee39cd",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-5ec4d0281774cc11",
+        "src-mlit-passenger-7a08b1992059d315",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-d1f03531cf04dd25"
+      ]
+    },
+    {
+      "modelId": "citroen/ds4",
+      "canonicalName": "DS4",
+      "sourceBrandId": "citroen",
+      "sourceName": "DS4",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018
+      ],
+      "typeCodes": [
+        "LDA-B7CAH02"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-b7785551256457e2"
+      ]
+    },
+    {
+      "modelId": "citroen/ds5",
+      "canonicalName": "DS5",
+      "sourceBrandId": "citroen",
+      "sourceName": "DS5",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018
+      ],
+      "typeCodes": [
+        "LDA-B8AH02"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-b7785551256457e2"
+      ]
+    },
+    {
+      "modelId": "dodge/nitro",
+      "canonicalName": "Nitro",
+      "sourceBrandId": "dodge",
+      "sourceName": "ナイトロ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "ABA-KA37"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-03695627075c4949"
+      ]
+    },
+    {
+      "modelId": "fiat/500",
+      "canonicalName": "500",
+      "sourceBrandId": "fiat",
+      "sourceName": "500, 500C",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "3BA-31209",
+        "3BA-31212",
+        "ABA-31209",
+        "ABA-31212"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "fiat/500",
+      "canonicalName": "500",
+      "sourceBrandId": "fiat",
+      "sourceName": "500,500C",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "3BA-31209",
+        "3BA-31212",
+        "ABA-31209",
+        "ABA-31212"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "fiat/500",
+      "canonicalName": "500",
+      "sourceBrandId": "fiat",
+      "sourceName": "500、 500C",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "3BA-31209",
+        "3BA-31212",
+        "ABA-31209",
+        "ABA-31212"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "fiat/500-x",
+      "canonicalName": "500 X",
+      "sourceBrandId": "fiat",
+      "sourceName": "500X",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "3BA-33413",
+        "3BA-33413PM",
+        "ABA-33414"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-dfc1d652c4d2274c",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "fiat/doblo",
+      "canonicalName": "Doblò",
+      "sourceBrandId": "fiat",
+      "sourceName": "ドブロ",
+      "observedInventoryYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3DA-K9FYH01",
+        "3DA-K9FYH01L"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-a7425abba0698f6c",
+        "src-mlit-passenger-1f0b6518346f5e62",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-b6daeae0fcee39cd",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-5ec4d0281774cc11",
+        "src-mlit-passenger-7a08b1992059d315"
+      ]
+    },
+    {
+      "modelId": "jaguar/e-pace",
+      "canonicalName": "E-Pace",
+      "sourceBrandId": "jaguar",
+      "sourceName": "E-PACE",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-DF2XB",
+        "3CA-DF2NB",
+        "DBA-DF2XA",
+        "LDA-DF2NA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-0150603b8ea16b34",
+        "src-mlit-passenger-7657f5125aa714f8",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "jaguar/f-pace",
+      "canonicalName": "F-Pace",
+      "sourceBrandId": "jaguar",
+      "sourceName": "F-PACE",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-DC2XC",
+        "3CA-DC2NC",
+        "CBA-DC3VA",
+        "DBA-DC2XB",
+        "DBA-J60XB",
+        "LDA-DC2NA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-0150603b8ea16b34",
+        "src-mlit-passenger-7657f5125aa714f8",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "jaguar/f-type",
+      "canonicalName": "F-Type",
+      "sourceBrandId": "jaguar",
+      "sourceName": "F-TYPE",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "3BA-J608C",
+        "3BA-J60MC",
+        "3BA-J60XC",
+        "CBA-J608A",
+        "CBA-J60MA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205"
+      ]
+    },
+    {
+      "modelId": "jaguar/f-type",
+      "canonicalName": "F-Type",
+      "sourceBrandId": "jaguar",
+      "sourceName": "F-TYPE SVR",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "CBA-J60MA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f"
+      ]
+    },
+    {
+      "modelId": "jaguar/xe",
+      "canonicalName": "Xe",
+      "sourceBrandId": "jaguar",
+      "sourceName": "XE",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "3BA-JA2XD",
+        "3CA-JA2ND",
+        "CBA-JA2GA",
+        "CBA-JA2XB",
+        "CBA-JA3VA",
+        "DBA-JA2XC",
+        "LDA-JA2NA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-7f8a9d845cab8f57",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "jaguar/xe",
+      "canonicalName": "Xe",
+      "sourceBrandId": "jaguar",
+      "sourceName": "XE AWD",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "LDA-JA2NA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "jaguar/xf",
+      "canonicalName": "XF",
+      "sourceBrandId": "jaguar",
+      "sourceName": "XF",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "3BA-JB2XD",
+        "3CA-JB2ND",
+        "CBA-JB2GA",
+        "CBA-JB2XB",
+        "CBA-JB3VA",
+        "DBA-JB2XC",
+        "LDA-JB2NA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "jaguar/xf",
+      "canonicalName": "XF",
+      "sourceBrandId": "jaguar",
+      "sourceName": "XF AWD",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "LDA-JB2NA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "jaguar/xf",
+      "canonicalName": "XF",
+      "sourceBrandId": "jaguar",
+      "sourceName": "XF Premium Luxury/ XF Portfolio",
+      "observedInventoryYears": [
+        2015
+      ],
+      "typeCodes": [
+        "CBA-J058C",
+        "CBA-J05PC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e"
+      ]
+    },
+    {
+      "modelId": "jaguar/xf",
+      "canonicalName": "XF",
+      "sourceBrandId": "jaguar",
+      "sourceName": "XF Sport brake",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "3BA-JBS2XD",
+        "3CA-JBS2ND",
+        "DBA-JBS2XC",
+        "LDA-JBS2NC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "jaguar/xf",
+      "canonicalName": "XF",
+      "sourceBrandId": "jaguar",
+      "sourceName": "XF Sport Brake",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "3BA-JBS2XD",
+        "3CA-JBS2ND",
+        "DBA-JBS2XC",
+        "LDA-JBS2NC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "jaguar/xf",
+      "canonicalName": "XF",
+      "sourceBrandId": "jaguar",
+      "sourceName": "XF Sport Brake AWD",
+      "observedInventoryYears": [
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "LDA-JBS2NC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "jaguar/xf",
+      "canonicalName": "XF",
+      "sourceBrandId": "jaguar",
+      "sourceName": "XF Sportbrake",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "3BA-JBS2XD",
+        "3CA-JBS2ND",
+        "DBA-JBS2XC",
+        "LDA-JBS2NC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "jaguar/xfr",
+      "canonicalName": "Xfr",
+      "sourceBrandId": "jaguar",
+      "sourceName": "XFR",
+      "observedInventoryYears": [
+        2015
+      ],
+      "typeCodes": [
+        "CBA-J05MB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e"
+      ]
+    },
+    {
+      "modelId": "jaguar/xj",
+      "canonicalName": "Xj",
+      "sourceBrandId": "jaguar",
+      "sourceName": "XJ Luxury/ Premium Luxury",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "CBA-J128B",
+        "CBA-J12PB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f"
+      ]
+    },
+    {
+      "modelId": "jaguar/xj",
+      "canonicalName": "Xj",
+      "sourceBrandId": "jaguar",
+      "sourceName": "XJ Supersport",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "CBA-J12MA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f"
+      ]
+    },
+    {
+      "modelId": "jaguar/xj",
+      "canonicalName": "Xj",
+      "sourceBrandId": "jaguar",
+      "sourceName": "XJ Supersport LWB リアビジネスシート仕様",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "CBA-J24MA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f"
+      ]
+    },
+    {
+      "modelId": "jaguar/xj",
+      "canonicalName": "Xj",
+      "sourceBrandId": "jaguar",
+      "sourceName": "XJ Supersport LWB/ XJ Portolio LWB",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "CBA-J24MA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f"
+      ]
+    },
+    {
+      "modelId": "jeep/avenger",
+      "canonicalName": "Avenger",
+      "sourceBrandId": "jeep",
+      "sourceName": "アベンジャー 4xe",
+      "observedInventoryYears": [
+        2026
+      ],
+      "typeCodes": [
+        "5AA-FH1JEMA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-69309a01ee117f27",
+        "src-mlit-passenger-44c58a7433f65f47"
+      ]
+    },
+    {
+      "modelId": "jeep/cherokee",
+      "canonicalName": "Cherokee",
+      "sourceBrandId": "chrysler",
+      "sourceName": "ジープ・チェロキー",
+      "observedInventoryYears": [
+        2015
+      ],
+      "typeCodes": [
+        "ABA-KL24",
+        "ABA-KL32",
+        "ABA-KL32L",
+        "ABA-LX36"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e"
+      ]
+    },
+    {
+      "modelId": "jeep/cherokee",
+      "canonicalName": "Cherokee",
+      "sourceBrandId": "jeep",
+      "sourceName": "チェロキー",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "3BA-KL20L",
+        "3BA-KL24",
+        "ABA-KL20L",
+        "ABA-KL24",
+        "ABA-KL32",
+        "ABA-KL32L",
+        "DBA-KL32L"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "jeep/commander",
+      "canonicalName": "Commander",
+      "sourceBrandId": "jeep",
+      "sourceName": "コマンダー",
+      "observedInventoryYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3DA-H620"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-b6daeae0fcee39cd",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-5ec4d0281774cc11",
+        "src-mlit-passenger-7a08b1992059d315",
+        "src-mlit-passenger-a94da5dd26382e6f",
+        "src-mlit-passenger-46b7f6a3f9f274ba"
+      ]
+    },
+    {
+      "modelId": "jeep/compass",
+      "canonicalName": "Compass",
+      "sourceBrandId": "jeep",
+      "sourceName": "コンパス",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-M624",
+        "ABA-M624"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-69309a01ee117f27",
+        "src-mlit-passenger-44c58a7433f65f47"
+      ]
+    },
+    {
+      "modelId": "jeep/grand-cherokee",
+      "canonicalName": "Grand Cherokee",
+      "sourceBrandId": "jeep",
+      "sourceName": "グランド チェロキー",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "ABA-WK36T",
+        "ABA-WK36TA",
+        "DBA-WK36T",
+        "DBA-WK36TA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "jeep/grand-cherokee",
+      "canonicalName": "Grand Cherokee",
+      "sourceBrandId": "chrysler",
+      "sourceName": "ジープ・グランド チェロキー",
+      "observedInventoryYears": [
+        2015
+      ],
+      "typeCodes": [
+        "ABA-WK36T",
+        "ABA-WK36TA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e"
+      ]
+    },
+    {
+      "modelId": "jeep/patriot",
+      "canonicalName": "Patriot",
+      "sourceBrandId": "chrysler",
+      "sourceName": "ジープ・パトリオット",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2021
+      ],
+      "typeCodes": [
+        "ABA-MK74"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-da32a6d5e0bd376e"
+      ]
+    },
+    {
+      "modelId": "jeep/renegade",
+      "canonicalName": "Renegade",
+      "sourceBrandId": "chrysler",
+      "sourceName": "ジープ・レネゲード",
+      "observedInventoryYears": [
+        2015
+      ],
+      "typeCodes": [
+        "ABA-BU14",
+        "ABA-BU24"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e"
+      ]
+    },
+    {
+      "modelId": "jeep/renegade",
+      "canonicalName": "Renegade",
+      "sourceBrandId": "jeep",
+      "sourceName": "レネゲード",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3AA-BV15",
+        "3BA-BU13",
+        "3BA-BV13PM",
+        "ABA-BU14",
+        "ABA-BU24"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-dfc1d652c4d2274c",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-69309a01ee117f27",
+        "src-mlit-passenger-44c58a7433f65f47"
+      ]
+    },
+    {
+      "modelId": "jeep/wrangler",
+      "canonicalName": "Wrangler",
+      "sourceBrandId": "chrysler",
+      "sourceName": "ジープ・ラングラー",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2021
+      ],
+      "typeCodes": [
+        "ABA-JK36S",
+        "ABA-JK38S"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-da32a6d5e0bd376e"
+      ]
+    },
+    {
+      "modelId": "jeep/wrangler",
+      "canonicalName": "Wrangler",
+      "sourceBrandId": "jeep",
+      "sourceName": "ラングラー",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "3BA-JL20S",
+        "3BA-JL36S",
+        "ABA-JK36S",
+        "ABA-JL36S"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "jeep/wrangler-unlimited",
+      "canonicalName": "Wrangler Unlimited",
+      "sourceBrandId": "chrysler",
+      "sourceName": "ジープ・ラングラー アンリミッテド",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2021
+      ],
+      "typeCodes": [
+        "ABA-JK36L",
+        "ABA-JK38L"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-da32a6d5e0bd376e"
+      ]
+    },
+    {
+      "modelId": "jeep/wrangler-unlimited",
+      "canonicalName": "Wrangler Unlimited",
+      "sourceBrandId": "jeep",
+      "sourceName": "ラングラー アンリミッテド",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018
+      ],
+      "typeCodes": [
+        "ABA-JK36L"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640"
+      ]
+    },
+    {
+      "modelId": "jeep/wrangler-unlimited",
+      "canonicalName": "Wrangler Unlimited",
+      "sourceBrandId": "jeep",
+      "sourceName": "ラングラー アンリミテッド",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-JL20L",
+        "3BA-JL36L",
+        "ABA-JL20L",
+        "ABA-JL36L"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-69309a01ee117f27",
+        "src-mlit-passenger-44c58a7433f65f47"
+      ]
+    },
+    {
+      "modelId": "land-rover/defender",
+      "canonicalName": "Defender",
+      "sourceBrandId": "land-rover",
+      "sourceName": "DEFENDER 110",
+      "observedInventoryYears": [
+        2020
+      ],
+      "typeCodes": [
+        "3BA-LE72XAA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-aaa32dd92f225205"
+      ]
+    },
+    {
+      "modelId": "land-rover/defender",
+      "canonicalName": "Defender",
+      "sourceBrandId": "land-rover",
+      "sourceName": "ディフェンダー Trophy Edition",
+      "observedInventoryYears": [
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3CA-LE72WAB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-023a39a5f4c76658",
+        "src-mlit-passenger-b131d92ac6f097c1",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-b6daeae0fcee39cd"
+      ]
+    },
+    {
+      "modelId": "land-rover/defender",
+      "canonicalName": "Defender",
+      "sourceBrandId": "land-rover",
+      "sourceName": "ディフェンダー90 (エアサスペンション)",
+      "observedInventoryYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-LE62XAA",
+        "3CA-LE62WAB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-0780156bb14bb9ad",
+        "src-mlit-passenger-023a39a5f4c76658",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-b131d92ac6f097c1",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-b6daeae0fcee39cd",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499"
+      ]
+    },
+    {
+      "modelId": "land-rover/defender",
+      "canonicalName": "Defender",
+      "sourceBrandId": "land-rover",
+      "sourceName": "ディフェンダー90 (コイルサスペンション)",
+      "observedInventoryYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-LE62XCA",
+        "3CA-LE62WAB",
+        "3CA-LE62WCB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-0780156bb14bb9ad",
+        "src-mlit-passenger-023a39a5f4c76658",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-b131d92ac6f097c1",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-b6daeae0fcee39cd",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499"
+      ]
+    },
+    {
+      "modelId": "land-rover/defender",
+      "canonicalName": "Defender",
+      "sourceBrandId": "land-rover",
+      "sourceName": "ディフェンダー110 (エアサスペンション)",
+      "observedInventoryYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-LE72XAA",
+        "3CA-LE72WAB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-0780156bb14bb9ad",
+        "src-mlit-passenger-023a39a5f4c76658",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-b131d92ac6f097c1",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-b6daeae0fcee39cd",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499"
+      ]
+    },
+    {
+      "modelId": "land-rover/defender",
+      "canonicalName": "Defender",
+      "sourceBrandId": "land-rover",
+      "sourceName": "ディフェンダー110 (コイルサスペンション)",
+      "observedInventoryYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-LE72XCA",
+        "3CA-LE72WCB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-0780156bb14bb9ad",
+        "src-mlit-passenger-023a39a5f4c76658",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-b131d92ac6f097c1",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-b6daeae0fcee39cd",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499"
+      ]
+    },
+    {
+      "modelId": "land-rover/defender",
+      "canonicalName": "Defender",
+      "sourceBrandId": "land-rover",
+      "sourceName": "ディフェンダー130",
+      "observedInventoryYears": [
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "3CA-LE72WAB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499"
+      ]
+    },
+    {
+      "modelId": "land-rover/defender",
+      "canonicalName": "Defender",
+      "sourceBrandId": "land-rover",
+      "sourceName": "ディフェンダー130 / ディフェンダー130 Outbound",
+      "observedInventoryYears": [
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3CA-LE72WAB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-023a39a5f4c76658",
+        "src-mlit-passenger-b131d92ac6f097c1",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-b6daeae0fcee39cd"
+      ]
+    },
+    {
+      "modelId": "land-rover/discovery",
+      "canonicalName": "Discovery",
+      "sourceBrandId": "land-rover",
+      "sourceName": "ディスカバリー",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3AA-LR3UB",
+        "3CA-LR3WB",
+        "ABA-LA3SB",
+        "LDA-LR3KA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-023a39a5f4c76658",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "land-rover/discovery",
+      "canonicalName": "Discovery",
+      "sourceBrandId": "land-rover",
+      "sourceName": "ディスカバリー4",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "ABA-LA5N"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-03695627075c4949"
+      ]
+    },
+    {
+      "modelId": "land-rover/discovery",
+      "canonicalName": "Discovery",
+      "sourceBrandId": "land-rover",
+      "sourceName": "ニューディスカバリー",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "ABA-LR3VA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "land-rover/discovery-sport",
+      "canonicalName": "Discovery Sport",
+      "sourceBrandId": "land-rover",
+      "sourceName": "ディスカバリー スポーツ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3CA-LC2ND",
+        "3DA-LC2NC",
+        "5BA-LC2XC",
+        "CBA-LC2A",
+        "CBA-LC2VA",
+        "DBA-LC2XB",
+        "LDA-LC2NB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-0780156bb14bb9ad",
+        "src-mlit-passenger-023a39a5f4c76658",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-d1f03531cf04dd25",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "land-rover/discovery-sport",
+      "canonicalName": "Discovery Sport",
+      "sourceBrandId": "land-rover",
+      "sourceName": "ディスカバリースポーツ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3CA-LC2ND",
+        "3DA-LC2NC",
+        "5BA-LC2XC",
+        "CBA-LC2A",
+        "CBA-LC2VA",
+        "DBA-LC2XB",
+        "LDA-LC2NB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-0780156bb14bb9ad",
+        "src-mlit-passenger-023a39a5f4c76658",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-d1f03531cf04dd25",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "land-rover/freelander-2",
+      "canonicalName": "Freelander 2",
+      "sourceBrandId": "land-rover",
+      "sourceName": "フリーランダー 2",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "CBA-LF32"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-03695627075c4949"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover",
+      "canonicalName": "Range Rover",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバー",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-LG5SF",
+        "3BA-LK9447A",
+        "3CA-LK93WA",
+        "3CA-LK93WB",
+        "3CA-LKB3WB",
+        "3DA-LG3KF",
+        "ABA-LG3SB",
+        "ABA-LG5SA",
+        "ABA-LGL3SC",
+        "ABA-LGL5SC",
+        "LDA-LG3KD"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-023a39a5f4c76658",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-d1f03531cf04dd25",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover",
+      "canonicalName": "Range Rover",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバー 280kW仕様",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017
+      ],
+      "typeCodes": [
+        "ABA-LG3SB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover",
+      "canonicalName": "Range Rover",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバー VOGUE ロングホイールベース、280kW仕様",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017
+      ],
+      "typeCodes": [
+        "ABA-LGL3SC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover",
+      "canonicalName": "Range Rover",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバー ロングホイールベース",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017
+      ],
+      "typeCodes": [
+        "ABA-LGL3SC",
+        "ABA-LGL5SC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover",
+      "canonicalName": "Range Rover",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバー ロングホイールベース 405kW仕様",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017
+      ],
+      "typeCodes": [
+        "ABA-LGL5SC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover",
+      "canonicalName": "Range Rover",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバーLWB",
+      "observedInventoryYears": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "3BA-LGL5SF",
+        "3BA-LKB447A"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover-evoque",
+      "canonicalName": "Range Rover Evoque",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバーEvoque",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "CBA-LV2A",
+        "DBA-LV2XB",
+        "LDA-LV2NB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-03695627075c4949",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover-evoque",
+      "canonicalName": "Range Rover Evoque",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバーEvoque Convertible",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "CBA-LV2A",
+        "DBA-LV2XB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover-evoque",
+      "canonicalName": "Range Rover Evoque",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバーイヴォーク",
+      "observedInventoryYears": [
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3CA-LZ2NB",
+        "3DA-LZ2NA",
+        "3LA-LZ2NA",
+        "5AA-LZ2XHA",
+        "5BA-LZ2XA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-0780156bb14bb9ad",
+        "src-mlit-passenger-023a39a5f4c76658",
+        "src-mlit-passenger-dfc1d652c4d2274c",
+        "src-mlit-passenger-3a4c98b8689d0706",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-b363b6f7492ccb20",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-d1f03531cf04dd25"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover-sport",
+      "canonicalName": "Range Rover Sport",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバー スポーツ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3AA-L123UA",
+        "3BA-LW5SE",
+        "3CA-L123WA",
+        "3CA-LW3WHE",
+        "ABA-LS5N",
+        "ABA-LS5S",
+        "ABA-LW3SA",
+        "ABA-LW5SA",
+        "LDA-LW3KB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-023a39a5f4c76658",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-03695627075c4949",
+        "src-mlit-passenger-d1f03531cf04dd25",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover-sport",
+      "canonicalName": "Range Rover Sport",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバー スポーツ HST 280kW仕様",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017
+      ],
+      "typeCodes": [
+        "ABA-LW3SA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover-sport",
+      "canonicalName": "Range Rover Sport",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバー スポーツ SVR",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "ABA-LW5SA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover-sport",
+      "canonicalName": "Range Rover Sport",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバースポーツ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3AA-L123UA",
+        "3BA-LW5SE",
+        "3CA-L123WA",
+        "3CA-LW3WHE",
+        "ABA-LS5N",
+        "ABA-LS5S",
+        "ABA-LW3SA",
+        "ABA-LW5SA",
+        "LDA-LW3KB"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-023a39a5f4c76658",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-03695627075c4949",
+        "src-mlit-passenger-d1f03531cf04dd25",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover-velar",
+      "canonicalName": "Range Rover Velar",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバーヴェラール",
+      "observedInventoryYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3CA-LY2NAC",
+        "3CA-LY2NCC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-023a39a5f4c76658",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover-velar",
+      "canonicalName": "Range Rover Velar",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバーヴェラール (エアサスペンション)",
+      "observedInventoryYears": [
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "3BA-LY2XAC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-269745b829bef442"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover-velar",
+      "canonicalName": "Range Rover Velar",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバーヴェラール (コイルサスペンション)",
+      "observedInventoryYears": [
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "3BA-LY2XCC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-269745b829bef442"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover-velar",
+      "canonicalName": "Range Rover Velar",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバーベラール",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "CBA-LR3VA",
+        "CBA-LY3VA",
+        "DBA-LY2XAB",
+        "DBA-LY2XCB",
+        "LDA-LY2NA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover-velar",
+      "canonicalName": "Range Rover Velar",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバーベラール (エアサスペンション)",
+      "observedInventoryYears": [
+        2021
+      ],
+      "typeCodes": [
+        "3BA-LY2XAC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-d5b6430c97f6106b"
+      ]
+    },
+    {
+      "modelId": "land-rover/range-rover-velar",
+      "canonicalName": "Range Rover Velar",
+      "sourceBrandId": "land-rover",
+      "sourceName": "レンジローバーベラール (コイルサスペンション)",
+      "observedInventoryYears": [
+        2021
+      ],
+      "typeCodes": [
+        "3BA-LY2XCC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-d5b6430c97f6106b"
+      ]
+    },
+    {
+      "modelId": "lexus/ct",
+      "canonicalName": "CT",
+      "sourceBrandId": "lexus",
+      "sourceName": "CT200h",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "6AA-ZWA10",
+        "DAA-ZWA10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "lexus/es",
+      "canonicalName": "ES",
+      "sourceBrandId": "lexus",
+      "sourceName": "ES300h",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "typeCodes": [
+        "6AA-AXZH10",
+        "6AA-AXZH11"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-7ea71d814d77cbb8",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-ad0384c0bee6960e",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "lexus/es",
+      "canonicalName": "ES",
+      "sourceBrandId": "lexus",
+      "sourceName": "ES350h",
+      "observedInventoryYears": [
+        2026
+      ],
+      "typeCodes": [
+        "6AA-AXZH21",
+        "6AA-AXZH26"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/gs",
+      "canonicalName": "GS",
+      "sourceBrandId": "lexus",
+      "sourceName": "GS200t",
+      "observedInventoryYears": [
+        2016
+      ],
+      "typeCodes": [
+        "DBA-ARL10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3407446a360a9ada"
+      ]
+    },
+    {
+      "modelId": "lexus/gs",
+      "canonicalName": "GS",
+      "sourceBrandId": "lexus",
+      "sourceName": "GS250",
+      "observedInventoryYears": [
+        2015
+      ],
+      "typeCodes": [
+        "DBA-GRL11"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485"
+      ]
+    },
+    {
+      "modelId": "lexus/gs",
+      "canonicalName": "GS",
+      "sourceBrandId": "lexus",
+      "sourceName": "GS300",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "DBA-ARL10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90"
+      ]
+    },
+    {
+      "modelId": "lexus/gs",
+      "canonicalName": "GS",
+      "sourceBrandId": "lexus",
+      "sourceName": "GS300h",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "DAA-AWL10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90"
+      ]
+    },
+    {
+      "modelId": "lexus/gs",
+      "canonicalName": "GS",
+      "sourceBrandId": "lexus",
+      "sourceName": "GS350",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "DBA-GRL12",
+        "DBA-GRL16"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90"
+      ]
+    },
+    {
+      "modelId": "lexus/gs",
+      "canonicalName": "GS",
+      "sourceBrandId": "lexus",
+      "sourceName": "GS450h",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "DAA-GWL10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90"
+      ]
+    },
+    {
+      "modelId": "lexus/gs-f",
+      "canonicalName": "GS F",
+      "sourceBrandId": "lexus",
+      "sourceName": "GS F",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "DBA-URL10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90"
+      ]
+    },
+    {
+      "modelId": "lexus/gx",
+      "canonicalName": "GX",
+      "sourceBrandId": "lexus",
+      "sourceName": "GX550",
+      "observedInventoryYears": [
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-VJA252W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/hs",
+      "canonicalName": "HS",
+      "sourceBrandId": "lexus",
+      "sourceName": "HS250h",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017
+      ],
+      "typeCodes": [
+        "DAA-ANF10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5"
+      ]
+    },
+    {
+      "modelId": "lexus/is",
+      "canonicalName": "IS",
+      "sourceBrandId": "lexus",
+      "sourceName": "IS200t",
+      "observedInventoryYears": [
+        2015,
+        2016
+      ],
+      "typeCodes": [
+        "DBA-ASE30"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada"
+      ]
+    },
+    {
+      "modelId": "lexus/is",
+      "canonicalName": "IS",
+      "sourceBrandId": "lexus",
+      "sourceName": "IS250",
+      "observedInventoryYears": [
+        2015
+      ],
+      "typeCodes": [
+        "DBA-GSE35"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485"
+      ]
+    },
+    {
+      "modelId": "lexus/is",
+      "canonicalName": "IS",
+      "sourceBrandId": "lexus",
+      "sourceName": "IS300",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "typeCodes": [
+        "3BA-ASE30",
+        "DBA-ASE30"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "lexus/is",
+      "canonicalName": "IS",
+      "sourceBrandId": "lexus",
+      "sourceName": "IS300h",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "6AA-AVE30",
+        "6AA-AVE35",
+        "DAA-AVE30",
+        "DAA-AVE35"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/is",
+      "canonicalName": "IS",
+      "sourceBrandId": "lexus",
+      "sourceName": "IS350",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "typeCodes": [
+        "3BA-GSE31",
+        "DBA-GSE31"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "lexus/is",
+      "canonicalName": "IS",
+      "sourceBrandId": "lexus",
+      "sourceName": "IS500",
+      "observedInventoryYears": [
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "typeCodes": [
+        "5BA-USE30"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6"
+      ]
+    },
+    {
+      "modelId": "lexus/lbx",
+      "canonicalName": "LBX",
+      "sourceBrandId": "lexus",
+      "sourceName": "LBX",
+      "observedInventoryYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "4BA-GAYA16",
+        "6AA-MAYH10",
+        "6AA-MAYH15"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/lc",
+      "canonicalName": "LC",
+      "sourceBrandId": "lexus",
+      "sourceName": "LC500",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-URZ100",
+        "DBA-URZ100"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/lc",
+      "canonicalName": "LC",
+      "sourceBrandId": "lexus",
+      "sourceName": "LC500h",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "6AA-GWZ100",
+        "DAA-GWZ100"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/lm",
+      "canonicalName": "LM",
+      "sourceBrandId": "lexus",
+      "sourceName": "LM350h",
+      "observedInventoryYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "6AA-AAWH10W",
+        "6AA-AAWH15W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/lm",
+      "canonicalName": "LM",
+      "sourceBrandId": "lexus",
+      "sourceName": "LM500h",
+      "observedInventoryYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-TAWH15W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/ls",
+      "canonicalName": "LS",
+      "sourceBrandId": "lexus",
+      "sourceName": "LS460",
+      "observedInventoryYears": [
+        2015,
+        2016
+      ],
+      "typeCodes": [
+        "DBA-USF40",
+        "DBA-USF45"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada"
+      ]
+    },
+    {
+      "modelId": "lexus/ls",
+      "canonicalName": "LS",
+      "sourceBrandId": "lexus",
+      "sourceName": "LS460L",
+      "observedInventoryYears": [
+        2015,
+        2016
+      ],
+      "typeCodes": [
+        "DBA-USF41",
+        "DBA-USF46"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada"
+      ]
+    },
+    {
+      "modelId": "lexus/ls",
+      "canonicalName": "LS",
+      "sourceBrandId": "lexus",
+      "sourceName": "LS500",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-VXFA50",
+        "3BA-VXFA55",
+        "DBA-VXFA50",
+        "DBA-VXFA55"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/ls",
+      "canonicalName": "LS",
+      "sourceBrandId": "lexus",
+      "sourceName": "LS500h",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "6AA-GVF50",
+        "6AA-GVF55",
+        "DAA-GVF50",
+        "DAA-GVF55"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/ls",
+      "canonicalName": "LS",
+      "sourceBrandId": "lexus",
+      "sourceName": "LS600h",
+      "observedInventoryYears": [
+        2015,
+        2016
+      ],
+      "typeCodes": [
+        "DAA-UVF45"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada"
+      ]
+    },
+    {
+      "modelId": "lexus/ls",
+      "canonicalName": "LS",
+      "sourceBrandId": "lexus",
+      "sourceName": "LS600hL",
+      "observedInventoryYears": [
+        2015,
+        2016
+      ],
+      "typeCodes": [
+        "DAA-UVF46"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada"
+      ]
+    },
+    {
+      "modelId": "lexus/lx",
+      "canonicalName": "LX",
+      "sourceBrandId": "lexus",
+      "sourceName": "LX570",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "typeCodes": [
+        "3BA-URJ201W",
+        "DBA-URJ201W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "lexus/lx",
+      "canonicalName": "LX",
+      "sourceBrandId": "lexus",
+      "sourceName": "LX600",
+      "observedInventoryYears": [
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-VJA310W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/lx",
+      "canonicalName": "LX",
+      "sourceBrandId": "lexus",
+      "sourceName": "LX700h",
+      "observedInventoryYears": [
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-VJH310W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/nx",
+      "canonicalName": "NX",
+      "sourceBrandId": "lexus",
+      "sourceName": "NX200t",
+      "observedInventoryYears": [
+        2015,
+        2016
+      ],
+      "typeCodes": [
+        "DBA-AGZ10",
+        "DBA-AGZ15"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada"
+      ]
+    },
+    {
+      "modelId": "lexus/nx",
+      "canonicalName": "NX",
+      "sourceBrandId": "lexus",
+      "sourceName": "NX250",
+      "observedInventoryYears": [
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "5BA-AAZA20",
+        "5BA-AAZA25"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6"
+      ]
+    },
+    {
+      "modelId": "lexus/nx",
+      "canonicalName": "NX",
+      "sourceBrandId": "lexus",
+      "sourceName": "NX300",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "3BA-AGZ10",
+        "3BA-AGZ15",
+        "DBA-AGZ10",
+        "DBA-AGZ15"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "lexus/nx",
+      "canonicalName": "NX",
+      "sourceBrandId": "lexus",
+      "sourceName": "NX300h",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "6AA-AYZ10",
+        "6AA-AYZ15",
+        "DAA-AYZ10",
+        "DAA-AYZ15"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "lexus/nx",
+      "canonicalName": "NX",
+      "sourceBrandId": "lexus",
+      "sourceName": "NX350",
+      "observedInventoryYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-TAZA25"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/nx",
+      "canonicalName": "NX",
+      "sourceBrandId": "lexus",
+      "sourceName": "NX350h",
+      "observedInventoryYears": [
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "6AA-AAZH20",
+        "6AA-AAZH25"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/rc",
+      "canonicalName": "RC",
+      "sourceBrandId": "lexus",
+      "sourceName": "RC200t",
+      "observedInventoryYears": [
+        2015,
+        2016
+      ],
+      "typeCodes": [
+        "DBA-ASC10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada"
+      ]
+    },
+    {
+      "modelId": "lexus/rc",
+      "canonicalName": "RC",
+      "sourceBrandId": "lexus",
+      "sourceName": "RC300",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "typeCodes": [
+        "3BA-ASC10",
+        "DBA-ASC10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "lexus/rc",
+      "canonicalName": "RC",
+      "sourceBrandId": "lexus",
+      "sourceName": "RC300h",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "typeCodes": [
+        "6AA-AVC10",
+        "DAA-AVC10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "lexus/rc",
+      "canonicalName": "RC",
+      "sourceBrandId": "lexus",
+      "sourceName": "RC350",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "typeCodes": [
+        "3BA-GSC10",
+        "DBA-GSC10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "lexus/rc-f",
+      "canonicalName": "RC F",
+      "sourceBrandId": "lexus",
+      "sourceName": "RC F",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025
+      ],
+      "typeCodes": [
+        "5BA-USC10",
+        "DBA-USC10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "lexus/rx",
+      "canonicalName": "RX",
+      "sourceBrandId": "lexus",
+      "sourceName": "RX200t",
+      "observedInventoryYears": [
+        2015,
+        2016
+      ],
+      "typeCodes": [
+        "DBA-AGL20W",
+        "DBA-AGL25W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-3407446a360a9ada"
+      ]
+    },
+    {
+      "modelId": "lexus/rx",
+      "canonicalName": "RX",
+      "sourceBrandId": "lexus",
+      "sourceName": "RX270",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "DBA-AGL10W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-86aba6aa586376c0",
+        "src-mlit-passenger-5fee9be36aef5b62",
+        "src-mlit-passenger-58f8a83211a2e488",
+        "src-mlit-passenger-9f0671fc63541edb",
+        "src-mlit-passenger-6fd18c626fecbf9a",
+        "src-mlit-passenger-7ec7e959fc32d317",
+        "src-mlit-passenger-a6125bc18850f40b",
+        "src-mlit-passenger-f1e78b1c6aa292cf"
+      ]
+    },
+    {
+      "modelId": "lexus/rx",
+      "canonicalName": "RX",
+      "sourceBrandId": "lexus",
+      "sourceName": "RX300",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "typeCodes": [
+        "3BA-AGL20W",
+        "3BA-AGL25W",
+        "DBA-AGL20W",
+        "DBA-AGL25W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "lexus/rx",
+      "canonicalName": "RX",
+      "sourceBrandId": "lexus",
+      "sourceName": "RX350",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5BA-TALA10",
+        "5BA-TALA15",
+        "DBA-GGL10W",
+        "DBA-GGL15W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-86aba6aa586376c0",
+        "src-mlit-passenger-5fee9be36aef5b62",
+        "src-mlit-passenger-58f8a83211a2e488",
+        "src-mlit-passenger-9f0671fc63541edb",
+        "src-mlit-passenger-6fd18c626fecbf9a",
+        "src-mlit-passenger-7ec7e959fc32d317",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-a6125bc18850f40b",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-f1e78b1c6aa292cf",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/rx",
+      "canonicalName": "RX",
+      "sourceBrandId": "lexus",
+      "sourceName": "RX350h",
+      "observedInventoryYears": [
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "6AA-AALH10",
+        "6AA-AALH15"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/rx",
+      "canonicalName": "RX",
+      "sourceBrandId": "lexus",
+      "sourceName": "RX450h",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "6AA-GYL20W",
+        "6AA-GYL25W",
+        "DAA-GYL10W",
+        "DAA-GYL15W",
+        "DAA-GYL16W",
+        "DAA-GYL20W",
+        "DAA-GYL25W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-60a79e46229b4485",
+        "src-mlit-passenger-86aba6aa586376c0",
+        "src-mlit-passenger-3407446a360a9ada",
+        "src-mlit-passenger-5fee9be36aef5b62",
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-58f8a83211a2e488",
+        "src-mlit-passenger-9f0671fc63541edb",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-6fd18c626fecbf9a",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-7ec7e959fc32d317",
+        "src-mlit-passenger-a6125bc18850f40b",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-f1e78b1c6aa292cf"
+      ]
+    },
+    {
+      "modelId": "lexus/rx",
+      "canonicalName": "RX",
+      "sourceBrandId": "lexus",
+      "sourceName": "RX450hL",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021
+      ],
+      "typeCodes": [
+        "6AA-GYL26W",
+        "DAA-GYL26W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-3c2ad4db7a94a3f5",
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-4e5eac78a8026cbf"
+      ]
+    },
+    {
+      "modelId": "lexus/rx",
+      "canonicalName": "RX",
+      "sourceBrandId": "lexus",
+      "sourceName": "RX500h",
+      "observedInventoryYears": [
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-TALH17"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "lexus/ux",
+      "canonicalName": "UX",
+      "sourceBrandId": "lexus",
+      "sourceName": "UX200",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "6BA-MZAA10"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "lexus/ux",
+      "canonicalName": "UX",
+      "sourceBrandId": "lexus",
+      "sourceName": "UX250h",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023
+      ],
+      "typeCodes": [
+        "6AA-MZAH10",
+        "6AA-MZAH15"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-636840c6f9474da2",
+        "src-mlit-passenger-b45c99715bf7c11a",
+        "src-mlit-passenger-7853c37de2f35f90",
+        "src-mlit-passenger-5615de0cd2580a2f",
+        "src-mlit-passenger-32e99d21b9bd8ee5",
+        "src-mlit-passenger-5f941a43ba93993a",
+        "src-mlit-passenger-be927258fa5b27ce",
+        "src-mlit-passenger-ca668355aa0ef2b5",
+        "src-mlit-passenger-f3dc7ac5cfae04d6",
+        "src-mlit-passenger-b4cf291484c6a9ed",
+        "src-mlit-passenger-4e5eac78a8026cbf",
+        "src-mlit-passenger-8ecb1b07ea639549"
+      ]
+    },
+    {
+      "modelId": "lexus/ux",
+      "canonicalName": "UX",
+      "sourceBrandId": "lexus",
+      "sourceName": "UX300h",
+      "observedInventoryYears": [
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "6AA-MZAH11",
+        "6AA-MZAH16"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-062f229997b9eff5",
+        "src-mlit-passenger-c9a81fe53189b4b8",
+        "src-mlit-passenger-a5efaff3f8856a39"
+      ]
+    },
+    {
+      "modelId": "peugeot/rifter",
+      "canonicalName": "Rifter",
+      "sourceBrandId": "peugeot",
+      "sourceName": "リフター",
+      "observedInventoryYears": [
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3DA-K9PYH01",
+        "3DA-K9PYH01L"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-16f5a07cb62e6fd8",
+        "src-mlit-passenger-d30a875e7ba94f68",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-b6daeae0fcee39cd",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-bb8a8756dd475499",
+        "src-mlit-passenger-5ec4d0281774cc11",
+        "src-mlit-passenger-7a08b1992059d315",
+        "src-mlit-passenger-d1f03531cf04dd25",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "renault/captur",
+      "canonicalName": "Captur",
+      "sourceBrandId": "renault",
+      "sourceName": "キャプチャー",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3AA-HJBH5HH",
+        "3BA-HJBH5H",
+        "5AA-HJBH4MH",
+        "ABA-2RH5F1"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-b9012d980e7a841d",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-868b48b1a9314b95",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "renault/clio",
+      "canonicalName": "Clio",
+      "sourceBrandId": "renault",
+      "sourceName": "ルーテシア",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-BJAH5H",
+        "5AA-BJAH4MH",
+        "ABA-RH5F1"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-b9012d980e7a841d",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-868b48b1a9314b95",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "renault/kangoo",
+      "canonicalName": "Kangoo",
+      "sourceBrandId": "renault",
+      "sourceName": "カングー",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3BA-KFKH5H",
+        "3DA-KFKK9K",
+        "ABA-KWH5F1"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-b9012d980e7a841d",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-868b48b1a9314b95",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-8a2fedd29164e9f8",
+        "src-mlit-passenger-917f6ab043f473e0",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-e86e2169ba52022e",
+        "src-mlit-passenger-d2d3686a62ecde44",
+        "src-mlit-passenger-b6daeae0fcee39cd",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-454e5722e59fd750",
+        "src-mlit-passenger-5ec4d0281774cc11",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "renault/twingo",
+      "canonicalName": "Twingo",
+      "sourceBrandId": "renault",
+      "sourceName": "トゥインゴ",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024
+      ],
+      "typeCodes": [
+        "3BA-AHH4B",
+        "DBA-AHH4B"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-dfc1d652c4d2274c",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-8efefde3954f1c86",
+        "src-mlit-passenger-0c731e231146eca7",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "smart/forfour",
+      "canonicalName": "Forfour",
+      "sourceBrandId": "smart",
+      "sourceName": "フォーフォー",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "DBA-453042"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "smart/forfour",
+      "canonicalName": "Forfour",
+      "sourceBrandId": "smart",
+      "sourceName": "フォーフォー ターボ",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "DBA-453044"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "smart/fortwo",
+      "canonicalName": "Fortwo",
+      "sourceBrandId": "smart",
+      "sourceName": "フォーツー",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "DBA-453342"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "smart/fortwo",
+      "canonicalName": "Fortwo",
+      "sourceBrandId": "smart",
+      "sourceName": "フォーツー カブリオ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "ABA-451480"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "smart/fortwo",
+      "canonicalName": "Fortwo",
+      "sourceBrandId": "smart",
+      "sourceName": "フォーツー カブリオ BRABUS",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "ABA-453462"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "smart/fortwo",
+      "canonicalName": "Fortwo",
+      "sourceBrandId": "smart",
+      "sourceName": "フォーツー カブリオ ターボ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "CBA-451432",
+        "DBA-453444"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "smart/fortwo",
+      "canonicalName": "Fortwo",
+      "sourceBrandId": "smart",
+      "sourceName": "フォーツー クーペ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "ABA-451380"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "smart/fortwo",
+      "canonicalName": "Fortwo",
+      "sourceBrandId": "smart",
+      "sourceName": "フォーツー クーペ ターボ",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "CBA-451332"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "smart/fortwo",
+      "canonicalName": "Fortwo",
+      "sourceBrandId": "smart",
+      "sourceName": "フォーツー ターボ",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "DBA-453344"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "smart/fortwo",
+      "canonicalName": "Fortwo",
+      "sourceBrandId": "smart",
+      "sourceName": "フォーツーBRABUS",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020
+      ],
+      "typeCodes": [
+        "ABA-453062",
+        "ABA-453362"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-94752914c4875e20"
+      ]
+    },
+    {
+      "modelId": "volvo/s60",
+      "canonicalName": "S60",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボ S60",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-ZB420TM",
+        "5AA-ZB420TM2",
+        "CBA-FB6304T",
+        "DBA-FB4154T",
+        "DBA-FB4164T",
+        "DBA-FB420",
+        "DBA-ZB420",
+        "LDA-FD4204T"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-7f8a9d845cab8f57",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-da32a6d5e0bd376e",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-2bd0a7a42563e495",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-03695627075c4949",
+        "src-mlit-passenger-b60d6436954a12b3",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/s60",
+      "canonicalName": "S60",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボS60",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-ZB420TM",
+        "5AA-ZB420TM2",
+        "CBA-FB6304T",
+        "DBA-FB4154T",
+        "DBA-FB4164T",
+        "DBA-FB420",
+        "DBA-ZB420",
+        "LDA-FD4204T"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-7f8a9d845cab8f57",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-da32a6d5e0bd376e",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-2bd0a7a42563e495",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-03695627075c4949",
+        "src-mlit-passenger-b60d6436954a12b3",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/s80",
+      "canonicalName": "S80",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボS80",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "CBA-AB4204T",
+        "CBA-AB6304T",
+        "DBA-AB4164T"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-da32a6d5e0bd376e",
+        "src-mlit-passenger-2bd0a7a42563e495",
+        "src-mlit-passenger-03695627075c4949"
+      ]
+    },
+    {
+      "modelId": "volvo/s90",
+      "canonicalName": "S90",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボ S90",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-PB420TM",
+        "5AA-PB420TMA",
+        "DBA-PB420",
+        "DBA-PB420A"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/s90",
+      "canonicalName": "S90",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボS90",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-PB420TM",
+        "5AA-PB420TMA",
+        "DBA-PB420",
+        "DBA-PB420A"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/v40",
+      "canonicalName": "V40",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボV40",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "DBA-MB4154T",
+        "DBA-MB420",
+        "LDA-MD4204T"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-7f8a9d845cab8f57",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "volvo/v40-cross-country",
+      "canonicalName": "V40 Cross Country",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボV40クロスカントリー",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "CBA-MB420XC",
+        "DBA-MB4154T",
+        "DBA-MB420",
+        "LDA-MD4204T"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-7f8a9d845cab8f57",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3"
+      ]
+    },
+    {
+      "modelId": "volvo/v60",
+      "canonicalName": "V60",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボ V60",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-ZB420TM",
+        "5AA-ZB420TM2",
+        "CBA-FB6304T",
+        "DBA-FB4154T",
+        "DBA-FB4164T",
+        "DBA-FB420",
+        "DBA-ZB420",
+        "LDA-FD4204T"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-7f8a9d845cab8f57",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-da32a6d5e0bd376e",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-2bd0a7a42563e495",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-03695627075c4949",
+        "src-mlit-passenger-b60d6436954a12b3",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/v60",
+      "canonicalName": "V60",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボV60",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-ZB420TM",
+        "5AA-ZB420TM2",
+        "CBA-FB6304T",
+        "DBA-FB4154T",
+        "DBA-FB4164T",
+        "DBA-FB420",
+        "DBA-ZB420",
+        "LDA-FD4204T"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-7f8a9d845cab8f57",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-da32a6d5e0bd376e",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-2bd0a7a42563e495",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-03695627075c4949",
+        "src-mlit-passenger-b60d6436954a12b3",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/v60-cross-country",
+      "canonicalName": "V60 Cross Country",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボ V60クロスカントリー",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-ZB420TM",
+        "5AA-ZB420TM2",
+        "CBA-FB525XC",
+        "DBA-FB420",
+        "DBA-ZB420",
+        "LDA-FD4204T"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-7f8a9d845cab8f57",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/v60-cross-country",
+      "canonicalName": "V60 Cross Country",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボV60クロスカントリー",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-ZB420TM",
+        "5AA-ZB420TM2",
+        "CBA-FB525XC",
+        "DBA-FB420",
+        "DBA-ZB420",
+        "LDA-FD4204T"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-7f8a9d845cab8f57",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/v70",
+      "canonicalName": "V70",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボV70",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "CBA-BB4204TW",
+        "CBA-BB6304TW",
+        "DBA-BB4164TW",
+        "DBA-BB420W"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-da32a6d5e0bd376e",
+        "src-mlit-passenger-2bd0a7a42563e495",
+        "src-mlit-passenger-03695627075c4949"
+      ]
+    },
+    {
+      "modelId": "volvo/v90",
+      "canonicalName": "V90",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボ V90",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-PB420TM",
+        "5AA-PB420TM2",
+        "5AA-PB420TM2A",
+        "5AA-PB420TMA",
+        "DBA-PB420",
+        "DBA-PB420A",
+        "LDA-PD4204T",
+        "LDA-PD4204TA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/v90",
+      "canonicalName": "V90",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボV90",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-PB420TM",
+        "5AA-PB420TM2",
+        "5AA-PB420TM2A",
+        "5AA-PB420TMA",
+        "DBA-PB420",
+        "DBA-PB420A",
+        "LDA-PD4204T",
+        "LDA-PD4204TA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/v90-cross-country",
+      "canonicalName": "V90 Cross Country",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボ V90クロスカントリー",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-PB420TM",
+        "5AA-PB420TMA",
+        "DBA-PB420",
+        "DBA-PB420A",
+        "LDA-PD4204T",
+        "LDA-PD4204TA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/v90-cross-country",
+      "canonicalName": "V90 Cross Country",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボV90クロスカントリー",
+      "observedInventoryYears": [
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-PB420TM",
+        "5AA-PB420TMA",
+        "DBA-PB420",
+        "DBA-PB420A",
+        "LDA-PD4204T",
+        "LDA-PD4204TA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-b60d6436954a12b3",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/xc40",
+      "canonicalName": "XC40",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボ XC40",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-XB420TXCM",
+        "5AA-XB420TXCM2",
+        "DBA-XB420XC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/xc40",
+      "canonicalName": "XC40",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボXC40",
+      "observedInventoryYears": [
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-XB420TXCM",
+        "5AA-XB420TXCM2",
+        "DBA-XB420XC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/xc60",
+      "canonicalName": "XC60",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボ XC60",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-UB420TXCM",
+        "5AA-UB420TXCM2",
+        "5AA-UB420TXCM2A",
+        "5AA-UB420TXCMA",
+        "CBA-DB4204TXC",
+        "CBA-DB525XC",
+        "CBA-DB6304TXC",
+        "DBA-DB420XC",
+        "DBA-UB420XC",
+        "DBA-UB420XCA",
+        "LDA-DD4204TXC",
+        "LDA-UD4204TXCA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-7f8a9d845cab8f57",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-da32a6d5e0bd376e",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-2bd0a7a42563e495",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-03695627075c4949",
+        "src-mlit-passenger-b60d6436954a12b3",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/xc60",
+      "canonicalName": "XC60",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボXC60",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "5AA-UB420TXCM",
+        "5AA-UB420TXCM2",
+        "5AA-UB420TXCM2A",
+        "5AA-UB420TXCMA",
+        "CBA-DB4204TXC",
+        "CBA-DB525XC",
+        "CBA-DB6304TXC",
+        "DBA-DB420XC",
+        "DBA-UB420XC",
+        "DBA-UB420XCA",
+        "LDA-DD4204TXC",
+        "LDA-UD4204TXCA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-7f8a9d845cab8f57",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-f7a1fc4f30a6aeef",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-200aa531d3a11bed",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-b7785551256457e2",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-6eba5c4bb14a8494",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-da32a6d5e0bd376e",
+        "src-mlit-passenger-073d4d7c85aebd69",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-2bd0a7a42563e495",
+        "src-mlit-passenger-678c2005a0e63b4f",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-03695627075c4949",
+        "src-mlit-passenger-b60d6436954a12b3",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/xc70",
+      "canonicalName": "XC70",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボXC70",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022
+      ],
+      "typeCodes": [
+        "CBA-BB525XC",
+        "CBA-BB6304TXC",
+        "DBA-BB420XC"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-da32a6d5e0bd376e",
+        "src-mlit-passenger-2bd0a7a42563e495",
+        "src-mlit-passenger-03695627075c4949"
+      ]
+    },
+    {
+      "modelId": "volvo/xc90",
+      "canonicalName": "XC90",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボ XC90",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3DA-LD4204TXC",
+        "3DA-LD4204TXCA",
+        "5AA-LB420TXCM",
+        "5AA-LB420TXCM2",
+        "5AA-LB420TXCM2A",
+        "5AA-LB420TXCMA",
+        "CBA-CB6324AW",
+        "DBA-LB420XC",
+        "DBA-LB420XCA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-3a4c98b8689d0706",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-da32a6d5e0bd376e",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-2bd0a7a42563e495",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-03695627075c4949",
+        "src-mlit-passenger-d1f03531cf04dd25",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    },
+    {
+      "modelId": "volvo/xc90",
+      "canonicalName": "XC90",
+      "sourceBrandId": "volvo",
+      "sourceName": "ボルボXC90",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2021,
+        2022,
+        2023,
+        2024,
+        2025,
+        2026
+      ],
+      "typeCodes": [
+        "3DA-LD4204TXC",
+        "3DA-LD4204TXCA",
+        "5AA-LB420TXCM",
+        "5AA-LB420TXCM2",
+        "5AA-LB420TXCM2A",
+        "5AA-LB420TXCMA",
+        "CBA-CB6324AW",
+        "DBA-LB420XC",
+        "DBA-LB420XCA"
+      ],
+      "sourceIds": [
+        "src-mlit-passenger-94192db29984183e",
+        "src-mlit-passenger-6dd68f2f31bda8d3",
+        "src-mlit-passenger-2e18513621227dae",
+        "src-mlit-passenger-9ecbf8dcf7624986",
+        "src-mlit-passenger-af6f209ef438d450",
+        "src-mlit-passenger-0b325d96c5e125e6",
+        "src-mlit-passenger-bcc8fbbf6cf03723",
+        "src-mlit-passenger-cd4512da88914640",
+        "src-mlit-passenger-65bee60935816e91",
+        "src-mlit-passenger-112544ae3266913f",
+        "src-mlit-passenger-3a4c98b8689d0706",
+        "src-mlit-passenger-d5b6430c97f6106b",
+        "src-mlit-passenger-90a3365aaa448efb",
+        "src-mlit-passenger-da32a6d5e0bd376e",
+        "src-mlit-passenger-e69856093cf0a1c5",
+        "src-mlit-passenger-c597c8d08b1b82f7",
+        "src-mlit-passenger-828379cbbcd3910c",
+        "src-mlit-passenger-2bd0a7a42563e495",
+        "src-mlit-passenger-4b604fa86f742500",
+        "src-mlit-passenger-24cc8153255a1871",
+        "src-mlit-passenger-d6852ab65d2071f7",
+        "src-mlit-passenger-269745b829bef442",
+        "src-mlit-passenger-aaa32dd92f225205",
+        "src-mlit-passenger-94752914c4875e20",
+        "src-mlit-passenger-03695627075c4949",
+        "src-mlit-passenger-d1f03531cf04dd25",
+        "src-mlit-passenger-5b754ef62f9e42ca"
+      ]
+    }
+  ],
+  "rejected": [
+    {
+      "brandId": "abarth",
+      "sourceName": "595、595C",
+      "reason": "combined_multi_model_row",
+      "observedInventoryYears": [
+        2016,
+        2017,
+        2018,
+        2019,
+        2020,
+        2023
+      ],
+      "typeCodes": [
+        "ABA-31214T"
+      ]
+    },
+    {
+      "brandId": "abarth",
+      "sourceName": "595、595C、695",
+      "reason": "combined_multi_model_row",
+      "observedInventoryYears": [
+        2020,
+        2023
+      ],
+      "typeCodes": [
+        "ABA-31214T"
+      ]
+    },
+    {
+      "brandId": "volvo",
+      "sourceName": "ボルボV40/V40クロスカントリー",
+      "reason": "combined_multi_model_row",
+      "observedInventoryYears": [
+        2015
+      ],
+      "typeCodes": [
+        "DBA-MB4164T",
+        "DBA-MB5204T"
+      ]
+    },
+    {
+      "brandId": "volvo",
+      "sourceName": "Mini クーパーD クロスオーバー",
+      "reason": "wrong_brand_contamination",
+      "observedInventoryYears": [
+        2020
+      ],
+      "typeCodes": [
+        "LDA-PD4204T",
+        "LDA-PD4204TA"
+      ]
+    },
+    {
+      "brandId": "citroen",
+      "sourceName": "Mini クーパーD クロスオーバー",
+      "reason": "wrong_brand_contamination",
+      "observedInventoryYears": [
+        2020
+      ],
+      "typeCodes": [
+        "3DA-C84AH01"
+      ]
+    },
+    {
+      "brandId": "jaguar",
+      "sourceName": "Mini クーパーD クロスオーバー",
+      "reason": "wrong_brand_contamination",
+      "observedInventoryYears": [
+        2020
+      ],
+      "typeCodes": [
+        "LDA-DF2NA"
+      ]
+    },
+    {
+      "brandId": "jaguar",
+      "sourceName": "XFR/ XF Supercharged",
+      "reason": "combined_multi_model_row",
+      "observedInventoryYears": [
+        2015
+      ],
+      "typeCodes": [
+        "CBA-J05MB"
+      ]
+    },
+    {
+      "brandId": "jaguar",
+      "sourceName": "XJ Supersport/XJR",
+      "reason": "combined_multi_model_row",
+      "observedInventoryYears": [
+        2015,
+        2016,
+        2017,
+        2018,
+        2019
+      ],
+      "typeCodes": [
+        "CBA-J12MA"
+      ]
+    }
+  ]
+}

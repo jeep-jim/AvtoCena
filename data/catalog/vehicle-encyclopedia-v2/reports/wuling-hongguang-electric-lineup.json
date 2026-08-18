@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 5,
+    "replacedModels": 1,
+    "newGenerations": 2,
+    "newVariants": 5
+  },
+  "modelId": "wuling/hongguang",
+  "generationIds": [
+    "wuling/hongguang/bev-2024",
+    "wuling/hongguang/erev-2025"
+  ],
+  "variantIds": [
+    "wuling/hongguang/bev-2024/practical-300-km",
+    "wuling/hongguang/bev-2024/standard-300-km",
+    "wuling/hongguang/erev-2025/practical-50-km-5-seat",
+    "wuling/hongguang/erev-2025/standard-50-km-5-seat",
+    "wuling/hongguang/erev-2025/comfort-50-km-7-seat"
+  ],
+  "policy": {
+    "exactManufacturerValuesOnly": true,
+    "EnglishCanonicalLocalizedAliases": true,
+    "multiSeatChoiceNotCollapsed": true,
+    "batteryBasisUnspecifiedAndRejected": true,
+    "motorPeakNotPower30Min": true,
+    "automaticPublicationReady": false
+  }
+}

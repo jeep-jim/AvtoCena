@@ -1,0 +1,374 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-gm-wuling-xing-chi-launch-en-2022",
+          "type": "manufacturer",
+          "title": "Wuling Introduces All-New Xing Chi Small SUV",
+          "publisher": "General Motors / SAIC-GM-Wuling",
+          "url": "https://news.gm.com.cn/en/home.detail.html/Pages/news/cn/en/2022/Sept/0929-wuling.html",
+          "documentId": "GM China Wuling Xing Chi 2022-09-29 EN",
+          "documentDate": "2022-09-29",
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "transmission"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official English launch establishes the spaced public name Xing Chi, September 2022 China launch, small-SUV body and six-variant ICE range with 1.5-liter manual/CVT and 1.5-liter turbo CVT powertrains."
+        },
+        {
+          "id": "src-sgmw-wuling-xingchi-current-spec",
+          "type": "manufacturer_technical_document",
+          "title": "五菱星驰参数配置",
+          "publisher": "SAIC-GM-Wuling Automobile Co., Ltd. (SGMW)",
+          "url": "https://www.sgmw.com.cn/carDetail?id=22",
+          "documentId": "SGMW carDetail 22",
+          "documentDate": null,
+          "verifiedAt": "2026-08-18",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "market",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "engineCc",
+            "transmission",
+            "gears",
+            "drive",
+            "icePowerKw",
+            "lengthMm",
+            "widthMm",
+            "heightMm",
+            "wheelbaseMm",
+            "curbWeightKg",
+            "tankCapacityL"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Current official two-column table supplies exact grade names and technical values. 1.485 L is normalized to the exact equivalent 1,485 cm³; simulated CVT steps are not stored as physical gears and kW is not converted to horsepower."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/xingchi",
+          "brandId": "wuling",
+          "canonicalName": "Xing Chi",
+          "slug": "xingchi",
+          "aliases": [
+            {
+              "value": "Xingchi",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-silver-current-zh-2026"
+              ]
+            }
+          ],
+          "sourceNames": [
+            {
+              "value": "五菱 星驰",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-silver-current-zh-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2022-09",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-sgmw-wuling-silver-current-zh-2026",
+              "fields": [
+                "canonicalName",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "SGMW's official China current-range page supplies the exact source identity; the public Latin name is a conservative review-only romanization."
+            },
+            {
+              "sourceId": "src-gm-wuling-xing-chi-launch-en-2022",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English release uses the public name Xing Chi and identifies the September 2022 ICE small-SUV launch."
+            }
+          ],
+          "researchNotes": [
+            "Current model identity only: production start, generation, body and exact specification require a model-specific manufacturer page before pricing use.",
+            "Trim or generation labels such as Macaron, GAMEBOY, Cabrio and New Hongguang S are not duplicated as standalone models.",
+            "Canonical public name corrected from the review-only joined romanization Xingchi to official English Xing Chi; Xingchi remains a searchable transliteration alias.",
+            "Two exact official 1.5L configurations are staged below; the four remaining 2022 launch configurations stay queued until manufacturer columns are recovered."
+          ],
+          "updatedAt": "2026-08-18"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/xingchi/launch-2022",
+          "modelId": "wuling/xingchi",
+          "name": "Launch generation (2022)",
+          "aliases": [
+            {
+              "value": "五菱星驰",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-silver-current-zh-2026"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2022-09",
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-xing-chi-launch-en-2022",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release dates the all-new small-SUV launch to 2022-09-28."
+            }
+          ],
+          "researchNotes": [
+            "Launch-generation container only; no unverified platform or internal generation code is inferred."
+          ],
+          "updatedAt": "2026-08-18"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/xingchi/launch-2022/1-5l-6mt-freedom",
+          "modelId": "wuling/xingchi",
+          "generationId": "wuling/xingchi/launch-2022",
+          "faceliftId": null,
+          "name": "1.5L 6MT Freedom",
+          "aliases": [
+            {
+              "value": "1.5L 6MT 自由型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-xingchi-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2022,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1485,
+          "transmission": "6-speed manual",
+          "gears": 6,
+          "drive": "FWD",
+          "icePowerKw": 73,
+          "lengthMm": 4350,
+          "widthMm": 1750,
+          "heightMm": 1610,
+          "wheelbaseMm": 2550,
+          "curbWeightKg": 1190,
+          "tankCapacityL": 45,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-xing-chi-launch-en-2022",
+              "fields": [
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "transmission"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch establishes the 2022 China small-SUV range and its 1.5-liter manual/CVT powertrain choices."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-xingchi-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "transmission",
+                "gears",
+                "drive",
+                "icePowerKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "tankCapacityL"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from the current SGMW table; front-engine/front-wheel drive is normalized to FWD."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation of the exact Chinese alias; matching and audit retain the manufacturer wording.",
+            "No horsepower is calculated from the official kW value. Simulated CVT steps are not stored as physical gears."
+          ],
+          "updatedAt": "2026-08-18"
+        },
+        {
+          "id": "wuling/xingchi/launch-2022/1-5l-cvt-play",
+          "modelId": "wuling/xingchi",
+          "generationId": "wuling/xingchi/launch-2022",
+          "faceliftId": null,
+          "name": "1.5L CVT Play",
+          "aliases": [
+            {
+              "value": "1.5L CVT 畅玩型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-sgmw-wuling-xingchi-current-spec"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2022,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1485,
+          "transmission": "CVT",
+          "drive": "FWD",
+          "icePowerKw": 73,
+          "lengthMm": 4350,
+          "widthMm": 1750,
+          "heightMm": 1610,
+          "wheelbaseMm": 2550,
+          "curbWeightKg": 1240,
+          "tankCapacityL": 45,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-xing-chi-launch-en-2022",
+              "fields": [
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "transmission"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official launch establishes the 2022 China small-SUV range and its 1.5-liter manual/CVT powertrain choices."
+            },
+            {
+              "sourceId": "src-sgmw-wuling-xingchi-current-spec",
+              "fields": [
+                "name",
+                "market",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "transmission",
+                "drive",
+                "icePowerKw",
+                "lengthMm",
+                "widthMm",
+                "heightMm",
+                "wheelbaseMm",
+                "curbWeightKg",
+                "tankCapacityL"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact values are transcribed column-for-column from the current SGMW table; front-engine/front-wheel drive is normalized to FWD."
+            }
+          ],
+          "researchNotes": [
+            "The English grade label is a conservative translation of the exact Chinese alias; matching and audit retain the manufacturer wording.",
+            "No horsepower is calculated from the official kW value. Simulated CVT steps are not stored as physical gears."
+          ],
+          "updatedAt": "2026-08-18"
+        }
+      ]
+    }
+  ]
+}

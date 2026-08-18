@@ -1,0 +1,1220 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "alfa-romeo/giulietta",
+          "brandId": "alfa-romeo",
+          "canonicalName": "Giulietta",
+          "slug": "giulietta",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ALFA ROMEO GIULIETTA",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final"
+              ]
+            },
+            {
+              "value": "GIULIETTA",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final"
+              ]
+            },
+            {
+              "value": "ALFA GIULIETTA",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2021, 2023."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2021, 2023."
+            }
+          ],
+          "researchNotes": [
+            "EEA source make spellings: ALFA ROMEO.",
+            "EEA registration observations: 2679; specification groups: 10. Counts establish observed presence, not total sales or production boundaries.",
+            "Review status: body style, powertrain family, generation boundary, canonical cover and complete marketed-model boundary remain unverified; excluded from safe automatic resolution."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "bmw/2-series",
+          "brandId": "bmw",
+          "canonicalName": "2 Series",
+          "slug": "2-series",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "2 SERIES",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final"
+              ]
+            },
+            {
+              "value": "218d",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "218d Active Tourer",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "218I",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "218I ACTIVE TOURER",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "220I",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "220i Active Tourer",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "225E XDRIVE ACTIVE TOURER",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2021."
+            }
+          ],
+          "researchNotes": [
+            "EEA source make spellings: BMW.",
+            "EEA registration observations: 2; specification groups: 1. Counts establish observed presence, not total sales or production boundaries.",
+            "Review status: body style, powertrain family, generation boundary, canonical cover and complete marketed-model boundary remain unverified; excluded from safe automatic resolution."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "bmw/4-series",
+          "brandId": "bmw",
+          "canonicalName": "4 Series",
+          "slug": "4-series",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "4 SERIES",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final"
+              ]
+            },
+            {
+              "value": "420D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "420d xDrive",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "420I",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "M440I XDRIVE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2022."
+            }
+          ],
+          "researchNotes": [
+            "EEA source make spellings: BMW.",
+            "EEA registration observations: 1; specification groups: 1. Counts establish observed presence, not total sales or production boundaries.",
+            "Review status: body style, powertrain family, generation boundary, canonical cover and complete marketed-model boundary remain unverified; excluded from safe automatic resolution."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "bmw/5-series",
+          "brandId": "bmw",
+          "canonicalName": "5 Series",
+          "slug": "5-series",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "5 SERIES",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final"
+              ]
+            },
+            {
+              "value": "520D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "520d xDrive",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "520I",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "530D XDRIVE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "530E",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "530E XDRIVE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "540d xDrive",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2022."
+            }
+          ],
+          "researchNotes": [
+            "EEA source make spellings: BMW.",
+            "EEA registration observations: 2; specification groups: 2. Counts establish observed presence, not total sales or production boundaries.",
+            "Review status: body style, powertrain family, generation boundary, canonical cover and complete marketed-model boundary remain unverified; excluded from safe automatic resolution."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lexus/es",
+          "brandId": "lexus",
+          "canonicalName": "ES",
+          "slug": "es",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "LEXUS ES300H",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2021, 2022, 2023, 2024, 2025."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2021, 2022, 2023, 2024, 2025."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2021, 2022, 2023, 2024, 2025."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2025-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2021, 2022, 2023, 2024, 2025."
+            }
+          ],
+          "researchNotes": [
+            "EEA source make spellings: LEXUS.",
+            "EEA registration observations: 32; specification groups: 6. Counts establish observed presence, not total sales or production boundaries.",
+            "Review status: body style, powertrain family, generation boundary, canonical cover and complete marketed-model boundary remain unverified; excluded from safe automatic resolution."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lexus/nx",
+          "brandId": "lexus",
+          "canonicalName": "NX",
+          "slug": "nx",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "LEXUS NX",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "LEXUS NX300H",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "LEXUS NX350H",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "LEXUS NX450H+",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2021, 2022, 2023, 2024, 2025."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2021, 2022, 2023, 2024, 2025."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2021, 2022, 2023, 2024, 2025."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2025-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2021, 2022, 2023, 2024, 2025."
+            }
+          ],
+          "researchNotes": [
+            "EEA source make spellings: LEXUS.",
+            "EEA registration observations: 290; specification groups: 10. Counts establish observed presence, not total sales or production boundaries.",
+            "Review status: body style, powertrain family, generation boundary, canonical cover and complete marketed-model boundary remain unverified; excluded from safe automatic resolution."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lexus/ux",
+          "brandId": "lexus",
+          "canonicalName": "UX",
+          "slug": "ux",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "LEXUS UX250H",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "UX250H",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2021, 2022, 2023, 2024, 2025."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2023-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2021, 2022, 2023, 2024, 2025."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2024-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2021, 2022, 2023, 2024, 2025."
+            },
+            {
+              "sourceId": "src-eea-co2cars-2025-provisional",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2020, 2021, 2022, 2023, 2024, 2025."
+            }
+          ],
+          "researchNotes": [
+            "EEA source make spellings: LEXUS.",
+            "EEA registration observations: 41; specification groups: 7. Counts establish observed presence, not total sales or production boundaries.",
+            "Review status: body style, powertrain family, generation boundary, canonical cover and complete marketed-model boundary remain unverified; excluded from safe automatic resolution."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/mazda3",
+          "brandId": "mazda",
+          "canonicalName": "MAZDA3",
+          "slug": "mazda3",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "MAZDA 3",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-dcab38fb541f0111"
+              ]
+            },
+            {
+              "value": "3",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mlit-passenger-dcab38fb541f0111",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact MLIT common-name spelling intersects one VehiclesDB marketed-model candidate; MLIT manufacturer mapped from Mazda to Mazda; observed in inventory years 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026."
+            }
+          ],
+          "researchNotes": [
+            "MLIT type designation codes: 3AA-BPEP, 3DA-BP8P, 3DA-BP8R, 5AA-BPEK3R, 5AA-BPEP, 5AA-BPFJ3P, 5AA-BPFJ3R, 5AA-BPLK3R, 5BA-BPFP, 6BA-BP5P, 6BA-BP5R.",
+            "Review status: production range, body style, powertrain, cover and complete marketed-model boundary remain unverified; excluded from safe automatic resolution."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mercedes-benz/e-class",
+          "brandId": "mercedes-benz",
+          "canonicalName": "E-Class",
+          "slug": "e-class",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "E-CLASS",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final"
+              ]
+            },
+            {
+              "value": "E 200",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "E 200 D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "E 220 D",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "E 220 D 4MATIC",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "E 300 DE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "E 300 DE 4MATIC",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "E 300E",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2022."
+            }
+          ],
+          "researchNotes": [
+            "EEA source make spellings: MERCEDES-BENZ.",
+            "EEA registration observations: 2; specification groups: 2. Counts establish observed presence, not total sales or production boundaries.",
+            "Review status: body style, powertrain family, generation boundary, canonical cover and complete marketed-model boundary remain unverified; excluded from safe automatic resolution."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mercedes-benz/v-class",
+          "brandId": "mercedes-benz",
+          "canonicalName": "V-Class",
+          "slug": "v-class",
+          "aliases": [
+            {
+              "value": "V级MPV",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh",
+              "market": "China",
+              "sourceIds": [
+                "src-mercedes-v-class-china-current"
+              ]
+            },
+            {
+              "value": "V级",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh",
+              "market": "China",
+              "sourceIds": [
+                "src-mercedes-v-class-china-current"
+              ]
+            }
+          ],
+          "sourceNames": [
+            {
+              "value": "Mercedes-Benz V-Class",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-mercedes-v-class-uk-current"
+              ]
+            },
+            {
+              "value": "V KLASSE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": "2014",
+          "productionTo": null,
+          "bodyTypes": [
+            "MPV"
+          ],
+          "powertrainKinds": [
+            "ICE",
+            "MHEV"
+          ],
+          "mediaIds": [
+            "media-mercedes-v-class-cover"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-mercedes-mid-size-vans-update-2023",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Mercedes-Benz distinguishes the private-use V-Class MPV from the commercial Vito range."
+            },
+            {
+              "sourceId": "src-commons-mercedes-v-class-w447-identity",
+              "fields": [
+                "productionFrom"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The licensed W447 identity record establishes the 2014 V-Class series context."
+            },
+            {
+              "sourceId": "src-mercedes-v-class-uk-current",
+              "fields": [
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current UK range documents diesel ICE derivatives."
+            },
+            {
+              "sourceId": "src-mercedes-v-class-china-current",
+              "fields": [
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The current China range documents the M254 engine with a 48V motor."
+            }
+          ],
+          "researchNotes": [
+            "V-Class and Vito remain distinct canonical models even though they share the W447 family.",
+            "Coachbuilder strings such as 雅升汽车, 上莆 and AM are not attached as aliases without base-vehicle proof."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mini/jcw",
+          "brandId": "mini",
+          "canonicalName": "Jcw",
+          "slug": "jcw",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "MINI JCW",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-94192db29984183e"
+              ]
+            },
+            {
+              "value": "JOHN COOPER WORKS",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mlit-passenger-94192db29984183e",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact MLIT common-name spelling intersects one VehiclesDB marketed-model candidate; MLIT manufacturer mapped from BMW to MINI; observed in inventory years 2015, 2016, 2017, 2018, 2019."
+            }
+          ],
+          "researchNotes": [
+            "MLIT type designation codes: DBA-XMJCW.",
+            "Review status: production range, body style, powertrain, cover and complete marketed-model boundary remain unverified; excluded from safe automatic resolution."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "peugeot/208",
+          "brandId": "peugeot",
+          "canonicalName": "208",
+          "slug": "208",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "Peugeot 208",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-wikidata-q1164784"
+              ]
+            },
+            {
+              "value": "N208",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-wikidata-q1164784",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact English label Peugeot 208 is typed as a car model or automobile model series in Wikidata and intersects the VehiclesDB candidate Peugeot 208."
+            }
+          ],
+          "researchNotes": [
+            "Wikidata candidates: Q1164784.",
+            "Review status: exact marketed-model boundary, official regional years, body style, powertrain and canonical cover remain unverified; excluded from safe automatic resolution."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "peugeot/2008",
+          "brandId": "peugeot",
+          "canonicalName": "2008",
+          "slug": "2008",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "Peugeot 2008",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-wikidata-q2081398"
+              ]
+            },
+            {
+              "value": "N 2008",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-wikidata-q2081398",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact English label Peugeot 2008 is typed as a car model or automobile model series in Wikidata and intersects the VehiclesDB candidate Peugeot 2008."
+            }
+          ],
+          "researchNotes": [
+            "Wikidata candidates: Q2081398.",
+            "Review status: exact marketed-model boundary, official regional years, body style, powertrain and canonical cover remain unverified; excluded from safe automatic resolution."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "peugeot/3008",
+          "brandId": "peugeot",
+          "canonicalName": "3008",
+          "slug": "3008",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "Peugeot 3008",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-wikidata-q1130819"
+              ]
+            },
+            {
+              "value": "N 3008",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-wikidata-q1130819",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact English label Peugeot 3008 is typed as a car model or automobile model series in Wikidata and intersects the VehiclesDB candidate Peugeot 3008."
+            }
+          ],
+          "researchNotes": [
+            "Wikidata candidates: Q1130819.",
+            "Review status: exact marketed-model boundary, official regional years, body style, powertrain and canonical cover remain unverified; excluded from safe automatic resolution."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

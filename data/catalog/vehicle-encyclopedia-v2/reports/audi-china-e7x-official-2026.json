@@ -1,0 +1,31 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 1,
+    "newModels": 1,
+    "newGenerations": 1,
+    "newVariants": 2
+  },
+  "sourceIds": [
+    "src-audi-china-e7x-production-2026"
+  ],
+  "modelIds": [
+    "audi-china/e7x"
+  ],
+  "generationIds": [
+    "audi-china/e7x/adp"
+  ],
+  "variantIds": [
+    "audi-china/e7x/adp/300-kw-rwd",
+    "audi-china/e7x/adp/500-kw-quattro"
+  ],
+  "policy": {
+    "latestProductionReleaseWins": true,
+    "unpairedBatteryAndSeatingValuesRejected": true,
+    "promotionalRangeNotPromoted": true,
+    "power30MinNotDerived": true,
+    "automaticPublicationReady": false
+  }
+}

@@ -1,0 +1,7302 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 48,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-1066a55ecc3ca704222e",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1995,
+      "powerKw": 243,
+      "commercialNames": [
+        "LEVANTE GT Hybrid",
+        "LEVANTE GT HYBRID"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 12,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3041621d520ed2efa3d8",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Levante",
+      "modelId": "maserati/levante",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 2979,
+      "powerKw": 316,
+      "commercialNames": [
+        "LEVANTE MODENA S"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4d279ab62e033e3f1128",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "MC20",
+      "modelId": "maserati/mc20",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2992,
+      "powerKw": 463,
+      "commercialNames": [
+        "MC20",
+        "MC20 (CIELO)",
+        "MC20 CIELO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 777,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c1ad20695e0e34110d8",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "MC20",
+      "modelId": "maserati/mc20",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2992,
+      "powerKw": 471,
+      "commercialNames": [
+        "MC20"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51620cff4d2bb0890d0d",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "MCPura",
+      "modelId": "maserati/mcpura",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2992,
+      "powerKw": 463,
+      "commercialNames": [
+        "MC PURA",
+        "MC PURA CIELO",
+        "MCPURA CIELO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e03b771256539b8b1dd2",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Quattroporte",
+      "modelId": "maserati/quattroporte",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2987,
+      "powerKw": null,
+      "commercialNames": [
+        "QUATTROPORTE DV6 AUTO",
+        "QUATTROPORTE GRANSPORT V6 D A"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb00c8498be171827551",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Quattroporte",
+      "modelId": "maserati/quattroporte",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2987,
+      "powerKw": 184,
+      "commercialNames": [
+        "QUATTROPORTE DIESEL"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cdf983405eaf616c39d5",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Quattroporte",
+      "modelId": "maserati/quattroporte",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2987,
+      "powerKw": 202,
+      "commercialNames": [
+        "QUATTROPORTE",
+        "QUATTROPORTE DIESEL"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2ccec912392554dbe23",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Quattroporte",
+      "modelId": "maserati/quattroporte",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": null,
+      "commercialNames": [
+        "QUATTROPORTE GRANLUSSO V6 AUTO",
+        "QUATTROPORTE GRANSPORT V6 AUTO",
+        "QUATTROPORTE S GRANLUSSO V6 A"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bbb751bfe8dcda25c9ad",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Quattroporte",
+      "modelId": "maserati/quattroporte",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": 302,
+      "commercialNames": [
+        "QUATTROPORTE S Q4"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-064e4f9d92702d6bc5bd",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Quattroporte",
+      "modelId": "maserati/quattroporte",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": 316,
+      "commercialNames": [
+        "QUATTROPORTE",
+        "QUATTROPORTE MODENA",
+        "QUATTROPORTE MODENA Q4",
+        "Quattroporte Modena SQ4",
+        "QUATTROPORTE S",
+        "QUATTROPORTE S Q4",
+        "QUATTROPORTE S4",
+        "QUATTROPORTE TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 359,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-27b0853afbbd8a62f1c3",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Quattroporte",
+      "modelId": "maserati/quattroporte",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3798,
+      "powerKw": 427,
+      "commercialNames": [
+        "QUATTROPORTE TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 126,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a50adc7d9b7430cffca",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Quattroporte",
+      "modelId": "maserati/quattroporte",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "UNKNOWN",
+      "engineCc": 4244,
+      "powerKw": 295,
+      "commercialNames": [
+        "QUATTROPORTE"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63082e7ce01aa849be1d",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Quattroporte",
+      "modelId": "maserati/quattroporte",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": 257,
+      "commercialNames": [
+        "QUATTROPORTE",
+        "Quattroporte GT",
+        "QUATTROPORTE GT",
+        "QUATTROPORTE GTS"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 31,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1af64d5eb8b4e0e8d79",
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "canonicalModel": "Quattroporte",
+      "modelId": "maserati/quattroporte",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2979,
+      "powerKw": 427,
+      "commercialNames": [
+        "QUATTROPORTE TROFEO"
+      ],
+      "sourceMakeNames": [
+        "MASERATI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45d46a8bf5e5c8021689",
+      "brandId": "maxus",
+      "brand": "Maxus",
+      "canonicalModel": "eDeliver 9",
+      "modelId": "maxus/edeliver-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "E-DELIVER 9",
+        "E-DELIVER9",
+        "eDELIVER 9",
+        "EDELIVER 9",
+        "EDELIVER9",
+        "MAXUS eDELIVER 9",
+        "MAXUS EDELIVER 9",
+        "MAXUS EDELIVER9"
+      ],
+      "sourceMakeNames": [
+        "MAXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 68,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74e01fb304abcfb51268",
+      "brandId": "maxus",
+      "brand": "Maxus",
+      "canonicalModel": "eDeliver 9",
+      "modelId": "maxus/edeliver-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "E DELIVER 9"
+      ],
+      "sourceMakeNames": [
+        "MAXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5e170875f4ee99e145b",
+      "brandId": "maxus",
+      "brand": "Maxus",
+      "canonicalModel": "Euniq 5",
+      "modelId": "maxus/euniq-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 130,
+      "commercialNames": [
+        "EUNIQ 5",
+        "Euniq 5",
+        "EUNIQ 5 PLUS",
+        "EUNIQ5",
+        "MAXUS EUNIQ 5",
+        "MAXUS EUNIQ 5 PLUS"
+      ],
+      "sourceMakeNames": [
+        "MAXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 16,
+      "registrations": 1521,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-256f689360e2927efd45",
+      "brandId": "maxus",
+      "brand": "Maxus",
+      "canonicalModel": "Euniq 5",
+      "modelId": "maxus/euniq-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 65,
+      "commercialNames": [
+        "EUNIQ 5",
+        "MAXUS EUNIQ 5"
+      ],
+      "sourceMakeNames": [
+        "MAXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 66,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-173fdc3809d9b1b841e8",
+      "brandId": "maxus",
+      "brand": "Maxus",
+      "canonicalModel": "Euniq 6",
+      "modelId": "maxus/euniq-6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 130,
+      "commercialNames": [
+        "EUNIQ 6",
+        "EUNIQ6",
+        "MAXUS EUNIQ 6"
+      ],
+      "sourceMakeNames": [
+        "MAXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 2561,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5d39602cefa5cabecc81",
+      "brandId": "maxus",
+      "brand": "Maxus",
+      "canonicalModel": "Euniq 6",
+      "modelId": "maxus/euniq-6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "MAXUS EUNIQ 6"
+      ],
+      "sourceMakeNames": [
+        "MAXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a74f51e4b63447af542b",
+      "brandId": "maxus",
+      "brand": "Maxus",
+      "canonicalModel": "Euniq 6",
+      "modelId": "maxus/euniq-6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 118,
+      "commercialNames": [
+        "MAXUS EUNIQ 6"
+      ],
+      "sourceMakeNames": [
+        "MAXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 89,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f069c1bf0b38943fae09",
+      "brandId": "maxus",
+      "brand": "Maxus",
+      "canonicalModel": "Mifa 9",
+      "modelId": "maxus/mifa-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 180,
+      "commercialNames": [
+        "MAXUS MIFA 9",
+        "MIFA 9",
+        "MIFA9"
+      ],
+      "sourceMakeNames": [
+        "MAXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 300,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aa8a02520293cafe4344",
+      "brandId": "maxus",
+      "brand": "Maxus",
+      "canonicalModel": "Mifa 9",
+      "modelId": "maxus/mifa-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "MAXUS MIFA 9"
+      ],
+      "sourceMakeNames": [
+        "MAXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae204a394398ed056105",
+      "brandId": "maxus",
+      "brand": "Maxus",
+      "canonicalModel": "Mifa 9",
+      "modelId": "maxus/mifa-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "MIFA 9"
+      ],
+      "sourceMakeNames": [
+        "MAXUS"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-960d267902123b4e21f7",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-3",
+      "modelId": "mazda/cx-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1759,
+      "powerKw": 85,
+      "commercialNames": [
+        "MAZDA CX-3"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c9823a4d11b2940ed023",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-3",
+      "modelId": "mazda/cx-3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "CX-3 SPORT NAV +",
+        "CX-3 SPORT NAV + AUTO"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-758277ceb9bdca4435d8",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-3",
+      "modelId": "mazda/cx-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 88,
+      "commercialNames": [
+        "CX-3"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9145ef630d22e0d135d1",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-3",
+      "modelId": "mazda/cx-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 89,
+      "commercialNames": [
+        "CX-3",
+        "CX-3 / G121 /",
+        "CX-3 / G121 / AT",
+        "CX-3 G121",
+        "CX-3 G121 100 YEARS",
+        "CX-3 G121 AT REVOLUTION",
+        "CX-3 G121 AT REVOLUTION TOP",
+        "CX-3 G121 LIFE PLUS",
+        "CX-3 G121 REVOLUTION",
+        "CX-3 G121 REVOLUTION TOP",
+        "CX-3 G121 TAKUMI",
+        "CX-3/G121/100 YEARS",
+        "CX-3/G121/AT/REVOLUTION",
+        "CX-3/G121/AT/REVOLUTION TOP",
+        "CX-3/G121/LIFE PLUS",
+        "CX-3/G121/REVOLUTION",
+        "CX-3/G121/REVOLUTION TOP",
+        "CX-3/G121/TAKUMI",
+        "MAZDA CX-3",
+        "MAZDA CX-3 G121 100YEARS",
+        "MAZDA CX-3 G121 AT REVOLUTION",
+        "MAZDA CX-3 G121 REVOLUTION",
+        "MAZDA CX-3 G121 TAKUMI",
+        "MAZDA CX-3/G121/100YEARS",
+        "MAZDA CX-3/G121/AT/REVOLUTION",
+        "MAZDA CX-3/G121/AT/REVOLUTION/",
+        "MAZDA CX-3/G121/LIFE PLUS",
+        "MAZDA CX-3/G121/LIFE PLUS/NAVI",
+        "MAZDA CX-3/G121/PREMIUM MODERN",
+        "MAZDA CX-3/G121/REVOLUTION",
+        "MAZDA CX-3/G121/REVOLUTION TOP",
+        "MAZDA CX-3/G121/REVOLUTION/NAV",
+        "MAZDA CX-3/G121/TAKUMI",
+        "MAZDA CX-3/G121/TAKUMI/NAVI",
+        "MAZDA CX3"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 54,
+      "registrations": 39400,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-288ef469f935e5a7e225",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-3",
+      "modelId": "mazda/cx-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 90,
+      "commercialNames": [
+        "CX-3"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f40f24d4473986afff48",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-3",
+      "modelId": "mazda/cx-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 110,
+      "commercialNames": [
+        "CX-3",
+        "Mazda CX-3"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d66933c001d8d3e7ef6e",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-3",
+      "modelId": "mazda/cx-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 132,
+      "commercialNames": [
+        "CX-3"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-18f0be8924296d3c3898",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-3",
+      "modelId": "mazda/cx-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 149,
+      "commercialNames": [
+        "CX-3"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-283239af965325438e0b",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-3",
+      "modelId": "mazda/cx-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1496,
+      "powerKw": 85,
+      "commercialNames": [
+        "MAZDA CX-3"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 105,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c72a1e7d85b116286b44",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-3",
+      "modelId": "mazda/cx-3",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1497,
+      "powerKw": null,
+      "commercialNames": [
+        "CX 3 SPORT"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4ba2e109a6341926062",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-3",
+      "modelId": "mazda/cx-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1998,
+      "powerKw": 89,
+      "commercialNames": [
+        "CX-3"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba416783411341e65ce9",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-3",
+      "modelId": "mazda/cx-3",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1999,
+      "powerKw": 110,
+      "commercialNames": [
+        "CX-3"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf4b0e94b16c62e3df8f",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2191,
+      "powerKw": null,
+      "commercialNames": [
+        "CX-5 GT SPORT D 4X4",
+        "CX-5 GT SPORT D 4X4 AUTO",
+        "CX-5 GT SPORT NAV + D 4X4 A",
+        "CX-5 GT SPORT NAV PLUS D 4X4",
+        "CX-5 SE-L D",
+        "CX-5 SE-L D AUTO",
+        "CX-5 SE-L NAV + D",
+        "CX-5 SE-L NAV + D AUTO",
+        "CX-5 SPORT D",
+        "CX-5 SPORT D 4X4",
+        "CX-5 SPORT D 4X4 AUTO",
+        "CX-5 SPORT D AUTO",
+        "CX-5 SPORT NAV + D",
+        "CX-5 SPORT NAV + D 4X4",
+        "CX-5 SPORT NAV + D 4X4 AUTO",
+        "CX-5 SPORT NAV + D AUTO",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 17,
+      "registrations": 2468,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f8b0c0e21f543502b0c0",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2191,
+      "powerKw": 110,
+      "commercialNames": [
+        "CX-5",
+        "CX-5 / CD150 /",
+        "CX-5 / CD150 / AT",
+        "CX-5 / CD150 / AWD",
+        "CX-5 / CD150 / AWD AT",
+        "CX-5 CD150",
+        "CX-5 CD150 AT REVOLUTION",
+        "CX-5 CD150 AT TAKUMI",
+        "CX-5 CD150 AWD",
+        "CX-5 CD150 AWD AT",
+        "CX-5 CD150 AWD AT EDITION 100",
+        "CX-5 CD150 AWD AT REVOLUTION",
+        "CX-5 CD150 AWD AT TAKUMI",
+        "CX-5 CD150 AWD CHALLENGE",
+        "CX-5 CD150 AWD EDITION 100",
+        "CX-5 CD150 AWD REVOLUTION",
+        "CX-5 CD150 AWD TAKUMI",
+        "CX-5 CD150 CHALLENGE",
+        "CX-5 CD150 REVOLUTION",
+        "CX-5 CD150 TAKUMI",
+        "CX-5/CD150/AWD/AT/EDITION 100",
+        "CX-5/CD150/AWD/EDITION 100",
+        "CX-5/CD150/AWD/REVOLUTION",
+        "CX-5/CD150/REVOLUTION",
+        "CX-5/CD150/TAKUMI",
+        "MAZDA CX 5",
+        "MAZDA CX-5",
+        "Mazda CX-5",
+        "MAZDA CX-5/CD150/AMBITION",
+        "MAZDA CX-5/CD150/AMBITION PLUS",
+        "MAZDA CX-5/CD150/AT/AMBITION",
+        "MAZDA CX-5/CD150/AWD/AMBITION",
+        "MAZDA CX-5/CD150/AWD/AT/AMBITI",
+        "MAZDA CX-5/CD150/AWD/AT/EDITIO",
+        "MAZDA CX-5/CD150/AWD/AT/HOMURA",
+        "MAZDA CX-5/CD150/AWD/AT/NEWGRO",
+        "MAZDA CX-5/CD150/AWD/AT/REVOLU",
+        "MAZDA CX-5/CD150/AWD/EDITION10",
+        "MAZDA CX-5/CD150/AWD/HOMURA",
+        "MAZDA CX-5/CD150/AWD/HOMURA PL",
+        "MAZDA CX-5/CD150/AWD/NEWGROUND",
+        "MAZDA CX-5/CD150/AWD/REVOLUTIO",
+        "MAZDA CX-5/CD150/CHALLENGE",
+        "MAZDA CX-5/CD150/CHALLENGE PLU",
+        "MAZDA CX-5/CD150/HOMURA",
+        "MAZDA CX-5/CD150/NEWGROUND",
+        "MAZDA CX-5/CD150/REVOLUTION",
+        "MAZDA CX-5/CD150/REVOLUTION-"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 81,
+      "registrations": 18961,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e8739e4c75357d6fa92",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2191,
+      "powerKw": 135,
+      "commercialNames": [
+        "CX 5",
+        "CX-5",
+        "CX-5 / CD184 / AWD AT",
+        "CX-5 / CD184/ AWD / AT",
+        "CX-5 CD184 AWD AT",
+        "CX-5 CD184 AWD AT REVOLUTION",
+        "CX-5 CD184 AWD AT REVOLUTION T",
+        "CX-5 CD184 AWD AT TAKUMI PLUS",
+        "CX-5 CD184 AWD REVOLUTION",
+        "CX-5 CD184 AWD REVOLUTION TOP",
+        "CX-5 CD184 AWD TAKUMI PLUS",
+        "CX-5/CD184/AWD/AT/REVOLUTION",
+        "CX-5/CD184/AWD/AT/REVOLUTION T",
+        "CX-5/CD184/AWD/AT/TAKUMI PLUS",
+        "MAZDA CX 5",
+        "MAZDA CX-5",
+        "Mazda CX-5",
+        "MAZDA CX-5 CD184 AWD AT REVOLU",
+        "MAZDA CX-5/CD184/AWD/AT/HOMURA",
+        "MAZDA CX-5/CD184/AWD/AT/NEWGRO",
+        "MAZDA CX-5/CD184/AWD/AT/REV.TO",
+        "MAZDA CX-5/CD184/AWD/AT/REVOLU",
+        "MAZDA CX-5/CD184/AWD/AT/TAKUMI",
+        "MAZDA CX-5/CD184/AWD/HOMURA",
+        "MAZDA CX-5/CD184/AWD/REVOLUTIO",
+        "MAZDA CX-5/CD184/HOMURA"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 45,
+      "registrations": 19007,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f7c542b626d772df9f74",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "CX-5",
+        "CX-5 100TH ANNIVERSARY EDITION",
+        "CX-5 GT SPORT",
+        "CX-5 GT SPORT AUTO",
+        "CX-5 GT SPORT NAV +",
+        "CX-5 GT SPORT NAV + AUTO",
+        "CX-5 KURO EDITION",
+        "CX-5 SE-L",
+        "CX-5 SE-L AUTO",
+        "CX-5 SE-L NAV +",
+        "CX-5 SE-L NAV + AUTO",
+        "CX-5 SPORT",
+        "CX-5 SPORT AUTO",
+        "CX-5 SPORT NAV +",
+        "CX-5 SPORT NAV + AUTO",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 16,
+      "registrations": 9074,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-500905d35de8ac6009e4",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 120,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5",
+        "Mazda CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 8041,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3f76dbd0a5d89d8389fd",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 121,
+      "commercialNames": [
+        "CX 5",
+        "CX-5",
+        "CX-5 / G165 /",
+        "CX-5 / G165 / AT",
+        "CX-5 / G165 / AWD",
+        "CX-5 / G165 / AWD / AT",
+        "CX-5 G165",
+        "CX-5 G165 AT",
+        "CX-5 G165 AWD",
+        "CX-5 G165 AWD AT",
+        "CX-5 G165 AWD AT REVOLUTION",
+        "CX-5 G165 AWD AT TAKUMI",
+        "CX-5 G165 AWD CHALLENGE",
+        "CX-5 G165 AWD EDITION 100",
+        "CX-5 G165 AWD REVOLUTION",
+        "CX-5 G165 AWD REVOLUTION TOP",
+        "CX-5 G165 AWD TAKUMI",
+        "CX-5 G165 AWD TAKUMI PLUS",
+        "CX-5 G165 CHALLENGE",
+        "CX-5 G165 EDITION 100",
+        "CX-5 G165 EMOTION",
+        "CX-5 G165 REVOLUTION",
+        "CX-5 G165 REVOLUTION TOP",
+        "CX-5 G165 TAKUMI",
+        "CX-5 G165 TAKUMI PLUS",
+        "CX-5/G165/AWD/AT/TAKUMI",
+        "CX-5/G165/AWD/EDITION 100",
+        "CX-5/G165/AWD/REVOLUTION",
+        "CX-5/G165/AWD/REVOLUTION TOP",
+        "CX-5/G165/AWD/TAKUMI",
+        "CX-5/G165/EDITION 100",
+        "CX-5/G165/EMOTION",
+        "CX-5/G165/REVOLUTION",
+        "CX-5/G165/REVOLUTION TOP",
+        "CX-5/G165/TAKUMI",
+        "CX-5/G165/TAKUMI PLUS",
+        "CX5",
+        "MAZDA CX 5",
+        "MAZDA CX-5",
+        "Mazda CX-5",
+        "MAZDA CX-5 G165 EDITION100",
+        "MAZDA CX-5/G165/AMBITION",
+        "MAZDA CX-5/G165/AMBITION PLUS",
+        "MAZDA CX-5/G165/AT/AMBITION",
+        "MAZDA CX-5/G165/AWD/AMBITION",
+        "MAZDA CX-5/G165/AWD/AMBITION P",
+        "MAZDA CX-5/G165/AWD/AT/AMBITIO",
+        "MAZDA CX-5/G165/AWD/AT/REVOLUT",
+        "MAZDA CX-5/G165/AWD/CHALLENGE",
+        "MAZDA CX-5/G165/AWD/EDITION100",
+        "MAZDA CX-5/G165/AWD/HOMURA",
+        "MAZDA CX-5/G165/AWD/HOMURA PLU",
+        "MAZDA CX-5/G165/AWD/NEWGROUND",
+        "MAZDA CX-5/G165/AWD/REVOLUTION",
+        "MAZDA CX-5/G165/CHALLENGE",
+        "MAZDA CX-5/G165/CHALLENGE PLUS",
+        "MAZDA CX-5/G165/EDITION 100",
+        "MAZDA CX-5/G165/EDITION100",
+        "MAZDA CX-5/G165/EMOTION",
+        "MAZDA CX-5/G165/HOMURA",
+        "MAZDA CX-5/G165/HOMURA PLUS/SD",
+        "MAZDA CX-5/G165/NEWGROUND",
+        "MAZDA CX-5/G165/REVOLUTION",
+        "MAZDA CX-5/G165/REVOLUTION-"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 107,
+      "registrations": 81934,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c9a47a0e3872f861b77b",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 149,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3260140687464a33d1a6",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2148,
+      "powerKw": 143,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "Mazda"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09dee749dec482751bc5",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2488,
+      "powerKw": 137,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-31a22f5823b4541f65af",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2488,
+      "powerKw": 143,
+      "commercialNames": [
+        "CX 5",
+        "CX-5",
+        "CX-5 / G194 / AT",
+        "CX-5 / G194 / AWD / AT",
+        "CX-5 / G194 / AWD AT",
+        "CX-5 G194 AT",
+        "CX-5 G194 AT REVOLUTION",
+        "CX-5 G194 AWD AT",
+        "CX-5 G194 AWD AT REVOLUTION",
+        "CX-5 G194 AWD AT REVOLUTION TO",
+        "CX-5 G194 AWD AT TAKUMI PLUS",
+        "CX-5/G194/AWD/AT/REVOLUTION TO",
+        "CX-5/G194/AWD/AT/TAKUMI PLUS",
+        "MAZDA CX 5",
+        "Mazda CX-5",
+        "MAZDA CX-5",
+        "MAZDA CX-5 G194 AWD AT REVOLUT",
+        "MAZDA CX-5 G194 AWD AT TAKUMI",
+        "MAZDA CX-5/G194/AT/HOMURA",
+        "MAZDA CX-5/G194/AT/REVOLUTION",
+        "MAZDA CX-5/G194/AWD/AT/100YEAR",
+        "MAZDA CX-5/G194/AWD/AT/HOMURA",
+        "MAZDA CX-5/G194/AWD/AT/NEWGROU",
+        "MAZDA CX-5/G194/AWD/AT/REV.TOP",
+        "MAZDA CX-5/G194/AWD/AT/REVOLUT",
+        "MAZDA CX-5/G194/AWD/AT/TAKUMI"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 53,
+      "registrations": 54499,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1a08fdf419700dbd3ee",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1997,
+      "powerKw": 118,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eaacb590a77b4168981c",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2191,
+      "powerKw": 110,
+      "commercialNames": [
+        "CX-5",
+        "Mazda CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-78b5da0be92f7e612c52",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2500,
+      "powerKw": 241,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8a67e5cd8f7ea597e5e",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1998,
+      "powerKw": 121,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-04561e893b45213458bc",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 2488,
+      "powerKw": 143,
+      "commercialNames": [
+        "CX-5",
+        "Mazda CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-050f054b1ef677145ab9",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2488,
+      "powerKw": null,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 48,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a7f1c331c8b2c6dc8be",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2488,
+      "powerKw": 138,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4738a94aff50ad493adf",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2488,
+      "powerKw": 141,
+      "commercialNames": [
+        "CX5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1fad265012fa0715b129",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2488,
+      "powerKw": 142,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-979c67d91be32a2728b4",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2488,
+      "powerKw": 195,
+      "commercialNames": [
+        "MAZDA CX 5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09abe549b4c870344bb7",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2500,
+      "powerKw": 137,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3cb4a09237e88c1f2a5e",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2191,
+      "powerKw": 61,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-416e515a7e7a174f65cc",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2191,
+      "powerKw": 84,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-630db5e7dad10c4bdc3d",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2191,
+      "powerKw": 96,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1c2a2f89a154afb99ce5",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2191,
+      "powerKw": 117,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db98b289400528da1234",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2191,
+      "powerKw": 129,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2964f9b9d352419e28eb",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 49,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fbfdc0e5feff6187016",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 51,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ebf2a38c31f37e47f62a",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 55,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d920271e97b09fe3e28",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 61,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-412b1c596a64221a1bc8",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 62,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44d97d80a02e00158d87",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 67,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 71,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4fd77e8f332645790172",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 68,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83ca007f4ae473636961",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 69,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-874772f4997fa4649a3c",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 70,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8803945205ab9facc956",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 72,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93dd588001290a13e30b",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 73,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e5d62b7a511e7c955673",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 74,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91c29e77b7c069b26d62",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 75,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-98556293063da8e6699e",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 80,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6af8af23f28d48b2aeb5",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 81,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63407fe4d533a73af8c5",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 84,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-740035d5e5b77a3989ba",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 85,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c3e2f8d59df724b1bcbf",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 88,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2a269cc5106fc0f397f7",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 90,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-83c0d6b05a870a49f774",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 91,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-350ef684db996a3c0d34",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 92,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dd70a2853df82180248c",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 95,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d022ec0297672da6f91",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 96,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01941bb722be9a054c9b",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 110,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d1862fc58290e70709a6",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 112,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-276eac897905321ed384",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 114,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-56ad4c1cfe5ca3d76106",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 116,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-746881c0ddbafa355b5a",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 117,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-48f1d1d088dd4b35ca0c",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 124,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-daa4cacd3dbffc170dfc",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 131,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ebccd776eef22a903f67",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 132,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef4a5e6f6cf814efd15a",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 135,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-149d331a295079b93d49",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 136,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ebaf7760fd593a7b3678",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 137,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bde29ee08bbf62bfcfdc",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 140,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26fcfb71127cd69405be",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 143,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-682e5419ce4dc38b11d6",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 145,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-506a6e13cb56aa800b68",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 147,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc7f6d54ad0be981a995",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cfe17badeca3472c6072",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 180,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fbbf6e1daf4f5a96a9a5",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 206,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88bca5f666461cf969af",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 210,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bebfd560d6efc67a08bf",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 221,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be6b75835cdd8b28fded",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 228,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0751d63dc57ce40a3e5",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 243,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0b68afe313dd3f9cd57b",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 245,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36859f52531b1ceeaa21",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 250,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2132ebf98a13e3cf2f5a",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 258,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2579a2b4d819e3729d31",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 270,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45250dd0a033c7fdc29b",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 280,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b188cdaee2004bf4d7c",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 351,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2552f7e6cdf07363a2e",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 460,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-af382ba1549461176e8f",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 470,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e4a2270054c561d2d7f",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 515,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d8f40f7feaaa0b386bb3",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 49,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63a6292cbce0a6ec468e",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 51,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-42019a76e3b2ca3fc973",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 53,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d1531a46df1b3e5f2ed4",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 55,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d27bf16a72136a5292d",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 59,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7b5275e5e2c114f8fc5f",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 61,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63e6406776b0d7176fc4",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 67,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 70,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-babb6220f0016a1b5801",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 68,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-727384b2abe27bd44425",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 69,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d9fd67389b7ba82e481f",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 70,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d82d09b06233ab7fa3a4",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 72,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00bcaf187edddf02797b",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 73,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7ece415c2cee5f0aa735",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 77,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-86aa9e8516e0cacc9ac1",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 80,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-89eb0241e1703324df88",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 81,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fd7f797cef48529e24ca",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 84,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6f97d640f6f57fdad3c",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 85,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1d08db1dfe2634ceac8b",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 88,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9a87a63308dc004e6654",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 90,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f695eb18d3d1b9eeb762",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 91,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-85e0333d5a58a77b6961",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 92,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1aabd3f2986dbb5fa4f",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 95,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-49ae595864b685ea9941",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 96,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b4972648389eaab89c13",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 110,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-871035c09ef211831755",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 112,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2aa91e7e623b8d1004a9",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 116,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70c10d262c3b21b43b30",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 117,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-88d5bf53e4c97d7db4f3",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 120,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ff0eb9657151a62eeb8",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 131,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9399738e6d6325d30b0f",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 132,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e6d9622a36c728c72a17",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 135,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1b10a6e4ef164e8449db",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 136,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43586080674f26af53e3",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 140,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7adc7455880d92a61827",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 145,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d5fbe83d78b31ca05a4c",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 147,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-518822403859c332026d",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 150,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e026b2b49a6269595c8f",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 173,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c083941538a99b87eb88",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 180,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c9cf9130b659d2393bba",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 184,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7e43cdf5fc55d64039ab",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 210,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93b40197b260906f9526",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 250,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fc8a6ecf1ba71ceb3b0",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 294,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c4b68c97e236eda936e9",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 320,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b88eb0f1be29460c53da",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 13,
+      "commercialNames": [
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a97bb65a1b61c6d45d5e",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 100,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-efee8a91951ef74993b1",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1998,
+      "powerKw": 121,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db1b73803ea041005dc7",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 2488,
+      "powerKw": 143,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39b41f923ae4d5305f07",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 58,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cec026f591667bb5bf59",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 104,
+      "commercialNames": [
+        "CX-5",
+        "MAZDA CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c56bd6f1e60b0eb3bd9f",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-5",
+      "modelId": "mazda/cx-5",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2488,
+      "powerKw": 122,
+      "commercialNames": [
+        "CX-5"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-578fde23d814bdf1247d",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-6e",
+      "modelId": "mazda/cx-6e",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 190,
+      "commercialNames": [
+        "CX-6E"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51626798b3647b71c0d7",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-7",
+      "modelId": "mazda/cx-7",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2184,
+      "powerKw": 127,
+      "commercialNames": [
+        "MAZDA CX-7"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-30de0d2e3b57d97324fb",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-9",
+      "modelId": "mazda/cx-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2488,
+      "powerKw": 116,
+      "commercialNames": [
+        "CX-9"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dfc6a5a0ea867ecf9ac1",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-9",
+      "modelId": "mazda/cx-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2488,
+      "powerKw": 186,
+      "commercialNames": [
+        "MAZDA CX-9"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5824a955b992126cbf8",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-9",
+      "modelId": "mazda/cx-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2488,
+      "powerKw": null,
+      "commercialNames": [
+        "CX 9"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c221b6c5a5d31d0110bd",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1759,
+      "powerKw": 85,
+      "commercialNames": [
+        "CX-30",
+        "CX-30 / D116",
+        "CX-30 / D116 / AT",
+        "CX-30 D116",
+        "CX-30 SKYACTIV-D116 AT COMFORT",
+        "CX-30 SKYACTIV-D116 AWD AT COM",
+        "CX-30 SKYACTIV-D116 AWD COMFOR",
+        "CX-30 SKYACTIV-D116 COMFORT",
+        "CX-30 SKYACTIV-D116 COMFORT+",
+        "CX-30 SKYACTIV-D116 COMFORT+ S",
+        "CX-30/SKYACTIV-D116/AWD/COMFOR",
+        "MAZDA CX-30",
+        "MAZDA CX-30 D116 AWD COMFORT+",
+        "MAZDA CX-30 D116 COMFORT+",
+        "MAZDA CX-30/D116/AT/COMFORT+/S",
+        "MAZDA CX-30/D116/AWD/AT/COMFOR",
+        "MAZDA CX-30/D116/AWD/COMFORT+",
+        "MAZDA CX-30/D116/AWD/COMFORT+/",
+        "MAZDA CX-30/D116/COMFORT+",
+        "MAZDA CX-30/D116/COMFORT+/SOUN",
+        "MAZDA CX30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 24,
+      "registrations": 5426,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-485f98311ce1c8d1b668",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": null,
+      "commercialNames": [
+        "CX-30",
+        "CX-30 100TH ANNIVERSRY ED MHEV",
+        "CX-30 GT SPORT MHEV",
+        "CX-30 GT SPORT MHEV 4X4",
+        "CX-30 GT SPORT MHEV 4X4 AUTO",
+        "CX-30 GT SPORT MHEV AUTO",
+        "CX-30 GT SPORT TECH MHEV",
+        "CX-30 GT SPORT TECH MHEV 4X4",
+        "CX-30 GT SPORT TECH MHEV 4X4 A",
+        "CX-30 GT SPORT TECH MHEV AUTO",
+        "CX-30 SE-L LUX MHEV",
+        "CX-30 SE-L LUX MHEV AUTO",
+        "CX-30 SE-L MHEV",
+        "CX-30 SE-L MHEV AUTO",
+        "CX-30 SPORT LUX MHEV",
+        "CX-30 SPORT LUX MHEV 4X4",
+        "CX-30 SPORT LUX MHEV 4X4 AUTO",
+        "CX-30 SPORT LUX MHEV AUTO",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 21,
+      "registrations": 14182,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54a25f7909d0cf4be291",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 89,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9957e702430d90e9e995",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 90,
+      "commercialNames": [
+        "CX 30",
+        "CX-30",
+        "CX-30 / G122",
+        "CX-30 / G122 / AT",
+        "CX-30 / G122 / AWD",
+        "CX-30 / G122 / AWD AT",
+        "CX-30 G122",
+        "CX-30 G122 AT",
+        "CX-30 G122 AWD",
+        "CX-30 G122 AWD AT",
+        "CX-30 SKYACTIV-G122 AT COMFORT",
+        "CX-30 SKYACTIV-G122 AWD AT COM",
+        "CX-30 SKYACTIV-G122 AWD COMFOR",
+        "CX-30 SKYACTIV-G122 COMFORT",
+        "CX-30 SKYACTIV-G122 COMFORT+",
+        "CX-30 SKYACTIV-G122 COMFORT+ S",
+        "CX-30/SKYACTIV-G122/AT/COMFORT",
+        "CX-30/SKYACTIV-G122/AWD/AT/COM",
+        "CX-30/SKYACTIV-G122/AWD/COMFOR",
+        "CX-30/SKYACTIV-G122/COMFORT",
+        "CX-30/SKYACTIV-G122/COMFORT+",
+        "CX-30/SKYACTIV-G122/COMFORT+/S",
+        "MAZDA CX 30",
+        "MAZDA CX-30",
+        "MAZDA CX-30 G122 AT COMFORT+",
+        "MAZDA CX-30 G122 AT COMFORT+ S",
+        "MAZDA CX-30 G122 AWD AT COMFOR",
+        "MAZDA CX-30 G122 AWD COMFORT+",
+        "MAZDA CX-30 G122 COMFORT+",
+        "MAZDA CX-30 G122 COMFORT+ SOUN",
+        "MAZDA CX-30 G122 COMFORT+ STYL",
+        "MAZDA CX-30/G122/AT/COMFORT+",
+        "MAZDA CX-30/G122/AT/COMFORT+/S",
+        "MAZDA CX-30/G122/AT/HOMURA",
+        "MAZDA CX-30/G122/AWD/AT/COMFOR",
+        "MAZDA CX-30/G122/AWD/COMFORT+/",
+        "MAZDA CX-30/G122/COMFORT",
+        "MAZDA CX-30/G122/COMFORT+",
+        "MAZDA CX-30/G122/COMFORT+/SOUN",
+        "MAZDA CX-30/G122/COMFORT+/STYL",
+        "MAZDA CX-30/G122/HOMURA",
+        "MAZDA CX30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 74,
+      "registrations": 87413,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b52732e4e34e437ef53",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 110,
+      "commercialNames": [
+        "CX-30",
+        "CX-30 / G150",
+        "CX-30 / G150 / AT",
+        "CX-30 / G150 / AWD",
+        "CX-30 / G150 / AWD AT",
+        "CX-30 G150",
+        "CX-30 G150 AT",
+        "CX-30 G150 AWD",
+        "CX-30 G150 AWD AT",
+        "MAZDA CX 30",
+        "MAZDA CX-30",
+        "MAZDA CX-30/G150/AT/COMFORT+",
+        "MAZDA CX-30/G150/AT/COMFORT+/S",
+        "MAZDA CX-30/G150/AT/HOMURA",
+        "MAZDA CX-30/G150/AWD/AT/COMFOR",
+        "MAZDA CX-30/G150/AWD/COMFORT+",
+        "MAZDA CX-30/G150/AWD/COMFORT+/",
+        "MAZDA CX-30/G150/COMFORT+",
+        "MAZDA CX-30/G150/COMFORT+/SOUN",
+        "MAZDA CX-30/G150/COMFORT+/STYL",
+        "MAZDA CX-30/G150/HOMURA",
+        "MAZDA CX30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 61,
+      "registrations": 69070,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ba48749ee59ab2324c20",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 132,
+      "commercialNames": [
+        "CX-30",
+        "CX-30 / X180",
+        "CX-30 / X180 / AT",
+        "CX-30 / X180 / AWD",
+        "CX-30 / X180 / AWD AT",
+        "CX-30 SKYACTIV-X180 AT GT+",
+        "CX-30 SKYACTIV-X180 AT GT+ SOU",
+        "CX-30 SKYACTIV-X180 AWD AT 100",
+        "CX-30 SKYACTIV-X180 AWD AT GT+",
+        "CX-30 SKYACTIV-X180 AWD GT+",
+        "CX-30 SKYACTIV-X180 AWD GT+ SO",
+        "CX-30 SKYACTIV-X180 GT",
+        "CX-30 SKYACTIV-X180 GT+",
+        "CX-30 SKYACTIV-X180 GT+ SOUND",
+        "CX-30 X180",
+        "CX-30 X180 AT",
+        "CX-30 X180 AWD",
+        "CX-30 X180 AWD AT",
+        "CX-30/SKYACTIV-X180/AT/GT+",
+        "CX-30/SKYACTIV-X180/AT/GT+/SOU",
+        "CX-30/SKYACTIV-X180/AWD/AT/100",
+        "CX-30/SKYACTIV-X180/AWD/AT/GT+",
+        "CX-30/SKYACTIV-X180/AWD/GT+",
+        "CX-30/SKYACTIV-X180/AWD/GT+/SO",
+        "CX-30/SKYACTIV-X180/GT+",
+        "CX-30/SKYACTIV-X180/GT+/SOUND",
+        "CX-30/SKYACTIV-X180/GT+/SOUND/",
+        "MAZDA CX 30",
+        "MAZDA CX-30",
+        "MAZDA CX-30 X180 AWD AT 100YEA",
+        "MAZDA CX-30/X180/AT/GT+/SOUND/",
+        "MAZDA CX-30/X180/AWD/AT/100YEA",
+        "MAZDA CX-30/X180/AWD/AT/GT+/SO",
+        "MAZDA CX-30/X180/AWD/GT+/SOUND",
+        "MAZDA CX-30/X180/GT+",
+        "MAZDA CX-30/X180/GT+/SOUND",
+        "MAZDA CX-30/X180/GT+/SOUND/PRE",
+        "MAZDA CX30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 45,
+      "registrations": 38820,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-396d4739decc120d8ead",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 137,
+      "commercialNames": [
+        "CX 30",
+        "CX-30",
+        "CX-30 / X186",
+        "CX-30 / X186 / AT",
+        "CX-30 / X186 / AWD",
+        "CX-30 / X186 / AWD AT",
+        "CX-30 X186",
+        "CX-30 X186 AT",
+        "CX-30 X186 AWD",
+        "CX-30 X186 AWD AT",
+        "MAZDA CX 30",
+        "MAZDA CX-30",
+        "MAZDA CX-30/X186/AT/GT+",
+        "MAZDA CX-30/X186/AT/GT+/SOUND",
+        "MAZDA CX-30/X186/AT/GT+/SOUND/",
+        "MAZDA CX-30/X186/AWD/AT/GT+",
+        "MAZDA CX-30/X186/AWD/AT/GT+/SO",
+        "MAZDA CX-30/X186/AWD/AT/GT+SOU",
+        "MAZDA CX-30/X186/AWD/GT+",
+        "MAZDA CX-30/X186/AWD/GT+/SOUND",
+        "MAZDA CX-30/X186/GT+",
+        "MAZDA CX-30/X186/GT+/SOUND",
+        "MAZDA CX-30/X186/GT+/SOUND/PRE",
+        "MAZDA CX30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 69,
+      "registrations": 56911,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-72868318d81d3807940e",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1996,
+      "powerKw": 90,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1a5ea72977818104928a",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1998,
+      "powerKw": 110,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-73c2dccc3f18c9c27291",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2488,
+      "powerKw": 139,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6648f43526275c9dfdb",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2500,
+      "powerKw": 139,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9ed8ee385dfa1e1eba48",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1989,
+      "powerKw": 90,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8add89a7902e3a0bc52e",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 13,
+      "commercialNames": [
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-65499d2054536311f5e0",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 49,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7d5b43c46994c404bb25",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 52,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a6f446aee60daa9befb3",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 53,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-13fa68d30b8efe324c56",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 55,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6e115911081e6c91e60",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 59,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-328bde94da7b33a00715",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 61,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be79ff58cb1ba10d0490",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 62,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a7378b7567645ba01c50",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 67,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 160,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f471059233e044291e2b",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 68,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61fc24918268437df598",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 69,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-afcf9e385c77ac56b847",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 70,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ebcb8dc2d6ddd9d36256",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 72,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84faf2466a031fc6112f",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 73,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f9f48162c0472bbb73c",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 74,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-92ff3b091000650f1bd5",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 75,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c4d963ce234650d294c",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 77,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-140d9a190e1cf3b17449",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 79,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bfb2b18d811bc3b23aff",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 80,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7386d1c18bde433ff672",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 81,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 43,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d00e6a02f2289df8ab30",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 84,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 24,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7af7f8b449a881f7a84",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 85,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9fb671c631c3c0cf443e",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 88,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52dd9b80ceca14c04c10",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 91,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 16,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b638c0e6b32bbab8393",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 92,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1cc537797fe35fe423c5",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 95,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-34b91335b90c82c257b7",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 96,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9b8b0951c340f1e9f3f4",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 112,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6592f9d166b70278f136",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 114,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-647e96d007f1730d6bf1",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 116,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae3ed9b727cc209fdb0e",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 117,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f18b46ba5b538bd0e255",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 118,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-38350c827c01e0a2437c",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 120,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68e2dd90fc178ba8246d",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 121,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc418fb84fdae4dba0c5",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 129,
+      "commercialNames": [
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a966b9fea6078f11f76a",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 131,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 15,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e3fb18d5dac7fa091369",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 133,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44d91ee7446489112de1",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 135,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3cb7f7942785088bf451",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 136,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9bb8671beae7ef767f7f",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 140,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45642a545c3179b59142",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 142,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef5a4b6f5dcf1ee7b946",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 143,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df1a1b6de5a01eb890d3",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 145,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d6231a2cc87f13dfa790",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 147,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6b2ce66d207ebc6bf89d",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 150,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-da449545f6bc06eaf615",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 165,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-50ae3fa8e278d7b5afcb",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 170,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d8afa6c4182f2dd2d87",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 173,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f13e15f33213653586c8",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 180,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-abdc533ff530fbbaa083",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 183,
+      "commercialNames": [
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5331f27fd6fedd4044e9",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 184,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a10c84dd14aa6362568",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 190,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6983c53a315f9cf53dd8",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 195,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4110a9816d3d3690c1a6",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 210,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-40d711f723893b975417",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 220,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4bac5ceb16eaa9347cd",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 224,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9047583665bb9bd60068",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 228,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6dceaeb5a8ec564b08c",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 243,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-84651d6c9f88a67326bd",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 245,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4be0c11898065dfc319",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 250,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a1290ad8d843e73bfef",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 258,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e79dcc9b5bb1fcea71a",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 280,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-434d2fad5684e9fd341a",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 294,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dff4b18d6a58d7ace7ac",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 320,
+      "commercialNames": [
+        "CX-30",
+        "MAZDA CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c5d2b50542a41532a524",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 353,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0ec4e2397bd39d032331",
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "canonicalModel": "CX-30",
+      "modelId": "mazda/cx-30",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1998,
+      "powerKw": 373,
+      "commercialNames": [
+        "CX-30"
+      ],
+      "sourceMakeNames": [
+        "MAZDA"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

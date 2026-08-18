@@ -1,0 +1,125 @@
+{
+  "schemaVersion": 2,
+  "entityType": "brand",
+  "chunk": 2,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "yudo",
+      "canonicalName": "Yudo",
+      "slug": "yudo",
+      "aliases": [],
+      "countries": [],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "canonicalName"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "YUDO are exact registered make values in the EEA passenger-car datasets."
+        }
+      ],
+      "researchNotes": [
+        "EEA observations cover 2023, 2024, 2025 and 425 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+        "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "zeekr",
+      "canonicalName": "Zeekr",
+      "slug": "zeekr",
+      "aliases": [],
+      "countries": [],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-drom-brand-catalog-index-2026",
+          "fields": [
+            "canonicalName"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+        }
+      ],
+      "researchNotes": [
+        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "zhidou",
+      "canonicalName": "Zhidou",
+      "slug": "zhidou",
+      "aliases": [],
+      "countries": [],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "canonicalName"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "ZHIDOU are exact registered make values in the EEA passenger-car datasets."
+        }
+      ],
+      "researchNotes": [
+        "EEA observations cover 2020, 2021, 2022, 2023, 2024, 2025 and 100 registrations. Authentic source-traceable 90 x 60 dark/light logos and complete in-window model coverage remain required.",
+        "This reviewed make is retained as an automotive marque; coachbuilder, motorhome, converter, address-only and cross-brand make strings remain unresolved."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "zotye",
+      "canonicalName": "Zotye",
+      "slug": "zotye",
+      "aliases": [],
+      "countries": [],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-drom-brand-catalog-index-2026",
+          "fields": [
+            "canonicalName"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+        }
+      ],
+      "researchNotes": [
+        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "id": "zx-auto",
+      "canonicalName": "ZX",
+      "slug": "zx",
+      "aliases": [],
+      "countries": [],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-drom-brand-catalog-index-2026",
+          "fields": [
+            "canonicalName"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+        }
+      ],
+      "researchNotes": [
+        "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+      ],
+      "updatedAt": "2026-08-17"
+    }
+  ]
+}

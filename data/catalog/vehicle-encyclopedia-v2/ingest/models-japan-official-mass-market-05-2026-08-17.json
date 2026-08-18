@@ -1,0 +1,925 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-mazda-biante-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Biante official Japan model page",
+          "publisher": "Mazda Motor Corporation",
+          "url": "https://newsroom.mazda.com/en/publicity/release/2008/200805/080509a.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive or news release identifies this Japan-market model. Exact generation and production boundaries are not inferred from the page."
+        },
+        {
+          "id": "src-mazda-premacy-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Premacy official Japan model page",
+          "publisher": "Mazda Motor Corporation",
+          "url": "https://newsroom.mazda.com/en/publicity/release/2010/201007/100701a.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive or news release identifies this Japan-market model. Exact generation and production boundaries are not inferred from the page."
+        },
+        {
+          "id": "src-mazda-verisa-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Verisa official Japan model page",
+          "publisher": "Mazda Motor Corporation",
+          "url": "https://newsroom.mazda.com/en/publicity/release/2004/200406/0628e.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive or news release identifies this Japan-market model. Exact generation and production boundaries are not inferred from the page."
+        },
+        {
+          "id": "src-mlit-passenger-0b325d96c5e125e6",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001225528.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001225528.xls",
+          "documentId": "001225528.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-6dd68f2f31bda8d3",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001125032.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001125032.xls",
+          "documentId": "001125032.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-mlit-passenger-9ecbf8dcf7624986",
+          "type": "government_registry",
+          "title": "Japan passenger-car inventory workbook 001178236.xls",
+          "publisher": "Ministry of Land, Infrastructure, Transport and Tourism of Japan",
+          "url": "https://www.mlit.go.jp/common/001178236.xls",
+          "documentId": "001178236.xls",
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official MLIT passenger-car inventory workbook. Exact Japanese-market common names and type-designation observations are retained without inferring production or generation boundaries."
+        },
+        {
+          "id": "src-nissan-clipper-rio-japan-current-2026",
+          "type": "manufacturer",
+          "title": "CLIPPER RIO official Japan model page",
+          "publisher": "Nissan Motor Co., Ltd.",
+          "url": "https://www3.nissan.co.jp/vehicles/new/clipperrio.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer page identifies CLIPPER RIO; generation and production boundaries are not inferred."
+        },
+        {
+          "id": "src-nissan-dayz-roox-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "DAYZ ROOX official Japan model page",
+          "publisher": "Nissan Motor Co., Ltd.",
+          "url": "https://history.nissan.co.jp/DAYZROOX/BA0/1612/index.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive or news release identifies this Japan-market model. Exact generation and production boundaries are not inferred from the page."
+        },
+        {
+          "id": "src-nissan-lafesta-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Lafesta official Japan model page",
+          "publisher": "Nissan Motor Co., Ltd.",
+          "url": "https://history.nissan.co.jp/LAFESTA/B35/1302/index.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive or news release identifies this Japan-market model. Exact generation and production boundaries are not inferred from the page."
+        },
+        {
+          "id": "src-nissan-moco-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "MOCO official Japan model page",
+          "publisher": "Nissan Motor Co., Ltd.",
+          "url": "https://history.nissan.co.jp/MOCO/SA2/1310/index.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive or news release identifies this Japan-market model. Exact generation and production boundaries are not inferred from the page."
+        },
+        {
+          "id": "src-nissan-nv100-clipper-rio-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "NV100 Clipper Rio official Japan model page",
+          "publisher": "Nissan Motor Co., Ltd.",
+          "url": "https://history.nissan.co.jp/NV100CLIPPERRIO/WZA0/1312/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive or news release identifies this Japan-market model. Exact generation and production boundaries are not inferred from the page."
+        },
+        {
+          "id": "src-nissan-sylphy-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "SYLPHY official Japan model page",
+          "publisher": "Nissan Motor Co., Ltd.",
+          "url": "https://history.nissan.co.jp/SYLPHY/B17/1212/index.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive or news release identifies this Japan-market model. Exact generation and production boundaries are not inferred from the page."
+        },
+        {
+          "id": "src-nissan-wingroad-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "WINGROAD official Japan model page",
+          "publisher": "Nissan Motor Co., Ltd.",
+          "url": "https://history.nissan.co.jp/WINGROAD/Y12/0511/index.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive or news release identifies this Japan-market model. Exact generation and production boundaries are not inferred from the page."
+        },
+        {
+          "id": "src-suzuki-kizashi-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Kizashi official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.globalsuzuki.com/globalnews/2009/1021b.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive or news release identifies this Japan-market model. Exact generation and production boundaries are not inferred from the page."
+        },
+        {
+          "id": "src-suzuki-mr-wagon-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "MR Wagon official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.globalsuzuki.com/globalnews/2001/1024_5.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive or news release identifies this Japan-market model. Exact generation and production boundaries are not inferred from the page."
+        },
+        {
+          "id": "src-suzuki-splash-japan-archive-2026",
+          "type": "manufacturer",
+          "title": "Splash official Japan model page",
+          "publisher": "Suzuki Motor Corporation",
+          "url": "https://www.globalsuzuki.com/globalnews/2008/1021.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Japan",
+          "language": "ja",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official manufacturer archive or news release identifies this Japan-market model. Exact generation and production boundaries are not inferred from the page."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "mazda/biante",
+          "brandId": "mazda",
+          "canonicalName": "Biante",
+          "slug": "biante",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ビアンテ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-60a79e46229b4485"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mazda-biante-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/premacy",
+          "brandId": "mazda",
+          "canonicalName": "Premacy",
+          "slug": "premacy",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "プレマシー",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-58f8a83211a2e488",
+                "src-mlit-passenger-5fee9be36aef5b62",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-86aba6aa586376c0"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mazda-premacy-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/verisa",
+          "brandId": "mazda",
+          "canonicalName": "Verisa",
+          "slug": "verisa",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ベリーサ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-5fee9be36aef5b62"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-mazda-verisa-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2016.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/clipper-rio",
+          "brandId": "nissan",
+          "canonicalName": "CLIPPER RIO",
+          "slug": "clipper-rio",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "クリッパーリオ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-19e17d2dda4c2731",
+                "src-mlit-passenger-62437a6730cf71ea",
+                "src-mlit-passenger-6651bcb387ac8297",
+                "src-mlit-passenger-c4a65a8e4f14eec6",
+                "src-mlit-passenger-d9f1ba4a8bb0c331",
+                "src-mlit-passenger-f14fef9166bd3a02",
+                "src-nissan-clipper-rio-japan-current-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-nissan-clipper-rio-japan-current-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2024, 2025, 2026.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/dayz-roox",
+          "brandId": "nissan",
+          "canonicalName": "DAYZ ROOX",
+          "slug": "dayz-roox",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "デイズ ルークス",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-nissan-dayz-roox-japan-archive-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-nissan-dayz-roox-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/lafesta",
+          "brandId": "nissan",
+          "canonicalName": "Lafesta",
+          "slug": "lafesta",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ラフェスタ ハイウェイスター",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-nissan-lafesta-japan-archive-2026"
+              ]
+            },
+            {
+              "value": "ラフェスタ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-60a79e46229b4485"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-nissan-lafesta-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/moco",
+          "brandId": "nissan",
+          "canonicalName": "MOCO",
+          "slug": "moco",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "モコ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-nissan-moco-japan-archive-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-nissan-moco-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/nv100-clipper-rio",
+          "brandId": "nissan",
+          "canonicalName": "NV100 Clipper Rio",
+          "slug": "nv100-clipper-rio",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "NV100クリッパー リオ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3165bf519f826129",
+                "src-mlit-passenger-57d7963763dc73d1",
+                "src-mlit-passenger-8799770c54d7d78f",
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-9531e6ae2b871190",
+                "src-mlit-passenger-a4045ab0a2a7418f",
+                "src-mlit-passenger-a63e12c27a2c101c",
+                "src-mlit-passenger-cff55f4fe5401003",
+                "src-mlit-passenger-d8ea99797e11ef1d",
+                "src-mlit-passenger-eb369f28ab9f1709",
+                "src-mlit-passenger-f13d82dd215e8972",
+                "src-mlit-passenger-fefd359dc42f8a6d",
+                "src-nissan-nv100-clipper-rio-japan-archive-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-nissan-nv100-clipper-rio-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/sylphy",
+          "brandId": "nissan",
+          "canonicalName": "SYLPHY",
+          "slug": "sylphy",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "シルフィ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2",
+                "src-mlit-passenger-7853c37de2f35f90",
+                "src-nissan-sylphy-japan-archive-2026"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-nissan-sylphy-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018, 2019.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan/wingroad",
+          "brandId": "nissan",
+          "canonicalName": "WINGROAD",
+          "slug": "wingroad",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "ウイングロード",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-nissan-wingroad-japan-archive-2026"
+              ]
+            },
+            {
+              "value": "ウィングロード",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-3c2ad4db7a94a3f5",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-636840c6f9474da2"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-nissan-wingroad-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017, 2018.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/kizashi",
+          "brandId": "suzuki",
+          "canonicalName": "Kizashi",
+          "slug": "kizashi",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "キザシ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-3407446a360a9ada",
+                "src-mlit-passenger-5fee9be36aef5b62",
+                "src-mlit-passenger-60a79e46229b4485",
+                "src-mlit-passenger-86aba6aa586376c0"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-kizashi-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/mr-wagon",
+          "brandId": "suzuki",
+          "canonicalName": "MR Wagon",
+          "slug": "mr-wagon",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "MRワゴン",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-8a3c23026f67b82f",
+                "src-mlit-passenger-eb369f28ab9f1709"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-mr-wagon-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "suzuki/splash",
+          "brandId": "suzuki",
+          "canonicalName": "Splash",
+          "slug": "splash",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "スプラッシュ",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mlit-passenger-0b325d96c5e125e6",
+                "src-mlit-passenger-6dd68f2f31bda8d3",
+                "src-mlit-passenger-9ecbf8dcf7624986"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-suzuki-splash-japan-archive-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official manufacturer model identity; exact Japanese source spellings are retained separately."
+            }
+          ],
+          "researchNotes": [
+            "MLIT inventory observation years: 2015, 2016, 2017.",
+            "Review status: 2015-2026 generation, facelift, body, engine, grade and canonical-cover coverage remains pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

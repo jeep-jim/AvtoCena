@@ -1,0 +1,3077 @@
+{
+  "schemaVersion": 2,
+  "productionConnected": false,
+  "totals": {
+    "source": 928,
+    "brand": 255,
+    "model": 1619,
+    "generation": 1293,
+    "facelift": 105,
+    "variant": 19240,
+    "media": 449
+  },
+  "statuses": {
+    "brand": {
+      "review": 3,
+      "seed": 243,
+      "verified": 9
+    },
+    "model": {
+      "review": 1560,
+      "seed": 34,
+      "verified": 25
+    },
+    "generation": {
+      "review": 1232,
+      "seed": 35,
+      "verified": 26
+    },
+    "facelift": {
+      "review": 93,
+      "seed": 3,
+      "verified": 9
+    },
+    "variant": {
+      "review": 18941,
+      "seed": 38,
+      "verified": 261
+    }
+  },
+  "byBrand": [
+    {
+      "brandId": "212",
+      "brand": "212",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "abarth",
+      "brand": "Abarth",
+      "models": 6,
+      "generations": 5,
+      "facelifts": 0,
+      "variants": 19,
+      "media": 3
+    },
+    {
+      "brandId": "ac-cars",
+      "brand": "AC",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "acura",
+      "brand": "Acura",
+      "models": 6,
+      "generations": 7,
+      "facelifts": 1,
+      "variants": 20,
+      "media": 3
+    },
+    {
+      "brandId": "aion",
+      "brand": "AION",
+      "models": 5,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 2,
+      "media": 0
+    },
+    {
+      "brandId": "aito",
+      "brand": "AITO",
+      "models": 5,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 3
+    },
+    {
+      "brandId": "aiways",
+      "brand": "Aiways",
+      "models": 2,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 5,
+      "media": 0
+    },
+    {
+      "brandId": "alfa-romeo",
+      "brand": "Alfa Romeo",
+      "models": 14,
+      "generations": 13,
+      "facelifts": 0,
+      "variants": 152,
+      "media": 3
+    },
+    {
+      "brandId": "alpina",
+      "brand": "Alpina",
+      "models": 12,
+      "generations": 7,
+      "facelifts": 0,
+      "variants": 11,
+      "media": 2
+    },
+    {
+      "brandId": "alpine-cars",
+      "brand": "Alpine",
+      "models": 4,
+      "generations": 4,
+      "facelifts": 0,
+      "variants": 11,
+      "media": 0
+    },
+    {
+      "brandId": "amberauto",
+      "brand": "AMBERAUTO",
+      "models": 1,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "ambertruck",
+      "brand": "AMBERTRUCK",
+      "models": 6,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "amc",
+      "brand": "AMC",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "arcfox",
+      "brand": "ARCFOX",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "aro",
+      "brand": "Aro",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "asia",
+      "brand": "Asia",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "aston-martin",
+      "brand": "Aston Martin",
+      "models": 17,
+      "generations": 16,
+      "facelifts": 0,
+      "variants": 59,
+      "media": 3
+    },
+    {
+      "brandId": "audi",
+      "brand": "Audi",
+      "models": 44,
+      "generations": 47,
+      "facelifts": 8,
+      "variants": 1112,
+      "media": 3
+    },
+    {
+      "brandId": "audi-china",
+      "brand": "AUDI China",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 2,
+      "media": 0
+    },
+    {
+      "brandId": "avatr",
+      "brand": "Avatr",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 3
+    },
+    {
+      "brandId": "baic",
+      "brand": "BAIC",
+      "models": 8,
+      "generations": 7,
+      "facelifts": 0,
+      "variants": 45,
+      "media": 3
+    },
+    {
+      "brandId": "baojun",
+      "brand": "Baojun",
+      "models": 15,
+      "generations": 9,
+      "facelifts": 0,
+      "variants": 28,
+      "media": 3
+    },
+    {
+      "brandId": "baw",
+      "brand": "BAW",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 3
+    },
+    {
+      "brandId": "belgee",
+      "brand": "Belgee",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 3
+    },
+    {
+      "brandId": "bentley",
+      "brand": "Bentley",
+      "models": 7,
+      "generations": 7,
+      "facelifts": 0,
+      "variants": 67,
+      "media": 3
+    },
+    {
+      "brandId": "bestune",
+      "brand": "Bestune",
+      "models": 5,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 3
+    },
+    {
+      "brandId": "bmw",
+      "brand": "BMW",
+      "models": 38,
+      "generations": 39,
+      "facelifts": 8,
+      "variants": 1229,
+      "media": 3
+    },
+    {
+      "brandId": "borgward",
+      "brand": "Borgward",
+      "models": 1,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "brabus",
+      "brand": "Brabus",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "brilliance",
+      "brand": "Brilliance",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "bugatti",
+      "brand": "Bugatti",
+      "models": 4,
+      "generations": 4,
+      "facelifts": 0,
+      "variants": 6,
+      "media": 0
+    },
+    {
+      "brandId": "buick",
+      "brand": "Buick",
+      "models": 3,
+      "generations": 3,
+      "facelifts": 0,
+      "variants": 3,
+      "media": 3
+    },
+    {
+      "brandId": "byd",
+      "brand": "BYD",
+      "models": 15,
+      "generations": 15,
+      "facelifts": 0,
+      "variants": 92,
+      "media": 3
+    },
+    {
+      "brandId": "cadillac",
+      "brand": "Cadillac",
+      "models": 12,
+      "generations": 12,
+      "facelifts": 0,
+      "variants": 45,
+      "media": 3
+    },
+    {
+      "brandId": "caterham",
+      "brand": "Caterham",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 12,
+      "media": 0
+    },
+    {
+      "brandId": "changan",
+      "brand": "Changan",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 3
+    },
+    {
+      "brandId": "changan-nevo",
+      "brand": "Changan NEVO",
+      "models": 3,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "changfeng",
+      "brand": "Changfeng",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "changhe",
+      "brand": "Changhe",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "chery",
+      "brand": "Chery",
+      "models": 21,
+      "generations": 8,
+      "facelifts": 0,
+      "variants": 19,
+      "media": 3
+    },
+    {
+      "brandId": "chevrolet",
+      "brand": "Chevrolet",
+      "models": 21,
+      "generations": 21,
+      "facelifts": 0,
+      "variants": 100,
+      "media": 3
+    },
+    {
+      "brandId": "chrysler",
+      "brand": "Chrysler",
+      "models": 7,
+      "generations": 7,
+      "facelifts": 0,
+      "variants": 17,
+      "media": 2
+    },
+    {
+      "brandId": "ciimo",
+      "brand": "CIIMO",
+      "models": 1,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "cirelli",
+      "brand": "Cirelli",
+      "models": 7,
+      "generations": 7,
+      "facelifts": 0,
+      "variants": 11,
+      "media": 0
+    },
+    {
+      "brandId": "citroen",
+      "brand": "Citroën",
+      "models": 35,
+      "generations": 33,
+      "facelifts": 1,
+      "variants": 447,
+      "media": 3
+    },
+    {
+      "brandId": "coda",
+      "brand": "Coda",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "cupra",
+      "brand": "Cupra",
+      "models": 7,
+      "generations": 7,
+      "facelifts": 0,
+      "variants": 71,
+      "media": 2
+    },
+    {
+      "brandId": "dacia",
+      "brand": "Dacia",
+      "models": 9,
+      "generations": 12,
+      "facelifts": 5,
+      "variants": 278,
+      "media": 2
+    },
+    {
+      "brandId": "dadi",
+      "brand": "Dadi",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "daewoo",
+      "brand": "Daewoo",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "daihatsu",
+      "brand": "Daihatsu",
+      "models": 21,
+      "generations": 2,
+      "facelifts": 1,
+      "variants": 15,
+      "media": 3
+    },
+    {
+      "brandId": "dallara",
+      "brand": "Dallara",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 5,
+      "media": 0
+    },
+    {
+      "brandId": "datsun",
+      "brand": "Datsun",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "dayun",
+      "brand": "Dayun",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "deepal",
+      "brand": "Deepal",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 5,
+      "media": 2
+    },
+    {
+      "brandId": "denza",
+      "brand": "Denza",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "dfsk",
+      "brand": "DFSK",
+      "models": 7,
+      "generations": 5,
+      "facelifts": 0,
+      "variants": 42,
+      "media": 0
+    },
+    {
+      "brandId": "dodge",
+      "brand": "Dodge",
+      "models": 11,
+      "generations": 10,
+      "facelifts": 1,
+      "variants": 111,
+      "media": 2
+    },
+    {
+      "brandId": "dongfeng",
+      "brand": "Dongfeng",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 2,
+      "media": 2
+    },
+    {
+      "brandId": "dongfeng-aeolus",
+      "brand": "Dongfeng Aeolus",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "dongfeng-epi",
+      "brand": "Dongfeng eπ",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "dongfeng-nammi",
+      "brand": "Dongfeng Nammi",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "donkervoort",
+      "brand": "Donkervoort",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 2,
+      "media": 0
+    },
+    {
+      "brandId": "dr-automobiles",
+      "brand": "DR",
+      "models": 11,
+      "generations": 5,
+      "facelifts": 0,
+      "variants": 34,
+      "media": 0
+    },
+    {
+      "brandId": "ds-automobiles",
+      "brand": "DS Automobiles",
+      "models": 7,
+      "generations": 6,
+      "facelifts": 0,
+      "variants": 91,
+      "media": 0
+    },
+    {
+      "brandId": "ego-mobile",
+      "brand": "e.GO",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 6,
+      "media": 0
+    },
+    {
+      "brandId": "eagle",
+      "brand": "Eagle",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "ebro",
+      "brand": "EBRO",
+      "models": 4,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 2,
+      "media": 0
+    },
+    {
+      "brandId": "elaris",
+      "brand": "Elaris",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 2,
+      "media": 0
+    },
+    {
+      "brandId": "emc",
+      "brand": "EMC",
+      "models": 5,
+      "generations": 5,
+      "facelifts": 0,
+      "variants": 11,
+      "media": 0
+    },
+    {
+      "brandId": "eonyx",
+      "brand": "EONYX",
+      "models": 3,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "esteo",
+      "brand": "ESTEO",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "evo",
+      "brand": "EVO",
+      "models": 6,
+      "generations": 5,
+      "facelifts": 0,
+      "variants": 14,
+      "media": 0
+    },
+    {
+      "brandId": "evolute",
+      "brand": "EVOLUTE",
+      "models": 6,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "exeed",
+      "brand": "EXEED",
+      "models": 2,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "exlantix",
+      "brand": "Exlantix",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 6,
+      "media": 0
+    },
+    {
+      "brandId": "fangchengbao",
+      "brand": "FANGCHENGBAO",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "farizon",
+      "brand": "Farizon",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "faw",
+      "brand": "FAW",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 12,
+      "media": 2
+    },
+    {
+      "brandId": "ferrari",
+      "brand": "Ferrari",
+      "models": 38,
+      "generations": 36,
+      "facelifts": 0,
+      "variants": 68,
+      "media": 2
+    },
+    {
+      "brandId": "fiat",
+      "brand": "Fiat",
+      "models": 42,
+      "generations": 38,
+      "facelifts": 1,
+      "variants": 416,
+      "media": 2
+    },
+    {
+      "brandId": "firefly",
+      "brand": "firefly",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "fisker",
+      "brand": "Fisker",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 9,
+      "media": 2
+    },
+    {
+      "brandId": "ford",
+      "brand": "Ford",
+      "models": 44,
+      "generations": 42,
+      "facelifts": 7,
+      "variants": 1041,
+      "media": 3
+    },
+    {
+      "brandId": "forthing",
+      "brand": "Forthing",
+      "models": 4,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "foton",
+      "brand": "Foton",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "gac",
+      "brand": "GAC",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 4,
+      "media": 2
+    },
+    {
+      "brandId": "geely",
+      "brand": "Geely",
+      "models": 7,
+      "generations": 3,
+      "facelifts": 0,
+      "variants": 7,
+      "media": 3
+    },
+    {
+      "brandId": "geely-galaxy",
+      "brand": "Geely Galaxy",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "genesis",
+      "brand": "Genesis",
+      "models": 5,
+      "generations": 5,
+      "facelifts": 0,
+      "variants": 21,
+      "media": 2
+    },
+    {
+      "brandId": "geo",
+      "brand": "Geo",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "gmc",
+      "brand": "GMC",
+      "models": 8,
+      "generations": 8,
+      "facelifts": 0,
+      "variants": 18,
+      "media": 2
+    },
+    {
+      "brandId": "great-wall",
+      "brand": "Great Wall",
+      "models": 12,
+      "generations": 7,
+      "facelifts": 0,
+      "variants": 11,
+      "media": 2
+    },
+    {
+      "brandId": "hafei",
+      "brand": "Hafei",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "haima",
+      "brand": "Haima",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "haval",
+      "brand": "Haval",
+      "models": 4,
+      "generations": 4,
+      "facelifts": 1,
+      "variants": 14,
+      "media": 3
+    },
+    {
+      "brandId": "hawtai",
+      "brand": "Hawtai",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "hedmos",
+      "brand": "HEDMOS",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "hiphi",
+      "brand": "HiPhi",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "honda",
+      "brand": "Honda",
+      "models": 48,
+      "generations": 37,
+      "facelifts": 10,
+      "variants": 307,
+      "media": 10
+    },
+    {
+      "brandId": "hongqi",
+      "brand": "Hongqi",
+      "models": 1,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "hozon",
+      "brand": "Hozon",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "huanghai",
+      "brand": "Huanghai",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "hummer",
+      "brand": "Hummer",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "hyptec",
+      "brand": "HYPTEC",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "models": 30,
+      "generations": 32,
+      "facelifts": 4,
+      "variants": 1098,
+      "media": 3
+    },
+    {
+      "brandId": "icar",
+      "brand": "iCAR",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "icaur",
+      "brand": "iCAUR",
+      "models": 2,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 2,
+      "media": 0
+    },
+    {
+      "brandId": "im-motors",
+      "brand": "IM Motors",
+      "models": 5,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "ineos",
+      "brand": "INEOS",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 16,
+      "media": 0
+    },
+    {
+      "brandId": "infiniti",
+      "brand": "Infiniti",
+      "models": 12,
+      "generations": 12,
+      "facelifts": 0,
+      "variants": 21,
+      "media": 2
+    },
+    {
+      "brandId": "iran-khodro",
+      "brand": "Iran Khodro",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "isuzu",
+      "brand": "Isuzu",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 5,
+      "media": 2
+    },
+    {
+      "brandId": "iveco",
+      "brand": "IVECO",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "jac",
+      "brand": "JAC",
+      "models": 4,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "jac-yiwei",
+      "brand": "JAC Yiwei",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 0
+    },
+    {
+      "brandId": "jaecoo",
+      "brand": "Jaecoo",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 9,
+      "media": 2
+    },
+    {
+      "brandId": "jaguar",
+      "brand": "Jaguar",
+      "models": 11,
+      "generations": 10,
+      "facelifts": 2,
+      "variants": 182,
+      "media": 2
+    },
+    {
+      "brandId": "jeep",
+      "brand": "Jeep",
+      "models": 15,
+      "generations": 15,
+      "facelifts": 3,
+      "variants": 313,
+      "media": 2
+    },
+    {
+      "brandId": "jeland",
+      "brand": "Jeland",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "jetour",
+      "brand": "Jetour",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 2,
+      "media": 2
+    },
+    {
+      "brandId": "jetta",
+      "brand": "Jetta",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "jinbei",
+      "brand": "Jinbei",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "jmc",
+      "brand": "JMC",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "jmev",
+      "brand": "JMEV",
+      "models": 4,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "kaiyi",
+      "brand": "Kaiyi",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "kgm",
+      "brand": "KGM",
+      "models": 6,
+      "generations": 6,
+      "facelifts": 0,
+      "variants": 32,
+      "media": 2
+    },
+    {
+      "brandId": "kia",
+      "brand": "Kia",
+      "models": 34,
+      "generations": 34,
+      "facelifts": 5,
+      "variants": 457,
+      "media": 3
+    },
+    {
+      "brandId": "knewstar",
+      "brand": "Knewstar",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "ktm",
+      "brand": "KTM",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 4,
+      "media": 0
+    },
+    {
+      "brandId": "kuayue",
+      "brand": "Kuayue",
+      "models": 5,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "lada",
+      "brand": "Lada",
+      "models": 6,
+      "generations": 6,
+      "facelifts": 0,
+      "variants": 18,
+      "media": 0
+    },
+    {
+      "brandId": "lamborghini",
+      "brand": "Lamborghini",
+      "models": 13,
+      "generations": 12,
+      "facelifts": 0,
+      "variants": 56,
+      "media": 2
+    },
+    {
+      "brandId": "lancia",
+      "brand": "Lancia",
+      "models": 5,
+      "generations": 5,
+      "facelifts": 0,
+      "variants": 23,
+      "media": 2
+    },
+    {
+      "brandId": "land-rover",
+      "brand": "Land Rover",
+      "models": 8,
+      "generations": 7,
+      "facelifts": 0,
+      "variants": 375,
+      "media": 2
+    },
+    {
+      "brandId": "landwind",
+      "brand": "Landwind",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "leapmotor",
+      "brand": "Leapmotor",
+      "models": 3,
+      "generations": 3,
+      "facelifts": 0,
+      "variants": 25,
+      "media": 2
+    },
+    {
+      "brandId": "lepas",
+      "brand": "LEPAS",
+      "models": 3,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "levc",
+      "brand": "LEVC",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 0
+    },
+    {
+      "brandId": "lexus",
+      "brand": "Lexus",
+      "models": 18,
+      "generations": 15,
+      "facelifts": 0,
+      "variants": 60,
+      "media": 3
+    },
+    {
+      "brandId": "li-auto",
+      "brand": "Li Auto",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "lifan",
+      "brand": "Lifan",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "lincoln",
+      "brand": "Lincoln",
+      "models": 8,
+      "generations": 8,
+      "facelifts": 0,
+      "variants": 18,
+      "media": 2
+    },
+    {
+      "brandId": "livan",
+      "brand": "Livan",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 3,
+      "media": 2
+    },
+    {
+      "brandId": "lotus",
+      "brand": "Lotus",
+      "models": 12,
+      "generations": 12,
+      "facelifts": 0,
+      "variants": 50,
+      "media": 2
+    },
+    {
+      "brandId": "lucid",
+      "brand": "Lucid",
+      "models": 5,
+      "generations": 5,
+      "facelifts": 0,
+      "variants": 32,
+      "media": 2
+    },
+    {
+      "brandId": "luxeed",
+      "brand": "LUXEED",
+      "models": 3,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "luxgen",
+      "brand": "Luxgen",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "lynk-and-co",
+      "brand": "Lynk & Co",
+      "models": 4,
+      "generations": 3,
+      "facelifts": 0,
+      "variants": 5,
+      "media": 2
+    },
+    {
+      "brandId": "m-hero",
+      "brand": "M-Hero",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "maextro",
+      "brand": "Maextro",
+      "models": 3,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "mahindra",
+      "brand": "Mahindra",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 4,
+      "media": 0
+    },
+    {
+      "brandId": "man",
+      "brand": "MAN",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 9,
+      "media": 0
+    },
+    {
+      "brandId": "maserati",
+      "brand": "Maserati",
+      "models": 9,
+      "generations": 9,
+      "facelifts": 0,
+      "variants": 76,
+      "media": 2
+    },
+    {
+      "brandId": "maxus",
+      "brand": "Maxus",
+      "models": 4,
+      "generations": 4,
+      "facelifts": 0,
+      "variants": 7,
+      "media": 2
+    },
+    {
+      "brandId": "maybach",
+      "brand": "Maybach",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "mazda",
+      "brand": "Mazda",
+      "models": 33,
+      "generations": 19,
+      "facelifts": 5,
+      "variants": 647,
+      "media": 4
+    },
+    {
+      "brandId": "mclaren",
+      "brand": "McLaren",
+      "models": 16,
+      "generations": 16,
+      "facelifts": 0,
+      "variants": 41,
+      "media": 2
+    },
+    {
+      "brandId": "mercedes-benz",
+      "brand": "Mercedes-Benz",
+      "models": 56,
+      "generations": 52,
+      "facelifts": 2,
+      "variants": 1104,
+      "media": 5
+    },
+    {
+      "brandId": "mercury",
+      "brand": "Mercury",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "mg-motor",
+      "brand": "MG",
+      "models": 14,
+      "generations": 13,
+      "facelifts": 0,
+      "variants": 106,
+      "media": 2
+    },
+    {
+      "brandId": "micro",
+      "brand": "Micro",
+      "models": 1,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "mini",
+      "brand": "MINI",
+      "models": 9,
+      "generations": 9,
+      "facelifts": 1,
+      "variants": 274,
+      "media": 2
+    },
+    {
+      "brandId": "mitsubishi",
+      "brand": "Mitsubishi",
+      "models": 27,
+      "generations": 18,
+      "facelifts": 4,
+      "variants": 128,
+      "media": 3
+    },
+    {
+      "brandId": "mitsuoka",
+      "brand": "Mitsuoka",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "mobilize",
+      "brand": "Mobilize",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 2,
+      "media": 0
+    },
+    {
+      "brandId": "moke",
+      "brand": "Moke",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 2,
+      "media": 0
+    },
+    {
+      "brandId": "morgan",
+      "brand": "Morgan",
+      "models": 6,
+      "generations": 6,
+      "facelifts": 0,
+      "variants": 27,
+      "media": 2
+    },
+    {
+      "brandId": "neta",
+      "brand": "Neta",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "nio",
+      "brand": "Nio",
+      "models": 7,
+      "generations": 5,
+      "facelifts": 0,
+      "variants": 17,
+      "media": 2
+    },
+    {
+      "brandId": "nissan",
+      "brand": "Nissan",
+      "models": 51,
+      "generations": 34,
+      "facelifts": 5,
+      "variants": 267,
+      "media": 4
+    },
+    {
+      "brandId": "nordcross",
+      "brand": "Nordcross",
+      "models": 1,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "oldsmobile",
+      "brand": "Oldsmobile",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "omoda",
+      "brand": "OMODA",
+      "models": 4,
+      "generations": 3,
+      "facelifts": 0,
+      "variants": 20,
+      "media": 2
+    },
+    {
+      "brandId": "onvo",
+      "brand": "ONVO",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "opel",
+      "brand": "Opel",
+      "models": 18,
+      "generations": 16,
+      "facelifts": 0,
+      "variants": 478,
+      "media": 2
+    },
+    {
+      "brandId": "ora",
+      "brand": "ORA",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 2
+    },
+    {
+      "brandId": "oshan",
+      "brand": "Oshan",
+      "models": 1,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "oting",
+      "brand": "Oting",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "peugeot",
+      "brand": "Peugeot",
+      "models": 30,
+      "generations": 29,
+      "facelifts": 6,
+      "variants": 789,
+      "media": 2
+    },
+    {
+      "brandId": "plymouth",
+      "brand": "Plymouth",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "polar-stone",
+      "brand": "Polar Stone",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "polestar",
+      "brand": "Polestar",
+      "models": 4,
+      "generations": 3,
+      "facelifts": 0,
+      "variants": 37,
+      "media": 2
+    },
+    {
+      "brandId": "pontiac",
+      "brand": "Pontiac",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 2,
+      "media": 2
+    },
+    {
+      "brandId": "porsche",
+      "brand": "Porsche",
+      "models": 10,
+      "generations": 9,
+      "facelifts": 0,
+      "variants": 461,
+      "media": 3
+    },
+    {
+      "brandId": "proton",
+      "brand": "Proton",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "radar",
+      "brand": "RADAR",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "ram",
+      "brand": "RAM",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 3,
+      "media": 2
+    },
+    {
+      "brandId": "ravon",
+      "brand": "Ravon",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "renault",
+      "brand": "Renault",
+      "models": 27,
+      "generations": 26,
+      "facelifts": 2,
+      "variants": 350,
+      "media": 2
+    },
+    {
+      "brandId": "renault-samsung",
+      "brand": "Renault Samsung",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "rising-auto",
+      "brand": "Rising Auto",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "rivian",
+      "brand": "Rivian",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 2
+    },
+    {
+      "brandId": "roewe",
+      "brand": "Roewe",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "rolls-royce",
+      "brand": "Rolls-Royce",
+      "models": 16,
+      "generations": 16,
+      "facelifts": 0,
+      "variants": 83,
+      "media": 2
+    },
+    {
+      "brandId": "rover",
+      "brand": "Rover",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "rox",
+      "brand": "Rox",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "ruf",
+      "brand": "RUF",
+      "models": 3,
+      "generations": 3,
+      "facelifts": 0,
+      "variants": 5,
+      "media": 0
+    },
+    {
+      "brandId": "saab",
+      "brand": "Saab",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "saipa",
+      "brand": "SAIPA",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "saturn",
+      "brand": "Saturn",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 2
+    },
+    {
+      "brandId": "scion",
+      "brand": "Scion",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 2,
+      "media": 2
+    },
+    {
+      "brandId": "seat",
+      "brand": "SEAT",
+      "models": 10,
+      "generations": 11,
+      "facelifts": 2,
+      "variants": 210,
+      "media": 2
+    },
+    {
+      "brandId": "secma",
+      "brand": "SECMA",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 3,
+      "media": 0
+    },
+    {
+      "brandId": "seres",
+      "brand": "Seres",
+      "models": 2,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "shangjie",
+      "brand": "SHANGJIE",
+      "models": 3,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "shuanghuan",
+      "brand": "Shuanghuan",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "skoda",
+      "brand": "Skoda",
+      "models": 14,
+      "generations": 16,
+      "facelifts": 5,
+      "variants": 1205,
+      "media": 2
+    },
+    {
+      "brandId": "skywell",
+      "brand": "Skywell",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 9,
+      "media": 2
+    },
+    {
+      "brandId": "skyworth",
+      "brand": "Skyworth",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 0
+    },
+    {
+      "brandId": "smart",
+      "brand": "Smart",
+      "models": 11,
+      "generations": 10,
+      "facelifts": 0,
+      "variants": 67,
+      "media": 2
+    },
+    {
+      "brandId": "solaris",
+      "brand": "Solaris",
+      "models": 4,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "sollers",
+      "brand": "Sollers",
+      "models": 4,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "soueast",
+      "brand": "Soueast",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "sportequipe",
+      "brand": "Sportequipe",
+      "models": 6,
+      "generations": 4,
+      "facelifts": 0,
+      "variants": 18,
+      "media": 0
+    },
+    {
+      "brandId": "srm-shineray",
+      "brand": "SRM Shineray",
+      "models": 15,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "ssangyong",
+      "brand": "SsangYong",
+      "models": 9,
+      "generations": 9,
+      "facelifts": 0,
+      "variants": 282,
+      "media": 2
+    },
+    {
+      "brandId": "stelato",
+      "brand": "STELATO",
+      "models": 2,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "subaru",
+      "brand": "Subaru",
+      "models": 21,
+      "generations": 13,
+      "facelifts": 0,
+      "variants": 73,
+      "media": 3
+    },
+    {
+      "brandId": "suda",
+      "brand": "Suda",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 3,
+      "media": 0
+    },
+    {
+      "brandId": "suzuki",
+      "brand": "Suzuki",
+      "models": 30,
+      "generations": 15,
+      "facelifts": 1,
+      "variants": 162,
+      "media": 3
+    },
+    {
+      "brandId": "swm",
+      "brand": "SWM",
+      "models": 4,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 13,
+      "media": 2
+    },
+    {
+      "brandId": "tank",
+      "brand": "Tank",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "tata",
+      "brand": "TATA",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "tenet",
+      "brand": "TENET",
+      "models": 4,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "tesla",
+      "brand": "Tesla",
+      "models": 5,
+      "generations": 5,
+      "facelifts": 0,
+      "variants": 244,
+      "media": 3
+    },
+    {
+      "brandId": "tianma",
+      "brand": "Tianma",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "tianye",
+      "brand": "Tianye",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "togg",
+      "brand": "Togg",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 7,
+      "media": 0
+    },
+    {
+      "brandId": "toyota",
+      "brand": "Toyota",
+      "models": 93,
+      "generations": 59,
+      "facelifts": 6,
+      "variants": 588,
+      "media": 11
+    },
+    {
+      "brandId": "trabant",
+      "brand": "Trabant",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "umo",
+      "brand": "Umo",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "vauxhall",
+      "brand": "Vauxhall",
+      "models": 9,
+      "generations": 7,
+      "facelifts": 0,
+      "variants": 23,
+      "media": 2
+    },
+    {
+      "brandId": "venucia",
+      "brand": "Venucia",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "vgv",
+      "brand": "VGV",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "vinfast",
+      "brand": "VinFast",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 9,
+      "media": 0
+    },
+    {
+      "brandId": "volkswagen",
+      "brand": "Volkswagen",
+      "models": 42,
+      "generations": 40,
+      "facelifts": 6,
+      "variants": 1926,
+      "media": 3
+    },
+    {
+      "brandId": "volvo",
+      "brand": "Volvo",
+      "models": 25,
+      "generations": 23,
+      "facelifts": 2,
+      "variants": 344,
+      "media": 3
+    },
+    {
+      "brandId": "voyah",
+      "brand": "Voyah",
+      "models": 2,
+      "generations": 2,
+      "facelifts": 0,
+      "variants": 10,
+      "media": 2
+    },
+    {
+      "brandId": "wartburg",
+      "brand": "Wartburg",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "weltmeister",
+      "brand": "Weltmeister",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "wey",
+      "brand": "WEY",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "willys",
+      "brand": "Willys",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 1,
+      "media": 2
+    },
+    {
+      "brandId": "wuling",
+      "brand": "Wuling",
+      "models": 29,
+      "generations": 21,
+      "facelifts": 0,
+      "variants": 83,
+      "media": 2
+    },
+    {
+      "brandId": "xcite",
+      "brand": "XCITE",
+      "models": 2,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "xiaomi",
+      "brand": "Xiaomi",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 2,
+      "media": 2
+    },
+    {
+      "brandId": "xin-kai",
+      "brand": "Xin Kai",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "xpeng",
+      "brand": "XPeng",
+      "models": 8,
+      "generations": 4,
+      "facelifts": 0,
+      "variants": 48,
+      "media": 2
+    },
+    {
+      "brandId": "yangwang",
+      "brand": "YANGWANG",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "yema",
+      "brand": "Yema",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "yudo",
+      "brand": "Yudo",
+      "models": 1,
+      "generations": 1,
+      "facelifts": 0,
+      "variants": 2,
+      "media": 0
+    },
+    {
+      "brandId": "zeekr",
+      "brand": "Zeekr",
+      "models": 3,
+      "generations": 3,
+      "facelifts": 0,
+      "variants": 10,
+      "media": 2
+    },
+    {
+      "brandId": "zhidou",
+      "brand": "Zhidou",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 0
+    },
+    {
+      "brandId": "zotye",
+      "brand": "Zotye",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    },
+    {
+      "brandId": "zx-auto",
+      "brand": "ZX",
+      "models": 0,
+      "generations": 0,
+      "facelifts": 0,
+      "variants": 0,
+      "media": 2
+    }
+  ],
+  "sources": {
+    "byType": {
+      "authoritative_catalog": 114,
+      "government_registry": 232,
+      "manufacturer": 350,
+      "manufacturer_technical_document": 93,
+      "secondary_reference": 3,
+      "wikidata": 76,
+      "wikimedia_commons": 60
+    },
+    "byDomain": {
+      "agr.auto": 1,
+      "aito.auto": 3,
+      "amberauto.ru": 1,
+      "ambertruck.ru": 1,
+      "astonmartin.com": 3,
+      "audi-mediacenter.com": 2,
+      "audi.com": 3,
+      "avatr.com": 2,
+      "baicglobal.com": 3,
+      "baicgroup.com.cn": 1,
+      "baw.com.cn": 3,
+      "belgee.ru": 3,
+      "bentleymedia.com": 2,
+      "bestune.ru": 2,
+      "bmwgroup.com": 1,
+      "byd.com": 3,
+      "can-am.brp.com": 1,
+      "cdn.renault.co.kr": 1,
+      "changan.ae": 2,
+      "changan.co.th": 2,
+      "changan.com.cn": 1,
+      "changan.com.pk": 1,
+      "chery.cn": 1,
+      "chery.my": 1,
+      "cheryinternational.com": 4,
+      "commons.wikimedia.org": 60,
+      "consumer.huawei.com": 2,
+      "corporate.ford.com": 1,
+      "daihatsu.co.jp": 8,
+      "daihatsu.com": 11,
+      "dfmc.com.cn": 2,
+      "dongfeng-honda.com": 1,
+      "drautomobiles.com": 1,
+      "drom.ru": 107,
+      "eea.europa.eu": 4,
+      "en.jmev.com": 1,
+      "en.wikipedia.org": 1,
+      "encar.com": 1,
+      "eonyx.ru": 1,
+      "evolute.ru": 1,
+      "faw.com": 1,
+      "fiatprofessional.com": 1,
+      "ford.com": 1,
+      "gacgroup.com": 1,
+      "geely.com": 2,
+      "global.geely.com": 4,
+      "global.honda": 26,
+      "global.nissannews.com": 3,
+      "global.toyota": 35,
+      "globalchangan.com": 3,
+      "globalsuzuki.com": 3,
+      "govt.chinadaily.com.cn": 1,
+      "group.mercedes-benz.com": 1,
+      "gwm-global.com": 2,
+      "gxxnyqch.sgmw.com.cn": 1,
+      "hima.auto": 5,
+      "history.nissan.co.jp": 10,
+      "honda.co.jp": 14,
+      "hondanews.com": 1,
+      "hyundai.com": 3,
+      "hyundai.news": 1,
+      "icaurglobal.com": 3,
+      "kiapressoffice.com": 1,
+      "kyc.az": 1,
+      "lepasinternational.com": 1,
+      "liauto.com": 1,
+      "lu.sgmw.com.cn": 19,
+      "m.kg-mobility.com": 1,
+      "mahindra.it": 1,
+      "major-auto.ru": 1,
+      "man.eu": 1,
+      "mazda.co.jp": 8,
+      "mazda.com": 1,
+      "media.cadillac.com": 1,
+      "media.gm.com": 2,
+      "media.landrover.com": 1,
+      "media.mercedes-benz.com": 4,
+      "media.mercedes-benz.fr": 1,
+      "media.renault.com": 1,
+      "media.stellantis.com": 14,
+      "media.toyota.co.uk": 2,
+      "media.volvocars.com": 2,
+      "mercedes-benz-publicarchive.com": 1,
+      "mercedes-benz.co.uk": 3,
+      "mercedes-benz.com.cn": 2,
+      "micro-mobility.com": 1,
+      "mitsubishi-motors.co.jp": 3,
+      "mitsubishi-motors.com": 4,
+      "mlit.go.jp": 227,
+      "mustang-mach-e.fordpresskits.com": 1,
+      "news.chevrolet.com.mx": 1,
+      "news.gm.com": 4,
+      "news.gm.com.cn": 22,
+      "newsroom.lexus.eu": 2,
+      "newsroom.mazda.com": 8,
+      "newsroom.porsche.com": 2,
+      "nio.com": 1,
+      "nissan-global.com": 2,
+      "peugeot.co.uk": 1,
+      "press.bmwgroup.com": 5,
+      "press.kia.com": 1,
+      "pressroom.toyota.com": 1,
+      "prnewswire.com": 1,
+      "proton.com": 1,
+      "renaultgroup.com": 1,
+      "saicmotor.com": 1,
+      "sgmw.com.cn": 23,
+      "shineray.com": 1,
+      "sollers-auto.com": 1,
+      "sportequipe.it": 1,
+      "subaru.co.jp": 2,
+      "subaru.jp": 7,
+      "suzuki.co.jp": 14,
+      "tax.mercedes-benz.co.uk": 1,
+      "tenet.ru": 1,
+      "tesla.com": 3,
+      "toyota.jp": 35,
+      "ucar.mitsubishi-motors.co.jp": 1,
+      "uk.mazda-press.com": 1,
+      "vauxhall.co.uk": 2,
+      "volkswagen-newsroom.com": 5,
+      "volkswagen-vans.co.uk": 2,
+      "volvocars.com": 2,
+      "vpic.nhtsa.dot.gov": 1,
+      "wikidata.org": 76,
+      "worldwide.kia.com": 1,
+      "wuling.com": 3,
+      "wuling.id": 2,
+      "www3.nissan.co.jp": 7,
+      "xcite-center.ru": 1,
+      "yiwei.jac.com.cn": 3
+    }
+  },
+  "chunks": [
+    {
+      "file": "brands-0001.json",
+      "entityType": "brand",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "brands-0002.json",
+      "entityType": "brand",
+      "records": 5,
+      "maxRecords": 250
+    },
+    {
+      "file": "facelifts-0001.json",
+      "entityType": "facelift",
+      "records": 105,
+      "maxRecords": 250
+    },
+    {
+      "file": "generations-0001.json",
+      "entityType": "generation",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "generations-0002.json",
+      "entityType": "generation",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "generations-0003.json",
+      "entityType": "generation",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "generations-0004.json",
+      "entityType": "generation",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "generations-0005.json",
+      "entityType": "generation",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "generations-0006.json",
+      "entityType": "generation",
+      "records": 43,
+      "maxRecords": 250
+    },
+    {
+      "file": "media-0001.json",
+      "entityType": "media",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "media-0002.json",
+      "entityType": "media",
+      "records": 199,
+      "maxRecords": 250
+    },
+    {
+      "file": "models-0001.json",
+      "entityType": "model",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "models-0002.json",
+      "entityType": "model",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "models-0003.json",
+      "entityType": "model",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "models-0004.json",
+      "entityType": "model",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "models-0005.json",
+      "entityType": "model",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "models-0006.json",
+      "entityType": "model",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "models-0007.json",
+      "entityType": "model",
+      "records": 119,
+      "maxRecords": 250
+    },
+    {
+      "file": "sources-0001.json",
+      "entityType": "source",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "sources-0002.json",
+      "entityType": "source",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "sources-0003.json",
+      "entityType": "source",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "sources-0004.json",
+      "entityType": "source",
+      "records": 178,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0001.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0002.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0003.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0004.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0005.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0006.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0007.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0008.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0009.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0010.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0011.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0012.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0013.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0014.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0015.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0016.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0017.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0018.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0019.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0020.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0021.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0022.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0023.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0024.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0025.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0026.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0027.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0028.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0029.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0030.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0031.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0032.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0033.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0034.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0035.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0036.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0037.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0038.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0039.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0040.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0041.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0042.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0043.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0044.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0045.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0046.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0047.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0048.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0049.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0050.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0051.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0052.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0053.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0054.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0055.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0056.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0057.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0058.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0059.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0060.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0061.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0062.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0063.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0064.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0065.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0066.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0067.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0068.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0069.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0070.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0071.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0072.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0073.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0074.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0075.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0076.json",
+      "entityType": "variant",
+      "records": 250,
+      "maxRecords": 250
+    },
+    {
+      "file": "variants-0077.json",
+      "entityType": "variant",
+      "records": 240,
+      "maxRecords": 250
+    }
+  ]
+}

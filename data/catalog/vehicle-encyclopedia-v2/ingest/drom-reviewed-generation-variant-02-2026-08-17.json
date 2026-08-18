@@ -1,0 +1,2350 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-drom-catalog-16dc947d5a80b83d",
+          "type": "authoritative_catalog",
+          "title": "Drom catalog specifications for Mazda Axela",
+          "publisher": "Drom",
+          "url": "https://www.drom.ru/catalog/mazda/axela/specs/engine_capacity/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-05",
+          "market": null,
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "sourceNames",
+            "productionFrom",
+            "productionTo",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "platformCodes",
+            "market",
+            "yearFrom",
+            "yearTo",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "engineCc",
+            "transmission",
+            "drive",
+            "powerHp"
+          ],
+          "confidence": "high",
+          "status": "active",
+          "license": null,
+          "notes": "Secondary catalog evidence imported from the existing AvtoCena research database. Review-only; no market applicability, engine code, power standard or derived kW value is inferred."
+        },
+        {
+          "id": "src-drom-catalog-1d1992db2dc4c48f",
+          "type": "authoritative_catalog",
+          "title": "Drom catalog specifications for Toyota RAV4",
+          "publisher": "Drom",
+          "url": "https://pressroom.toyota.com/2020-toyota-rav4-offers-a-new-trd-off-road-model-and-multimedia-enhancements/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-07-28",
+          "market": null,
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "sourceNames",
+            "productionFrom",
+            "productionTo",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "platformCodes",
+            "market",
+            "yearFrom",
+            "yearTo",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "engineCc",
+            "transmission",
+            "drive",
+            "powerHp"
+          ],
+          "confidence": "high",
+          "status": "active",
+          "license": null,
+          "notes": "Secondary catalog evidence imported from the existing AvtoCena research database. Review-only; no market applicability, engine code, power standard or derived kW value is inferred."
+        },
+        {
+          "id": "src-drom-catalog-2975dec6bac4b99f",
+          "type": "authoritative_catalog",
+          "title": "Drom catalog specifications for Honda Fit",
+          "publisher": "Drom",
+          "url": "https://www.drom.ru/catalog/honda/fit/specs/engine_capacity/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-05",
+          "market": null,
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "sourceNames",
+            "productionFrom",
+            "productionTo",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "platformCodes",
+            "market",
+            "yearFrom",
+            "yearTo",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "engineCc",
+            "transmission",
+            "drive",
+            "powerHp"
+          ],
+          "confidence": "high",
+          "status": "active",
+          "license": null,
+          "notes": "Secondary catalog evidence imported from the existing AvtoCena research database. Review-only; no market applicability, engine code, power standard or derived kW value is inferred."
+        },
+        {
+          "id": "src-drom-catalog-546d039cbd7ed7da",
+          "type": "authoritative_catalog",
+          "title": "Drom catalog specifications for Honda Vezel",
+          "publisher": "Drom",
+          "url": "https://www.drom.ru/catalog/honda/vezel/specs/engine_capacity/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-05",
+          "market": null,
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "sourceNames",
+            "productionFrom",
+            "productionTo",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "platformCodes",
+            "market",
+            "yearFrom",
+            "yearTo",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "engineCc",
+            "transmission",
+            "drive",
+            "powerHp"
+          ],
+          "confidence": "high",
+          "status": "active",
+          "license": null,
+          "notes": "Secondary catalog evidence imported from the existing AvtoCena research database. Review-only; no market applicability, engine code, power standard or derived kW value is inferred."
+        },
+        {
+          "id": "src-drom-catalog-8858cf22aeb1f4bf",
+          "type": "authoritative_catalog",
+          "title": "Drom catalog specifications for Toyota Yaris",
+          "publisher": "Drom",
+          "url": "https://www.drom.ru/catalog/toyota/yaris/specs/engine_capacity/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-05",
+          "market": null,
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "sourceNames",
+            "productionFrom",
+            "productionTo",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "platformCodes",
+            "market",
+            "yearFrom",
+            "yearTo",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "engineCc",
+            "transmission",
+            "drive",
+            "powerHp"
+          ],
+          "confidence": "high",
+          "status": "active",
+          "license": null,
+          "notes": "Secondary catalog evidence imported from the existing AvtoCena research database. Review-only; no market applicability, engine code, power standard or derived kW value is inferred."
+        },
+        {
+          "id": "src-drom-catalog-e75f551be882ccbb",
+          "type": "authoritative_catalog",
+          "title": "Drom catalog specifications for Volkswagen Lavida",
+          "publisher": "Drom",
+          "url": "https://www.drom.ru/catalog/volkswagen/lavida/specs/engine_capacity/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-05",
+          "market": null,
+          "language": "ru",
+          "supportedFields": [
+            "canonicalName",
+            "sourceNames",
+            "productionFrom",
+            "productionTo",
+            "bodyTypes",
+            "powertrainKinds",
+            "name",
+            "platformCodes",
+            "market",
+            "yearFrom",
+            "yearTo",
+            "bodyType",
+            "powertrainKind",
+            "fuel",
+            "engineCc",
+            "transmission",
+            "drive",
+            "powerHp"
+          ],
+          "confidence": "high",
+          "status": "active",
+          "license": null,
+          "notes": "Secondary catalog evidence imported from the existing AvtoCena research database. Review-only; no market applicability, engine code, power standard or derived kW value is inferred."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "mazda/axela",
+          "brandId": "mazda",
+          "canonicalName": "Axela",
+          "slug": "axela",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "Axela",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": null,
+              "market": null,
+              "sourceIds": [
+                "src-drom-catalog-16dc947d5a80b83d"
+              ]
+            }
+          ],
+          "productionFrom": "2013-11",
+          "productionTo": "2019-05",
+          "bodyTypes": [
+            "Hatchback",
+            "Sedan"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "canonicalName",
+                "sourceNames",
+                "productionFrom",
+                "productionTo",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact legacy catalog model spelling and the observed in-window production/body/powertrain envelope; review-only pending preferred-source confirmation."
+            }
+          ],
+          "researchNotes": [
+            "Added only because exact legacy specifications overlap the priority window and the canonical brand identity already exists.",
+            "No localized alias, market applicability, media asset or production scope outside the observed source rows is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/lavida",
+          "brandId": "volkswagen",
+          "canonicalName": "Lavida",
+          "slug": "lavida",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "Lavida",
+              "kind": "source_spelling",
+              "safe": false,
+              "language": null,
+              "market": null,
+              "sourceIds": [
+                "src-drom-catalog-e75f551be882ccbb"
+              ]
+            }
+          ],
+          "productionFrom": "2018-04",
+          "productionTo": "2025-11",
+          "bodyTypes": [
+            "Sedan",
+            "Station wagon"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-e75f551be882ccbb",
+              "fields": [
+                "canonicalName",
+                "sourceNames",
+                "productionFrom",
+                "productionTo",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact legacy catalog model spelling and the observed in-window production/body/powertrain envelope; review-only pending preferred-source confirmation."
+            }
+          ],
+          "researchNotes": [
+            "Added only because exact legacy specifications overlap the priority window and the canonical brand identity already exists.",
+            "No localized alias, market applicability, media asset or production scope outside the observed source rows is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "mazda/axela/drom-generation-3",
+          "modelId": "mazda/axela",
+          "name": "Third generation",
+          "aliases": [
+            {
+              "value": "3 поколение",
+              "kind": "localized",
+              "safe": false,
+              "language": "ru",
+              "market": null,
+              "sourceIds": [
+                "src-drom-catalog-16dc947d5a80b83d"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2013-11",
+          "productionTo": "2019-05",
+          "bodyTypes": [
+            "Hatchback",
+            "Sedan"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes",
+                "productionTo"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact legacy catalog generation grouping and observed production/body envelope; the English ordinal is a direct normalization of the source label."
+            }
+          ],
+          "researchNotes": [
+            "Review-only secondary-catalog generation; no platform code or sales-market applicability is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/lavida/drom-generation-3",
+          "modelId": "volkswagen/lavida",
+          "name": "Third generation",
+          "aliases": [
+            {
+              "value": "3 поколение",
+              "kind": "localized",
+              "safe": false,
+              "language": "ru",
+              "market": null,
+              "sourceIds": [
+                "src-drom-catalog-e75f551be882ccbb"
+              ]
+            }
+          ],
+          "platformCodes": [],
+          "productionFrom": "2018-04",
+          "productionTo": "2025-11",
+          "bodyTypes": [
+            "Sedan",
+            "Station wagon"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-e75f551be882ccbb",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes",
+                "productionTo"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact legacy catalog generation grouping and observed production/body envelope; the English ordinal is a direct normalization of the source label."
+            }
+          ],
+          "researchNotes": [
+            "Review-only secondary-catalog generation; no platform code or sales-market applicability is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "facelift",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "mazda/axela/drom-generation-3/facelift-1",
+          "generationId": "mazda/axela/drom-generation-3",
+          "name": "Facelift",
+          "aliases": [
+            {
+              "value": "3 поколение, рестайлинг",
+              "kind": "localized",
+              "safe": false,
+              "language": "ru",
+              "market": null,
+              "sourceIds": [
+                "src-drom-catalog-16dc947d5a80b83d"
+              ]
+            }
+          ],
+          "productionFrom": "2016-07",
+          "productionTo": "2019-05",
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "productionFrom",
+                "productionTo"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The source facelift label and observed production range are preserved; the public label is normalized to English."
+            }
+          ],
+          "researchNotes": [
+            "Review-only facelift boundary; no trim or market applicability is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/lavida/drom-generation-3/facelift-1",
+          "generationId": "volkswagen/lavida/drom-generation-3",
+          "name": "Facelift",
+          "aliases": [
+            {
+              "value": "3 поколение, рестайлинг",
+              "kind": "localized",
+              "safe": false,
+              "language": "ru",
+              "market": null,
+              "sourceIds": [
+                "src-drom-catalog-e75f551be882ccbb"
+              ]
+            }
+          ],
+          "productionFrom": "2022-04",
+          "productionTo": "2025-11",
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-e75f551be882ccbb",
+              "fields": [
+                "name",
+                "productionFrom",
+                "productionTo"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "The source facelift label and observed production range are preserved; the public label is normalized to English."
+            }
+          ],
+          "researchNotes": [
+            "Review-only facelift boundary; no trim or market applicability is inferred."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "honda/fit/japan-2020/drom-e9f91ccc8bc3822678ef",
+          "modelId": "honda/fit",
+          "generationId": "honda/fit/japan-2020",
+          "faceliftId": null,
+          "name": "Fit 1500 cc 118 hp CVT AWD — Fourth generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2022,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "CVT",
+          "drive": "AWD",
+          "powerHp": 118,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-2975dec6bac4b99f",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_9dac83efc4022402e7dc831d.",
+            "Linked only by a model-specific reviewed rule to honda/fit/japan-2020; the source generation spelling remains in provenance.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "honda/fit/japan-2020/drom-d9c319518a9c9ca53b6d",
+          "modelId": "honda/fit",
+          "generationId": "honda/fit/japan-2020",
+          "faceliftId": null,
+          "name": "Fit 1500 cc 118 hp CVT FWD — Fourth generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2022,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "CVT",
+          "drive": "FWD",
+          "powerHp": 118,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-2975dec6bac4b99f",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_95030ddba4795801c610f1de.",
+            "Linked only by a model-specific reviewed rule to honda/fit/japan-2020; the source generation spelling remains in provenance.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "honda/fit/japan-2020/drom-d1e17da0ebecc8259b2a",
+          "modelId": "honda/fit",
+          "generationId": "honda/fit/japan-2020",
+          "faceliftId": null,
+          "name": "Fit 1500 cc 124 hp CVT FWD — Fourth generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2026,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "CVT",
+          "drive": "FWD",
+          "powerHp": 124,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-2975dec6bac4b99f",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 2 exact legacy source row(s): drom_0fe1b416130f613c60d1a468, drom_875f748714d0132cdaed6ca2.",
+            "Linked only by a model-specific reviewed rule to honda/fit/japan-2020; the source generation spelling remains in provenance.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "honda/vezel/japan-2021/drom-ac570af1bae7484b96ee",
+          "modelId": "honda/vezel",
+          "generationId": "honda/vezel/japan-2021",
+          "faceliftId": null,
+          "name": "Vezel 1500 cc 118 hp CVT AWD — Second generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2024,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "CVT",
+          "drive": "AWD",
+          "powerHp": 118,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-546d039cbd7ed7da",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_a12835ad4b15ee5abde38d62.",
+            "Linked only by a model-specific reviewed rule to honda/vezel/japan-2021; the source generation spelling remains in provenance.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "honda/vezel/japan-2021/drom-c3158ef01a06550d3ed4",
+          "modelId": "honda/vezel",
+          "generationId": "honda/vezel/japan-2021",
+          "faceliftId": null,
+          "name": "Vezel 1500 cc 124 hp CVT FWD — Second generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2021,
+          "yearTo": null,
+          "bodyType": "SUV",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "CVT",
+          "drive": "FWD",
+          "powerHp": 124,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-546d039cbd7ed7da",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 2 exact legacy source row(s): drom_47b9183b86403a18b96d042c, drom_eacaff26c7f6ecf933b57993.",
+            "Linked only by a model-specific reviewed rule to honda/vezel/japan-2021; the source generation spelling remains in provenance.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "honda/vezel/japan-2021/drom-ac4efb89a97bf795bffc",
+          "modelId": "honda/vezel",
+          "generationId": "honda/vezel/japan-2021",
+          "faceliftId": null,
+          "name": "Vezel 1500 cc 118 hp CVT AWD — Second generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2021,
+          "yearTo": 2024,
+          "bodyType": "SUV",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "CVT",
+          "drive": "AWD",
+          "powerHp": 118,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-546d039cbd7ed7da",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_fa23f047d1b9bd60bcd49b35.",
+            "Linked only by a model-specific reviewed rule to honda/vezel/japan-2021; the source generation spelling remains in provenance.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "honda/vezel/japan-2021/drom-b6eef0910cf28b05e217",
+          "modelId": "honda/vezel",
+          "generationId": "honda/vezel/japan-2021",
+          "faceliftId": null,
+          "name": "Vezel 1500 cc 118 hp CVT FWD — Second generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2021,
+          "yearTo": 2024,
+          "bodyType": "SUV",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "CVT",
+          "drive": "FWD",
+          "powerHp": 118,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-546d039cbd7ed7da",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_12af03db53ec4ef936930e2e.",
+            "Linked only by a model-specific reviewed rule to honda/vezel/japan-2021; the source generation spelling remains in provenance.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/facelift-1/drom-2c205bda8917c421b5bf",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": "mazda/axela/drom-generation-3/facelift-1",
+          "name": "Axela 1500 cc 105 hp Automatic FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2016,
+          "yearTo": 2019,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Diesel",
+          "engineCc": 1500,
+          "transmission": "Automatic",
+          "drive": "FWD",
+          "powerHp": 105,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_e6d97312cce75c96e7b1c15a.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/facelift-1/drom-4b03dc424fdbe3c439a7",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": "mazda/axela/drom-generation-3/facelift-1",
+          "name": "Axela 1500 cc 111 hp Automatic AWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2016,
+          "yearTo": 2019,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "Automatic",
+          "drive": "AWD",
+          "powerHp": 111,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_bf553b16099ef61be4508655.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/facelift-1/drom-4749c1f3c0fdee1072a8",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": "mazda/axela/drom-generation-3/facelift-1",
+          "name": "Axela 1500 cc 111 hp Automatic FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2016,
+          "yearTo": 2019,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "Automatic",
+          "drive": "FWD",
+          "powerHp": 111,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_2644ada4f4420ad47faa8dbb.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/facelift-1/drom-49de07a58772fb485925",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": "mazda/axela/drom-generation-3/facelift-1",
+          "name": "Axela 1500 cc 111 hp Manual FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2016,
+          "yearTo": 2019,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "Manual",
+          "drive": "FWD",
+          "powerHp": 111,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 2 exact legacy source row(s): drom_158d0275268fe7d1bf19f5d9, drom_21d2b3499c1e897028e358dc.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/facelift-1/drom-8490dc48c6be303f121a",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": "mazda/axela/drom-generation-3/facelift-1",
+          "name": "Axela 2200 cc 175 hp Automatic AWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2016,
+          "yearTo": 2019,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Diesel",
+          "engineCc": 2200,
+          "transmission": "Automatic",
+          "drive": "AWD",
+          "powerHp": 175,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_efd03a9e4acc106858182fb6.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/facelift-1/drom-19be45c1a193a066a27a",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": "mazda/axela/drom-generation-3/facelift-1",
+          "name": "Axela 2200 cc 175 hp Automatic FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2016,
+          "yearTo": 2019,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Diesel",
+          "engineCc": 2200,
+          "transmission": "Automatic",
+          "drive": "FWD",
+          "powerHp": 175,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_cb97dfa551341d8a5449553a.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/facelift-1/drom-afb5b39e20ab9a7d172b",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": "mazda/axela/drom-generation-3/facelift-1",
+          "name": "Axela 2200 cc 175 hp Manual AWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2016,
+          "yearTo": 2019,
+          "bodyType": "Hatchback",
+          "powertrainKind": "ICE",
+          "fuel": "Diesel",
+          "engineCc": 2200,
+          "transmission": "Manual",
+          "drive": "AWD",
+          "powerHp": 175,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_4a25b8b9a565d01088925f9d.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/facelift-1/drom-25a40c20eeb7f8e2e9ed",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": "mazda/axela/drom-generation-3/facelift-1",
+          "name": "Axela 2200 cc 175 hp Manual FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2016,
+          "yearTo": 2019,
+          "bodyType": "Hatchback",
+          "powertrainKind": "ICE",
+          "fuel": "Diesel",
+          "engineCc": 2200,
+          "transmission": "Manual",
+          "drive": "FWD",
+          "powerHp": 175,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_cee933aa58be595c1069a5fc.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/drom-312d2f14341bf52d0710",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": null,
+          "name": "Axela 1500 cc 111 hp Automatic AWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2013,
+          "yearTo": 2016,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "Automatic",
+          "drive": "AWD",
+          "powerHp": 111,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_149ece94898bd0f049977563.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/drom-25f8f552bf50896a0398",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": null,
+          "name": "Axela 1500 cc 111 hp Automatic FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2013,
+          "yearTo": 2016,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "Automatic",
+          "drive": "FWD",
+          "powerHp": 111,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_b27d5cab88feec88c5877fc8.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/drom-0e084c3cda254a0aceb6",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": null,
+          "name": "Axela 1500 cc 111 hp Manual FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2013,
+          "yearTo": 2016,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "Manual",
+          "drive": "FWD",
+          "powerHp": 111,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 2 exact legacy source row(s): drom_c15d3bb961cb5d4554855d7f, drom_d03ab4ee7218cce10844ef60.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/drom-335f1552e73d1ea21ffc",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": null,
+          "name": "Axela 1600 cc 105 hp Automatic FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2013,
+          "yearTo": 2016,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1600,
+          "transmission": "Automatic",
+          "drive": "FWD",
+          "powerHp": 105,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_8c32202b1ef8e5722850ec34.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/drom-6b0a90e05fafd4cf7b8c",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": null,
+          "name": "Axela 1600 cc 105 hp Manual FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2013,
+          "yearTo": 2016,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1600,
+          "transmission": "Manual",
+          "drive": "FWD",
+          "powerHp": 105,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_5e5b7f15ca9589528b9b6914.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/drom-b6cde73e239b199d8652",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": null,
+          "name": "Axela 2000 cc 155 hp Automatic FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2013,
+          "yearTo": 2016,
+          "bodyType": "Hatchback",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 2000,
+          "transmission": "Automatic",
+          "drive": "FWD",
+          "powerHp": 155,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_0781c388983dfab3d8d2b0d7.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/drom-09992b31c7ac8dc1ef3b",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": null,
+          "name": "Axela 2000 cc 155 hp Manual FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2013,
+          "yearTo": 2016,
+          "bodyType": "Hatchback",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 2000,
+          "transmission": "Manual",
+          "drive": "FWD",
+          "powerHp": 155,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_b9996ee1b80b4f36349fdbbf.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/drom-d04954500661bd8d8ec6",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": null,
+          "name": "Axela 2200 cc 175 hp Automatic FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2013,
+          "yearTo": 2016,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Diesel",
+          "engineCc": 2200,
+          "transmission": "Automatic",
+          "drive": "FWD",
+          "powerHp": 175,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_eeae54c5347cf0233a9dfd05.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mazda/axela/drom-generation-3/drom-5c3937b385a5298e9d16",
+          "modelId": "mazda/axela",
+          "generationId": "mazda/axela/drom-generation-3",
+          "faceliftId": null,
+          "name": "Axela 2200 cc 175 hp Manual FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2013,
+          "yearTo": 2016,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Diesel",
+          "engineCc": 2200,
+          "transmission": "Manual",
+          "drive": "FWD",
+          "powerHp": 175,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-16dc947d5a80b83d",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_211d33e8bcaa45a016ceffd0.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/rav4/xa50/drom-d8519a4b34976308d4e9",
+          "modelId": "toyota/rav4",
+          "generationId": "toyota/rav4/xa50",
+          "faceliftId": null,
+          "name": "RAV4 2487 cc 203 hp — Fifth generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2019,
+          "yearTo": 2024,
+          "bodyType": "SUV",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 2487,
+          "powerHp": 203,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-1d1992db2dc4c48f",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): toyota/rav4/xa50-a25a-fks-2019-2024.",
+            "Linked only by a model-specific reviewed rule to toyota/rav4/xa50; the source generation spelling remains in provenance.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/yaris/japan-2020/drom-25d05cf388f272370e30",
+          "modelId": "toyota/yaris",
+          "generationId": "toyota/yaris/japan-2020",
+          "faceliftId": null,
+          "name": "Yaris 1000 cc 69 hp CVT FWD — 2020 Japan generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2024,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1000,
+          "transmission": "CVT",
+          "drive": "FWD",
+          "powerHp": 69,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-8858cf22aeb1f4bf",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 2 exact legacy source row(s): drom_0cff620c46e8e3e1869dfcf4, drom_539c414ce0213b14b944f347.",
+            "Linked only by a model-specific reviewed rule to toyota/yaris/japan-2020; the source generation spelling remains in provenance.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/yaris/japan-2020/drom-fe9a833ecdd99050d737",
+          "modelId": "toyota/yaris",
+          "generationId": "toyota/yaris/japan-2020",
+          "faceliftId": null,
+          "name": "Yaris 1500 cc 120 hp CVT AWD — 2020 Japan generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2024,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "CVT",
+          "drive": "AWD",
+          "powerHp": 120,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-8858cf22aeb1f4bf",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_e7b8387119a17560f0853dbb.",
+            "Linked only by a model-specific reviewed rule to toyota/yaris/japan-2020; the source generation spelling remains in provenance.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/yaris/japan-2020/drom-a7fa6e1afaab3cefd17a",
+          "modelId": "toyota/yaris",
+          "generationId": "toyota/yaris/japan-2020",
+          "faceliftId": null,
+          "name": "Yaris 1500 cc 120 hp CVT FWD — 2020 Japan generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2024,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "CVT",
+          "drive": "FWD",
+          "powerHp": 120,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-8858cf22aeb1f4bf",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_6f45a0a9588827aef5c8f6f2.",
+            "Linked only by a model-specific reviewed rule to toyota/yaris/japan-2020; the source generation spelling remains in provenance.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "toyota/yaris/japan-2020/drom-da686ce61569215bc69f",
+          "modelId": "toyota/yaris",
+          "generationId": "toyota/yaris/japan-2020",
+          "faceliftId": null,
+          "name": "Yaris 1500 cc 120 hp Manual FWD — 2020 Japan generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2024,
+          "yearTo": null,
+          "bodyType": "Hatchback",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "Manual",
+          "drive": "FWD",
+          "powerHp": 120,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-8858cf22aeb1f4bf",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_9d64ab32558742bdb47378d5.",
+            "Linked only by a model-specific reviewed rule to toyota/yaris/japan-2020; the source generation spelling remains in provenance.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/lavida/drom-generation-3/facelift-1/drom-ae0bfcc6f18a910ec5f8",
+          "modelId": "volkswagen/lavida",
+          "generationId": "volkswagen/lavida/drom-generation-3",
+          "faceliftId": "volkswagen/lavida/drom-generation-3/facelift-1",
+          "name": "Lavida 1200 cc 116 hp DCT FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2022,
+          "yearTo": 2025,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1200,
+          "transmission": "DCT",
+          "drive": "FWD",
+          "powerHp": 116,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-e75f551be882ccbb",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 2 exact legacy source row(s): drom_984270514e0f6e99dc9c0de3, drom_a092bd3d544663e340d6a901.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/lavida/drom-generation-3/facelift-1/drom-cdff44e3d5be827eed49",
+          "modelId": "volkswagen/lavida",
+          "generationId": "volkswagen/lavida/drom-generation-3",
+          "faceliftId": "volkswagen/lavida/drom-generation-3/facelift-1",
+          "name": "Lavida 1400 cc 150 hp DCT FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2022,
+          "yearTo": 2025,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1400,
+          "transmission": "DCT",
+          "drive": "FWD",
+          "powerHp": 150,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-e75f551be882ccbb",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_56eff53a2225d8836a999c7a.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/lavida/drom-generation-3/facelift-1/drom-7554de2037a1dfb3feaa",
+          "modelId": "volkswagen/lavida",
+          "generationId": "volkswagen/lavida/drom-generation-3",
+          "faceliftId": "volkswagen/lavida/drom-generation-3/facelift-1",
+          "name": "Lavida 1500 cc 110 hp Automatic FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2022,
+          "yearTo": 2025,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "Automatic",
+          "drive": "FWD",
+          "powerHp": 110,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-e75f551be882ccbb",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_ceca080a3ebd5576169663c8.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/lavida/drom-generation-3/facelift-1/drom-2ec35777964a99002359",
+          "modelId": "volkswagen/lavida",
+          "generationId": "volkswagen/lavida/drom-generation-3",
+          "faceliftId": "volkswagen/lavida/drom-generation-3/facelift-1",
+          "name": "Lavida 1500 cc 113 hp Automatic FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2022,
+          "yearTo": 2025,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "Automatic",
+          "drive": "FWD",
+          "powerHp": 113,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-e75f551be882ccbb",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_e79a5525c0dac71f5f54aaa6.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/lavida/drom-generation-3/facelift-1/drom-f754256bca7735af62d2",
+          "modelId": "volkswagen/lavida",
+          "generationId": "volkswagen/lavida/drom-generation-3",
+          "faceliftId": "volkswagen/lavida/drom-generation-3/facelift-1",
+          "name": "Lavida 1500 cc 160 hp DCT FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2022,
+          "yearTo": 2025,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "DCT",
+          "drive": "FWD",
+          "powerHp": 160,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-e75f551be882ccbb",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_eeefe8b156726456de3e4ffc.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/lavida/drom-generation-3/drom-ecf20f4dc13ec5b62119",
+          "modelId": "volkswagen/lavida",
+          "generationId": "volkswagen/lavida/drom-generation-3",
+          "faceliftId": null,
+          "name": "Lavida 1400 cc 150 hp DCT FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2018,
+          "yearTo": 2023,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1400,
+          "transmission": "DCT",
+          "drive": "FWD",
+          "powerHp": 150,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-e75f551be882ccbb",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 2 exact legacy source row(s): drom_2a5b71d1e6752fd7443b53f4, drom_34c5da847c6b53a24b87c572.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/lavida/drom-generation-3/drom-24f5b36763c373b97d99",
+          "modelId": "volkswagen/lavida",
+          "generationId": "volkswagen/lavida/drom-generation-3",
+          "faceliftId": null,
+          "name": "Lavida 1400 cc 150 hp DCT FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2018,
+          "yearTo": 2023,
+          "bodyType": "Station wagon",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1400,
+          "transmission": "DCT",
+          "drive": "FWD",
+          "powerHp": 150,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-e75f551be882ccbb",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 2 exact legacy source row(s): drom_8b8bc882902bd17eb57593aa, drom_8d187e4ea9de0838531c746c.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/lavida/drom-generation-3/drom-7d76309628a09cc02ba4",
+          "modelId": "volkswagen/lavida",
+          "generationId": "volkswagen/lavida/drom-generation-3",
+          "faceliftId": null,
+          "name": "Lavida 1500 cc 112 hp Automatic FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2018,
+          "yearTo": 2023,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "Automatic",
+          "drive": "FWD",
+          "powerHp": 112,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-e75f551be882ccbb",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_4cb2cc6dae73c5df4a804e6a.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/lavida/drom-generation-3/drom-de81b4a2038ea6be7746",
+          "modelId": "volkswagen/lavida",
+          "generationId": "volkswagen/lavida/drom-generation-3",
+          "faceliftId": null,
+          "name": "Lavida 1500 cc 112 hp Automatic FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2018,
+          "yearTo": 2023,
+          "bodyType": "Station wagon",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "Automatic",
+          "drive": "FWD",
+          "powerHp": 112,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-e75f551be882ccbb",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_bac7bf63ed517d7cea667093.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/lavida/drom-generation-3/drom-51fa93b5536c9d72154d",
+          "modelId": "volkswagen/lavida",
+          "generationId": "volkswagen/lavida/drom-generation-3",
+          "faceliftId": null,
+          "name": "Lavida 1500 cc 112 hp Manual FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2018,
+          "yearTo": 2023,
+          "bodyType": "Sedan",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "Manual",
+          "drive": "FWD",
+          "powerHp": 112,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-e75f551be882ccbb",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_976e62b8fcd8abceb4b493e4.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen/lavida/drom-generation-3/drom-50590e021b7ffb6e1e84",
+          "modelId": "volkswagen/lavida",
+          "generationId": "volkswagen/lavida/drom-generation-3",
+          "faceliftId": null,
+          "name": "Lavida 1500 cc 112 hp Manual FWD — Third generation",
+          "aliases": [],
+          "market": "Reference catalog",
+          "yearFrom": 2018,
+          "yearTo": 2023,
+          "bodyType": "Station wagon",
+          "powertrainKind": "ICE",
+          "fuel": "Petrol",
+          "engineCc": 1500,
+          "transmission": "Manual",
+          "drive": "FWD",
+          "powerHp": 112,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-drom-catalog-e75f551be882ccbb",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "fuel",
+                "engineCc",
+                "powerHp",
+                "yearTo",
+                "transmission",
+                "drive"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Exact secondary-catalog specification after duplicate source rows were merged. No engine code, horsepower standard, derived kW, sales-market applicability or 30-minute power is inferred."
+            }
+          ],
+          "researchNotes": [
+            "Merged 1 exact legacy source row(s): drom_62608bc8cd9a506a12994eb6.",
+            "Linked to the review-only generation created from the same exact source rows.",
+            "Review-only: this specification cannot auto-resolve pricing until its source spelling and generation are separately approved."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

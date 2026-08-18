@@ -1,0 +1,465 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-gm-wuling-starlight-launch-en-2023",
+          "type": "manufacturer",
+          "title": "SAIC-GM-Wuling Adds Wuling Xing Guang PHEV to Its NEV Portfolio",
+          "publisher": "General Motors / SAIC-GM-Wuling",
+          "url": "https://news.gm.com.cn/en/home.detail.html/Pages/news/cn/en/2023/Dec/1205-wuling.html",
+          "documentId": "GM China Wuling 2023-12-06 EN",
+          "documentDate": "2023-12-06",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official English launch explains that Xing Guang means Starlight, identifies the family sedan body and dates the original PHEV launch. The 2025 BEV expansion is sourced separately."
+        },
+        {
+          "id": "src-gm-wuling-starlight-2025-launch-zh",
+          "type": "manufacturer",
+          "title": "限时先享置换一口价！「10万级600续航中级轿车」五菱星光2025款正式上市！",
+          "publisher": "General Motors / SAIC-GM-Wuling",
+          "url": "https://news.gm.com.cn/zh/home.detail.html/Pages/news/cn/zh/2025/may/0528-wuling.html",
+          "documentId": "GM China Wuling 2025-05-28 ZH",
+          "documentDate": "2025-05-28",
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "name",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds",
+            "market",
+            "yearFrom",
+            "bodyType",
+            "powertrainKind",
+            "rangeKm"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official 2025 model-year launch names all six PHEV and BEV configurations and their advertised electric-range figures. The release does not attach a test cycle to each grade, so rangeStandard is intentionally empty."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/starlight",
+          "brandId": "wuling",
+          "canonicalName": "Starlight",
+          "slug": "starlight",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "五菱 星光",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-huawei-hicar-current-models-2026"
+              ]
+            }
+          ],
+          "productionFrom": "2023-12",
+          "productionTo": null,
+          "bodyTypes": [
+            "Sedan"
+          ],
+          "powertrainKinds": [
+            "PHEV",
+            "BEV"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-huawei-hicar-current-models-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+            },
+            {
+              "sourceId": "src-gm-wuling-starlight-launch-en-2023",
+              "fields": [
+                "canonicalName",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official English release says Xing Guang means Starlight and records the December 2023 family-sedan launch."
+            },
+            {
+              "sourceId": "src-gm-wuling-starlight-2025-launch-zh",
+              "fields": [
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official 2025 release confirms both PHEV and BEV forms."
+            }
+          ],
+          "researchNotes": [
+            "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+            "Compatibility model years are observations and are not copied into productionFrom.",
+            "All six official 2025 model-year grades are staged below with English public names and exact Chinese source aliases."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "generation",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/starlight/2025-model-year",
+          "modelId": "wuling/starlight",
+          "name": "2025 model year",
+          "aliases": [],
+          "platformCodes": [],
+          "productionFrom": "2025-05",
+          "productionTo": null,
+          "bodyTypes": [
+            "Sedan"
+          ],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-starlight-2025-launch-zh",
+              "fields": [
+                "name",
+                "productionFrom",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official release confirms the six-grade 2025 model year launched on 2025-05-28."
+            }
+          ],
+          "researchNotes": [
+            "Model-year container only; it does not assert a new platform generation or facelift code."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "variant",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "wuling/starlight/2025-model-year/phev-70-km-smart-standard",
+          "modelId": "wuling/starlight",
+          "generationId": "wuling/starlight/2025-model-year",
+          "faceliftId": null,
+          "name": "PHEV 70 km Smart Standard",
+          "aliases": [
+            {
+              "value": "插混70km智能标准型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-wuling-starlight-2025-launch-zh"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Sedan",
+          "powertrainKind": "PHEV",
+          "rangeKm": 70,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-starlight-2025-launch-zh",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact 2025 grade identity, powertrain and advertised electric-range figure are transcribed from SGMW's official launch release."
+            }
+          ],
+          "researchNotes": [
+            "Sparse official grade identity: technical values absent from the launch release remain empty until a manufacturer specification table is available.",
+            "rangeStandard is intentionally omitted because the release does not state a cycle for each listed grade; 69.2 kWh is not assigned because the battery-capacity basis is unstated."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight/2025-model-year/phev-150-km-smart-advanced",
+          "modelId": "wuling/starlight",
+          "generationId": "wuling/starlight/2025-model-year",
+          "faceliftId": null,
+          "name": "PHEV 150 km Smart Advanced",
+          "aliases": [
+            {
+              "value": "插混150km智能进阶型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-wuling-starlight-2025-launch-zh"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Sedan",
+          "powertrainKind": "PHEV",
+          "rangeKm": 150,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-starlight-2025-launch-zh",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact 2025 grade identity, powertrain and advertised electric-range figure are transcribed from SGMW's official launch release."
+            }
+          ],
+          "researchNotes": [
+            "Sparse official grade identity: technical values absent from the launch release remain empty until a manufacturer specification table is available.",
+            "rangeStandard is intentionally omitted because the release does not state a cycle for each listed grade; 69.2 kWh is not assigned because the battery-capacity basis is unstated."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight/2025-model-year/phev-150-km-smart-pilot",
+          "modelId": "wuling/starlight",
+          "generationId": "wuling/starlight/2025-model-year",
+          "faceliftId": null,
+          "name": "PHEV 150 km Smart Pilot",
+          "aliases": [
+            {
+              "value": "插混150km智能领航型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-wuling-starlight-2025-launch-zh"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Sedan",
+          "powertrainKind": "PHEV",
+          "rangeKm": 150,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-starlight-2025-launch-zh",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact 2025 grade identity, powertrain and advertised electric-range figure are transcribed from SGMW's official launch release."
+            }
+          ],
+          "researchNotes": [
+            "Sparse official grade identity: technical values absent from the launch release remain empty until a manufacturer specification table is available.",
+            "rangeStandard is intentionally omitted because the release does not state a cycle for each listed grade; 69.2 kWh is not assigned because the battery-capacity basis is unstated."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight/2025-model-year/bev-510-km-smart-advanced",
+          "modelId": "wuling/starlight",
+          "generationId": "wuling/starlight/2025-model-year",
+          "faceliftId": null,
+          "name": "BEV 510 km Smart Advanced",
+          "aliases": [
+            {
+              "value": "纯电510km智能进阶型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-wuling-starlight-2025-launch-zh"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Sedan",
+          "powertrainKind": "BEV",
+          "rangeKm": 510,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-starlight-2025-launch-zh",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact 2025 grade identity, powertrain and advertised electric-range figure are transcribed from SGMW's official launch release."
+            }
+          ],
+          "researchNotes": [
+            "Sparse official grade identity: technical values absent from the launch release remain empty until a manufacturer specification table is available.",
+            "rangeStandard is intentionally omitted because the release does not state a cycle for each listed grade; 69.2 kWh is not assigned because the battery-capacity basis is unstated."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight/2025-model-year/bev-610-km-smart-advanced",
+          "modelId": "wuling/starlight",
+          "generationId": "wuling/starlight/2025-model-year",
+          "faceliftId": null,
+          "name": "BEV 610 km Smart Advanced",
+          "aliases": [
+            {
+              "value": "纯电610km智能进阶型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-wuling-starlight-2025-launch-zh"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Sedan",
+          "powertrainKind": "BEV",
+          "rangeKm": 610,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-starlight-2025-launch-zh",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact 2025 grade identity, powertrain and advertised electric-range figure are transcribed from SGMW's official launch release."
+            }
+          ],
+          "researchNotes": [
+            "Sparse official grade identity: technical values absent from the launch release remain empty until a manufacturer specification table is available.",
+            "rangeStandard is intentionally omitted because the release does not state a cycle for each listed grade; 69.2 kWh is not assigned because the battery-capacity basis is unstated."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "wuling/starlight/2025-model-year/bev-610-km-smart-flagship",
+          "modelId": "wuling/starlight",
+          "generationId": "wuling/starlight/2025-model-year",
+          "faceliftId": null,
+          "name": "BEV 610 km Smart Flagship",
+          "aliases": [
+            {
+              "value": "纯电610km智能旗舰型",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-gm-wuling-starlight-2025-launch-zh"
+              ]
+            }
+          ],
+          "market": "China",
+          "yearFrom": 2025,
+          "yearTo": null,
+          "bodyType": "Sedan",
+          "powertrainKind": "BEV",
+          "rangeKm": 610,
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-gm-wuling-starlight-2025-launch-zh",
+              "fields": [
+                "name",
+                "market",
+                "yearFrom",
+                "bodyType",
+                "powertrainKind",
+                "rangeKm"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact 2025 grade identity, powertrain and advertised electric-range figure are transcribed from SGMW's official launch release."
+            }
+          ],
+          "researchNotes": [
+            "Sparse official grade identity: technical values absent from the launch release remain empty until a manufacturer specification table is available.",
+            "rangeStandard is intentionally omitted because the release does not state a cycle for each listed grade; 69.2 kWh is not assigned because the battery-capacity basis is unstated."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,128 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "policy": {
+    "canonicalBrandName": "Stable public English/Latin identity",
+    "localizedNames": "Proven localized, transliterated and source-market names remain aliases",
+    "distinctSubBrands": "Never merge a real sub-brand merely because the parent name appears in a source spelling",
+    "productLines": "Do not inflate a manufacturer-declared model line into a duplicate vehicle marque"
+  },
+  "totals": {
+    "brandsAdded": 1,
+    "brandsUpdated": 14,
+    "modelsAdded": 16,
+    "parserRawMakeAliasesStaged": 12,
+    "technicalLogoPairsAdded": 1,
+    "canonicalScriptViolations": 0,
+    "explicitlyExcludedNonPassengerCandidates": 1
+  },
+  "decisions": [
+    {
+      "sourceIdentity": "Changan Qiyuan / 长安启源",
+      "canonicalBrandId": "changan-nevo",
+      "canonicalName": "Changan NEVO",
+      "decision": "separate-brand-with-localized-aliases"
+    },
+    {
+      "sourceIdentity": "Chery Fengyun / 奇瑞风云 / Chery Fulwin",
+      "canonicalBrandId": "chery",
+      "canonicalName": "Chery",
+      "decision": "manufacturer-product-line-aliases; models stored as Fulwin model family"
+    },
+    {
+      "sourceIdentity": "Changan Oshan / Oushan / 长安欧尚",
+      "canonicalBrandId": "oshan",
+      "canonicalName": "Oshan",
+      "decision": "distinct-market-brand-with-source-aliases"
+    },
+    {
+      "sourceIdentity": "CAN AM",
+      "canonicalBrandId": null,
+      "canonicalName": null,
+      "decision": "excluded-from-passenger-light-passenger-denominator; official range is motorcycles and three-wheel vehicles"
+    }
+  ],
+  "parserAliasDecisions": [
+    {
+      "sourceIdentity": "기아",
+      "canonicalBrandId": "kia",
+      "canonicalName": "Kia"
+    },
+    {
+      "sourceIdentity": "현대",
+      "canonicalBrandId": "hyundai",
+      "canonicalName": "Hyundai"
+    },
+    {
+      "sourceIdentity": "제네시스",
+      "canonicalBrandId": "genesis",
+      "canonicalName": "Genesis"
+    },
+    {
+      "sourceIdentity": "지프",
+      "canonicalBrandId": "jeep",
+      "canonicalName": "Jeep"
+    },
+    {
+      "sourceIdentity": "포르쉐",
+      "canonicalBrandId": "porsche",
+      "canonicalName": "Porsche"
+    },
+    {
+      "sourceIdentity": "미니",
+      "canonicalBrandId": "mini",
+      "canonicalName": "MINI"
+    },
+    {
+      "sourceIdentity": "벤츠",
+      "canonicalBrandId": "mercedes-benz",
+      "canonicalName": "Mercedes-Benz"
+    },
+    {
+      "sourceIdentity": "아우디",
+      "canonicalBrandId": "audi",
+      "canonicalName": "Audi"
+    },
+    {
+      "sourceIdentity": "포드",
+      "canonicalBrandId": "ford",
+      "canonicalName": "Ford"
+    },
+    {
+      "sourceIdentity": "KG모빌리티(쌍용)",
+      "canonicalBrandId": "kgm",
+      "canonicalName": "KGM"
+    },
+    {
+      "sourceIdentity": "르노코리아(삼성)",
+      "canonicalBrandId": "renault-samsung",
+      "canonicalName": "Renault Samsung"
+    },
+    {
+      "sourceIdentity": "Geely Auto",
+      "canonicalBrandId": "geely",
+      "canonicalName": "Geely"
+    }
+  ],
+  "canonicalScriptViolations": [],
+  "stagedModelIds": [
+    "changan-nevo/a06",
+    "changan-nevo/q05",
+    "changan-nevo/q07",
+    "chery/fulwin-a8l",
+    "chery/fulwin-a9",
+    "chery/fulwin-a9l",
+    "chery/fulwin-qq3",
+    "chery/fulwin-t10",
+    "chery/fulwin-t11",
+    "chery/fulwin-t8",
+    "chery/fulwin-t9",
+    "chery/fulwin-t9l",
+    "chery/fulwin-x3",
+    "chery/fulwin-x3-plus",
+    "chery/fulwin-x3l",
+    "oshan/x7"
+  ],
+  "uiObservation": "A wordmark inside a logo and the adjacent accessible brand label may repeat visually without representing duplicate database entities; that presentation issue is outside this isolated V2 task."
+}

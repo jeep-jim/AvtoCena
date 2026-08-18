@@ -1,0 +1,85 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-renault-master-fourth-generation-2023",
+          "type": "manufacturer",
+          "title": "Renault official global media: fourth-generation Master",
+          "publisher": "Renault Group",
+          "url": "https://media.renault.com/nouveau-renault-master-un-souffle-nouveau-sur-les-utilitaires/",
+          "documentId": null,
+          "documentDate": "2023-12-01",
+          "verifiedAt": "2026-08-17",
+          "market": "Europe",
+          "language": "fr",
+          "supportedFields": [
+            "canonicalName",
+            "bodyTypes"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Renault's official newsroom identifies Master as its large-van model and explicitly describes the fourth generation. This identity-only batch does not infer production dates or technical configurations."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "renault/master",
+          "brandId": "renault",
+          "canonicalName": "Master",
+          "slug": "master",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "New Renault Master",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-renault-master-fourth-generation-2023"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "Van"
+          ],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-renault-master-fourth-generation-2023",
+              "fields": [
+                "canonicalName",
+                "bodyTypes"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official Renault model-family and van-body identity; detailed configurations remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Priority-window identity seed for European 2020-2026 registration and listing normalization.",
+            "Review status: exact generation dates, variants, canonical cover and complete technical specifications remain pending."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

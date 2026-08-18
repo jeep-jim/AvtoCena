@@ -1,0 +1,2066 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "source",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "src-changan-nevo-thailand-2026",
+          "type": "manufacturer",
+          "title": "CHANGAN NEVO brand history",
+          "publisher": "CHANGAN Thailand",
+          "url": "https://www.changan.co.th/en/about-nevo/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Thailand",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "aliases",
+            "countries"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official CHANGAN market site identifies CHANGAN NEVO as a brand launched in Chongqing, China, in 2023."
+        },
+        {
+          "id": "src-changan-nevo-global-models-2026",
+          "type": "manufacturer",
+          "title": "CHANGAN NEVO Q05 global debut",
+          "publisher": "Global CHANGAN",
+          "url": "https://www.globalchangan.com/newsroom/changan-showcases-tech-changan-trusted-choice-at-the-47th-bangkok-motor-show-debuts-nevo-q05-in-thailand.html",
+          "documentId": null,
+          "documentDate": "2026-03-23",
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "aliases"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Global CHANGAN names CHANGAN NEVO as one of its core brands and uses the English NEVO Q05 model identity."
+        },
+        {
+          "id": "src-changan-nevo-official-logo-2026",
+          "type": "manufacturer",
+          "title": "CHANGAN NEVO official logo asset",
+          "publisher": "CHANGAN Thailand",
+          "url": "https://www.changan.co.th/images/nevo/logo-nevo.svg",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Thailand",
+          "language": "en",
+          "supportedFields": [
+            "brandLogo"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Official SVG normalized without distortion to transparent 90 x 60 PNG canvases. Trademark publication rights remain review-required."
+        },
+        {
+          "id": "src-changan-qiyuan-china-current",
+          "type": "manufacturer",
+          "title": "CHANGAN China model and dealer selector",
+          "publisher": "Chongqing Changan Automobile Co., Ltd.",
+          "url": "https://www.changan.com.cn/dealer_inquiry",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "canonicalName",
+            "aliases"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official China selector places Q05, A06 and Q07 under 长安启源. Together with CHANGAN's English NEVO source this proves the localized Qiyuan/NEVO identity and current model codes."
+        },
+        {
+          "id": "src-changan-oshan-pakistan-current",
+          "type": "authoritative_catalog",
+          "title": "Changan Oshan X7",
+          "publisher": "Master Changan Motors Limited",
+          "url": "https://changan.com.pk/oshan-x7/",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "Pakistan",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "aliases",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "confidence": "high",
+          "status": "active",
+          "license": null,
+          "notes": "The authorized Changan market site repeatedly uses Changan Oshan X7 and Oshan X7 for the same SUV identity."
+        },
+        {
+          "id": "src-chery-fulwin-global-2026",
+          "type": "manufacturer",
+          "title": "Chery 20 millionth vehicle and the renewed FULWIN line",
+          "publisher": "Chery International",
+          "url": "https://www.cheryinternational.com/pc/news/news1/20260727/detail-2618.shtml",
+          "documentId": null,
+          "documentDate": "2026-07-27",
+          "verifiedAt": "2026-08-17",
+          "market": "Global",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName",
+            "aliases"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "Chery's official English release calls FULWIN a renewed product line/range within Chery, not an independent vehicle marque."
+        },
+        {
+          "id": "src-chery-fulwin-china-current",
+          "type": "manufacturer",
+          "title": "Chery China current Chery and Fulwin model ranges",
+          "publisher": "Chery Automobile Co., Ltd.",
+          "url": "https://www.chery.cn/home",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "China",
+          "language": "zh-CN",
+          "supportedFields": [
+            "canonicalName",
+            "aliases"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official Chery site separates regular Chery models from 风云车型 while retaining both under Chery, and lists the current A, T, X and QQ line identities."
+        },
+        {
+          "id": "src-can-am-on-road-2025",
+          "type": "manufacturer",
+          "title": "2025 Can-Am On-Road vehicles",
+          "publisher": "Bombardier Recreational Products Inc.",
+          "url": "https://can-am.brp.com/on-road/us/en/models/previous-models/2025.html",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "United States",
+          "language": "en",
+          "supportedFields": [
+            "canonicalName"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official range consists of motorcycles and three-wheel vehicles. CAN AM therefore remains outside the passenger/light-passenger brand denominator unless a qualifying vehicle identity is proven separately."
+        },
+        {
+          "id": "src-encar-korean-make-selector-2026",
+          "type": "authoritative_catalog",
+          "title": "Encar Korean vehicle make selector",
+          "publisher": "Encar.com",
+          "url": "https://www.encar.com/index.do",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "South Korea",
+          "language": "ko",
+          "supportedFields": [
+            "aliases"
+          ],
+          "confidence": "high",
+          "status": "active",
+          "license": null,
+          "notes": "Exact Korean make strings are retained as marketplace source aliases only. They do not support technical specifications or cross-brand merges."
+        },
+        {
+          "id": "src-renault-korea-about-current",
+          "type": "manufacturer",
+          "title": "About Renault Korea",
+          "publisher": "Renault Korea Co., Ltd.",
+          "url": "https://cdn.renault.co.kr/ko/company/about.jsp",
+          "documentId": null,
+          "documentDate": null,
+          "verifiedAt": "2026-08-17",
+          "market": "South Korea",
+          "language": "ko",
+          "supportedFields": [
+            "canonicalName",
+            "aliases"
+          ],
+          "confidence": "official",
+          "status": "active",
+          "license": null,
+          "notes": "The official site identifies the current Renault Korea company/source spelling; the Encar composite preserves continuity with the former Samsung name without merging it into the separate global Renault entity."
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "brand",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "audi",
+          "canonicalName": "Audi",
+          "slug": "audi",
+          "aliases": [
+            {
+              "value": "AUDI AG",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "de",
+              "market": "Global",
+              "sourceIds": [
+                "src-audi-company-legal"
+              ]
+            },
+            {
+              "value": "아우디",
+              "kind": "localized",
+              "safe": true,
+              "language": "ko",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-encar-korean-make-selector-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "status": "verified",
+          "evidence": [
+            {
+              "sourceId": "src-audi-company-legal",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": null
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "changan-nevo",
+          "canonicalName": "Changan NEVO",
+          "slug": "changan-nevo",
+          "aliases": [
+            {
+              "value": "Changan Qiyuan",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-changan-nevo-thailand-2026",
+                "src-changan-qiyuan-china-current"
+              ]
+            },
+            {
+              "value": "长安启源",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-changan-qiyuan-china-current"
+              ]
+            }
+          ],
+          "countries": [
+            "China"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-changan-nevo-thailand-2026",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Official CHANGAN source identifies CHANGAN NEVO as a brand launched in Chongqing, China."
+            }
+          ],
+          "researchNotes": [
+            "Authentic source-traced 90 x 60 dark/light logos and full 2020+ China/active-export model, generation and grade coverage remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "chery",
+          "canonicalName": "Chery",
+          "slug": "chery",
+          "aliases": [
+            {
+              "value": "Chery Automobile",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-chery-company-introduction"
+              ]
+            },
+            {
+              "value": "Chery Fulwin",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-global-2026",
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "Chery Fengyun",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-global-2026",
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "奇瑞风云",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            }
+          ],
+          "countries": [
+            "China"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-chery-company-introduction",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": null
+            }
+          ],
+          "researchNotes": [
+            "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ford",
+          "canonicalName": "Ford",
+          "slug": "ford",
+          "aliases": [
+            {
+              "value": "Ford Motor Company",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-ford-company-dearborn"
+              ]
+            },
+            {
+              "value": "FORD-CNG TECHNIK",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional"
+              ]
+            },
+            {
+              "value": "포드",
+              "kind": "localized",
+              "safe": true,
+              "language": "ko",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-encar-korean-make-selector-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "United States"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-ford-company-dearborn",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Ford Motor Company identifies itself as based in Dearborn, Michigan; the country is normalized to United States."
+            }
+          ],
+          "researchNotes": [
+            "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "geely",
+          "canonicalName": "Geely",
+          "slug": "geely",
+          "aliases": [
+            {
+              "value": "Geely Auto",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-geely-company-global"
+              ]
+            }
+          ],
+          "countries": [
+            "China"
+          ],
+          "status": "verified",
+          "evidence": [
+            {
+              "sourceId": "src-geely-company-global",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": null
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "genesis",
+          "canonicalName": "Genesis",
+          "slug": "genesis",
+          "aliases": [
+            {
+              "value": "제네시스",
+              "kind": "localized",
+              "safe": true,
+              "language": "ko",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-encar-korean-make-selector-2026"
+              ]
+            }
+          ],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "hyundai",
+          "canonicalName": "Hyundai",
+          "slug": "hyundai",
+          "aliases": [
+            {
+              "value": "Hyundai Motor Company",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-hyundai-company-global"
+              ]
+            },
+            {
+              "value": "현대",
+              "kind": "localized",
+              "safe": true,
+              "language": "ko",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-encar-korean-make-selector-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "South Korea"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-hyundai-company-global",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "The source uses Korea; the normalized country label is South Korea."
+            }
+          ],
+          "researchNotes": [
+            "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "jeep",
+          "canonicalName": "Jeep",
+          "slug": "jeep",
+          "aliases": [
+            {
+              "value": "지프",
+              "kind": "localized",
+              "safe": true,
+              "language": "ko",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-encar-korean-make-selector-2026"
+              ]
+            }
+          ],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "kgm",
+          "canonicalName": "KGM",
+          "slug": "kgm",
+          "aliases": [
+            {
+              "value": "KG MOBILITY",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional",
+                "src-kgm-actyon-global-2024"
+              ]
+            },
+            {
+              "value": "KG모빌리티(쌍용)",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "ko",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-encar-korean-make-selector-2026",
+                "src-kgm-actyon-global-2024"
+              ]
+            },
+            {
+              "value": "KG모빌리티",
+              "kind": "localized",
+              "safe": true,
+              "language": "ko",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-encar-korean-make-selector-2026",
+                "src-kgm-actyon-global-2024"
+              ]
+            },
+            {
+              "value": "쌍용",
+              "kind": "historical",
+              "safe": true,
+              "language": "ko",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-encar-korean-make-selector-2026",
+                "src-kgm-actyon-global-2024"
+              ]
+            }
+          ],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "kia",
+          "canonicalName": "Kia",
+          "slug": "kia",
+          "aliases": [
+            {
+              "value": "Kia Corporation",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-kia-company-information"
+              ]
+            },
+            {
+              "value": "기아",
+              "kind": "localized",
+              "safe": true,
+              "language": "ko",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-encar-korean-make-selector-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "South Korea"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-kia-company-information",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": null
+            }
+          ],
+          "researchNotes": [
+            "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mercedes-benz",
+          "canonicalName": "Mercedes-Benz",
+          "slug": "mercedes-benz",
+          "aliases": [
+            {
+              "value": "Mercedes-Benz AG",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-mercedes-company-provider"
+              ]
+            },
+            {
+              "value": "MERCEDES",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "MERCEDES-AMG",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "벤츠",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "ko",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-encar-korean-make-selector-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-mercedes-company-provider",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": null
+            }
+          ],
+          "researchNotes": [
+            "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mini",
+          "canonicalName": "MINI",
+          "slug": "mini",
+          "aliases": [
+            {
+              "value": "미니",
+              "kind": "localized",
+              "safe": true,
+              "language": "ko",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-encar-korean-make-selector-2026"
+              ]
+            }
+          ],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "oshan",
+          "canonicalName": "Oshan",
+          "slug": "oshan",
+          "aliases": [
+            {
+              "value": "Changan Oshan",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Pakistan",
+              "sourceIds": [
+                "src-changan-oshan-pakistan-current"
+              ]
+            },
+            {
+              "value": "Oushan",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-changan-oshan-pakistan-current"
+              ]
+            },
+            {
+              "value": "长安欧尚",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-changan-oshan-pakistan-current"
+              ]
+            }
+          ],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "porsche",
+          "canonicalName": "Porsche",
+          "slug": "porsche",
+          "aliases": [
+            {
+              "value": "Dr. Ing. h.c. F. Porsche AG",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "de",
+              "market": "Global",
+              "sourceIds": [
+                "src-porsche-company-legal"
+              ]
+            },
+            {
+              "value": "포르쉐",
+              "kind": "localized",
+              "safe": true,
+              "language": "ko",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-encar-korean-make-selector-2026"
+              ]
+            }
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-porsche-company-legal",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": null
+            }
+          ],
+          "researchNotes": [
+            "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "renault-samsung",
+          "canonicalName": "Renault Samsung",
+          "slug": "renault-samsung",
+          "aliases": [
+            {
+              "value": "Renault Korea",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-renault-korea-about-current"
+              ]
+            },
+            {
+              "value": "르노코리아(삼성)",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "ko",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-encar-korean-make-selector-2026",
+                "src-renault-korea-about-current"
+              ]
+            },
+            {
+              "value": "르노코리아",
+              "kind": "localized",
+              "safe": true,
+              "language": "ko",
+              "market": "South Korea",
+              "sourceIds": [
+                "src-renault-korea-about-current"
+              ]
+            }
+          ],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "model",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "changan-nevo/a06",
+          "brandId": "changan-nevo",
+          "canonicalName": "A06",
+          "slug": "a06",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "NEVO A06",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-changan-nevo-global-models-2026",
+                "src-changan-qiyuan-china-current"
+              ]
+            },
+            {
+              "value": "长安启源A06",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-changan-qiyuan-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-changan-qiyuan-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "changan-nevo/q05",
+          "brandId": "changan-nevo",
+          "canonicalName": "Q05",
+          "slug": "q05",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "NEVO Q05",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-changan-nevo-global-models-2026",
+                "src-changan-qiyuan-china-current"
+              ]
+            },
+            {
+              "value": "长安启源Q05",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-changan-qiyuan-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-changan-qiyuan-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "changan-nevo/q07",
+          "brandId": "changan-nevo",
+          "canonicalName": "Q07",
+          "slug": "q07",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "NEVO Q07",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-changan-nevo-global-models-2026",
+                "src-changan-qiyuan-china-current"
+              ]
+            },
+            {
+              "value": "长安启源Q07",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-changan-qiyuan-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-changan-qiyuan-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "chery/fulwin-a8l",
+          "brandId": "chery",
+          "canonicalName": "Fulwin A8L",
+          "slug": "fulwin-a8l",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "A8L",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "风云A8L",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "Fengyun A8L",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-global-2026",
+                "src-chery-fulwin-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-chery-fulwin-global-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            },
+            {
+              "sourceId": "src-chery-fulwin-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "chery/fulwin-a9",
+          "brandId": "chery",
+          "canonicalName": "Fulwin A9",
+          "slug": "fulwin-a9",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "A9",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "风云A9",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "Fengyun A9",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-global-2026",
+                "src-chery-fulwin-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-chery-fulwin-global-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            },
+            {
+              "sourceId": "src-chery-fulwin-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "chery/fulwin-a9l",
+          "brandId": "chery",
+          "canonicalName": "Fulwin A9L",
+          "slug": "fulwin-a9l",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "A9L",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "风云A9L",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "Fengyun A9L",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-global-2026",
+                "src-chery-fulwin-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-chery-fulwin-global-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            },
+            {
+              "sourceId": "src-chery-fulwin-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "chery/fulwin-qq3",
+          "brandId": "chery",
+          "canonicalName": "Fulwin QQ3",
+          "slug": "fulwin-qq3",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "QQ3",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "全新QQ3",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "Fengyun QQ3",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-global-2026",
+                "src-chery-fulwin-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-chery-fulwin-global-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            },
+            {
+              "sourceId": "src-chery-fulwin-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "chery/fulwin-t10",
+          "brandId": "chery",
+          "canonicalName": "Fulwin T10",
+          "slug": "fulwin-t10",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "T10",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "风云T10",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "Fengyun T10",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-global-2026",
+                "src-chery-fulwin-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-chery-fulwin-global-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            },
+            {
+              "sourceId": "src-chery-fulwin-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "chery/fulwin-t11",
+          "brandId": "chery",
+          "canonicalName": "Fulwin T11",
+          "slug": "fulwin-t11",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "T11",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "风云T11",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "Fengyun T11",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-global-2026",
+                "src-chery-fulwin-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-chery-fulwin-global-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            },
+            {
+              "sourceId": "src-chery-fulwin-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "chery/fulwin-t8",
+          "brandId": "chery",
+          "canonicalName": "Fulwin T8",
+          "slug": "fulwin-t8",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "T8",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "风云T8",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "Fengyun T8",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-global-2026",
+                "src-chery-fulwin-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-chery-fulwin-global-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            },
+            {
+              "sourceId": "src-chery-fulwin-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "chery/fulwin-t9",
+          "brandId": "chery",
+          "canonicalName": "Fulwin T9",
+          "slug": "fulwin-t9",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "T9",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "风云T9",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "Fengyun T9",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-global-2026",
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "T9 Long Range",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "T9长续航",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-chery-fulwin-global-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            },
+            {
+              "sourceId": "src-chery-fulwin-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [
+            "The official T9 Long Range/T9长续航 listing is retained as a T9 market alias, not inflated into a separate model."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "chery/fulwin-t9l",
+          "brandId": "chery",
+          "canonicalName": "Fulwin T9L",
+          "slug": "fulwin-t9l",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "T9L",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "风云T9L",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "Fengyun T9L",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-global-2026",
+                "src-chery-fulwin-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-chery-fulwin-global-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            },
+            {
+              "sourceId": "src-chery-fulwin-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "chery/fulwin-x3",
+          "brandId": "chery",
+          "canonicalName": "Fulwin X3",
+          "slug": "fulwin-x3",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "X3",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "风云X3",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "Fengyun X3",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-global-2026",
+                "src-chery-fulwin-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-chery-fulwin-global-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            },
+            {
+              "sourceId": "src-chery-fulwin-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "chery/fulwin-x3-plus",
+          "brandId": "chery",
+          "canonicalName": "Fulwin X3 Plus",
+          "slug": "fulwin-x3-plus",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "X3 PLUS",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "风云X3 PLUS",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "Fengyun X3 PLUS",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-global-2026",
+                "src-chery-fulwin-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-chery-fulwin-global-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            },
+            {
+              "sourceId": "src-chery-fulwin-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "chery/fulwin-x3l",
+          "brandId": "chery",
+          "canonicalName": "Fulwin X3L",
+          "slug": "fulwin-x3l",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "X3L",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "风云X3L",
+              "kind": "localized",
+              "safe": true,
+              "language": "zh-CN",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-china-current"
+              ]
+            },
+            {
+              "value": "Fengyun X3L",
+              "kind": "transliteration",
+              "safe": true,
+              "language": "zh-Latn",
+              "market": "China",
+              "sourceIds": [
+                "src-chery-fulwin-global-2026",
+                "src-chery-fulwin-china-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [],
+          "powertrainKinds": [],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-chery-fulwin-global-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            },
+            {
+              "sourceId": "src-chery-fulwin-china-current",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Exact current manufacturer portfolio identity; generation, powertrain and grade coverage remain pending."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "oshan/x7",
+          "brandId": "oshan",
+          "canonicalName": "X7",
+          "slug": "x7",
+          "aliases": [],
+          "sourceNames": [
+            {
+              "value": "Oshan X7",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Pakistan",
+              "sourceIds": [
+                "src-changan-oshan-pakistan-current"
+              ]
+            },
+            {
+              "value": "Changan Oshan X7",
+              "kind": "market_name",
+              "safe": true,
+              "language": "en",
+              "market": "Pakistan",
+              "sourceIds": [
+                "src-changan-oshan-pakistan-current"
+              ]
+            }
+          ],
+          "productionFrom": null,
+          "productionTo": null,
+          "bodyTypes": [
+            "SUV"
+          ],
+          "powertrainKinds": [
+            "ICE"
+          ],
+          "mediaIds": [],
+          "status": "review",
+          "evidence": [
+            {
+              "sourceId": "src-changan-oshan-pakistan-current",
+              "fields": [
+                "canonicalName",
+                "bodyTypes",
+                "powertrainKinds"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Authorized Changan market specifications identify Oshan X7 as a gasoline SUV."
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    },
+    {
+      "schemaVersion": 2,
+      "entityType": "media",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "brand-logo/changan-nevo/dark",
+          "ownerType": "brand",
+          "ownerId": "changan-nevo",
+          "role": "brand_logo",
+          "sourceId": "src-changan-nevo-official-logo-2026",
+          "originalUrl": "https://www.changan.co.th/images/nevo/logo-nevo.svg",
+          "pageUrl": "https://www.changan.co.th/en/about-nevo/",
+          "license": "Trademark asset; publication rights review required",
+          "attribution": "Official CHANGAN NEVO logo; trademark belongs to Changan Automobile",
+          "identityStatus": "exact_brand",
+          "theme": "dark",
+          "assetPath": "assets/brand-logos/dark/changan-nevo.png",
+          "widthPx": 90,
+          "heightPx": 60,
+          "sha256": "684c120fead24ea794082ada97f9c75ed728271dc7a528328c4c798e28c069e4",
+          "rightsStatus": "review_required",
+          "status": "review",
+          "verifiedAt": "2026-08-17"
+        },
+        {
+          "id": "brand-logo/changan-nevo/light",
+          "ownerType": "brand",
+          "ownerId": "changan-nevo",
+          "role": "brand_logo",
+          "sourceId": "src-changan-nevo-official-logo-2026",
+          "originalUrl": "https://www.changan.co.th/images/nevo/logo-nevo.svg",
+          "pageUrl": "https://www.changan.co.th/en/about-nevo/",
+          "license": "Trademark asset; publication rights review required",
+          "attribution": "Official CHANGAN NEVO logo; trademark belongs to Changan Automobile",
+          "identityStatus": "exact_brand",
+          "theme": "light",
+          "assetPath": "assets/brand-logos/light/changan-nevo.png",
+          "widthPx": 90,
+          "heightPx": 60,
+          "sha256": "684c120fead24ea794082ada97f9c75ed728271dc7a528328c4c798e28c069e4",
+          "rightsStatus": "review_required",
+          "status": "review",
+          "verifiedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}

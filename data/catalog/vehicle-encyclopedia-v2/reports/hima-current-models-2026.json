@@ -1,0 +1,42 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 6,
+    "newModels": 15
+  },
+  "brandIds": [
+    "aito",
+    "luxeed",
+    "maextro",
+    "shangjie",
+    "stelato"
+  ],
+  "modelIds": [
+    "aito/m5",
+    "aito/m6",
+    "aito/m7",
+    "aito/m8",
+    "luxeed/r7",
+    "luxeed/s7",
+    "luxeed/v9",
+    "maextro/s800",
+    "maextro/v680",
+    "maextro/v800",
+    "shangjie/h5",
+    "shangjie/z7",
+    "shangjie/z7t",
+    "stelato/s9",
+    "stelato/s9t"
+  ],
+  "policy": {
+    "priority": "Current high-demand HIMA model families",
+    "officialCurrentRangeRequired": true,
+    "exactChineseAliasesRetained": true,
+    "compatibilityYearsNotProductionDates": true,
+    "headlineSpecsNotPromotedToVariants": true,
+    "unknownPowertrainOrBodyNotInferred": true,
+    "automaticPublicationReady": false
+  }
+}

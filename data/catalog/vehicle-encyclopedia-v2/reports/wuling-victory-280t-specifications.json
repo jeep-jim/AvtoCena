@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "totals": {
+    "newSources": 3,
+    "replacedModels": 1,
+    "newGenerations": 1,
+    "newVariants": 2
+  },
+  "modelId": "wuling/kaijie",
+  "canonicalName": "Victory",
+  "retainedAliases": [
+    "Kaijie",
+    "五菱 凯捷"
+  ],
+  "generationIds": [
+    "wuling/kaijie/280t-2022"
+  ],
+  "variantIds": [
+    "wuling/kaijie/280t-2022/1-5t-cvt-280t-premium",
+    "wuling/kaijie/280t-2022/1-5t-cvt-280t-flagship"
+  ],
+  "policy": {
+    "officialEnglishCanonicalName": true,
+    "exactDatedLaunchGradesOnly": true,
+    "localizedSourceNamesRetainedAsAliases": true,
+    "directOfficialPsNotConverted": true,
+    "simulatedCvtRatiosNotStoredAsGears": true,
+    "power30MinNotInferred": true,
+    "automaticPublicationReady": false
+  }
+}

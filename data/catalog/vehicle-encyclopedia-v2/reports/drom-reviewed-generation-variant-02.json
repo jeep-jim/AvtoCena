@@ -1,0 +1,103 @@
+{
+  "schemaVersion": 2,
+  "generatedAt": "2026-08-17",
+  "productionConnected": false,
+  "inputLegacyVariants": 15735,
+  "acceptedSources": 6,
+  "acceptedModels": 2,
+  "acceptedGenerations": 2,
+  "acceptedFacelifts": 2,
+  "acceptedVariants": 40,
+  "acceptedMissingModelVariants": 28,
+  "acceptedExistingGenerationVariants": 12,
+  "duplicateSourceRowsMerged": 8,
+  "rejected": {
+    "outsideSelectedIdentities": 15335,
+    "incompleteOrAmbiguousSpecification": 216,
+    "outsidePriorityWindow": 40,
+    "existingGenerationRuleMismatch": 96,
+    "duplicateExistingSpecification": 0
+  },
+  "policy": {
+    "japanPriorityWindow": "2015-2026 (overlap required)",
+    "otherMarketsPriorityWindow": "2020-2026 (overlap required)",
+    "selectedMissingExactModels": [
+      "mazda/axela",
+      "volkswagen/lavida"
+    ],
+    "selectedExistingGenerationRules": [
+      "honda/fit",
+      "honda/vezel",
+      "toyota/rav4",
+      "toyota/yaris"
+    ],
+    "yarisSedanExcludedFromJapanHatchbackGeneration": true,
+    "regionalWrVGenerationNotGuessed": true,
+    "ambiguousHybridPowertrainRejected": true,
+    "engineCodeNotPromoted": true,
+    "derivedPowerKwNotPromoted": true,
+    "automaticPublicationReady": false
+  },
+  "sourceIds": [
+    "src-drom-catalog-16dc947d5a80b83d",
+    "src-drom-catalog-1d1992db2dc4c48f",
+    "src-drom-catalog-2975dec6bac4b99f",
+    "src-drom-catalog-546d039cbd7ed7da",
+    "src-drom-catalog-8858cf22aeb1f4bf",
+    "src-drom-catalog-e75f551be882ccbb"
+  ],
+  "modelIds": [
+    "mazda/axela",
+    "volkswagen/lavida"
+  ],
+  "generationIds": [
+    "mazda/axela/drom-generation-3",
+    "volkswagen/lavida/drom-generation-3"
+  ],
+  "faceliftIds": [
+    "mazda/axela/drom-generation-3/facelift-1",
+    "volkswagen/lavida/drom-generation-3/facelift-1"
+  ],
+  "variantIds": [
+    "honda/fit/japan-2020/drom-e9f91ccc8bc3822678ef",
+    "honda/fit/japan-2020/drom-d9c319518a9c9ca53b6d",
+    "honda/fit/japan-2020/drom-d1e17da0ebecc8259b2a",
+    "honda/vezel/japan-2021/drom-ac570af1bae7484b96ee",
+    "honda/vezel/japan-2021/drom-c3158ef01a06550d3ed4",
+    "honda/vezel/japan-2021/drom-ac4efb89a97bf795bffc",
+    "honda/vezel/japan-2021/drom-b6eef0910cf28b05e217",
+    "mazda/axela/drom-generation-3/facelift-1/drom-2c205bda8917c421b5bf",
+    "mazda/axela/drom-generation-3/facelift-1/drom-4b03dc424fdbe3c439a7",
+    "mazda/axela/drom-generation-3/facelift-1/drom-4749c1f3c0fdee1072a8",
+    "mazda/axela/drom-generation-3/facelift-1/drom-49de07a58772fb485925",
+    "mazda/axela/drom-generation-3/facelift-1/drom-8490dc48c6be303f121a",
+    "mazda/axela/drom-generation-3/facelift-1/drom-19be45c1a193a066a27a",
+    "mazda/axela/drom-generation-3/facelift-1/drom-afb5b39e20ab9a7d172b",
+    "mazda/axela/drom-generation-3/facelift-1/drom-25a40c20eeb7f8e2e9ed",
+    "mazda/axela/drom-generation-3/drom-312d2f14341bf52d0710",
+    "mazda/axela/drom-generation-3/drom-25f8f552bf50896a0398",
+    "mazda/axela/drom-generation-3/drom-0e084c3cda254a0aceb6",
+    "mazda/axela/drom-generation-3/drom-335f1552e73d1ea21ffc",
+    "mazda/axela/drom-generation-3/drom-6b0a90e05fafd4cf7b8c",
+    "mazda/axela/drom-generation-3/drom-b6cde73e239b199d8652",
+    "mazda/axela/drom-generation-3/drom-09992b31c7ac8dc1ef3b",
+    "mazda/axela/drom-generation-3/drom-d04954500661bd8d8ec6",
+    "mazda/axela/drom-generation-3/drom-5c3937b385a5298e9d16",
+    "toyota/rav4/xa50/drom-d8519a4b34976308d4e9",
+    "toyota/yaris/japan-2020/drom-25d05cf388f272370e30",
+    "toyota/yaris/japan-2020/drom-fe9a833ecdd99050d737",
+    "toyota/yaris/japan-2020/drom-a7fa6e1afaab3cefd17a",
+    "toyota/yaris/japan-2020/drom-da686ce61569215bc69f",
+    "volkswagen/lavida/drom-generation-3/facelift-1/drom-ae0bfcc6f18a910ec5f8",
+    "volkswagen/lavida/drom-generation-3/facelift-1/drom-cdff44e3d5be827eed49",
+    "volkswagen/lavida/drom-generation-3/facelift-1/drom-7554de2037a1dfb3feaa",
+    "volkswagen/lavida/drom-generation-3/facelift-1/drom-2ec35777964a99002359",
+    "volkswagen/lavida/drom-generation-3/facelift-1/drom-f754256bca7735af62d2",
+    "volkswagen/lavida/drom-generation-3/drom-ecf20f4dc13ec5b62119",
+    "volkswagen/lavida/drom-generation-3/drom-24f5b36763c373b97d99",
+    "volkswagen/lavida/drom-generation-3/drom-7d76309628a09cc02ba4",
+    "volkswagen/lavida/drom-generation-3/drom-de81b4a2038ea6be7746",
+    "volkswagen/lavida/drom-generation-3/drom-51fa93b5536c9d72154d",
+    "volkswagen/lavida/drom-generation-3/drom-50590e021b7ffb6e1e84"
+  ]
+}

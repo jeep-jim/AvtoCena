@@ -1,0 +1,7223 @@
+{
+  "schemaVersion": 1,
+  "recordType": "eea_modification_candidate",
+  "chunk": 38,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "eea-mod-2315b066f89399946c28",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 6",
+      "modelId": "hyundai/ioniq-6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "IONIQ6"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a248ed5347e52f4d77ed",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 6",
+      "modelId": "hyundai/ioniq-6",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "IONIQ6"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-52179e32aac5b4655794",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 9",
+      "modelId": "hyundai/ioniq-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 230,
+      "commercialNames": [
+        "IONIQ9"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51000345283547b14994",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 9",
+      "modelId": "hyundai/ioniq-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "IONIQ 9"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 18,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-87d1dd3511d2f3fc0b64",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 9",
+      "modelId": "hyundai/ioniq-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 53,
+      "commercialNames": [
+        "IONIQ 9"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a222b1750af9ecdbb61",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 9",
+      "modelId": "hyundai/ioniq-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 66,
+      "commercialNames": [
+        "IONIQ 9"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-18be00580b19cf0481cb",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 9",
+      "modelId": "hyundai/ioniq-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 78,
+      "commercialNames": [
+        "IONIQ 9"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 86,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ddc6ca5f4513f92fefa",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 9",
+      "modelId": "hyundai/ioniq-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "IONIQ 9"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a069c67979f3ed869253",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 9",
+      "modelId": "hyundai/ioniq-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 113,
+      "commercialNames": [
+        "IONIQ 9",
+        "IONIQ 9 157.3 KW+157.3 KW 4WD 6S EV",
+        "IONIQ 9 157.3 KW+157.3 KW 4WD 7S EV"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 34,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4a37e30e138740e80e32",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 9",
+      "modelId": "hyundai/ioniq-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 157,
+      "commercialNames": [
+        "IONIQ 9"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a04588a095cb851bf85f",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 9",
+      "modelId": "hyundai/ioniq-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "IONIQ 9",
+        "IONIQ9"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 144,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2410e90889fceaa7ce0c",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 9",
+      "modelId": "hyundai/ioniq-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 226,
+      "commercialNames": [
+        "IONIQ 9",
+        "IONIQ9"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 1167,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be20691b8ee3562df47b",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 9",
+      "modelId": "hyundai/ioniq-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 314,
+      "commercialNames": [
+        "IONIQ 9",
+        "IONIQ9"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 343,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae4f94539a117100e95c",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 9",
+      "modelId": "hyundai/ioniq-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 315,
+      "commercialNames": [
+        "IONIQ 9",
+        "IONIQ9"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 223,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7879cd42b84579a560a8",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Ioniq 9",
+      "modelId": "hyundai/ioniq-9",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 320,
+      "commercialNames": [
+        "IONIQ 9"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dee3ef8b675e33366486",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "ix20",
+      "modelId": "hyundai/ix20",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1591,
+      "powerKw": 87,
+      "commercialNames": [
+        "IX20 BI-FUEL"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 72,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-45981828e25ea689b910",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "ix20",
+      "modelId": "hyundai/ix20",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1396,
+      "powerKw": 66,
+      "commercialNames": [
+        "IX20"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-694ef4f3062d3c182cc2",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "ix20",
+      "modelId": "hyundai/ix20",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1591,
+      "powerKw": null,
+      "commercialNames": [
+        "IX20 PREMIUM NAV MPI",
+        "IX20 PREMIUM NAV MPI AUTO",
+        "IX20 SE MPI",
+        "IX20 SE MPI AUTO",
+        "IX20 SE NAV MPI",
+        "IX20 SE NAV MPI AUTO"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 6,
+      "registrations": 254,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bc2db700b5836a172c73",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "ix20",
+      "modelId": "hyundai/ix20",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1591,
+      "powerKw": 91,
+      "commercialNames": [
+        "HYUNDAI IX20",
+        "IX20"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 269,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b334fff16c85d86d9057",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "ix20",
+      "modelId": "hyundai/ix20",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1591,
+      "powerKw": 92,
+      "commercialNames": [
+        "IX20"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 720,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-772bab26df7881bdd1e6",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "ix20",
+      "modelId": "hyundai/ix20",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1396,
+      "powerKw": 66,
+      "commercialNames": [
+        "IX20"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b02f0a9bd741f95df41c",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "ix20",
+      "modelId": "hyundai/ix20",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1582,
+      "powerKw": 85,
+      "commercialNames": [
+        "IX20"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c7c9ed968b4a663b2211",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "ix20",
+      "modelId": "hyundai/ix20",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1396,
+      "powerKw": 132,
+      "commercialNames": [
+        "IX20"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ad3b616d0167e6852a6",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "ix35",
+      "modelId": "hyundai/ix35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 100,
+      "commercialNames": [
+        "IX35"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f4bb81d62cedc60ef119",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "ix35",
+      "modelId": "hyundai/ix35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1591,
+      "powerKw": 97,
+      "commercialNames": [
+        "IX35"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c703e0402025b076a90a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "ix35",
+      "modelId": "hyundai/ix35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 100,
+      "commercialNames": [
+        "ix35"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-24edcf1a6825c995fcab",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "ix35",
+      "modelId": "hyundai/ix35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": 132,
+      "commercialNames": [
+        "ix35"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 216,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-afa7684cd6ee920f4a0c",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "ix35",
+      "modelId": "hyundai/ix35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 1995,
+      "powerKw": 135,
+      "commercialNames": [
+        "IX35"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-415eb92263c3b52898f7",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "ix35",
+      "modelId": "hyundai/ix35",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 110,
+      "commercialNames": [
+        "IX35"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7026437b5fbf62a0bbca",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kauai",
+      "modelId": "hyundai/kauai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 85,
+      "commercialNames": [
+        "KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 402,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-90b9cb96c5324a8ed098",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kauai",
+      "modelId": "hyundai/kauai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 100,
+      "commercialNames": [
+        "KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 215,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-91a4bf1e8181768abc17",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kauai",
+      "modelId": "hyundai/kauai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 603,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1153b5e5403cc761252d",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kauai",
+      "modelId": "hyundai/kauai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 2729,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c2c71990e08e31520560",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kauai",
+      "modelId": "hyundai/kauai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 88,
+      "commercialNames": [
+        "KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 7711,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2fb2bfa08a6dcf55aba2",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kauai",
+      "modelId": "hyundai/kauai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1580,
+      "powerKw": 77,
+      "commercialNames": [
+        "KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 1141,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-659d34af0073e5cac1d1",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kauai",
+      "modelId": "hyundai/kauai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1591,
+      "powerKw": 130,
+      "commercialNames": [
+        "KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54f479da8ebfdc64ecf5",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kauai",
+      "modelId": "hyundai/kauai",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 206,
+      "commercialNames": [
+        "KAUAI N"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a573cd064ce3033d91ff",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kauai",
+      "modelId": "hyundai/kauai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 146,
+      "commercialNames": [
+        "Kauai"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-517e2ea2dbdc73d3ab26",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kauai",
+      "modelId": "hyundai/kauai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 99,
+      "commercialNames": [
+        "KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 241,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16b91cfe0174c1375bbf",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kauai",
+      "modelId": "hyundai/kauai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 115,
+      "commercialNames": [
+        "KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 63,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db10dc79789f36ca5b2d",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kauai",
+      "modelId": "hyundai/kauai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 46,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b697f3380669c8dc7806",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kauai",
+      "modelId": "hyundai/kauai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 74,
+      "commercialNames": [
+        "KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 674,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8cae6135a94d87f2767",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kauai",
+      "modelId": "hyundai/kauai",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 69,
+      "commercialNames": [
+        "KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 153,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9edfc4bb2a3ed2265030",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 998,
+      "powerKw": 88,
+      "commercialNames": [
+        "Hyundai Kona Kauai"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dbb9ddc6d5677e4abcb3",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1591,
+      "powerKw": 130,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6e6056db33f6164e2d30",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "KONA SE CRDI",
+        "KONA SE CRDI S-A"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-df54b03a9d10bcf75f53",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 77,
+      "commercialNames": [
+        "KONA"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2135caffbf32fae35ab",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 85,
+      "commercialNames": [
+        "HYUNDAI KONA KAUAI",
+        "Hyundai Kona Kauai",
+        "Kona",
+        "KONA",
+        "KONA 16 CRDI",
+        "Kona Kauai",
+        "KONA KAUAI",
+        "KONA,",
+        "KONA,KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI",
+        "Hyundai"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 11,
+      "registrations": 8511,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2807aa4f93943f89c89d",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1598,
+      "powerKw": 100,
+      "commercialNames": [
+        "HYUNDAI KONA KAUAI",
+        "Hyundai Kona Kauai",
+        "KONA",
+        "Kona",
+        "KONA , KAUAI",
+        "KONA . KAUAI",
+        "KONA / 1.6 / CRDI 48V",
+        "KONA / 1.6 / CRDI DCT 4WD 48V",
+        "KONA / 1.6 / CRDI DCT 48V",
+        "KONA / 1.6 / CRDI HP 48V",
+        "KONA / 1.6 / CRDI HP 48V N-LINE",
+        "KONA / 1.6 / CRDI HP DCT 48V",
+        "KONA 16 CRDI HP DCT",
+        "KONA 16 CRDI HP DCT 4WD",
+        "KONA KAUAI",
+        "Kona Kauai",
+        "KONA, KAUAI",
+        "KONA,KAUAI",
+        "KONA. KAUAI",
+        "KONA/1.6/CRDI48V",
+        "KONA/1.6/CRDIDCT4WD48V",
+        "KONA/1.6/CRDIDCT48V",
+        "KONA/1.6/CRDIHP48V",
+        "KONA/1.6/CRDIHP48VN-LINE",
+        "KONA/1.6/CRDIHPDCT48V"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI",
+        "Hyundai"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 31,
+      "registrations": 12560,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3a278a7f89e58810a49",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "KONA",
+        "Kona",
+        "KONA EV",
+        "KONA KAUAI",
+        "KONA PREMIUM EV AUTO",
+        "KONA PREMIUM SE EV AUTO",
+        "KONA SE EV AUTO",
+        "KONA, KAUAI",
+        "KONA,KAUAI",
+        "KONA. KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 75253,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0a737993b1c0ee324d41",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 26,
+      "commercialNames": [
+        "KONA",
+        "KONA / 100 / EV",
+        "KONA KAUAI",
+        "KONA,",
+        "KONA. KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 14049,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e8d334eef3578e24dcb7",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 28,
+      "commercialNames": [
+        "HYUNDAI KONA",
+        "KONA",
+        "Kona",
+        "KONA / 150 / EV",
+        "KONA KAUAI",
+        "KONA,",
+        "KONA, KAUAI",
+        "KONA,KAUAI",
+        "KONA. KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 17,
+      "registrations": 43482,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cda73b95c5d724afe554",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 77,
+      "commercialNames": [
+        "KONA"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 22,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c0165d538dcad95c63a2",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 100,
+      "commercialNames": [
+        "HYUNDAI KONA",
+        "HYUNDAI KONA KAUAI",
+        "Hyundai Kona Kauai",
+        "KONA",
+        "Kona",
+        "KONA . KAUAI",
+        "KONA / 100 / EV",
+        "KONA 100 EV",
+        "KONA KAUAI",
+        "kona Kauai",
+        "Kona Kauai",
+        "KONA, KAUAI",
+        "KONA,KAUAI",
+        "KONA. KAUAI",
+        "KONA.KAUAI",
+        "KONA/100/EV"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI",
+        "Hyundai"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 23953,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8b47fc7c963566f3c5cc",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "HYUNDAI KONA",
+        "HYUNDAI KONA KAUAI",
+        "Hyundai Kona Kauai",
+        "Kona",
+        "KONA",
+        "KONA / 150 / EV",
+        "KONA 150 EV",
+        "KONA KAUAI",
+        "Kona Kauai",
+        "KONA- KAUAI",
+        "KONA,",
+        "KONA, KAUAI",
+        "KONA,KAUAI",
+        "KONA. KAUAI",
+        "KONA.KAUAI",
+        "KONA/150/EV"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI",
+        "Hyundai"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 29,
+      "registrations": 70910,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-09eaed200dcdae071e34",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "LPG",
+      "engineCc": 1591,
+      "powerKw": 130,
+      "commercialNames": [
+        "Hyundai Kona Kauai"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-66ba9e4ea9a5a3fc51c4",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "KONA,"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c203a38aaa5b3e928e4",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "Hyundai Kona Kauai",
+        "KONA",
+        "kona Kauai",
+        "KONA PLAY T-GDI",
+        "KONA PREMIUM",
+        "KONA PREMIUM SE",
+        "KONA S",
+        "KONA SE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 7553,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8fa725ccea3aae95e4c",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 77,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 39,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6487bb287ff03730a818",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 83,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8d3d25f52a29f3ec0a6e",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 998,
+      "powerKw": 88,
+      "commercialNames": [
+        "HYUNDAI KONA",
+        "HYUNDAI KONA KAUAI",
+        "Hyundai Kona Kauai",
+        "KONA",
+        "KONA / 1.0 / T-GDI",
+        "KONA / 1.0 / T-GDI 48V N-LINE",
+        "KONA / 1.0 / T-GDI DCT",
+        "KONA / 1.0 / T-GDI N-LINE",
+        "KONA 1.0 T-GDI",
+        "KONA 10 T-GDI",
+        "KONA KAUA",
+        "KONA KAUAI",
+        "kona Kauai",
+        "Kona Kauai",
+        "KONA,",
+        "KONA, KAUAI",
+        "KONA,KAUAI",
+        "KONA. KAUAI",
+        "Kona. Kauai",
+        "KONA.KAUAI",
+        "KONA/1.0/T-GDI",
+        "KONA/1.0/T-GDI48VN-LINE",
+        "KONA/1.0/T-GDIDCT"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 41,
+      "registrations": 148234,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2b617b706b9152bb7195",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1580,
+      "powerKw": null,
+      "commercialNames": [
+        "Hyundai Kona Kauai",
+        "HyundaiKona",
+        "KONA",
+        "kona Kauai",
+        "KONA PREMIUM GDI HEV S-A",
+        "KONA PREMIUM SE GDI HEV S-A",
+        "KONA SE GDI HEV S-A"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 8,
+      "registrations": 10679,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cf1916e32fc1235a9005",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1580,
+      "powerKw": 77,
+      "commercialNames": [
+        "HYUNDAI KONA",
+        "Hyundai Kona",
+        "HYUNDAI KONA KAUAI",
+        "Hyundai Kona Kauai",
+        "KONA",
+        "Kona",
+        "KONA . KAUAI",
+        "KONA / 1.6 / GDI HEV",
+        "KONA 1.6 GDI HEV",
+        "KONA 16 GDI HEV",
+        "KONA KAUA",
+        "KONA KAUAI",
+        "Kona Kauai",
+        "Kona Kauaii",
+        "KONA,",
+        "Kona, Kauai",
+        "KONA, KAUAI",
+        "Kona,Kauai",
+        "KONA,KAUAI",
+        "KONA.",
+        "KONA. KAUAI",
+        "KONA.KAUAI",
+        "KONA/1.6/GDIHEV"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI",
+        "Hyundai"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 37,
+      "registrations": 137043,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-41126b75ff07fc6e821b",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1591,
+      "powerKw": null,
+      "commercialNames": [
+        "KONA IRON MAN EDITION S-A",
+        "KONA PREMIUM GT 4X4 S-A"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 368,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b39568887fc8adf78160",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1591,
+      "powerKw": 130,
+      "commercialNames": [
+        "Hyundai KONA",
+        "Hyundai Kona Kauai",
+        "KONA",
+        "KONA 16 T-GDI DCT",
+        "KONA 16 T-GDI DCT 4WD",
+        "KONA KAUAI",
+        "KONA,",
+        "KONA, KAUAI",
+        "KONA,KAUAI",
+        "KONA. KAUAI",
+        "KONA.KAUAI",
+        "KONA/ 1.6 / T-GDI DCT",
+        "KONA/ 1.6 / T-GDI DCT 4WD",
+        "KONA/1.6/T-GDIDCT",
+        "KONA/1.6/T-GDIDCT4WD"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 20,
+      "registrations": 15345,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ae391025a104f73e1a15",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": 100,
+      "commercialNames": [
+        "Hyundai Kona Kauai"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 11,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cc4f18c4bf666f16fe68",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": null,
+      "powerKw": 150,
+      "commercialNames": [
+        "KONA,KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-423c746f945d1733b566",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": null,
+      "commercialNames": [
+        "KONA"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ac22a38ca7aacf8c056a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 999,
+      "powerKw": 88,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fcb1af4599ee131c1c59",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1580,
+      "powerKw": 100,
+      "commercialNames": [
+        "HyundaiKona"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54d0c5e1a8f8056d0dd0",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "Hyundai Kona Kauai",
+        "KONA",
+        "kona Kauai",
+        "KONA KAUAI",
+        "KONA,"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 632,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e29ade21062395719819",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 100,
+      "commercialNames": [
+        "KONA KAUAI",
+        "KONA,KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 14,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f0681e813e45c16ce54a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 145,
+      "commercialNames": [
+        "Kona",
+        "KONA",
+        "KONA ,KAUAI",
+        "KONA KAUAI",
+        "KONA,",
+        "KONA, KAUAI",
+        "KONA,KANUAI",
+        "KONA,KAUAI",
+        "KONA. KAUAI",
+        "KONA.KAUAI"
+      ],
+      "sourceMakeNames": [
+        "Hyundai",
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 18,
+      "registrations": 2775,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44cf83f751066365f28b",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 146,
+      "commercialNames": [
+        "Hyundai Kona Kauai",
+        "KONA",
+        "KONA , KAUAI",
+        "KONA . KAUAI",
+        "KONA KAUA",
+        "Kona Kauai",
+        "KONA KAUAI",
+        "KONA- KAUAI",
+        "KONA, KAUAI",
+        "KONA,KAUAI",
+        "KONA. KAUAI",
+        "KONA/ 1.6 / T-GDI DCT",
+        "KONA/ 1.6 / T-GDI DCT 4WD",
+        "KONA/ 1.6 / T-GDI DCT 4WD N-LINE",
+        "KONA/ 1.6 / T-GDI DCT N-LINE",
+        "KONA/1.6/T-GDIDCT4WD",
+        "KONA/1.6/T-GDIDCT4WDN-LINE",
+        "KONA/1.6/T-GDIDCTN-LINE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 27,
+      "registrations": 14527,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-28892f5b769f19bc8ee5",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2024,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 206,
+      "commercialNames": [
+        "Hyundai KONA N KAUAI N",
+        "KONA",
+        "KONA N",
+        "KONA N / 2.0 / T-GDI DCT",
+        "KONA N KAUAI N",
+        "KONA N, KAUAI N",
+        "KONA N,KAUAI N",
+        "KONA N. KAUAI N",
+        "KONA N.KAUAI N",
+        "KONA NKAUAI N"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 20,
+      "registrations": 4039,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c8ca4574ff7dfff9333a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 998,
+      "powerKw": null,
+      "commercialNames": [
+        "Hyundai Kona Kauai"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4808fc11badd1cb73ac3",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1580,
+      "powerKw": null,
+      "commercialNames": [
+        "Hyundai Kona",
+        "Hyundai Kona Kauai",
+        "KONA"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 218,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c65b6422f0fdb87a053",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1580,
+      "powerKw": 77,
+      "commercialNames": [
+        "Kona",
+        "KONA",
+        "KONA KAUAI",
+        "KONA, KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 794,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d486cfdd8ad047a37a0",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 110,
+      "commercialNames": [
+        "KONA KAUAI",
+        "Kona. Kauai"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 97,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-370148d5cc937adc2580",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 103,
+      "commercialNames": [
+        "KONA"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16b389f5216940afc0d6",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 110,
+      "commercialNames": [
+        "KONA",
+        "KONA 1.6 T-GDI LP",
+        "KONA, KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 793,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6de01b6d190af133ff39",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 141,
+      "commercialNames": [
+        "KONA"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e481e948de3f8d32d2a9",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1999,
+      "powerKw": 110,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5f50e992787c0fceb43d",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 67,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d9c30f84a2edc80701cd",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 69,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-eedc817432f4358be591",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 70,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-de19effc73395e38f88d",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 73,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63fd436a624832f1345b",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 81,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e0c7be8c6f58851197fa",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 84,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6891813bef7b88b98969",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 85,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2ff1650c1907c01eb45f",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 88,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d711ea72b96c90ec33e0",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 90,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3ad70c362fa71c7df5d5",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 91,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-94457646a968176400bd",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 95,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5a6c1b9a82e25b438913",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 114,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUAI",
+        "KONA, KAUAI",
+        "KONA. KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1619,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d3518f1eb818f29687e0",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 115,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUAI",
+        "KONA- KAUAI",
+        "KONA, KAUAI",
+        "KONA,KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 5627,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7236e8cd54af499ca17d",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 117,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a9c87e33d932e0c1a3a2",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a357b63684a6001e6550",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 121,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8468749a9bcf795a9ee2",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 131,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-311943e8199a9dbfdd51",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 132,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cdb9abb6f252e92ba9dd",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 136,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-385ee59dadb3eb509447",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 140,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7492ec81bb9e3db4ebb6",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 160,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUA",
+        "KONA KAUAI",
+        "KONA SX",
+        "KONA- KAUAI",
+        "KONA, KAUAI",
+        "KONA,KAUAI",
+        "KONA. KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 12,
+      "registrations": 32462,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ef5ba85c41ebba65563c",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 195,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-703bf11c00fc607a184b",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 49,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-726a4cb6e35dbf96896f",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 51,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6cf2cd38e035349cc77",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 52,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-244f67b401a91ab2c218",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 53,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c73a64938dfdfab4d05f",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 55,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-757f253a12d4fcf55583",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 59,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4147670bf0bf39ad2583",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 61,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cba6a3bb73aac52ed150",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 62,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2cb06e82ce0afbacd4eb",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 67,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 70,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-43db6e5ffd060eea3b81",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 68,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0dfa8ee357e75cdf8c68",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 69,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-01b1cd9533698208d44f",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 70,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8f27682fe56ef7880844",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 72,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8c1a5353a8bad2aa3656",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 74,
+      "commercialNames": [
+        "KONA",
+        "KONA / 1.0 / T-GDI",
+        "KONA 1.0 T-GDI",
+        "KONA KAUAI",
+        "KONA- KAUAI",
+        "KONA-KAUAI",
+        "KONA, KAUAI",
+        "KONA,KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 3374,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4b7b8e523339526d47a8",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 75,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a8d5ea302af9d9309124",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 80,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-368e698fcae5d34afcf3",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 81,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 13,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a5425fcd024317d174a8",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 84,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 473,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61a75a5f82c36b295e45",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 85,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUAI",
+        "KONA, KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 115,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f96c256df4cb88582bc2",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 89,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 78,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e584d4070a69e691dd3f",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 90,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d4388062196d3b06bdc1",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 91,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0f9c923a12863a0749e1",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 95,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f342b5cc9ea7d34f3c4a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 96,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 9,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e822510ac0caf4ec056",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 110,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 36,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a611c82598080f8b0222",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 112,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d6c1f8a039304fdb58a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 114,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dbad95e4111b073e04b9",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 116,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-93e457e92b6d51ebec8f",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 118,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-819cf8ff14343ea6dcfa",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 120,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 6,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-69d2b9012d1df73a0177",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 131,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2627908c38c53a736dda",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 132,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f81176bd4fb1871976a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 135,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2cbaea371ce7991da1b9",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 136,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-aede46e952e87778fd45",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 137,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b27daa2830b5c7e6cb38",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 140,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-830c6296a44d17dbf7d5",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 141,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-309dfcab1939652e3606",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 145,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-74f467e89c30ed454bd8",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 147,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4c61177b65504b863fb4",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 150,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00ea2cdc1847aefe7c9a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 170,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7c45a305f37cca04db56",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 173,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e4110f892d9ffe3da286",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 184,
+      "commercialNames": [
+        "KONA N KAUAI N"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bb65eabc4c13e92c8dd6",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 190,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-dbe6d0720fe1fa868e90",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 210,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-47030df5c826ec55d937",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 245,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ce2534dab374a1894984",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 250,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35ac14f564ad32dbf12b",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 270,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-00e277c192cae05d5287",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 280,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc92f991e8eb4edfdf02",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 320,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7f1a5d4e8046002a0513",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 331,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4006170760fc62087747",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 360,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12c0fb2a0f0e3bc2ebf1",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 375,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d4e701f82642a2dc4e2",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 404,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-073ddb7132dc364e9849",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 430,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c1707cbed4f6d3ca9c51",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 520,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0aa6d3ac4c1db05bbf30",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 49,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-708300cd6a905fb360fa",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 53,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-33367b9cad9e444ce219",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 61,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e70c13adce1e77a80610",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 67,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 17,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-be9a65078530ea676ac3",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 68,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUAI",
+        "KONA, KAUAI",
+        "KONA. KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 18270,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-35beb175cc816c69b22f",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 69,
+      "commercialNames": [
+        "KONA",
+        "KONA 1.6 GDI HEV",
+        "KONA KAUAI",
+        "KONA-",
+        "KONA- KAUA",
+        "KONA- KAUAI",
+        "KONA, KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 10,
+      "registrations": 13911,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-db2114c51252649a8d76",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 70,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-876eb84790b7258c0474",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 74,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3c77db2414aed784cae4",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 78,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 59,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c59dd7e13c335aa0f18d",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 80,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8da55430089490fcee8a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 81,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 10,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0bcbd1d872210eb27a5f",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 84,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7bd8050387b70d8100f6",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 85,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fa4f6cdf6b63e7daaba",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 90,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a03645db03f477e121e0",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 91,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-278d44c5b39a06743a16",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 95,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 7,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6052abbdf979689962d7",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 96,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-165f12d9194af141a06e",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 110,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 19,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1204f46c6c059e58a7ad",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 116,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-79a97d842772019dbc70",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 120,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5de2331712e989349df9",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 121,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b5686fd5b3c50b09f8f3",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 131,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b1b8c2eea907d93274a3",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 132,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ec44f9cd091efc35928f",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 136,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-8a14006c00447e326858",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 137,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-16b99d24c68ebe419a48",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 173,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-36eeb4a797f16dc28dec",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 195,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-bba9e4bd00b03415c3cf",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 243,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-61936696f0c52f590c39",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 375,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0fc84f0610377713a46d",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 130,
+      "commercialNames": [
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-d75b7de9950f060126ce",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 206,
+      "commercialNames": [
+        "KONA N KAUAI N"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-afae38f415f9f975b89a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1600,
+      "powerKw": 110,
+      "commercialNames": [
+        "KONA"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-39d6619bfdbab3bce866",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 33,
+      "commercialNames": [
+        "KONA",
+        "KONA 99 EV",
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 132,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b2b22b9d717322ac9701",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 38,
+      "commercialNames": [
+        "KONA",
+        "KONA / 115 / EV",
+        "KONA 115 EV",
+        "KONA KAUAI",
+        "KONA, KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 375,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-046c01fa9ac31af94479",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 50,
+      "commercialNames": [
+        "KONA",
+        "KONA 150 EV",
+        "KONA 150 EV N-LINE",
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 250,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b65583ce3303808be8c4",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 53,
+      "commercialNames": [
+        "KONA",
+        "KONA / 160 / EV",
+        "KONA 160 EV",
+        "KONA 160 EV N-LINE",
+        "KONA KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 7,
+      "registrations": 1424,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a2192f46287e90ab5708",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 99,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUAI",
+        "KONA- KAUAI",
+        "KONA, KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 1033,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-51e4cb23aaa8414e56ec",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 998,
+      "powerKw": 73,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUAI",
+        "KONA, KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 2467,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-311d65d88cf0db0741f0",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 101,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUAI",
+        "KONA, KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1739,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-310699073924f0a61b2a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 102,
+      "commercialNames": [
+        "KONA",
+        "KONA 1.6 T-GDI DCT LP",
+        "KONA 1.6 T-GDI LP",
+        "KONA KAUAI",
+        "KONA- KAUAI",
+        "KONA-KAUAI",
+        "KONA, KAUAI",
+        "KONA,KAUAI",
+        "KONA/ 1.6 / T-GDI DCT LP"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 11,
+      "registrations": 7580,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-5995d447511b6dcc89a1",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 125,
+      "commercialNames": [
+        "KONA",
+        "KONA 1.6 T-GDI DCT HP 4WD",
+        "KONA KAUA",
+        "KONA KAUAI",
+        "KONA- KAUAI",
+        "KONA, KAUAI",
+        "KONA,KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 1720,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-b44222a9c0284d1a7210",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 998,
+      "powerKw": 88,
+      "commercialNames": [
+        "KONA"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3272bd4aa84a5e0a7f54",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "electric",
+      "engineCc": null,
+      "powerKw": 74,
+      "commercialNames": [
+        "KONA"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fc5a7826b63815c998d6",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "lpg",
+      "engineCc": 998,
+      "powerKw": 74,
+      "commercialNames": [
+        "KONA BI-FUEL"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 151,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-62380a83ca02088623bf",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 46,
+      "commercialNames": [
+        "KONA"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a95459144a5c05fca792",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 62,
+      "commercialNames": [
+        "KONA"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f2ef18d1f19a260a6cc7",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 75,
+      "commercialNames": [
+        "KONA",
+        "KONA 1.6 GDI HEV",
+        "KONA KAUAI",
+        "KONA- KAUAI",
+        "KONA, KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 6394,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1e603cdf24ca37436437",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1580,
+      "powerKw": 88,
+      "commercialNames": [
+        "KONA"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-fff3c2dfbe92bde1831b",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol",
+      "engineCc": 1598,
+      "powerKw": 132,
+      "commercialNames": [
+        "KONA",
+        "KONA KAUAI",
+        "KONA, KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 186,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4f45ae7975c65cb45e1a",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1580,
+      "powerKw": 69,
+      "commercialNames": [
+        "KONA",
+        "KONA, KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 859,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2c343051403ad5e13735",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Kona",
+      "modelId": "hyundai/kona",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "fuelSourceValue": "petrol/electric",
+      "engineCc": 1580,
+      "powerKw": 75,
+      "commercialNames": [
+        "KONA",
+        "KONA, KAUAI"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 45,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e93ef9b496bcd69736e2",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Nexo",
+      "modelId": "hyundai/nexo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 32,
+      "commercialNames": [
+        "NEXO"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 366,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-68342cb667bb95193b83",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Nexo",
+      "modelId": "hyundai/nexo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "ELECTRIC",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "Hyundai NEXO",
+        "NEXO"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 8,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1ab0505d66923f02c2fd",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Nexo",
+      "modelId": "hyundai/nexo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "HYDROGEN",
+      "engineCc": null,
+      "powerKw": null,
+      "commercialNames": [
+        "NEXO",
+        "NEXO PREMIUM SE AUTO"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 89,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-63e31af8a1f162e1b0de",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Nexo",
+      "modelId": "hyundai/nexo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "HYDROGEN",
+      "engineCc": null,
+      "powerKw": 31,
+      "commercialNames": [
+        "NEXO"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 4,
+      "registrations": 29,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-399a85adbba8ccf5331f",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Nexo",
+      "modelId": "hyundai/nexo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "HYDROGEN",
+      "engineCc": null,
+      "powerKw": 32,
+      "commercialNames": [
+        "NEXO"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 259,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-223354df971db51131e9",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Nexo",
+      "modelId": "hyundai/nexo",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "fuelSourceValue": "HYDROGEN",
+      "engineCc": null,
+      "powerKw": 120,
+      "commercialNames": [
+        "HYUNDAI NEXO",
+        "Hyundai NEXO",
+        "HyundaiNEXO",
+        "NEXO",
+        "NEXO PREMIUM SE AUTO"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 9,
+      "registrations": 1263,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-54e466086f491ee54a87",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Palisade",
+      "modelId": "hyundai/palisade",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3778,
+      "powerKw": 214,
+      "commercialNames": [
+        "PALISADE AWD ULTIMATE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 4,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-c55964eb3de20f54bd71",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Palisade",
+      "modelId": "hyundai/palisade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3778,
+      "powerKw": 217,
+      "commercialNames": [
+        "HYUNDAI PALISADE",
+        "PALISADE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 3,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-12f1cabd28b6f7997f2c",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Palisade",
+      "modelId": "hyundai/palisade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2500,
+      "powerKw": 143,
+      "commercialNames": [
+        "PALISADE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-70fe1c1f20a7e715507c",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Palisade",
+      "modelId": "hyundai/palisade",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2024,
+      "yearTo": 2024,
+      "fuelSourceValue": "petrol",
+      "engineCc": 2500,
+      "powerKw": 207,
+      "commercialNames": [
+        "PALISADE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-95732635d3e9f34a6386",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 110,
+      "commercialNames": [
+        "HYUNDAI SANTA FE",
+        "SANTA FE",
+        "SANTAFE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 220,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-ab8f775eed43814d8ded",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 1995,
+      "powerKw": 136,
+      "commercialNames": [
+        "Hyundai Santa Fe",
+        "SANTA FE",
+        "SANTAFE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 1084,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2520aaa0e7449a4fbd10",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2151,
+      "powerKw": 148,
+      "commercialNames": [
+        "HYUNDAI SANTA FE",
+        "Hyundai Santa Fe",
+        "HyundaiSantaFe",
+        "Santa Fe",
+        "SANTA FE",
+        "SANTA FE / 2.2 / CRDI DCT 4WD",
+        "SantaFe",
+        "SANTAFE",
+        "SANTAFE/2.2/CRDIDCT4WD"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI",
+        "Hyundai"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 13,
+      "registrations": 6078,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-05da803451efda2e8bbd",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model_prefix",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2199,
+      "powerKw": null,
+      "commercialNames": [
+        "SANTA FE PREMIUM CRDI",
+        "SANTA FE PREMIUM CRDI 2WD",
+        "SANTA FE PREMIUM CRDI 2WD AUTO",
+        "SANTA FE PREMIUM CRDI AUTO",
+        "SANTA FE PREMIUM SE CRDI AUTO"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 5,
+      "registrations": 932,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a35e8323e5a44f0d1b0e",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2199,
+      "powerKw": 147,
+      "commercialNames": [
+        "HYUNDAI SANTA FE",
+        "Hyundai Santa Fe",
+        "HyundaiSantaFe",
+        "SANTA FE",
+        "Santa Fe",
+        "SANTA FE / 2.2 / CRDI AUT. 4WD",
+        "SANTA FE 22 CRDI AUT 4WD",
+        "SANTA FE GRAND SANTA FE",
+        "SANTAFE",
+        "SantaFe",
+        "SANTAFE/2.2/CRDIAUT.4WD"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI",
+        "Hyundai"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 12,
+      "registrations": 9020,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-4437c94dcc5a65ec87f6",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 132,
+      "commercialNames": [
+        "Hyundai Santa Fe",
+        "SANTA FE",
+        "SANTA FE / 1.6 / T-GDI HEV AUT. 4WD",
+        "SANTAFE",
+        "SANTAFE/1.6/T-GDIHEVAUT.4WD"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 13,
+      "registrations": 11560,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-1889a9434af4d3224858",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2359,
+      "powerKw": 136,
+      "commercialNames": [
+        "Hyundai Santa Fe",
+        "Santa Fe",
+        "SANTA FE",
+        "SANTAFE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI",
+        "Hyundai"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 4,
+      "registrations": 338,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-870948f4018481552169",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "Hyundai Santa Fe",
+        "HyundaiSantaFe",
+        "Santa Fe",
+        "SANTA FE",
+        "SANTAFE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 5,
+      "registrations": 796,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6d762bd2a230a4736b52",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1998,
+      "powerKw": 173,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a37710e73c1d0a0987a4",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2359,
+      "powerKw": 138,
+      "commercialNames": [
+        "SANTA FE",
+        "SANTAFE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-7a4d2d70ac8f57010bde",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": null,
+      "commercialNames": [
+        "Hyundai Santa Fe",
+        "Santa Fe",
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 3,
+      "registrations": 202,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-25dc0edc8b268f47d803",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2021,
+      "yearTo": 2025,
+      "fuelSourceValue": "PETROL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": 132,
+      "commercialNames": [
+        "Hyundai Santa Fe",
+        "HyundaiSantaFe",
+        "SANTA FE",
+        "SANTA FE / 1.6 / T-GDI PHEV AUT. 4WD",
+        "Santafe",
+        "SANTAFE",
+        "SANTAFE/1.6/T-GDIPHEVAUT.4WD"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional",
+        "eea-co2cars-2025-provisional"
+      ],
+      "specificationGroups": 14,
+      "registrations": 16315,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-26dff28e48ba678096fd",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2151,
+      "powerKw": 142,
+      "commercialNames": [
+        "Santa Fe",
+        "SANTA FE",
+        "SANTA FE / 2.2 / CRDI DCT 4WD",
+        "SANTAFE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final",
+        "eea-co2cars-2024-provisional"
+      ],
+      "specificationGroups": 6,
+      "registrations": 5095,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-f6cb28c794350b830422",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL",
+      "engineCc": 2199,
+      "powerKw": 145,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-a0b7b1a2970e6630e680",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "DIESEL/ELECTRIC",
+      "engineCc": 1598,
+      "powerKw": 132,
+      "commercialNames": [
+        "Santa Fe"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 20,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2f47cd448db7e12c34bd",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 1598,
+      "powerKw": 110,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-2af3a700fca273c2801e",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2359,
+      "powerKw": null,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-6ac65fd789e217d972c7",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 2500,
+      "powerKw": 143,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final",
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 2,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-e360b112b0fdf97d784b",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "fuelSourceValue": "PETROL",
+      "engineCc": 3342,
+      "powerKw": 205,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2020-2022-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-9614ec2a122064393f9c",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2151,
+      "powerKw": 55,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cd243b8998caed05371c",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2151,
+      "powerKw": 61,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-44ba227837655abdd348",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2151,
+      "powerKw": 62,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-294059025d8aac434eed",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2151,
+      "powerKw": 67,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 23,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3a937f6e36ce436afde6",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2151,
+      "powerKw": 68,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 2,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-feb40ad43613a59e1d09",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2151,
+      "powerKw": 72,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-0adc978028c609f31264",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2151,
+      "powerKw": 73,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 1,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-cad945bee6c3978e2602",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2151,
+      "powerKw": 81,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 5,
+      "status": "review",
+      "safeAutomaticResolution": false
+    },
+    {
+      "id": "eea-mod-3cb0414132bdbaac6913",
+      "brandId": "hyundai",
+      "brand": "Hyundai",
+      "canonicalModel": "Santa FE",
+      "modelId": "hyundai/santa-fe",
+      "modelDisposition": "existing_model",
+      "market": "Europe",
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "fuelSourceValue": "diesel",
+      "engineCc": 2151,
+      "powerKw": 84,
+      "commercialNames": [
+        "SANTA FE"
+      ],
+      "sourceMakeNames": [
+        "HYUNDAI"
+      ],
+      "sourceDatasetIds": [
+        "eea-co2cars-2023-final"
+      ],
+      "specificationGroups": 1,
+      "registrations": 3,
+      "status": "review",
+      "safeAutomaticResolution": false
+    }
+  ]
+}

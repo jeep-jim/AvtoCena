@@ -1,0 +1,628 @@
+{
+  "schemaVersion": 2,
+  "batches": [
+    {
+      "schemaVersion": 2,
+      "entityType": "brand",
+      "chunk": 1,
+      "maxRecords": 250,
+      "records": [
+        {
+          "id": "bmw",
+          "canonicalName": "BMW",
+          "slug": "bmw",
+          "aliases": [
+            {
+              "value": "BMW AG",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "de",
+              "market": "Global",
+              "sourceIds": [
+                "src-bmw-company-legal"
+              ]
+            },
+            {
+              "value": "BMW I",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional"
+              ]
+            }
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "status": "verified",
+          "evidence": [
+            {
+              "sourceId": "src-bmw-company-legal",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": null
+            }
+          ],
+          "researchNotes": [],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ds-automobiles",
+          "canonicalName": "DS Automobiles",
+          "slug": "ds-automobiles",
+          "aliases": [
+            {
+              "value": "DS",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-eea-co2cars-2020-2022-final",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "DS and DS AUTOMOBILES are separately retained registered make spellings in the final EEA passenger-car dataset."
+            }
+          ],
+          "researchNotes": [
+            "Cross-brand EEA strings that combine Citroen and DS remain unresolved and are not accepted as aliases. Authentic source-traceable 90 x 60 dark/light logos remain required."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "ford",
+          "canonicalName": "Ford",
+          "slug": "ford",
+          "aliases": [
+            {
+              "value": "Ford Motor Company",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-ford-company-dearborn"
+              ]
+            },
+            {
+              "value": "FORD-CNG TECHNIK",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional"
+              ]
+            }
+          ],
+          "countries": [
+            "United States"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-ford-company-dearborn",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": "Ford Motor Company identifies itself as based in Dearborn, Michigan; the country is normalized to United States."
+            }
+          ],
+          "researchNotes": [
+            "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "great-wall",
+          "canonicalName": "Great Wall",
+          "slug": "great-wall",
+          "aliases": [
+            {
+              "value": "GREAT WALL MOTOR CO LTD",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2023-final"
+              ]
+            },
+            {
+              "value": "GREAT WALL MOTOR COMPANY",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "GREAT WALL MOTOR COMPANY LIMITED",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "kgm",
+          "canonicalName": "KGM",
+          "slug": "kgm",
+          "aliases": [
+            {
+              "value": "KG MOBILITY",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional",
+                "src-kgm-actyon-global-2024"
+              ]
+            }
+          ],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lamborghini",
+          "canonicalName": "Lamborghini",
+          "slug": "lamborghini",
+          "aliases": [
+            {
+              "value": "AUTOMOBILI LAMBORGHINI",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "AUTOMOBILI LAMBORGHINI S.P.A.",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "lucid",
+          "canonicalName": "Lucid",
+          "slug": "lucid",
+          "aliases": [
+            {
+              "value": "LUCID MOTORS",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "LUCID USA INC",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2024-provisional"
+              ]
+            }
+          ],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mercedes-benz",
+          "canonicalName": "Mercedes-Benz",
+          "slug": "mercedes-benz",
+          "aliases": [
+            {
+              "value": "Mercedes-Benz AG",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-mercedes-company-provider"
+              ]
+            },
+            {
+              "value": "MERCEDES",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            },
+            {
+              "value": "MERCEDES-AMG",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final",
+                "src-eea-co2cars-2024-provisional",
+                "src-eea-co2cars-2025-provisional"
+              ]
+            }
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-mercedes-company-provider",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": null
+            }
+          ],
+          "researchNotes": [
+            "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "mitsubishi",
+          "canonicalName": "Mitsubishi",
+          "slug": "mitsubishi",
+          "aliases": [
+            {
+              "value": "三菱",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mitsubishi-delica-mini-japan-launch-2023"
+              ]
+            },
+            {
+              "value": "三菱自動車",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-mitsubishi-delica-mini-japan-launch-2023"
+              ]
+            },
+            {
+              "value": "MITSUBISHI MOTORS THAILAND",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2023-final"
+              ]
+            },
+            {
+              "value": "MITSUBISHI MOTORS CORPORATION",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final"
+              ]
+            },
+            {
+              "value": "MITSUBISHI MOTORS THAILAND Ltd.",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final"
+              ]
+            }
+          ],
+          "countries": [
+            "Japan"
+          ],
+          "status": "verified",
+          "evidence": [
+            {
+              "sourceId": "src-mitsubishi-delica-mini-japan-launch-2023",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": null
+            }
+          ],
+          "researchNotes": [
+            "Brand record is verified; full model coverage remains in progress."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "nissan",
+          "canonicalName": "Nissan",
+          "slug": "nissan",
+          "aliases": [
+            {
+              "value": "Nissan Motor Co., Ltd.",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-nissan-company-contact"
+              ]
+            },
+            {
+              "value": "日産",
+              "kind": "localized",
+              "safe": true,
+              "language": "ja",
+              "market": "Japan",
+              "sourceIds": [
+                "src-nissan-note-design-jp-2020"
+              ]
+            },
+            {
+              "value": "NISSAN AUTOMOTIVE EUROPE",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final"
+              ]
+            }
+          ],
+          "countries": [
+            "Japan"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-nissan-company-contact",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": null
+            }
+          ],
+          "researchNotes": [
+            "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "smart",
+          "canonicalName": "Smart",
+          "slug": "smart",
+          "aliases": [
+            {
+              "value": "MCC SMART",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final"
+              ]
+            }
+          ],
+          "countries": [],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-drom-brand-catalog-index-2026",
+              "fields": [
+                "canonicalName"
+              ],
+              "status": "verified",
+              "confidence": "high",
+              "note": "Source-backed brand identity only; country, models, generations and variants remain pending."
+            }
+          ],
+          "researchNotes": [
+            "Registry seed only. This brand is not complete until its in-window model, generation, grade and powertrain inventory is checked against primary sources and active-listing identities."
+          ],
+          "updatedAt": "2026-08-17"
+        },
+        {
+          "id": "volkswagen",
+          "canonicalName": "Volkswagen",
+          "slug": "volkswagen",
+          "aliases": [
+            {
+              "value": "Volkswagen AG",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-volkswagen-company-publication-data"
+              ]
+            },
+            {
+              "value": "VW",
+              "kind": "punctuation",
+              "safe": true,
+              "language": "en",
+              "market": "Global",
+              "sourceIds": [
+                "src-volkswagen-company-publication-data"
+              ]
+            },
+            {
+              "value": "VOLKSWAGEN V W",
+              "kind": "source_spelling",
+              "safe": true,
+              "language": "en",
+              "market": "Europe",
+              "sourceIds": [
+                "src-eea-co2cars-2020-2022-final",
+                "src-eea-co2cars-2023-final"
+              ]
+            }
+          ],
+          "countries": [
+            "Germany"
+          ],
+          "status": "seed",
+          "evidence": [
+            {
+              "sourceId": "src-volkswagen-company-publication-data",
+              "fields": [
+                "canonicalName",
+                "countries"
+              ],
+              "status": "verified",
+              "confidence": "official",
+              "note": null
+            }
+          ],
+          "researchNotes": [
+            "Checkpoint seed only; the brand is not complete until its full 2015+ model and variant inventory is source-checked."
+          ],
+          "updatedAt": "2026-08-17"
+        }
+      ]
+    }
+  ]
+}
