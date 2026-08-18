@@ -1,0 +1,191 @@
+{
+  "records": [
+    {
+      "file": "models-0004.json",
+      "id": "mazda/6e",
+      "brandId": "mazda",
+      "canonicalName": "Mazda6e",
+      "slug": "6e",
+      "aliases": [],
+      "sourceNames": [
+        {
+          "value": "6E",
+          "kind": "source_spelling",
+          "safe": false,
+          "language": "en",
+          "market": "Europe",
+          "sourceIds": [
+            "src-eea-co2cars-2025-provisional"
+          ]
+        }
+      ],
+      "productionFrom": null,
+      "productionTo": null,
+      "bodyTypes": [],
+      "powertrainKinds": [],
+      "mediaIds": [],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "canonicalName"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact same-brand EEA registered commercial-name identity retained after explicit model-boundary review."
+        }
+      ],
+      "researchNotes": [
+        "EEA registration observations cover 2025; 909 registrations and 2 specification groups. Counts establish observed presence, not production boundaries.",
+        "Review status: body style, generation boundary, canonical cover and the complete engine/grade inventory remain pending; source spellings are unsafe until listing-level context confirms the model.",
+        "Reviewed EEA commercial-name spellings are retained as unsafe source aliases for English canonical model resolution."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "file": "models-0004.json",
+      "id": "mazda/mazda6e",
+      "brandId": "mazda",
+      "canonicalName": "MAZDA6e",
+      "slug": "mazda6e",
+      "aliases": [],
+      "sourceNames": [
+        {
+          "value": "MAZDA 6E",
+          "kind": "source_spelling",
+          "safe": true,
+          "language": "en",
+          "market": "Europe",
+          "sourceIds": [
+            "src-eea-co2cars-2025-provisional"
+          ]
+        }
+      ],
+      "productionFrom": null,
+      "productionTo": null,
+      "bodyTypes": [],
+      "powertrainKinds": [],
+      "mediaIds": [],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "canonicalName"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2025."
+        }
+      ],
+      "researchNotes": [
+        "EEA source make spellings: MAZDA.",
+        "EEA registration observations: 6265; specification groups: 4. Counts establish observed presence, not total sales or production boundaries.",
+        "Review status: body style, powertrain family, generation boundary, canonical cover and complete marketed-model boundary remain unverified; excluded from safe automatic resolution."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "file": "models-0007.json",
+      "id": "xpeng/p7",
+      "brandId": "xpeng",
+      "canonicalName": "P7",
+      "slug": "p7",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": null,
+      "productionTo": null,
+      "bodyTypes": [],
+      "powertrainKinds": [],
+      "mediaIds": [],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-eea-co2cars-2020-2022-final",
+          "fields": [
+            "canonicalName"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2021, 2022, 2023, 2024, 2025."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2023-final",
+          "fields": [
+            "canonicalName"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2021, 2022, 2023, 2024, 2025."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2024-provisional",
+          "fields": [
+            "canonicalName"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2021, 2022, 2023, 2024, 2025."
+        },
+        {
+          "sourceId": "src-eea-co2cars-2025-provisional",
+          "fields": [
+            "canonicalName"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Exact EEA commercial-name spelling intersects one same-brand VehiclesDB marketed-model candidate; observed in European registrations during 2021, 2022, 2023, 2024, 2025."
+        }
+      ],
+      "researchNotes": [
+        "EEA source make spellings: XPENG.",
+        "EEA registration observations: 1039; specification groups: 27. Counts establish observed presence, not total sales or production boundaries.",
+        "Review status: body style, powertrain family, generation boundary, canonical cover and complete marketed-model boundary remain unverified; excluded from safe automatic resolution."
+      ],
+      "updatedAt": "2026-08-17"
+    },
+    {
+      "file": "models-0007.json",
+      "id": "xpeng/p7-plus",
+      "brandId": "xpeng",
+      "canonicalName": "P7+",
+      "slug": "p7-plus",
+      "aliases": [],
+      "sourceNames": [
+        {
+          "value": "小鹏 P7+",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh-CN",
+          "market": "China",
+          "sourceIds": [
+            "src-huawei-hicar-current-models-2026"
+          ]
+        }
+      ],
+      "productionFrom": null,
+      "productionTo": null,
+      "bodyTypes": [],
+      "powertrainKinds": [],
+      "mediaIds": [],
+      "status": "review",
+      "evidence": [
+        {
+          "sourceId": "src-huawei-hicar-current-models-2026",
+          "fields": [
+            "canonicalName"
+          ],
+          "status": "verified",
+          "confidence": "high",
+          "note": "Huawei's official HiCar inventory explicitly lists the model code or public Chinese model name in the 2020-2026 scope. Latin transliterations without an official export spelling remain review-only."
+        }
+      ],
+      "researchNotes": [
+        "Priority identity gap only: exact generation, body, powertrain, grade and technical values require manufacturer sources before pricing use.",
+        "Compatibility model years are observations and are not copied into productionFrom."
+      ],
+      "updatedAt": "2026-08-17"
+    }
+  ]
+}
