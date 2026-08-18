@@ -1,0 +1,555 @@
+{
+  "variants": [
+    {
+      "entityId": "audi/q6-e-tron/2024/performance-eu",
+      "missing": [
+        "transmission",
+        "curbWeightKg",
+        "doors",
+        "acChargeKw",
+        "power30MinKw"
+      ]
+    },
+    {
+      "entityId": "bmw/i4/g26/edrive40-2024-global",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "doors",
+        "power30MinKw",
+        "batteryCapacityKwh"
+      ]
+    },
+    {
+      "entityId": "toyota/rav4/xa50/hybrid-awd-i-uk",
+      "missing": [
+        "transmission",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "byd/seal/2023/excellence-awd-eu",
+      "missing": [
+        "transmission",
+        "curbWeightKg",
+        "doors",
+        "power30MinKw"
+      ]
+    },
+    {
+      "entityId": "geely/ex5/global/160kw-global",
+      "missing": [
+        "transmission",
+        "drive",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "mercedes-benz/glc/2022-launch/glc-300-4matic-de",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors"
+      ]
+    },
+    {
+      "entityId": "volkswagen/golf/eighth-generation/gti-2024-de",
+      "missing": [
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "honda/civic/11th-generation/type-r-2023-us",
+      "missing": [
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors"
+      ]
+    },
+    {
+      "entityId": "nissan/leaf/second-generation/eplus-2019-eu",
+      "missing": [
+        "transmission",
+        "drive",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh"
+      ]
+    },
+    {
+      "entityId": "hyundai/tucson/fourth-generation/hybrid-230ps-2wd-eu",
+      "missing": [
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "kia/ev6/2021-launch/gt-2022-eu",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "mazda/cx-60/2022-launch/e-skyactiv-phev-uk",
+      "missing": [
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "lexus/rz/2022-launch/rz-450e-eu",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "volvo/ex30/2023-launch/twin-motor-performance-global",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "porsche/taycan/2019-launch/4s-performance-battery-plus-eu",
+      "missing": [
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "acChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh"
+      ]
+    },
+    {
+      "entityId": "ford/mustang-mach-e/2026-model-year/gt-us",
+      "missing": [
+        "transmission",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "chevrolet/blazer-ev/2024-launch/ss-us",
+      "missing": [
+        "transmission",
+        "drive",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "tesla/model-3/2024-series/performance-au",
+      "missing": [
+        "transmission",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "chery/tiggo-7-pro-max/saudi-2024-series/1-6tgdi-4wd-sa",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "haval/h6/2021-hybrid-launch/hybrid-suv-2wd-th",
+      "missing": [
+        "transmission",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "abarth/500e/2022-launch/hatchback-eu",
+      "missing": [
+        "transmission",
+        "drive",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "acura/zdx/2024-launch/type-s-us",
+      "missing": [
+        "transmission",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "alfa-romeo/junior/2024-launch/elettrica-ch",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "power30MinKw"
+      ]
+    },
+    {
+      "entityId": "aston-martin/db12/2023-launch/v8-coupe-global",
+      "missing": [
+        "drive",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "bentley/continental-gt/fourth-generation/speed-global",
+      "missing": [
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "doors",
+        "motorPeakKw",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "aito/m9/2023-launch/bev-max-six-seat-cn",
+      "missing": [
+        "transmission",
+        "powerKw",
+        "curbWeightKg",
+        "doors",
+        "motorPeakKw",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh"
+      ]
+    },
+    {
+      "entityId": "avatr/12/2023-launch/bev-global",
+      "missing": [
+        "transmission",
+        "drive",
+        "powerKw",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "baic/x55/2022-global/honor-global",
+      "missing": [
+        "powerKw",
+        "curbWeightKg",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "baojun/yep/2023-launch/rwd-cn",
+      "missing": [
+        "transmission",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "motorPeakKw",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh"
+      ]
+    },
+    {
+      "entityId": "baw/ruisheng-m8/current-2026/bev-560-flagship-7-cn",
+      "missing": [
+        "transmission",
+        "drive",
+        "curbWeightKg",
+        "doors",
+        "rangeStandard",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh",
+        "rangeKmOrInterval"
+      ]
+    },
+    {
+      "entityId": "belgee/x50/2023-launch/1-5t-7dct-ru",
+      "missing": [
+        "drive",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "bestune/t90/2024-russia/2-0t-flagship-ru",
+      "missing": [
+        "drive",
+        "powerKw",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "buick/envista/2024-launch/avenir-us",
+      "missing": [
+        "fuel",
+        "powerKw",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    },
+    {
+      "entityId": "cadillac/lyriq/2022-launch/standard-range-luxury-cn",
+      "missing": [
+        "transmission",
+        "lengthMm",
+        "widthMm",
+        "heightMm",
+        "wheelbaseMm",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "acChargeKw",
+        "dcChargeKw",
+        "power30MinKw",
+        "batteryCapacityKwh"
+      ]
+    },
+    {
+      "entityId": "changan/cs75-plus/2024-uae/sport-uae",
+      "missing": [
+        "fuel",
+        "powerKw",
+        "curbWeightKg",
+        "seats",
+        "doors",
+        "engineCc"
+      ]
+    }
+  ]
+}

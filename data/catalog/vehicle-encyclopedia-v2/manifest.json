@@ -1,0 +1,101 @@
+{
+  "schemaVersion": 2,
+  "workspace": "vehicle-encyclopedia-v2",
+  "productionConnected": false,
+  "targetYearFrom": 2015,
+  "targetYearTo": 2026,
+  "chunkSize": 250,
+  "brandSource": "apps/web/lib/catalog/brands.ts",
+  "status": "checkpoint-seed",
+  "pilotBrands": [
+    "Audi",
+    "BMW",
+    "Toyota",
+    "BYD",
+    "Geely"
+  ],
+  "collections": {
+    "source": {
+      "pattern": "chunks/sources-*.json",
+      "chunks": 1,
+      "records": 128
+    },
+    "brand": {
+      "pattern": "chunks/brands-*.json",
+      "chunks": 1,
+      "records": 35
+    },
+    "model": {
+      "pattern": "chunks/models-*.json",
+      "chunks": 1,
+      "records": 35
+    },
+    "generation": {
+      "pattern": "chunks/generations-*.json",
+      "chunks": 1,
+      "records": 35
+    },
+    "facelift": {
+      "pattern": "chunks/facelifts-*.json",
+      "chunks": 1,
+      "records": 2
+    },
+    "variant": {
+      "pattern": "chunks/variants-*.json",
+      "chunks": 1,
+      "records": 35
+    },
+    "media": {
+      "pattern": "chunks/media-*.json",
+      "chunks": 1,
+      "records": 35
+    }
+  },
+  "completedBrands": [
+    "Audi",
+    "BMW",
+    "Toyota",
+    "BYD",
+    "Geely"
+  ],
+  "inProgressBrands": [
+    "Mercedes-Benz",
+    "Volkswagen",
+    "Honda",
+    "Nissan",
+    "Hyundai",
+    "Kia",
+    "Mazda",
+    "Lexus",
+    "Volvo",
+    "Porsche",
+    "Ford",
+    "Chevrolet",
+    "Tesla",
+    "Chery",
+    "Haval",
+    "Abarth",
+    "Acura",
+    "Alfa Romeo",
+    "Aston Martin",
+    "Bentley",
+    "AITO",
+    "Avatr",
+    "BAIC",
+    "Baojun",
+    "BAW",
+    "Belgee",
+    "Bestune",
+    "Buick",
+    "Cadillac",
+    "Changan"
+  ],
+  "blockedBrands": [],
+  "lastCheckpoint": "2026-08-16",
+  "notes": [
+    "Research staging only. Do not publish or modify data/catalog/vehicle-knowledge during collection.",
+    "All canonical entity collections use deterministic chunks capped at 250 records.",
+    "Start with brands already present in CATALOG_BRANDS, then report globally relevant missing passenger-car brands before adding them.",
+    "Exact 30-minute power is source-only and must never be derived from peak power."
+  ]
+}

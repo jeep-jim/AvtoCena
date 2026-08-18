@@ -1,0 +1,100 @@
+[
+  {
+    "id": "audi/q6-e-tron",
+    "make": "Audi",
+    "model": "Q6 SUV e-tron",
+    "aliases": [
+      "Q6 e-tron",
+      "아우디 Q6 e-트론"
+    ],
+    "bodyTypes": [
+      "suv"
+    ],
+    "countries": [
+      "Germany"
+    ],
+    "yearFrom": 2024,
+    "source": "manufacturer",
+    "sourceVersion": "Encyclopedia V2 pilot preview",
+    "sourceUrl": "https://www.audi-mediacenter.com/en/the-audi-q6-e-tron-electric-mobility-on-a-new-level-15929/download",
+    "updatedAt": "2026-08-15T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "bmw/i4",
+    "make": "BMW",
+    "model": "i4",
+    "aliases": [
+      "宝马i4"
+    ],
+    "bodyTypes": [
+      "gran coupe"
+    ],
+    "countries": [
+      "Germany"
+    ],
+    "yearFrom": 2021,
+    "source": "manufacturer",
+    "sourceVersion": "Encyclopedia V2 pilot preview",
+    "sourceUrl": "https://www.press.bmwgroup.com/global/article/detail/T0441229EN/the-new-bmw-i4-and-the-new-bmw-4-series-gran-coup%C3%A9?language=en",
+    "updatedAt": "2026-08-15T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/rav4",
+    "make": "Toyota",
+    "model": "RAV4",
+    "bodyTypes": [
+      "suv"
+    ],
+    "countries": [
+      "Japan"
+    ],
+    "yearFrom": 2019,
+    "yearTo": 2026,
+    "source": "manufacturer",
+    "sourceVersion": "Encyclopedia V2 pilot preview",
+    "sourceUrl": "https://media.toyota.co.uk/vehicles/rav4-2019-2026/",
+    "updatedAt": "2026-08-15T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "byd/seal",
+    "make": "BYD",
+    "model": "SEAL",
+    "aliases": [
+      "比亞迪海豹",
+      "BYD・シール",
+      "비야디 씰"
+    ],
+    "bodyTypes": [
+      "sedan"
+    ],
+    "countries": [
+      "China"
+    ],
+    "yearFrom": 2023,
+    "source": "manufacturer",
+    "sourceVersion": "Encyclopedia V2 pilot preview",
+    "sourceUrl": "https://www.byd.com/eu/news-list/BYD_SEAL_Dynamic_and_Intelligent.html",
+    "updatedAt": "2026-08-15T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "geely/ex5",
+    "make": "Geely",
+    "model": "EX5",
+    "bodyTypes": [
+      "suv"
+    ],
+    "countries": [
+      "China"
+    ],
+    "yearFrom": 2024,
+    "source": "manufacturer",
+    "sourceVersion": "Encyclopedia V2 pilot preview",
+    "sourceUrl": "https://www.geely.com/en/news/2024/geely-auto-unveils-ex5",
+    "updatedAt": "2026-08-15T00:00:00.000Z",
+    "active": true
+  }
+]

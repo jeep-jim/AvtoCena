@@ -1,0 +1,1048 @@
+{
+  "schemaVersion": 2,
+  "entityType": "model",
+  "chunk": 1,
+  "maxRecords": 250,
+  "records": [
+    {
+      "id": "audi/q6-e-tron",
+      "brandId": "audi",
+      "canonicalName": "Q6 SUV e-tron",
+      "slug": "q6-suv-e-tron",
+      "aliases": [
+        { "value": "Q6 e-tron", "kind": "market_name", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-audi-q6-technical-2024"] },
+        { "value": "아우디 Q6 e-트론", "kind": "localized", "safe": true, "language": "ko", "market": "South Korea", "sourceIds": ["src-wikidata-audi-q6"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-audi-q6-cover"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-audi-q6-technical-2024", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["Audi uses both Q6 SUV e-tron and Q6 e-tron in official material; the shorter form is retained as a safe alias."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "bmw/i4",
+      "brandId": "bmw",
+      "canonicalName": "i4",
+      "slug": "i4",
+      "aliases": [
+        { "value": "宝马i4", "kind": "localized", "safe": true, "language": "zh", "market": "China", "sourceIds": ["src-wikidata-bmw-i4"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2021",
+      "productionTo": null,
+      "bodyTypes": ["Gran Coupe"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-bmw-i4-cover"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-bmw-i4-update-2024", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "toyota/rav4",
+      "brandId": "toyota",
+      "canonicalName": "RAV4",
+      "slug": "rav4",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2019",
+      "productionTo": "2026",
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["HEV", "PHEV"],
+      "mediaIds": ["media-toyota-rav4-cover"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-toyota-rav4-archive", "fields": ["canonicalName", "productionFrom", "productionTo", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "Scope is the fifth-generation archive, not the full historical RAV4 nameplate." }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "byd/seal",
+      "brandId": "byd",
+      "canonicalName": "SEAL",
+      "slug": "seal",
+      "aliases": [
+        { "value": "比亞迪海豹", "kind": "localized", "safe": true, "language": "zh-Hant", "market": "Taiwan", "sourceIds": ["src-wikidata-byd-seal"] },
+        { "value": "BYD・シール", "kind": "localized", "safe": true, "language": "ja", "market": "Japan", "sourceIds": ["src-wikidata-byd-seal"] },
+        { "value": "비야디 씰", "kind": "localized", "safe": true, "language": "ko", "market": "South Korea", "sourceIds": ["src-wikidata-byd-seal"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": ["Sedan"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-byd-seal-cover"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-byd-seal-europe-2023", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "Production range represents the European introduction tracked by this seed." }
+      ],
+      "researchNotes": [],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "geely/ex5",
+      "brandId": "geely",
+      "canonicalName": "EX5",
+      "slug": "ex5",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-geely-ex5-cover"],
+      "status": "verified",
+      "evidence": [
+        { "sourceId": "src-geely-ex5-debut-2024", "fields": ["productionFrom"], "status": "verified", "confidence": "official", "note": "Official global unveiling dated September 2024." },
+        { "sourceId": "src-geely-ex5-global", "fields": ["canonicalName", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": null }
+      ],
+      "researchNotes": ["No E5/EX5 safe alias is published until an official source explicitly proves cross-market equivalence."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "mercedes-benz/glc",
+      "brandId": "mercedes-benz",
+      "canonicalName": "GLC",
+      "slug": "glc",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["MHEV", "PHEV"],
+      "mediaIds": ["media-mercedes-glc-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-mercedes-glc-launch-2022", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The range is bounded to the new GLC series launched in 2022, not the complete historical nameplate." }
+      ],
+      "researchNotes": ["Checkpoint seed: one current generation and one official German-market variant are represented; broader GLC coverage remains open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "volkswagen/golf",
+      "brandId": "volkswagen",
+      "canonicalName": "Golf",
+      "slug": "golf",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2019",
+      "productionTo": null,
+      "bodyTypes": ["Compact car"],
+      "powertrainKinds": ["ICE", "MHEV", "PHEV"],
+      "mediaIds": ["media-volkswagen-golf-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-volkswagen-golf-mk8-premiere-2019", "fields": ["canonicalName", "productionFrom", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The range is bounded to the eighth-generation Golf introduced in 2019." },
+        { "sourceId": "src-volkswagen-golf-gti-2024", "fields": ["bodyTypes"], "status": "verified", "confidence": "official", "note": "Volkswagen describes the Golf GTI as a sporty compact car." }
+      ],
+      "researchNotes": ["Checkpoint seed: eighth-generation Golf coverage is incomplete beyond the 2024 GTI specimen."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "honda/civic",
+      "brandId": "honda",
+      "canonicalName": "Civic",
+      "slug": "civic",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["Hatchback"],
+      "powertrainKinds": ["ICE"],
+      "mediaIds": ["media-honda-civic-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-honda-civic-type-r-press-kit-2022", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "This seed is scoped to the 11th-generation Civic Hatchback / Type R material, not the full Civic nameplate." }
+      ],
+      "researchNotes": ["Checkpoint seed: only the 11th-generation US Type R specimen is represented; other Civic bodies and powertrains remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "nissan/leaf",
+      "brandId": "nissan",
+      "canonicalName": "LEAF",
+      "slug": "leaf",
+      "aliases": [
+        { "value": "Leaf", "kind": "punctuation", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-nissan-leaf-second-gen-2017"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2017",
+      "productionTo": null,
+      "bodyTypes": ["Hatchback"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-nissan-leaf-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-nissan-leaf-second-gen-2017", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The range is bounded to the second-generation LEAF introduced in 2017." }
+      ],
+      "researchNotes": ["Checkpoint seed: the second generation is represented by the 2019 European e+ specification; other markets and versions remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "hyundai/tucson",
+      "brandId": "hyundai",
+      "canonicalName": "TUCSON",
+      "slug": "tucson",
+      "aliases": [
+        { "value": "Tucson", "kind": "punctuation", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-hyundai-tucson-launch-2020"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2020",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["ICE", "HEV", "PHEV"],
+      "mediaIds": ["media-hyundai-tucson-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-hyundai-tucson-launch-2020", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The range is bounded to the fourth-generation TUCSON launched in 2020." }
+      ],
+      "researchNotes": ["Checkpoint seed: one European hybrid configuration is represented; other fourth-generation markets and powertrains remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "kia/ev6",
+      "brandId": "kia",
+      "canonicalName": "EV6",
+      "slug": "ev6",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2021",
+      "productionTo": null,
+      "bodyTypes": ["Crossover"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-kia-ev6-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-kia-ev6-world-premiere-2021", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The tracked range begins with the official 2021 global launch and second-half sales start." }
+      ],
+      "researchNotes": ["Checkpoint seed: the original EV6 launch series is represented by one European GT configuration; other markets, batteries and the 2024 product enhancement remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "mazda/cx-60",
+      "brandId": "mazda",
+      "canonicalName": "CX-60",
+      "slug": "cx-60",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["Crossover SUV"],
+      "powertrainKinds": ["PHEV"],
+      "mediaIds": ["media-mazda-cx-60-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-mazda-cx-60-global-2022", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The official release dates production from March 2022 and identifies the European e-Skyactiv PHEV launch configuration." }
+      ],
+      "researchNotes": ["Checkpoint seed: one UK PHEV configuration is represented; diesel, petrol, mild-hybrid and additional-market coverage remains open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "lexus/rz",
+      "brandId": "lexus",
+      "canonicalName": "RZ",
+      "slug": "rz",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-lexus-rz-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-lexus-rz-world-premiere-2022", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The tracked range begins with the all-new RZ 450e and first European deliveries at the end of 2022." }
+      ],
+      "researchNotes": ["Checkpoint seed: only the original European RZ 450e launch configuration is represented; later RZ derivatives and market updates remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "volvo/ex30",
+      "brandId": "volvo",
+      "canonicalName": "EX30",
+      "slug": "ex30",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": ["Small SUV"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-volvo-ex30-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-volvo-ex30-launch-2023", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The tracked range begins with the June 2023 global reveal and order opening; a production-start month is not inferred." }
+      ],
+      "researchNotes": ["Checkpoint seed: one global Twin Motor Performance configuration is represented; other batteries, motors, markets and Cross Country coverage remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "porsche/taycan",
+      "brandId": "porsche",
+      "canonicalName": "Taycan",
+      "slug": "taycan",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2019",
+      "productionTo": null,
+      "bodyTypes": ["Sports saloon"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-porsche-taycan-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-porsche-taycan-4s-2019", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The tracked range begins with the original Taycan series presented in 2019; the 4S specimen reached European dealers in January 2020." }
+      ],
+      "researchNotes": ["Checkpoint seed: one original-series Taycan 4S configuration is represented; the full saloon range, Cross Turismo, Sport Turismo and 2024 update remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "ford/mustang-mach-e",
+      "brandId": "ford",
+      "canonicalName": "Mustang Mach-E",
+      "slug": "mustang-mach-e",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2026",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-ford-mustang-mach-e-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-ford-mustang-mach-e-overview", "fields": ["canonicalName", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "Ford describes Mustang Mach-E as an all-electric SUV." },
+        { "sourceId": "src-ford-mustang-mach-e-2026-us", "fields": ["productionFrom"], "status": "verified", "confidence": "official", "note": "This seed is deliberately scoped to the documented US 2026 model-year series, not the complete Mustang Mach-E nameplate." }
+      ],
+      "researchNotes": ["Checkpoint seed: only one 2026 US GT configuration is represented; earlier model years, other trims and non-US markets remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "chevrolet/blazer-ev",
+      "brandId": "chevrolet",
+      "canonicalName": "Blazer EV",
+      "slug": "blazer-ev",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": ["Midsize crossover"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-chevrolet-blazer-ev-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-chevrolet-blazer-ev-2022", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The official reveal calls Blazer EV an all-electric midsize crossover and dates US/Canada sales from 2023." }
+      ],
+      "researchNotes": ["Checkpoint seed: the original Ultium launch series is represented by one US SS specimen; later model years and other trims remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "tesla/model-3",
+      "brandId": "tesla",
+      "canonicalName": "Model 3",
+      "slug": "model-3",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["Sedan"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-tesla-model-3-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-tesla-model-3-performance-au", "fields": ["canonicalName", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "Tesla identifies Model 3 Performance as an electric AWD sedan." },
+        { "sourceId": "src-tesla-model-3-manual-2024", "fields": ["productionFrom"], "status": "verified", "confidence": "official", "note": "This seed is deliberately scoped to Tesla's 2024+ owner-manual series, not the complete historical Model 3 nameplate." }
+      ],
+      "researchNotes": ["Checkpoint seed: one Australian-market Performance configuration from the 2024+ series is represented; other variants and markets remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "chery/tiggo-7-pro-max",
+      "brandId": "chery",
+      "canonicalName": "Tiggo 7 Pro Max",
+      "slug": "tiggo-7-pro-max",
+      "aliases": [
+        { "value": "TIGGO 7 Pro Max", "kind": "punctuation", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-chery-tiggo-7-pro-max-2023"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": null,
+      "productionTo": null,
+      "bodyTypes": ["Crossover SUV"],
+      "powertrainKinds": ["ICE"],
+      "mediaIds": ["media-chery-tiggo-7-pro-max-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-chery-tiggo-7-pro-max-2023", "fields": ["canonicalName"], "status": "verified", "confidence": "official", "note": "The official 2023 review establishes the model name but does not state its production start." },
+        { "sourceId": "src-chery-tiggo-7-pro-max-saudi-2024", "fields": ["bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The Saudi-market source identifies the vehicle as a crossover SUV powered by a 1.6TGDI combustion engine." }
+      ],
+      "researchNotes": ["Checkpoint seed: one 2024 Saudi-market 4WD configuration is represented. Production start remains unset because the reviewed official sources do not establish it."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "haval/h6",
+      "brandId": "haval",
+      "canonicalName": "H6",
+      "slug": "h6",
+      "aliases": [
+        { "value": "HAVAL H6", "kind": "source_spelling", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-haval-h6-hybrid-thailand-2021"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2021",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["HEV"],
+      "mediaIds": ["media-haval-h6-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-haval-h6-hybrid-thailand-2021", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The tracked range is scoped to the H6 Hybrid SUV launched for Thailand in Q2 2021, not the complete historical H6 nameplate." }
+      ],
+      "researchNotes": ["Checkpoint seed: one Thailand-market Hybrid SUV configuration is represented; ICE, PHEV, later facelifts and other markets remain open."],
+      "updatedAt": "2026-08-15"
+    },
+    {
+      "id": "abarth/500e",
+      "brandId": "abarth",
+      "canonicalName": "500e",
+      "slug": "500e",
+      "aliases": [
+        { "value": "Abarth 500e", "kind": "source_spelling", "safe": true, "language": "en", "market": "Europe", "sourceIds": ["src-abarth-500e-launch-2022"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2022",
+      "productionTo": null,
+      "bodyTypes": ["Hatchback", "Cabriolet"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-abarth-500e-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-abarth-500e-launch-2022", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The official European launch identifies the all-electric 500e and shows both hatchback and cabriolet forms." }
+      ],
+      "researchNotes": ["Checkpoint seed: one European launch configuration is represented; later trims, model years and non-European markets remain open."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "acura/zdx",
+      "brandId": "acura",
+      "canonicalName": "ZDX",
+      "slug": "zdx",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["SUV"],
+      "powertrainKinds": ["BEV"],
+      "mediaIds": ["media-acura-zdx-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-acura-zdx-debut-2023", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "Honda's global debut release identifies ZDX as Acura's first all-electric SUV and dates first deliveries to early 2024." }
+      ],
+      "researchNotes": ["Checkpoint seed: the 2024 North American Type S is represented; A-Spec versions and final production-end evidence remain open."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "alfa-romeo/junior",
+      "brandId": "alfa-romeo",
+      "canonicalName": "Junior",
+      "slug": "junior",
+      "aliases": [
+        { "value": "Milano", "kind": "historical", "safe": true, "language": "en", "market": "Global", "sourceIds": ["src-alfa-romeo-junior-name-2024"] }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["Compact crossover"],
+      "powertrainKinds": ["BEV", "MHEV"],
+      "mediaIds": ["media-alfa-romeo-junior-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-alfa-romeo-junior-name-2024", "fields": ["canonicalName"], "status": "verified", "confidence": "official", "note": "Alfa Romeo officially changed the recently unveiled model name from Milano to Junior on 15 April 2024." },
+        { "sourceId": "src-alfa-romeo-junior-swiss-2024", "fields": ["productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The Swiss launch identifies the Junior as a compact crossover available in 2024 with battery-electric and mild-hybrid powertrains." }
+      ],
+      "researchNotes": ["Checkpoint seed: one Swiss-market Elettrica configuration is represented; other electric and hybrid versions and markets remain open."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "aston-martin/db12",
+      "brandId": "aston-martin",
+      "canonicalName": "DB12",
+      "slug": "db12",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": ["Coupe"],
+      "powertrainKinds": ["ICE"],
+      "mediaIds": ["media-aston-martin-db12-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-aston-martin-db12-launch-2023", "fields": ["canonicalName", "productionFrom", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The official May 2023 launch identifies DB12 as the first of Aston Martin's next generation of sports cars with a V8 powertrain." },
+        { "sourceId": "src-aston-martin-db12-spec-uk", "fields": ["bodyTypes"], "status": "verified", "confidence": "official", "note": "The official UK technical page identifies the DB12 V8 Coupe." }
+      ],
+      "researchNotes": ["Checkpoint seed: one global-launch V8 Coupe configuration is represented; Volante and later versions remain open."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "bentley/continental-gt",
+      "brandId": "bentley",
+      "canonicalName": "Continental GT",
+      "slug": "continental-gt",
+      "aliases": [],
+      "sourceNames": [],
+      "productionFrom": "2024",
+      "productionTo": null,
+      "bodyTypes": ["Coupe"],
+      "powertrainKinds": ["PHEV"],
+      "mediaIds": ["media-bentley-continental-gt-cover"],
+      "status": "seed",
+      "evidence": [
+        { "sourceId": "src-bentley-continental-gt-speed-2024", "fields": ["canonicalName", "productionFrom", "bodyTypes", "powertrainKinds"], "status": "verified", "confidence": "official", "note": "The source reveals the fourth-generation Continental GT Speed coupe in June 2024 with an Ultra Performance Hybrid plug-in powertrain." }
+      ],
+      "researchNotes": ["Checkpoint seed: only the fourth-generation Continental GT Speed launch configuration is represented; other fourth-generation trims and the earlier nameplate history remain open."],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "aito/m9",
+      "brandId": "aito",
+      "canonicalName": "M9",
+      "slug": "m9",
+      "aliases": [],
+      "sourceNames": [
+        {
+          "value": "AITO M9",
+          "kind": "source_spelling",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-aito-m9-preorder-2023"
+          ]
+        }
+      ],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "powertrainKinds": [
+        "EREV",
+        "BEV"
+      ],
+      "mediaIds": [
+        "media-aito-m9-cover"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-aito-m9-preorder-2023",
+          "fields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official announcement opens BEV and range-extender M9 preorders and schedules its full-size SUV launch for Q4 2023."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed: one 2025 China-market BEV configuration is represented; the EREV range and other trims remain open."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "avatr/12",
+      "brandId": "avatr",
+      "canonicalName": "12",
+      "slug": "12",
+      "aliases": [],
+      "sourceNames": [
+        {
+          "value": "AVATR 12",
+          "kind": "source_spelling",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-avatr-12-premiere-2023"
+          ]
+        }
+      ],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": [
+        "Gran Coupe"
+      ],
+      "powertrainKinds": [
+        "BEV"
+      ],
+      "mediaIds": [
+        "media-avatr-12-cover"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-avatr-12-premiere-2023",
+          "fields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "The official premiere establishes the AVATR 12 Gran Coupe and Q4 2023 delivery timing."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed: the original BEV launch series is represented; later range-extender versions on the current dual-platform page remain open."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "baic/x55",
+      "brandId": "baic",
+      "canonicalName": "X55",
+      "slug": "x55",
+      "aliases": [
+        {
+          "value": "X55 II",
+          "kind": "source_spelling",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-baic-x55-annual-2022"
+          ]
+        }
+      ],
+      "sourceNames": [
+        {
+          "value": "BAIC X55",
+          "kind": "source_spelling",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-baic-x55-global-config"
+          ]
+        }
+      ],
+      "productionFrom": null,
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "powertrainKinds": [
+        "ICE"
+      ],
+      "mediaIds": [
+        "media-baic-x55-cover"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-baic-x55-annual-2022",
+          "fields": [
+            "canonicalName"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official annual review records the X55 II release in 2022."
+        },
+        {
+          "sourceId": "src-baic-x55-global-config",
+          "fields": [
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official model configuration identifies the X55 SUV and combustion-engine specification."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed: one global Honor configuration is represented; exact market boundaries and additional trims remain open.",
+        "Model-level productionFrom remains null because the reviewed 2022 source establishes the X55 II release, not the earliest X55 nameplate production."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "baojun/yep",
+      "brandId": "baojun",
+      "canonicalName": "Yep",
+      "slug": "yep",
+      "aliases": [],
+      "sourceNames": [
+        {
+          "value": "Baojun Yep",
+          "kind": "source_spelling",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-baojun-yep-launch-2023"
+          ]
+        }
+      ],
+      "productionFrom": "2023",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "powertrainKinds": [
+        "BEV"
+      ],
+      "mediaIds": [
+        "media-baojun-yep-cover"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-baojun-yep-launch-2023",
+          "fields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official China launch identifies the Yep as an all-electric compact SUV launched in May 2023."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed: the original China-market rear-wheel-drive Yep is represented; Yep Plus and later versions remain separate research work."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "baw/ruisheng-m8",
+      "brandId": "baw",
+      "canonicalName": "Ruisheng M8",
+      "slug": "ruisheng-m8",
+      "aliases": [
+        {
+          "value": "锐胜M8",
+          "kind": "localized",
+          "safe": true,
+          "language": "zh",
+          "market": "China",
+          "sourceIds": [
+            "src-baw-ruisheng-m8-current-2026"
+          ]
+        }
+      ],
+      "sourceNames": [],
+      "productionFrom": null,
+      "productionTo": null,
+      "bodyTypes": [
+        "MPV"
+      ],
+      "powertrainKinds": [
+        "EREV",
+        "BEV"
+      ],
+      "mediaIds": [
+        "media-baw-ruisheng-m8-cover"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-baw-ruisheng-m8-current-2026",
+          "fields": [
+            "canonicalName",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official BAW range reviewed in 2026 lists the Ruisheng M8 large MPV."
+        },
+        {
+          "sourceId": "src-baw-ruisheng-m8-config-2026",
+          "fields": [
+            "powertrainKinds"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official table lists range-extender and battery-electric configurations."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed: productionFrom remains null because the reviewed official pages establish current 2026 availability but do not establish the launch date."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "belgee/x50",
+      "brandId": "belgee",
+      "canonicalName": "X50",
+      "slug": "x50",
+      "aliases": [],
+      "sourceNames": [
+        {
+          "value": "BELGEE X50",
+          "kind": "source_spelling",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-belgee-x50-production-2025"
+          ]
+        }
+      ],
+      "productionFrom": "2023-07",
+      "productionTo": null,
+      "bodyTypes": [
+        "Crossover"
+      ],
+      "powertrainKinds": [
+        "ICE"
+      ],
+      "mediaIds": [
+        "media-belgee-x50-cover"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-belgee-x50-production-2025",
+          "fields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official release dates the first X50 production in Belarus to July 2023 and calls it a crossover."
+        },
+        {
+          "sourceId": "src-belgee-x50-two-years-2025",
+          "fields": [
+            "powertrainKinds"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official technical overview establishes the combustion-engine powertrain."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed: one Russian-market turbo-petrol DCT configuration is represented; other markets and trims remain open."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "bestune/t90",
+      "brandId": "bestune",
+      "canonicalName": "T90",
+      "slug": "t90",
+      "aliases": [],
+      "sourceNames": [
+        {
+          "value": "BESTUNE T90",
+          "kind": "source_spelling",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-bestune-t90-russia-launch-2024"
+          ]
+        }
+      ],
+      "productionFrom": null,
+      "productionTo": null,
+      "bodyTypes": [
+        "Crossover"
+      ],
+      "powertrainKinds": [
+        "ICE"
+      ],
+      "mediaIds": [
+        "media-bestune-t90-cover"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-bestune-t90-russia-launch-2024",
+          "fields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official Russian launch identifies the T90 petrol crossover from 2024."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed: one Russia-market Flagship configuration is represented.",
+        "Model-level productionFrom remains null because the reviewed source establishes the 2024 Russian launch, not the earliest global production date."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "buick/envista",
+      "brandId": "buick",
+      "canonicalName": "Envista",
+      "slug": "envista",
+      "aliases": [],
+      "sourceNames": [
+        {
+          "value": "Buick Envista",
+          "kind": "source_spelling",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-buick-envista-launch-2023"
+          ]
+        }
+      ],
+      "productionFrom": null,
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "powertrainKinds": [
+        "ICE"
+      ],
+      "mediaIds": [
+        "media-buick-envista-cover"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-buick-envista-launch-2023",
+          "fields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official U.S. reveal establishes the 2024 Envista small SUV and combustion powertrain."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed: the U.S.-market Avenir launch configuration is represented; China-market and later variants remain open.",
+        "Model-level productionFrom remains null because the reviewed source establishes the 2024 U.S. model-year launch rather than the earliest global use of the Envista name."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "cadillac/lyriq",
+      "brandId": "cadillac",
+      "canonicalName": "LYRIQ",
+      "slug": "lyriq",
+      "aliases": [
+        {
+          "value": "Lyriq",
+          "kind": "punctuation",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-cadillac-lyriq-production-2022"
+          ]
+        }
+      ],
+      "sourceNames": [],
+      "productionFrom": "2022-03",
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "powertrainKinds": [
+        "BEV"
+      ],
+      "mediaIds": [
+        "media-cadillac-lyriq-cover"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-cadillac-lyriq-production-2022",
+          "fields": [
+            "canonicalName",
+            "productionFrom",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official release records the March 2022 start of retail production for the 2023 LYRIQ electric SUV."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed: one 2023 China-market rear-wheel-drive configuration is represented; other battery, drivetrain and market variants remain open."
+      ],
+      "updatedAt": "2026-08-16"
+    },
+    {
+      "id": "changan/cs75-plus",
+      "brandId": "changan",
+      "canonicalName": "CS75 Plus",
+      "slug": "cs75-plus",
+      "aliases": [
+        {
+          "value": "CS75 PLUS",
+          "kind": "punctuation",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-changan-cs75-plus-uae-2024"
+          ]
+        }
+      ],
+      "sourceNames": [
+        {
+          "value": "Changan CS75 Plus",
+          "kind": "source_spelling",
+          "safe": true,
+          "language": "en",
+          "market": "Global",
+          "sourceIds": [
+            "src-changan-cs75-plus-uae-2024"
+          ]
+        }
+      ],
+      "productionFrom": null,
+      "productionTo": null,
+      "bodyTypes": [
+        "SUV"
+      ],
+      "powertrainKinds": [
+        "ICE"
+      ],
+      "mediaIds": [
+        "media-changan-cs75-plus-cover"
+      ],
+      "status": "seed",
+      "evidence": [
+        {
+          "sourceId": "src-changan-cs75-plus-uae-2024",
+          "fields": [
+            "canonicalName",
+            "bodyTypes",
+            "powertrainKinds"
+          ],
+          "status": "verified",
+          "confidence": "official",
+          "note": "Official UAE article establishes the locally offered 2024 CS75 Plus SUV; the date is market-scoped, not a global nameplate start."
+        }
+      ],
+      "researchNotes": [
+        "Checkpoint seed: one UAE-market Sport configuration is represented; global generation history and other markets remain open.",
+        "Model-level productionFrom remains null because the reviewed source establishes the 2024 UAE offering, not the global CS75 Plus nameplate start."
+      ],
+      "updatedAt": "2026-08-16"
+    }
+  ]
+}

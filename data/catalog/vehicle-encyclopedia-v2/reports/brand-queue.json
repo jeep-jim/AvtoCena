@@ -1,0 +1,1740 @@
+{
+  "schemaVersion": 1,
+  "generatedFrom": [
+    "apps/web/lib/catalog/brands.ts",
+    "data/catalog/vehicle-knowledge/models-index.json",
+    "data/catalog/vehicle-knowledge/variants-index.json",
+    "vehicle-encyclopedia-v2 canonical chunks"
+  ],
+  "productionModified": false,
+  "totals": {
+    "productionBrands": 185,
+    "verified": 5,
+    "inProgress": 30,
+    "queued": 150,
+    "legacyCandidateModels": 4899,
+    "legacyCandidateVariants": 15735
+  },
+  "activeCheckpoint": "checkpoint-03",
+  "nextCheckpoint": [
+    "Abarth",
+    "Acura",
+    "AITO",
+    "Alfa Romeo",
+    "Aston Martin",
+    "Avatr",
+    "BAIC",
+    "Baojun",
+    "BAW",
+    "Belgee",
+    "Bentley",
+    "Bestune",
+    "Buick",
+    "Cadillac",
+    "Changan"
+  ],
+  "checkpoints": {
+    "checkpoint-02": [
+      "Mercedes-Benz",
+      "Volkswagen",
+      "Honda",
+      "Nissan",
+      "Hyundai",
+      "Kia",
+      "Mazda",
+      "Lexus",
+      "Volvo",
+      "Porsche",
+      "Ford",
+      "Chevrolet",
+      "Tesla",
+      "Chery",
+      "Haval"
+    ],
+    "checkpoint-03": [
+      "Abarth",
+      "Acura",
+      "AITO",
+      "Alfa Romeo",
+      "Aston Martin",
+      "Avatr",
+      "BAIC",
+      "Baojun",
+      "BAW",
+      "Belgee",
+      "Bentley",
+      "Bestune",
+      "Buick",
+      "Cadillac",
+      "Changan"
+    ]
+  },
+  "rule": "Legacy counts are research-queue candidates only and are never treated as proven V2 facts.",
+  "queue": [
+    {
+      "position": 1,
+      "brand": "212",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 2,
+      "brand": "Abarth",
+      "status": "in-progress",
+      "v2BrandId": "abarth",
+      "legacyCandidateModels": 6,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 3,
+      "brand": "AC",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 4,
+      "brand": "Acura",
+      "status": "in-progress",
+      "v2BrandId": "acura",
+      "legacyCandidateModels": 23,
+      "legacyCandidateVariants": 17,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 5,
+      "brand": "AITO",
+      "status": "in-progress",
+      "v2BrandId": "aito",
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 6,
+      "brand": "Alfa Romeo",
+      "status": "in-progress",
+      "v2BrandId": "alfa-romeo",
+      "legacyCandidateModels": 81,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 7,
+      "brand": "Alpina",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 15,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 8,
+      "brand": "AMC",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 10,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 9,
+      "brand": "Aro",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 10,
+      "brand": "Asia",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 11,
+      "brand": "Aston Martin",
+      "status": "in-progress",
+      "v2BrandId": "aston-martin",
+      "legacyCandidateModels": 27,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 12,
+      "brand": "Audi",
+      "status": "verified",
+      "v2BrandId": "audi",
+      "legacyCandidateModels": 56,
+      "legacyCandidateVariants": 1561,
+      "checkpoint": null
+    },
+    {
+      "position": 13,
+      "brand": "Avatr",
+      "status": "in-progress",
+      "v2BrandId": "avatr",
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 14,
+      "brand": "BAIC",
+      "status": "in-progress",
+      "v2BrandId": "baic",
+      "legacyCandidateModels": 7,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 15,
+      "brand": "Baojun",
+      "status": "in-progress",
+      "v2BrandId": "baojun",
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 16,
+      "brand": "BAW",
+      "status": "in-progress",
+      "v2BrandId": "baw",
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 17,
+      "brand": "Belgee",
+      "status": "in-progress",
+      "v2BrandId": "belgee",
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 18,
+      "brand": "Bentley",
+      "status": "in-progress",
+      "v2BrandId": "bentley",
+      "legacyCandidateModels": 36,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 19,
+      "brand": "Bestune",
+      "status": "in-progress",
+      "v2BrandId": "bestune",
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 20,
+      "brand": "BMW",
+      "status": "verified",
+      "v2BrandId": "bmw",
+      "legacyCandidateModels": 65,
+      "legacyCandidateVariants": 2307,
+      "checkpoint": null
+    },
+    {
+      "position": 21,
+      "brand": "Borgward",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 2,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 22,
+      "brand": "Brilliance",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 23,
+      "brand": "Buick",
+      "status": "in-progress",
+      "v2BrandId": "buick",
+      "legacyCandidateModels": 44,
+      "legacyCandidateVariants": 128,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 24,
+      "brand": "BYD",
+      "status": "verified",
+      "v2BrandId": "byd",
+      "legacyCandidateModels": 28,
+      "legacyCandidateVariants": 5,
+      "checkpoint": null
+    },
+    {
+      "position": 25,
+      "brand": "Cadillac",
+      "status": "in-progress",
+      "v2BrandId": "cadillac",
+      "legacyCandidateModels": 49,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 26,
+      "brand": "Changfeng",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 27,
+      "brand": "Changhe",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 28,
+      "brand": "Changan",
+      "status": "in-progress",
+      "v2BrandId": "changan",
+      "legacyCandidateModels": 4,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-03"
+    },
+    {
+      "position": 29,
+      "brand": "Chery",
+      "status": "in-progress",
+      "v2BrandId": "chery",
+      "legacyCandidateModels": 18,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 30,
+      "brand": "Chevrolet",
+      "status": "in-progress",
+      "v2BrandId": "chevrolet",
+      "legacyCandidateModels": 145,
+      "legacyCandidateVariants": 53,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 31,
+      "brand": "Chrysler",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 72,
+      "legacyCandidateVariants": 70,
+      "checkpoint": null
+    },
+    {
+      "position": 32,
+      "brand": "Citroen",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 33,
+      "brand": "Coda",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 34,
+      "brand": "Cupra",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 7,
+      "legacyCandidateVariants": 4,
+      "checkpoint": null
+    },
+    {
+      "position": 35,
+      "brand": "Dacia",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 8,
+      "legacyCandidateVariants": 140,
+      "checkpoint": null
+    },
+    {
+      "position": 36,
+      "brand": "Dadi",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 37,
+      "brand": "Daewoo",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 19,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 38,
+      "brand": "Daihatsu",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 27,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 39,
+      "brand": "Datsun",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 48,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 40,
+      "brand": "Dayun",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 41,
+      "brand": "Deepal",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 3,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 42,
+      "brand": "Denza",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 3,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 43,
+      "brand": "Dodge",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 88,
+      "legacyCandidateVariants": 5,
+      "checkpoint": null
+    },
+    {
+      "position": 44,
+      "brand": "Dongfeng",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 1,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 45,
+      "brand": "Eagle",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 4,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 46,
+      "brand": "ESTEO",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 47,
+      "brand": "EXEED",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 48,
+      "brand": "FAW",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 2,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 49,
+      "brand": "Ferrari",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 117,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 50,
+      "brand": "Fiat",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 152,
+      "legacyCandidateVariants": 113,
+      "checkpoint": null
+    },
+    {
+      "position": 51,
+      "brand": "Fisker",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 4,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 52,
+      "brand": "Ford",
+      "status": "in-progress",
+      "v2BrandId": "ford",
+      "legacyCandidateModels": 200,
+      "legacyCandidateVariants": 1187,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 53,
+      "brand": "Forthing",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 54,
+      "brand": "Foton",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 55,
+      "brand": "GAC",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 3,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 56,
+      "brand": "Geely",
+      "status": "verified",
+      "v2BrandId": "geely",
+      "legacyCandidateModels": 8,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 57,
+      "brand": "Genesis",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 10,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 58,
+      "brand": "Geo",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 5,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 59,
+      "brand": "GMC",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 43,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 60,
+      "brand": "Great Wall",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 13,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 61,
+      "brand": "Hafei",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 62,
+      "brand": "Haima",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 63,
+      "brand": "Haval",
+      "status": "in-progress",
+      "v2BrandId": "haval",
+      "legacyCandidateModels": 5,
+      "legacyCandidateVariants": 12,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 64,
+      "brand": "Hawtai",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 65,
+      "brand": "HiPhi",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 66,
+      "brand": "Honda",
+      "status": "in-progress",
+      "v2BrandId": "honda",
+      "legacyCandidateModels": 116,
+      "legacyCandidateVariants": 1127,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 67,
+      "brand": "Hongqi",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 1,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 68,
+      "brand": "Hozon",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 69,
+      "brand": "Huanghai",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 70,
+      "brand": "Hummer",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 5,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 71,
+      "brand": "Hyundai",
+      "status": "in-progress",
+      "v2BrandId": "hyundai",
+      "legacyCandidateModels": 67,
+      "legacyCandidateVariants": 482,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 72,
+      "brand": "iCAR",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 73,
+      "brand": "IM Motors",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 74,
+      "brand": "Infiniti",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 54,
+      "legacyCandidateVariants": 10,
+      "checkpoint": null
+    },
+    {
+      "position": 75,
+      "brand": "Iran Khodro",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 76,
+      "brand": "Isuzu",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 18,
+      "legacyCandidateVariants": 11,
+      "checkpoint": null
+    },
+    {
+      "position": 77,
+      "brand": "IVECO",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 78,
+      "brand": "JAC",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 2,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 79,
+      "brand": "Jaecoo",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 5,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 80,
+      "brand": "Jaguar",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 71,
+      "legacyCandidateVariants": 101,
+      "checkpoint": null
+    },
+    {
+      "position": 81,
+      "brand": "Jeep",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 27,
+      "legacyCandidateVariants": 121,
+      "checkpoint": null
+    },
+    {
+      "position": 82,
+      "brand": "Jeland",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 83,
+      "brand": "Jetour",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 6,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 84,
+      "brand": "Jetta",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 85,
+      "brand": "Jinbei",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 86,
+      "brand": "JMC",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 87,
+      "brand": "Kaiyi",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 88,
+      "brand": "KGM",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 6,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 89,
+      "brand": "Kia",
+      "status": "in-progress",
+      "v2BrandId": "kia",
+      "legacyCandidateModels": 55,
+      "legacyCandidateVariants": 717,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 90,
+      "brand": "Knewstar",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 91,
+      "brand": "Lamborghini",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 35,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 92,
+      "brand": "Lancia",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 43,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 93,
+      "brand": "Land Rover",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 25,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 94,
+      "brand": "Landwind",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 95,
+      "brand": "Leapmotor",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 4,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 96,
+      "brand": "Lexus",
+      "status": "in-progress",
+      "v2BrandId": "lexus",
+      "legacyCandidateModels": 22,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 97,
+      "brand": "Li Auto",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 98,
+      "brand": "Lifan",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 99,
+      "brand": "Lincoln",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 34,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 100,
+      "brand": "Livan",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 1,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 101,
+      "brand": "Lotus",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 42,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 102,
+      "brand": "Lucid",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 6,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 103,
+      "brand": "Luxgen",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 104,
+      "brand": "Lynk & Co",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 4,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 105,
+      "brand": "M-Hero",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 106,
+      "brand": "Maextro",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 107,
+      "brand": "Maserati",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 35,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 108,
+      "brand": "Maxus",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 5,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 109,
+      "brand": "Maybach",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 6,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 110,
+      "brand": "Mazda",
+      "status": "in-progress",
+      "v2BrandId": "mazda",
+      "legacyCandidateModels": 72,
+      "legacyCandidateVariants": 520,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 111,
+      "brand": "McLaren",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 22,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 112,
+      "brand": "Mercedes-Benz",
+      "status": "in-progress",
+      "v2BrandId": "mercedes-benz",
+      "legacyCandidateModels": 307,
+      "legacyCandidateVariants": 980,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 113,
+      "brand": "Mercury",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 37,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 114,
+      "brand": "MG",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 56,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 115,
+      "brand": "MINI",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 17,
+      "legacyCandidateVariants": 103,
+      "checkpoint": null
+    },
+    {
+      "position": 116,
+      "brand": "Mitsubishi",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 59,
+      "legacyCandidateVariants": 99,
+      "checkpoint": null
+    },
+    {
+      "position": 117,
+      "brand": "Mitsuoka",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 118,
+      "brand": "Morgan",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 16,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 119,
+      "brand": "Neta",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 3,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 120,
+      "brand": "Nio",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 5,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 121,
+      "brand": "Nissan",
+      "status": "in-progress",
+      "v2BrandId": "nissan",
+      "legacyCandidateModels": 106,
+      "legacyCandidateVariants": 329,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 122,
+      "brand": "Oldsmobile",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 59,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 123,
+      "brand": "OMODA",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 4,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 124,
+      "brand": "Opel",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 40,
+      "legacyCandidateVariants": 172,
+      "checkpoint": null
+    },
+    {
+      "position": 125,
+      "brand": "ORA",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 1,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 126,
+      "brand": "Oshan",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 127,
+      "brand": "Oting",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 128,
+      "brand": "Peugeot",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 55,
+      "legacyCandidateVariants": 340,
+      "checkpoint": null
+    },
+    {
+      "position": 129,
+      "brand": "Plymouth",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 53,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 130,
+      "brand": "Polar Stone",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 131,
+      "brand": "Polestar",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 3,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 132,
+      "brand": "Pontiac",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 45,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 133,
+      "brand": "Porsche",
+      "status": "in-progress",
+      "v2BrandId": "porsche",
+      "legacyCandidateModels": 18,
+      "legacyCandidateVariants": 51,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 134,
+      "brand": "Proton",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 12,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 135,
+      "brand": "RAM",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 4,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 136,
+      "brand": "Ravon",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 2,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 137,
+      "brand": "Renault",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 70,
+      "legacyCandidateVariants": 400,
+      "checkpoint": null
+    },
+    {
+      "position": 138,
+      "brand": "Renault Samsung",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 139,
+      "brand": "Rising Auto",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 140,
+      "brand": "Rivian",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 2,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 141,
+      "brand": "Roewe",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 142,
+      "brand": "Rolls-Royce",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 54,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 143,
+      "brand": "Rover",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 58,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 144,
+      "brand": "Rox",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 145,
+      "brand": "Saab",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 15,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 146,
+      "brand": "SAIPA",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 147,
+      "brand": "Saturn",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 15,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 148,
+      "brand": "Scion",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 8,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 149,
+      "brand": "SEAT",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 17,
+      "legacyCandidateVariants": 286,
+      "checkpoint": null
+    },
+    {
+      "position": 150,
+      "brand": "Seres",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 151,
+      "brand": "Shuanghuan",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 152,
+      "brand": "Skoda",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 153,
+      "brand": "Skywell",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 2,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 154,
+      "brand": "Smart",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 24,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 155,
+      "brand": "Soueast",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 156,
+      "brand": "SsangYong",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 11,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 157,
+      "brand": "Subaru",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 38,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 158,
+      "brand": "Suzuki",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 60,
+      "legacyCandidateVariants": 279,
+      "checkpoint": null
+    },
+    {
+      "position": 159,
+      "brand": "SWM",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 2,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 160,
+      "brand": "Tank",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 161,
+      "brand": "TATA",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 1,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 162,
+      "brand": "Tesla",
+      "status": "in-progress",
+      "v2BrandId": "tesla",
+      "legacyCandidateModels": 6,
+      "legacyCandidateVariants": 0,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 163,
+      "brand": "Tianma",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 164,
+      "brand": "Tianye",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 165,
+      "brand": "Toyota",
+      "status": "verified",
+      "v2BrandId": "toyota",
+      "legacyCandidateModels": 155,
+      "legacyCandidateVariants": 1285,
+      "checkpoint": null
+    },
+    {
+      "position": 166,
+      "brand": "Trabant",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 10,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 167,
+      "brand": "Umo",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 168,
+      "brand": "Vauxhall",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 45,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 169,
+      "brand": "Venucia",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 170,
+      "brand": "VGV",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 171,
+      "brand": "Volkswagen",
+      "status": "in-progress",
+      "v2BrandId": "volkswagen",
+      "legacyCandidateModels": 83,
+      "legacyCandidateVariants": 1310,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 172,
+      "brand": "Volvo",
+      "status": "in-progress",
+      "v2BrandId": "volvo",
+      "legacyCandidateModels": 63,
+      "legacyCandidateVariants": 515,
+      "checkpoint": "checkpoint-02"
+    },
+    {
+      "position": 173,
+      "brand": "Voyah",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 2,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 174,
+      "brand": "Wartburg",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 3,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 175,
+      "brand": "Weltmeister",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 176,
+      "brand": "WEY",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 177,
+      "brand": "Willys",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 24,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 178,
+      "brand": "Wuling",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 179,
+      "brand": "Xiaomi",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 1,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 180,
+      "brand": "Xin Kai",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 181,
+      "brand": "XPeng",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 7,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 182,
+      "brand": "Yema",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 183,
+      "brand": "Zeekr",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 5,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 184,
+      "brand": "Zotye",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    },
+    {
+      "position": 185,
+      "brand": "ZX",
+      "status": "queued",
+      "v2BrandId": null,
+      "legacyCandidateModels": 0,
+      "legacyCandidateVariants": 0,
+      "checkpoint": null
+    }
+  ]
+}

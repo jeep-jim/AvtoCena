@@ -1,0 +1,55 @@
+[
+  {
+    "id": "bmw/i4/g26/edrive40-2024-global",
+    "modelId": "bmw/i4",
+    "make": "BMW",
+    "model": "i4",
+    "generation": "G26",
+    "generationAliases": [
+      "G26"
+    ],
+    "yearFrom": 2024,
+    "productionFrom": "2024-07",
+    "fuel": "Electric",
+    "drive": "RWD",
+    "bodyType": "gran coupe",
+    "powertrainKind": "electric",
+    "powerHp": 340,
+    "powerKw": 250,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-bmw-i4-update-2024"
+    ],
+    "sourceUrl": "https://www.press.bmwgroup.com/global/article/detail/T0441229EN/the-new-bmw-i4-and-the-new-bmw-4-series-gran-coup%C3%A9?language=en",
+    "verifiedAt": "2026-08-15T00:00:00.000Z",
+    "active": true
+  },
+  {
+    "id": "toyota/rav4/xa50/hybrid-awd-i-uk",
+    "modelId": "toyota/rav4",
+    "make": "Toyota",
+    "model": "RAV4",
+    "generation": "Fifth generation",
+    "generationAliases": [
+      "XA50",
+      "GA-K"
+    ],
+    "yearFrom": 2019,
+    "yearTo": 2024,
+    "productionFrom": "2019",
+    "productionTo": "2026",
+    "fuel": "Petrol hybrid",
+    "drive": "AWD",
+    "bodyType": "suv",
+    "powertrainKind": "other_hybrid",
+    "powerHp": 219,
+    "sourceType": "manufacturer",
+    "sourceIds": [
+      "src-toyota-rav4-launch-2018",
+      "src-toyota-rav4-archive"
+    ],
+    "sourceUrl": "https://media.toyota.co.uk/specifications-and-prices-announced-for-the-all-new-all-hybrid-toyota-rav4/",
+    "verifiedAt": "2026-08-15T00:00:00.000Z",
+    "active": true
+  }
+]
