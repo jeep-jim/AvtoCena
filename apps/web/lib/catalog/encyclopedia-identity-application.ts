@@ -9,6 +9,7 @@ export type CatalogIdentityMetadata = {
   makeSource: string;
   modelSource: string;
   fullyResolved: boolean;
+  ambiguous: boolean;
 };
 
 type IdentityCarrier = {
@@ -17,18 +18,23 @@ type IdentityCarrier = {
   operational?: Record<string, unknown>;
 };
 
+export type IdentityApplied<T extends IdentityCarrier> = Omit<T, "make" | "model" | "operational"> & {
+  make: string;
+  model: string;
+  operational: Record<string, unknown> & { encyclopediaIdentity: CatalogIdentityMetadata };
+};
+
 /**
  * Pure application step for a previously validated Encyclopedia V2 resolver.
  *
  * This function intentionally does not perform fuzzy matching and does not
- * decide whether V2 is enabled. The caller owns the feature gate. It also
- * keeps the original source spelling in operational metadata so an offer can
- * always be audited/re-projected without re-downloading it from the market.
+ * decide whether V2 is enabled. The caller owns the feature gate. It always
+ * keeps source spelling and resolution status in operational metadata, so an
+ * unresolved offer remains ingestible and can later be re-projected without
+ * re-downloading it from the market.
  */
-export function applyEncyclopediaIdentity<T extends IdentityCarrier>(resolver: EncyclopediaIdentityResolver, input: T): T {
+export function applyEncyclopediaIdentity<T extends IdentityCarrier>(resolver: EncyclopediaIdentityResolver, input: T): IdentityApplied<T> {
   const result = resolver.resolve({ make: input.make, model: input.model });
-  if (!result.brandId) return input;
-
   const identity: CatalogIdentityMetadata = {
     version: 2,
     rawMake: result.rawMake,
@@ -38,11 +44,12 @@ export function applyEncyclopediaIdentity<T extends IdentityCarrier>(resolver: E
     makeSource: result.makeSource,
     modelSource: result.modelSource,
     fullyResolved: result.resolved,
+    ambiguous: result.ambiguous,
   };
 
   return {
     ...input,
-    make: result.canonicalMake,
+    make: result.brandId ? result.canonicalMake : input.make,
     model: result.modelId ? result.canonicalModel : input.model,
     operational: {
       ...(input.operational || {}),
