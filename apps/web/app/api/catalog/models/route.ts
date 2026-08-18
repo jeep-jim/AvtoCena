@@ -1,6 +1,9 @@
 import { NextResponse } from "next/server";
 import { readCatalogFacets } from "@/lib/catalog/storage";
 import { resolveVehicleModelQuery, vehicleKnowledgeFacets } from "@/lib/catalog/vehicle-knowledge";
+import { catalogEncyclopediaIdentityMode } from "@/lib/catalog/encyclopedia-identity-runtime";
+import { resolveConfiguredCatalogSearchParams } from "@/lib/catalog/encyclopedia-identity-query";
+import { encyclopediaIdentityFacets, searchEncyclopediaIdentityModels } from "@/lib/catalog/encyclopedia-identity-directory";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -62,19 +65,23 @@ function contextualFilters(searchParams: URLSearchParams, make: string, includeM
   };
 }
 
-function hasInventoryContext(filters: ReturnType<typeof contextualFilters>) {
+function hasInventoryContext(filters: Record<string, unknown>) {
   return Object.values(filters).some((value) => value !== undefined && value !== "");
 }
 
 export async function GET(request: Request) {
   const url = new URL(request.url);
-  const query = clean(url.searchParams.get("q"));
-  const make = clean(url.searchParams.get("make"));
+  const rawQuery = clean(url.searchParams.get("q"));
+  const rawMake = clean(url.searchParams.get("make"));
+  const mode = catalogEncyclopediaIdentityMode();
+  const identitySearch = await resolveConfiguredCatalogSearchParams({ make: rawMake || undefined, model: rawQuery || undefined });
+  const query = clean(identitySearch.model || rawQuery);
+  const make = clean(identitySearch.make || rawMake);
   const makeValues = [...new Set(make.split(",").map(clean).filter(Boolean))];
   const scope = clean(url.searchParams.get("scope"));
   const limit = Math.min(500, Math.max(1, Number(url.searchParams.get("limit") || 30)));
-  const facetFilters = contextualFilters(url.searchParams, make, true);
-  const modelFilters = contextualFilters(url.searchParams, make, false);
+  const facetFilters = await resolveConfiguredCatalogSearchParams(contextualFilters(url.searchParams, make, true));
+  const modelFilters = await resolveConfiguredCatalogSearchParams(contextualFilters(url.searchParams, make, false));
   const inventoryContext = hasInventoryContext(modelFilters);
 
   if (scope === "facets") {
@@ -92,10 +99,15 @@ export async function GET(request: Request) {
     }
 
     const catalog = await readCatalogFacets(modelFilters);
-    const knowledge = inventoryContext ? { models: [] as ModelSuggestion[] } : await vehicleKnowledgeFacets(make);
+    const knowledge = inventoryContext
+      ? { models: [] as ModelSuggestion[] }
+      : mode === "apply"
+        ? await encyclopediaIdentityFacets(make)
+        : await vehicleKnowledgeFacets(make);
     const models = mergeSuggestions(knowledge.models, catalog.models, "", limit);
     return NextResponse.json({
       items: models.map((item) => ({
+        id: item.id,
         make: item.make,
         model: item.model,
         aliases: item.aliases || [],
@@ -105,6 +117,19 @@ export async function GET(request: Request) {
   }
 
   const catalogFacets = inventoryContext ? await readCatalogFacets(modelFilters) : { models: [] as ModelSuggestion[] };
+  if (!inventoryContext && mode === "apply") {
+    const matches = await searchEncyclopediaIdentityModels(query, make || undefined, limit);
+    return NextResponse.json({
+      items: matches.map((item) => ({
+        id: item.id,
+        make: item.make,
+        model: item.model,
+        aliases: item.aliases || [],
+        label: makeValues.length === 1 ? item.model : `${item.make} ${item.model}`,
+      })),
+    });
+  }
+
   const knowledgeMatches = inventoryContext ? [] : await resolveVehicleModelQuery(query, make || undefined, limit);
   const matches = mergeSuggestions(knowledgeMatches, catalogFacets.models, query, limit);
   return NextResponse.json({
@@ -113,7 +138,7 @@ export async function GET(request: Request) {
       make: item.make,
       model: item.model,
       aliases: item.aliases || [],
-        label: makeValues.length === 1 ? item.model : `${item.make} ${item.model}`,
+      label: makeValues.length === 1 ? item.model : `${item.make} ${item.model}`,
     })),
   });
 }
