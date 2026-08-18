@@ -12,7 +12,8 @@ import { readVehiclePowerKnowledge } from "@/lib/catalog/power-knowledge";
 import { CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
 import { searchOffers } from "@/lib/catalog/storage";
 import type { CatalogMarket } from "@/lib/catalog/types";
-import { readVehicleKnowledgeVariants, vehicleKnowledgeCompact } from "@/lib/catalog/vehicle-knowledge";
+import { readEncyclopediaKnowledgeVariants } from "@/lib/catalog/encyclopedia";
+import { vehicleKnowledgeCompact } from "@/lib/catalog/vehicle-knowledge";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -103,7 +104,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
   const [model, directory, allVariants, allPowerReferences] = await Promise.all([
     findBrandModelBySlug(brand.name, modelSlug),
     readBrandModelDirectory(brand.name),
-    readVehicleKnowledgeVariants(),
+    readEncyclopediaKnowledgeVariants(),
     readVehiclePowerKnowledge(),
   ]);
   if (!model) notFound();
@@ -194,9 +195,9 @@ export default async function ModelLandingPage({ params }: PageProps) {
       <header className="mt-5 grid gap-6 rounded-[2rem] bg-[var(--ac-surface)] p-5 md:grid-cols-[170px_minmax(0,1fr)] md:items-center md:p-8">
         <div className="flex h-32 items-center justify-center rounded-[1.5rem] bg-[var(--ac-surface-2)] md:h-40"><BrandLogoVisual brand={brand.name} className="!h-20 !w-32 md:!h-24 md:!w-36" /></div>
         <div className="min-w-0">
-          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Расчёт автомобиля под ключ</div>
-          <h1 className="mt-2 break-words text-4xl font-black leading-[.98] tracking-[-0.045em] md:text-6xl">{brand.name} {model.model} под заказ</h1>
-          <p className="mt-4 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">АвтоЦена ищет {brand.name} {model.model} на семи рынках. Характеристики из базы знаний автоматически сопоставляются с объявлениями и используются для расчёта мощности, таможни и утилизационного сбора.</p>
+          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Энциклопедия АвтоЦена · проверенные характеристики</div>
+          <h1 className="mt-2 break-words text-4xl font-black leading-[.98] tracking-[-0.045em] md:text-6xl">{brand.name} {model.model}</h1>
+          <p className="mt-4 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">Поколения, модификации и подтверждённые характеристики {brand.name} {model.model}. Данные энциклопедии связаны с актуальными объявлениями АвтоЦены и помогают точнее рассчитывать мощность, таможню и утилизационный сбор.</p>
           <div className="mt-4 flex flex-wrap gap-2 text-xs font-black">
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{model.count ? `${model.count} предложений` : "Под заказ"}</span>
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">Выпуск: {yearRange(model.yearFrom, model.yearTo)}</span>
@@ -210,7 +211,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
       <section className="mt-7 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-7">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">База знаний АвтоЦена</div>
+            <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">Энциклопедия · источники и модификации</div>
             <h2 className="mt-1 text-2xl font-black md:text-4xl">Характеристики {brand.name} {model.model}</h2>
           </div>
           <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-xs font-black">Автосопоставление включено</span>
