@@ -162,6 +162,15 @@ test("public brand and model pages render encyclopedia power, kW and 30-minute f
   assert.match(modelPage, /readVehiclePowerKnowledge/);
 });
 
+test("verified V2 cards stay visible without fabricated power", () => {
+  assert.doesNotMatch(modelPage, /if \(!powerHp\) continue/);
+  assert.match(modelPage, /variantName/);
+  assert.match(modelPage, /Серия \/ период/);
+  assert.match(modelPage, /эл\.мотор peak/);
+  assert.match(modelPage, /система max/);
+  assert.match(modelPage, /variant\.sourceType !== "encyclopedia_v2"/);
+});
+
 test("Drom enrichment remains available but is not a two-hour production prerequisite", () => {
   assert.match(productionWorkflow, /scripts\/catalog-enrich-drom-vehicle-variants\.mjs/);
   assert.match(productionWorkflow, /Audit current encyclopedia snapshot/);
