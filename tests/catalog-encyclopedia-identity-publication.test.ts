@@ -23,10 +23,8 @@ test("identity read-model migration proves offer and market counts before any wr
   assert.match(publisher, /catalog_identity_publish_brand_collisions/);
 });
 
-test("future catalog writer applies identity after legacy spec enrichment and keeps a dedicated identity-only path", () => {
-  assert.match(storage, /identityOnlyReprojection\?: boolean/);
-  assert.match(storage, /identityOnlyReprojection/);
-  assert.match(storage, /applyConfiguredEncyclopediaIdentity/);
-  assert.match(storage, /enrichOfferWithVehicleKnowledge/);
-  assert.match(storage, /exactPreserveMarkets\.has\(offer\.market\)/);
+test("first identity release leaves the core catalog writer and recovery preservation contract untouched", () => {
+  assert.doesNotMatch(storage, /applyConfiguredEncyclopediaIdentity/);
+  assert.doesNotMatch(storage, /identityOnlyReprojection/);
+  assert.match(storage, /exactPreserveMarkets\.has\(offer\.market\)[\s\S]*\? offer[\s\S]*enrichOfferWithVehicleKnowledge/);
 });
