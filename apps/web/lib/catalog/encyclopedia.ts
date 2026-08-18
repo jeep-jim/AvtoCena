@@ -220,10 +220,15 @@ export async function readEncyclopediaKnowledgeModels() {
         variantsByModel.set(variant.modelId, rows);
       }
       const verifiedModels: VehicleKnowledgeModel[] = corpus.models
-        .filter((model) => model.status === "verified" && variantsByModel.has(model.id))
-        .map((model) => {
-          const variantDates = (variantsByModel.get(model.id) || []).map((row) => String(row.updatedAt || "")).filter(Boolean).sort();
-          return {
+        .filter((model) => variantsByModel.has(model.id))
+        .flatMap((model) => {
+          const variantDates = (variantsByModel.get(model.id) || [])
+            .map((row) => String(row.updatedAt || ""))
+            .filter(Boolean)
+            .sort();
+          const updatedAt = variantDates.at(-1);
+          if (!updatedAt) return [];
+          return [{
             id: model.id,
             make: canonicalCatalogBrand(model.brandId),
             model: model.canonicalName,
@@ -231,11 +236,11 @@ export async function readEncyclopediaKnowledgeModels() {
             bodyTypes: model.bodyTypes || [],
             yearFrom: year(model.productionFrom),
             yearTo: year(model.productionTo),
-            source: "manual",
+            source: "manual" as const,
             sourceVersion: `Encyclopedia V2 verified corpus ${corpus.sourceCheckpoint}`,
-            updatedAt: variantDates.at(-1) || "2026-08-18",
+            updatedAt,
             active: true,
-          };
+          }];
         });
       return appendNewIds(runtime, verifiedModels);
     });
