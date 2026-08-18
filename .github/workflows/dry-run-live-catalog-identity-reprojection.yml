@@ -39,7 +39,8 @@ jobs:
         run: |
           set -o pipefail
           {
-            node --import tsx <<'NODE'
+            node --import tsx --input-type=module <<'NODE'
+            import fs from 'node:fs';
             const { readAllOffersForMaintenance } = await import('./apps/web/lib/catalog/storage.ts');
             const { readEncyclopediaIdentityResolver } = await import('./apps/web/lib/catalog/encyclopedia-identity-data.ts');
             const { planEncyclopediaIdentityReprojection } = await import('./apps/web/lib/catalog/encyclopedia-identity-reprojection.ts');
@@ -49,7 +50,7 @@ jobs:
             const { rows, report } = planEncyclopediaIdentityReprojection(resolver, offers);
             if (rows.length !== offers.length) throw new Error(`offer_count_changed:${offers.length}:${rows.length}`);
             const result = { verifiedFeatureSha: process.env.GITHUB_SHA || null, resolverCollisions: resolver.collisions, report };
-            require('fs').writeFileSync('/tmp/live-identity-reprojection-dry-run.json', JSON.stringify(result,null,2)+'\n');
+            fs.writeFileSync('/tmp/live-identity-reprojection-dry-run.json', JSON.stringify(result,null,2)+'\n');
             console.log(JSON.stringify(result,null,2));
             NODE
             test -s /tmp/live-identity-reprojection-dry-run.json
