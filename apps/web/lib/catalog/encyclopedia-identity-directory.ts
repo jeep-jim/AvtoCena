@@ -22,15 +22,20 @@ function searchScore(query: string, values: string[]) {
   return score;
 }
 
-export async function encyclopediaIdentityFacets(make?: unknown) {
-  const dataset = await readEncyclopediaIdentityDataset();
-  if (!dataset) return { makes: [] as string[], models: [] as Array<{ id: string; make: string; model: string; aliases: string[] }> };
-  const resolver = await readEncyclopediaIdentityResolver();
-  if (!resolver) return { makes: [] as string[], models: [] as Array<{ id: string; make: string; model: string; aliases: string[] }> };
+async function requiredIdentityData() {
+  const [dataset, resolver] = await Promise.all([
+    readEncyclopediaIdentityDataset(),
+    readEncyclopediaIdentityResolver(),
+  ]);
+  if (!dataset || !resolver) throw new Error("catalog_encyclopedia_identity_directory_unavailable");
+  return { dataset, resolver };
+}
 
+export async function encyclopediaIdentityFacets(make?: unknown) {
+  const { dataset, resolver } = await requiredIdentityData();
   const rawMake = String(make || "").trim();
   const brandId = rawMake ? resolver.resolveBrand(rawMake)?.brand.id || null : null;
-  if (rawMake && !brandId) return { makes: [], models: [] };
+  if (rawMake && !brandId) return { makes: [], models: [] as Array<{ id: string; make: string; model: string; aliases: string[] }> };
 
   const brands = new Map(dataset.brands.map((brand) => [brand.id, brand]));
   const selectedBrands = brandId ? dataset.brands.filter((brand) => brand.id === brandId) : dataset.brands;
@@ -51,9 +56,7 @@ export async function encyclopediaIdentityFacets(make?: unknown) {
 export async function searchEncyclopediaIdentityModels(query: unknown, make?: unknown, limit = 30) {
   const requested = String(query || "").trim();
   if (!requested) return [];
-  const dataset = await readEncyclopediaIdentityDataset();
-  const resolver = await readEncyclopediaIdentityResolver();
-  if (!dataset || !resolver) return [];
+  const { dataset, resolver } = await requiredIdentityData();
 
   const rawMake = String(make || "").trim();
   const brandId = rawMake ? resolver.resolveBrand(rawMake)?.brand.id || null : null;
