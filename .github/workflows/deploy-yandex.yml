@@ -66,6 +66,7 @@ jobs:
           revision-env: |
             NODE_ENV=production
             NEXT_PUBLIC_SITE_URL=https://avtocena.com
+            AVTOCENA_RELEASE_SHA=${{ github.sha }}
             AUTH_SECRET=${{ secrets.AUTH_SECRET }}
             AUTH_ACCESS_KEY=${{ secrets.AUTH_ACCESS_KEY }}
             DADATA_API_KEY=${{ vars.DADATA_API_KEY }}
@@ -85,8 +86,9 @@ jobs:
           set -euo pipefail
           CURL=(curl --retry 5 --retry-delay 5 --retry-all-errors --max-time 30 -fsS)
 
-          echo '1/9 health'
-          "${CURL[@]}" -o /dev/null 'https://avtocena.com/api/health'
+          echo '1/9 health + exact release'
+          health_json="$("${CURL[@]}" 'https://avtocena.com/api/health')"
+          jq -e --arg sha '${{ github.sha }}' '.ok == true and .service == "avtocena-web" and .releaseSha == $sha' <<<"$health_json" >/dev/null
 
           echo '2/9 public catalog'
           catalog_json="$("${CURL[@]}" 'https://avtocena.com/api/catalog/search?market=korea&pageSize=1')"
@@ -196,21 +198,26 @@ jobs:
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          run_url='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+          description='Yandex live: ${{ steps.visible_calculation_audit.outputs.visible_offers }} visible; exact ${{ steps.visible_calculation_audit.outputs.ready_exact }}; needs ${{ steps.visible_calculation_audit.outputs.needs_data }}'
+          payload="$(jq -nc --arg url "$run_url" --arg description "$description" '{state:"success",context:"deploy/yandex",description:$description,target_url:$url}')"
           curl -fsS -X POST \
             -H "Authorization: Bearer $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
-            -d '{"state":"success","context":"deploy/yandex","description":"Yandex deploy, live smoke and calculation coverage passed"}' >/dev/null
+            -d "$payload" >/dev/null
 
       - name: Mark Yandex deploy failure
         if: failure()
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
+          run_url='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+          payload="$(jq -nc --arg url "$run_url" '{state:"failure",context:"deploy/yandex",description:"Yandex deploy, live smoke or calculation coverage failed",target_url:$url}')"
           curl -fsS -X POST \
             -H "Authorization: Bearer $GH_TOKEN" \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
-            -d '{"state":"failure","context":"deploy/yandex","description":"Yandex deploy, live smoke or calculation coverage failed"}' >/dev/null
+            -d "$payload" >/dev/null
