@@ -1,6 +1,9 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { assertEncyclopediaIdentityDataset } from "../apps/web/lib/catalog/encyclopedia-identity-data";
+import {
+  assertEncyclopediaIdentityDataset,
+  assertEncyclopediaIdentityProductionConnected,
+} from "../apps/web/lib/catalog/encyclopedia-identity-data";
 
 function makeAlias(value = "AITO 问界") {
   return { value, kind: "localized", safe: true, sourceIds: ["src-aito"] };
@@ -12,6 +15,7 @@ function dataset() {
       schemaVersion: 2,
       workspace: "vehicle-encyclopedia-v2",
       productionConnected: false,
+      identityProductionConnected: false,
       collections: { brand: { records: 1 }, model: { records: 1 } },
     },
     brands: [{ id: "aito", canonicalName: "AITO", aliases: [makeAlias()] }],
@@ -26,6 +30,15 @@ function dataset() {
 test("valid V2 identity dataset passes runtime validation", () => {
   const input = dataset();
   assert.equal(assertEncyclopediaIdentityDataset(input), input);
+});
+
+test("identity production opt-in is independent from full Encyclopedia productionConnected", () => {
+  const input: any = dataset();
+  assert.equal(input.manifest.productionConnected, false);
+  assert.throws(() => assertEncyclopediaIdentityProductionConnected(input), /catalog_encyclopedia_identity_production_not_connected/);
+  input.manifest.identityProductionConnected = true;
+  assert.equal(assertEncyclopediaIdentityProductionConnected(input), input);
+  assert.equal(input.manifest.productionConnected, false);
 });
 
 test("runtime loader rejects string aliases even though the generic resolver can model legacy input", () => {
