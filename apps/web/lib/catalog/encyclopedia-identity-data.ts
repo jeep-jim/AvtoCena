@@ -12,6 +12,7 @@ type EncyclopediaManifest = {
   schemaVersion?: number;
   workspace?: string;
   productionConnected?: boolean;
+  identityProductionConnected?: boolean;
   collections?: Record<string, { records?: number }>;
 };
 
@@ -190,7 +191,7 @@ export async function readEncyclopediaIdentityResolver() {
 }
 
 export function assertEncyclopediaIdentityProductionConnected(dataset: EncyclopediaIdentityDataset) {
-  if (dataset.manifest.productionConnected !== true) {
+  if (dataset.manifest.identityProductionConnected !== true) {
     throw new Error("catalog_encyclopedia_identity_production_not_connected");
   }
   return dataset;
