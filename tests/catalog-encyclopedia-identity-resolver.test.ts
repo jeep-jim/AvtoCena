@@ -21,6 +21,7 @@ function resolver() {
         aliases: [{ value: "Beijing Automobile Works", safe: true }],
       },
       { id: "changan", canonicalName: "Changan", aliases: [{ value: "长安", safe: true }] },
+      { id: "xpeng", canonicalName: "XPeng", aliases: [] },
       { id: "other", canonicalName: "Other", aliases: [{ value: "Collision", safe: true }] },
       { id: "other-2", canonicalName: "Other 2", aliases: [{ value: "Collision", safe: true }] },
     ],
@@ -34,6 +35,8 @@ function resolver() {
       },
       { id: "changan/cs75-plus", brandId: "changan", canonicalName: "CS75 Plus", aliases: [{ value: "CS75 PLUS", safe: true }] },
       { id: "baw/m7", brandId: "baw", canonicalName: "M7" },
+      { id: "xpeng/p7", brandId: "xpeng", canonicalName: "P7" },
+      { id: "xpeng/p7-plus", brandId: "xpeng", canonicalName: "P7+" },
     ],
     searchEntries: [
       { entityType: "model", entityId: "aito/m9", brandId: "aito", modelId: "aito/m9", term: "AITO M9", safe: true, kind: "canonical_make_model" },
@@ -42,9 +45,12 @@ function resolver() {
   });
 }
 
-test("identity key is Unicode-aware and punctuation-insensitive", () => {
+test("identity key is Unicode-aware while preserving semantic model symbols", () => {
   assert.equal(encyclopediaIdentityKey(" AITO 问界 "), "aito问界");
   assert.equal(encyclopediaIdentityKey("Lynk & Co"), "lynkandco");
+  assert.equal(encyclopediaIdentityKey("P7"), "p7");
+  assert.equal(encyclopediaIdentityKey("P7+"), "p7plus");
+  assert.notEqual(encyclopediaIdentityKey("P7"), encyclopediaIdentityKey("P7+"));
 });
 
 test("safe brand aliases collapse source spellings to one canonical make", () => {
@@ -57,6 +63,13 @@ test("safe brand aliases collapse source spellings to one canonical make", () =>
     assert.equal(result.canonicalModel, "M9");
     assert.equal(result.resolved, true);
   }
+});
+
+test("plus-suffixed model identity stays distinct from the base model", () => {
+  const identity = resolver();
+  assert.equal(identity.resolve({ make: "XPeng", model: "P7" }).modelId, "xpeng/p7");
+  assert.equal(identity.resolve({ make: "XPeng", model: "P7+" }).modelId, "xpeng/p7-plus");
+  assert.ok(!identity.collisions.some((collision) => collision.key === "xpeng:p7"));
 });
 
 test("canonical make+model search-index terms resolve without fuzzy guessing", () => {
