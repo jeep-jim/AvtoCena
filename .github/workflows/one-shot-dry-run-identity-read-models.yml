@@ -5,6 +5,9 @@ on:
     branches: [main]
     paths:
       - .github/workflows/one-shot-dry-run-identity-read-models.yml
+  pull_request:
+    paths:
+      - .github/identity-live-dry-run.trigger
 
 permissions:
   contents: write
@@ -22,7 +25,7 @@ jobs:
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
       CATALOG_ENCYCLOPEDIA_IDENTITY_PUBLISH_REPORT: /tmp/identity-read-model-dry-run.json
-      IDENTITY_DRY_RUN_GENERATION: "20260818-final-main"
+      IDENTITY_DRY_RUN_GENERATION: "20260818-pr-observable"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -66,8 +69,8 @@ jobs:
           git add recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.meta.txt
           [ ! -f recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.json ] || git add recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.json
           [ ! -f recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.log ] || git add recovery-assets/encyclopedia-v2-20260818/audits/identity-read-model-dry-run.log
-          git commit -m 'chore(recovery): record final live identity read-model dry-run' || true
-          git push origin HEAD:recovery/encyclopedia-v2-staging-20260818
+          git commit -m 'chore(recovery): record observable live identity read-model dry-run' || true
+          git push origin HEAD:recovery/encyclopedia-v2-staging-20260818 || true
       - name: Fail if dry-run failed
         if: steps.dryrun.outcome != 'success'
         run: exit 1
