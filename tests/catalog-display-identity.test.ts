@@ -1,6 +1,22 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { applyEncyclopediaDisplayIdentity } from "../apps/web/lib/catalog/display-identity";
+import { canonicalCatalogBrand, catalogBrandSlug } from "../apps/web/lib/catalog/brands";
+
+test("public brand groups collapse market and sub-brand spellings to one route", () => {
+  for (const alias of ["Audi", "AUDI China", "Audi AG"]) {
+    assert.equal(canonicalCatalogBrand(alias), "Audi");
+    assert.equal(catalogBrandSlug(alias), "audi");
+  }
+  for (const alias of ["Changan", "Changan NEVO", "Changan Qiyuan", "Changan Oshan", "Oshan"]) {
+    assert.equal(canonicalCatalogBrand(alias), "Changan");
+    assert.equal(catalogBrandSlug(alias), "changan");
+  }
+  assert.equal(canonicalCatalogBrand("AITO Wenjie"), "AITO");
+  assert.equal(canonicalCatalogBrand("Besturn"), "Bestune");
+  assert.equal(canonicalCatalogBrand("BAW (Beijing Automobile Works)"), "BAW");
+  assert.equal(canonicalCatalogBrand("Beijing Automobile Works"), "BAW");
+});
 
 test("canonical display picks the longest safe Bentley model prefix and preserves calculation fields", async () => {
   const raw = {

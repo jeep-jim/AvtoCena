@@ -174,16 +174,14 @@ test("model directory separates trusted V2 specifications from read-only observa
   assert.match(modelDirectory, /utilizationPowerKw/);
 });
 
-test("public encyclopedia shows verified specs and source observations separately", () => {
-  assert.match(brandDirectoryUi, /Нажмите на модель, чтобы раскрыть собранные сведения/);
-  assert.match(brandDirectoryUi, /Проверенных/);
-  assert.match(brandDirectoryUi, /Наблюдений/);
-  assert.match(modelPage, /Проверенные характеристики и собранные source-backed наблюдения/);
-  assert.match(modelPage, /В расчёт — только exact/);
-  assert.match(modelPage, /Собранные наблюдения источников/);
-  assert.match(modelPage, /не используются в расчёте/);
-  assert.match(modelPage, /эл\.мотор peak/);
-  assert.match(modelPage, /система max/);
+test("public encyclopedia exposes reader-facing specifications without internal staging notes", () => {
+  assert.match(brandDirectoryUi, /Найдите модель, откройте характеристики/);
+  assert.doesNotMatch(brandDirectoryUi, /source-backed|Проверенных|Наблюдений/);
+  assert.match(modelPage, /Технические характеристики/);
+  assert.match(modelPage, /30-минутная мощность/);
+  assert.doesNotMatch(modelPage, /source-backed|В расчёт — только exact|Собранные наблюдения источников|не используются в расчёте|V2 ·|review/);
+  assert.match(modelPage, /Электромотор:/);
+  assert.match(modelPage, /Система:/);
   assert.match(modelPage, /variant\.sourceType !== "encyclopedia_v2"/);
 });
 

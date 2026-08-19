@@ -5,7 +5,6 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useEffect, useMemo, useRef, useState, type MouseEvent } from "react";
 import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug } from "@/lib/catalog/brands";
 
-const KNOWN_BRANDS = new Map(CATALOG_BRANDS.map((brand) => [brand.name.toLocaleLowerCase("en-US"), brand.name]));
 const BRAND_COUNT_FORMATTER = new Intl.NumberFormat("ru-RU");
 const BRAND_COUNT_CACHE_MS = 30_000;
 const BRAND_COUNT_REQUESTS = new Map<string, { at: number; promise: Promise<Record<string, number>> }>();
@@ -32,10 +31,10 @@ function loadBrandCounts(query: string) {
 
 export function BrandLogoVisual({ brand, className = "" }: { brand: string; className?: string }) {
   const [theme, setTheme] = useState<"light" | "dark">("light");
-  const [failed, setFailed] = useState(false);
+  const [sourceIndex, setSourceIndex] = useState(0);
   const slug = catalogBrandSlug(brand);
 
-  useEffect(() => setFailed(false), [brand, theme]);
+  useEffect(() => setSourceIndex(0), [brand, theme]);
   useEffect(() => {
     const root = document.documentElement;
     const sync = () => setTheme(root.dataset.theme === "dark" ? "dark" : "light");
@@ -45,17 +44,19 @@ export function BrandLogoVisual({ brand, className = "" }: { brand: string; clas
     return () => observer.disconnect();
   }, []);
 
-  if (failed) {
-    return <span className={`flex h-10 w-[76px] items-center justify-center text-center text-[12px] font-black leading-[1.05] tracking-[-0.035em] text-[var(--ac-text)] ${className}`}>{brand}</span>;
-  }
+  const sources = [
+    `/brand-logos/drom/${theme}/${slug}.png`,
+    `/api/catalog/brand-logo/${encodeURIComponent(slug)}?theme=${theme}`,
+    `/favicon-${theme}.svg`,
+  ];
 
   return <img
-    src={`/brand-logos/drom/${theme}/${slug}.png`}
-    alt={`Логотип ${brand}`}
+    src={sources[Math.min(sourceIndex, sources.length - 1)]}
+    alt={sourceIndex < 2 ? `Логотип ${brand}` : "АвтоЦена"}
     loading="lazy"
     decoding="async"
     draggable={false}
-    onError={() => setFailed(true)}
+    onError={() => setSourceIndex((current) => Math.min(sources.length - 1, current + 1))}
     className={`h-10 w-[76px] select-none bg-transparent object-contain ${className}`}
   />;
 }
@@ -103,7 +104,17 @@ function BrandDirectoryTile({
   </Link>;
 }
 
-export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resultCount?: number }) {
+export function BrandLogoRail({
+  brands,
+  resultCount,
+  directoryMode = false,
+  showSearch = false,
+}: {
+  brands: string[];
+  resultCount?: number;
+  directoryMode?: boolean;
+  showSearch?: boolean;
+}) {
   const pathname = usePathname();
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -115,17 +126,29 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
   const railRef = useRef<HTMLDivElement>(null);
   const drag = useRef<{ pointerId: number; startX: number; startScrollLeft: number; moved: boolean } | null>(null);
   const suppressClick = useRef(false);
-  const homeBrandDirectory = pathname === "/";
+  const homeBrandDirectory = directoryMode || pathname === "/";
+  const suppliedBrands = useMemo(() => {
+    const map = new Map<string, string>();
+    for (const value of brands) {
+      const canonical = canonicalCatalogBrand(value);
+      if (canonical) map.set(canonical.toLocaleLowerCase("en-US"), canonical);
+    }
+    return [...map.values()].sort((a, b) => a.localeCompare(b, "ru"));
+  }, [brands]);
+  const knownBrands = useMemo(() => new Map(
+    [...CATALOG_BRANDS.map((brand) => brand.name), ...suppliedBrands]
+      .map((brand) => [brand.toLocaleLowerCase("en-US"), brand] as const),
+  ), [suppliedBrands]);
   const selectedBrands = useMemo(() => {
     if (homeBrandDirectory) return [] as string[];
     const raw = searchParams.get("make") || searchParams.get("brand") || "";
     const map = new Map<string, string>();
     for (const value of raw.split(",").map((item) => canonicalCatalogBrand(item.trim())).filter(Boolean)) {
-      const known = KNOWN_BRANDS.get(value.toLocaleLowerCase("en-US"));
+      const known = knownBrands.get(value.toLocaleLowerCase("en-US"));
       if (known) map.set(known.toLocaleLowerCase("en-US"), known);
     }
     return [...map.values()];
-  }, [homeBrandDirectory, searchParamsText]);
+  }, [homeBrandDirectory, knownBrands, searchParamsText]);
   const selectedBrandKeys = useMemo(() => new Set(selectedBrands.map((brand) => brand.toLocaleLowerCase("en-US"))), [selectedBrands]);
   const countQuery = useMemo(() => {
     if (homeBrandDirectory) return "";
@@ -137,13 +160,14 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
     const result = new Map<string, { brand: string; count: number }>();
     for (const [brand, value] of Object.entries(brandCounts)) {
       const canonical = canonicalCatalogBrand(brand);
-      const known = KNOWN_BRANDS.get(canonical.toLocaleLowerCase("en-US"));
+      const known = knownBrands.get(canonical.toLocaleLowerCase("en-US"));
       const count = Number(value);
       if (known && Number.isFinite(count) && count >= 0) result.set(known.toLocaleLowerCase("en-US"), { brand: known, count });
     }
     return result;
-  }, [brandCounts]);
+  }, [brandCounts, knownBrands]);
   const activeBrands = useMemo(() => {
+    if (directoryMode) return suppliedBrands;
     // Once live counts arrive, they become the source of truth on both /cars and
     // the homepage. This removes old knowledge-only brands with no live cars.
     if (countStatus === "ready") {
@@ -155,16 +179,17 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
     const map = new Map<string, string>();
     for (const value of brands) {
       const canonical = canonicalCatalogBrand(value);
-      const known = KNOWN_BRANDS.get(canonical.toLocaleLowerCase("en-US"));
+      const known = knownBrands.get(canonical.toLocaleLowerCase("en-US"));
       if (known) map.set(known.toLocaleLowerCase("en-US"), known);
     }
     return [...map.values()].sort((a, b) => a.localeCompare(b, "ru"));
-  }, [brands, countStatus, normalizedCounts]);
+  }, [brands, countStatus, directoryMode, knownBrands, normalizedCounts, suppliedBrands]);
   const orderedBrands = activeBrands;
   const filtered = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase("ru-RU");
     return normalized ? activeBrands.filter((brand) => brand.toLocaleLowerCase("ru-RU").includes(normalized)) : activeBrands;
   }, [activeBrands, query]);
+  const railBrands = showSearch && query.trim() ? filtered : orderedBrands;
 
   useEffect(() => {
     if (!open) return;
@@ -283,6 +308,18 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
   };
 
   return <>
+    {showSearch ? <label className="mt-5 flex h-14 w-full items-center gap-3 rounded-2xl bg-[var(--ac-surface)] px-4 text-[var(--ac-muted)] focus-within:ring-2 focus-within:ring-red-500/35">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.8" stroke="currentColor" strokeWidth="1.9" /><path d="m16 16 4.3 4.3" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" /></svg>
+      <input
+        type="search"
+        value={query}
+        onChange={(event) => setQuery(event.target.value)}
+        placeholder="Найти марку"
+        className="h-full min-w-0 flex-1 bg-transparent text-sm font-bold text-[var(--ac-text)] outline-none placeholder:text-[var(--ac-muted)]"
+        aria-label="Найти марку автомобиля"
+      />
+      {query ? <button type="button" onClick={() => setQuery("")} className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ac-surface-2)] text-lg font-bold" aria-label="Очистить поиск">×</button> : null}
+    </label> : null}
     <section className="ac-brand-rail relative mt-5 rounded-[1.6rem] p-3 pr-12 md:p-4 md:pr-16" aria-label="Марки автомобилей">
       <div
         ref={railRef}
@@ -298,7 +335,8 @@ export function BrandLogoRail({ brands, resultCount }: { brands: string[]; resul
           event.stopPropagation();
         }}
       >
-        {orderedBrands.map((brand) => <BrandTile key={brand.toLocaleLowerCase("en-US")} brand={brand} href={hrefForBrand(brand)} onClick={handleBrandClick(brand)} />)}
+        {railBrands.map((brand) => <BrandTile key={brand.toLocaleLowerCase("en-US")} brand={brand} href={hrefForBrand(brand)} onClick={handleBrandClick(brand)} />)}
+        {!railBrands.length ? <div className="px-4 py-6 text-sm font-bold text-[var(--ac-muted)]">Марка не найдена</div> : null}
       </div>
       <button type="button" onClick={() => setOpen(true)} className="absolute right-2 top-1/2 flex h-12 w-9 -translate-y-1/2 items-center justify-center rounded-xl bg-[var(--ac-surface-2)] text-xl font-black text-red-500" aria-label="Показать все марки">›</button>
     </section>

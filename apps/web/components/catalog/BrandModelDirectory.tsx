@@ -65,8 +65,8 @@ function modelKnowledgeLabel(model: BrandModelLink) {
   if (hp) return hp;
   if (kw30) return kw30;
   if (model.representativePowerHp) return `${compactNumber(model.representativePowerHp)} л.с.`;
-  if (model.knowledge?.trustedVariants) return `${model.knowledge.trustedVariants} провер. модификаций`;
-  return model.knowledge?.records ? `${model.knowledge.records} записей источников` : "";
+  if (model.knowledge?.trustedVariants) return `${model.knowledge.trustedVariants} модификаций`;
+  return model.knowledge?.records ? `${model.knowledge.records} вариантов` : "";
 }
 
 function modelKnowledgeRows(model: BrandModelLink): KnowledgeRow[] {
@@ -77,8 +77,6 @@ function modelKnowledgeRows(model: BrandModelLink): KnowledgeRow[] {
     rangeLabel(model.knowledge?.powerKw, "кВт") ? { label: "Мощность", value: rangeLabel(model.knowledge?.powerKw, "кВт") } : null,
     rangeLabel(model.knowledge?.power30MinKw, "кВт") ? { label: "30-минутная", value: rangeLabel(model.knowledge?.power30MinKw, "кВт") } : null,
     rangeLabel(model.knowledge?.utilizationPowerKw, "кВт") ? { label: "Для утильсбора", value: rangeLabel(model.knowledge?.utilizationPowerKw, "кВт") } : null,
-    model.knowledge?.trustedVariants ? { label: "Проверенных", value: String(model.knowledge.trustedVariants) } : null,
-    model.knowledge?.observations ? { label: "Наблюдений", value: String(model.knowledge.observations) } : null,
     model.count ? { label: "Предложений", value: String(model.count) } : null,
   ];
   return rows.filter((row): row is KnowledgeRow => Boolean(row));
@@ -139,7 +137,7 @@ export function BrandModelDirectory({
     <div className="flex items-center justify-between gap-3">
       <div>
         <h2 className="text-2xl font-black md:text-4xl">Модели {brand}</h2>
-        <p className="mt-1 text-xs font-bold text-[var(--ac-muted)]">Нажмите на модель, чтобы раскрыть собранные сведения. Наблюдения источников видны в энциклопедии, но в расчёт попадают только подтверждённые характеристики.</p>
+        <p className="mt-1 text-xs font-bold text-[var(--ac-muted)]">Найдите модель, откройте характеристики и посмотрите автомобили со всех доступных рынков.</p>
       </div>
       {canExpand ? <button
         type="button"
@@ -185,7 +183,7 @@ export function BrandModelDirectory({
           >
             <span className="min-w-0">
               <span className="block truncate text-sm font-black">{model.model}</span>
-              {knowledge ? <span className="mt-0.5 block truncate text-[10px] font-bold text-[var(--ac-muted)]">{knowledge}</span> : <span className="mt-0.5 block truncate text-[10px] font-bold text-[var(--ac-muted)]">Данные ещё не собраны</span>}
+              {knowledge ? <span className="mt-0.5 block truncate text-[10px] font-bold text-[var(--ac-muted)]">{knowledge}</span> : <span className="mt-0.5 block truncate text-[10px] font-bold text-[var(--ac-muted)]">Открыть модель</span>}
             </span>
             <span className="flex shrink-0 items-center gap-1 text-[10px] font-black text-[var(--ac-muted)]">
               {model.count > 0 ? <span>{model.count}</span> : null}
@@ -199,7 +197,7 @@ export function BrandModelDirectory({
                 <div className="text-[9px] font-black uppercase tracking-[0.12em] text-[var(--ac-muted)]">{row.label}</div>
                 <div className="mt-1 text-sm font-black text-[var(--ac-text)]">{row.value}</div>
               </div>)}
-            </div> : <p className="rounded-xl bg-[var(--ac-surface)] px-3 py-3 text-xs font-bold leading-5 text-[var(--ac-muted)]">Для этой модели пока нет source-backed данных. Непроверенные цифры в расчёт не подставляются.</p>}
+            </div> : <p className="rounded-xl bg-[var(--ac-surface)] px-3 py-3 text-xs font-bold leading-5 text-[var(--ac-muted)]">Характеристики этой модели дополняются.</p>}
 
             <div className="mt-3 flex flex-wrap items-center gap-2">
               {tags.map((tag) => <span key={tag} className="rounded-full bg-[var(--ac-surface)] px-3 py-1.5 text-[10px] font-black text-[var(--ac-muted)]">{tag}</span>)}

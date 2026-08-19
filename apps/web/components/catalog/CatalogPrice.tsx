@@ -1,5 +1,5 @@
 import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
-import { PriceTrend } from "@/components/catalog/PriceTrend";
+import { AuctionResultPrice, PriceTrend } from "@/components/catalog/PriceTrend";
 
 export function CatalogPrice({
   offer,
@@ -13,12 +13,15 @@ export function CatalogPrice({
   priceClassName?: string;
 }) {
   const totalRub = Number(offer?.totalRub || 0);
+  const japanAuction = String(offer?.market || "").toLowerCase() === "japan"
+    || /япони/i.test(String(offer?.marketLabel || ""));
   const powertrainKind = String(offer?.powertrainKind || "").toLowerCase();
   const fuel = String(offer?.fuel || "").toLowerCase();
   const highlightElectrified = ["electric", "series_hybrid", "other_hybrid"].includes(powertrainKind)
     || /(?:electric|battery|\bbev\b|\bev\b|hybrid|phev|hev|mhev|электро|гибрид)/i.test(fuel);
 
   if (totalRub > 0) {
+    if (japanAuction) return <AuctionResultPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
     const preliminary = String(offer?.calculationStatus || "") === "preliminary_power_pending"
       || offer?.calculationSnapshot?.pricingConfidence === "preliminary";
     if (preliminary) return <PreliminaryPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} highlightElectrified={highlightElectrified} />;

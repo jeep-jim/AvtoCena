@@ -93,6 +93,24 @@ function mergeOfferBase(previous: VehicleOffer | undefined, base: VehicleOffer, 
 }
 
 export function applyPriceTrend(next: VehicleOffer, previous: VehicleOffer | undefined, changedAt: string): VehicleOffer {
+  if (next.market === "japan") {
+    const sameAuctionPrice = previous
+      && Number(previous.sourcePrice || 0) === Number(next.sourcePrice || 0)
+      && String(previous.sourceCurrency || "").toUpperCase() === String(next.sourceCurrency || "").toUpperCase()
+      && Number(previous.totalRub || 0) > 0;
+    return {
+      ...next,
+      ...(sameAuctionPrice ? {
+        totalRub: previous.totalRub,
+        calculationSnapshot: previous.calculationSnapshot,
+        calculationStatus: previous.calculationStatus,
+        priceMode: previous.priceMode,
+      } : {}),
+      previousTotalRub: null,
+      priceDeltaRub: null,
+      priceChangedAt: undefined,
+    };
+  }
   if (!previous) return next;
 
   const currentTotal = Number(next.totalRub || 0);

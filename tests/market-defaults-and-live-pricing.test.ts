@@ -104,6 +104,26 @@ test("visible offer is repriced from current CRM values without changing customs
   assert.equal(Number(deposit.amountRub) + Number(car.amountRub), 1_000_000);
 });
 
+test("completed Japanese auction keeps its historical published total", () => {
+  const offer = {
+    id: "japan-sold-1",
+    market: "japan",
+    priceMode: "fixed",
+    totalRub: 2_678_898,
+    previousTotalRub: 2_500_000,
+    priceDeltaRub: 178_898,
+    calculationSnapshot: {
+      currencyRate: { sourcePriceRub: 1_010_327, effectiveRate: 0.54 },
+      customs: { status: "ready", totalCustomsRub: 700_000 },
+    },
+  } as any;
+  const config = markets.find((market: any) => market.id === "japan").versions[0];
+  const result = repriceOfferWithBusinessConfig(offer, config);
+  assert.equal(result.totalRub, 2_678_898);
+  assert.equal(result.previousTotalRub, null);
+  assert.equal(result.priceDeltaRub, null);
+});
+
 test("pending public offer gets a ruble source-price snapshot even before customs is ready", async () => {
   const result = await applyActiveBusinessPricing({
     id: "pending-rub",

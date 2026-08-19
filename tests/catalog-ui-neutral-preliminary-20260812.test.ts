@@ -39,6 +39,16 @@ test("catalog price colors distinguish electrified, preliminary and regular calc
   assert.match(offerPage, /height:auto!important;aspect-ratio:4\/3!important/);
 });
 
+test("Japanese auction results use a neutral historical price and auction gavel", () => {
+  assert.match(catalogPrice, /japanAuction/);
+  assert.match(catalogPrice, /AuctionResultPrice/);
+  assert.match(priceTrend, /function AuctionGavelIcon/);
+  assert.match(priceTrend, /Завершённый аукционный лот/);
+  assert.match(priceTrend, /Текущий курс её не изменяет/);
+  assert.match(offerPage, /\{japanAuction/);
+  assert.match(offerPage, /<AuctionResultPrice offer=\{o\} label="Завершённый аукцион"/);
+});
+
 test("saved total changes are not mislabeled as currency impact", () => {
   assert.match(priceTrend, /trendUsesCurrency/);
   assert.match(priceTrend, /sheetRate && trend && trendUsesCurrency/);

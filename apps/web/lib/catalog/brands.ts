@@ -170,6 +170,25 @@ const LOCALIZED_ALIASES: Record<string, string> = {
 };
 
 const ALIASES: Record<string, string> = {
+  audichina: "Audi",
+  audiag: "Audi",
+  aitowenjie: "AITO",
+  wenjie: "AITO",
+  besturn: "Bestune",
+  bawbeijingautomobileworks: "BAW",
+  beijingautomobileworks: "BAW",
+  changannevo: "Changan",
+  changanqiyuan: "Changan",
+  changanoshan: "Changan",
+  oshan: "Changan",
+  dongfengaelous: "Dongfeng",
+  dongfengaeolus: "Dongfeng",
+  dongfengepi: "Dongfeng",
+  dongfenge: "Dongfeng",
+  dongfengnammi: "Dongfeng",
+  geelygalaxy: "Geely",
+  jacyiwei: "JAC",
+  ds: "DS",
   mercedes: "Mercedes-Benz",
   mercedesbenz: "Mercedes-Benz",
   landrover: "Land Rover",
@@ -223,7 +242,7 @@ export function catalogBrandSlug(value: string) {
 }
 
 export function catalogBrandBySlug(slug: string) {
-  return byKey.get(key(slug));
+  return byKey.get(key(canonicalCatalogBrand(slug)));
 }
 
 export function catalogBrandLogoSlug(value: string) {
