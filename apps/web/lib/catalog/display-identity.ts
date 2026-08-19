@@ -1,5 +1,3 @@
-import "server-only";
-
 import { canonicalCatalogBrand } from "./brands";
 import { readStagingEncyclopediaCorpus } from "./encyclopedia";
 import { presentCatalogOffer } from "./presentation";
