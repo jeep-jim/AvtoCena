@@ -66,7 +66,7 @@ export class LocalJsonStorage implements JsonStorage {
   async binaryExists(relativePath: string) { try { await fs.promises.access(localPath(relativePath)); return true; } catch { return false; } }
   async deleteBinary(relativePath: string) { await fs.promises.rm(localPath(relativePath), { force: true }); }
   async exists(relativePath: string) { try { await fs.promises.access(localPath(relativePath)); return true; } catch { return false; } }
-  async listObjects(prefix: string) { const normalized = normalizeStorageKey(prefix); const root = localPath(normalized); const dataRoot = path.resolve(getDataRoot()); const files = await walkLocalFiles(root); return Promise.all(files.map(async (file) => { const stat = await fs.promises.stat(file); return { key: path.relative(dataRoot, file).replace(/\\/g, "/"), lastModified: stat.mtime.toISOString(), size: stat.size }; })); }
+  async listObjects(prefix: string) { const requested = String(prefix || "").trim(); const normalized = requested ? normalizeStorageKey(requested) : ""; const root = normalized ? localPath(normalized) : path.resolve(getDataRoot()); const dataRoot = path.resolve(getDataRoot()); const files = await walkLocalFiles(root); return Promise.all(files.map(async (file) => { const stat = await fs.promises.stat(file); return { key: path.relative(dataRoot, file).replace(/\\/g, "/"), lastModified: stat.mtime.toISOString(), size: stat.size }; })); }
   async deleteObjects(relativePaths: string[]) { const keys = [...new Set(relativePaths.map(normalizeStorageKey))]; await Promise.all(keys.map((key) => fs.promises.rm(localPath(key), { force: true }))); return keys.length; }
   async deletePrefix(prefix: string) { const objects = await this.listObjects(prefix); await Promise.all(objects.map((object) => fs.promises.rm(localPath(object.key), { force: true }))); return objects.length; }
 }
@@ -179,7 +179,8 @@ export class ObjectJsonStorage implements JsonStorage {
   async exists(relativePath: string) { return this.head(relativePath); }
   async listObjects(prefix: string) {
     const cfg = objectConfig();
-    const normalizedPrefix = [cfg.prefix, normalizeStorageKey(prefix)].filter(Boolean).join("/");
+    const requested = String(prefix || "").trim();
+    const normalizedPrefix = [cfg.prefix, requested ? normalizeStorageKey(requested) : ""].filter(Boolean).join("/");
     const objects: StorageObject[] = [];
     let continuationToken = "";
     do {
