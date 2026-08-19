@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { parsePrestigeJapanExactDetail, PrestigeJapanExactSource, prestigeJapanImageProbeKind } from "../apps/web/lib/catalog/prestige-japan-exact-source";
+import { canonicalPrestigeJapanIdentity, parsePrestigeJapanExactDetail, PrestigeJapanExactSource, prestigeJapanImageProbeKind } from "../apps/web/lib/catalog/prestige-japan-exact-source";
 
 function soldDetail(year: number) {
   return `
@@ -17,6 +17,20 @@ test("Prestige rejects Japanese auction lots older than 2015 at parsing time", (
   const url = "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=year-gate";
   assert.equal(parsePrestigeJapanExactDetail(soldDetail(2014), url), null);
   assert.equal(parsePrestigeJapanExactDetail(soldDetail(2015), url)?.year, 2015);
+});
+
+test("Prestige parent-company grouping publishes MINI as its own marque", () => {
+  assert.deepEqual(canonicalPrestigeJapanIdentity("BMW", "MINI"), { make: "MINI", model: "MINI" });
+  assert.deepEqual(canonicalPrestigeJapanIdentity("BMW", "MINI COOPER"), { make: "MINI", model: "COOPER" });
+  assert.deepEqual(canonicalPrestigeJapanIdentity("BMW", "X3"), { make: "BMW", model: "X3" });
+
+  const url = "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=mini-brand-gate";
+  const mini = parsePrestigeJapanExactDetail(soldDetail(2021)
+    .replace("HONDA", "BMW")
+    .replace("FREED", "MINI"), url);
+  assert.equal(mini?.make, "MINI");
+  assert.equal(mini?.model, "MINI");
+  assert.equal(mini?.rawFields.Make, "BMW");
 });
 
 test("AJES GIF89a content is rejected as a source NO FOTO placeholder", () => {

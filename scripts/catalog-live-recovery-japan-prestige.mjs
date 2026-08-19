@@ -11,6 +11,7 @@ const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spe
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
 const { findVehicleModel, readVehicleKnowledgeVariants } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
+const { canonicalPrestigeJapanIdentity } = await import("../apps/web/lib/catalog/prestige-japan-exact-source.ts");
 
 const input = process.env.PRESTIGE_RECOVERY_INPUT || "prestige-japan-exact-sold-repaired.json";
 const output = process.env.PRESTIGE_RECOVERY_OUTPUT || "catalog-rebuild-japan.json";
@@ -180,7 +181,8 @@ const rejected = {};
 function reject(reason) { rejected[reason] = Number(rejected[reason] || 0) + 1; }
 
 const prepared = await pool(rows, concurrency, async (raw) => {
-  let offer = normalizeVehicleOfferSpecs({ ...raw, status: "active", images: credibleCatalogImages(raw?.images || []).slice(0, 30) });
+  const identity = canonicalPrestigeJapanIdentity(raw?.make, raw?.model);
+  let offer = normalizeVehicleOfferSpecs({ ...raw, ...identity, status: "active", images: credibleCatalogImages(raw?.images || []).slice(0, 30) });
   const op = offer?.operational || {};
   const sourceRaw = op?.raw || {};
   if (offer.sourceId !== "prestige_japan_auctions_open" || offer.market !== "japan") { reject("source"); return null; }

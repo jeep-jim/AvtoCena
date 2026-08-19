@@ -2,6 +2,7 @@
 
 import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent, type WheelEvent as ReactWheelEvent } from "react";
 import { createPortal } from "react-dom";
+import { Gavel } from "lucide-react";
 
 export type RateHistoryPoint = { date: string; effectiveRate: number };
 export type PublicCurrencyRate = {
@@ -468,11 +469,7 @@ function TrendPopover({ offer, currency, panel, light, currencyDriven, currencyI
 }
 
 function AuctionGavelIcon({ className = "" }: { className?: string }) {
-  return <svg className={className} viewBox="0 0 32 32" fill="none" aria-hidden="true">
-    <path d="m11.2 8.1 6.6 6.6m-9.4-3.8 6.6 6.6m1.3-4.1 8.2 8.2" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round" />
-    <path d="m8.8 5.6 4.9 4.9-3.2 3.2-4.9-4.9 3.2-3.2Zm9.3 9.3 4.9 4.9-3.2 3.2-4.9-4.9 3.2-3.2Z" stroke="currentColor" strokeWidth="2.2" strokeLinejoin="round" />
-    <path d="M5.5 26.5h15" stroke="currentColor" strokeWidth="2.6" strokeLinecap="round" />
-  </svg>;
+  return <Gavel className={className} strokeWidth={2.5} aria-hidden="true" />;
 }
 
 export function AuctionResultPrice({
@@ -522,7 +519,7 @@ export function AuctionResultPrice({
         type="button"
         aria-label="Что означает завершённый аукционный лот"
         aria-expanded={open}
-        className="relative flex shrink-0 items-center rounded-lg text-[var(--ac-text)] outline-none transition hover:text-red-500 focus-visible:ring-2 focus-visible:ring-red-500/50"
+        className="relative flex shrink-0 items-center rounded-xl bg-[#ef3340] p-1.5 text-white shadow-[0_5px_14px_rgba(239,51,64,.28)] outline-none transition hover:bg-[#d92533] focus-visible:ring-2 focus-visible:ring-red-500/50"
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
         onClick={(event) => { event.preventDefault(); event.stopPropagation(); setOpen((current) => !current); }}
