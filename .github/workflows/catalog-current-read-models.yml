@@ -8,6 +8,7 @@ on:
     paths:
       - .github/workflows/catalog-current-read-models.yml
       - apps/web/lib/catalog/display-identity.ts
+      - apps/web/lib/catalog/brands.ts
       - apps/web/lib/catalog/storage.ts
   workflow_run:
     workflows:

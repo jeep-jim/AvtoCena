@@ -45,6 +45,7 @@ function materiallyDifferentRate(stored, current) {
 }
 
 function needsCurrentRateReprice(offer) {
+  if (String(offer?.market || "") === "japan") return false;
   const sourceRate = currentRates.get(String(offer?.sourceCurrency || "").toUpperCase());
   const eurRate = currentRates.get("EUR");
   if (!sourceRate || !eurRate) return false;
@@ -53,6 +54,7 @@ function needsCurrentRateReprice(offer) {
 }
 
 async function repriceWithCurrentRates(offer) {
+  if (String(offer?.market || "") === "japan") return { ...offer, previousTotalRub: null, priceDeltaRub: null, priceChangedAt: undefined };
   if (!needsCurrentRateReprice(offer)) return offer;
   try {
     const calculated = isPreliminaryPowerPendingCalculation(offer)

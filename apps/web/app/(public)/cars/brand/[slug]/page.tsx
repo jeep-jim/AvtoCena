@@ -58,7 +58,8 @@ export default async function BrandLandingPage({ params }: PageProps) {
     }
   }
   const offers = [...uniqueOffers.values()];
-  const catalogMake = makeResults.find((entry) => entry.result.total > 0)?.make || brand.name;
+  const catalogMakes = rawMakes.join(",");
+  const totalOffers = makeResults.reduce((sum, entry) => sum + Number(entry.result.total || 0), 0);
   const grouped = MARKET_ORDER.map((market) => ({
     market,
     offers: offers.filter((offer: any) => offer.market === market),
@@ -67,9 +68,6 @@ export default async function BrandLandingPage({ params }: PageProps) {
   const fallbackResult = offers.length ? null : await searchOffers({ pageSize: 16, sort: "updatedAt" });
   const similar = (fallbackResult?.items || []).filter((offer: any) => isCrediblePublicOffer(offer)).slice(0, 12);
   const availableMarkets = grouped.map((group) => group.market);
-  const knowledgeRecords = models.reduce((sum, model) => sum + Number(model.knowledge.records || 0), 0);
-  const trustedRecords = models.reduce((sum, model) => sum + Number(model.knowledge.trustedVariants || 0) + Number(model.knowledge.references || 0), 0);
-  const observations = models.reduce((sum, model) => sum + Number(model.knowledge.observations || 0), 0);
 
   return <main className="ac-brand-catalog-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
@@ -83,17 +81,15 @@ export default async function BrandLandingPage({ params }: PageProps) {
           <BrandLogoVisual brand={brand.name} className="!h-20 !w-32 md:!h-24 md:!w-36" />
         </div>
         <div className="min-w-0">
-          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Энциклопедия АвтоЦена · {models.length} канонических моделей</div>
+          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Марка автомобиля</div>
           <h1 className="mt-2 break-words text-4xl font-black leading-[.98] tracking-[-0.045em] md:text-6xl">{brand.name}</h1>
           <p className="mt-4 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">
-            Канонические модели, проверенные характеристики и собранные source-backed наблюдения {brand.name}. Наблюдения доступны для прозрачности и верификации, но в расчёт подставляются только подтверждённые спецификации.
+            Модели {brand.name}, их характеристики и автомобили из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана. Все варианты марки собраны на одной странице независимо от рынка.
           </p>
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-black">
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{models.length} моделей</span>
-            <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{knowledgeRecords} записей V2</span>
-            <span className="rounded-full bg-emerald-500/10 px-3 py-2 text-emerald-500">{trustedRecords} проверенных</span>
-            {observations ? <span className="rounded-full bg-amber-500/10 px-3 py-2 text-amber-500">{observations} наблюдений</span> : null}
-            <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{availableMarkets.length || 7} рынков</span>
+            {totalOffers ? <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{totalOffers.toLocaleString("ru-RU")} автомобилей</span> : null}
+            <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{availableMarkets.length || 7} {availableMarkets.length === 1 ? "рынок" : "рынков"}</span>
           </div>
         </div>
       </header>
@@ -113,7 +109,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
           return <section key={group.market}>
             <div className="flex items-end justify-between gap-3">
               <h2 className="flex items-center gap-2 text-3xl font-black md:text-4xl"><CatalogMarketFlag market={group.market} className="h-5 w-7 md:h-6 md:w-9" /><span>{label}</span><span className="text-base text-[var(--ac-muted)]">· {group.offers.length}</span></h2>
-              <Link href={`/cars?market=${group.market}&make=${encodeURIComponent(catalogMake)}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
+              <Link href={`/cars?market=${group.market}&make=${encodeURIComponent(catalogMakes)}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
             </div>
             <div className="mt-5 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">
               {group.offers.slice(0, 12).map((offer: any) => <CatalogCard key={offer.id} offer={offer} compact dense />)}

@@ -5,7 +5,7 @@ import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
-import { PriceTrend } from "@/components/catalog/PriceTrend";
+import { AuctionResultPrice, PriceTrend } from "@/components/catalog/PriceTrend";
 import { VehicleGallery } from "@/components/catalog/VehicleGallery";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
@@ -231,7 +231,9 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const updatedAt = new Date(o.updatedAt);
   const updatedDate = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleDateString("ru-RU");
   const updatedTime = Number.isNaN(updatedAt.getTime()) ? "" : updatedAt.toLocaleTimeString("ru-RU");
-  const snapshot = { id: o.id, title: o.title, price: o.totalRub, totalRub: o.totalRub, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: o.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, marketLabel: o.marketLabel, href: `/cars/offer/${o.id}` };
+  const auctionAt = new Date(o.auctionDate || "");
+  const auctionDateLabel = Number.isNaN(auctionAt.getTime()) ? "" : auctionAt.toLocaleDateString("ru-RU");
+  const snapshot = { id: o.id, title: o.title, price: o.totalRub, totalRub: o.totalRub, previousTotalRub: o.previousTotalRub, priceDeltaRub: o.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice, sourceCurrency: o.sourceCurrency, calculationSnapshot: o.calculationSnapshot, imageUrl: o.images[0], year: o.year, mileageKm: o.mileageKm, market: raw.market, marketLabel: o.marketLabel, auctionDate: o.auctionDate, href: `/cars/offer/${o.id}` };
   const marketHref = `/cars?market=${encodeURIComponent(raw.market || "")}`;
   const makeHref = `/cars/brand/${catalogBrandSlug(raw.make || "")}`;
   const powerDisplay = catalogPowerDisplay(raw);
@@ -242,6 +244,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
   const isHybrid = ["series_hybrid", "other_hybrid"].includes(powertrainKind) || /hybrid|гибрид|phev|hev/.test(fuelKind);
   const electrified = isElectric || isHybrid;
+  const japanAuction = String(raw.market || "").toLowerCase() === "japan";
   const powerValue = o.powerHp ? `${o.powerHp} л.с.` : o.powerKw ? `${o.powerKw} кВт` : "";
   const mileageKm = Number(o.mileageKm || 0);
   const mileageTile = mileageKm > 0 ? { label: "Пробег", value: `${money(mileageKm)} км`, icon: "mileage" as const } : null;
@@ -295,18 +298,23 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
         </div>
 
         <div className="min-w-0 xl:sticky xl:top-[92px] xl:self-start">
-          {preliminaryPricing
+          {japanAuction
+            ? <AuctionResultPrice offer={o} label="Завершённый аукцион" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
+            : preliminaryPricing
             ? <PreliminaryPrice offer={o} label="Предварительно от" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />
             : <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />}
-          {o.priceMode === "auction_start" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p> : null}
+          {!japanAuction && o.priceMode === "auction_start" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p> : null}
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
             <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{specs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={specs.length % 2 === 1 && index === specs.length - 1} />)}</div>
             <div className="mt-4"><OfferPriceBreakdown offer={o} /></div>
             <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
-              <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
+              {japanAuction ? <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
+                <span className="block whitespace-nowrap">Завершённый лот{auctionDateLabel ? ` · торги ${auctionDateLabel}` : ""}</span>
+                <span className="mt-1 block">Цена сохранена как ориентир по результату аукциона.</span>
+              </p> : <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
                 <span className="block whitespace-nowrap">Обновлено {updatedDate}{updatedDate && updatedTime ? ", " : ""}{updatedTime ? sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="text-inherit no-underline visited:text-inherit hover:text-inherit">{updatedTime}</a> : updatedTime : null}</span>
                 <span className="mt-1 block xl:whitespace-nowrap">Возможность покупки и финальную стоимость подтвердит менеджер.</span>
-              </p>
+              </p>}
             </div>
             <div data-offer-desktop-actions-slot className="hidden xl:block" />
           </aside>

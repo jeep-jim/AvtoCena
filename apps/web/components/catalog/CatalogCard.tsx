@@ -55,7 +55,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
     id: o.id, title: o.title, price: visibleRub || null, totalRub: visibleRub || null, previousTotalRub: displayOffer.previousTotalRub,
     priceDeltaRub: displayOffer.priceDeltaRub, priceChangedAt: o.priceChangedAt, sourcePrice: o.sourcePrice,
     sourceCurrency: o.sourceCurrency, calculationSnapshot: o.calculationSnapshot, imageUrl, year: o.year,
-    mileageKm: o.mileageKm, marketLabel: o.marketLabel, href,
+    mileageKm: o.mileageKm, market: normalizedOffer.market, marketLabel: o.marketLabel, auctionDate: o.auctionDate, href,
   };
   const mediaHeight = dense ? "h-24 sm:h-40 md:h-44" : compact ? "h-36 sm:h-44" : "h-44 sm:h-52";
   const tagClass = dense ? "flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-white/[0.05] px-1.5 py-1 sm:gap-1.5 sm:px-2.5 sm:py-1.5" : "flex shrink-0 items-center gap-1.5 whitespace-nowrap rounded-full bg-white/[0.05] px-2.5 py-1.5";

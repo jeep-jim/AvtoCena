@@ -11,7 +11,9 @@ type FavoriteSnapshot = {
   imageUrl?: string;
   year?: number;
   mileageKm?: number;
+  market?: string;
   marketLabel?: string;
+  auctionDate?: string;
   href?: string;
 };
 

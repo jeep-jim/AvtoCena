@@ -1,5 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { catalogBrandBySlug, catalogBrandDromSlug } from "@/lib/catalog/brands";
+import fs from "node:fs/promises";
+import path from "node:path";
+import { resolveCatalogBrandBySlug } from "@/lib/catalog/catalog-brand-directory";
+import { catalogBrandDromSlug, catalogBrandSlug } from "@/lib/catalog/brands";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -11,6 +14,15 @@ type LogoSet = { light?: string; dark?: string; any?: string };
 type ManifestCache = { expiresAt: number; logos: Map<string, LogoSet> };
 
 let manifestCache: ManifestCache | null = null;
+const LOCAL_LOGO_ROOT = path.resolve(process.cwd(), "data/catalog/vehicle-encyclopedia-v2/assets/brand-logos");
+
+async function localBrandLogo(slug: string, theme: "light" | "dark") {
+  const safeSlug = catalogBrandSlug(slug);
+  if (!/^[a-z0-9-]+$/.test(safeSlug)) return null;
+  const file = path.resolve(LOCAL_LOGO_ROOT, theme, `${safeSlug}.png`);
+  if (!file.startsWith(`${LOCAL_LOGO_ROOT}${path.sep}`)) return null;
+  try { return await fs.readFile(file); } catch { return null; }
+}
 
 function normalizedKey(value: string) {
   let decoded = String(value || "");
@@ -129,10 +141,17 @@ function resolvedImageContentType(source: string, received: string | null) {
 }
 
 export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
-  const brand = catalogBrandBySlug(params.slug);
+  const brand = await resolveCatalogBrandBySlug(params.slug);
   if (!brand) return new NextResponse(null, { status: 404 });
 
   const theme = request.nextUrl.searchParams.get("theme") === "dark" ? "dark" : "light";
+  const local = await localBrandLogo(brand.slug, theme);
+  if (local) return new NextResponse(local, {
+    headers: {
+      "content-type": "image/png",
+      "cache-control": "public, max-age=86400, s-maxage=604800, stale-while-revalidate=2592000",
+    },
+  });
   const dromSlug = catalogBrandDromSlug(brand.name);
   const candidates = [dromSlug, brand.slug, brand.name];
 

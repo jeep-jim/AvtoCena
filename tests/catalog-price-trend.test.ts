@@ -48,3 +48,36 @@ test("unchanged recalculation keeps the latest meaningful movement", () => {
   assert.equal(next.priceDeltaRub, -9_000);
   assert.equal(next.priceChangedAt, "2026-07-15T12:00:00.000Z");
 });
+
+test("completed Japanese auction result never receives a current-price trend", () => {
+  const previous = offer(2_700_000, { market: "japan", previousTotalRub: 2_600_000, priceDeltaRub: 100_000 });
+  const next = applyPriceTrend(offer(2_900_000, { market: "japan" }), previous, "2026-08-19T12:00:00.000Z");
+  assert.equal(next.totalRub, 2_700_000);
+  assert.equal(next.previousTotalRub, null);
+  assert.equal(next.priceDeltaRub, null);
+  assert.equal(next.priceChangedAt, undefined);
+  assert.equal(resolvePriceTrend(next), null);
+});
+
+test("repeated Japanese import keeps the saved historical calculation", () => {
+  const previous = offer(1_930_000, {
+    market: "japan",
+    sourcePrice: 1_200_000,
+    sourceCurrency: "JPY",
+    calculationStatus: "ready",
+    calculationSnapshot: { currencyRate: { rateToRub: 0.56, capturedAt: "2026-08-01T00:00:00.000Z" } },
+  });
+  const recalculated = offer(2_140_000, {
+    market: "japan",
+    sourcePrice: 1_200_000,
+    sourceCurrency: "jpy",
+    calculationStatus: "ready",
+    calculationSnapshot: { currencyRate: { rateToRub: 0.63, capturedAt: "2026-08-19T00:00:00.000Z" } },
+  });
+
+  const result = applyPriceTrend(recalculated, previous, "2026-08-19T00:00:00.000Z");
+  assert.equal(result.totalRub, 1_930_000);
+  assert.equal(result.calculationSnapshot?.currencyRate?.rateToRub, 0.56);
+  assert.equal(result.previousTotalRub, null);
+  assert.equal(result.priceDeltaRub, null);
+});

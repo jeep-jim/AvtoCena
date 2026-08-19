@@ -1,12 +1,10 @@
 import fs from "node:fs/promises";
 
-const { readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
-const { isCrediblePublicOffer, hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
-const { findVehicleModel } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
+const { readCurrentPublicCatalogProjection } = await import("../apps/web/lib/catalog/storage.ts");
+const { hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
 
 const OUTPUT = process.env.CATALOG_VISIBLE_CALCULATION_AUDIT_OUTPUT || "catalog-visible-calculation-coverage.json";
 const SAMPLE_LIMIT = Math.max(20, Math.min(500, Number(process.env.CATALOG_VISIBLE_CALCULATION_SAMPLE_LIMIT || 200)));
-const MAX_MATCH_CONCURRENCY = Math.max(1, Math.min(32, Number(process.env.CATALOG_VISIBLE_CALCULATION_MATCH_CONCURRENCY || 12)));
 
 function clean(value) {
   return String(value || "").replace(/\s+/g, " ").trim();
@@ -24,14 +22,6 @@ function totalThirtyMinuteKw(offer) {
     ? offer.power30MinKwByMotor.map(positive).filter(Boolean)
     : [];
   return motors.length ? motors.reduce((sum, value) => sum + value, 0) : undefined;
-}
-
-function modelKey(offer) {
-  return `${clean(offer?.make)}\u0000${clean(offer?.model)}`;
-}
-
-function matchKey(offer) {
-  return [clean(offer?.make), clean(offer?.model), Number(offer?.year || 0), Number(offer?.engineCc || 0), clean(offer?.fuel), clean(offer?.powertrainKind)].join("\u0000");
 }
 
 function exactPowerState(offer) {
@@ -72,19 +62,6 @@ function exactPowerState(offer) {
   };
 }
 
-async function mapWithConcurrency(items, concurrency, worker) {
-  const output = new Array(items.length);
-  let cursor = 0;
-  await Promise.all(Array.from({ length: Math.min(concurrency, Math.max(1, items.length)) }, async () => {
-    while (true) {
-      const index = cursor++;
-      if (index >= items.length) return;
-      output[index] = await worker(items[index], index);
-    }
-  }));
-  return output;
-}
-
 function increment(map, key, amount = 1) {
   map.set(key, Number(map.get(key) || 0) + amount);
 }
@@ -96,24 +73,8 @@ function sortedCounts(map, limit = SAMPLE_LIMIT) {
     .slice(0, limit);
 }
 
-const offers = await readAllOffersForMaintenance();
-const visible = offers.filter((offer) => isCrediblePublicOffer(offer));
-const representativeByMatch = new Map();
-for (const offer of visible) {
-  const key = matchKey(offer);
-  if (!representativeByMatch.has(key)) representativeByMatch.set(key, offer);
-}
-
-const matchEntries = [...representativeByMatch.entries()];
-const matchResults = await mapWithConcurrency(matchEntries, MAX_MATCH_CONCURRENCY, async ([key, offer]) => {
-  try {
-    const match = await findVehicleModel(offer);
-    return [key, match?.model?.id || null];
-  } catch (error) {
-    return [key, null, String(error?.message || error)];
-  }
-});
-const resolvedByMatch = new Map(matchResults.map(([key, modelId]) => [key, modelId]));
+const publicReadmodel = await readCurrentPublicCatalogProjection();
+const visible = publicReadmodel.rows || [];
 
 const byMarket = new Map();
 const needsDataModels = new Map();
@@ -132,23 +93,27 @@ for (const offer of visible) {
   const market = clean(offer.market) || "unknown";
   const status = clean(offer.calculationStatus) || "unknown";
   const pair = `${clean(offer.make)} ${clean(offer.model)}`.trim();
-  const pairKey = modelKey(offer);
+  const pairKey = `${clean(offer?.make)}\u0000${clean(offer?.model)}`;
   visibleModels.add(pairKey);
   increment(statusCounts, status);
 
   const marketRow = byMarket.get(market) || { visible: 0, ready: 0, readyExact: 0, needsData: 0, auctionStart: 0, unresolvedIdentity: 0, invalidReady: 0 };
   marketRow.visible++;
 
-  const identityResolved = hasCredibleCatalogIdentity(offer) && Boolean(resolvedByMatch.get(matchKey(offer)));
+  const identityResolved = hasCredibleCatalogIdentity(offer);
   if (identityResolved) resolvedIdentity++;
   else {
     marketRow.unresolvedIdentity++;
     increment(unresolvedModels, `${market} · ${pair}`);
   }
 
-  if (status === "ready") {
+  if (status === "ready" || status === "estimated") {
     ready++;
     marketRow.ready++;
+    if (status === "estimated") {
+      byMarket.set(market, marketRow);
+      continue;
+    }
     const exact = exactPowerState(offer);
     const totalRub = positive(offer.totalRub);
     const hardReasons = [...exact.reasons];
@@ -175,7 +140,7 @@ for (const offer of visible) {
         readyUnclassified.push({ id: offer.id, market, make: offer.make, model: offer.model, year: offer.year });
       }
     }
-  } else if (status === "needs_data") {
+  } else if (status === "needs_data" || status === "preliminary_power_pending") {
     needsData++;
     marketRow.needsData++;
     const state = exactPowerState(offer);
@@ -196,7 +161,8 @@ const report = {
   auditedAt: new Date().toISOString(),
   mode: "production_visible_read_only",
   totals: {
-    maintenanceOffers: offers.length,
+    publicReadmodelOffers: visible.length,
+    generationId: publicReadmodel.generationId,
     visibleOffers: visible.length,
     visibleMakeModelPairs: visibleModels.size,
     resolvedIdentity,

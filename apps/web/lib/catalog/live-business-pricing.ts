@@ -25,6 +25,7 @@ function uniqueText(values: unknown[]) {
 }
 
 async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer: T): Promise<T> {
+  if (String(offer.market || "") === "japan") return offer;
   const sourcePrice = positive(offer.sourcePrice);
   const sourceCurrency = String(offer.sourceCurrency || "").trim().toUpperCase();
   if (!sourcePrice || !sourceCurrency) return offer;
@@ -48,6 +49,14 @@ async function attachCurrentCurrencyRate<T extends Partial<VehicleOffer>>(offer:
 export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(offer: T, configured: any): T {
   const market = String(offer.market || "") as CatalogMarket;
   if (!market) return offer;
+  // Japan contains completed auction results. Their published price is a
+  // historical snapshot and must not move with today's exchange rate.
+  if (market === "japan") return {
+    ...offer,
+    previousTotalRub: null,
+    priceDeltaRub: null,
+    priceChangedAt: undefined,
+  } as T;
   const sourcePriceRub = snapshotSourcePriceRub(offer);
   const customsRub = snapshotCustomsRub(offer);
   if (!sourcePriceRub || !customsRub) return offer;

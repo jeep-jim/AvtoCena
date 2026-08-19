@@ -4,7 +4,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
-import { PriceTrend } from "@/components/catalog/PriceTrend";
+import { CatalogPrice } from "@/components/catalog/CatalogPrice";
 
 const FAVORITES_KEY = "avtocena_favorites";
 
@@ -21,7 +21,9 @@ type Favorite = {
   imageUrl?: string;
   year?: number;
   mileageKm?: number;
+  market?: string;
   marketLabel?: string;
+  auctionDate?: string;
   href?: string;
 };
 
@@ -68,7 +70,7 @@ export default function FavoritesPage() {
                 <div className="text-xs font-black uppercase tracking-[0.15em] text-red-300">{item.marketLabel || "Каталог"}</div>
                 <h2 className="mt-2 text-xl font-black">{item.title || "Автомобиль"}</h2>
                 <div className="mt-2 text-sm text-white/55">{item.year || "—"} · {item.mileageKm ? `${new Intl.NumberFormat("ru-RU").format(item.mileageKm)} км` : "пробег уточняется"}</div>
-                <PriceTrend offer={trendOffer} className="mt-4" priceClassName="text-2xl" />
+                <div className="mt-4"><CatalogPrice offer={trendOffer} label={item.year ? `${item.year} г.` : "Стоимость"} priceClassName="text-2xl" /></div>
               </div>
             </Link>
             <FavoriteToggle offerId={item.id} snapshot={item} className="absolute right-3 top-3" />

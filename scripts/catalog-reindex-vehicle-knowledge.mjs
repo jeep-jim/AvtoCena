@@ -52,6 +52,12 @@ let missingCustoms = 0;
 
 const recalculated = await mapWithConcurrency(offers, async (source, index) => {
   try {
+    if (source?.market === "japan") return {
+      ...source,
+      previousTotalRub: null,
+      priceDeltaRub: null,
+      priceChangedAt: undefined,
+    };
     const result = isPreliminaryPowerPendingCalculation(source)
       ? await calculateOfferWithPreliminaryPowerPricing(source)
       : await calculateOfferWithRussiaCustoms(source);

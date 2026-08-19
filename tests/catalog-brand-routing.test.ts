@@ -19,7 +19,11 @@ test("brand routes resolve both legacy and source-backed V2 identities", async (
 
 test("encyclopedia brand directory is not limited to the legacy Drom list", async () => {
   const brands = await readCatalogBrandDirectory();
-  assert.ok(brands.length >= 255);
+  assert.ok(brands.length >= 245);
   assert.equal(new Set(brands.map((brand) => brand.slug)).size, brands.length);
   assert.ok(brands.some((brand) => brand.name === "Mercedes-Benz"));
+  assert.equal(brands.filter((brand) => brand.slug === "audi").length, 1);
+  assert.equal(brands.some((brand) => brand.slug === "audi-china"), false);
+  assert.equal(brands.filter((brand) => brand.slug === "changan").length, 1);
+  assert.equal(brands.some((brand) => ["changan-nevo", "oshan"].includes(brand.slug)), false);
 });

@@ -141,7 +141,8 @@ export type CatalogBrandSummary = { generationId: string; brands: Record<string,
 export type CatalogSearchProjection = {
   id: string; market: string; make: string; model: string; year: number; totalRub?: number | null; mileageKm?: number; engineCc?: number; powerHp?: number;
   fuel?: string; bodyType?: string; transmission?: string; drive?: string; auctionGrade?: string; auctionDate?: string; updatedAt?: string; firstSeenAt?: string; sourcePublishedAt?: string;
-  trim?: string; powerKw?: number; powertrainKind?: string; power30MinKw?: number; power30MinKwByMotor?: number[]; utilizationPowerKw?: number;
+  trim?: string; powerKw?: number; icePowerKw?: number; powertrainKind?: string; power30MinKw?: number; power30MinKwByMotor?: number[]; utilizationPowerKw?: number;
+  powerDataConfidence?: string; powerDataSource?: string;
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
   calculationStatus?: string; calculationSnapshot?: { currencyRate?: any; pricingConfidence?: string } | null; publicVisibleRub?: number; cardImageUrl?: string; seriesId?: string; cardProjectionVersion?: 1;
 };
@@ -347,7 +348,8 @@ function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchProjection
     totalRub: visibleRub || null, mileageKm: offer.mileageKm, engineCc: offer.engineCc, powerHp: offer.powerHp, fuel: cleanFacet(offer.fuel), bodyType: cleanFacet(offer.bodyType),
     transmission: cleanFacet(offer.transmission), drive: cleanFacet(offer.drive), auctionGrade: cleanFacet(offer.auctionGrade), auctionDate: offer.auctionDate, updatedAt: offer.updatedAt,
     firstSeenAt: offer.firstSeenAt, sourcePublishedAt: String((offer.operational as any)?.sourcePublishedAt || "") || undefined,
-    trim: cleanFacet(offer.trim), powerKw: offer.powerKw, powertrainKind: offer.powertrainKind, power30MinKw: offer.power30MinKw, power30MinKwByMotor: offer.power30MinKwByMotor, utilizationPowerKw: offer.utilizationPowerKw,
+    trim: cleanFacet(offer.trim), powerKw: offer.powerKw, icePowerKw: offer.icePowerKw, powertrainKind: offer.powertrainKind, power30MinKw: offer.power30MinKw, power30MinKwByMotor: offer.power30MinKwByMotor, utilizationPowerKw: offer.utilizationPowerKw,
+    powerDataConfidence: offer.powerDataConfidence, powerDataSource: offer.powerDataSource,
     sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, priceMode: offer.priceMode, previousTotalRub: visibleRub ? offer.previousTotalRub : null, priceDeltaRub: visibleRub ? offer.priceDeltaRub : null, priceChangedAt: offer.priceChangedAt,
     calculationStatus: offer.calculationStatus, calculationSnapshot: { currencyRate: offer.calculationSnapshot?.currencyRate, pricingConfidence: offer.calculationSnapshot?.pricingConfidence },
     publicVisibleRub: visibleRub || undefined, cardImageUrl: rankedCatalogImageUrls(offer)[0] || undefined,
@@ -558,6 +560,10 @@ async function currentProjectionRows(params: CatalogSearchParams = {}) {
   const current = await readCurrentSearchProjection(scope);
   if (current.generationId === manifest.generationId) return { generationId: manifest.generationId, rows: current.items || [] };
   return { generationId: manifest.generationId, rows: await readProjectionRows(manifest, params) };
+}
+
+export async function readCurrentPublicCatalogProjection() {
+  return currentProjectionRows({});
 }
 
 export async function readCatalogBrandCounts(params: CatalogSearchParams = {}) {

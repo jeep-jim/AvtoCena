@@ -41,9 +41,22 @@ export async function readCatalogBrandDirectory() {
     brands.set(key, current ? { ...brand, ...current, aliases: [...new Set([...(current.aliases || []), ...(brand.aliases || [])])] } : brand);
   };
 
-  for (const brand of CATALOG_BRANDS) add(brand);
+  for (const brand of CATALOG_BRANDS) {
+    const publicName = canonicalCatalogBrand(brand.name);
+    add({
+      ...brand,
+      name: publicName,
+      slug: catalogBrandSlug(publicName),
+      aliases: [...new Set([brand.name, ...(brand.aliases || [])])],
+    });
+  }
   for (const brand of dataset?.brands || []) {
-    add(toBrand(brand.canonicalName, clean(brand.slug) || catalogBrandSlug(brand.canonicalName), safeAliasValues(brand.aliases)));
+    const publicName = canonicalCatalogBrand(brand.canonicalName);
+    add(toBrand(publicName, catalogBrandSlug(publicName), [
+      brand.canonicalName,
+      clean(brand.slug),
+      ...safeAliasValues(brand.aliases),
+    ].filter(Boolean)));
   }
   for (const rawMake of facets.makes || []) {
     const publicName = canonicalCatalogBrand(translateCatalogText(rawMake) || clean(rawMake));
@@ -62,7 +75,8 @@ export async function resolveCatalogBrandBySlug(rawSlug: string): Promise<Catalo
     const match = new EncyclopediaIdentitySlugResolver(dataset).resolveBrand(rawSlug);
     if (match) {
       const source = dataset.brands.find((brand) => brand.id === match.brandId);
-      return toBrand(match.canonicalName, match.canonicalSlug, safeAliasValues(source?.aliases));
+      const publicName = canonicalCatalogBrand(match.canonicalName);
+      return toBrand(publicName, catalogBrandSlug(publicName), [match.canonicalName, match.canonicalSlug, ...safeAliasValues(source?.aliases)]);
     }
   }
 
@@ -74,5 +88,5 @@ export function catalogBrandMatches(brand: CatalogBrand, rawMake: unknown) {
   if (!raw) return false;
   const translated = clean(translateCatalogText(raw));
   const candidates = [raw, translated, canonicalCatalogBrand(raw), canonicalCatalogBrand(translated), ...(brand.aliases || [])];
-  return candidates.some((candidate) => catalogBrandSlug(candidate) === brand.slug);
+  return candidates.some((candidate) => catalogBrandSlug(canonicalCatalogBrand(candidate)) === brand.slug);
 }
