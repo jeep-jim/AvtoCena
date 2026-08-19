@@ -67,7 +67,7 @@ test("production keeps one warm container and serves navigation bursts in-proces
   assert.match(deploy, /revision-memory: 2Gb/);
   assert.match(deploy, /revision-concurrency: 4/);
   assert.match(deploy, /revision-provisioned: 1/);
-  assert.match(deploy, /Warm public catalog and first offer/);
+  assert.match(deploy, /Warm public catalog and verify AI discovery/);
   assert.match(deploy, /cars\/offer\/\$offer_id/);
 });
 

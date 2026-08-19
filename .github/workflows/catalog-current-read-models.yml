@@ -9,6 +9,10 @@ on:
       - ".github/workflows/catalog-current-read-models.yml"
       - "scripts/catalog-publish-current-read-models.mjs"
       - "apps/web/lib/catalog/storage.ts"
+      - "tests/ai-product-feed.test.ts"
+      - "tests/catalog-current-read-model-empty-market-policy.test.ts"
+      - "tests/catalog-filter-search.test.ts"
+      - "tests/offer-navigation-performance.test.ts"
   workflow_run:
     workflows:
       - "Catalog live recovery · UAE + Kyrgyzstan"
