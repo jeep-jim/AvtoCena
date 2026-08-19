@@ -24,7 +24,8 @@ permissions:
 
 concurrency:
   group: catalog-current-read-models
-  cancel-in-progress: true
+  # Never let a late skipped workflow_run cancel a real publisher already writing Object Storage.
+  cancel-in-progress: false
 
 env:
   JSON_STORAGE_DRIVER: object
