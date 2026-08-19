@@ -130,6 +130,9 @@ test("daily cleanup keeps a bounded six-hour grace while preserving both live ma
   assert.match(dataStorage, /listObjects\?/);
   assert.match(dataStorage, /requested \? normalizeStorageKey\(requested\) : ""/);
   assert.match(dataStorage, /requested \? normalizeStorageKey\(requested\) : ""\]\s*\.filter\(Boolean\)\.join\("\/"\)/);
+  assert.match(dataStorage, /listBucketObjects\?\(prefix\?: string\)/);
+  assert.match(dataStorage, /listRawObjects\(normalizedPrefix: string, stripConfiguredPrefix: boolean\)/);
+  assert.match(dataStorage, /listBucketObjects\(prefix = ""\)/);
   assert.match(dataStorage, /deletePrefix\?/);
   assert.match(dataStorage, /list-type/);
   assert.match(dataStorage, /NextContinuationToken/);
@@ -147,6 +150,9 @@ test("daily cleanup keeps a bounded six-hour grace while preserving both live ma
   assert.match(cleanup, /storage\.listObjects\(""\)/);
   assert.match(cleanup, /catalogInventory/);
   assert.match(cleanup, /namespaceInventory/);
+  assert.match(cleanup, /physicalBucketInventory/);
+  assert.match(cleanup, /outsideConfiguredNamespaceBytes/);
+  assert.match(cleanup, /storage\.listBucketObjects\?\.\(""\)/);
   assert.match(cleanup, /nonCatalogBytes/);
   assert.match(cleanup, /unaccountedBytes/);
   assert.match(cleanup, /objectPrefixSummary\(catalogObjects\)/);
