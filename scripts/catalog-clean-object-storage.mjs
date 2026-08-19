@@ -93,10 +93,19 @@ if (!storage.listObjects || !storage.deletePrefix || !storage.deleteJson) {
 
 const startedAt = new Date().toISOString();
 const cutoff = Date.now() - GRACE_MS;
-const [publicManifest, internalManifest, bucketObjects, namespaceObjects, catalogObjects, generationObjects, internalObjects, imageObjects] = await Promise.all([
+const inventoryErrors = [];
+const objectVersionsPromise = storage.listObjectVersions
+  ? storage.listObjectVersions().catch((error) => { inventoryErrors.push({ stage: "object_versions", error: String(error?.message || error) }); return []; })
+  : Promise.resolve([]);
+const multipartUploadsPromise = storage.listMultipartUploads
+  ? storage.listMultipartUploads().catch((error) => { inventoryErrors.push({ stage: "multipart_uploads", error: String(error?.message || error) }); return []; })
+  : Promise.resolve([]);
+const [publicManifest, internalManifest, bucketObjects, objectVersions, multipartUploads, namespaceObjects, catalogObjects, generationObjects, internalObjects, imageObjects] = await Promise.all([
   readDataJson("catalog/manifest.json", { generationId: "", markets: {} }),
   readDataJson("catalog/internal/manifest.json", { generationId: "", sources: {} }),
   storage.listBucketObjects?.("") || storage.listObjects(""),
+  objectVersionsPromise,
+  multipartUploadsPromise,
   // This is read-only inventory of the complete configured Object Storage
   // namespace. Deletion remains strictly limited to the guarded catalog paths.
   storage.listObjects(""),
@@ -121,7 +130,7 @@ const protectedGenerations = new Set([
 
 if (!publicGeneration || !generationIds.length) {
   const report = {
-    version: 4,
+    version: 5,
     startedAt,
     finishedAt: new Date().toISOString(),
     dryRun: DRY_RUN,
@@ -189,7 +198,7 @@ if (!publicGeneration || !generationIds.length) {
   }
 
   const report = {
-    version: 4,
+    version: 5,
     startedAt,
     finishedAt: new Date().toISOString(),
     dryRun: DRY_RUN,
@@ -238,6 +247,20 @@ if (!publicGeneration || !generationIds.length) {
       outsideConfiguredNamespaceBytes: Math.max(0, objectBytes(bucketObjects) - objectBytes(namespaceObjects)),
       prefixes: objectPrefixSummary(bucketObjects).slice(0, 100),
     },
+    objectVersionInventory: {
+      versions: objectVersions.filter((object) => !object.deleteMarker).length,
+      deleteMarkers: objectVersions.filter((object) => object.deleteMarker).length,
+      bytes: objectBytes(objectVersions.filter((object) => !object.deleteMarker)),
+      nonCurrentVersions: objectVersions.filter((object) => !object.deleteMarker && !object.isLatest).length,
+      nonCurrentBytes: objectBytes(objectVersions.filter((object) => !object.deleteMarker && !object.isLatest)),
+      prefixes: objectPrefixSummary(objectVersions.filter((object) => !object.deleteMarker)).slice(0, 100),
+    },
+    multipartUploadInventory: {
+      uploads: multipartUploads.length,
+      parts: multipartUploads.reduce((sum, upload) => sum + Number(upload.parts || 0), 0),
+      bytes: multipartUploads.reduce((sum, upload) => sum + Number(upload.bytes || 0), 0),
+      prefixes: objectPrefixSummary(multipartUploads.map((upload) => ({ key: upload.key, size: upload.bytes }))).slice(0, 100),
+    },
     planned: {
       generationObjects: generationDeleteObjects.length,
       internalObjects: internalDeleteObjects.length,
@@ -251,7 +274,7 @@ if (!publicGeneration || !generationIds.length) {
       images: deletedImages,
       total: deletedGenerationObjects + deletedInternalObjects + deletedImages,
     },
-    errors: errors.slice(0, 500),
+    errors: [...inventoryErrors, ...errors].slice(0, 500),
   };
   await fs.writeFile(REPORT_FILE, JSON.stringify(report, null, 2));
   await writeDataJson("catalog/storage-cleanup-report.json", report).catch(() => undefined);

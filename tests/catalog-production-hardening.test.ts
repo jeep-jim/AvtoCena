@@ -131,6 +131,8 @@ test("daily cleanup keeps a bounded six-hour grace while preserving both live ma
   assert.match(dataStorage, /requested \? normalizeStorageKey\(requested\) : ""/);
   assert.match(dataStorage, /requested \? normalizeStorageKey\(requested\) : ""\]\s*\.filter\(Boolean\)\.join\("\/"\)/);
   assert.match(dataStorage, /listBucketObjects\?\(prefix\?: string\)/);
+  assert.match(dataStorage, /listObjectVersions\?\(\)/);
+  assert.match(dataStorage, /listMultipartUploads\?\(\)/);
   assert.match(dataStorage, /listRawObjects\(normalizedPrefix: string, stripConfiguredPrefix: boolean\)/);
   assert.match(dataStorage, /listBucketObjects\(prefix = ""\)/);
   assert.match(dataStorage, /deletePrefix\?/);
@@ -153,6 +155,9 @@ test("daily cleanup keeps a bounded six-hour grace while preserving both live ma
   assert.match(cleanup, /physicalBucketInventory/);
   assert.match(cleanup, /outsideConfiguredNamespaceBytes/);
   assert.match(cleanup, /storage\.listBucketObjects\?\.\(""\)/);
+  assert.match(cleanup, /objectVersionInventory/);
+  assert.match(cleanup, /nonCurrentBytes/);
+  assert.match(cleanup, /multipartUploadInventory/);
   assert.match(cleanup, /nonCatalogBytes/);
   assert.match(cleanup, /unaccountedBytes/);
   assert.match(cleanup, /objectPrefixSummary\(catalogObjects\)/);
@@ -160,7 +165,7 @@ test("daily cleanup keeps a bounded six-hour grace while preserving both live ma
   assert.match(cleanup, /plannedDeletes > MAX_DELETES/);
   assert.match(cleanupWorkflow, /cron: "40 2 \* \* \*"/);
   assert.match(cleanupWorkflow, /apps\/web\/lib\/data\.ts/);
-  assert.match(cleanup, /version: 4/);
+  assert.match(cleanup, /version: 5/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_KEEP_GENERATIONS: "2"/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_EMERGENCY: "false"/);

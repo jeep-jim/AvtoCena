@@ -12,6 +12,8 @@ export type JsonStorageDriver = "local" | "object";
 export type JsonReadResult<T> = { value: T; etag?: string; found: boolean };
 export type JsonWriteCondition = { ifMatch?: string; ifNoneMatch?: "*" };
 export type StorageObject = { key: string; lastModified?: string; size?: number };
+export type StorageObjectVersion = StorageObject & { versionId: string; isLatest: boolean; deleteMarker: boolean };
+export type StorageMultipartUpload = { key: string; uploadId: string; initiated?: string; parts: number; bytes: number };
 
 export class StorageConflictError extends Error { constructor() { super("storage_conflict"); this.name = "StorageConflictError"; } }
 
@@ -29,6 +31,8 @@ export interface JsonStorage {
   deleteBinary?(relativePath: string): Promise<void>;
   listObjects?(prefix: string): Promise<StorageObject[]>;
   listBucketObjects?(prefix?: string): Promise<StorageObject[]>;
+  listObjectVersions?(): Promise<StorageObjectVersion[]>;
+  listMultipartUploads?(): Promise<StorageMultipartUpload[]>;
   deleteObjects?(relativePaths: string[]): Promise<number>;
   deletePrefix?(prefix: string): Promise<number>;
 }
@@ -69,6 +73,8 @@ export class LocalJsonStorage implements JsonStorage {
   async exists(relativePath: string) { try { await fs.promises.access(localPath(relativePath)); return true; } catch { return false; } }
   async listObjects(prefix: string) { const requested = String(prefix || "").trim(); const normalized = requested ? normalizeStorageKey(requested) : ""; const root = normalized ? localPath(normalized) : path.resolve(getDataRoot()); const dataRoot = path.resolve(getDataRoot()); const files = await walkLocalFiles(root); return Promise.all(files.map(async (file) => { const stat = await fs.promises.stat(file); return { key: path.relative(dataRoot, file).replace(/\\/g, "/"), lastModified: stat.mtime.toISOString(), size: stat.size }; })); }
   async listBucketObjects(prefix = "") { return this.listObjects(prefix); }
+  async listObjectVersions() { return (await this.listObjects("")).map((object) => ({ ...object, versionId: "", isLatest: true, deleteMarker: false })); }
+  async listMultipartUploads() { return []; }
   async deleteObjects(relativePaths: string[]) { const keys = [...new Set(relativePaths.map(normalizeStorageKey))]; await Promise.all(keys.map((key) => fs.promises.rm(localPath(key), { force: true }))); return keys.length; }
   async deletePrefix(prefix: string) { const objects = await this.listObjects(prefix); await Promise.all(objects.map((object) => fs.promises.rm(localPath(object.key), { force: true }))); return objects.length; }
 }
@@ -210,6 +216,79 @@ export class ObjectJsonStorage implements JsonStorage {
   async listBucketObjects(prefix = "") {
     const requested = String(prefix || "").trim();
     return this.listRawObjects(requested ? normalizeStorageKey(requested) : "", false);
+  }
+  async listObjectVersions() {
+    const versions: StorageObjectVersion[] = [];
+    let keyMarker = "";
+    let versionIdMarker = "";
+    do {
+      const params: Record<string, string> = { versions: "", "max-keys": "1000" };
+      if (keyMarker) params["key-marker"] = keyMarker;
+      if (versionIdMarker) params["version-id-marker"] = versionIdMarker;
+      const response = await this.bucketRequest(params);
+      if (!response.ok) throw new Error(`object_storage_list_versions_${response.status}`);
+      const xml = await response.text();
+      for (const block of xml.match(/<(Version|DeleteMarker)>[\s\S]*?<\/\1>/g) || []) {
+        const deleteMarker = block.startsWith("<DeleteMarker>");
+        const key = decodeXml(block.match(/<Key>([\s\S]*?)<\/Key>/)?.[1] || "");
+        const versionId = decodeXml(block.match(/<VersionId>([\s\S]*?)<\/VersionId>/)?.[1] || "");
+        const lastModified = block.match(/<LastModified>([\s\S]*?)<\/LastModified>/)?.[1];
+        const size = deleteMarker ? 0 : Number(block.match(/<Size>([\s\S]*?)<\/Size>/)?.[1] || 0);
+        if (key && versionId) versions.push({ key, versionId, lastModified, size, deleteMarker, isLatest: /<IsLatest>true<\/IsLatest>/.test(block) });
+      }
+      const truncated = /<IsTruncated>true<\/IsTruncated>/.test(xml);
+      keyMarker = truncated ? decodeXml(xml.match(/<NextKeyMarker>([\s\S]*?)<\/NextKeyMarker>/)?.[1] || "") : "";
+      versionIdMarker = truncated ? decodeXml(xml.match(/<NextVersionIdMarker>([\s\S]*?)<\/NextVersionIdMarker>/)?.[1] || "") : "";
+    } while (keyMarker || versionIdMarker);
+    return versions;
+  }
+  private async listMultipartParts(key: string, uploadId: string) {
+    const cfg = objectConfig();
+    let partMarker = "";
+    let parts = 0;
+    let bytes = 0;
+    do {
+      const params: Record<string, string> = { uploadId, "max-parts": "1000" };
+      if (partMarker) params["part-number-marker"] = partMarker;
+      const query = canonicalQuery(params);
+      const url = new URL(`${cfg.endpoint}/${cfg.bucket}/${encodeKey(key)}`);
+      url.search = query;
+      const response = await this.signedRequest("GET", url, undefined, {}, query);
+      if (!response.ok) throw new Error(`object_storage_list_parts_${response.status}`);
+      const xml = await response.text();
+      for (const block of xml.match(/<Part>[\s\S]*?<\/Part>/g) || []) {
+        parts += 1;
+        bytes += Number(block.match(/<Size>([\s\S]*?)<\/Size>/)?.[1] || 0);
+      }
+      const truncated = /<IsTruncated>true<\/IsTruncated>/.test(xml);
+      partMarker = truncated ? String(xml.match(/<NextPartNumberMarker>([\s\S]*?)<\/NextPartNumberMarker>/)?.[1] || "") : "";
+    } while (partMarker);
+    return { parts, bytes };
+  }
+  async listMultipartUploads() {
+    const uploads: Array<{ key: string; uploadId: string; initiated?: string }> = [];
+    let keyMarker = "";
+    let uploadIdMarker = "";
+    do {
+      const params: Record<string, string> = { uploads: "", "max-uploads": "1000" };
+      if (keyMarker) params["key-marker"] = keyMarker;
+      if (uploadIdMarker) params["upload-id-marker"] = uploadIdMarker;
+      const response = await this.bucketRequest(params);
+      if (!response.ok) throw new Error(`object_storage_list_uploads_${response.status}`);
+      const xml = await response.text();
+      for (const block of xml.match(/<Upload>[\s\S]*?<\/Upload>/g) || []) {
+        const key = decodeXml(block.match(/<Key>([\s\S]*?)<\/Key>/)?.[1] || "");
+        const uploadId = decodeXml(block.match(/<UploadId>([\s\S]*?)<\/UploadId>/)?.[1] || "");
+        const initiated = block.match(/<Initiated>([\s\S]*?)<\/Initiated>/)?.[1];
+        if (key && uploadId) uploads.push({ key, uploadId, initiated });
+      }
+      const truncated = /<IsTruncated>true<\/IsTruncated>/.test(xml);
+      keyMarker = truncated ? decodeXml(xml.match(/<NextKeyMarker>([\s\S]*?)<\/NextKeyMarker>/)?.[1] || "") : "";
+      uploadIdMarker = truncated ? decodeXml(xml.match(/<NextUploadIdMarker>([\s\S]*?)<\/NextUploadIdMarker>/)?.[1] || "") : "";
+    } while (keyMarker || uploadIdMarker);
+    const result: StorageMultipartUpload[] = [];
+    for (const upload of uploads) result.push({ ...upload, ...(await this.listMultipartParts(upload.key, upload.uploadId)) });
+    return result;
   }
   async deleteObjects(relativePaths: string[]) {
     const relative = [...new Set(relativePaths.map(normalizeStorageKey))];
