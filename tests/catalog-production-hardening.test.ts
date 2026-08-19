@@ -151,6 +151,8 @@ test("daily cleanup keeps a bounded six-hour grace while preserving both live ma
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_KEEP_GENERATIONS: "2"/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_EMERGENCY: "false"/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_GRACE_MS: "21600000"/);
+  assert.match(cleanupWorkflow, /group: catalog-object-storage-cleanup/);
+  assert.doesNotMatch(cleanupWorkflow, /group: catalog-live-daily-working-markets/);
   assert.match(cleanup, /const MIN_GRACE_MS = EMERGENCY \? 0 : 6 \* 60 \* 60 \* 1_000/);
   assert.match(cleanup, /generations: objectBytes\(generationObjects\)/);
   assert.doesNotMatch(cleanupWorkflow, /createWorkflowDispatch/);
