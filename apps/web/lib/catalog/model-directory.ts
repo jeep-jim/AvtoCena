@@ -12,6 +12,8 @@ export type CatalogNumericRange = { min: number; max: number; count: number };
 export type CatalogModelKnowledgeSummary = {
   records: number;
   variants: number;
+  trustedVariants: number;
+  observations: number;
   references: number;
   powerHp?: CatalogNumericRange;
   powerKw?: CatalogNumericRange;
@@ -68,6 +70,20 @@ function thirtyMinutePower(row: { power30MinKw?: number; power30MinKwByMotor?: n
   return motors.length ? Math.round(motors.reduce((sum, value) => sum + value, 0) * 100) / 100 : undefined;
 }
 
+function trustedVariant(row: any) {
+  if (row?.sourceType !== "encyclopedia_v2") return true;
+  if (row?.encyclopediaStatus === "verified") return true;
+  return row?.encyclopediaStatus === "seed" && row?.encyclopediaEvidenceOfficial === true;
+}
+
+function explicitPowerKw(row: any) {
+  const direct = positive(row?.powerKw, 4_000);
+  if (direct) return direct;
+  if (row?.sourceType === "encyclopedia_v2") return undefined;
+  const hp = positive(row?.powerHp, 2_500);
+  return hp ? hp / 1.35962 : undefined;
+}
+
 export function catalogModelSlug(model: Pick<VehicleKnowledgeModel, "id" | "model">) {
   const idTail = String(model.id || "").split("/").slice(1).join("/");
   return slugify(idTail || model.model);
@@ -83,20 +99,23 @@ const readKnowledge = cache(async () => {
 });
 
 function summarizeModel(model: VehicleKnowledgeModel, variants: any[], references: any[]): CatalogModelKnowledgeSummary {
-  const rows = [...variants, ...references];
-  const hp = rows.map((row) => row.powerHp);
+  const trustedVariants = variants.filter(trustedVariant);
+  const trustedRows = [...trustedVariants, ...references];
+  const hp = trustedRows.map((row) => row.powerHp);
   if (model.representativePowerHp) hp.push(model.representativePowerHp);
   return {
-    records: rows.length,
+    records: variants.length + references.length,
     variants: variants.length,
+    trustedVariants: trustedVariants.length,
+    observations: Math.max(0, variants.length - trustedVariants.length),
     references: references.length,
     powerHp: range(hp, 2_500),
-    powerKw: range(rows.map((row) => row.powerKw || (positive(row.powerHp, 2_500) ? Number(row.powerHp) / 1.35962 : undefined)), 4_000),
-    power30MinKw: range(rows.map(thirtyMinutePower), 4_000),
-    utilizationPowerKw: range(rows.map((row) => row.utilizationPowerKw), 4_000),
-    engineCc: range(rows.map((row) => row.engineCc), 20_000),
-    fuels: unique(rows.map((row) => row.fuel)),
-    powertrains: unique(rows.map((row) => row.powertrainKind)),
+    powerKw: range(trustedRows.map(explicitPowerKw), 4_000),
+    power30MinKw: range(trustedRows.map(thirtyMinutePower), 4_000),
+    utilizationPowerKw: range(trustedRows.map((row) => row.utilizationPowerKw), 4_000),
+    engineCc: range(trustedRows.map((row) => row.engineCc), 20_000),
+    fuels: unique(trustedRows.map((row) => row.fuel)),
+    powertrains: unique(trustedRows.map((row) => row.powertrainKind)),
   };
 }
 
