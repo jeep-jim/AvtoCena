@@ -5,7 +5,7 @@ import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { PublicHeader } from "@/components/layout/PublicHeader";
-import { catalogBrandBySlug } from "@/lib/catalog/brands";
+import { resolveCatalogBrandBySlug } from "@/lib/catalog/catalog-brand-directory";
 import { findBrandModelBySlug, readBrandModelDirectory, type CatalogNumericRange } from "@/lib/catalog/model-directory";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { readVehiclePowerKnowledge } from "@/lib/catalog/power-knowledge";
@@ -135,7 +135,7 @@ function ObservationCard({ row }: { row: PublicKnowledgeRow }) {
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug, model: modelSlug } = await params;
-  const brand = catalogBrandBySlug(slug);
+  const brand = await resolveCatalogBrandBySlug(slug);
   if (!brand) return {};
   const model = await findBrandModelBySlug(brand.name, modelSlug);
   if (!model) return {};
@@ -151,7 +151,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function ModelLandingPage({ params }: PageProps) {
   const { slug, model: modelSlug } = await params;
-  const brand = catalogBrandBySlug(slug);
+  const brand = await resolveCatalogBrandBySlug(slug);
   if (!brand) notFound();
   const [model, directory, allVariants, allPowerReferences] = await Promise.all([
     findBrandModelBySlug(brand.name, modelSlug),

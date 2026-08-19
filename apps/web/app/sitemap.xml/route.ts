@@ -1,4 +1,4 @@
-import { CATALOG_BRANDS } from "@/lib/catalog/brands";
+import { readCatalogBrandDirectory } from "@/lib/catalog/catalog-brand-directory";
 
 export const dynamic = "force-dynamic";
 
@@ -22,13 +22,14 @@ function urlEntry(url: string, changefreq: string, priority: number) {
   ].join("\n");
 }
 
-export function GET() {
+export async function GET() {
   const baseUrl = "https://avtocena.com";
+  const brands = await readCatalogBrandDirectory();
   const entries = [
     urlEntry(baseUrl, "daily", 1),
     urlEntry(`${baseUrl}/cars`, "hourly", 0.95),
     urlEntry(`${baseUrl}/cars/encyclopedia`, "daily", 0.9),
-    ...CATALOG_BRANDS.map((brand) => urlEntry(`${baseUrl}/cars/brand/${brand.slug}`, "daily", 0.8)),
+    ...brands.map((brand) => urlEntry(`${baseUrl}/cars/brand/${brand.slug}`, "daily", 0.8)),
   ];
 
   const xml = [

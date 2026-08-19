@@ -3,6 +3,7 @@ import { canonicalCatalogBrand, catalogBrandSlug } from "./brands";
 import { readEncyclopediaKnowledgeModels, readEncyclopediaKnowledgeVariants } from "./encyclopedia";
 import { readVehiclePowerKnowledge } from "./power-knowledge";
 import { readCatalogBrandModelCounts } from "./storage";
+import { presentCatalogOffer } from "./presentation";
 import {
   vehicleKnowledgeCompact,
   type VehicleKnowledgeModel,
@@ -153,7 +154,7 @@ export const readBrandModelDirectory = cache(async (rawMake: string): Promise<Ca
     counters.set(recognized.id, { count: item.count, marketCounts: item.marketCounts });
   }
 
-  return models.map((model) => {
+  const canonicalModels = models.map((model) => {
     const count = counters.get(model.id) || { count: 0, marketCounts: {} };
     const modelVariants = variantsByModel.get(model.id) || [];
     const modelReferences = referencesByModel.get(modelKey(make, model.model)) || [];
@@ -165,7 +166,39 @@ export const readBrandModelDirectory = cache(async (rawMake: string): Promise<Ca
       marketCounts: count.marketCounts,
       knowledge: summarizeModel(model, modelVariants, modelReferences),
     };
-  }).sort((left, right) => Number(right.count > 0) - Number(left.count > 0)
+  });
+  const liveOnly = live.models.flatMap((item) => {
+    if (modelByAlias.get(vehicleKnowledgeCompact(item.model))) return [];
+    const presented = presentCatalogOffer({ market: "china", make, model: item.model });
+    const model = clean(presented.modelLabel || item.model);
+    if (!model) return [];
+    return [{
+      id: `live/${slugify(make)}/${slugify(model)}`,
+      make,
+      model,
+      aliases: item.model === model ? [] : [item.model],
+      bodyTypes: [],
+      source: "manual" as const,
+      sourceVersion: "live-catalog-identity",
+      updatedAt: "",
+      active: true,
+      popularityDecile: 10,
+      slug: slugify(model),
+      count: item.count,
+      marketCounts: item.marketCounts,
+      knowledge: {
+        records: 0,
+        variants: 0,
+        trustedVariants: 0,
+        observations: 0,
+        references: 0,
+        fuels: [],
+        powertrains: [],
+      },
+    } satisfies CatalogModelDirectoryItem];
+  });
+
+  return [...canonicalModels, ...liveOnly].sort((left, right) => Number(right.count > 0) - Number(left.count > 0)
     || right.count - left.count
     || Number(left.popularityDecile || 10) - Number(right.popularityDecile || 10)
     || left.model.localeCompare(right.model, "ru"));

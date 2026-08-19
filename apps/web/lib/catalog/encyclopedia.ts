@@ -103,6 +103,7 @@ type StagingManifest = {
   collections?: Record<string, { records?: number }>;
 };
 type StagingChunk<T> = { schemaVersion?: number; entityType?: string; records?: T[] };
+type StagingBrand = { id: string; canonicalName: string };
 type StagingModel = {
   id: string;
   brandId: string;
@@ -154,6 +155,7 @@ type StagingVariant = {
 };
 type StagingEncyclopediaCorpus = {
   manifest: StagingManifest;
+  brands: StagingBrand[];
   models: StagingModel[];
   variants: Array<StagingVariant & { generation?: VerifiedCorpusGeneration | null; facelift?: VerifiedCorpusGeneration | null }>;
 };
@@ -226,7 +228,7 @@ async function readLocalJson<T>(file: string): Promise<T> {
   return JSON.parse(await fs.readFile(file, "utf8")) as T;
 }
 
-async function readStagingChunks<T>(root: string, entity: "model" | "generation" | "facelift" | "variant", prefix: string) {
+async function readStagingChunks<T>(root: string, entity: "brand" | "model" | "generation" | "facelift" | "variant", prefix: string) {
   const directory = path.join(root, "chunks");
   const names = (await fs.readdir(directory)).filter((name) => name.startsWith(prefix) && name.endsWith(".json")).sort();
   if (!names.length) throw new Error(`encyclopedia_staging_${entity}_chunks_missing`);
@@ -266,13 +268,14 @@ export async function readStagingEncyclopediaCorpus() {
       const root = stagingRoot();
       const manifest = await readLocalJson<StagingManifest>(path.join(root, "manifest.json"));
       if (manifest.schemaVersion !== 2 || manifest.workspace !== "vehicle-encyclopedia-v2") throw new Error("encyclopedia_staging_manifest_invalid");
-      const [models, generations, facelifts, variants] = await Promise.all([
+      const [brands, models, generations, facelifts, variants] = await Promise.all([
+        readStagingChunks<StagingBrand>(root, "brand", "brands-"),
         readStagingChunks<StagingModel>(root, "model", "models-"),
         readStagingChunks<StagingGeneration>(root, "generation", "generations-"),
         readStagingChunks<StagingGeneration>(root, "facelift", "facelifts-"),
         readStagingChunks<StagingVariant>(root, "variant", "variants-"),
       ]);
-      for (const [entity, actual] of [["model", models.length], ["generation", generations.length], ["facelift", facelifts.length], ["variant", variants.length]] as const) {
+      for (const [entity, actual] of [["brand", brands.length], ["model", models.length], ["generation", generations.length], ["facelift", facelifts.length], ["variant", variants.length]] as const) {
         const expected = expectedStagingCount(manifest, entity);
         if (expected !== null && expected !== actual) throw new Error(`encyclopedia_staging_${entity}_count_mismatch:${actual}:${expected}`);
       }
@@ -280,6 +283,7 @@ export async function readStagingEncyclopediaCorpus() {
       const faceliftById = new Map(facelifts.map((row) => [row.id, row]));
       return {
         manifest,
+        brands,
         models,
         variants: variants.map((row) => ({
           ...row,
@@ -295,11 +299,12 @@ export async function readStagingEncyclopediaCorpus() {
 function corpusVariantToKnowledge(
   row: VerifiedCorpusVariant,
   model: VerifiedCorpusModel,
+  brandName: string,
 ): EncyclopediaKnowledgeVariant {
   return {
     id: row.id,
     modelId: row.modelId,
-    make: canonicalCatalogBrand(model.brandId),
+    make: canonicalCatalogBrand(brandName || model.brandId),
     model: model.canonicalName,
     name: row.name,
     market: row.market,
@@ -334,12 +339,12 @@ function corpusVariantToKnowledge(
   };
 }
 
-function stagingVariantToKnowledge(row: StagingEncyclopediaCorpus["variants"][number], model: StagingModel): EncyclopediaKnowledgeVariant {
+function stagingVariantToKnowledge(row: StagingEncyclopediaCorpus["variants"][number], model: StagingModel, brandName: string): EncyclopediaKnowledgeVariant {
   const evidence = evidenceSummary(row.evidence);
   return {
     id: row.id,
     modelId: row.modelId,
-    make: canonicalCatalogBrand(model.brandId),
+    make: canonicalCatalogBrand(brandName || model.brandId),
     model: model.canonicalName,
     name: row.name,
     market: row.market,
@@ -410,14 +415,21 @@ export async function readEncyclopediaKnowledgeVariants() {
       readStagingEncyclopediaCorpus(),
     ]).then(([runtime, previewV2, verifiedCorpus, stagingCorpus]) => {
       const preview = previewV2.filter((row) => row?.id && row?.modelId && Number(row.powerHp) > 0) as EncyclopediaKnowledgeVariant[];
+      const stagingBrands = new Map(stagingCorpus.brands.map((brand) => [brand.id, brand.canonicalName]));
       const stagingModels = new Map(stagingCorpus.models.map((model) => [model.id, model]));
       const staging = stagingCorpus.variants
         .filter((row) => row?.id && row?.modelId && stagingModels.has(row.modelId))
-        .map((row) => stagingVariantToKnowledge(row, stagingModels.get(row.modelId)!));
+        .map((row) => {
+          const model = stagingModels.get(row.modelId)!;
+          return stagingVariantToKnowledge(row, model, stagingBrands.get(model.brandId) || model.brandId);
+        });
       const verifiedModels = new Map(verifiedCorpus.models.map((model) => [model.id, model]));
       const verified = verifiedCorpus.variants
         .filter((row) => row?.id && row?.modelId && row.status === "verified" && verifiedModels.has(row.modelId))
-        .map((row) => corpusVariantToKnowledge(row, verifiedModels.get(row.modelId)!));
+        .map((row) => {
+          const model = verifiedModels.get(row.modelId)!;
+          return corpusVariantToKnowledge(row, model, stagingBrands.get(model.brandId) || model.brandId);
+        });
       return mergeById(runtime as EncyclopediaKnowledgeVariant[], staging, preview, verified);
     });
   }
@@ -431,11 +443,12 @@ export async function readEncyclopediaKnowledgeModels() {
       readVerifiedEncyclopediaCorpus(),
       readStagingEncyclopediaCorpus(),
     ]).then(([runtime, verifiedCorpus, stagingCorpus]) => {
+      const stagingBrands = new Map(stagingCorpus.brands.map((brand) => [brand.id, brand.canonicalName]));
       const stagingModels: EncyclopediaKnowledgeModel[] = stagingCorpus.models.map((model) => {
         const evidence = evidenceSummary(model.evidence);
         return {
           id: model.id,
-          make: canonicalCatalogBrand(model.brandId),
+          make: canonicalCatalogBrand(stagingBrands.get(model.brandId) || model.brandId),
           model: model.canonicalName,
           aliases: aliasValues(model.aliases, model.sourceNames),
           bodyTypes: model.bodyTypes || [],
@@ -463,7 +476,7 @@ export async function readEncyclopediaKnowledgeModels() {
         if (!updatedAt) return [];
         return [{
           id: model.id,
-          make: canonicalCatalogBrand(model.brandId),
+          make: canonicalCatalogBrand(stagingBrands.get(model.brandId) || model.brandId),
           model: model.canonicalName,
           aliases: model.aliases || [],
           bodyTypes: model.bodyTypes || [],

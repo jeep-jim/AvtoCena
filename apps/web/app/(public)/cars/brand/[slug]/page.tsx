@@ -6,7 +6,7 @@ import { BrandModelDirectory } from "@/components/catalog/BrandModelDirectory";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { PublicHeader } from "@/components/layout/PublicHeader";
-import { canonicalCatalogBrand, catalogBrandBySlug } from "@/lib/catalog/brands";
+import { catalogBrandMatches, resolveCatalogBrandBySlug } from "@/lib/catalog/catalog-brand-directory";
 import { readBrandModelDirectory } from "@/lib/catalog/model-directory";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
@@ -22,7 +22,7 @@ type PageProps = { params: Promise<{ slug: string }> };
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const { slug } = await params;
-  const brand = catalogBrandBySlug(slug);
+  const brand = await resolveCatalogBrandBySlug(slug);
   if (!brand) return {};
   const title = `${brand.name} — модели, характеристики и цены | Энциклопедия АвтоЦена`;
   const description = `Энциклопедия ${brand.name}: модели, характеристики, мощность и актуальные предложения из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана. Расчёт под ключ в АвтоЦене.`;
@@ -36,7 +36,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
 
 export default async function BrandLandingPage({ params }: PageProps) {
   const { slug } = await params;
-  const brand = catalogBrandBySlug(slug);
+  const brand = await resolveCatalogBrandBySlug(slug);
   if (!brand) notFound();
 
   const [facets, models] = await Promise.all([
@@ -45,7 +45,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
   ]);
   const rawMakes = [...new Set([
     brand.name,
-    ...(facets.makes || []).filter((make) => canonicalCatalogBrand(String(make)) === brand.name),
+    ...(facets.makes || []).filter((make) => catalogBrandMatches(brand, make)),
   ])];
   const makeResults = await Promise.all(rawMakes.map(async (make) => ({
     make,

@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { catalogBrandBySlug } from "@/lib/catalog/brands";
+import { resolveCatalogBrandBySlug } from "@/lib/catalog/catalog-brand-directory";
 import { findBrandModelBySlug } from "@/lib/catalog/model-directory";
 import { findVehicleModelMedia } from "@/lib/catalog/model-media";
 import { readVehicleKnowledgeVariants } from "@/lib/catalog/vehicle-knowledge";
@@ -66,7 +66,7 @@ function faqJsonLd(make: string, model: string, years: string, engines: string[]
 
 export default async function ModelSeoLayout({ children, params }: LayoutProps) {
   const { slug, model: modelSlug } = await params;
-  const brand = catalogBrandBySlug(slug);
+  const brand = await resolveCatalogBrandBySlug(slug);
   if (!brand) return children;
   const model = await findBrandModelBySlug(brand.name, modelSlug);
   if (!model) return children;
