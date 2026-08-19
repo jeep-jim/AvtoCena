@@ -3,15 +3,9 @@ name: Catalog V6 · Prestige exact sold up-to-30k
 on:
   workflow_dispatch:
   schedule:
-    - cron: "40 19 * * *"
-  push:
-    branches:
-      - main
-    paths:
-      - ".github/workflows/catalog-v6-prestige-up-to-30k.yml"
-      - "scripts/prestige-japan-strict-partition-plan.mjs"
-      - "scripts/prestige-japan-strict-chunk.mjs"
-      - "scripts/prestige-japan-strict-merge.mjs"
+    # Four rotating collection passes per week are enough to fill the separate
+    # 30-day history while cutting Japan runner spend by about 43%.
+    - cron: "40 19 * * 0,1,3,5"
 
 permissions:
   contents: read

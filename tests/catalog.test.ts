@@ -6,10 +6,11 @@ import sharp from "sharp";
 import test from "node:test";
 import { BeForwardPublicAdapter, Che168GlobalPublicAdapter, EncarDirectAdapter, JsonPartnerFeedAdapter, buildEncarImageUrl, buildEncarListUrl, normalizeEncarPrice, parseBeForwardStocklist, parseCsv } from "../apps/web/lib/catalog/adapters";
 import { persistCatalogOffers, searchOffers, publicOffer, CATALOG_CHUNK_SIZE, getOffer, cacheImageFromUrl, assertSafeImageUrl, resetImageSourceCacheForTests } from "../apps/web/lib/catalog/storage";
-import { convertToRub } from "../apps/web/lib/catalog/rates";
+import { convertToRub, resetCatalogRateCache } from "../apps/web/lib/catalog/rates";
 import { getJsonStorage, resetJsonStorageForTests, readDataJson } from "../apps/web/lib/data";
 
 process.env.JSON_STORAGE_DRIVER = "local";
+process.env.CATALOG_LIVE_RATE_DISABLED = "true";
 delete process.env.CATALOG_IMAGE_CDN_URL;
 const image = { id: "img1", url: "/api/catalog/images/img1", objectKey: "catalog/images/japan/a.jpg", size: 10_000, checksum: "abc", mimeType: "image/jpeg" };
 
@@ -86,22 +87,36 @@ test("CSV parser detects delimiter, quoted fields and BOM", () => {
 test("catalog generation chunks stay under 500 and search loads indexed chunks only", async () => {
   resetJsonStorageForTests();
   const now = new Date().toISOString();
-  const offers: any[] = Array.from({ length: CATALOG_CHUNK_SIZE + 1 }, (_, i) => ({ id: `o${i}`, sourceId: "test", sourceOfferId: `${i}`, market: "japan", offerType: "fixed", status: "active", make: "Toyota", model: i % 2 ? "Prius" : "Aqua", year: 2020 + (i % 4), sourcePrice: 1000000, sourceCurrency: "JPY", priceMode: "fixed", images: [image], totalRub: 1500000 + i, calculationStatus: "ready", firstSeenAt: now, updatedAt: now, operational: {} }));
-  offers.push({ ...offers[0], id: "needs-data", sourceOfferId: "ND", sourcePrice: null, sourceCurrency: null, totalRub: null, calculationStatus: "needs_data" });
+  const gallery = Array.from({ length: 5 }, (_, index) => ({
+    ...image,
+    id: `img${index + 1}`,
+    url: `/api/catalog/images/img${index + 1}`,
+    objectKey: `catalog/images/japan/${index + 1}.jpg`,
+    checksum: `checksum-${index + 1}`,
+    size: 100_000,
+    width: 1200,
+    height: 800,
+  }));
+  const offers: any[] = Array.from({ length: CATALOG_CHUNK_SIZE + 1 }, (_, i) => ({ id: `o${i}`, sourceId: "test", sourceOfferId: `${i}`, market: "japan", offerType: "auction", status: "active", make: "Toyota", model: i % 2 ? "Prius" : "Aqua", year: 2020 + (i % 4), sourcePrice: 1000000, sourceCurrency: "JPY", priceMode: "fixed", images: gallery, totalRub: 1500000 + i, calculationStatus: "ready", firstSeenAt: now, updatedAt: now, operational: { sourceUrl: `https://example.com/japan/${i}` } }));
   await persistCatalogOffers(offers);
   const manifest = await readDataJson<any>("catalog/manifest.json", {});
   assert.ok(manifest.generationId.startsWith("gen_"));
-  const firstChunk = await readDataJson<any[]>(`catalog/generations/${manifest.generationId}/offers/japan/${manifest.markets.japan.chunks[0]}.json`, []);
+  const firstChunkPath = String(manifest.markets.japan.chunks[0]).startsWith("catalog/")
+    ? manifest.markets.japan.chunks[0]
+    : `catalog/generations/${manifest.generationId}/offers/japan/${manifest.markets.japan.chunks[0]}.json`;
+  const firstChunk = await readDataJson<any[]>(firstChunkPath, []);
   assert.ok(firstChunk.length <= 500);
+  const japanArchive = await readDataJson<any>("catalog/japan-auction-history/manifest.json", {});
+  assert.equal(japanArchive.retentionDays, 30);
+  assert.equal(japanArchive.count, offers.length);
   const result = await searchOffers({ market: "japan", make: "Toyota", model: "Prius", sort: "totalRub", pageSize: 10 });
   assert.equal(result.items.length, 10);
-  assert.ok(result.usedIndexShards.some((p: string) => p.includes("/indexes/market/")));
+  assert.ok(result.usedIndexShards.some((p: string) => p.includes("projection/japan")));
   assert.equal(await getOffer("missing"), null);
 });
 
-test("lead generation cards without price are public when they have local photo and real source id", async () => {
-  const result = await searchOffers({ hasPrice: "no", pageSize: 5 });
-  assert.ok(result.items.some((o: any) => o.id === "needs-data" && o.calculationStatus === "needs_data"));
+test("source-price gate keeps incomplete lead rows out of the public catalog", async () => {
+  assert.equal(await getOffer("needs-data"), null);
 });
 
 test("image cache rejects HTML instead of image", async () => {
@@ -183,6 +198,28 @@ test("legacy JPY rate is not divided by 100 and structured CBR nominal is suppor
   assert.equal(usd?.sourcePriceRub, 92_000);
 });
 
+test("stale stored currency values yield to the current official CBR nominal", async () => {
+  const originalFetch = global.fetch;
+  const previousDisabled = process.env.CATALOG_LIVE_RATE_DISABLED;
+  delete process.env.CATALOG_LIVE_RATE_DISABLED;
+  resetCatalogRateCache();
+  (global as any).fetch = async () => new Response(
+    '<ValCurs Date="19.08.2026"><Valute><CharCode>KRW</CharCode><Nominal>1000</Nominal><Value>60,1784</Value></Valute></ValCurs>',
+    { headers: { "content-type": "application/xml" } },
+  );
+  try {
+    const krw = await convertToRub(17_400_000, "KRW");
+    assert.equal(krw?.sourcePriceRub, 1_047_104);
+    assert.ok(Math.abs(Number(krw?.effectiveRate) - 0.0601784) < 1e-10);
+    assert.equal(krw?.rateSource, "cbr_live");
+  } finally {
+    (global as any).fetch = originalFetch;
+    if (previousDisabled === undefined) delete process.env.CATALOG_LIVE_RATE_DISABLED;
+    else process.env.CATALOG_LIVE_RATE_DISABLED = previousDisabled;
+    resetCatalogRateCache();
+  }
+});
+
 test("public DTO strips source and private image storage fields", () => {
   const dto: any = publicOffer({ id: "o", sourceId: "private", sourceOfferId: "s", market: "japan", offerType: "fixed", status: "active", make: "Toyota", model: "Aqua", year: 2021, sourcePrice: 1, sourceCurrency: "JPY", priceMode: "fixed", images: [image], totalRub: 1, calculationStatus: "ready", firstSeenAt: "now", updatedAt: "now", operational: { sourceUrl: "https://source" } } as any);
   assert.equal(dto.sourceId, undefined);
@@ -222,6 +259,7 @@ test("Encar list cover is preserved when detail gallery is absent", async () => 
   resetJsonStorageForTests();
   const original = global.fetch;
   const seenUrls: string[] = [];
+  const listCover = `/carphoto/list-cover-${Date.now()}.jpg`;
   (global as any).fetch = async (url: string) => {
     seenUrls.push(String(url));
     if (String(url).includes("/v1/readside/vehicle/ENC1")) {
@@ -231,11 +269,11 @@ test("Encar list cover is preserved when detail gallery is absent", async () => 
   };
   try {
     const adapter = new EncarDirectAdapter();
-    const offer = adapter.normalizeOffer({ Id: "ENC1", Manufacturer: "Hyundai", Model: "Avante", FormYear: "2022", Mileage: 1000, Price: 2000, ModifiedDate: "2026-07-14T00:00:00Z", Photo: "/carphoto/list-cover.jpg" });
+    const offer = adapter.normalizeOffer({ Id: "ENC1", Manufacturer: "Hyundai", Model: "Avante", FormYear: "2022", Mileage: 1000, Price: 2000, ModifiedDate: "2026-07-14T00:00:00Z", Photo: listCover });
     assert.ok(offer);
     const images = await adapter.fetchImages(offer!);
     assert.equal(images.length, 1);
-    assert.ok(seenUrls.some((url) => url.includes("/carphoto/list-cover.jpg")));
+    assert.ok(seenUrls.some((url) => url.includes(listCover)));
     assert.equal(offer!.engineCc, 1999);
   } finally {
     (global as any).fetch = original;
@@ -322,6 +360,7 @@ test("Encar sample image limit stops downloading after configured maximum", asyn
   const originalFetch = global.fetch;
   const previousLimit = process.env.CATALOG_MAX_IMAGES_PER_OFFER;
   const imageUrls: string[] = [];
+  const cover = `/carphoto/cover-${Date.now()}.jpg`;
   process.env.CATALOG_MAX_IMAGES_PER_OFFER = "1";
   (global as any).fetch = async (url: string) => {
     const href = String(url);
@@ -333,7 +372,7 @@ test("Encar sample image limit stops downloading after configured maximum", asyn
   };
   try {
     const adapter = new EncarDirectAdapter();
-    const offer = adapter.normalizeOffer({ Id: "ENC_LIMIT", Manufacturer: "Hyundai", Model: "Avante", FormYear: "2022", Price: 2000, Photo: "/carphoto/cover.jpg" });
+    const offer = adapter.normalizeOffer({ Id: "ENC_LIMIT", Manufacturer: "Hyundai", Model: "Avante", FormYear: "2022", Price: 2000, Photo: cover });
     assert.ok(offer);
     const images = await adapter.fetchImages(offer!);
     assert.equal(images.length, 1);
@@ -364,15 +403,11 @@ test("public UI uses live catalog and labels estimates honestly", async () => {
   const home = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/page.tsx", "utf-8"));
   const results = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/results/page.tsx", "utf-8"));
   const cars = await import("node:fs/promises").then((fs) => fs.readFile("apps/web/app/(public)/cars/page.tsx", "utf-8"));
-  assert.match(home, /api\/catalog\/search\?pageSize=12/);
-  assert.match(home, /NODE_ENV !== "production"/);
-  assert.match(home, /ENABLE_DEMO_CATALOG/);
-  assert.match(home, /Каталог обновляется/);
-  assert.match(home, /href="\/cars"[^>]*>Каталог/);
-  assert.match(results, /await searchOffers/);
-  assert.match(results, /Актуальные автомобили/);
-  assert.match(results, /Расчётный пример, не конкретный автомобиль/);
-  assert.match(results, /offerSnapshot/);
+  assert.match(home, /readHomeCatalogSnapshot\(6\)/);
+  assert.doesNotMatch(home, /ENABLE_DEMO_CATALOG/);
+  assert.match(results, /redirect\(`\/cars/);
+  assert.match(cars, /await searchOffers/);
+  assert.match(cars, /applyActiveBusinessPricingBatch/);
   assert.doesNotMatch(cars, /нужен подключенный feed/);
-  assert.match(cars, /Свежие автомобили пока загружаются/);
+  assert.match(cars, /Статистика отыгранных лотов ещё загружается/);
 });

@@ -5,7 +5,10 @@ const { getJsonStorage, readDataJson, writeDataJson } = await import("../apps/we
 const REPORT_FILE = process.env.CATALOG_STORAGE_CLEANUP_REPORT || "catalog-storage-cleanup-report.json";
 const EMERGENCY = String(process.env.CATALOG_STORAGE_EMERGENCY || "false").toLowerCase() === "true";
 const KEEP_GENERATIONS = Math.max(EMERGENCY ? 0 : 2, Number(process.env.CATALOG_STORAGE_KEEP_GENERATIONS || (EMERGENCY ? 0 : 2)));
-const MIN_GRACE_MS = EMERGENCY ? 0 : 3 * 24 * 60 * 60 * 1_000;
+// Current + internal manifests and the newest two generations are protected
+// independently. A three-day grace kept many complete daily copies alive and
+// prevented routine cleanup from ever catching up.
+const MIN_GRACE_MS = EMERGENCY ? 0 : 6 * 60 * 60 * 1_000;
 const GRACE_MS = Math.max(MIN_GRACE_MS, Number(process.env.CATALOG_STORAGE_CLEANUP_GRACE_MS || 4 * 24 * 60 * 60 * 1_000));
 const MAX_DELETES = Math.max(1_000, Number(process.env.CATALOG_STORAGE_CLEANUP_MAX_DELETES || 100_000));
 const DELETE_CONCURRENCY = Math.max(1, Math.min(32, Number(process.env.CATALOG_STORAGE_DELETE_CONCURRENCY || 12)));
@@ -184,6 +187,12 @@ if (!publicGeneration || !generationIds.length) {
       internalObjects: internalObjects.length,
       imageObjects: imageObjects.length,
       liveImages: liveImageKeys.size,
+      bytes: {
+        generations: objectBytes(generationObjects),
+        internal: objectBytes(internalObjects),
+        images: objectBytes(imageObjects),
+        total: objectBytes([...generationObjects, ...internalObjects, ...imageObjects]),
+      },
     },
     planned: {
       generationObjects: generationDeleteObjects.length,

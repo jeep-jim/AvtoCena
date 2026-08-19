@@ -11,7 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     concurrency:
-      group: catalog-reindex-vehicle-knowledge
+      group: catalog-live-daily-working-markets
       cancel-in-progress: false
     env:
       JSON_STORAGE_DRIVER: object

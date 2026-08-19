@@ -1,5 +1,7 @@
 const { writeDataJson } = await import("../apps/web/lib/data.ts");
-const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
+const { calculateOfferWithPreliminaryPowerPricing, calculateOfferWithRussiaCustoms, isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
+const { refreshLiveExchangeRates } = await import("../apps/web/lib/catalog/live-rates.ts");
+const { resetCatalogRateCache } = await import("../apps/web/lib/catalog/rates.ts");
 const { isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 const { persistCatalogOffers, readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
@@ -9,10 +11,20 @@ const MIN_PUBLIC_RATIO = Math.min(1, Math.max(0.1, Number(process.env.CATALOG_RE
 const MIN_PUBLIC_GUARD_COUNT = Math.max(1, Number(process.env.CATALOG_REINDEX_MIN_PUBLIC_GUARD_COUNT || 50));
 const REPORT_PATH = "catalog/vehicle-knowledge/catalog-reindex-report.json";
 const startedAt = new Date().toISOString();
-const [offers, currentPublicLists] = await Promise.all([
+const refreshedRates = await refreshLiveExchangeRates();
+resetCatalogRateCache();
+const [maintenanceOffers, currentPublicLists] = await Promise.all([
   readAllOffersForMaintenance(),
   Promise.all(PUBLIC_CATALOG_MARKETS.map((market) => readMarketOffers(market))),
 ]);
+const japanRetentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_JAPAN_RETENTION_MS || 30 * 24 * 60 * 60 * 1_000));
+const japanCutoff = Date.now() - japanRetentionMs;
+const offers = maintenanceOffers.filter((offer) => {
+  if (offer?.market !== "japan") return true;
+  const timestamp = Date.parse(String(offer?.auctionDate || offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
+  return timestamp >= japanCutoff;
+});
+const japanRetentionPruned = maintenanceOffers.length - offers.length;
 const currentPublicOffers = currentPublicLists.flat().filter((offer) => isCrediblePublicOffer(offer));
 
 async function mapWithConcurrency(items, worker, concurrency) {
@@ -40,7 +52,9 @@ let missingCustoms = 0;
 
 const recalculated = await mapWithConcurrency(offers, async (source, index) => {
   try {
-    const result = await calculateOfferWithRussiaCustoms(source);
+    const result = isPreliminaryPowerPendingCalculation(source)
+      ? await calculateOfferWithPreliminaryPowerPricing(source)
+      : await calculateOfferWithRussiaCustoms(source);
     if (result.make !== source.make || result.model !== source.model) canonicalized++;
     if (!Number(source.powerHp || 0) && Number(result.powerHp || 0) > 0) powerFilled++;
     const previousTotal = Number(source.totalRub || 0);
@@ -78,6 +92,9 @@ const baseReport = {
   finishedAt: new Date().toISOString(),
   concurrency: CONCURRENCY,
   totalOffers: offers.length,
+  japanRetentionMs,
+  japanRetentionPruned,
+  officialRateDate: String((refreshedRates?.rates || []).find((rate) => rate?.currency === "EUR")?.rateDate || ""),
   previousPublicOffers: currentPublicOffers.length,
   publicOffers: publicOffers.length,
   guardedMinimum,

@@ -11,9 +11,16 @@ const input = process.env.JAPAN_STRICT_MERGE_INPUT || "catalog-rebuild-japan-exa
 const output = process.env.JAPAN_STRICT_MERGE_REPORT || "catalog-japan-strict-merge-publish-report.json";
 const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
 const minYear = catalogMinYearForMarket("japan");
+const minPublishCount = Math.max(1, Number(process.env.JAPAN_STRICT_MIN_PUBLISH_COUNT || 193));
+const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 30 * 24 * 60 * 60 * 1_000));
+const retentionCutoff = Date.now() - retentionMs;
 
 function compact(value) { return String(value || "").toLocaleLowerCase("en-US").replace(/[^a-z0-9]+/g, ""); }
 function positive(value) { const n = Number(value); return Number.isFinite(n) && n > 0 ? n : 0; }
+function withinRetention(offer) {
+  const timestamp = Date.parse(String(offer?.auctionDate || offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
+  return timestamp >= retentionCutoff;
+}
 function makeKey(offer) { return String(offer?.make || "").trim().toLowerCase().replace(/\s+/g, " "); }
 function exactCalculation(offer) {
   const total = positive(offer?.totalRub);
@@ -82,6 +89,7 @@ const reject = (reason) => { rejected[reason] = Number(rejected[reason] || 0) + 
 for (const rawOffer of combinedCandidates) {
   const offer = normalizeVehicleOfferSpecs({ ...rawOffer, status: "active", images: credibleCatalogImages(rawOffer?.images || []).slice(0, 30) });
   if (!offer?.id || unique.has(offer.id)) continue;
+  if (!withinRetention(offer)) { reject("retention"); continue; }
   if (!isCatalogYearAllowed(offer.year, "japan")) { reject("year"); continue; }
   if (!soldSemantics(offer)) { reject("sold_semantics"); continue; }
   if (!exactPhotos(offer)) { reject("exact_photos"); continue; }
@@ -104,7 +112,7 @@ for (const offer of strictRows) {
   japanRows.push(offer);
   if (key) modelYearCounts.set(key, count + 1);
 }
-if (!japanRows.length) throw new Error("japan_strict_merge_empty");
+if (japanRows.length < minPublishCount) throw new Error(`japan_strict_preflight_below_min:${japanRows.length}:${minPublishCount}`);
 
 const all = [...japanRows];
 const preservedByMarket = {};
@@ -135,7 +143,9 @@ const report = {
   inputCurrent: current.length,
   strictBeforeDiversity: strictRows.length,
   count: japanRows.length,
+  minPublishCount,
   maxOffersPerModelYear,
+  retentionMs,
   distinctModels: new Set(japanRows.map((offer) => catalogExactModelKey(offer, "japan")).filter(Boolean)).size,
   distinctModelYears: modelYearCounts.size,
   distinctMakes: new Set(japanRows.map(makeKey)).size,

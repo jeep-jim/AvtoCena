@@ -45,15 +45,29 @@ test("known model plus listing trim can be canonicalized without changing trim o
 test("coachbuilder VITO is not silently promoted to Mercedes-Benz Vito", async () => {
   const raw = { id: "coachbuilder-vito", market: "china", make: "雅升汽车", model: "VITO", year: 2025, totalRub: 13_963_671 };
   const result = await applyEncyclopediaDisplayIdentity(raw);
-  assert.equal(result.make, raw.make);
+  assert.equal(result.make, "Yasheng");
   assert.equal(result.model, raw.model);
-  assert.equal(result.encyclopediaDisplayIdentity, undefined);
+  assert.equal(result.encyclopediaDisplayIdentity?.match, "trusted_alias");
 });
 
-test("KGM Rexton Sports Khan remains unresolved instead of collapsing into Rexton SUV", async () => {
+test("KGM Rexton Sports Khan uses the exact official pickup identity instead of collapsing into Rexton SUV", async () => {
   const raw = { id: "kgm-sports", market: "korea", make: "KGM(KGM)", model: "더 뉴 렉스턴 스포츠 칸 디젤 2.2 2WD", year: 2022 };
   const result = await applyEncyclopediaDisplayIdentity(raw);
-  assert.equal(result.make, raw.make);
-  assert.equal(result.model, raw.model);
-  assert.equal(result.encyclopediaDisplayIdentity, undefined);
+  assert.equal(result.make, "KGM");
+  assert.equal(result.model, "Rexton Sports Khan");
+  assert.equal(result.encyclopediaDisplayIdentity?.match, "trusted_alias");
+});
+
+test("Hyundai Grandeur Hybrid listing suffix is not exposed as a raw Korean model", async () => {
+  const result = await applyEncyclopediaDisplayIdentity({ make: "현대", model: "그랜저 하이브리드 (GN7)", market: "korea" });
+  assert.equal(result.make, "Hyundai");
+  assert.equal(result.model, "Grandeur");
+  assert.equal(result.encyclopediaDisplayIdentity?.match, "trusted_alias");
+});
+
+test("reviewed Chinese source identities render in stable Latin labels", async () => {
+  const huakai = await applyEncyclopediaDisplayIdentity({ make: "华凯", model: "华凯新能源", market: "china" });
+  const huanghai = await applyEncyclopediaDisplayIdentity({ make: "HuangHai", model: "蛟龙新能源", market: "china" });
+  assert.deepEqual([huakai.make, huakai.model], ["Huakai", "Huakai EV"]);
+  assert.deepEqual([huanghai.make, huanghai.model], ["Huanghai", "Jiaolong EV"]);
 });
