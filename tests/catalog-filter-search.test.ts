@@ -24,10 +24,19 @@ test("all catalog filters use the projection when optional categorical shards ar
 
   try {
     const now = new Date().toISOString();
-    const image = { id: "filter-image", url: "/api/catalog/images/filter-image", objectKey: "catalog/images/korea/filter.jpg", width: 1_280, height: 960, size: 120_000, checksum: "filter", mimeType: "image/jpeg" };
+    const images = Array.from({ length: 5 }, (_, index) => ({
+      id: `filter-image-${index + 1}`,
+      url: `/api/catalog/images/filter-image-${index + 1}`,
+      objectKey: `catalog/images/korea/filter-${index + 1}.jpg`,
+      width: 1_280,
+      height: 960,
+      size: 120_000,
+      checksum: `filter-${index + 1}`,
+      mimeType: "image/jpeg",
+    }));
     await persistCatalogOffers([{
       id: "filter-target", sourceId: "filter-test", sourceOfferId: "FILTER", market: "korea", offerType: "fixed", status: "active",
-      make: "Hyundai", model: "Avante (CN7)", year: 2021, sourcePrice: 18_000_000, sourceCurrency: "KRW", priceMode: "fixed", images: [image],
+      make: "Hyundai", model: "Avante (CN7)", year: 2021, sourcePrice: 18_000_000, sourceCurrency: "KRW", priceMode: "fixed", images,
       totalRub: 2_021_912, mileageKm: 61_114, engineCc: 1_598, powerHp: 123, fuel: "petrol", transmission: "automatic", drive: "fwd", bodyType: "sedan",
       calculationStatus: "ready", calculationSnapshot: {
         customs: { status: "ready" },

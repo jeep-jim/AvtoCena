@@ -68,8 +68,8 @@ jobs:
         run: node --import tsx --test tests/vehicle-knowledge.test.ts
       - name: Live offer display enrichment tests
         run: node --import tsx --test tests/catalog-display-enrichment.test.ts tests/catalog-display-identity.test.ts
-      - name: AI product feed tests
-        run: node --import tsx --test tests/ai-product-feed.test.ts
+      - name: Current read-model and AI product feed tests
+        run: node --import tsx --test tests/offer-navigation-performance.test.ts tests/catalog-filter-search.test.ts tests/catalog-current-read-model-empty-market-policy.test.ts tests/ai-product-feed.test.ts
       - name: Drom generation and horsepower parser tests
         run: node --import tsx --test tests/drom-vehicle-knowledge.test.ts
       - name: Validate catalog automation scripts
