@@ -1,6 +1,23 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { PrestigeJapanExactSource, prestigeJapanImageProbeKind } from "../apps/web/lib/catalog/prestige-japan-exact-source";
+import { parsePrestigeJapanExactDetail, PrestigeJapanExactSource, prestigeJapanImageProbeKind } from "../apps/web/lib/catalog/prestige-japan-exact-source";
+
+function soldDetail(year: number) {
+  return `
+    <table>
+      <tr><td><strong>Year</strong></td><td>${year}</td></tr>
+      <tr><td><strong>Make</strong></td><td>HONDA</td></tr>
+      <tr><td><strong>Model</strong></td><td>FREED</td></tr>
+      <tr><td><strong>Final Price</strong></td><td>900,000 YEN</td></tr>
+      <tr><td><strong>Current Status</strong></td><td>Sold</td></tr>
+    </table>`;
+}
+
+test("Prestige rejects Japanese auction lots older than 2015 at parsing time", () => {
+  const url = "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=year-gate";
+  assert.equal(parsePrestigeJapanExactDetail(soldDetail(2014), url), null);
+  assert.equal(parsePrestigeJapanExactDetail(soldDetail(2015), url)?.year, 2015);
+});
 
 test("AJES GIF89a content is rejected as a source NO FOTO placeholder", () => {
   assert.equal(prestigeJapanImageProbeKind("image/gif", new Uint8Array([0x47,0x49,0x46,0x38,0x39,0x61])), "placeholder");

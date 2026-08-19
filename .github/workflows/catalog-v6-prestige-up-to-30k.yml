@@ -16,7 +16,9 @@ permissions:
 
 concurrency:
   group: catalog-v6-prestige-exact-sold-up-to-30k
-  cancel-in-progress: false
+  # A corrective push must stop an already-running collector before any stale
+  # (<2015) artifact can reach the publish job.
+  cancel-in-progress: true
 
 jobs:
   plan:

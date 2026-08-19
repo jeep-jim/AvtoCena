@@ -6,6 +6,7 @@ const LANDING = `${BASE}/auctions/`;
 const AJAX = `${BASE}/wp-admin/admin-ajax.php`;
 const DETAIL_RE = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=([A-Za-z0-9_-]+)$/;
 const EXACT_IMAGE_RE = /^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i;
+const JAPAN_MIN_MODEL_YEAR = 2015;
 const HEADERS = {
   accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
   "accept-language": "en-US,en;q=0.9",
@@ -211,7 +212,7 @@ export function parsePrestigeJapanExactDetail(markup: string, url: string): Pres
   const year = Number(rawFields.Year.match(/\b((?:19|20)\d{2})\b/)?.[1] || 0);
   const make = clean(rawFields.Make);
   const model = clean(rawFields.Model);
-  if (!year || !make || !model) return null;
+  if (year < JAPAN_MIN_MODEL_YEAR || !make || !model) return null;
   const images = exactImages(markup, url);
   const sourceTitle = plainVehicleTitle(markup, year) || `${year} ${make} ${model}`;
   return {
@@ -265,7 +266,7 @@ export class PrestigeJapanExactSource implements CatalogSourceAdapter {
   private async searchPage(make: MakeOption, model: ModelOption, offset: number) {
     const params = new URLSearchParams();
     params.set("action", "search_results_car_dev"); params.set("limit_start", String(offset)); params.set("auction-date", "Past");
-    params.set("year_from", "2011"); params.set("year_to", String(new Date().getUTCFullYear() + 1)); params.set("marka_id", make.value); params.set("model_id", model.extId);
+    params.set("year_from", String(JAPAN_MIN_MODEL_YEAR)); params.set("year_to", String(new Date().getUTCFullYear() + 1)); params.set("marka_id", make.value); params.set("model_id", model.extId);
     params.append("auction_name[]", "2");
     const { response, body } = await request(AJAX, { method: "POST", body: params.toString(), headers: { accept: "application/json,text/plain,*/*", "content-type": "application/x-www-form-urlencoded; charset=UTF-8", "x-requested-with": "XMLHttpRequest", origin: BASE, referer: LANDING } });
     let payload: any = null;
@@ -317,7 +318,7 @@ export class PrestigeJapanExactSource implements CatalogSourceAdapter {
 
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as PrestigeJapanExactRow;
-    if (!row?.carId || !row.sourceUrl || row.currentStatus !== "Sold" || !(row.finalPrice > 0) || !row.make || !row.model || !row.year) return null;
+    if (!row?.carId || !row.sourceUrl || row.currentStatus !== "Sold" || !(row.finalPrice > 0) || !row.make || !row.model || row.year < JAPAN_MIN_MODEL_YEAR) return null;
     const now = new Date().toISOString();
     return {
       id: stableOfferId(this.sourceId, row.carId), sourceId: this.sourceId, sourceOfferId: row.carId, market: "japan", offerType: "auction", status: "active",
