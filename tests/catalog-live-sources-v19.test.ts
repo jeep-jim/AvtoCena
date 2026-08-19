@@ -94,6 +94,26 @@ test("DubiCars ignores an implausible source horsepower typo instead of pricing 
   assert.equal(row.powerHp, undefined);
 });
 
+test("DubiCars price-on-request listing cannot borrow a recommendation price", () => {
+  const markup = `
+    <h1>Ford Everest Right Hand Drive</h1>
+    <section>Model year 2024 Kilometers 29,811 Km Engine capacity 3 L Horsepower 247 HP
+      Make Ford Model Everest Transmission Automatic Vehicle type Station Wagon Fuel Type Diesel</section>
+    <a href="https://api.whatsapp.com/send?text=Reference%3A+dc-989293%0AMake%3A+Ford%0AModel%3A+Everest%0APrice%3A+0%0AYear%3A+2024">WhatsApp</a>
+    <section>Similar cars Rolls Royce AED 2,680,000</section>
+    <img src="https://cdn.dubicars.com/images/abcdef/w_1200x800/vehicle/72345678-abcd-1234-abcd-123456789abc.jpg" />
+    <img src="https://cdn.dubicars.com/images/abcdef/w_1200x800/vehicle/82345678-abcd-1234-abcd-123456789abc.jpg" />
+  `;
+  const row = parseDubicarsCurrentListing(markup, "https://www.dubicars.com/2024-ford-everest-right-hand-drive-989293.html");
+  assert.ok(row);
+  assert.equal(row.price, undefined);
+  assert.equal(row.currency, undefined);
+  const offer = new DubicarsCurrentAdapter().normalizeOffer(row);
+  assert.ok(offer);
+  assert.equal(offer.sourcePrice, null);
+  assert.equal(offer.calculationStatus, "needs_data");
+});
+
 test("commercial vehicles are excluded from priority passenger-car sources", () => {
   assert.match(priority, /COMMERCIAL_RE/);
   assert.match(priority, /Hino\|Mitsubishi Fuso/);

@@ -112,7 +112,7 @@ export function PreliminaryPrice({
         {!panel ? <span aria-hidden="true" className={`${dense ? "text-[9px] sm:text-xs" : "text-xs md:text-sm"} invisible shrink-0 font-black leading-none`}>+0K</span> : null}
       </div>
       <div className={`${dense ? "mt-1 gap-1 sm:mt-1.5 sm:gap-3" : "mt-1.5 gap-3"} flex min-w-0 items-end justify-between`}>
-        <div className={`ac-price ac-price--preliminary min-w-0 whitespace-nowrap font-black leading-none tracking-[-0.05em] ${priceClassName}`} style={{ color: priceColor }}>
+        <div className={`ac-price ac-price--preliminary ${highlightElectrified ? "ac-price--electrified" : ""} min-w-0 whitespace-nowrap font-black leading-none tracking-[-0.05em] ${priceClassName}`} style={{ color: priceColor }}>
           {totalRub > 0 ? <><span>{money(totalRub)}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}
         </div>
         {!panel ? <span aria-hidden="true" className="invisible relative flex shrink-0 items-center rounded-lg pb-0.5"><svg className={dense ? "h-5 w-7 sm:h-6 sm:w-8" : "h-6 w-8 md:h-7 md:w-10"} viewBox="0 0 38 29" /></span> : null}

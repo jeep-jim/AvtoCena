@@ -117,6 +117,13 @@ function price(plain: string) {
   return { price: undefined, currency: undefined };
 }
 
+function listingExplicitlyHasNoPrice(markup: string) {
+  const inquiryPrice = markup.match(/Price%3A(?:\+|%20)*([0-9][0-9%2C,.+]*)%0A/i)?.[1];
+  if (!inquiryPrice) return false;
+  const decoded = decodeURIComponent(inquiryPrice.replace(/\+/g, " "));
+  return Number(decoded.replace(/[^0-9]/g, "")) === 0;
+}
+
 function labelValue(plain: string, labels: string[], stops: string[]) {
   const labelPattern = labels.map((item) => item.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
   const stopPattern = stops.map((item) => item.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
@@ -213,7 +220,12 @@ export function parseDubicarsCurrentListing(markup: string, url: string): Row | 
   const model = exactIdentity.model || clean(exactModelRaw) || parsedName.model;
   if (!make || !model) return null;
 
-  const parsedPrice = price(fullPlain);
+  // DubiCars detail pages contain prices from recommendation cards after the
+  // primary listing. The listing-specific enquiry link carries Price: 0 when
+  // the seller selected "Price on request"; never borrow a neighbour's price.
+  const parsedPrice = listingExplicitlyHasNoPrice(markup)
+    ? { price: undefined, currency: undefined }
+    : price(fullPlain);
   const mileageKm = integer(
     fullPlain.match(/(?:Kilometers?|Mileage)\s*[:：]?\s*([0-9][0-9, ]+)\s*Km\b/i)?.[1]
     || fullPlain.match(/([0-9][0-9, ]+)\s*Km\b/i)?.[1],

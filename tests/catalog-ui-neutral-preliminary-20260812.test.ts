@@ -9,6 +9,7 @@ const carsLoading = fs.readFileSync(new URL("../apps/web/app/(public)/cars/loadi
 const carsLayout = fs.readFileSync(new URL("../apps/web/app/(public)/cars/layout.tsx", import.meta.url), "utf8");
 const catalogFilters = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogFilters.tsx", import.meta.url), "utf8");
 const offerPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");
+const priceSheetCss = fs.readFileSync(new URL("../apps/web/app/public-price-sheet-fix.css", import.meta.url), "utf8");
 
 test("catalog price colors distinguish electrified, preliminary and regular calculations", () => {
   assert.match(catalogPrice, /highlightElectrified/);
@@ -19,6 +20,10 @@ test("catalog price colors distinguish electrified, preliminary and regular calc
   assert.match(preliminaryPrice, /highlightElectrified \? \(lightTheme \? "#c58a00" : "#ffd21f"\) : "var\(--ac-text\)"/);
   assert.match(priceTrend, /highlightElectrified \? \(lightTheme \? "#c58a00" : "#ffd21f"\) : undefined/);
   assert.match(priceTrend, /style=\{priceColor \? \{ color: priceColor \} : undefined\}/);
+  assert.match(priceTrend, /ac-price--electrified/);
+  assert.match(preliminaryPrice, /ac-price--electrified/);
+  assert.match(priceSheetCss, /\.ac-price\.ac-price--electrified[^}]+#ffd21f !important/s);
+  assert.match(priceSheetCss, /html\[data-theme="light"\][^}]+\.ac-price\.ac-price--electrified[^}]+#c58a00 !important/s);
   assert.match(preliminaryPrice, /Почему цена предварительная/);
   assert.match(offerPage, /PreliminaryPrice[^;]+highlightElectrified=\{electrified\}/s);
   assert.match(offerPage, /PriceTrend[^;]+highlightElectrified=\{electrified\}/s);
@@ -32,6 +37,13 @@ test("catalog price colors distinguish electrified, preliminary and regular calc
   assert.match(preliminaryPrice, /setProperty\("background", electrifiedPanelBackground, "important"\)/);
   assert.match(preliminaryPrice, /setProperty\("background-color", electrifiedPanelBackground, "important"\)/);
   assert.match(offerPage, /height:auto!important;aspect-ratio:4\/3!important/);
+});
+
+test("saved total changes are not mislabeled as currency impact", () => {
+  assert.match(priceTrend, /trendUsesCurrency/);
+  assert.match(priceTrend, /sheetRate && trend && trendUsesCurrency/);
+  assert.match(priceTrend, /trendUsesCurrency \? "Показать влияние курса валюты" : "Изменение полного расчёта"/);
+  assert.match(priceTrend, /trendUsesCurrency && desktopHover && popoverOpen/);
 });
 
 test("catalog route loader follows active light or dark theme variables", () => {
