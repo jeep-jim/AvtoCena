@@ -87,8 +87,20 @@ jobs:
           CURL=(curl --retry 5 --retry-delay 5 --retry-all-errors --max-time 30 -fsS)
 
           echo '1/9 health + exact release'
-          health_json="$("${CURL[@]}" 'https://avtocena.com/api/health')"
-          jq -e --arg sha '${{ github.sha }}' '.ok == true and .service == "avtocena-web" and .releaseSha == $sha' <<<"$health_json" >/dev/null
+          expected_sha='${{ github.sha }}'
+          release_ready=0
+          for attempt in $(seq 1 18); do
+            health_json="$("${CURL[@]}" 'https://avtocena.com/api/health' || true)"
+            live_sha="$(jq -r '.releaseSha // empty' <<<"$health_json" 2>/dev/null || true)"
+            if jq -e --arg sha "$expected_sha" '.ok == true and .service == "avtocena-web" and .releaseSha == $sha' <<<"$health_json" >/dev/null 2>&1; then
+              echo "release ready on attempt $attempt: $live_sha"
+              release_ready=1
+              break
+            fi
+            echo "waiting for Yandex revision $expected_sha; live=${live_sha:-unknown}; attempt=$attempt/18"
+            sleep 5
+          done
+          test "$release_ready" -eq 1
 
           echo '2/9 public catalog'
           catalog_json="$("${CURL[@]}" 'https://avtocena.com/api/catalog/search?market=korea&pageSize=1')"
@@ -101,6 +113,8 @@ jobs:
           "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/encyclopedia'
           "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/brand/toyota'
           "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/brand/toyota/model/land-cruiser-250'
+          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/brand/bentley'
+          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/brand/bentley/model/continental-gt'
 
           echo '3/9 OpenAI crawler rules'
           robots="$("${CURL[@]}" 'https://avtocena.com/robots.txt')"

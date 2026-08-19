@@ -19,6 +19,7 @@ export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
 const MARKET_ORDER: CatalogMarket[] = ["japan", "china", "korea", "uae", "europe", "georgia", "kyrgyzstan"];
+const OBSERVATION_PREVIEW_LIMIT = 24;
 type PageProps = { params: Promise<{ slug: string; model: string }> };
 
 type PublicKnowledgeRow = {
@@ -43,13 +44,15 @@ type PublicKnowledgeRow = {
   systemPowerKw?: number;
   power30MinKw?: number;
   utilizationPowerKw?: number;
+  encyclopediaStatus?: string;
+  evidenceOfficial?: boolean;
 };
 
 function yearRange(from?: number, to?: number) {
   if (from && to) return `${from}–${to}`;
   if (from) return `с ${from}`;
   if (to) return `до ${to}`;
-  return "поколения уточняются";
+  return "период уточняется";
 }
 
 function compactNumber(value: number) {
@@ -75,17 +78,59 @@ function totalThirtyMinute(row: { power30MinKw?: number; power30MinKwByMotor?: n
 }
 
 function knowledgeSignature(row: PublicKnowledgeRow) {
-  return [row.yearFrom || 0, row.yearTo || 0, row.engineCc || 0, vehicleKnowledgeCompact(row.fuel), vehicleKnowledgeCompact(row.generation), Math.round(Number(row.powerHp || 0) * 10) / 10, Math.round(Number(row.power30MinKw || 0) * 100) / 100].join("|");
+  return [
+    vehicleKnowledgeCompact(row.variantName), row.yearFrom || 0, row.yearTo || 0, row.engineCc || 0,
+    vehicleKnowledgeCompact(row.fuel), vehicleKnowledgeCompact(row.generation), row.encyclopediaStatus || "",
+    Math.round(Number(row.powerHp || 0) * 10) / 10, Math.round(Number(row.power30MinKw || 0) * 100) / 100,
+  ].join("|");
 }
 
-function sourceLabel(source: string) {
-  if (source.includes("manufacturer")) return "Производитель";
-  if (source.includes("official_registry") || source === "power_registry") return "Официальный реестр";
-  if (source.includes("drom")) return "Каталог модификаций";
-  if (source.includes("consensus")) return "Подтверждено источниками";
-  if (source.includes("manual")) return "Проверено АвтоЦена";
-  if (source.includes("encyclopedia_v2")) return "Энциклопедия V2 · verified";
+function trustedKnowledgeRow(row: PublicKnowledgeRow) {
+  if (row.source !== "encyclopedia_v2") return true;
+  if (row.encyclopediaStatus === "verified") return true;
+  return row.encyclopediaStatus === "seed" && row.evidenceOfficial === true;
+}
+
+function sourceLabel(row: PublicKnowledgeRow) {
+  if (row.source.includes("manufacturer")) return "Производитель";
+  if (row.source.includes("official_registry") || row.source === "power_registry") return "Официальный реестр";
+  if (row.source.includes("drom")) return "Каталог модификаций";
+  if (row.source.includes("consensus")) return "Подтверждено источниками";
+  if (row.source.includes("manual")) return "Проверено АвтоЦена";
+  if (row.source.includes("encyclopedia_v2")) {
+    if (row.encyclopediaStatus === "verified") return "V2 · verified";
+    if (row.encyclopediaStatus === "seed" && row.evidenceOfficial) return "Официальный источник";
+    return "Наблюдение источника";
+  }
   return "База АвтоЦена";
+}
+
+function TrustedSpecCard({ row, brand, model }: { row: PublicKnowledgeRow; brand: string; model: string }) {
+  return <article className="rounded-2xl bg-[var(--ac-surface-2)] p-4">
+    <div className="flex items-start justify-between gap-3"><div className="font-black">{row.variantName || row.generation || `${brand} ${model}`}</div><span className="text-[10px] font-black text-emerald-500">{sourceLabel(row)}</span></div>
+    {row.generation ? <div className="mt-1 text-[11px] font-bold text-[var(--ac-muted)]">{row.generationStatus === "verified" ? "Поколение" : "Серия / период"}: {row.generation}</div> : null}
+    {row.facelift ? <div className="mt-1 text-[11px] font-bold text-[var(--ac-muted)]">{row.faceliftStatus === "verified" ? "Обновление" : "Срез / период"}: {row.facelift}</div> : null}
+    <div className="mt-2 text-xs font-bold text-[var(--ac-muted)]">{yearRange(row.yearFrom, row.yearTo)}{row.engineCc ? ` · ${compactNumber(row.engineCc)} см³` : ""}{row.fuel ? ` · ${row.fuel}` : ""}</div>
+    {(row.powerHp || row.powerKw || row.icePowerKw || row.motorPeakKw || row.systemPowerKw || row.power30MinKw || row.utilizationPowerKw) ? <div className="mt-3 flex flex-wrap gap-2 text-xs font-black">
+      {row.powerHp ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">{compactNumber(row.powerHp)} л.с.</span> : null}
+      {row.powerKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">{compactNumber(row.powerKw)} кВт</span> : null}
+      {row.icePowerKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">ДВС: {compactNumber(row.icePowerKw)} кВт</span> : null}
+      {row.motorPeakKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">эл.мотор peak: {compactNumber(row.motorPeakKw)} кВт</span> : null}
+      {row.systemPowerKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">система max: {compactNumber(row.systemPowerKw)} кВт</span> : null}
+      {row.power30MinKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">30 мин: {compactNumber(row.power30MinKw)} кВт</span> : null}
+      {row.utilizationPowerKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">утиль: {compactNumber(row.utilizationPowerKw)} кВт</span> : null}
+    </div> : null}
+    {(row.transmission || row.drive || row.powertrainKind) ? <div className="mt-3 text-[11px] font-bold text-[var(--ac-muted)]">{[row.powertrainKind, row.transmission, row.drive].filter(Boolean).join(" · ")}</div> : null}
+  </article>;
+}
+
+function ObservationCard({ row }: { row: PublicKnowledgeRow }) {
+  return <article className="rounded-2xl border border-dashed border-white/10 bg-[var(--ac-surface-2)] p-4">
+    <div className="flex items-start justify-between gap-3"><div className="font-black">{row.generation || "Source-backed observation"}</div><span className="text-[10px] font-black text-amber-500">не для расчёта</span></div>
+    <div className="mt-2 text-xs font-bold text-[var(--ac-muted)]">{yearRange(row.yearFrom, row.yearTo)}{row.engineCc ? ` · ${compactNumber(row.engineCc)} см³` : ""}{row.fuel ? ` · ${row.fuel}` : ""}</div>
+    {row.variantName ? <div className="mt-2 text-[11px] font-bold leading-5 text-[var(--ac-muted)]">Источник: {row.variantName}</div> : null}
+    {(row.transmission || row.drive || row.powertrainKind) ? <div className="mt-2 text-[11px] font-bold text-[var(--ac-muted)]">{[row.powertrainKind, row.transmission, row.drive].filter(Boolean).join(" · ")}</div> : null}
+  </article>;
 }
 
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
@@ -94,8 +139,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   if (!brand) return {};
   const model = await findBrandModelBySlug(brand.name, modelSlug);
   if (!model) return {};
-  const title = `${brand.name} ${model.model} под заказ — цена с таможней и доставкой`;
-  const description = `Рассчитать ${brand.name} ${model.model} под ключ из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана. Объявления, мощность, таможня, утильсбор и доставка в Россию.`;
+  const title = `${brand.name} ${model.model} — характеристики и расчёт`;
+  const description = `Энциклопедия ${brand.name} ${model.model}: поколения, модификации, source-backed данные, мощность и расчёт стоимости с таможней и утилизационным сбором.`;
   return {
     title,
     description,
@@ -145,6 +190,8 @@ export default async function ModelLandingPage({ params }: PageProps) {
       systemPowerKw: positive((variant as any).systemPowerKw, 4_000),
       power30MinKw: totalThirtyMinute(variant),
       utilizationPowerKw: positive(variant.utilizationPowerKw, 4_000),
+      encyclopediaStatus: (variant as any).encyclopediaStatus,
+      evidenceOfficial: (variant as any).encyclopediaEvidenceOfficial === true,
     };
     rows.set(knowledgeSignature(row), row);
   }
@@ -168,6 +215,8 @@ export default async function ModelLandingPage({ params }: PageProps) {
     if (!rows.has(knowledgeSignature(row))) rows.set(knowledgeSignature(row), row);
   }
   const knowledgeRows = [...rows.values()].sort((left, right) => Number(right.yearTo || right.yearFrom || 0) - Number(left.yearTo || left.yearFrom || 0) || Number(left.powerHp || 0) - Number(right.powerHp || 0));
+  const trustedRows = knowledgeRows.filter(trustedKnowledgeRow);
+  const observationRows = knowledgeRows.filter((row) => !trustedKnowledgeRow(row));
 
   const result = await searchOffers({ make: brand.name, model: model.model, pageSize: 48, sort: "updatedAt" });
   const offers = (result.items || []).filter((offer: any) => isCrediblePublicOffer(offer));
@@ -195,7 +244,9 @@ export default async function ModelLandingPage({ params }: PageProps) {
     model.knowledge.power30MinKw ? ["30-минутная", rangeText(model.knowledge.power30MinKw, "кВт")] : null,
     model.knowledge.utilizationPowerKw ? ["Для утильсбора", rangeText(model.knowledge.utilizationPowerKw, "кВт")] : null,
     model.knowledge.engineCc ? ["Объём двигателя", rangeText(model.knowledge.engineCc, "см³")] : null,
-    ["Записей в базе", String(model.knowledge.records || (model.representativePowerHp ? 1 : 0))],
+    ["Проверенных", String(model.knowledge.trustedVariants || model.knowledge.references || 0)],
+    ["Наблюдений", String(model.knowledge.observations || 0)],
+    ["Всего записей", String(model.knowledge.records || (model.representativePowerHp ? 1 : 0))],
   ].filter((item): item is string[] => Boolean(item));
 
   return <main className="ac-model-catalog-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
@@ -209,12 +260,13 @@ export default async function ModelLandingPage({ params }: PageProps) {
       <header className="mt-5 grid gap-6 rounded-[2rem] bg-[var(--ac-surface)] p-5 md:grid-cols-[170px_minmax(0,1fr)] md:items-center md:p-8">
         <div className="flex h-32 items-center justify-center rounded-[1.5rem] bg-[var(--ac-surface-2)] md:h-40"><BrandLogoVisual brand={brand.name} className="!h-20 !w-32 md:!h-24 md:!w-36" /></div>
         <div className="min-w-0">
-          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Энциклопедия АвтоЦена · проверенные характеристики</div>
+          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Энциклопедия АвтоЦена · V2</div>
           <h1 className="mt-2 break-words text-4xl font-black leading-[.98] tracking-[-0.045em] md:text-6xl">{brand.name} {model.model}</h1>
-          <p className="mt-4 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">Поколения, модификации и подтверждённые характеристики {brand.name} {model.model}. Данные энциклопедии связаны с актуальными объявлениями АвтоЦены и помогают точнее рассчитывать мощность, таможню и утилизационный сбор.</p>
+          <p className="mt-4 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">Проверенные характеристики и собранные source-backed наблюдения {brand.name} {model.model}. Неподтверждённые наблюдения видны для прозрачности, но не используются в расчёте.</p>
           <div className="mt-4 flex flex-wrap gap-2 text-xs font-black">
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{model.count ? `${model.count} предложений` : "Под заказ"}</span>
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">Выпуск: {yearRange(model.yearFrom, model.yearTo)}</span>
+            <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{model.knowledge.records} записей в базе</span>
             {model.knowledge.powerHp ? <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{rangeText(model.knowledge.powerHp, "л.с.")}</span> : null}
             {model.knowledge.power30MinKw ? <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">30 мин: {rangeText(model.knowledge.power30MinKw, "кВт")}</span> : null}
           </div>
@@ -225,34 +277,34 @@ export default async function ModelLandingPage({ params }: PageProps) {
       <section className="mt-7 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-7">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <div>
-            <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">Энциклопедия · источники и модификации</div>
+            <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">Энциклопедия · проверенные спецификации</div>
             <h2 className="mt-1 text-2xl font-black md:text-4xl">Характеристики {brand.name} {model.model}</h2>
           </div>
-          <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-xs font-black">Автосопоставление включено</span>
+          <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-xs font-black">В расчёт — только exact</span>
         </div>
-        <p className="mt-3 max-w-5xl text-sm font-medium leading-6 text-[var(--ac-muted)]">Здесь отображается всё, что уже известно системе по модели и её модификациям. Когда площадка не передаёт лошадиные силы, кВт или 30-минутную мощность, расчётный движок ищет точное совпадение в этой базе по модели, году, двигателю, топливу и поколению.</p>
-        <div className="mt-5 grid grid-cols-2 gap-2 md:grid-cols-3 xl:grid-cols-6">
+        <p className="mt-3 max-w-5xl text-sm font-medium leading-6 text-[var(--ac-muted)]">Верхний блок использует только подтверждённые V2/production записи. Peak-мощность не заменяет 30-минутную, а review-наблюдения ниже не участвуют в расчёте таможни и утильсбора.</p>
+        <div className="mt-5 grid grid-cols-2 gap-2 md:grid-cols-4 xl:grid-cols-8">
           {summaryCards.map(([label, value]) => <div key={`${label}-${value}`} className="rounded-2xl bg-[var(--ac-surface-2)] p-3"><div className="text-[10px] font-black uppercase tracking-wide text-[var(--ac-muted)]">{label}</div><div className="mt-1 text-lg font-black">{value}</div></div>)}
         </div>
-        {knowledgeRows.length ? <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
-          {knowledgeRows.map((row) => <article key={row.id} className="rounded-2xl bg-[var(--ac-surface-2)] p-4">
-            <div className="flex items-start justify-between gap-3"><div className="font-black">{row.variantName || row.generation || `${brand.name} ${model.model}`}</div><span className="text-[10px] font-black text-[var(--ac-muted)]">{sourceLabel(row.source)}</span></div>
-            {row.generation ? <div className="mt-1 text-[11px] font-bold text-[var(--ac-muted)]">{row.generationStatus === "verified" ? "Поколение" : "Серия / период"}: {row.generation}</div> : null}
-            {row.facelift ? <div className="mt-1 text-[11px] font-bold text-[var(--ac-muted)]">{row.faceliftStatus === "verified" ? "Обновление" : "Срез / период"}: {row.facelift}</div> : null}
-            <div className="mt-2 text-xs font-bold text-[var(--ac-muted)]">{yearRange(row.yearFrom, row.yearTo)}{row.engineCc ? ` · ${compactNumber(row.engineCc)} см³` : ""}{row.fuel ? ` · ${row.fuel}` : ""}</div>
-            {(row.powerHp || row.powerKw || row.icePowerKw || row.motorPeakKw || row.systemPowerKw || row.power30MinKw || row.utilizationPowerKw) ? <div className="mt-3 flex flex-wrap gap-2 text-xs font-black">
-              {row.powerHp ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">{compactNumber(row.powerHp)} л.с.</span> : null}
-              {row.powerKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">{compactNumber(row.powerKw)} кВт</span> : null}
-              {row.icePowerKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">ДВС: {compactNumber(row.icePowerKw)} кВт</span> : null}
-              {row.motorPeakKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">эл.мотор peak: {compactNumber(row.motorPeakKw)} кВт</span> : null}
-              {row.systemPowerKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">система max: {compactNumber(row.systemPowerKw)} кВт</span> : null}
-              {row.power30MinKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">30 мин: {compactNumber(row.power30MinKw)} кВт</span> : null}
-              {row.utilizationPowerKw ? <span className="rounded-full bg-[var(--ac-surface-3)] px-2.5 py-1.5">утиль: {compactNumber(row.utilizationPowerKw)} кВт</span> : null}
-            </div> : null}
-            {(row.transmission || row.drive || row.powertrainKind) ? <div className="mt-3 text-[11px] font-bold text-[var(--ac-muted)]">{[row.powertrainKind, row.transmission, row.drive].filter(Boolean).join(" · ")}</div> : null}
-          </article>)}
-        </div> : <p className="mt-5 rounded-2xl bg-[var(--ac-surface-2)] p-4 text-sm font-bold text-[var(--ac-muted)]">Для этой модели пока сохранён только базовый каталог модели. Точная мощность появится автоматически после подтверждения модификации из объявления или официального источника.</p>}
+        {trustedRows.length ? <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {trustedRows.map((row) => <TrustedSpecCard key={row.id} row={row} brand={brand.name} model={model.model} />)}
+        </div> : <p className="mt-5 rounded-2xl bg-[var(--ac-surface-2)] p-4 text-sm font-bold text-[var(--ac-muted)]">Для этой модели пока нет конфигурации, которую можно безопасно использовать как подтверждённую спецификацию. Собранные наблюдения, если они есть, показаны ниже.</p>}
       </section>
+
+      {observationRows.length ? <section className="mt-7 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-7">
+        <div className="flex flex-wrap items-end justify-between gap-3">
+          <div>
+            <div className="text-xs font-black uppercase tracking-[0.16em] text-amber-500">V2 · source-backed staging</div>
+            <h2 className="mt-1 text-2xl font-black md:text-3xl">Собранные наблюдения источников · {observationRows.length}</h2>
+          </div>
+          <span className="rounded-full bg-amber-500/10 px-3 py-2 text-xs font-black text-amber-500">не используются в расчёте</span>
+        </div>
+        <p className="mt-3 max-w-5xl text-sm font-medium leading-6 text-[var(--ac-muted)]">Это уже собранные записи из официальных реестров, регистрационных наборов и других source-backed источников. Они помогают подтвердить поколения и модификации, но остаются read-only до отдельной проверки заводской спецификации.</p>
+        <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+          {observationRows.slice(0, OBSERVATION_PREVIEW_LIMIT).map((row) => <ObservationCard key={row.id} row={row} />)}
+        </div>
+        {observationRows.length > OBSERVATION_PREVIEW_LIMIT ? <p className="mt-4 text-xs font-bold text-[var(--ac-muted)]">Показаны первые {OBSERVATION_PREVIEW_LIMIT} записи из {observationRows.length}. Полный набор сохранён в V2 и используется очередью верификации.</p> : null}
+      </section> : null}
 
       {grouped.length ? <div className="mt-10 space-y-12">
         {grouped.map((group) => <section key={group.market}>
@@ -275,7 +327,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
 
       {otherModels.length ? <section className="mt-12 rounded-[1.8rem] bg-[var(--ac-surface)] p-5 md:p-7">
         <h2 className="text-2xl font-black md:text-3xl">Другие модели {brand.name}</h2>
-        <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">{otherModels.map((item) => <Link key={item.id} href={`/cars/brand/${brand.slug}/model/${item.slug}`} className="flex items-center justify-between gap-2 rounded-2xl bg-[var(--ac-surface-2)] px-3 py-3 text-sm font-black hover:text-red-500"><span className="truncate">{item.model}</span><span className="shrink-0 text-[10px] text-[var(--ac-muted)]">{item.count || "—"}</span></Link>)}</div>
+        <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">{otherModels.map((item) => <Link key={item.id} href={`/cars/brand/${brand.slug}/model/${item.slug}`} className="flex items-center justify-between gap-2 rounded-2xl bg-[var(--ac-surface-2)] px-3 py-3 text-sm font-black hover:text-red-500"><span className="truncate">{item.model}</span><span className="shrink-0 text-[10px] text-[var(--ac-muted)]">{item.knowledge.records || item.count || "—"}</span></Link>)}</div>
       </section> : null}
     </section>
   </main>;
