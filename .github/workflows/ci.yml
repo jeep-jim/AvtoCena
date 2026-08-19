@@ -67,7 +67,7 @@ jobs:
       - name: Vehicle knowledge and model search tests
         run: node --import tsx --test tests/vehicle-knowledge.test.ts
       - name: Live offer display enrichment tests
-        run: node --import tsx --test tests/catalog-display-enrichment.test.ts
+        run: node --import tsx --test tests/catalog-display-enrichment.test.ts tests/catalog-display-identity.test.ts
       - name: Drom generation and horsepower parser tests
         run: node --import tsx --test tests/drom-vehicle-knowledge.test.ts
       - name: Validate catalog automation scripts
