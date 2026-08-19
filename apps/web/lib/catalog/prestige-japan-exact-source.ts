@@ -174,6 +174,17 @@ function trimFromTitle(title: string, year: number, make: string, model: string)
   return trim && trim.toUpperCase() !== model.toUpperCase() ? trim : undefined;
 }
 function image(url: string): CatalogImage { return { id: "", url, objectKey: "", checksum: "", size: 0, mimeType: "image/jpeg" }; }
+export function canonicalPrestigeJapanIdentity(makeValue: unknown, modelValue: unknown) {
+  const make = clean(makeValue);
+  const model = clean(modelValue);
+  const miniModel = model.match(/^MINI(?:\s+(.+))?$/i);
+  if (make.toUpperCase() !== "BMW" || !miniModel) return { make, model };
+
+  // Prestige groups MINI underneath its parent company BMW. Public catalog
+  // identity follows the vehicle marque instead: MINI is a separate brand.
+  // Keep an exact bare MINI model instead of guessing Cooper from the photo.
+  return { make: "MINI", model: clean(miniModel[1]) || "MINI" };
+}
 function parseCursor(cursor?: string | null) {
   const value = String(cursor || "0:0:0");
   const full = value.match(/^(\d+):(\d+):(\d+)$/);
@@ -210,13 +221,16 @@ export function parsePrestigeJapanExactDetail(markup: string, url: string): Pres
   const finalPrice = yen(rawFields["Final Price"]);
   if (rawFields["Current Status"] !== "Sold" || !(finalPrice > 0)) return null;
   const year = Number(rawFields.Year.match(/\b((?:19|20)\d{2})\b/)?.[1] || 0);
-  const make = clean(rawFields.Make);
-  const model = clean(rawFields.Model);
+  const sourceMake = clean(rawFields.Make);
+  const sourceModel = clean(rawFields.Model);
+  const canonicalIdentity = canonicalPrestigeJapanIdentity(sourceMake, sourceModel);
+  const make = canonicalIdentity.make;
+  const model = canonicalIdentity.model;
   if (year < JAPAN_MIN_MODEL_YEAR || !make || !model) return null;
   const images = exactImages(markup, url);
-  const sourceTitle = plainVehicleTitle(markup, year) || `${year} ${make} ${model}`;
+  const sourceTitle = plainVehicleTitle(markup, year) || `${year} ${sourceMake} ${sourceModel}`;
   return {
-    carId: identity, sourceUrl: url, sourceTitle, make, model, trim: trimFromTitle(sourceTitle, year, make, model), year,
+    carId: identity, sourceUrl: url, sourceTitle, make, model, trim: trimFromTitle(sourceTitle, year, sourceMake, sourceModel), year,
     mileageKm: positiveInteger(rawFields.Kms), engineCc: positiveInteger(rawFields.Capacity), transmission: rawFields.Trans || undefined,
     color: rawFields.Colour || undefined, frameNumber: rawFields.Chassis || undefined, auctionDate: isoDate(rawFields["Auction Date"]),
     lotNumber: rawFields.Number || undefined, auctionName: rawFields.Location || undefined, auctionGrade: exactAuctionGrade(rawFields.Grade),

@@ -10,6 +10,7 @@ const { calculateOfferWithPreliminaryPowerPricing, calculateOfferWithRussiaCusto
 const { refreshLiveExchangeRates } = await import("../apps/web/lib/catalog/live-rates.ts");
 const { resetCatalogRateCache } = await import("../apps/web/lib/catalog/rates.ts");
 const { PUBLIC_CATALOG_MARKETS, CATALOG_RETENTION_MS, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
+const { canonicalPrestigeJapanIdentity } = await import("../apps/web/lib/catalog/prestige-japan-exact-source.ts");
 
 const market = String(process.env.RECOVERY_PUBLISH_MARKET || "").trim();
 const input = String(process.env.RECOVERY_PUBLISH_INPUT || `catalog-rebuild-${market}.json`).trim();
@@ -178,8 +179,12 @@ function normalizeVisible(raw) {
   const op = raw?.operational || {};
   const sourceRaw = op?.raw || {};
   const exactPhoto = sourceRaw.recoveryExactPhotoIdentity === true;
+  const identity = raw?.sourceId === "prestige_japan_auctions_open"
+    ? canonicalPrestigeJapanIdentity(raw?.make, raw?.model)
+    : { make: raw?.make, model: raw?.model };
   return normalizeVehicleOfferSpecs({
     ...raw,
+    ...identity,
     status: "active",
     images: credibleCatalogImages(raw?.images || []).slice(0, 30),
     operational: {

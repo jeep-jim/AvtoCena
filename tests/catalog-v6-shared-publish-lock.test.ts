@@ -19,6 +19,8 @@ test("V6 production publish waits on the shared catalog writer and audits all se
   assert.match(workflow, /CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "2592000000"/);
   assert.match(workflow, /CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"/);
+  assert.match(workflow, /Verify the six untouched markets before replacing Japan[\s\S]*"japan":0/);
+  assert.match(workflow, /Verify the published generation and every market year gate[\s\S]*"japan":2200/);
 });
 
 test("Prestige scheduled collection tolerates isolated shard transport failures without weakening row quality", () => {

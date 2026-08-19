@@ -331,6 +331,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
       html[data-theme="light"] .ac-offer-page .ac-offer-breakdown,
       html[data-theme="light"] .ac-offer-page .ac-offer-status,
       html[data-theme="light"] .ac-offer-page .ac-offer-form{background:#f8f9fb!important;border:1px solid rgba(30,36,48,.10)!important;box-shadow:0 14px 34px rgba(38,43,57,.10)!important}
+      html[data-theme="light"] .ac-offer-page .ac-offer-price-panel{background:#fff!important;background-color:#fff!important;border:1px solid rgba(30,36,48,.10)!important;box-shadow:0 14px 34px rgba(38,43,57,.12)!important}
       html[data-theme="light"] .ac-offer-page .ac-offer-form .soft-input{background:#e3e7ed!important;border:1px solid #c7ced9!important;color:#171b24!important;box-shadow:none!important}
       html[data-theme="light"] .ac-offer-page .ac-offer-form .soft-input::placeholder{color:#737d8e!important;opacity:1!important}
       html[data-theme="light"] .ac-offer-page .ac-preliminary-notice{background:#fff2cc!important;border-color:#e9c56b!important;color:#704500!important;box-shadow:0 8px 24px rgba(111,75,0,.08)!important}

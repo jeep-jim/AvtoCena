@@ -170,10 +170,14 @@ jobs:
         with:
           name: prestige-japan-exact-sold-up-to-30000
           path: prestige-live-input
-      - name: Verify all seven markets before the single catalog write
+      - name: Verify the six untouched markets before replacing Japan
         env:
           CATALOG_AUDIT_OUTPUT: catalog-japan-scale-preflight-audit.json
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":2200,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
+          # Japan is the repair target. Requiring its desired post-publish floor
+          # here deadlocks a recovery whenever the current public count is below
+          # that floor. The unchanged six markets stay gated here; Japan keeps
+          # the same 2,200-card floor in the post-persist audit below.
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":0,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Enrich exact sold lots with documented chassis power when available
         shell: bash
