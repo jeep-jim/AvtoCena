@@ -28,6 +28,7 @@ export interface JsonStorage {
   binaryExists?(relativePath: string): Promise<boolean>;
   deleteBinary?(relativePath: string): Promise<void>;
   listObjects?(prefix: string): Promise<StorageObject[]>;
+  listBucketObjects?(prefix?: string): Promise<StorageObject[]>;
   deleteObjects?(relativePaths: string[]): Promise<number>;
   deletePrefix?(prefix: string): Promise<number>;
 }
@@ -67,6 +68,7 @@ export class LocalJsonStorage implements JsonStorage {
   async deleteBinary(relativePath: string) { await fs.promises.rm(localPath(relativePath), { force: true }); }
   async exists(relativePath: string) { try { await fs.promises.access(localPath(relativePath)); return true; } catch { return false; } }
   async listObjects(prefix: string) { const requested = String(prefix || "").trim(); const normalized = requested ? normalizeStorageKey(requested) : ""; const root = normalized ? localPath(normalized) : path.resolve(getDataRoot()); const dataRoot = path.resolve(getDataRoot()); const files = await walkLocalFiles(root); return Promise.all(files.map(async (file) => { const stat = await fs.promises.stat(file); return { key: path.relative(dataRoot, file).replace(/\\/g, "/"), lastModified: stat.mtime.toISOString(), size: stat.size }; })); }
+  async listBucketObjects(prefix = "") { return this.listObjects(prefix); }
   async deleteObjects(relativePaths: string[]) { const keys = [...new Set(relativePaths.map(normalizeStorageKey))]; await Promise.all(keys.map((key) => fs.promises.rm(localPath(key), { force: true }))); return keys.length; }
   async deletePrefix(prefix: string) { const objects = await this.listObjects(prefix); await Promise.all(objects.map((object) => fs.promises.rm(localPath(object.key), { force: true }))); return objects.length; }
 }
@@ -177,10 +179,8 @@ export class ObjectJsonStorage implements JsonStorage {
   async binaryExists(relativePath: string) { return this.head(relativePath); }
   async deleteBinary(relativePath: string) { await this.request("DELETE", relativePath); }
   async exists(relativePath: string) { return this.head(relativePath); }
-  async listObjects(prefix: string) {
+  private async listRawObjects(normalizedPrefix: string, stripConfiguredPrefix: boolean) {
     const cfg = objectConfig();
-    const requested = String(prefix || "").trim();
-    const normalizedPrefix = [cfg.prefix, requested ? normalizeStorageKey(requested) : ""].filter(Boolean).join("/");
     const objects: StorageObject[] = [];
     let continuationToken = "";
     do {
@@ -192,7 +192,7 @@ export class ObjectJsonStorage implements JsonStorage {
       for (const block of xml.match(/<Contents>[\s\S]*?<\/Contents>/g) || []) {
         const rawKey = block.match(/<Key>([\s\S]*?)<\/Key>/)?.[1] || "";
         const key = decodeXml(rawKey);
-        const relative = cfg.prefix && key.startsWith(`${cfg.prefix}/`) ? key.slice(cfg.prefix.length + 1) : key;
+        const relative = stripConfiguredPrefix && cfg.prefix && key.startsWith(`${cfg.prefix}/`) ? key.slice(cfg.prefix.length + 1) : key;
         const lastModified = block.match(/<LastModified>([\s\S]*?)<\/LastModified>/)?.[1];
         const size = Number(block.match(/<Size>([\s\S]*?)<\/Size>/)?.[1] || 0);
         if (relative) objects.push({ key: relative, lastModified, size });
@@ -201,6 +201,15 @@ export class ObjectJsonStorage implements JsonStorage {
       continuationToken = truncated ? decodeXml(xml.match(/<NextContinuationToken>([\s\S]*?)<\/NextContinuationToken>/)?.[1] || "") : "";
     } while (continuationToken);
     return objects;
+  }
+  async listObjects(prefix: string) {
+    const cfg = objectConfig();
+    const requested = String(prefix || "").trim();
+    return this.listRawObjects([cfg.prefix, requested ? normalizeStorageKey(requested) : ""].filter(Boolean).join("/"), true);
+  }
+  async listBucketObjects(prefix = "") {
+    const requested = String(prefix || "").trim();
+    return this.listRawObjects(requested ? normalizeStorageKey(requested) : "", false);
   }
   async deleteObjects(relativePaths: string[]) {
     const relative = [...new Set(relativePaths.map(normalizeStorageKey))];
