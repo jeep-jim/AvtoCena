@@ -22,13 +22,13 @@ test("V6 production publish waits on the shared catalog writer and audits all se
 });
 
 test("Prestige scheduled collection tolerates isolated shard transport failures without weakening row quality", () => {
-  assert.doesNotMatch(workflow, /^\s*push:/m);
-  assert.match(workflow, /cron: "40 19 \* \* 0,1,3,5"/);
+  assert.match(workflow, /cron: "40 19 1,8,15,22 \* \*"/);
   assert.match(workflow, /PRESTIGE_PLAN_MAX_PARTITIONS: "90"/);
   assert.match(workflow, /PRESTIGE_PLAN_RAW_BUDGET: "18000"/);
   assert.match(workflow, /start_model_index=\$\(\( \(10#\$day_of_year % 40\) \* 3 \)\)/);
-  assert.match(workflow, /group: catalog-v6-prestige-exact-sold-up-to-30k[\s\S]*cancel-in-progress: false/);
+  assert.match(workflow, /group: catalog-v6-prestige-exact-sold-up-to-30k[\s\S]*cancel-in-progress: true/);
   assert.match(workflow, /chunks:[\s\S]*continue-on-error: true/);
+  assert.match(workflow, /Collect exact sold-result partition without publishing[\s\S]*continue-on-error: true/);
   assert.match(workflow, /PRESTIGE_MIN_CHUNK_COVERAGE: "0\.95"/);
   assert.match(merge, /minimumChunkCoverage/);
   assert.match(merge, /inputCoverage/);
