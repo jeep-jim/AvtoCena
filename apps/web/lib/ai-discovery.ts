@@ -1,8 +1,23 @@
-import { readDataJson } from "./data";
+import { gzipSync } from "node:zlib";
+import { getJsonStorage, readDataJson } from "./data";
 import type { CatalogSearchProjection } from "./catalog/storage";
 
 export const AVTOCENA_PUBLIC_ORIGIN = "https://avtocena.com";
 export const AI_CATALOG_PROJECTION_PATH = "catalog/public/projection/all.json";
+export const AI_PRODUCT_FEED_PATH = "catalog/public/feeds/openai-products.csv.gz";
+export const AI_PRODUCT_FEED_METADATA_PATH = "catalog/public/feeds/openai-products.json";
+export const AI_PRODUCT_FEED_HEADER = [
+  "id",
+  "title",
+  "description",
+  "link",
+  "image_link",
+  "availability",
+  "price",
+  "brand",
+  "identifier_exists",
+  "product_type",
+];
 
 export type AiCatalogProjection = {
   generationId: string;
@@ -73,4 +88,74 @@ export function aiCatalogDescription(item: CatalogSearchProjection) {
   ].filter(Boolean);
 
   return `${parts.join("; ")}. Стоимость указана по расчёту АвтоЦены под ключ и должна подтверждаться в актуальной карточке автомобиля.`.slice(0, 5000);
+}
+
+
+export type AiProductFeedMetadata = {
+  version: 1;
+  generationId: string;
+  updatedAt: string;
+  objectPath: string;
+  productCount: number;
+  size: number;
+  checksum: string;
+  format: "google-compatible-csv-gzip";
+};
+
+function csvCell(value: unknown) {
+  return `"${String(value ?? "").replace(/"/g, '""')}"`;
+}
+
+export function buildAiProductFeed(projection: AiCatalogProjection) {
+  const rows = projection.items
+    .filter((item) => Number(item.totalRub || item.publicVisibleRub || 0) > 0 && Boolean(item.cardImageUrl))
+    .map((item) => {
+      const priceRub = Math.round(Number(item.totalRub || item.publicVisibleRub || 0));
+      return [
+        item.id,
+        aiCatalogTitle(item).slice(0, 150),
+        aiCatalogDescription(item).slice(0, 5000),
+        catalogOfferUrl(item.id),
+        absoluteAvtocenaUrl(item.cardImageUrl),
+        "in_stock",
+        `${priceRub} RUB`,
+        item.make,
+        "no",
+        "Vehicles > Cars",
+      ].map(csvCell).join(",");
+    });
+
+  const body = `\uFEFF${AI_PRODUCT_FEED_HEADER.join(",")}\n${rows.join("\n")}\n`;
+  return {
+    data: gzipSync(Buffer.from(body, "utf8"), { level: 9 }),
+    productCount: rows.length,
+  };
+}
+
+export async function publishAiProductFeed(projection: AiCatalogProjection): Promise<AiProductFeedMetadata> {
+  const storage = getJsonStorage();
+  if (!storage.putBinary) throw new Error("ai_product_feed_binary_storage_unavailable");
+  const built = buildAiProductFeed(projection);
+  const stored = await storage.putBinary(AI_PRODUCT_FEED_PATH, built.data, "application/gzip");
+  const metadata: AiProductFeedMetadata = {
+    version: 1,
+    generationId: projection.generationId,
+    updatedAt: new Date().toISOString(),
+    objectPath: AI_PRODUCT_FEED_PATH,
+    productCount: built.productCount,
+    size: stored.size,
+    checksum: stored.checksum,
+    format: "google-compatible-csv-gzip",
+  };
+  await storage.writeJson(AI_PRODUCT_FEED_METADATA_PATH, metadata);
+  return metadata;
+}
+
+export async function ensureAiProductFeed(projection: AiCatalogProjection): Promise<AiProductFeedMetadata> {
+  const storage = getJsonStorage();
+  const current = await storage.readJson<AiProductFeedMetadata | null>(AI_PRODUCT_FEED_METADATA_PATH, null);
+  const currentObjectExists = current?.objectPath === AI_PRODUCT_FEED_PATH
+    && Boolean(await storage.binaryExists?.(AI_PRODUCT_FEED_PATH).catch(() => false));
+  if (current?.version === 1 && current.generationId === projection.generationId && currentObjectExists) return current;
+  return publishAiProductFeed(projection);
 }

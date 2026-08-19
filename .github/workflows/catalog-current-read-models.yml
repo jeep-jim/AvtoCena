@@ -50,7 +50,7 @@ jobs:
       - name: Validate current read-model publisher
         run: |
           node --check scripts/catalog-publish-current-read-models.mjs
-          node --import tsx --test tests/offer-navigation-performance.test.ts tests/catalog-filter-search.test.ts tests/catalog-current-read-model-empty-market-policy.test.ts
+          node --import tsx --test tests/offer-navigation-performance.test.ts tests/catalog-filter-search.test.ts tests/catalog-current-read-model-empty-market-policy.test.ts tests/ai-product-feed.test.ts
           npm run typecheck
       - name: Publish one-hop projections and offer shards
         run: |
