@@ -16,6 +16,34 @@ test("public brand groups collapse market and sub-brand spellings to one route",
   assert.equal(canonicalCatalogBrand("Besturn"), "Bestune");
   assert.equal(canonicalCatalogBrand("BAW (Beijing Automobile Works)"), "BAW");
   assert.equal(canonicalCatalogBrand("Beijing Automobile Works"), "BAW");
+  for (const [alias, parent] of [
+    ["Audi AUDI", "Audi"],
+    ["BAIC ORV", "BAIC"],
+    ["Chery Fengyun", "Chery"],
+    ["Chery Fulwin", "Chery"],
+    ["Dongfeng Fengdu", "Dongfeng"],
+    ["Dongfeng Fengxing", "Dongfeng"],
+    ["Dongfeng Yipai", "Dongfeng"],
+    ["DR Automobiles", "DR"],
+    ["DS Automobiles", "DS"],
+    ["FANGCHENGBAO", "Fang Cheng Bao"],
+    ["GAC Aion", "AION"],
+    ["GAC Haobo", "HYPTEC"],
+    ["GAC Trumpchi", "GAC"],
+    ["Geely Geometry", "Geely"],
+    ["INEOS Grenadier", "INEOS"],
+    ["JAC Motors", "JAC"],
+    ["JAC Refine", "JAC"],
+    ["Jetour Shanhai", "Jetour"],
+    ["KGM(KGM)", "KGM"],
+    ["Lotus Cars", "Lotus"],
+    ["Renault Korea", "Renault"],
+    ["Renault Samsung", "Renault"],
+    ["Voyah Auto", "Voyah"],
+    ["Wuling Motors", "Wuling"],
+    ["Xiaomi Auto", "Xiaomi"],
+    ["Yasheng Auto", "Yasheng"],
+  ]) assert.equal(canonicalCatalogBrand(alias), parent);
 });
 
 test("canonical display picks the longest safe Bentley model prefix and preserves calculation fields", async () => {
