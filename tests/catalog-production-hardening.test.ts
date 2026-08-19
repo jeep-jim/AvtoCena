@@ -142,9 +142,13 @@ test("daily cleanup keeps a bounded six-hour grace while preserving both live ma
   assert.match(cleanup, /storage\.deletePrefix\(`catalog\/generations\/\$\{generationId\}`\)/);
   assert.match(cleanup, /plannedBytes/);
   assert.match(cleanup, /storage\.listObjects\("catalog"\)/);
+  assert.match(cleanup, /storage\.listObjects\(""\)/);
   assert.match(cleanup, /catalogInventory/);
+  assert.match(cleanup, /namespaceInventory/);
+  assert.match(cleanup, /nonCatalogBytes/);
   assert.match(cleanup, /unaccountedBytes/);
-  assert.match(cleanup, /catalogPrefixSummary\(catalogObjects\)/);
+  assert.match(cleanup, /objectPrefixSummary\(catalogObjects\)/);
+  assert.match(cleanup, /objectPrefixSummary\(namespaceObjects\)/);
   assert.match(cleanup, /plannedDeletes > MAX_DELETES/);
   assert.match(cleanupWorkflow, /cron: "40 2 \* \* \*"/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"/);
