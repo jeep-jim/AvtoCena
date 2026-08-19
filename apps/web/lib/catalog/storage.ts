@@ -1,6 +1,7 @@
 import crypto from "node:crypto";
 import sharp from "sharp";
 import { getJsonStorage, readDataJson, StorageConflictError } from "../data";
+import { publishAiProductFeed } from "../ai-discovery";
 import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOffer, VehicleOffer } from "./types";
 import { hasCredibleOfferContent } from "./offer-quality";
 import { rankedCatalogImageUrls } from "./image-quality";
@@ -943,6 +944,7 @@ export async function publishCurrentCatalogReadModels() {
     writeJsonAtomic(currentProjectionPath(market), { generationId: manifest.generationId, items }, false));
   await mapWithConcurrency([...offersByShard.entries()], 12, ([shard, items]) =>
     writeJsonAtomic(`catalog/public/offers/${shard}.json`, { generationId: manifest.generationId, items }, false));
+  const aiProductFeed = await publishAiProductFeed({ generationId: manifest.generationId, items: allProjectionItems });
 
   return {
     generationId: manifest.generationId,
@@ -953,6 +955,8 @@ export async function publishCurrentCatalogReadModels() {
     brandSummaryCount: Object.keys(brandSummary.brands).length,
     brandProjectionCount: projectionsByBrand.size,
     offerShards: offersByShard.size,
+    aiProductFeedProducts: aiProductFeed.productCount,
+    aiProductFeedBytes: aiProductFeed.size,
   };
 }
 export async function getOffer(id: string) {

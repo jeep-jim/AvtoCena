@@ -24,6 +24,7 @@ export interface JsonStorage {
   exists?(relativePath: string): Promise<boolean>;
   putBinary?(relativePath: string, data: Buffer, contentType: string, condition?: JsonWriteCondition): Promise<{ objectKey: string; mimeType: string; size: number; checksum: string }>;
   getBinary?(relativePath: string): Promise<{ data: Buffer; mimeType?: string; size: number; checksum: string }>;
+  createBinaryDownloadUrl?(relativePath: string, expiresSeconds?: number): Promise<string | null>;
   binaryExists?(relativePath: string): Promise<boolean>;
   deleteBinary?(relativePath: string): Promise<void>;
   listObjects?(prefix: string): Promise<StorageObject[]>;
@@ -61,6 +62,7 @@ export class LocalJsonStorage implements JsonStorage {
   async deleteJson(relativePath: string) { await fs.promises.rm(localPath(relativePath), { force: true }); }
   async putBinary(relativePath: string, data: Buffer, contentType: string, condition?: JsonWriteCondition) { const p = localPath(relativePath); const current = localEtag(p); if (condition?.ifNoneMatch === "*" && current) throw new StorageConflictError(); if (condition?.ifMatch && current !== condition.ifMatch) throw new StorageConflictError(); await fs.promises.mkdir(path.dirname(p), { recursive: true }); await fs.promises.writeFile(p, data); return { objectKey: normalizeStorageKey(relativePath), mimeType: contentType, size: data.length, checksum: sha256(data) }; }
   async getBinary(relativePath: string) { const data = await fs.promises.readFile(localPath(relativePath)); return { data, size: data.length, checksum: sha256(data) }; }
+  async createBinaryDownloadUrl(_relativePath: string, _expiresSeconds = 900) { return null; }
   async binaryExists(relativePath: string) { try { await fs.promises.access(localPath(relativePath)); return true; } catch { return false; } }
   async deleteBinary(relativePath: string) { await fs.promises.rm(localPath(relativePath), { force: true }); }
   async exists(relativePath: string) { try { await fs.promises.access(localPath(relativePath)); return true; } catch { return false; } }
@@ -149,6 +151,29 @@ export class ObjectJsonStorage implements JsonStorage {
   async deleteJson(relativePath: string) { await this.request("DELETE", relativePath); }
   async putBinary(relativePath: string, data: Buffer, contentType: string, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": contentType }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, data, headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_binary_write_${res.status}`); return { objectKey: normalizeStorageKey(relativePath), mimeType: contentType, size: data.length, checksum: sha256(data) }; }
   async getBinary(relativePath: string) { const res = await this.request("GET", relativePath); if (!res.ok) throw new Error(`object_storage_binary_read_${res.status}`); const data = Buffer.from(await res.arrayBuffer()); return { data, mimeType: res.headers.get("content-type") || undefined, size: data.length, checksum: sha256(data) }; }
+  async createBinaryDownloadUrl(relativePath: string, expiresSeconds = 900) {
+    const cfg = objectConfig();
+    const normalizedPath = normalizeStorageKey(relativePath);
+    const url = new URL(`${cfg.endpoint}/${cfg.bucket}/${encodeKey(this.key(normalizedPath))}`);
+    const amzDate = new Date().toISOString().replace(/[:-]|\.\d{3}/g, "");
+    const date = amzDate.slice(0, 8);
+    const scope = `${date}/${cfg.region}/s3/aws4_request`;
+    const expires = Math.max(60, Math.min(604_800, Math.floor(Number(expiresSeconds) || 900)));
+    const params: Record<string, string> = {
+      "X-Amz-Algorithm": "AWS4-HMAC-SHA256",
+      "X-Amz-Credential": `${cfg.accessKeyId}/${scope}`,
+      "X-Amz-Date": amzDate,
+      "X-Amz-Expires": String(expires),
+      "X-Amz-SignedHeaders": "host",
+    };
+    const query = canonicalQuery(params);
+    const canonicalRequest = ["GET", url.pathname, query, `host:${url.host}\n`, "host", "UNSIGNED-PAYLOAD"].join("\n");
+    const stringToSign = ["AWS4-HMAC-SHA256", amzDate, scope, sha256(canonicalRequest)].join("\n");
+    const signingKey = hmac(hmac(hmac(hmac(`AWS4${cfg.secretAccessKey}`, date), cfg.region), "s3"), "aws4_request");
+    params["X-Amz-Signature"] = crypto.createHmac("sha256", signingKey).update(stringToSign).digest("hex");
+    url.search = canonicalQuery(params);
+    return url.toString();
+  }
   async binaryExists(relativePath: string) { return this.head(relativePath); }
   async deleteBinary(relativePath: string) { await this.request("DELETE", relativePath); }
   async exists(relativePath: string) { return this.head(relativePath); }
