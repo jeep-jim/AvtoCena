@@ -10,6 +10,7 @@ import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
 import { selectCatalogShowcaseDiversity } from "./inventory-quota";
 import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./vehicle-knowledge";
+import { applyEncyclopediaDisplayIdentityBatch } from "./display-identity";
 
 const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
@@ -944,8 +945,12 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
 export async function publishCurrentCatalogReadModels() {
   const manifest = await readManifest();
   const marketIds = Object.keys(manifest.markets || {}).filter((market) => Number(manifest.markets[market]?.count || 0) > 0);
-  const offers = (await mapWithConcurrency(marketIds, Math.min(7, Math.max(1, marketIds.length)), (market) => readMarketOffers(market))).flat()
+  const storedOffers = (await mapWithConcurrency(marketIds, Math.min(7, Math.max(1, marketIds.length)), (market) => readMarketOffers(market))).flat()
     .filter(isPublicOffer);
+  // Keep source/internal objects immutable. Public read models receive the
+  // same deterministic V2 + source-translation identity used by cards, so
+  // facets, filters, breadcrumbs, SEO pages and offer shards cannot disagree.
+  const offers = await applyEncyclopediaDisplayIdentityBatch(storedOffers);
 
   const makes = uniqueText(offers.map((offer) => offer.make)).sort((a, b) => a.localeCompare(b, "ru"));
   const models = [...new Map(offers.map((offer) => {

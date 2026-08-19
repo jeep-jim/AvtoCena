@@ -271,7 +271,8 @@ test("brand rail opens existing brand and model SEO pages", () => {
   assert.match(brandPage, /BrandModelDirectory/);
   assert.match(brandPage, /readBrandModelDirectory/);
   assert.match(modelPage, /generateMetadata/);
-  assert.match(sitemap, /CATALOG_BRANDS\.map/);
+  assert.match(sitemap, /readCatalogBrandDirectory/);
+  assert.match(sitemap, /brands\.map/);
   assert.match(sitemap, /\/cars\/brand\/\$\{brand\.slug\}/);
   assert.match(sitemap, /content-type.*application\/xml/si);
 });

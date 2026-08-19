@@ -1,5 +1,5 @@
 import { canonicalCatalogBrand } from "./brands";
-import { readStagingEncyclopediaCorpus } from "./encyclopedia";
+import { readEncyclopediaIdentityDataset } from "./encyclopedia-identity-data";
 import { presentCatalogOffer } from "./presentation";
 
 type DisplayCarrier = { make?: unknown; model?: unknown; [key: string]: any };
@@ -39,10 +39,11 @@ function safeAliasValues(rows: any) {
 }
 
 async function readIndex() {
-  indexPromise ||= readStagingEncyclopediaCorpus().then((corpus) => {
+  indexPromise ||= readEncyclopediaIdentityDataset().then((dataset) => {
+    const canonicalBrandNames = new Map((dataset?.brands || []).map((brand) => [brand.id, brand.canonicalName]));
     const byMake = new Map<string, DisplayModel[]>();
-    for (const model of corpus.models) {
-      const make = canonicalCatalogBrand(model.brandId);
+    for (const model of dataset?.models || []) {
+      const make = canonicalCatalogBrand(canonicalBrandNames.get(model.brandId) || model.brandId);
       const phrases = [...new Set([
         clean(model.canonicalName),
         ...safeAliasValues((model as any).aliases),

@@ -1,0 +1,78 @@
+import {
+  CATALOG_BRANDS,
+  canonicalCatalogBrand,
+  catalogBrandBySlug,
+  catalogBrandSlug,
+  type CatalogBrand,
+} from "./brands";
+import { readEncyclopediaIdentityDataset } from "./encyclopedia-identity-data";
+import { EncyclopediaIdentitySlugResolver } from "./encyclopedia-identity-slugs";
+import { translateCatalogText } from "./presentation";
+import { readCatalogFacets } from "./storage";
+
+function clean(value: unknown) {
+  return String(value || "").replace(/\s+/g, " ").trim();
+}
+
+function safeAliasValues(rows: any) {
+  return (Array.isArray(rows) ? rows : [])
+    .filter((row) => row && row.safe === true && clean(row.value))
+    .map((row) => clean(row.value));
+}
+
+function toBrand(name: string, slug = catalogBrandSlug(name), aliases: string[] = []): CatalogBrand {
+  return { name, slug, dromSlug: slug, aliases };
+}
+
+/**
+ * A route-safe brand directory shared by live catalog identities and V2.
+ * The legacy Drom list remains a logo/source compatibility layer, but it is no
+ * longer allowed to decide whether a valid live or source-backed brand URL 404s.
+ */
+export async function readCatalogBrandDirectory() {
+  const [dataset, facets] = await Promise.all([
+    readEncyclopediaIdentityDataset(),
+    readCatalogFacets().catch(() => ({ makes: [] as string[] } as any)),
+  ]);
+  const brands = new Map<string, CatalogBrand>();
+  const add = (brand: CatalogBrand) => {
+    const key = brand.slug || catalogBrandSlug(brand.name);
+    const current = brands.get(key);
+    brands.set(key, current ? { ...brand, ...current, aliases: [...new Set([...(current.aliases || []), ...(brand.aliases || [])])] } : brand);
+  };
+
+  for (const brand of CATALOG_BRANDS) add(brand);
+  for (const brand of dataset?.brands || []) {
+    add(toBrand(brand.canonicalName, clean(brand.slug) || catalogBrandSlug(brand.canonicalName), safeAliasValues(brand.aliases)));
+  }
+  for (const rawMake of facets.makes || []) {
+    const publicName = canonicalCatalogBrand(translateCatalogText(rawMake) || clean(rawMake));
+    if (publicName) add(toBrand(publicName));
+  }
+  return [...brands.values()].sort((left, right) => left.name.localeCompare(right.name, "ru"));
+}
+
+export async function resolveCatalogBrandBySlug(rawSlug: string): Promise<CatalogBrand | null> {
+  const slug = catalogBrandSlug(rawSlug);
+  const legacy = catalogBrandBySlug(rawSlug);
+  if (legacy) return legacy;
+
+  const dataset = await readEncyclopediaIdentityDataset();
+  if (dataset) {
+    const match = new EncyclopediaIdentitySlugResolver(dataset).resolveBrand(rawSlug);
+    if (match) {
+      const source = dataset.brands.find((brand) => brand.id === match.brandId);
+      return toBrand(match.canonicalName, match.canonicalSlug, safeAliasValues(source?.aliases));
+    }
+  }
+
+  return (await readCatalogBrandDirectory()).find((brand) => brand.slug === slug) || null;
+}
+
+export function catalogBrandMatches(brand: CatalogBrand, rawMake: unknown) {
+  const raw = clean(rawMake);
+  if (!raw) return false;
+  const translated = clean(translateCatalogText(raw));
+  const candidates = [raw, translated, canonicalCatalogBrand(raw), canonicalCatalogBrand(translated), ...(brand.aliases || [])];
+  return candidates.some((candidate) => catalogBrandSlug(candidate) === brand.slug);
+}
