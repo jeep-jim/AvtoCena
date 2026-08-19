@@ -1,5 +1,6 @@
 import { getEffectiveMarketsWithDefaults, getEffectiveMarketVersion } from "../effective-market-settings";
 import { calculateAvtocenaFromBusinessConfig } from "../../../../packages/engine/src/calculation/calculateAvtocena";
+import { applyEncyclopediaDisplayIdentity, applyEncyclopediaDisplayIdentityBatch } from "./display-identity";
 import { resolveCatalogMarketConfig } from "./estimated-market-config";
 import { convertToRub } from "./rates";
 import type { CatalogMarket, VehicleOffer } from "./types";
@@ -100,7 +101,8 @@ export async function applyActiveBusinessPricing<T extends Partial<VehicleOffer>
   if (!offer.market) return offer;
   const rated = await attachCurrentCurrencyRate(offer);
   const configured = await getEffectiveMarketVersion(String(rated.market));
-  return repriceOfferWithBusinessConfig(rated, configured);
+  const repriced = repriceOfferWithBusinessConfig(rated, configured);
+  return await applyEncyclopediaDisplayIdentity(repriced as any) as T;
 }
 
 export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleOffer>>(offers: T[]): Promise<T[]> {
@@ -110,5 +112,6 @@ export async function applyActiveBusinessPricingBatch<T extends Partial<VehicleO
     Promise.all(offers.map((offer) => attachCurrentCurrencyRate(offer))),
   ]);
   const configs = new Map(markets.map((market) => [market.id, market.effectiveVersion || null]));
-  return ratedOffers.map((offer) => repriceOfferWithBusinessConfig(offer, configs.get(String(offer.market))));
+  const repriced = ratedOffers.map((offer) => repriceOfferWithBusinessConfig(offer, configs.get(String(offer.market))));
+  return await applyEncyclopediaDisplayIdentityBatch(repriced as any[]) as T[];
 }
