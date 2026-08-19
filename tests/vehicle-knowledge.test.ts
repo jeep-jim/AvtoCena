@@ -7,7 +7,6 @@ import {
   readStagingEncyclopediaCorpus,
   readVerifiedEncyclopediaCorpus,
 } from "../apps/web/lib/catalog/encyclopedia";
-import { readBrandModelDirectory } from "../apps/web/lib/catalog/model-directory";
 import {
   enrichOfferWithVehicleKnowledge,
   findVehicleModel,
@@ -147,23 +146,29 @@ test("full encyclopedia read layer remains isolated from calculator runtime", as
   assert.ok(publicVariants.some((row) => row.id === "bentley/continental-gt/fourth-generation/speed-global"));
 });
 
-test("Bentley directory uses canonical V2 models instead of legacy pseudo-models", async () => {
-  const models = await readBrandModelDirectory("Bentley");
-  const names = models.map((row) => row.model);
+test("Bentley public reader uses canonical V2 models instead of legacy pseudo-models", async () => {
+  const [models, variants] = await Promise.all([
+    readEncyclopediaKnowledgeModels(),
+    readEncyclopediaKnowledgeVariants(),
+  ]);
+  const bentleyModels = models.filter((row) => row.make === "Bentley");
+  const names = bentleyModels.map((row) => row.model);
   assert.deepEqual(names.slice().sort(), ["Bentayga", "Continental", "Continental Flying Spur", "Continental GT", "Continental GTC", "Flying Spur", "Mulsanne"].sort());
   assert.ok(!names.includes("Mark"));
   assert.ok(!names.includes("3 Litre"));
-  const gt = models.find((row) => row.id === "bentley/continental-gt");
-  assert.ok(gt);
-  assert.ok(Number(gt.knowledge.records) >= 5);
-  assert.ok(Number(gt.knowledge.trustedVariants) >= 1);
-  assert.equal(gt.knowledge.powerHp?.max, 782);
+  const gtRows = variants.filter((row) => row.modelId === "bentley/continental-gt");
+  assert.ok(gtRows.length >= 5);
+  const speed = gtRows.find((row) => row.id === "bentley/continental-gt/fourth-generation/speed-global");
+  assert.ok(speed);
+  assert.equal(speed.powerHp, 782);
+  assert.equal(speed.encyclopediaStatus, "seed");
+  assert.equal(speed.encyclopediaEvidenceOfficial, true);
 });
 
 test("model directory separates trusted V2 specifications from read-only observations", () => {
   assert.match(modelDirectory, /trustedVariant/);
   assert.match(modelDirectory, /observations/);
-  assert.match(modelDirectory, /row\.sourceType === "encyclopedia_v2"/);
+  assert.match(modelDirectory, /row\?\.sourceType !== "encyclopedia_v2"/);
   assert.match(modelDirectory, /encyclopediaEvidenceOfficial/);
   assert.match(modelDirectory, /power30MinKw/);
   assert.match(modelDirectory, /utilizationPowerKw/);
