@@ -28,7 +28,7 @@ export async function GET() {
 
   if (!storage.getBinary) throw new Error("ai_product_feed_binary_storage_unavailable");
   const binary = await storage.getBinary(AI_PRODUCT_FEED_PATH);
-  return new Response(binary.data, {
+  return new Response(Uint8Array.from(binary.data), {
     status: 200,
     headers: {
       ...headers,
