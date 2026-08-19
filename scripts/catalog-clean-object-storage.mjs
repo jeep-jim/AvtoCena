@@ -120,7 +120,7 @@ const protectedGenerations = new Set([
 
 if (!publicGeneration || !generationIds.length) {
   const report = {
-    version: 3,
+    version: 4,
     startedAt,
     finishedAt: new Date().toISOString(),
     dryRun: DRY_RUN,
@@ -188,7 +188,7 @@ if (!publicGeneration || !generationIds.length) {
   }
 
   const report = {
-    version: 3,
+    version: 4,
     startedAt,
     finishedAt: new Date().toISOString(),
     dryRun: DRY_RUN,
