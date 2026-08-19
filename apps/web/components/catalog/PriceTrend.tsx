@@ -328,7 +328,7 @@ function DetailRow({ label, value, muted, valueClassName = "" }: { label: string
   return <div className="flex min-w-0 items-end gap-2"><span className={`shrink-0 ${muted}`}>{label}</span><span className="mb-[3px] min-w-3 flex-1 border-b border-dotted border-current opacity-35" aria-hidden="true" /><span className={`shrink-0 whitespace-nowrap ${valueClassName}`}>{value}</span></div>;
 }
 
-function CurrencyRateDetails({ rate, impactRub, priceRub, light = false, compact = false }: { rate: CurrencyRateLike; impactRub?: number; priceRub?: number; light?: boolean; compact?: boolean }) {
+function CurrencyRateDetails({ rate, impactRub, priceRub, light = false, compact = false, statusLabel = "Пересчитали по актуальному курсу" }: { rate: CurrencyRateLike; impactRub?: number; priceRub?: number; light?: boolean; compact?: boolean; statusLabel?: string }) {
   const currency = String(rate.currency || "").toUpperCase();
   const history = normalizedHistory(rate);
   const currentRate = Number(rate.effectiveRate || history.at(-1)?.effectiveRate || 0);
@@ -342,7 +342,7 @@ function CurrencyRateDetails({ rate, impactRub, priceRub, light = false, compact
 
   return <div>
     <RateSparkline rate={rate} light={light} priceRub={priceRub} />
-    <div className={`mt-4 flex items-center gap-2.5 ${strong}`}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><div className={`${compact ? "text-sm leading-5" : "text-base leading-6"} font-black`}>Пересчитали по актуальному курсу</div></div>
+    <div className={`mt-4 flex items-center gap-2.5 ${strong}`}><span className="ac-pulse-dot ac-pulse-dot--status shrink-0" aria-hidden="true"><span /></span><div className={`${compact ? "text-sm leading-5" : "text-base leading-6"} font-black`}>{statusLabel}</div></div>
     <div className={`${compact ? "mt-3 gap-2 text-xs" : "mt-4 gap-3 text-sm"} grid font-bold`}>
       <DetailRow label={`Курс ${currency}`} muted={muted} value={`${previousRate ? `${formatRate(previousRate, currency)} ₽ → ` : ""}${formatRate(currentRate, currency)} ₽`} valueClassName={strong} />
       <DetailRow label="Изменение курса" muted={muted} value={`${rateDelta < 0 ? "−" : rateDelta > 0 ? "+" : ""}${formatRate(Math.abs(rateDelta), currency)} ₽ (${percent < 0 ? "−" : percent > 0 ? "+" : ""}${Math.abs(percent).toFixed(2)}%)`} valueClassName={deltaClass} />
@@ -353,7 +353,7 @@ function CurrencyRateDetails({ rate, impactRub, priceRub, light = false, compact
   </div>;
 }
 
-export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impactRub, priceRub }: { open: boolean; onClose: () => void; rates: PublicCurrencyRate[]; initialCurrency?: string; impactRub?: number; priceRub?: number }) {
+export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impactRub, priceRub, statusLabel }: { open: boolean; onClose: () => void; rates: PublicCurrencyRate[]; initialCurrency?: string; impactRub?: number; priceRub?: number; statusLabel?: string }) {
   const orderedRates = useMemo(() => [...rates].filter((rate) => rate?.currency && Number(rate?.effectiveRate) > 0).sort((left, right) => {
     const leftIndex = RATE_ORDER.indexOf(String(left.currency).toUpperCase());
     const rightIndex = RATE_ORDER.indexOf(String(right.currency).toUpperCase());
@@ -452,19 +452,19 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
             return <button key={currency} type="button" onClick={() => setActiveCurrency(currency)} className={`relative z-[1] min-w-[88px] touch-manipulation snap-start rounded-2xl border px-3 py-2.5 text-left transition active:scale-[.98] ${active ? activeClass : inactiveClass}`}><div className="pointer-events-none flex items-center justify-between gap-2"><CurrencyFlag currency={currency} className="h-4 w-6" /><span className={delta < 0 ? "text-[#20a85e]" : delta > 0 ? "text-[#ef3340]" : dark ? "text-white/45" : "text-[#788190]"}>{delta ? <RateDirectionIcon direction={delta < 0 ? "down" : "up"} className="h-4 w-5" /> : "—"}</span></div><div className="pointer-events-none mt-1 text-xs font-black">{currency}</div></button>;
           })}</div> : null}
         </div>
-        <div className="px-5 pb-[calc(24px+env(safe-area-inset-bottom))] pt-5"><CurrencyRateDetails rate={activeRate} impactRub={impactRub} priceRub={priceRub} light={!dark} /></div>
+        <div className="px-5 pb-[calc(24px+env(safe-area-inset-bottom))] pt-5"><CurrencyRateDetails rate={activeRate} impactRub={impactRub} priceRub={priceRub} light={!dark} statusLabel={statusLabel} /></div>
       </section>
     </div>
   </div>, document.body);
 }
 
-function TrendPopover({ offer, trend, currency, panel, light }: { offer: PriceLike; trend: PriceTrendValue; currency: string; panel: boolean; light: boolean }) {
+function TrendPopover({ offer, currency, panel, light, currencyDriven, currencyImpactRub }: { offer: PriceLike; currency: string; panel: boolean; light: boolean; currencyDriven: boolean; currencyImpactRub?: number }) {
   const rate = { currency, ...(offer.calculationSnapshot?.currencyRate || {}) };
   const placementClass = panel ? "top-[calc(100%+12px)]" : "bottom-[calc(100%+10px)]";
   const widthClass = panel ? "w-[min(430px,calc(100vw-48px))]" : "w-[min(360px,82vw)]";
   const panelClass = light ? "border-[#dfe3ea] bg-[#f8f9fb] text-[#151922] shadow-[0_20px_65px_rgba(34,40,52,.22)]" : "border-white/10 bg-[#11141c] text-white shadow-[0_20px_65px_rgba(0,0,0,.55)]";
   const tailClass = panel ? `absolute -top-1.5 right-3 h-3 w-3 rotate-45 border-l border-t ${light ? "border-[#dfe3ea] bg-[#f8f9fb]" : "border-white/10 bg-[#11141c]"}` : `absolute -bottom-1.5 right-3 h-3 w-3 rotate-45 border-b border-r ${light ? "border-[#dfe3ea] bg-[#f8f9fb]" : "border-white/10 bg-[#11141c]"}`;
-  return <div className={`ac-price-trend-popover absolute right-0 z-[400] ${widthClass} rounded-2xl border p-3.5 text-left ${panelClass} ${placementClass}`} role="tooltip" onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}><div className={`mb-3 text-[10px] font-black uppercase tracking-[0.15em] ${light ? "text-[#747d8d]" : "text-white/48"}`}>Почему изменилась цена</div><CurrencyRateDetails rate={rate} impactRub={trend.deltaRub} priceRub={Number(offer.totalRub || 0)} compact light={light} /><span className={tailClass} /></div>;
+  return <div className={`ac-price-trend-popover absolute right-0 z-[400] ${widthClass} rounded-2xl border p-3.5 text-left ${panelClass} ${placementClass}`} role="tooltip" onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}><div className={`mb-3 text-[10px] font-black uppercase tracking-[0.15em] ${light ? "text-[#747d8d]" : "text-white/48"}`}>{currencyDriven ? "Почему изменилась цена" : "Курс валюты и расчёт"}</div><CurrencyRateDetails rate={rate} impactRub={currencyImpactRub} priceRub={Number(offer.totalRub || 0)} compact light={light} statusLabel={currencyDriven ? "Пересчитали по актуальному курсу" : "Курс валюты в расчёте автомобиля"} />{currencyDriven ? null : <div className={`mt-3 text-[11px] leading-4 ${light ? "text-[#7a8290]" : "text-white/42"}`}>Стрелка показывает изменение полного сохранённого расчёта. Влияние курса указано отдельно.</div>}<span className={tailClass} /></div>;
 }
 
 function AuctionGavelIcon({ className = "" }: { className?: string }) {
@@ -606,16 +606,18 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
   const priceStateClass = direction === "down" ? "ac-price--down" : direction === "up" ? "ac-price--up" : "ac-price--flat";
   const hasPrice = Boolean(pricedOffer.totalRub);
   const trendUsesCurrency = Boolean(trend) && !savedPriceDelta(pricedOffer) && Boolean(currencyDelta(pricedOffer));
-  const trendTitle = trend ? trendUsesCurrency ? "Цена изменилась из-за обновления курса. Нажмите, чтобы увидеть расчёт" : "Изменение относительно предыдущего сохранённого расчёта" : "Ожидается следующий снимок валютного курса";
+  const currencyImpactRub = currencyDelta(pricedOffer) || undefined;
+  const trendTitle = trend ? trendUsesCurrency ? "Цена изменилась из-за обновления курса. Нажмите, чтобы увидеть расчёт" : "Изменение полного расчёта. Нажмите, чтобы увидеть курс валюты" : "Ожидается следующий снимок валютного курса";
   const sheetRate: PublicCurrencyRate | null = currency && pricedOffer.calculationSnapshot?.currencyRate?.effectiveRate ? { currency, ...(pricedOffer.calculationSnapshot.currencyRate as PublicCurrencyRate) } : liveRate;
-  const openSheet = () => { if (sheetRate && trend && trendUsesCurrency) { setPopoverOpen(false); setSheetOpen(true); } };
+  const canShowRate = Boolean(sheetRate && trend);
+  const openSheet = () => { if (canShowRate) { setPopoverOpen(false); setSheetOpen(true); } };
   const priceColor = highlightElectrified ? (lightTheme ? "#c58a00" : "#ffd21f") : undefined;
 
   return <div
     ref={panelRoot}
-    className={`relative ${panel ? `ac-price-trend-panel rounded-[1.35rem] p-4 shadow-[0_14px_38px_rgba(0,0,0,.14)] ${trendUsesCurrency ? "cursor-pointer" : ""}` : ""} ${stateClass} ${className}`}
-    role={panel && trendUsesCurrency ? "button" : undefined}
-    tabIndex={panel && trendUsesCurrency ? 0 : undefined}
+    className={`relative ${panel ? `ac-price-trend-panel rounded-[1.35rem] p-4 shadow-[0_14px_38px_rgba(0,0,0,.14)] ${canShowRate ? "cursor-pointer" : ""}` : ""} ${stateClass} ${className}`}
+    role={panel && canShowRate ? "button" : undefined}
+    tabIndex={panel && canShowRate ? 0 : undefined}
     onClick={panel ? (event) => { if (!desktopHover) { event.preventDefault(); event.stopPropagation(); openSheet(); } } : undefined}
     onKeyDown={panel ? (event) => { if ((event.key === "Enter" || event.key === " ") && !desktopHover) { event.preventDefault(); openSheet(); } } : undefined}
   >
@@ -624,15 +626,15 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
       <div className={`ac-price ${priceStateClass} ${highlightElectrified ? "ac-price--electrified" : ""} min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName}`} style={priceColor ? { color: priceColor } : undefined}>{hasPrice ? <><span>{money(Number(pricedOffer.totalRub))}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}</div>
       {trend ? <span
         ref={trendRoot}
-        role={trendUsesCurrency ? "button" : undefined}
-        tabIndex={trendUsesCurrency ? 0 : undefined}
-        aria-label={`${trend.direction === "down" ? "Цена снизилась" : "Цена выросла"} на ${trend.formattedDelta}. ${trendUsesCurrency ? "Показать влияние курса валюты" : "Изменение полного расчёта"}`}
-        aria-expanded={trendUsesCurrency ? popoverOpen || sheetOpen : undefined}
-        className={`ac-price-trend-arrow relative flex shrink-0 items-center rounded-lg pb-0.5 outline-none transition ${trendUsesCurrency ? `lg:cursor-pointer lg:hover:scale-105 lg:focus-visible:ring-2 lg:focus-visible:ring-current/50 ${panel ? "cursor-pointer" : "pointer-events-none lg:pointer-events-auto"}` : "pointer-events-none"}`}
-        onMouseEnter={() => { if (trendUsesCurrency && desktopHover) setPopoverOpen(true); }}
+        role={canShowRate ? "button" : undefined}
+        tabIndex={canShowRate ? 0 : undefined}
+        aria-label={`${trend.direction === "down" ? "Цена снизилась" : "Цена выросла"} на ${trend.formattedDelta}. ${trendUsesCurrency ? "Показать влияние курса валюты" : "Показать курс валюты и полный расчёт"}`}
+        aria-expanded={canShowRate ? popoverOpen || sheetOpen : undefined}
+        className={`ac-price-trend-arrow relative flex shrink-0 items-center rounded-lg pb-0.5 outline-none transition ${canShowRate ? `lg:cursor-pointer lg:hover:scale-105 lg:focus-visible:ring-2 lg:focus-visible:ring-current/50 ${panel ? "cursor-pointer" : "pointer-events-none lg:pointer-events-auto"}` : "pointer-events-none"}`}
+        onMouseEnter={() => { if (canShowRate && desktopHover) setPopoverOpen(true); }}
         onMouseLeave={() => { if (desktopHover) setPopoverOpen(false); }}
         onPointerDown={(event) => {
-          if (!trendUsesCurrency) return;
+          if (!canShowRate) return;
           if (!panel && !desktopHover) return;
           if (event.pointerType === "mouse" && desktopHover) return;
           event.preventDefault();
@@ -640,22 +642,22 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
           openSheet();
         }}
         onClick={(event) => {
-          if (!trendUsesCurrency) return;
+          if (!canShowRate) return;
           if (!panel && !desktopHover) return;
           event.preventDefault();
           event.stopPropagation();
           if (desktopHover) setPopoverOpen(true); else openSheet();
         }}
         onKeyDown={(event) => {
-          if (!trendUsesCurrency) return;
+          if (!canShowRate) return;
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
             event.stopPropagation();
             if (desktopHover) setPopoverOpen((current) => !current); else if (panel) openSheet();
           }
         }}
-      ><TrendArrow direction={trend.direction} className={dense ? "h-5 w-7 sm:h-6 sm:w-8" : "h-6 w-8 md:h-7 md:w-10"} />{trendUsesCurrency && desktopHover && popoverOpen ? <TrendPopover offer={pricedOffer} trend={trend} currency={currency || "валюты"} panel={panel} light={lightTheme} /> : null}</span> : null}
+      ><TrendArrow direction={trend.direction} className={dense ? "h-5 w-7 sm:h-6 sm:w-8" : "h-6 w-8 md:h-7 md:w-10"} />{canShowRate && desktopHover && popoverOpen ? <TrendPopover offer={pricedOffer} currency={currency || "валюты"} panel={panel} light={lightTheme} currencyDriven={trendUsesCurrency} currencyImpactRub={currencyImpactRub} /> : null}</span> : null}
     </div>
-    {sheetRate && trend && trendUsesCurrency ? <CurrencyRatesSheet open={sheetOpen} onClose={() => setSheetOpen(false)} rates={[sheetRate]} initialCurrency={currency} impactRub={trend.deltaRub} priceRub={Number(pricedOffer.totalRub || 0)} /> : null}
+    {sheetRate && trend ? <CurrencyRatesSheet open={sheetOpen} onClose={() => setSheetOpen(false)} rates={[sheetRate]} initialCurrency={currency} impactRub={currencyImpactRub} priceRub={Number(pricedOffer.totalRub || 0)} statusLabel={trendUsesCurrency ? "Пересчитали по актуальному курсу" : "Курс валюты в расчёте автомобиля"} /> : null}
   </div>;
 }

@@ -8,6 +8,19 @@ import { CATALOG_BRANDS, canonicalCatalogBrand, catalogBrandSlug } from "@/lib/c
 const BRAND_COUNT_FORMATTER = new Intl.NumberFormat("ru-RU");
 const BRAND_COUNT_CACHE_MS = 30_000;
 const BRAND_COUNT_REQUESTS = new Map<string, { at: number; promise: Promise<Record<string, number>> }>();
+const FEATURED_BRANDS = [
+  "Toyota", "BMW", "Mercedes-Benz", "Audi", "Volkswagen", "Lexus", "Honda", "Nissan", "Mazda", "Mitsubishi",
+  "Subaru", "Suzuki", "Hyundai", "Kia", "BYD", "Geely", "Chery", "Haval", "Changan", "GAC", "AION", "AITO",
+  "Dongfeng", "JAC", "Renault", "Ford", "Porsche", "Volvo", "Land Rover", "KGM",
+];
+const FEATURED_BRAND_RANK = new Map(FEATURED_BRANDS.map((brand, index) => [brand.toLocaleLowerCase("en-US"), index]));
+
+function compareBrands(left: string, right: string) {
+  const leftRank = FEATURED_BRAND_RANK.get(left.toLocaleLowerCase("en-US"));
+  const rightRank = FEATURED_BRAND_RANK.get(right.toLocaleLowerCase("en-US"));
+  if (leftRank !== undefined || rightRank !== undefined) return (leftRank ?? Number.MAX_SAFE_INTEGER) - (rightRank ?? Number.MAX_SAFE_INTEGER);
+  return left.localeCompare(right, "ru");
+}
 
 function loadBrandCounts(query: string) {
   const key = query || "__all__";
@@ -47,16 +60,17 @@ export function BrandLogoVisual({ brand, className = "" }: { brand: string; clas
   const sources = [
     `/brand-logos/drom/${theme}/${slug}.png`,
     `/api/catalog/brand-logo/${encodeURIComponent(slug)}?theme=${theme}`,
-    `/favicon-${theme}.svg`,
   ];
 
+  if (sourceIndex >= sources.length) return <span aria-hidden="true" className={`block h-10 w-[76px] shrink-0 ${className}`} />;
+
   return <img
-    src={sources[Math.min(sourceIndex, sources.length - 1)]}
-    alt={sourceIndex < 2 ? `Логотип ${brand}` : "АвтоЦена"}
+    src={sources[sourceIndex]}
+    alt={`Логотип ${brand}`}
     loading="lazy"
     decoding="async"
     draggable={false}
-    onError={() => setSourceIndex((current) => Math.min(sources.length - 1, current + 1))}
+    onError={() => setSourceIndex((current) => Math.min(sources.length, current + 1))}
     className={`h-10 w-[76px] select-none bg-transparent object-contain ${className}`}
   />;
 }
@@ -133,7 +147,7 @@ export function BrandLogoRail({
       const canonical = canonicalCatalogBrand(value);
       if (canonical) map.set(canonical.toLocaleLowerCase("en-US"), canonical);
     }
-    return [...map.values()].sort((a, b) => a.localeCompare(b, "ru"));
+    return [...map.values()].sort(compareBrands);
   }, [brands]);
   const knownBrands = useMemo(() => new Map(
     [...CATALOG_BRANDS.map((brand) => brand.name), ...suppliedBrands]
@@ -174,7 +188,7 @@ export function BrandLogoRail({
       return [...normalizedCounts.values()]
         .filter((item) => item.count > 0)
         .map((item) => item.brand)
-        .sort((a, b) => a.localeCompare(b, "ru"));
+        .sort(compareBrands);
     }
     const map = new Map<string, string>();
     for (const value of brands) {
@@ -182,7 +196,7 @@ export function BrandLogoRail({
       const known = knownBrands.get(canonical.toLocaleLowerCase("en-US"));
       if (known) map.set(known.toLocaleLowerCase("en-US"), known);
     }
-    return [...map.values()].sort((a, b) => a.localeCompare(b, "ru"));
+    return [...map.values()].sort(compareBrands);
   }, [brands, countStatus, directoryMode, knownBrands, normalizedCounts, suppliedBrands]);
   const orderedBrands = activeBrands;
   const filtered = useMemo(() => {
