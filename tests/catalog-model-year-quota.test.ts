@@ -101,15 +101,15 @@ test("coverage-first does not let newer Casper rows crowd out Casper 2022 at a s
   assert.equal(selected.filter((row) => row.year === 2025).length, 1);
 });
 
-test("market age gates stay unchanged while quota changes", () => {
-  const currentYear = new Date().getFullYear();
+test("market age gates keep Japan at the agreed 2015 floor", () => {
   assert.equal(catalogMinYearForMarket("korea"), 2020);
   assert.equal(catalogMinYearForMarket("europe"), 2020);
   assert.equal(catalogMinYearForMarket("georgia"), 2020);
-  assert.equal(catalogMinYearForMarket("japan"), currentYear - 15);
+  assert.equal(catalogMinYearForMarket("japan"), 2015);
   assert.equal(isCatalogYearAllowed(2019, "korea"), false);
   assert.equal(isCatalogYearAllowed(2020, "korea"), true);
-  assert.equal(isCatalogYearAllowed(currentYear - 15, "japan"), true);
+  assert.equal(isCatalogYearAllowed(2014, "japan"), false);
+  assert.equal(isCatalogYearAllowed(2015, "japan"), true);
 });
 
 test("all active quota paths use the shared model-year identity", () => {
