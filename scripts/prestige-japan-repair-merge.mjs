@@ -8,6 +8,7 @@ const target = Math.max(1, Math.min(30_000, Number(process.env.PRESTIGE_REPAIR_T
 const exactImage = /^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i;
 const exactUrl = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
 const gradeToken = /^(?:[0-6](?:\.5)?|R|RA|A\d?|S)$/i;
+const JAPAN_MIN_MODEL_YEAR = 2015;
 
 async function walk(dir) {
   const result = [];
@@ -35,7 +36,7 @@ function checkOffer(offer) {
   if (raw.currentStatus !== "Sold") problems.push("soldStatus");
   if (!(Number(offer?.sourcePrice) > 0) || offer?.sourceCurrency !== "JPY" || Number(raw.finalPriceJpy || 0) !== Number(offer?.sourcePrice || 0)) problems.push("price");
   if (op.auctionResultPriceVerified !== true || op.resultPriceVerified !== true || op.exactDetail !== true || op.sourceOnlyFieldsPreserved !== true) problems.push("exactFlags");
-  if (!offer?.make || !offer?.model || !(Number(offer?.year) >= 2011)) problems.push("core");
+  if (!offer?.make || !offer?.model || !(Number(offer?.year) >= JAPAN_MIN_MODEL_YEAR)) problems.push("core");
   if (offer?.auctionGrade && !gradeToken.test(String(offer.auctionGrade))) problems.push("grade");
   const images = Array.isArray(offer?.images) ? offer.images : [];
   if (images.length < 5 || images.length > 30 || images.some((image) => !exactImage.test(String(image?.url || "")))) problems.push("gallery");

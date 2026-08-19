@@ -23,6 +23,7 @@ const exactImage = /^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i;
 const exactUrl = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
 const gradeToken = /^(?:[0-6](?:\.5)?|R|RA|A\d?|S)$/i;
 const commercial = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tractor|forklift|excavator|machinery)\b/i;
+const JAPAN_MIN_MODEL_YEAR = 2015;
 
 if (!/^\d+:\d+:\d+$/.test(startCursor)) throw new Error("prestige_chunk_start_cursor_invalid");
 if (!Number.isInteger(expectedMakeIndex) || !Number.isInteger(expectedModelIndex) || !(endOffset > 0)) throw new Error("prestige_chunk_boundary_invalid");
@@ -90,7 +91,7 @@ function strictCheck(offer) {
   if (!(Number(offer?.sourcePrice) > 0) || offer?.sourceCurrency !== "JPY") problems.push("price");
   if (Number(raw.finalPriceJpy || 0) !== Number(offer?.sourcePrice || 0)) problems.push("finalPriceBinding");
   if (op.auctionResultPriceVerified !== true || op.resultPriceVerified !== true || op.exactDetail !== true || op.sourceOnlyFieldsPreserved !== true) problems.push("exactFlags");
-  if (!offer?.make || !offer?.model || !(Number(offer?.year) >= 2011)) problems.push("coreIdentity");
+  if (!offer?.make || !offer?.model || !(Number(offer?.year) >= JAPAN_MIN_MODEL_YEAR)) problems.push("coreIdentity");
   if (commercial.test(String(offer?.sourceTitle || ""))) problems.push("commercial");
   if (offer?.auctionGrade && !gradeToken.test(String(offer.auctionGrade))) problems.push("grade");
   const images = Array.isArray(offer?.images) ? offer.images : [];

@@ -3,7 +3,7 @@ import sharp from "sharp";
 import { getJsonStorage, readDataJson, StorageConflictError } from "../data";
 import { publishAiProductFeed } from "../ai-discovery";
 import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOffer, VehicleOffer } from "./types";
-import { hasCredibleOfferContent } from "./offer-quality";
+import { hasCredibleOfferContent, isCatalogYearAllowed } from "./offer-quality";
 import { rankedCatalogImageUrls } from "./image-quality";
 import { catalogOfferVisibleRub } from "./public-priority";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
@@ -768,7 +768,11 @@ async function persistJapanAuctionHistory(storage: ReturnType<typeof getJsonStor
   await storage.writeJson(JAPAN_ARCHIVE_MANIFEST_PATH, manifest, current.found && current.etag ? { ifMatch: current.etag } : { ifNoneMatch: "*" });
   return manifest;
 }
-function isPublicOffer(o: VehicleOffer) { return o.status === "active" && hasCredibleOfferContent(o); }
+function isPublicOffer(o: VehicleOffer) {
+  return o.status === "active"
+    && isCatalogYearAllowed(o.year, o.market)
+    && hasCredibleOfferContent(o);
+}
 async function writeIndexShard(generationId: string, name: string, key: string, ids: string[]) { await writeJsonAtomic(generationPath(generationId, `indexes/${name}/${cleanShard(key)}.json`), { generationId, updatedAt: new Date().toISOString(), ids }); }
 async function runWithConcurrency(tasks: Array<() => Promise<void>>, concurrency: number) {
   if (!tasks.length) return;

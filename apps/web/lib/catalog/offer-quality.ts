@@ -14,7 +14,7 @@ const GEORGIA_ALLOWED_SOURCE_IDS = new Set(["myauto_georgia_list", "myauto_georg
 const BUSINESS_LIQUIDITY_RECENT_YEARS = 6;
 const BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP = 160;
 export const CATALOG_NON_JAPAN_MIN_YEAR = 2020;
-export const CATALOG_JAPAN_MAX_AGE_YEARS = 15;
+export const CATALOG_JAPAN_MIN_YEAR = 2015;
 
 export function isCatalogMarketSourceAllowed(offer: Pick<VehicleOffer, "market" | "sourceId">) {
   if (String(offer.market || "") !== "georgia") return true;
@@ -23,7 +23,7 @@ export function isCatalogMarketSourceAllowed(offer: Pick<VehicleOffer, "market" 
 
 export function catalogMinYearForMarket(marketValue: unknown) {
   const market = String(marketValue || "").trim().toLowerCase();
-  return market === "japan" ? new Date().getFullYear() - CATALOG_JAPAN_MAX_AGE_YEARS : CATALOG_NON_JAPAN_MIN_YEAR;
+  return market === "japan" ? CATALOG_JAPAN_MIN_YEAR : CATALOG_NON_JAPAN_MIN_YEAR;
 }
 export function isCatalogYearAllowed(yearValue: unknown, marketValue?: unknown) {
   const year = Number(yearValue || 0);
