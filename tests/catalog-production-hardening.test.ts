@@ -128,6 +128,8 @@ test("single recovery publisher preserves full maintenance state and enforces ta
 
 test("daily cleanup keeps a bounded six-hour grace while preserving both live manifests", () => {
   assert.match(dataStorage, /listObjects\?/);
+  assert.match(dataStorage, /requested \? normalizeStorageKey\(requested\) : ""/);
+  assert.match(dataStorage, /requested \? normalizeStorageKey\(requested\) : ""\]\s*\.filter\(Boolean\)\.join\("\/"\)/);
   assert.match(dataStorage, /deletePrefix\?/);
   assert.match(dataStorage, /list-type/);
   assert.match(dataStorage, /NextContinuationToken/);
