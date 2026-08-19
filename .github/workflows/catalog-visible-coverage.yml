@@ -1,0 +1,58 @@
+name: Catalog visible calculation coverage
+
+on:
+  workflow_run:
+    workflows:
+      - Deploy to Yandex Cloud
+    types:
+      - completed
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-visible-calculation-coverage
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.head_branch == 'main'
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - name: Checkout deployed commit
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Audit every visible catalog calculation
+        env:
+          JSON_STORAGE_DRIVER: object
+          YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+          YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+          YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+          YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+          CATALOG_VISIBLE_CALCULATION_AUDIT_OUTPUT: catalog-visible-calculation-coverage.json
+          CATALOG_VISIBLE_CALCULATION_SAMPLE_LIMIT: "500"
+        run: node --import tsx scripts/catalog-audit-visible-calculation-coverage.mjs
+
+      - name: Upload full coverage report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visible-calculation-coverage-${{ github.event.workflow_run.head_sha || github.sha }}
+          path: catalog-visible-calculation-coverage.json
+          if-no-files-found: error
+          retention-days: 7
