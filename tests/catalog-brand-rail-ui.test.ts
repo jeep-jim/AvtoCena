@@ -25,3 +25,10 @@ test("brand counts and brand landing use compact projection summaries", () => {
   assert.doesNotMatch(modelDirectory, /readMarketOffers/);
   assert.doesNotMatch(modelDirectory, /findVehicleModel\(offer\)/);
 });
+
+test("brand rail leads with popular makes and never repeats the AvtoCena favicon as a missing logo", () => {
+  assert.match(rail, /const FEATURED_BRANDS = \[\s*"Toyota", "BMW", "Mercedes-Benz", "Audi", "Volkswagen"/);
+  assert.match(rail, /\.sort\(compareBrands\)/);
+  assert.doesNotMatch(rail, /`\/favicon-\$\{theme\}\.svg`/);
+  assert.match(rail, /sourceIndex >= sources\.length/);
+});

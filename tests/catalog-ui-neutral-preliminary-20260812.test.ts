@@ -51,9 +51,11 @@ test("Japanese auction results use a neutral historical price and auction gavel"
 
 test("saved total changes are not mislabeled as currency impact", () => {
   assert.match(priceTrend, /trendUsesCurrency/);
-  assert.match(priceTrend, /sheetRate && trend && trendUsesCurrency/);
-  assert.match(priceTrend, /trendUsesCurrency \? "Показать влияние курса валюты" : "Изменение полного расчёта"/);
-  assert.match(priceTrend, /trendUsesCurrency && desktopHover && popoverOpen/);
+  assert.match(priceTrend, /const currencyImpactRub = currencyDelta\(pricedOffer\) \|\| undefined/);
+  assert.match(priceTrend, /const canShowRate = Boolean\(sheetRate && trend\)/);
+  assert.match(priceTrend, /trendUsesCurrency \? "Показать влияние курса валюты" : "Показать курс валюты и полный расчёт"/);
+  assert.match(priceTrend, /impactRub=\{currencyImpactRub\}/);
+  assert.match(priceTrend, /Стрелка показывает изменение полного сохранённого расчёта\. Влияние курса указано отдельно\./);
 });
 
 test("catalog route loader follows active light or dark theme variables", () => {

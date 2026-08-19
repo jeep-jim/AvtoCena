@@ -16,12 +16,15 @@ type ManifestCache = { expiresAt: number; logos: Map<string, LogoSet> };
 let manifestCache: ManifestCache | null = null;
 const LOCAL_LOGO_ROOT = path.resolve(process.cwd(), "data/catalog/vehicle-encyclopedia-v2/assets/brand-logos");
 
-async function localBrandLogo(slug: string, theme: "light" | "dark") {
-  const safeSlug = catalogBrandSlug(slug);
-  if (!/^[a-z0-9-]+$/.test(safeSlug)) return null;
-  const file = path.resolve(LOCAL_LOGO_ROOT, theme, `${safeSlug}.png`);
-  if (!file.startsWith(`${LOCAL_LOGO_ROOT}${path.sep}`)) return null;
-  try { return await fs.readFile(file); } catch { return null; }
+async function localBrandLogo(values: string[], theme: "light" | "dark") {
+  for (const value of values) {
+    const safeSlug = catalogBrandSlug(value);
+    if (!/^[a-z0-9-]+$/.test(safeSlug)) continue;
+    const file = path.resolve(LOCAL_LOGO_ROOT, theme, `${safeSlug}.png`);
+    if (!file.startsWith(`${LOCAL_LOGO_ROOT}${path.sep}`)) continue;
+    try { return await fs.readFile(file); } catch {}
+  }
+  return null;
 }
 
 function normalizedKey(value: string) {
@@ -118,7 +121,7 @@ function logoFor(logos: Map<string, LogoSet>, candidates: string[], theme: "ligh
   return "";
 }
 
-async function loadBrandPageLogo(dromSlug: string, name: string, theme: "light" | "dark") {
+async function loadBrandPageLogo(dromSlug: string, candidates: string[], theme: "light" | "dark") {
   const logos = new Map<string, LogoSet>();
   const pages = [
     `${DROM_ORIGIN}/${encodeURIComponent(dromSlug)}/`,
@@ -129,7 +132,7 @@ async function loadBrandPageLogo(dromSlug: string, name: string, theme: "light" 
     try { collectLogos(await fetchPage(page), logos); } catch {}
   }));
 
-  return logoFor(logos, [dromSlug, name], theme);
+  return logoFor(logos, [dromSlug, ...candidates], theme);
 }
 
 function resolvedImageContentType(source: string, received: string | null) {
@@ -145,7 +148,8 @@ export async function GET(request: NextRequest, { params }: { params: { slug: st
   if (!brand) return new NextResponse(null, { status: 404 });
 
   const theme = request.nextUrl.searchParams.get("theme") === "dark" ? "dark" : "light";
-  const local = await localBrandLogo(brand.slug, theme);
+  const aliases = brand.aliases || [];
+  const local = await localBrandLogo([brand.slug, brand.name, ...aliases], theme);
   if (local) return new NextResponse(local, {
     headers: {
       "content-type": "image/png",
@@ -153,11 +157,11 @@ export async function GET(request: NextRequest, { params }: { params: { slug: st
     },
   });
   const dromSlug = catalogBrandDromSlug(brand.name);
-  const candidates = [dromSlug, brand.slug, brand.name];
+  const candidates = [dromSlug, brand.slug, brand.name, ...aliases];
 
   const manifest = await loadManifest();
   let source = logoFor(manifest, candidates, theme);
-  if (!source) source = await loadBrandPageLogo(dromSlug, brand.name, theme);
+  if (!source) source = await loadBrandPageLogo(dromSlug, candidates, theme);
   if (!source) return new NextResponse(null, { status: 404 });
 
   try {
