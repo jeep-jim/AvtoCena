@@ -256,6 +256,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
       calculationSnapshot: {
         ...calculation.snapshot,
         currencyRate: rate,
+        eurRate,
         sourcePriceRub: rate.sourcePriceRub,
         customs,
         customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub),
@@ -285,6 +286,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
       totalRub: null,
       calculationSnapshot: {
         ...pendingSnapshot,
+        eurRate,
         customs,
         customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub),
         customsCompleteness: customs.status,
@@ -321,6 +323,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     calculationSnapshot: {
       ...calculation.snapshot,
       currencyRate: rate,
+      eurRate,
       sourcePriceRub: rate.sourcePriceRub,
       customs,
       customsValue: customsValueSnapshot(rate, borderTransportRub, customsValueRub),

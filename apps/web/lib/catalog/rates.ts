@@ -62,6 +62,17 @@ function optionalNumber(value: unknown) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
 }
 
+function liveRatesDisabled() {
+  return /^(?:1|true|yes|on)$/i.test(String(process.env.CATALOG_LIVE_RATE_DISABLED || ""));
+}
+
+function storedRateIsFresh(value: unknown) {
+  const timestamp = Date.parse(String(value || ""));
+  if (!Number.isFinite(timestamp)) return false;
+  const maxAgeMs = Math.max(24 * 60 * 60 * 1_000, Number(process.env.CATALOG_RATE_MAX_AGE_MS || 4 * 24 * 60 * 60 * 1_000));
+  return timestamp >= Date.now() - maxAgeMs;
+}
+
 function xmlValue(block: string, tag: string) {
   return block.match(new RegExp(`<${tag}>([\\s\\S]*?)<\\/${tag}>`, "i"))?.[1]?.trim() || "";
 }
@@ -136,6 +147,28 @@ export async function convertToRub(sourcePrice: number | null, currency: string 
       ? rates[code]
       : null;
 
+  // A stored snapshot is a cache, not permanent calculation authority. Market
+  // recovery may be idle for several days, so try the official current CBR
+  // publication before reusing a stale snapshot. The stored value remains the
+  // fail-safe when CBR is temporarily unavailable.
+  const structuredDate = structured?.rateDate || structured?.date || rates.updatedAt;
+  if (!liveRatesDisabled() && !storedRateIsFresh(structuredDate)) {
+    const live = await fetchLiveCbrRates().then((map) => map.get(code)).catch(() => undefined);
+    if (live) {
+      return {
+        currency: code,
+        cbrRate: live.cbrRate,
+        nominal: live.nominal,
+        effectiveRate: live.effectiveRate,
+        rateDate: live.rateDate,
+        fetchedAt: live.fetchedAt,
+        rateSource: "cbr_live",
+        sourcePrice,
+        sourcePriceRub: Math.round(sourcePrice * live.effectiveRate),
+      };
+    }
+  }
+
   if (structured) {
     const cbrRate = Number(structured.cbrRate ?? structured.value);
     const nominal = Number(structured.nominal || 1);
@@ -163,7 +196,9 @@ export async function convertToRub(sourcePrice: number | null, currency: string 
     }
   }
 
-  const live = await fetchLiveCbrRates().then((map) => map.get(code)).catch(() => undefined);
+  const live = liveRatesDisabled()
+    ? undefined
+    : await fetchLiveCbrRates().then((map) => map.get(code)).catch(() => undefined);
   if (live) {
     return {
       currency: code,

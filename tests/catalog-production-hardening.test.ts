@@ -126,7 +126,7 @@ test("single recovery publisher preserves full maintenance state and enforces ta
   assert.match(singleRecoveryPublisher, /recovery_duplicate_id_in_full_state/);
 });
 
-test("daily cleanup keeps a three-day grace while emergency cleanup preserves both live manifests", () => {
+test("daily cleanup keeps a bounded six-hour grace while preserving both live manifests", () => {
   assert.match(dataStorage, /listObjects\?/);
   assert.match(dataStorage, /deletePrefix\?/);
   assert.match(dataStorage, /list-type/);
@@ -146,14 +146,15 @@ test("daily cleanup keeps a three-day grace while emergency cleanup preserves bo
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_KEEP_GENERATIONS: "2"/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_EMERGENCY: "false"/);
-  assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_GRACE_MS: "259200000"/);
+  assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_GRACE_MS: "21600000"/);
+  assert.match(cleanup, /const MIN_GRACE_MS = EMERGENCY \? 0 : 6 \* 60 \* 60 \* 1_000/);
+  assert.match(cleanup, /generations: objectBytes\(generationObjects\)/);
   assert.doesNotMatch(cleanupWorkflow, /createWorkflowDispatch/);
 });
 
 test("large catalog search uses compact projections and bounded fallback chunk reads", () => {
-  assert.match(storage, /power: new Map\(\)/);
-  assert.match(storage, /mileage: new Map\(\)/);
-  assert.match(storage, /engine: new Map\(\)/);
+  assert.match(storage, /const maps: Record<string, Map<string, string\[\]>> = \{ market: new Map\(\) \}/);
+  assert.doesNotMatch(storage, /power: new Map\(\)/);
   assert.match(storage, /const searchProjectionCache = new Map/);
   assert.match(storage, /readSearchProjection\(manifest\.generationId, market\)/);
   assert.match(storage, /indexes\/projection/);

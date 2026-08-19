@@ -6,19 +6,10 @@ on:
   push:
     branches: [main]
     paths:
-      - ".github/workflows/catalog-certified-power-apply.yml"
       - "apps/web/lib/catalog/power-reference.ts"
       - "data/catalog/power-reference/30-minute-power.json"
       - "scripts/catalog-seed-certified-power-reference.mjs"
       - "scripts/catalog-apply-certified-power.mjs"
-  schedule:
-    - cron: "35 23 * * *"
-  workflow_run:
-    workflows:
-      - "Catalog live recovery · UAE + Kyrgyzstan"
-      - "Catalog live · daily working markets"
-      - "Catalog Japan · publish verified Prestige aggregate"
-    types: [completed]
 
 permissions:
   contents: read
@@ -39,7 +30,6 @@ env:
 
 jobs:
   apply:
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 150
     steps:

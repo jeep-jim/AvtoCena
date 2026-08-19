@@ -12,7 +12,7 @@ type DisplayIdentity = {
   modelId: string;
   canonicalMake: string;
   canonicalModel: string;
-  match: "exact" | "prefix";
+  match: "exact" | "prefix" | "trusted_alias" | "translated";
 };
 
 let indexPromise: Promise<Map<string, DisplayModel[]>> | null = null;
@@ -83,6 +83,24 @@ function chooseModel(rows: DisplayModel[], rawModel: string) {
   return ids.length === 1 ? best : null;
 }
 
+function trustedCanonicalModel(make: string, model: string) {
+  const rules: Array<{ make: RegExp; model: RegExp; canonical: string }> = [
+    // Hyundai and KGM publish these exact English model identities on their
+    // official sites; source listing suffixes are trims/powertrains, not models.
+    { make: /^Hyundai$/i, model: /^(?:The New |The All New )?Grandeur\b/i, canonical: "Grandeur" },
+    { make: /^KGM$/i, model: /^(?:The New )?Rexton Sports Khan\b/i, canonical: "Rexton Sports Khan" },
+    { make: /^Huakai$/i, model: /^(?:Huakai )?EV\b/i, canonical: "Huakai EV" },
+    { make: /^HuangHai$/i, model: /^Jiaolong EV\b/i, canonical: "Jiaolong EV" },
+    { make: /^Yasheng$/i, model: /^VITO\b/i, canonical: "VITO" },
+    { make: /^Xiaoao$/i, model: /^VITO\b/i, canonical: "VITO" },
+  ];
+  return rules.find((rule) => rule.make.test(make) && rule.model.test(model))?.canonical || "";
+}
+
+function hasUnresolvedAsianScript(value: string) {
+  return /[\u1100-\u11ff\u3040-\u30ff\u3130-\u318f\u31f0-\u31ff\u3400-\u4dbf\u4e00-\u9fff\ua960-\ua97f\uac00-\ud7af\uf900-\ufaff]/u.test(value);
+}
+
 export async function applyEncyclopediaDisplayIdentity<T extends DisplayCarrier>(offer: T): Promise<T & { encyclopediaDisplayIdentity?: DisplayIdentity }> {
   const presented = presentCatalogOffer(offer);
   const presentedMake = duplicateParentheticalMake(clean(presented.makeLabel || offer.make));
@@ -91,10 +109,32 @@ export async function applyEncyclopediaDisplayIdentity<T extends DisplayCarrier>
   const index = await readIndex();
   const rows = index.get(phrase(canonicalMake)) || [];
   const match = chooseModel(rows, modelLabel);
-  if (!match) return offer as T & { encyclopediaDisplayIdentity?: DisplayIdentity };
-
   const rawMake = clean(offer.make);
   const rawModel = clean(offer.model);
+  if (!match) {
+    const trustedModel = trustedCanonicalModel(canonicalMake, modelLabel);
+    const translated = Boolean(canonicalMake && modelLabel
+      && !hasUnresolvedAsianScript(canonicalMake)
+      && !hasUnresolvedAsianScript(modelLabel)
+      && (phrase(canonicalMake) !== phrase(rawMake) || phrase(modelLabel) !== phrase(rawModel)));
+    if (!trustedModel && !translated) return offer as T & { encyclopediaDisplayIdentity?: DisplayIdentity };
+    const canonicalModel = trustedModel || modelLabel;
+    return {
+      ...offer,
+      make: canonicalMake,
+      model: canonicalModel,
+      encyclopediaDisplayIdentity: {
+        version: 1,
+        rawMake,
+        rawModel,
+        modelId: "",
+        canonicalMake,
+        canonicalModel,
+        match: trustedModel ? "trusted_alias" : "translated",
+      },
+    };
+  }
+
   return {
     ...offer,
     make: match.row.make,

@@ -17,13 +17,13 @@ test("V6 production publish waits on the shared catalog writer and audits all se
   assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
   assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
   assert.match(workflow, /CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"/);
-  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
+  assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "2592000000"/);
   assert.match(workflow, /CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"/);
 });
 
-test("Prestige daily tolerates isolated shard transport failures without weakening row quality", () => {
-  assert.match(workflow, /push:[\s\S]*branches:[\s\S]*- main/);
-  assert.match(workflow, /cron: "40 19 \* \* \*"/);
+test("Prestige scheduled collection tolerates isolated shard transport failures without weakening row quality", () => {
+  assert.doesNotMatch(workflow, /^\s*push:/m);
+  assert.match(workflow, /cron: "40 19 \* \* 0,1,3,5"/);
   assert.match(workflow, /PRESTIGE_PLAN_MAX_PARTITIONS: "90"/);
   assert.match(workflow, /PRESTIGE_PLAN_RAW_BUDGET: "18000"/);
   assert.match(workflow, /start_model_index=\$\(\( \(10#\$day_of_year % 40\) \* 3 \)\)/);

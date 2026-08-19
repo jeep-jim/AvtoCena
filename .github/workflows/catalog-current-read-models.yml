@@ -3,22 +3,13 @@ run-name: One-hop catalog read models · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/catalog-current-read-models.yml"
-      - "scripts/catalog-publish-current-read-models.mjs"
-      - "apps/web/lib/catalog/storage.ts"
-      - "tests/ai-product-feed.test.ts"
-      - "tests/catalog-current-read-model-empty-market-policy.test.ts"
-      - "tests/catalog-filter-search.test.ts"
-      - "tests/offer-navigation-performance.test.ts"
   workflow_run:
     workflows:
       - "Catalog live recovery · UAE + Kyrgyzstan"
       - "Catalog live · daily working markets"
       - "Catalog Japan · publish verified Prestige aggregate"
       - "Catalog · apply certified 30-minute power"
+      - "Catalog reindex from vehicle knowledge"
     types: [completed]
 
 permissions:

@@ -22,6 +22,8 @@ const IMAGE_SOURCE_CACHE_SHARD_LIMIT = Math.max(100, Math.min(500, Number(proces
 const IMAGE_SOURCE_HOST_CONCURRENCY = Math.max(1, Math.min(8, Number(process.env.CATALOG_IMAGE_HOST_CONCURRENCY || 3)));
 const IMAGE_SOURCE_HOST_RPM = Math.max(30, Math.min(600, Number(process.env.CATALOG_IMAGE_HOST_RPM || 180)));
 const INTERNAL_MANIFEST_PATH = "catalog/internal/manifest.json";
+const JAPAN_ARCHIVE_MANIFEST_PATH = "catalog/japan-auction-history/manifest.json";
+const JAPAN_ARCHIVE_RETENTION_DAYS = 30;
 const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?encar\.com$/i,
   /^(.+\.)?kcar\.com$/i,
@@ -130,6 +132,7 @@ const ALLOWED_IMAGE_HOSTS = [
 export { CATALOG_CHUNK_SIZE };
 export type OfferLocation = { market: CatalogMarket; chunk: string };
 export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string }> };
+type JapanAuctionArchiveManifest = { version: 1; updatedAt: string; retentionDays: 30; activeSlot: "a" | "b"; count: number; chunks: string[]; contentHash: string };
 export type CatalogFacets = { generationId: string; makes: string[]; models: Array<{ make: string; model: string; aliases?: string[]; popularityDecile?: number }>; markets: string[]; bodyTypes: string[]; fuels: string[]; transmissions: string[]; drives: string[] };
 export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };
 export type CatalogBrandSummary = { generationId: string; brands: Record<string, { make: string; count: number; marketCounts: Record<string, number>; models: CatalogBrandSummaryModel[] }> };
@@ -253,11 +256,6 @@ function cleanFacet(value: unknown) { return String(value || "").replace(/\s+/g,
 export function catalogMakeFilterValues(value: unknown) {
   return [...new Set(String(value || "").split(",").map(cleanFacet).filter(Boolean))];
 }
-function numericBucket(value: number | null | undefined, size: number) { const number = Number(value || 0); return number > 0 ? String(Math.ceil(number / size) * size) : "unknown"; }
-function budgetBucket(value?: number | null) { return numericBucket(value, 500_000); }
-function powerBucket(value?: number | null) { return numericBucket(value, 25); }
-function mileageBucket(value?: number | null) { return numericBucket(value, 25_000); }
-function engineBucket(value?: number | null) { return numericBucket(value, 250); }
 function generationPath(generationId: string, rel: string) { return `catalog/generations/${generationId}/${rel}`; }
 function currentProjectionPath(market: string) { return `catalog/public/projection/${cleanShard(market)}.json`; }
 function catalogBrandReadModelKey(value: unknown) { return cleanFacet(value).toLocaleLowerCase("ru-RU"); }
@@ -303,6 +301,9 @@ export function buildCatalogBrandSummary(generationId: string, rows: CatalogSear
   };
 }
 export function offerPath(generationId: string, market: string, chunk: string) { return generationPath(generationId, `offers/${market}/${chunk}.json`); }
+function storedOfferChunkPath(generationId: string, market: string, chunk: string) {
+  return String(chunk || "").startsWith("catalog/") ? String(chunk) : offerPath(generationId, market, chunk);
+}
 export function chunkName(index: number) { return `chunk-${String(index).padStart(4, "0")}`; }
 // The manifest is tiny but a signed cross-service Object Storage GET can take
 // several seconds after a container resumes. Catalog publications are atomic
@@ -636,12 +637,19 @@ async function readOfferLists(paths: string[]) {
 export async function readMarketOffers(market: string) {
   const manifest = await readManifest();
   const chunks: string[] = manifest.markets?.[market]?.chunks || [];
-  return readOfferLists(chunks.map((chunk) => offerPath(manifest.generationId, market, chunk)));
+  return readOfferLists(chunks.map((chunk) => storedOfferChunkPath(manifest.generationId, market, chunk)));
 }
 export async function readAllOffersForMaintenance() {
-  const manifest = await readDataJson<any>(INTERNAL_MANIFEST_PATH, { generationId: "", sources: {} });
-  const chunks: string[] = Object.values<any>(manifest.sources || {}).flatMap((source) => source.chunks || []);
-  return readOfferLists(chunks);
+  const [manifest, japanArchive] = await Promise.all([
+    readDataJson<any>(INTERNAL_MANIFEST_PATH, { generationId: "", sources: {} }),
+    readDataJson<JapanAuctionArchiveManifest | null>(JAPAN_ARCHIVE_MANIFEST_PATH, null),
+  ]);
+  const chunks: string[] = [
+    ...Object.values<any>(manifest.sources || {}).flatMap((source) => source.chunks || []),
+    ...(Array.isArray(japanArchive?.chunks) ? japanArchive.chunks : []),
+  ];
+  const rows = await readOfferLists([...new Set(chunks)]);
+  return [...new Map(rows.map((offer) => [offer.id, offer])).values()];
 }
 export const readAllOffers = readAllOffersForMaintenance;
 async function facetsFromProjection(generationId: string, rows: CatalogSearchProjection[], params: CatalogSearchParams, hasFilters: boolean): Promise<CatalogFacets> {
@@ -709,7 +717,10 @@ async function persistInternalCatalog(storage: ReturnType<typeof getJsonStorage>
   const now = new Date().toISOString();
   const sources: Record<string, { count: number; chunks: string[]; updatedAt: string }> = {};
   const bySource = new Map<string, VehicleOffer[]>();
-  for (const offer of offers) bySource.set(offer.sourceId, [...(bySource.get(offer.sourceId) || []), offer]);
+  // Completed Japanese auctions live in their own bounded monthly archive.
+  // Repeating them in every internal generation was one of the main sources of
+  // Object Storage growth.
+  for (const offer of offers) if (offer.market !== "japan") bySource.set(offer.sourceId, [...(bySource.get(offer.sourceId) || []), offer]);
   for (const [sourceId, list] of bySource) {
     const chunks: string[] = [];
     for (let i = 0; i < list.length; i += CATALOG_CHUNK_SIZE) {
@@ -725,6 +736,36 @@ async function persistInternalCatalog(storage: ReturnType<typeof getJsonStorage>
     catch (e) { if (e instanceof StorageConflictError) continue; throw e; }
   }
   throw new StorageConflictError();
+}
+
+async function persistJapanAuctionHistory(storage: ReturnType<typeof getJsonStorage>, offers: VehicleOffer[]) {
+  // The Japan publisher applies the 30-day source-date cutoff before this write.
+  // Storage owns the separate bounded representation and records that retention
+  // contract without re-filtering an untouched market during another market's
+  // atomic publication.
+  const retained = offers.filter((offer) => offer.market === "japan");
+  const contentHash = crypto.createHash("sha256").update(JSON.stringify(retained)).digest("hex");
+  const current = await storage.readJsonWithMeta<JapanAuctionArchiveManifest | null>(JAPAN_ARCHIVE_MANIFEST_PATH, null);
+  if (current.value?.version === 1 && current.value.contentHash === contentHash) return current.value;
+
+  const activeSlot: "a" | "b" = current.value?.activeSlot === "a" ? "b" : "a";
+  const chunks: string[] = [];
+  for (let index = 0; index < retained.length; index += CATALOG_CHUNK_SIZE) {
+    const path = `catalog/japan-auction-history/slots/${activeSlot}/${chunkName(chunks.length + 1)}.json`;
+    chunks.push(path);
+    await writeJsonAtomic(path, retained.slice(index, index + CATALOG_CHUNK_SIZE), false);
+  }
+  const manifest: JapanAuctionArchiveManifest = {
+    version: 1,
+    updatedAt: new Date().toISOString(),
+    retentionDays: JAPAN_ARCHIVE_RETENTION_DAYS,
+    activeSlot,
+    count: retained.length,
+    chunks,
+    contentHash,
+  };
+  await storage.writeJson(JAPAN_ARCHIVE_MANIFEST_PATH, manifest, current.found && current.etag ? { ifMatch: current.etag } : { ifNoneMatch: "*" });
+  return manifest;
 }
 function isPublicOffer(o: VehicleOffer) { return o.status === "active" && hasCredibleOfferContent(o); }
 async function writeIndexShard(generationId: string, name: string, key: string, ids: string[]) { await writeJsonAtomic(generationPath(generationId, `indexes/${name}/${cleanShard(key)}.json`), { generationId, updatedAt: new Date().toISOString(), ids }); }
@@ -796,6 +837,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   if (options.beforePersistValidate) await options.beforePersistValidate(publicOffers);
   const generationId = `gen_${Date.now()}_${crypto.randomUUID().slice(0, 8)}`;
   const now = new Date().toISOString();
+  const japanArchive = await persistJapanAuctionHistory(storage, publicOffers.filter((offer) => offer.market === "japan"));
   await persistInternalCatalog(storage, generationId, nextOffers);
   const byMarket = new Map<string, VehicleOffer[]>();
   for (const offer of publicOffers) byMarket.set(offer.market, [...(byMarket.get(offer.market) || []), offer]);
@@ -803,6 +845,18 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   const byId: Record<string, OfferLocation> = {};
   const imagesById: Record<string, { objectKey: string; mimeType: string; checksum: string; size: number }> = {};
   for (const [market, offers] of byMarket) {
+    if (market === "japan") {
+      const chunks = [...japanArchive.chunks];
+      for (let index = 0; index < offers.length; index += CATALOG_CHUNK_SIZE) {
+        const chunk = chunks[Math.floor(index / CATALOG_CHUNK_SIZE)];
+        for (const offer of offers.slice(index, index + CATALOG_CHUNK_SIZE)) {
+          byId[offer.id] = { market: offer.market, chunk };
+          offer.images.forEach((img) => { imagesById[img.id] = { objectKey: img.objectKey, mimeType: img.mimeType, checksum: img.checksum, size: img.size }; });
+        }
+      }
+      markets[market] = { count: japanArchive.count, chunks, updatedAt: japanArchive.updatedAt };
+      continue;
+    }
     const chunks: string[] = [];
     for (let i = 0; i < offers.length; i += CATALOG_CHUNK_SIZE) {
       const name = chunkName(chunks.length + 1);
@@ -823,11 +877,10 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   throw new StorageConflictError();
 }
 export async function rebuildIndexes(generationId: string, offers: VehicleOffer[], byId: Record<string, OfferLocation>, imagesById: Record<string, { objectKey: string; mimeType: string; checksum: string; size: number }> = {}) {
-  const maps: Record<string, Map<string, string[]>> = {
-    market: new Map(), make: new Map(), model: new Map(), year: new Map(), budget: new Map(),
-    power: new Map(), mileage: new Map(), engine: new Map(), fuel: new Map(), body: new Map(),
-    transmission: new Map(), drive: new Map(), hasPrice: new Map(),
-  };
+  // Public search and facets use compact current projections. Only the market
+  // shard is still read by the homepage; the thousands of per-value shards that
+  // used to be written here were dead data duplicated in every generation.
+  const maps: Record<string, Map<string, string[]>> = { market: new Map() };
   const makes = new Map<string, string>();
   const models = new Map<string, { make: string; model: string }>();
   for (const o of offers) {
@@ -835,11 +888,7 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
     const model = cleanFacet(o.model);
     if (make) makes.set(cleanShard(make), make);
     if (make && model) models.set(`${cleanShard(make)}:${cleanShard(model)}`, { make, model });
-    const pairs = {
-      market: o.market, make, model: `${make}:${model}`, year: o.year, budget: budgetBucket(o.totalRub),
-      power: powerBucket(o.powerHp), mileage: mileageBucket(o.mileageKm), engine: engineBucket(o.engineCc),
-      fuel: o.fuel, body: o.bodyType, transmission: o.transmission, drive: o.drive, hasPrice: o.totalRub ? "yes" : "no",
-    };
+    const pairs = { market: o.market };
     for (const [name, key] of Object.entries(pairs)) { const map = maps[name]; const shard = cleanShard(key); map.set(shard, [...(map.get(shard) || []), o.id]); }
   }
   await writeJsonAtomic(generationPath(generationId, "indexes/offers-by-id.json"), { generationId, byId });
@@ -975,7 +1024,7 @@ export async function getOffer(id: string) {
   const byId = await offerLocationIndexCache;
   const loc = byId.byId[id];
   if (!loc) return null;
-  const path = offerPath(manifest.generationId, loc.market, loc.chunk);
+  const path = storedOfferChunkPath(manifest.generationId, loc.market, loc.chunk);
   let chunkPromise = offerChunkCache.get(path);
   if (!chunkPromise) {
     chunkPromise = readDataJson<VehicleOffer[]>(path, []).catch((error) => { offerChunkCache.delete(path); throw error; });
@@ -1114,7 +1163,7 @@ export async function searchOffers(params: CatalogSearchParams) {
   for (const id of pageIds) { const loc = byId.byId[id]; if (loc) chunkKeys.set(`${loc.market}/${loc.chunk}`, loc); }
   const chunkLocations = [...chunkKeys.values()];
   const readConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_SEARCH_CHUNK_CONCURRENCY || 12)));
-  const loaded = (await mapWithConcurrency(chunkLocations, readConcurrency, (loc) => readDataJson<VehicleOffer[]>(offerPath(manifest.generationId, loc.market, loc.chunk), []))).flat();
+  const loaded = (await mapWithConcurrency(chunkLocations, readConcurrency, (loc) => readDataJson<VehicleOffer[]>(storedOfferChunkPath(manifest.generationId, loc.market, loc.chunk), []))).flat();
   let items = loaded.filter((offer) => pageSet.has(offer.id) && isPublicOffer(offer));
   const rank = new Map(pageIds.map((id, index) => [id, index]));
   items.sort((a,b) => (rank.get(a.id) ?? Number.MAX_SAFE_INTEGER) - (rank.get(b.id) ?? Number.MAX_SAFE_INTEGER));
@@ -1175,7 +1224,7 @@ export async function readHomeCatalogSnapshot(perMarket = 6) {
     }
     const readConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_SEARCH_CHUNK_CONCURRENCY || 12)));
     const loaded = (await mapWithConcurrency([...chunkLocations.values()], readConcurrency, (location) =>
-      readDataJson<VehicleOffer[]>(offerPath(manifest.generationId, location.market, location.chunk), []))).flat();
+      readDataJson<VehicleOffer[]>(storedOfferChunkPath(manifest.generationId, location.market, location.chunk), []))).flat();
     for (const offer of loaded.filter(isPublicOffer)) fallbackById.set(offer.id, offer);
   }
 

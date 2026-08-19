@@ -2,10 +2,6 @@ name: Japan JPAuc · publish 100 verified cards
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/japan-jpauc-100-smoke.yml"
 
 permissions:
   contents: read
@@ -75,7 +71,7 @@ jobs:
       CATALOG_REBUILD_MARKETS: japan
       CATALOG_REBUILD_PUBLISH_REPORT: japan-jpauc-publish-report.json
       CATALOG_PUBLISH_MAX_PER_MARKET: "30000"
-      CATALOG_OFFER_RETENTION_MS: "259200000"
+      CATALOG_OFFER_RETENTION_MS: "2592000000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
     steps:
       - uses: actions/checkout@v4

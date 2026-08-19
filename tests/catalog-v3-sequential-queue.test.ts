@@ -16,20 +16,16 @@ test("obsolete Catalog V3 automatic chain remains disabled", () => {
 test("daily working markets own Korea, China and Europe while Georgia stays on Yandex v2", () => {
   assert.match(dailyWorkingMarkets, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"/);
   assert.match(dailyWorkingMarkets, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
-  for (const market of ["korea", "china", "europe"]) {
-    assert.match(dailyWorkingMarkets, new RegExp(`\\n  publish-${market}:`));
-    assert.match(dailyWorkingMarkets, new RegExp(`RECOVERY_PUBLISH_MARKET: ${market}`));
-    assert.match(dailyWorkingMarkets, new RegExp(`CATALOG_AUDIT_ASSERT_MARKETS: ${market}`));
-  }
-  assert.match(dailyWorkingMarkets, /publish-china:[\s\S]*needs: \[validate, merge, publish-korea\]/);
-  assert.match(dailyWorkingMarkets, /publish-europe:[\s\S]*needs: \[validate, merge, publish-china\]/);
+  assert.match(dailyWorkingMarkets, /\n  publish:/);
+  assert.match(dailyWorkingMarkets, /RECOVERY_BATCH_MARKETS: korea,china,europe/);
+  assert.match(dailyWorkingMarkets, /catalog-live-recovery-publish-batch\.mjs/);
+  assert.doesNotMatch(dailyWorkingMarkets, /\n  publish-(?:korea|china|europe):/);
   assert.doesNotMatch(dailyWorkingMarkets, /\n  publish-georgia:/);
   assert.doesNotMatch(dailyWorkingMarkets, /myauto_georgia_list|autopapa_georgia_open/);
-  assert.match(dailyWorkingMarkets, /publish-korea:[\s\S]*timeout-minutes: 120/);
-  assert.match(dailyWorkingMarkets, /publish-europe:[\s\S]*timeout-minutes: 120/);
-  assert.match(dailyWorkingMarkets, /CATALOG_GALLERY_MIN_IMAGES: "5"/);
+  assert.match(dailyWorkingMarkets, /publish:[\s\S]*timeout-minutes: 180/);
+  assert.doesNotMatch(dailyWorkingMarkets, /CATALOG_GALLERY_MIN_IMAGES/);
   assert.doesNotMatch(dailyWorkingMarkets, /Publish markets serially, preserving all seven/);
-  assert.match(dailyWorkingMarkets, /\n  final-audit:/);
+  assert.match(dailyWorkingMarkets, /Audit all seven after the daily cycle/);
 });
 
 test("daily UAE source failure cannot block Kyrgyzstan publication", () => {

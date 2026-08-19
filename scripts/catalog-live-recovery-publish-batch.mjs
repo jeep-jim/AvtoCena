@@ -5,7 +5,9 @@ import path from "node:path";
 const { persistCatalogOffers, readMarketOffers, readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
 const { credibleCatalogImages, isCatalogOfferBusinessLiquid, hasCredibleOfferContent, catalogMinYearForMarket, isCatalogYearAllowed, isCatalogMarketSourceAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-const { isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
+const { calculateOfferWithPreliminaryPowerPricing, calculateOfferWithRussiaCustoms, isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
+const { refreshLiveExchangeRates } = await import("../apps/web/lib/catalog/live-rates.ts");
+const { resetCatalogRateCache } = await import("../apps/web/lib/catalog/rates.ts");
 const { PUBLIC_CATALOG_MARKETS, CATALOG_RETENTION_MS, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 
@@ -26,6 +28,58 @@ const retentionCutoff = Date.now() - retentionMs;
 
 if (!markets.length || markets.some((market) => !PUBLIC_CATALOG_MARKETS.includes(market))) {
   throw new Error(`recovery_batch_markets_invalid:${markets.join(",")}`);
+}
+
+const refreshedRates = await refreshLiveExchangeRates();
+resetCatalogRateCache();
+const currentRates = new Map((Array.isArray(refreshedRates?.rates) ? refreshedRates.rates : [])
+  .filter((rate) => String(rate?.rateSource || "") === "cbr")
+  .map((rate) => [String(rate.currency || "").toUpperCase(), rate]));
+let rateRepriced = 0;
+let rateRepriceFailed = 0;
+
+function materiallyDifferentRate(stored, current) {
+  const left = Number(stored?.effectiveRate || 0);
+  const right = Number(current?.effectiveRate || 0);
+  return right > 0 && (!(left > 0) || Math.abs(left - right) / right > 0.000001);
+}
+
+function needsCurrentRateReprice(offer) {
+  const sourceRate = currentRates.get(String(offer?.sourceCurrency || "").toUpperCase());
+  const eurRate = currentRates.get("EUR");
+  if (!sourceRate || !eurRate) return false;
+  return materiallyDifferentRate(offer?.calculationSnapshot?.currencyRate, sourceRate)
+    || materiallyDifferentRate(offer?.calculationSnapshot?.eurRate, eurRate);
+}
+
+async function repriceWithCurrentRates(offer) {
+  if (!needsCurrentRateReprice(offer)) return offer;
+  try {
+    const calculated = isPreliminaryPowerPendingCalculation(offer)
+      ? await calculateOfferWithPreliminaryPowerPricing(offer)
+      : await calculateOfferWithRussiaCustoms(offer);
+    rateRepriced++;
+    return calculated;
+  } catch (error) {
+    rateRepriceFailed++;
+    console.warn(`[current-rate] ${offer?.market || "unknown"}/${offer?.id || "unknown"}: ${String(error?.message || error)}`);
+    return offer;
+  }
+}
+
+async function repriceRowsWithCurrentRates(rows) {
+  const input = rows.map(normalizeVisible);
+  const output = new Array(input.length);
+  let cursor = 0;
+  const concurrency = Math.max(1, Math.min(24, Number(process.env.RECOVERY_REPRICE_CONCURRENCY || 12)));
+  await Promise.all(Array.from({ length: Math.min(concurrency, input.length || 1) }, async () => {
+    while (true) {
+      const index = cursor++;
+      if (index >= input.length) return;
+      output[index] = await repriceWithCurrentRates(input[index]);
+    }
+  }));
+  return output;
 }
 
 function exactCalculation(offer) {
@@ -64,7 +118,7 @@ function publicExistingStillValid(offer) {
   return canonicalPublic(offer) && publishableCalculation(offer) && isCatalogOfferBusinessLiquid(offer);
 }
 function freshness(offer) {
-  return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
+  return Date.parse(String(offer?.auctionDate || offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
 }
 function withinRetention(offer) {
   const timestamp = freshness(offer);
@@ -144,8 +198,7 @@ for (const market of markets) {
   const incoming = new Map();
   const rejected = {};
   const reject = (reason) => { rejected[reason] = Number(rejected[reason] || 0) + 1; };
-  for (const raw of sourceRows) {
-    const offer = normalizeVisible(raw);
+  for (const offer of await repriceRowsWithCurrentRates(sourceRows)) {
     if (!offer?.id || incoming.has(offer.id)) continue;
     if (offer.market !== market) { reject("market"); continue; }
     const year = Number(offer.year || 0);
@@ -162,10 +215,9 @@ for (const market of markets) {
   let previous = [];
   try { previous = await readMarketOffers(market); } catch { previous = []; }
   const candidates = new Map();
-  for (const raw of previous) {
-    const offer = normalizeVisible(raw);
+  for (const offer of await repriceRowsWithCurrentRates(previous)) {
     const year = Number(offer?.year || 0);
-    if (!offer?.id || !["active", "stale"].includes(String(raw?.status || ""))) continue;
+    if (!offer?.id || !["active", "stale"].includes(String(offer?.status || ""))) continue;
     if (!isCatalogYearAllowed(year, market) || !offer.make || !offer.model || offer.images.length < minImagesPerOffer) continue;
     if (!withinRetention(offer) || !publicExistingStillValid(offer)) continue;
     candidates.set(offer.id, offer);
@@ -232,6 +284,9 @@ for (const market of markets) {
     preliminaryCount: rows.filter(isPreliminaryPowerPendingCalculation).length,
     minYear: catalogMinYearForMarket(market),
     retentionMs,
+    rateRepriced,
+    rateRepriceFailed,
+    officialRateDate: String(currentRates.get("EUR")?.rateDate || ""),
     preferredMaxRub,
     maxOffersPerModelYear,
     minImagesPerOffer,
@@ -329,6 +384,9 @@ const report = {
   published: true,
   generationId: manifest.generationId,
   retentionMs,
+  rateRepriced,
+  rateRepriceFailed,
+  officialRateDate: String(currentRates.get("EUR")?.rateDate || ""),
   minImagesPerOffer,
   preserveUntouchedExact,
   byMarket: marketReports,

@@ -3,10 +3,6 @@ run-name: Restore Japan from verified full generation · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/catalog-emergency-restore-japan.yml"
 
 permissions:
   contents: read
@@ -26,7 +22,7 @@ env:
   CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
   CATALOG_IMAGE_STORAGE_MODE: source_urls_only
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
-  CATALOG_OFFER_RETENTION_MS: "259200000"
+  CATALOG_OFFER_RETENTION_MS: "2592000000"
 
 jobs:
   restore:
