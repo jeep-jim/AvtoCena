@@ -32,6 +32,20 @@ function objectBytes(objects) {
   return objects.reduce((sum, object) => sum + Math.max(0, Number(object?.size || 0)), 0);
 }
 
+function catalogPrefixSummary(objects) {
+  const summary = new Map();
+  for (const object of objects) {
+    const key = String(object?.key || "");
+    const parts = key.split("/").filter(Boolean);
+    const prefix = parts.length >= 2 ? parts.slice(0, Math.min(3, parts.length)).join("/") : key || "(unknown)";
+    const current = summary.get(prefix) || { prefix, objects: 0, bytes: 0 };
+    current.objects += 1;
+    current.bytes += Math.max(0, Number(object?.size || 0));
+    summary.set(prefix, current);
+  }
+  return [...summary.values()].sort((left, right) => right.bytes - left.bytes || right.objects - left.objects || left.prefix.localeCompare(right.prefix));
+}
+
 async function mapWithConcurrency(items, concurrency, worker) {
   if (!items.length) return [];
   const results = new Array(items.length);
@@ -79,9 +93,13 @@ if (!storage.listObjects || !storage.deletePrefix || !storage.deleteJson) {
 
 const startedAt = new Date().toISOString();
 const cutoff = Date.now() - GRACE_MS;
-const [publicManifest, internalManifest, generationObjects, internalObjects, imageObjects] = await Promise.all([
+const [publicManifest, internalManifest, catalogObjects, generationObjects, internalObjects, imageObjects] = await Promise.all([
   readDataJson("catalog/manifest.json", { generationId: "", markets: {} }),
   readDataJson("catalog/internal/manifest.json", { generationId: "", sources: {} }),
+  // Inventory the complete catalog namespace. The cleanup used to report
+  // green while only seeing generations/internal/images, leaving large legacy
+  // branches invisible and making bucket growth impossible to explain.
+  storage.listObjects("catalog"),
   storage.listObjects("catalog/generations"),
   storage.listObjects("catalog/internal/offers"),
   storage.listObjects("catalog/images"),
@@ -182,6 +200,7 @@ if (!publicGeneration || !generationIds.length) {
     protectedGenerations: [...protectedGenerations],
     candidateGenerations,
     discovered: {
+      catalogObjects: catalogObjects.length,
       generations: generationIds.length,
       generationObjects: generationObjects.length,
       internalObjects: internalObjects.length,
@@ -193,6 +212,13 @@ if (!publicGeneration || !generationIds.length) {
         images: objectBytes(imageObjects),
         total: objectBytes([...generationObjects, ...internalObjects, ...imageObjects]),
       },
+    },
+    catalogInventory: {
+      objects: catalogObjects.length,
+      bytes: objectBytes(catalogObjects),
+      accountedBytes: objectBytes([...generationObjects, ...internalObjects, ...imageObjects]),
+      unaccountedBytes: Math.max(0, objectBytes(catalogObjects) - objectBytes([...generationObjects, ...internalObjects, ...imageObjects])),
+      prefixes: catalogPrefixSummary(catalogObjects).slice(0, 100),
     },
     planned: {
       generationObjects: generationDeleteObjects.length,
