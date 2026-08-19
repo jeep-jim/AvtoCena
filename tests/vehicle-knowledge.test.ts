@@ -213,3 +213,5 @@ test("vehicle knowledge audit reports recent specification coverage", () => {
   assert.match(knowledgeAudit, /coreSpecificationCoverage/);
   assert.match(knowledgeAudit, /minimumRecentSpecificationCoverage/);
 });
+
+// CI retrigger marker: full V2 read-layer regression.
