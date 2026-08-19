@@ -8,6 +8,7 @@ on:
     paths:
       - ".github/workflows/catalog-storage-cleanup.yml"
       - "scripts/catalog-clean-object-storage.mjs"
+      - "apps/web/lib/data.ts"
   schedule:
     - cron: "40 2 * * *"
 
