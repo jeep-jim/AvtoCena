@@ -533,30 +533,31 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
   const trendUsesCurrency = Boolean(trend) && !savedPriceDelta(pricedOffer) && Boolean(currencyDelta(pricedOffer));
   const trendTitle = trend ? trendUsesCurrency ? "Цена изменилась из-за обновления курса. Нажмите, чтобы увидеть расчёт" : "Изменение относительно предыдущего сохранённого расчёта" : "Ожидается следующий снимок валютного курса";
   const sheetRate: PublicCurrencyRate | null = currency && pricedOffer.calculationSnapshot?.currencyRate?.effectiveRate ? { currency, ...(pricedOffer.calculationSnapshot.currencyRate as PublicCurrencyRate) } : liveRate;
-  const openSheet = () => { if (sheetRate && trend) { setPopoverOpen(false); setSheetOpen(true); } };
+  const openSheet = () => { if (sheetRate && trend && trendUsesCurrency) { setPopoverOpen(false); setSheetOpen(true); } };
   const priceColor = highlightElectrified ? (lightTheme ? "#c58a00" : "#ffd21f") : undefined;
 
   return <div
     ref={panelRoot}
-    className={`relative ${panel ? "ac-price-trend-panel cursor-pointer rounded-[1.35rem] p-4 shadow-[0_14px_38px_rgba(0,0,0,.14)]" : ""} ${stateClass} ${className}`}
-    role={panel ? "button" : undefined}
-    tabIndex={panel ? 0 : undefined}
+    className={`relative ${panel ? `ac-price-trend-panel rounded-[1.35rem] p-4 shadow-[0_14px_38px_rgba(0,0,0,.14)] ${trendUsesCurrency ? "cursor-pointer" : ""}` : ""} ${stateClass} ${className}`}
+    role={panel && trendUsesCurrency ? "button" : undefined}
+    tabIndex={panel && trendUsesCurrency ? 0 : undefined}
     onClick={panel ? (event) => { if (!desktopHover) { event.preventDefault(); event.stopPropagation(); openSheet(); } } : undefined}
     onKeyDown={panel ? (event) => { if ((event.key === "Enter" || event.key === " ") && !desktopHover) { event.preventDefault(); openSheet(); } } : undefined}
   >
     <div className="flex min-w-0 items-center justify-between gap-2"><div className={`${dense ? "text-[8px] sm:text-[10px]" : panel ? "text-[10px] md:text-[11px]" : "text-[10px]"} ac-price-trend-label min-w-0 font-black uppercase tracking-[0.19em] text-[var(--ac-text)]`}>{label}</div>{trend ? <span className={`${dense ? "text-[9px] sm:text-xs" : "text-xs md:text-sm"} ac-price-trend-delta shrink-0 font-black leading-none`} title={trendTitle}>{trend.direction === "down" ? "−" : "+"}{trend.formattedDelta}</span> : null}</div>
     <div className={`${dense ? "mt-1 gap-1 sm:mt-1.5 sm:gap-3" : "mt-1.5 gap-3"} flex min-w-0 items-end justify-between`}>
-      <div className={`ac-price ${priceStateClass} min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName}`} style={priceColor ? { color: priceColor } : undefined}>{hasPrice ? <><span>{money(Number(pricedOffer.totalRub))}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}</div>
+      <div className={`ac-price ${priceStateClass} ${highlightElectrified ? "ac-price--electrified" : ""} min-w-0 font-black leading-none tracking-[-0.05em] ${hasPrice ? "whitespace-nowrap" : "break-words"} ${priceClassName}`} style={priceColor ? { color: priceColor } : undefined}>{hasPrice ? <><span>{money(Number(pricedOffer.totalRub))}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}</div>
       {trend ? <span
         ref={trendRoot}
-        role="button"
-        tabIndex={0}
-        aria-label={`${trend.direction === "down" ? "Цена снизилась" : "Цена выросла"} на ${trend.formattedDelta}. Показать влияние курса валюты`}
-        aria-expanded={popoverOpen || sheetOpen}
-        className={`ac-price-trend-arrow relative flex shrink-0 items-center rounded-lg pb-0.5 outline-none transition lg:cursor-pointer lg:hover:scale-105 lg:focus-visible:ring-2 lg:focus-visible:ring-current/50 ${panel ? "cursor-pointer" : "pointer-events-none lg:pointer-events-auto"}`}
-        onMouseEnter={() => { if (desktopHover) setPopoverOpen(true); }}
+        role={trendUsesCurrency ? "button" : undefined}
+        tabIndex={trendUsesCurrency ? 0 : undefined}
+        aria-label={`${trend.direction === "down" ? "Цена снизилась" : "Цена выросла"} на ${trend.formattedDelta}. ${trendUsesCurrency ? "Показать влияние курса валюты" : "Изменение полного расчёта"}`}
+        aria-expanded={trendUsesCurrency ? popoverOpen || sheetOpen : undefined}
+        className={`ac-price-trend-arrow relative flex shrink-0 items-center rounded-lg pb-0.5 outline-none transition ${trendUsesCurrency ? `lg:cursor-pointer lg:hover:scale-105 lg:focus-visible:ring-2 lg:focus-visible:ring-current/50 ${panel ? "cursor-pointer" : "pointer-events-none lg:pointer-events-auto"}` : "pointer-events-none"}`}
+        onMouseEnter={() => { if (trendUsesCurrency && desktopHover) setPopoverOpen(true); }}
         onMouseLeave={() => { if (desktopHover) setPopoverOpen(false); }}
         onPointerDown={(event) => {
+          if (!trendUsesCurrency) return;
           if (!panel && !desktopHover) return;
           if (event.pointerType === "mouse" && desktopHover) return;
           event.preventDefault();
@@ -564,20 +565,22 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
           openSheet();
         }}
         onClick={(event) => {
+          if (!trendUsesCurrency) return;
           if (!panel && !desktopHover) return;
           event.preventDefault();
           event.stopPropagation();
           if (desktopHover) setPopoverOpen(true); else openSheet();
         }}
         onKeyDown={(event) => {
+          if (!trendUsesCurrency) return;
           if (event.key === "Enter" || event.key === " ") {
             event.preventDefault();
             event.stopPropagation();
             if (desktopHover) setPopoverOpen((current) => !current); else if (panel) openSheet();
           }
         }}
-      ><TrendArrow direction={trend.direction} className={dense ? "h-5 w-7 sm:h-6 sm:w-8" : "h-6 w-8 md:h-7 md:w-10"} />{desktopHover && popoverOpen ? <TrendPopover offer={pricedOffer} trend={trend} currency={currency || "валюты"} panel={panel} light={lightTheme} /> : null}</span> : null}
+      ><TrendArrow direction={trend.direction} className={dense ? "h-5 w-7 sm:h-6 sm:w-8" : "h-6 w-8 md:h-7 md:w-10"} />{trendUsesCurrency && desktopHover && popoverOpen ? <TrendPopover offer={pricedOffer} trend={trend} currency={currency || "валюты"} panel={panel} light={lightTheme} /> : null}</span> : null}
     </div>
-    {sheetRate && trend ? <CurrencyRatesSheet open={sheetOpen} onClose={() => setSheetOpen(false)} rates={[sheetRate]} initialCurrency={currency} impactRub={trend.deltaRub} priceRub={Number(pricedOffer.totalRub || 0)} /> : null}
+    {sheetRate && trend && trendUsesCurrency ? <CurrencyRatesSheet open={sheetOpen} onClose={() => setSheetOpen(false)} rates={[sheetRate]} initialCurrency={currency} impactRub={trend.deltaRub} priceRub={Number(pricedOffer.totalRub || 0)} /> : null}
   </div>;
 }

@@ -11,6 +11,7 @@ import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
 import { selectCatalogShowcaseDiversity } from "./inventory-quota";
 import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./vehicle-knowledge";
 import { applyEncyclopediaDisplayIdentityBatch } from "./display-identity";
+import { catalogPublicPriority, findCatalogPriceOutliers } from "./public-priority";
 
 const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
@@ -771,7 +772,8 @@ async function persistJapanAuctionHistory(storage: ReturnType<typeof getJsonStor
 function isPublicOffer(o: VehicleOffer) {
   return o.status === "active"
     && isCatalogYearAllowed(o.year, o.market)
-    && hasCredibleOfferContent(o);
+    && hasCredibleOfferContent(o)
+    && catalogPublicPriority(o).eligible;
 }
 async function writeIndexShard(generationId: string, name: string, key: string, ids: string[]) { await writeJsonAtomic(generationPath(generationId, `indexes/${name}/${cleanShard(key)}.json`), { generationId, updatedAt: new Date().toISOString(), ids }); }
 async function runWithConcurrency(tasks: Array<() => Promise<void>>, concurrency: number) {
@@ -954,7 +956,11 @@ export async function publishCurrentCatalogReadModels() {
   // Keep source/internal objects immutable. Public read models receive the
   // same deterministic V2 + source-translation identity used by cards, so
   // facets, filters, breadcrumbs, SEO pages and offer shards cannot disagree.
-  const offers = await applyEncyclopediaDisplayIdentityBatch(storedOffers);
+  const identifiedOffers = await applyEncyclopediaDisplayIdentityBatch(storedOffers);
+  const priceOutliers = findCatalogPriceOutliers(identifiedOffers);
+  const rejectedPriceIds = new Set(priceOutliers.map((outlier) => outlier.id));
+  const offers = identifiedOffers.filter((offer) => !rejectedPriceIds.has(offer.id));
+  const previousAllProjection = await readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION).catch(() => ({ generationId: "", items: [] }));
 
   const makes = uniqueText(offers.map((offer) => offer.make)).sort((a, b) => a.localeCompare(b, "ru"));
   const models = [...new Map(offers.map((offer) => {
@@ -996,12 +1002,20 @@ export async function publishCurrentCatalogReadModels() {
   await writeJsonAtomic(currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION), { generationId: manifest.generationId, items: allProjectionItems }, false);
   const brandSummary = buildCatalogBrandSummary(manifest.generationId, allProjectionItems);
   await writeJsonAtomic(CURRENT_BRAND_SUMMARY_PATH, brandSummary, false);
-  await mapWithConcurrency([...projectionsByBrand.entries()], 16, ([make, items]) =>
-    writeJsonAtomic(currentBrandProjectionPath(make), { generationId: manifest.generationId, items }, false));
+  const brandProjectionsToWrite = new Set([
+    ...projectionsByBrand.keys(),
+    ...(previousAllProjection.items || []).map((row) => catalogBrandReadModelKey(row.make)).filter(Boolean),
+  ]);
+  await mapWithConcurrency([...brandProjectionsToWrite], 16, (make) =>
+    writeJsonAtomic(currentBrandProjectionPath(make), { generationId: manifest.generationId, items: projectionsByBrand.get(make) || [] }, false));
   await mapWithConcurrency([...projectionsByMarket.entries()], 7, ([market, items]) =>
     writeJsonAtomic(currentProjectionPath(market), { generationId: manifest.generationId, items }, false));
-  await mapWithConcurrency([...offersByShard.entries()], 12, ([shard, items]) =>
-    writeJsonAtomic(`catalog/public/offers/${shard}.json`, { generationId: manifest.generationId, items }, false));
+  const offerShardsToWrite = new Set([
+    ...offersByShard.keys(),
+    ...(previousAllProjection.items || []).map((row) => currentOfferShardName(row.id)),
+  ]);
+  await mapWithConcurrency([...offerShardsToWrite], 12, (shard) =>
+    writeJsonAtomic(`catalog/public/offers/${shard}.json`, { generationId: manifest.generationId, items: offersByShard.get(shard) || [] }, false));
   const aiProductFeed = await publishAiProductFeed({ generationId: manifest.generationId, items: allProjectionItems });
 
   return {
@@ -1013,6 +1027,8 @@ export async function publishCurrentCatalogReadModels() {
     brandSummaryCount: Object.keys(brandSummary.brands).length,
     brandProjectionCount: projectionsByBrand.size,
     offerShards: offersByShard.size,
+    priceOutliersRejected: priceOutliers.length,
+    priceOutliers: priceOutliers.slice(0, 50),
     aiProductFeedProducts: aiProductFeed.productCount,
     aiProductFeedBytes: aiProductFeed.size,
   };
@@ -1020,8 +1036,7 @@ export async function publishCurrentCatalogReadModels() {
 export async function getOffer(id: string) {
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
   if (current.generationId === manifest.generationId) {
-    const offer = (current.items || []).find((item) => item.id === id && isPublicOffer(item));
-    if (offer) return offer;
+    return (current.items || []).find((item) => item.id === id && isPublicOffer(item)) || null;
   }
   if (offerLookupCacheGeneration !== manifest.generationId) {
     offerLookupCacheGeneration = manifest.generationId;

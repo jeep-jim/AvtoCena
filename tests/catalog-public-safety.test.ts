@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { catalogOfferVisibleRub } from "../apps/web/lib/catalog/public-priority";
+import { catalogOfferVisibleRub, findCatalogPriceOutliers } from "../apps/web/lib/catalog/public-priority";
 import { hasCredibleOfferContent } from "../apps/web/lib/catalog/offer-quality";
 
 // Regression coverage for the exact public failures reported from production cards.
@@ -50,9 +50,11 @@ function sourceOffer(overrides: Record<string, unknown> = {}) {
   } as any;
 }
 
-test("public price never exposes implausible raw calculated totals", () => {
+test("public price requires a complete calculation and keeps a hard corruption ceiling", () => {
   assert.equal(catalogOfferVisibleRub(calculatedOffer(3_200_000)), 3_200_000);
-  assert.equal(catalogOfferVisibleRub(calculatedOffer(56_609_760)), 0);
+  // High-end cars are not globally hidden by price alone; peer comparison
+  // below distinguishes a legitimate Rolls-Royce from a broken Ford parse.
+  assert.equal(catalogOfferVisibleRub(calculatedOffer(56_609_760)), 56_609_760);
   assert.equal(catalogOfferVisibleRub(calculatedOffer(346_980_250)), 0);
   assert.equal(catalogOfferVisibleRub({ ...calculatedOffer(3_200_000), calculationSnapshot: { customs: { status: "ready" }, breakdown: [] } }), 0);
 });
@@ -105,4 +107,50 @@ test("JPAuc may publish its verified three source photos", () => {
     },
   });
   assert.equal(hasCredibleOfferContent(offer), true);
+});
+
+test("same-model peer median rejects a tenfold price parse without hiding legitimate peers", () => {
+  const fordEverest = [
+    ["everest-1", 7_251_986],
+    ["everest-2", 7_804_265],
+    ["everest-3", 8_384_049],
+    ["everest-4", 8_728_965],
+    ["everest-bad", 97_800_816],
+  ].map(([id, totalRub]) => ({
+    ...calculatedOffer(Number(totalRub), "uae"),
+    id,
+    make: "Ford",
+    model: "Everest",
+    year: 2024,
+    priceMode: "fixed",
+    powertrainKind: "combustion",
+  }));
+  const outliers = findCatalogPriceOutliers(fordEverest);
+  assert.equal(outliers.length, 1);
+  assert.equal(outliers[0].id, "everest-bad");
+  assert.equal(outliers[0].direction, "above");
+  assert.equal(outliers[0].peerCount, 4);
+  assert.ok(outliers[0].ratioToMedian > 10);
+});
+
+test("price comparison keeps auction starts separate from fixed-price listings", () => {
+  const fixed = [7_000_000, 7_300_000, 7_600_000, 7_900_000].map((totalRub, index) => ({
+    ...calculatedOffer(totalRub, "japan"),
+    id: `fixed-${index}`,
+    make: "Toyota",
+    model: "Land Cruiser",
+    year: 2024,
+    priceMode: "fixed",
+    powertrainKind: "combustion",
+  }));
+  const auction = {
+    ...calculatedOffer(900_000, "japan"),
+    id: "auction-start",
+    make: "Toyota",
+    model: "Land Cruiser",
+    year: 2024,
+    priceMode: "auction_start",
+    powertrainKind: "combustion",
+  };
+  assert.deepEqual(findCatalogPriceOutliers([...fixed, auction]), []);
 });

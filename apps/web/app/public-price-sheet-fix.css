@@ -90,6 +90,14 @@ html[data-theme="light"] .ac-catalog-card,
   color: #ef3340 !important;
 }
 
+/* Electrified prices stay yellow regardless of the independent up/down trend. */
+.ac-page-copy .ac-price.ac-price--electrified {
+  color: #ffd21f !important;
+}
+html[data-theme="light"] .ac-page-copy .ac-price.ac-price--electrified {
+  color: #c58a00 !important;
+}
+
 html[data-theme="light"] .ac-price-trend-panel.is-down {
   background: #cfe5d8 !important;
 }

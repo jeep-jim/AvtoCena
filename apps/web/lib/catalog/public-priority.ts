@@ -14,6 +14,19 @@ export type CatalogPublicPriority = {
   japanAuction: boolean;
 };
 
+export type CatalogPriceOutlier = {
+  id: string;
+  market: string;
+  make: string;
+  model: string;
+  year: number;
+  totalRub: number;
+  peerMedianRub: number;
+  peerCount: number;
+  ratioToMedian: number;
+  direction: "below" | "above";
+};
+
 const REQUIRED_PRICE_LINES = [
   "car",
   "topavto-commission",
@@ -193,4 +206,76 @@ export function compareCatalogPublicPriority(left: Partial<VehicleOffer> | any, 
     || a.popularityDecile - b.popularityDecile
     || a.visibleRub - b.visibleRub
     || Date.parse(String(right?.updatedAt || "")) - Date.parse(String(left?.updatedAt || ""));
+}
+
+function normalizedPeerIdentity(value: unknown) {
+  return String(value || "").replace(/\s+/g, " ").trim().toLocaleLowerCase("ru-RU");
+}
+
+function pricePeerGroup(offer: Partial<VehicleOffer> | any) {
+  const market = normalizedPeerIdentity(offer?.market);
+  const make = normalizedPeerIdentity(offer?.make);
+  const model = normalizedPeerIdentity(offer?.model);
+  const saleMode = String(offer?.priceMode || "").toLowerCase() === "auction_start" ? "auction_start" : "fixed";
+  const kind = String(offer?.powertrainKind || "").toLowerCase();
+  const fuel = String(offer?.fuel || "").toLowerCase();
+  const powertrain = ["electric", "series_hybrid", "other_hybrid"].includes(kind)
+    || /electric|battery|\bbev\b|\bev\b|hybrid|phev|hev|mhev|электро|гибрид/i.test(fuel)
+    ? "electrified"
+    : "combustion";
+  return market && make && model ? `${market}|${make}|${model}|${saleMode}|${powertrain}` : "";
+}
+
+function median(values: number[]) {
+  const sorted = [...values].sort((left, right) => left - right);
+  const middle = Math.floor(sorted.length / 2);
+  return sorted.length % 2 ? sorted[middle] : Math.round((sorted[middle - 1] + sorted[middle]) / 2);
+}
+
+export function findCatalogPriceOutliers(offers: Array<Partial<VehicleOffer> | any>): CatalogPriceOutlier[] {
+  const minimumPeers = Math.max(3, Number(process.env.CATALOG_PRICE_OUTLIER_MIN_PEERS || 3));
+  const maximumMedianRatio = Math.max(3, Number(process.env.CATALOG_PRICE_OUTLIER_MAX_MEDIAN_RATIO || 5));
+  const maximumYearDistance = Math.max(0, Number(process.env.CATALOG_PRICE_OUTLIER_MAX_YEAR_DISTANCE || 2));
+  const groups = new Map<string, Array<{ offer: any; totalRub: number; year: number }>>();
+
+  for (const offer of offers) {
+    const key = pricePeerGroup(offer);
+    const totalRub = catalogOfferVisibleRub(offer);
+    const year = positive(offer?.year, new Date().getFullYear() + 2);
+    if (!key || !totalRub || !year) continue;
+    groups.set(key, [...(groups.get(key) || []), { offer, totalRub, year }]);
+  }
+
+  const outliers: CatalogPriceOutlier[] = [];
+  for (const rows of groups.values()) {
+    for (const row of rows) {
+      const peers = rows
+        .filter((candidate) => candidate.offer?.id !== row.offer?.id && Math.abs(candidate.year - row.year) <= maximumYearDistance)
+        .map((candidate) => candidate.totalRub)
+        .filter((value) => value > 0);
+      if (peers.length < minimumPeers) continue;
+      const peerMedianRub = median(peers);
+      if (!peerMedianRub) continue;
+      const ratioToMedian = row.totalRub / peerMedianRub;
+      const direction = ratioToMedian >= maximumMedianRatio
+        ? "above"
+        : ratioToMedian <= 1 / maximumMedianRatio
+          ? "below"
+          : null;
+      if (!direction) continue;
+      outliers.push({
+        id: String(row.offer?.id || ""),
+        market: String(row.offer?.market || ""),
+        make: String(row.offer?.make || ""),
+        model: String(row.offer?.model || ""),
+        year: row.year,
+        totalRub: row.totalRub,
+        peerMedianRub,
+        peerCount: peers.length,
+        ratioToMedian: Math.round(ratioToMedian * 100) / 100,
+        direction,
+      });
+    }
+  }
+  return outliers;
 }
