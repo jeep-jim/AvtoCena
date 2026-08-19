@@ -32,7 +32,7 @@ function objectBytes(objects) {
   return objects.reduce((sum, object) => sum + Math.max(0, Number(object?.size || 0)), 0);
 }
 
-function catalogPrefixSummary(objects) {
+function objectPrefixSummary(objects) {
   const summary = new Map();
   for (const object of objects) {
     const key = String(object?.key || "");
@@ -93,9 +93,12 @@ if (!storage.listObjects || !storage.deletePrefix || !storage.deleteJson) {
 
 const startedAt = new Date().toISOString();
 const cutoff = Date.now() - GRACE_MS;
-const [publicManifest, internalManifest, catalogObjects, generationObjects, internalObjects, imageObjects] = await Promise.all([
+const [publicManifest, internalManifest, namespaceObjects, catalogObjects, generationObjects, internalObjects, imageObjects] = await Promise.all([
   readDataJson("catalog/manifest.json", { generationId: "", markets: {} }),
   readDataJson("catalog/internal/manifest.json", { generationId: "", sources: {} }),
+  // This is read-only inventory of the complete configured Object Storage
+  // namespace. Deletion remains strictly limited to the guarded catalog paths.
+  storage.listObjects(""),
   // Inventory the complete catalog namespace. The cleanup used to report
   // green while only seeing generations/internal/images, leaving large legacy
   // branches invisible and making bucket growth impossible to explain.
@@ -218,7 +221,14 @@ if (!publicGeneration || !generationIds.length) {
       bytes: objectBytes(catalogObjects),
       accountedBytes: objectBytes([...generationObjects, ...internalObjects, ...imageObjects]),
       unaccountedBytes: Math.max(0, objectBytes(catalogObjects) - objectBytes([...generationObjects, ...internalObjects, ...imageObjects])),
-      prefixes: catalogPrefixSummary(catalogObjects).slice(0, 100),
+      prefixes: objectPrefixSummary(catalogObjects).slice(0, 100),
+    },
+    namespaceInventory: {
+      objects: namespaceObjects.length,
+      bytes: objectBytes(namespaceObjects),
+      catalogBytes: objectBytes(catalogObjects),
+      nonCatalogBytes: Math.max(0, objectBytes(namespaceObjects) - objectBytes(catalogObjects)),
+      prefixes: objectPrefixSummary(namespaceObjects).slice(0, 100),
     },
     planned: {
       generationObjects: generationDeleteObjects.length,
