@@ -93,9 +93,10 @@ if (!storage.listObjects || !storage.deletePrefix || !storage.deleteJson) {
 
 const startedAt = new Date().toISOString();
 const cutoff = Date.now() - GRACE_MS;
-const [publicManifest, internalManifest, namespaceObjects, catalogObjects, generationObjects, internalObjects, imageObjects] = await Promise.all([
+const [publicManifest, internalManifest, bucketObjects, namespaceObjects, catalogObjects, generationObjects, internalObjects, imageObjects] = await Promise.all([
   readDataJson("catalog/manifest.json", { generationId: "", markets: {} }),
   readDataJson("catalog/internal/manifest.json", { generationId: "", sources: {} }),
+  storage.listBucketObjects?.("") || storage.listObjects(""),
   // This is read-only inventory of the complete configured Object Storage
   // namespace. Deletion remains strictly limited to the guarded catalog paths.
   storage.listObjects(""),
@@ -229,6 +230,13 @@ if (!publicGeneration || !generationIds.length) {
       catalogBytes: objectBytes(catalogObjects),
       nonCatalogBytes: Math.max(0, objectBytes(namespaceObjects) - objectBytes(catalogObjects)),
       prefixes: objectPrefixSummary(namespaceObjects).slice(0, 100),
+    },
+    physicalBucketInventory: {
+      objects: bucketObjects.length,
+      bytes: objectBytes(bucketObjects),
+      configuredNamespaceBytes: objectBytes(namespaceObjects),
+      outsideConfiguredNamespaceBytes: Math.max(0, objectBytes(bucketObjects) - objectBytes(namespaceObjects)),
+      prefixes: objectPrefixSummary(bucketObjects).slice(0, 100),
     },
     planned: {
       generationObjects: generationDeleteObjects.length,
