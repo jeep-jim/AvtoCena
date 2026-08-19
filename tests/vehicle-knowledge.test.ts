@@ -4,8 +4,10 @@ import fs from "node:fs";
 import {
   readEncyclopediaKnowledgeModels,
   readEncyclopediaKnowledgeVariants,
+  readStagingEncyclopediaCorpus,
   readVerifiedEncyclopediaCorpus,
 } from "../apps/web/lib/catalog/encyclopedia";
+import { readBrandModelDirectory } from "../apps/web/lib/catalog/model-directory";
 import {
   enrichOfferWithVehicleKnowledge,
   findVehicleModel,
@@ -115,7 +117,15 @@ test("verified encyclopedia corpus is intact and complete", async () => {
   assert.ok(corpus.variants.some((row) => row.id === "toyota/crown-sport/sixteenth-generation/sport-rs-phev-2023" && row.powerKw === 225));
 });
 
-test("full verified corpus remains read-only and cannot expand calculator runtime", async () => {
+test("staging encyclopedia corpus exposes source-backed models and observations read-only", async () => {
+  const corpus = await readStagingEncyclopediaCorpus();
+  assert.equal(corpus.models.length, 1_619);
+  assert.equal(corpus.variants.length, 19_240);
+  assert.ok(corpus.models.some((row) => row.id === "bentley/continental-gt"));
+  assert.ok(corpus.variants.some((row) => row.id === "bentley/continental-gt/fourth-generation/speed-global" && row.powerHp === 782));
+});
+
+test("full encyclopedia read layer remains isolated from calculator runtime", async () => {
   resetVehicleKnowledgeCache();
   const [runtimeModels, runtimeVariants, publicModels, publicVariants] = await Promise.all([
     readVehicleKnowledgeModels(),
@@ -129,44 +139,44 @@ test("full verified corpus remains read-only and cannot expand calculator runtim
   assert.ok(!runtimeModels.some((row) => row.id === "toyota/premio"));
   assert.ok(!runtimeVariants.some((row) => row.id === "toyota/premio/second-generation/f-2016"));
 
-  assert.ok(publicModels.length > runtimeModels.length);
   assert.ok(publicVariants.length > runtimeVariants.length);
   assert.ok(publicModels.some((row) => row.id === "toyota/premio"));
   assert.ok(publicModels.some((row) => row.id === "toyota/regiusace"));
+  assert.ok(publicModels.some((row) => row.id === "bentley/continental-gt"));
   assert.ok(publicVariants.some((row) => row.id === "toyota/premio/second-generation/f-2016"));
+  assert.ok(publicVariants.some((row) => row.id === "bentley/continental-gt/fourth-generation/speed-global"));
 });
 
-test("model directory aggregates verified encyclopedia variants and power references into public characteristics", () => {
-  assert.match(modelDirectory, /readEncyclopediaKnowledgeModels/);
-  assert.match(modelDirectory, /readEncyclopediaKnowledgeVariants/);
-  assert.match(modelDirectory, /readVehiclePowerKnowledge/);
+test("Bentley directory uses canonical V2 models instead of legacy pseudo-models", async () => {
+  const models = await readBrandModelDirectory("Bentley");
+  const names = models.map((row) => row.model);
+  assert.deepEqual(names.slice().sort(), ["Bentayga", "Continental", "Continental Flying Spur", "Continental GT", "Continental GTC", "Flying Spur", "Mulsanne"].sort());
+  assert.ok(!names.includes("Mark"));
+  assert.ok(!names.includes("3 Litre"));
+  const gt = models.find((row) => row.id === "bentley/continental-gt");
+  assert.ok(gt);
+  assert.ok(Number(gt.knowledge.records) >= 5);
+  assert.ok(Number(gt.knowledge.trustedVariants) >= 1);
+  assert.equal(gt.knowledge.powerHp?.max, 782);
+});
+
+test("model directory separates trusted V2 specifications from read-only observations", () => {
+  assert.match(modelDirectory, /trustedVariant/);
+  assert.match(modelDirectory, /observations/);
+  assert.match(modelDirectory, /row\.sourceType === "encyclopedia_v2"/);
+  assert.match(modelDirectory, /encyclopediaEvidenceOfficial/);
   assert.match(modelDirectory, /power30MinKw/);
   assert.match(modelDirectory, /utilizationPowerKw/);
-  assert.match(modelDirectory, /engineCc/);
-  assert.match(modelDirectory, /knowledge: summarizeModel/);
 });
 
-test("public brand and model pages render encyclopedia power, kW and 30-minute fields", () => {
-  assert.match(brandDirectoryUi, /Нажмите на модель, чтобы раскрыть характеристики/);
-  assert.match(brandDirectoryUi, /aria-controls/);
-  assert.match(brandDirectoryUi, /Все характеристики и предложения/);
-  assert.match(brandDirectoryUi, /utilizationPowerKw/);
-  assert.match(brandDirectoryUi, /power30MinKw/);
-  assert.match(brandDirectoryUi, /fuels/);
-  assert.match(brandDirectoryUi, /powertrains/);
-  assert.match(modelPage, /Энциклопедия АвтоЦена/);
-  assert.match(modelPage, /Автосопоставление включено/);
-  assert.match(modelPage, /30-минутную мощность/);
-  assert.match(modelPage, /utilizationPowerKw/);
-  assert.match(modelPage, /readEncyclopediaKnowledgeVariants/);
-  assert.match(modelPage, /readVehiclePowerKnowledge/);
-});
-
-test("verified V2 cards stay visible without fabricated power", () => {
-  assert.match(modelPage, /const powerHp = positive\(variant\.powerHp, 2_500\)/);
-  assert.doesNotMatch(modelPage, /const powerHp = (?:Number|positive)\(variant\.powerHp[^;]*;\s*if \(!powerHp\) continue/);
-  assert.match(modelPage, /variantName/);
-  assert.match(modelPage, /Серия \/ период/);
+test("public encyclopedia shows verified specs and source observations separately", () => {
+  assert.match(brandDirectoryUi, /Нажмите на модель, чтобы раскрыть собранные сведения/);
+  assert.match(brandDirectoryUi, /Проверенных/);
+  assert.match(brandDirectoryUi, /Наблюдений/);
+  assert.match(modelPage, /Проверенные характеристики и собранные source-backed наблюдения/);
+  assert.match(modelPage, /В расчёт — только exact/);
+  assert.match(modelPage, /Собранные наблюдения источников/);
+  assert.match(modelPage, /не используются в расчёте/);
   assert.match(modelPage, /эл\.мотор peak/);
   assert.match(modelPage, /система max/);
   assert.match(modelPage, /variant\.sourceType !== "encyclopedia_v2"/);
