@@ -68,6 +68,8 @@ export default async function BrandLandingPage({ params }: PageProps) {
   const similar = (fallbackResult?.items || []).filter((offer: any) => isCrediblePublicOffer(offer)).slice(0, 12);
   const availableMarkets = grouped.map((group) => group.market);
   const knowledgeRecords = models.reduce((sum, model) => sum + Number(model.knowledge.records || 0), 0);
+  const trustedRecords = models.reduce((sum, model) => sum + Number(model.knowledge.trustedVariants || 0) + Number(model.knowledge.references || 0), 0);
+  const observations = models.reduce((sum, model) => sum + Number(model.knowledge.observations || 0), 0);
 
   return <main className="ac-brand-catalog-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
@@ -81,14 +83,16 @@ export default async function BrandLandingPage({ params }: PageProps) {
           <BrandLogoVisual brand={brand.name} className="!h-20 !w-32 md:!h-24 md:!w-36" />
         </div>
         <div className="min-w-0">
-          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Энциклопедия АвтоЦена · {models.length} моделей</div>
+          <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Энциклопедия АвтоЦена · {models.length} канонических моделей</div>
           <h1 className="mt-2 break-words text-4xl font-black leading-[.98] tracking-[-0.045em] md:text-6xl">{brand.name}</h1>
           <p className="mt-4 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">
-            Модели, характеристики и проверенные модификации {brand.name} в единой базе АвтоЦены. Выберите модель, изучите доступные данные и сразу перейдите к актуальным предложениям или расчёту автомобиля под ключ.
+            Канонические модели, проверенные характеристики и собранные source-backed наблюдения {brand.name}. Наблюдения доступны для прозрачности и верификации, но в расчёт подставляются только подтверждённые спецификации.
           </p>
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-black">
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{models.length} моделей</span>
-            <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{knowledgeRecords} записей характеристик</span>
+            <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{knowledgeRecords} записей V2</span>
+            <span className="rounded-full bg-emerald-500/10 px-3 py-2 text-emerald-500">{trustedRecords} проверенных</span>
+            {observations ? <span className="rounded-full bg-amber-500/10 px-3 py-2 text-amber-500">{observations} наблюдений</span> : null}
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{availableMarkets.length || 7} рынков</span>
           </div>
         </div>
