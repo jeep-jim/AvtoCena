@@ -132,7 +132,9 @@ export class EncyclopediaIdentityResolver {
       this.models.set(model.id, model);
       const map = this.modelMap(model.brandId);
       addCandidate(map, model.canonicalName, { entityId: model.id, source: "canonical" });
-      for (const alias of model.aliases || []) {
+      // V2 distinguishes editorial aliases from source-observed spellings, but
+      // both may become identity authority only when they carry safe=true.
+      for (const alias of [...(model.aliases || []), ...(model.sourceNames || [])]) {
         if (aliasSafe(alias)) addCandidate(map, aliasValue(alias), { entityId: model.id, source: "safe_alias" });
       }
     }

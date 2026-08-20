@@ -3,6 +3,7 @@ import fs from "node:fs";
 import test from "node:test";
 
 const catalogPrice = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogPrice.tsx", import.meta.url), "utf8");
+const auctionCardPrice = fs.readFileSync(new URL("../apps/web/components/catalog/AuctionCardPrice.tsx", import.meta.url), "utf8");
 const preliminaryPrice = fs.readFileSync(new URL("../apps/web/components/catalog/PreliminaryPrice.tsx", import.meta.url), "utf8");
 const priceTrend = fs.readFileSync(new URL("../apps/web/components/catalog/PriceTrend.tsx", import.meta.url), "utf8");
 const carsLoading = fs.readFileSync(new URL("../apps/web/app/(public)/cars/loading.tsx", import.meta.url), "utf8");
@@ -39,14 +40,19 @@ test("catalog price colors distinguish electrified, preliminary and regular calc
   assert.match(offerPage, /height:auto!important;aspect-ratio:4\/3!important/);
 });
 
-test("Japanese auction results use a neutral historical price and auction gavel", () => {
+test("Japanese auction microcards use a neutral historical price and non-navigating plain gavel", () => {
   assert.match(catalogPrice, /japanAuction/);
-  assert.match(catalogPrice, /AuctionResultPrice/);
-  assert.match(priceTrend, /function AuctionGavelIcon/);
-  assert.match(priceTrend, /import \{ Gavel \} from "lucide-react"/);
-  assert.match(priceTrend, /bg-\[#ef3340\]/);
-  assert.match(priceTrend, /Завершённый аукционный лот/);
-  assert.match(priceTrend, /Текущий курс её не изменяет/);
+  assert.match(catalogPrice, /AuctionCardPrice/);
+  assert.match(auctionCardPrice, /import \{ Gavel \} from "lucide-react"/);
+  assert.match(auctionCardPrice, /bg-transparent/);
+  assert.doesNotMatch(auctionCardPrice, /bg-\[#ef3340\]/);
+  assert.match(auctionCardPrice, /bottom-\[calc\(100%\+10px\)\]/);
+  assert.match(auctionCardPrice, /Завершённый аукционный лот/);
+  assert.match(auctionCardPrice, /Текущий курс её не изменяет/);
+  assert.match(auctionCardPrice, /event\.preventDefault\(\)/);
+  assert.match(auctionCardPrice, /event\.stopPropagation\(\)/);
+  assert.match(priceSheetCss, /\.ac-auction-gavel[^}]+background:\s*transparent !important/s);
+  assert.match(priceTrend, /export function AuctionResultPrice/);
   assert.match(offerPage, /\{japanAuction/);
   assert.match(offerPage, /<AuctionResultPrice offer=\{o\} label="Завершённый аукцион"/);
   assert.match(offerPage, /html\[data-theme="light"\][^}]+\.ac-offer-price-panel[^}]+background:#fff!important/s);
