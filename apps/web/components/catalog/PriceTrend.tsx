@@ -519,9 +519,10 @@ export function AuctionResultPrice({
         type="button"
         aria-label="Что означает завершённый аукционный лот"
         aria-expanded={open}
-        className="relative flex shrink-0 items-center rounded-xl bg-[#ef3340] p-1.5 text-white shadow-[0_5px_14px_rgba(239,51,64,.28)] outline-none transition hover:bg-[#d92533] focus-visible:ring-2 focus-visible:ring-red-500/50"
+        className="ac-offer-auction-gavel relative flex shrink-0 items-center rounded-xl bg-[#11151d] p-1.5 text-white outline-none transition focus-visible:ring-2 focus-visible:ring-white/50"
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
+        onPointerDown={(event) => { event.preventDefault(); event.stopPropagation(); }}
         onClick={(event) => { event.preventDefault(); event.stopPropagation(); setOpen((current) => !current); }}
       >
         <AuctionGavelIcon className={dense ? "h-5 w-5 sm:h-6 sm:w-6" : "h-7 w-7"} />
@@ -628,8 +629,6 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
         aria-label={`${trend.direction === "down" ? "Цена снизилась" : "Цена выросла"} на ${trend.formattedDelta}. ${trendUsesCurrency ? "Показать влияние курса валюты" : "Показать курс валюты и полный расчёт"}`}
         aria-expanded={canShowRate ? popoverOpen || sheetOpen : undefined}
         className={`ac-price-trend-arrow relative flex shrink-0 items-center rounded-lg pb-0.5 outline-none transition ${canShowRate ? `lg:cursor-pointer lg:hover:scale-105 lg:focus-visible:ring-2 lg:focus-visible:ring-current/50 ${panel ? "cursor-pointer" : "pointer-events-none lg:pointer-events-auto"}` : "pointer-events-none"}`}
-        onMouseEnter={() => { if (canShowRate && desktopHover) setPopoverOpen(true); }}
-        onMouseLeave={() => { if (desktopHover) setPopoverOpen(false); }}
         onPointerDown={(event) => {
           if (!canShowRate) return;
           if (!panel && !desktopHover) return;
@@ -643,7 +642,7 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
           if (!panel && !desktopHover) return;
           event.preventDefault();
           event.stopPropagation();
-          if (desktopHover) setPopoverOpen(true); else openSheet();
+          if (desktopHover) setPopoverOpen((current) => !current); else openSheet();
         }}
         onKeyDown={(event) => {
           if (!canShowRate) return;
