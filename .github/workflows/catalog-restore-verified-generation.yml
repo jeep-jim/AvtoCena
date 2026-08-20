@@ -47,7 +47,10 @@ jobs:
           node --import tsx --test tests/catalog-production-hardening.test.ts tests/catalog-display-identity.test.ts
           npm run typecheck
       - name: Preflight and atomically restore verified generation
-        run: npx tsx scripts/catalog-restore-verified-generation.mjs | tee catalog-restore-verified-generation.log
+        shell: bash
+        run: |
+          set -euo pipefail
+          npx tsx scripts/catalog-restore-verified-generation.mjs | tee catalog-restore-verified-generation.log
       - uses: actions/upload-artifact@v4
         if: always()
         with:
