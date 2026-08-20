@@ -8,6 +8,7 @@ export type PriceMode = "fixed" | "auction_start" | "estimated";
 export type CalculationStatus = "ready" | "needs_data" | "auction_start" | (string & {});
 export type PowertrainKind = "combustion" | "electric" | "series_hybrid" | "other_hybrid" | "unknown";
 export type PowerDataConfidence = "documented" | "source_exact" | "reference" | "estimated";
+export type VehicleCategory = "M1" | "N1" | "unknown";
 export type CatalogKind = "listing" | "auction_result";
 export type AuctionResult = "sold" | "unsold";
 export type AuctionPriceKind = "hammer" | "published_result";
@@ -48,6 +49,10 @@ export type VehicleOffer = {
   transmission?: string;
   drive?: string;
   bodyType?: string;
+  vehicleCategory?: VehicleCategory;
+  tnVedCode?: string;
+  grossVehicleWeightKg?: number;
+  personalUseEligible?: boolean;
   powerHp?: number;
   powerKw?: number;
   icePowerKw?: number;
