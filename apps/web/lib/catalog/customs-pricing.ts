@@ -1,6 +1,6 @@
 import { getActiveMarketVersion } from "../business-settings";
 import { calculateAvtocenaFromBusinessConfig } from "../../../../packages/engine/src/calculation/calculateAvtocena";
-import { calculateRussiaCustomsForIndividual } from "../../../../packages/engine/src/calculation/russiaCustoms";
+import { calculateRussiaCustomsForIndividual } from "../../../../packages/engine/src/calculation/russiaCustomsV2";
 import { resolveCatalogMarketConfig } from "./estimated-market-config";
 import { enrichOfferWithExplicitEngineDisplacement } from "./explicit-engine-displacement";
 import { enrichOfferWithPowerKnowledge } from "./power-knowledge";
@@ -59,8 +59,14 @@ function customsValueSnapshot(rate: any, borderTransportRub: number, customsValu
   return {
     vehiclePriceRub: rate.sourcePriceRub,
     transportToBorderRub: borderTransportRub,
+    transportExcludedFromCustomsValueRub: borderTransportRub,
+    transportIncludedInCustomsValue: false,
     totalRub: customsValueRub,
   };
+}
+
+export function isOfficialCustomsCurrencyRate(rate: any) {
+  return ["cbr", "cbr_live"].includes(String(rate?.rateSource || ""));
 }
 
 function hasTrustedPowerProvenance(offer: VehicleOffer) {
@@ -173,6 +179,21 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
       },
     };
   }
+  if (!isOfficialCustomsCurrencyRate(rate)) {
+    return {
+      ...offer,
+      totalRub: null,
+      calculationStatus: "needs_currency_rate",
+      calculationSnapshot: {
+        ...(offer.calculationSnapshot || {}),
+        currencyRate: rate,
+        sourcePriceRub: rate.sourcePriceRub,
+        pricingConfidence: "unavailable",
+        customs: { status: "needs_data", missing: ["official_source_currency_rate"] },
+        warnings: ["Для точного таможенного расчёта нужен официальный курс Банка России. Биржевой или резервный курс не используется как таможенный."],
+      },
+    };
+  }
 
   const pendingSnapshot = {
     ...(offer.calculationSnapshot || {}),
@@ -198,21 +219,27 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
   }
 
   const eurRate = await convertToRub(1, "EUR");
-  if (!eurRate) {
+  if (!eurRate || !isOfficialCustomsCurrencyRate(eurRate)) {
     return {
       ...offer,
       totalRub: null,
       calculationStatus: "needs_currency_rate",
       calculationSnapshot: {
         ...pendingSnapshot,
-        customs: { status: "needs_data", missing: ["eur_rate"] },
+        eurRate: eurRate || undefined,
+        customs: { status: "needs_data", missing: ["official_eur_rate"] },
         pricingConfidence: "unavailable",
+        warnings: ["Для единой ставки таможенных платежей нужен официальный курс евро Банка России."],
       },
     };
   }
 
   const borderTransportRub = transportToBorderRub(offer);
-  const customsValueRub = rate.sourcePriceRub + borderTransportRub;
+  // For an individual's personal-use vehicle, transport/insurance to the border
+  // is not automatically added to the customs value. Keep it visible in the
+  // audit snapshot but calculate the customs base from the vehicle value itself.
+  const customsValueRub = rate.sourcePriceRub;
+  const motor30MinKnown = documentedMotorPower(offer) > 0;
   const customs = calculateRussiaCustomsForIndividual({
     customsValueRub,
     eurRateRub: Number(eurRate.effectiveRate || 0),
@@ -220,13 +247,18 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     powerHp: offer.powerHp,
     powerKw: offer.powerKw,
     icePowerKw: offer.icePowerKw,
-    power30MinKw: documentedMotorPower(offer) ? offer.power30MinKw : undefined,
-    power30MinKwByMotor: documentedMotorPower(offer) && Array.isArray(offer.power30MinKwByMotor) ? offer.power30MinKwByMotor : undefined,
+    power30MinKw: motor30MinKnown ? offer.power30MinKw : undefined,
+    power30MinKwByMotor: motor30MinKnown && Array.isArray(offer.power30MinKwByMotor) ? offer.power30MinKwByMotor : undefined,
     utilizationPowerKw: hasTrustedUtilizationPower(offer) ? offer.utilizationPowerKw : undefined,
     powertrainKind: offer.powertrainKind,
     productionDate: offer.productionDate,
     year: offer.year,
     fuel: offer.fuel,
+    vehicleCategory: offer.vehicleCategory,
+    tnVedCode: offer.tnVedCode,
+    grossVehicleWeightKg: offer.grossVehicleWeightKg,
+    bodyType: offer.bodyType,
+    personalUseEligible: offer.personalUseEligible,
   });
 
   const configured: any = await getCalculationMarketVersion(offer.market);
@@ -309,7 +341,8 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
   });
 
   const powerEstimated = ["reference", "estimated"].includes(String(offer.powerDataConfidence || ""));
-  const priceEstimated = market.estimated || powerEstimated || customs.ageEstimated || offer.priceMode === "estimated";
+  const customsAssumed = customs.personalUseAssumed || customs.vehicleCategoryAssumed;
+  const priceEstimated = market.estimated || powerEstimated || customs.ageEstimated || customsAssumed || offer.priceMode === "estimated";
   const warnings = [
     ...market.warnings,
     ...customs.warnings,
