@@ -41,7 +41,7 @@ test("brand and model pages use Autocatalog copy and model previews", () => {
 
   assert.match(brandPage, /modelsWithPreviews/);
   assert.match(brandPage, /\/cars\/autocatalog/);
-  assert.match(modelPage, /modelPreviewUrl/);
+  assert.match(modelPage, /heroImageUrl/);
   assert.match(modelPage, /Автокаталог/);
   assert.match(modelDirectory, /model\.previewUrl/);
   assert.match(modelDirectory, /Характеристики дополняются/);

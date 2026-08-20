@@ -224,7 +224,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
     }
   }
   const offers = [...uniqueOffers.values()];
-  const modelPreviewUrl = String(offers.find((offer: any) => offer.images?.[0]?.url || offer.cardImageUrl)?.images?.[0]?.url
+  const heroImageUrl = String(offers.find((offer: any) => offer.images?.[0]?.url || offer.cardImageUrl)?.images?.[0]?.url
     || offers.find((offer: any) => offer.cardImageUrl)?.cardImageUrl
     || "");
   const grouped = MARKET_ORDER.map((market) => ({ market, offers: offers.filter((offer: any) => offer.market === market) })).filter((group) => group.offers.length);
@@ -238,7 +238,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
     description: `Характеристики и расчёт стоимости ${brand.name} ${model.model} с доставкой, таможней и утилизационным сбором.`,
     url: canonicalUrl,
     brand: { "@type": "Brand", name: brand.name },
-    ...(modelPreviewUrl ? { image: [modelPreviewUrl] } : {}),
+    ...(heroImageUrl ? { image: [heroImageUrl] } : {}),
     additionalProperty: [
       model.knowledge.powerHp ? { "@type": "PropertyValue", name: "Мощность", value: rangeText(model.knowledge.powerHp, "л.с.") } : null,
       model.knowledge.powerKw ? { "@type": "PropertyValue", name: "Мощность", value: rangeText(model.knowledge.powerKw, "кВт") } : null,
@@ -262,9 +262,9 @@ export default async function ModelLandingPage({ params }: PageProps) {
         <Link href="/cars/autocatalog" className="hover:text-red-500">Автокаталог</Link><span className="mx-2">/</span><Link href={`/cars/brand/${brand.slug}`} className="hover:text-red-500">{brand.name}</Link><span className="mx-2">/</span><span>{model.model}</span>
       </nav>
 
-      <header className={`mt-5 grid gap-6 rounded-[2rem] bg-[var(--ac-surface)] p-5 md:items-center md:p-8 ${modelPreviewUrl ? "md:grid-cols-[minmax(300px,.8fr)_minmax(0,1.2fr)]" : "md:grid-cols-[170px_minmax(0,1fr)]"}`}>
-        <div className={`flex items-center justify-center overflow-hidden rounded-[1.5rem] bg-[var(--ac-surface-2)] ${modelPreviewUrl ? "aspect-[16/10] md:aspect-[4/3]" : "h-32 md:h-40"}`}>
-          {modelPreviewUrl ? <img src={modelPreviewUrl} alt={`${brand.name} ${model.model}`} width={960} height={720} loading="eager" className="h-full w-full object-cover" /> : <BrandLogoVisual brand={brand.name} className="!h-20 !w-32 md:!h-24 md:!w-36" />}
+      <header className={`mt-5 grid gap-6 rounded-[2rem] bg-[var(--ac-surface)] p-5 md:items-center md:p-8 ${heroImageUrl ? "md:grid-cols-[minmax(300px,.8fr)_minmax(0,1.2fr)]" : "md:grid-cols-[170px_minmax(0,1fr)]"}`}>
+        <div className={`flex items-center justify-center overflow-hidden rounded-[1.5rem] bg-[var(--ac-surface-2)] ${heroImageUrl ? "aspect-[16/10] md:aspect-[4/3]" : "h-32 md:h-40"}`}>
+          {heroImageUrl ? <img src={heroImageUrl} alt={`${brand.name} ${model.model}`} width={960} height={720} loading="eager" className="h-full w-full object-cover" /> : <BrandLogoVisual brand={brand.name} className="!h-20 !w-32 md:!h-24 md:!w-36" />}
         </div>
         <div className="min-w-0">
           <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Модель автомобиля</div>
