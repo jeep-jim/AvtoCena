@@ -70,7 +70,15 @@ jobs:
           node --check scripts/catalog-probe-source-shard.mjs
           node --check scripts/catalog-rebuild-source-shard.mjs
           node --check scripts/catalog-publish-market.mjs
-          node --import tsx --test tests/catalog-calculation-integrity.test.ts tests/catalog-image-quality.test.ts tests/catalog-v2-market-recovery.test.ts
+          node --check scripts/catalog-apply-encyclopedia-identity-master.mjs
+          node --import tsx --test \
+            tests/catalog-calculation-integrity.test.ts \
+            tests/catalog-image-quality.test.ts \
+            tests/catalog-v2-market-recovery.test.ts \
+            tests/catalog-encyclopedia-identity-application.test.ts \
+            tests/catalog-encyclopedia-identity-runtime.test.ts \
+            tests/catalog-encyclopedia-identity-data.test.ts \
+            tests/catalog-encyclopedia-identity-master.test.ts
 
   collect:
     needs: validate
@@ -159,6 +167,8 @@ jobs:
       CATALOG_PUBLISH_PREPARE_CONCURRENCY: "24"
       CATALOG_INDEX_WRITE_CONCURRENCY: "12"
       CATALOG_STORAGE_EMERGENCY: "true"
+      CATALOG_ENCYCLOPEDIA_IDENTITY_MASTER: "1"
+      CATALOG_IDENTITY_PREPARE_CONCURRENCY: "24"
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -180,6 +190,8 @@ jobs:
           console.log({files:files.length,total});
           if(total<=0) process.exit(1);
           NODE
+      - name: Apply Encyclopedia Identity Master
+        run: npx tsx scripts/catalog-apply-encyclopedia-identity-master.mjs
       - run: npx tsx scripts/catalog-validate-source-scale.mjs
       - name: Publish market
         run: npx tsx scripts/catalog-publish-market.mjs
