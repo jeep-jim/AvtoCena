@@ -7,6 +7,7 @@ const modificationPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/
 const reference = fs.readFileSync(new URL("../apps/web/components/catalog/EncyclopediaModelReference.tsx", import.meta.url), "utf8");
 const specs = fs.readFileSync(new URL("../apps/web/components/catalog/VehicleSpecifications.tsx", import.meta.url), "utf8");
 const publicData = fs.readFileSync(new URL("../apps/web/lib/catalog/encyclopedia-public.ts", import.meta.url), "utf8");
+const hiluxBridge = JSON.parse(fs.readFileSync(new URL("../data/catalog/vehicle-knowledge/v2-bridge-verified-variants.json", import.meta.url), "utf8"));
 
 test("Toyota Hilux is the isolated encyclopedia reference model", () => {
   assert.match(modelPage, /brand\.slug === "toyota" && model\.slug === "hilux"/);
@@ -25,6 +26,29 @@ test("modifications have stable detail routes and a reusable specification view"
   assert.match(specs, /mode === "compact"/);
   assert.match(specs, /30-минутная мощность/);
   assert.match(specs, /Мощность для утильсбора/);
+});
+
+test("Hilux reference has manufacturer-backed current eighth-generation variants", () => {
+  assert.equal(hiluxBridge.length, 4);
+  for (const row of hiluxBridge) {
+    assert.equal(row.modelId, "toyota/hilux");
+    assert.equal(row.make, "Toyota");
+    assert.equal(row.model, "Hilux");
+    assert.equal(row.generation, "8th generation");
+    assert.equal(row.yearFrom, 2025);
+    assert.equal(row.yearTo, 2025);
+    assert.equal(row.drive, "4WD");
+    assert.equal(row.sourceType, "manufacturer");
+    assert.match(row.sourceUrl, /^https:\/\/www\.toyota\.co\.uk\//);
+    assert.ok(Number(row.powerHp) > 0);
+    assert.ok(Number(row.powerKw) > 0);
+  }
+  const hybrid = hiluxBridge.find((row: any) => row.powertrainKind === "other_hybrid");
+  assert.ok(hybrid);
+  assert.equal(hybrid.engineCc, 2755);
+  assert.equal(hybrid.icePowerKw, 150);
+  assert.equal(hybrid.power30MinKw, undefined);
+  assert.equal(hybrid.utilizationPowerKw, undefined);
 });
 
 test("reference specifications omit unknown dimensions instead of inventing them", () => {
