@@ -99,6 +99,11 @@ html[data-theme="light"] .ac-catalog-card,
   color: #fff !important;
 }
 
+.ac-offer-auction-gavel > svg {
+  color: #fff !important;
+  stroke: #fff !important;
+}
+
 /* Falling customer price is always green; rising price is always red. */
 .is-down .ac-price,
 .is-down .ac-price-trend-delta,

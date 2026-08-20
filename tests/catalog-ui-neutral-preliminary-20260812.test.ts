@@ -55,7 +55,9 @@ test("Japanese auction microcards use a neutral historical price and non-navigat
   assert.match(priceTrend, /export function AuctionResultPrice/);
   assert.match(priceTrend, /ac-offer-auction-gavel/);
   assert.doesNotMatch(priceTrend, /ac-offer-auction-gavel[^\n]+bg-\[#ef3340\]/);
+  assert.doesNotMatch(priceTrend, /ac-offer-auction-gavel[^\n]+\btext-white\b/);
   assert.match(priceSheetCss, /\.ac-offer-auction-gavel[^}]+background:\s*#11151d !important[^}]+color:\s*#fff !important/s);
+  assert.match(priceSheetCss, /\.ac-offer-auction-gavel > svg\s*\{[^}]+color:\s*#fff !important;[^}]+stroke:\s*#fff !important;/s);
   assert.match(offerPage, /\{japanAuction/);
   assert.match(offerPage, /<AuctionResultPrice offer=\{o\} label="Завершённый аукцион"/);
   assert.match(offerPage, /html\[data-theme="light"\][^}]+\.ac-offer-price-panel[^}]+background:#fff!important/s);
