@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const { assertEncyclopediaIdentityProductionConnected, readEncyclopediaIdentityDataset, readEncyclopediaIdentityResolver } = await import("../apps/web/lib/catalog/encyclopedia-identity-data.ts");
+const { readEncyclopediaIdentityDataset, readEncyclopediaIdentityResolver } = await import("../apps/web/lib/catalog/encyclopedia-identity-data.ts");
 const { applyEncyclopediaIdentityMaster } = await import("../apps/web/lib/catalog/encyclopedia-identity-master.ts");
 const { enrichOfferWithVehicleKnowledge } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
@@ -9,9 +9,15 @@ const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spe
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-v3-input";
 const concurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_IDENTITY_PREPARE_CONCURRENCY || 24)));
 
+// This is deliberately a publication-pipeline opt-in rather than the broad
+// encyclopedia production switch. It lets canonical identity go live without
+// declaring unfinished generation/specification content production-complete.
+if (process.env.CATALOG_ENCYCLOPEDIA_IDENTITY_MASTER !== "1") {
+  throw new Error("catalog_encyclopedia_identity_master_not_enabled");
+}
+
 const dataset = await readEncyclopediaIdentityDataset();
 if (!dataset) throw new Error("catalog_encyclopedia_identity_dataset_unavailable:master");
-assertEncyclopediaIdentityProductionConnected(dataset);
 const resolver = await readEncyclopediaIdentityResolver();
 if (!resolver) throw new Error("catalog_encyclopedia_identity_resolver_unavailable:master");
 
