@@ -45,7 +45,7 @@ jobs:
         run: |
           set -o pipefail
           {
-            node scripts/catalog-publish-encyclopedia-identity-read-models.mjs
+            node --import tsx scripts/catalog-publish-encyclopedia-identity-read-models.mjs
             test -s /tmp/identity-read-model-dry-run.json
             cat /tmp/identity-read-model-dry-run.json
           } 2>&1 | tee /tmp/identity-read-model-dry-run.log
