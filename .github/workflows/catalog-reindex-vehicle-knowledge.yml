@@ -7,9 +7,11 @@ on:
     paths:
       - ".github/workflows/catalog-reindex-vehicle-knowledge.yml"
       - "scripts/catalog-reindex-vehicle-knowledge.mjs"
+      - "scripts/catalog-rf-customs-live-card-proof.mjs"
 
 permissions:
   contents: read
+  statuses: write
 
 jobs:
   reindex-production-catalog:
@@ -45,9 +47,53 @@ jobs:
           test -n "$YC_OBJECT_STORAGE_BUCKET"
           test -n "$YC_OBJECT_STORAGE_ACCESS_KEY_ID"
           test -n "$YC_OBJECT_STORAGE_SECRET_ACCESS_KEY"
+      - name: Validate RF customs live-card proof
+        run: node --check scripts/catalog-rf-customs-live-card-proof.mjs
+      - name: RF customs live-card proof (read-only)
+        id: rf_customs_proof
+        env:
+          CATALOG_RF_CUSTOMS_LIVE_PROOF_OUTPUT: catalog-rf-customs-live-card-proof.json
+        run: node --import tsx scripts/catalog-rf-customs-live-card-proof.mjs
+      - name: Upload RF customs live-card proof
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: rf-customs-live-card-proof-${{ github.run_id }}
+          path: catalog-rf-customs-live-card-proof.json
+          if-no-files-found: warn
+          retention-days: 7
       - name: Build missing certified 30-minute power queue
         run: npm run catalog:power-reference-queue
       - name: Recanonicalize and reprice current catalog
         run: npm run catalog:reindex-vehicle-knowledge
       - name: Run catalog smoke checks
         run: npm run catalog:smoke
+      - name: Mark production reprice success
+        if: success()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          run_url='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+          description='RF live proof 3/3 + production reprice passed'
+          payload="$(jq -nc --arg url "$run_url" --arg description "$description" '{state:"success",context:"catalog/reindex",description:$description,target_url:$url}')"
+          curl -fsS -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+            -d "$payload" >/dev/null
+      - name: Mark production reprice failure
+        if: failure()
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          run_url='${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}'
+          payload="$(jq -nc --arg url "$run_url" '{state:"failure",context:"catalog/reindex",description:"RF live proof or production reprice failed",target_url:$url}')"
+          curl -fsS -X POST \
+            -H "Authorization: Bearer $GH_TOKEN" \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "https://api.github.com/repos/${{ github.repository }}/statuses/${{ github.sha }}" \
+            -d "$payload" >/dev/null
