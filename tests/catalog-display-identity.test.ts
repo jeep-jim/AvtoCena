@@ -177,6 +177,17 @@ test("known Korean brands canonicalize without inventing an untranslated model",
     ["기아", "Kia", "미확인차종"],
     ["현대", "Hyundai", "미확인차종"],
     ["벤츠", "Mercedes-Benz", "미확인차종"],
+    ["닷지", "Dodge", "미확인차종"],
+    ["람보르기니", "Lamborghini", "미확인차종"],
+    ["로터스", "Lotus", "미확인차종"],
+    ["롤스로이스", "Rolls-Royce", "미확인차종"],
+    ["맥라렌", "McLaren", "미확인차종"],
+    ["벤틀리", "Bentley", "미확인차종"],
+    ["시트로엥", "Citroen", "미확인차종"],
+    ["신위안", "SRM Shineray", "미확인차종"],
+    ["지리", "Geely", "미확인차종"],
+    ["페라리", "Ferrari", "미확인차종"],
+    ["폴스타", "Polestar", "미확인차종"],
   ]) {
     const result = await applyEncyclopediaDisplayIdentity({ make: rawMake, model: rawModel, market: "korea" });
     assert.equal(result.make, canonicalMake);

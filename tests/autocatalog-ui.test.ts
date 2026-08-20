@@ -29,6 +29,8 @@ test("brand logos never disappear and the public request path does not crawl a t
 
   assert.match(visual, /Логотип \$\{brand\} проверяется/);
   assert.match(visual, /const initials/);
+  assert.match(visual, /`\/brand-logos\/drom\/\$\{theme\}\/\$\{slug\}\.png`[\s\S]*`\/api\/catalog\/brand-logo/);
+  assert.match(visual, /\(previous\?\.count \|\| 0\) \+ count/);
   assert.match(route, /LOGO_ROOTS/);
   assert.match(route, /params: Promise<\{ slug: string \}>/);
   assert.match(route, /const \{ slug \} = await params/);
