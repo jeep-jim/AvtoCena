@@ -8,7 +8,7 @@ import { rankedCatalogImageUrls } from "./image-quality";
 import { catalogOfferVisibleRub } from "./public-priority";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
-import { selectCatalogShowcaseDiversity } from "./inventory-quota";
+import { enforceCatalogModelYearQuota, selectCatalogShowcaseDiversity } from "./inventory-quota";
 import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./vehicle-knowledge";
 import { applyEncyclopediaDisplayIdentityBatch } from "./display-identity";
 import { catalogPublicPriority, findCatalogPriceOutliers } from "./public-priority";
@@ -962,12 +962,13 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[]) {
   const rejectedPriceIds = new Set(priceOutliers.map((outlier) => outlier.id));
   const priceFilteredOffers = identityEligibleOffers.filter((offer) => !rejectedPriceIds.has(offer.id));
   const deduplicated = deduplicatePublicCatalogOffers(priceFilteredOffers);
-  return { offers: deduplicated.rows, identityRejected, priceOutliers, deduplicated };
+  const quota = enforceCatalogModelYearQuota(deduplicated.rows);
+  return { offers: quota.rows, identityRejected, priceOutliers, deduplicated, quota };
 }
 
 async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[]) {
   const canonical = await canonicalizePublicCatalogOffers(storedOffers);
-  const { offers, identityRejected, priceOutliers, deduplicated } = canonical;
+  const { offers, identityRejected, priceOutliers, deduplicated, quota } = canonical;
   const previousAllProjection = await readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION).catch(() => ({ generationId: "", items: [] }));
 
   const makes = uniqueText(offers.map((offer) => offer.make)).sort((a, b) => a.localeCompare(b, "ru"));
@@ -1047,6 +1048,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
     priceOutliers: priceOutliers.slice(0, 50),
     semanticDuplicatesRejected: deduplicated.removed.length,
     semanticDuplicates: deduplicated.removed.slice(0, 100),
+    modelYearQuotaRejected: quota.removed.length,
     aiProductFeedProducts: aiProductFeed.productCount,
     aiProductFeedBytes: aiProductFeed.size,
   };

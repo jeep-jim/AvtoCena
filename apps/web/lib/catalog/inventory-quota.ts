@@ -34,6 +34,29 @@ export function catalogExactModelKey(
 }
 
 /**
+ * Enforce the public model-year cap without changing the caller's quality
+ * order. This is intentionally part of the canonical publication path: brand
+ * normalization can merge formerly separate source buckets, so the final
+ * public identity must be capped after identity normalization and deduplication.
+ */
+export function enforceCatalogModelYearQuota<T extends Partial<VehicleOffer>>(rows: readonly T[]) {
+  const counts = new Map<string, number>();
+  const kept: T[] = [];
+  const removed: T[] = [];
+  for (const row of rows) {
+    const key = catalogModelYearQuotaKey(row);
+    const count = key ? Number(counts.get(key) || 0) : 0;
+    if (!key || count >= CATALOG_MAX_OFFERS_PER_MODEL_YEAR) {
+      removed.push(row);
+      continue;
+    }
+    counts.set(key, count + 1);
+    kept.push(row);
+  }
+  return { rows: kept, removed };
+}
+
+/**
  * Keep a small public showcase representative: prefer a new make first, then
  * a new exact model, and only use duplicate models when the market has no
  * other renderable candidates. Input order remains the freshness ranking.
