@@ -16,12 +16,24 @@ function money(value: number) {
 
 export function AuctionCardPrice({ offer, label, dense = false, priceClassName = "text-[22px]" }: AuctionCardPriceProps) {
   const [open, setOpen] = useState(false);
+  const [desktopInteractive, setDesktopInteractive] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const totalRub = Number(offer?.totalRub || 0);
   const auctionDate = String(offer?.auctionDate || "").trim();
   const dateLabel = auctionDate && !Number.isNaN(Date.parse(auctionDate))
     ? new Date(auctionDate).toLocaleDateString("ru-RU")
     : "";
+
+  useEffect(() => {
+    const media = window.matchMedia("(min-width: 1024px) and (hover: hover) and (pointer: fine)");
+    const sync = () => {
+      setDesktopInteractive(media.matches);
+      if (!media.matches) setOpen(false);
+    };
+    sync();
+    media.addEventListener?.("change", sync);
+    return () => media.removeEventListener?.("change", sync);
+  }, []);
 
   useEffect(() => {
     if (!open) return;
@@ -40,9 +52,11 @@ export function AuctionCardPrice({ offer, label, dense = false, priceClassName =
   }, [open]);
 
   const stopPointer = (event: SyntheticEvent) => {
+    if (!desktopInteractive) return;
     event.stopPropagation();
   };
   const swallowClick = (event: SyntheticEvent) => {
+    if (!desktopInteractive) return;
     event.preventDefault();
     event.stopPropagation();
   };
@@ -55,24 +69,22 @@ export function AuctionCardPrice({ offer, label, dense = false, priceClassName =
       <div className={`ac-price ac-price--flat min-w-0 font-black leading-none tracking-[-0.05em] text-[var(--ac-text)] ${totalRub ? "whitespace-nowrap" : "break-words"} ${priceClassName}`}>
         {totalRub ? <><span>{money(totalRub)}</span><span className="ml-[0.18em] inline-block translate-y-[-0.03em] text-[0.58em] tracking-[-0.02em]">₽</span></> : "Цена по запросу"}
       </div>
-      <div
-        className="relative shrink-0"
-        onMouseEnter={() => setOpen(true)}
-        onMouseLeave={() => setOpen(false)}
-      >
+      <div className="relative shrink-0">
         <button
           type="button"
-          aria-label="Что означает завершённый аукционный лот"
-          aria-expanded={open}
-          className="ac-auction-gavel flex shrink-0 touch-manipulation items-center justify-center rounded-lg bg-transparent p-0.5 text-[var(--ac-text)] outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-current/45"
+          aria-label={desktopInteractive ? "Что означает завершённый аукционный лот" : undefined}
+          aria-expanded={desktopInteractive ? open : undefined}
+          tabIndex={desktopInteractive ? 0 : -1}
+          className="ac-auction-gavel pointer-events-none flex shrink-0 items-center justify-center bg-transparent p-0.5 text-[var(--ac-text)] outline-none lg:pointer-events-auto lg:cursor-pointer lg:focus-visible:ring-2 lg:focus-visible:ring-current/45"
           onPointerDownCapture={stopPointer}
           onPointerUpCapture={stopPointer}
           onClickCapture={(event) => {
+            if (!desktopInteractive) return;
             swallowClick(event);
             setOpen((current) => !current);
           }}
           onKeyDown={(event) => {
-            if (event.key !== "Enter" && event.key !== " ") return;
+            if (!desktopInteractive || (event.key !== "Enter" && event.key !== " ")) return;
             event.preventDefault();
             event.stopPropagation();
             setOpen((current) => !current);
@@ -80,7 +92,7 @@ export function AuctionCardPrice({ offer, label, dense = false, priceClassName =
         >
           <Gavel className={dense ? "h-5 w-5 sm:h-6 sm:w-6" : "h-7 w-7"} strokeWidth={2.35} aria-hidden="true" />
         </button>
-        {open ? <div
+        {desktopInteractive && open ? <div
           role="tooltip"
           className="ac-price-trend-popover absolute bottom-[calc(100%+10px)] right-0 z-[12020] w-[min(320px,calc(100vw-24px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-3.5 text-left text-xs font-bold leading-5 text-[var(--ac-text)] shadow-[0_20px_65px_rgba(0,0,0,.35)]"
           onPointerDownCapture={stopPointer}
