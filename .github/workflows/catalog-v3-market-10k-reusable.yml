@@ -155,6 +155,7 @@ jobs:
       CATALOG_REBUILD_MARKETS: ${{ inputs.market }}
       CATALOG_REBUILD_VALIDATION_REPORT: catalog-v3-${{ inputs.market }}-validation-report.json
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-v3-${{ inputs.market }}-publish-report.json
+      CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"
       CATALOG_PUBLISH_PREPARE_CONCURRENCY: "24"
       CATALOG_INDEX_WRITE_CONCURRENCY: "12"
       CATALOG_STORAGE_EMERGENCY: "true"
