@@ -66,6 +66,30 @@ function duplicateParentheticalMake(value: string) {
   return phrase(match[1]) === phrase(match[2]) ? clean(match[1]) : value;
 }
 
+function duplicateMakePrefixRemoved(make: string, model: string) {
+  const normalizedMake = phrase(make);
+  const normalizedModel = phrase(model);
+  if (!normalizedMake || !normalizedModel) return model;
+  if (normalizedModel === normalizedMake) return "";
+
+  const makeWords = clean(make).split(/\s+/).filter(Boolean);
+  const modelWords = clean(model).split(/\s+/).filter(Boolean);
+  if (modelWords.length > makeWords.length
+    && phrase(modelWords.slice(0, makeWords.length).join(" ")) === normalizedMake) {
+    return clean(modelWords.slice(makeWords.length).join(" "));
+  }
+  return model;
+}
+
+function trustedCanonicalMake(value: string) {
+  const canonical = canonicalCatalogBrand(value);
+  // These are source-manufacturer identities, not Mercedes-Benz aliases. Keep
+  // the actual coachbuilder brand while presenting one stable Latin spelling.
+  if (/^(?:Xiaoao|AM\s+Xiaoao)$/i.test(canonical)) return "AM Xiaoao";
+  if (/^(?:上喆(?:汽车)?|Shangzhe)$/iu.test(canonical)) return "Shangzhe";
+  return canonical;
+}
+
 function chooseModel(rows: DisplayModel[], rawModel: string) {
   const query = phrase(rawModel);
   if (!query) return null;
@@ -92,8 +116,9 @@ function trustedCanonicalModel(make: string, model: string) {
     { make: /^KGM$/i, model: /^(?:The New )?Rexton Sports Khan\b/i, canonical: "Rexton Sports Khan" },
     { make: /^Huakai$/i, model: /^(?:Huakai )?EV\b/i, canonical: "Huakai EV" },
     { make: /^HuangHai$/i, model: /^Jiaolong EV\b/i, canonical: "Jiaolong EV" },
-    { make: /^Yasheng$/i, model: /^VITO\b/i, canonical: "VITO" },
-    { make: /^Xiaoao$/i, model: /^VITO\b/i, canonical: "VITO" },
+    { make: /^Yasheng$/i, model: /^(?:Yasheng\s+)?VITO\b/i, canonical: "VITO" },
+    { make: /^AM Xiaoao$/i, model: /^(?:(?:AM\s+)?Xiaoao\s+)?VITO\b/i, canonical: "VITO" },
+    { make: /^Shangzhe$/i, model: /^(?:Shangzhe\s+)?V[\s-]*Class\b/i, canonical: "V-Class" },
   ];
   return rules.find((rule) => rule.make.test(make) && rule.model.test(model))?.canonical || "";
 }
@@ -105,8 +130,8 @@ function hasUnresolvedAsianScript(value: string) {
 export async function applyEncyclopediaDisplayIdentity<T extends DisplayCarrier>(offer: T): Promise<T & { encyclopediaDisplayIdentity?: DisplayIdentity }> {
   const presented = presentCatalogOffer(offer);
   const presentedMake = duplicateParentheticalMake(clean(presented.makeLabel || offer.make));
-  const canonicalMake = canonicalCatalogBrand(presentedMake);
-  const modelLabel = clean(presented.modelLabel || offer.model);
+  const canonicalMake = trustedCanonicalMake(presentedMake);
+  const modelLabel = duplicateMakePrefixRemoved(presentedMake, clean(presented.modelLabel || offer.model));
   const index = await readIndex();
   const rows = index.get(phrase(canonicalMake)) || [];
   const match = chooseModel(rows, modelLabel);
