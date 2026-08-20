@@ -15,7 +15,9 @@ type DisplayIdentity = {
   match: "exact" | "prefix" | "trusted_alias" | "translated";
 };
 
-let indexPromise: Promise<Map<string, DisplayModel[]>> | null = null;
+type DisplayIndex = { byMake: Map<string, DisplayModel[]>; allModels: DisplayModel[] };
+
+let indexPromise: Promise<DisplayIndex> | null = null;
 
 function clean(value: unknown) {
   return String(value || "").normalize("NFKC").replace(/\s+/g, " ").trim();
@@ -42,6 +44,7 @@ async function readIndex() {
   indexPromise ||= readEncyclopediaIdentityDataset().then((dataset) => {
     const canonicalBrandNames = new Map((dataset?.brands || []).map((brand) => [brand.id, brand.canonicalName]));
     const byMake = new Map<string, DisplayModel[]>();
+    const allModels: DisplayModel[] = [];
     for (const model of dataset?.models || []) {
       const make = canonicalCatalogBrand(canonicalBrandNames.get(model.brandId) || model.brandId);
       const phrases = [...new Set([
@@ -52,10 +55,12 @@ async function readIndex() {
       if (!make || !phrases.length) continue;
       const key = phrase(make);
       const rows = byMake.get(key) || [];
-      rows.push({ id: model.id, make, model: model.canonicalName, phrases });
+      const row = { id: model.id, make, model: model.canonicalName, phrases };
+      rows.push(row);
+      allModels.push(row);
       byMake.set(key, rows);
     }
-    return byMake;
+    return { byMake, allModels };
   });
   return indexPromise;
 }
@@ -82,12 +87,7 @@ function duplicateMakePrefixRemoved(make: string, model: string) {
 }
 
 function trustedCanonicalMake(value: string) {
-  const canonical = canonicalCatalogBrand(value);
-  // These are source-manufacturer identities, not Mercedes-Benz aliases. Keep
-  // the actual coachbuilder brand while presenting one stable Latin spelling.
-  if (/^(?:Xiaoao|AM\s+Xiaoao)$/i.test(canonical)) return "AM Xiaoao";
-  if (/^(?:上喆(?:汽车)?|Shangzhe)$/iu.test(canonical)) return "Shangzhe";
-  return canonical;
+  return canonicalCatalogBrand(value);
 }
 
 function chooseModel(rows: DisplayModel[], rawModel: string) {
@@ -108,6 +108,52 @@ function chooseModel(rows: DisplayModel[], rawModel: string) {
   return ids.length === 1 ? best : null;
 }
 
+function uniqueChinaBaseModel(rows: DisplayModel[], offer: DisplayCarrier, rawModel: string) {
+  const raw: any = offer?.operational?.raw || {};
+  const evidence = [
+    rawModel,
+    offer?.sourceTitle,
+    offer?.operational?.sourceTitle,
+    raw?.title,
+    raw?.model,
+    raw?.Model,
+    raw?.modelName,
+    raw?.ModelName,
+    raw?.seriesName,
+    raw?.listing?.title,
+    raw?.listing?.model,
+    raw?.listing?.modelName,
+    raw?.listing?.seriesName,
+    raw?.offer?.Model,
+    raw?.offer?.ModelName,
+    raw?.detail?.model,
+    raw?.detail?.modelName,
+    raw?.detail?.seriesName,
+  ].map(phrase).filter(Boolean);
+  if (!evidence.length) return null;
+
+  const matches: Array<{ row: DisplayModel; exact: boolean; length: number }> = [];
+  for (const row of rows) {
+    for (const candidate of row.phrases) {
+      const cjkAlias = /[^\u0000-\u007f]/u.test(candidate) && candidate.replace(/\s+/g, "").length >= 2;
+      const latinAlias = !cjkAlias && candidate.replace(/\s+/g, "").length >= 4;
+      if (!cjkAlias && !latinAlias) continue;
+      for (const value of evidence) {
+        const exact = value === candidate;
+        const bounded = ` ${value} `.includes(` ${candidate} `);
+        const containedCjk = cjkAlias && value.includes(candidate);
+        if (exact || bounded || containedCjk) matches.push({ row, exact, length: candidate.length });
+      }
+    }
+  }
+  if (!matches.length) return null;
+  matches.sort((left, right) => Number(right.exact) - Number(left.exact) || right.length - left.length);
+  const best = matches[0];
+  const sameRank = matches.filter((item) => item.exact === best.exact && item.length === best.length);
+  const ids = [...new Set(sameRank.map((item) => item.row.id))];
+  return ids.length === 1 ? best.row : null;
+}
+
 function trustedCanonicalModel(make: string, model: string) {
   const rules: Array<{ make: RegExp; model: RegExp; canonical: string }> = [
     // Hyundai and KGM publish these exact English model identities on their
@@ -116,9 +162,6 @@ function trustedCanonicalModel(make: string, model: string) {
     { make: /^KGM$/i, model: /^(?:The New )?Rexton Sports Khan\b/i, canonical: "Rexton Sports Khan" },
     { make: /^Huakai$/i, model: /^(?:Huakai )?EV\b/i, canonical: "Huakai EV" },
     { make: /^HuangHai$/i, model: /^Jiaolong EV\b/i, canonical: "Jiaolong EV" },
-    { make: /^Yasheng$/i, model: /^(?:Yasheng\s+)?VITO\b/i, canonical: "VITO" },
-    { make: /^AM Xiaoao$/i, model: /^(?:(?:AM\s+)?Xiaoao\s+)?VITO\b/i, canonical: "VITO" },
-    { make: /^Shangzhe$/i, model: /^(?:Shangzhe\s+)?V[\s-]*Class\b/i, canonical: "V-Class" },
   ];
   return rules.find((rule) => rule.make.test(make) && rule.model.test(model))?.canonical || "";
 }
@@ -133,11 +176,30 @@ export async function applyEncyclopediaDisplayIdentity<T extends DisplayCarrier>
   const canonicalMake = trustedCanonicalMake(presentedMake);
   const modelLabel = duplicateMakePrefixRemoved(presentedMake, clean(presented.modelLabel || offer.model));
   const index = await readIndex();
-  const rows = index.get(phrase(canonicalMake)) || [];
+  const rows = index.byMake.get(phrase(canonicalMake)) || [];
   const match = chooseModel(rows, modelLabel);
   const rawMake = clean(offer.make);
   const rawModel = clean(offer.model);
   if (!match) {
+    const baseModel = clean(offer.market).toLowerCase() === "china"
+      ? uniqueChinaBaseModel(index.allModels, offer, rawModel)
+      : null;
+    if (baseModel && phrase(baseModel.make) !== phrase(canonicalMake)) {
+      return {
+        ...offer,
+        make: baseModel.make,
+        model: baseModel.model,
+        encyclopediaDisplayIdentity: {
+          version: 1,
+          rawMake,
+          rawModel,
+          modelId: baseModel.id,
+          canonicalMake: baseModel.make,
+          canonicalModel: baseModel.model,
+          match: "trusted_alias",
+        },
+      };
+    }
     const trustedModel = trustedCanonicalModel(canonicalMake, modelLabel);
     const translated = Boolean(canonicalMake && modelLabel
       && !hasUnresolvedAsianScript(canonicalMake)

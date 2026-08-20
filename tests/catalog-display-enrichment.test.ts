@@ -66,8 +66,8 @@ test("offer detail enrichment uses the same canonical China identity as catalog 
   } as any;
 
   const enriched = await enrichOfferForDisplay(offer);
-  assert.equal(enriched.make, "AM Xiaoao");
-  assert.equal(enriched.model, "VITO");
+  assert.equal(enriched.make, "Mercedes-Benz");
+  assert.equal(enriched.model, "Vito");
   assert.equal(enriched.totalRub, offer.totalRub);
   assert.equal(enriched.powerHp, offer.powerHp);
 });

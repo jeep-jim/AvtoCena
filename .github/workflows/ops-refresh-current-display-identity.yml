@@ -5,6 +5,10 @@ on:
     branches: [main]
     paths:
       - .github/workflows/ops-refresh-current-display-identity.yml
+      - apps/web/lib/catalog/display-identity.ts
+      - apps/web/lib/catalog/public-offer-deduplication.ts
+      - apps/web/lib/catalog/storage.ts
+      - scripts/catalog-refresh-current-display-identity.mjs
 
 permissions:
   contents: read
@@ -35,7 +39,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Validate identity regressions
-        run: node --import tsx --test tests/catalog-display-identity.test.ts tests/catalog-display-enrichment.test.ts
+        run: node --import tsx --test tests/catalog-display-identity.test.ts tests/catalog-display-enrichment.test.ts tests/catalog-public-offer-deduplication.test.ts
       - name: Refresh current public read models without changing catalog generation
         run: node --import tsx scripts/catalog-refresh-current-display-identity.mjs
       - name: Upload refresh report
