@@ -309,7 +309,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
             <div className="mt-4"><OfferPriceBreakdown offer={o} /></div>
             <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               {japanAuction ? <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
-                <span className="block whitespace-nowrap">Завершённый лот{auctionDateLabel ? ` · торги ${auctionDateLabel}` : ""}</span>
+                <span className="block whitespace-nowrap">Продано на торгах{auctionDateLabel || updatedDate ? ` ${auctionDateLabel || updatedDate}` : ""}{updatedTime ? " в " : ""}{updatedTime ? sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="text-inherit no-underline visited:text-inherit hover:text-inherit">{updatedTime}</a> : updatedTime : null}</span>
                 <span className="mt-1 block">Цена сохранена как ориентир по результату аукциона.</span>
               </p> : <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
                 <span className="block whitespace-nowrap">Обновлено {updatedDate}{updatedDate && updatedTime ? ", " : ""}{updatedTime ? sourceUrl ? <a href={sourceUrl} target="_blank" rel="noopener noreferrer" className="text-inherit no-underline visited:text-inherit hover:text-inherit">{updatedTime}</a> : updatedTime : null}</span>

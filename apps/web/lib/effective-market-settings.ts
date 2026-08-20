@@ -20,6 +20,10 @@ const MARKET_NAMES: Record<MarketId, string> = {
 const EFFECTIVE_MARKETS_CACHE_MS = Math.max(1_000, Number(process.env.EFFECTIVE_MARKETS_CACHE_MS || 60_000));
 let marketsSettingsCache: { expiresAt: number; promise: ReturnType<typeof getMarketsSettings> } | null = null;
 
+export function invalidateEffectiveMarketsCache() {
+  marketsSettingsCache = null;
+}
+
 async function getCachedMarketsSettings() {
   const now = Date.now();
   if (marketsSettingsCache && marketsSettingsCache.expiresAt > now) return marketsSettingsCache.promise;

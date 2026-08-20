@@ -61,6 +61,8 @@ test("Japanese auction microcards use a neutral historical price and non-navigat
   assert.match(offerPage, /\{japanAuction/);
   assert.match(offerPage, /<AuctionResultPrice offer=\{o\} label="Завершённый аукцион"/);
   assert.match(offerPage, /html\[data-theme="light"\][^}]+\.ac-offer-price-panel[^}]+background:#fff!important/s);
+  assert.match(offerPage, /Продано на торгах[^\n]+auctionDateLabel \|\| updatedDate[^\n]+sourceUrl \? <a href=\{sourceUrl\}[^\n]+\{updatedTime\}<\/a>/);
+  assert.doesNotMatch(offerPage, /Завершённый лот\{auctionDateLabel/);
 });
 
 test("catalog helper popovers preserve card rounding and currency opens only on click", () => {

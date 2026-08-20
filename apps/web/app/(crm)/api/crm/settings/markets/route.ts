@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { getCurrentUser } from "@/lib/auth";
 import { createMarketVersion } from "@/lib/business-settings";
 import { writeDataJson } from "@/lib/data";
+import { invalidateEffectiveMarketsCache } from "@/lib/effective-market-settings";
 import { booleanFromForm, canEditBusinessSettings, cleanText, nullableNumber } from "@/lib/settings-validation";
 
 function parseJsonField(value: FormDataEntryValue | null, fallback: unknown) {
@@ -10,21 +11,21 @@ function parseJsonField(value: FormDataEntryValue | null, fallback: unknown) {
   try { return JSON.parse(raw); } catch { return fallback; }
 }
 
-function redirectToSettings(request: Request, state: "saved" | "error", message = "") {
-  const url = new URL("/crm/settings", request.url);
-  url.hash = "markets";
-  url.searchParams.set("state", state);
-  if (message) url.searchParams.set("message", message.slice(0, 180));
-  return NextResponse.redirect(url, { status: 303 });
+function relativeRedirect(path: string) {
+  return new NextResponse(null, { status: 303, headers: { Location: path } });
+}
+
+function redirectToSettings(state: "saved" | "error", message = "") {
+  const search = new URLSearchParams({ state });
+  if (message) search.set("message", message.slice(0, 180));
+  return relativeRedirect(`/crm/settings?${search.toString()}#markets`);
 }
 
 export async function POST(request: Request) {
   const user = getCurrentUser();
   if (!user || !canEditBusinessSettings(user.role)) {
-    const login = new URL("/login", request.url);
-    login.searchParams.set("next", "/crm/settings#markets");
-    login.searchParams.set("error", "auth_required");
-    return NextResponse.redirect(login, { status: 303 });
+    const search = new URLSearchParams({ next: "/crm/settings#markets", error: "auth_required" });
+    return relativeRedirect(`/login?${search.toString()}`);
   }
 
   try {
@@ -75,9 +76,10 @@ export async function POST(request: Request) {
       requestedByUserId: user.id,
       status: "pending",
     });
-    return redirectToSettings(request, "saved");
+    invalidateEffectiveMarketsCache();
+    return redirectToSettings("saved");
   } catch (error) {
     console.error("crm_market_settings_save_failed", error);
-    return redirectToSettings(request, "error", error instanceof Error ? error.message : "settings_error");
+    return redirectToSettings("error", error instanceof Error ? error.message : "settings_error");
   }
 }
