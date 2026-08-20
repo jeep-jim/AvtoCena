@@ -41,6 +41,7 @@ test("global cleanup follows every completed catalog writer and audits all seven
   assert.match(workflow, /Catalog Korea · K Car exterior gallery repair/);
   assert.match(workflow, /Catalog emergency · restore Japan baseline/);
   assert.match(workflow, /Catalog V6 · Prestige exact sold up-to-30k/);
+  assert.match(workflow, /github\.event\.workflow_run\.conclusion == 'success'/);
   assert.doesNotMatch(workflow, /workflow_run\.conclusion != 'cancelled'/);
   assert.match(workflow, /actions: write/);
   assert.match(workflow, /CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"/);
