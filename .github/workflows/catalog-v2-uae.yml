@@ -3,9 +3,11 @@ run-name: Catalog V3 · UAE · 10k · ${{ github.sha }}
 
 on:
   workflow_dispatch:
+  schedule:
+    - cron: "17 21 * * *"
 
-# Automatic schedule and push triggers are intentionally disabled.
-# Run this market only from the Actions UI when needed.
+# Daily independent market refresh. Each successful run keeps recently seen
+# offers and adds newly discovered unique offers.
 permissions:
   contents: read
 

@@ -20,7 +20,9 @@ const targetPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PE
 const targetPerMarket = Math.max(1, Number(process.env.CATALOG_PUBLISH_TARGET_PER_MARKET || 100_000));
 const maximumPerMarket = Math.max(targetPerMarket, Number(process.env.CATALOG_PUBLISH_MAX_PER_MARKET || 100_000));
 const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
-const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 3 * 24 * 60 * 60 * 1_000));
+const defaultRetentionMs = Math.max(60_000, Number(process.env.CATALOG_DEFAULT_RETENTION_MS || 3 * 24 * 60 * 60 * 1_000));
+const japanRetentionMs = Math.max(defaultRetentionMs, Number(process.env.CATALOG_JAPAN_RETENTION_MS || 30 * 24 * 60 * 60 * 1_000));
+const currentRetentionOverrideMs = Math.max(0, Number(process.env.CATALOG_OFFER_RETENTION_MS || 0));
 const prepareConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_PUBLISH_PREPARE_CONCURRENCY || 16)));
 const priorityMaxTotalRub = Math.max(100_000, Number(process.env.CATALOG_PRIORITY_MAX_TOTAL_RUB || 6_000_000));
 const priorityMaxPowerHp = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_POWER_HP || 160));
@@ -43,6 +45,13 @@ if (configuredMarkets.length !== 1) {
   throw new Error(`catalog_market_scope_requires_one_market:${configuredMarkets.join(",")}`);
 }
 
+function retentionForMarket(marketId) {
+  if (marketId === market && currentRetentionOverrideMs > 0) return Math.max(60_000, currentRetentionOverrideMs);
+  return marketId === "japan" ? japanRetentionMs : defaultRetentionMs;
+}
+
+const retentionMs = retentionForMarket(market);
+
 function imageKey(image) {
   return String(image?.checksum || image?.id || image?.objectKey || image?.url || "");
 }
@@ -61,7 +70,13 @@ function uniqueImages(images) {
 }
 
 function freshness(offer) {
-  return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0;
+  return Date.parse(String(
+    offer?.updatedAt
+      || offer?.operational?.fullRebuildAt
+      || offer?.operational?.sourcePublishedAt
+      || offer?.firstSeenAt
+      || "",
+  )) || 0;
 }
 
 function qualityOrder(left, right) {
@@ -196,10 +211,11 @@ const cutoff = Date.now() - retentionMs;
 const generation = await readGenerationFiles();
 let currentMarketRows = [];
 try { currentMarketRows = await readMarketOffers(market); } catch { currentMarketRows = []; }
+const currentRetainedRows = currentMarketRows
+  .filter((row) => ["active", "stale"].includes(String(row?.status || "")) && freshness(row) >= cutoff);
 
 const candidatesById = new Map();
-for (const offer of currentMarketRows
-  .filter((row) => ["active", "stale"].includes(String(row?.status || "")) && freshness(row) >= cutoff)
+for (const offer of currentRetainedRows
   .sort((left, right) => freshness(left) - freshness(right))) {
   candidatesById.set(offer.id, mergeOfferVersions({ ...offer, status: "active" }, candidatesById.get(offer.id)));
 }
@@ -257,9 +273,10 @@ for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
   if (otherMarket === market) continue;
   let rows = [];
   try { rows = await readMarketOffers(otherMarket); } catch { rows = []; }
+  const otherCutoff = Date.now() - retentionForMarket(otherMarket);
   const preserved = rows
     .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
-    .filter((offer) => freshness(offer) >= cutoff)
+    .filter((offer) => freshness(offer) >= otherCutoff)
     .filter((offer) => isCrediblePublicOffer({ ...offer, status: "active" }))
     .sort(qualityOrder)
     .slice(0, maximumPerMarket)
@@ -271,10 +288,14 @@ for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
 const unique = new Map();
 for (const offer of combined) if (offer?.id && !unique.has(offer.id)) unique.set(offer.id, offer);
 const allOffers = [...unique.values()];
+const previousRetainedCount = currentRetainedRows.length;
+const regressionBlocked = previousRetainedCount > 0 && selectedMarketOffers.length < previousRetainedCount;
 let manifest = null;
 let publicationError = "";
 
-if (selectedMarketOffers.length > 0) {
+if (regressionBlocked) {
+  publicationError = `catalog_v3_regression_guard:${market}:${selectedMarketOffers.length}:${previousRetainedCount}`;
+} else if (selectedMarketOffers.length > 0) {
   try {
     process.env.CATALOG_GROW_ONLY_MARKETS = "";
     manifest = await persistCatalogOffers(allOffers);
@@ -291,7 +312,7 @@ const byMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((marketId) => [
 ]));
 const calculatedCount = selectedMarketOffers.filter((offer) => Number(offer.totalRub || 0) > 0).length;
 const report = {
-  version: 1,
+  version: 2,
   mode: "catalog_v2_independent_market",
   market,
   publishedAt: new Date().toISOString(),
@@ -300,6 +321,8 @@ const report = {
   generationId: manifest?.generationId || null,
   previousManifestPreserved: !manifest,
   retentionMs,
+  defaultRetentionMs,
+  japanRetentionMs,
   targetPerSource,
   targetPerMarket,
   maximumPerMarket,
@@ -317,6 +340,8 @@ const report = {
       shortage: Math.max(0, targetPerMarket - selectedMarketOffers.length),
       generatedCandidates: generation.offers.length,
       retainedCandidates: currentMarketRows.length,
+      previousRetainedCount,
+      regressionBlocked,
       published: selectedMarketOffers.length,
       calculatedCount,
       calculatedShare: selectedMarketOffers.length ? Number((calculatedCount / selectedMarketOffers.length).toFixed(4)) : 0,

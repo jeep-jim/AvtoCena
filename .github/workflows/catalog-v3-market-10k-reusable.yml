@@ -9,6 +9,10 @@ on:
       display_name:
         required: true
         type: string
+      retention_ms:
+        required: false
+        type: string
+        default: "259200000"
     secrets:
       YC_OBJECT_STORAGE_ENDPOINT:
         required: false
@@ -42,8 +46,10 @@ env:
   CATALOG_REBUILD_TARGET_PER_SOURCE: "10000"
   CATALOG_REBUILD_TARGET_PER_MARKET: "10000"
   CATALOG_PUBLISH_TARGET_PER_MARKET: "10000"
-  CATALOG_PUBLISH_MAX_PER_MARKET: "10000"
-  CATALOG_OFFER_RETENTION_MS: "259200000"
+  CATALOG_PUBLISH_MAX_PER_MARKET: "100000"
+  CATALOG_OFFER_RETENTION_MS: ${{ inputs.retention_ms }}
+  CATALOG_DEFAULT_RETENTION_MS: "259200000"
+  CATALOG_JAPAN_RETENTION_MS: "2592000000"
   CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
   CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "1"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
@@ -149,6 +155,7 @@ jobs:
       CATALOG_REBUILD_MARKETS: ${{ inputs.market }}
       CATALOG_REBUILD_VALIDATION_REPORT: catalog-v3-${{ inputs.market }}-validation-report.json
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-v3-${{ inputs.market }}-publish-report.json
+      CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"
       CATALOG_PUBLISH_PREPARE_CONCURRENCY: "24"
       CATALOG_INDEX_WRITE_CONCURRENCY: "12"
       CATALOG_STORAGE_EMERGENCY: "true"
@@ -176,7 +183,7 @@ jobs:
       - run: npx tsx scripts/catalog-validate-source-scale.mjs
       - name: Publish market
         run: npx tsx scripts/catalog-publish-market.mjs
-      - name: Require complete 10k publication
+      - name: Require safe publication
         run: |
           node <<'NODE'
           const fs=require('fs');
@@ -184,10 +191,10 @@ jobs:
           const p=JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_PUBLISH_REPORT,'utf8'));
           const count=Number(p.byMarket?.[market]||0);
           const q=p.marketQuality?.[market]||{};
-          const state={market,published:p.published===true,generationId:p.generationId||null,count,priorityCount:Number(q.priorityCount||0),recentCount:Number(q.recentCount||0),extendedCount:Number(q.extendedCount||0),imageStats:q.imageStats||{},publicationError:p.publicationError||''};
+          const state={market,published:p.published===true,generationId:p.generationId||null,count,previousRetainedCount:Number(q.previousRetainedCount||0),generatedCandidates:Number(q.generatedCandidates||0),priorityCount:Number(q.priorityCount||0),recentCount:Number(q.recentCount||0),extendedCount:Number(q.extendedCount||0),regressionBlocked:q.regressionBlocked===true,publicationError:p.publicationError||''};
           console.log(JSON.stringify(state,null,2));
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,`### Catalog V3 ${market}\n\n\`\`\`json\n${JSON.stringify(state,null,2)}\n\`\`\`\n`);
-          if(!state.published||!state.generationId||state.count!==10000||state.publicationError) process.exit(1);
+          if(!state.published||!state.generationId||state.count<=0||state.regressionBlocked||state.publicationError) process.exit(1);
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
