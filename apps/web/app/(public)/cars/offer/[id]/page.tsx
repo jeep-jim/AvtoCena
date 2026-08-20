@@ -1,5 +1,6 @@
 import { Suspense, type ReactNode } from "react";
 import Link from "next/link";
+import { notFound } from "next/navigation";
 import { money } from "@/lib/avtocena";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
@@ -201,14 +202,10 @@ function OfferPriceBreakdown({ offer }: { offer: any }) {
   </details>;
 }
 
-function MissingOffer() {
-  return <main className="ac-page-copy min-h-screen bg-[#07080d] text-white"><PublicHeader backHref="/cars" backLabel="В каталог" /><section className="mx-auto max-w-4xl px-4 py-20 text-center"><h1 className="text-4xl font-black">Предложение не найдено</h1><p className="mt-3 font-bold text-[var(--ac-muted)]">Карточка временно недоступна.</p><Link href="/cars" className="avto-button mt-7 inline-block rounded-2xl px-6 py-4 font-black">Открыть каталог</Link></section></main>;
-}
-
 export default async function OfferPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const offer = await getOfferForPage(id);
-  if (!offer || !isCrediblePublicOffer(offer)) return <MissingOffer />;
+  if (!offer || !isCrediblePublicOffer(offer)) notFound();
 
   const enrichedOffer = await enrichOfferForDisplay(offer);
   const sourceUrl = safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);

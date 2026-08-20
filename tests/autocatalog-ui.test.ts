@@ -37,6 +37,7 @@ test("brand logos never disappear and the public request path does not crawl a t
 test("brand and model pages use Autocatalog copy, saved previews and no aggregate pseudo-specs", () => {
   const brandPage = source("apps/web/app/(public)/cars/brand/[slug]/page.tsx");
   const modelPage = source("apps/web/app/(public)/cars/brand/[slug]/model/[model]/page.tsx");
+  const modelLayout = source("apps/web/app/(public)/cars/brand/[slug]/model/[model]/layout.tsx");
   const modelDirectory = source("apps/web/components/catalog/BrandModelDirectory.tsx");
 
   assert.match(brandPage, /modelsWithPreviews/);
@@ -47,4 +48,11 @@ test("brand and model pages use Autocatalog copy, saved previews and no aggregat
   assert.match(brandPage, /\(published \? autocatalogCoverUrl\(published\) : undefined\) \|\| previewByModel/);
   assert.doesNotMatch(modelDirectory, /Характеристики дополняются|specRanges|representativePowerHp/);
   assert.doesNotMatch(modelPage, /Технические характеристики|Характеристики [^{]*\{/);
+  assert.doesNotMatch(modelLayout, /readVehicleKnowledgeVariants|Описание и характеристики|Мощность|Тип топлива|Привод/);
+});
+
+test("removed offers return a real not-found response instead of a soft 200 page", () => {
+  const offerPage = source("apps/web/app/(public)/cars/offer/[id]/page.tsx");
+  assert.match(offerPage, /if \(!offer \|\| !isCrediblePublicOffer\(offer\)\) notFound\(\)/);
+  assert.doesNotMatch(offerPage, /function MissingOffer/);
 });
