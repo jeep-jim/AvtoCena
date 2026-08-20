@@ -37,3 +37,37 @@ test("fills known BMW i3 eDrive display fields instead of showing unresolved pla
   assert.equal(enriched.drive, "rwd");
   assert.equal(enriched.engineCc, undefined);
 });
+
+test("offer detail enrichment uses the same canonical China identity as catalog cards", async () => {
+  const offer = {
+    id: "china-xiaoao-vito-detail",
+    sourceId: "autohome_used_china_open",
+    sourceOfferId: "xiaoao-1",
+    market: "china",
+    offerType: "fixed",
+    status: "active",
+    make: "AM晓澳汽车",
+    model: "晓澳汽车 VITO",
+    year: 2025,
+    mileageKm: 1_000,
+    powerHp: 231,
+    engineCc: 1991,
+    powertrainKind: "combustion",
+    sourcePrice: 680_000,
+    sourceCurrency: "CNY",
+    images: [],
+    totalRub: 15_000_000,
+    firstSeenAt: "2026-08-20T00:00:00.000Z",
+    updatedAt: "2026-08-20T00:00:00.000Z",
+    operational: {
+      sourceUrl: "https://example.com/xiaoao-vito",
+      raw: { title: "AM晓澳汽车 晓澳汽车 VITO" },
+    },
+  } as any;
+
+  const enriched = await enrichOfferForDisplay(offer);
+  assert.equal(enriched.make, "AM Xiaoao");
+  assert.equal(enriched.model, "VITO");
+  assert.equal(enriched.totalRub, offer.totalRub);
+  assert.equal(enriched.powerHp, offer.powerHp);
+});
