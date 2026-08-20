@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type SyntheticEvent } from "react";
 import { Gavel } from "lucide-react";
 
 type AuctionCardPriceProps = {
@@ -39,7 +39,10 @@ export function AuctionCardPrice({ offer, label, dense = false, priceClassName =
     };
   }, [open]);
 
-  const swallowPointer = (event: React.SyntheticEvent) => {
+  const stopPointer = (event: SyntheticEvent) => {
+    event.stopPropagation();
+  };
+  const swallowClick = (event: SyntheticEvent) => {
     event.preventDefault();
     event.stopPropagation();
   };
@@ -62,10 +65,10 @@ export function AuctionCardPrice({ offer, label, dense = false, priceClassName =
           aria-label="Что означает завершённый аукционный лот"
           aria-expanded={open}
           className="ac-auction-gavel flex shrink-0 touch-manipulation items-center justify-center rounded-lg bg-transparent p-0.5 text-[var(--ac-text)] outline-none transition-opacity hover:opacity-70 focus-visible:ring-2 focus-visible:ring-current/45"
-          onPointerDownCapture={swallowPointer}
-          onPointerUpCapture={swallowPointer}
+          onPointerDownCapture={stopPointer}
+          onPointerUpCapture={stopPointer}
           onClickCapture={(event) => {
-            swallowPointer(event);
+            swallowClick(event);
             setOpen((current) => !current);
           }}
           onKeyDown={(event) => {
@@ -80,8 +83,8 @@ export function AuctionCardPrice({ offer, label, dense = false, priceClassName =
         {open ? <div
           role="tooltip"
           className="ac-price-trend-popover absolute bottom-[calc(100%+10px)] right-0 z-[12020] w-[min(320px,calc(100vw-24px))] rounded-2xl border border-[var(--ac-border)] bg-[var(--ac-surface)] p-3.5 text-left text-xs font-bold leading-5 text-[var(--ac-text)] shadow-[0_20px_65px_rgba(0,0,0,.35)]"
-          onPointerDownCapture={swallowPointer}
-          onClickCapture={swallowPointer}
+          onPointerDownCapture={stopPointer}
+          onClickCapture={swallowClick}
         >
           Завершённый аукционный лот{dateLabel ? ` от ${dateLabel}` : ""}. Показана стоимость под ключ, рассчитанная по цене продажи и курсу, сохранённому для этого лота. Текущий курс её не изменяет.
           <span className="absolute -bottom-1.5 right-2.5 h-3 w-3 rotate-45 border-b border-r border-[var(--ac-border)] bg-[var(--ac-surface)]" aria-hidden="true" />
