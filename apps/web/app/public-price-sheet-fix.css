@@ -24,9 +24,12 @@ html[data-theme="light"] .ac-catalog-card,
   border-radius: var(--ac-card-radius) !important;
 }
 
-.ac-catalog-card > a > div:first-child,
+.ac-catalog-card > a > div:first-child {
+  border-radius: var(--ac-card-radius) var(--ac-card-radius) 0 0 !important;
+}
+
 .ac-catalog-card > a > div:last-child {
-  border-radius: 0 !important;
+  border-radius: 0 0 var(--ac-card-radius) var(--ac-card-radius) !important;
 }
 
 .ac-catalog-card .ac-price-trend-label {
@@ -83,6 +86,17 @@ html[data-theme="light"] .ac-catalog-card,
   background-color: transparent !important;
   box-shadow: none !important;
   color: var(--ac-text) !important;
+}
+
+/* The full offer uses a neutral dark control so the requested white gavel
+   remains visible in the light theme without bringing back the red backing. */
+.ac-offer-auction-gavel,
+.ac-offer-auction-gavel:hover,
+.ac-offer-auction-gavel:active {
+  background: #11151d !important;
+  background-color: #11151d !important;
+  box-shadow: none !important;
+  color: #fff !important;
 }
 
 /* Falling customer price is always green; rising price is always red. */
@@ -228,23 +242,6 @@ html body main.ac-page-copy.ac-home-page section.ac-brand-rail[aria-label="Ма�
 
   .ac-price-trend-panel {
     pointer-events: none !important;
-  }
-}
-
-/* Hovering a currency arrow must not spawn the large rectangular helper.
-   A deliberate desktop click/focus still reveals the same information. */
-@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
-  .ac-price-trend-arrow:hover > .ac-price-trend-popover {
-    visibility: hidden !important;
-    opacity: 0 !important;
-    pointer-events: none !important;
-  }
-
-  .ac-price-trend-arrow:focus > .ac-price-trend-popover,
-  .ac-price-trend-arrow:focus-within > .ac-price-trend-popover {
-    visibility: visible !important;
-    opacity: 1 !important;
-    pointer-events: auto !important;
   }
 }
 

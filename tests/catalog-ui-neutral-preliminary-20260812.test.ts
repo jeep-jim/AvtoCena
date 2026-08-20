@@ -53,9 +53,22 @@ test("Japanese auction microcards use a neutral historical price and non-navigat
   assert.match(auctionCardPrice, /event\.stopPropagation\(\)/);
   assert.match(priceSheetCss, /\.ac-auction-gavel[^}]+background:\s*transparent !important/s);
   assert.match(priceTrend, /export function AuctionResultPrice/);
+  assert.match(priceTrend, /ac-offer-auction-gavel/);
+  assert.doesNotMatch(priceTrend, /ac-offer-auction-gavel[^\n]+bg-\[#ef3340\]/);
+  assert.match(priceSheetCss, /\.ac-offer-auction-gavel[^}]+background:\s*#11151d !important[^}]+color:\s*#fff !important/s);
   assert.match(offerPage, /\{japanAuction/);
   assert.match(offerPage, /<AuctionResultPrice offer=\{o\} label="Завершённый аукцион"/);
   assert.match(offerPage, /html\[data-theme="light"\][^}]+\.ac-offer-price-panel[^}]+background:#fff!important/s);
+});
+
+test("catalog helper popovers preserve card rounding and currency opens only on click", () => {
+  assert.match(priceSheetCss, /> a > div:first-child\s*\{[^}]+border-radius:\s*var\(--ac-card-radius\) var\(--ac-card-radius\) 0 0 !important/s);
+  assert.match(priceSheetCss, /> a > div:last-child\s*\{[^}]+border-radius:\s*0 0 var\(--ac-card-radius\) var\(--ac-card-radius\) !important/s);
+  assert.doesNotMatch(priceTrend, /onMouseEnter=\{\(\) => \{ if \(canShowRate && desktopHover\) setPopoverOpen\(true\); \}\}/);
+  assert.doesNotMatch(priceTrend, /onMouseLeave=\{\(\) => \{ if \(desktopHover\) setPopoverOpen\(false\); \}\}/);
+  assert.match(priceTrend, /if \(desktopHover\) setPopoverOpen\(\(current\) => !current\); else openSheet\(\);/);
+  assert.match(auctionCardPrice, /bottom-\[calc\(100%\+10px\)\]/);
+  assert.match(auctionCardPrice, /onClickCapture=\{\(event\) => \{[^}]+swallowClick\(event\);[^}]+setOpen\(\(current\) => !current\);/s);
 });
 
 test("saved total changes are not mislabeled as currency impact", () => {
