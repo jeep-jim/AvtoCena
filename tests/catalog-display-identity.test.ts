@@ -86,15 +86,15 @@ test("known model plus listing trim can be canonicalized without changing trim o
   assert.equal(result.calculationStatus, "ready");
 });
 
-test("coachbuilder VITO is not silently promoted to Mercedes-Benz Vito", async () => {
+test("China coachbuilder VITO is presented under its verified base vehicle brand", async () => {
   const raw = { id: "coachbuilder-vito", market: "china", make: "雅升汽车", model: "VITO", year: 2025, totalRub: 13_963_671 };
   const result = await applyEncyclopediaDisplayIdentity(raw);
-  assert.equal(result.make, "Yasheng");
-  assert.equal(result.model, raw.model);
+  assert.equal(result.make, "Mercedes-Benz");
+  assert.equal(result.model, "Vito");
   assert.equal(result.encyclopediaDisplayIdentity?.match, "trusted_alias");
 });
 
-test("China coachbuilders keep their real brand and one canonical VITO/V-Class model name", async () => {
+test("China coachbuilders resolve to the verified Mercedes-Benz Vito/V-Class base identity", async () => {
   const xiaoao = await applyEncyclopediaDisplayIdentity({
     id: "xiaoao-vito",
     market: "china",
@@ -117,11 +117,31 @@ test("China coachbuilders keep their real brand and one canonical VITO/V-Class m
     year: 2025,
   });
 
-  assert.deepEqual([xiaoao.make, xiaoao.model], ["AM Xiaoao", "VITO"]);
-  assert.deepEqual([shangzhe.make, shangzhe.model], ["Shangzhe", "V-Class"]);
-  assert.deepEqual([yasheng.make, yasheng.model], ["Yasheng", "VITO"]);
+  assert.deepEqual([xiaoao.make, xiaoao.model], ["Mercedes-Benz", "Vito"]);
+  assert.deepEqual([shangzhe.make, shangzhe.model], ["Mercedes-Benz", "V-Class"]);
+  assert.deepEqual([yasheng.make, yasheng.model], ["Mercedes-Benz", "Vito"]);
   assert.equal(xiaoao.encyclopediaDisplayIdentity?.match, "trusted_alias");
   assert.equal(shangzhe.encyclopediaDisplayIdentity?.match, "trusted_alias");
+});
+
+test("raw Chinese official model aliases recover the base brand hidden by a coachbuilder label", async () => {
+  const vClass = await applyEncyclopediaDisplayIdentity({
+    id: "we昊-v-class",
+    market: "china",
+    make: "伟昊汽车",
+    model: "塞里雅兰V级",
+    year: 2025,
+  });
+  const vito = await applyEncyclopediaDisplayIdentity({
+    id: "shangzhe-vito",
+    market: "china",
+    make: "上喆汽车",
+    model: "浩达威霆",
+    year: 2025,
+  });
+
+  assert.deepEqual([vClass.make, vClass.model], ["Mercedes-Benz", "V-Class"]);
+  assert.deepEqual([vito.make, vito.model], ["Mercedes-Benz", "Vito"]);
 });
 
 test("AITO localized source spellings collapse to one public brand without duplicated make in model", async () => {

@@ -12,6 +12,7 @@ import { selectCatalogShowcaseDiversity } from "./inventory-quota";
 import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./vehicle-knowledge";
 import { applyEncyclopediaDisplayIdentityBatch } from "./display-identity";
 import { catalogPublicPriority, findCatalogPriceOutliers } from "./public-priority";
+import { deduplicatePublicCatalogOffers } from "./public-offer-deduplication";
 
 const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
@@ -965,7 +966,9 @@ export async function publishCurrentCatalogReadModels() {
   const identifiedOffers = await applyEncyclopediaDisplayIdentityBatch(storedOffers);
   const priceOutliers = findCatalogPriceOutliers(identifiedOffers);
   const rejectedPriceIds = new Set(priceOutliers.map((outlier) => outlier.id));
-  const offers = identifiedOffers.filter((offer) => !rejectedPriceIds.has(offer.id));
+  const priceFilteredOffers = identifiedOffers.filter((offer) => !rejectedPriceIds.has(offer.id));
+  const deduplicated = deduplicatePublicCatalogOffers(priceFilteredOffers);
+  const offers = deduplicated.rows;
   const previousAllProjection = await readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION).catch(() => ({ generationId: "", items: [] }));
 
   const makes = uniqueText(offers.map((offer) => offer.make)).sort((a, b) => a.localeCompare(b, "ru"));
@@ -1035,6 +1038,8 @@ export async function publishCurrentCatalogReadModels() {
     offerShards: offersByShard.size,
     priceOutliersRejected: priceOutliers.length,
     priceOutliers: priceOutliers.slice(0, 50),
+    semanticDuplicatesRejected: deduplicated.removed.length,
+    semanticDuplicates: deduplicated.removed.slice(0, 100),
     aiProductFeedProducts: aiProductFeed.productCount,
     aiProductFeedBytes: aiProductFeed.size,
   };

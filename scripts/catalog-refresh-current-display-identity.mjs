@@ -5,6 +5,7 @@ const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime
 const { hasCredibleOfferContent, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { applyEncyclopediaDisplayIdentityBatch } = await import("../apps/web/lib/catalog/display-identity.ts");
 const { catalogPublicPriority, findCatalogPriceOutliers } = await import("../apps/web/lib/catalog/public-priority.ts");
+const { deduplicatePublicCatalogOffers } = await import("../apps/web/lib/catalog/public-offer-deduplication.ts");
 
 const APPLY = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_DISPLAY_IDENTITY_APPLY || ""));
 const OUTPUT = process.env.CATALOG_DISPLAY_IDENTITY_REPORT || "catalog-current-display-identity-refresh.json";
@@ -50,6 +51,9 @@ const priceOutliers = findCatalogPriceOutliers(identifiedRows);
 if (priceOutliers.length) {
   throw new Error(`display_identity_refresh_price_outliers_present:${priceOutliers.length}`);
 }
+const deduplicated = deduplicatePublicCatalogOffers(identifiedRows);
+const publicRows = deduplicated.rows;
+const publicMarketCounts = countMarkets(publicRows);
 
 const changedRows = identifiedRows.flatMap((after, index) => {
   const before = sourceRows[index];
@@ -70,8 +74,8 @@ const changedRows = identifiedRows.flatMap((after, index) => {
 });
 
 const currentProjection = await readCurrentPublicCatalogProjection();
-if (currentProjection.rows.length !== sourceRows.length) {
-  throw new Error(`display_identity_refresh_current_projection_count_mismatch:${currentProjection.rows.length}:${sourceRows.length}`);
+if (currentProjection.rows.length > sourceRows.length) {
+  throw new Error(`display_identity_refresh_current_projection_count_exceeds_source:${currentProjection.rows.length}:${sourceRows.length}`);
 }
 
 const beforePairs = new Set(sourceRows.map(identityPair));
@@ -82,7 +86,9 @@ const report = {
   generatedAt: new Date().toISOString(),
   generationId: currentProjection.generationId,
   total: sourceRows.length,
+  publicTotal: publicRows.length,
   marketCounts: sourceMarketCounts,
+  publicMarketCounts,
   identity: {
     changed: changedRows.length,
     brandChanged: changedRows.filter((row) => row.beforeMake !== row.afterMake).length,
@@ -92,16 +98,21 @@ const report = {
     sample: changedRows.slice(0, 100),
   },
   priceOutliers: 0,
+  semanticDuplicates: {
+    rejected: deduplicated.removed.length,
+    sample: deduplicated.removed.slice(0, 100),
+  },
   applied: false,
 };
 
 if (APPLY) {
   const published = await publishCurrentCatalogReadModels();
   if (published.generationId !== currentProjection.generationId) throw new Error(`display_identity_refresh_generation_changed:${currentProjection.generationId}:${published.generationId}`);
-  if (published.total !== sourceRows.length) throw new Error(`display_identity_refresh_published_count_changed:${published.total}:${sourceRows.length}`);
-  if (published.allProjectionCount !== sourceRows.length) throw new Error(`display_identity_refresh_projection_count_changed:${published.allProjectionCount}:${sourceRows.length}`);
+  if (published.total !== publicRows.length) throw new Error(`display_identity_refresh_published_count_mismatch:${published.total}:${publicRows.length}`);
+  if (published.allProjectionCount !== publicRows.length) throw new Error(`display_identity_refresh_projection_count_mismatch:${published.allProjectionCount}:${publicRows.length}`);
   if (published.priceOutliersRejected !== 0) throw new Error(`display_identity_refresh_unexpected_outlier_rejection:${published.priceOutliersRejected}`);
-  if (JSON.stringify(published.markets) !== JSON.stringify(sourceMarketCounts)) throw new Error("display_identity_refresh_published_market_counts_changed");
+  if (published.semanticDuplicatesRejected !== deduplicated.removed.length) throw new Error(`display_identity_refresh_duplicate_count_mismatch:${published.semanticDuplicatesRejected}:${deduplicated.removed.length}`);
+  if (JSON.stringify(published.markets) !== JSON.stringify(publicMarketCounts)) throw new Error("display_identity_refresh_published_market_counts_changed");
   report.applied = true;
   report.published = published;
 }
