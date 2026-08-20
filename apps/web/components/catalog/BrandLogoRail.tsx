@@ -58,8 +58,8 @@ export function BrandLogoVisual({ brand, className = "" }: { brand: string; clas
   }, []);
 
   const sources = [
-    `/api/catalog/brand-logo/${encodeURIComponent(slug)}?theme=${theme}`,
     `/brand-logos/drom/${theme}/${slug}.png`,
+    `/api/catalog/brand-logo/${encodeURIComponent(slug)}?theme=${theme}`,
   ];
 
   if (sourceIndex >= sources.length) {
@@ -183,7 +183,11 @@ export function BrandLogoRail({
       const canonical = canonicalCatalogBrand(brand);
       const known = knownBrands.get(canonical.toLocaleLowerCase("en-US"));
       const count = Number(value);
-      if (known && Number.isFinite(count) && count >= 0) result.set(known.toLocaleLowerCase("en-US"), { brand: known, count });
+      if (known && Number.isFinite(count) && count >= 0) {
+        const brandKey = known.toLocaleLowerCase("en-US");
+        const previous = result.get(brandKey);
+        result.set(brandKey, { brand: known, count: (previous?.count || 0) + count });
+      }
     }
     return result;
   }, [brandCounts, knownBrands]);

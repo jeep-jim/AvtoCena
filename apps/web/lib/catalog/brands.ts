@@ -167,6 +167,17 @@ const LOCALIZED_ALIASES: Record<string, string> = {
   "렉서스": "Lexus",
   "링컨": "Lincoln",
   "마세라티": "Maserati",
+  "닷지": "Dodge",
+  "람보르기니": "Lamborghini",
+  "로터스": "Lotus",
+  "롤스로이스": "Rolls-Royce",
+  "맥라렌": "McLaren",
+  "벤틀리": "Bentley",
+  "시트로엥": "Citroen",
+  "신위안": "SRM Shineray",
+  "지리": "Geely",
+  "페라리": "Ferrari",
+  "폴스타": "Polestar",
 };
 
 const ALIASES: Record<string, string> = {
