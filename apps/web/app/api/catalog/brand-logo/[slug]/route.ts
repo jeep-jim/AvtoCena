@@ -25,9 +25,10 @@ async function localBrandLogo(values: string[], theme: "light" | "dark") {
   return null;
 }
 
-export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
-  const brand = await resolveCatalogBrandBySlug(params.slug);
-  const requestedSlug = catalogBrandSlug(params.slug);
+export async function GET(request: NextRequest, { params }: { params: Promise<{ slug: string }> }) {
+  const { slug } = await params;
+  const brand = await resolveCatalogBrandBySlug(slug);
+  const requestedSlug = catalogBrandSlug(slug);
   if (!/^[a-z0-9-]+$/.test(requestedSlug)) return new NextResponse(null, { status: 404 });
 
   const theme = request.nextUrl.searchParams.get("theme") === "dark" ? "dark" : "light";
