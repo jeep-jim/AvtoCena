@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useMemo, useState } from "react";
+import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
 
 type NumericRange = { min: number; max: number; count: number };
 type BrandModelLink = {
@@ -14,6 +15,7 @@ type BrandModelLink = {
   yearFrom?: number;
   yearTo?: number;
   representativePowerHp?: number;
+  previewUrl?: string;
   knowledge?: {
     records: number;
     variants: number;
@@ -32,7 +34,7 @@ type BrandModelLink = {
 
 type KnowledgeRow = { label: string; value: string };
 
-const PREVIEW_LIMIT = 6;
+const PREVIEW_LIMIT = 8;
 
 function searchable(value: unknown) {
   return String(value || "")
@@ -163,7 +165,7 @@ export function BrandModelDirectory({
       {query ? <button type="button" onClick={() => setQuery("")} className="flex h-8 w-8 items-center justify-center rounded-full bg-[var(--ac-surface-3)] text-lg font-bold" aria-label="Очистить поиск">×</button> : null}
     </label>
 
-    {filtered.length ? <div className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 lg:grid-cols-6">
+    {filtered.length ? <div className="mt-4 grid grid-cols-2 gap-2.5 sm:grid-cols-3 lg:grid-cols-4">
       {filtered.map((model) => {
         const knowledge = modelKnowledgeLabel(model);
         const open = openModelId === model.id;
@@ -172,22 +174,25 @@ export function BrandModelDirectory({
         const tags = modelTags(model);
         return <article
           key={model.id}
-          className={`overflow-hidden rounded-2xl bg-[var(--ac-surface-2)] transition ${open ? "col-span-2 sm:col-span-3 lg:col-span-6 ring-1 ring-red-500/20" : ""}`}
+          className={`overflow-hidden rounded-2xl bg-[var(--ac-surface-2)] transition ${open ? "col-span-2 sm:col-span-3 lg:col-span-4 ring-1 ring-red-500/20" : ""}`}
         >
           <button
             type="button"
             onClick={() => setOpenModelId(open ? null : model.id)}
-            className="group flex min-h-14 w-full items-center justify-between gap-2 px-3 py-2.5 text-left transition hover:bg-[var(--ac-surface-3)] hover:text-red-500"
+            className="group block w-full text-left transition hover:bg-[var(--ac-surface-3)]"
             aria-expanded={open}
             aria-controls={detailId}
           >
-            <span className="min-w-0">
-              <span className="block truncate text-sm font-black">{model.model}</span>
-              {knowledge ? <span className="mt-0.5 block truncate text-[10px] font-bold text-[var(--ac-muted)]">{knowledge}</span> : <span className="mt-0.5 block truncate text-[10px] font-bold text-[var(--ac-muted)]">Открыть модель</span>}
+            <span className="relative flex h-24 items-center justify-center overflow-hidden bg-[var(--ac-surface)] sm:h-28">
+              {model.previewUrl ? <img src={model.previewUrl} alt={`${brand} ${model.model}`} loading="lazy" decoding="async" className="h-full w-full object-cover transition duration-300 group-hover:scale-[1.025]" /> : <BrandLogoVisual brand={brand} className="!h-12 !w-24 opacity-55" />}
+              {model.count > 0 ? <span className="absolute right-2 top-2 rounded-full bg-black/65 px-2 py-1 text-[9px] font-black text-white">{model.count} в продаже</span> : null}
             </span>
-            <span className="flex shrink-0 items-center gap-1 text-[10px] font-black text-[var(--ac-muted)]">
-              {model.count > 0 ? <span>{model.count}</span> : null}
-              <Chevron open={open} />
+            <span className="flex min-h-14 items-center justify-between gap-2 px-3 py-2.5">
+              <span className="min-w-0">
+                <span className="block truncate text-sm font-black text-[var(--ac-text)] transition group-hover:text-red-500">{model.model}</span>
+                {knowledge ? <span className="mt-0.5 block truncate text-[10px] font-bold text-[var(--ac-muted)]">{knowledge}</span> : <span className="mt-0.5 block truncate text-[10px] font-bold text-[var(--ac-muted)]">Характеристики дополняются</span>}
+              </span>
+              <span className="flex shrink-0 items-center gap-1 text-[10px] font-black text-[var(--ac-muted)]"><Chevron open={open} /></span>
             </span>
           </button>
 

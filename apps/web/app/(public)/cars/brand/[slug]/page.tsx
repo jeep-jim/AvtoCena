@@ -12,6 +12,7 @@ import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 import type { CatalogMarket } from "@/lib/catalog/types";
+import { vehicleKnowledgeCompact } from "@/lib/catalog/vehicle-knowledge";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -24,8 +25,8 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const { slug } = await params;
   const brand = await resolveCatalogBrandBySlug(slug);
   if (!brand) return {};
-  const title = `${brand.name} — модели, характеристики и цены | Энциклопедия АвтоЦена`;
-  const description = `Энциклопедия ${brand.name}: модели, характеристики, мощность и актуальные предложения из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана. Расчёт под ключ в АвтоЦене.`;
+  const title = `${brand.name} — модели, характеристики и цены | Автокаталог`;
+  const description = `Автокаталог ${brand.name}: модели, характеристики, мощность и актуальные предложения из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана.`;
   return {
     title,
     description,
@@ -58,6 +59,22 @@ export default async function BrandLandingPage({ params }: PageProps) {
     }
   }
   const offers = [...uniqueOffers.values()];
+  const modelByAlias = new Map<string, string | null>();
+  for (const model of models) {
+    for (const value of [model.model, ...(model.aliases || [])]) {
+      const key = vehicleKnowledgeCompact(value);
+      if (!key) continue;
+      const current = modelByAlias.get(key);
+      modelByAlias.set(key, current && current !== model.id ? null : model.id);
+    }
+  }
+  const previewByModel = new Map<string, string>();
+  for (const offer of offers) {
+    const modelId = modelByAlias.get(vehicleKnowledgeCompact(offer.model));
+    const previewUrl = String(offer.images?.[0]?.url || offer.cardImageUrl || "");
+    if (modelId && previewUrl && !previewByModel.has(modelId)) previewByModel.set(modelId, previewUrl);
+  }
+  const modelsWithPreviews = models.map((model) => ({ ...model, previewUrl: previewByModel.get(model.id) }));
   const catalogMakes = rawMakes.join(",");
   const totalOffers = makeResults.reduce((sum, entry) => sum + Number(entry.result.total || 0), 0);
   const grouped = MARKET_ORDER.map((market) => ({
@@ -73,7 +90,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="mx-auto w-full max-w-[1500px] px-4 py-8 md:px-8 md:py-12">
       <nav className="text-xs font-black uppercase tracking-[0.15em] text-[var(--ac-muted)]" aria-label="Хлебные крошки">
-        <Link href="/cars" className="hover:text-red-500">Каталог</Link><span className="mx-2">/</span><span>{brand.name}</span>
+        <Link href="/cars/autocatalog" className="hover:text-red-500">Автокаталог</Link><span className="mx-2">/</span><span>{brand.name}</span>
       </nav>
 
       <header className="mt-5 grid gap-6 rounded-[2rem] bg-[var(--ac-surface)] p-5 shadow-[0_22px_70px_rgba(0,0,0,.16)] md:grid-cols-[170px_minmax(0,1fr)] md:items-center md:p-8">
@@ -91,17 +108,11 @@ export default async function BrandLandingPage({ params }: PageProps) {
             {totalOffers ? <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{totalOffers.toLocaleString("ru-RU")} автомобилей</span> : null}
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{availableMarkets.length || 7} {availableMarkets.length === 1 ? "рынок" : "рынков"}</span>
           </div>
+          {availableMarkets.length ? <div className="mt-3 flex flex-wrap gap-2">{availableMarkets.map((market) => <span key={market} className="inline-flex items-center gap-2 rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-xs font-black"><CatalogMarketFlag market={market} className="h-4 w-6" />{CATALOG_MARKET_LABELS[market]}</span>)}</div> : null}
         </div>
       </header>
 
-      <section className="mt-7 rounded-[1.6rem] bg-[var(--ac-surface)] p-5 md:p-6">
-        <div className="flex flex-wrap items-center gap-3">
-          <h2 className="mr-auto text-xl font-black md:text-2xl">Актуальные рынки {brand.name}</h2>
-          {availableMarkets.length ? availableMarkets.map((market) => <span key={market} className="inline-flex items-center gap-2 rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-sm font-black"><CatalogMarketFlag market={market} className="h-4 w-6" />{CATALOG_MARKET_LABELS[market]}</span>) : <span className="text-sm font-bold text-[var(--ac-muted)]">Подбираем автомобили на семи рынках</span>}
-        </div>
-      </section>
-
-      <BrandModelDirectory brand={brand.name} brandSlug={brand.slug} models={models} />
+      <BrandModelDirectory brand={brand.name} brandSlug={brand.slug} models={modelsWithPreviews} />
 
       {grouped.length ? <div className="mt-9 space-y-12">
         {grouped.map((group) => {
