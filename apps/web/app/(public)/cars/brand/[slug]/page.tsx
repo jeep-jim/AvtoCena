@@ -6,6 +6,7 @@ import { BrandModelDirectory } from "@/components/catalog/BrandModelDirectory";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { PublicHeader } from "@/components/layout/PublicHeader";
+import { autocatalogCoverUrl, readAutocatalogCoverIndex } from "@/lib/catalog/autocatalog-publication";
 import { catalogBrandMatches, resolveCatalogBrandBySlug } from "@/lib/catalog/catalog-brand-directory";
 import { readBrandModelDirectory } from "@/lib/catalog/model-directory";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
@@ -40,9 +41,10 @@ export default async function BrandLandingPage({ params }: PageProps) {
   const brand = await resolveCatalogBrandBySlug(slug);
   if (!brand) notFound();
 
-  const [facets, models] = await Promise.all([
+  const [facets, models, publishedCovers] = await Promise.all([
     readCatalogFacets(),
     readBrandModelDirectory(brand.name),
+    readAutocatalogCoverIndex(),
   ]);
   const rawMakes = [...new Set([
     brand.name,
@@ -74,7 +76,10 @@ export default async function BrandLandingPage({ params }: PageProps) {
     const previewUrl = String(offer.images?.[0]?.url || offer.cardImageUrl || "");
     if (modelId && previewUrl && !previewByModel.has(modelId)) previewByModel.set(modelId, previewUrl);
   }
-  const modelsWithPreviews = models.map((model) => ({ ...model, previewUrl: previewByModel.get(model.id) }));
+  const modelsWithPreviews = models.map((model) => {
+    const published = publishedCovers.get(model.id);
+    return { ...model, previewUrl: previewByModel.get(model.id) || (published ? autocatalogCoverUrl(published) : undefined) };
+  });
   const catalogMakes = rawMakes.join(",");
   const totalOffers = makeResults.reduce((sum, entry) => sum + Number(entry.result.total || 0), 0);
   const grouped = MARKET_ORDER.map((market) => ({

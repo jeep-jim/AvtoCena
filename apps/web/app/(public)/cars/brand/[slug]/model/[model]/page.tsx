@@ -6,6 +6,7 @@ import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { EncyclopediaModelReference } from "@/components/catalog/EncyclopediaModelReference";
 import { PublicHeader } from "@/components/layout/PublicHeader";
+import { autocatalogCoverUrl, findAutocatalogPublishedCover } from "@/lib/catalog/autocatalog-publication";
 import { catalogBrandMatches, resolveCatalogBrandBySlug } from "@/lib/catalog/catalog-brand-directory";
 import { readPublicEncyclopediaVariants } from "@/lib/catalog/encyclopedia-public";
 import { findBrandModelBySlug, readBrandModelDirectory, type CatalogNumericRange } from "@/lib/catalog/model-directory";
@@ -153,6 +154,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
     readCatalogFacets(),
   ]);
   if (!model) notFound();
+  const publishedCover = await findAutocatalogPublishedCover(model.id);
 
   const isHiluxReference = brand.slug === "toyota" && model.slug === "hilux";
   const referenceVariants = isHiluxReference ? await readPublicEncyclopediaVariants(model.id) : [];
@@ -226,6 +228,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
   const offers = [...uniqueOffers.values()];
   const heroImageUrl = String(offers.find((offer: any) => offer.images?.[0]?.url || offer.cardImageUrl)?.images?.[0]?.url
     || offers.find((offer: any) => offer.cardImageUrl)?.cardImageUrl
+    || (publishedCover ? autocatalogCoverUrl(publishedCover) : "")
     || "");
   const grouped = MARKET_ORDER.map((market) => ({ market, offers: offers.filter((offer: any) => offer.market === market) })).filter((group) => group.offers.length);
   const brandFallback = offers.length ? [] : (await searchOffers({ make: rawMakes.join(","), pageSize: 16, sort: "updatedAt" })).items.filter((offer: any) => isCrediblePublicOffer(offer)).slice(0, 12);
