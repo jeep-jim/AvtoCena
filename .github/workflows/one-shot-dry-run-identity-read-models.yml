@@ -25,7 +25,7 @@ jobs:
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
       CATALOG_ENCYCLOPEDIA_IDENTITY_PUBLISH_REPORT: /tmp/identity-read-model-dry-run.json
-      IDENTITY_DRY_RUN_GENERATION: "20260818-pr-observable"
+      IDENTITY_DRY_RUN_GENERATION: "20260820-current-main"
     steps:
       - uses: actions/checkout@v4
         with:
@@ -45,10 +45,20 @@ jobs:
         run: |
           set -o pipefail
           {
-            node scripts/catalog-publish-encyclopedia-identity-read-models.mjs
+            node --import tsx scripts/catalog-publish-encyclopedia-identity-read-models.mjs
             test -s /tmp/identity-read-model-dry-run.json
             cat /tmp/identity-read-model-dry-run.json
           } 2>&1 | tee /tmp/identity-read-model-dry-run.log
+      - name: Upload dry-run report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: identity-read-model-dry-run
+          path: |
+            /tmp/identity-read-model-dry-run.json
+            /tmp/identity-read-model-dry-run.log
+          if-no-files-found: warn
+          retention-days: 7
       - name: Persist report and diagnostics to recovery branch
         if: always()
         env:
