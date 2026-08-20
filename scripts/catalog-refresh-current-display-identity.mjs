@@ -48,10 +48,9 @@ const identifiedMarketCounts = countMarkets(identifiedRows);
 if (JSON.stringify(sourceMarketCounts) !== JSON.stringify(identifiedMarketCounts)) throw new Error("display_identity_refresh_market_counts_changed");
 
 const priceOutliers = findCatalogPriceOutliers(identifiedRows);
-if (priceOutliers.length) {
-  throw new Error(`display_identity_refresh_price_outliers_present:${priceOutliers.length}`);
-}
-const deduplicated = deduplicatePublicCatalogOffers(identifiedRows);
+const rejectedPriceIds = new Set(priceOutliers.map((outlier) => String(outlier?.id || "")).filter(Boolean));
+const priceEligibleRows = identifiedRows.filter((row) => !rejectedPriceIds.has(String(row?.id || "")));
+const deduplicated = deduplicatePublicCatalogOffers(priceEligibleRows);
 const publicRows = deduplicated.rows;
 const publicMarketCounts = countMarkets(publicRows);
 
@@ -97,7 +96,10 @@ const report = {
     makeModelPairsAfter: afterPairs.size,
     sample: changedRows.slice(0, 100),
   },
-  priceOutliers: 0,
+  priceOutliers: {
+    rejected: priceOutliers.length,
+    sample: priceOutliers.slice(0, 50),
+  },
   semanticDuplicates: {
     rejected: deduplicated.removed.length,
     sample: deduplicated.removed.slice(0, 100),
@@ -110,7 +112,7 @@ if (APPLY) {
   if (published.generationId !== currentProjection.generationId) throw new Error(`display_identity_refresh_generation_changed:${currentProjection.generationId}:${published.generationId}`);
   if (published.total !== publicRows.length) throw new Error(`display_identity_refresh_published_count_mismatch:${published.total}:${publicRows.length}`);
   if (published.allProjectionCount !== publicRows.length) throw new Error(`display_identity_refresh_projection_count_mismatch:${published.allProjectionCount}:${publicRows.length}`);
-  if (published.priceOutliersRejected !== 0) throw new Error(`display_identity_refresh_unexpected_outlier_rejection:${published.priceOutliersRejected}`);
+  if (published.priceOutliersRejected !== priceOutliers.length) throw new Error(`display_identity_refresh_outlier_count_mismatch:${published.priceOutliersRejected}:${priceOutliers.length}`);
   if (published.semanticDuplicatesRejected !== deduplicated.removed.length) throw new Error(`display_identity_refresh_duplicate_count_mismatch:${published.semanticDuplicatesRejected}:${deduplicated.removed.length}`);
   if (JSON.stringify(published.markets) !== JSON.stringify(publicMarketCounts)) throw new Error("display_identity_refresh_published_market_counts_changed");
   report.applied = true;
