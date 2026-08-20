@@ -53,7 +53,7 @@ export default async function EncyclopediaModificationPage({ params }: PageProps
     <section className="mx-auto w-full max-w-[1500px] px-4 py-8 md:px-8 md:py-12">
       <nav className="text-xs font-black uppercase tracking-[0.15em] text-[var(--ac-muted)]" aria-label="Хлебные крошки">
         <Link href="/cars" className="hover:text-red-500">Каталог</Link><span className="mx-2">/</span>
-        <Link href="/cars/encyclopedia" className="hover:text-red-500">Энциклопедия</Link><span className="mx-2">/</span>
+        <Link href="/cars/autocatalog" className="hover:text-red-500">Автокаталог</Link><span className="mx-2">/</span>
         <Link href={`/cars/brand/${brand.slug}`} className="hover:text-red-500">{brand.name}</Link><span className="mx-2">/</span>
         <Link href={`/cars/brand/${brand.slug}/model/${model.slug}`} className="hover:text-red-500">{model.model}</Link><span className="mx-2">/</span>
         <span>Модификация</span>

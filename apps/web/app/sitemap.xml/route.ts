@@ -28,7 +28,7 @@ export async function GET() {
   const entries = [
     urlEntry(baseUrl, "daily", 1),
     urlEntry(`${baseUrl}/cars`, "hourly", 0.95),
-    urlEntry(`${baseUrl}/cars/encyclopedia`, "daily", 0.9),
+    urlEntry(`${baseUrl}/cars/autocatalog`, "daily", 0.9),
     ...brands.map((brand) => urlEntry(`${baseUrl}/cars/brand/${brand.slug}`, "daily", 0.8)),
   ];
 

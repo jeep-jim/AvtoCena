@@ -248,7 +248,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
         </nav>
         <div className="flex flex-wrap items-end justify-between gap-3">
           <h1 className="whitespace-nowrap text-[30px] font-black leading-none tracking-[-0.04em] sm:text-4xl md:text-6xl">{japanStatisticsSelected ? "Аукционная статистика" : "Каталог автомобилей"}</h1>
-          <Link href="/cars/encyclopedia" className="inline-flex min-h-10 items-center rounded-xl bg-white/[0.06] px-4 text-sm font-black text-white transition hover:bg-white/[0.1] hover:text-red-400">Энциклопедия →</Link>
+          <Link href="/cars/autocatalog" className="inline-flex min-h-10 items-center rounded-xl bg-white/[0.06] px-4 text-sm font-black text-white transition hover:bg-white/[0.1] hover:text-red-400">Автокаталог →</Link>
         </div>
         <p className="mt-3 hidden text-sm font-bold leading-6 text-white/52 md:text-base lg:block">Найдено: {total}</p>
         <div className="lg:hidden"><BrandLogoRail brands={brandNames} resultCount={total} /></div>

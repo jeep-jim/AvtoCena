@@ -58,11 +58,18 @@ export function BrandLogoVisual({ brand, className = "" }: { brand: string; clas
   }, []);
 
   const sources = [
-    `/brand-logos/drom/${theme}/${slug}.png`,
     `/api/catalog/brand-logo/${encodeURIComponent(slug)}?theme=${theme}`,
+    `/brand-logos/drom/${theme}/${slug}.png`,
   ];
 
-  if (sourceIndex >= sources.length) return <span aria-hidden="true" className={`block h-10 w-[76px] shrink-0 ${className}`} />;
+  if (sourceIndex >= sources.length) {
+    const initials = brand.split(/[\s&-]+/).map((part) => part[0] || "").join("").slice(0, 2).toUpperCase() || "·";
+    return <span
+      aria-label={`Логотип ${brand} проверяется`}
+      title={`Официальный логотип ${brand} пока проходит проверку источника`}
+      className={`flex h-10 w-[76px] shrink-0 items-center justify-center rounded-xl border border-current/10 bg-[var(--ac-surface-2)] text-sm font-black tracking-[0.08em] text-[var(--ac-muted)] ${className}`}
+    >{initials}</span>;
+  }
 
   return <img
     src={sources[sourceIndex]}

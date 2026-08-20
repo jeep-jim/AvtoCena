@@ -6,6 +6,7 @@ import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { EncyclopediaModelReference } from "@/components/catalog/EncyclopediaModelReference";
 import { PublicHeader } from "@/components/layout/PublicHeader";
+import { autocatalogCoverUrl, findAutocatalogPublishedCover } from "@/lib/catalog/autocatalog-publication";
 import { catalogBrandMatches, resolveCatalogBrandBySlug } from "@/lib/catalog/catalog-brand-directory";
 import { readPublicEncyclopediaVariants } from "@/lib/catalog/encyclopedia-public";
 import { findBrandModelBySlug, readBrandModelDirectory, type CatalogNumericRange } from "@/lib/catalog/model-directory";
@@ -132,7 +133,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const model = await findBrandModelBySlug(brand.name, modelSlug);
   if (!model) return {};
   const title = `${brand.name} ${model.model} — характеристики и расчёт`;
-  const description = `Энциклопедия ${brand.name} ${model.model}: поколения, модификации, мощность и расчёт стоимости с доставкой, таможней и утилизационным сбором.`;
+  const description = `Автокаталог ${brand.name} ${model.model}: поколения, модификации, мощность и расчёт стоимости с доставкой, таможней и утилизационным сбором.`;
   return {
     title,
     description,
@@ -153,6 +154,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
     readCatalogFacets(),
   ]);
   if (!model) notFound();
+  const publishedCover = await findAutocatalogPublishedCover(model.id);
 
   const isHiluxReference = brand.slug === "toyota" && model.slug === "hilux";
   const referenceVariants = isHiluxReference ? await readPublicEncyclopediaVariants(model.id) : [];
@@ -224,6 +226,10 @@ export default async function ModelLandingPage({ params }: PageProps) {
     }
   }
   const offers = [...uniqueOffers.values()];
+  const heroImageUrl = String(offers.find((offer: any) => offer.images?.[0]?.url || offer.cardImageUrl)?.images?.[0]?.url
+    || offers.find((offer: any) => offer.cardImageUrl)?.cardImageUrl
+    || (publishedCover ? autocatalogCoverUrl(publishedCover) : "")
+    || "");
   const grouped = MARKET_ORDER.map((market) => ({ market, offers: offers.filter((offer: any) => offer.market === market) })).filter((group) => group.offers.length);
   const brandFallback = offers.length ? [] : (await searchOffers({ make: rawMakes.join(","), pageSize: 16, sort: "updatedAt" })).items.filter((offer: any) => isCrediblePublicOffer(offer)).slice(0, 12);
   const otherModels = directory.filter((item) => item.id !== model.id).slice(0, 18);
@@ -235,6 +241,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
     description: `Характеристики и расчёт стоимости ${brand.name} ${model.model} с доставкой, таможней и утилизационным сбором.`,
     url: canonicalUrl,
     brand: { "@type": "Brand", name: brand.name },
+    ...(heroImageUrl ? { image: [heroImageUrl] } : {}),
     additionalProperty: [
       model.knowledge.powerHp ? { "@type": "PropertyValue", name: "Мощность", value: rangeText(model.knowledge.powerHp, "л.с.") } : null,
       model.knowledge.powerKw ? { "@type": "PropertyValue", name: "Мощность", value: rangeText(model.knowledge.powerKw, "кВт") } : null,
@@ -255,11 +262,13 @@ export default async function ModelLandingPage({ params }: PageProps) {
     <section className="mx-auto w-full max-w-[1500px] px-4 py-8 md:px-8 md:py-12">
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }} />
       <nav className="text-xs font-black uppercase tracking-[0.15em] text-[var(--ac-muted)]" aria-label="Хлебные крошки">
-        <Link href="/cars" className="hover:text-red-500">Каталог</Link><span className="mx-2">/</span><Link href="/cars/encyclopedia" className="hover:text-red-500">Энциклопедия</Link><span className="mx-2">/</span><Link href={`/cars/brand/${brand.slug}`} className="hover:text-red-500">{brand.name}</Link><span className="mx-2">/</span><span>{model.model}</span>
+        <Link href="/cars/autocatalog" className="hover:text-red-500">Автокаталог</Link><span className="mx-2">/</span><Link href={`/cars/brand/${brand.slug}`} className="hover:text-red-500">{brand.name}</Link><span className="mx-2">/</span><span>{model.model}</span>
       </nav>
 
-      <header className="mt-5 grid gap-6 rounded-[2rem] bg-[var(--ac-surface)] p-5 md:grid-cols-[170px_minmax(0,1fr)] md:items-center md:p-8">
-        <div className="flex h-32 items-center justify-center rounded-[1.5rem] bg-[var(--ac-surface-2)] md:h-40"><BrandLogoVisual brand={brand.name} className="!h-20 !w-32 md:!h-24 md:!w-36" /></div>
+      <header className={`mt-5 grid gap-6 rounded-[2rem] bg-[var(--ac-surface)] p-5 md:items-center md:p-8 ${heroImageUrl ? "md:grid-cols-[minmax(300px,.8fr)_minmax(0,1.2fr)]" : "md:grid-cols-[170px_minmax(0,1fr)]"}`}>
+        <div className={`flex items-center justify-center overflow-hidden rounded-[1.5rem] bg-[var(--ac-surface-2)] ${heroImageUrl ? "aspect-[16/10] md:aspect-[4/3]" : "h-32 md:h-40"}`}>
+          {heroImageUrl ? <img src={heroImageUrl} alt={`${brand.name} ${model.model}`} width={960} height={720} loading="eager" className="h-full w-full object-cover" /> : <BrandLogoVisual brand={brand.name} className="!h-20 !w-32 md:!h-24 md:!w-36" />}
+        </div>
         <div className="min-w-0">
           <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Модель автомобиля</div>
           <h1 className="mt-2 break-words text-4xl font-black leading-[.98] tracking-[-0.045em] md:text-6xl">{brand.name} {model.model}</h1>
