@@ -1,3 +1,4 @@
+import { applyEncyclopediaDisplayIdentity } from "./display-identity";
 import { applyActiveBusinessPricing } from "./live-business-pricing";
 import type { VehicleOffer } from "./types";
 import {
@@ -108,7 +109,9 @@ export async function enrichOfferForDisplay<T extends VehicleOffer>(input: T): P
     },
   } as T;
 
-  // Сохранённая в CRM версия рынка применяется при каждом открытии карточки.
-  // Поэтому изменение комиссии или логистики видно сразу, даже до фонового reindex.
-  return applyActiveBusinessPricing(displayEnriched);
+  // Saved market pricing still wins at render time. Canonical public identity is
+  // applied last so offer pages use exactly the same make/model labels as cards,
+  // facets and SEO read models without touching source/raw identity or pricing.
+  const priced = applyActiveBusinessPricing(displayEnriched);
+  return await applyEncyclopediaDisplayIdentity(priced) as T;
 }
