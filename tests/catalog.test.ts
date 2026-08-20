@@ -97,7 +97,36 @@ test("catalog generation chunks stay under 500 and search loads indexed chunks o
     width: 1200,
     height: 800,
   }));
-  const offers: any[] = Array.from({ length: CATALOG_CHUNK_SIZE + 1 }, (_, i) => ({ id: `o${i}`, sourceId: "test", sourceOfferId: `${i}`, market: "japan", offerType: "auction", status: "active", make: "Toyota", model: i % 2 ? "Prius" : "Aqua", year: 2020 + (i % 4), sourcePrice: 1000000, sourceCurrency: "JPY", priceMode: "fixed", images: gallery, totalRub: 1500000 + i, calculationStatus: "ready", firstSeenAt: now, updatedAt: now, operational: { sourceUrl: `https://example.com/japan/${i}` } }));
+  const offers: any[] = Array.from({ length: CATALOG_CHUNK_SIZE + 1 }, (_, i) => ({
+    id: `o${i}`,
+    sourceId: "test",
+    sourceOfferId: `${i}`,
+    market: "japan",
+    offerType: "auction",
+    status: "active",
+    make: "Toyota",
+    model: i % 2 ? "Prius" : "Aqua",
+    year: 2020 + (i % 4),
+    sourcePrice: 1000000,
+    sourceCurrency: "JPY",
+    priceMode: "fixed",
+    images: gallery.map((item) => ({
+      ...item,
+      id: `${item.id}-${i}`,
+      objectKey: `catalog/images/japan/${i}-${item.id}.jpg`,
+      checksum: `${item.checksum}-${i}`,
+    })),
+    totalRub: 1500000 + i,
+    calculationStatus: "ready",
+    calculationSnapshot: {
+      customs: { status: "ready" },
+      breakdown: ["car", "topavto-commission", "broker", "svh", "laboratory", "sbkts", "epts", "rf-delivery", "customs"]
+        .map((id) => ({ id, amountRub: 1 })),
+    },
+    firstSeenAt: now,
+    updatedAt: now,
+    operational: { sourceUrl: `https://example.com/japan/${i}` },
+  }));
   await persistCatalogOffers(offers);
   const manifest = await readDataJson<any>("catalog/manifest.json", {});
   assert.ok(manifest.generationId.startsWith("gen_"));

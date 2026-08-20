@@ -9,9 +9,9 @@ const specs = fs.readFileSync(new URL("../apps/web/components/catalog/VehicleSpe
 const publicData = fs.readFileSync(new URL("../apps/web/lib/catalog/encyclopedia-public.ts", import.meta.url), "utf8");
 const hiluxBridge = JSON.parse(fs.readFileSync(new URL("../data/catalog/vehicle-knowledge/v2-bridge-verified-variants.json", import.meta.url), "utf8"));
 
-test("Toyota Hilux is the isolated encyclopedia reference model", () => {
-  assert.match(modelPage, /brand\.slug === "toyota" && model\.slug === "hilux"/);
-  assert.match(modelPage, /<EncyclopediaModelReference/);
+test("public model pages never special-case a research reference or expose aggregate pseudo-specs", () => {
+  assert.doesNotMatch(modelPage, /brand\.slug === "toyota" && model\.slug === "hilux"/);
+  assert.doesNotMatch(modelPage, /<EncyclopediaModelReference|Технические характеристики|readVehiclePowerKnowledge/);
   assert.match(reference, /Поколение \/ период/);
   assert.match(reference, /Открыть подробные характеристики/);
   assert.match(reference, /\/modification\/\$\{row\.slug\}/);

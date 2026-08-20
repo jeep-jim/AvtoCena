@@ -102,6 +102,7 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   report.markets[market] = stats;
   const min = Number(minimums?.[market] || 0);
   if (min > 0 && stats.count < min) report.failures.push(`${market}:count_below_min:${stats.count}<${min}`);
+  if (assertMarkets.has(market) && stats.count === 0) report.failures.push(`${market}:empty`);
   if (assertMarkets.has(market) && stats.invalidIdentityCount > 0) report.failures.push(`${market}:invalid_identity:${stats.invalidIdentityCount}`);
   if (assertMarkets.has(market) && stats.renderedIdentityFailureCount > 0) report.failures.push(`${market}:rendered_identity:${stats.renderedIdentityFailureCount}`);
   if (assertMarkets.has(market) && stats.maxPerExactModelYear > maxOffersPerModelYear) report.failures.push(`${market}:model_year_quota:${stats.maxPerExactModelYear}>${maxOffersPerModelYear}`);

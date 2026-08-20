@@ -9,6 +9,7 @@ on:
       - .github/workflows/catalog-current-read-models.yml
       - apps/web/lib/catalog/display-identity.ts
       - apps/web/lib/catalog/brands.ts
+      - apps/web/lib/catalog/public-identity-policy.ts
       - apps/web/lib/catalog/storage.ts
   workflow_run:
     workflows:
@@ -24,8 +25,8 @@ permissions:
   contents: read
 
 concurrency:
-  group: catalog-current-read-models
-  # Never let a late skipped workflow_run cancel a real publisher already writing Object Storage.
+  group: catalog-live-daily-working-markets
+  # Serialize every object-storage catalog writer and read-model repair.
   cancel-in-progress: false
 
 env:

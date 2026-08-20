@@ -1,14 +1,7 @@
 name: Ops · Refresh current display identity
 
 on:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/ops-refresh-current-display-identity.yml
-      - apps/web/lib/catalog/display-identity.ts
-      - apps/web/lib/catalog/public-offer-deduplication.ts
-      - apps/web/lib/catalog/storage.ts
-      - scripts/catalog-refresh-current-display-identity.mjs
+  workflow_dispatch:
 
 permissions:
   contents: read

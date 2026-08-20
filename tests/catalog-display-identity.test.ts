@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { applyEncyclopediaDisplayIdentity } from "../apps/web/lib/catalog/display-identity";
 import { canonicalCatalogBrand, catalogBrandSlug } from "../apps/web/lib/catalog/brands";
+import { publicCatalogIdentityRejectionReason } from "../apps/web/lib/catalog/public-identity-policy";
 
 test("public brand groups collapse market and sub-brand spellings to one route", () => {
   for (const alias of ["Audi", "AUDI China", "Audi AG"]) {
@@ -171,9 +172,23 @@ test("Hyundai Grandeur Hybrid listing suffix is not exposed as a raw Korean mode
   assert.equal(result.encyclopediaDisplayIdentity?.match, "trusted_alias");
 });
 
-test("reviewed Chinese source identities render in stable Latin labels", async () => {
+test("unresolved China manufacturer labels stay out of the public catalog instead of being guessed", async () => {
   const huakai = await applyEncyclopediaDisplayIdentity({ make: "华凯", model: "华凯新能源", market: "china" });
   const huanghai = await applyEncyclopediaDisplayIdentity({ make: "HuangHai", model: "蛟龙新能源", market: "china" });
-  assert.deepEqual([huakai.make, huakai.model], ["Huakai", "Huakai EV"]);
+  assert.equal(publicCatalogIdentityRejectionReason(huakai), "unresolved_china_make");
   assert.deepEqual([huanghai.make, huanghai.model], ["Huanghai", "Jiaolong EV"]);
+  assert.equal(publicCatalogIdentityRejectionReason(huanghai), "");
+});
+
+test("WALD City conversions are grouped under the documented Toyota Hiace base model", async () => {
+  for (const model of ["City H7", "City M7", "City S7", "City S9"]) {
+    const result = await applyEncyclopediaDisplayIdentity({ make: "WALD", model, market: "china" });
+    assert.deepEqual([result.make, result.model], ["Toyota", "Hiace"]);
+    assert.equal(publicCatalogIdentityRejectionReason(result), "");
+  }
+});
+
+test("Russian domestic listings do not enter the foreign import catalog", () => {
+  assert.equal(publicCatalogIdentityRejectionReason({ market: "europe", make: "Lada" }), "unsupported_import_brand");
+  assert.equal(publicCatalogIdentityRejectionReason({ market: "europe", make: "Volkswagen" }), "");
 });

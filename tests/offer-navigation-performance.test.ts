@@ -31,6 +31,7 @@ test("similar offers stream after the primary offer instead of blocking it", () 
   assert.match(page, /async function SimilarOffers/);
   assert.match(page, /make: current\.make, model: current\.model/);
   assert.match(page, /Ещё \{modelTitle\}/);
+  assert.doesNotMatch(page, /const fillers = diverseSimilarOffers/);
   assert.match(page, /<CatalogMarketFlag market=\{String\(current\.market/);
   assert.match(page, /· \{marketTotal\}/);
   assert.match(page, /new URLSearchParams\(\{ market: String\(current\.market \|\| ""\), make: String\(current\.make \|\| ""\), model: String\(current\.model \|\| ""\) \}\)/);
@@ -85,14 +86,24 @@ test("catalog reads a current one-hop projection before generation indexes", () 
   assert.match(storage, /readCurrentSearchProjection\(currentProjectionScope\)/);
   assert.match(storage, /currentProjectionPath\(CURRENT_ALL_MARKETS_PROJECTION\)/);
   assert.match(storage, /current\.generationId === manifest\.generationId/);
-  assert.match(storage, /writeJsonAtomic\(currentProjectionPath\(market\), projection, false\)/);
+  assert.match(storage, /writeJsonAtomic\(currentProjectionPath\(market\), \{ generationId, items: projectionsByMarket\.get\(market\) \|\| \[\] \}, false\)/);
   assert.match(storage, /export async function publishCurrentCatalogReadModels/);
   assert.match(readModelsScript, /publishCurrentCatalogReadModels/);
   assert.match(readModelsWorkflow, /Catalog live recovery · UAE \+ Kyrgyzstan/);
   assert.match(readModelsWorkflow, /Catalog live · daily working markets/);
   assert.match(readModelsWorkflow, /Catalog Japan · publish verified Prestige aggregate/);
   assert.match(readModelsWorkflow, /Catalog · apply certified 30-minute power/);
-  assert.match(readModelsWorkflow, /group: catalog-current-read-models/);
+  assert.match(readModelsWorkflow, /group: catalog-live-daily-working-markets/);
+});
+
+test("catalog generation becomes public only after canonical identity and deduplication", () => {
+  assert.match(storage, /const canonicalPublic = await canonicalizePublicCatalogOffers\(publicOffers\)/);
+  assert.match(storage, /await rebuildIndexes\(generationId, publishedOffers, byId, imagesById\)/);
+  const manifestSwitch = storage.indexOf('await storage.writeJson("catalog/manifest.json", manifest');
+  const currentReadModelRefresh = storage.indexOf("await writeCurrentCatalogReadModels(generationId, publishedOffers)");
+  assert.ok(manifestSwitch > 0);
+  assert.ok(currentReadModelRefresh > manifestSwitch);
+  assert.match(storage, /current\.generationId === manifest\.generationId/);
 });
 
 test("catalog overview does not rescan every stored Japan offer", () => {

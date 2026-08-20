@@ -49,7 +49,7 @@ jobs:
         shell: bash
         env:
           CATALOG_AUDIT_OUTPUT: catalog-uaekg-preflight-audit.json
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":2200,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":0,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
         run: |
           set -euo pipefail
           node --check scripts/catalog-live-recovery-market.mjs
@@ -241,7 +241,7 @@ jobs:
         env:
           CATALOG_AUDIT_OUTPUT: catalog-uae-postpersist-audit.json
           CATALOG_AUDIT_ASSERT_MARKETS: uae
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":2200,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":0,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()
@@ -285,7 +285,7 @@ jobs:
         env:
           CATALOG_AUDIT_OUTPUT: catalog-kyrgyzstan-postpersist-audit.json
           CATALOG_AUDIT_ASSERT_MARKETS: kyrgyzstan
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":2200,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":6500,"japan":0,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()

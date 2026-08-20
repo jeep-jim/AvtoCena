@@ -6,6 +6,7 @@ const { hasCredibleOfferContent, isCatalogYearAllowed } = await import("../apps/
 const { applyEncyclopediaDisplayIdentityBatch } = await import("../apps/web/lib/catalog/display-identity.ts");
 const { catalogPublicPriority, findCatalogPriceOutliers } = await import("../apps/web/lib/catalog/public-priority.ts");
 const { deduplicatePublicCatalogOffers } = await import("../apps/web/lib/catalog/public-offer-deduplication.ts");
+const { isSupportedPublicCatalogIdentity, publicCatalogIdentityRejectionReason } = await import("../apps/web/lib/catalog/public-identity-policy.ts");
 
 const APPLY = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_DISPLAY_IDENTITY_APPLY || ""));
 const OUTPUT = process.env.CATALOG_DISPLAY_IDENTITY_REPORT || "catalog-current-display-identity-refresh.json";
@@ -47,9 +48,11 @@ const sourceMarketCounts = countMarkets(sourceRows);
 const identifiedMarketCounts = countMarkets(identifiedRows);
 if (JSON.stringify(sourceMarketCounts) !== JSON.stringify(identifiedMarketCounts)) throw new Error("display_identity_refresh_market_counts_changed");
 
-const priceOutliers = findCatalogPriceOutliers(identifiedRows);
+const identityRejectedRows = identifiedRows.filter((row) => !isSupportedPublicCatalogIdentity(row));
+const identityEligibleRows = identifiedRows.filter(isSupportedPublicCatalogIdentity);
+const priceOutliers = findCatalogPriceOutliers(identityEligibleRows);
 const rejectedPriceIds = new Set(priceOutliers.map((outlier) => String(outlier?.id || "")).filter(Boolean));
-const priceEligibleRows = identifiedRows.filter((row) => !rejectedPriceIds.has(String(row?.id || "")));
+const priceEligibleRows = identityEligibleRows.filter((row) => !rejectedPriceIds.has(String(row?.id || "")));
 const deduplicated = deduplicatePublicCatalogOffers(priceEligibleRows);
 const publicRows = deduplicated.rows;
 const publicMarketCounts = countMarkets(publicRows);
@@ -95,6 +98,16 @@ const report = {
     makeModelPairsBefore: beforePairs.size,
     makeModelPairsAfter: afterPairs.size,
     sample: changedRows.slice(0, 100),
+  },
+  identityPolicy: {
+    rejected: identityRejectedRows.length,
+    sample: identityRejectedRows.slice(0, 100).map((row) => ({
+      id: row.id,
+      market: row.market,
+      make: row.make,
+      model: row.model,
+      reason: publicCatalogIdentityRejectionReason(row),
+    })),
   },
   priceOutliers: {
     rejected: priceOutliers.length,

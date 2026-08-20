@@ -13,7 +13,7 @@ test("current offer shard is trusted only for the active manifest generation", (
 
 test("public read models require a valid engine price and reject peer-median outliers", () => {
   assert.match(storage, /catalogPublicPriority\(o\)\.eligible/);
-  assert.match(storage, /findCatalogPriceOutliers\(identifiedOffers\)/);
+  assert.match(storage, /findCatalogPriceOutliers\(identityEligibleOffers\)/);
   assert.match(storage, /rejectedPriceIds/);
   assert.match(storage, /previousAllProjection/);
 });
