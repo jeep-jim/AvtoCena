@@ -1,12 +1,13 @@
 import fs from "node:fs/promises";
+import crypto from "node:crypto";
 
 const { getJsonStorage } = await import("../apps/web/lib/data.ts");
 const {
-  CATALOG_CHUNK_SIZE,
   chunkName,
   offerPath,
+  persistCatalogOffers,
   previewCanonicalPublicCatalogOffers,
-  publishCurrentCatalogReadModels,
+  readAllOffersForMaintenance,
 } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
@@ -34,21 +35,35 @@ if (Object.values(expectedCounts).reduce((sum, value) => sum + Number(value || 0
 
 const storage = getJsonStorage();
 const restoredAt = new Date().toISOString();
-const manifestMarkets = {};
 const allRows = [];
 const seenIds = new Set();
 
+function stableJsonValue(value) {
+  if (Array.isArray(value)) return value.map(stableJsonValue);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, stableJsonValue(value[key])]));
+  }
+  return value;
+}
+
+function hashRows(rows) {
+  return crypto.createHash("sha256").update(JSON.stringify(
+    [...rows].sort((left, right) => String(left?.id || "").localeCompare(String(right?.id || ""))).map(stableJsonValue),
+  )).digest("hex");
+}
+
 for (const market of PUBLIC_CATALOG_MARKETS) {
-  const expectedCount = Number(expectedCounts[market]);
-  const chunkCount = Math.ceil(expectedCount / CATALOG_CHUNK_SIZE);
-  const chunks = Array.from({ length: chunkCount }, (_, index) => chunkName(index + 1));
   const rows = [];
-  for (const chunk of chunks) {
+  const chunks = [];
+  for (let index = 1; index <= 100; index++) {
+    const chunk = chunkName(index);
     const meta = await storage.readJsonWithMeta(offerPath(sourceGeneration, market, chunk), null);
-    if (!meta.found || !Array.isArray(meta.value)) throw new Error(`catalog_restore_chunk_missing:${market}:${chunk}`);
+    if (!meta.found) break;
+    if (!Array.isArray(meta.value)) throw new Error(`catalog_restore_chunk_invalid:${market}:${chunk}`);
+    chunks.push(chunk);
     rows.push(...meta.value);
   }
-  if (rows.length !== expectedCount) throw new Error(`catalog_restore_count_mismatch:${market}:${rows.length}:${expectedCount}`);
+  if (!chunks.length || !rows.length) throw new Error(`catalog_restore_market_missing:${market}`);
   for (const row of rows) {
     if (!row?.id || String(row.market || "") !== market || !row.make || !row.model || !Array.isArray(row.images) || row.images.length === 0) {
       throw new Error(`catalog_restore_row_invalid:${market}:${String(row?.id || "missing")}`);
@@ -56,11 +71,8 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
     if (seenIds.has(row.id)) throw new Error(`catalog_restore_duplicate_id:${row.id}`);
     seenIds.add(row.id);
   }
-  manifestMarkets[market] = { count: rows.length, chunks, updatedAt: restoredAt };
   allRows.push(...rows);
 }
-
-if (allRows.length !== expectedTotal) throw new Error(`catalog_restore_total_mismatch:${allRows.length}:${expectedTotal}`);
 
 const canonical = await previewCanonicalPublicCatalogOffers(allRows);
 const canonicalCounts = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [
@@ -83,24 +95,46 @@ if (forbiddenFound.length) throw new Error(`catalog_restore_forbidden_makes:${fo
 if (requiredMissing.length) throw new Error(`catalog_restore_required_makes_missing:${requiredMissing.join(",")}`);
 
 const indexMeta = await storage.readJsonWithMeta(`catalog/generations/${sourceGeneration}/indexes/offers-by-id.json`, null);
-if (!indexMeta.found || !indexMeta.value?.byId || Object.keys(indexMeta.value.byId).length !== expectedTotal) {
-  throw new Error(`catalog_restore_index_invalid:${Object.keys(indexMeta.value?.byId || {}).length}:${expectedTotal}`);
-}
+if (!indexMeta.found || !indexMeta.value?.byId || Object.keys(indexMeta.value.byId).length < expectedTotal) throw new Error("catalog_restore_index_invalid");
 
-// This is the only mutable operation. All chunks, counts, canonical identity,
-// unique IDs and generation indexes have already been verified above.
-const currentMeta = await storage.readJsonWithMeta("catalog/manifest.json", null);
-if (!currentMeta.found || !currentMeta.etag || !currentMeta.value?.generationId) throw new Error("catalog_restore_current_manifest_missing");
-const manifest = { version: 2, generationId: sourceGeneration, updatedAt: restoredAt, markets: manifestMarkets };
-await storage.writeJson("catalog/manifest.json", manifest, { ifMatch: currentMeta.etag });
+// Retain the complete maintenance state and add any verified public row that is
+// absent from it. The exact canonical rows below are the only public input.
+const maintenance = await readAllOffersForMaintenance();
+if (!Array.isArray(maintenance)) throw new Error("catalog_restore_maintenance_invalid");
+const combinedById = new Map();
+for (const row of maintenance) if (row?.id) combinedById.set(row.id, row);
+for (const row of canonical.offers) if (row?.id && !combinedById.has(row.id)) combinedById.set(row.id, row);
 
-const readModels = await publishCurrentCatalogReadModels();
-if (readModels.generationId !== sourceGeneration || readModels.total !== expectedTotal) {
-  throw new Error(`catalog_restore_read_models_mismatch:${readModels.generationId}:${readModels.total}:${sourceGeneration}:${expectedTotal}`);
-}
+const preservedPublicOffersByMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [
+  market,
+  canonical.offers.filter((offer) => String(offer?.market || "") === market),
+]));
+const expectedHashes = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [market, hashRows(preservedPublicOffersByMarket[market])]));
+process.env.CATALOG_GROW_ONLY_MARKETS = "";
+const manifest = await persistCatalogOffers([...combinedById.values()], {
+  preservePublicOffersByMarket,
+  beforePersistValidate(publicOffers) {
+    const failures = [];
+    for (const market of PUBLIC_CATALOG_MARKETS) {
+      const rows = publicOffers.filter((offer) => String(offer?.market || "") === market);
+      if (rows.length !== Number(expectedCounts[market])) failures.push(`${market}:count:${rows.length}:${expectedCounts[market]}`);
+      if (hashRows(rows) !== expectedHashes[market]) failures.push(`${market}:hash`);
+    }
+    if (failures.length) throw new Error(`catalog_restore_prewrite_mismatch:${failures.join("|")}`);
+  },
+  beforePublishValidate(publishedOffers) {
+    const failures = [];
+    for (const market of PUBLIC_CATALOG_MARKETS) {
+      const rows = publishedOffers.filter((offer) => String(offer?.market || "") === market);
+      if (rows.length !== Number(expectedCounts[market])) failures.push(`${market}:count:${rows.length}:${expectedCounts[market]}`);
+      if (hashRows(rows) !== expectedHashes[market]) failures.push(`${market}:hash`);
+    }
+    if (failures.length) throw new Error(`catalog_restore_public_mismatch:${failures.join("|")}`);
+  },
+});
 for (const market of PUBLIC_CATALOG_MARKETS) {
-  if (Number(readModels.markets?.[market] || 0) !== Number(expectedCounts[market])) {
-    throw new Error(`catalog_restore_read_model_market_mismatch:${market}:${readModels.markets?.[market] || 0}:${expectedCounts[market]}`);
+  if (Number(manifest.markets?.[market]?.count || 0) !== Number(expectedCounts[market])) {
+    throw new Error(`catalog_restore_manifest_market_mismatch:${market}:${manifest.markets?.[market]?.count || 0}:${expectedCounts[market]}`);
   }
 }
 
@@ -109,15 +143,16 @@ const report = {
   mode: "restore_verified_public_generation",
   restored: true,
   restoredAt,
-  previousGeneration: currentMeta.value.generationId,
-  generationId: sourceGeneration,
+  sourceGeneration,
+  generationId: manifest.generationId,
+  sourceStoredTotal: allRows.length,
   total: expectedTotal,
   markets: expectedCounts,
   canonicalCounts,
   makeCount: makes.size,
   requiredMakes: [...requiredMakes],
   forbiddenMakesFound: forbiddenFound,
-  readModels,
+  manifestMarkets: Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [market, manifest.markets?.[market]?.count || 0])),
 };
 await fs.writeFile(reportFile, JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report, null, 2));

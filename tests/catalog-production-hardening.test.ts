@@ -135,14 +135,19 @@ test("standard one-market publisher cannot shrink the target or mutate untouched
 });
 
 test("verified-generation restore is preflight-first and shares the global writer lock", () => {
-  assert.match(verifiedGenerationRestore, /catalog_restore_chunk_missing/);
+  assert.match(verifiedGenerationRestore, /catalog_restore_chunk_invalid/);
+  assert.match(verifiedGenerationRestore, /catalog_restore_market_missing/);
   assert.match(verifiedGenerationRestore, /previewCanonicalPublicCatalogOffers/);
   assert.match(verifiedGenerationRestore, /catalog_restore_canonical_total_mismatch/);
   assert.match(verifiedGenerationRestore, /catalog_restore_forbidden_makes/);
-  assert.match(verifiedGenerationRestore, /readJsonWithMeta\("catalog\/manifest\.json"/);
-  assert.match(verifiedGenerationRestore, /writeJson\("catalog\/manifest\.json", manifest, \{ ifMatch: currentMeta\.etag \}\)/);
-  assert.ok(verifiedGenerationRestore.indexOf("catalog_restore_canonical_total_mismatch") < verifiedGenerationRestore.indexOf("writeJson(\"catalog/manifest.json\""));
+  assert.match(verifiedGenerationRestore, /preservePublicOffersByMarket/);
+  assert.match(verifiedGenerationRestore, /beforePersistValidate\(publicOffers\)/);
+  assert.match(verifiedGenerationRestore, /beforePublishValidate\(publishedOffers\)/);
+  assert.match(verifiedGenerationRestore, /persistCatalogOffers\(\[\.\.\.combinedById\.values\(\)\]/);
+  assert.ok(verifiedGenerationRestore.indexOf("catalog_restore_canonical_total_mismatch") < verifiedGenerationRestore.indexOf("persistCatalogOffers("));
+  assert.doesNotMatch(verifiedGenerationRestore, /writeJson\("catalog\/manifest\.json"/);
   assert.match(verifiedGenerationRestoreWorkflow, /group: catalog-live-daily-working-markets/);
+  assert.match(verifiedGenerationRestoreWorkflow, /set -euo pipefail/);
   assert.match(v3MarketWorkflow, /group: catalog-live-daily-working-markets/);
 });
 
