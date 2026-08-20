@@ -5,6 +5,7 @@ import {
   CATALOG_MAX_OFFERS_PER_MODEL_YEAR,
   catalogExactModelKey,
   catalogModelYearQuotaKey,
+  enforceCatalogModelYearQuota,
   selectCatalogShowcaseDiversity,
   selectCatalogModelYearCoverageFirst,
 } from "../apps/web/lib/catalog/inventory-quota";
@@ -70,6 +71,19 @@ test("different years can each retain twenty cards for the same model", () => {
   assert.equal(selected.filter((row) => row.year === 2022).length, 20);
   assert.equal(selected.filter((row) => row.year === 2025).length, 20);
   assert.equal(selected.length, 40);
+});
+
+test("canonical publication caps normalized model-year buckets and preserves quality order", () => {
+  const rows = [
+    ...Array.from({ length: 25 }, (_, index) => ({ ...offer("china", "Toyota", "Hiace", 2025), id: `hiace-${index}` })),
+    ...Array.from({ length: 3 }, (_, index) => ({ ...offer("china", "Toyota", "Hiace", 2024), id: `hiace-old-${index}` })),
+  ];
+  const result = enforceCatalogModelYearQuota(rows);
+  assert.equal(result.rows.length, 23);
+  assert.equal(result.removed.length, 5);
+  assert.deepEqual(result.rows.slice(0, 3).map((row: any) => row.id), ["hiace-0", "hiace-1", "hiace-2"]);
+  assert.equal(result.rows.filter((row: any) => row.year === 2025).length, 20);
+  assert.equal(result.rows.filter((row: any) => row.year === 2024).length, 3);
 });
 
 test("coverage-first bounded output represents every discovered model-year before taking seconds", () => {

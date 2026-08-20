@@ -3,18 +3,6 @@ run-name: Enforce 20 exact offers per model-year · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows:
-      - "Catalog live daily · working markets"
-      - "Catalog live recovery · UAE + Georgia direct"
-      - "Catalog live recovery · UAE + Kyrgyzstan"
-      - "Catalog Japan · publish verified Prestige aggregate"
-      - "Catalog Japan strict merge publish"
-      - "Catalog certified power · apply"
-      - "Catalog Korea · K Car exterior gallery repair"
-      - "Catalog emergency · restore Japan baseline"
-      - "Catalog V6 · Prestige exact sold up-to-30k"
-    types: [completed]
 
 permissions:
   actions: write
@@ -38,7 +26,6 @@ env:
 
 jobs:
   enforce:
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
