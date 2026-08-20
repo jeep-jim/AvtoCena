@@ -5,7 +5,6 @@ on:
   push:
     branches: [main]
     paths:
-      - ".github/workflows/catalog-reindex-vehicle-knowledge.yml"
       - "scripts/catalog-reindex-vehicle-knowledge.mjs"
       - "scripts/catalog-rf-customs-live-card-proof.mjs"
 
@@ -66,7 +65,8 @@ jobs:
         run: npm run catalog:power-reference-queue
       - name: Recanonicalize and reprice current catalog
         run: npm run catalog:reindex-vehicle-knowledge
-      - name: Run catalog smoke checks
+      - name: Probe external catalog sources (non-blocking after atomic publication)
+        continue-on-error: true
         run: npm run catalog:smoke
       - name: Mark production reprice success
         if: success()

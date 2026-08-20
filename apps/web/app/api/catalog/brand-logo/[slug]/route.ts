@@ -27,10 +27,14 @@ async function localBrandLogo(values: string[], theme: "light" | "dark") {
 
 export async function GET(request: NextRequest, { params }: { params: { slug: string } }) {
   const brand = await resolveCatalogBrandBySlug(params.slug);
-  if (!brand) return new NextResponse(null, { status: 404 });
+  const requestedSlug = catalogBrandSlug(params.slug);
+  if (!/^[a-z0-9-]+$/.test(requestedSlug)) return new NextResponse(null, { status: 404 });
 
   const theme = request.nextUrl.searchParams.get("theme") === "dark" ? "dark" : "light";
-  const logo = await localBrandLogo([brand.slug, brand.name, ...(brand.aliases || [])], theme);
+  const logo = await localBrandLogo([
+    requestedSlug,
+    ...(brand ? [brand.slug, brand.name, ...(brand.aliases || [])] : []),
+  ], theme);
   if (!logo) return new NextResponse(null, {
     status: 404,
     headers: { "cache-control": "public, max-age=3600, s-maxage=86400" },

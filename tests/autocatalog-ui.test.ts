@@ -34,7 +34,7 @@ test("brand logos never disappear and the public request path does not crawl a t
   assert.doesNotMatch(route, /drom\.ru/);
 });
 
-test("brand and model pages use Autocatalog copy and model previews", () => {
+test("brand and model pages use Autocatalog copy, saved previews and no aggregate pseudo-specs", () => {
   const brandPage = source("apps/web/app/(public)/cars/brand/[slug]/page.tsx");
   const modelPage = source("apps/web/app/(public)/cars/brand/[slug]/model/[model]/page.tsx");
   const modelDirectory = source("apps/web/components/catalog/BrandModelDirectory.tsx");
@@ -44,5 +44,7 @@ test("brand and model pages use Autocatalog copy and model previews", () => {
   assert.match(modelPage, /heroImageUrl/);
   assert.match(modelPage, /Автокаталог/);
   assert.match(modelDirectory, /model\.previewUrl/);
-  assert.match(modelDirectory, /Характеристики дополняются/);
+  assert.match(brandPage, /\(published \? autocatalogCoverUrl\(published\) : undefined\) \|\| previewByModel/);
+  assert.doesNotMatch(modelDirectory, /Характеристики дополняются|specRanges|representativePowerHp/);
+  assert.doesNotMatch(modelPage, /Технические характеристики|Характеристики [^{]*\{/);
 });

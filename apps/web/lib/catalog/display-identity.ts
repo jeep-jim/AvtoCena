@@ -154,13 +154,44 @@ function uniqueChinaBaseModel(rows: DisplayModel[], offer: DisplayCarrier, rawMo
   return ids.length === 1 ? best.row : null;
 }
 
+function trustedChinaBaseVehicleIdentity(offer: DisplayCarrier, presentedMake: string, presentedModel: string) {
+  if (clean(offer.market).toLowerCase() !== "china") return null;
+  const raw: any = offer?.operational?.raw || {};
+  const makeEvidence = phrase([offer.make, presentedMake].filter(Boolean).join(" "));
+  const modelEvidence = phrase([
+    offer.model,
+    presentedModel,
+    offer?.sourceTitle,
+    offer?.operational?.sourceTitle,
+    raw?.title,
+    raw?.model,
+    raw?.Model,
+    raw?.modelName,
+    raw?.ModelName,
+    raw?.seriesName,
+  ].filter(Boolean).join(" "));
+
+  // These identities are model-name evidence, not a guess from the photo:
+  // Vito/威霆 and V-Class/V级 are Mercedes-Benz product names. The coachbuilder
+  // remains preserved in the source/internal object while the public card is
+  // grouped under the base vehicle.
+  if (/\bvito\b|威霆/u.test(modelEvidence)) return { make: "Mercedes-Benz", model: "Vito" };
+  if (/\bv\s*class\b|v级/u.test(modelEvidence)) return { make: "Mercedes-Benz", model: "V-Class" };
+
+  // WALD City H7/M7/S7/S9 listings are documented sixth-generation Toyota
+  // Hiace conversions. Do not broaden this rule to arbitrary WALD products.
+  if (/\bwald\b/u.test(makeEvidence) && /\bcity\s+(?:h7|m7|s7|s9)\b/u.test(modelEvidence)) {
+    return { make: "Toyota", model: "Hiace" };
+  }
+  return null;
+}
+
 function trustedCanonicalModel(make: string, model: string) {
   const rules: Array<{ make: RegExp; model: RegExp; canonical: string }> = [
     // Hyundai and KGM publish these exact English model identities on their
     // official sites; source listing suffixes are trims/powertrains, not models.
     { make: /^Hyundai$/i, model: /^(?:The New |The All New )?Grandeur\b/i, canonical: "Grandeur" },
     { make: /^KGM$/i, model: /^(?:The New )?Rexton Sports Khan\b/i, canonical: "Rexton Sports Khan" },
-    { make: /^Huakai$/i, model: /^(?:Huakai )?EV\b/i, canonical: "Huakai EV" },
     { make: /^HuangHai$/i, model: /^Jiaolong EV\b/i, canonical: "Jiaolong EV" },
   ];
   return rules.find((rule) => rule.make.test(make) && rule.model.test(model))?.canonical || "";
@@ -176,6 +207,27 @@ export async function applyEncyclopediaDisplayIdentity<T extends DisplayCarrier>
   const canonicalMake = trustedCanonicalMake(presentedMake);
   const modelLabel = duplicateMakePrefixRemoved(presentedMake, clean(presented.modelLabel || offer.model));
   const index = await readIndex();
+  const trustedBase = trustedChinaBaseVehicleIdentity(offer, presentedMake, modelLabel);
+  if (trustedBase) {
+    const baseRows = index.byMake.get(phrase(trustedBase.make)) || [];
+    const baseMatch = chooseModel(baseRows, trustedBase.model);
+    const rawMake = clean(offer.make);
+    const rawModel = clean(offer.model);
+    return {
+      ...offer,
+      make: trustedBase.make,
+      model: trustedBase.model,
+      encyclopediaDisplayIdentity: {
+        version: 1,
+        rawMake,
+        rawModel,
+        modelId: baseMatch?.row.id || "",
+        canonicalMake: trustedBase.make,
+        canonicalModel: trustedBase.model,
+        match: "trusted_alias",
+      },
+    };
+  }
   const rows = index.byMake.get(phrase(canonicalMake)) || [];
   const match = chooseModel(rows, modelLabel);
   const rawMake = clean(offer.make);

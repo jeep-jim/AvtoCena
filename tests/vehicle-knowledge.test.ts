@@ -174,15 +174,13 @@ test("model directory separates trusted V2 specifications from read-only observa
   assert.match(modelDirectory, /utilizationPowerKw/);
 });
 
-test("public encyclopedia exposes reader-facing specifications without internal staging notes", () => {
-  assert.match(brandDirectoryUi, /Найдите модель, откройте характеристики/);
+test("public autocatalog does not expose unverified aggregate specification ranges", () => {
+  assert.match(brandDirectoryUi, /Выберите модель/);
   assert.doesNotMatch(brandDirectoryUi, /source-backed|Проверенных|Наблюдений/);
-  assert.match(modelPage, /Технические характеристики/);
-  assert.match(modelPage, /30-минутная мощность/);
+  assert.doesNotMatch(modelPage, /Технические характеристики/);
+  assert.doesNotMatch(modelPage, /30-минутная мощность/);
+  assert.doesNotMatch(modelPage, /model\.knowledge\.power/);
   assert.doesNotMatch(modelPage, /source-backed|В расчёт — только exact|Собранные наблюдения источников|не используются в расчёте|V2 ·|review/);
-  assert.match(modelPage, /Электромотор:/);
-  assert.match(modelPage, /Система:/);
-  assert.match(modelPage, /variant\.sourceType !== "encyclopedia_v2"/);
 });
 
 test("Drom enrichment remains available but is not a two-hour production prerequisite", () => {

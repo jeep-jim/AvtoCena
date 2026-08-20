@@ -78,7 +78,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
   }
   const modelsWithPreviews = models.map((model) => {
     const published = publishedCovers.get(model.id);
-    return { ...model, previewUrl: previewByModel.get(model.id) || (published ? autocatalogCoverUrl(published) : undefined) };
+    return { ...model, previewUrl: (published ? autocatalogCoverUrl(published) : undefined) || previewByModel.get(model.id) };
   });
   const catalogMakes = rawMakes.join(",");
   const totalOffers = makeResults.reduce((sum, entry) => sum + Number(entry.result.total || 0), 0);
