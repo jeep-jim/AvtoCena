@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import { test, beforeEach } from "node:test";
-import { cpSync, mkdtempSync, rmSync } from "node:fs";
+import { cpSync, mkdtempSync, rmSync, writeFileSync } from "node:fs";
 import { tmpdir } from "node:os";
 import path from "node:path";
 
@@ -63,6 +63,35 @@ test("snapshots stay immutable after immediate market version update", async () 
   assert.equal(oldSnapshot.rules.topAvtoCommissionRub, 90000);
   assert.equal(newSnapshot.rules.topAvtoCommissionRub, 91000);
   assert.notEqual(oldSnapshot.configVersion, newSnapshot.configVersion);
+});
+
+test("createMarketVersion bootstraps a known market missing from storage", async () => {
+  writeFileSync(path.join(tempRoot, "data/markets/markets.json"), "[]\n", "utf8");
+  const { settings } = await loadModules();
+  const saved = await settings.createMarketVersion("china", {
+    name: "Китай",
+    active: true,
+    currency: "CNY",
+    securityDepositRub: 160000,
+    topAvtoCommissionRub: 90000,
+    contractInitialPaymentRub: 250000,
+    exchangeRateReservePercent: 2,
+    exportExpensesRub: 80000,
+    logisticsRub: 150000,
+    brokerRub: 35000,
+    svhRub: 35000,
+    laboratoryRub: 15000,
+    sbktsRub: 35000,
+    eptsRub: 35000,
+    rfDeliveryRub: 120000,
+    otherFixedExpensesRub: 0,
+  }, { id: "owner", displayName: "Owner", role: "owner" }, "bootstrap China");
+  const market = await settings.getMarketSettings("china");
+
+  assert.equal(saved.logisticsRub, 150000);
+  assert.equal(market.id, "china");
+  assert.equal(market.name, "Китай");
+  assert.equal(market.activeVersionId, saved.id);
 });
 
 test("known initial market payments are preserved", async () => {

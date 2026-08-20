@@ -85,8 +85,9 @@ export async function createMarketVersion(marketId: string, patch: any, user: Se
   let nextVersion: any = null;
   await mutateDataJson<any[]>("markets/markets.json", [], (markets) => {
     const marketIndex = markets.findIndex((market) => market.id === marketId);
-    if (marketIndex === -1) throw new Error("market_not_found");
-    const market = markets[marketIndex];
+    const market = marketIndex === -1
+      ? { id: marketId, name: cleanText(patch.name, 120) || marketId, activeVersionId: "", versions: [] }
+      : markets[marketIndex];
     current = chooseEffectiveVersion(market.versions || []) || market.versions?.[market.versions.length - 1] || {};
     const nextVersionNumber = Math.max(0, ...(market.versions || []).map((version: any) => Number(version.version || 0))) + 1;
     const candidate = { ...current, ...patch, id: makeId(`market_${marketId}_v${nextVersionNumber}`), version: nextVersionNumber, effectiveFrom: patch.effectiveFrom || nowIso(), status: statusForEffectiveFrom(patch.effectiveFrom || nowIso(), patch.active !== false), createdAt: nowIso(), createdByUserId: user.id };
@@ -94,7 +95,9 @@ export async function createMarketVersion(marketId: string, patch: any, user: Se
     if (!validation.ok) { const error = new Error(validation.errors.join(",")); (error as any).validationErrors = validation.errors; throw error; }
     nextVersion = validation.value;
     const nextMarket = { ...market, name: cleanText(patch.name, 120) || market.name, activeVersionId: nextVersion.status === "active" ? nextVersion.id : market.activeVersionId, versions: [...(market.versions || []).map((version: any) => nextVersion.status === "active" && version.status === "active" ? { ...version, status: "archived" } : version), nextVersion] };
-    return markets.map((item, index) => index === marketIndex ? nextMarket : item);
+    return marketIndex === -1
+      ? [...markets, nextMarket]
+      : markets.map((item, index) => index === marketIndex ? nextMarket : item);
   });
   await appendChangeLog({ entityType: "market", entityId: marketId, changedByUserId: user.id, changedByName: user.displayName, oldValue: current, newValue: nextVersion, comment: cleanText(comment, 1000) });
   return nextVersion;
