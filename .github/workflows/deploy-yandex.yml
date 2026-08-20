@@ -109,8 +109,8 @@ jobs:
           "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars'
           "${CURL[@]}" -o /dev/null "https://avtocena.com/cars/offer/$offer_id"
 
-          echo '2b/9 encyclopedia routes'
-          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/encyclopedia'
+          echo '2b/9 Autocatalog routes'
+          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/autocatalog'
           "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/brand/toyota'
           "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/brand/toyota/model/land-cruiser-250'
           "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars/brand/bentley'
@@ -126,7 +126,7 @@ jobs:
           echo '4/9 sitemaps'
           echo '4a root sitemap'
           root_sitemap="$("${CURL[@]}" 'https://avtocena.com/sitemap.xml')"
-          grep -q 'https://avtocena.com/cars/encyclopedia' <<<"$root_sitemap"
+          grep -q 'https://avtocena.com/cars/autocatalog' <<<"$root_sitemap"
           echo '4b model sitemap index'
           model_sitemap_index="$("${CURL[@]}" 'https://avtocena.com/cars/models-sitemap.xml')"
           grep -q '<sitemapindex' <<<"$model_sitemap_index"
