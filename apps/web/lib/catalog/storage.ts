@@ -10,7 +10,7 @@ import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
 import { enforceCatalogModelYearQuota, selectCatalogShowcaseDiversity } from "./inventory-quota";
 import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./vehicle-knowledge";
-import { applyEncyclopediaDisplayIdentityBatch } from "./display-identity";
+import { applyEncyclopediaDisplayIdentity, applyEncyclopediaDisplayIdentityBatch } from "./display-identity";
 import { catalogPublicPriority, findCatalogPriceOutliers } from "./public-priority";
 import { deduplicatePublicCatalogOffers } from "./public-offer-deduplication";
 import { isSupportedPublicCatalogIdentity, publicCatalogIdentityRejectionReason } from "./public-identity-policy";
@@ -865,7 +865,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   // written, so a preservation mismatch cannot switch or partially stage a new
   // catalog generation.
   if (options.beforePersistValidate) await options.beforePersistValidate(publicOffers);
-  const canonicalPublic = await canonicalizePublicCatalogOffers(publicOffers);
+  const canonicalPublic = await canonicalizePublicCatalogOffers(publicOffers, exactPreserveMarkets);
   const publishedOffers = canonicalPublic.offers;
   if (options.beforePublishValidate) await options.beforePublishValidate(publishedOffers);
   const generationId = `gen_${Date.now()}_${crypto.randomUUID().slice(0, 8)}`;
@@ -953,11 +953,15 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
   await runWithConcurrency(tasks, concurrency);
 }
 
-async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[]) {
+async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], skipDisplayIdentityMarkets = new Set<CatalogMarket>()) {
   // Keep source/internal objects immutable. Public read models receive the
   // same deterministic V2 + source-translation identity used by cards, so
   // facets, filters, breadcrumbs, SEO pages and offer shards cannot disagree.
-  const identifiedOffers = await applyEncyclopediaDisplayIdentityBatch(storedOffers);
+  const identifiedOffers = skipDisplayIdentityMarkets.size
+    ? await Promise.all(storedOffers.map((offer) => skipDisplayIdentityMarkets.has(offer.market)
+      ? offer
+      : applyEncyclopediaDisplayIdentity(offer)))
+    : await applyEncyclopediaDisplayIdentityBatch(storedOffers);
   const identityRejected = identifiedOffers.filter((offer) => !isSupportedPublicCatalogIdentity(offer));
   const identityEligibleOffers = identifiedOffers.filter(isSupportedPublicCatalogIdentity);
   const priceOutliers = findCatalogPriceOutliers(identityEligibleOffers);
