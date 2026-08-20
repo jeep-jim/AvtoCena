@@ -1,4 +1,4 @@
-import { canonicalCatalogBrand } from "./brands";
+import { canonicalCatalogBrand, catalogBrandBySlug, catalogBrandSlug } from "./brands";
 import { readEncyclopediaIdentityDataset } from "./encyclopedia-identity-data";
 import { presentCatalogOffer } from "./presentation";
 
@@ -12,7 +12,7 @@ type DisplayIdentity = {
   modelId: string;
   canonicalMake: string;
   canonicalModel: string;
-  match: "exact" | "prefix" | "trusted_alias" | "translated";
+  match: "exact" | "prefix" | "trusted_alias" | "translated" | "brand_only";
 };
 
 type DisplayIndex = { byMake: Map<string, DisplayModel[]>; allModels: DisplayModel[] };
@@ -140,7 +140,12 @@ function uniqueChinaBaseModel(rows: DisplayModel[], offer: DisplayCarrier, rawMo
       if (!cjkAlias && !latinAlias) continue;
       for (const value of evidence) {
         const exact = value === candidate;
-        const bounded = ` ${value} `.includes(` ${candidate} `);
+        // A one-word Latin prefix such as "City" is not enough evidence to
+        // move an offer to a different manufacturer. Cross-brand Latin
+        // recovery requires either the full value or a multi-word identity.
+        const bounded = cjkAlias || candidate.includes(" ")
+          ? ` ${value} `.includes(` ${candidate} `)
+          : false;
         const containedCjk = cjkAlias && value.includes(candidate);
         if (exact || bounded || containedCjk) matches.push({ row, exact, length: candidate.length });
       }
@@ -178,9 +183,9 @@ function trustedChinaBaseVehicleIdentity(offer: DisplayCarrier, presentedMake: s
   if (/\bvito\b|威霆/u.test(modelEvidence)) return { make: "Mercedes-Benz", model: "Vito" };
   if (/\bv\s*class\b|v级/u.test(modelEvidence)) return { make: "Mercedes-Benz", model: "V-Class" };
 
-  // WALD City H7/M7/S7/S9 listings are documented sixth-generation Toyota
+  // The documented City H7 and the source-backed City S9 listing are Toyota
   // Hiace conversions. Do not broaden this rule to arbitrary WALD products.
-  if (/\bwald\b/u.test(makeEvidence) && /\bcity\s+(?:h7|m7|s7|s9)\b/u.test(modelEvidence)) {
+  if (/\bwald\b/u.test(makeEvidence) && /\bcity\s+(?:h7|s9)\b/u.test(modelEvidence)) {
     return { make: "Toyota", model: "Hiace" };
   }
   return null;
@@ -233,7 +238,8 @@ export async function applyEncyclopediaDisplayIdentity<T extends DisplayCarrier>
   const rawMake = clean(offer.make);
   const rawModel = clean(offer.model);
   if (!match) {
-    const baseModel = clean(offer.market).toLowerCase() === "china"
+    const knownPresentedBrand = Boolean(catalogBrandBySlug(catalogBrandSlug(canonicalMake)));
+    const baseModel = clean(offer.market).toLowerCase() === "china" && !knownPresentedBrand
       ? uniqueChinaBaseModel(index.allModels, offer, rawModel)
       : null;
     if (baseModel && phrase(baseModel.make) !== phrase(canonicalMake)) {
@@ -257,8 +263,15 @@ export async function applyEncyclopediaDisplayIdentity<T extends DisplayCarrier>
       && !hasUnresolvedAsianScript(canonicalMake)
       && !hasUnresolvedAsianScript(modelLabel)
       && (phrase(canonicalMake) !== phrase(rawMake) || phrase(modelLabel) !== phrase(rawModel)));
-    if (!trustedModel && !translated) return offer as T & { encyclopediaDisplayIdentity?: DisplayIdentity };
-    const canonicalModel = trustedModel || modelLabel;
+    // A known brand translation is independently safe even when a localized
+    // model name is not in the maintained model directory yet. Canonicalize
+    // the public brand group, but preserve the source model verbatim rather
+    // than inventing a model identity from an incomplete translation.
+    const brandOnly = Boolean(canonicalMake
+      && !hasUnresolvedAsianScript(canonicalMake)
+      && phrase(canonicalMake) !== phrase(rawMake));
+    if (!trustedModel && !translated && !brandOnly) return offer as T & { encyclopediaDisplayIdentity?: DisplayIdentity };
+    const canonicalModel = trustedModel || (translated ? modelLabel : rawModel);
     return {
       ...offer,
       make: canonicalMake,
@@ -270,7 +283,7 @@ export async function applyEncyclopediaDisplayIdentity<T extends DisplayCarrier>
         modelId: "",
         canonicalMake,
         canonicalModel,
-        match: trustedModel ? "trusted_alias" : "translated",
+        match: trustedModel ? "trusted_alias" : translated ? "translated" : "brand_only",
       },
     };
   }
