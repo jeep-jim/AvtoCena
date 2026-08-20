@@ -244,6 +244,7 @@ const preservedByMarket = {};
 const preservedInternalByMarket = {};
 const preservedPublicHashByMarket = {};
 const preservedPublicRowsByMarket = {};
+const previousPublicCountByMarket = {};
 const maintenanceOffers = preserveUntouchedExact ? await readAllOffersForMaintenance() : [];
 if (preserveUntouchedExact && !Array.isArray(maintenanceOffers)) throw new Error("recovery_batch_maintenance_state_invalid");
 for (const other of PUBLIC_CATALOG_MARKETS) {
@@ -271,6 +272,14 @@ for (const other of PUBLIC_CATALOG_MARKETS) {
     .slice(0, CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET || 100_000);
   preservedByMarket[other] = preserved.length;
   combined.push(...preserved);
+}
+
+for (const targetMarket of markets) {
+  let rows = [];
+  try { rows = await readMarketOffers(targetMarket); } catch (error) {
+    throw new Error(`recovery_batch_target_public_read_failed:${targetMarket}:${String(error?.message || error)}`);
+  }
+  previousPublicCountByMarket[targetMarket] = rows.length;
 }
 
 const marketReports = {};
@@ -344,6 +353,22 @@ const manifest = await persistCatalogOffers([...unique.values()], {
     }
     if (failures.length) throw new Error(`recovery_batch_prewrite_preservation_gate_failed:${failures.join("|")}`);
   },
+  beforePublishValidate(publishedOffers) {
+    const failures = [];
+    for (const other of PUBLIC_CATALOG_MARKETS) {
+      const rows = publishedOffers.filter((offer) => String(offer?.market || "") === other);
+      if (markets.includes(other)) {
+        const previousCount = Number(previousPublicCountByMarket[other] || 0);
+        if (previousCount > 0 && rows.length < previousCount) failures.push(`${other}:count:${rows.length}:${previousCount}`);
+        continue;
+      }
+      const expectedCount = Number(preservedByMarket[other] || 0);
+      const expectedHash = preservedPublicHashByMarket[other];
+      if (rows.length !== expectedCount) failures.push(`${other}:count:${rows.length}:${expectedCount}`);
+      if (hashRows(rows) !== expectedHash) failures.push(`${other}:hash`);
+    }
+    if (failures.length) throw new Error(`recovery_batch_public_regression_guard:${failures.join("|")}`);
+  },
 });
 
 for (const market of markets) {
@@ -395,6 +420,7 @@ const report = {
   preservedByMarket,
   preservedInternalByMarket,
   preservedPublicHashByMarket,
+  previousPublicCountByMarket,
   manifestCounts: Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [market, Number(manifest?.markets?.[market]?.count || 0)])),
 };
 await fs.writeFile(output, JSON.stringify(report, null, 2));

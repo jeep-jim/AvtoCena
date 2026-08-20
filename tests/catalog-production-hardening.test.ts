@@ -11,8 +11,12 @@ const postPersistAudit = fs.readFileSync(new URL("../scripts/catalog-live-postpe
 const knowledgeSync = fs.readFileSync(new URL("../scripts/catalog-sync-vehicle-models.mjs", import.meta.url), "utf8");
 const cleanup = fs.readFileSync(new URL("../scripts/catalog-clean-object-storage.mjs", import.meta.url), "utf8");
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
+const standardMarketPublisher = fs.readFileSync(new URL("../scripts/catalog-publish-market.mjs", import.meta.url), "utf8");
 const recoveryPublisher = fs.readFileSync(new URL("../scripts/catalog-live-recovery-publish-batch.mjs", import.meta.url), "utf8");
 const singleRecoveryPublisher = fs.readFileSync(new URL("../scripts/catalog-live-recovery-publish.mjs", import.meta.url), "utf8");
+const verifiedGenerationRestore = fs.readFileSync(new URL("../scripts/catalog-restore-verified-generation.mjs", import.meta.url), "utf8");
+const verifiedGenerationRestoreWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-restore-verified-generation.yml", import.meta.url), "utf8");
+const v3MarketWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v3-market-10k-reusable.yml", import.meta.url), "utf8");
 const dataStorage = fs.readFileSync(new URL("../apps/web/lib/data.ts", import.meta.url), "utf8");
 const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
 const strictSourceDetail = fs.readFileSync(new URL("../apps/web/lib/catalog/strict-source-detail-wrapper.ts", import.meta.url), "utf8");
@@ -102,6 +106,9 @@ test("recovery publisher always preserves untouched full maintenance state exact
   assert.match(recoveryPublisher, /recovery_batch_preserved_internal_gate_failed/);
   assert.match(recoveryPublisher, /recovery_batch_preserved_manifest_mismatch/);
   assert.match(recoveryPublisher, /recovery_batch_preserved_hash_mismatch/);
+  assert.match(recoveryPublisher, /beforePublishValidate\(publishedOffers\)/);
+  assert.match(recoveryPublisher, /previousPublicCountByMarket/);
+  assert.match(recoveryPublisher, /recovery_batch_public_regression_guard/);
 });
 
 test("recovery preservation gates keep untouched public rows exact before any generation write", () => {
@@ -112,6 +119,31 @@ test("recovery preservation gates keep untouched public rows exact before any ge
   assert.match(recoveryPublisher, /preservePublicOffersByMarket: preserveUntouchedExact \? preservedPublicRowsByMarket : undefined[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*recovery_batch_prewrite_preservation_gate_failed/);
   assert.match(singleRecoveryPublisher, /function stableJsonValue/);
   assert.match(recoveryPublisher, /function stableJsonValue/);
+});
+
+test("standard one-market publisher cannot shrink the target or mutate untouched markets", () => {
+  assert.match(standardMarketPublisher, /readAllOffersForMaintenance/);
+  assert.match(standardMarketPublisher, /preservePublicOffersByMarket: preservedPublicRowsByMarket/);
+  assert.match(standardMarketPublisher, /beforePersistValidate\(publicOffers\)/);
+  assert.match(standardMarketPublisher, /beforePublishValidate\(publishedOffers\)/);
+  assert.match(standardMarketPublisher, /catalog_prewrite_preservation_gate_failed/);
+  assert.match(standardMarketPublisher, /catalog_public_regression_guard/);
+  assert.match(standardMarketPublisher, /previousPublicCount = currentMarketRows\.length/);
+  assert.doesNotMatch(standardMarketPublisher, /otherCutoff/);
+  assert.match(storage, /beforePublishValidate\?:/);
+  assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers\)[\s\S]*beforePublishValidate\(publishedOffers\)[\s\S]*const generationId/);
+});
+
+test("verified-generation restore is preflight-first and shares the global writer lock", () => {
+  assert.match(verifiedGenerationRestore, /catalog_restore_chunk_missing/);
+  assert.match(verifiedGenerationRestore, /previewCanonicalPublicCatalogOffers/);
+  assert.match(verifiedGenerationRestore, /catalog_restore_canonical_total_mismatch/);
+  assert.match(verifiedGenerationRestore, /catalog_restore_forbidden_makes/);
+  assert.match(verifiedGenerationRestore, /readJsonWithMeta\("catalog\/manifest\.json"/);
+  assert.match(verifiedGenerationRestore, /writeJson\("catalog\/manifest\.json", manifest, \{ ifMatch: currentMeta\.etag \}\)/);
+  assert.ok(verifiedGenerationRestore.indexOf("catalog_restore_canonical_total_mismatch") < verifiedGenerationRestore.indexOf("writeJson(\"catalog/manifest.json\""));
+  assert.match(verifiedGenerationRestoreWorkflow, /group: catalog-live-daily-working-markets/);
+  assert.match(v3MarketWorkflow, /group: catalog-live-daily-working-markets/);
 });
 
 test("single recovery publisher preserves full maintenance state and enforces target gallery depth", () => {

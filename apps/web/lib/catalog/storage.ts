@@ -812,6 +812,7 @@ async function runWithConcurrency(tasks: Array<() => Promise<void>>, concurrency
 }
 export type PersistCatalogOptions = {
   beforePersistValidate?: (publicOffers: VehicleOffer[]) => void | Promise<void>;
+  beforePublishValidate?: (publishedOffers: VehicleOffer[]) => void | Promise<void>;
   // Recovery writers may preserve already-published markets byte-for-byte while
   // rebuilding only their target market. Those rows are trusted only because
   // the caller has already read and hash-validated the current public market.
@@ -866,6 +867,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   if (options.beforePersistValidate) await options.beforePersistValidate(publicOffers);
   const canonicalPublic = await canonicalizePublicCatalogOffers(publicOffers);
   const publishedOffers = canonicalPublic.offers;
+  if (options.beforePublishValidate) await options.beforePublishValidate(publishedOffers);
   const generationId = `gen_${Date.now()}_${crypto.randomUUID().slice(0, 8)}`;
   const now = new Date().toISOString();
   const japanArchive = await persistJapanAuctionHistory(storage, publicOffers.filter((offer) => offer.market === "japan"));
@@ -964,6 +966,10 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[]) {
   const deduplicated = deduplicatePublicCatalogOffers(priceFilteredOffers);
   const quota = enforceCatalogModelYearQuota(deduplicated.rows);
   return { offers: quota.rows, identityRejected, priceOutliers, deduplicated, quota };
+}
+
+export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleOffer[]) {
+  return canonicalizePublicCatalogOffers(storedOffers.filter(isPublicOffer));
 }
 
 async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[]) {

@@ -29,7 +29,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: catalog-v2-market-${{ inputs.market }}
+  group: catalog-live-daily-working-markets
   cancel-in-progress: false
 
 env:
