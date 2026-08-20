@@ -112,7 +112,7 @@ const preservedPublicOffersByMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.
 const expectedHashes = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [market, hashRows(preservedPublicOffersByMarket[market])]));
 process.env.CATALOG_GROW_ONLY_MARKETS = "";
 const manifest = await persistCatalogOffers([...combinedById.values()], {
-  preservePublicOffersByMarket,
+  preservePublicOffersByMarket: preservedPublicOffersByMarket,
   beforePersistValidate(publicOffers) {
     const failures = [];
     for (const market of PUBLIC_CATALOG_MARKETS) {

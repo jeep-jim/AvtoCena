@@ -141,6 +141,7 @@ test("verified-generation restore is preflight-first and shares the global write
   assert.match(verifiedGenerationRestore, /catalog_restore_canonical_total_mismatch/);
   assert.match(verifiedGenerationRestore, /catalog_restore_forbidden_makes/);
   assert.match(verifiedGenerationRestore, /preservePublicOffersByMarket/);
+  assert.match(verifiedGenerationRestore, /preservePublicOffersByMarket: preservedPublicOffersByMarket/);
   assert.match(verifiedGenerationRestore, /beforePersistValidate\(publicOffers\)/);
   assert.match(verifiedGenerationRestore, /beforePublishValidate\(publishedOffers\)/);
   assert.match(verifiedGenerationRestore, /persistCatalogOffers\(\[\.\.\.combinedById\.values\(\)\]/);
