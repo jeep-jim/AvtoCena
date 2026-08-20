@@ -38,6 +38,22 @@ test("brand logos never disappear and the public request path does not crawl a t
   assert.doesNotMatch(route, /drom\.ru/);
 });
 
+test("every remaining live brand logo gap has local light and dark assets", () => {
+  const supplement = JSON.parse(source("data/catalog/brand-logo-supplement.json"));
+  const slugs = supplement.brands.map((brand: { slug: string }) => brand.slug);
+
+  assert.deepEqual(slugs, [...slugs].sort((left, right) => left.localeCompare(right, "en")));
+  assert.equal(supplement.policy.visitorThirdPartyRequests, false);
+  assert.equal(new Set(slugs).size, 16);
+
+  for (const slug of slugs) {
+    for (const theme of ["light", "dark"]) {
+      const asset = new URL(`../apps/web/public/brand-logos/drom/${theme}/${slug}.png`, import.meta.url);
+      assert.ok(fs.statSync(asset).size > 1_000, `${theme}/${slug}.png must be a real local logo`);
+    }
+  }
+});
+
 test("brand and model pages use Autocatalog copy, saved previews and no aggregate pseudo-specs", () => {
   const brandPage = source("apps/web/app/(public)/cars/brand/[slug]/page.tsx");
   const modelPage = source("apps/web/app/(public)/cars/brand/[slug]/model/[model]/page.tsx");

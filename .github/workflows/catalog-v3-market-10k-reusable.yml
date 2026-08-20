@@ -33,7 +33,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: catalog-v3-market-${{ inputs.market }}
+  group: catalog-live-daily-working-markets
   cancel-in-progress: false
 
 env:

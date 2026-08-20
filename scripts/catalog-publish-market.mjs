@@ -1,12 +1,13 @@
 import fs from "node:fs/promises";
+import crypto from "node:crypto";
 import path from "node:path";
 
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
-const { isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { isCrediblePublicOffer, isCatalogYearAllowed, isCatalogMarketSourceAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");
 const { classifyCatalogV2Offer, selectCatalogV2MarketOffers } = await import("../apps/web/lib/catalog/catalog-v2-policy.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const { persistCatalogOffers, readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-v2-input";
@@ -77,6 +78,21 @@ function freshness(offer) {
       || offer?.firstSeenAt
       || "",
   )) || 0;
+}
+
+function stableJsonValue(value) {
+  if (Array.isArray(value)) return value.map(stableJsonValue);
+  if (value && typeof value === "object") {
+    return Object.fromEntries(Object.keys(value).sort().map((key) => [key, stableJsonValue(value[key])]));
+  }
+  return value;
+}
+
+function hashRows(rows) {
+  const canonical = [...rows]
+    .sort((left, right) => String(left?.id || "").localeCompare(String(right?.id || "")))
+    .map(stableJsonValue);
+  return crypto.createHash("sha256").update(JSON.stringify(canonical)).digest("hex");
 }
 
 function qualityOrder(left, right) {
@@ -267,38 +283,93 @@ for (let start = 0; start < orderedCandidates.length && selected.length < maximu
 const v2Selection = selectCatalogV2MarketOffers(selected.sort(qualityOrder), v2Policy);
 const selectedMarketOffers = v2Selection.selected.slice(0, maximumPerMarket);
 const preservedByMarket = {};
-const combined = [...selectedMarketOffers];
+const preservedPublicHashByMarket = {};
+const preservedPublicRowsByMarket = {};
 
+// A one-market refresh must never reconstruct the other six markets from
+// retention or quality filters. Read their already-published rows and pass them
+// through the exact-preservation path byte-for-byte.
 for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
   if (otherMarket === market) continue;
   let rows = [];
-  try { rows = await readMarketOffers(otherMarket); } catch { rows = []; }
-  const otherCutoff = Date.now() - retentionForMarket(otherMarket);
-  const preserved = rows
-    .filter((offer) => ["active", "stale"].includes(String(offer?.status || "")))
-    .filter((offer) => freshness(offer) >= otherCutoff)
-    .filter((offer) => isCrediblePublicOffer({ ...offer, status: "active" }))
-    .sort(qualityOrder)
-    .slice(0, maximumPerMarket)
-    .map((offer) => ({ ...offer, status: "active", images: uniqueImages(offer.images) }));
-  preservedByMarket[otherMarket] = preserved.length;
-  combined.push(...preserved);
+  try { rows = await readMarketOffers(otherMarket); } catch (error) {
+    throw new Error(`catalog_preserved_public_read_failed:${otherMarket}:${String(error?.message || error)}`);
+  }
+  const invalid = rows.filter((offer) => !offer?.id || !offer?.make || !offer?.model
+    || String(offer?.market || "") !== otherMarket
+    || !isCatalogYearAllowed(offer?.year, otherMarket)
+    || !isCatalogMarketSourceAllowed(offer)
+    || !Array.isArray(offer?.images) || offer.images.length === 0);
+  if (invalid.length) throw new Error(`catalog_preserved_public_gate_failed:${otherMarket}:${invalid.length}`);
+  preservedByMarket[otherMarket] = rows.length;
+  preservedPublicHashByMarket[otherMarket] = hashRows(rows);
+  preservedPublicRowsByMarket[otherMarket] = rows;
 }
 
+const currentInternal = await readAllOffersForMaintenance();
+if (!Array.isArray(currentInternal)) throw new Error("catalog_maintenance_state_invalid");
+const preservedInternal = currentInternal.filter((offer) => String(offer?.market || "") !== market);
+const invalidInternal = preservedInternal.filter((offer) => {
+  const otherMarket = String(offer?.market || "");
+  return !offer?.id || !PUBLIC_CATALOG_MARKETS.includes(otherMarket)
+    || !isCatalogYearAllowed(offer?.year, otherMarket)
+    || !isCatalogMarketSourceAllowed(offer);
+});
+if (invalidInternal.length) throw new Error(`catalog_preserved_internal_gate_failed:${invalidInternal.length}`);
+
 const unique = new Map();
-for (const offer of combined) if (offer?.id && !unique.has(offer.id)) unique.set(offer.id, offer);
+for (const offer of [...preservedInternal, ...selectedMarketOffers]) {
+  if (offer?.id && !unique.has(offer.id)) unique.set(offer.id, offer);
+}
+// Keep the internal maintenance state a superset of every exact public row,
+// including rows restored from an older verified public generation.
+for (const rows of Object.values(preservedPublicRowsByMarket)) {
+  for (const offer of rows) if (offer?.id && !unique.has(offer.id)) unique.set(offer.id, offer);
+}
 const allOffers = [...unique.values()];
 const previousRetainedCount = currentRetainedRows.length;
-const regressionBlocked = previousRetainedCount > 0 && selectedMarketOffers.length < previousRetainedCount;
+const previousPublicCount = currentMarketRows.length;
+const regressionBlocked = previousPublicCount > 0 && selectedMarketOffers.length < previousPublicCount;
 let manifest = null;
 let publicationError = "";
+let nextPublicCount = 0;
 
 if (regressionBlocked) {
-  publicationError = `catalog_v3_regression_guard:${market}:${selectedMarketOffers.length}:${previousRetainedCount}`;
+  publicationError = `catalog_public_regression_guard:${market}:${selectedMarketOffers.length}:${previousPublicCount}`;
 } else if (selectedMarketOffers.length > 0) {
   try {
     process.env.CATALOG_GROW_ONLY_MARKETS = "";
-    manifest = await persistCatalogOffers(allOffers);
+    manifest = await persistCatalogOffers(allOffers, {
+      preservePublicOffersByMarket: preservedPublicRowsByMarket,
+      beforePersistValidate(publicOffers) {
+        const failures = [];
+        for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
+          if (otherMarket === market) continue;
+          const rows = publicOffers.filter((offer) => String(offer?.market || "") === otherMarket);
+          const expectedCount = Number(preservedByMarket[otherMarket] || 0);
+          const expectedHash = preservedPublicHashByMarket[otherMarket];
+          if (rows.length !== expectedCount) failures.push(`${otherMarket}:count:${rows.length}:${expectedCount}`);
+          if (hashRows(rows) !== expectedHash) failures.push(`${otherMarket}:hash`);
+        }
+        if (failures.length) throw new Error(`catalog_prewrite_preservation_gate_failed:${failures.join("|")}`);
+      },
+      beforePublishValidate(publishedOffers) {
+        const failures = [];
+        for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
+          if (otherMarket === market) continue;
+          const rows = publishedOffers.filter((offer) => String(offer?.market || "") === otherMarket);
+          const expectedCount = Number(preservedByMarket[otherMarket] || 0);
+          const expectedHash = preservedPublicHashByMarket[otherMarket];
+          if (rows.length !== expectedCount) failures.push(`${otherMarket}:count:${rows.length}:${expectedCount}`);
+          if (hashRows(rows) !== expectedHash) failures.push(`${otherMarket}:hash`);
+        }
+        nextPublicCount = publishedOffers.filter((offer) => String(offer?.market || "") === market).length;
+        if (previousPublicCount > 0 && nextPublicCount < previousPublicCount) {
+          failures.push(`${market}:count:${nextPublicCount}:${previousPublicCount}`);
+        }
+        if (failures.length) throw new Error(`catalog_public_regression_guard:${failures.join("|")}`);
+      },
+    });
   } catch (error) {
     publicationError = String(error?.message || error);
   }
@@ -341,6 +412,8 @@ const report = {
       generatedCandidates: generation.offers.length,
       retainedCandidates: currentMarketRows.length,
       previousRetainedCount,
+      previousPublicCount,
+      nextPublicCount,
       regressionBlocked,
       published: selectedMarketOffers.length,
       calculatedCount,
@@ -358,6 +431,7 @@ const report = {
   },
   files: generation.filenames,
   preservedByMarket,
+  preservedPublicHashByMarket,
 };
 
 await fs.writeFile(reportFile, JSON.stringify(report, null, 2));

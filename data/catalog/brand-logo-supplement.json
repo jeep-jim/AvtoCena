@@ -1,0 +1,111 @@
+{
+  "generatedAt": "2026-08-20",
+  "policy": {
+    "delivery": "local-static-only",
+    "themes": ["light", "dark"],
+    "visitorThirdPartyRequests": false,
+    "outputTemplate": "apps/web/public/brand-logos/drom/{theme}/{slug}.png"
+  },
+  "brands": [
+    {
+      "name": "AION",
+      "slug": "aion",
+      "source": "https://car2.autoimg.cn/cardfs/series/g34/M04/3A/70/autohomecar__ChxpWGnq1iSABf4xAAAVjwDuKa4995.png",
+      "sourceOwner": "Autohome"
+    },
+    {
+      "name": "Aixam",
+      "slug": "aixam",
+      "source": "https://www.aixam.com/en/",
+      "sourceOwner": "Aixam",
+      "sourceDetail": "official inline SVG"
+    },
+    {
+      "name": "BRP",
+      "slug": "brp",
+      "source": "https://www.brp.com/content/dam/global/logos/brands/BRP-Digital_and_Campaign_Logo-W-RGB.svg",
+      "sourceOwner": "BRP"
+    },
+    {
+      "name": "Can-Am",
+      "slug": "can-am",
+      "source": "https://can-am.brp.com/content/dam/nextgen/logos/brands/can-am-logo.svg",
+      "sourceOwner": "Can-Am"
+    },
+    {
+      "name": "Corvette",
+      "slug": "corvette",
+      "source": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Logo_Corvette_-Transparency.png",
+      "sourceOwner": "Wikimedia Commons"
+    },
+    {
+      "name": "DFSK",
+      "slug": "dfsk",
+      "source": "https://car3.autoimg.cn/cardfs/series/g26/M09/FC/BC/autohomecar__ChtlxWUKwrmAFY7xAADNbY6qOSY447.png",
+      "sourceOwner": "Autohome"
+    },
+    {
+      "name": "DR",
+      "slug": "dr",
+      "source": "https://drautomobiles.com/wp-content/uploads/2023/09/DR_LogoP.svg",
+      "sourceOwner": "DR Automobiles"
+    },
+    {
+      "name": "DS",
+      "slug": "ds",
+      "source": "https://car2.autoimg.cn/cardfs/series/g28/M0B/6D/9B/autohomecar__Chtlx2TLfOyAS1r_AAEXkvFZub8263.png",
+      "sourceOwner": "Autohome"
+    },
+    {
+      "name": "EMC",
+      "slug": "emc",
+      "source": "https://emcauto.it/wp-content/uploads/2025/11/emc_black.svg",
+      "darkSource": "https://emcauto.it/wp-content/uploads/2025/11/emc_white.svg",
+      "sourceOwner": "EMC Auto"
+    },
+    {
+      "name": "EVO",
+      "slug": "evo",
+      "source": "https://www.auto-evo.com/wp-content/uploads/2023/08/Logo_EVO_128px.png",
+      "sourceOwner": "EVO Automobili"
+    },
+    {
+      "name": "ICH-X",
+      "slug": "ich-x",
+      "source": "https://ich-x.it/wp-content/uploads/ich-x_logo.svg",
+      "sourceOwner": "ICH-X"
+    },
+    {
+      "name": "Kubota",
+      "slug": "kubota",
+      "source": "https://www.kubota.com/assets/images/icons/logo_kubota.svg",
+      "sourceOwner": "Kubota",
+      "sourceDetail": "official KUBOTA wordmark extracted from the combined corporate lockup"
+    },
+    {
+      "name": "Ligier",
+      "slug": "ligier",
+      "source": "https://www.ligier.fr/wp-content/uploads/2021/03/ligier-withe-logo-vecto.svg",
+      "darkSource": "https://www.ligier.fr/wp-content/uploads/2021/03/ligier-dark-logo-vecto.svg",
+      "sourceOwner": "Ligier"
+    },
+    {
+      "name": "LUXEED",
+      "slug": "luxeed",
+      "source": "https://car2.autoimg.cn/cardfs/series/g30/M02/8E/A6/autohomecar__Chtk2Gh3nFmAV0YuAABnXFEEr4E505.png",
+      "sourceOwner": "Autohome"
+    },
+    {
+      "name": "Microcar",
+      "slug": "microcar",
+      "source": "https://commons.wikimedia.org/wiki/Special:Redirect/file/Logo_Microcar_2022.png",
+      "sourceOwner": "Wikimedia Commons"
+    },
+    {
+      "name": "STELATO",
+      "slug": "stelato",
+      "source": "https://car3.autoimg.cn/cardfs/series/g34/M05/43/62/autohomecar__ChxpWGidpU2ACTXvAACM0_ScdA0743.png",
+      "sourceOwner": "Autohome"
+    }
+  ]
+}
