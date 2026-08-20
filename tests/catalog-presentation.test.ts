@@ -14,6 +14,12 @@ test("public catalog text removes half-width Japanese Kana", () => {
   assert.equal(translateCatalogText("Nissan X Trail Eﾌﾞﾚ Key Package"), "Nissan X Trail E Key Package");
 });
 
+test("canonical Latin brand and model hyphens remain visible", () => {
+  assert.equal(translateCatalogText("Mercedes-Benz V-Class"), "Mercedes-Benz V-Class");
+  assert.equal(catalogOfferTitle({ market: "china", make: "Mercedes-Benz", model: "V-Class" }), "Mercedes-Benz V-Class");
+  assert.equal(catalogOfferTitle({ market: "china", make: "Toyota", model: "HiAce" }), "Toyota HiAce");
+});
+
 test("public offer title and labels never expose raw Japanese source script", () => {
   const offer = {
     id: "jp-halfwidth-kana",

@@ -322,7 +322,8 @@ export function translateCatalogText(value: unknown) {
   text = text
     .replace(/[\u1100-\u11ff\u3040-\u30ff\u3130-\u318f\u31f0-\u31ff\u3400-\u4dbf\u4e00-\u9fff\ua960-\ua97f\uac00-\ud7af\ud7b0-\ud7ff\uf900-\ufaff\uff61-\uff9f]+/gu, " ")
     .replace(/([0-9]{4})款/g, "$1 ")
-    .replace(/\s*[-·|]+\s*/g, " ")
+    .replace(/\s*[·|]+\s*/g, " ")
+    .replace(/\s+-\s+/g, " ")
     .replace(/\s+/g, " ")
     .trim();
   return text;
