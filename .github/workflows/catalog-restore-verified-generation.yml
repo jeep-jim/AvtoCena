@@ -14,6 +14,8 @@ permissions:
   contents: read
 
 concurrency:
+  # This restore is the only writer started by a storage publication change;
+  # persistCatalogOffers refreshes the one-hop read models in the same write.
   group: catalog-live-daily-working-markets
   cancel-in-progress: false
 
