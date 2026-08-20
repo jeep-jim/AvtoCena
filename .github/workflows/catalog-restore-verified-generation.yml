@@ -17,7 +17,9 @@ concurrency:
   # This restore is the only writer started by a storage publication change;
   # persistCatalogOffers refreshes the one-hop read models in the same write.
   group: catalog-live-daily-working-markets
-  cancel-in-progress: false
+  # An explicitly labelled emergency merge may replace a known-stale writer.
+  # Ordinary pushes and manual runs remain non-preemptive.
+  cancel-in-progress: ${{ contains(github.event.head_commit.message, '[preempt-restore]') }}
 
 env:
   JSON_STORAGE_DRIVER: object

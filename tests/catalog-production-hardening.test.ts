@@ -150,6 +150,7 @@ test("verified-generation restore is preflight-first and shares the global write
   assert.ok(verifiedGenerationRestore.indexOf("catalog_restore_canonical_total_mismatch") < verifiedGenerationRestore.indexOf("persistCatalogOffers("));
   assert.doesNotMatch(verifiedGenerationRestore, /writeJson\("catalog\/manifest\.json"/);
   assert.match(verifiedGenerationRestoreWorkflow, /group: catalog-live-daily-working-markets/);
+  assert.match(verifiedGenerationRestoreWorkflow, /cancel-in-progress: \$\{\{ contains\(github\.event\.head_commit\.message, '\[preempt-restore\]'\) \}\}/);
   assert.match(verifiedGenerationRestoreWorkflow, /set -euo pipefail/);
   assert.match(v3MarketWorkflow, /group: catalog-live-daily-working-markets/);
 });
