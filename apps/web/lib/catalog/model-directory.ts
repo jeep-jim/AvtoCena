@@ -3,7 +3,6 @@ import { canonicalCatalogBrand, catalogBrandSlug } from "./brands";
 import { readEncyclopediaKnowledgeModels, readEncyclopediaKnowledgeVariants } from "./encyclopedia";
 import { readVehiclePowerKnowledge } from "./power-knowledge";
 import { readCatalogBrandModelCounts } from "./storage";
-import { presentCatalogOffer } from "./presentation";
 import {
   vehicleKnowledgeCompact,
   type VehicleKnowledgeModel,
@@ -167,38 +166,11 @@ export const readBrandModelDirectory = cache(async (rawMake: string): Promise<Ca
       knowledge: summarizeModel(model, modelVariants, modelReferences),
     };
   });
-  const liveOnly = live.models.flatMap((item) => {
-    if (modelByAlias.get(vehicleKnowledgeCompact(item.model))) return [];
-    const presented = presentCatalogOffer({ market: "china", make, model: item.model });
-    const model = clean(presented.modelLabel || item.model);
-    if (!model) return [];
-    return [{
-      id: `live/${slugify(make)}/${slugify(model)}`,
-      make,
-      model,
-      aliases: item.model === model ? [] : [item.model],
-      bodyTypes: [],
-      source: "manual" as const,
-      sourceVersion: "live-catalog-identity",
-      updatedAt: "",
-      active: true,
-      popularityDecile: 10,
-      slug: slugify(model),
-      count: item.count,
-      marketCounts: item.marketCounts,
-      knowledge: {
-        records: 0,
-        variants: 0,
-        trustedVariants: 0,
-        observations: 0,
-        references: 0,
-        fuels: [],
-        powertrains: [],
-      },
-    } satisfies CatalogModelDirectoryItem];
-  });
 
-  return [...canonicalModels, ...liveOnly].sort((left, right) => Number(right.count > 0) - Number(left.count > 0)
+  // Unknown live parser strings must never create public/SEO model entities.
+  // They remain valid offers in the market catalog and wait for a future safe
+  // Encyclopedia V2 alias/model match instead of polluting the directory.
+  return canonicalModels.sort((left, right) => Number(right.count > 0) - Number(left.count > 0)
     || right.count - left.count
     || Number(left.popularityDecile || 10) - Number(right.popularityDecile || 10)
     || left.model.localeCompare(right.model, "ru"));
