@@ -49,7 +49,9 @@ async function applyOffer(rawOffer) {
   let offer = normalizeVehicleOfferSpecs(rawOffer);
   offer = normalizeVehicleOfferSpecs(applyEncyclopediaIdentityMaster(resolver, offer));
   const identity = identityMeta(offer);
-  const changed = clean(offer.make) !== sourceMake || clean(offer.model) !== sourceModel;
+  const canonicalMake = clean(offer.make);
+  const canonicalModel = clean(offer.model);
+  const changed = canonicalMake !== sourceMake || canonicalModel !== sourceModel;
   let knowledgeEnriched = false;
 
   // Re-run the existing calculation knowledge bridge only for identities that
@@ -63,7 +65,18 @@ async function applyOffer(rawOffer) {
       fuel: clean(offer.fuel),
     };
     try {
-      offer = normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer));
+      const enriched = normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer));
+      // The legacy knowledge bridge may fill missing technical data, but it is
+      // not allowed to overrule the Encyclopedia Identity Master naming choice.
+      offer = normalizeVehicleOfferSpecs({
+        ...enriched,
+        make: canonicalMake,
+        model: canonicalModel,
+        operational: {
+          ...(enriched.operational || {}),
+          encyclopediaIdentity: identity,
+        },
+      });
       knowledgeEnriched = Number(offer.powerHp || 0) !== before.powerHp
         || Number(offer.engineCc || 0) !== before.engineCc
         || clean(offer.fuel) !== before.fuel;
