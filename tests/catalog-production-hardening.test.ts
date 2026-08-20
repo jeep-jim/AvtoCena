@@ -114,6 +114,8 @@ test("recovery publisher always preserves untouched full maintenance state exact
 test("recovery preservation gates keep untouched public rows exact before any generation write", () => {
   assert.match(storage, /preservePublicOffersByMarket/);
   assert.match(storage, /exactPreserveMarkets\.has\(offer\.market\)[\s\S]*\? offer[\s\S]*enrichOfferWithVehicleKnowledge/);
+  assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets\)/);
+  assert.match(storage, /skipDisplayIdentityMarkets\.has\(offer\.market\)[\s\S]*\? offer[\s\S]*applyEncyclopediaDisplayIdentity\(offer\)/);
   assert.match(storage, /const publicOffers = nextOffers\.filter\(\(offer\) => !exactPreserveMarkets\.has\(offer\.market\) && isPublicOffer\(offer\)\);[\s\S]*Object\.entries\(preservedPublicOffersByMarket\)[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*const generationId[\s\S]*persistInternalCatalog/);
   assert.match(singleRecoveryPublisher, /preservePublicOffersByMarket: preservedPublicRowsByMarket[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*recovery_prewrite_preservation_gate_failed/);
   assert.match(recoveryPublisher, /preservePublicOffersByMarket: preserveUntouchedExact \? preservedPublicRowsByMarket : undefined[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*recovery_batch_prewrite_preservation_gate_failed/);
@@ -131,7 +133,7 @@ test("standard one-market publisher cannot shrink the target or mutate untouched
   assert.match(standardMarketPublisher, /previousPublicCount = currentMarketRows\.length/);
   assert.doesNotMatch(standardMarketPublisher, /otherCutoff/);
   assert.match(storage, /beforePublishValidate\?:/);
-  assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers\)[\s\S]*beforePublishValidate\(publishedOffers\)[\s\S]*const generationId/);
+  assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets\)[\s\S]*beforePublishValidate\(publishedOffers\)[\s\S]*const generationId/);
 });
 
 test("verified-generation restore is preflight-first and shares the global writer lock", () => {
