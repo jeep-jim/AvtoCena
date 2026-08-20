@@ -216,3 +216,46 @@ html body main.ac-page-copy.ac-catalog-page section.ac-brand-rail[aria-label="М
 html body main.ac-page-copy.ac-home-page section.ac-brand-rail[aria-label="Марки автомобилей"] > button {
   right: 0 !important;
 }
+
+/* Price helper icons are desktop-only interactions. On touch/mobile they are
+   purely informational graphics and must never open a sheet/popover. */
+@media (max-width: 1023px) {
+  .ac-price-trend-arrow,
+  .ac-auction-gavel,
+  button[aria-label="Что означает завершённый аукционный лот"] {
+    pointer-events: none !important;
+  }
+
+  .ac-price-trend-panel {
+    pointer-events: none !important;
+  }
+}
+
+/* Hovering a currency arrow must not spawn the large rectangular helper.
+   A deliberate desktop click/focus still reveals the same information. */
+@media (min-width: 1024px) and (hover: hover) and (pointer: fine) {
+  .ac-price-trend-arrow:hover > .ac-price-trend-popover {
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+  }
+
+  .ac-price-trend-arrow:focus > .ac-price-trend-popover,
+  .ac-price-trend-arrow:focus-within > .ac-price-trend-popover {
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+  }
+}
+
+/* Card hover should never introduce a square/rectangular backing, border or
+   shadow around the rounded catalog card. */
+.ac-catalog-card:hover,
+.ac-catalog-card:hover > a,
+.ac-catalog-card:hover > a > div:first-child,
+.ac-catalog-card:hover > a > div:last-child {
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  filter: none !important;
+}
