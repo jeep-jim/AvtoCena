@@ -94,6 +94,48 @@ test("coachbuilder VITO is not silently promoted to Mercedes-Benz Vito", async (
   assert.equal(result.encyclopediaDisplayIdentity?.match, "trusted_alias");
 });
 
+test("China coachbuilders keep their real brand and one canonical VITO/V-Class model name", async () => {
+  const xiaoao = await applyEncyclopediaDisplayIdentity({
+    id: "xiaoao-vito",
+    market: "china",
+    make: "AM晓澳汽车",
+    model: "晓澳汽车 VITO",
+    year: 2025,
+  });
+  const shangzhe = await applyEncyclopediaDisplayIdentity({
+    id: "shangzhe-vclass",
+    market: "china",
+    make: "上喆汽车",
+    model: "上喆 V Class",
+    year: 2025,
+  });
+  const yasheng = await applyEncyclopediaDisplayIdentity({
+    id: "yasheng-vito-duplicate",
+    market: "china",
+    make: "雅升汽车",
+    model: "雅升 VITO",
+    year: 2025,
+  });
+
+  assert.deepEqual([xiaoao.make, xiaoao.model], ["AM Xiaoao", "VITO"]);
+  assert.deepEqual([shangzhe.make, shangzhe.model], ["Shangzhe", "V-Class"]);
+  assert.deepEqual([yasheng.make, yasheng.model], ["Yasheng", "VITO"]);
+  assert.equal(xiaoao.encyclopediaDisplayIdentity?.match, "trusted_alias");
+  assert.equal(shangzhe.encyclopediaDisplayIdentity?.match, "trusted_alias");
+});
+
+test("AITO localized source spellings collapse to one public brand without duplicated make in model", async () => {
+  const result = await applyEncyclopediaDisplayIdentity({
+    id: "aito-wenjie",
+    market: "china",
+    make: "AITO 问界",
+    model: "问界 M9",
+    year: 2025,
+  });
+  assert.equal(result.make, "AITO");
+  assert.equal(result.model, "M9");
+});
+
 test("KGM Rexton Sports Khan uses the exact official pickup identity instead of collapsing into Rexton SUV", async () => {
   const raw = { id: "kgm-sports", market: "korea", make: "KGM(KGM)", model: "더 뉴 렉스턴 스포츠 칸 디젤 2.2 2WD", year: 2022 };
   const result = await applyEncyclopediaDisplayIdentity(raw);
