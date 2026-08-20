@@ -34,7 +34,7 @@ test("Catalog V2 publishes each market independently and preserves completed mar
   assert.match(marketWorkflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
   assert.match(marketWorkflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
   assert.match(marketWorkflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
-  assert.match(marketWorkflow, /group: catalog-v2-market-\$\{\{ inputs\.market \}\}/);
+  assert.match(marketWorkflow, /group: catalog-live-daily-working-markets/);
   assert.match(marketWorkflow, /test "\$\{\{ needs\.publish\.result \}\}" = "success"/);
 
   assert.match(koreaWorkflow, /market: korea/);
@@ -43,7 +43,9 @@ test("Catalog V2 publishes each market independently and preserves completed mar
   assert.match(marketPublisher, /for \(const otherMarket of PUBLIC_CATALOG_MARKETS\)/);
   assert.match(marketPublisher, /readMarketOffers\(otherMarket\)/);
   assert.match(marketPublisher, /preservedByMarket/);
-  assert.match(marketPublisher, /persistCatalogOffers\(allOffers\)/);
+  assert.match(marketPublisher, /persistCatalogOffers\(allOffers, \{/);
+  assert.match(marketPublisher, /beforePublishValidate\(publishedOffers\)/);
+  assert.match(marketPublisher, /catalog_public_regression_guard/);
   assert.match(marketPublisher, /catalog_v2_empty_market/);
 });
 
