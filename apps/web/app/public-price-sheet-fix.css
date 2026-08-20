@@ -75,6 +75,16 @@ html[data-theme="light"] .ac-catalog-card,
   z-index: 12020 !important;
 }
 
+/* Auction microcards use a plain theme-aware gavel with no colored backing. */
+.ac-catalog-card .ac-auction-gavel,
+.ac-catalog-card .ac-auction-gavel:hover,
+.ac-catalog-card .ac-auction-gavel:active {
+  background: transparent !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  color: var(--ac-text) !important;
+}
+
 /* Falling customer price is always green; rising price is always red. */
 .is-down .ac-price,
 .is-down .ac-price-trend-delta,
@@ -103,6 +113,16 @@ html[data-theme="light"] .ac-price-trend-panel.is-down {
 }
 html[data-theme="light"] .ac-price-trend-panel.is-up {
   background: #f2d1d5 !important;
+}
+
+/* Offer-page price trend tint must survive generic light-theme panel styles. */
+html[data-theme="light"] body .ac-price-trend-panel.ac-offer-price-panel.is-down {
+  background: #cfe5d8 !important;
+  background-color: #cfe5d8 !important;
+}
+html[data-theme="light"] body .ac-price-trend-panel.ac-offer-price-panel.is-up {
+  background: #f2d1d5 !important;
+  background-color: #f2d1d5 !important;
 }
 
 /* The offer price panel uses the same is-up / is-down state logic in dark mode.

@@ -1,5 +1,6 @@
+import { AuctionCardPrice } from "@/components/catalog/AuctionCardPrice";
 import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
-import { AuctionResultPrice, PriceTrend } from "@/components/catalog/PriceTrend";
+import { PriceTrend } from "@/components/catalog/PriceTrend";
 
 export function CatalogPrice({
   offer,
@@ -21,7 +22,7 @@ export function CatalogPrice({
     || /(?:electric|battery|\bbev\b|\bev\b|hybrid|phev|hev|mhev|электро|гибрид)/i.test(fuel);
 
   if (totalRub > 0) {
-    if (japanAuction) return <AuctionResultPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
+    if (japanAuction) return <AuctionCardPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
     const preliminary = String(offer?.calculationStatus || "") === "preliminary_power_pending"
       || offer?.calculationSnapshot?.pricingConfidence === "preliminary";
     if (preliminary) return <PreliminaryPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} highlightElectrified={highlightElectrified} />;
