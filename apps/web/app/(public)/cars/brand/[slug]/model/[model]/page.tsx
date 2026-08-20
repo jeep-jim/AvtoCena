@@ -4,8 +4,10 @@ import { notFound } from "next/navigation";
 import { BrandLogoVisual } from "@/components/catalog/BrandLogoRail";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
+import { EncyclopediaModelReference } from "@/components/catalog/EncyclopediaModelReference";
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { catalogBrandMatches, resolveCatalogBrandBySlug } from "@/lib/catalog/catalog-brand-directory";
+import { readPublicEncyclopediaVariants } from "@/lib/catalog/encyclopedia-public";
 import { findBrandModelBySlug, readBrandModelDirectory, type CatalogNumericRange } from "@/lib/catalog/model-directory";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { readVehiclePowerKnowledge } from "@/lib/catalog/power-knowledge";
@@ -152,6 +154,8 @@ export default async function ModelLandingPage({ params }: PageProps) {
   ]);
   if (!model) notFound();
 
+  const isHiluxReference = brand.slug === "toyota" && model.slug === "hilux";
+  const referenceVariants = isHiluxReference ? await readPublicEncyclopediaVariants(model.id) : [];
   const modelKey = vehicleKnowledgeCompact(model.model);
   const makeKey = vehicleKnowledgeCompact(brand.name);
   const rows = new Map<string, PublicKnowledgeRow>();
@@ -277,11 +281,11 @@ export default async function ModelLandingPage({ params }: PageProps) {
             <h2 className="mt-1 text-2xl font-black md:text-4xl">Характеристики {brand.name} {model.model}</h2>
           </div>
         </div>
-        <p className="mt-3 max-w-5xl text-sm font-medium leading-6 text-[var(--ac-muted)]">Доступные сведения о двигателях, мощности, трансмиссии и приводе. Для электромобилей отдельно указана 30-минутная мощность, используемая при расчёте утилизационного сбора.</p>
+        <p className="mt-3 max-w-5xl text-sm font-medium leading-6 text-[var(--ac-muted)]">{isHiluxReference ? "Эталонная версия Энциклопедии: поколения собраны отдельно, а каждая подтверждённая модификация открывает собственную страницу характеристик. Показываются только известные базе параметры." : "Доступные сведения о двигателях, мощности, трансмиссии и приводе. Для электромобилей отдельно указана 30-минутная мощность, используемая при расчёте утилизационного сбора."}</p>
         <div className="mt-5 grid grid-cols-2 gap-2 md:grid-cols-4 xl:grid-cols-8">
           {summaryCards.map(([label, value]) => <div key={`${label}-${value}`} className="rounded-2xl bg-[var(--ac-surface-2)] p-3"><div className="text-[10px] font-black uppercase tracking-wide text-[var(--ac-muted)]">{label}</div><div className="mt-1 text-lg font-black">{value}</div></div>)}
         </div>
-        {trustedRows.length ? <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
+        {isHiluxReference ? <EncyclopediaModelReference variants={referenceVariants} brandName={brand.name} brandSlug={brand.slug} modelName={model.model} modelSlug={model.slug} /> : trustedRows.length ? <div className="mt-6 grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {trustedRows.map((row) => <TrustedSpecCard key={row.id} row={row} brand={brand.name} model={model.model} />)}
         </div> : <p className="mt-5 rounded-2xl bg-[var(--ac-surface-2)] p-4 text-sm font-bold text-[var(--ac-muted)]">Характеристики этой модели дополняются. Оставьте заявку, и менеджер уточнит параметры нужной модификации.</p>}
       </section>
