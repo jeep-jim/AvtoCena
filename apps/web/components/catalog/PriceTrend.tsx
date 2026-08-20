@@ -519,7 +519,7 @@ export function AuctionResultPrice({
         type="button"
         aria-label="Что означает завершённый аукционный лот"
         aria-expanded={open}
-        className="ac-offer-auction-gavel relative flex shrink-0 items-center rounded-xl bg-[#11151d] p-1.5 text-white outline-none transition focus-visible:ring-2 focus-visible:ring-white/50"
+        className="ac-offer-auction-gavel relative flex shrink-0 items-center rounded-xl bg-[#11151d] p-1.5 outline-none transition focus-visible:ring-2 focus-visible:ring-white/50"
         onMouseEnter={() => setOpen(true)}
         onMouseLeave={() => setOpen(false)}
         onPointerDown={(event) => { event.preventDefault(); event.stopPropagation(); }}
