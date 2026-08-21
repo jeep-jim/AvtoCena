@@ -27,7 +27,9 @@ test("Prestige scheduled collection tolerates isolated shard transport failures 
   assert.match(workflow, /cron: "40 7,19 \* \* \*"/);
   assert.match(workflow, /PRESTIGE_PLAN_MAX_PARTITIONS: "90"/);
   assert.match(workflow, /PRESTIGE_PLAN_RAW_BUDGET: "18000"/);
-  assert.match(workflow, /start_model_index=\$\(\( \(10#\$day_of_year % 40\) \* 3 \)\)/);
+  assert.match(workflow, /half_day=\$\(\(10#\$hour_utc \/ 12\)\)/);
+  assert.match(workflow, /slot=\$\(\( \(10#\$day_of_year \* 2 \+ half_day\) % 40 \)\)/);
+  assert.match(workflow, /start_model_index=\$\(\( \(slot \* 21\) % 120 \)\)/);
   assert.match(workflow, /group: catalog-v6-prestige-exact-sold-up-to-30k[\s\S]*cancel-in-progress: true/);
   assert.match(workflow, /chunks:[\s\S]*continue-on-error: true/);
   assert.match(workflow, /Collect exact sold-result partition without publishing[\s\S]*continue-on-error: true/);
