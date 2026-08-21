@@ -64,7 +64,7 @@ export function classifyCatalogV2Offer(offer: Partial<VehicleOffer>, options: Ca
     return { tier: "japan_auction", eligible: true, reason: "completed_auction", ageYears, powerHp, totalRub, popularityDecile: popularity };
   }
   return isCatalogPriorityOffer(offer, options)
-    ? { tier: "priority", eligible: true, reason: "affordable_power_priority", ageYears, powerHp, totalRub, popularityDecile: popularity }
+    ? { tier: "priority", eligible: true, reason: "affordable_recent", ageYears, powerHp, totalRub, popularityDecile: popularity }
     : { tier: "recent", eligible: true, reason: "market_year_eligible", ageYears, powerHp, totalRub, popularityDecile: popularity };
 }
 
