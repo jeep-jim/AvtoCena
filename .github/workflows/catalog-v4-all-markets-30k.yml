@@ -2,6 +2,11 @@ name: Catalog calculated · 7 markets · up to 30k each
 run-name: Catalog calculated sequential recovery · ${{ github.sha }}
 
 on:
+  push:
+    branches:
+      - ops/run-calculated-seven-20260821
+    paths:
+      - "docs/catalog-production-controls.md"
   workflow_dispatch:
     inputs:
       reset_catalog:
