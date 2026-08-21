@@ -43,7 +43,7 @@ jobs:
       - name: Catalog model-year inventory quota tests
         run: node --import tsx --test tests/catalog-model-year-quota.test.ts tests/catalog-global-model-cap.test.ts
       - name: Japan auction statistics tests
-        run: node --import tsx --test tests/japan-auction-statistics-source.test.ts
+        run: node --import tsx --test tests/japan-auction-statistics-source.test.ts tests/catalog-japan-fixed-price-policy.test.ts
       - name: Japan Prestige partition rotation tests
         run: node --import tsx --test tests/prestige-japan-partition-plan.test.ts
       - name: Catalog live sources v23 tests
