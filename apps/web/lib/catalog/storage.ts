@@ -928,7 +928,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     try {
       await storage.writeJson("catalog/manifest.json", manifest, current.found && current.etag ? { ifMatch: current.etag } : { ifNoneMatch: "*" });
       resetCatalogReadCachesForTests();
-      await writeCurrentCatalogReadModels(generationId, publishedOffers);
+      await writeCurrentCatalogReadModels(generationId, publishedOffers, true);
       resetCatalogReadCachesForTests();
       return manifest;
     }
@@ -1007,8 +1007,10 @@ export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleO
   return canonicalizePublicCatalogOffers(storedOffers);
 }
 
-async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[]) {
-  const canonical = await canonicalizePublicCatalogOffers(storedOffers);
+async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[], alreadyCanonical = false) {
+  const exactMarkets = alreadyCanonical ? new Set<CatalogMarket>(storedOffers.map((offer) => offer.market).filter(Boolean)) : undefined;
+  const protectedIds = alreadyCanonical ? new Set(storedOffers.map((offer) => String(offer.id || "")).filter(Boolean)) : undefined;
+  const canonical = await canonicalizePublicCatalogOffers(storedOffers, exactMarkets, protectedIds);
   const { offers, qualityRejected, identityRejected, priceOutliers, deduplicated, quota } = canonical;
   const previousAllProjection = await readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION).catch(() => ({ generationId: "", items: [] }));
 
