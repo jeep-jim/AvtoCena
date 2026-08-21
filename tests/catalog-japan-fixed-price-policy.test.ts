@@ -61,6 +61,7 @@ test("Japan includes model year 2010 but rejects older stock", () => {
 
 test("post-publish audit applies sold identity only to Japanese auctions", () => {
   const audit = readFileSync(new URL("../scripts/catalog-live-postpersist-audit.mjs", import.meta.url), "utf8");
-  assert.match(audit, /catalogRequiredSpecificationRejectionReason, isJapanAuctionOffer/);
-  assert.match(audit, /offer\?\.market !== "japan" \|\| !isJapanAuctionOffer\(offer\) \|\| \(/);
+  assert.doesNotMatch(audit, /catalogRequiredSpecificationRejectionReason, isJapanAuctionOffer/);
+  assert.match(audit, /const actualAuction = offer\?\.offerType === "auction" \|\| offer\?\.catalogKind === "auction_result"/);
+  assert.match(audit, /offer\?\.market !== "japan" \|\| !actualAuction \|\| \(/);
 });
