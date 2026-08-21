@@ -159,14 +159,16 @@ export function isJapanAuctionOffer(offer: Partial<VehicleOffer> | any) {
 export function japanAuctionSoldIdentityVerified(offer: Partial<VehicleOffer> | any) {
   if (!isJapanAuctionOffer(offer)) return true;
   const raw = offer?.operational?.raw || {};
-  return offer?.offerType === "auction"
+  const structuralIdentity = offer?.offerType === "auction"
     && offer?.catalogKind === "auction_result"
     && offer?.auctionResult === "sold"
-    && offer?.auctionPriceKind === "published_result"
-    && raw?.listingBoundImages === true
+    && offer?.auctionPriceKind === "published_result";
+  const rawIdentity = raw?.listingBoundImages === true
     && raw?.photoIdentityVerified === true
     && raw?.recoveryExactSourceUrl === true
     && raw?.recoveryExactPhotoIdentity === true;
+  const persistedIdentity = offer?.operational?.publicJapanSoldIdentityVerified === true;
+  return structuralIdentity && (rawIdentity || persistedIdentity);
 }
 
 function publicPriceLimits() {

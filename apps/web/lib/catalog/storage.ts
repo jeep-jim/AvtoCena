@@ -5,7 +5,7 @@ import { publishAiProductFeed } from "../ai-discovery";
 import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOffer, VehicleOffer } from "./types";
 import { hasCredibleOfferContent, isCatalogYearAllowed } from "./offer-quality";
 import { rankedCatalogImageUrls } from "./image-quality";
-import { catalogOfferVisibleRub } from "./public-priority";
+import { catalogOfferVisibleRub, isJapanAuctionOffer, japanAuctionSoldIdentityVerified } from "./public-priority";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
 import { enforceCatalogModelYearQuota, selectCatalogShowcaseDiversity } from "./inventory-quota";
@@ -155,7 +155,10 @@ export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
   // payload (hundreds of MB per generation) even though public readers never use
   // it. Keep the normalized card, calculation and verification metadata only.
   const operational = { ...(offer.operational || {}) } as any;
+  const publicJapanSoldIdentityVerified = isJapanAuctionOffer(offer) && japanAuctionSoldIdentityVerified(offer);
   delete operational.raw;
+  delete operational.publicJapanSoldIdentityVerified;
+  if (publicJapanSoldIdentityVerified) operational.publicJapanSoldIdentityVerified = true;
   return { ...offer, operational };
 }
 export function stableOfferId(sourceId: string, sourceOfferId: string) { return crypto.createHash("sha256").update(`${sourceId}:${sourceOfferId}`).digest("hex").slice(0, 24); }
