@@ -1,4 +1,4 @@
-name: Catalog V3 independent market 10k
+name: Catalog V3 serialized market production
 
 on:
   workflow_call:
@@ -48,19 +48,23 @@ on:
 permissions:
   contents: read
 
+# One production writer/collector at a time across every market. A failed market
+# releases the lock for the next queued market instead of cancelling that market.
 concurrency:
-  group: catalog-v3-${{ inputs.market }}
+  group: catalog-production-market-serial
   cancel-in-progress: false
 
 env:
-  CATALOG_V2_PRIORITY_TARGET: "1"
-  CATALOG_PRIORITY_MAX_TOTAL_RUB: "6000000"
+  CATALOG_V2_PRIORITY_TARGET: "0.8"
+  CATALOG_PRIORITY_MAX_TOTAL_RUB: "8000000"
   CATALOG_PRIORITY_MAX_POWER_HP: "160"
-  CATALOG_PRIORITY_MAX_AGE_YEARS: "6"
-  CATALOG_V2_RECENT_MAX_AGE_YEARS: "15"
+  CATALOG_PRIORITY_MAX_AGE_YEARS: "99"
+  CATALOG_V2_RECENT_MAX_AGE_YEARS: "99"
   CATALOG_V2_HARD_MAX_TOTAL_RUB: "15000000"
   CATALOG_PUBLIC_ABSOLUTE_MAX_TOTAL_RUB: "15000000"
   CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO: "8"
+  CATALOG_MIN_MODEL_YEAR_JAPAN: "2010"
+  CATALOG_MIN_MODEL_YEAR_OTHER: "2020"
   CATALOG_REBUILD_TARGET_PER_SOURCE: ${{ inputs.target_per_source }}
   CATALOG_REBUILD_TARGET_PER_MARKET: ${{ inputs.target_per_market }}
   CATALOG_PUBLISH_TARGET_PER_MARKET: ${{ inputs.target_per_market }}
@@ -68,10 +72,12 @@ env:
   CATALOG_OFFER_RETENTION_MS: ${{ inputs.retention_ms }}
   CATALOG_DEFAULT_RETENTION_MS: "259200000"
   CATALOG_JAPAN_RETENTION_MS: "2592000000"
-  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
-  CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "5"
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "2"
+  CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
-  CATALOG_COLLECTION_IMAGE_LIMIT: "5"
+  CATALOG_COLLECTION_IMAGE_LIMIT: "30"
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_GALLERY_SAFETY_MODE: source_urls_only
 
 jobs:
   validate:
@@ -131,13 +137,15 @@ jobs:
       CATALOG_REBUILD_MAX_EMPTY_PAGES: "500"
       CATALOG_REBUILD_MAX_SOURCE_ERRORS: "8"
       CATALOG_REBUILD_DETAIL_LIMIT_PER_SOURCE: "10000"
-      CATALOG_REBUILD_PREPARE_CONCURRENCY: "30"
-      CATALOG_REBUILD_SOURCE_CONCURRENCY: "8"
+      CATALOG_REBUILD_PREPARE_CONCURRENCY: "24"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "4"
       CATALOG_REBUILD_TIME_LIMIT_MS: "5700000"
       CATALOG_SOURCE_TIMEOUT_MS: "30000"
+      CATALOG_SOURCE_RETRY_ATTEMPTS: "5"
+      CATALOG_SOURCE_PAGE_DELAY_MS: "150"
       CATALOG_IMAGE_TIMEOUT_MS: "20000"
       CATALOG_IMAGE_MAX_BYTES: "12000000"
-      CATALOG_IMAGE_FETCH_CONCURRENCY: "10"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "6"
       CATALOG_GALLERY_FAST_PATH: "true"
       CATALOG_REBUILD_OUTPUT: catalog-rebuild-${{ inputs.market }}-${{ matrix.shard }}.json
       CATALOG_PROBE_OUTPUT: catalog-v3-probe-${{ inputs.market }}-${{ matrix.shard }}.json
@@ -156,7 +164,10 @@ jobs:
           timeout --signal=TERM --kill-after=90s 6000s npx tsx scripts/catalog-rebuild-source-shard.mjs
           status=$?
           test -s "$CATALOG_REBUILD_OUTPUT" || node -e 'const fs=require("fs");fs.writeFileSync(process.env.CATALOG_REBUILD_OUTPUT,JSON.stringify({market:process.env.CATALOG_REBUILD_MARKET,count:0,partial:true,offers:[],report:{sourceErrors:[{error:`exit_${process.argv[1]}`}]}}))' "$status"
-          exit 0
+          if [ "$status" -ne 0 ]; then
+            echo "collector failed with exit status $status" >&2
+            exit "$status"
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -169,7 +180,7 @@ jobs:
 
   publish:
     needs: [validate, collect]
-    if: always() && needs.validate.result == 'success' && needs.collect.result != 'cancelled'
+    if: always() && needs.validate.result == 'success' && needs.collect.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
@@ -210,7 +221,7 @@ jobs:
           const files=fs.readdirSync(process.env.CATALOG_REBUILD_INPUT_DIR).filter(x=>/^catalog-rebuild-.*-\d+\.json$/.test(x));
           const total=files.reduce((n,f)=>{const p=JSON.parse(fs.readFileSync(path.join(process.env.CATALOG_REBUILD_INPUT_DIR,f)));return n+Number(p.count||p.offers?.length||0)},0);
           console.log({files:files.length,total});
-          if(total<=0) process.exit(1);
+          if(files.length!==5||total<=0) process.exit(1);
           NODE
       - name: Apply Encyclopedia Identity Master
         run: npx tsx scripts/catalog-apply-encyclopedia-identity-master.mjs
