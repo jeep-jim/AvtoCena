@@ -61,22 +61,14 @@ function safeImageUrl(value: string, baseUrl = BASE) {
     return url.toString();
   } catch { return ""; }
 }
-function lotImageHost(listingImage: string) {
-  try { return new URL(listingImage).hostname.toLowerCase(); } catch { return ""; }
-}
-function isSameLotImageHost(value: string, listingImage: string, baseUrl: string) {
-  const candidate = safeImageUrl(value, baseUrl);
-  if (!candidate) return "";
-  const expectedHost = lotImageHost(listingImage);
-  if (!expectedHost) return candidate;
-  try {
-    const host = new URL(candidate).hostname.toLowerCase();
-    const expectedAleado = /(?:^|\.)aleado\.com$/i.test(expectedHost);
-    const candidateAleado = /(?:^|\.)aleado\.com$/i.test(host);
-    if (expectedAleado) return candidateAleado ? candidate : "";
-    return host === expectedHost ? candidate : "";
-  } catch { return ""; }
-}
+
+/**
+ * JPAuc listing thumbnails are backed by the auction image service itself.
+ * The `number` parameter addresses additional photos of that same listing.
+ * We intentionally derive gallery URLs only from the listing-bound URL instead
+ * of scraping arbitrary images from the detail page: a shared CDN host is not
+ * sufficient evidence that another image belongs to this auction lot.
+ */
 function photoVariants(value: string) {
   if (!value) return [];
   try {
@@ -89,7 +81,8 @@ function photoVariants(value: string) {
       image.searchParams.set("number", String(number));
       if (number > 0) image.searchParams.set("h", "1280");
       else image.searchParams.delete("h");
-      result.push(image.toString());
+      const safe = safeImageUrl(image.toString());
+      if (safe) result.push(safe);
     }
     return result;
   } catch { return []; }
@@ -224,36 +217,17 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
       make: row.maker, model: row.model, trim: row.grade || undefined, year: row.year, mileageKm: row.mileageKm, engineCc: row.engineCc, transmission: row.shift || undefined, color: row.color || undefined,
       auctionName: row.location || undefined, auctionDate: row.date || undefined, lotNumber: row.lot || undefined, auctionGrade: row.auctionGrade || undefined,
       sourcePrice: row.startPrice, sourceCurrency: "JPY", priceMode: "auction_start", images: row.listingImage ? photoVariants(row.listingImage).map(remoteImage) : [], calculationStatus: "auction_start", firstSeenAt: now, updatedAt: now,
-      operational: { sourceUrl: row.detailUrl, sourceVenueName: row.location || "JPAuc", sourcePublishedAt: row.date || undefined, sourceTitle, raw: row, sourceStatus: row.sourceStatus, modelCode: row.modelCode, galleryStoredAs: "json_urls", minimumImages: 2, historicalAuction: true },
+      operational: { sourceUrl: row.detailUrl, sourceVenueName: row.location || "JPAuc", sourcePublishedAt: row.date || undefined, sourceTitle, raw: row, sourceStatus: row.sourceStatus, modelCode: row.modelCode, galleryStoredAs: "json_urls", galleryIdentity: "listing_bound_variants", minimumImages: 2, historicalAuction: true },
     };
   }
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const raw = offer.operational?.raw as JpaucRawRow | undefined;
     const max = Math.min(30, Math.max(2, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
-    const listingImage = raw?.listingImage || "";
-    const urls = new Set(photoVariants(listingImage).map((url) => safeImageUrl(url)).filter(Boolean));
-    const sourceUrl = String(raw?.detailUrl || offer.operational?.sourceUrl || "");
-    if (sourceUrl && urls.size < max) {
-      try {
-        const detail = await this.request(sourceUrl, { referer: this.listingUrl });
-        for (const match of detail.html.matchAll(/<(?:img|source)[^>]+(?:data-original|data-lazy-src|data-src|src)\s*=\s*["']([^"']+)["']/gi)) {
-          const url = isSameLotImageHost(match[1], listingImage, sourceUrl);
-          if (url) urls.add(url);
-          if (urls.size >= max) break;
-        }
-        if (urls.size < max) {
-          for (const match of detail.html.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) {
-            const url = isSameLotImageHost(match[0].replace(/\\\//g, "/"), listingImage, sourceUrl);
-            if (url) urls.add(url);
-            if (urls.size >= max) break;
-          }
-        }
-      } catch {
-        // Keep the verified listing URLs. Gallery failure must not substitute unrelated images.
-      }
-    }
-    return [...urls].slice(0, max).map(remoteImage);
+    const listingImage = safeImageUrl(raw?.listingImage || "");
+    // Fail closed: a shared image host does not prove lot identity. Only URLs
+    // derived from this exact listing image are allowed for JPAuc.
+    return photoVariants(listingImage).slice(0, max).map(remoteImage);
   }
 
   mapStatus(): OfferStatus { return "active"; }
