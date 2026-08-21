@@ -259,6 +259,7 @@ async function auditCandidate(sourceOffer) {
     const calculationPending = calculationStatus === "needs_data" || calculationStatus.startsWith("needs_");
     if (!hasExactCalculation(offer) && !calculationPending) return { offer: null, reason: "calculation" };
     if (!isCrediblePublicOffer(offer)) return { offer: null, reason: "quality" };
+    if (!japanAuctionSoldIdentityVerified(offer)) return { offer: null, reason: "japan_auction_sold_identity_unverified" };
     const priority = classifyCatalogV2Offer(offer, v2Policy);
     if (!priority.eligible) return { offer: null, reason: `v2_${priority.reason}` };
     offer.operational = {
