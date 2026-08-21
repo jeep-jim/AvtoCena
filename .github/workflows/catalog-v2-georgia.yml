@@ -18,6 +18,6 @@ jobs:
     with:
       market: georgia
       display_name: Грузия
-      reset_cursor: true
+      reset_cursor: ${{ github.event_name != 'schedule' }}
       priority_target: "8000"
     secrets: inherit
