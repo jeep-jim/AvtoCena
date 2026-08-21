@@ -1,6 +1,6 @@
 import type { CatalogImage, CatalogSourceAdapter, VehicleOffer } from "./types";
 
-const BAD_IMAGE_RE = /logo|icon|avatar|qrcode|placeholder|banner|tracking|pixel|seller|dealer|recommend|related|similar|favicon|badge|social|share|twitter|facebook|instagram|linkedin|youtube|tiktok|whatsapp|telegram|pinterest|threads|no[-_ ]?photo|no[-_ ]?image|coming[-_ ]?soon|repair|maintenance|wrench|spanner|service[-_ ]?image|camera[-_ ]?off|car[-_ ]?silhouette|dummy/i;
+const BAD_IMAGE_RE = /logo|icon|avatar|qrcode|placeholder|banner|bnr|campaign|promo|promotion|advert|tracking|pixel|seller|dealer|recommend|related|similar|favicon|badge|social|share|twitter|facebook|instagram|linkedin|youtube|tiktok|whatsapp|telegram|pinterest|threads|no[-_ ]?photo|no[-_ ]?image|coming[-_ ]?soon|repair|maintenance|wrench|spanner|service[-_ ]?image|camera[-_ ]?off|car[-_ ]?silhouette|dummy/i;
 
 function decode(value: unknown) {
   return String(value || "")
@@ -100,10 +100,10 @@ export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
   const original = source.fetchImages?.bind(source);
   source.fetchImages = async (offer: VehicleOffer) => {
     const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
-    const limit = Math.min(30, Math.max(5, Number.isFinite(requested) ? requested : 30));
+    const limit = Math.min(30, Math.max(2, Number.isFinite(requested) ? requested : 30));
     const minimum = Math.min(
       limit,
-      Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)),
+      Math.max(2, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 2)),
     );
     const sourceUrl = String((offer.operational as any)?.sourceUrl || "");
 
