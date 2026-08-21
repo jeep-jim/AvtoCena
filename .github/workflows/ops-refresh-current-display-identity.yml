@@ -2,12 +2,18 @@ name: Ops · Refresh current display identity
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - "apps/web/lib/catalog/display-identity.ts"
+      - "tests/catalog-display-identity.test.ts"
+      - ".github/workflows/ops-refresh-current-display-identity.yml"
 
 permissions:
   contents: read
 
 concurrency:
-  group: catalog-live-daily-working-markets
+  group: catalog-writer
   cancel-in-progress: false
 
 jobs:
