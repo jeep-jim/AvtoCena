@@ -13,6 +13,7 @@ const GRACE_MS = Math.max(MIN_GRACE_MS, Number(process.env.CATALOG_STORAGE_CLEAN
 const MAX_DELETES = Math.max(1_000, Number(process.env.CATALOG_STORAGE_CLEANUP_MAX_DELETES || 100_000));
 const DELETE_CONCURRENCY = Math.max(1, Math.min(32, Number(process.env.CATALOG_STORAGE_DELETE_CONCURRENCY || 12)));
 const DRY_RUN = String(process.env.CATALOG_STORAGE_CLEANUP_DRY_RUN || "true").toLowerCase() !== "false";
+const STAGING_RETENTION_MS = Math.max(24 * 60 * 60 * 1_000, Number(process.env.CATALOG_STORAGE_STAGING_RETENTION_MS || 3 * 24 * 60 * 60 * 1_000));
 
 function generationIdFromKey(key) {
   return String(key || "").match(/^catalog\/generations\/(gen_(\d+)_[-a-z0-9]+)\//i)?.[1] || "";
@@ -100,7 +101,7 @@ const objectVersionsPromise = storage.listObjectVersions
 const multipartUploadsPromise = storage.listMultipartUploads
   ? storage.listMultipartUploads().catch((error) => { inventoryErrors.push({ stage: "multipart_uploads", error: String(error?.message || error) }); return []; })
   : Promise.resolve([]);
-const [publicManifest, internalManifest, bucketObjects, objectVersions, multipartUploads, namespaceObjects, catalogObjects, generationObjects, internalObjects, imageObjects] = await Promise.all([
+const [publicManifest, internalManifest, bucketObjects, objectVersions, multipartUploads, namespaceObjects, catalogObjects, generationObjects, internalObjects, imageObjects, sourceCandidateObjects, brandProjectionObjects] = await Promise.all([
   readDataJson("catalog/manifest.json", { generationId: "", markets: {} }),
   readDataJson("catalog/internal/manifest.json", { generationId: "", sources: {} }),
   storage.listBucketObjects?.("") || storage.listObjects(""),
@@ -116,6 +117,8 @@ const [publicManifest, internalManifest, bucketObjects, objectVersions, multipar
   storage.listObjects("catalog/generations"),
   storage.listObjects("catalog/internal/offers"),
   storage.listObjects("catalog/images"),
+  storage.listObjects("catalog/source-candidates"),
+  storage.listObjects("catalog/public/projection-brand"),
 ]);
 
 const generationIds = [...new Set(generationObjects.map((object) => generationIdFromKey(object.key)).filter(Boolean))]
@@ -168,7 +171,18 @@ if (!publicGeneration || !generationIds.length) {
     const oldEnough = EMERGENCY || (modifiedAt > 0 && modifiedAt < cutoff);
     return object.key && !liveImageKeys.has(object.key) && oldEnough;
   });
-  const allDeleteObjects = [...generationDeleteObjects, ...internalDeleteObjects, ...imageDeleteObjects];
+  const stagingCutoff = Date.now() - STAGING_RETENTION_MS;
+  const staleSourceCandidateObjects = sourceCandidateObjects.filter((object) => {
+    const modifiedAt = objectAge(object.lastModified);
+    return object.key && modifiedAt > 0 && modifiedAt < stagingCutoff;
+  });
+  // Active brand projections are rewritten by every publication. A projection
+  // untouched for three days belongs to a brand with no current public offers.
+  const staleBrandProjectionObjects = brandProjectionObjects.filter((object) => {
+    const modifiedAt = objectAge(object.lastModified);
+    return object.key && modifiedAt > 0 && modifiedAt < stagingCutoff;
+  });
+  const allDeleteObjects = [...generationDeleteObjects, ...internalDeleteObjects, ...imageDeleteObjects, ...staleSourceCandidateObjects, ...staleBrandProjectionObjects];
   const plannedDeletes = allDeleteObjects.length;
   const plannedBytes = objectBytes(allDeleteObjects);
   const blocked = plannedDeletes > MAX_DELETES;
@@ -176,6 +190,8 @@ if (!publicGeneration || !generationIds.length) {
   let deletedGenerationObjects = 0;
   let deletedInternalObjects = 0;
   let deletedImages = 0;
+  let deletedSourceCandidates = 0;
+  let deletedBrandProjections = 0;
 
   if (!DRY_RUN && !blocked) {
     for (const generationId of candidateGenerations) {
@@ -195,6 +211,16 @@ if (!publicGeneration || !generationIds.length) {
       catch (error) { errors.push({ stage: "image", key: object.key, error: String(error?.message || error) }); return 0; }
     });
     deletedImages = imageResults.reduce((sum, value) => sum + Number(value || 0), 0);
+    const sourceCandidateResults = await mapWithConcurrency(staleSourceCandidateObjects, DELETE_CONCURRENCY, async (object) => {
+      try { await storage.deleteJson(object.key); return 1; }
+      catch (error) { errors.push({ stage: "source_candidate", key: object.key, error: String(error?.message || error) }); return 0; }
+    });
+    deletedSourceCandidates = sourceCandidateResults.reduce((sum, value) => sum + Number(value || 0), 0);
+    const brandProjectionResults = await mapWithConcurrency(staleBrandProjectionObjects, DELETE_CONCURRENCY, async (object) => {
+      try { await storage.deleteJson(object.key); return 1; }
+      catch (error) { errors.push({ stage: "brand_projection", key: object.key, error: String(error?.message || error) }); return 0; }
+    });
+    deletedBrandProjections = brandProjectionResults.reduce((sum, value) => sum + Number(value || 0), 0);
   }
 
   const report = {
@@ -206,6 +232,7 @@ if (!publicGeneration || !generationIds.length) {
     blocked,
     blockReason: blocked ? `planned_deletes_${plannedDeletes}_exceed_${MAX_DELETES}` : "",
     graceMs: GRACE_MS,
+    stagingRetentionMs: STAGING_RETENTION_MS,
     keepGenerations: KEEP_GENERATIONS,
     maximumDeletes: MAX_DELETES,
     currentPublicGeneration: publicGeneration,
@@ -265,6 +292,8 @@ if (!publicGeneration || !generationIds.length) {
       generationObjects: generationDeleteObjects.length,
       internalObjects: internalDeleteObjects.length,
       images: imageDeleteObjects.length,
+      sourceCandidates: staleSourceCandidateObjects.length,
+      brandProjections: staleBrandProjectionObjects.length,
       total: plannedDeletes,
       bytes: plannedBytes,
     },
@@ -272,7 +301,9 @@ if (!publicGeneration || !generationIds.length) {
       generationObjects: deletedGenerationObjects,
       internalObjects: deletedInternalObjects,
       images: deletedImages,
-      total: deletedGenerationObjects + deletedInternalObjects + deletedImages,
+      sourceCandidates: deletedSourceCandidates,
+      brandProjections: deletedBrandProjections,
+      total: deletedGenerationObjects + deletedInternalObjects + deletedImages + deletedSourceCandidates + deletedBrandProjections,
     },
     errors: [...inventoryErrors, ...errors].slice(0, 500),
   };

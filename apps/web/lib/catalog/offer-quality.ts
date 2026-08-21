@@ -11,10 +11,10 @@ const ALTERNATIVE_POWERTRAIN_RE = /(?:hybrid|phev|hev|electric|\bbev\b|\bev\b|г
 const INVALID_CATALOG_IDENTITY_RE = /^(?:unknown|undefined|null|none|n\/?a|not\s+(?:specified|available|known)|other(?:s)?|andere|brand|make|model|марка(?:\s+уточняется)?|модель(?:\s+уточняется)?|уточняется|не\s+указано|неизвестно|기타|미상|其他|未知|その他)$/iu;
 const REQUIRED_SOURCE_IDS = new Set(Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId));
 const GEORGIA_ALLOWED_SOURCE_IDS = new Set(["myauto_georgia_list", "myauto_georgia_exact", "autopapa_georgia_open"]);
-const BUSINESS_LIQUIDITY_RECENT_YEARS = 6;
+const BUSINESS_LIQUIDITY_RECENT_YEARS = 5;
 const BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP = 160;
 export const CATALOG_NON_JAPAN_MIN_YEAR = 2020;
-export const CATALOG_JAPAN_MIN_YEAR = 2015;
+export const CATALOG_JAPAN_MIN_YEAR = 2010;
 
 export function isCatalogMarketSourceAllowed(offer: Pick<VehicleOffer, "market" | "sourceId">) {
   if (String(offer.market || "") !== "georgia") return true;
@@ -140,8 +140,6 @@ export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
   const year = Number(offer.year || 0);
   const powerHp = Number(offer.powerHp || 0);
   if (!year || year >= currentYear - BUSINESS_LIQUIDITY_RECENT_YEARS || !(powerHp > BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP)) return true;
-
-  if (/^vehicle-model-representative:/i.test(clean(offer.powerDataSource))) return true;
 
   const powertrainKind = clean(offer.powertrainKind).toLowerCase();
   if (["electric", "series_hybrid", "other_hybrid"].includes(powertrainKind)) return true;

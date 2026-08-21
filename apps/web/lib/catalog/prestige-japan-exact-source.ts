@@ -6,7 +6,7 @@ const LANDING = `${BASE}/auctions/`;
 const AJAX = `${BASE}/wp-admin/admin-ajax.php`;
 const DETAIL_RE = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=([A-Za-z0-9_-]+)$/;
 const EXACT_IMAGE_RE = /^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i;
-const JAPAN_MIN_MODEL_YEAR = 2015;
+const JAPAN_MIN_MODEL_YEAR = 2010;
 const HEADERS = {
   accept: "text/html,application/xhtml+xml,application/json;q=0.9,*/*;q=0.8",
   "accept-language": "en-US,en;q=0.9",

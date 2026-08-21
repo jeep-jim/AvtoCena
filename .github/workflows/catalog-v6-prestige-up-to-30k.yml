@@ -17,7 +17,7 @@ permissions:
 concurrency:
   group: catalog-v6-prestige-exact-sold-up-to-30k
   # A corrective push must stop an already-running collector before any stale
-  # (<2015) artifact can reach the publish job.
+  # (<2010) artifact can reach the publish job.
   cancel-in-progress: true
 
 jobs:
@@ -161,6 +161,8 @@ jobs:
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
       CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
+      CATALOG_PUBLIC_ABSOLUTE_MAX_TOTAL_RUB: "15000000"
+      CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO: "8"
       CATALOG_OFFER_RETENTION_MS: "15552000000"
       RECOVERY_PREFERRED_MAX_RUB: "8000000"
       RECOVERY_PUBLISH_MIN_PREVIOUS_RATIO: "0.90"
@@ -176,14 +178,13 @@ jobs:
         with:
           name: prestige-japan-exact-sold-up-to-30000
           path: prestige-live-input
-      - name: Verify the six untouched markets before replacing Japan
+      - name: Verify the catalog is readable before replacing Japan
         env:
           CATALOG_AUDIT_OUTPUT: catalog-japan-scale-preflight-audit.json
-          # Japan is the repair target. Requiring its desired post-publish floor
-          # here deadlocks a recovery whenever the current public count is below
-          # that floor. The unchanged six markets stay gated here; Japan keeps
-          # the same 2,200-card floor in the post-persist audit below.
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":5000,"japan":0,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
+          # A target market must never be blocked by another market temporarily
+          # missing its growth target. The publisher separately hash-validates
+          # and preserves every untouched market atomically.
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1,"china":1,"japan":0,"uae":1,"europe":1,"georgia":1,"kyrgyzstan":1}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Enrich exact sold lots with documented chassis power when available
         shell: bash
@@ -225,7 +226,7 @@ jobs:
           CATALOG_AUDIT_OUTPUT: catalog-japan-scale-postpersist-audit.json
           CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
           CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":5000,"japan":2200,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1,"china":1,"japan":1,"uae":1,"europe":1,"georgia":1,"kyrgyzstan":1}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()

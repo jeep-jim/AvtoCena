@@ -255,3 +255,9 @@ test("Russian domestic listings do not enter the foreign import catalog", () => 
   assert.equal(publicCatalogIdentityRejectionReason({ market: "europe", make: "Lada" }), "unsupported_import_brand");
   assert.equal(publicCatalogIdentityRejectionReason({ market: "europe", make: "Volkswagen" }), "");
 });
+
+test("unresolved Korean or CJK model names do not reach public cards", () => {
+  assert.equal(publicCatalogIdentityRejectionReason({ market: "korea", make: "Chrysler", model: "퍼시피카" }), "unresolved_source_language_identity");
+  assert.equal(publicCatalogIdentityRejectionReason({ market: "china", make: "Audi", model: "奥迪A6L" }), "unresolved_source_language_identity");
+  assert.equal(publicCatalogIdentityRejectionReason({ market: "korea", make: "Chrysler", model: "Pacifica" }), "");
+});

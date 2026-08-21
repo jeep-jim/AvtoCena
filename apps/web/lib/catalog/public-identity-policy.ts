@@ -3,6 +3,7 @@ import { canonicalCatalogBrand, catalogBrandBySlug, catalogBrandSlug } from "./b
 type PublicIdentityCarrier = {
   market?: unknown;
   make?: unknown;
+  model?: unknown;
   encyclopediaDisplayIdentity?: { modelId?: unknown };
 };
 
@@ -23,9 +24,14 @@ function cleanKey(value: unknown) {
     .replace(/[^a-z0-9]+/g, "");
 }
 
+function containsUnresolvedSourceScript(value: unknown) {
+  return /[\p{Script=Han}\p{Script=Hangul}\p{Script=Hiragana}\p{Script=Katakana}]/u.test(String(value || ""));
+}
+
 export function publicCatalogIdentityRejectionReason(offer: PublicIdentityCarrier) {
   const canonicalMake = canonicalCatalogBrand(String(offer?.make || ""));
   if (UNSUPPORTED_IMPORT_BRANDS.has(cleanKey(canonicalMake))) return "unsupported_import_brand";
+  if (containsUnresolvedSourceScript(canonicalMake) || containsUnresolvedSourceScript(offer?.model)) return "unresolved_source_language_identity";
 
   if (String(offer?.market || "").toLowerCase() === "china") {
     const knownBrand = catalogBrandBySlug(catalogBrandSlug(canonicalMake));

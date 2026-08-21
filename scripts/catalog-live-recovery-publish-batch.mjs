@@ -2,7 +2,7 @@ import crypto from "node:crypto";
 import fs from "node:fs/promises";
 import path from "node:path";
 
-const { persistCatalogOffers, readMarketOffers, readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
+const { persistCatalogOffers, previewCanonicalPublicCatalogOffers, readMarketOffers, readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
 const { credibleCatalogImages, isCatalogOfferBusinessLiquid, hasCredibleOfferContent, catalogMinYearForMarket, isCatalogYearAllowed, isCatalogMarketSourceAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { calculateOfferWithPreliminaryPowerPricing, calculateOfferWithRussiaCustoms, isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
@@ -193,6 +193,8 @@ function applyPerModelYearCap(rows, rejected) {
 const selectedByMarket = new Map();
 const incomingIdsByMarket = new Map();
 const rejectedByMarket = {};
+const previousPublicCountByMarket = {};
+const retainedPreviousByMarket = new Map();
 for (const market of markets) {
   const input = path.join(inputDir, `catalog-rebuild-${market}.json`);
   const payload = JSON.parse(await fs.readFile(input, "utf8"));
@@ -216,13 +218,16 @@ for (const market of markets) {
 
   let previous = [];
   try { previous = await readMarketOffers(market); } catch { previous = []; }
+  previousPublicCountByMarket[market] = previous.length;
   const candidates = new Map();
+  const retainedPrevious = [];
   for (const offer of await repriceRowsWithCurrentRates(previous)) {
     const year = Number(offer?.year || 0);
     if (!offer?.id || !["active", "stale"].includes(String(offer?.status || ""))) continue;
     if (!isCatalogYearAllowed(year, market) || !offer.make || !offer.model || offer.images.length < minImagesPerOffer) continue;
     if (!withinRetention(offer) || !publicExistingStillValid(offer)) continue;
     candidates.set(offer.id, offer);
+    retainedPrevious.push(offer);
   }
   for (const [id, offer] of incoming) candidates.set(id, offer);
 
@@ -234,6 +239,7 @@ for (const market of markets) {
     throw new Error(`recovery_batch_target_image_gate_failed:${market}:${minImagesPerOffer}`);
   }
   selectedByMarket.set(market, marketRows);
+  retainedPreviousByMarket.set(market, retainedPrevious);
   incomingIdsByMarket.set(market, new Set(incoming.keys()));
   rejectedByMarket[market] = rejected;
 }
@@ -243,9 +249,9 @@ for (const marketRows of selectedByMarket.values()) combined.push(...marketRows)
 const preservedByMarket = {};
 const preservedInternalByMarket = {};
 const preservedPublicHashByMarket = {};
+const expectedPublishedByMarket = {};
+const expectedPublishedHashByMarket = {};
 const preservedPublicRowsByMarket = {};
-const previousPublicCountByMarket = {};
-const previousPublicRowsByMarket = {};
 const maintenanceOffers = preserveUntouchedExact ? await readAllOffersForMaintenance() : [];
 if (preserveUntouchedExact && !Array.isArray(maintenanceOffers)) throw new Error("recovery_batch_maintenance_state_invalid");
 for (const other of PUBLIC_CATALOG_MARKETS) {
@@ -263,6 +269,9 @@ for (const other of PUBLIC_CATALOG_MARKETS) {
     preservedInternalByMarket[other] = internalRows.length;
     preservedPublicHashByMarket[other] = hashRows(rows);
     preservedPublicRowsByMarket[other] = rows;
+    const canonical = await previewCanonicalPublicCatalogOffers(rows);
+    expectedPublishedByMarket[other] = canonical.offers.length;
+    expectedPublishedHashByMarket[other] = hashRows(canonical.offers);
     combined.push(...internalRows);
     continue;
   }
@@ -276,14 +285,9 @@ for (const other of PUBLIC_CATALOG_MARKETS) {
 }
 
 for (const targetMarket of markets) {
-  let rows = [];
-  try { rows = await readMarketOffers(targetMarket); } catch (error) {
-    throw new Error(`recovery_batch_target_public_read_failed:${targetMarket}:${String(error?.message || error)}`);
-  }
-  previousPublicCountByMarket[targetMarket] = rows.length;
-  previousPublicRowsByMarket[targetMarket] = rows;
-  const selectedIds = new Set((selectedByMarket.get(targetMarket) || []).map((offer) => String(offer.id)));
-  combined.push(...rows.filter((offer) => !selectedIds.has(String(offer.id))));
+  const canonical = await previewCanonicalPublicCatalogOffers(selectedByMarket.get(targetMarket) || []);
+  expectedPublishedByMarket[targetMarket] = canonical.offers.length;
+  expectedPublishedHashByMarket[targetMarket] = hashRows(canonical.offers);
 }
 
 const marketReports = {};
@@ -292,6 +296,8 @@ for (const market of markets) {
   const incomingIds = incomingIdsByMarket.get(market) || new Set();
   marketReports[market] = {
     count: rows.length,
+    previousCount: Number(previousPublicCountByMarket[market] || 0),
+    previousRetainedCount: (retainedPreviousByMarket.get(market) || []).length,
     incomingCount: rows.filter((offer) => incomingIds.has(offer.id)).length,
     retainedCount: rows.filter((offer) => !incomingIds.has(offer.id)).length,
     preferredCount: rows.filter((offer) => Number(offer.totalRub || 0) <= preferredMaxRub).length,
@@ -333,6 +339,8 @@ if (dryRun) {
     preservedByMarket,
     preservedInternalByMarket,
     preservedPublicHashByMarket,
+    expectedPublishedByMarket,
+    expectedPublishedHashByMarket,
   };
   await fs.writeFile(output, JSON.stringify(report, null, 2));
   console.log(JSON.stringify(report, null, 2));
@@ -345,7 +353,6 @@ if (preserveUntouchedExact && unique.size !== combined.length) throw new Error(`
 process.env.CATALOG_GROW_ONLY_MARKETS = "";
 const manifest = await persistCatalogOffers([...unique.values()], {
   preservePublicOffersByMarket: preserveUntouchedExact ? preservedPublicRowsByMarket : undefined,
-  appendPublicOffersByMarket: previousPublicRowsByMarket,
   beforePersistValidate(publicOffers) {
     const failures = [];
     for (const other of PUBLIC_CATALOG_MARKETS) {
@@ -362,13 +369,8 @@ const manifest = await persistCatalogOffers([...unique.values()], {
     const failures = [];
     for (const other of PUBLIC_CATALOG_MARKETS) {
       const rows = publishedOffers.filter((offer) => String(offer?.market || "") === other);
-      if (markets.includes(other)) {
-        const previousCount = Number(previousPublicCountByMarket[other] || 0);
-        if (previousCount > 0 && rows.length < previousCount) failures.push(`${other}:count:${rows.length}:${previousCount}`);
-        continue;
-      }
-      const expectedCount = Number(preservedByMarket[other] || 0);
-      const expectedHash = preservedPublicHashByMarket[other];
+      const expectedCount = Number(expectedPublishedByMarket[other] || 0);
+      const expectedHash = expectedPublishedHashByMarket[other];
       if (rows.length !== expectedCount) failures.push(`${other}:count:${rows.length}:${expectedCount}`);
       if (hashRows(rows) !== expectedHash) failures.push(`${other}:hash`);
     }
@@ -387,11 +389,11 @@ if (preserveUntouchedExact) {
   for (const other of PUBLIC_CATALOG_MARKETS) {
     if (markets.includes(other)) continue;
     const manifestCount = Number(manifest?.markets?.[other]?.count || 0);
-    if (manifestCount !== Number(preservedByMarket[other] || 0)) throw new Error(`recovery_batch_preserved_manifest_mismatch:${other}:${manifestCount}:${preservedByMarket[other] || 0}`);
+    if (manifestCount !== Number(expectedPublishedByMarket[other] || 0)) throw new Error(`recovery_batch_preserved_manifest_mismatch:${other}:${manifestCount}:${expectedPublishedByMarket[other] || 0}`);
     const afterRows = await readMarketOffers(other);
-    if (afterRows.length !== Number(preservedByMarket[other] || 0)) throw new Error(`recovery_batch_preserved_count_mismatch:${other}:${afterRows.length}:${preservedByMarket[other] || 0}`);
+    if (afterRows.length !== Number(expectedPublishedByMarket[other] || 0)) throw new Error(`recovery_batch_preserved_count_mismatch:${other}:${afterRows.length}:${expectedPublishedByMarket[other] || 0}`);
     const afterHash = hashRows(afterRows);
-    if (afterHash !== preservedPublicHashByMarket[other]) throw new Error(`recovery_batch_preserved_hash_mismatch:${other}:${afterHash}:${preservedPublicHashByMarket[other]}`);
+    if (afterHash !== expectedPublishedHashByMarket[other]) throw new Error(`recovery_batch_preserved_hash_mismatch:${other}:${afterHash}:${expectedPublishedHashByMarket[other]}`);
   }
 }
 
@@ -412,6 +414,8 @@ const report = {
   preservedByMarket,
   preservedInternalByMarket,
   preservedPublicHashByMarket,
+  expectedPublishedByMarket,
+  expectedPublishedHashByMarket,
   previousPublicCountByMarket,
   manifestCounts: Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [market, Number(manifest?.markets?.[market]?.count || 0)])),
 };

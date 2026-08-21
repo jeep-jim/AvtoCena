@@ -23,7 +23,7 @@ const exactImage = /^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i;
 const exactUrl = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
 const gradeToken = /^(?:[0-6](?:\.5)?|R|RA|A\d?|S)$/i;
 const commercial = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tractor|forklift|excavator|machinery)\b/i;
-const JAPAN_MIN_MODEL_YEAR = 2015;
+const JAPAN_MIN_MODEL_YEAR = 2010;
 
 if (!/^\d+:\d+:\d+$/.test(startCursor)) throw new Error("prestige_chunk_start_cursor_invalid");
 if (!Number.isInteger(expectedMakeIndex) || !Number.isInteger(expectedModelIndex) || !(endOffset > 0)) throw new Error("prestige_chunk_boundary_invalid");
