@@ -8,6 +8,7 @@ import {
   isJapanAuctionOffer,
 } from "../apps/web/lib/catalog/catalog-v2-policy";
 import { japanAuctionSoldIdentityVerified } from "../apps/web/lib/catalog/public-priority";
+import { compactPublicStorageOffer } from "../apps/web/lib/catalog/storage";
 
 function japanOffer(id: string, overrides: Record<string, unknown> = {}) {
   return {
@@ -81,4 +82,21 @@ test("Japan public policy excludes inherited auction results without exact sold 
     auctionPriceKind: "published_result",
     operational: { raw: { listingBoundImages: true, photoIdentityVerified: true, recoveryExactSourceUrl: true, recoveryExactPhotoIdentity: true } },
   })), true);
+});
+
+
+test("Japan sold provenance survives compact public storage without retaining raw payloads", () => {
+  const verified = japanOffer("verified-compact", {
+    sourceId: "prestige_japan_auctions_open",
+    offerType: "auction",
+    catalogKind: "auction_result",
+    auctionResult: "sold",
+    auctionPriceKind: "published_result",
+    images: [],
+    operational: { raw: { listingBoundImages: true, photoIdentityVerified: true, recoveryExactSourceUrl: true, recoveryExactPhotoIdentity: true } },
+  });
+  const compact: any = compactPublicStorageOffer(verified);
+  assert.equal(compact.operational.raw, undefined);
+  assert.equal(compact.operational.publicJapanSoldIdentityVerified, true);
+  assert.equal(japanAuctionSoldIdentityVerified(compact), true);
 });
