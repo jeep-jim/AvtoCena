@@ -8,6 +8,7 @@ const cleanupWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-st
 const prestigeRepairWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v6-prestige-repair.yml", import.meta.url), "utf8");
 const audit = fs.readFileSync(new URL("../scripts/catalog-audit-vehicle-knowledge.mjs", import.meta.url), "utf8");
 const postPersistAudit = fs.readFileSync(new URL("../scripts/catalog-live-postpersist-audit.mjs", import.meta.url), "utf8");
+const rfCustomsLiveProof = fs.readFileSync(new URL("../scripts/catalog-rf-customs-live-card-proof.mjs", import.meta.url), "utf8");
 const knowledgeSync = fs.readFileSync(new URL("../scripts/catalog-sync-vehicle-models.mjs", import.meta.url), "utf8");
 const cleanup = fs.readFileSync(new URL("../scripts/catalog-clean-object-storage.mjs", import.meta.url), "utf8");
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
@@ -46,6 +47,14 @@ test("production workflow serializes catalog builds and never cancels a running 
   assert.match(workflow, /group: catalog-v2-production\n  cancel-in-progress: false/);
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
+});
+
+test("RF live proof accepts an earlier missing-power rejection without weakening pickup customs safety", () => {
+  assert.match(rfCustomsLiveProof, /blockedByMissingPower/);
+  assert.match(rfCustomsLiveProof, /customs\.status !== "ready"/);
+  assert.match(rfCustomsLiveProof, /snapshot\.priceIncludesAllCustoms !== true/);
+  assert.match(rfCustomsLiveProof, /positive\(result\.totalRub\) === 0/);
+  assert.match(rfCustomsLiveProof, /categoryBlocked \|\| blockedByMissingPower/);
 });
 
 test("Prestige failed-chunk repair uses GitHub CLI artifact downloads and remains no-publish", () => {

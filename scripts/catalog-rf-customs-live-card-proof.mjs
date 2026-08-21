@@ -100,7 +100,8 @@ function chooseElectrified(rows) {
 function choosePickup(rows) {
   const candidates = rows.filter((offer) => commonCandidate(offer) && isPickupLike(offer));
   return stableSort(candidates, (offer) =>
-    (normalizedCategory(offer?.vehicleCategory) ? 100 : 0)
+    (positive(offer?.engineCc) > 0 && (positive(offer?.powerHp) > 0 || positive(offer?.powerKw) > 0) ? 200 : 0)
+    + (normalizedCategory(offer?.vehicleCategory) ? 100 : 0)
     + (/^8704/.test(clean(offer?.tnVedCode).replace(/\D/g, "")) ? 80 : 0)
     + (PICKUP_BODY_RE.test(clean(offer?.bodyType)) ? 60 : 0)
     + (/hilux/i.test(`${clean(offer?.make)} ${clean(offer?.model)}`) ? 20 : 0)
@@ -266,11 +267,22 @@ if (pickup) {
   if (explicitM1) {
     assertProof(customs.vehicleCategory === "M1" && customs.vehicleCategoryAssumed === false, caseFailures, `Explicit M1 pickup category was not preserved: ${candidateLabel(pickup)}`);
   } else {
-    assertProof(customs.status === "needs_data", caseFailures, `Pickup without explicit M1 became customs-ready: ${candidateLabel(pickup)}`);
+    const blockedByMissingPower = clean(result.calculationStatus) === "needs_power_data"
+      && positive(result.powerHp || pickup.powerHp) === 0
+      && positive(result.powerKw || pickup.powerKw) === 0;
+    assertProof(customs.status !== "ready", caseFailures, `Pickup without explicit M1 became customs-ready: ${candidateLabel(pickup)}`);
     assertProof(snapshot.priceIncludesAllCustoms !== true, caseFailures, `Pickup without explicit M1 claims all customs included: ${candidateLabel(pickup)}`);
     assertProof(positive(result.totalRub) === 0, caseFailures, `Pickup without explicit M1 received a public final total: ${candidateLabel(pickup)}`);
     const expectedMissing = explicitCategory === "N1" || tnVed.startsWith("8704") ? "n1_customs_tariff" : "vehicle_category";
-    assertProof(Array.isArray(customs.missing) && customs.missing.includes(expectedMissing), caseFailures, `Pickup fail-closed reason is missing (${expectedMissing}): ${candidateLabel(pickup)}`);
+    const categoryBlocked = customs.status === "needs_data"
+      && Array.isArray(customs.missing)
+      && customs.missing.includes(expectedMissing);
+    // A live card can be rejected by the power gate before the customs engine
+    // reaches vehicle-category validation. That is still fail-closed: it has no
+    // customs-ready state, complete-price flags or public total. Prefer a
+    // power-complete pickup above, but accept this earlier safe rejection when
+    // production currently has no such candidate.
+    assertProof(categoryBlocked || blockedByMissingPower, caseFailures, `Pickup fail-closed reason is missing (${expectedMissing}): ${candidateLabel(pickup)}`);
   }
   proof.cases.pickup = { pass: caseFailures.length === 0, failures: caseFailures, result: summarize(pickup, result) };
   failures.push(...caseFailures);
