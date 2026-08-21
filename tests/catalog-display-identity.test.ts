@@ -145,6 +145,39 @@ test("raw Chinese official model aliases recover the base brand hidden by a coac
   assert.deepEqual([vito.make, vito.model], ["Mercedes-Benz", "Vito"]);
 });
 
+test("China Audi source titles cannot be stolen by the EMC Quattro model", async () => {
+  for (const [sourceTitle, expectedModel] of [
+    ["奥迪Q5L Sportback 2025款 quattro 45周年典藏版 45 TFSI 豪华型", "Q5L Sportback"],
+    ["奥迪A7L 2025款 55 TFSI quattro 黑武士版", "A7L"],
+    ["奥迪Q6L e-tron 2026款 quattro 乾崑智驾版", "Q6L e-tron"],
+    ["Audi Audi A6L 2023 Facelift 45 TFSI quattro Premium Dynamic", "A6L"],
+  ] as const) {
+    const result = await applyEncyclopediaDisplayIdentity({
+      id: `audi-${expectedModel}`,
+      market: "china",
+      make: "EMC",
+      model: "Quattro",
+      sourceTitle,
+      trim: sourceTitle,
+      year: 2025,
+    });
+    assert.deepEqual([result.make, result.model], ["Audi", expectedModel]);
+    assert.equal(result.encyclopediaDisplayIdentity?.match, "trusted_alias");
+  }
+});
+
+test("a generic one-word Latin token cannot move an unknown China make to another brand", async () => {
+  const result = await applyEncyclopediaDisplayIdentity({
+    id: "unknown-quattro",
+    market: "china",
+    make: "未识别制造商",
+    model: "Quattro",
+    sourceTitle: "2025款 45 TFSI quattro",
+    year: 2025,
+  });
+  assert.notEqual(result.make, "EMC");
+});
+
 test("AITO localized source spellings collapse to one public brand without duplicated make in model", async () => {
   const result = await applyEncyclopediaDisplayIdentity({
     id: "aito-wenjie",

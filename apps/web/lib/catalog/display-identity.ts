@@ -1,6 +1,6 @@
 import { canonicalCatalogBrand, catalogBrandBySlug, catalogBrandSlug } from "./brands";
 import { readEncyclopediaIdentityDataset } from "./encyclopedia-identity-data";
-import { presentCatalogOffer } from "./presentation";
+import { presentCatalogOffer, translateCatalogText } from "./presentation";
 
 type DisplayCarrier = { make?: unknown; model?: unknown; [key: string]: any };
 type DisplayModel = { id: string; make: string; model: string; phrases: string[] };
@@ -139,7 +139,12 @@ function uniqueChinaBaseModel(rows: DisplayModel[], offer: DisplayCarrier, rawMo
       const latinAlias = !cjkAlias && candidate.replace(/\s+/g, "").length >= 4;
       if (!cjkAlias && !latinAlias) continue;
       for (const value of evidence) {
-        const exact = value === candidate;
+        // A drivetrain/product token such as "quattro" must never win a
+        // cross-brand match merely because it is the whole raw model value.
+        // Require a CJK identity or at least two Latin words for an exact
+        // cross-brand match; real model evidence is still recovered from the
+        // source title below (for example "Audi A7L").
+        const exact = value === candidate && (cjkAlias || candidate.includes(" "));
         // A one-word Latin prefix such as "City" is not enough evidence to
         // move an offer to a different manufacturer. Cross-brand Latin
         // recovery requires either the full value or a multi-word identity.
@@ -163,9 +168,10 @@ function trustedChinaBaseVehicleIdentity(offer: DisplayCarrier, presentedMake: s
   if (clean(offer.market).toLowerCase() !== "china") return null;
   const raw: any = offer?.operational?.raw || {};
   const makeEvidence = phrase([offer.make, presentedMake].filter(Boolean).join(" "));
-  const modelEvidence = phrase([
+  const identityEvidence = [
     offer.model,
     presentedModel,
+    offer.trim,
     offer?.sourceTitle,
     offer?.operational?.sourceTitle,
     raw?.title,
@@ -174,7 +180,30 @@ function trustedChinaBaseVehicleIdentity(offer: DisplayCarrier, presentedMake: s
     raw?.modelName,
     raw?.ModelName,
     raw?.seriesName,
-  ].filter(Boolean).join(" "));
+    raw?.specPageTitle,
+    raw?.listing?.title,
+    raw?.listing?.model,
+    raw?.listing?.modelName,
+    raw?.listing?.seriesName,
+    raw?.listing?.trimTitle,
+  ].filter(Boolean).join(" ");
+  const modelEvidence = phrase(identityEvidence);
+  const translatedModelEvidence = phrase(translateCatalogText(identityEvidence));
+
+  // Autohome titles contain the exact Audi series even when a prior public
+  // projection reduced the model to the drivetrain word "Quattro". Recover
+  // the real series from that immutable source title. This also repairs the
+  // already-published EMC/Quattro rows without guessing from an image.
+  const audiModel = translatedModelEvidence.match(/\baudi\s+(?:audi\s+)?((?:a|q)[1-8](?:l)?(?:\s+sportback)?(?:\s+e\s*tron)?)/iu)?.[1];
+  if (audiModel) {
+    const canonicalAudiModel = audiModel
+      .replace(/^([aq])(\d)(l?)/iu, (_match, family, number, longWheelbase) => `${String(family).toUpperCase()}${number}${longWheelbase ? "L" : ""}`)
+      .replace(/\bsportback\b/iu, "Sportback")
+      .replace(/\be\s*tron\b/iu, "e-tron")
+      .replace(/\s+/g, " ")
+      .trim();
+    return { make: "Audi", model: canonicalAudiModel };
+  }
 
   // These identities are model-name evidence, not a guess from the photo:
   // Vito/威霆 and V-Class/V级 are Mercedes-Benz product names. The coachbuilder
