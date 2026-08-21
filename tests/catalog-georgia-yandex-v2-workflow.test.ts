@@ -40,15 +40,16 @@ test("Georgia Yandex v2 collection remains storage-readonly and filters sparse o
   assert.match(collect, /georgia_yandex_sparse_gallery_in_snapshot/);
 });
 
-test("Georgia Yandex v2 retains strict all-seven dry-run and write gates", () => {
+test("Georgia Yandex v2 audits six populated markets before recovery and all seven after persistence", () => {
   assert.match(workflow, /GEORGIA_YANDEX_MIN_FRESH: "1000"/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"/);
   assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
-  assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
+  assert.equal((workflow.match(/CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,kyrgyzstan/g) || []).length, 3);
+  assert.equal((workflow.match(/CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/g) || []).length, 1);
   assert.match(workflow, /RECOVERY_BATCH_MARKETS: georgia/);
   assert.match(workflow, /RECOVERY_BATCH_DRY_RUN: "true"/);
   assert.match(workflow, /if: github\.event_name == 'push' \|\| inputs\.apply == true/);
-  assert.match(workflow, /Recheck strict all-seven baseline immediately before persistence/);
+  assert.match(workflow, /Recheck strict six-market baseline immediately before persistence/);
   assert.match(workflow, /Strict post-persist seven-market audit/);
   assert.match(workflow, /preservedPublicHashByMarket/);
 });
