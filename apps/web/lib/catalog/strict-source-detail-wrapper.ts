@@ -38,8 +38,8 @@ export function strictSourceDetail<T extends CatalogSourceAdapter>(source: T): T
   const originalFetchImages = source.fetchImages.bind(source);
 
   source.fetchImages = async (offer: VehicleOffer) => {
-    const limit = Math.min(30, Math.max(5, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
-    const minimum = Math.min(limit, Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
+    const limit = Math.min(30, Math.max(2, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
+    const minimum = Math.min(limit, Math.max(2, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 2)));
     const images = dedupeImages(await originalFetchImages(offer).catch(() => [] as CatalogImage[]), limit);
     const verified = hasExplicitPhotoIdentityProof(offer) && images.length >= minimum;
 
