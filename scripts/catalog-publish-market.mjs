@@ -25,6 +25,8 @@ const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN
 const defaultRetentionMs = Math.max(60_000, Number(process.env.CATALOG_DEFAULT_RETENTION_MS || 3 * 24 * 60 * 60 * 1_000));
 const japanRetentionMs = Math.max(defaultRetentionMs, Number(process.env.CATALOG_JAPAN_RETENTION_MS || 180 * 24 * 60 * 60 * 1_000));
 const currentRetentionOverrideMs = Math.max(0, Number(process.env.CATALOG_OFFER_RETENTION_MS || 0));
+const minimumPublicRetentionRatio = Math.max(0.01, Math.min(1, Number(process.env.CATALOG_MIN_PUBLIC_RETENTION_RATIO || 0.10)));
+const allowPublicCollapse = process.env.CATALOG_ALLOW_PUBLIC_COLLAPSE === "1";
 const prepareConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_PUBLISH_PREPARE_CONCURRENCY || 16)));
 const priorityMaxTotalRub = Math.max(100_000, Number(process.env.CATALOG_PRIORITY_MAX_TOTAL_RUB || 6_000_000));
 const priorityMaxPowerHp = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_POWER_HP || 160));
@@ -391,13 +393,19 @@ for (const rows of Object.values(preservedPublicRowsByMarket)) {
 const allOffers = [...unique.values()];
 const previousRetainedCount = currentRetainedRows.length;
 const previousPublicCount = currentMarketRows.length;
-const regressionBlocked = expectedPublishedByMarket[market] <= 0;
+const minimumSafePublicCount = previousPublicCount >= 100
+  ? Math.max(1, Math.ceil(previousPublicCount * minimumPublicRetentionRatio))
+  : 1;
+const catastrophicPublicCollapse = previousPublicCount >= 100
+  && expectedPublishedByMarket[market] < minimumSafePublicCount;
+const regressionBlocked = expectedPublishedByMarket[market] <= 0
+  || (catastrophicPublicCollapse && !allowPublicCollapse);
 let manifest = null;
 let publicationError = "";
 let nextPublicCount = 0;
 
 if (regressionBlocked) {
-  publicationError = `catalog_public_regression_guard:${market}:${expectedPublishedByMarket[market]}:1`;
+  publicationError = `catalog_public_regression_guard:${market}:${expectedPublishedByMarket[market]}:${minimumSafePublicCount}`;
 } else if (selectedMarketOffers.length > 0) {
   try {
     process.env.CATALOG_GROW_ONLY_MARKETS = "";
@@ -475,6 +483,9 @@ const report = {
       previousRetainedCount,
       previousPublicCount,
       nextPublicCount,
+      minimumPublicRetentionRatio,
+      minimumSafePublicCount,
+      catastrophicPublicCollapse,
       regressionBlocked,
       published: publishedMarketCount,
       calculatedCount,
