@@ -17,6 +17,7 @@ const singleRecoveryPublisher = fs.readFileSync(new URL("../scripts/catalog-live
 const verifiedGenerationRestore = fs.readFileSync(new URL("../scripts/catalog-restore-verified-generation.mjs", import.meta.url), "utf8");
 const verifiedGenerationRestoreWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-restore-verified-generation.yml", import.meta.url), "utf8");
 const v3MarketWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v3-market-10k-reusable.yml", import.meta.url), "utf8");
+const sevenMarketWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v4-all-markets-30k.yml", import.meta.url), "utf8");
 const dataStorage = fs.readFileSync(new URL("../apps/web/lib/data.ts", import.meta.url), "utf8");
 const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
 const strictSourceDetail = fs.readFileSync(new URL("../apps/web/lib/catalog/strict-source-detail-wrapper.ts", import.meta.url), "utf8");
@@ -144,6 +145,18 @@ test("standard one-market publisher expires stale target rows and canonicalizes 
   assert.match(standardMarketPublisher, /acquirePublishLock\(\)/);
   assert.match(standardMarketPublisher, /finally \{[\s\S]*releasePublishLock\(\)/);
   assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets, protectedPublicIds\)[\s\S]*beforePublishValidate\(publishedOffers\)[\s\S]*const generationId/);
+});
+
+test("seven-market recovery is calculated, failure-tolerant and collapse-protected", () => {
+  assert.doesNotMatch(sevenMarketWorkflow, /uses: \.\/\.github\/workflows\/catalog-v4-market-30k-reusable\.yml/);
+  assert.equal((sevenMarketWorkflow.match(/uses: \.\/\.github\/workflows\/catalog-v3-market-10k-reusable\.yml/g) || []).length, 7);
+  assert.equal((sevenMarketWorkflow.match(/if: \$\{\{ always\(\) && !cancelled\(\) \}\}/g) || []).length, 7);
+  assert.equal((sevenMarketWorkflow.match(/target_per_market: "30000"/g) || []).length, 7);
+  assert.match(sevenMarketWorkflow, /market: japan[\s\S]*retention_ms: "15552000000"/);
+  assert.match(v3MarketWorkflow, /CATALOG_PUBLISH_MAX_PER_MARKET: \$\{\{ inputs\.maximum_per_market \}\}/);
+  assert.match(standardMarketPublisher, /CATALOG_MIN_PUBLIC_RETENTION_RATIO \|\| 0\.10/);
+  assert.match(standardMarketPublisher, /catastrophicPublicCollapse/);
+  assert.match(standardMarketPublisher, /CATALOG_ALLOW_PUBLIC_COLLAPSE/);
 });
 
 test("verified-generation restore is preflight-first and shares the global writer lock", () => {
