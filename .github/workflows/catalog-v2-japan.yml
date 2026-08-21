@@ -21,6 +21,7 @@ jobs:
     with:
       market: japan
       display_name: Япония
+      reset_cursor: ${{ github.event_name != 'schedule' }}
       retention_ms: "2592000000"
       target_per_source: "30000"
       target_per_market: "30000"
