@@ -87,6 +87,11 @@ export function catalogBrandMatches(brand: CatalogBrand, rawMake: unknown) {
   const raw = clean(rawMake);
   if (!raw) return false;
   const translated = clean(translateCatalogText(raw));
-  const candidates = [raw, translated, canonicalCatalogBrand(raw), canonicalCatalogBrand(translated), ...(brand.aliases || [])];
-  return candidates.some((candidate) => catalogBrandSlug(canonicalCatalogBrand(candidate)) === brand.slug);
+  const sourceSlugs = new Set([raw, translated, canonicalCatalogBrand(raw), canonicalCatalogBrand(translated)]
+    .filter(Boolean)
+    .map((candidate) => catalogBrandSlug(canonicalCatalogBrand(candidate))));
+  const brandSlugs = new Set([brand.name, brand.slug, ...(brand.aliases || [])]
+    .filter(Boolean)
+    .map((candidate) => catalogBrandSlug(canonicalCatalogBrand(candidate))));
+  return [...sourceSlugs].some((candidate) => brandSlugs.has(candidate));
 }

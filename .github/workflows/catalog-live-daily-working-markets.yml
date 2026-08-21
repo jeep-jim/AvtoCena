@@ -3,8 +3,10 @@ run-name: Source-sharded cumulative catalog · Korea China Europe · ${{ github.
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "17 20 * * *"
+
+# Superseded by the seven independent twice-daily V3 workflows. Keeping a
+# second scheduled writer here used GitHub's single pending concurrency slot
+# and cancelled a healthy market publication before it could acquire the lock.
 
 permissions:
   contents: read

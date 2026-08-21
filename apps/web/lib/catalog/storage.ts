@@ -27,7 +27,7 @@ const IMAGE_SOURCE_HOST_CONCURRENCY = Math.max(1, Math.min(8, Number(process.env
 const IMAGE_SOURCE_HOST_RPM = Math.max(30, Math.min(600, Number(process.env.CATALOG_IMAGE_HOST_RPM || 180)));
 const INTERNAL_MANIFEST_PATH = "catalog/internal/manifest.json";
 const JAPAN_ARCHIVE_MANIFEST_PATH = "catalog/japan-auction-history/manifest.json";
-const JAPAN_ARCHIVE_RETENTION_DAYS = 30;
+const JAPAN_ARCHIVE_RETENTION_DAYS = 180;
 const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?encar\.com$/i,
   /^(.+\.)?kcar\.com$/i,
@@ -136,7 +136,7 @@ const ALLOWED_IMAGE_HOSTS = [
 export { CATALOG_CHUNK_SIZE };
 export type OfferLocation = { market: CatalogMarket; chunk: string };
 export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string }> };
-type JapanAuctionArchiveManifest = { version: 1; updatedAt: string; retentionDays: 30; activeSlot: "a" | "b"; count: number; chunks: string[]; contentHash: string };
+type JapanAuctionArchiveManifest = { version: 1; updatedAt: string; retentionDays: 180; activeSlot: "a" | "b"; count: number; chunks: string[]; contentHash: string };
 export type CatalogFacets = { generationId: string; makes: string[]; models: Array<{ make: string; model: string; aliases?: string[]; popularityDecile?: number }>; markets: string[]; bodyTypes: string[]; fuels: string[]; transmissions: string[]; drives: string[] };
 export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };
 export type CatalogBrandSummary = { generationId: string; brands: Record<string, { make: string; count: number; marketCounts: Record<string, number>; models: CatalogBrandSummaryModel[] }> };
@@ -817,17 +817,28 @@ export type PersistCatalogOptions = {
   // rebuilding only their target market. Those rows are trusted only because
   // the caller has already read and hash-validated the current public market.
   preservePublicOffersByMarket?: Partial<Record<CatalogMarket, VehicleOffer[]>>;
+  // A normal market refresh may append canonical newcomers while keeping every
+  // already-published row byte-stable. Protected rows win duplicate and quota
+  // ties, which makes routine collection genuinely grow-only.
+  appendPublicOffersByMarket?: Partial<Record<CatalogMarket, VehicleOffer[]>>;
 };
 export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: PersistCatalogOptions = {}) {
   const storage = getJsonStorage();
   const growOnlyMarkets = new Set(String(process.env.CATALOG_GROW_ONLY_MARKETS ?? "korea").split(",").map((value) => value.trim()).filter(Boolean));
   const preservedPublicOffersByMarket = options.preservePublicOffersByMarket || {};
+  const appendPublicOffersByMarket = options.appendPublicOffersByMarket || {};
   const preservedMarketKeys = Object.keys(preservedPublicOffersByMarket);
+  const appendMarketKeys = Object.keys(appendPublicOffersByMarket);
   for (const market of preservedMarketKeys) {
     if (!MARKETS.includes(market as CatalogMarket)) throw new Error(`catalog_preserved_public_market_unknown:${market}`);
   }
+  for (const market of appendMarketKeys) {
+    if (!MARKETS.includes(market as CatalogMarket)) throw new Error(`catalog_append_public_market_unknown:${market}`);
+    if (preservedMarketKeys.includes(market)) throw new Error(`catalog_public_market_mode_conflict:${market}`);
+  }
   const exactPreserveMarkets = new Set(preservedMarketKeys as CatalogMarket[]);
-  const normalized = await Promise.all(nextOffers.map(async (offer) => exactPreserveMarkets.has(offer.market)
+  const protectedPublicIds = new Set(Object.values(appendPublicOffersByMarket).flatMap((rows) => rows || []).map((offer) => String(offer?.id || "")).filter(Boolean));
+  const normalized = await Promise.all(nextOffers.map(async (offer) => exactPreserveMarkets.has(offer.market) || protectedPublicIds.has(String(offer.id))
     ? offer
     : normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer))));
   if (growOnlyMarkets.size) {
@@ -846,10 +857,16 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   } else {
     nextOffers = normalized;
   }
-  const publicOffers = nextOffers.filter((offer) => !exactPreserveMarkets.has(offer.market) && isPublicOffer(offer));
+  const publicOffers = nextOffers.filter((offer) => !exactPreserveMarkets.has(offer.market) && !protectedPublicIds.has(String(offer.id)) && isPublicOffer(offer));
   for (const [market, rows] of Object.entries(preservedPublicOffersByMarket)) {
     for (const offer of rows || []) {
       if (!offer?.id || String(offer.market || "") !== market) throw new Error(`catalog_preserved_public_row_invalid:${market}:${String(offer?.id || "missing")}`);
+      publicOffers.push(offer);
+    }
+  }
+  for (const [market, rows] of Object.entries(appendPublicOffersByMarket)) {
+    for (const offer of rows || []) {
+      if (!offer?.id || String(offer.market || "") !== market) throw new Error(`catalog_append_public_row_invalid:${market}:${String(offer?.id || "missing")}`);
       publicOffers.push(offer);
     }
   }
@@ -865,7 +882,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   // written, so a preservation mismatch cannot switch or partially stage a new
   // catalog generation.
   if (options.beforePersistValidate) await options.beforePersistValidate(publicOffers);
-  const canonicalPublic = await canonicalizePublicCatalogOffers(publicOffers, exactPreserveMarkets);
+  const canonicalPublic = await canonicalizePublicCatalogOffers(publicOffers, exactPreserveMarkets, protectedPublicIds);
   const publishedOffers = canonicalPublic.offers;
   if (options.beforePublishValidate) await options.beforePublishValidate(publishedOffers);
   const generationId = `gen_${Date.now()}_${crypto.randomUUID().slice(0, 8)}`;
@@ -953,21 +970,23 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
   await runWithConcurrency(tasks, concurrency);
 }
 
-async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], skipDisplayIdentityMarkets = new Set<CatalogMarket>()) {
+async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], skipDisplayIdentityMarkets = new Set<CatalogMarket>(), protectedPublicIds = new Set<string>()) {
   // Keep source/internal objects immutable. Public read models receive the
   // same deterministic V2 + source-translation identity used by cards, so
   // facets, filters, breadcrumbs, SEO pages and offer shards cannot disagree.
-  const identifiedOffers = skipDisplayIdentityMarkets.size
-    ? await Promise.all(storedOffers.map((offer) => skipDisplayIdentityMarkets.has(offer.market)
+  const identifiedOffers = skipDisplayIdentityMarkets.size || protectedPublicIds.size
+    ? await Promise.all(storedOffers.map((offer) => skipDisplayIdentityMarkets.has(offer.market) || protectedPublicIds.has(String(offer.id))
       ? offer
       : applyEncyclopediaDisplayIdentity(offer)))
     : await applyEncyclopediaDisplayIdentityBatch(storedOffers);
-  const identityRejected = identifiedOffers.filter((offer) => !isSupportedPublicCatalogIdentity(offer));
-  const identityEligibleOffers = identifiedOffers.filter(isSupportedPublicCatalogIdentity);
+  const identityRejected = identifiedOffers.filter((offer) => !protectedPublicIds.has(String(offer.id)) && !isSupportedPublicCatalogIdentity(offer));
+  const identityEligibleOffers = identifiedOffers.filter((offer) => protectedPublicIds.has(String(offer.id)) || isSupportedPublicCatalogIdentity(offer));
   const priceOutliers = findCatalogPriceOutliers(identityEligibleOffers);
-  const rejectedPriceIds = new Set(priceOutliers.map((outlier) => outlier.id));
+  const rejectedPriceIds = new Set(priceOutliers.map((outlier) => outlier.id).filter((id) => !protectedPublicIds.has(String(id))));
   const priceFilteredOffers = identityEligibleOffers.filter((offer) => !rejectedPriceIds.has(offer.id));
-  const deduplicated = deduplicatePublicCatalogOffers(priceFilteredOffers);
+  const protectedRows = priceFilteredOffers.filter((offer) => protectedPublicIds.has(String(offer.id)));
+  const newRows = priceFilteredOffers.filter((offer) => !protectedPublicIds.has(String(offer.id)));
+  const deduplicated = deduplicatePublicCatalogOffers([...protectedRows, ...newRows], { protectedIds: protectedPublicIds });
   const quota = enforceCatalogModelYearQuota(deduplicated.rows);
   return { offers: quota.rows, identityRejected, priceOutliers, deduplicated, quota };
 }

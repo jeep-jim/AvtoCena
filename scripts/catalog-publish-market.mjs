@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 import crypto from "node:crypto";
 import path from "node:path";
 
+const { mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { isCrediblePublicOffer, isCatalogYearAllowed, isCatalogMarketSourceAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");
@@ -22,7 +23,7 @@ const targetPerMarket = Math.max(1, Number(process.env.CATALOG_PUBLISH_TARGET_PE
 const maximumPerMarket = Math.max(targetPerMarket, Number(process.env.CATALOG_PUBLISH_MAX_PER_MARKET || 100_000));
 const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
 const defaultRetentionMs = Math.max(60_000, Number(process.env.CATALOG_DEFAULT_RETENTION_MS || 3 * 24 * 60 * 60 * 1_000));
-const japanRetentionMs = Math.max(defaultRetentionMs, Number(process.env.CATALOG_JAPAN_RETENTION_MS || 30 * 24 * 60 * 60 * 1_000));
+const japanRetentionMs = Math.max(defaultRetentionMs, Number(process.env.CATALOG_JAPAN_RETENTION_MS || 180 * 24 * 60 * 60 * 1_000));
 const currentRetentionOverrideMs = Math.max(0, Number(process.env.CATALOG_OFFER_RETENTION_MS || 0));
 const prepareConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_PUBLISH_PREPARE_CONCURRENCY || 16)));
 const priorityMaxTotalRub = Math.max(100_000, Number(process.env.CATALOG_PRIORITY_MAX_TOTAL_RUB || 6_000_000));
@@ -38,6 +39,12 @@ const v2Policy = {
   hardMaxTotalRub: Math.max(priorityMaxTotalRub, Number(process.env.CATALOG_V2_HARD_MAX_TOTAL_RUB || 100_000_000)),
 };
 const COMMERCIAL_RE = /\b(?:truck|dump|tipper|bus|minibus|kei\s*truck|commercial|cargo|lorry|tractor|forklift|excavator|machinery|canter|fighter|ranger|dutro|forward|giga|elf|profia|8\s*tonne|8\s*ton)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
+const publishLockPath = "catalog/import-lock.json";
+const publishOperationId = `catalog_v3_publish_${market}_${crypto.randomUUID()}`;
+const publishLockWaitMs = Math.max(0, Number(process.env.CATALOG_PUBLISH_LOCK_WAIT_MS || 7_200_000));
+const publishLockPollMs = Math.max(1_000, Number(process.env.CATALOG_PUBLISH_LOCK_POLL_MS || 15_000));
+const publishLockTtlMs = Math.max(30 * 60_000, Number(process.env.CATALOG_PUBLISH_LOCK_TTL_MS || 90 * 60_000));
+let publishLockHeld = false;
 
 if (!PUBLIC_CATALOG_MARKETS.includes(market)) {
   throw new Error(`catalog_market_invalid:${market || "missing"}`);
@@ -52,6 +59,48 @@ function retentionForMarket(marketId) {
 }
 
 const retentionMs = retentionForMarket(market);
+
+function sleep(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+async function acquirePublishLock() {
+  const deadline = Date.now() + publishLockWaitMs;
+  let lastLock = "catalog_publish_locked";
+  while (true) {
+    try {
+      await mutateDataJson(publishLockPath, { lockedUntil: "" }, (current) => {
+        const lockedUntil = Date.parse(String(current?.lockedUntil || ""));
+        if (Number.isFinite(lockedUntil) && lockedUntil > Date.now() && current?.operationId !== publishOperationId) {
+          throw new Error(`catalog_publish_locked_until_${new Date(lockedUntil).toISOString()}`);
+        }
+        return {
+          operationId: publishOperationId,
+          operationType: `catalog_v3_publish_${market}`,
+          lockedUntil: new Date(Date.now() + publishLockTtlMs).toISOString(),
+          startedAt: new Date().toISOString(),
+        };
+      });
+      publishLockHeld = true;
+      return;
+    } catch (error) {
+      lastLock = String(error?.message || error);
+      if (!/catalog_(?:publish|import|certified_power)_locked/i.test(lastLock) || Date.now() + publishLockPollMs > deadline) {
+        throw new Error(`catalog_publish_lock_wait_failed:${lastLock}`);
+      }
+      console.log(`[publish-lock] ${market} waiting: ${lastLock}`);
+      await sleep(publishLockPollMs);
+    }
+  }
+}
+
+async function releasePublishLock() {
+  if (!publishLockHeld) return;
+  await mutateDataJson(publishLockPath, { lockedUntil: "" }, (current) => current?.operationId === publishOperationId
+    ? { operationId: publishOperationId, operationType: `catalog_v3_publish_${market}`, lockedUntil: "", finishedAt: new Date().toISOString() }
+    : current);
+  publishLockHeld = false;
+}
 
 function imageKey(image) {
   return String(image?.checksum || image?.id || image?.objectKey || image?.url || "");
@@ -223,6 +272,8 @@ async function auditCandidate(sourceOffer) {
   }
 }
 
+await acquirePublishLock();
+try {
 const cutoff = Date.now() - retentionMs;
 const generation = await readGenerationFiles();
 let currentMarketRows = [];
@@ -281,7 +332,9 @@ for (let start = 0; start < orderedCandidates.length && selected.length < maximu
 }
 
 const v2Selection = selectCatalogV2MarketOffers(selected.sort(qualityOrder), v2Policy);
-const selectedMarketOffers = v2Selection.selected.slice(0, maximumPerMarket);
+const selectedMarketOffersById = new Map(currentMarketRows.map((offer) => [String(offer.id), offer]));
+for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) selectedMarketOffersById.set(String(offer.id), offer);
+const selectedMarketOffers = [...selectedMarketOffersById.values()].slice(0, maximumPerMarket);
 const preservedByMarket = {};
 const preservedPublicHashByMarket = {};
 const preservedPublicRowsByMarket = {};
@@ -318,7 +371,7 @@ const invalidInternal = preservedInternal.filter((offer) => {
 if (invalidInternal.length) throw new Error(`catalog_preserved_internal_gate_failed:${invalidInternal.length}`);
 
 const unique = new Map();
-for (const offer of [...preservedInternal, ...selectedMarketOffers]) {
+for (const offer of [...preservedInternal, ...selectedMarketOffers, ...currentMarketRows]) {
   if (offer?.id && !unique.has(offer.id)) unique.set(offer.id, offer);
 }
 // Keep the internal maintenance state a superset of every exact public row,
@@ -341,6 +394,7 @@ if (regressionBlocked) {
     process.env.CATALOG_GROW_ONLY_MARKETS = "";
     manifest = await persistCatalogOffers(allOffers, {
       preservePublicOffersByMarket: preservedPublicRowsByMarket,
+      appendPublicOffersByMarket: { [market]: currentMarketRows },
       beforePersistValidate(publicOffers) {
         const failures = [];
         for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
@@ -379,8 +433,9 @@ if (regressionBlocked) {
 
 const byMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((marketId) => [
   marketId,
-  marketId === market ? selectedMarketOffers.length : Number(preservedByMarket[marketId] || 0),
+  marketId === market ? (nextPublicCount || selectedMarketOffers.length) : Number(preservedByMarket[marketId] || 0),
 ]));
+const publishedMarketCount = Number(byMarket[market] || 0);
 const calculatedCount = selectedMarketOffers.filter((offer) => Number(offer.totalRub || 0) > 0).length;
 const report = {
   version: 2,
@@ -398,8 +453,10 @@ const report = {
   targetPerMarket,
   maximumPerMarket,
   selectedMarketCount: selectedMarketOffers.length,
-  shortage: Math.max(0, targetPerMarket - selectedMarketOffers.length),
-  total: allOffers.length,
+  publishedMarketCount,
+  addedCount: publishedMarketCount - previousPublicCount,
+  shortage: Math.max(0, targetPerMarket - publishedMarketCount),
+  total: Object.values(byMarket).reduce((sum, count) => sum + Number(count || 0), 0),
   byMarket,
   byMarketAndSource: {
     [market]: Object.fromEntries([...sourceCounts.entries()].sort(([left], [right]) => left.localeCompare(right))),
@@ -407,15 +464,15 @@ const report = {
   marketQuality: {
     [market]: {
       target: targetPerMarket,
-      targetReached: selectedMarketOffers.length >= targetPerMarket,
-      shortage: Math.max(0, targetPerMarket - selectedMarketOffers.length),
+      targetReached: publishedMarketCount >= targetPerMarket,
+      shortage: Math.max(0, targetPerMarket - publishedMarketCount),
       generatedCandidates: generation.offers.length,
       retainedCandidates: currentMarketRows.length,
       previousRetainedCount,
       previousPublicCount,
       nextPublicCount,
       regressionBlocked,
-      published: selectedMarketOffers.length,
+      published: publishedMarketCount,
       calculatedCount,
       calculatedShare: selectedMarketOffers.length ? Number((calculatedCount / selectedMarketOffers.length).toFixed(4)) : 0,
       priorityCount: v2Selection.priorityCount,
@@ -436,3 +493,6 @@ const report = {
 
 await fs.writeFile(reportFile, JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report, null, 2));
+} finally {
+  await releasePublishLock();
+}

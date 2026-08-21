@@ -114,9 +114,9 @@ test("recovery publisher always preserves untouched full maintenance state exact
 test("recovery preservation gates keep untouched public rows exact before any generation write", () => {
   assert.match(storage, /preservePublicOffersByMarket/);
   assert.match(storage, /exactPreserveMarkets\.has\(offer\.market\)[\s\S]*\? offer[\s\S]*enrichOfferWithVehicleKnowledge/);
-  assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets\)/);
+  assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets, protectedPublicIds\)/);
   assert.match(storage, /skipDisplayIdentityMarkets\.has\(offer\.market\)[\s\S]*\? offer[\s\S]*applyEncyclopediaDisplayIdentity\(offer\)/);
-  assert.match(storage, /const publicOffers = nextOffers\.filter\(\(offer\) => !exactPreserveMarkets\.has\(offer\.market\) && isPublicOffer\(offer\)\);[\s\S]*Object\.entries\(preservedPublicOffersByMarket\)[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*const generationId[\s\S]*persistInternalCatalog/);
+  assert.match(storage, /const publicOffers = nextOffers\.filter\(\(offer\) => !exactPreserveMarkets\.has\(offer\.market\) && !protectedPublicIds\.has\(String\(offer\.id\)\) && isPublicOffer\(offer\)\);[\s\S]*Object\.entries\(preservedPublicOffersByMarket\)[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*const generationId[\s\S]*persistInternalCatalog/);
   assert.match(singleRecoveryPublisher, /preservePublicOffersByMarket: preservedPublicRowsByMarket[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*recovery_prewrite_preservation_gate_failed/);
   assert.match(recoveryPublisher, /preservePublicOffersByMarket: preserveUntouchedExact \? preservedPublicRowsByMarket : undefined[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*recovery_batch_prewrite_preservation_gate_failed/);
   assert.match(singleRecoveryPublisher, /function stableJsonValue/);
@@ -133,7 +133,14 @@ test("standard one-market publisher cannot shrink the target or mutate untouched
   assert.match(standardMarketPublisher, /previousPublicCount = currentMarketRows\.length/);
   assert.doesNotMatch(standardMarketPublisher, /otherCutoff/);
   assert.match(storage, /beforePublishValidate\?:/);
-  assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets\)[\s\S]*beforePublishValidate\(publishedOffers\)[\s\S]*const generationId/);
+  assert.match(storage, /appendPublicOffersByMarket\?:/);
+  assert.match(storage, /protectedPublicIds/);
+  assert.match(storage, /deduplicatePublicCatalogOffers\(\[\.\.\.protectedRows, \.\.\.newRows\], \{ protectedIds: protectedPublicIds \}\)/);
+  assert.match(standardMarketPublisher, /appendPublicOffersByMarket: \{ \[market\]: currentMarketRows \}/);
+  assert.match(standardMarketPublisher, /catalog\/import-lock\.json/);
+  assert.match(standardMarketPublisher, /acquirePublishLock\(\)/);
+  assert.match(standardMarketPublisher, /finally \{[\s\S]*releasePublishLock\(\)/);
+  assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets, protectedPublicIds\)[\s\S]*beforePublishValidate\(publishedOffers\)[\s\S]*const generationId/);
 });
 
 test("verified-generation restore is preflight-first and shares the global writer lock", () => {
@@ -152,7 +159,7 @@ test("verified-generation restore is preflight-first and shares the global write
   assert.match(verifiedGenerationRestoreWorkflow, /group: catalog-live-daily-working-markets/);
   assert.match(verifiedGenerationRestoreWorkflow, /cancel-in-progress: \$\{\{ contains\(github\.event\.head_commit\.message, '\[preempt-restore\]'\) \}\}/);
   assert.match(verifiedGenerationRestoreWorkflow, /set -euo pipefail/);
-  assert.match(v3MarketWorkflow, /group: catalog-live-daily-working-markets/);
+  assert.match(v3MarketWorkflow, /group: catalog-v3-\$\{\{ inputs\.market \}\}/);
 });
 
 test("single recovery publisher preserves full maintenance state and enforces target gallery depth", () => {

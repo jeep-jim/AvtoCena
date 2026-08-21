@@ -60,3 +60,12 @@ test("same stock photo does not collapse vehicles with different commercial iden
   assert.equal(result.rows.length, 3);
   assert.equal(result.removed.length, 0);
 });
+
+test("append-only publication never replaces an already public duplicate", () => {
+  const published = offer({ id: "offer-published", sourceOfferId: "41940870" });
+  const newcomer = offer({ id: "offer-new", sourceOfferId: "41935962", updatedAt: "2026-08-21T01:00:00.000Z" });
+  const result = deduplicatePublicCatalogOffers([published, newcomer], { protectedIds: new Set([published.id]) });
+
+  assert.deepEqual(result.rows.map((row) => row.id), [published.id]);
+  assert.deepEqual(result.removed.map((row) => [row.keptId, row.removedId]), [[published.id, newcomer.id]]);
+});

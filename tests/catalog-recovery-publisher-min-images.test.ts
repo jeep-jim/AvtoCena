@@ -37,8 +37,8 @@ test("single recovery publisher hashes untouched public projections before and a
   assert.match(singleSource, /recovery_duplicate_id_in_full_state/);
 });
 
-test("Japan keeps sold lots for 30 days and rejects a pre-write drop below 90 percent", () => {
-  assert.match(japanWorkflow, /CATALOG_OFFER_RETENTION_MS: "2592000000"/);
+test("Japan keeps sold lots for 180 days and rejects a pre-write drop below 90 percent", () => {
+  assert.match(japanWorkflow, /CATALOG_OFFER_RETENTION_MS: "15552000000"/);
   assert.match(japanWorkflow, /RECOVERY_PUBLISH_MIN_PREVIOUS_RATIO: "0\.90"/);
   assert.match(singleSource, /const minPreviousCount = minPreviousRatio > 0 && previousMarket\.length > 0/);
   assert.match(singleSource, /recovery_previous_count_gate_failed/);

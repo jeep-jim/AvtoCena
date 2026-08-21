@@ -320,7 +320,12 @@ for (const other of PUBLIC_CATALOG_MARKETS) {
   preservedPublicRowsByMarket[other] = rows;
 }
 
-const combined = [...preservedInternal, ...marketRows];
+const selectedMarketIds = new Set(marketRows.map((offer) => String(offer.id)));
+const combined = [
+  ...preservedInternal,
+  ...marketRows,
+  ...previousMarket.filter((offer) => !selectedMarketIds.has(String(offer.id))),
+];
 const unique = new Map();
 for (const offer of combined) if (offer?.id && !unique.has(offer.id)) unique.set(offer.id, offer);
 if (unique.size !== combined.length) throw new Error(`recovery_duplicate_id_in_full_state:${combined.length - unique.size}`);
@@ -331,6 +336,7 @@ try {
   process.env.CATALOG_GROW_ONLY_MARKETS = "";
   manifest = await persistCatalogOffers([...unique.values()], {
     preservePublicOffersByMarket: preservedPublicRowsByMarket,
+    appendPublicOffersByMarket: { [market]: previousMarket },
     beforePersistValidate(publicOffers) {
       const failures = [];
       for (const other of PUBLIC_CATALOG_MARKETS) {

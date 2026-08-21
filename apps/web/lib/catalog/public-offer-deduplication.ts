@@ -15,6 +15,10 @@ export type PublicOfferDeduplicationResult<T extends VehicleOffer> = {
   removed: PublicOfferDuplicate[];
 };
 
+export type PublicOfferDeduplicationOptions = {
+  protectedIds?: ReadonlySet<string>;
+};
+
 function clean(value: unknown) {
   return String(value ?? "").normalize("NFKC").replace(/\s+/g, " ").trim().toLocaleLowerCase("en-US");
 }
@@ -99,7 +103,7 @@ function preferredOffer<T extends VehicleOffer>(left: T, right: T) {
  * This catches Encar rows where a new listing id accidentally carries another
  * listing's complete gallery without collapsing legitimate similar vehicles.
  */
-export function deduplicatePublicCatalogOffers<T extends VehicleOffer>(offers: T[]): PublicOfferDeduplicationResult<T> {
+export function deduplicatePublicCatalogOffers<T extends VehicleOffer>(offers: T[], options: PublicOfferDeduplicationOptions = {}): PublicOfferDeduplicationResult<T> {
   const groups = new Map<string, T[]>();
   const unique: T[] = [];
   for (const offer of offers) {
@@ -112,7 +116,11 @@ export function deduplicatePublicCatalogOffers<T extends VehicleOffer>(offers: T
   const removed: PublicOfferDuplicate[] = [];
   for (const rows of groups.values()) {
     let winner = rows[0];
-    for (const row of rows.slice(1)) winner = preferredOffer(winner, row);
+    for (const row of rows.slice(1)) {
+      const winnerProtected = options.protectedIds?.has(String(winner.id)) === true;
+      const rowProtected = options.protectedIds?.has(String(row.id)) === true;
+      winner = winnerProtected !== rowProtected ? (winnerProtected ? winner : row) : preferredOffer(winner, row);
+    }
     keptIds.add(winner.id);
     const cover = coverIdentity(winner);
     for (const row of rows) {

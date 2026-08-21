@@ -12,7 +12,7 @@ const output = process.env.JAPAN_STRICT_MERGE_REPORT || "catalog-japan-strict-me
 const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
 const minYear = catalogMinYearForMarket("japan");
 const minPublishCount = Math.max(1, Number(process.env.JAPAN_STRICT_MIN_PUBLISH_COUNT || 193));
-const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 30 * 24 * 60 * 60 * 1_000));
+const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 180 * 24 * 60 * 60 * 1_000));
 const retentionCutoff = Date.now() - retentionMs;
 
 function compact(value) { return String(value || "").toLocaleLowerCase("en-US").replace(/[^a-z0-9]+/g, ""); }

@@ -245,6 +245,7 @@ const preservedInternalByMarket = {};
 const preservedPublicHashByMarket = {};
 const preservedPublicRowsByMarket = {};
 const previousPublicCountByMarket = {};
+const previousPublicRowsByMarket = {};
 const maintenanceOffers = preserveUntouchedExact ? await readAllOffersForMaintenance() : [];
 if (preserveUntouchedExact && !Array.isArray(maintenanceOffers)) throw new Error("recovery_batch_maintenance_state_invalid");
 for (const other of PUBLIC_CATALOG_MARKETS) {
@@ -280,6 +281,9 @@ for (const targetMarket of markets) {
     throw new Error(`recovery_batch_target_public_read_failed:${targetMarket}:${String(error?.message || error)}`);
   }
   previousPublicCountByMarket[targetMarket] = rows.length;
+  previousPublicRowsByMarket[targetMarket] = rows;
+  const selectedIds = new Set((selectedByMarket.get(targetMarket) || []).map((offer) => String(offer.id)));
+  combined.push(...rows.filter((offer) => !selectedIds.has(String(offer.id))));
 }
 
 const marketReports = {};
@@ -341,6 +345,7 @@ if (preserveUntouchedExact && unique.size !== combined.length) throw new Error(`
 process.env.CATALOG_GROW_ONLY_MARKETS = "";
 const manifest = await persistCatalogOffers([...unique.values()], {
   preservePublicOffersByMarket: preserveUntouchedExact ? preservedPublicRowsByMarket : undefined,
+  appendPublicOffersByMarket: previousPublicRowsByMarket,
   beforePersistValidate(publicOffers) {
     const failures = [];
     for (const other of PUBLIC_CATALOG_MARKETS) {
@@ -372,23 +377,10 @@ const manifest = await persistCatalogOffers([...unique.values()], {
 });
 
 for (const market of markets) {
-  const rows = selectedByMarket.get(market) || [];
   const manifestCount = Number(manifest?.markets?.[market]?.count || 0);
-  if (manifestCount !== rows.length) {
-    const debugReport = {
-      version: 5,
-      mode: "live_markets_publishable_cumulative_batch_publish",
-      markets,
-      published: false,
-      generationId: manifest?.generationId || null,
-      failure: `recovery_batch_manifest_mismatch:${market}:${manifestCount}:${rows.length}`,
-      selectedCounts: Object.fromEntries(markets.map((item) => [item, (selectedByMarket.get(item) || []).length])),
-      manifestCounts: Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((item) => [item, Number(manifest?.markets?.[item]?.count || 0)])),
-      preservedByMarket,
-    };
-    await fs.writeFile(output, JSON.stringify(debugReport, null, 2));
-    throw new Error(debugReport.failure);
-  }
+  marketReports[market].selectedCandidateCount = marketReports[market].count;
+  marketReports[market].count = manifestCount;
+  marketReports[market].addedCount = manifestCount - Number(previousPublicCountByMarket[market] || 0);
 }
 
 if (preserveUntouchedExact) {
