@@ -12,7 +12,7 @@ on:
       retention_ms:
         required: false
         type: string
-        default: "259200000"
+        default: "2592000000"
       target_per_source:
         required: false
         type: string
@@ -66,7 +66,7 @@ env:
   CATALOG_PUBLISH_TARGET_PER_MARKET: ${{ inputs.target_per_market }}
   CATALOG_PUBLISH_MAX_PER_MARKET: ${{ inputs.maximum_per_market }}
   CATALOG_OFFER_RETENTION_MS: ${{ inputs.retention_ms }}
-  CATALOG_DEFAULT_RETENTION_MS: "259200000"
+  CATALOG_DEFAULT_RETENTION_MS: "2592000000"
   CATALOG_JAPAN_RETENTION_MS: "2592000000"
   CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
   CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "5"
