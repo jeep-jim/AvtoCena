@@ -162,6 +162,16 @@ function inferPowerHp(text: string) {
   return kw ? reasonable(Number(kw[1]) * 1.35962, 20, 2_500) : undefined;
 }
 
+function suspiciousMashinaNumericModelPower(offer: Partial<VehicleOffer>, powerHp?: number) {
+  if (String(offer.sourceId || "") !== "mashina_kyrgyzstan_exact" || !powerHp) return false;
+  const numericModelTokens = String(offer.model || "").match(/\b\d{2,4}\b/g) || [];
+  if (!numericModelTokens.some((token) => Number(token) === Math.round(powerHp))) return false;
+  const raw = rawText(offer.operational?.raw);
+  const rawExplicitPower = inferPowerHp(raw);
+  const confidence = String(offer.powerDataConfidence || "");
+  return rawExplicitPower === undefined && !["documented", "source_exact"].includes(confidence);
+}
+
 function structuredPowerHp(offer: Partial<VehicleOffer>) {
   const raw = offer.operational?.raw;
   const hp = findStructuredNumber(raw, [
@@ -301,11 +311,12 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
     || structuredEngineCc(offer)
     || inferEngineCc(primary)
     || inferEngineCc(full);
-  const powerHp = reasonable(offer.powerHp, 20, 2_500)
-    || structuredPowerHp(offer)
-    || inferPowerHp(primary)
-    || inferPowerHp(full);
-  const explicitPowerKw = reasonable(offer.powerKw, 10, 2_000);
+  const suppliedPowerHp = reasonable(offer.powerHp, 20, 2_500);
+  const rejectNumericModelPower = suspiciousMashinaNumericModelPower(offer, suppliedPowerHp);
+  const powerHp = rejectNumericModelPower
+    ? inferPowerHp(primary) || inferPowerHp(full)
+    : suppliedPowerHp || structuredPowerHp(offer) || inferPowerHp(primary) || inferPowerHp(full);
+  const explicitPowerKw = rejectNumericModelPower ? undefined : reasonable(offer.powerKw, 10, 2_000);
   const powerKw = explicitPowerKw || (powerHp ? Math.round((powerHp / 1.35962) * 100) / 100 : undefined);
 
   // Semantic vehicle attributes are provenance-sensitive. They may only be

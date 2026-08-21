@@ -3,8 +3,9 @@ import type { VehicleOffer } from "./types";
 function explicitLiters(value: unknown) {
   const text = String(value || "").replace(/,/g, ".");
   const patterns = [
-    /(?:^|[^0-9])([0-9](?:\.[0-9])?)\s*(?:L|л|liter|litre)\b/i,
-    /(?:^|[^0-9])([0-9](?:\.[0-9])?)\s*(?:TSI|TFSI|TDI|GDI|MPI|Turbo|T)\b/i,
+    /(?:^|[\s([{,;:/+\-])([0-9](?:\.[0-9])?)\s*(?:L|л|liter|litre)\b/i,
+    /(?:^|[\s([{,;:/+\-])([0-9](?:\.[0-9])?)\s*(?:TSI|TFSI|TDI|GDI|MPI|Turbo|T)\b/i,
+    /(?:^|[\s([{,;:/+\-])([0-8]\.[0-9])\s*(?:A\/?T|M\/?T|AMT|CVT|DCT|DSG)\b/i,
   ];
   for (const pattern of patterns) {
     const liters = Number(text.match(pattern)?.[1] || 0);
