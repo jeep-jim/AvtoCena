@@ -7,6 +7,7 @@ import {
   isCompletedJapanAuction,
   isJapanAuctionOffer,
 } from "../apps/web/lib/catalog/catalog-v2-policy";
+import { japanAuctionSoldIdentityVerified } from "../apps/web/lib/catalog/public-priority";
 
 function japanOffer(id: string, overrides: Record<string, unknown> = {}) {
   return {
@@ -61,7 +62,23 @@ test("Japan includes model year 2010 but rejects older stock", () => {
 
 test("post-publish audit applies sold identity only to Japanese auctions", () => {
   const audit = readFileSync(new URL("../scripts/catalog-live-postpersist-audit.mjs", import.meta.url), "utf8");
-  assert.doesNotMatch(audit, /catalogRequiredSpecificationRejectionReason, isJapanAuctionOffer/);
-  assert.match(audit, /const actualAuction = offer\?\.offerType === "auction" \|\| offer\?\.catalogKind === "auction_result"/);
-  assert.match(audit, /offer\?\.market !== "japan" \|\| !actualAuction \|\| \(/);
+  assert.match(audit, /catalogRequiredSpecificationRejectionReason, japanAuctionSoldIdentityVerified/);
+  assert.match(audit, /rows\.filter\(\(offer\) => !japanAuctionSoldIdentityVerified\(offer\)\)/);
+});
+
+test("Japan public policy excludes inherited auction results without exact sold provenance", () => {
+  assert.equal(japanAuctionSoldIdentityVerified(japanOffer("fixed")), true);
+  assert.equal(japanAuctionSoldIdentityVerified(japanOffer("legacy-result", {
+    sourceId: "prestige_japan_auctions_open",
+    offerType: "fixed",
+    catalogKind: "auction_result",
+  })), false);
+  assert.equal(japanAuctionSoldIdentityVerified(japanOffer("verified-result", {
+    sourceId: "prestige_japan_auctions_open",
+    offerType: "auction",
+    catalogKind: "auction_result",
+    auctionResult: "sold",
+    auctionPriceKind: "published_result",
+    operational: { raw: { listingBoundImages: true, photoIdentityVerified: true, recoveryExactSourceUrl: true, recoveryExactPhotoIdentity: true } },
+  })), true);
 });

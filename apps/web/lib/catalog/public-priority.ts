@@ -156,6 +156,19 @@ export function isJapanAuctionOffer(offer: Partial<VehicleOffer> | any) {
     || /auction|auc_|_stat|statistics|jpauc|carvector/.test(source);
 }
 
+export function japanAuctionSoldIdentityVerified(offer: Partial<VehicleOffer> | any) {
+  if (!isJapanAuctionOffer(offer)) return true;
+  const raw = offer?.operational?.raw || {};
+  return offer?.offerType === "auction"
+    && offer?.catalogKind === "auction_result"
+    && offer?.auctionResult === "sold"
+    && offer?.auctionPriceKind === "published_result"
+    && raw?.listingBoundImages === true
+    && raw?.photoIdentityVerified === true
+    && raw?.recoveryExactSourceUrl === true
+    && raw?.recoveryExactPhotoIdentity === true;
+}
+
 function publicPriceLimits() {
   // The preferred limit only affects ordering. The 15M ceiling is a product
   // invariant: an environment override may tighten it, but cannot accidentally
@@ -268,6 +281,7 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
   if (!calculated) return { eligible: false, tier: 99, reason: "missing_full_calculation", ...base };
   const specificationRejection = catalogRequiredSpecificationRejectionReason(offer);
   if (specificationRejection) return { eligible: false, tier: 99, reason: specificationRejection, ...base };
+  if (japanAuction && !japanAuctionSoldIdentityVerified(offer)) return { eligible: false, tier: 99, reason: "japan_auction_sold_identity_unverified", ...base };
   if (!regionalPhotoIdentityVerified(offer)) return { eligible: false, tier: 99, reason: "unverified_regional_photo_identity", ...base };
   if (!rawTotalRub) return { eligible: false, tier: 99, reason: "missing_ruble_price", ...base };
   const economicRejection = catalogPublicEconomicRejectionReason(offer);
