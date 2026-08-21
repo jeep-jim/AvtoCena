@@ -48,14 +48,17 @@ jobs:
       - run: npm run typecheck
       - name: Validate circular model-band planning
         run: node --import tsx --test tests/prestige-japan-partition-plan.test.ts
-      - name: Rotate the bounded daily model band
+      - name: Rotate the bounded twice-daily model band
         shell: bash
         run: |
           set -euo pipefail
           day_of_year=$(date -u +%j)
-          start_model_index=$(( (10#$day_of_year % 40) * 3 ))
+          hour_utc=$(date -u +%H)
+          half_day=$((10#$hour_utc / 12))
+          slot=$(( (10#$day_of_year * 2 + half_day) % 40 ))
+          start_model_index=$(( (slot * 21) % 120 ))
           echo "PRESTIGE_PLAN_START_MODEL_INDEX=$start_model_index" >> "$GITHUB_ENV"
-          echo "Daily Japan model band starts at index $start_model_index" >> "$GITHUB_STEP_SUMMARY"
+          echo "Japan model band slot $slot starts at index $start_model_index" >> "$GITHUB_STEP_SUMMARY"
       - id: plan
         name: Build round-robin partitions across all available models
         run: npx tsx scripts/prestige-japan-strict-partition-plan.mjs
