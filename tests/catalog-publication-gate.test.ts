@@ -74,6 +74,9 @@ test("production source-scale audit validates exact calculations and preserves a
   assert.match(validator, /catalogRequiredSpecificationRejectionReason/);
   assert.match(validator, /price_breakdown/);
   assert.match(validator, /requiredSourcesComplete/);
+  assert.match(validator, /requiredSourcesAvailable/);
+  assert.match(validator, /requiredActiveSourceIds\.size > 0/);
+  assert.match(validator, /\|\| !row\.requiredSourcesAvailable/);
   assert.match(validator, /blockingMarkets/);
   assert.match(publisher, /calculateOfferWithRussiaCustoms/);
   assert.match(publisher, /previousManifestPreserved/);
