@@ -70,6 +70,7 @@ test("each market has an isolated operator trigger in addition to its schedule",
     const marketWorkflow = fs.readFileSync(new URL(`../.github/workflows/catalog-v2-${market}.yml`, import.meta.url), "utf8");
     assert.match(marketWorkflow, new RegExp(`\\.github/market-runs/${market}`));
     assert.match(marketWorkflow, new RegExp(`market: ${market}`));
+    assert.match(marketWorkflow, /reset_cursor: \$\{\{ github\.event_name != 'schedule' \}\}/);
   }
 });
 
