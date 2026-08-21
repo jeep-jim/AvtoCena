@@ -156,6 +156,10 @@ for (const market of markets) {
     requiredActiveSourceIds: [...requiredActiveSourceIds].sort(),
     requiredInactiveSourceIds: requiredInactiveSourceIds.sort(),
     missingRequiredAdapters: [...missingRequiredAdapters].sort(),
+    requiredSourcesAvailable: marketProbes.length > 0
+      && requiredSourceIds.size > 0
+      && requiredActiveSourceIds.size > 0
+      && missingRequiredAdapters.size === 0,
     requiredSourcesComplete: marketProbes.length > 0
       && requiredSourceIds.size > 0
       && requiredInactiveSourceIds.length === 0
@@ -187,7 +191,7 @@ const blockingMarkets = markets.filter((market) => {
     || row.valid <= 0
     || !row.freshThresholdReached
     || !row.sourceTargetReached
-    || !row.requiredSourcesComplete;
+    || !row.requiredSourcesAvailable;
 });
 const report = {
   version: 22,

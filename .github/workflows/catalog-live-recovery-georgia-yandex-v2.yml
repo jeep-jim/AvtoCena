@@ -9,6 +9,10 @@ on:
         required: true
         default: false
         type: boolean
+  push:
+    branches: [main]
+    paths:
+      - ".github/market-runs/georgia-yandex"
 
 permissions:
   contents: read
@@ -292,7 +296,7 @@ jobs:
 
   publish:
     needs: dry-run
-    if: inputs.apply == true
+    if: github.event_name == 'push' || inputs.apply == true
     runs-on: ubuntu-latest
     timeout-minutes: 45
     env:
