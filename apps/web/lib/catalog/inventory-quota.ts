@@ -39,13 +39,22 @@ export function catalogExactModelKey(
  * normalization can merge formerly separate source buckets, so the final
  * public identity must be capped after identity normalization and deduplication.
  */
-export function enforceCatalogModelYearQuota<T extends Partial<VehicleOffer>>(rows: readonly T[]) {
+export function enforceCatalogModelYearQuota<T extends Partial<VehicleOffer>>(
+  rows: readonly T[],
+  options: { protectedIds?: ReadonlySet<string> } = {},
+) {
   const counts = new Map<string, number>();
   const kept: T[] = [];
   const removed: T[] = [];
   for (const row of rows) {
     const key = catalogModelYearQuotaKey(row);
     const count = key ? Number(counts.get(key) || 0) : 0;
+    const protectedRow = options.protectedIds?.has(String(row?.id || "")) === true;
+    if (protectedRow) {
+      if (key) counts.set(key, count + 1);
+      kept.push(row);
+      continue;
+    }
     if (!key || count >= CATALOG_MAX_OFFERS_PER_MODEL_YEAR) {
       removed.push(row);
       continue;
