@@ -25,9 +25,10 @@ test("fast gallery does not binary-cache listing photos in source URL mode", () 
   assert.ok(sourceMode >= 0 && binaryMode > sourceMode, "binary cache must be confined to the non-source-URL branch");
 });
 
-test("JPAuc detail gallery only accepts the listing lot image host family", () => {
-  assert.match(jpauc, /isSameLotImageHost/);
-  assert.match(jpauc, /aleado\\\.com/);
-  assert.match(jpauc, /expectedAleado/);
-  assert.match(jpauc, /candidateAleado/);
+test("JPAuc gallery is derived only from the exact listing-bound image URL", () => {
+  assert.match(jpauc, /galleryIdentity: "listing_bound_variants"/);
+  assert.match(jpauc, /photoVariants\(listingImage\)/);
+  assert.match(jpauc, /shared image host does not prove lot identity/);
+  assert.doesNotMatch(jpauc, /isSameLotImageHost/);
+  assert.doesNotMatch(jpauc, /detail\.html\.matchAll/);
 });
