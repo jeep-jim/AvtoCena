@@ -16,7 +16,7 @@ import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { getOfferForPage } from "@/lib/catalog/offer-page-data";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
-import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
+import { catalogOfferVisibleRub, catalogPublicPriority } from "@/lib/catalog/public-priority";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { publicOffer, searchOffers } from "@/lib/catalog/storage";
@@ -210,14 +210,14 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const enrichedOffer = await enrichOfferForDisplay(offer);
   const sourceUrl = safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);
   const raw: any = normalizeVehicleOfferSpecs(publicOffer(enrichedOffer));
+  if (!catalogPublicPriority(raw).eligible) notFound();
   const presented = presentCatalogOffer(raw);
-  const exactTotalRub = Number(presented.totalRub || 0);
-  const visibleRub = exactTotalRub || catalogOfferVisibleRub(raw);
+  const visibleRub = catalogOfferVisibleRub(raw);
   const o = {
     ...presented,
     totalRub: visibleRub || null,
-    previousTotalRub: exactTotalRub ? presented.previousTotalRub : null,
-    priceDeltaRub: exactTotalRub ? presented.priceDeltaRub : null,
+    previousTotalRub: visibleRub ? presented.previousTotalRub : null,
+    priceDeltaRub: visibleRub ? presented.priceDeltaRub : null,
     images: rankedCatalogImageUrls(raw),
   };
   const updatedAt = new Date(o.updatedAt);
@@ -237,7 +237,9 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const isHybrid = ["series_hybrid", "other_hybrid"].includes(powertrainKind) || /hybrid|гибрид|phev|hev/.test(fuelKind);
   const electrified = isElectric || isHybrid;
   const japanAuction = String(raw.market || "").toLowerCase() === "japan";
-  const powerValue = o.powerHp ? `${o.powerHp} л.с.` : o.powerKw ? `${o.powerKw} кВт` : "";
+  const powerValue = electrified
+    ? o.powerKw ? `${o.powerKw} кВт` : o.powerHp ? `${o.powerHp} л.с.` : ""
+    : o.powerHp ? `${o.powerHp} л.с.` : o.powerKw ? `${o.powerKw} кВт` : "";
   const mileageKm = Number(o.mileageKm || 0);
   const mileageTile = mileageKm > 0 ? { label: "Пробег", value: `${money(mileageKm)} км`, icon: "mileage" as const } : null;
   const transmissionValue = knownValue(o.transmissionLabel);

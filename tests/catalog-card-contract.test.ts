@@ -6,19 +6,23 @@ const card = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard
 const price = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogPrice.tsx", import.meta.url), "utf8");
 const publicLayout = fs.readFileSync(new URL("../apps/web/app/(public)/layout.tsx", import.meta.url), "utf8");
 const contract = fs.readFileSync(new URL("../docs/catalog-card-contract.md", import.meta.url), "utf8");
+const offerPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");
 
 test("catalog card never bypasses the validated public ruble price", () => {
   assert.match(card, /const visibleRub = catalogOfferVisibleRub\(normalizedOffer\)/);
   assert.doesNotMatch(card, /exactTotalRub\s*\|\|/);
   assert.doesNotMatch(card, /Number\(o\.totalRub\s*\|\|\s*0\)/);
   assert.match(card, /totalRub: visibleRub \|\| null/);
-  assert.match(card, /· ориентир/);
+  assert.match(card, /if \(!visibleRub\) return null/);
   assert.doesNotMatch(card, /function sourceMoney/);
   assert.doesNotMatch(card, /Цена в объявлении/);
   assert.doesNotMatch(card, /Цена торгов/);
   assert.doesNotMatch(card, /Расчёт под ключ уточняется/);
   assert.doesNotMatch(card, /Расчёт таможни/);
   assert.doesNotMatch(card, /ориентир под ключ/);
+  assert.match(offerPage, /const visibleRub = catalogOfferVisibleRub\(raw\)/);
+  assert.match(offerPage, /if \(!catalogPublicPriority\(raw\)\.eligible\) notFound\(\)/);
+  assert.doesNotMatch(offerPage, /exactTotalRub\s*\|\|/);
 });
 
 test("invalid ruble calculation never falls back to foreign source currency", () => {

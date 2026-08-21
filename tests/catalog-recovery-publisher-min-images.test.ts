@@ -37,7 +37,7 @@ test("single recovery publisher hashes untouched public projections before and a
   assert.match(singleSource, /recovery_duplicate_id_in_full_state/);
 });
 
-test("Japan keeps sold lots for 180 days and compares the safety ratio only with retained rows", () => {
+test("Japan keeps sold lots for 30 days and compares the safety ratio only with retained rows", () => {
   assert.match(japanWorkflow, /CATALOG_OFFER_RETENTION_MS: "2592000000"/);
   assert.match(japanWorkflow, /RECOVERY_PUBLISH_MIN_PREVIOUS_RATIO: "0\.90"/);
   assert.match(singleSource, /const minPreviousCount = minPreviousRatio > 0 && retainedPreviousMarket\.length > 0/);

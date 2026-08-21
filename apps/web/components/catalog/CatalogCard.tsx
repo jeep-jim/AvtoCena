@@ -45,6 +45,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   /* Never render raw totalRub directly. It becomes public only after the full
      calculation and public sanity limits pass in catalogOfferVisibleRub(). */
   const visibleRub = catalogOfferVisibleRub(normalizedOffer);
+  if (!visibleRub) return null;
   const displayOffer = {
     ...o,
     totalRub: visibleRub || null,
@@ -78,7 +79,9 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
           <div className={`flex flex-nowrap overflow-x-auto whitespace-nowrap font-bold text-white/58 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
             {o.mileageKm ? <span className={tagClass}><MileageIcon dense={dense} /><span>{new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км</span></span> : null}
             <span className={tagClass}><EngineIcon dense={dense} fuel={!o.engineCc && !isElectric} electric={isElectric} /><span>{engineLabel}</span></span>
-            {o.powerHp
+            {isElectrified && o.powerKw
+              ? <span className={tagClass}><PowerIcon dense={dense} /><span>{o.powerKw} кВт</span></span>
+              : o.powerHp
               ? <span className={tagClass}><PowerIcon dense={dense} /><span>{o.powerHp} л.с.</span></span>
               : !isElectrified ? <span className={tagClass}><PowerIcon dense={dense} /><span>Мощность уточняется</span></span> : null}
             {powerDisplay ? <span className={tagClass} title={powerDisplay.sourceLabel}><ThirtyMinuteIcon dense={dense} /><span>{powerDisplay.thirtyMinuteLabel}</span></span> : null}

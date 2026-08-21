@@ -74,6 +74,49 @@ function completeCalculation(offer: Partial<VehicleOffer> | any) {
   );
 }
 
+function summedThirtyMinutePowerKw(offer: Partial<VehicleOffer> | any) {
+  const direct = positive(offer?.power30MinKw, 2_000);
+  if (direct) return direct;
+  const motors = Array.isArray(offer?.power30MinKwByMotor)
+    ? offer.power30MinKwByMotor.map((value: unknown) => positive(value, 2_000)).filter(Boolean)
+    : [];
+  return motors.length ? motors.reduce((sum: number, value: number) => sum + value, 0) : 0;
+}
+
+export function catalogRequiredSpecificationRejectionReason(offer: Partial<VehicleOffer> | any) {
+  const kind = String(offer?.powertrainKind || "").toLowerCase();
+  const engineCc = positive(offer?.engineCc, 10_000);
+  const powerHp = positive(offer?.powerHp, 2_500);
+  const powerKw = positive(offer?.powerKw, 2_000);
+  const icePowerKw = positive(offer?.icePowerKw, 2_000);
+  const thirtyMinutePowerKw = summedThirtyMinutePowerKw(offer);
+  const utilizationPowerKw = positive(
+    offer?.utilizationPowerKw || offer?.calculationSnapshot?.customs?.utilizationPowerKw,
+    2_000,
+  );
+
+  if (kind === "combustion") {
+    if (!engineCc) return "missing_engine_cc";
+    if (!powerHp) return "missing_power_hp";
+    return "";
+  }
+  if (kind === "electric") {
+    if (!powerKw && !powerHp) return "missing_peak_power";
+    if (!thirtyMinutePowerKw) return "missing_certified_30min_kw";
+    if (!utilizationPowerKw) return "missing_utilization_power_kw";
+    return "";
+  }
+  if (kind === "series_hybrid" || kind === "other_hybrid") {
+    if (!engineCc) return "missing_engine_cc";
+    if (!icePowerKw) return "missing_ice_power_kw";
+    if (!powerKw && !powerHp) return "missing_peak_power";
+    if (!thirtyMinutePowerKw) return "missing_certified_30min_kw";
+    if (!utilizationPowerKw) return "missing_utilization_power_kw";
+    return "";
+  }
+  return "unknown_powertrain_kind";
+}
+
 function preliminaryPowerPendingCalculation(offer: Partial<VehicleOffer> | any) {
   const totalRub = positive(offer?.totalRub, 1_000_000_000);
   const kind = String(offer?.powertrainKind || "");
@@ -152,12 +195,24 @@ export function catalogPublicEconomicRejectionReason(offer: Partial<VehicleOffer
 }
 
 export function catalogOfferVisibleRub(offer: Partial<VehicleOffer> | any) {
+  // Never trust a legacy projected amount without re-checking the underlying
+  // calculation contract. Older projections may contain a lower-bound price
+  // produced before the utilization fee was known.
+  const status = String(offer?.calculationStatus || "");
+  const pricingConfidence = String(offer?.calculationSnapshot?.pricingConfidence || "");
+  const projectionVersion = Number(offer?.cardProjectionVersion || 0);
+  const validatedProjection = projectionVersion >= 2
+    || (projectionVersion === 1
+      && ["ready", "estimated", "auction_start", "calculated"].includes(status)
+      && pricingConfidence !== "preliminary");
+  if (!completeCalculation(offer) && !validatedProjection) return 0;
+  if (catalogRequiredSpecificationRejectionReason(offer)) return 0;
+  if (catalogPublicEconomicRejectionReason(offer)) return 0;
   const projectedVisibleRub = Math.round(positive(offer?.publicVisibleRub, 1_000_000_000));
   if (projectedVisibleRub) {
     const { absoluteMaximumRub } = publicPriceLimits();
     return projectedVisibleRub <= absoluteMaximumRub ? projectedVisibleRub : 0;
   }
-  if (!completeCalculation(offer) && !preliminaryPowerPendingCalculation(offer)) return 0;
   const totalRub = Math.round(positive(offer?.totalRub, 1_000_000_000));
   if (!totalRub) return 0;
   const { absoluteMaximumRub } = publicPriceLimits();
@@ -205,16 +260,19 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
   const rawTotalRub = Math.round(positive(offer?.totalRub, 1_000_000_000));
   const base = { visibleRub, ageYears, powerHp, popularityDecile, calculated, preliminary, imageCount, japanAuction };
 
-  if (!calculated && !preliminary) return { eligible: false, tier: 99, reason: "missing_full_calculation", ...base };
+  // A preliminary number is a lower bound: it explicitly omits the utilization
+  // fee (and may omit excise/VAT components). It must never be exposed as the
+  // delivered price of a public card. Keep it in maintenance storage so the
+  // enrichment queue can finish it, but publish only complete calculations.
+  if (preliminary) return { eligible: false, tier: 99, reason: "preliminary_price_incomplete", ...base };
+  if (!calculated) return { eligible: false, tier: 99, reason: "missing_full_calculation", ...base };
+  const specificationRejection = catalogRequiredSpecificationRejectionReason(offer);
+  if (specificationRejection) return { eligible: false, tier: 99, reason: specificationRejection, ...base };
   if (!regionalPhotoIdentityVerified(offer)) return { eligible: false, tier: 99, reason: "unverified_regional_photo_identity", ...base };
   if (!rawTotalRub) return { eligible: false, tier: 99, reason: "missing_ruble_price", ...base };
   const economicRejection = catalogPublicEconomicRejectionReason(offer);
   if (economicRejection) return { eligible: false, tier: 99, reason: economicRejection, ...base };
   if (!visibleRub) return { eligible: false, tier: 99, reason: "missing_ruble_price", ...base };
-
-  if (preliminary) {
-    return { eligible: true, tier: rawTotalRub <= preferredMaximumRub ? 8 : 9, reason: "preliminary_power_pending", ...base };
-  }
 
   const recent = ageYears <= maximumAgeYears;
   const economicalPower = powerHp > 0 && powerHp <= maximumPowerHp;

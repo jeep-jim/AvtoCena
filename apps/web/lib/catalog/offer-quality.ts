@@ -149,7 +149,7 @@ export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
 }
 
 function minimumImageCount(offer: VehicleOffer) {
-  if (Number((offer as any).cardProjectionVersion || 0) === 1) return 1;
+  if (Number((offer as any).cardProjectionVersion || 0) >= 1) return 1;
   if (offer.market === "georgia") return 5;
   if (offer.market === "korea") return 5;
   if (["autohome_new_china_open", "mobile_de_open"].includes(String(offer.sourceId || ""))) return 5;

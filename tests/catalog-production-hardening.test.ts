@@ -84,6 +84,8 @@ test("post-persist market audit rejects broken source identity and shallow Korea
   assert.match(postPersistAudit, /invalid_identity/);
   assert.match(postPersistAudit, /market === "korea"[\s\S]*belowFiveImagesCount/);
   assert.match(postPersistAudit, /korea:below_five_images/);
+  assert.match(postPersistAudit, /preliminary_public_price/);
+  assert.match(postPersistAudit, /incomplete_specifications/);
 });
 
 test("publisher accumulates galleries before deduplication and protects the newest generations", () => {

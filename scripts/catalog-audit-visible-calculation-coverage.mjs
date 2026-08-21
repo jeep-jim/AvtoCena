@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 
 const { readCurrentPublicCatalogProjection } = await import("../apps/web/lib/catalog/storage.ts");
 const { hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { catalogRequiredSpecificationRejectionReason } = await import("../apps/web/lib/catalog/public-priority.ts");
 
 const OUTPUT = process.env.CATALOG_VISIBLE_CALCULATION_AUDIT_OUTPUT || "catalog-visible-calculation-coverage.json";
 const SAMPLE_LIMIT = Math.max(20, Math.min(500, Number(process.env.CATALOG_VISIBLE_CALCULATION_SAMPLE_LIMIT || 200)));
@@ -24,7 +25,7 @@ function totalThirtyMinuteKw(offer) {
   return motors.length ? motors.reduce((sum, value) => sum + value, 0) : undefined;
 }
 
-function exactPowerState(offer) {
+function exactPowerState(offer, requireExactProvenance = false) {
   const kind = clean(offer?.powertrainKind).toLowerCase();
   const engineCc = positive(offer?.engineCc);
   const powerHp = positive(offer?.powerHp);
@@ -36,7 +37,7 @@ function exactPowerState(offer) {
   const definitelyNonExact = confidence === "estimated" || /^vehicle-model-representative:/i.test(source);
   const reasons = [];
 
-  if (definitelyNonExact) reasons.push("non_exact_power_source");
+  if (requireExactProvenance && definitelyNonExact) reasons.push("non_exact_power_source");
 
   if (kind === "electric") {
     if (!powerKw && !powerHp) reasons.push("missing_peak_power");
@@ -81,11 +82,13 @@ const needsDataModels = new Map();
 const unresolvedModels = new Map();
 const invalidReady = [];
 const readyUnclassified = [];
+const invalidSpecifications = [];
 const statusCounts = new Map();
 const visibleModels = new Set();
 let readyExact = 0;
 let ready = 0;
 let needsData = 0;
+let preliminary = 0;
 let auctionStart = 0;
 let resolvedIdentity = 0;
 
@@ -96,8 +99,10 @@ for (const offer of visible) {
   const pairKey = `${clean(offer?.make)}\u0000${clean(offer?.model)}`;
   visibleModels.add(pairKey);
   increment(statusCounts, status);
+  const specificationRejection = catalogRequiredSpecificationRejectionReason(offer);
+  if (specificationRejection) invalidSpecifications.push({ id: offer.id, market, make: offer.make, model: offer.model, reason: specificationRejection });
 
-  const marketRow = byMarket.get(market) || { visible: 0, ready: 0, readyExact: 0, needsData: 0, auctionStart: 0, unresolvedIdentity: 0, invalidReady: 0 };
+  const marketRow = byMarket.get(market) || { visible: 0, ready: 0, readyExact: 0, needsData: 0, preliminary: 0, auctionStart: 0, unresolvedIdentity: 0, invalidReady: 0 };
   marketRow.visible++;
 
   const identityResolved = hasCredibleCatalogIdentity(offer);
@@ -110,11 +115,7 @@ for (const offer of visible) {
   if (status === "ready" || status === "estimated") {
     ready++;
     marketRow.ready++;
-    if (status === "estimated") {
-      byMarket.set(market, marketRow);
-      continue;
-    }
-    const exact = exactPowerState(offer);
+    const exact = exactPowerState(offer, status === "ready");
     const totalRub = positive(offer.totalRub);
     const hardReasons = [...exact.reasons];
     if (!identityResolved) hardReasons.push("unresolved_model_identity");
@@ -133,7 +134,7 @@ for (const offer of visible) {
         powerDataConfidence: exact.powerDataConfidence,
         powerDataSource: exact.powerDataSource,
       });
-    } else {
+    } else if (status === "ready") {
       readyExact++;
       marketRow.readyExact++;
       if (!clean(offer.powerDataConfidence)) {
@@ -143,6 +144,10 @@ for (const offer of visible) {
   } else if (status === "needs_data" || status === "preliminary_power_pending") {
     needsData++;
     marketRow.needsData++;
+    if (status === "preliminary_power_pending") {
+      preliminary++;
+      marketRow.preliminary++;
+    }
     const state = exactPowerState(offer);
     const reasons = [...state.reasons];
     if (!identityResolved) reasons.push("unresolved_model_identity");
@@ -171,19 +176,25 @@ const report = {
     readyExact,
     readyExactRatio: ready ? Number((readyExact / ready).toFixed(5)) : 1,
     needsData,
+    preliminary,
     auctionStart,
     invalidReady: invalidReady.length,
+    invalidSpecifications: invalidSpecifications.length,
     readyWithoutConfidenceLabel: readyUnclassified.length,
   },
   statusCounts: Object.fromEntries([...statusCounts.entries()].sort((a, b) => b[1] - a[1])),
   byMarket: Object.fromEntries([...byMarket.entries()].sort((a, b) => a[0].localeCompare(b[0]))),
   invalidReady: invalidReady.slice(0, SAMPLE_LIMIT),
+  invalidSpecifications: invalidSpecifications.slice(0, SAMPLE_LIMIT),
   unresolvedModels: sortedCounts(unresolvedModels),
   needsDataQueue: sortedCounts(needsDataModels),
   readyWithoutConfidenceLabel: readyUnclassified.slice(0, SAMPLE_LIMIT),
   releaseGate: {
     noInvalidReady: invalidReady.length === 0,
-    pass: invalidReady.length === 0,
+    noInvalidSpecifications: invalidSpecifications.length === 0,
+    noPreliminaryPublicPrices: preliminary === 0,
+    noNeedsDataPublicCards: needsData === 0,
+    pass: invalidReady.length === 0 && invalidSpecifications.length === 0 && preliminary === 0 && needsData === 0,
   },
 };
 
@@ -195,7 +206,9 @@ if (process.env.GITHUB_OUTPUT) {
   await fs.appendFile(process.env.GITHUB_OUTPUT, `visible_models=${report.totals.visibleMakeModelPairs}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `ready_exact=${report.totals.readyExact}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `needs_data=${report.totals.needsData}\n`);
+  await fs.appendFile(process.env.GITHUB_OUTPUT, `preliminary=${report.totals.preliminary}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `invalid_ready=${report.totals.invalidReady}\n`);
+  await fs.appendFile(process.env.GITHUB_OUTPUT, `invalid_specifications=${report.totals.invalidSpecifications}\n`);
 }
 
 if (!report.releaseGate.pass) process.exitCode = 1;

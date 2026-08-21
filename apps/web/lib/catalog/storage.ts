@@ -27,7 +27,7 @@ const IMAGE_SOURCE_HOST_CONCURRENCY = Math.max(1, Math.min(8, Number(process.env
 const IMAGE_SOURCE_HOST_RPM = Math.max(30, Math.min(600, Number(process.env.CATALOG_IMAGE_HOST_RPM || 180)));
 const INTERNAL_MANIFEST_PATH = "catalog/internal/manifest.json";
 const JAPAN_ARCHIVE_MANIFEST_PATH = "catalog/japan-auction-history/manifest.json";
-const JAPAN_ARCHIVE_RETENTION_DAYS = 180;
+const JAPAN_ARCHIVE_RETENTION_DAYS = 30;
 const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?encar\.com$/i,
   /^(.+\.)?kcar\.com$/i,
@@ -136,7 +136,7 @@ const ALLOWED_IMAGE_HOSTS = [
 export { CATALOG_CHUNK_SIZE };
 export type OfferLocation = { market: CatalogMarket; chunk: string };
 export type CatalogManifest = { version: 2; generationId: string; updatedAt: string; markets: Record<string, { count: number; chunks: string[]; updatedAt: string }> };
-type JapanAuctionArchiveManifest = { version: 1; updatedAt: string; retentionDays: 180; activeSlot: "a" | "b"; count: number; chunks: string[]; contentHash: string };
+type JapanAuctionArchiveManifest = { version: 1; updatedAt: string; retentionDays: 30; activeSlot: "a" | "b"; count: number; chunks: string[]; contentHash: string };
 export type CatalogFacets = { generationId: string; makes: string[]; models: Array<{ make: string; model: string; aliases?: string[]; popularityDecile?: number }>; markets: string[]; bodyTypes: string[]; fuels: string[]; transmissions: string[]; drives: string[] };
 export type CatalogBrandSummaryModel = { model: string; count: number; marketCounts: Record<string, number> };
 export type CatalogBrandSummary = { generationId: string; brands: Record<string, { make: string; count: number; marketCounts: Record<string, number>; models: CatalogBrandSummaryModel[] }> };
@@ -146,7 +146,7 @@ export type CatalogSearchProjection = {
   trim?: string; powerKw?: number; icePowerKw?: number; powertrainKind?: string; power30MinKw?: number; power30MinKwByMotor?: number[]; utilizationPowerKw?: number;
   powerDataConfidence?: string; powerDataSource?: string;
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
-  calculationStatus?: string; calculationSnapshot?: { currencyRate?: any; pricingConfidence?: string } | null; publicVisibleRub?: number; cardImageUrl?: string; seriesId?: string; cardProjectionVersion?: 1;
+  calculationStatus?: string; calculationSnapshot?: { currencyRate?: any; pricingConfidence?: string } | null; publicVisibleRub?: number; cardImageUrl?: string; seriesId?: string; cardProjectionVersion?: 1 | 2;
 };
 export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
@@ -364,11 +364,11 @@ function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchProjection
     sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, priceMode: offer.priceMode, previousTotalRub: visibleRub ? offer.previousTotalRub : null, priceDeltaRub: visibleRub ? offer.priceDeltaRub : null, priceChangedAt: offer.priceChangedAt,
     calculationStatus: offer.calculationStatus, calculationSnapshot: { currencyRate: offer.calculationSnapshot?.currencyRate, pricingConfidence: offer.calculationSnapshot?.pricingConfidence },
     publicVisibleRub: visibleRub || undefined, cardImageUrl: rankedCatalogImageUrls(offer)[0] || undefined,
-    seriesId: String(raw?.listing?.seriesId || raw?.seriesId || (offer as any)?.seriesId || "") || undefined, cardProjectionVersion: 1,
+    seriesId: String(raw?.listing?.seriesId || raw?.seriesId || (offer as any)?.seriesId || "") || undefined, cardProjectionVersion: 2,
   };
 }
 function projectionCanRenderCard(row: CatalogSearchProjection) {
-  return row.cardProjectionVersion === 1 && Boolean(row.id && row.market && row.make && row.model && row.year);
+  return [1, 2].includes(Number(row.cardProjectionVersion)) && Boolean(row.id && row.market && row.make && row.model && row.year);
 }
 function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleOffer {
   const imageUrl = String(row.cardImageUrl || "");
@@ -1005,7 +1005,7 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], _sk
 }
 
 export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleOffer[]) {
-  return canonicalizePublicCatalogOffers(storedOffers.filter(isPublicOffer));
+  return canonicalizePublicCatalogOffers(storedOffers);
 }
 
 async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[]) {

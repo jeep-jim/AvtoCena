@@ -4,7 +4,7 @@ const { refreshLiveExchangeRates } = await import("../apps/web/lib/catalog/live-
 const { resetCatalogRateCache } = await import("../apps/web/lib/catalog/rates.ts");
 const { isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
-const { persistCatalogOffers, readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
+const { persistCatalogOffers, previewCanonicalPublicCatalogOffers, readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 
 const CONCURRENCY = Math.max(1, Math.min(24, Number(process.env.CATALOG_KNOWLEDGE_REINDEX_CONCURRENCY || 8)));
 const MIN_PUBLIC_RATIO = Math.min(1, Math.max(0.1, Number(process.env.CATALOG_REINDEX_MIN_PUBLIC_RATIO || 0.65)));
@@ -88,7 +88,8 @@ const recalculated = await mapWithConcurrency(offers, async (source, index) => {
   }
 }, CONCURRENCY);
 
-const publicOffers = recalculated.filter((offer) => isCrediblePublicOffer(offer));
+const publicPreview = await previewCanonicalPublicCatalogOffers(recalculated);
+const publicOffers = publicPreview.offers;
 const guardedMinimum = currentPublicOffers.length >= MIN_PUBLIC_GUARD_COUNT
   ? Math.floor(currentPublicOffers.length * MIN_PUBLIC_RATIO)
   : 0;
@@ -103,6 +104,8 @@ const baseReport = {
   officialRateDate: String((refreshedRates?.rates || []).find((rate) => rate?.currency === "EUR")?.rateDate || ""),
   previousPublicOffers: currentPublicOffers.length,
   publicOffers: publicOffers.length,
+  publicByMarket: Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [market, publicOffers.filter((offer) => offer.market === market).length])),
+  preliminaryRejected: publicPreview.qualityRejected.filter((offer) => String(offer?.calculationStatus || "") === "preliminary_power_pending").length,
   guardedMinimum,
   guardTriggered,
   canonicalized,

@@ -448,7 +448,11 @@ const byMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((marketId) => [
   marketId === market ? (nextPublicCount || selectedMarketOffers.length) : Number(preservedByMarket[marketId] || 0),
 ]));
 const publishedMarketCount = Number(byMarket[market] || 0);
-const calculatedCount = selectedMarketOffers.filter((offer) => Number(offer.totalRub || 0) > 0).length;
+const calculatedCount = canonicalTargetPreview.offers.length;
+const preliminaryRejectedCount = canonicalTargetPreview.qualityRejected
+  .filter((offer) => String(offer?.calculationStatus || "") === "preliminary_power_pending"
+    || offer?.calculationSnapshot?.pricingConfidence === "preliminary")
+  .length;
 const report = {
   version: 2,
   mode: "catalog_v2_independent_market",
@@ -490,6 +494,7 @@ const report = {
       published: publishedMarketCount,
       calculatedCount,
       calculatedShare: selectedMarketOffers.length ? Number((calculatedCount / selectedMarketOffers.length).toFixed(4)) : 0,
+      preliminaryRejectedCount,
       priorityCount: v2Selection.priorityCount,
       auctionCount: v2Selection.auctionCount,
       recentCount: v2Selection.recentCount,

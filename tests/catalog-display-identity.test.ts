@@ -253,11 +253,19 @@ test("verified WALD City conversions are grouped under the Toyota Hiace base mod
 
 test("Russian domestic listings do not enter the foreign import catalog", () => {
   assert.equal(publicCatalogIdentityRejectionReason({ market: "europe", make: "Lada" }), "unsupported_import_brand");
-  assert.equal(publicCatalogIdentityRejectionReason({ market: "europe", make: "Volkswagen" }), "");
+  assert.equal(publicCatalogIdentityRejectionReason({ market: "europe", make: "Volkswagen", model: "Passat" }), "");
 });
 
 test("unresolved Korean or CJK model names do not reach public cards", () => {
   assert.equal(publicCatalogIdentityRejectionReason({ market: "korea", make: "Chrysler", model: "퍼시피카" }), "unresolved_source_language_identity");
   assert.equal(publicCatalogIdentityRejectionReason({ market: "china", make: "Audi", model: "奥迪A6L" }), "unresolved_source_language_identity");
   assert.equal(publicCatalogIdentityRejectionReason({ market: "korea", make: "Chrysler", model: "Pacifica" }), "");
+});
+
+test("internal model codes and truncated generic model names do not reach public cards", () => {
+  assert.equal(publicCatalogIdentityRejectionReason({ market: "uae", make: "Porsche", model: "(PO536)" }), "internal_model_code_only");
+  assert.equal(publicCatalogIdentityRejectionReason({ market: "europe", make: "Volkswagen", model: "II" }), "incomplete_roman_model");
+  assert.equal(publicCatalogIdentityRejectionReason({ market: "europe", make: "Volkswagen", model: "7" }), "unproven_numeric_model");
+  assert.equal(publicCatalogIdentityRejectionReason({ market: "china", make: "Tesla", model: "3" }), "");
+  assert.equal(publicCatalogIdentityRejectionReason({ market: "europe", make: "Porsche", model: "(PO536)", encyclopediaDisplayIdentity: { modelId: "porsche/cayenne" } }), "internal_model_code_only");
 });

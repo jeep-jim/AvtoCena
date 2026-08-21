@@ -342,8 +342,6 @@ function compactListingText(value: unknown) {
     .trim();
 }
 
-const unresolvedHanRe = /[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]/u;
-
 function stripUnresolvedHan(value: string) {
   return value
     .replace(/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]+/gu, " ")
@@ -371,8 +369,11 @@ function nativeSourceIdentity(value: unknown) {
 function publicMarketIdentity(value: unknown, marketValue: unknown) {
   const translated = cleanIdentityLabel(compactListingText(value));
   if (translated) return translated;
-  const market = safeCatalogText(marketValue).toLowerCase();
-  return market === "korea" ? nativeSourceIdentity(value) : "";
+  // Public identity is fail-closed. A native-source fallback is useful in the
+  // internal enrichment queue, but it must never leak Korean/Japanese/Chinese
+  // text back into a customer-facing title.
+  void marketValue;
+  return "";
 }
 
 function isChinaOffer(offer: any) {
@@ -426,9 +427,9 @@ function publicChinaModel(offer: any) {
 
 function publicTitleTrim(value: unknown) {
   const original = compactListingText(value);
-  if (!original || !unresolvedHanRe.test(original)) return original;
+  if (!original) return "";
   const cleaned = original
-    .replace(/[\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff]+/gu, " ")
+    .replace(/[\u1100-\u11ff\u3040-\u30ff\u3130-\u318f\u31f0-\u31ff\u3400-\u4dbf\u4e00-\u9fff\ua960-\ua97f\uac00-\ud7af\ud7b0-\ud7ff\uf900-\ufaff\uff61-\uff9f]+/gu, " ")
     .replace(/\s+/g, " ")
     .trim();
   return /[A-Za-zА-Яа-яЁё]/u.test(cleaned) ? cleaned : "";
