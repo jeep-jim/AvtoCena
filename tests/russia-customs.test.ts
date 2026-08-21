@@ -283,12 +283,27 @@ test("N1 and unclassified pickups fail closed instead of receiving an M1 tariff"
     bodyType: "pickup",
     importedAt,
   });
+  const mislabeledHilux = calculateRussiaCustomsForIndividual({
+    customsValueRub: 2_000_000,
+    eurRateRub: 100,
+    engineCc: 2_800,
+    powerHp: 200,
+    productionDate: "2025-01",
+    make: "Toyota",
+    model: "Hilux",
+    bodyType: "suv",
+    importedAt,
+  });
   assert.equal(n1.status, "needs_data");
   assert.equal(n1.totalCustomsRub, undefined);
   assert.ok(n1.missing.includes("n1_customs_tariff"));
   assert.equal(unknownPickup.vehicleCategory, "unknown");
   assert.equal(unknownPickup.totalCustomsRub, undefined);
   assert.ok(unknownPickup.missing.includes("vehicle_category"));
+  assert.equal(mislabeledHilux.vehicleCategory, "unknown");
+  assert.equal(mislabeledHilux.status, "needs_data");
+  assert.equal(mislabeledHilux.totalCustomsRub, undefined);
+  assert.ok(mislabeledHilux.missing.includes("vehicle_category"));
 });
 
 test("personal-use privilege is explicit in the result and can be disabled", () => {

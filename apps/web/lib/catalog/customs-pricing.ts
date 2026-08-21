@@ -258,6 +258,9 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     tnVedCode: offer.tnVedCode,
     grossVehicleWeightKg: offer.grossVehicleWeightKg,
     bodyType: offer.bodyType,
+    make: offer.make,
+    model: offer.model,
+    sourceTitle: offer.sourceTitle,
     personalUseEligible: offer.personalUseEligible,
   });
 
