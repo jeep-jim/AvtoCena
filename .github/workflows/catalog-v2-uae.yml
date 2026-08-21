@@ -4,9 +4,9 @@ run-name: Catalog V3 · UAE · 10k · ${{ github.sha }}
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 10,22 * * *"
+    - cron: "17 10 * * *"
 
-# Twice-daily independent market refresh. Existing rows remain only inside the
+# Daily independent market refresh. Existing rows remain only inside the
 # configured three-day window; expired and policy-rejected cards are removed.
 permissions:
   contents: read

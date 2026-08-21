@@ -17,7 +17,7 @@ const [maintenanceOffers, currentPublicLists] = await Promise.all([
   readAllOffersForMaintenance(),
   Promise.all(PUBLIC_CATALOG_MARKETS.map((market) => readMarketOffers(market))),
 ]);
-const japanRetentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_JAPAN_RETENTION_MS || 180 * 24 * 60 * 60 * 1_000));
+const japanRetentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_JAPAN_RETENTION_MS || 30 * 24 * 60 * 60 * 1_000));
 const japanCutoff = Date.now() - japanRetentionMs;
 const offers = maintenanceOffers.filter((offer) => {
   if (offer?.market !== "japan") return true;

@@ -2,14 +2,9 @@ name: Catalog V6 · Prestige exact sold up-to-30k
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/catalog-v6-prestige-up-to-30k.yml
-  schedule:
-    # The highest-demand auction market is collected twice every day. Sold-lot
-    # history is append-only and retained for six months.
-    - cron: "40 7,19 * * *"
+
+# Manual source-recovery tool. The weekly Japan owner is catalog-v2-japan.yml;
+# keeping a second automatic collector here would duplicate GitHub and cloud spend.
 
 permissions:
   contents: read
@@ -163,7 +158,7 @@ jobs:
       CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
       CATALOG_PUBLIC_ABSOLUTE_MAX_TOTAL_RUB: "15000000"
       CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO: "8"
-      CATALOG_OFFER_RETENTION_MS: "15552000000"
+      CATALOG_OFFER_RETENTION_MS: "2592000000"
       RECOVERY_PREFERRED_MAX_RUB: "8000000"
       RECOVERY_PUBLISH_MIN_PREVIOUS_RATIO: "0.90"
       CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"

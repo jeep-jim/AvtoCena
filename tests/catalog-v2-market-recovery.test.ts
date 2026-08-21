@@ -75,18 +75,21 @@ test("independent market collection keeps the full production crawl budget", () 
   assert.match(workflow, /timeout --signal=TERM --kill-after=120s 6600s/);
 });
 
-test("all seven market collectors run independently twice daily", () => {
+test("six markets run daily while Japan runs weekly", () => {
   assert.equal(marketFiles.length, 7);
   for (const { market, content } of marketFiles) {
     assert.match(content, /workflow_dispatch:/, `${market} must support manual dispatch`);
     assert.match(content, /schedule:/, `${market} must have its own schedule`);
-    assert.match(content, /cron: "17 \d{1,2},\d{1,2} \* \* \*"/, `${market} must run twice daily`);
+    if (market === "japan") assert.match(content, /cron: "17 5 \* \* 1"/, "Japan must run weekly");
+    else assert.match(content, /cron: "17 \d{1,2} \* \* \*"/, `${market} must run daily`);
     assert.doesNotMatch(content, /\bneeds:/, `${market} must not depend on another market`);
     assert.match(content, new RegExp(`market: ${market}`));
     assert.match(content, /catalog-v(?:2-market-recovery|3-market-10k)-reusable\.yml/);
   }
   assert.match(market10kReusable, /group: catalog-v3-\$\{\{ inputs\.market \}\}/);
-  assert.match(market10kReusable, /CATALOG_JAPAN_RETENTION_MS: "15552000000"/);
+  assert.match(marketFiles.find(({ market }) => market === "japan")?.content || "", /retention_ms: "2592000000"/);
+  assert.match(marketFiles.find(({ market }) => market === "japan")?.content || "", /target_per_market: "30000"/);
+  assert.match(market10kReusable, /CATALOG_JAPAN_RETENTION_MS: "2592000000"/);
 });
 
 test("retired combined writers cannot collide with the independent schedules", () => {

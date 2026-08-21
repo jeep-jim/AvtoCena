@@ -1,20 +1,13 @@
-name: Catalog V3 · Japan · 10k
-run-name: Catalog V3 · Japan · 10k · ${{ github.sha }}
+name: Catalog V3 · Japan · 30k weekly
+run-name: Catalog V3 · Japan · 30k weekly · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - .github/workflows/catalog-v2-japan.yml
-      - .github/workflows/catalog-v3-market-10k-reusable.yml
-      - scripts/catalog-publish-market.mjs
-      - apps/web/lib/catalog/storage.ts
   schedule:
-    - cron: "17 5,17 * * *"
+    - cron: "17 5 * * 1"
 
-# Japan is refreshed twice daily and completed auction rows remain available
-# for six months. Duplicate lots collapse by stable source identity.
+# Japan is refreshed once a week and completed auction rows remain available
+# for 30 days. Duplicate lots collapse by stable source identity.
 permissions:
   contents: read
 
@@ -24,5 +17,8 @@ jobs:
     with:
       market: japan
       display_name: Япония
-      retention_ms: "15552000000"
+      retention_ms: "2592000000"
+      target_per_source: "30000"
+      target_per_market: "30000"
+      maximum_per_market: "30000"
     secrets: inherit

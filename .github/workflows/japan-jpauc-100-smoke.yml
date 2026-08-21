@@ -71,7 +71,7 @@ jobs:
       CATALOG_REBUILD_MARKETS: japan
       CATALOG_REBUILD_PUBLISH_REPORT: japan-jpauc-publish-report.json
       CATALOG_PUBLISH_MAX_PER_MARKET: "30000"
-      CATALOG_OFFER_RETENTION_MS: "15552000000"
+      CATALOG_OFFER_RETENTION_MS: "2592000000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
     steps:
       - uses: actions/checkout@v4
