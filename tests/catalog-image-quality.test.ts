@@ -94,25 +94,19 @@ test("removes repeated images with the same checksum", () => {
   assert.deepEqual(rankedCatalogImageUrls({ images: [jpegPhoto, copy, copy] }), ["/api/catalog/images/photo"]);
 });
 
-test("enforces five photos for Korea and preserves existing strict market contracts", () => {
-  assert.equal(isCrediblePublicOffer({ ...rawOffer, images: rawOffer.images.slice(0, 4) } as any), false);
-  assert.equal(isCrediblePublicOffer(rawOffer as any), true);
-
-  const georgia = { ...rawOffer, market: "georgia", sourceId: "autopapa_georgia_open", sourceCurrency: "USD" };
-  assert.equal(isCrediblePublicOffer({ ...georgia, images: rawOffer.images.slice(0, 4) } as any), false);
-  assert.equal(isCrediblePublicOffer(georgia as any), true);
-
-  const autoHome = { ...rawOffer, market: "china", sourceId: "autohome_new_china_open", sourceCurrency: "CNY" };
-  assert.equal(isCrediblePublicOffer({ ...autoHome, images: rawOffer.images.slice(0, 4) } as any), false);
-  assert.equal(isCrediblePublicOffer(autoHome as any), true);
-
-  const europe = { ...rawOffer, market: "europe", sourceId: "mobile_de_open", sourceCurrency: "EUR" };
-  assert.equal(isCrediblePublicOffer({ ...europe, images: rawOffer.images.slice(0, 4) } as any), false);
-  assert.equal(isCrediblePublicOffer(europe as any), true);
-
-  const japan = { ...rawOffer, market: "japan", sourceId: "japan_live", sourceCurrency: "JPY" };
-  assert.equal(isCrediblePublicOffer({ ...japan, images: rawOffer.images.slice(0, 4) } as any), false);
-  assert.equal(isCrediblePublicOffer(japan as any), true);
+test("accepts two genuine photos for every passenger-car market and rejects one", () => {
+  const variants = [
+    { ...rawOffer, market: "korea", sourceId: "encar_direct", sourceCurrency: "KRW" },
+    { ...rawOffer, market: "georgia", sourceId: "autopapa_georgia_open", sourceCurrency: "USD" },
+    { ...rawOffer, market: "china", sourceId: "autohome_new_china_open", sourceCurrency: "CNY" },
+    { ...rawOffer, market: "europe", sourceId: "mobile_de_open", sourceCurrency: "EUR" },
+    { ...rawOffer, market: "japan", sourceId: "japan_live", sourceCurrency: "JPY" },
+    { ...rawOffer, market: "uae", sourceId: "dubizzle_uae_open", sourceCurrency: "AED" },
+  ];
+  for (const offer of variants) {
+    assert.equal(isCrediblePublicOffer({ ...offer, images: rawOffer.images.slice(0, 1) } as any), false, `${offer.market}: one image must fail`);
+    assert.equal(isCrediblePublicOffer({ ...offer, images: rawOffer.images.slice(0, 2) } as any), true, `${offer.market}: two images must pass`);
+  }
 });
 
 test("rejects catalog cards without real source make and model identity", () => {
@@ -125,7 +119,7 @@ test("rejects catalog cards without real source make and model identity", () => 
   }
 });
 
-test("keeps a server-validated compact Japan projection visible with one ranked cover", () => {
+test("compact projections also require two real photos", () => {
   const japanProjection = {
     ...rawOffer,
     id: "japan-projection-card",
@@ -140,8 +134,8 @@ test("keeps a server-validated compact Japan projection visible with one ranked 
     images: rawOffer.images.slice(0, 1),
     cardProjectionVersion: 1,
   };
-  assert.equal(isCrediblePublicOffer(japanProjection as any), true);
-  assert.equal(isCrediblePublicOffer({ ...japanProjection, cardProjectionVersion: undefined } as any), false);
+  assert.equal(isCrediblePublicOffer(japanProjection as any), false);
+  assert.equal(isCrediblePublicOffer({ ...japanProjection, images: rawOffer.images.slice(0, 2) } as any), true);
 });
 
 test("accepts raw source price without knowledge calculation", () => {
@@ -157,27 +151,27 @@ test("rejects an advertising payment string used as the source title", () => {
   } as any), false);
 });
 
-test("older high-power combustion listings stay out even when power is model-wide", () => {
+test("older high-power Japan cars stay eligible for the non-priority 20 percent", () => {
   const olderJapan = {
     ...rawOffer,
     market: "japan",
-    year: new Date().getFullYear() - 7,
+    year: Math.max(2010, new Date().getFullYear() - 7),
     fuel: "petrol",
     powerHp: 220,
     powerDataConfidence: "estimated",
     powerDataSource: "vehicle-model-representative:toyota/crown",
   };
-  assert.equal(isCatalogOfferBusinessLiquid(olderJapan as any), false);
+  assert.equal(isCatalogOfferBusinessLiquid(olderJapan as any), true);
   assert.equal(isCatalogOfferBusinessLiquid({
     ...olderJapan,
     powerDataConfidence: "reference",
     powerDataSource: "vehicle-knowledge:drom_variant_220hp",
-  } as any), false);
+  } as any), true);
   assert.equal(isCatalogOfferBusinessLiquid({
     ...olderJapan,
     powerDataConfidence: "source_exact",
     powerDataSource: "source:horsepower",
-  } as any), false);
+  } as any), true);
 });
 
 test("rejects rounded Korea K9 3.3 GDI displacement and keeps exact 3342cc evidence", () => {
