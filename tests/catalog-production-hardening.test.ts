@@ -57,6 +57,13 @@ test("RF live proof accepts an earlier missing-power rejection without weakening
   assert.match(rfCustomsLiveProof, /categoryBlocked \|\| blockedByMissingPower/);
 });
 
+test("catalog reindex reruns whenever the production customs calculation changes", () => {
+  const reindexWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-reindex-vehicle-knowledge.yml", import.meta.url), "utf8");
+  assert.match(reindexWorkflow, /packages\/engine\/src\/calculation\/russiaCustomsV2\.ts/);
+  assert.match(reindexWorkflow, /apps\/web\/lib\/catalog\/customs-pricing\.ts/);
+  assert.match(reindexWorkflow, /\.github\/workflows\/catalog-reindex-vehicle-knowledge\.yml/);
+});
+
 test("Prestige failed-chunk repair uses GitHub CLI artifact downloads and remains no-publish", () => {
   assert.match(prestigeRepairWorkflow, /permissions:\n  actions: read\n  contents: read/);
   assert.match(prestigeRepairWorkflow, /gh run download "\$SOURCE_RUN_ID"/);
