@@ -3,7 +3,7 @@ const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime
 const { catalogMinYearForMarket, hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { presentCatalogOffer } = await import("../apps/web/lib/catalog/presentation.ts");
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
-const { catalogRequiredSpecificationRejectionReason } = await import("../apps/web/lib/catalog/public-priority.ts");
+const { catalogRequiredSpecificationRejectionReason, japanAuctionSoldIdentityVerified } = await import("../apps/web/lib/catalog/public-priority.ts");
 
 const output = String(process.env.CATALOG_AUDIT_OUTPUT || "catalog-live-postpersist-audit.json");
 const assertMarkets = new Set(String(process.env.CATALOG_AUDIT_ASSERT_MARKETS || "").split(",").map((v) => v.trim()).filter(Boolean));
@@ -31,21 +31,6 @@ function renderedIdentityProblems(offer) {
   if (!sourceSame && makeLabel && title && normalizedIdentity(title) === normalizedIdentity(makeLabel)) problems.push("display_title_make_only");
   return { problems, makeLabel, modelLabel, title };
 }
-function japanSoldIdentityOk(offer) {
-  const raw = offer?.operational?.raw || {};
-  const actualAuction = offer?.offerType === "auction" || offer?.catalogKind === "auction_result";
-  return offer?.market !== "japan" || !actualAuction || (
-    offer?.offerType === "auction"
-    && offer?.catalogKind === "auction_result"
-    && offer?.auctionResult === "sold"
-    && offer?.auctionPriceKind === "published_result"
-    && raw?.listingBoundImages === true
-    && raw?.photoIdentityVerified === true
-    && raw?.recoveryExactSourceUrl === true
-    && raw?.recoveryExactPhotoIdentity === true
-  );
-}
-
 const report = { version: 3, checkedAt: new Date().toISOString(), markets: {}, failures: [] };
 for (const market of PUBLIC_CATALOG_MARKETS) {
   let rows = [];
@@ -102,7 +87,7 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
     nonVehicleCount: rows.filter((offer) => nonVehicle.test(`${offer?.make || ""} ${offer?.model || ""} ${offer?.trim || ""} ${offer?.bodyType || ""}`)).length,
     nonPositiveSourcePriceCount: rows.filter((offer) => !(Number(offer?.sourcePrice || 0) > 0) || !String(offer?.sourceCurrency || "").trim()).length,
     belowFiveImagesCount: rows.filter((offer) => !Array.isArray(offer?.images) || offer.images.length < 5).length,
-    japanSoldIdentityFailureCount: market === "japan" ? rows.filter((offer) => !japanSoldIdentityOk(offer)).length : 0,
+    japanSoldIdentityFailureCount: market === "japan" ? rows.filter((offer) => !japanAuctionSoldIdentityVerified(offer)).length : 0,
     sourceCounts: Object.fromEntries([...new Set(rows.map((offer) => String(offer?.sourceId || "unknown")))].sort().map((sourceId) => [sourceId, rows.filter((offer) => String(offer?.sourceId || "unknown") === sourceId).length])),
   };
   report.markets[market] = stats;
