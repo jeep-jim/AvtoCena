@@ -98,6 +98,13 @@ function cleanEtag(value: string | null) { return value?.replace(/^W\//, "") || 
 function decodeXml(value: string) { return value.replace(/&lt;/g, "<").replace(/&gt;/g, ">").replace(/&quot;/g, "\"").replace(/&apos;/g, "'").replace(/&amp;/g, "&"); }
 function encodeXml(value: string) { return value.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/\"/g, "&quot;").replace(/'/g, "&apos;"); }
 
+export function objectStorageRequestTimeoutMs(bodyBytes: number) {
+  const configured = Math.max(5_000, Number(process.env.YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS || 30_000));
+  if (!Number.isFinite(bodyBytes) || bodyBytes <= 0) return configured;
+  const uploadAllowance = Math.min(300_000, 30_000 + Math.ceil(bodyBytes / (1024 * 1024)) * 10_000);
+  return Math.max(configured, uploadAllowance);
+}
+
 export class ObjectJsonStorage implements JsonStorage {
   driver: JsonStorageDriver = "object";
   private key(relativePath: string) { const cfg = objectConfig(); return [cfg.prefix, normalizeStorageKey(relativePath)].filter(Boolean).join("/"); }
@@ -105,7 +112,7 @@ export class ObjectJsonStorage implements JsonStorage {
     const cfg = objectConfig();
     const payloadHash = sha256(body ?? "");
     const attempts = Math.max(3, Number(process.env.YC_OBJECT_STORAGE_MAX_ATTEMPTS || 6));
-    const timeoutMs = Math.max(5_000, Number(process.env.YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS || 30_000));
+    const timeoutMs = objectStorageRequestTimeoutMs(Buffer.byteLength(body ?? ""));
     let lastError: unknown;
     for (let attempt = 0; attempt < attempts; attempt++) {
       const amzDate = new Date().toISOString().replace(/[:-]|\.\d{3}/g, "");

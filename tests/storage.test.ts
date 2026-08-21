@@ -3,7 +3,23 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { appendChunkedDataJson, generateId, LocalJsonStorage, resetJsonStorageForTests, writeDataJson, readDataJson } from '../apps/web/lib/data.ts';
+import { appendChunkedDataJson, generateId, LocalJsonStorage, objectStorageRequestTimeoutMs, resetJsonStorageForTests, writeDataJson, readDataJson } from '../apps/web/lib/data.ts';
+
+
+test('Object Storage gives large uploads enough time without unbounded waits', () => {
+  const previous = process.env.YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS;
+  delete process.env.YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS;
+  try {
+    assert.equal(objectStorageRequestTimeoutMs(0), 30_000);
+    assert.equal(objectStorageRequestTimeoutMs(12 * 1024 * 1024), 150_000);
+    assert.equal(objectStorageRequestTimeoutMs(100 * 1024 * 1024), 300_000);
+    process.env.YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS = '420000';
+    assert.equal(objectStorageRequestTimeoutMs(12 * 1024 * 1024), 420_000);
+  } finally {
+    if (previous === undefined) delete process.env.YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS;
+    else process.env.YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS = previous;
+  }
+});
 
 test('LocalJsonStorage reads and writes JSON', async () => {
   const dir = fs.mkdtempSync(path.join(os.tmpdir(), 'avtocena-storage-'));

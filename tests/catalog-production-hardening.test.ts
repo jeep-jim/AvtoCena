@@ -293,6 +293,8 @@ test("Object Storage publication bounds dynamic index keys and reports the faili
   assert.match(storage, /createHash\("sha256"\)/);
   assert.match(dataStorage, /object_storage_\$\{method\}_\$\{response\.status\}/);
   assert.match(dataStorage, /path=\$\{normalizedPath\.slice/);
+  assert.match(dataStorage, /objectStorageRequestTimeoutMs\(Buffer\.byteLength\(body \?\? ""\)\)/);
+  assert.match(dataStorage, /Math\.min\(300_000, 30_000 \+ Math\.ceil\(bodyBytes \/ \(1024 \* 1024\)\) \* 10_000\)/);
   assert.match(publisher, /Buffer\.byteLength\(normalized, "utf8"\) <= 180/);
 });
 
