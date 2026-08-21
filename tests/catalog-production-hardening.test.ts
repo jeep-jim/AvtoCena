@@ -152,7 +152,7 @@ test("seven-market recovery is calculated, failure-tolerant and collapse-protect
   assert.equal((sevenMarketWorkflow.match(/uses: \.\/\.github\/workflows\/catalog-v3-market-10k-reusable\.yml/g) || []).length, 7);
   assert.equal((sevenMarketWorkflow.match(/if: \$\{\{ always\(\) && !cancelled\(\) \}\}/g) || []).length, 7);
   assert.equal((sevenMarketWorkflow.match(/target_per_market: "30000"/g) || []).length, 7);
-  assert.match(sevenMarketWorkflow, /market: japan[\s\S]*retention_ms: "15552000000"/);
+  assert.match(sevenMarketWorkflow, /market: japan[\s\S]*retention_ms: "2592000000"/);
   assert.match(v3MarketWorkflow, /CATALOG_PUBLISH_MAX_PER_MARKET: \$\{\{ inputs\.maximum_per_market \}\}/);
   assert.match(standardMarketPublisher, /CATALOG_MIN_PUBLIC_RETENTION_RATIO \|\| 0\.10/);
   assert.match(standardMarketPublisher, /catastrophicPublicCollapse/);

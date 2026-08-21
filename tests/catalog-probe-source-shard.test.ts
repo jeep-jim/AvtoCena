@@ -46,8 +46,8 @@ test("Japan rollout combines mandatory and optional completed auction histories"
   assert.match(sourceRegistry, /market === "japan"\) return source\.role === "auction_history"/);
   assert.match(japanWorkflow, /workflow_dispatch:/);
   assert.match(japanWorkflow, /schedule:/);
-  assert.match(japanWorkflow, /cron: "17 5,17 \* \* \*"/);
-  assert.match(japanWorkflow, /retention_ms: "15552000000"/);
+  assert.match(japanWorkflow, /cron: "17 5 \* \* 1"/);
+  assert.match(japanWorkflow, /retention_ms: "2592000000"/);
   assert.match(japanWorkflow, /catalog-v3-market-10k-reusable\.yml/);
   assert.doesNotMatch(japanWorkflow, /\bneeds:/);
 });

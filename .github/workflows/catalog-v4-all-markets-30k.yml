@@ -65,7 +65,7 @@ jobs:
     with:
       market: japan
       display_name: Япония
-      retention_ms: "15552000000"
+      retention_ms: "2592000000"
       target_per_source: "30000"
       target_per_market: "30000"
       maximum_per_market: "30000"

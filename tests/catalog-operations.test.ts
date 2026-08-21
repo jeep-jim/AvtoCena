@@ -43,8 +43,8 @@ test("Japan scale collection goes deeper and publishes through the durable objec
   assert.match(workflow, /max-parallel: 6/);
   assert.match(workflow, /group: catalog-live-daily-working-markets/);
   assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
-  assert.match(workflow, /cron: "40 7,19 \* \* \*"/);
-  assert.match(workflow, /^\s*push:/m);
+  assert.doesNotMatch(workflow, /^\s*schedule:/m);
+  assert.doesNotMatch(workflow, /^\s*push:/m);
   assert.match(workflow, /cancel-in-progress: true/);
   assert.match(workflow, /RECOVERY_PUBLISH_MAX: "30000"/);
 
@@ -60,7 +60,7 @@ test("Japan scale collection goes deeper and publishes through the durable objec
   const verifiedPublish = fs.readFileSync(".github/workflows/catalog-japan-publish-verified-aggregate.yml", "utf8");
   assert.match(verifiedPublish, /PRESTIGE_AGGREGATE_MIN_COUNT: "5000"/);
   assert.match(verifiedPublish, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
-  assert.match(verifiedPublish, /CATALOG_OFFER_RETENTION_MS: "15552000000"/);
+  assert.match(verifiedPublish, /CATALOG_OFFER_RETENTION_MS: "2592000000"/);
   assert.match(verifiedPublish, /prestige-japan-aggregate-salvage\.mjs/);
   assert.match(verifiedPublish, /"japan":2200/);
   assert.match(verifiedPublish, /group: catalog-live-daily-working-markets/);
@@ -77,7 +77,7 @@ test("Japan scale collection goes deeper and publishes through the durable objec
   assert.match(reindexWorkflow, /group: catalog-live-daily-working-markets/);
   assert.match(reindex, /refreshLiveExchangeRates/);
   assert.match(reindex, /isPreliminaryPowerPendingCalculation\(source\)[\s\S]*calculateOfferWithPreliminaryPowerPricing\(source\)/);
-  assert.match(reindex, /180 \* 24 \* 60 \* 60 \* 1_000/);
+  assert.match(reindex, /30 \* 24 \* 60 \* 60 \* 1_000/);
 });
 
 test("certified 30-minute power applies only on reviewed changes or manual dispatch", () => {
