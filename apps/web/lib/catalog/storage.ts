@@ -846,7 +846,10 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
     if (preservedMarketKeys.includes(market)) throw new Error(`catalog_public_market_mode_conflict:${market}`);
   }
   const exactPreserveMarkets = new Set(preservedMarketKeys as CatalogMarket[]);
-  const protectedPublicIds = new Set(Object.values(appendPublicOffersByMarket).flatMap((rows) => rows || []).map((offer) => String(offer?.id || "")).filter(Boolean));
+  const protectedPublicIds = new Set([
+    ...Object.values(preservedPublicOffersByMarket),
+    ...Object.values(appendPublicOffersByMarket),
+  ].flatMap((rows) => rows || []).map((offer) => String(offer?.id || "")).filter(Boolean));
   const normalized = await Promise.all(nextOffers.map(async (offer) => exactPreserveMarkets.has(offer.market) || protectedPublicIds.has(String(offer.id))
     ? offer
     : normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer))));
@@ -980,16 +983,14 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
 }
 
 async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], _skipDisplayIdentityMarkets = new Set<CatalogMarket>(), protectedPublicIds = new Set<string>()) {
-  // Keep source/internal objects immutable. Public read models receive the
-  // same deterministic V2 + source-translation identity used by cards, so
-  // facets, filters, breadcrumbs, SEO pages and offer shards cannot disagree.
-  // Identity canonicalization is deliberately global, including exact-preserve
-  // and append-only rows. "Exact preserve" protects the input at the pre-write
-  // gate; it must not keep a stale Korean/Japanese/Chinese public title alive.
-  const identifiedOffers = await applyEncyclopediaDisplayIdentityBatch(storedOffers);
-  // Revalidate preserved/append-only rows too. Otherwise a stale expensive or
-  // untranslated card could survive forever merely because another market was
-  // the target of the current atomic publication.
+  // Keep source/internal objects immutable. Mutable rows receive the same
+  // deterministic V2 + source-translation identity used by cards.
+  // A one-market writer must not rename, reprice or delete another market.
+  // Protected rows were read from the active public generation and hash-gated
+  // by the caller; only that market's own refresh may revalidate them.
+  const protectedRows = storedOffers.filter((offer) => protectedPublicIds.has(String(offer.id)));
+  const mutableRows = storedOffers.filter((offer) => !protectedPublicIds.has(String(offer.id)));
+  const identifiedOffers = await applyEncyclopediaDisplayIdentityBatch(mutableRows);
   const qualityRejected = identifiedOffers.filter((offer) => !isPublicOffer(offer));
   const qualityEligibleOffers = identifiedOffers.filter(isPublicOffer);
   const identityRejected = qualityEligibleOffers.filter((offer) => !isSupportedPublicCatalogIdentity(offer));
@@ -997,10 +998,8 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], _sk
   const priceOutliers = findCatalogPriceOutliers(identityEligibleOffers);
   const rejectedPriceIds = new Set(priceOutliers.map((outlier) => outlier.id).filter((id) => !protectedPublicIds.has(String(id))));
   const priceFilteredOffers = identityEligibleOffers.filter((offer) => !rejectedPriceIds.has(offer.id));
-  const protectedRows = priceFilteredOffers.filter((offer) => protectedPublicIds.has(String(offer.id)));
-  const newRows = priceFilteredOffers.filter((offer) => !protectedPublicIds.has(String(offer.id)));
-  const deduplicated = deduplicatePublicCatalogOffers([...protectedRows, ...newRows], { protectedIds: protectedPublicIds });
-  const quota = enforceCatalogModelYearQuota(deduplicated.rows);
+  const deduplicated = deduplicatePublicCatalogOffers([...protectedRows, ...priceFilteredOffers], { protectedIds: protectedPublicIds });
+  const quota = enforceCatalogModelYearQuota(deduplicated.rows, { protectedIds: protectedPublicIds });
   return { offers: quota.rows, qualityRejected, identityRejected, priceOutliers, deduplicated, quota };
 }
 
