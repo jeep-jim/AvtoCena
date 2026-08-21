@@ -44,6 +44,8 @@ jobs:
         run: node --import tsx --test tests/catalog-model-year-quota.test.ts tests/catalog-global-model-cap.test.ts
       - name: Japan auction statistics tests
         run: node --import tsx --test tests/japan-auction-statistics-source.test.ts
+      - name: Japan Prestige partition rotation tests
+        run: node --import tsx --test tests/prestige-japan-partition-plan.test.ts
       - name: Catalog live sources v23 tests
         run: node --import tsx --test tests/catalog-live-sources-v19.test.ts
       - name: Guazi China RU listing tests

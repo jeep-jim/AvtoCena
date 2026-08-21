@@ -6,64 +6,62 @@ process.env.PRESTIGE_JAPAN_SEARCH_PAGES_PER_FETCH = "1";
 process.env.PRESTIGE_JAPAN_DESIRED_SOLD_PER_FETCH = "20";
 
 const { prestigeJapanExactSource: source } = await import("../apps/web/lib/catalog/prestige-japan-exact-source.ts");
+const { mapWithConcurrency, rotatedPrestigePlanCandidates } = await import("../apps/web/lib/catalog/prestige-japan-partition-plan.ts");
 
 const rawBudget = Math.max(1_000, Number(process.env.PRESTIGE_PLAN_RAW_BUDGET || 100_000));
 const maxPartitions = Math.max(1, Math.min(500, Number(process.env.PRESTIGE_PLAN_MAX_PARTITIONS || 220)));
 const maxMakes = Math.max(1, Math.min(100, Number(process.env.PRESTIGE_PLAN_MAX_MAKES || 100)));
 const rawPerModel = Math.max(20, Math.min(200, Number(process.env.PRESTIGE_PLAN_RAW_PER_MODEL || 60)));
 const startModelIndex = Math.max(0, Math.min(10_000, Number(process.env.PRESTIGE_PLAN_START_MODEL_INDEX || 0)));
+const planConcurrency = Math.max(1, Math.min(8, Number(process.env.PRESTIGE_PLAN_CONCURRENCY || 4)));
 const commercial = /(?:FORK|FORKLIFT|LOADER|EXCAVATOR|TRACTOR|CRANE|DUMP|TRUCK|BUS|COASTER|DYNA|TOYOACE|DUTRO|CANTER|ELF|FORWARD|GIGA|PROFIA|FD\d|FG\d|FGL|FDL|SDK)/i;
 
 const makes = await source.makes();
-const makeLists = [];
-for (let makeIndex = 0; makeIndex < Math.min(makes.length, maxMakes); makeIndex++) {
-  const make = makes[makeIndex];
+const selectedMakes = makes.slice(0, maxMakes);
+const makeLists = await mapWithConcurrency(selectedMakes, planConcurrency, async (make, makeIndex) => {
   const sourceModels = await source.models(make);
   const usableModels = sourceModels
     .map((model, modelIndex) => ({ model, modelIndex }))
     .filter(({ model }) => !commercial.test(String(model?.name || "")));
-  makeLists.push({ make, makeIndex, models: usableModels });
-}
+  return { make, makeIndex, models: usableModels };
+});
+const candidates = rotatedPrestigePlanCandidates(makeLists, startModelIndex);
+console.log(JSON.stringify({ phase: "plan_inventory", makes: makeLists.length, candidates: candidates.length, startModelIndex, planConcurrency }));
 
 const partitions = [];
 const models = [];
 let plannedRows = 0;
-let complete = true;
-let round = startModelIndex;
+let candidateOffset = 0;
 
 // Round-robin across every available make and model. We deliberately do not
 // cap the number of distinct models per make. The final catalog cap is only
 // 10–20 offers of the same make+model, which keeps variety without hiding
 // Toyota/Nissan/Honda model ranges.
 //
-// startModelIndex lets later no-publish/source-sharded passes continue from a
-// deeper model band instead of repeatedly exhausting the first 220 positive
-// partitions. This is a traversal offset only; source identity and all strict
-// sold/detail/gallery gates remain unchanged.
-while (partitions.length < maxPartitions && plannedRows < rawBudget) {
-  let anyModelInRound = false;
-  for (const entry of makeLists) {
-    const candidate = entry.models[round];
-    if (!candidate) continue;
-    anyModelInRound = true;
-    const { make, makeIndex } = entry;
-    const { model, modelIndex } = candidate;
-    let total = 0;
+// The daily start is circular per make: a high day offset never skips shorter
+// model lists. Bounded parallel probes keep the plan below its one-hour job
+// timeout without exceeding the collector's existing source concurrency.
+while (candidateOffset < candidates.length && partitions.length < maxPartitions && plannedRows < rawBudget) {
+  const batch = candidates.slice(candidateOffset, candidateOffset + planConcurrency);
+  candidateOffset += batch.length;
+  const probes = await mapWithConcurrency(batch, planConcurrency, async ({ make, makeIndex, model, modelIndex }) => {
     try {
       const probe = await source.searchPage(make, model, 0);
-      total = Math.max(0, Number(probe?.total || 0));
+      return { make, makeIndex, model, modelIndex, total: Math.max(0, Number(probe?.total || 0)) };
     } catch (error) {
-      models.push({ makeIndex, modelIndex, make: make.name, model: model.name, total: 0, error: String(error?.message || error) });
-      continue;
+      return { make, makeIndex, model, modelIndex, total: 0, error: String(error?.message || error) };
     }
-    models.push({ makeIndex, modelIndex, make: make.name, model: model.name, total });
+  });
+
+  for (const probe of probes) {
+    const { make, makeIndex, model, modelIndex, total } = probe;
+    models.push({ makeIndex, modelIndex, make: make.name, model: model.name, total, ...(probe.error ? { error: probe.error } : {}) });
     if (!total) continue;
     const remainingBudget = rawBudget - plannedRows;
-    if (remainingBudget <= 0 || partitions.length >= maxPartitions) { complete = false; break; }
+    if (remainingBudget <= 0 || partitions.length >= maxPartitions) break;
     const plannedForModel = Math.max(1, Math.min(total, rawPerModel, remainingBudget));
-    const id = `m${makeIndex}-d${modelIndex}-o0`;
     partitions.push({
-      id,
+      id: `m${makeIndex}-d${modelIndex}-o0`,
       makeIndex,
       modelIndex,
       make: make.name,
@@ -74,14 +72,11 @@ while (partitions.length < maxPartitions && plannedRows < rawBudget) {
       plannedRows: plannedForModel,
     });
     plannedRows += plannedForModel;
-    if (partitions.length >= maxPartitions || plannedRows >= rawBudget) { complete = false; break; }
   }
-  if (!anyModelInRound) break;
-  if (!complete) break;
-  round++;
 }
 
 if (!partitions.length) throw new Error("prestige_partition_plan_empty");
+const complete = candidateOffset >= candidates.length;
 const matrix = { include: partitions };
 const report = {
   generatedAt: new Date().toISOString(),
@@ -92,6 +87,7 @@ const report = {
   rawPerModel,
   maxPartitions,
   maxMakes,
+  planConcurrency,
   plannedRows,
   partitionCount: partitions.length,
   complete,
