@@ -17,6 +17,9 @@ export type RussiaCustomsV2Input = RussiaCustomsInput & {
   tnVedCode?: string;
   grossVehicleWeightKg?: number;
   bodyType?: string;
+  make?: string;
+  model?: string;
+  sourceTitle?: string;
 };
 
 export type RussiaCustomsV2Result = RussiaCustomsResult & {
@@ -132,7 +135,10 @@ function normalizedCategory(input: RussiaCustomsV2Input) {
   const tnVed = String(input.tnVedCode || "").replace(/\D/g, "");
   if (tnVed.startsWith("8704")) return { category: "N1" as const, assumed: false };
   const body = String(input.bodyType || "").toLowerCase();
-  if (/\b(?:pickup|pick-up|light\s*truck|truck|commercial)\b|пикап|груз/.test(body)) {
+  const identity = `${String(input.make || "")} ${String(input.model || "")} ${String(input.sourceTitle || "")}`.toLowerCase();
+  const pickupBody = /\b(?:pickup|pick-up|light\s*truck|truck|commercial)\b|пикап|груз/.test(body);
+  const pickupModel = /\b(?:hilux|tacoma|tundra|ranger|amarok|colorado|gladiator|navara|frontier|d-?max|triton|l200|musso|rexton\s+sports|silverado|f-?150|ram\s*1500|poer|cannon)\b/.test(identity);
+  if (pickupBody || pickupModel) {
     return { category: "unknown" as const, assumed: false };
   }
   return { category: "M1" as const, assumed: true };
