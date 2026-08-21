@@ -30,7 +30,7 @@ const REQUEST_HEADERS = {
   "accept-language": "en-US,en;q=0.9,ja;q=0.8",
   "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/150.0.0.0 Safari/537.36",
 };
-const BAD_IMAGE_RE = /logo|favicon|icon|sprite|banner|bnr|campaign|promo|advert|avatar|tracking|pixel|cookie|qrcode|qr-code|no[-_ ]?photo|no[-_ ]?image|thumb(?:nail)?/i;
+const BAD_IMAGE_RE = /logo|favicon|icon|sprite|banner|bnr|campaign|promo|promotion|advert|avatar|tracking|pixel|cookie|qrcode|qr-code|no[-_ ]?photo|no[-_ ]?image|thumb(?:nail)?|seller|dealer|recommend|related|similar/i;
 
 function clean(value: unknown) {
   return String(value ?? "")
@@ -61,11 +61,27 @@ function safeImageUrl(value: string, baseUrl = BASE) {
     return url.toString();
   } catch { return ""; }
 }
+function lotImageHost(listingImage: string) {
+  try { return new URL(listingImage).hostname.toLowerCase(); } catch { return ""; }
+}
+function isSameLotImageHost(value: string, listingImage: string, baseUrl: string) {
+  const candidate = safeImageUrl(value, baseUrl);
+  if (!candidate) return "";
+  const expectedHost = lotImageHost(listingImage);
+  if (!expectedHost) return candidate;
+  try {
+    const host = new URL(candidate).hostname.toLowerCase();
+    const expectedAleado = /(?:^|\.)aleado\.com$/i.test(expectedHost);
+    const candidateAleado = /(?:^|\.)aleado\.com$/i.test(host);
+    if (expectedAleado) return candidateAleado ? candidate : "";
+    return host === expectedHost ? candidate : "";
+  } catch { return ""; }
+}
 function photoVariants(value: string) {
   if (!value) return [];
   try {
     const base = new URL(value, BASE);
-    if (!/aleado\.com$/i.test(base.hostname)) return [base.toString()];
+    if (!/(?:^|\.)aleado\.com$/i.test(base.hostname)) return [base.toString()];
     base.protocol = "https:";
     const result: string[] = [];
     for (const number of [0, 1, 2]) {
@@ -215,17 +231,22 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const raw = offer.operational?.raw as JpaucRawRow | undefined;
     const max = Math.min(30, Math.max(2, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
-    const urls = new Set(photoVariants(raw?.listingImage || "").map((url) => safeImageUrl(url)).filter(Boolean));
+    const listingImage = raw?.listingImage || "";
+    const urls = new Set(photoVariants(listingImage).map((url) => safeImageUrl(url)).filter(Boolean));
     const sourceUrl = String(raw?.detailUrl || offer.operational?.sourceUrl || "");
     if (sourceUrl && urls.size < max) {
       try {
         const detail = await this.request(sourceUrl, { referer: this.listingUrl });
         for (const match of detail.html.matchAll(/<(?:img|source)[^>]+(?:data-original|data-lazy-src|data-src|src)\s*=\s*["']([^"']+)["']/gi)) {
-          const url = safeImageUrl(match[1], sourceUrl); if (url) urls.add(url); if (urls.size >= max) break;
+          const url = isSameLotImageHost(match[1], listingImage, sourceUrl);
+          if (url) urls.add(url);
+          if (urls.size >= max) break;
         }
         if (urls.size < max) {
           for (const match of detail.html.matchAll(/https?:\\?\/\\?\/[^"'\\\s<>]+?\.(?:jpe?g|png|webp|avif)(?:\?[^"'\\\s<>]*)?/gi)) {
-            const url = safeImageUrl(match[0].replace(/\\\//g, "/"), sourceUrl); if (url) urls.add(url); if (urls.size >= max) break;
+            const url = isSameLotImageHost(match[0].replace(/\\\//g, "/"), listingImage, sourceUrl);
+            if (url) urls.add(url);
+            if (urls.size >= max) break;
           }
         }
       } catch {
