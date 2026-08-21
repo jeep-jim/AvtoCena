@@ -2,6 +2,11 @@ name: Catalog raw · 7 markets · up to 30k each
 run-name: Catalog raw sequential recovery · ${{ github.sha }}
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/catalog-v4-all-markets-30k.yml"
   workflow_dispatch:
     inputs:
       reset_catalog:
@@ -15,10 +20,11 @@ permissions:
 
 concurrency:
   group: catalog-raw-all-markets-production
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   reset:
+    if: github.event_name == 'workflow_dispatch'
     name: Check storage and optionally clean catalog
     runs-on: ubuntu-latest
     timeout-minutes: 360
