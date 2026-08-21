@@ -289,7 +289,7 @@ export async function readVehicleKnowledgeVariants() {
   if (!variantCache) {
     variantCache = Promise.all([
       readBundledChunkedDataJson<VehicleKnowledgeVariant>(VARIANTS_PATH, []),
-      readBundledChunkedDataJson<VehicleKnowledgeVariant[]>(V2_BRIDGE_VARIANTS_PATH, []),
+      readBundledChunkedDataJson<VehicleKnowledgeVariant>(V2_BRIDGE_VARIANTS_PATH, []),
     ]).then(([legacy, bridge]) => appendNewIds(legacy, bridge)
       .filter((row) => row && row.id && row.modelId && positive(row.powerHp, 2_500)));
   }
