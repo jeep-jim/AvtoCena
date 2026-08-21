@@ -146,7 +146,10 @@ test("priority galleries preserve listing photos and enrich detail progressively
   const detailedFetch = fastGallery.indexOf("source.fetchImages(offer)");
   assert.ok(listingCache >= 0 && detailedFetch > listingCache);
   assert.match(fastGallery, /CATALOG_GALLERY_FAST_PATH/);
-  assert.match(fastGallery, /listingImages\.length >= minimum/);
+  // Minimum image count is an admission floor; fast-path collection only stops
+  // once the preferred gallery depth is reached, normally 30 source photos.
+  assert.match(fastGallery, /listingImages\.length >= preferred/);
+  assert.match(fastGallery, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER \|\| 30/);
   assert.match(fullGallery, /sourceGalleryUrls\(offer\)/);
   assert.match(fullGallery, /\[\.\.\.listingUrls, \.\.\.detailed\]/);
   assert.match(fullGallery, /gallerySafetyMode: "source_urls_only"/);

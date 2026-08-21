@@ -8,6 +8,7 @@ const { isCrediblePublicOffer, isCatalogYearAllowed, isCatalogMarketSourceAllowe
 const { compareCatalogPublicPriority, japanAuctionSoldIdentityVerified } = await import("../apps/web/lib/catalog/public-priority.ts");
 const { classifyCatalogV2Offer, selectCatalogV2MarketOffers } = await import("../apps/web/lib/catalog/catalog-v2-policy.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
+const { catalogRetentionDecision, catalogSourceRefreshStates } = await import("../apps/web/lib/catalog/source-retention.ts");
 const { persistCatalogOffers, previewCanonicalPublicCatalogOffers, readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
@@ -25,6 +26,7 @@ const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN
 const defaultRetentionMs = Math.max(60_000, Number(process.env.CATALOG_DEFAULT_RETENTION_MS || 3 * 24 * 60 * 60 * 1_000));
 const japanRetentionMs = Math.max(defaultRetentionMs, Number(process.env.CATALOG_JAPAN_RETENTION_MS || 30 * 24 * 60 * 60 * 1_000));
 const currentRetentionOverrideMs = Math.max(0, Number(process.env.CATALOG_OFFER_RETENTION_MS || 0));
+const outageGraceMultiplier = Math.max(1, Math.min(4, Number(process.env.CATALOG_SOURCE_OUTAGE_RETENTION_MULTIPLIER || 2)));
 const minimumPublicRetentionRatio = Math.max(0.01, Math.min(1, Number(process.env.CATALOG_MIN_PUBLIC_RETENTION_RATIO || 0.10)));
 const allowPublicCollapse = process.env.CATALOG_ALLOW_PUBLIC_COLLAPSE === "1";
 const prepareConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_PUBLISH_PREPARE_CONCURRENCY || 16)));
@@ -277,12 +279,25 @@ async function auditCandidate(sourceOffer) {
 
 await acquirePublishLock();
 try {
-const cutoff = Date.now() - retentionMs;
 const generation = await readGenerationFiles();
+const sourceRefreshStates = catalogSourceRefreshStates(generation.payloads);
 let currentMarketRows = [];
 try { currentMarketRows = await readMarketOffers(market); } catch { currentMarketRows = []; }
-const currentRetainedRows = currentMarketRows
-  .filter((row) => ["active", "stale"].includes(String(row?.status || "")) && freshness(row) >= cutoff);
+const retentionDecisions = new Map();
+const currentRetainedRows = currentMarketRows.filter((row) => {
+  if (!["active", "stale"].includes(String(row?.status || ""))) return false;
+  const decision = catalogRetentionDecision({
+    offer: row,
+    retentionMs,
+    outageGraceMultiplier,
+    sourceStates: sourceRefreshStates,
+  });
+  retentionDecisions.set(String(row.id || ""), decision);
+  return decision.retain;
+});
+const outageProtectedCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "source_outage_grace").length;
+const authoritativeExpiredCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "expired_after_authoritative_refresh").length;
+const outageGraceExpiredCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "outage_grace_expired").length;
 
 const candidatesById = new Map();
 for (const offer of currentRetainedRows
@@ -337,7 +352,7 @@ for (let start = 0; start < orderedCandidates.length && selected.length < maximu
 const v2Selection = selectCatalogV2MarketOffers(selected.sort(qualityOrder), v2Policy);
 // Retention must not bypass newly tightened public safety gates. In particular,
 // legacy Japanese auction-result rows may predate exact sold/photo provenance;
-// keep the 30-day window, but do not inherit those rows into a new generation.
+// keep the retention window, but do not inherit those rows into a new generation.
 const safelyRetainedCurrentRows = currentRetainedRows.filter((offer) => japanAuctionSoldIdentityVerified(offer));
 const selectedMarketOffersById = new Map(safelyRetainedCurrentRows.map((offer) => [String(offer.id), offer]));
 for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) selectedMarketOffersById.set(String(offer.id), offer);
@@ -464,7 +479,7 @@ const preliminaryRejectedCount = canonicalTargetPreview.qualityRejected
     || offer?.calculationSnapshot?.pricingConfidence === "preliminary")
   .length;
 const report = {
-  version: 2,
+  version: 3,
   mode: "catalog_v2_independent_market",
   market,
   publishedAt: new Date().toISOString(),
@@ -475,6 +490,12 @@ const report = {
   retentionMs,
   defaultRetentionMs,
   japanRetentionMs,
+  outageGraceMultiplier,
+  outageGraceMs: retentionMs * outageGraceMultiplier,
+  outageProtectedCount,
+  authoritativeExpiredCount,
+  outageGraceExpiredCount,
+  sourceRefreshStates,
   targetPerSource,
   targetPerMarket,
   maximumPerMarket,
@@ -511,6 +532,10 @@ const report = {
       extendedCount: v2Selection.extendedCount,
       fallbackUnlocked: v2Selection.fallbackUnlocked,
       shortageToUnlock: v2Selection.shortageToUnlock,
+      outageProtectedCount,
+      authoritativeExpiredCount,
+      outageGraceExpiredCount,
+      sourceRefreshStates,
       rejectionReasons,
       generationErrors: generation.errors,
       generationStopReasons: generation.payloads.map((payload) => payload.stopReason || payload.report?.stopReason || "unknown"),

@@ -57,11 +57,16 @@ test("Japan rollout combines mandatory and optional completed auction histories"
   assert.match(sequentialQueue, /retention_ms: "2592000000"/);
 });
 
-test("listing photos are cached before optional detail enrichment", () => {
-  const cacheAt = gallery.indexOf("cacheImageFromUrl(url");
-  const fastReturnAt = gallery.indexOf("listingImages.length >= minimum");
+test("listing photos stay source-bound and detail enrichment continues to preferred depth", () => {
+  const sourceModeAt = gallery.indexOf("if (sourceUrlsOnly)");
+  const binaryFallbackAt = gallery.indexOf("cacheImageFromUrl(url", sourceModeAt);
+  const fastReturnAt = gallery.indexOf("listingImages.length >= preferred");
   const detailAt = gallery.indexOf("source.fetchImages(offer)");
-  assert.ok(cacheAt >= 0 && fastReturnAt > cacheAt && detailAt > fastReturnAt);
+  assert.ok(sourceModeAt >= 0);
+  assert.ok(binaryFallbackAt > sourceModeAt, "binary cache must remain a non-source-URL fallback");
+  assert.ok(fastReturnAt > binaryFallbackAt && detailAt > fastReturnAt);
+  assert.match(gallery, /CATALOG_IMAGE_STORAGE_MODE/);
+  assert.match(gallery, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER \|\| 30/);
   assert.match(gallery, /Math\.min\(30/);
 });
 
