@@ -57,6 +57,9 @@ test("market workflow never turns an empty or failed collection into a fake succ
   assert.match(workflow, /totalCollected/);
   assert.match(workflow, /process\.exit\(1\)/);
   assert.match(workflow, /Require a non-empty market publication/);
+  assert.match(market10kReusable, /collector failed with exit status/);
+  assert.match(market10kReusable, /needs\.collect\.result == 'success'/);
+  assert.doesNotMatch(market10kReusable, /needs\.collect\.result != 'cancelled'/);
 });
 
 test("independent market collection keeps the full production crawl budget", () => {
@@ -75,21 +78,36 @@ test("independent market collection keeps the full production crawl budget", () 
   assert.match(workflow, /timeout --signal=TERM --kill-after=120s 6600s/);
 });
 
-test("six markets run daily while Japan runs weekly", () => {
+test("six markets run daily while Japan runs four times monthly and all production runs serialize", () => {
   assert.equal(marketFiles.length, 7);
   for (const { market, content } of marketFiles) {
     assert.match(content, /workflow_dispatch:/, `${market} must support manual dispatch`);
     assert.match(content, /schedule:/, `${market} must have its own schedule`);
-    if (market === "japan") assert.match(content, /cron: "17 5 \* \* 1"/, "Japan must run weekly");
+    if (market === "japan") assert.match(content, /cron: "17 5 1,8,15,22 \* \*"/, "Japan must run exactly four times per calendar month");
     else assert.match(content, /cron: "17 \d{1,2} \* \* \*"/, `${market} must run daily`);
     assert.doesNotMatch(content, /\bneeds:/, `${market} must not depend on another market`);
     assert.match(content, new RegExp(`market: ${market}`));
     assert.match(content, /catalog-v(?:2-market-recovery|3-market-10k)-reusable\.yml/);
   }
-  assert.match(market10kReusable, /group: catalog-v3-\$\{\{ inputs\.market \}\}/);
-  assert.match(marketFiles.find(({ market }) => market === "japan")?.content || "", /retention_ms: "2592000000"/);
-  assert.match(marketFiles.find(({ market }) => market === "japan")?.content || "", /target_per_market: "30000"/);
+  assert.match(market10kReusable, /group: catalog-production-market-serial/);
+  assert.match(market10kReusable, /cancel-in-progress: false/);
+  const japan = marketFiles.find(({ market }) => market === "japan")?.content || "";
+  assert.match(japan, /retention_ms: "2592000000"/);
+  assert.match(japan, /target_per_source: "100000"/);
+  assert.match(japan, /target_per_market: "30000"/);
+  assert.match(japan, /maximum_per_market: "100000"/);
   assert.match(market10kReusable, /CATALOG_JAPAN_RETENTION_MS: "2592000000"/);
+});
+
+test("current reusable enforces two-photo galleries, 30-image collection and 80/20 priority inputs", () => {
+  assert.match(market10kReusable, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "2"/);
+  assert.match(market10kReusable, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
+  assert.match(market10kReusable, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
+  assert.match(market10kReusable, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
+  assert.match(market10kReusable, /CATALOG_V2_PRIORITY_TARGET: "0\.8"/);
+  assert.match(market10kReusable, /CATALOG_PRIORITY_MAX_TOTAL_RUB: "8000000"/);
+  assert.match(market10kReusable, /CATALOG_PRIORITY_MAX_POWER_HP: "160"/);
+  assert.match(market10kReusable, /CATALOG_IMAGE_STORAGE_MODE: source_urls_only/);
 });
 
 test("retired combined writers cannot collide with the independent schedules", () => {
