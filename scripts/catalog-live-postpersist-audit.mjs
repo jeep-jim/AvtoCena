@@ -3,7 +3,7 @@ const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime
 const { catalogMinYearForMarket, hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { presentCatalogOffer } = await import("../apps/web/lib/catalog/presentation.ts");
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
-const { catalogRequiredSpecificationRejectionReason } = await import("../apps/web/lib/catalog/public-priority.ts");
+const { catalogRequiredSpecificationRejectionReason, isJapanAuctionOffer } = await import("../apps/web/lib/catalog/public-priority.ts");
 
 const output = String(process.env.CATALOG_AUDIT_OUTPUT || "catalog-live-postpersist-audit.json");
 const assertMarkets = new Set(String(process.env.CATALOG_AUDIT_ASSERT_MARKETS || "").split(",").map((v) => v.trim()).filter(Boolean));
@@ -33,7 +33,7 @@ function renderedIdentityProblems(offer) {
 }
 function japanSoldIdentityOk(offer) {
   const raw = offer?.operational?.raw || {};
-  return offer?.market !== "japan" || (
+  return offer?.market !== "japan" || !isJapanAuctionOffer(offer) || (
     offer?.offerType === "auction"
     && offer?.catalogKind === "auction_result"
     && offer?.auctionResult === "sold"
