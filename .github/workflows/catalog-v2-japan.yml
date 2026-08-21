@@ -1,5 +1,5 @@
-name: Catalog V3 · Japan · 30k weekly
-run-name: Catalog V3 · Japan · 30k weekly · ${{ github.sha }}
+name: Catalog V3 · Japan · 30k+ four times monthly
+run-name: Catalog V3 · Japan · 30k+ four times monthly · ${{ github.sha }}
 
 on:
   workflow_dispatch:
@@ -8,10 +8,12 @@ on:
     paths:
       - ".github/market-runs/japan"
   schedule:
-    - cron: "17 5 * * 1"
+    - cron: "17 5 1,8,15,22 * *"
 
-# Japan is refreshed once a week and completed auction rows remain available
-# for 30 days. Duplicate lots collapse by stable source identity.
+# Japan is refreshed exactly four times per calendar month. Active/current rows
+# and completed auction history may accumulate for 30 days. 30k is the target,
+# not a publish floor: the crawl may publish a smaller complete run and may grow
+# well beyond 30k when the sources expose more valid vehicles.
 permissions:
   contents: read
 
@@ -23,7 +25,7 @@ jobs:
       display_name: Япония
       reset_cursor: ${{ github.event_name != 'schedule' }}
       retention_ms: "2592000000"
-      target_per_source: "30000"
+      target_per_source: "100000"
       target_per_market: "30000"
-      maximum_per_market: "30000"
+      maximum_per_market: "100000"
     secrets: inherit
