@@ -35,6 +35,7 @@ jobs:
       PRESTIGE_PLAN_MAX_PARTITIONS: "90"
       PRESTIGE_PLAN_MAX_MAKES: "30"
       PRESTIGE_PLAN_RAW_PER_MODEL: "200"
+      PRESTIGE_PLAN_CONCURRENCY: "4"
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
       CATALOG_KNOWLEDGE_DISABLED: "1"
     steps:
@@ -45,6 +46,8 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
+      - name: Validate circular model-band planning
+        run: node --import tsx --test tests/prestige-japan-partition-plan.test.ts
       - name: Rotate the bounded daily model band
         shell: bash
         run: |
