@@ -101,6 +101,8 @@ test("Mashina numeric model code cannot become estimated horsepower", () => {
     sourceId: "mashina_kyrgyzstan_exact",
     make: "Dongfeng",
     model: "DFSK 500",
+    trim: "Dongfeng DFSK 500",
+    transmission: "CVT",
     powerHp: 500,
     powerKw: 367.75,
     powerDataConfidence: "estimated" as const,

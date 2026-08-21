@@ -154,11 +154,11 @@ function inferEngineCc(text: string) {
 }
 
 function inferPowerHp(text: string) {
-  const hp = text.match(/\b([2-9]\d|[1-9]\d{2}|1\d{3})\s*(?:hp|ps|bhp|cv|ch|л\.?\s*с\.?|лс|马力|匹|마력|ცხ\.?\s*ძ\.?)/i);
+  const hp = text.match(/\b([2-9]\d|[1-9]\d{2}|1\d{3})\s*(?:hp|ps|bhp|cv|ch|л\.?\s*с\.?|лс|马力|匹|마력|ცხ\.?\s*ძ\.?)(?=$|[^\p{L}\p{N}])/iu);
   if (hp) return reasonable(hp[1], 20, 2_500);
   const georgian = text.match(/\b([2-9]\d|[1-9]\d{2}|1\d{3})\s*ცხენის\s+ძალა/i);
   if (georgian) return reasonable(georgian[1], 20, 2_500);
-  const kw = text.match(/\b([1-9]\d{1,3})\s*(?:kw|квт|კვტ|千瓦|킬로와트)/i);
+  const kw = text.match(/\b([1-9]\d{1,3})\s*(?:kw|квт|კვტ|千瓦|킬로와트)(?=$|[^\p{L}\p{N}])/iu);
   return kw ? reasonable(Number(kw[1]) * 1.35962, 20, 2_500) : undefined;
 }
 
