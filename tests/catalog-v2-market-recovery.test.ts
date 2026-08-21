@@ -87,6 +87,8 @@ test("six markets run daily while Japan runs weekly", () => {
     assert.match(content, /catalog-v(?:2-market-recovery|3-market-10k)-reusable\.yml/);
   }
   assert.match(market10kReusable, /group: catalog-v3-\$\{\{ inputs\.market \}\}/);
+  assert.match(market10kReusable, /default: "2592000000"/);
+  assert.match(market10kReusable, /CATALOG_DEFAULT_RETENTION_MS: "2592000000"/);
   assert.match(marketFiles.find(({ market }) => market === "japan")?.content || "", /retention_ms: "2592000000"/);
   assert.match(marketFiles.find(({ market }) => market === "japan")?.content || "", /target_per_market: "30000"/);
   assert.match(market10kReusable, /CATALOG_JAPAN_RETENTION_MS: "2592000000"/);
