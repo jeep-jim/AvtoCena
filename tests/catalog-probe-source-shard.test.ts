@@ -11,6 +11,7 @@ const fullGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/full-galler
 const sourceRegistry = fs.readFileSync(new URL("../apps/web/lib/catalog/catalog-v2-source-registry.ts", import.meta.url), "utf8");
 const requiredSources = fs.readFileSync(new URL("../apps/web/lib/catalog/required-catalog-sources.ts", import.meta.url), "utf8");
 const japanWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-japan.yml", import.meta.url), "utf8");
+const sequentialQueue = fs.readFileSync(new URL("../.github/workflows/catalog-v3-sequential-queue.yml", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
 const legacyWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-production-recovery-v15.yml", import.meta.url), "utf8");
 const knowledgeBlock = workflow.slice(workflow.indexOf("\n  knowledge:"), workflow.indexOf("\n  collect:"));
@@ -45,11 +46,15 @@ test("Japan rollout combines mandatory and optional completed auction histories"
   assert.doesNotMatch(japanPlan, /auctions22_japan_upcoming_open/);
   assert.match(sourceRegistry, /market === "japan"\) return source\.role === "auction_history"/);
   assert.match(japanWorkflow, /workflow_dispatch:/);
-  assert.match(japanWorkflow, /schedule:/);
-  assert.match(japanWorkflow, /cron: "17 5 \* \* 1"/);
+  assert.doesNotMatch(japanWorkflow, /^\s+schedule:/m);
   assert.match(japanWorkflow, /retention_ms: "2592000000"/);
   assert.match(japanWorkflow, /catalog-v3-market-10k-reusable\.yml/);
   assert.doesNotMatch(japanWorkflow, /\bneeds:/);
+  assert.match(sequentialQueue, /schedule:/);
+  assert.match(sequentialQueue, /cron: "17 21 \* \* \*"/);
+  assert.match(sequentialQueue, /01\|08\|15\|22/);
+  assert.match(sequentialQueue, /target_per_market: "30000"/);
+  assert.match(sequentialQueue, /retention_ms: "2592000000"/);
 });
 
 test("listing photos are cached before optional detail enrichment", () => {
