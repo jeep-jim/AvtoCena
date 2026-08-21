@@ -184,17 +184,19 @@ if (minimumFresh.__configError) warnings.push(`minimum_fresh_config:${minimumFre
 const degradedMarkets = markets.filter((market) => !byMarket[market]?.marketTargetReached || !byMarket[market]?.sourceTargetReached);
 const blockingMarkets = markets.filter((market) => {
   const row = byMarket[market];
+  // Freshness and target volume are growth signals, not publication-safety
+  // signals. A market with a non-empty, fully validated retained inventory
+  // must still be publishable while an upstream source is temporarily sparse.
+  // Invalid/incomplete offers have already been excluded from row.valid.
   return !row
     || row.artifacts === 0
     || row.sourceProbeArtifacts === 0
     || row.processFailures.length > 0
     || row.valid <= 0
-    || !row.freshThresholdReached
-    || !row.sourceTargetReached
     || !row.requiredSourcesAvailable;
 });
 const report = {
-  version: 22,
+  version: 23,
   checkedAt: new Date().toISOString(),
   mode: "per_market_volume_and_integrity_audit",
   inputDir,
