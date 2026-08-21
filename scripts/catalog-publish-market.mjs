@@ -334,7 +334,11 @@ for (let start = 0; start < orderedCandidates.length && selected.length < maximu
 }
 
 const v2Selection = selectCatalogV2MarketOffers(selected.sort(qualityOrder), v2Policy);
-// Retention must not bypass newly tightened public safety gates. In particular,\n// legacy Japanese auction-result rows may predate exact sold/photo provenance;\n// keep the 30-day window, but do not inherit those rows into a new generation.\nconst safelyRetainedCurrentRows = currentRetainedRows.filter((offer) => japanAuctionSoldIdentityVerified(offer));\nconst selectedMarketOffersById = new Map(safelyRetainedCurrentRows.map((offer) => [String(offer.id), offer]));
+// Retention must not bypass newly tightened public safety gates. In particular,
+// legacy Japanese auction-result rows may predate exact sold/photo provenance;
+// keep the 30-day window, but do not inherit those rows into a new generation.
+const safelyRetainedCurrentRows = currentRetainedRows.filter((offer) => japanAuctionSoldIdentityVerified(offer));
+const selectedMarketOffersById = new Map(safelyRetainedCurrentRows.map((offer) => [String(offer.id), offer]));
 for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) selectedMarketOffersById.set(String(offer.id), offer);
 const selectedMarketOffers = [...selectedMarketOffersById.values()].slice(0, maximumPerMarket);
 const preservedByMarket = {};

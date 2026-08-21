@@ -165,6 +165,7 @@ test("standard one-market publisher expires stale target rows and canonicalizes 
   assert.match(standardMarketPublisher, /previousPublicCount = currentMarketRows\.length/);
   assert.match(standardMarketPublisher, /safelyRetainedCurrentRows = currentRetainedRows\.filter\(\(offer\) => japanAuctionSoldIdentityVerified\(offer\)\)/);
   assert.match(standardMarketPublisher, /selectedMarketOffersById = new Map\(safelyRetainedCurrentRows/);
+  assert.equal(standardMarketPublisher.includes(String.raw`\n// legacy`), false);
   assert.match(standardMarketPublisher, /expectedPublishedHashByMarket/);
   assert.match(standardMarketPublisher, /expectedPublishedByMarket\[otherMarket\] = rows\.length/);
   assert.match(standardMarketPublisher, /currentMarket === market[\s\S]*expectedPublishedHashByMarket\[currentMarket\] = hashRows\(rows\)/);
