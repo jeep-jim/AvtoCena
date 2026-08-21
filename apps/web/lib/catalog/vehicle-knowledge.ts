@@ -59,6 +59,19 @@ export type VehicleModelMatch = {
   matchedBy: "model" | "alias" | "text";
 };
 
+export type KnowledgePowerResolution = {
+  powerHp?: number;
+  confidence?: PowerDataConfidence;
+  source?: string;
+  usedVariant: boolean;
+  usedRepresentative: boolean;
+  conflict?: {
+    kind: "variant_override" | "unresolved_model_conflict";
+    suppliedPowerHp: number;
+    referencePowerHp: number;
+  };
+};
+
 const MODELS_PATH = "catalog/vehicle-knowledge/models.json";
 const VARIANTS_PATH = "catalog/vehicle-knowledge/variants.json";
 const V2_BRIDGE_MODELS_PATH = "catalog/vehicle-knowledge/v2-bridge-models.json";
@@ -94,6 +107,76 @@ function validName(value: unknown, minimum = 2) {
 function positive(value: unknown, max = 4_000) {
   const parsed = Number(value);
   return Number.isFinite(parsed) && parsed > 0 && parsed <= max ? parsed : undefined;
+}
+
+function materiallyDifferent(left?: number, right?: number, relativeThreshold = 0.18, absoluteThreshold = 20) {
+  if (!left || !right) return false;
+  const delta = Math.abs(left - right);
+  return delta >= absoluteThreshold && delta / Math.max(left, right) >= relativeThreshold;
+}
+
+export function resolveKnowledgePower(args: {
+  suppliedPowerHp?: number;
+  suppliedConfidence?: PowerDataConfidence;
+  suppliedSource?: string;
+  variantPowerHp?: number;
+  variantId?: string;
+  representativePowerHp?: number;
+  modelId: string;
+}): KnowledgePowerResolution {
+  const supplied = positive(args.suppliedPowerHp, 2_500);
+  const variant = positive(args.variantPowerHp, 2_500);
+  const representative = positive(args.representativePowerHp, 2_500);
+  const trustedSupplied = supplied && ["documented", "source_exact"].includes(String(args.suppliedConfidence || ""));
+
+  if (!supplied) {
+    if (variant) return {
+      powerHp: variant,
+      confidence: "reference",
+      source: args.variantId ? `vehicle-knowledge:${args.variantId}` : undefined,
+      usedVariant: true,
+      usedRepresentative: false,
+    };
+    if (representative) return {
+      powerHp: representative,
+      confidence: "estimated",
+      source: `vehicle-model-representative:${args.modelId}`,
+      usedVariant: false,
+      usedRepresentative: true,
+    };
+    return { usedVariant: false, usedRepresentative: false };
+  }
+
+  if (!trustedSupplied && variant && materiallyDifferent(supplied, variant)) {
+    return {
+      powerHp: variant,
+      confidence: "reference",
+      source: args.variantId ? `vehicle-knowledge:${args.variantId}` : undefined,
+      usedVariant: true,
+      usedRepresentative: false,
+      conflict: { kind: "variant_override", suppliedPowerHp: supplied, referencePowerHp: variant },
+    };
+  }
+
+  // A model-wide representative value is never safe enough to replace an exact
+  // source field. It is only a plausibility alarm: if an untrusted source value
+  // is wildly outside the model family and no unique variant can resolve it,
+  // publish no horsepower rather than a confidently wrong number.
+  if (!trustedSupplied && !variant && representative && materiallyDifferent(supplied, representative, 0.35, 30)) {
+    return {
+      usedVariant: false,
+      usedRepresentative: false,
+      conflict: { kind: "unresolved_model_conflict", suppliedPowerHp: supplied, referencePowerHp: representative },
+    };
+  }
+
+  return {
+    powerHp: supplied,
+    confidence: args.suppliedConfidence,
+    source: args.suppliedSource,
+    usedVariant: false,
+    usedRepresentative: false,
+  };
 }
 
 function unique(values: unknown[]) {
@@ -206,7 +289,7 @@ export async function readVehicleKnowledgeVariants() {
   if (!variantCache) {
     variantCache = Promise.all([
       readBundledChunkedDataJson<VehicleKnowledgeVariant>(VARIANTS_PATH, []),
-      readBundledChunkedDataJson<VehicleKnowledgeVariant>(V2_BRIDGE_VARIANTS_PATH, []),
+      readBundledChunkedDataJson<VehicleKnowledgeVariant[]>(V2_BRIDGE_VARIANTS_PATH, []),
     ]).then(([legacy, bridge]) => appendNewIds(legacy, bridge)
       .filter((row) => row && row.id && row.modelId && positive(row.powerHp, 2_500)));
   }
@@ -333,20 +416,26 @@ export async function enrichOfferWithVehicleKnowledge<T extends VehicleOffer>(in
   } as T;
   const variant = await findVehicleVariant(model, canonical);
   const representativePowerHp = positive(model.representativePowerHp, 2_500);
-  const powerHp = positive(canonical.powerHp, 2_500)
-    || positive(variant?.powerHp, 2_500)
-    || representativePowerHp;
-  const usedRepresentative = !positive(canonical.powerHp, 2_500) && !variant && Boolean(representativePowerHp);
+  const powerResolution = resolveKnowledgePower({
+    suppliedPowerHp: positive(canonical.powerHp, 2_500),
+    suppliedConfidence: canonical.powerDataConfidence,
+    suppliedSource: canonical.powerDataSource,
+    variantPowerHp: positive(variant?.powerHp, 2_500),
+    variantId: variant?.id,
+    representativePowerHp,
+    modelId: model.id,
+  });
+  const powerHp = powerResolution.powerHp;
   const motorPowers = (variant?.power30MinKwByMotor || []).map(Number).filter((value) => positive(value, 2_000));
   const total30 = positive(variant?.power30MinKw, 2_000)
     || (motorPowers.length ? Math.round(motorPowers.reduce((sum, value) => sum + value, 0) * 100) / 100 : undefined);
-  const powerConfidence: PowerDataConfidence | undefined = positive(canonical.powerHp, 2_500)
-    ? canonical.powerDataConfidence
-    : variant
-      ? "reference"
-      : usedRepresentative
-        ? "estimated"
-        : canonical.powerDataConfidence;
+  const selectedPowerKw = powerResolution.usedVariant
+    ? positive(variant?.powerKw, 2_000) || (powerHp ? Math.round((powerHp / 1.35962) * 100) / 100 : undefined)
+    : powerResolution.usedRepresentative
+      ? (powerHp ? Math.round((powerHp / 1.35962) * 100) / 100 : undefined)
+      : powerHp
+        ? positive(canonical.powerKw, 2_000) || Math.round((powerHp / 1.35962) * 100) / 100
+        : undefined;
   return {
     ...canonical,
     generation: canonical.generation || variant?.generation,
@@ -356,28 +445,29 @@ export async function enrichOfferWithVehicleKnowledge<T extends VehicleOffer>(in
     drive: canonical.drive || variant?.drive,
     bodyType: canonical.bodyType || variant?.bodyType,
     powertrainKind: canonical.powertrainKind && canonical.powertrainKind !== "unknown" ? canonical.powertrainKind : variant?.powertrainKind || canonical.powertrainKind,
-    powerHp: powerHp || canonical.powerHp,
-    powerKw: canonical.powerKw || positive(variant?.powerKw, 2_000) || (powerHp ? Math.round((powerHp / 1.35962) * 100) / 100 : undefined),
+    powerHp,
+    powerKw: selectedPowerKw,
     icePowerKw: canonical.icePowerKw || positive(variant?.icePowerKw, 2_000),
     power30MinKwByMotor: canonical.power30MinKwByMotor?.length ? canonical.power30MinKwByMotor : motorPowers.length ? motorPowers : undefined,
     power30MinKw: canonical.power30MinKw || total30,
     utilizationPowerKw: canonical.utilizationPowerKw || positive(variant?.utilizationPowerKw, 4_000),
-    powerDataConfidence: powerConfidence,
-    powerDataSource: canonical.powerDataSource || (variant ? `vehicle-knowledge:${variant.id}` : usedRepresentative ? `vehicle-model-representative:${model.id}` : undefined),
+    powerDataConfidence: powerResolution.confidence,
+    powerDataSource: powerResolution.source,
     operational: {
       ...canonical.operational,
       raw: {
         ...(typeof canonical.operational?.raw === "object" && canonical.operational.raw ? canonical.operational.raw as object : {}),
         vehicleKnowledgeModel: {
-        id: model.id,
-        matchedBy: match.matchedBy,
-        score: match.score,
-        popularityDecile: model.popularityDecile,
-        representativePowerHp: model.representativePowerHp,
-        yearFrom: model.yearFrom,
-        yearTo: model.yearTo,
-      },
+          id: model.id,
+          matchedBy: match.matchedBy,
+          score: match.score,
+          popularityDecile: model.popularityDecile,
+          representativePowerHp: model.representativePowerHp,
+          yearFrom: model.yearFrom,
+          yearTo: model.yearTo,
+        },
         ...(variant ? { vehicleKnowledgeVariant: { id: variant.id, sourceType: variant.sourceType } } : {}),
+        ...(powerResolution.conflict ? { powerConflictResolution: powerResolution.conflict } : {}),
       },
     },
   } as T;
