@@ -20,10 +20,11 @@ permissions:
 
 concurrency:
   group: catalog-raw-all-markets-production
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   reset:
+    if: github.event_name == 'workflow_dispatch'
     name: Check storage and optionally clean catalog
     runs-on: ubuntu-latest
     timeout-minutes: 360
@@ -53,7 +54,7 @@ jobs:
 
   korea:
     needs: reset
-    if: ${{ always() && !cancelled() }}
+    if: ${{ github.event_name == 'workflow_dispatch' && always() && !cancelled() }}
     uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: korea
@@ -65,7 +66,7 @@ jobs:
 
   japan:
     needs: korea
-    if: ${{ always() && !cancelled() }}
+    if: ${{ github.event_name == 'workflow_dispatch' && always() && !cancelled() }}
     uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: japan
@@ -78,7 +79,7 @@ jobs:
 
   china:
     needs: japan
-    if: ${{ always() && !cancelled() }}
+    if: ${{ github.event_name == 'workflow_dispatch' && always() && !cancelled() }}
     uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: china
@@ -90,7 +91,7 @@ jobs:
 
   uae:
     needs: china
-    if: ${{ always() && !cancelled() }}
+    if: ${{ github.event_name == 'workflow_dispatch' && always() && !cancelled() }}
     uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: uae
@@ -102,7 +103,7 @@ jobs:
 
   europe:
     needs: uae
-    if: ${{ always() && !cancelled() }}
+    if: ${{ github.event_name == 'workflow_dispatch' && always() && !cancelled() }}
     uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: europe
@@ -114,7 +115,7 @@ jobs:
 
   georgia:
     needs: europe
-    if: ${{ always() && !cancelled() }}
+    if: ${{ github.event_name == 'workflow_dispatch' && always() && !cancelled() }}
     uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: georgia
@@ -126,7 +127,7 @@ jobs:
 
   kyrgyzstan:
     needs: georgia
-    if: ${{ always() && !cancelled() }}
+    if: ${{ github.event_name == 'workflow_dispatch' && always() && !cancelled() }}
     uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: kyrgyzstan
