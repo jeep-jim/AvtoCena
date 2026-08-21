@@ -17,7 +17,7 @@ const shardIndex = Math.max(0, Number(process.env.CATALOG_REBUILD_SHARD_INDEX ||
 const shardCount = Math.max(1, Number(process.env.CATALOG_REBUILD_SHARD_COUNT || 1));
 const targetPerSource = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PER_SOURCE || 100_000));
 const minimumMarketTarget = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET_PER_MARKET || 100_000));
-const minimumImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 1));
+const minimumImages = Math.max(1, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 2));
 const preferredImages = Math.max(minimumImages, Number(process.env.CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER || 30));
 const maximumImages = Math.min(30, Math.max(preferredImages, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
 const networkImageLimit = Math.min(maximumImages, Math.max(minimumImages, Number(process.env.CATALOG_COLLECTION_IMAGE_LIMIT || maximumImages)));
@@ -30,9 +30,9 @@ const maxSourceErrors = Math.max(2, Number(process.env.CATALOG_REBUILD_MAX_SOURC
 const sourceConcurrency = Math.max(1, Math.min(12, Number(process.env.CATALOG_REBUILD_SOURCE_CONCURRENCY || 8)));
 const prepareConcurrency = Math.max(1, Math.min(30, Number(process.env.CATALOG_REBUILD_PREPARE_CONCURRENCY || 30)));
 const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 6_300_000));
-const priorityMaxTotalRub = Math.max(100_000, Number(process.env.CATALOG_PRIORITY_MAX_TOTAL_RUB || 6_000_000));
+const priorityMaxTotalRub = Math.max(100_000, Number(process.env.CATALOG_PRIORITY_MAX_TOTAL_RUB || 8_000_000));
 const priorityMaxPowerHp = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_POWER_HP || 160));
-const priorityMaxAgeYears = Math.max(0, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
+const priorityMaxAgeYears = Math.max(0, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 99));
 const priorityMinYear = new Date().getFullYear() - priorityMaxAgeYears;
 const outputFile = process.env.CATALOG_REBUILD_OUTPUT || `catalog-rebuild-${market}-${shardIndex}.json`;
 const ignoreProbe = process.env.CATALOG_REBUILD_IGNORE_PROBE === "1";
@@ -64,7 +64,18 @@ function images(list) {
   }
   return result;
 }
-function firstSeen(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.firstSeenAt || offer?.updatedAt || "")) || 0; }
+// Retention is based on the last time the listing was successfully seen/refreshed,
+// not on the source's original publication date. A 2021 ad that is still live in
+// 2026 must survive a three-day rolling window as long as each crawl sees it.
+function retentionTime(offer) {
+  return Date.parse(String(
+    offer?.operational?.fullRebuildAt
+      || offer?.updatedAt
+      || offer?.firstSeenAt
+      || offer?.operational?.sourcePublishedAt
+      || "",
+  )) || 0;
+}
 function currentTime(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0; }
 function isMassMarketPriority(offer) { return classifyCatalogV2Offer(offer).tier === "priority"; }
 function quality(a, b) {
@@ -188,10 +199,10 @@ async function persistCandidatePools() {
   for (const sourceId of sourceIds) {
     const byId = new Map();
     for (const offer of retained.get(sourceId).values()) {
-      if (offer?.id && firstSeen(offer) >= cutoff) byId.set(offer.id, offer);
+      if (offer?.id && retentionTime(offer) >= cutoff) byId.set(offer.id, offer);
     }
     for (const offer of fresh.get(sourceId).values()) {
-      if (offer?.id && firstSeen(offer) >= cutoff) byId.set(offer.id, offer);
+      if (offer?.id && retentionTime(offer) >= cutoff) byId.set(offer.id, offer);
     }
     const rows = [...byId.values()].sort(quality).slice(0, targetPerSource);
     try {
@@ -219,7 +230,7 @@ for (const sourceId of sourceIds) {
     const rows = await readChunkedDataJson(candidatePath(sourceId), []);
     const bucket = retained.get(sourceId);
     for (const row of rows.sort(quality)) {
-      if (!row?.id || bucket.has(row.id) || bucket.size >= targetPerSource || firstSeen(row) < cutoff) continue;
+      if (!row?.id || bucket.has(row.id) || bucket.size >= targetPerSource || retentionTime(row) < cutoff) continue;
       const offer = normalizeVehicleOfferSpecs({ ...row, status: "active", images: images(row.images) });
       if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer)) {
         bucket.set(offer.id, offer);
@@ -238,7 +249,7 @@ try { internalRows = await readAllOffersForMaintenance(); } catch (error) { addE
 for (const row of [...publicRows, ...internalRows].sort(quality)) {
   const sourceId = String(row?.sourceId || "");
   const bucket = retained.get(sourceId);
-  if (!bucket || !row?.id || bucket.has(row.id) || bucket.size >= targetPerSource || firstSeen(row) < cutoff) continue;
+  if (!bucket || !row?.id || bucket.has(row.id) || bucket.size >= targetPerSource || retentionTime(row) < cutoff) continue;
   const offer = normalizeVehicleOfferSpecs({ ...row, status: "active", images: images(row.images) });
   if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer)) bucket.set(offer.id, offer);
 }
