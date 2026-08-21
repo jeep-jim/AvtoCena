@@ -25,6 +25,10 @@ on:
         required: false
         type: string
         default: "100000"
+      reset_cursor:
+        required: false
+        type: boolean
+        default: false
     secrets:
       YC_OBJECT_STORAGE_ENDPOINT:
         required: false
@@ -121,7 +125,7 @@ jobs:
       CATALOG_REBUILD_SHARD_COUNT: "5"
       CATALOG_V2_SOURCE_SLOTS_ONLY: "0"
       CATALOG_REBUILD_IGNORE_PROBE: "0"
-      CATALOG_REBUILD_RESET_CURSOR: "0"
+      CATALOG_REBUILD_RESET_CURSOR: ${{ inputs.reset_cursor && '1' || '0' }}
       CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "10000"
       CATALOG_REBUILD_MAX_TOTAL_PAGES: "100000"
       CATALOG_REBUILD_MAX_EMPTY_PAGES: "500"

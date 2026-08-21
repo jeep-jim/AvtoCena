@@ -21,4 +21,5 @@ jobs:
     with:
       market: kyrgyzstan
       display_name: Кыргызстан
+      reset_cursor: ${{ github.event_name != 'schedule' }}
     secrets: inherit

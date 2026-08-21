@@ -21,4 +21,5 @@ jobs:
     with:
       market: europe
       display_name: Европа
+      reset_cursor: ${{ github.event_name != 'schedule' }}
     secrets: inherit
