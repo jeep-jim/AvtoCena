@@ -32,11 +32,17 @@ export function isCompletedJapanAuction(offer: Partial<VehicleOffer>) { if (!isJ
 export function classifyCatalogV2Offer(offer: Partial<VehicleOffer>, options: CatalogV2PolicyOptions = CATALOG_V2_DEFAULT_POLICY): CatalogV2Classification {
   if (!offer.id || !offer.make || !offer.model || !offer.market) return { tier: "rejected", eligible: false, reason: "identity" };
   const year = number(offer.year), ageYears = currentAge(year), powerHp = number(offer.powerHp), totalRub = number(offer.totalRub), popularity = popularityDecile(offer);
-  if (!year || year < 2011 || year > new Date().getFullYear() + 1) return { tier: "rejected", eligible: false, reason: "year", ageYears, powerHp, totalRub, popularityDecile: popularity };
+  const minimumYear = offer.market === "japan" ? 2010 : 2011;
+  if (!year || year < minimumYear || year > new Date().getFullYear() + 1) return { tier: "rejected", eligible: false, reason: "year", ageYears, powerHp, totalRub, popularityDecile: popularity };
   if (!hasExplicitSourcePrice(offer)) return { tier: "rejected", eligible: false, reason: REQUEST_PRICE.test(priceText(offer)) ? "price_on_request" : "source_price_missing", ageYears, powerHp, totalRub, popularityDecile: popularity };
   if (offer.market === "japan") {
-    if (!isCompletedJapanAuction(offer)) return { tier: "rejected", eligible: false, reason: "japan_auction_not_completed", ageYears, powerHp, totalRub, popularityDecile: popularity };
-    return { tier: "japan_auction", eligible: true, reason: "completed_auction", ageYears, powerHp, totalRub, popularityDecile: popularity };
+    // A sold-result requirement is meaningful only for auction inventory.
+    // Fixed-price dealer listings (Goo-net, Carused and similar sources) are
+    // normal purchasable stock and must not be discarded as unfinished lots.
+    if (isJapanAuctionOffer(offer)) {
+      if (!isCompletedJapanAuction(offer)) return { tier: "rejected", eligible: false, reason: "japan_auction_not_completed", ageYears, powerHp, totalRub, popularityDecile: popularity };
+      return { tier: "japan_auction", eligible: true, reason: "completed_auction", ageYears, powerHp, totalRub, popularityDecile: popularity };
+    }
   }
   const priority = ageYears !== undefined && ageYears <= options.priorityMaxAgeYears && (powerHp === undefined || powerHp <= options.priorityMaxPowerHp) && (totalRub === undefined || totalRub <= options.priorityMaxTotalRub);
   return priority
