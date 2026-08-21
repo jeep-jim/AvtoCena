@@ -6,13 +6,10 @@ import { isEncarNonCashContractOffer } from "./encar-sale-contract";
 const GENERIC_LISTING_RE = /(?:exclusively\s+on|read\s+more|learn\s+more|breaking\s+news|latest\s+news|car\s+news|road\s+test|article|blog|magazine|toonaan|deze\s+elektr|highly\s+responsive|certified\s+pre\s+owned|\b(?:aed|usd|eur)\s*\d+\s*\/\s*month\b|\b0\s*dp\b|\b\d+\s*day\s*return\b|\breturn\s+warranty\b|^location$|^alle\s+|未上传图片|暂无图片|扫码|二维码|联系卖家|&(?:#\d+|[a-z]+);)/i;
 const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|jet\s*ski|watercraft|personal\s+watercraft|super\s+jet|forklift|excavator|bulldozer|tractor|crane|generator|boat|ship|machinery|spare\s+parts?|engine\s+only|автозапчаст|мотоцикл|погрузчик|генератор)/i;
 const NON_PASSENGER_BODY_RE = /^(?:truck|light[\s-]*truck|heavy[\s-]*truck|lorry|commercial(?:\s+vehicle)?|bus|coach|special(?:\s+purpose)?(?:\s+vehicle)?|machinery)$/i;
-const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|social|share[-_ ]?icon|camera[-_ ]?off|dummy[-_ ]?(?:car|image)|\/users\/|cdn-cgi|challenge-platform)/i;
-const ALTERNATIVE_POWERTRAIN_RE = /(?:hybrid|phev|hev|electric|\bbev\b|\bev\b|гибрид|электро)/i;
+const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?not[-_ ]?available|coming[-_ ]?soon|default[-_ ]?(?:car|vehicle|image)|upload[-_ ]?image|placeholder|qrcode|qr-code|qr_|weixin|wechat|scan|download[-_ ]?app|appstore|googleplay|favicon|sprite|tracking|pixel|social|share[-_ ]?icon|camera[-_ ]?off|dummy[-_ ]?(?:car|image)|banner|bnr|campaign|promo|promotion|advert|\/users\/|cdn-cgi|challenge-platform)/i;
 const INVALID_CATALOG_IDENTITY_RE = /^(?:unknown|undefined|null|none|n\/?a|not\s+(?:specified|available|known)|other(?:s)?|andere|brand|make|model|марка(?:\s+уточняется)?|модель(?:\s+уточняется)?|уточняется|не\s+указано|неизвестно|기타|미상|其他|未知|その他)$/iu;
 const REQUIRED_SOURCE_IDS = new Set(Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId));
 const GEORGIA_ALLOWED_SOURCE_IDS = new Set(["myauto_georgia_list", "myauto_georgia_exact", "autopapa_georgia_open"]);
-const BUSINESS_LIQUIDITY_RECENT_YEARS = 5;
-const BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP = 160;
 export const CATALOG_NON_JAPAN_MIN_YEAR = 2020;
 export const CATALOG_JAPAN_MIN_YEAR = 2010;
 
@@ -43,9 +40,6 @@ export function hasCredibleCatalogIdentity(offer: Pick<VehicleOffer, "make" | "m
   const make = clean(offer.make);
   const model = clean(offer.model);
   if (!credibleIdentityValue(make) || !credibleIdentityValue(model)) return false;
-  // "Benz" is never a model family for modern Mercedes-Benz stock. It appears
-  // when a source/normalizer collapses the make token into the model field and
-  // cannot be safely matched to Encyclopedia variants, so fail closed.
   if (/^Mercedes[- ]?Benz$/i.test(make) && /^Benz$/i.test(model)) return false;
   return true;
 }
@@ -135,26 +129,13 @@ export function isCatalogKnownK9EngineSemanticValid(offer: VehicleOffer) {
 }
 
 export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
-  if (!isCatalogKnownBodySemanticValid(offer) || !isCatalogKnownK9EngineSemanticValid(offer)) return false;
-  const currentYear = new Date().getFullYear();
-  const year = Number(offer.year || 0);
-  const powerHp = Number(offer.powerHp || 0);
-  if (!year || year >= currentYear - BUSINESS_LIQUIDITY_RECENT_YEARS || !(powerHp > BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP)) return true;
-
-  const powertrainKind = clean(offer.powertrainKind).toLowerCase();
-  if (["electric", "series_hybrid", "other_hybrid"].includes(powertrainKind)) return true;
-  if (ALTERNATIVE_POWERTRAIN_RE.test(clean(offer.fuel))) return true;
-
-  return false;
+  // Price/power are ranking and 80/20 selection rules, not hard rejection rules.
+  // The hard catalog gate only rejects known semantic corruption here.
+  return isCatalogKnownBodySemanticValid(offer) && isCatalogKnownK9EngineSemanticValid(offer);
 }
 
-function minimumImageCount(offer: VehicleOffer) {
-  if (Number((offer as any).cardProjectionVersion || 0) >= 1) return 1;
-  if (offer.market === "georgia") return 5;
-  if (offer.market === "korea") return 5;
-  if (["autohome_new_china_open", "mobile_de_open"].includes(String(offer.sourceId || ""))) return 5;
-  if (offer.market === "japan") return offer.sourceId === "jpauc_japan_past_open" ? 3 : 5;
-  return 1;
+function minimumImageCount(_offer: VehicleOffer) {
+  return 2;
 }
 
 function mandatorySourcePhotoIdentityVerified(offer: VehicleOffer) {
@@ -173,7 +154,7 @@ function mandatorySourcePhotoIdentityVerified(offer: VehicleOffer) {
 
   if (offer.sourceId === "jpauc_japan_past_open"
     && operational.historicalAuction === true
-    && Number(operational.minimumImages || 0) === 3
+    && Number(operational.minimumImages || 0) >= 2
     && String(raw?.dataId || "") === String(offer.sourceOfferId || "")) return true;
 
   return false;
