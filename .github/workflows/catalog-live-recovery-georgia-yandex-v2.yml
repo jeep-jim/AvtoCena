@@ -69,10 +69,10 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Require a clean seven-market baseline before Georgia collection
+      - name: Require a clean six-market baseline before Georgia collection
         env:
           CATALOG_AUDIT_OUTPUT: catalog-georgia-yandex-v2-preflight.json
-          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,kyrgyzstan
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()
@@ -245,10 +245,10 @@ jobs:
         with:
           name: catalog-yandex-v2-recovery-georgia
           path: recovery-input
-      - name: Snapshot all seven markets immediately before dry-run
+      - name: Snapshot the six populated markets immediately before dry-run
         env:
           CATALOG_AUDIT_OUTPUT: catalog-georgia-yandex-v2-before.json
-          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,kyrgyzstan
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Dry-run Georgia replacement inside the full seven-market state
         env:
@@ -319,10 +319,10 @@ jobs:
         with:
           name: catalog-yandex-v2-recovery-georgia
           path: recovery-input
-      - name: Recheck strict all-seven baseline immediately before persistence
+      - name: Recheck strict six-market baseline immediately before persistence
         env:
           CATALOG_AUDIT_OUTPUT: catalog-georgia-yandex-v2-publish-before.json
-          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,kyrgyzstan
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Publish Georgia while preserving the other six public snapshots exactly
         env:
