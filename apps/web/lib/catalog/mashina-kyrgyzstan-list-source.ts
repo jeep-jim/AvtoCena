@@ -34,6 +34,8 @@ export type MashinaListRow = {
   mileageKm?: number;
   engineCc?: number;
   powerHp?: number;
+  powerKw?: number;
+  power30MinKw?: number;
   fuel?: string;
   transmission?: string;
   bodyType?: string;
@@ -66,6 +68,49 @@ export function parseMashinaExplicitEngineLiters(value: unknown) {
   const match = text.match(/(?:^|\s)([0-8](?:\.[0-9]))\s*(?=(?:A\/?T|M\/?T|AT|MT|CVT|DCT|DSG|hyb(?:rid)?|diesel|petrol|gasoline|turbo|T|d)\b)/i);
   const liters = Number(match?.[1] || 0);
   return Number.isFinite(liters) && liters >= 0.6 && liters <= 8 ? liters : 0;
+}
+export function parseMashinaExplicitPowerHp(value: unknown) {
+  const match = String(value || "").match(/(?:^|[^\p{L}\p{N}])([2-9]\d|[1-9]\d{2}|[12]\d{3})\s*(?:HP|PS|BHP|horsepower|л\.?\s*с\.?)(?=$|[^\p{L}\p{N}])/iu);
+  const power = Number(match?.[1] || 0);
+  return Number.isFinite(power) && power >= 20 && power <= 2_500 ? power : undefined;
+}
+
+function explicitKw(value: string, thirtyMinute: boolean) {
+  for (const match of value.matchAll(/([1-9]\d{0,3}(?:[.,]\d+)?)\s*(?:kW|кВт)(?=$|[^\p{L}\p{N}])/giu)) {
+    const context = value.slice(Math.max(0, (match.index || 0) - 70), match.index || 0);
+    const isThirtyMinute = /30\s*(?:[- ]?min(?:ute)?s?|мин(?:ут\w*)?)/iu.test(context);
+    if (isThirtyMinute !== thirtyMinute) continue;
+    const power = Number(match[1].replace(",", "."));
+    if (Number.isFinite(power) && power >= 1 && power <= 2_000) return power;
+  }
+  return undefined;
+}
+
+export function parseMashinaDetailSpecs(markup: string) {
+  const text = plainText(markup);
+  const cc = integer(text.match(/(?:Engine(?: capacity| displacement)?|Объ[её]м(?: двигателя)?|К[өо]л[өо]м)[^0-9]{0,20}([0-9][0-9\s,.]{2,5})\s*(?:cc|cm3|cm³|см3|см³)/iu)?.[1])
+    || integer(text.match(/([0-9][0-9\s,.]{2,5})\s*(?:cc|cm3|cm³|см3|см³)/iu)?.[1]);
+  const unitLiters = Number(text.match(/(?:Engine(?: capacity| displacement)?|Объ[её]м(?: двигателя)?|К[өо]л[өо]м)[^0-9]{0,20}([0-9]+(?:[.,][0-9]+)?)\s*(?:L|liter|litre|л\.?)/iu)?.[1]?.replace(",", ".") || 0);
+  const liters = unitLiters || parseMashinaExplicitEngineLiters(text);
+  const rawFuel = text.match(/(?:Fuel(?: type)?|Топливо|К[үу]й[үү]ч[үу]\s+май)\s*[:\-]?\s*(Gasoline\s*\/\s*gas|Gasoline|Petrol|Diesel|Hybrid|Electric|Gas|LPG|CNG|Бензин|Дизель|Гибрид|Электр(?:о|ический)?)/iu)?.[1];
+  const rawTransmission = text.match(/(?:Transmission|Gearbox|Коробка(?: передач)?|КПП)\s*[:\-]?\s*(Automatic|Manual|Variator|CVT|Robot|Robotic|Автомат(?:ическая)?|Механика|Механическая|Вариатор|Робот)/iu)?.[1];
+  const fuel = /diesel|дизел/iu.test(rawFuel || "") ? "Diesel"
+    : /hybrid|гибрид/iu.test(rawFuel || "") ? "Hybrid"
+      : /electric|электр/iu.test(rawFuel || "") ? "Electric"
+        : /gasoline|petrol|бензин/iu.test(rawFuel || "") ? "Gasoline"
+          : /gas|lpg|cng/iu.test(rawFuel || "") ? "Gas" : undefined;
+  const transmission = /variator|cvt|вариатор/iu.test(rawTransmission || "") ? "CVT"
+    : /robot|робот/iu.test(rawTransmission || "") ? "Robot"
+      : /manual|механ/iu.test(rawTransmission || "") ? "Manual"
+        : /automatic|автомат/iu.test(rawTransmission || "") ? "Automatic" : undefined;
+  return {
+    engineCc: cc || (liters >= 0.3 && liters <= 15 ? Math.round(liters * 1_000) : undefined),
+    powerHp: parseMashinaExplicitPowerHp(text),
+    powerKw: explicitKw(text, false),
+    power30MinKw: explicitKw(text, true),
+    fuel,
+    transmission,
+  };
 }
 function compact(value: unknown) {
   return String(value || "").toLocaleLowerCase("en-US").replace(/[^\p{L}\p{N}]+/gu, "");
@@ -254,6 +299,9 @@ export function parseMashinaListingMarkup(markup: string, pageUrl: string): Mash
       currency: money.currency,
       mileageKm: integer(text.match(/([0-9][0-9\s,.]{1,})\s*km\b/i)?.[1]),
       engineCc: liters >= 0.3 && liters <= 15 ? Math.round(liters * 1_000) : undefined,
+      powerHp: parseMashinaExplicitPowerHp(text),
+      powerKw: explicitKw(text, false),
+      power30MinKw: explicitKw(text, true),
       fuel: text.match(/\b(Gasoline\s*\/\s*gas|Gasoline|Petrol|Diesel|Hybrid|Electric|Gas|LPG|CNG)\b/i)?.[1],
       transmission: text.match(/\b(Automatic|Manual|Variator|CVT|Robot|Robotic)\b/i)?.[1],
       bodyType: text.match(/\b(Sedan|Hatchback(?:\s+[35]\s+doors)?|Liftback|Fastback|Suv(?:\s+[35]\s+doors)?|Wagon|Coupe|Minivan|Compact van|Microvan|Pickup|Limousine|Van|Cabriolet|Roadster)\b/i)?.[1],
@@ -318,6 +366,7 @@ export class MashinaKyrgyzstanListAdapter implements CatalogSourceAdapter {
       id: stableOfferId(this.sourceId, raw.id), sourceId: this.sourceId, sourceOfferId: raw.id,
       market: this.market, offerType: "fixed", status: "active", make: raw.make, model: raw.model,
       trim: raw.title, year: raw.year, mileageKm: raw.mileageKm, engineCc: raw.engineCc, powerHp: raw.powerHp,
+      powerKw: raw.powerKw, power30MinKw: raw.power30MinKw,
       fuel: raw.fuel, transmission: raw.transmission, bodyType: raw.bodyType,
       sourcePrice: raw.price, sourceCurrency: raw.currency, priceMode: "fixed", images: [], totalRub: null,
       calculationStatus: "needs_data", firstSeenAt: now, updatedAt: now,
@@ -340,17 +389,25 @@ export class MashinaKyrgyzstanListAdapter implements CatalogSourceAdapter {
     const minimum = Math.min(limit, Math.max(1, Number.isFinite(requestedMinimum) ? requestedMinimum : 5));
     let urls = dedupeMashinaImageUrls(raw?.images || row?.images || []);
     const detailUrl = offer.operational.sourceUrl || row?.detailUrl || "";
-    if (detailUrl && row && urls.length < minimum) {
+    const needsSpecs = !offer.fuel || (!offer.powerHp && !offer.powerKw)
+      || (String(offer.fuel || "").toLowerCase() === "electric" && !offer.power30MinKw)
+      || (String(offer.fuel || "").toLowerCase() !== "electric" && !offer.engineCc);
+    if (detailUrl && row && (urls.length < minimum || needsSpecs)) {
       try {
         const detail = await request(detailUrl, "https://www.mashina.kg/en/search/");
         if (identityMatches(detail.markup, row)) {
           urls = dedupeMashinaImageUrls([...urls, ...imageUrls(detail.markup, detail.response.url || detailUrl)]);
-          const text = plainText(detail.markup);
-          const cc = integer(text.match(/([0-9][0-9\s,.]{2,5})\s*(?:cc|cm3|cm³)/i)?.[1]);
-          const unitLiters = Number(text.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*(?:L|liter|litre)\b/i)?.[1]?.replace(",", ".") || 0);
-          const liters = unitLiters || parseMashinaExplicitEngineLiters(text);
-          offer.engineCc ||= cc || (liters >= 0.3 && liters <= 15 ? Math.round(liters * 1_000) : undefined);
-          offer.powerHp ||= integer(text.match(/\b([0-9]{2,4})\s*(?:HP|PS|horsepower|л\.с\.)\b/i)?.[1]);
+          const specs = parseMashinaDetailSpecs(detail.markup);
+          offer.engineCc ||= specs.engineCc;
+          offer.powerHp ||= specs.powerHp;
+          offer.powerKw ||= specs.powerKw;
+          offer.power30MinKw ||= specs.power30MinKw;
+          offer.fuel ||= specs.fuel;
+          offer.transmission ||= specs.transmission;
+          if (specs.powerHp || specs.powerKw || specs.power30MinKw) {
+            offer.powerDataConfidence = "source_exact";
+            offer.powerDataSource = `Mashina detail:${offer.sourceOfferId}:explicit-unit`;
+          }
           (offer.operational.raw as any).detailIdentityVerified = true;
         }
       } catch {
