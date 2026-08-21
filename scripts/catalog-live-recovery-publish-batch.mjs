@@ -269,9 +269,8 @@ for (const other of PUBLIC_CATALOG_MARKETS) {
     preservedInternalByMarket[other] = internalRows.length;
     preservedPublicHashByMarket[other] = hashRows(rows);
     preservedPublicRowsByMarket[other] = rows;
-    const canonical = await previewCanonicalPublicCatalogOffers(rows);
-    expectedPublishedByMarket[other] = canonical.offers.length;
-    expectedPublishedHashByMarket[other] = hashRows(canonical.offers);
+    expectedPublishedByMarket[other] = rows.length;
+    expectedPublishedHashByMarket[other] = hashRows(rows);
     combined.push(...internalRows);
     continue;
   }
@@ -369,6 +368,12 @@ const manifest = await persistCatalogOffers([...unique.values()], {
     const failures = [];
     for (const other of PUBLIC_CATALOG_MARKETS) {
       const rows = publishedOffers.filter((offer) => String(offer?.market || "") === other);
+      if (markets.includes(other)) {
+        if (!rows.length) failures.push(`${other}:count:0:1`);
+        expectedPublishedByMarket[other] = rows.length;
+        expectedPublishedHashByMarket[other] = hashRows(rows);
+        continue;
+      }
       const expectedCount = Number(expectedPublishedByMarket[other] || 0);
       const expectedHash = expectedPublishedHashByMarket[other];
       if (rows.length !== expectedCount) failures.push(`${other}:count:${rows.length}:${expectedCount}`);

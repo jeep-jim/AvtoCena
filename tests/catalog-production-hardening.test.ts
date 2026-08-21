@@ -140,11 +140,13 @@ test("recovery publisher always preserves untouched full maintenance state exact
   assert.match(recoveryPublisher, /recovery_batch_public_regression_guard/);
 });
 
-test("recovery preservation gates keep input exact before write and canonicalize every public market", () => {
+test("recovery preservation gates keep untouched markets byte-stable and canonicalize only mutable rows", () => {
   assert.match(storage, /preservePublicOffersByMarket/);
   assert.match(storage, /exactPreserveMarkets\.has\(offer\.market\)[\s\S]*\? offer[\s\S]*enrichOfferWithVehicleKnowledge/);
   assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets, protectedPublicIds\)/);
-  assert.match(storage, /applyEncyclopediaDisplayIdentityBatch\(storedOffers\)/);
+  assert.match(storage, /protectedRows = storedOffers\.filter/);
+  assert.match(storage, /mutableRows = storedOffers\.filter/);
+  assert.match(storage, /applyEncyclopediaDisplayIdentityBatch\(mutableRows\)/);
   assert.match(storage, /qualityEligibleOffers = identifiedOffers\.filter\(isPublicOffer\)/);
   assert.match(storage, /const publicOffers = nextOffers\.filter\(\(offer\) => !exactPreserveMarkets\.has\(offer\.market\) && !protectedPublicIds\.has\(String\(offer\.id\)\) && isPublicOffer\(offer\)\);[\s\S]*Object\.entries\(preservedPublicOffersByMarket\)[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*const generationId[\s\S]*persistInternalCatalog/);
   assert.match(singleRecoveryPublisher, /preservePublicOffersByMarket: preservedPublicRowsByMarket[\s\S]*beforePersistValidate\(publicOffers\)[\s\S]*recovery_prewrite_preservation_gate_failed/);
@@ -163,13 +165,14 @@ test("standard one-market publisher expires stale target rows and canonicalizes 
   assert.match(standardMarketPublisher, /previousPublicCount = currentMarketRows\.length/);
   assert.match(standardMarketPublisher, /selectedMarketOffersById = new Map\(currentRetainedRows/);
   assert.match(standardMarketPublisher, /expectedPublishedHashByMarket/);
-  assert.match(standardMarketPublisher, /canonicalCombinedPreview = await previewCanonicalPublicCatalogOffers/);
-  assert.match(standardMarketPublisher, /Object\.values\(preservedPublicRowsByMarket\)\.flat\(\)/);
+  assert.match(standardMarketPublisher, /expectedPublishedByMarket\[otherMarket\] = rows\.length/);
+  assert.match(standardMarketPublisher, /currentMarket === market[\s\S]*expectedPublishedHashByMarket\[currentMarket\] = hashRows\(rows\)/);
   assert.doesNotMatch(standardMarketPublisher, /otherCutoff/);
   assert.match(storage, /beforePublishValidate\?:/);
   assert.match(storage, /appendPublicOffersByMarket\?:/);
   assert.match(storage, /protectedPublicIds/);
-  assert.match(storage, /deduplicatePublicCatalogOffers\(\[\.\.\.protectedRows, \.\.\.newRows\], \{ protectedIds: protectedPublicIds \}\)/);
+  assert.match(storage, /deduplicatePublicCatalogOffers\(\[\.\.\.protectedRows, \.\.\.priceFilteredOffers\], \{ protectedIds: protectedPublicIds \}\)/);
+  assert.match(storage, /enforceCatalogModelYearQuota\(deduplicated\.rows, \{ protectedIds: protectedPublicIds \}\)/);
   assert.doesNotMatch(standardMarketPublisher, /appendPublicOffersByMarket: \{ \[market\]: currentMarketRows \}/);
   assert.match(standardMarketPublisher, /catalog\/import-lock\.json/);
   assert.match(standardMarketPublisher, /acquirePublishLock\(\)/);

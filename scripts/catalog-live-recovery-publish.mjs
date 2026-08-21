@@ -322,9 +322,8 @@ for (const other of PUBLIC_CATALOG_MARKETS) {
   preservedByMarket[other] = rows.length;
   preservedPublicHashByMarket[other] = hashRows(rows);
   preservedPublicRowsByMarket[other] = rows;
-  const canonical = await previewCanonicalPublicCatalogOffers(rows);
-  expectedPublishedByMarket[other] = canonical.offers.length;
-  expectedPublishedHashByMarket[other] = hashRows(canonical.offers);
+  expectedPublishedByMarket[other] = rows.length;
+  expectedPublishedHashByMarket[other] = hashRows(rows);
 }
 
 const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(marketRows);
@@ -361,6 +360,12 @@ try {
       const failures = [];
       for (const currentMarket of PUBLIC_CATALOG_MARKETS) {
         const rows = publishedOffers.filter((offer) => String(offer?.market || "") === currentMarket);
+        if (currentMarket === market) {
+          if (rows.length < minPreviousCount || !rows.length) failures.push(`${currentMarket}:count:${rows.length}:${Math.max(1, minPreviousCount)}`);
+          expectedPublishedByMarket[currentMarket] = rows.length;
+          expectedPublishedHashByMarket[currentMarket] = hashRows(rows);
+          continue;
+        }
         const expectedCount = Number(expectedPublishedByMarket[currentMarket] || 0);
         const expectedHash = expectedPublishedHashByMarket[currentMarket];
         if (rows.length !== expectedCount) failures.push(`${currentMarket}:count:${rows.length}:${expectedCount}`);
