@@ -5,7 +5,7 @@ import path from "node:path";
 import sharp from "sharp";
 import test from "node:test";
 import { BeForwardPublicAdapter, Che168GlobalPublicAdapter, EncarDirectAdapter, JsonPartnerFeedAdapter, buildEncarImageUrl, buildEncarListUrl, normalizeEncarPrice, parseBeForwardStocklist, parseCsv } from "../apps/web/lib/catalog/adapters";
-import { persistCatalogOffers, searchOffers, publicOffer, CATALOG_CHUNK_SIZE, getOffer, cacheImageFromUrl, assertSafeImageUrl, resetImageSourceCacheForTests } from "../apps/web/lib/catalog/storage";
+import { persistCatalogOffers, searchOffers, publicOffer, compactPublicStorageOffer, CATALOG_CHUNK_SIZE, getOffer, cacheImageFromUrl, assertSafeImageUrl, resetImageSourceCacheForTests } from "../apps/web/lib/catalog/storage";
 import { convertToRub, resetCatalogRateCache } from "../apps/web/lib/catalog/rates";
 import { getJsonStorage, resetJsonStorageForTests, readDataJson } from "../apps/web/lib/data";
 
@@ -254,6 +254,18 @@ test("public DTO strips source and private image storage fields", () => {
   assert.equal(dto.sourceId, undefined);
   assert.equal(dto.images[0].objectKey, undefined);
   assert.equal(dto.images[0].checksum, undefined);
+});
+
+test("public storage keeps verification metadata but drops bulky adapter raw payloads", () => {
+  const stored: any = compactPublicStorageOffer({
+    id: "o", sourceId: "source", sourceOfferId: "s", market: "korea", offerType: "fixed", status: "active",
+    make: "Hyundai", model: "Sonata", year: 2024, sourcePrice: 1, sourceCurrency: "KRW", priceMode: "fixed",
+    images: [image], calculationStatus: "ready", firstSeenAt: "now", updatedAt: "now",
+    operational: { sourceUrl: "https://example.com/car", photoIdentityVerified: true, raw: { html: "x".repeat(100_000) } },
+  } as any);
+  assert.equal(stored.operational.sourceUrl, "https://example.com/car");
+  assert.equal(stored.operational.photoIdentityVerified, true);
+  assert.equal(stored.operational.raw, undefined);
 });
 
 test("SSRF guard rejects private hosts and allows known image hosts", () => {

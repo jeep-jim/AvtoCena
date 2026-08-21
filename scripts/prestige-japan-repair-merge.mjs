@@ -8,7 +8,7 @@ const target = Math.max(1, Math.min(30_000, Number(process.env.PRESTIGE_REPAIR_T
 const exactImage = /^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i;
 const exactUrl = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
 const gradeToken = /^(?:[0-6](?:\.5)?|R|RA|A\d?|S)$/i;
-const JAPAN_MIN_MODEL_YEAR = 2015;
+const JAPAN_MIN_MODEL_YEAR = 2010;
 
 async function walk(dir) {
   const result = [];

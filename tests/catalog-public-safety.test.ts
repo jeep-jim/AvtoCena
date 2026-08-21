@@ -50,13 +50,21 @@ function sourceOffer(overrides: Record<string, unknown> = {}) {
   } as any;
 }
 
-test("public price requires a complete calculation and keeps a hard corruption ceiling", () => {
+test("public price requires a complete calculation and enforces the 15M product ceiling", () => {
   assert.equal(catalogOfferVisibleRub(calculatedOffer(3_200_000)), 3_200_000);
-  // High-end cars are not globally hidden by price alone; peer comparison
-  // below distinguishes a legitimate Rolls-Royce from a broken Ford parse.
-  assert.equal(catalogOfferVisibleRub(calculatedOffer(56_609_760)), 56_609_760);
+  assert.equal(catalogOfferVisibleRub(calculatedOffer(15_000_000)), 15_000_000);
+  assert.equal(catalogOfferVisibleRub(calculatedOffer(15_000_001)), 0);
   assert.equal(catalogOfferVisibleRub(calculatedOffer(346_980_250)), 0);
   assert.equal(catalogOfferVisibleRub({ ...calculatedOffer(3_200_000), calculationSnapshot: { customs: { status: "ready" }, breakdown: [] } }), 0);
+});
+
+test("public priority rejects a delivered total eight times the source car price", async () => {
+  const { catalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority");
+  const base = calculatedOffer(4_000_000) as any;
+  base.calculationSnapshot.currencyRate = { sourcePriceRub: 500_000 };
+  assert.equal(catalogPublicPriority(base).reason, "total_to_car_price_ratio");
+  base.calculationSnapshot.currencyRate.sourcePriceRub = 500_001;
+  assert.equal(catalogPublicPriority(base).eligible, true);
 });
 
 test("verified preliminary combustion price is visible without pretending the utilization fee is known", () => {
@@ -111,11 +119,11 @@ test("JPAuc may publish its verified three source photos", () => {
 
 test("same-model peer median rejects a tenfold price parse without hiding legitimate peers", () => {
   const fordEverest = [
-    ["everest-1", 7_251_986],
-    ["everest-2", 7_804_265],
-    ["everest-3", 8_384_049],
-    ["everest-4", 8_728_965],
-    ["everest-bad", 97_800_816],
+    ["everest-1", 1_251_986],
+    ["everest-2", 1_304_265],
+    ["everest-3", 1_384_049],
+    ["everest-4", 1_428_965],
+    ["everest-bad", 14_800_816],
   ].map(([id, totalRub]) => ({
     ...calculatedOffer(Number(totalRub), "uae"),
     id,

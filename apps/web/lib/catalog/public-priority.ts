@@ -48,6 +48,9 @@ const PRELIMINARY_POWER_MISSING = new Set([
   "power_hp",
 ]);
 
+export const CATALOG_PUBLIC_HARD_MAX_TOTAL_RUB = 15_000_000;
+export const CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO = 8;
+
 function positive(value: unknown, max = Number.MAX_SAFE_INTEGER) {
   const number = Number(value);
   return Number.isFinite(number) && number > 0 && number <= max ? number : 0;
@@ -111,11 +114,41 @@ export function isJapanAuctionOffer(offer: Partial<VehicleOffer> | any) {
 }
 
 function publicPriceLimits() {
-  // 8M is a sorting preference, not a visibility gate. A correctly calculated
-  // car must show the same RUB total on the list card and on the detail page.
-  const preferredMaximumRub = Math.max(1_000_000, Number(process.env.CATALOG_PUBLIC_MAX_TOTAL_RUB || 8_000_000));
-  const absoluteMaximumRub = Math.max(preferredMaximumRub, Number(process.env.CATALOG_PUBLIC_ABSOLUTE_MAX_TOTAL_RUB || 100_000_000));
+  // The preferred limit only affects ordering. The 15M ceiling is a product
+  // invariant: an environment override may tighten it, but cannot accidentally
+  // return unaffordable inventory to the public catalog.
+  const requestedPreferredRub = Number(process.env.CATALOG_PUBLIC_MAX_TOTAL_RUB || 8_000_000);
+  const requestedAbsoluteRub = Number(process.env.CATALOG_PUBLIC_ABSOLUTE_MAX_TOTAL_RUB || CATALOG_PUBLIC_HARD_MAX_TOTAL_RUB);
+  const absoluteMaximumRub = Math.min(
+    CATALOG_PUBLIC_HARD_MAX_TOTAL_RUB,
+    Math.max(1_000_000, Number.isFinite(requestedAbsoluteRub) ? requestedAbsoluteRub : CATALOG_PUBLIC_HARD_MAX_TOTAL_RUB),
+  );
+  const preferredMaximumRub = Math.min(
+    absoluteMaximumRub,
+    Math.max(1_000_000, Number.isFinite(requestedPreferredRub) ? requestedPreferredRub : 8_000_000),
+  );
   return { preferredMaximumRub, absoluteMaximumRub };
+}
+
+export function catalogOfferCarPriceRub(offer: Partial<VehicleOffer> | any) {
+  const ratePrice = Math.round(positive(offer?.calculationSnapshot?.currencyRate?.sourcePriceRub, 1_000_000_000));
+  if (ratePrice) return ratePrice;
+  return Math.round(positive(offer?.calculationSnapshot?.sourcePriceRub, 1_000_000_000));
+}
+
+export function catalogPublicEconomicRejectionReason(offer: Partial<VehicleOffer> | any) {
+  const totalRub = Math.round(positive(offer?.totalRub, 1_000_000_000));
+  if (!totalRub) return "";
+  const { absoluteMaximumRub } = publicPriceLimits();
+  if (totalRub > absoluteMaximumRub) return "above_public_price_limit";
+  const carPriceRub = catalogOfferCarPriceRub(offer);
+  const requestedRatio = Number(process.env.CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO || CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO);
+  const maximumRatio = Math.min(
+    CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO,
+    Math.max(1, Number.isFinite(requestedRatio) ? requestedRatio : CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO),
+  );
+  if (carPriceRub > 0 && totalRub / carPriceRub >= maximumRatio) return "total_to_car_price_ratio";
+  return "";
 }
 
 export function catalogOfferVisibleRub(offer: Partial<VehicleOffer> | any) {
@@ -165,7 +198,7 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
   const powerHp = offerPowerHp(offer);
   const popularityDecile = knowledgePopularityDecile(offer);
   const imageCount = Array.isArray(offer?.images) ? offer.images.length : 0;
-  const { preferredMaximumRub, absoluteMaximumRub } = publicPriceLimits();
+  const { preferredMaximumRub } = publicPriceLimits();
   const maximumPowerHp = Math.max(50, Number(process.env.CATALOG_PRIORITY_MAX_POWER_HP || 160));
   const maximumAgeYears = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
   const popularDecile = Math.max(1, Math.min(10, Number(process.env.CATALOG_PRIORITY_POPULARITY_DECILE || 5)));
@@ -175,7 +208,8 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
   if (!calculated && !preliminary) return { eligible: false, tier: 99, reason: "missing_full_calculation", ...base };
   if (!regionalPhotoIdentityVerified(offer)) return { eligible: false, tier: 99, reason: "unverified_regional_photo_identity", ...base };
   if (!rawTotalRub) return { eligible: false, tier: 99, reason: "missing_ruble_price", ...base };
-  if (rawTotalRub > absoluteMaximumRub) return { eligible: false, tier: 99, reason: "above_absolute_price_limit", ...base };
+  const economicRejection = catalogPublicEconomicRejectionReason(offer);
+  if (economicRejection) return { eligible: false, tier: 99, reason: economicRejection, ...base };
   if (!visibleRub) return { eligible: false, tier: 99, reason: "missing_ruble_price", ...base };
 
   if (preliminary) {

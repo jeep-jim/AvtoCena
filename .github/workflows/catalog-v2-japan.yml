@@ -14,7 +14,7 @@ on:
     - cron: "17 5,17 * * *"
 
 # Japan is refreshed twice daily and completed auction rows remain available
-# for six months. Every pass appends new unique lots without replacing history.
+# for six months. Duplicate lots collapse by stable source identity.
 permissions:
   contents: read
 

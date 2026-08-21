@@ -62,7 +62,13 @@ export async function readCatalogBrandDirectory() {
     const publicName = canonicalCatalogBrand(translateCatalogText(rawMake) || clean(rawMake));
     if (publicName) add(toBrand(publicName));
   }
-  return [...brands.values()].sort((left, right) => left.name.localeCompare(right.name, "ru"));
+  const activeBrandSlugs = new Set((facets.makes || [])
+    .map((rawMake: unknown) => canonicalCatalogBrand(translateCatalogText(rawMake) || clean(rawMake)))
+    .filter(Boolean)
+    .map((name: string) => catalogBrandSlug(name)));
+  return [...brands.values()]
+    .filter((brand) => activeBrandSlugs.has(brand.slug || catalogBrandSlug(brand.name)))
+    .sort((left, right) => left.name.localeCompare(right.name, "ru"));
 }
 
 export async function resolveCatalogBrandBySlug(rawSlug: string): Promise<CatalogBrand | null> {

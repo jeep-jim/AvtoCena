@@ -7,7 +7,7 @@ const minCoverage = Math.max(0.5, Math.min(1, Number(process.env.PRESTIGE_MIN_CH
 const exactImage = /^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i;
 const exactUrl = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
 const gradeToken = /^(?:[0-6](?:\.5)?|R|RA|A\d?|S)$/i;
-const JAPAN_MIN_MODEL_YEAR = 2015;
+const JAPAN_MIN_MODEL_YEAR = 2010;
 const galleryContract = "prestige_ajes_exact_detail_v2_cover_content_verified";
 
 function checkOffer(offer) {

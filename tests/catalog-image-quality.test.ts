@@ -157,7 +157,7 @@ test("rejects an advertising payment string used as the source title", () => {
   } as any), false);
 });
 
-test("model-wide representative power cannot evict an older exact listing", () => {
+test("older high-power combustion listings stay out even when power is model-wide", () => {
   const olderJapan = {
     ...rawOffer,
     market: "japan",
@@ -167,7 +167,7 @@ test("model-wide representative power cannot evict an older exact listing", () =
     powerDataConfidence: "estimated",
     powerDataSource: "vehicle-model-representative:toyota/crown",
   };
-  assert.equal(isCatalogOfferBusinessLiquid(olderJapan as any), true);
+  assert.equal(isCatalogOfferBusinessLiquid(olderJapan as any), false);
   assert.equal(isCatalogOfferBusinessLiquid({
     ...olderJapan,
     powerDataConfidence: "reference",

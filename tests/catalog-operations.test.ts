@@ -3,10 +3,10 @@ import fs from "node:fs";
 import test from "node:test";
 import { catalogMinYearForMarket, isCatalogYearAllowed } from "../apps/web/lib/catalog/offer-quality";
 
-test("production year gates keep Japan at 2015+ and every other market at 2020+", () => {
-  assert.equal(catalogMinYearForMarket("japan"), 2015);
-  assert.equal(isCatalogYearAllowed(2014, "japan"), false);
-  assert.equal(isCatalogYearAllowed(2015, "japan"), true);
+test("production year gates keep Japan at 2010+ and every other market at 2020+", () => {
+  assert.equal(catalogMinYearForMarket("japan"), 2010);
+  assert.equal(isCatalogYearAllowed(2009, "japan"), false);
+  assert.equal(isCatalogYearAllowed(2010, "japan"), true);
   for (const market of ["korea", "china", "uae", "europe", "georgia", "kyrgyzstan"]) {
     assert.equal(catalogMinYearForMarket(market), 2020, market);
     assert.equal(isCatalogYearAllowed(2019, market), false, market);
@@ -49,11 +49,11 @@ test("Japan scale collection goes deeper and publishes through the durable objec
   assert.match(workflow, /RECOVERY_PUBLISH_MAX: "30000"/);
 
   const prestigeSource = fs.readFileSync("apps/web/lib/catalog/prestige-japan-exact-source.ts", "utf8");
-  assert.match(prestigeSource, /JAPAN_MIN_MODEL_YEAR = 2015/);
+  assert.match(prestigeSource, /JAPAN_MIN_MODEL_YEAR = 2010/);
   assert.match(prestigeSource, /year_from", String\(JAPAN_MIN_MODEL_YEAR\)/);
 
   const merge = fs.readFileSync("scripts/prestige-japan-strict-merge.mjs", "utf8");
-  assert.match(merge, /JAPAN_MIN_MODEL_YEAR = 2015/);
+  assert.match(merge, /JAPAN_MIN_MODEL_YEAR = 2010/);
   assert.match(merge, /warnings\.push\(`chunk_incomplete_/);
   assert.match(merge, /const passed = errors\.length === 0 && outputOffers\.length > 0/);
 

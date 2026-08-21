@@ -6,8 +6,8 @@ on:
   schedule:
     - cron: "17 0,12 * * *"
 
-# Twice-daily independent market refresh. Public rows are append-only between
-# explicit maintenance passes, so a refresh cannot make the catalog smaller.
+# Twice-daily independent market refresh. Existing rows remain only inside the
+# configured three-day window; expired and policy-rejected cards are removed.
 permissions:
   contents: read
 

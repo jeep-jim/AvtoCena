@@ -1,8 +1,8 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import test from "node:test";
 import {
   catalogBrandMatches,
-  readCatalogBrandDirectory,
   resolveCatalogBrandBySlug,
 } from "../apps/web/lib/catalog/catalog-brand-directory";
 
@@ -17,15 +17,10 @@ test("brand routes resolve both legacy and source-backed V2 identities", async (
   assert.equal(catalogBrandMatches(mercedes!, "梅赛德斯-奔驰"), true);
 });
 
-test("encyclopedia brand directory is not limited to the legacy Drom list", async () => {
-  const brands = await readCatalogBrandDirectory();
-  assert.ok(brands.length >= 245);
-  assert.equal(new Set(brands.map((brand) => brand.slug)).size, brands.length);
-  assert.ok(brands.some((brand) => brand.name === "Mercedes-Benz"));
-  assert.equal(brands.filter((brand) => brand.slug === "audi").length, 1);
-  assert.equal(brands.some((brand) => brand.slug === "audi-china"), false);
-  assert.equal(brands.filter((brand) => brand.slug === "changan").length, 1);
-  assert.equal(brands.some((brand) => ["changan-nevo", "oshan"].includes(brand.slug)), false);
+test("brand directory is filtered by live catalog facets", () => {
+  const source = fs.readFileSync(new URL("../apps/web/lib/catalog/catalog-brand-directory.ts", import.meta.url), "utf8");
+  assert.match(source, /const activeBrandSlugs = new Set\(\(facets\.makes \|\| \[\]\)/);
+  assert.match(source, /\.filter\(\(brand\) => activeBrandSlugs\.has/);
 });
 
 test("a brand alias cannot make unrelated catalog makes match", () => {

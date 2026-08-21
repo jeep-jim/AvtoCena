@@ -10,7 +10,7 @@ import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
 import { enforceCatalogModelYearQuota, selectCatalogShowcaseDiversity } from "./inventory-quota";
 import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./vehicle-knowledge";
-import { applyEncyclopediaDisplayIdentity, applyEncyclopediaDisplayIdentityBatch } from "./display-identity";
+import { applyEncyclopediaDisplayIdentityBatch } from "./display-identity";
 import { catalogPublicPriority, findCatalogPriceOutliers } from "./public-priority";
 import { deduplicatePublicCatalogOffers } from "./public-offer-deduplication";
 import { isSupportedPublicCatalogIdentity, publicCatalogIdentityRejectionReason } from "./public-identity-policy";
@@ -149,6 +149,15 @@ export type CatalogSearchProjection = {
   calculationStatus?: string; calculationSnapshot?: { currencyRate?: any; pricingConfidence?: string } | null; publicVisibleRub?: number; cardImageUrl?: string; seriesId?: string; cardProjectionVersion?: 1;
 };
 export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
+export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
+  // Source adapters may retain complete HTML/JSON responses in operational.raw
+  // for diagnostics. Public generations are immutable and were duplicating that
+  // payload (hundreds of MB per generation) even though public readers never use
+  // it. Keep the normalized card, calculation and verification metadata only.
+  const operational = { ...(offer.operational || {}) } as any;
+  delete operational.raw;
+  return { ...offer, operational };
+}
 export function stableOfferId(sourceId: string, sourceOfferId: string) { return crypto.createHash("sha256").update(`${sourceId}:${sourceOfferId}`).digest("hex").slice(0, 24); }
 export function publicImageUrl(imageId: string, objectKey: string) { const cdn = process.env.CATALOG_IMAGE_CDN_URL?.replace(/\/+$/g, ""); return cdn ? `${cdn}/${objectKey}` : `/api/catalog/images/${imageId}`; }
 
@@ -791,7 +800,7 @@ async function persistJapanAuctionHistory(storage: ReturnType<typeof getJsonStor
   await storage.writeJson(JAPAN_ARCHIVE_MANIFEST_PATH, manifest, current.found && current.etag ? { ifMatch: current.etag } : { ifNoneMatch: "*" });
   return manifest;
 }
-function isPublicOffer(o: VehicleOffer) {
+export function isPublicOffer(o: VehicleOffer) {
   return o.status === "active"
     && isCatalogYearAllowed(o.year, o.market)
     && hasCredibleOfferContent(o)
@@ -901,7 +910,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
       chunks.push(name);
       const slice = offers.slice(i, i + CATALOG_CHUNK_SIZE);
       slice.forEach((o) => { byId[o.id] = { market: o.market, chunk: name }; o.images.forEach((img) => { imagesById[img.id] = { objectKey: img.objectKey, mimeType: img.mimeType, checksum: img.checksum, size: img.size }; }); });
-      await writeJsonAtomic(offerPath(generationId, market, name), slice);
+      await writeJsonAtomic(offerPath(generationId, market, name), slice.map(compactPublicStorageOffer));
     }
     markets[market] = { count: offers.length, chunks, updatedAt: now };
   }
@@ -970,17 +979,21 @@ export async function rebuildIndexes(generationId: string, offers: VehicleOffer[
   await runWithConcurrency(tasks, concurrency);
 }
 
-async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], skipDisplayIdentityMarkets = new Set<CatalogMarket>(), protectedPublicIds = new Set<string>()) {
+async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], _skipDisplayIdentityMarkets = new Set<CatalogMarket>(), protectedPublicIds = new Set<string>()) {
   // Keep source/internal objects immutable. Public read models receive the
   // same deterministic V2 + source-translation identity used by cards, so
   // facets, filters, breadcrumbs, SEO pages and offer shards cannot disagree.
-  const identifiedOffers = skipDisplayIdentityMarkets.size || protectedPublicIds.size
-    ? await Promise.all(storedOffers.map((offer) => skipDisplayIdentityMarkets.has(offer.market) || protectedPublicIds.has(String(offer.id))
-      ? offer
-      : applyEncyclopediaDisplayIdentity(offer)))
-    : await applyEncyclopediaDisplayIdentityBatch(storedOffers);
-  const identityRejected = identifiedOffers.filter((offer) => !protectedPublicIds.has(String(offer.id)) && !isSupportedPublicCatalogIdentity(offer));
-  const identityEligibleOffers = identifiedOffers.filter((offer) => protectedPublicIds.has(String(offer.id)) || isSupportedPublicCatalogIdentity(offer));
+  // Identity canonicalization is deliberately global, including exact-preserve
+  // and append-only rows. "Exact preserve" protects the input at the pre-write
+  // gate; it must not keep a stale Korean/Japanese/Chinese public title alive.
+  const identifiedOffers = await applyEncyclopediaDisplayIdentityBatch(storedOffers);
+  // Revalidate preserved/append-only rows too. Otherwise a stale expensive or
+  // untranslated card could survive forever merely because another market was
+  // the target of the current atomic publication.
+  const qualityRejected = identifiedOffers.filter((offer) => !isPublicOffer(offer));
+  const qualityEligibleOffers = identifiedOffers.filter(isPublicOffer);
+  const identityRejected = qualityEligibleOffers.filter((offer) => !isSupportedPublicCatalogIdentity(offer));
+  const identityEligibleOffers = qualityEligibleOffers.filter(isSupportedPublicCatalogIdentity);
   const priceOutliers = findCatalogPriceOutliers(identityEligibleOffers);
   const rejectedPriceIds = new Set(priceOutliers.map((outlier) => outlier.id).filter((id) => !protectedPublicIds.has(String(id))));
   const priceFilteredOffers = identityEligibleOffers.filter((offer) => !rejectedPriceIds.has(offer.id));
@@ -988,7 +1001,7 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], ski
   const newRows = priceFilteredOffers.filter((offer) => !protectedPublicIds.has(String(offer.id)));
   const deduplicated = deduplicatePublicCatalogOffers([...protectedRows, ...newRows], { protectedIds: protectedPublicIds });
   const quota = enforceCatalogModelYearQuota(deduplicated.rows);
-  return { offers: quota.rows, identityRejected, priceOutliers, deduplicated, quota };
+  return { offers: quota.rows, qualityRejected, identityRejected, priceOutliers, deduplicated, quota };
 }
 
 export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleOffer[]) {
@@ -997,7 +1010,7 @@ export async function previewCanonicalPublicCatalogOffers(storedOffers: VehicleO
 
 async function writeCurrentCatalogReadModels(generationId: string, storedOffers: VehicleOffer[]) {
   const canonical = await canonicalizePublicCatalogOffers(storedOffers);
-  const { offers, identityRejected, priceOutliers, deduplicated, quota } = canonical;
+  const { offers, qualityRejected, identityRejected, priceOutliers, deduplicated, quota } = canonical;
   const previousAllProjection = await readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION).catch(() => ({ generationId: "", items: [] }));
 
   const makes = uniqueText(offers.map((offer) => offer.make)).sort((a, b) => a.localeCompare(b, "ru"));
@@ -1033,7 +1046,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
       if (brandKey) projectionsByBrand.set(brandKey, [...(projectionsByBrand.get(brandKey) || []), row]);
     }
     const shard = currentOfferShardName(offer.id);
-    offersByShard.set(shard, [...(offersByShard.get(shard) || []), offer]);
+    offersByShard.set(shard, [...(offersByShard.get(shard) || []), compactPublicStorageOffer(offer)]);
   }
 
   await writeJsonAtomic(CURRENT_FACETS_PATH, facets, false);
@@ -1072,6 +1085,14 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
       make: offer.make,
       model: offer.model,
       reason: publicCatalogIdentityRejectionReason(offer),
+    })),
+    qualityRejected: qualityRejected.length,
+    qualityRejections: qualityRejected.slice(0, 100).map((offer) => ({
+      id: offer.id,
+      market: offer.market,
+      make: offer.make,
+      model: offer.model,
+      reason: catalogPublicPriority(offer).reason,
     })),
     priceOutliersRejected: priceOutliers.length,
     priceOutliers: priceOutliers.slice(0, 50),

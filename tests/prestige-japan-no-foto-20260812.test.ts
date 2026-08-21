@@ -13,10 +13,10 @@ function soldDetail(year: number) {
     </table>`;
 }
 
-test("Prestige rejects Japanese auction lots older than 2015 at parsing time", () => {
+test("Prestige rejects Japanese auction lots older than 2010 at parsing time", () => {
   const url = "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=year-gate";
-  assert.equal(parsePrestigeJapanExactDetail(soldDetail(2014), url), null);
-  assert.equal(parsePrestigeJapanExactDetail(soldDetail(2015), url)?.year, 2015);
+  assert.equal(parsePrestigeJapanExactDetail(soldDetail(2009), url), null);
+  assert.equal(parsePrestigeJapanExactDetail(soldDetail(2010), url)?.year, 2010);
 });
 
 test("Prestige parent-company grouping publishes MINI as its own marque", () => {

@@ -9,7 +9,7 @@ const minimumChunkCoverage = Math.max(0.5, Math.min(1, Number(process.env.PRESTI
 const exactImage = /^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i;
 const exactUrl = /^https:\/\/prestigemotorsport\.com\.au\/auction-vehicle-display\/\?car_id=[A-Za-z0-9_-]+$/;
 const gradeToken = /^(?:[0-6](?:\.5)?|R|RA|A\d?|S)$/i;
-const JAPAN_MIN_MODEL_YEAR = 2015;
+const JAPAN_MIN_MODEL_YEAR = 2010;
 
 async function walk(dir) {
   const result = [];
