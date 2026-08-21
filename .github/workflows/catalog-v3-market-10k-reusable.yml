@@ -33,7 +33,7 @@ permissions:
   contents: read
 
 concurrency:
-  group: catalog-live-daily-working-markets
+  group: catalog-v3-${{ inputs.market }}
   cancel-in-progress: false
 
 env:
@@ -49,7 +49,7 @@ env:
   CATALOG_PUBLISH_MAX_PER_MARKET: "100000"
   CATALOG_OFFER_RETENTION_MS: ${{ inputs.retention_ms }}
   CATALOG_DEFAULT_RETENTION_MS: "259200000"
-  CATALOG_JAPAN_RETENTION_MS: "2592000000"
+  CATALOG_JAPAN_RETENTION_MS: "15552000000"
   CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"
   CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "1"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"

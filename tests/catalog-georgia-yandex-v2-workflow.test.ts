@@ -5,10 +5,10 @@ import test from "node:test";
 const workflow = fs.readFileSync(".github/workflows/catalog-live-recovery-georgia-yandex-v2.yml", "utf8");
 const merge = fs.readFileSync("scripts/catalog-georgia-yandex-merge.mjs", "utf8");
 
-test("Georgia Yandex v2 is daily, serialized and uses source-specific bounded shards", () => {
+test("legacy Georgia Yandex v2 is manual-only, serialized and uses source-specific bounded shards", () => {
   assert.match(workflow, /workflow_dispatch:/);
-  assert.match(workflow, /schedule:[\s\S]*cron: "35 22 \* \* \*"/);
-  assert.match(workflow, /push:[\s\S]*catalog-live-recovery-georgia-yandex-v2\.yml/);
+  assert.doesNotMatch(workflow, /^\s+schedule:/m);
+  assert.doesNotMatch(workflow, /^\s+push:/m);
   assert.match(workflow, /group: catalog-live-daily-working-markets/);
   assert.match(workflow, /cancel-in-progress: false/);
   assert.match(workflow, /GEORGIA_YANDEX_ROUTE: https:\/\/avtocena\.com\/api\/internal\/georgia-recovery-e2f913/);
@@ -46,7 +46,7 @@ test("Georgia Yandex v2 retains strict all-seven dry-run and write gates", () =>
   assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
   assert.match(workflow, /RECOVERY_BATCH_MARKETS: georgia/);
   assert.match(workflow, /RECOVERY_BATCH_DRY_RUN: "true"/);
-  assert.match(workflow, /if: inputs\.apply == true \|\| github\.event_name == 'schedule' \|\| github\.event_name == 'push'/);
+  assert.match(workflow, /if: inputs\.apply == true/);
   assert.match(workflow, /Recheck strict all-seven baseline immediately before persistence/);
   assert.match(workflow, /Strict post-persist seven-market audit/);
   assert.match(workflow, /preservedPublicHashByMarket/);

@@ -76,3 +76,10 @@ test("removed offers return a real not-found response instead of a soft 200 page
   assert.match(offerPage, /if \(!offer \|\| !isCrediblePublicOffer\(offer\)\) notFound\(\)/);
   assert.doesNotMatch(offerPage, /function MissingOffer/);
 });
+
+test("Autocatalog is not injected into the public catalog header or hero", () => {
+  const header = source("apps/web/components/layout/PublicHeader.tsx");
+  const catalogPage = source("apps/web/app/(public)/cars/page.tsx");
+  assert.doesNotMatch(header, /href="\/cars\/autocatalog"/);
+  assert.doesNotMatch(catalogPage, /Автокаталог →/);
+});

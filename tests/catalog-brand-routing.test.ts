@@ -27,3 +27,11 @@ test("encyclopedia brand directory is not limited to the legacy Drom list", asyn
   assert.equal(brands.filter((brand) => brand.slug === "changan").length, 1);
   assert.equal(brands.some((brand) => ["changan-nevo", "oshan"].includes(brand.slug)), false);
 });
+
+test("a brand alias cannot make unrelated catalog makes match", () => {
+  const emc = { name: "EMC", slug: "emc", dromSlug: "emc", aliases: ["EMC Auto"] };
+  assert.equal(catalogBrandMatches(emc, "EMC"), true);
+  assert.equal(catalogBrandMatches(emc, "EMC Auto"), true);
+  assert.equal(catalogBrandMatches(emc, "Audi"), false);
+  assert.equal(catalogBrandMatches(emc, "Mercedes-Benz"), false);
+});

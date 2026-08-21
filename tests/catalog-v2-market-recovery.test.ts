@@ -5,6 +5,15 @@ import test from "node:test";
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-market-recovery-reusable.yml", import.meta.url), "utf8");
 const cleanup = fs.readFileSync(new URL("../scripts/catalog-clean-failed-generations.mjs", import.meta.url), "utf8");
 const capacityWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-emergency-capacity-cleanup.yml", import.meta.url), "utf8");
+const market10kReusable = fs.readFileSync(new URL("../.github/workflows/catalog-v3-market-10k-reusable.yml", import.meta.url), "utf8");
+const retiredScheduledWriters = [
+  "catalog-live-daily-working-markets.yml",
+  "catalog-live-recovery-uae-kyrgyzstan.yml",
+  "catalog-live-recovery-georgia-yandex-v2.yml",
+].map((file) => ({
+  file,
+  content: fs.readFileSync(new URL(`../.github/workflows/${file}`, import.meta.url), "utf8"),
+}));
 const marketFiles = [
   "korea",
   "japan",
@@ -66,12 +75,24 @@ test("independent market collection keeps the full production crawl budget", () 
   assert.match(workflow, /timeout --signal=TERM --kill-after=120s 6600s/);
 });
 
-test("all seven reserve market collectors remain independently dispatchable", () => {
+test("all seven market collectors run independently twice daily", () => {
   assert.equal(marketFiles.length, 7);
   for (const { market, content } of marketFiles) {
     assert.match(content, /workflow_dispatch:/, `${market} must support manual dispatch`);
+    assert.match(content, /schedule:/, `${market} must have its own schedule`);
+    assert.match(content, /cron: "17 \d{1,2},\d{1,2} \* \* \*"/, `${market} must run twice daily`);
     assert.doesNotMatch(content, /\bneeds:/, `${market} must not depend on another market`);
     assert.match(content, new RegExp(`market: ${market}`));
     assert.match(content, /catalog-v(?:2-market-recovery|3-market-10k)-reusable\.yml/);
+  }
+  assert.match(market10kReusable, /group: catalog-v3-\$\{\{ inputs\.market \}\}/);
+  assert.match(market10kReusable, /CATALOG_JAPAN_RETENTION_MS: "15552000000"/);
+});
+
+test("retired combined writers cannot collide with the independent schedules", () => {
+  for (const { file, content } of retiredScheduledWriters) {
+    assert.match(content, /workflow_dispatch:/, `${file} must remain manually recoverable`);
+    assert.doesNotMatch(content, /^\s+schedule:/m, `${file} must not retain a duplicate schedule`);
+    assert.doesNotMatch(content, /^\s+workflow_run:/m, `${file} must not auto-chain into a live writer`);
   }
 });

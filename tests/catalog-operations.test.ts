@@ -14,8 +14,9 @@ test("production year gates keep Japan at 2015+ and every other market at 2020+"
   }
 });
 
-test("daily market writer publishes Korea, China and Europe once and leaves gallery repair manual", () => {
+test("legacy combined market writer is manual-only and leaves gallery repair manual", () => {
   const workflow = fs.readFileSync(".github/workflows/catalog-live-daily-working-markets.yml", "utf8");
+  assert.doesNotMatch(workflow, /^\s+schedule:/m);
   assert.match(workflow, /for market in korea china europe/);
   assert.match(workflow, /RECOVERY_BATCH_MARKETS: korea,china,europe/);
   assert.match(workflow, /catalog-live-recovery-publish-batch\.mjs/);
@@ -42,7 +43,7 @@ test("Japan scale collection goes deeper and publishes through the durable objec
   assert.match(workflow, /max-parallel: 6/);
   assert.match(workflow, /group: catalog-live-daily-working-markets/);
   assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
-  assert.match(workflow, /cron: "40 19 1,8,15,22 \* \*"/);
+  assert.match(workflow, /cron: "40 7,19 \* \* \*"/);
   assert.match(workflow, /^\s*push:/m);
   assert.match(workflow, /cancel-in-progress: true/);
   assert.match(workflow, /RECOVERY_PUBLISH_MAX: "30000"/);
@@ -59,7 +60,7 @@ test("Japan scale collection goes deeper and publishes through the durable objec
   const verifiedPublish = fs.readFileSync(".github/workflows/catalog-japan-publish-verified-aggregate.yml", "utf8");
   assert.match(verifiedPublish, /PRESTIGE_AGGREGATE_MIN_COUNT: "5000"/);
   assert.match(verifiedPublish, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
-  assert.match(verifiedPublish, /CATALOG_OFFER_RETENTION_MS: "2592000000"/);
+  assert.match(verifiedPublish, /CATALOG_OFFER_RETENTION_MS: "15552000000"/);
   assert.match(verifiedPublish, /prestige-japan-aggregate-salvage\.mjs/);
   assert.match(verifiedPublish, /"japan":2200/);
   assert.match(verifiedPublish, /group: catalog-live-daily-working-markets/);
@@ -76,7 +77,7 @@ test("Japan scale collection goes deeper and publishes through the durable objec
   assert.match(reindexWorkflow, /group: catalog-live-daily-working-markets/);
   assert.match(reindex, /refreshLiveExchangeRates/);
   assert.match(reindex, /isPreliminaryPowerPendingCalculation\(source\)[\s\S]*calculateOfferWithPreliminaryPowerPricing\(source\)/);
-  assert.match(reindex, /30 \* 24 \* 60 \* 60 \* 1_000/);
+  assert.match(reindex, /180 \* 24 \* 60 \* 60 \* 1_000/);
 });
 
 test("certified 30-minute power applies only on reviewed changes or manual dispatch", () => {
@@ -108,7 +109,7 @@ test("certified 30-minute power applies only on reviewed changes or manual dispa
   assert.doesNotMatch(strictWorkflow, /SOURCE_RUN_ID: "\d+"/);
 });
 
-test("emergency Japan recovery restores a verified generation before the remaining writers", () => {
+test("emergency Japan recovery and retired regional writer stay manual-only", () => {
   const recovery = fs.readFileSync(".github/workflows/catalog-emergency-restore-japan.yml", "utf8");
   assert.match(recovery, /CATALOG_RECOVERY_GENERATIONS: "gen_1786426826475_e390aa80"/);
   assert.match(recovery, /CATALOG_RECOVERY_MARKETS: "korea,china,japan,uae,europe,georgia,kyrgyzstan"/);
@@ -116,8 +117,9 @@ test("emergency Japan recovery restores a verified generation before the remaini
   assert.match(recovery, /CATALOG_AUDIT_ASSERT_MARKETS: japan/);
 
   const markets = fs.readFileSync(".github/workflows/catalog-live-recovery-uae-kyrgyzstan.yml", "utf8");
-  assert.match(markets, /Catalog emergency · restore Japan baseline/);
-  assert.match(markets, /github\.event\.workflow_run\.conclusion == 'success'/);
+  assert.match(markets, /workflow_dispatch:/);
+  assert.doesNotMatch(markets, /^\s+schedule:/m);
+  assert.doesNotMatch(markets, /^\s+workflow_run:/m);
   assert.match(markets, /group: catalog-live-daily-working-markets/);
 
   const script = fs.readFileSync("scripts/catalog-recover-generations.mjs", "utf8");

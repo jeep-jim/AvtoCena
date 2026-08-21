@@ -4,10 +4,10 @@ run-name: Catalog V3 · Kyrgyzstan · 10k · ${{ github.sha }}
 on:
   workflow_dispatch:
   schedule:
-    - cron: "17 6 * * *"
+    - cron: "17 4,16 * * *"
 
-# Daily independent market refresh. Each successful run keeps recently seen
-# offers and adds newly discovered unique offers.
+# Twice-daily independent market refresh. Public rows are append-only between
+# explicit maintenance passes, so a refresh cannot make the catalog smaller.
 permissions:
   contents: read
 

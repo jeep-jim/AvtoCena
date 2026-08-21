@@ -3,12 +3,6 @@ run-name: Independent UAE + Kyrgyzstan recovery · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  schedule:
-    - cron: "55 20 * * *"
-  workflow_run:
-    workflows:
-      - "Catalog emergency · restore Japan baseline"
-    types: [completed]
 
 permissions:
   contents: read
@@ -35,7 +29,6 @@ env:
 
 jobs:
   validate:
-    if: ${{ github.event_name != 'workflow_run' || github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     timeout-minutes: 25
     steps:
