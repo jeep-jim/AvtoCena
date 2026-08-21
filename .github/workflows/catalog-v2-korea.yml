@@ -7,11 +7,8 @@ on:
     branches: [main]
     paths:
       - ".github/market-runs/korea"
-  schedule:
-    - cron: "17 6 * * *"
 
-# Daily independent market refresh. Existing rows remain only inside the
-# configured three-day window; expired and policy-rejected cards are removed.
+# Automatic scheduling lives only in catalog-v3-sequential-queue.yml.
 permissions:
   contents: read
 
@@ -22,4 +19,5 @@ jobs:
       market: korea
       display_name: Корея
       reset_cursor: ${{ github.event_name != 'schedule' }}
+      priority_target: "8000"
     secrets: inherit

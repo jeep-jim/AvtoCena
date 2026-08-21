@@ -6,23 +6,13 @@ const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-market
 const cleanup = fs.readFileSync(new URL("../scripts/catalog-clean-failed-generations.mjs", import.meta.url), "utf8");
 const capacityWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-emergency-capacity-cleanup.yml", import.meta.url), "utf8");
 const market10kReusable = fs.readFileSync(new URL("../.github/workflows/catalog-v3-market-10k-reusable.yml", import.meta.url), "utf8");
+const sequentialQueue = fs.readFileSync(new URL("../.github/workflows/catalog-v3-sequential-queue.yml", import.meta.url), "utf8");
 const retiredScheduledWriters = [
   "catalog-live-daily-working-markets.yml",
   "catalog-live-recovery-uae-kyrgyzstan.yml",
   "catalog-live-recovery-georgia-yandex-v2.yml",
-].map((file) => ({
-  file,
-  content: fs.readFileSync(new URL(`../.github/workflows/${file}`, import.meta.url), "utf8"),
-}));
-const marketFiles = [
-  "korea",
-  "japan",
-  "china",
-  "uae",
-  "europe",
-  "georgia",
-  "kyrgyzstan",
-].map((market) => ({
+].map((file) => ({ file, content: fs.readFileSync(new URL(`../.github/workflows/${file}`, import.meta.url), "utf8") }));
+const marketFiles = ["korea", "japan", "china", "uae", "europe", "georgia", "kyrgyzstan"].map((market) => ({
   market,
   content: fs.readFileSync(new URL(`../.github/workflows/catalog-v2-${market}.yml`, import.meta.url), "utf8"),
 }));
@@ -75,24 +65,37 @@ test("independent market collection keeps the full production crawl budget", () 
   assert.match(workflow, /timeout --signal=TERM --kill-after=120s 6600s/);
 });
 
-test("six markets run daily while Japan runs weekly", () => {
+test("automatic catalog runs use one sequential queue and Japan runs four times monthly", () => {
   assert.equal(marketFiles.length, 7);
   for (const { market, content } of marketFiles) {
     assert.match(content, /workflow_dispatch:/, `${market} must support manual dispatch`);
-    assert.match(content, /schedule:/, `${market} must have its own schedule`);
-    if (market === "japan") assert.match(content, /cron: "17 5 \* \* 1"/, "Japan must run weekly");
-    else assert.match(content, /cron: "17 \d{1,2} \* \* \*"/, `${market} must run daily`);
-    assert.doesNotMatch(content, /\bneeds:/, `${market} must not depend on another market`);
+    assert.doesNotMatch(content, /^\s+schedule:/m, `${market} must not have a competing automatic schedule`);
     assert.match(content, new RegExp(`market: ${market}`));
-    assert.match(content, /catalog-v(?:2-market-recovery|3-market-10k)-reusable\.yml/);
+    assert.match(content, /catalog-v3-market-10k-reusable\.yml/);
   }
-  assert.match(market10kReusable, /group: catalog-v3-\$\{\{ inputs\.market \}\}/);
-  assert.match(marketFiles.find(({ market }) => market === "japan")?.content || "", /retention_ms: "2592000000"/);
-  assert.match(marketFiles.find(({ market }) => market === "japan")?.content || "", /target_per_market: "30000"/);
+  assert.match(sequentialQueue, /schedule:/);
+  assert.match(sequentialQueue, /cron: "17 21 \* \* \*"/);
+  assert.match(sequentialQueue, /01\|08\|15\|22/);
+  assert.match(sequentialQueue, /needs: \[plan, japan\]/);
+  assert.match(sequentialQueue, /needs: korea/);
+  assert.match(sequentialQueue, /needs: china/);
+  assert.match(sequentialQueue, /needs: uae/);
+  assert.match(sequentialQueue, /needs: europe/);
+  assert.match(sequentialQueue, /needs: georgia/);
+  assert.match(sequentialQueue, /if: always\(\)/);
+  assert.match(sequentialQueue, /retention_ms: "2592000000"/);
+  assert.match(sequentialQueue, /target_per_market: "30000"/);
+  assert.match(sequentialQueue, /priority_target: "24000"/);
+  assert.match(market10kReusable, /CATALOG_V2_PRIORITY_TARGET: \$\{\{ inputs\.priority_target \}\}/);
+  assert.match(market10kReusable, /CATALOG_PRIORITY_MAX_TOTAL_RUB: "8000000"/);
+  assert.match(market10kReusable, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "2"/);
+  assert.match(market10kReusable, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
+  assert.match(market10kReusable, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
+  assert.match(market10kReusable, /CATALOG_IMAGE_STORAGE_MODE: "source_urls_only"/);
   assert.match(market10kReusable, /CATALOG_JAPAN_RETENTION_MS: "2592000000"/);
 });
 
-test("retired combined writers cannot collide with the independent schedules", () => {
+test("retired combined writers cannot collide with the sequential schedule", () => {
   for (const { file, content } of retiredScheduledWriters) {
     assert.match(content, /workflow_dispatch:/, `${file} must remain manually recoverable`);
     assert.doesNotMatch(content, /^\s+schedule:/m, `${file} must not retain a duplicate schedule`);
