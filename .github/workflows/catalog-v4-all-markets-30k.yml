@@ -2,6 +2,11 @@ name: Catalog raw · 7 markets · up to 30k each
 run-name: Catalog raw sequential recovery · ${{ github.sha }}
 
 on:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/catalog-v4-all-markets-30k.yml"
   workflow_dispatch:
     inputs:
       reset_catalog:
