@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 
 import {
@@ -56,4 +57,10 @@ test("Japan still rejects unfinished auction lots and accepts completed results"
 test("Japan includes model year 2010 but rejects older stock", () => {
   assert.equal(classifyCatalogV2Offer(japanOffer("year-2010", { year: 2010 })).eligible, true);
   assert.equal(classifyCatalogV2Offer(japanOffer("year-2009", { year: 2009 })).reason, "year");
+});
+
+test("post-publish audit applies sold identity only to Japanese auctions", () => {
+  const audit = readFileSync(new URL("../scripts/catalog-live-postpersist-audit.mjs", import.meta.url), "utf8");
+  assert.match(audit, /catalogRequiredSpecificationRejectionReason, isJapanAuctionOffer/);
+  assert.match(audit, /offer\?\.market !== "japan" \|\| !isJapanAuctionOffer\(offer\) \|\| \(/);
 });
