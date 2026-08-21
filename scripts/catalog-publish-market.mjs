@@ -361,14 +361,23 @@ for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
   preservedByMarket[otherMarket] = rows.length;
   preservedPublicHashByMarket[otherMarket] = hashRows(rows);
   preservedPublicRowsByMarket[otherMarket] = rows;
-  const canonical = await previewCanonicalPublicCatalogOffers(rows);
-  expectedPublishedByMarket[otherMarket] = canonical.offers.length;
-  expectedPublishedHashByMarket[otherMarket] = hashRows(canonical.offers);
 }
 
 const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers);
-expectedPublishedByMarket[market] = canonicalTargetPreview.offers.length;
-expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
+// Canonical publication performs identity normalization, cross-market
+// deduplication and model/year quotas over the complete seven-market set.
+// Build the regression proof from that same combined input; per-market
+// previews can legitimately differ after cross-market deduplication and caused
+// healthy atomic writes to fail with a false hash mismatch.
+const canonicalCombinedPreview = await previewCanonicalPublicCatalogOffers([
+  ...Object.values(preservedPublicRowsByMarket).flat(),
+  ...selectedMarketOffers,
+]);
+for (const currentMarket of PUBLIC_CATALOG_MARKETS) {
+  const rows = canonicalCombinedPreview.offers.filter((offer) => String(offer?.market || "") === currentMarket);
+  expectedPublishedByMarket[currentMarket] = rows.length;
+  expectedPublishedHashByMarket[currentMarket] = hashRows(rows);
+}
 
 const currentInternal = await readAllOffersForMaintenance();
 if (!Array.isArray(currentInternal)) throw new Error("catalog_maintenance_state_invalid");
