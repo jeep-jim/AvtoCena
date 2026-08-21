@@ -5,6 +5,10 @@ on:
   push:
     branches: [main]
     paths:
+      - ".github/workflows/catalog-reindex-vehicle-knowledge.yml"
+      - "apps/web/lib/catalog/customs-pricing.ts"
+      - "packages/engine/src/calculation/russiaCustoms.ts"
+      - "packages/engine/src/calculation/russiaCustomsV2.ts"
       - "scripts/catalog-reindex-vehicle-knowledge.mjs"
       - "scripts/catalog-rf-customs-live-card-proof.mjs"
 
