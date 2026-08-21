@@ -61,10 +61,11 @@ import {
 const rawListingMode = process.env.CATALOG_RAW_LISTING_MODE === "1";
 
 if (process.env.CATALOG_REBUILD_MARKET || rawListingMode) {
-  process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER ||= "5";
+  process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER ||= "2";
   process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "30";
   process.env.CATALOG_COLLECTION_IMAGE_LIMIT ||= "30";
   process.env.CATALOG_IMAGE_STORAGE_MODE ||= "source_urls_only";
+  process.env.CATALOG_GALLERY_SAFETY_MODE ||= "source_urls_only";
 }
 
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
@@ -164,7 +165,7 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
   process.env.CATALOG_GROW_ONLY_MARKETS ||= PUBLIC_CATALOG_MARKETS.join(",");
   return importCatalogBase({
     ...requested,
-    maxImagesPerOffer: Math.min(30, Math.max(5, Number.isFinite(requestedImages) ? requestedImages : 30)),
+    maxImagesPerOffer: Math.min(30, Math.max(2, Number.isFinite(requestedImages) ? requestedImages : 30)),
   });
 }
 
