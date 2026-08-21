@@ -33,7 +33,7 @@ jobs:
       - name: Catalog UI state tests
         run: node --import tsx --test tests/catalog-ui-neutral-preliminary-20260812.test.ts
       - name: Catalog image quality tests
-        run: node --import tsx --test tests/catalog-image-quality.test.ts
+        run: node --import tsx --test tests/catalog-image-quality.test.ts tests/catalog-gallery-storage-contract.test.ts
       - name: Public image proxy tests
         run: node --import tsx --test tests/catalog-public-image-proxy.test.ts
       - name: Catalog source-scale tests
