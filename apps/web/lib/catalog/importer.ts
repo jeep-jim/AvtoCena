@@ -49,6 +49,8 @@ import { encarCompleteSource } from "./encar-complete-source";
 import { fullGallery } from "./full-gallery-wrapper";
 import { strictSourceDetail } from "./strict-source-detail-wrapper";
 import { normalizeOpenSource } from "./open-source-normalizer";
+import { OpenMarketAdapter } from "./open-market-sources";
+import { sourceBoundOpenMarketGallery } from "./source-bound-open-market-gallery";
 import { regionalLiveOverrides } from "./regional-live-overrides";
 import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
 import {
@@ -69,7 +71,12 @@ if (process.env.CATALOG_REBUILD_MARKET || rawListingMode) {
 }
 
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
-const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGallery(normalizeOpenSource(source));
+const prepareSource = (source: (typeof catalogImportSources)[number]) => {
+  const listingBound = source instanceof OpenMarketAdapter
+    ? sourceBoundOpenMarketGallery(source)
+    : source;
+  return fullGallery(normalizeOpenSource(listingBound));
+};
 // Georgia is canonical-only: MyAuto plus the dedicated AutoPapa adapter. Do not
 // let the generic scale adapter with the same sourceId replace the dedicated one.
 const allowedScaleSources = scaleMarketSources.filter((source) => source.market !== "georgia");
@@ -120,9 +127,9 @@ const requiredSourceIds = new Set(
 );
 
 // Dedicated adapters own their exact listing-bound detail/gallery flow. Every
-// other raw source can use the generic source-page wrapper. Never replace a
-// source-specific gallery parser with broad page scraping: that can mix related
-// or recommended vehicle images into the current listing.
+// generic OpenMarketAdapter is already wrapped above so its page-wide image
+// scraper cannot leak banners/related cars into a listing. Required sources that
+// still lack a dedicated adapter get the extra fail-closed identity wrapper here.
 const dedicatedDetailSourceIds = new Set([
   "encar_direct",
   "jpauc_japan_past_open",
