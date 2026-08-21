@@ -117,6 +117,9 @@ test("catalog generation chunks stay under 500 and search loads indexed chunks o
       checksum: `${item.checksum}-${i}`,
     })),
     totalRub: 1500000 + i,
+    powertrainKind: "combustion",
+    engineCc: 1_798,
+    powerHp: 122,
     calculationStatus: "ready",
     calculationSnapshot: {
       customs: { status: "ready" },
@@ -136,7 +139,7 @@ test("catalog generation chunks stay under 500 and search loads indexed chunks o
   const firstChunk = await readDataJson<any[]>(firstChunkPath, []);
   assert.ok(firstChunk.length <= 500);
   const japanArchive = await readDataJson<any>("catalog/japan-auction-history/manifest.json", {});
-  assert.equal(japanArchive.retentionDays, 180);
+  assert.equal(japanArchive.retentionDays, 30);
   assert.equal(japanArchive.count, offers.length);
   const result = await searchOffers({ market: "japan", make: "Toyota", model: "Prius", sort: "totalRub", pageSize: 10 });
   assert.equal(result.items.length, 10);

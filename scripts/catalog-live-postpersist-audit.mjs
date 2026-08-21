@@ -3,6 +3,7 @@ const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime
 const { catalogMinYearForMarket, hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { presentCatalogOffer } = await import("../apps/web/lib/catalog/presentation.ts");
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
+const { catalogRequiredSpecificationRejectionReason } = await import("../apps/web/lib/catalog/public-priority.ts");
 
 const output = String(process.env.CATALOG_AUDIT_OUTPUT || "catalog-live-postpersist-audit.json");
 const assertMarkets = new Set(String(process.env.CATALOG_AUDIT_ASSERT_MARKETS || "").split(",").map((v) => v.trim()).filter(Boolean));
@@ -79,6 +80,10 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
     electricCount: rows.filter(isElectric).length,
     hybridCount: rows.filter(isHybrid).length,
     preliminaryCount: rows.filter((offer) => String(offer?.calculationStatus || "") === "preliminary_power_pending" || offer?.calculationSnapshot?.pricingConfidence === "preliminary").length,
+    incompleteSpecificationCount: rows.filter((offer) => catalogRequiredSpecificationRejectionReason(offer)).length,
+    incompleteSpecificationReasons: Object.fromEntries([...new Set(rows.map((offer) => catalogRequiredSpecificationRejectionReason(offer)).filter(Boolean))]
+      .sort()
+      .map((reason) => [reason, rows.filter((offer) => catalogRequiredSpecificationRejectionReason(offer) === reason).length])),
     exactCalculatedCount: rows.filter((offer) => String(offer?.calculationSnapshot?.customs?.status || "") === "ready" && Number(offer?.totalRub || 0) > 0).length,
     priorityAgeCount: rows.filter((offer) => Number(offer?.year || 0) >= currentYear - 6).length,
     olderThan15Count: rows.filter((offer) => Number(offer?.year || 0) < currentYear - 15).length,
@@ -109,6 +114,8 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   if (assertMarkets.has(market) && stats.belowMarketMinYearCount > 0) report.failures.push(`${market}:below_market_min_year:${stats.belowMarketMinYearCount}:min=${stats.marketMinYear}`);
   if (assertMarkets.has(market) && stats.nonVehicleCount > 0) report.failures.push(`${market}:non_vehicle:${stats.nonVehicleCount}`);
   if (assertMarkets.has(market) && stats.nonPositiveSourcePriceCount > 0) report.failures.push(`${market}:source_price:${stats.nonPositiveSourcePriceCount}`);
+  if (assertMarkets.has(market) && stats.preliminaryCount > 0) report.failures.push(`${market}:preliminary_public_price:${stats.preliminaryCount}`);
+  if (assertMarkets.has(market) && stats.incompleteSpecificationCount > 0) report.failures.push(`${market}:incomplete_specifications:${stats.incompleteSpecificationCount}`);
   if (market === "korea" && assertMarkets.has(market) && stats.belowFiveImagesCount > 0) report.failures.push(`korea:below_five_images:${stats.belowFiveImagesCount}`);
   if (market === "japan" && assertMarkets.has(market) && stats.belowFiveImagesCount > 0) report.failures.push(`japan:below_five_images:${stats.belowFiveImagesCount}`);
   if (market === "japan" && assertMarkets.has(market) && stats.japanSoldIdentityFailureCount > 0) report.failures.push(`japan:sold_identity:${stats.japanSoldIdentityFailureCount}`);

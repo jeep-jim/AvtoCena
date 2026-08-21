@@ -1,6 +1,8 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 
+const { catalogRequiredSpecificationRejectionReason } = await import("../apps/web/lib/catalog/public-priority.ts");
+
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-rebuild";
 const markets = String(process.env.CATALOG_REBUILD_MARKETS || "korea,china,japan,uae,europe,georgia,kyrgyzstan")
   .split(",")
@@ -34,18 +36,6 @@ function imageKey(image) {
   return String(image?.checksum || image?.id || image?.objectKey || image?.url || "");
 }
 
-function hasExactElectrifiedPower(offer) {
-  const kind = String(offer?.powertrainKind || "");
-  if (!["electric", "series_hybrid", "other_hybrid"].includes(kind)) return true;
-  if (Number(offer?.utilizationPowerKw || 0) > 0) return true;
-  const motorPower = Number(offer?.power30MinKw || 0)
-    || (Array.isArray(offer?.power30MinKwByMotor)
-      ? offer.power30MinKwByMotor.reduce((sum, value) => sum + Math.max(0, Number(value || 0)), 0)
-      : 0);
-  if (kind === "electric" || kind === "series_hybrid") return motorPower > 0;
-  return motorPower > 0 && Number(offer?.icePowerKw || 0) > 0;
-}
-
 function validateOffer(offer) {
   const errors = [];
   const images = Array.isArray(offer?.images) ? offer.images : [];
@@ -55,7 +45,8 @@ function validateOffer(offer) {
   if (!Number.isFinite(Number(offer?.sourcePrice)) || Number(offer?.sourcePrice) <= 0) errors.push("source_price");
   if (!Number.isFinite(Number(offer?.totalRub)) || Number(offer?.totalRub) <= 0) errors.push("total_rub");
   if (!images.length || uniqueImages.size !== images.length) errors.push("images");
-  if (!hasExactElectrifiedPower(offer)) errors.push("certified_utilization_power");
+  const missingSpecification = catalogRequiredSpecificationRejectionReason(offer);
+  if (missingSpecification) errors.push(missingSpecification);
   const customs = offer?.calculationSnapshot?.customs;
   if (customs?.status !== "ready" || !Number.isFinite(Number(customs?.totalCustomsRub))) errors.push("customs");
   const breakdown = offer?.calculationSnapshot?.breakdown;
@@ -72,6 +63,7 @@ try {
 }
 
 const payloads = [];
+const probePayloads = [];
 const fileErrors = [];
 for (const name of filenames) {
   const filename = path.join(inputDir, name);
@@ -79,6 +71,23 @@ for (const name of filenames) {
     const payload = JSON.parse(await fs.readFile(filename, "utf8"));
     if (!payload?.market || !Array.isArray(payload?.offers)) throw new Error("invalid_generation_payload");
     payloads.push({ filename, payload });
+  } catch (error) {
+    fileErrors.push({ filename, error: String(error?.message || error) });
+  }
+}
+
+let probeFilenames = [];
+try {
+  probeFilenames = (await fs.readdir(inputDir)).filter((name) => /^catalog-v3-probe-.+-\d+\.json$/.test(name)).sort();
+} catch {
+  probeFilenames = [];
+}
+for (const name of probeFilenames) {
+  const filename = path.join(inputDir, name);
+  try {
+    const payload = JSON.parse(await fs.readFile(filename, "utf8"));
+    if (!payload?.market || !Array.isArray(payload?.results)) throw new Error("invalid_probe_payload");
+    probePayloads.push({ filename, payload });
   } catch (error) {
     fileErrors.push({ filename, error: String(error?.message || error) });
   }
@@ -95,6 +104,12 @@ for (const market of markets) {
   const freshBySource = new Map();
   const invalid = [];
   const processFailures = [];
+  const marketProbes = probePayloads.filter(({ payload }) => payload.market === market);
+  const requiredSourceIds = new Set(marketProbes.flatMap(({ payload }) => payload.requiredSourceIds || []));
+  const requiredActiveSourceIds = new Set(marketProbes.flatMap(({ payload }) => payload.requiredActiveSourceIds || []));
+  const activeSourceIds = new Set(marketProbes.flatMap(({ payload }) => payload.activeSourceIds || []));
+  const missingRequiredAdapters = new Set(marketProbes.flatMap(({ payload }) => payload.missingRequiredAdapters || []));
+  const requiredInactiveSourceIds = [...requiredSourceIds].filter((sourceId) => !requiredActiveSourceIds.has(sourceId));
 
   for (const { filename, payload } of marketPayloads) {
     if (["rebuild_process_failed", "collection_not_completed"].includes(payload.stopReason)
@@ -135,11 +150,23 @@ for (const market of markets) {
     freshBySource: Object.fromEntries([...freshBySource.entries()].sort(([left], [right]) => left.localeCompare(right))),
     invalidOffers: invalid,
     processFailures,
+    sourceProbeArtifacts: marketProbes.length,
+    activeSourceIds: [...activeSourceIds].sort(),
+    requiredSourceIds: [...requiredSourceIds].sort(),
+    requiredActiveSourceIds: [...requiredActiveSourceIds].sort(),
+    requiredInactiveSourceIds: requiredInactiveSourceIds.sort(),
+    missingRequiredAdapters: [...missingRequiredAdapters].sort(),
+    requiredSourcesComplete: marketProbes.length > 0
+      && requiredSourceIds.size > 0
+      && requiredInactiveSourceIds.length === 0
+      && missingRequiredAdapters.size === 0,
     stopReasons: marketPayloads.map(({ payload }) => payload.stopReason || payload.report?.stopReason || "unknown"),
   };
   byMarket[market] = row;
   if (validIds.size > 0) publishableMarkets.push(market);
   if (!marketPayloads.length) warnings.push(`${market}:missing_artifacts`);
+  if (!marketProbes.length) warnings.push(`${market}:missing_probe_artifacts`);
+  if (!row.requiredSourcesComplete) warnings.push(`${market}:required_sources_inactive:${row.requiredInactiveSourceIds.join(",") || "unknown"}`);
   if (processFailures.length) warnings.push(`${market}:rebuild_process_failed`);
   if (freshIds.size < threshold) warnings.push(`${market}:fresh_${freshIds.size}_below_${threshold}`);
   if (validIds.size < targetPerMarket) warnings.push(`${market}:valid_${validIds.size}_below_${targetPerMarket}`);
@@ -151,12 +178,24 @@ if (fileErrors.length) warnings.push(`generation_file_errors_${fileErrors.length
 if (minimumFresh.__configError) warnings.push(`minimum_fresh_config:${minimumFresh.__configError}`);
 
 const degradedMarkets = markets.filter((market) => !byMarket[market]?.marketTargetReached || !byMarket[market]?.sourceTargetReached);
+const blockingMarkets = markets.filter((market) => {
+  const row = byMarket[market];
+  return !row
+    || row.artifacts === 0
+    || row.sourceProbeArtifacts === 0
+    || row.processFailures.length > 0
+    || row.valid <= 0
+    || !row.freshThresholdReached
+    || !row.sourceTargetReached
+    || !row.requiredSourcesComplete;
+});
 const report = {
   version: 22,
   checkedAt: new Date().toISOString(),
   mode: "per_market_volume_and_integrity_audit",
   inputDir,
   files: filenames,
+  probeFiles: probeFilenames,
   fileErrors,
   targetPerMarket,
   minimumFresh,
@@ -164,11 +203,13 @@ const report = {
   byMarket,
   publishableMarkets,
   degradedMarkets,
+  blockingMarkets,
   volumeTargetReached: degradedMarkets.length === 0,
   integrityOk: Object.values(byMarket).every((row) => row.invalidOffers.length === 0),
   warnings,
-  ok: true,
+  ok: blockingMarkets.length === 0,
 };
 
 await fs.writeFile(outputFile, JSON.stringify(report, null, 2));
 console.log(JSON.stringify(report, null, 2));
+if (!report.ok) process.exitCode = 1;

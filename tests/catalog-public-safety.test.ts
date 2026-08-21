@@ -11,6 +11,9 @@ function calculatedOffer(totalRub: number, market = "korea") {
   return {
     totalRub,
     market,
+    powertrainKind: "combustion",
+    engineCc: 1_998,
+    powerHp: 150,
     calculationStatus: "ready",
     calculationSnapshot: {
       customs: { status: "ready" },
@@ -58,6 +61,19 @@ test("public price requires a complete calculation and enforces the 15M product 
   assert.equal(catalogOfferVisibleRub({ ...calculatedOffer(3_200_000), calculationSnapshot: { customs: { status: "ready" }, breakdown: [] } }), 0);
 });
 
+test("compact card projections expose only already validated non-preliminary prices", () => {
+  const exactProjection = {
+    ...calculatedOffer(3_200_000),
+    calculationSnapshot: { pricingConfidence: "estimated" },
+    publicVisibleRub: 3_200_000,
+    cardProjectionVersion: 1,
+  } as any;
+  assert.equal(catalogOfferVisibleRub(exactProjection), 3_200_000);
+  assert.equal(catalogOfferVisibleRub({ ...exactProjection, calculationStatus: "preliminary_power_pending", calculationSnapshot: { pricingConfidence: "preliminary" } }), 0);
+  assert.equal(catalogOfferVisibleRub({ ...exactProjection, engineCc: undefined }), 0);
+  assert.equal(catalogOfferVisibleRub({ ...exactProjection, cardProjectionVersion: 2 }), 3_200_000);
+});
+
 test("public priority rejects a delivered total eight times the source car price", async () => {
   const { catalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority");
   const base = calculatedOffer(4_000_000) as any;
@@ -67,7 +83,7 @@ test("public priority rejects a delivered total eight times the source car price
   assert.equal(catalogPublicPriority(base).eligible, true);
 });
 
-test("verified preliminary combustion price is visible without pretending the utilization fee is known", () => {
+test("preliminary price is never exposed as a delivered public total", () => {
   const offer = {
     market: "japan",
     powertrainKind: "combustion",
@@ -84,10 +100,34 @@ test("verified preliminary combustion price is visible without pretending the ut
       ],
     },
   } as any;
-  assert.equal(catalogOfferVisibleRub(offer), 2_450_000);
+  assert.equal(catalogOfferVisibleRub(offer), 0);
   offer.calculationSnapshot.missing = ["engine_cc"];
   offer.calculationSnapshot.customs.missing = ["engine_cc"];
   assert.equal(catalogOfferVisibleRub(offer), 0);
+});
+
+test("public priority requires calculation-critical specifications for every powertrain", async () => {
+  const { catalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority");
+  const combustion = calculatedOffer(3_200_000) as any;
+  assert.equal(catalogPublicPriority({ ...combustion, engineCc: undefined }).reason, "missing_engine_cc");
+  assert.equal(catalogPublicPriority({ ...combustion, powerHp: undefined }).reason, "missing_power_hp");
+
+  const electric = {
+    ...combustion,
+    powertrainKind: "electric",
+    engineCc: undefined,
+    powerHp: 299,
+    powerKw: 220,
+    power30MinKw: 88,
+    utilizationPowerKw: 88,
+  };
+  assert.equal(catalogPublicPriority(electric).eligible, true);
+  assert.equal(catalogPublicPriority({ ...electric, power30MinKw: undefined }).reason, "missing_certified_30min_kw");
+  assert.equal(catalogPublicPriority({ ...electric, utilizationPowerKw: undefined }).reason, "missing_utilization_power_kw");
+
+  const hybrid = { ...electric, powertrainKind: "other_hybrid", engineCc: 1_498, icePowerKw: 74 };
+  assert.equal(catalogPublicPriority(hybrid).eligible, true);
+  assert.equal(catalogPublicPriority({ ...hybrid, icePowerKw: undefined }).reason, "missing_ice_power_kw");
 });
 
 test("mandatory source offer is hidden until its exact-card photo identity is verified", () => {

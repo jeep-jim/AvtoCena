@@ -28,7 +28,10 @@ jobs:
       YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
       YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
       CATALOG_KNOWLEDGE_REINDEX_CONCURRENCY: 8
-      CATALOG_REINDEX_MIN_PUBLIC_RATIO: 0.65
+      # The first honesty cleanup removes preliminary prices and cards without
+      # calculation-critical engine/power data. Keep the write atomic and stop
+      # if fewer than 35% of the current public rows survive all strict gates.
+      CATALOG_REINDEX_MIN_PUBLIC_RATIO: 0.35
       CATALOG_REINDEX_MIN_PUBLIC_GUARD_COUNT: 50
       CATALOG_GROW_ONLY_MARKETS: ""
     steps:

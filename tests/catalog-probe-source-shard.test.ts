@@ -86,6 +86,9 @@ test("volume shortages remain explicit diagnostics", () => {
   assert.match(validator, /targetPerMarket/);
   assert.match(validator, /warnings/);
   assert.match(validator, /publishableMarkets/);
+  assert.match(validator, /blockingMarkets/);
+  assert.match(validator, /requiredSourcesComplete/);
+  assert.match(validator, /if \(!report\.ok\) process\.exitCode = 1/);
 });
 
 test("publisher uses atomic Catalog V2 tiers and preserves manifest on an empty market", () => {
