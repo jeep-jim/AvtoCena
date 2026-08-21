@@ -10,8 +10,8 @@ on:
   schedule:
     - cron: "17 6 * * *"
 
-# Daily independent market refresh. Existing rows remain only inside the
-# configured three-day window; expired and policy-rejected cards are removed.
+# Daily independent market refresh. Verified rows remain inside the configured
+# 30-day window; expired and policy-rejected cards are removed.
 permissions:
   contents: read
 
