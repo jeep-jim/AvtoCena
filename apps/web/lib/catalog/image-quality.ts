@@ -10,6 +10,7 @@ type CatalogImageLike = {
 };
 
 const promoUrlPattern = /(?:^|[\/_-])(banner|bnr|campaign|promo|promotion|advert|ad_|loan|credit|warranty|guarantee|inspection|diagnosis|service|support|feature|header|footer|sprite|icon|logo|users|obd|low[-_]?rate|placeholder|no[-_ ]?photo|no[-_ ]?image|coming[-_ ]?soon|repair|maintenance|wrench|spanner|tools?|camera[-_ ]?off|car[-_ ]?silhouette|dummy|cdn[-_]?cgi|challenge[-_]?platform)(?:[\/_\-.]|$)/i;
+const thumbnailTokenPattern = /(?:^|[\/_-])(?:thumb|thumbnail|thumbs|small|tiny|preview|lowres|low-res)(?:[\/_\-.]|$)/i;
 
 function text(value: unknown) {
   return String(value || "").trim();
@@ -48,6 +49,34 @@ function canonicalUrl(value: unknown) {
   } catch {
     return source.replace(/[?#].*$/, "").replace(/\/{2,}/g, "/").toLowerCase();
   }
+}
+
+function explicitDeliveryDimensions(value: unknown) {
+  const source = text(value);
+  if (!source) return { width: 0, height: 0 };
+  try {
+    const url = new URL(source, "https://catalog.local");
+    const decoded = decodeURIComponent(`${url.pathname}${url.search}`);
+    const pair = decoded.match(/(?:^|[\/_=,:-])(\d{2,5})[xX](\d{2,5})(?:[\/_.,?&=-]|$)/);
+    if (pair) return { width: Number(pair[1]), height: Number(pair[2]) };
+    const width = Number(url.searchParams.get("w") || url.searchParams.get("width") || url.searchParams.get("imageWidth") || 0);
+    const height = Number(url.searchParams.get("h") || url.searchParams.get("height") || url.searchParams.get("imageHeight") || 0);
+    return {
+      width: Number.isFinite(width) && width > 0 ? width : 0,
+      height: Number.isFinite(height) && height > 0 ? height : 0,
+    };
+  } catch {
+    const pair = source.match(/(?:^|[\/_=,:-])(\d{2,5})[xX](\d{2,5})(?:[\/_.,?&=-]|$)/);
+    return pair ? { width: Number(pair[1]), height: Number(pair[2]) } : { width: 0, height: 0 };
+  }
+}
+
+function explicitLowResolutionDelivery(value: unknown) {
+  const { width, height } = explicitDeliveryDimensions(value);
+  if (width && height) return width < 640 || height < 360;
+  if (width) return width < 640;
+  if (height) return height < 360;
+  return false;
 }
 
 function autoHomePhotoIdentity(value: unknown) {
@@ -119,6 +148,8 @@ export function catalogImageScore(image: CatalogImageLike) {
   let score = 0;
 
   if (promoUrlPattern.test(url)) score -= 20;
+  if (thumbnailTokenPattern.test(url)) score -= 8;
+  if (explicitLowResolutionDelivery(url)) score -= 30;
   if (/image\/(?:svg|gif)/.test(mime) || /\.(?:svg|gif)(?:\?|$)/i.test(url)) score -= 20;
   if (/image\/png/.test(mime) || /\.png(?:\?|$)/i.test(url)) score -= 7;
   if (/image\/(?:jpe?g|webp|avif)/.test(mime) || /\.(?:jpe?g|webp|avif)(?:\?|$)/i.test(url)) score += 3;
@@ -127,13 +158,13 @@ export function catalogImageScore(image: CatalogImageLike) {
   // delivery-size variants into one gallery frame.
   if (/^https?:\/\/storage\.mashina\.kg\/.*_large\.(?:jpe?g|png|webp|avif)(?:\?|$)/i.test(url)) score += 4;
   else if (/^https?:\/\/storage\.mashina\.kg\/.*_medium\.(?:jpe?g|png|webp|avif)(?:\?|$)/i.test(url)) score += 2;
-  else if (/^https?:\/\/storage\.mashina\.kg\/.*_small\.(?:jpe?g|png|webp|avif)(?:\?|$)/i.test(url)) score -= 2;
+  else if (/^https?:\/\/storage\.mashina\.kg\/.*_small\.(?:jpe?g|png|webp|avif)(?:\?|$)/i.test(url)) score -= 8;
   const legacySize = url.match(/^https?:\/\/im\.mashina\.kg\/.*_(\d{2,5})x(\d{2,5})\.(?:jpe?g|png|webp|avif)(?:\?|$)/i);
   if (legacySize) score += Math.min(4, Math.max(0, Math.log2((Number(legacySize[1]) * Number(legacySize[2])) / (640 * 480))));
 
   if (width && height) {
     if (width >= 640 && height >= 400) score += 3;
-    if (width < 420 || height < 260) score -= 10;
+    if (width < 640 || height < 360) score -= 14;
     if (ratio >= 1.08 && ratio <= 2.2) score += 3;
     else score -= 12;
   }
@@ -150,7 +181,11 @@ export function catalogImageScore(image: CatalogImageLike) {
 }
 
 export function isLikelyVehicleImage(image: CatalogImageLike) {
-  return Boolean(text(image?.url || image?.objectKey)) && hasImageEvidence(image) && catalogImageScore(image) >= 0;
+  const url = text(image?.url || image?.objectKey);
+  return Boolean(url)
+    && !explicitLowResolutionDelivery(url)
+    && hasImageEvidence(image)
+    && catalogImageScore(image) >= 0;
 }
 
 export function rankedCatalogImageUrls(offer: any) {
@@ -162,12 +197,9 @@ export function rankedCatalogImageUrls(offer: any) {
     }))
     .filter((candidate) => candidate.url && isLikelyVehicleImage(candidate.image));
 
-  // AutoHome legacy public rows can contain one 900px image followed by 240px
-  // thumbnails even when a full-size exact gallery exists upstream. Do not render
-  // those tiny delivery renditions in the customer gallery. The exact-gallery
-  // refresh replaces them in storage; this display guard prevents blur meanwhile.
-  const displayCandidates = candidates.filter((candidate) =>
-    !/^https?:\/\/g\.autoimg\.cn\/@img\/.*\/(?:240|300|320|360|400)x0_c\d+_/i.test(candidate.sourceUrl));
+  // Explicit source thumbnails never win over a full-size rendition and cannot
+  // become the hero image while the exact-gallery refresh is catching up.
+  const displayCandidates = candidates.filter((candidate) => !explicitLowResolutionDelivery(candidate.sourceUrl));
   const usable = displayCandidates.length ? displayCandidates : candidates;
 
   // Preserve source gallery/cover order. For duplicate delivery renditions of the
