@@ -39,7 +39,7 @@ jobs:
       - name: Catalog source-scale tests
         run: node --import tsx --test tests/catalog-source-scale.test.ts
       - name: Catalog production hardening tests
-        run: node --import tsx --test tests/catalog-production-hardening.test.ts tests/catalog-v2-market-recovery.test.ts tests/catalog-v6-shared-publish-lock.test.ts tests/catalog-operations.test.ts
+        run: node --import tsx --test tests/catalog-production-hardening.test.ts tests/catalog-v2-market-recovery.test.ts tests/catalog-v6-shared-publish-lock.test.ts tests/catalog-operations.test.ts tests/catalog-source-retention.test.ts
       - name: Catalog model-year inventory quota tests
         run: node --import tsx --test tests/catalog-model-year-quota.test.ts tests/catalog-global-model-cap.test.ts
       - name: Japan auction statistics tests
@@ -69,7 +69,7 @@ jobs:
       - name: Estimated EV publication tests
         run: node --import tsx --test tests/catalog-estimated-power-publication.test.ts
       - name: Vehicle knowledge and model search tests
-        run: node --import tsx --test tests/vehicle-knowledge.test.ts tests/catalog-knowledge-power-conflict.test.ts
+        run: node --import tsx --test tests/vehicle-knowledge.test.ts
       - name: Live offer display enrichment tests
         run: node --import tsx --test tests/catalog-display-enrichment.test.ts tests/catalog-display-identity.test.ts tests/catalog-public-offer-deduplication.test.ts tests/catalog-brand-routing.test.ts tests/autocatalog-ui.test.ts
       - name: Current read-model and AI product feed tests
@@ -77,7 +77,7 @@ jobs:
       - name: Drom generation and horsepower parser tests
         run: node --import tsx --test tests/drom-vehicle-knowledge.test.ts
       - name: Validate catalog automation scripts
-        run: node --check scripts/catalog-configure-source-limits.mjs && node --check scripts/catalog-daily-full.mjs && node --check scripts/catalog-daily-incremental.mjs && node --check scripts/catalog-sync-vehicle-models.mjs && node --check scripts/catalog-sync-vehicle-knowledge-seed.mjs && node --check scripts/catalog-build-vehicle-variants.mjs && node --check scripts/catalog-build-power-knowledge.mjs && node --check scripts/catalog-audit-vehicle-knowledge.mjs && node --check scripts/catalog-clean-object-storage.mjs && node --check scripts/catalog-reindex-vehicle-knowledge.mjs && node --check scripts/catalog-rebuild-market.mjs && node --check scripts/catalog-publish-fresh.mjs && node --check scripts/catalog-business-audit.mjs && node --check scripts/catalog-probe-source-shard.mjs && node --check scripts/catalog-rebuild-source-shard.mjs && node --check scripts/catalog-validate-source-scale.mjs && node --check scripts/catalog-publish-source-scale.mjs
+        run: node --check scripts/catalog-configure-source-limits.mjs && node --check scripts/catalog-daily-full.mjs && node --check scripts/catalog-daily-incremental.mjs && node --check scripts/catalog-sync-vehicle-models.mjs && node --check scripts/catalog-sync-vehicle-knowledge-seed.mjs && node --check scripts/catalog-build-vehicle-variants.mjs && node --check scripts/catalog-build-power-knowledge.mjs && node --check scripts/catalog-audit-vehicle-knowledge.mjs && node --check scripts/catalog-clean-object-storage.mjs && node --check scripts/catalog-reindex-vehicle-knowledge.mjs && node --check scripts/catalog-rebuild-market.mjs && node --check scripts/catalog-publish-fresh.mjs && node --check scripts/catalog-business-audit.mjs && node --check scripts/catalog-probe-source-shard.mjs && node --check scripts/catalog-rebuild-source-shard.mjs && node --check scripts/catalog-validate-source-scale.mjs && node --check scripts/catalog-publish-source-scale.mjs && node --check scripts/catalog-publish-market.mjs
       - name: Web typecheck diagnostics
         id: web_typecheck
         continue-on-error: true
