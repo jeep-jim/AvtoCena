@@ -297,7 +297,7 @@ test("publisher prioritizes affordable recent cars up to 160 hp", () => {
 
 test("catalog rejects prices above the absolute public limit and bounds parsed power", () => {
   assert.match(publicPriority, /absoluteMaximumRub/);
-  assert.match(publicPriority, /above_absolute_price_limit/);
+  assert.match(publicPriority, /above_public_price_limit/);
   assert.match(publicPriority, /function offerPowerHp/);
   assert.match(publicPriority, /offer\?\.powerHp/);
   assert.match(publicPriority, /2_500/);

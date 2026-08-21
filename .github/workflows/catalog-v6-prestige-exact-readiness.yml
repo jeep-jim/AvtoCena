@@ -48,7 +48,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run typecheck
-      - name: Verify known exact sold-detail parser contract
+      - name: Verify live exact sold-detail parser contract
         run: npx tsx scripts/prestige-japan-exact-parser-smoke.ts
       - name: Collect exact Prestige sold results without publishing
         run: npx tsx scripts/catalog-simple-source-market.mjs
