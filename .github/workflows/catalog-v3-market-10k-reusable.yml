@@ -13,6 +13,18 @@ on:
         required: false
         type: string
         default: "259200000"
+      target_per_source:
+        required: false
+        type: string
+        default: "10000"
+      target_per_market:
+        required: false
+        type: string
+        default: "10000"
+      maximum_per_market:
+        required: false
+        type: string
+        default: "100000"
     secrets:
       YC_OBJECT_STORAGE_ENDPOINT:
         required: false
@@ -45,10 +57,10 @@ env:
   CATALOG_V2_HARD_MAX_TOTAL_RUB: "15000000"
   CATALOG_PUBLIC_ABSOLUTE_MAX_TOTAL_RUB: "15000000"
   CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO: "8"
-  CATALOG_REBUILD_TARGET_PER_SOURCE: "10000"
-  CATALOG_REBUILD_TARGET_PER_MARKET: "10000"
-  CATALOG_PUBLISH_TARGET_PER_MARKET: "10000"
-  CATALOG_PUBLISH_MAX_PER_MARKET: "100000"
+  CATALOG_REBUILD_TARGET_PER_SOURCE: ${{ inputs.target_per_source }}
+  CATALOG_REBUILD_TARGET_PER_MARKET: ${{ inputs.target_per_market }}
+  CATALOG_PUBLISH_TARGET_PER_MARKET: ${{ inputs.target_per_market }}
+  CATALOG_PUBLISH_MAX_PER_MARKET: ${{ inputs.maximum_per_market }}
   CATALOG_OFFER_RETENTION_MS: ${{ inputs.retention_ms }}
   CATALOG_DEFAULT_RETENTION_MS: "259200000"
   CATALOG_JAPAN_RETENTION_MS: "15552000000"
@@ -165,7 +177,7 @@ jobs:
       CATALOG_REBUILD_MARKETS: ${{ inputs.market }}
       CATALOG_REBUILD_VALIDATION_REPORT: catalog-v3-${{ inputs.market }}-validation-report.json
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-v3-${{ inputs.market }}-publish-report.json
-      CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"
+      CATALOG_REBUILD_TARGET_PER_SOURCE: ${{ inputs.target_per_source }}
       CATALOG_PUBLISH_PREPARE_CONCURRENCY: "24"
       CATALOG_INDEX_WRITE_CONCURRENCY: "12"
       CATALOG_STORAGE_EMERGENCY: "true"

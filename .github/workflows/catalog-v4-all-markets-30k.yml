@@ -1,5 +1,5 @@
-name: Catalog raw · 7 markets · up to 30k each
-run-name: Catalog raw sequential recovery · ${{ github.sha }}
+name: Catalog calculated · 7 markets · up to 30k each
+run-name: Catalog calculated sequential recovery · ${{ github.sha }}
 
 on:
   workflow_dispatch:
@@ -48,56 +48,85 @@ jobs:
 
   korea:
     needs: reset
-    uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: korea
       display_name: Корея
+      target_per_source: "30000"
+      target_per_market: "30000"
+      maximum_per_market: "30000"
     secrets: inherit
 
   japan:
     needs: korea
-    uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: japan
       display_name: Япония
+      retention_ms: "15552000000"
+      target_per_source: "30000"
+      target_per_market: "30000"
+      maximum_per_market: "30000"
     secrets: inherit
 
   china:
     needs: japan
-    uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: china
       display_name: Китай
+      target_per_source: "30000"
+      target_per_market: "30000"
+      maximum_per_market: "30000"
     secrets: inherit
 
   uae:
     needs: china
-    uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: uae
       display_name: ОАЭ
+      target_per_source: "30000"
+      target_per_market: "30000"
+      maximum_per_market: "30000"
     secrets: inherit
 
   europe:
     needs: uae
-    uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: europe
       display_name: Европа
+      target_per_source: "30000"
+      target_per_market: "30000"
+      maximum_per_market: "30000"
     secrets: inherit
 
   georgia:
     needs: europe
-    uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: georgia
       display_name: Грузия
+      target_per_source: "30000"
+      target_per_market: "30000"
+      maximum_per_market: "30000"
     secrets: inherit
 
   kyrgyzstan:
     needs: georgia
-    uses: ./.github/workflows/catalog-v4-market-30k-reusable.yml
+    if: ${{ always() && !cancelled() }}
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: kyrgyzstan
       display_name: Кыргызстан
+      target_per_source: "30000"
+      target_per_market: "30000"
+      maximum_per_market: "30000"
     secrets: inherit
