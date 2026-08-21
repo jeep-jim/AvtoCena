@@ -72,6 +72,10 @@ test("production keeps one warm container and serves navigation bursts in-proces
   assert.match(deploy, /cars\/offer\/\$offer_id/);
 });
 
+test("market run markers do not rebuild and redeploy the web container", () => {
+  assert.match(deploy, /paths-ignore:[\s\S]*\.github\/market-runs\/\*\*/);
+});
+
 test("catalog pricing shares one short-lived market-settings read", () => {
   assert.match(effectiveMarkets, /EFFECTIVE_MARKETS_CACHE_MS/);
   assert.match(effectiveMarkets, /getCachedMarketsSettings\(\)/);
