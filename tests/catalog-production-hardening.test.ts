@@ -64,6 +64,15 @@ test("catalog reindex reruns whenever the production customs calculation changes
   assert.match(reindexWorkflow, /\.github\/workflows\/catalog-reindex-vehicle-knowledge\.yml/);
 });
 
+test("each market has an isolated operator trigger in addition to its schedule", () => {
+  assert.match(v3MarketWorkflow, /group: catalog-v3-\$\{\{ inputs\.market \}\}/);
+  for (const market of ["korea", "china", "japan", "uae", "europe", "georgia", "kyrgyzstan"]) {
+    const marketWorkflow = fs.readFileSync(new URL(`../.github/workflows/catalog-v2-${market}.yml`, import.meta.url), "utf8");
+    assert.match(marketWorkflow, new RegExp(`\\.github/market-runs/${market}`));
+    assert.match(marketWorkflow, new RegExp(`market: ${market}`));
+  }
+});
+
 test("Prestige failed-chunk repair uses GitHub CLI artifact downloads and remains no-publish", () => {
   assert.match(prestigeRepairWorkflow, /permissions:\n  actions: read\n  contents: read/);
   assert.match(prestigeRepairWorkflow, /gh run download "\$SOURCE_RUN_ID"/);

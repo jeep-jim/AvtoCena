@@ -3,6 +3,10 @@ run-name: Catalog V3 · Japan · 30k weekly · ${{ github.sha }}
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/market-runs/japan"
   schedule:
     - cron: "17 5 * * 1"
 
