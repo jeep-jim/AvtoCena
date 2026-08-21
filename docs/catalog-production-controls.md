@@ -121,3 +121,5 @@ Seed-файлы репозитория являются аварийным ми�
 
 
 <!-- one-shot calculated seven-market launch: 2026-08-21T08:18Z -->
+
+<!-- emergency stop: 2026-08-21T08:25Z -->
