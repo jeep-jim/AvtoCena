@@ -241,7 +241,7 @@
         "range",
         "modelImageUrl"
       ],
-      "notes": "Used only as a structured Chinese market identity/spec corroboration and gap-fill layer behind official/regulatory evidence. Collection is series-level and deliberately low-rate: one brand index, one series-list request per brand, one config page per series; no anti-bot bypass or per-listing scraping."
+      "notes": "Used only as a structured Chinese market identity/spec corroboration and gap-fill layer behind official/regulatory evidence. Collection is series-level and deliberately low-rate: one brand index, one public brand page per brand, and one config page per discovered series; no anti-bot bypass or per-listing scraping."
     },
     {
       "id": "mlit-japan-fuel-economy",
