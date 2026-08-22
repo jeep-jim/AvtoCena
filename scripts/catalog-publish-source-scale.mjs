@@ -31,7 +31,7 @@ const priorityMaxPowerHp = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_P
 const priorityMaxAgeYears = Math.max(0, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
 const priorityMinYear = new Date().getFullYear() - priorityMaxAgeYears;
 const v2Policy = {
-  priorityTarget: Math.max(1, Number(process.env.CATALOG_V2_PRIORITY_TARGET || 1_000)),
+  priorityTarget: Math.max(0, Number(process.env.CATALOG_V2_PRIORITY_TARGET || 1_000)),
   maximumPerMarket,
   priorityMaxAgeYears,
   recentMaxAgeYears: Math.max(priorityMaxAgeYears, Number(process.env.CATALOG_V2_RECENT_MAX_AGE_YEARS || 10)),

@@ -19,5 +19,5 @@ jobs:
       market: china
       display_name: Китай
       reset_cursor: ${{ github.event_name != 'schedule' }}
-      priority_target: "8000"
+      priority_target: "500"
     secrets: inherit

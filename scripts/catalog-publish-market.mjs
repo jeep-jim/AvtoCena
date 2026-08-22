@@ -34,7 +34,7 @@ const priorityMaxTotalRub = Math.max(100_000, Number(process.env.CATALOG_PRIORIT
 const priorityMaxPowerHp = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_POWER_HP || 160));
 const priorityMaxAgeYears = Math.max(0, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
 const v2Policy = {
-  priorityTarget: Math.max(1, Number(process.env.CATALOG_V2_PRIORITY_TARGET || 1_000)),
+  priorityTarget: Math.max(0, Number(process.env.CATALOG_V2_PRIORITY_TARGET || 1_000)),
   maximumPerMarket,
   priorityMaxAgeYears,
   recentMaxAgeYears: Math.max(priorityMaxAgeYears, Number(process.env.CATALOG_V2_RECENT_MAX_AGE_YEARS || 10)),

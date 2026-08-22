@@ -43,7 +43,7 @@ export type MobileDeExactRow = {
 };
 
 type CursorState = { shard: number; page: number };
-type SearchShard = { yearFrom: number; yearTo: number; maxPowerKw?: number; label: string };
+type SearchShard = { yearFrom: number; yearTo: number; minPowerKw?: number; maxPowerKw?: number; label: string };
 
 function clean(value: unknown) {
   return String(value ?? "").replace(/\s+/g, " ").trim();
@@ -98,16 +98,19 @@ function searchShards(): SearchShard[] {
   const currentYear = new Date().getUTCFullYear();
   const allowedYears = Array.from({ length: Math.max(1, currentYear - 2020 + 1) }, (_, index) => currentYear - index)
     .filter((year) => year >= 2020);
-  const rotate = (values: number[]) => {
-    if (!values.length) return values;
-    const day = Math.floor(Date.now() / 86_400_000);
-    const offset = day % values.length;
-    return [...values.slice(offset), ...values.slice(0, offset)];
-  };
-  return [
-    ...rotate(allowedYears).map((year) => ({ yearFrom: year, yearTo: year, maxPowerKw: 118, label: `recent_liquid_${year}` })),
-    ...rotate(allowedYears).map((year) => ({ yearFrom: year, yearTo: year, label: `recent_all_${year}` })),
+  const powerBands = [
+    { minPowerKw: 1, maxPowerKw: 85, label: "power_001_085" },
+    { minPowerKw: 86, maxPowerKw: 118, label: "power_086_118" },
+    { minPowerKw: 119, maxPowerKw: 160, label: "power_119_160" },
+    { minPowerKw: 161, maxPowerKw: 220, label: "power_161_220" },
+    { minPowerKw: 221, label: "power_221_plus" },
   ];
+  return allowedYears.flatMap((year) => powerBands.map((band) => ({
+    yearFrom: year,
+    yearTo: year,
+    ...band,
+    label: `${band.label}_${year}`,
+  })));
 }
 function classicSearchUrl(shard: SearchShard, page: number) {
   const url = new URL("/fahrzeuge/search.html", SEARCH_BASE);
@@ -115,7 +118,7 @@ function classicSearchUrl(shard: SearchShard, page: number) {
   url.searchParams.set("isSearchRequest", "true");
   url.searchParams.set("vc", "Car");
   url.searchParams.set("fr", `${shard.yearFrom}:${shard.yearTo}`);
-  if (shard.maxPowerKw) url.searchParams.set("pw", `:${shard.maxPowerKw}`);
+  if (shard.minPowerKw || shard.maxPowerKw) url.searchParams.set("pw", `${shard.minPowerKw || ""}:${shard.maxPowerKw || ""}`);
   url.searchParams.set("pageNumber", String(page));
   return url.toString();
 }
