@@ -131,9 +131,22 @@ async function snapshotVehiclesDb() {
   return manifest;
 }
 
+const EEA_CAR_DATASETS = {
+  2020: { table: "co2cars_2020Fv22", status: "F" },
+  2021: { table: "co2cars_2021Fv24", status: "F" },
+  2022: { table: "co2cars_2022Fv26", status: "F" },
+  2023: { table: "co2cars_2023Fv28", status: "F" },
+  2024: { table: "co2cars_2024Pv29", status: "P" },
+  2025: { table: "co2cars_2025Pv31", status: "P" },
+};
+
+function eeaDataset(year) {
+  return EEA_CAR_DATASETS[year] || { table: "co2cars", status: year >= 2024 ? "P" : "F" };
+}
+
 function eeaQuery(year) {
-  const status = year >= 2025 ? "P" : "F";
-  return `SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=${year} AND [Status]='${status}' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]`;
+  const dataset = eeaDataset(year);
+  return `SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[${dataset.table}] WHERE [Year]=${year} AND [Status]='${dataset.status}' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]`;
 }
 
 async function snapshotEea() {
@@ -144,6 +157,7 @@ async function snapshotEea() {
   const endYear = Math.min(2025, new Date().getFullYear());
   let total = 0;
   for (let year = startYear; year <= endYear; year++) {
+    const dataset = eeaDataset(year);
     const query = eeaQuery(year);
     let yearCount = 0;
     let finished = false;
@@ -155,7 +169,7 @@ async function snapshotEea() {
       const rows = Array.isArray(payload?.results) ? payload.results : [];
       if (!rows.length) { finished = true; break; }
       const relative = `year-${year}/part-${String(page).padStart(4, "0")}.json`;
-      manifest.files.push({ ...(await writeJson(relative, { source: "EEA CO2Emission.latest.co2cars", query, page, rows })), sourceUrl: url });
+      manifest.files.push({ ...(await writeJson(relative, { source: `EEA CO2Emission.latest.${dataset.table}`, query, page, rows })), sourceUrl: url });
       yearCount += rows.length;
       total += rows.length;
       if (rows.length < pageSize) { finished = true; break; }
@@ -164,11 +178,16 @@ async function snapshotEea() {
     manifest.counts[`year${year}`] = yearCount;
     if (!finished) {
       manifest.status = "partial";
-      manifest.errors.push({ source: "eea", year, error: `page_cap_reached:${maxPages}` });
+      manifest.errors.push({ source: "eea", year, table: dataset.table, error: `page_cap_reached:${maxPages}` });
+    }
+    if (yearCount === 0) {
+      manifest.status = "partial";
+      manifest.errors.push({ source: "eea", year, table: dataset.table, error: "empty_year_dataset" });
     }
   }
   manifest.counts.technicalTuples = total;
   manifest.notes.push("Rows are DISTINCT-by-GROUP technical identity tuples with observation counts; duplicate registration microdata is intentionally not copied to GitHub.");
+  manifest.notes.push("Year-specific EEA tables are pinned for 2020-2025 because the generic latest.co2cars view can omit historical years even when their official versioned datasets remain available.");
   await writeJson("snapshot-manifest.json", manifest);
   return manifest;
 }
