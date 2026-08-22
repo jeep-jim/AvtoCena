@@ -7,8 +7,10 @@ on:
       - fix/catalog-core-recovery-20260822
     paths:
       - scripts/catalog-download-knowledge-source-snapshot.mjs
+      - scripts/catalog-download-western-knowledge-sources.mjs
       - scripts/catalog-download-vehiclesdb-csv.mjs
       - scripts/catalog-build-knowledge-denominator.mjs
+      - scripts/catalog-extend-knowledge-denominator-west.mjs
       - data/catalog/knowledge-source-snapshots/SOURCES.json
       - .github/workflows/knowledge-source-snapshot.yml
 
@@ -27,7 +29,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        source: [vehiclesdb, eea, miit, mlit, korea]
+        source: [vehiclesdb, eea, miit, mlit, korea, western]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -39,6 +41,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Snapshot public source
+        if: matrix.source != 'western'
         env:
           KNOWLEDGE_SOURCE: ${{ matrix.source }}
           KNOWLEDGE_OUTPUT_ROOT: knowledge-output
@@ -50,6 +53,13 @@ jobs:
           KNOWLEDGE_MIIT_LAST_BATCH: "410"
           KNOWLEDGE_MLIT_MAX_PAGES: "150"
         run: node scripts/catalog-download-knowledge-source-snapshot.mjs
+      - name: Snapshot US and Canada government sources
+        if: matrix.source == 'western'
+        env:
+          KNOWLEDGE_OUTPUT_ROOT: knowledge-output
+          KNOWLEDGE_WEST_MAX_BYTES: "60000000"
+          KNOWLEDGE_WEST_TIMEOUT_MS: "90000"
+        run: node scripts/catalog-download-western-knowledge-sources.mjs
       - name: Snapshot VehiclesDB bulk CSV
         if: matrix.source == 'vehiclesdb'
         env:
@@ -66,9 +76,15 @@ jobs:
           exit 0
       - name: Show source manifest
         if: always()
+        shell: bash
         run: |
-          find knowledge-output -maxdepth 3 -type f -printf '%p %s bytes\n' | sort | head -200 || true
-          cat "knowledge-output/${{ matrix.source }}/snapshot-manifest.json" || true
+          find knowledge-output -maxdepth 3 -type f -printf '%p %s bytes\n' | sort | head -250 || true
+          if [ "${{ matrix.source }}" = "western" ]; then
+            cat knowledge-output/us/snapshot-manifest.json || true
+            cat knowledge-output/canada/snapshot-manifest.json || true
+          else
+            cat "knowledge-output/${{ matrix.source }}/snapshot-manifest.json" || true
+          fi
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -83,7 +99,7 @@ jobs:
     needs: snapshot
     if: always()
     runs-on: ubuntu-latest
-    timeout-minutes: 45
+    timeout-minutes: 60
     steps:
       - uses: actions/checkout@v4
         with:
@@ -106,12 +122,14 @@ jobs:
           rm -rf data/catalog/knowledge-source-snapshots/generated
           mkdir -p data/catalog/knowledge-source-snapshots/generated
           cp -a assembled/. data/catalog/knowledge-source-snapshots/generated/
-          find data/catalog/knowledge-source-snapshots/generated -type f -printf '%p %s bytes\n' | sort | head -300
+          find data/catalog/knowledge-source-snapshots/generated -type f -printf '%p %s bytes\n' | sort | head -350
       - name: Build source-evidence denominator
         env:
           KNOWLEDGE_SNAPSHOT_ROOT: data/catalog/knowledge-source-snapshots/generated
           KNOWLEDGE_DENOMINATOR_ROOT: data/catalog/knowledge-source-snapshots/denominator
-        run: node scripts/catalog-build-knowledge-denominator.mjs
+        run: |
+          node scripts/catalog-build-knowledge-denominator.mjs
+          node scripts/catalog-extend-knowledge-denominator-west.mjs
       - name: Build global snapshot manifest
         run: |
           node <<'NODE'
@@ -119,7 +137,7 @@ jobs:
           const path = require('path');
           const crypto = require('crypto');
           const root='data/catalog/knowledge-source-snapshots/generated';
-          const sources=['vehiclesdb','eea','miit','mlit','korea'];
+          const sources=['vehiclesdb','eea','miit','mlit','korea','us','canada'];
           const manifests=sources.map(source=>{
             const file=path.join(root,source,'snapshot-manifest.json');
             try{return {source,...JSON.parse(fs.readFileSync(file,'utf8'))}}catch(error){return {source,status:'missing',errors:[{error:String(error.message||error)}]}}
@@ -135,15 +153,20 @@ jobs:
         run: |
           set -euo pipefail
           node --check scripts/catalog-download-knowledge-source-snapshot.mjs
+          node --check scripts/catalog-download-western-knowledge-sources.mjs
           node --check scripts/catalog-download-vehiclesdb-csv.mjs
           node --check scripts/catalog-build-knowledge-denominator.mjs
+          node --check scripts/catalog-extend-knowledge-denominator-west.mjs
           test -s data/catalog/knowledge-source-snapshots/denominator/coverage-report.json
+          test -s data/catalog/knowledge-source-snapshots/denominator/western-coverage-report.json
           node - <<'NODE'
           const fs=require('fs');
           const r=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/denominator/coverage-report.json','utf8'));
-          console.log(JSON.stringify(r,null,2));
+          const w=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/denominator/western-coverage-report.json','utf8'));
+          console.log(JSON.stringify({global:r,western:w},null,2));
           if(Number(r.counts?.sourceBrands||0)<200) throw new Error('knowledge_denominator_brand_collapse');
           if(Number(r.counts?.sourceModels||0)<1500) throw new Error('knowledge_denominator_model_collapse');
+          if(Number(w.counts?.sourceModels||0)<500) throw new Error('western_denominator_model_collapse');
           NODE
       - name: Commit raw snapshots and denominator
         shell: bash
