@@ -13,6 +13,7 @@ on:
       - scripts/catalog-download-vehiclesdb-csv.mjs
       - scripts/catalog-download-miit-products.mjs
       - scripts/catalog-extract-mlit-pdf-knowledge.mjs
+      - scripts/catalog-extract-mlit-tabular.py
       - scripts/catalog-download-autohome-china-core.mjs
       - scripts/catalog-build-knowledge-denominator.mjs
       - scripts/catalog-extend-knowledge-denominator-west.mjs
@@ -111,6 +112,9 @@ jobs:
         with:
           node-version: 24
           cache: npm
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
       - run: npm ci
       - uses: actions/download-artifact@v4
         with:
@@ -124,8 +128,10 @@ jobs:
           rm -rf data/catalog/knowledge-source-snapshots/generated
           mkdir -p data/catalog/knowledge-source-snapshots/generated
           cp -a assembled/. data/catalog/knowledge-source-snapshots/generated/
-      - name: Install PDF extraction dependency
-        run: sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+      - name: Install source extraction dependencies
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y -qq poppler-utils
+          python -m pip install --disable-pip-version-check --quiet openpyxl xlrd
       - name: Complete China regulatory product snapshot
         env:
           KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
@@ -139,6 +145,11 @@ jobs:
           KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
           KNOWLEDGE_MLIT_PDF_MAX: "350"
         run: node scripts/catalog-extract-mlit-pdf-knowledge.mjs
+      - name: Complete Japan official tabular extraction
+        env:
+          KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
+          KNOWLEDGE_MLIT_TABLE_MAX: "200"
+        run: python scripts/catalog-extract-mlit-tabular.py
       - name: Complete Korea Energy Agency model snapshot
         env:
           KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
@@ -162,9 +173,7 @@ jobs:
           node <<'NODE'
           const fs=require('fs'),path=require('path'),crypto=require('crypto');
           const root='data/catalog/knowledge-source-snapshots/generated';
-          const manifests=[
-            ['vehiclesdb','snapshot-manifest.json'],['eea','snapshot-manifest.json'],['miit','snapshot-manifest.json'],['miit-products','products-manifest.json'],['mlit','snapshot-manifest.json'],['mlit-pdf','pdf-text-manifest.json'],['korea','snapshot-manifest.json'],['korea-jeju','jeju-registry-manifest.json'],['korea-energy','energy-agency-manifest.json'],['us','snapshot-manifest.json'],['canada','snapshot-manifest.json'],['autohome-china','snapshot-manifest.json']
-          ].map(([source,file])=>{const rootSource=source.startsWith('miit-')?'miit':source.startsWith('mlit-')?'mlit':source.startsWith('korea-')?'korea':source;const p=path.join(root,rootSource,file);try{return{source,...JSON.parse(fs.readFileSync(p,'utf8'))}}catch(error){return{source,status:'missing',errors:[{error:String(error.message||error)}]}}});
+          const manifests=[['vehiclesdb','snapshot-manifest.json'],['eea','snapshot-manifest.json'],['miit','snapshot-manifest.json'],['miit-products','products-manifest.json'],['mlit','snapshot-manifest.json'],['mlit-pdf','pdf-text-manifest.json'],['mlit-tabular','tabular-manifest.json'],['korea','snapshot-manifest.json'],['korea-jeju','jeju-registry-manifest.json'],['korea-energy','energy-agency-manifest.json'],['us','snapshot-manifest.json'],['canada','snapshot-manifest.json'],['autohome-china','snapshot-manifest.json']].map(([source,file])=>{const rootSource=source.startsWith('miit-')?'miit':source.startsWith('mlit-')?'mlit':source.startsWith('korea-')?'korea':source;const p=path.join(root,rootSource,file);try{return{source,...JSON.parse(fs.readFileSync(p,'utf8'))}}catch(error){return{source,status:'missing',errors:[{error:String(error.message||error)}]}}});
           const walk=(dir,out=[])=>{if(!fs.existsSync(dir))return out;for(const n of fs.readdirSync(dir)){const f=path.join(dir,n),s=fs.statSync(f);s.isDirectory()?walk(f,out):out.push({path:f.replaceAll('\\','/'),bytes:s.size})}return out};const files=walk(root);const payload={schemaVersion:1,builtAt:new Date().toISOString(),status:manifests.some(x=>['failed','missing'].includes(x.status))?'partial':manifests.some(x=>String(x.status).startsWith('partial'))?'partial':'complete_snapshot_set',sources:manifests.map(x=>({source:x.source,status:x.status,fetchedAt:x.fetchedAt||null,counts:x.counts||{},errors:(x.errors||[]).slice(0,20)})),files:files.length,totalBytes:files.reduce((n,x)=>n+x.bytes,0),contentDigest:crypto.createHash('sha256').update(JSON.stringify(files)).digest('hex')};fs.writeFileSync(path.join(root,'snapshot-manifest.json'),JSON.stringify(payload,null,2)+'\n');console.log(JSON.stringify(payload,null,2));
           NODE
       - name: Validate complete source corpus
@@ -172,9 +181,10 @@ jobs:
         run: |
           set -euo pipefail
           for f in scripts/catalog-download-knowledge-source-snapshot.mjs scripts/catalog-download-korea-jeju-registry.mjs scripts/catalog-download-korea-energy-models.mjs scripts/catalog-download-western-knowledge-sources.mjs scripts/catalog-download-vehiclesdb-csv.mjs scripts/catalog-download-miit-products.mjs scripts/catalog-extract-mlit-pdf-knowledge.mjs scripts/catalog-download-autohome-china-core.mjs scripts/catalog-build-knowledge-denominator.mjs scripts/catalog-extend-knowledge-denominator-west.mjs scripts/catalog-extend-knowledge-denominator-asia.mjs; do node --check "$f"; done
-          for f in data/catalog/knowledge-source-snapshots/denominator/coverage-report.json data/catalog/knowledge-source-snapshots/denominator/western-coverage-report.json data/catalog/knowledge-source-snapshots/denominator/asia-coverage-report.json data/catalog/knowledge-source-snapshots/generated/korea/jeju-registry-manifest.json data/catalog/knowledge-source-snapshots/generated/korea/energy-agency-manifest.json data/catalog/knowledge-source-snapshots/generated/autohome-china/snapshot-manifest.json data/catalog/knowledge-source-snapshots/generated/miit/products-manifest.json data/catalog/knowledge-source-snapshots/generated/mlit/pdf-text-manifest.json; do test -s "$f"; done
+          python -m py_compile scripts/catalog-extract-mlit-tabular.py
+          for f in data/catalog/knowledge-source-snapshots/denominator/coverage-report.json data/catalog/knowledge-source-snapshots/denominator/western-coverage-report.json data/catalog/knowledge-source-snapshots/denominator/asia-coverage-report.json data/catalog/knowledge-source-snapshots/generated/korea/jeju-registry-manifest.json data/catalog/knowledge-source-snapshots/generated/korea/energy-agency-manifest.json data/catalog/knowledge-source-snapshots/generated/autohome-china/snapshot-manifest.json data/catalog/knowledge-source-snapshots/generated/miit/products-manifest.json data/catalog/knowledge-source-snapshots/generated/mlit/pdf-text-manifest.json data/catalog/knowledge-source-snapshots/generated/mlit/tabular-manifest.json; do test -s "$f"; done
           node - <<'NODE'
-          const fs=require('fs');const g=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/denominator/coverage-report.json'));const w=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/denominator/western-coverage-report.json'));const a=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/denominator/asia-coverage-report.json'));const k=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/generated/korea/jeju-registry-manifest.json'));const c=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/generated/autohome-china/snapshot-manifest.json'));console.log(JSON.stringify({global:g.counts,west:w.counts,asia:a.counts,korea:k.counts,china:c.counts},null,2));if(Number(g.counts?.sourceModels||0)<4000)throw new Error('global_denominator_collapse');if(Number(w.counts?.sourceModels||0)<500)throw new Error('western_denominator_collapse');if(Number(a.counts?.models||0)<1000)throw new Error('asia_denominator_collapse');if(Number(k.counts?.rowsParsed||0)<100000)throw new Error('korea_registry_collapse');if(Number(c.counts?.variants2020Plus||0)<500)throw new Error('china_variant_collapse');
+          const fs=require('fs');const g=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/denominator/coverage-report.json'));const w=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/denominator/western-coverage-report.json'));const a=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/denominator/asia-coverage-report.json'));const k=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/generated/korea/jeju-registry-manifest.json'));const c=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/generated/autohome-china/snapshot-manifest.json'));const j=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/generated/mlit/tabular-manifest.json'));console.log(JSON.stringify({global:g.counts,west:w.counts,asia:a.counts,korea:k.counts,china:c.counts,japan:{tabularConverted:j.converted,tabularFiles:j.selected}},null,2));if(Number(g.counts?.sourceModels||0)<4000)throw new Error('global_denominator_collapse');if(Number(w.counts?.sourceModels||0)<500)throw new Error('western_denominator_collapse');if(Number(a.counts?.models||0)<1000)throw new Error('asia_denominator_collapse');if(Number(k.counts?.rowsParsed||0)<100000)throw new Error('korea_registry_collapse');if(Number(c.counts?.variants2020Plus||0)<500)throw new Error('china_variant_collapse');if(Number(j.converted||0)<5)throw new Error('mlit_tabular_collapse');
           NODE
       - name: Commit complete source corpus
         shell: bash
