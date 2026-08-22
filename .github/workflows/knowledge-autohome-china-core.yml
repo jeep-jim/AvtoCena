@@ -1,0 +1,55 @@
+name: Knowledge CORE China AutoHome snapshot
+
+on:
+  push:
+    branches:
+      - fix/catalog-core-recovery-20260822
+    paths:
+      - scripts/catalog-download-autohome-china-core.mjs
+      - .github/workflows/knowledge-autohome-china-core.yml
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: knowledge-core-source-snapshot
+  cancel-in-progress: false
+
+jobs:
+  collect:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-core-recovery-20260822
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Collect China brand/series/variant evidence
+        env:
+          KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
+          KNOWLEDGE_AUTOHOME_MAX_SERIES: "6000"
+          KNOWLEDGE_AUTOHOME_DELAY_MS: "150"
+        run: node scripts/catalog-download-autohome-china-core.mjs
+      - name: Validate China snapshot
+        run: |
+          node --check scripts/catalog-download-autohome-china-core.mjs
+          test -s data/catalog/knowledge-source-snapshots/generated/autohome-china/snapshot-manifest.json
+          node - <<'NODE'
+          const fs=require('fs');const m=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/generated/autohome-china/snapshot-manifest.json','utf8'));console.log(JSON.stringify(m,null,2));if(Number(m.counts?.brands||0)<50)throw new Error('china_brand_collapse');if(Number(m.counts?.variants2020Plus||0)<500)throw new Error('china_variant_collapse');
+          NODE
+      - name: Commit China source evidence
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git fetch origin fix/catalog-core-recovery-20260822
+          git rebase origin/fix/catalog-core-recovery-20260822
+          git add data/catalog/knowledge-source-snapshots/generated/autohome-china
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Snapshot China 2020+ model and variant evidence"
+          git push origin HEAD:fix/catalog-core-recovery-20260822
