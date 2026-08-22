@@ -72,11 +72,11 @@ def tabular_payload(data,url):
 for i,ref in enumerate(selected,1):
     try:
         data=download(ref['url']); digest=hashlib.sha256(data).hexdigest(); sheets=tabular_payload(data,ref['url'])
-        payload={'schemaVersion':1,'sourceId':'mlit-japan-fuel-economy','sourceUrl':ref['url'],'title':ref.get('text'),'sha256':digest,'bytes':len(data),'sheets':sheets}
+        payload={'schemaVersion':1,'sourceId':'mlit-japan-fuel-economy','sourceUrl':ref['url'],'title':ref.get('text'),'sourcePageUrl':ref.get('sourcePageUrl'),'sourcePageTitle':ref.get('sourcePageTitle'),'sha256':digest,'bytes':len(data),'sheets':sheets}
         name=f'{i:04d}-{digest[:16]}.json'; (OUT/name).write_text(json.dumps(payload,ensure_ascii=False,indent=2)+'\n','utf-8')
-        manifest['converted']+=1; manifest['files'].append({'file':'mlit/tabular-json/'+name,'sourceUrl':ref['url'],'title':ref.get('text'),'bytes':len(data),'sha256':digest,'sheets':len(sheets),'rows':sum(len(s.get('rows',[])) for s in sheets)})
+        manifest['converted']+=1; manifest['files'].append({'file':'mlit/tabular-json/'+name,'sourceUrl':ref['url'],'title':ref.get('text'),'sourcePageUrl':ref.get('sourcePageUrl'),'sourcePageTitle':ref.get('sourcePageTitle'),'bytes':len(data),'sha256':digest,'sheets':len(sheets),'rows':sum(len(s.get('rows',[])) for s in sheets)})
     except Exception as e:
-        manifest['failed']+=1; manifest['status']='partial'; manifest['errors'].append({'url':ref.get('url'),'title':ref.get('text'),'error':str(e)})
+        manifest['failed']+=1; manifest['status']='partial'; manifest['errors'].append({'url':ref.get('url'),'title':ref.get('text'),'sourcePageUrl':ref.get('sourcePageUrl'),'error':str(e)})
     time.sleep(0.10)
 (MLIT/'tabular-manifest.json').write_text(json.dumps(manifest,ensure_ascii=False,indent=2)+'\n','utf-8')
 print(json.dumps(manifest,ensure_ascii=False,indent=2))
