@@ -69,6 +69,10 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Workflow files are updated by the authorized repository connector,
+          # not by GITHUB_TOKEN (GitHub blocks workflow-file pushes without the
+          # workflows permission). This commit therefore contains runtime/source
+          # transformations only.
           git add \
             apps/web/lib/catalog/storage.ts \
             apps/web/lib/catalog/offer-page-data.ts \
@@ -80,8 +84,6 @@ jobs:
             'apps/web/app/(public)/cars/offer/[id]/layout.tsx' \
             scripts/catalog-apply-encyclopedia-identity-master.mjs \
             tests/offer-navigation-performance.test.ts \
-            .github/workflows/catalog-v3-market-10k-reusable.yml \
-            .github/workflows/ci.yml \
             data/catalog/vehicle-encyclopedia-v2/manifest.json \
             data/catalog/vehicle-encyclopedia-v2/CODEX_MASTER_TASK.md
           if git diff --cached --quiet; then
