@@ -62,22 +62,22 @@ jobs:
         run: node --import tsx --test tests/catalog-publication-gate.test.ts
       - name: Open source model normalization tests
         run: node --import tsx --test tests/open-source-normalizer.test.ts
-      - name: Power normalization tests
-        run: node --import tsx --test tests/catalog-power-normalization.test.ts tests/catalog-knowledge-power-conflict.test.ts
+      - name: Power normalization and public truth tests
+        run: node --import tsx --test tests/catalog-power-normalization.test.ts tests/catalog-knowledge-power-conflict.test.ts tests/catalog-public-truth-seo.test.ts tests/catalog-power-authority-contract.test.ts
       - name: Public 30-minute power display tests
         run: node --import tsx --test tests/catalog-power-display.test.ts
       - name: Estimated EV publication tests
         run: node --import tsx --test tests/catalog-estimated-power-publication.test.ts
-      - name: Vehicle knowledge and model search tests
-        run: node --import tsx --test tests/vehicle-knowledge.test.ts
+      - name: Vehicle Knowledge CORE and model search tests
+        run: node --import tsx --test tests/vehicle-knowledge.test.ts tests/catalog-knowledge-core-contract.test.ts
       - name: Live offer display enrichment tests
-        run: node --import tsx --test tests/catalog-display-enrichment.test.ts tests/catalog-display-identity.test.ts tests/catalog-public-offer-deduplication.test.ts tests/catalog-brand-routing.test.ts tests/autocatalog-ui.test.ts
+        run: node --import tsx --test tests/catalog-display-enrichment.test.ts tests/catalog-display-identity.test.ts tests/catalog-public-offer-deduplication.test.ts tests/catalog-brand-routing.test.ts tests/autocatalog-ui.test.ts tests/catalog-safe-model-label.test.ts
       - name: Current read-model and AI product feed tests
         run: node --import tsx --test tests/offer-navigation-performance.test.ts tests/catalog-filter-search.test.ts tests/catalog-current-read-model-empty-market-policy.test.ts tests/ai-product-feed.test.ts
       - name: Drom generation and horsepower parser tests
         run: node --import tsx --test tests/drom-vehicle-knowledge.test.ts
       - name: Validate catalog automation scripts
-        run: node --check scripts/catalog-configure-source-limits.mjs && node --check scripts/catalog-daily-full.mjs && node --check scripts/catalog-daily-incremental.mjs && node --check scripts/catalog-sync-vehicle-models.mjs && node --check scripts/catalog-sync-vehicle-knowledge-seed.mjs && node --check scripts/catalog-build-vehicle-variants.mjs && node --check scripts/catalog-build-power-knowledge.mjs && node --check scripts/catalog-audit-vehicle-knowledge.mjs && node --check scripts/catalog-clean-object-storage.mjs && node --check scripts/catalog-reindex-vehicle-knowledge.mjs && node --check scripts/catalog-rebuild-market.mjs && node --check scripts/catalog-publish-fresh.mjs && node --check scripts/catalog-business-audit.mjs && node --check scripts/catalog-probe-source-shard.mjs && node --check scripts/catalog-rebuild-source-shard.mjs && node --check scripts/catalog-validate-source-scale.mjs && node --check scripts/catalog-publish-source-scale.mjs && node --check scripts/catalog-publish-market.mjs
+        run: node --check scripts/catalog-configure-source-limits.mjs && node --check scripts/catalog-daily-full.mjs && node --check scripts/catalog-daily-incremental.mjs && node --check scripts/catalog-sync-vehicle-models.mjs && node --check scripts/catalog-sync-vehicle-knowledge-seed.mjs && node --check scripts/catalog-build-vehicle-variants.mjs && node --check scripts/catalog-build-power-knowledge.mjs && node --check scripts/catalog-audit-vehicle-knowledge.mjs && node --check scripts/catalog-clean-object-storage.mjs && node --check scripts/catalog-reindex-vehicle-knowledge.mjs && node --check scripts/catalog-rebuild-market.mjs && node --check scripts/catalog-publish-fresh.mjs && node --check scripts/catalog-business-audit.mjs && node --check scripts/catalog-probe-source-shard.mjs && node --check scripts/catalog-rebuild-source-shard.mjs && node --check scripts/catalog-validate-source-scale.mjs && node --check scripts/catalog-publish-source-scale.mjs && node --check scripts/catalog-publish-market.mjs && node --check scripts/catalog-build-knowledge-gaps.mjs && node --check scripts/catalog-verify-current-offers.mjs
       - name: Web typecheck diagnostics
         id: web_typecheck
         continue-on-error: true
