@@ -5,7 +5,7 @@ const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib
 const { credibleCatalogImages, hasCredibleOfferContent, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
-const { enrichOfferWithVehicleKnowledge } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
+const { enrichOfferWithKnowledgeCore } = await import("../apps/web/lib/catalog/knowledge-core.ts");
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 
 const markets = String(process.env.RECOVERY_BATCH_MARKETS || "uae,georgia").split(",").map((value) => value.trim()).filter(Boolean);
@@ -62,7 +62,7 @@ function normalizeVisible(raw) {
   });
 }
 async function normalizeAsPersisted(raw) {
-  return normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(normalizeVisible(raw)));
+  return normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(normalizeVisible(raw)));
 }
 function applyDiversity(rows, rejected, market) {
   const selected = [];

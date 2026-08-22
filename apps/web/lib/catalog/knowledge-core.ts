@@ -30,17 +30,34 @@ export type KnowledgeCoreVariant = {
   power30MinKwByMotor?: number[] | null;
   batteryKwh?: number | null;
   status?: string;
-  evidence?: Array<{ fields?: string[]; status?: string; confidence?: string }>;
+  evidence?: Array<{ sourceId?: string; fields?: string[]; status?: string; confidence?: string }>;
+  provenance?: Record<string, unknown>;
+  coreSource?: "vehicle-encyclopedia-v2" | "knowledge-source-corpus";
 };
 
-type CoreIndex = {
+export type KnowledgeCoreCompiledModel = {
+  id: string;
+  canonicalBrandId?: string;
+  canonicalMake?: string;
+  canonicalModel?: string;
+  sourceIdentities?: Array<Record<string, unknown>>;
+  imageCandidates?: Array<{ url: string; binaryVerified: false; sourceKeys?: string[] }>;
+  imageBinaryVerified?: boolean;
+  sourceConflictCount?: number;
+};
+
+export type CoreIndex = {
   variantsByModel: Map<string, KnowledgeCoreVariant[]>;
   modelByCanonical: Map<string, string>;
+  compiledModelsByCanonical: Map<string, KnowledgeCoreCompiledModel>;
   modelCount: number;
   variantCount: number;
+  compiledModelCount: number;
+  compiledVariantCount: number;
 };
 
 const CORE_ROOT = path.join("catalog", "vehicle-encyclopedia-v2", "chunks");
+const COMPILED_CORE_ROOT = path.join("catalog", "knowledge-core");
 let coreIndexPromise: Promise<CoreIndex | null> | null = null;
 
 function clean(value: unknown) {
@@ -148,21 +165,66 @@ async function loadCoreIndex(): Promise<CoreIndex | null> {
   const root = path.resolve(getDataRoot(), CORE_ROOT);
   let names: string[] = [];
   try { names = (await fs.readdir(root)).filter((name) => /^variants-\d+\.json$/.test(name)).sort(); }
-  catch { return { variantsByModel: new Map(), modelByCanonical, modelCount: identity.models.length, variantCount: 0 }; }
+  catch { names = []; }
   const variantsByModel = new Map<string, KnowledgeCoreVariant[]>();
+  const compiledModelsByCanonical = new Map<string, KnowledgeCoreCompiledModel>();
   let variantCount = 0;
+  let compiledVariantCount = 0;
+  const addVariant = (raw: KnowledgeCoreVariant, coreSource: KnowledgeCoreVariant["coreSource"]) => {
+    if (!raw?.id || !raw?.modelId || raw.status === "retired" || raw.status === "unresolved" || raw.status === "seed") return;
+    const variant = { ...raw, coreSource };
+    const list = variantsByModel.get(variant.modelId) || [];
+    list.push(variant);
+    variantsByModel.set(variant.modelId, list);
+    variantCount++;
+    if (coreSource === "knowledge-source-corpus") compiledVariantCount++;
+  };
   for (const name of names) {
     const payload = JSON.parse(await fs.readFile(path.join(root, name), "utf8"));
     if (payload?.schemaVersion !== 2 || payload?.entityType !== "variant" || !Array.isArray(payload.records)) continue;
-    for (const variant of payload.records as KnowledgeCoreVariant[]) {
-      if (!variant?.id || !variant?.modelId || variant.status === "retired" || variant.status === "unresolved" || variant.status === "seed") continue;
-      const list = variantsByModel.get(variant.modelId) || [];
-      list.push(variant);
-      variantsByModel.set(variant.modelId, list);
-      variantCount++;
-    }
+    for (const variant of payload.records as KnowledgeCoreVariant[]) addVariant(variant, "vehicle-encyclopedia-v2");
   }
-  return { variantsByModel, modelByCanonical, modelCount: identity.models.length, variantCount };
+  const compiledRoot = path.resolve(getDataRoot(), COMPILED_CORE_ROOT);
+  try {
+    const manifest = JSON.parse(await fs.readFile(path.join(compiledRoot, "manifest.json"), "utf8"));
+    if (manifest?.schemaVersion !== 1 || manifest?.status !== "ready" || manifest?.runtimeContract?.power30Min === undefined) {
+      throw new Error("knowledge_core_compiled_manifest_invalid");
+    }
+    const compiledChunks = path.join(compiledRoot, "chunks");
+    const compiledNames = (await fs.readdir(compiledChunks)).sort();
+    for (const name of compiledNames.filter((value) => /^models-\d+\.json$/.test(value))) {
+      const payload = JSON.parse(await fs.readFile(path.join(compiledChunks, name), "utf8"));
+      if (payload?.schemaVersion !== 1 || payload?.entityType !== "compiled_model" || !Array.isArray(payload.records)) {
+        throw new Error(`knowledge_core_compiled_model_chunk_invalid:${name}`);
+      }
+      for (const model of payload.records as KnowledgeCoreCompiledModel[]) {
+        if (!model?.id || compiledModelsByCanonical.has(model.id)) throw new Error(`knowledge_core_compiled_model_duplicate:${model?.id || name}`);
+        compiledModelsByCanonical.set(model.id, model);
+      }
+    }
+    for (const name of compiledNames.filter((value) => /^variants-\d+\.json$/.test(value))) {
+      const payload = JSON.parse(await fs.readFile(path.join(compiledChunks, name), "utf8"));
+      if (payload?.schemaVersion !== 1 || payload?.entityType !== "compiled_variant" || !Array.isArray(payload.records)) {
+        throw new Error(`knowledge_core_compiled_variant_chunk_invalid:${name}`);
+      }
+      for (const variant of payload.records as KnowledgeCoreVariant[]) addVariant(variant, "knowledge-source-corpus");
+    }
+    if (compiledModelsByCanonical.size !== Number(manifest?.counts?.compiledCanonicalModels)
+      || compiledVariantCount !== Number(manifest?.counts?.compiledSourceVariants)) {
+      throw new Error("knowledge_core_compiled_count_mismatch");
+    }
+  } catch (error: any) {
+    if (error?.code !== "ENOENT") throw error;
+  }
+  return {
+    variantsByModel,
+    modelByCanonical,
+    compiledModelsByCanonical,
+    modelCount: identity.models.length,
+    variantCount,
+    compiledModelCount: compiledModelsByCanonical.size,
+    compiledVariantCount,
+  };
 }
 
 export async function readKnowledgeCoreIndex() {
@@ -209,6 +271,9 @@ function variantScore(variant: KnowledgeCoreVariant, offer: VehicleOffer) {
   const candidateBody = normalizedBody(variant.bodyType);
   if (body && candidateBody) { discriminators++; score += body === candidateBody ? 2 : -2; }
   if (variant.status === "verified") score += 3;
+  // Curated V2 stays ahead of source-observation candidates when both describe
+  // the same offer; the corpus candidate is used only when it wins uniquely.
+  if (variant.coreSource === "vehicle-encyclopedia-v2") score += 4;
   return discriminators ? score : variant.status === "verified" ? score : -1000;
 }
 
@@ -265,28 +330,53 @@ function applyTrustedVariant(offer: VehicleOffer, variant: KnowledgeCoreVariant,
     ...(next.operational || {}),
     knowledgeCore: {
       version: 1,
-      source: "vehicle-encyclopedia-v2",
+      source: variant.coreSource || "vehicle-encyclopedia-v2",
       modelId: variant.modelId,
       generationId: variant.generationId || null,
       variantId: variant.id,
       variantStatus: variant.status || null,
       score,
       fieldsApplied: applied,
+      provenance: variant.provenance || null,
     },
   };
   return next as VehicleOffer;
 }
 
-export async function enrichOfferWithKnowledgeCore(offer: VehicleOffer): Promise<VehicleOffer> {
+export async function enrichOfferWithKnowledgeCore<T extends VehicleOffer>(offer: T): Promise<T> {
   const index = await readKnowledgeCoreIndex();
-  let current = offer;
+  let current: VehicleOffer = offer;
   let matched = false;
   if (index) {
     const modelId = index.modelByCanonical.get(canonicalKey(offer.make, offer.model));
+    const compiledModel = modelId ? index.compiledModelsByCanonical.get(modelId) : undefined;
+    const compiledMeta = compiledModel ? {
+      sourceCorpusConnected: true,
+      sourceIdentityCount: compiledModel.sourceIdentities?.length || 0,
+      sourceConflictCount: compiledModel.sourceConflictCount || 0,
+      modelImageCandidates: compiledModel.imageCandidates || [],
+      modelImageBinaryVerified: compiledModel.imageBinaryVerified === true,
+    } : {
+      sourceCorpusConnected: false,
+      sourceIdentityCount: 0,
+      sourceConflictCount: 0,
+      modelImageCandidates: [],
+      modelImageBinaryVerified: false,
+    };
     const variants = modelId ? index.variantsByModel.get(modelId) || [] : [];
     const match = variants.length ? matchCoreVariant(variants, offer) : null;
     if (match) {
       current = applyTrustedVariant(offer, match.variant, match.score);
+      current = {
+        ...current,
+        operational: {
+          ...(current.operational || {}),
+          knowledgeCore: {
+            ...((current.operational as any)?.knowledgeCore || {}),
+            ...compiledMeta,
+          },
+        },
+      } as VehicleOffer;
       matched = true;
     } else {
       current = {
@@ -301,6 +391,7 @@ export async function enrichOfferWithKnowledgeCore(offer: VehicleOffer): Promise
             variantId: null,
             score: null,
             fieldsApplied: [],
+            ...compiledMeta,
           },
         },
       } as VehicleOffer;
@@ -320,9 +411,9 @@ export async function enrichOfferWithKnowledgeCore(offer: VehicleOffer): Promise
           legacyFallbackApplied: true,
         },
       },
-    } as VehicleOffer;
+    } as unknown as T;
   }
-  return enriched;
+  return enriched as T;
 }
 
 export function resetKnowledgeCoreForTests() { coreIndexPromise = null; }

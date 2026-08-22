@@ -7,7 +7,7 @@ const { compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/p
 const { classifyCatalogV2Offer } = await import("../apps/web/lib/catalog/catalog-v2-policy.ts");
 const { catalogV2SourceIds } = await import("../apps/web/lib/catalog/catalog-v2-source-registry.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-const { enrichOfferWithVehicleKnowledge } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
+const { enrichOfferWithKnowledgeCore } = await import("../apps/web/lib/catalog/knowledge-core.ts");
 const { readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { getJsonStorage, readChunkedDataJson } = await import("../apps/web/lib/data.ts");
 const { replaceChunkedDataJson } = await import("../apps/web/lib/replace-chunked-data.ts");
@@ -276,7 +276,7 @@ async function prepare(base, source) {
 
   const powerBeforeKnowledge = Number(offer.powerHp || 0);
   try {
-    offer = normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer));
+    offer = normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer));
     if (!powerBeforeKnowledge && Number(offer.powerHp || 0)) knowledgeEnriched++;
   } catch (error) {
     addError({ sourceId: offer.sourceId, offerId: offer.id, stage: "knowledge", error: String(error?.message || error) });
