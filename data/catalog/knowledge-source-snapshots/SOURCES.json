@@ -29,11 +29,12 @@
         "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/manifest.json",
         "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/catalog/car/makes.json",
         "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/catalog/car/models.json",
+        "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/dist/vehicles.csv",
         "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/ATTRIBUTION.md",
         "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/SOURCES.md"
       ],
       "fields": ["make", "model", "aliases", "bodyTypes", "availability", "officialSourceIds", "typeApprovalCrossRefs"],
-      "notes": "Global denominator spine. Do not treat it as a substitute for market-specific power/spec sources."
+      "notes": "Global denominator spine. Current manifest 2026.08.2 reports 277 car makes and 4,895 car models. Bulk CSV is retained because it is easier to deterministically compile than display-oriented JSON. Do not treat it as a substitute for market-specific power/spec sources."
     },
     {
       "id": "eea-co2-passenger-cars",
@@ -86,7 +87,7 @@
       "metadataUrl": "https://www.data.go.kr/catalog/15128417/fileData.json",
       "fromYear": 2019,
       "fields": ["vehicleName", "modelYear", "engineCc", "fuel", "vehicleClass", "vehicleType", "firstRegistrationDate"],
-      "notes": "424k-row Jeju registration extract is downloadable without login according to the portal and is a strong Korean/localized identity spine, but it is regional and must be supplemented by nationwide KOTSA data."
+      "notes": "424,332-row Jeju registration extract is advertised as downloadable without login and unrestricted use. It is a strong Korean/localized identity, displacement, fuel and body/class spine, but regional and must be supplemented by nationwide KOTSA data."
     },
     {
       "id": "kotsa-new-registration-api",
