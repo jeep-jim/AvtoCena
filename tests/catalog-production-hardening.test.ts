@@ -1,97 +1,134 @@
-import test from "node:test";
 import assert from "node:assert/strict";
 import fs from "node:fs";
+import test from "node:test";
+import { parseDubizzleLabelBoundDetailFields } from "../apps/web/lib/catalog/dubizzle-exact-source";
 
-const ci = fs.readFileSync(".github/workflows/ci.yml", "utf8");
-const daily = fs.readFileSync(".github/workflows/catalog-daily.yml", "utf8");
-const sourceRecovery = fs.readFileSync(".github/workflows/catalog-recovery-source.yml", "utf8");
-const recovery = fs.readFileSync(".github/workflows/catalog-recovery.yml", "utf8");
-const recoveryPublisher = fs.readFileSync("scripts/catalog-publish-recovery-batch.mjs", "utf8");
-const singleRecoveryPublisher = fs.readFileSync("scripts/catalog-publish-recovery-market.mjs", "utf8");
-const standardMarketPublisher = fs.readFileSync("scripts/catalog-publish-market.mjs", "utf8");
-const liveAudit = fs.readFileSync("scripts/catalog-live-postpersist-audit.mjs", "utf8");
-const storage = fs.readFileSync("apps/web/lib/catalog/storage.ts", "utf8");
-const source = fs.readFileSync("apps/web/lib/catalog/source.ts", "utf8");
-const customs = fs.readFileSync("apps/web/lib/catalog/customs-pricing.ts", "utf8");
-const productionControl = fs.readFileSync("data/catalog/production-control.json", "utf8");
-const cleanup = fs.readFileSync("scripts/catalog-clean-object-storage.mjs", "utf8");
-const modelSync = fs.readFileSync("scripts/catalog-sync-vehicle-models.mjs", "utf8");
-const knowledgeAudit = fs.readFileSync("scripts/catalog-audit-vehicle-knowledge.mjs", "utf8");
-const reindexWorkflow = fs.readFileSync(".github/workflows/catalog-reindex-customs.yml", "utf8");
-
-const MARKET_WORKFLOWS = [
-  "catalog-v2-japan.yml",
-  "catalog-v2-korea.yml",
-  "catalog-v2-china.yml",
-  "catalog-v2-uae.yml",
-  "catalog-v2-europe.yml",
-  "catalog-v2-georgia.yml",
-  "catalog-v2-kyrgyzstan.yml",
-];
+const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
+const cleanupWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-storage-cleanup.yml", import.meta.url), "utf8");
+const prestigeRepairWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v6-prestige-repair.yml", import.meta.url), "utf8");
+const audit = fs.readFileSync(new URL("../scripts/catalog-audit-vehicle-knowledge.mjs", import.meta.url), "utf8");
+const postPersistAudit = fs.readFileSync(new URL("../scripts/catalog-live-postpersist-audit.mjs", import.meta.url), "utf8");
+const rfCustomsLiveProof = fs.readFileSync(new URL("../scripts/catalog-rf-customs-live-card-proof.mjs", import.meta.url), "utf8");
+const knowledgeSync = fs.readFileSync(new URL("../scripts/catalog-sync-vehicle-models.mjs", import.meta.url), "utf8");
+const cleanup = fs.readFileSync(new URL("../scripts/catalog-clean-object-storage.mjs", import.meta.url), "utf8");
+const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
+const standardMarketPublisher = fs.readFileSync(new URL("../scripts/catalog-publish-market.mjs", import.meta.url), "utf8");
+const recoveryPublisher = fs.readFileSync(new URL("../scripts/catalog-live-recovery-publish-batch.mjs", import.meta.url), "utf8");
+const singleRecoveryPublisher = fs.readFileSync(new URL("../scripts/catalog-live-recovery-publish.mjs", import.meta.url), "utf8");
+const verifiedGenerationRestore = fs.readFileSync(new URL("../scripts/catalog-restore-verified-generation.mjs", import.meta.url), "utf8");
+const verifiedGenerationRestoreWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-restore-verified-generation.yml", import.meta.url), "utf8");
+const v3MarketWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v3-market-10k-reusable.yml", import.meta.url), "utf8");
+const sevenMarketWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v4-all-markets-30k.yml", import.meta.url), "utf8");
+const dataStorage = fs.readFileSync(new URL("../apps/web/lib/data.ts", import.meta.url), "utf8");
+const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
+const strictSourceDetail = fs.readFileSync(new URL("../apps/web/lib/catalog/strict-source-detail-wrapper.ts", import.meta.url), "utf8");
+const customs = fs.readFileSync(new URL("../packages/engine/src/calculation/russiaCustoms.ts", import.meta.url), "utf8");
+const controls = fs.readFileSync(new URL("../docs/catalog-production-controls.md", import.meta.url), "utf8");
 
 test("production workflow audits the existing vehicle knowledge snapshot without a two-hour rebuild gate", () => {
-  assert.match(daily, /catalog-audit-vehicle-knowledge\.mjs/);
-  assert.doesNotMatch(daily, /catalog-sync-vehicle-models\.mjs/);
-  assert.doesNotMatch(daily, /catalog-build-vehicle-variants\.mjs/);
-  assert.doesNotMatch(daily, /catalog-build-power-knowledge\.mjs/);
-  assert.match(ci, /catalog-audit-vehicle-knowledge\.mjs/);
+  const knowledgeStart = workflow.indexOf("\n  knowledge:");
+  const collect = workflow.indexOf("\n  collect:");
+  const knowledgeBlock = workflow.slice(knowledgeStart, collect);
+
+  assert.ok(knowledgeStart >= 0);
+  assert.ok(collect > knowledgeStart);
+  assert.match(knowledgeBlock, /Verify current vehicle encyclopedia/);
+  assert.match(knowledgeBlock, /timeout-minutes: 15/);
+  assert.match(knowledgeBlock, /Audit current encyclopedia snapshot/);
+  assert.match(knowledgeBlock, /catalog-audit-vehicle-knowledge\.mjs/);
+  assert.match(knowledgeBlock, /CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS: "6000"/);
+  assert.doesNotMatch(knowledgeBlock, /Refresh model encyclopedia/);
+  assert.doesNotMatch(knowledgeBlock, /Accumulate model variants from verified listings/);
+  assert.doesNotMatch(knowledgeBlock, /Accumulate power knowledge/);
+  assert.doesNotMatch(knowledgeBlock, /catalog-sync-vehicle-models\.mjs/);
 });
 
 test("production workflow serializes catalog builds and never cancels a running build", () => {
-  assert.match(daily, /cancel-in-progress:\s*false/);
-  assert.match(recovery, /cancel-in-progress:\s*false/);
-  assert.match(sourceRecovery, /cancel-in-progress:\s*false/);
-  assert.match(daily, /catalog-imports/);
-  assert.match(recovery, /catalog-imports/);
+  assert.match(workflow, /group: catalog-v2-production\n  cancel-in-progress: false/);
+  assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
+  assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
 });
 
 test("RF live proof accepts an earlier missing-power rejection without weakening pickup customs safety", () => {
-  const workflow = fs.readFileSync(".github/workflows/rf-customs-live-proof.yml", "utf8");
-  assert.match(workflow, /missing_power_should_not_be_present/);
-  assert.match(workflow, /pickup_verified/);
+  assert.match(rfCustomsLiveProof, /blockedByMissingPower/);
+  assert.match(rfCustomsLiveProof, /customs\.status !== "ready"/);
+  assert.match(rfCustomsLiveProof, /snapshot\.priceIncludesAllCustoms !== true/);
+  assert.match(rfCustomsLiveProof, /positive\(result\.totalRub\) === 0/);
+  assert.match(rfCustomsLiveProof, /categoryBlocked \|\| blockedByMissingPower/);
 });
 
 test("catalog reindex reruns whenever the production customs calculation changes", () => {
+  const reindexWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-reindex-vehicle-knowledge.yml", import.meta.url), "utf8");
+  assert.match(reindexWorkflow, /packages\/engine\/src\/calculation\/russiaCustomsV2\.ts/);
   assert.match(reindexWorkflow, /apps\/web\/lib\/catalog\/customs-pricing\.ts/);
-  assert.match(reindexWorkflow, /scripts\/catalog-apply-certified-power\.mjs/);
+  assert.match(reindexWorkflow, /\.github\/workflows\/catalog-reindex-vehicle-knowledge\.yml/);
 });
 
 test("each market has an isolated operator trigger in addition to its schedule", () => {
-  for (const name of MARKET_WORKFLOWS) {
-    const workflow = fs.readFileSync(`.github/workflows/${name}`, "utf8");
-    assert.match(workflow, /workflow_dispatch:/, name);
+  assert.match(v3MarketWorkflow, /group: catalog-v3-\$\{\{ inputs\.market \}\}/);
+  for (const market of ["korea", "china", "japan", "uae", "europe", "georgia", "kyrgyzstan"]) {
+    const marketWorkflow = fs.readFileSync(new URL(`../.github/workflows/catalog-v2-${market}.yml`, import.meta.url), "utf8");
+    assert.match(marketWorkflow, new RegExp(`\\.github/market-runs/${market}`));
+    assert.match(marketWorkflow, new RegExp(`market: ${market}`));
+    assert.match(marketWorkflow, /reset_cursor: \$\{\{ github\.event_name != 'schedule' \}\}/);
   }
 });
 
 test("Prestige failed-chunk repair uses GitHub CLI artifact downloads and remains no-publish", () => {
-  const workflow = fs.readFileSync(".github/workflows/catalog-prestige-repair.yml", "utf8");
-  assert.match(workflow, /gh run download/);
-  assert.doesNotMatch(workflow, /catalog-publish/);
+  assert.match(prestigeRepairWorkflow, /permissions:\n  actions: read\n  contents: read/);
+  assert.match(prestigeRepairWorkflow, /gh run download "\$SOURCE_RUN_ID"/);
+  assert.match(prestigeRepairWorkflow, /--pattern 'prestige-japan-chunk-\*'/);
+  assert.doesNotMatch(prestigeRepairWorkflow, /\bcurl\b/);
+  assert.doesNotMatch(prestigeRepairWorkflow, /catalog-publish|persistCatalogOffers|JSON_STORAGE_DRIVER|YC_OBJECT_STORAGE/);
 });
 
 test("vehicle model sync uses current VehiclesDB paths and retained knowledge on upstream failure", () => {
-  assert.match(modelSync, /vehiclesdb/);
-  assert.match(modelSync, /retained/);
+  assert.match(knowledgeSync, /vehiclesdb\/vehiclesdb@latest\/vehicles\.csv/);
+  assert.doesNotMatch(knowledgeSync, /vehiclesdb\/vehiclesdb@latest\/dist\/vehicles\.csv/);
+  assert.match(knowledgeSync, /huggingface\.co\/datasets\/vehiclesdb\/vehiclesdb\/resolve\/main\/vehicles\.csv/);
+  assert.match(knowledgeSync, /fetchFirstAvailable/);
+  assert.match(knowledgeSync, /retained_knowledge_used/);
+  assert.match(knowledgeSync, /CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS/);
+  assert.match(knowledgeSync, /upstream_model_count_below_minimum/);
 });
 
 test("vehicle knowledge audit protects count, retention ratio and unique ids", () => {
-  assert.match(knowledgeAudit, /MIN_MODELS/);
-  assert.match(knowledgeAudit, /MIN_RETAINED_RATIO/);
-  assert.match(knowledgeAudit, /duplicateIds/);
+  assert.match(audit, /CATALOG_VEHICLE_KNOWLEDGE_MIN_MODELS/);
+  assert.match(audit, /CATALOG_VEHICLE_KNOWLEDGE_MIN_RETAINED_RATIO/);
+  assert.match(audit, /models_below_minimum/);
+  assert.match(audit, /models_collapse/);
+  assert.match(audit, /duplicate_model_ids/);
+  assert.match(audit, /duplicate_variant_ids/);
+  assert.match(audit, /variantsWithThirtyMinutePower/);
+  assert.match(audit, /certifiedPowerReferencesWithThirtyMinutePower/);
+  assert.match(audit, /writeDataJson\(HEALTH_PATH, report\)/);
 });
 
 test("post-persist market audit rejects broken source identity and shallow Korea galleries", () => {
-  assert.match(liveAudit, /source_identity/);
-  assert.match(liveAudit, /korea/i);
-  assert.match(liveAudit, /images/i);
+  assert.match(postPersistAudit, /hasCredibleCatalogIdentity/);
+  assert.match(postPersistAudit, /invalidIdentityCount/);
+  assert.match(postPersistAudit, /invalid_identity/);
+  assert.match(postPersistAudit, /market === "korea"[\s\S]*belowFiveImagesCount/);
+  assert.match(postPersistAudit, /korea:below_five_images/);
+  assert.match(postPersistAudit, /preliminary_public_price/);
+  assert.match(postPersistAudit, /incomplete_specifications/);
 });
 
 test("publisher accumulates galleries before deduplication and protects the newest generations", () => {
-  assert.match(storage, /rankedCatalogImageUrls/);
-  assert.match(storage, /enforceCatalogModelYearQuota/);
+  assert.match(publisher, /function mergeOfferVersions/);
+  assert.match(publisher, /images: uniqueImages\(\[\.\.\.\(primary\?\.images/);
+  assert.match(publisher, /retainedById/);
+  assert.match(publisher, /generatedById/);
+  assert.match(publisher, /galleriesAccumulated/);
+  assert.match(publisher, /generationInventory/);
+  assert.match(publisher, /generationKeepCount/);
+  assert.match(publisher, /generationCleanupGraceMs/);
+  assert.match(publisher, /entry\.objectKeys\.length > 0/);
+  assert.match(publisher, /manifest = await persistCatalogOffers\(offers\);[\s\S]*recordAndCleanupGenerations/);
 });
 
 test("recovery publisher always preserves untouched full maintenance state exactly", () => {
+  assert.match(recoveryPublisher, /readAllOffersForMaintenance/);
   assert.match(recoveryPublisher, /const preserveUntouchedExact = true/);
   assert.match(recoveryPublisher, /preservedInternalByMarket/);
   assert.match(recoveryPublisher, /preservedPublicHashByMarket/);
@@ -119,9 +156,28 @@ test("recovery preservation gates keep untouched markets byte-stable and canonic
 });
 
 test("standard one-market publisher expires stale target rows and canonicalizes every market deterministically", () => {
-  assert.match(standardMarketPublisher, /catalogRetentionDecision/);
-  assert.match(standardMarketPublisher, /sourceRefreshStates/);
-  assert.match(standardMarketPublisher, /outageGraceMultiplier/);
+  assert.match(standardMarketPublisher, /readAllOffersForMaintenance/);
+  assert.match(standardMarketPublisher, /preservePublicOffersByMarket: preservedPublicRowsByMarket/);
+  assert.match(standardMarketPublisher, /beforePersistValidate\(publicOffers\)/);
+  assert.match(standardMarketPublisher, /beforePublishValidate\(publishedOffers\)/);
+  assert.match(standardMarketPublisher, /catalog_prewrite_preservation_gate_failed/);
+  assert.match(standardMarketPublisher, /catalog_public_regression_guard/);
+  assert.match(standardMarketPublisher, /previousPublicCount = currentMarketRows\.length/);
+  assert.match(standardMarketPublisher, /safelyRetainedCurrentRows = currentRetainedRows\.filter\(\(offer\) => japanAuctionSoldIdentityVerified\(offer\)\)/);
+  assert.match(standardMarketPublisher, /if \(!japanAuctionSoldIdentityVerified\(offer\)\) return \{ offer: null, reason: "japan_auction_sold_identity_unverified" \}/);
+  assert.match(standardMarketPublisher, /selectedMarketOffersById = new Map\(safelyRetainedCurrentRows/);
+  assert.equal(standardMarketPublisher.includes(String.raw`\n// legacy`), false);
+  assert.match(standardMarketPublisher, /expectedPublishedHashByMarket/);
+  assert.match(standardMarketPublisher, /expectedPublishedByMarket\[otherMarket\] = rows\.length/);
+  assert.match(standardMarketPublisher, /currentMarket === market[\s\S]*expectedPublishedHashByMarket\[currentMarket\] = hashRows\(rows\)/);
+  assert.doesNotMatch(standardMarketPublisher, /otherCutoff/);
+  assert.match(storage, /beforePublishValidate\?:/);
+  assert.match(storage, /appendPublicOffersByMarket\?:/);
+  assert.match(storage, /protectedPublicIds/);
+  assert.match(storage, /deduplicatePublicCatalogOffers\(\[\.\.\.protectedRows, \.\.\.priceFilteredOffers\], \{ protectedIds: protectedPublicIds \}\)/);
+  assert.match(storage, /enforceCatalogModelYearQuota\(deduplicated\.rows, \{ protectedIds: protectedPublicIds \}\)/);
+  assert.doesNotMatch(standardMarketPublisher, /appendPublicOffersByMarket: \{ \[market\]: currentMarketRows \}/);
+  assert.match(standardMarketPublisher, /catalog\/import-lock\.json/);
   assert.match(standardMarketPublisher, /acquirePublishLock\(\)/);
   assert.match(standardMarketPublisher, /finally \{[\s\S]*releasePublishLock\(\)/);
   assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets, protectedPublicIds\)[\s\S]*beforePublishValidate\(publishedOffers\)[\s\S]*const generationId/);
@@ -131,52 +187,174 @@ test("standard one-market publisher expires stale target rows and canonicalizes 
 });
 
 test("seven-market recovery is calculated, failure-tolerant and collapse-protected", () => {
-  assert.match(recoveryPublisher, /calculateOfferWithRussiaCustoms/);
-  assert.match(recoveryPublisher, /regression/);
+  assert.doesNotMatch(sevenMarketWorkflow, /uses: \.\/\.github\/workflows\/catalog-v4-market-30k-reusable\.yml/);
+  assert.equal((sevenMarketWorkflow.match(/uses: \.\/\.github\/workflows\/catalog-v3-market-10k-reusable\.yml/g) || []).length, 7);
+  assert.equal((sevenMarketWorkflow.match(/if: \$\{\{ always\(\) && !cancelled\(\) \}\}/g) || []).length, 7);
+  assert.equal((sevenMarketWorkflow.match(/target_per_market: "30000"/g) || []).length, 7);
+  assert.match(sevenMarketWorkflow, /market: japan[\s\S]*retention_ms: "2592000000"/);
+  assert.match(v3MarketWorkflow, /CATALOG_PUBLISH_MAX_PER_MARKET: \$\{\{ inputs\.maximum_per_market \}\}/);
+  assert.match(standardMarketPublisher, /CATALOG_MIN_PUBLIC_RETENTION_RATIO \|\| 0\.10/);
+  assert.match(standardMarketPublisher, /catastrophicPublicCollapse/);
+  assert.match(standardMarketPublisher, /CATALOG_ALLOW_PUBLIC_COLLAPSE/);
 });
 
 test("verified-generation restore is preflight-first and shares the global writer lock", () => {
-  const restore = fs.readFileSync("scripts/catalog-restore-verified-generation.mjs", "utf8");
-  assert.match(restore, /preflight/i);
-  assert.match(restore, /import-lock/);
+  assert.match(verifiedGenerationRestore, /catalog_restore_chunk_invalid/);
+  assert.match(verifiedGenerationRestore, /catalog_restore_market_missing/);
+  assert.match(verifiedGenerationRestore, /previewCanonicalPublicCatalogOffers/);
+  assert.match(verifiedGenerationRestore, /catalog_restore_canonical_total_mismatch/);
+  assert.match(verifiedGenerationRestore, /catalog_restore_forbidden_makes/);
+  assert.match(verifiedGenerationRestore, /preservePublicOffersByMarket/);
+  assert.match(verifiedGenerationRestore, /preservePublicOffersByMarket: preservedPublicOffersByMarket/);
+  assert.match(verifiedGenerationRestore, /beforePersistValidate\(publicOffers\)/);
+  assert.match(verifiedGenerationRestore, /beforePublishValidate\(publishedOffers\)/);
+  assert.match(verifiedGenerationRestore, /persistCatalogOffers\(\[\.\.\.combinedById\.values\(\)\]/);
+  assert.ok(verifiedGenerationRestore.indexOf("catalog_restore_canonical_total_mismatch") < verifiedGenerationRestore.indexOf("persistCatalogOffers("));
+  assert.doesNotMatch(verifiedGenerationRestore, /writeJson\("catalog\/manifest\.json"/);
+  assert.match(verifiedGenerationRestoreWorkflow, /group: catalog-live-daily-working-markets/);
+  assert.match(verifiedGenerationRestoreWorkflow, /cancel-in-progress: \$\{\{ contains\(github\.event\.head_commit\.message, '\[preempt-restore\]'\) \}\}/);
+  assert.match(verifiedGenerationRestoreWorkflow, /set -euo pipefail/);
+  assert.match(v3MarketWorkflow, /group: catalog-v3-\$\{\{ inputs\.market \}\}/);
 });
 
 test("single recovery publisher preserves full maintenance state and enforces target gallery depth", () => {
   assert.match(singleRecoveryPublisher, /readAllOffersForMaintenance/);
-  assert.match(singleRecoveryPublisher, /images/i);
+  assert.match(singleRecoveryPublisher, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER\s*\|\|\s*5/);
+  assert.match(singleRecoveryPublisher, /recovery_target_image_gate_failed/);
+  assert.match(singleRecoveryPublisher, /preservedInternalByMarket/);
+  assert.match(singleRecoveryPublisher, /preservedPublicHashByMarket/);
+  assert.match(singleRecoveryPublisher, /postPersistPublicHashByMarket/);
+  assert.match(singleRecoveryPublisher, /preservationFailures/);
+  assert.match(singleRecoveryPublisher, /recovery_preserved_internal_gate_failed/);
+  assert.match(singleRecoveryPublisher, /recovery_duplicate_id_in_full_state/);
 });
 
 test("daily cleanup keeps a bounded six-hour grace while preserving both live manifests", () => {
-  assert.match(cleanup, /6 \* 60 \* 60/);
-  assert.match(cleanup, /manifest/);
-  assert.match(cleanup, /internal/);
+  assert.match(dataStorage, /listObjects\?/);
+  assert.match(dataStorage, /requested \? normalizeStorageKey\(requested\) : ""/);
+  assert.match(dataStorage, /requested \? normalizeStorageKey\(requested\) : ""\]\s*\.filter\(Boolean\)\.join\("\/"\)/);
+  assert.match(dataStorage, /listBucketObjects\?\(prefix\?: string\)/);
+  assert.match(dataStorage, /listObjectVersions\?\(\)/);
+  assert.match(dataStorage, /listMultipartUploads\?\(\)/);
+  assert.match(dataStorage, /listRawObjects\(normalizedPrefix: string, stripConfiguredPrefix: boolean\)/);
+  assert.match(dataStorage, /listBucketObjects\(prefix = ""\)/);
+  assert.match(dataStorage, /deletePrefix\?/);
+  assert.match(dataStorage, /list-type/);
+  assert.match(dataStorage, /NextContinuationToken/);
+  assert.match(cleanup, /EMERGENCY \? 0 : 2/);
+  assert.match(cleanup, /\.\.\.\(!EMERGENCY && internalGeneration/);
+  assert.match(cleanup, /\.\.\.\(!EMERGENCY \? generationIds\.slice/);
+  assert.match(cleanup, /includeInternal/);
+  assert.match(cleanup, /protectedInternalPaths/);
+  assert.match(cleanup, /protectedInternalPaths\.has\(key\)/);
+  assert.match(cleanup, /readLiveImageKeys\(protectedGenerations, internalManifest, true\)/);
+  assert.match(cleanup, /const oldEnough = EMERGENCY \|\|/);
+  assert.match(cleanup, /storage\.deletePrefix\(`catalog\/generations\/\$\{generationId\}`\)/);
+  assert.match(cleanup, /plannedBytes/);
+  assert.match(cleanup, /storage\.listObjects\("catalog"\)/);
+  assert.match(cleanup, /storage\.listObjects\(""\)/);
+  assert.match(cleanup, /catalogInventory/);
+  assert.match(cleanup, /namespaceInventory/);
+  assert.match(cleanup, /physicalBucketInventory/);
+  assert.match(cleanup, /outsideConfiguredNamespaceBytes/);
+  assert.match(cleanup, /storage\.listBucketObjects\?\.\(""\)/);
+  assert.match(cleanup, /objectVersionInventory/);
+  assert.match(cleanup, /nonCurrentBytes/);
+  assert.match(cleanup, /multipartUploadInventory/);
+  assert.match(cleanup, /nonCatalogBytes/);
+  assert.match(cleanup, /unaccountedBytes/);
+  assert.match(cleanup, /objectPrefixSummary\(catalogObjects\)/);
+  assert.match(cleanup, /objectPrefixSummary\(namespaceObjects\)/);
+  assert.match(cleanup, /plannedDeletes > MAX_DELETES/);
+  assert.match(cleanupWorkflow, /cron: "40 2 \* \* \*"/);
+  assert.match(cleanupWorkflow, /apps\/web\/lib\/data\.ts/);
+  assert.match(cleanup, /version: 5/);
+  assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"/);
+  assert.match(cleanupWorkflow, /CATALOG_STORAGE_KEEP_GENERATIONS: "2"/);
+  assert.match(cleanupWorkflow, /CATALOG_STORAGE_EMERGENCY: "false"/);
+  assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_GRACE_MS: "21600000"/);
+  assert.match(cleanupWorkflow, /group: catalog-object-storage-cleanup/);
+  assert.doesNotMatch(cleanupWorkflow, /group: catalog-live-daily-working-markets/);
+  assert.match(cleanup, /const MIN_GRACE_MS = EMERGENCY \? 0 : 6 \* 60 \* 60 \* 1_000/);
+  assert.match(cleanup, /generations: objectBytes\(generationObjects\)/);
+  assert.doesNotMatch(cleanupWorkflow, /createWorkflowDispatch/);
 });
 
 test("large catalog search uses compact projections and bounded fallback chunk reads", () => {
-  assert.match(storage, /CatalogSearchProjection/);
-  assert.match(storage, /OFFER_CHUNK_CACHE_MAX/);
+  assert.match(storage, /const maps: Record<string, Map<string, string\[\]>> = \{ market: new Map\(\) \}/);
+  assert.doesNotMatch(storage, /power: new Map\(\)/);
+  assert.match(storage, /const searchProjectionCache = new Map/);
+  assert.match(storage, /readSearchProjection\(manifest\.generationId, market\)/);
+  assert.match(storage, /indexes\/projection/);
+  assert.match(storage, /const needsProjection = Boolean/);
+  assert.match(storage, /CATALOG_SEARCH_CHUNK_CONCURRENCY/);
+  assert.match(storage, /mapWithConcurrency\(chunkLocations/);
+  assert.doesNotMatch(storage, /Promise\.all\(\[\.\.\.chunkKeys\.values\(\)\]\)/);
 });
 
 test("Object Storage publication bounds dynamic index keys and reports the failing path", () => {
-  assert.match(storage, /writeJsonAtomic/);
+  assert.match(storage, /MAX_INDEX_SHARD_BYTES = 180/);
+  assert.match(storage, /catalogIndexShardKey/);
+  assert.match(storage, /Buffer\.byteLength\(normalized, "utf8"\)/);
+  assert.match(storage, /createHash\("sha256"\)/);
+  assert.match(dataStorage, /object_storage_\$\{method\}_\$\{response\.status\}/);
+  assert.match(dataStorage, /path=\$\{normalizedPath\.slice/);
+  assert.match(dataStorage, /objectStorageRequestTimeoutMs\(Buffer\.byteLength\(body \?\? ""\)\)/);
+  assert.match(dataStorage, /Math\.min\(300_000, 30_000 \+ Math\.ceil\(bodyBytes \/ \(1024 \* 1024\)\) \* 10_000\)/);
+  assert.match(publisher, /Buffer\.byteLength\(normalized, "utf8"\) <= 180/);
 });
 
 test("generic source detail wrapper is fail-closed and never scrapes page-wide semantics or galleries", () => {
-  assert.match(source, /fail/i);
+  assert.match(strictSourceDetail, /strict_source_adapter_identity_only/);
+  assert.match(strictSourceDetail, /photoIdentityVerified/);
+  assert.match(strictSourceDetail, /originalFetchImages/);
+  assert.doesNotMatch(strictSourceDetail, /findStructuredValue/);
+  assert.doesNotMatch(strictSourceDetail, /mergeStructuredFields/);
+  assert.doesNotMatch(strictSourceDetail, /mergeTextFields/);
+  assert.doesNotMatch(strictSourceDetail, /htmlAttributeImages/);
+  assert.doesNotMatch(strictSourceDetail, /scriptImages/);
+  assert.doesNotMatch(strictSourceDetail, /\bfetch\s*\(/);
 });
 
-test("Dubizzle detail semantics are label-bound to Car Overview and ignore seller\/recommendation noise", () => {
-  assert.match(source, /dubizzle/i);
+test("Dubizzle detail semantics are label-bound to Car Overview and ignore seller/recommendation noise", () => {
+  const markup = `
+    <section><h2>Car Overview</h2>
+      <div>Body Type</div><div>Sedan</div>
+      <div>Fuel Type</div><div>Petrol</div>
+      <div>Transmission Type</div><div>Automatic</div>
+      <div>Drive Type</div><div>RWD</div>
+      <div>Engine Capacity</div><div>3.0 L</div>
+      <div>Horsepower</div><div>375 HP</div>
+      <div>Mileage</div><div>48,200 km</div>
+    </section>
+    <h2>Description</h2><p>Seller says SUV AWD Hybrid CVT 999 HP in unrelated marketing text.</p>
+    <aside>Recommended cars: SUV AWD Diesel Manual</aside>`;
+  const fields = parseDubizzleLabelBoundDetailFields(markup);
+  assert.equal(fields.bodyType, "Sedan");
+  assert.equal(fields.fuel, "Petrol");
+  assert.equal(fields.transmission, "Automatic");
+  assert.equal(fields.drive, "RWD");
+  assert.equal(fields.engineCc, 3000);
+  assert.equal(fields.powerHp, 375);
+  assert.equal(fields.mileageKm, 48200);
 });
 
 test("Dubizzle refuses semantic inference when Car Overview labels are absent", () => {
-  assert.match(source, /Car Overview|car overview/i);
+  const fields = parseDubizzleLabelBoundDetailFields(`<p>Seller description: SUV AWD Automatic Hybrid, 500 HP, only 10,000 km.</p>`);
+  assert.deepEqual(fields, {});
 });
 
 test("customs engine uses the 2026 coefficient columns rather than the 2025 columns", () => {
-  assert.match(customs, /2026/);
+  assert.match(customs, /\[58\.84, 44\.05, 77\.48\]/);
+  assert.match(customs, /\[139\.75, 49\.5, 82\.1\]/);
+  assert.match(customs, /\[117\.68, 123\.78, 187\.4\]/);
+  assert.doesNotMatch(customs, /\[58\.84, 40\.04, 70\.44\]/);
 });
 
 test("production control document fixes the CRM readiness gate", () => {
-  assert.match(productionControl, /crm/i);
+  assert.match(controls, /двух последовательных ежедневных production-проходов/);
+  assert.match(controls, /не менее 5 000 активных моделей/);
+  assert.match(controls, /Пиковая мощность электромотора не подставляется/);
+  assert.match(controls, /Новая версия объявления не должна уменьшать уже накопленную галерею/);
+  assert.match(controls, /destructive cleanup не запускается внутри неудачной публикации/);
 });
