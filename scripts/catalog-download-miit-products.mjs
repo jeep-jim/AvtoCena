@@ -12,15 +12,22 @@ const MAX_PAGES=Math.max(1,Math.min(500,Number(process.env.KNOWLEDGE_MIIT_MAX_PA
 const sleep=(ms)=>new Promise(r=>setTimeout(r,ms));
 const sha256=(v)=>crypto.createHash("sha256").update(v).digest("hex");
 
-async function query(batch,pageNum){
+async function queryOnce(batch,pageNum){
  const body=new URLSearchParams({qymc:"",pc:String(batch),cpsb:"",clxh:"",clmc:"",pageSize:String(PAGE_SIZE),pageNum:String(pageNum)});
  const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),60000);
  try{
-  const r=await fetch(ENDPOINT,{method:"POST",body,signal:controller.signal,redirect:"follow",headers:{accept:"application/json,text/plain,*/*","content-type":"application/x-www-form-urlencoded; charset=UTF-8","x-requested-with":"XMLHttpRequest",referer:`https://service.miit-eidc.org.cn/miitxxgk/gonggao/xxgk/queryByPc?pc=${batch}&querylb=cp&qyinfolb=`,`user-agent":"AvtoCena-KnowledgeCORE/1.0 (+https://avtocena.com; public MIIT data client)`}});
+  const r=await fetch(ENDPOINT,{method:"POST",body,signal:controller.signal,redirect:"follow",headers:{accept:"application/json,text/plain,*/*","content-type":"application/x-www-form-urlencoded; charset=UTF-8","x-requested-with":"XMLHttpRequest",referer:`https://service.miit-eidc.org.cn/miitxxgk/gonggao/xxgk/queryByPc?pc=${batch}&querylb=cp&qyinfolb=`,`user-agent":"AvtoCena-KnowledgeCORE/1.0 (+https://avtocena.com; public MIIT data client)"}});
   const text=await r.text();if(!r.ok)throw new Error(`http_${r.status}:${text.slice(0,120)}`);
   if(/访问行为验证|滑块|captcha|verify/i.test(text))return {blocked:true,text};
   try{return {blocked:false,payload:JSON.parse(text),text};}catch{throw new Error(`non_json:${text.slice(0,300)}`);}
  }finally{clearTimeout(timer);}
+}
+async function query(batch,pageNum){
+ let lastError;
+ for(let attempt=1;attempt<=3;attempt++){
+  try{return await queryOnce(batch,pageNum);}catch(error){lastError=error;if(attempt<3)await sleep(400*attempt);}
+ }
+ throw lastError;
 }
 await fs.mkdir(path.join(OUT,"products"),{recursive:true});
 const summary={schemaVersion:1,id:"miit-road-vehicle-products-public-query",authority:"government_type_approval",fetchedAt:new Date().toISOString(),status:"complete",endpoint:ENDPOINT,batches:{},counts:{batchesRequested:LAST-FIRST+1,batchesComplete:0,products:0,blockedBatches:0,failedBatches:0},errors:[]};
