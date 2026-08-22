@@ -425,6 +425,22 @@ function publicChinaModel(offer: any) {
   return sourceModel;
 }
 
+function publicResolvedModelLabel(offer: any, fallback: string) {
+  const identity = offer?.operational?.encyclopediaIdentity || {};
+  const rawModel = compactListingText(identity.rawModel);
+  const source = String(identity.modelSource || "").replace(/^presentation:/, "");
+  // The V2 resolver only emits safe_alias/search_index after uniqueness checks.
+  // Preserve that proven source model label for humans/SEO (RX300, NX350h, etc.)
+  // while the stored canonical family remains RX/NX for grouping and dedupe.
+  if ((source === "safe_alias" || source === "search_index")
+    && /^[A-Za-z0-9][A-Za-z0-9+._ /-]{0,47}$/.test(rawModel)
+    && rawModel.length > fallback.length
+    && normalizedIdentity(rawModel).startsWith(normalizedIdentity(fallback))) {
+    return collapseAdjacentRepeatedPhrases(rawModel);
+  }
+  return fallback;
+}
+
 function publicTitleTrim(value: unknown) {
   const original = compactListingText(value);
   if (!original) return "";
@@ -549,13 +565,15 @@ export function catalogOfferTitle(offer: any) {
   const china = isChinaOffer(offer);
   const market = safeCatalogText(offer?.market).toLowerCase();
   const make = china ? publicChinaMake(offer) : publicMarketIdentity(offer?.make, market);
-  const model = china ? publicChinaModel(offer) : publicMarketIdentity(offer?.model, market);
+  const canonicalModel = china ? publicChinaModel(offer) : publicMarketIdentity(offer?.model, market);
+  const model = china ? canonicalModel : publicResolvedModelLabel(offer, canonicalModel);
   const rawBase = model && make && normalizedIdentity(model).startsWith(`${normalizedIdentity(make)} `)
     ? model
     : [make, model].filter(Boolean).join(" ").trim();
   const base = collapseAdjacentRepeatedPhrases(china ? rawBase : stripUnresolvedHan(rawBase));
 
   let trim = china ? "" : collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim));
+  if (/^(?:other|другое|прочее|прочий|unknown|n\/?a)$/i.test(trim)) trim = "";
   trim = removeLeadingPhrase(trim, base);
   trim = removeLeadingPhrase(trim, make);
   trim = removeLeadingPhrase(trim, model);
@@ -585,7 +603,9 @@ export function presentCatalogOffer(offer: any) {
     ...offer,
     title: catalogOfferTitle(offer),
     makeLabel: isChinaOffer(offer) ? publicChinaMake(offer) : publicMarketIdentity(offer?.make, market),
-    modelLabel: isChinaOffer(offer) ? collapseAdjacentRepeatedPhrases(publicChinaModel(offer)) : collapseAdjacentRepeatedPhrases(publicMarketIdentity(offer?.model, market)),
+    modelLabel: isChinaOffer(offer)
+      ? collapseAdjacentRepeatedPhrases(publicChinaModel(offer))
+      : publicResolvedModelLabel(offer, collapseAdjacentRepeatedPhrases(publicMarketIdentity(offer?.model, market))),
     trimLabel: collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim)),
     marketLabel: catalogMarketName(offer?.market),
     bodyLabel: catalogBodyName(offer?.bodyType, offer),

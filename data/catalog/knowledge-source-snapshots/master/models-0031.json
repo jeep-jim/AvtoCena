@@ -1,0 +1,8220 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_model",
+  "chunk": 31,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "mini:first",
+      "make": "Mini",
+      "model": "First",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": null,
+        "canonicalMake": "MINI",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:jcw",
+      "make": "MINI",
+      "model": "Jcw",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": "mini/jcw",
+        "canonicalMake": "MINI",
+        "canonicalModel": "Jcw"
+      },
+      "aliases": [
+        "J COOPER WORKS",
+        "JOHN COOPER WORKS",
+        "MINI JCW"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:jcw3door",
+      "make": "MINI",
+      "model": "JCW 3 Door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:jcwconvertible",
+      "make": "MINI",
+      "model": "JCW Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:jcwcountrymanall4",
+      "make": "MINI",
+      "model": "JCW Countryman ALL4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:jcwe",
+      "make": "MINI",
+      "model": "Jcw E",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": "mini/jcw-e",
+        "canonicalMake": "MINI",
+        "canonicalModel": "Jcw E"
+      },
+      "aliases": [
+        "JCW E",
+        "MINI JCW E"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:johncooperworks",
+      "make": "MINI",
+      "model": "John Cooper Works",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:johncooperworks3door",
+      "make": "MINI",
+      "model": "John Cooper Works 3 Door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:johncooperworksclubmanall4",
+      "make": "MINI",
+      "model": "John Cooper Works Clubman ALL4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:johncooperworksconvertible",
+      "make": "MINI",
+      "model": "John Cooper Works Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:johncooperworkscountrymanall4",
+      "make": "MINI",
+      "model": "John Cooper Works Countryman ALL4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:johncooperworksgp",
+      "make": "MINI",
+      "model": "John Cooper Works GP",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:mayfair",
+      "make": "Mini",
+      "model": "Mayfair",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": null,
+        "canonicalMake": "MINI",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:mini",
+      "make": "MINI",
+      "model": "MINI",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g32/M05/35/04/120x90_0_q95_autohomecar__ChxkPmcoip-AB2LhAB9RPOC-9wI818.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniclubman",
+      "make": "MINI",
+      "model": "MINI CLUBMAN",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minicooper",
+      "make": "MINI",
+      "model": "MINI Cooper",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minicooper5door",
+      "make": "MINI",
+      "model": "MINI Cooper 5 Door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minicooper5doorc",
+      "make": "MINI",
+      "model": "MINI Cooper 5 Door C",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minicooper5doors",
+      "make": "MINI",
+      "model": "MINI Cooper 5 Door S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minicooperc",
+      "make": "MINI",
+      "model": "MINI Cooper C",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minicooperclubman",
+      "make": "MINI",
+      "model": "MINI Cooper Clubman",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minicooperd",
+      "make": "MINI",
+      "model": "MINI Cooper D",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minicooperd5door",
+      "make": "MINI",
+      "model": "MINI Cooper D 5 Door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minicoopers",
+      "make": "MINI",
+      "model": "MINI Cooper S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minicoopers5door",
+      "make": "MINI",
+      "model": "MINI Cooper S 5 Door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minicoopersクラブマン",
+      "make": "MINI",
+      "model": "MINI Cooper S クラブマン",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minicoopersクラブマンa4",
+      "make": "MINI",
+      "model": "MINI Cooper S クラブマン A4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minicoopersd5door",
+      "make": "MINI",
+      "model": "MINI Cooper SD 5 Door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minijcw",
+      "make": "MINI",
+      "model": "MINI JCW",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china",
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china",
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g34/M0A/78/B7/120x90_0_q95_autohomecar__ChxpWGj40ayAXbZeABOgYPJEX04480.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minijcwclubman",
+      "make": "MINI",
+      "model": "MINI JCW Clubman",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minijcwcountryman",
+      "make": "MINI",
+      "model": "MINI JCW COUNTRYMAN",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g31/M08/6E/AA/120x90_0_q95_autohomecar__ChxoHmYlH1uAN44hABbaJBbNeH0894.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minijcwコンバーチブル",
+      "make": "MINI",
+      "model": "MINI JCW コンバーチブル",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minione",
+      "make": "MINI",
+      "model": "MINI One",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minione5door",
+      "make": "MINI",
+      "model": "MINI One 5 Door",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minioneclubman",
+      "make": "MINI",
+      "model": "MINI One Clubman",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minioneクロスオバ",
+      "make": "MINI",
+      "model": "MINI ONE クロスオ-バ-",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:minioneクロスオーバー",
+      "make": "MINI",
+      "model": "MINI ONE クロスオーバー",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniカントリーマンc",
+      "make": "MINI",
+      "model": "MINI カントリーマン C",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniカントリーマンd",
+      "make": "MINI",
+      "model": "MINI カントリーマン D",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniカントリーマンsall4",
+      "make": "MINI",
+      "model": "MINI カントリーマン S ALL4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniクーパdクラブマン",
+      "make": "MINI",
+      "model": "MINI クーパ- D クラブマン",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniクーパsdクラブマン",
+      "make": "MINI",
+      "model": "MINI クーパ- SD クラブマン",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniクーパsコンバーチブル",
+      "make": "MINI",
+      "model": "MINI クーパ- Sコンバーチブル",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniクーパコンバーチブル",
+      "make": "MINI",
+      "model": "MINI クーパ- コンバーチブル",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniクーパーdクラブマン",
+      "make": "MINI",
+      "model": "MINI クーパー D クラブマン",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniクーパーsコンバーチブル",
+      "make": "MINI",
+      "model": "MINI クーパー S コンバーチブル",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniクーパーsdクラブマン",
+      "make": "MINI",
+      "model": "MINI クーパー SD クラブマン",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniクーパーコンバーチブルc",
+      "make": "MINI",
+      "model": "MINI クーパー コンバーチブル C",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniクーパーコンバーチブルs",
+      "make": "MINI",
+      "model": "MINI クーパー コンバーチブル S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniクーパーdクロスオバ",
+      "make": "MINI",
+      "model": "MINI クーパーD クロスオ-バ-",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniクーパーdクロスオバa4",
+      "make": "MINI",
+      "model": "MINI クーパーD クロスオ-バ-A4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:miniクーパーsdクロスオバa4",
+      "make": "MINI",
+      "model": "MINI クーパーSD クロスオ-バ-A4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:one",
+      "make": "MINI",
+      "model": "One",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": "mini/one",
+        "canonicalMake": "MINI",
+        "canonicalModel": "One"
+      },
+      "aliases": [
+        "ONE",
+        "MINI One",
+        "MINI One 5 Door"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:paceman",
+      "make": "MINI",
+      "model": "Paceman",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": "mini/paceman",
+        "canonicalMake": "MINI",
+        "canonicalModel": "Paceman"
+      },
+      "aliases": [
+        "MINI Cooper ペースマン",
+        "MINI JCW ペースマン",
+        "Mini クーパーD ペースマン",
+        "MINI クーパー S ペースマン",
+        "MINI クーパー S ペースマン A4"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:roadster",
+      "make": "Mini",
+      "model": "Roadster",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": null,
+        "canonicalMake": "MINI",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:special",
+      "make": "Mini",
+      "model": "Special",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": null,
+        "canonicalMake": "MINI",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:xn",
+      "make": "Mini",
+      "model": "Xn",
+      "canonical": {
+        "brandId": "mini",
+        "modelId": null,
+        "canonicalMake": "MINI",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:电动miniaceman",
+      "make": "MINI",
+      "model": "电动MINI ACEMAN",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g31/M01/6E/35/120x90_0_q95_autohomecar__ChxoHmemHK6AOb7rACAlHYtN_Iw220.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:电动minicooper",
+      "make": "MINI",
+      "model": "电动MINI COOPER",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g33/M02/6C/80/120x90_0_q95_autohomecar__ChxpVmloTMCAEDV1AB7W9kx6Xtk532.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:电动minijcw",
+      "make": "MINI",
+      "model": "电动MINI JCW",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g33/M01/FB/B5/120x90_0_q95_autohomecar__ChxpVmkCKgCARGbXACtu6lANsEE597.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mini:电动minijcwaceman",
+      "make": "MINI",
+      "model": "电动MINI JCW ACEMAN",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car2.autoimg.cn/cardfs/product/g34/M02/A6/51/120x90_0_q95_autohomecar__ChxpV2nzKaCAf1w_ADd9cjdzjiE316.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:3000gt",
+      "make": "Mitsubishi",
+      "model": "3000 GT",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:airtrek",
+      "make": "Mitsubishi",
+      "model": "Airtrek",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:asx",
+      "make": "Mitsubishi",
+      "model": "ASX",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/asx",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "ASX"
+      },
+      "aliases": [
+        "Mitsubishi ASX"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:attrage",
+      "make": "Mitsubishi",
+      "model": "Attrage",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:canter",
+      "make": "Mitsubishi",
+      "model": "Canter",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:carisma",
+      "make": "Mitsubishi",
+      "model": "Carisma",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:celeste",
+      "make": "Mitsubishi",
+      "model": "Celeste",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:challenger",
+      "make": "Mitsubishi",
+      "model": "Challenger",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:chariot",
+      "make": "Mitsubishi",
+      "model": "Chariot",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:colt",
+      "make": "Mitsubishi",
+      "model": "Colt",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/colt",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Colt"
+      },
+      "aliases": [
+        "COLT"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:cordia",
+      "make": "Mitsubishi",
+      "model": "Cordia",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:delica",
+      "make": "Mitsubishi",
+      "model": "Delica",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:delicad2",
+      "make": "Mitsubishi",
+      "model": "Delica D:2",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/delica-d2",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Delica D:2"
+      },
+      "aliases": [
+        "デリカD:2"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:delicad3",
+      "make": "Mitsubishi",
+      "model": "Delica D:3",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/delica-d3",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Delica D:3"
+      },
+      "aliases": [
+        "デリカD:3"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:delicad5",
+      "make": "Mitsubishi",
+      "model": "Delica D:5",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/delica-d5",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Delica D:5"
+      },
+      "aliases": [
+        "デリカD:5"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:delicamini",
+      "make": "Mitsubishi",
+      "model": "Delica Mini",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/delica-mini",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Delica Mini"
+      },
+      "aliases": [
+        "デリカミニ",
+        "DELICA MINI"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "Kei super-height wagon"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:diamante",
+      "make": "Mitsubishi",
+      "model": "Diamante",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:dignity",
+      "make": "Mitsubishi",
+      "model": "Dignity",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/dignity",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Dignity"
+      },
+      "aliases": [
+        "ディグニティ"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:dion",
+      "make": "Mitsubishi",
+      "model": "Dion",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:eclipse",
+      "make": "Mitsubishi",
+      "model": "Eclipse",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/eclipse",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Eclipse"
+      },
+      "aliases": [
+        "ECLIPSE"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:eclipsecross",
+      "make": "Mitsubishi",
+      "model": "Eclipse Cross",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/eclipse-cross",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Eclipse Cross"
+      },
+      "aliases": [
+        "ECLIPSE CROSS",
+        "MITSUBISHI ECLIPSE CROSS",
+        "Mitsubishi Eclipse Cross",
+        "エクリプス クロス"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:eclipsecross4wd",
+      "make": "Mitsubishi",
+      "model": "Eclipse Cross 4WD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:ek",
+      "make": "Mitsubishi",
+      "model": "eK",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/ek",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "eK"
+      },
+      "aliases": [
+        "eK"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:ekspace",
+      "make": "Mitsubishi",
+      "model": "eK SPACE",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/ek-space",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "eK SPACE"
+      },
+      "aliases": [
+        "eK SPACE"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:endeavor",
+      "make": "Mitsubishi",
+      "model": "Endeavor",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:fto",
+      "make": "Mitsubishi",
+      "model": "FTO",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishifuso:canter",
+      "make": "Mitsubishi Fuso",
+      "model": "Canter",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:galant",
+      "make": "Mitsubishi",
+      "model": "Galant",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/galant",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Galant"
+      },
+      "aliases": [
+        "GALANT",
+        "ギャラン"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:galantvr4",
+      "make": "Mitsubishi",
+      "model": "Galant VR-4",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:galloper",
+      "make": "Mitsubishi",
+      "model": "Galloper",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:grandis",
+      "make": "Mitsubishi",
+      "model": "Grandis",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/grandis",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Grandis"
+      },
+      "aliases": [
+        "GRANDIS"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:gto",
+      "make": "Mitsubishi",
+      "model": "GTO",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:h60w",
+      "make": "Mitsubishi",
+      "model": "H60W",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:imiev",
+      "make": "Mitsubishi",
+      "model": "i-MiEV",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/i-miev",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "i-MiEV"
+      },
+      "aliases": [
+        "MITSUBISHI I-MIEV",
+        "Mitsubishi i-MIEV"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:l300",
+      "make": "Mitsubishi",
+      "model": "L300",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:l400",
+      "make": "Mitsubishi",
+      "model": "L400",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:lancer",
+      "make": "Mitsubishi",
+      "model": "Lancer",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/lancer",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Lancer"
+      },
+      "aliases": [
+        "LANCER"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:lancerevolution",
+      "make": "Mitsubishi",
+      "model": "Lancer Evolution",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/lancer-evolution",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Lancer Evolution"
+      },
+      "aliases": [
+        "ランサーエボ",
+        "ランサーエボリューション"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:legnum",
+      "make": "Mitsubishi",
+      "model": "Legnum",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:minica",
+      "make": "Mitsubishi",
+      "model": "Minica",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:minicab",
+      "make": "Mitsubishi",
+      "model": "Minicab",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:mirage",
+      "make": "Mitsubishi",
+      "model": "Mirage",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/mirage",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Mirage"
+      },
+      "aliases": [
+        "MIRAGE 3",
+        "MIRAGE DESIGN",
+        "MIRAGE DESIGN CVT",
+        "MIRAGE DESIGN PRO",
+        "MIRAGE DESIGN PRO CVT",
+        "MIRAGE FIRST EDITION",
+        "MIRAGE FIRST EDITION CVT",
+        "MIRAGE VERVE",
+        "ミラージュ"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "gb",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:mirageg4",
+      "make": "Mitsubishi",
+      "model": "Mirage G4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:montero",
+      "make": "Mitsubishi",
+      "model": "Montero",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:monterosport",
+      "make": "Mitsubishi",
+      "model": "Montero Sport",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:nativa",
+      "make": "Mitsubishi",
+      "model": "Nativa",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:outlander",
+      "make": "Mitsubishi",
+      "model": "Outlander",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/outlander",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Outlander"
+      },
+      "aliases": [
+        "MITSUBISHI OUTLANDER",
+        "Mitsubishi Outlander",
+        "OUTLANDER",
+        "アウトランダー"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:outlander4wd",
+      "make": "Mitsubishi",
+      "model": "Outlander 4WD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:outlanderphevawd",
+      "make": "Mitsubishi",
+      "model": "Outlander PHEV AWD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:outlandersport",
+      "make": "Mitsubishi",
+      "model": "Outlander Sport",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/outlander-sport",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Outlander Sport"
+      },
+      "aliases": [
+        "OUTLANDER SPORT"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:pajero",
+      "make": "Mitsubishi",
+      "model": "Pajero",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/pajero",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Pajero"
+      },
+      "aliases": [
+        "パジェロ",
+        "Montero",
+        "Shogun"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:pajerojunior",
+      "make": "Mitsubishi",
+      "model": "Pajero Junior",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:pajeromini",
+      "make": "Mitsubishi",
+      "model": "Pajero Mini",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:pajeropinin",
+      "make": "Mitsubishi",
+      "model": "Pajero Pinin",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:pajerosport",
+      "make": "Mitsubishi",
+      "model": "Pajero Sport",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:proton",
+      "make": "Mitsubishi",
+      "model": "Proton",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:proudia",
+      "make": "Mitsubishi",
+      "model": "Proudia",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/proudia",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Proudia"
+      },
+      "aliases": [
+        "プラウディア"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:rvr",
+      "make": "Mitsubishi",
+      "model": "RVR",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/rvr",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "RVR"
+      },
+      "aliases": [
+        "RVR"
+      ],
+      "markets": [
+        "global",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:rvr4wd",
+      "make": "Mitsubishi",
+      "model": "RVR 4WD",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:sapporo",
+      "make": "Mitsubishi",
+      "model": "Sapporo",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:shogun",
+      "make": "Mitsubishi",
+      "model": "Shogun",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:sigma",
+      "make": "Mitsubishi",
+      "model": "Sigma",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:spacegear",
+      "make": "Mitsubishi",
+      "model": "Space Gear",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:spacerunner",
+      "make": "Mitsubishi",
+      "model": "Space Runner",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:spacestar",
+      "make": "Mitsubishi",
+      "model": "Space Star",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/space-star",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Space Star"
+      },
+      "aliases": [
+        "MITSUBISHI SPACE STAR",
+        "Mitsubishi Space Star",
+        "SPACE STAR",
+        "SpacE Star",
+        "SPACESTAR"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:spacewagon",
+      "make": "Mitsubishi",
+      "model": "Space Wagon",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:starion",
+      "make": "Mitsubishi",
+      "model": "Starion",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:townbox",
+      "make": "Mitsubishi",
+      "model": "Town Box",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/town-box",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Town Box"
+      },
+      "aliases": [
+        "タウンボックス"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:tredia",
+      "make": "Mitsubishi",
+      "model": "Tredia",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:triton",
+      "make": "Mitsubishi",
+      "model": "Triton",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/triton",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Triton"
+      },
+      "aliases": [
+        "Mitsubishi Triton"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:van",
+      "make": "Mitsubishi",
+      "model": "Van",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:xforce",
+      "make": "Mitsubishi",
+      "model": "Xforce",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/xforce",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Xforce"
+      },
+      "aliases": [
+        "Mitsubishi Xforce"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:xpander",
+      "make": "Mitsubishi",
+      "model": "Xpander",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": "mitsubishi/xpander",
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": "Xpander"
+      },
+      "aliases": [
+        "Mitsubishi Xpander"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mitsubishi:xpandercross",
+      "make": "Mitsubishi",
+      "model": "Xpander Cross",
+      "canonical": {
+        "brandId": "mitsubishi",
+        "modelId": null,
+        "canonicalMake": "Mitsubishi",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "mobilize:limo",
+      "make": "Mobilize",
+      "model": "Limo",
+      "canonical": {
+        "brandId": "mobilize",
+        "modelId": "mobilize/limo",
+        "canonicalMake": "Mobilize",
+        "canonicalModel": "Limo"
+      },
+      "aliases": [
+        "LIMO"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "moke:moke",
+      "make": "Moke",
+      "model": "Moke",
+      "canonical": {
+        "brandId": "moke",
+        "modelId": "moke/moke",
+        "canonicalMake": "Moke",
+        "canonicalModel": "Moke"
+      },
+      "aliases": [
+        "INTERNATIONAL LIMITED MOKE",
+        "MOKE"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:1600",
+      "make": "Morgan",
+      "model": "1600",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": null,
+        "canonicalMake": "Morgan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:3000",
+      "make": "Morgan",
+      "model": "3000",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": null,
+        "canonicalMake": "Morgan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:44series",
+      "make": "Morgan",
+      "model": "4/4 Series",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": null,
+        "canonicalMake": "Morgan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:44",
+      "make": "Morgan",
+      "model": "44",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": null,
+        "canonicalMake": "Morgan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:aero",
+      "make": "Morgan",
+      "model": "Aero",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": null,
+        "canonicalMake": "Morgan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:aero8",
+      "make": "Morgan",
+      "model": "Aero 8",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": null,
+        "canonicalMake": "Morgan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:plus4",
+      "make": "Morgan",
+      "model": "Plus 4",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": "morgan/plus-4",
+        "canonicalMake": "Morgan",
+        "canonicalModel": "Plus 4"
+      },
+      "aliases": [
+        "PLUS 4"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:plus6",
+      "make": "Morgan",
+      "model": "Plus 6",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": "morgan/plus-6",
+        "canonicalMake": "Morgan",
+        "canonicalModel": "Plus 6"
+      },
+      "aliases": [
+        "Morgan Plus 6",
+        "MORGAN PLUS 6",
+        "PLUS 6"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:plus8",
+      "make": "Morgan",
+      "model": "Plus 8",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": null,
+        "canonicalMake": "Morgan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:plus8pi",
+      "make": "Morgan",
+      "model": "Plus 8 Pi",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": null,
+        "canonicalMake": "Morgan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:pluseight",
+      "make": "Morgan",
+      "model": "Plus Eight",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": null,
+        "canonicalMake": "Morgan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:plusfour",
+      "make": "Morgan",
+      "model": "Plus Four",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": "morgan/plus-four",
+        "canonicalMake": "Morgan",
+        "canonicalModel": "Plus Four"
+      },
+      "aliases": [
+        "MORGAN PLUS FOUR",
+        "PLUS FOUR"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:plussix",
+      "make": "Morgan",
+      "model": "Plus Six",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": "morgan/plus-six",
+        "canonicalMake": "Morgan",
+        "canonicalModel": "Plus Six"
+      },
+      "aliases": [
+        "PLUS SIX"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:plussixsupersport",
+      "make": "Morgan",
+      "model": "Plus Six Supersport",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": "morgan/plus-six-supersport",
+        "canonicalMake": "Morgan",
+        "canonicalModel": "Plus Six Supersport"
+      },
+      "aliases": [
+        "PLUS SIX SUPERSPORT"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:roadster",
+      "make": "Morgan",
+      "model": "Roadster",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": "morgan/roadster",
+        "canonicalMake": "Morgan",
+        "canonicalModel": "Roadster"
+      },
+      "aliases": [
+        "ROADSTER"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morgan:sports",
+      "make": "Morgan",
+      "model": "Sports",
+      "canonical": {
+        "brandId": "morgan",
+        "modelId": null,
+        "canonicalMake": "Morgan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:14ton",
+      "make": "Morris",
+      "model": "1/4 Ton",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:10",
+      "make": "Morris",
+      "model": "10",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:1000",
+      "make": "Morris",
+      "model": "1000",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:1000traveller",
+      "make": "Morris",
+      "model": "1000 Traveller",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:1100",
+      "make": "Morris",
+      "model": "1100",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:1100mk",
+      "make": "Morris",
+      "model": "1100 Mk",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:1300",
+      "make": "Morris",
+      "model": "1300",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:1300gt",
+      "make": "Morris",
+      "model": "1300 GT",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:1800",
+      "make": "Morris",
+      "model": "1800",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:1800mkii",
+      "make": "Morris",
+      "model": "1800 Mkii",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:2200",
+      "make": "Morris",
+      "model": "2200",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:8seriese",
+      "make": "Morris",
+      "model": "8 Series E",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:850",
+      "make": "Morris",
+      "model": "850",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:8cwt",
+      "make": "Morris",
+      "model": "8CWT",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:clubman",
+      "make": "Morris",
+      "model": "Clubman",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:cooper",
+      "make": "Morris",
+      "model": "Cooper",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:coopers",
+      "make": "Morris",
+      "model": "Cooper S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:cowley",
+      "make": "Morris",
+      "model": "Cowley",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:cowleysix",
+      "make": "Morris",
+      "model": "Cowley Six",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:eight",
+      "make": "Morris",
+      "model": "Eight",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:eightseries",
+      "make": "Morris",
+      "model": "Eight Series",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:eightseriesi",
+      "make": "Morris",
+      "model": "Eight Series I",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:isis",
+      "make": "Morris",
+      "model": "Isis",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:ital",
+      "make": "Morris",
+      "model": "Ital",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:m8",
+      "make": "Morris",
+      "model": "M8",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:marina",
+      "make": "Morris",
+      "model": "Marina",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:mini",
+      "make": "Morris",
+      "model": "Mini",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:mini1000",
+      "make": "Morris",
+      "model": "Mini 1000",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:mini1000mk",
+      "make": "Morris",
+      "model": "Mini 1000 Mk",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:mini1275gt",
+      "make": "Morris",
+      "model": "Mini 1275GT",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:mini850",
+      "make": "Morris",
+      "model": "Mini 850",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:mini850l",
+      "make": "Morris",
+      "model": "Mini 850 L",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:miniauto",
+      "make": "Morris",
+      "model": "Mini Auto",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:miniclubman",
+      "make": "Morris",
+      "model": "Mini Clubman",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:minicooper",
+      "make": "Morris",
+      "model": "Mini Cooper",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:minicoopers",
+      "make": "Morris",
+      "model": "Mini Cooper S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:miniminor",
+      "make": "Morris",
+      "model": "Mini Minor",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:minimk2",
+      "make": "Morris",
+      "model": "Mini Mk 2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:minimoke",
+      "make": "Morris",
+      "model": "Mini Moke",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:minispecial",
+      "make": "Morris",
+      "model": "Mini Special",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:minor",
+      "make": "Morris",
+      "model": "Minor",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:minor1000",
+      "make": "Morris",
+      "model": "Minor 1000",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:minor1000traveller",
+      "make": "Morris",
+      "model": "Minor 1000 Traveller",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:minor8",
+      "make": "Morris",
+      "model": "Minor 8",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:minorseries",
+      "make": "Morris",
+      "model": "Minor Series",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:minortraveller",
+      "make": "Morris",
+      "model": "Minor Traveller",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:minorvan",
+      "make": "Morris",
+      "model": "Minor Van",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:mm8",
+      "make": "Morris",
+      "model": "MM8",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:moke",
+      "make": "Morris",
+      "model": "Moke",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:oxford",
+      "make": "Morris",
+      "model": "Oxford",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:oxfordseries",
+      "make": "Morris",
+      "model": "Oxford Series",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:ten",
+      "make": "Morris",
+      "model": "Ten",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "morris:tourer",
+      "make": "Morris",
+      "model": "Tourer",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "moskvich:408",
+      "make": "Moskvich",
+      "model": "408",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "moskvich:412",
+      "make": "Moskvich",
+      "model": "412",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nash:450",
+      "make": "Nash",
+      "model": "450",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nash:600",
+      "make": "Nash",
+      "model": "600",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nash:ambassador",
+      "make": "Nash",
+      "model": "Ambassador",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nash:ambassadorsix",
+      "make": "Nash",
+      "model": "Ambassador Six",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nash:ambassadorsuper",
+      "make": "Nash",
+      "model": "Ambassador Super",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nash:lafayette",
+      "make": "Nash",
+      "model": "Lafayette",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nash:metropolitan",
+      "make": "Nash",
+      "model": "Metropolitan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nash:metropolitan1500",
+      "make": "Nash",
+      "model": "Metropolitan 1500",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nash:rambler",
+      "make": "Nash",
+      "model": "Rambler",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nash:standardsix",
+      "make": "Nash",
+      "model": "Standard Six",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nash:statesmansuper",
+      "make": "Nash",
+      "model": "Statesman Super",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "neta:v",
+      "make": "Neta",
+      "model": "V",
+      "canonical": {
+        "brandId": "neta",
+        "modelId": null,
+        "canonicalMake": "Neta",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "neta:vii",
+      "make": "Neta",
+      "model": "V-II",
+      "canonical": {
+        "brandId": "neta",
+        "modelId": null,
+        "canonicalMake": "Neta",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "neta:x",
+      "make": "Neta",
+      "model": "X",
+      "canonical": {
+        "brandId": "neta",
+        "modelId": null,
+        "canonicalMake": "Neta",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nilsson:hearse3d",
+      "make": "Nilsson",
+      "model": "Hearse 3D",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nilsson:hearse5d",
+      "make": "Nilsson",
+      "model": "Hearse 5D",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nilsson:s80",
+      "make": "Nilsson",
+      "model": "S80",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nilsson:volvos80",
+      "make": "Nilsson",
+      "model": "Volvo S 80",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nilsson:volvos80hearse",
+      "make": "Nilsson",
+      "model": "Volvo S80 Hearse",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nio:el6",
+      "make": "Nio",
+      "model": "EL6",
+      "canonical": {
+        "brandId": "nio",
+        "modelId": "nio/el6",
+        "canonicalMake": "Nio",
+        "canonicalModel": "EL6"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nio:el7",
+      "make": "Nio",
+      "model": "EL7",
+      "canonical": {
+        "brandId": "nio",
+        "modelId": "nio/el7",
+        "canonicalMake": "Nio",
+        "canonicalModel": "EL7"
+      },
+      "aliases": [
+        "EL7"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nio:el8",
+      "make": "Nio",
+      "model": "EL8",
+      "canonical": {
+        "brandId": "nio",
+        "modelId": "nio/el8",
+        "canonicalMake": "Nio",
+        "canonicalModel": "EL8"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nio:es8",
+      "make": "Nio",
+      "model": "ES8",
+      "canonical": {
+        "brandId": "nio",
+        "modelId": "nio/es8",
+        "canonicalMake": "Nio",
+        "canonicalModel": "ES8"
+      },
+      "aliases": [
+        "ES8",
+        "ES8.EL8"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nio:et5",
+      "make": "Nio",
+      "model": "ET5",
+      "canonical": {
+        "brandId": "nio",
+        "modelId": "nio/et5",
+        "canonicalMake": "Nio",
+        "canonicalModel": "ET5"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nio:et7",
+      "make": "Nio",
+      "model": "ET7",
+      "canonical": {
+        "brandId": "nio",
+        "modelId": "nio/et7",
+        "canonicalMake": "Nio",
+        "canonicalModel": "ET7"
+      },
+      "aliases": [
+        "ET7 / /",
+        "NIO ET7"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nio:firefly",
+      "make": "Nio",
+      "model": "Firefly",
+      "canonical": {
+        "brandId": "nio",
+        "modelId": "nio/firefly",
+        "canonicalMake": "Nio",
+        "canonicalModel": "Firefly"
+      },
+      "aliases": [
+        "FIREFLY"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:100",
+      "make": "Nissan",
+      "model": "100",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:100nx",
+      "make": "Nissan",
+      "model": "100NX",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:180sx",
+      "make": "Nissan",
+      "model": "180SX",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:200",
+      "make": "Nissan",
+      "model": "200",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:200sx",
+      "make": "Nissan",
+      "model": "200SX",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:240",
+      "make": "Nissan",
+      "model": "240",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:2402",
+      "make": "Nissan",
+      "model": "2402",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:240sx",
+      "make": "Nissan",
+      "model": "240SX",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:240z",
+      "make": "Nissan",
+      "model": "240Z",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:280",
+      "make": "Nissan",
+      "model": "280",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:300",
+      "make": "Nissan",
+      "model": "300",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:300zx",
+      "make": "Nissan",
+      "model": "300ZX",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:350",
+      "make": "Nissan",
+      "model": "350",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:350z",
+      "make": "Nissan",
+      "model": "350 Z",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/350-z",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "350 Z"
+      },
+      "aliases": [
+        "350Z",
+        "NISSAN 350 Z"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:370",
+      "make": "Nissan",
+      "model": "370",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "nissan:370z",
+      "make": "Nissan",
+      "model": "370 Z",
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/370-z",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "370 Z"
+      },
+      "aliases": [
+        "370Z",
+        "NISSAN 370Z"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    }
+  ]
+}

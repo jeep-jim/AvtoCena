@@ -142,7 +142,7 @@ test("recovery publisher always preserves untouched full maintenance state exact
 
 test("recovery preservation gates keep untouched markets byte-stable and canonicalize only mutable rows", () => {
   assert.match(storage, /preservePublicOffersByMarket/);
-  assert.match(storage, /exactPreserveMarkets\.has\(offer\.market\)[\s\S]*\? offer[\s\S]*enrichOfferWithVehicleKnowledge/);
+  assert.match(storage, /exactPreserveMarkets\.has\(offer\.market\)[\s\S]*\? offer[\s\S]*enrichOfferWithKnowledgeCore/);
   assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets, protectedPublicIds\)/);
   assert.match(storage, /protectedRows = storedOffers\.filter/);
   assert.match(storage, /mutableRows = storedOffers\.filter/);

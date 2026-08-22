@@ -9,7 +9,7 @@ const {
   isCatalogYearAllowed,
 } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-const { enrichOfferWithVehicleKnowledge } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
+const { enrichOfferWithKnowledgeCore } = await import("../apps/web/lib/catalog/knowledge-core.ts");
 const { isPreliminaryPowerPendingCalculation } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
@@ -130,7 +130,7 @@ for (const offer of full) {
 // public gate. Project through that same enrichment before any write so a dry
 // run cannot claim exact preservation and then lose another market at persist.
 const projectedFull = await Promise.all(full.map(async (offer) =>
-  normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer))));
+  normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer))));
 const projectedPublicCounts = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((market) => [
   market,
   projectedFull.filter((offer) => offer.market === market && publicLike(offer)).length,

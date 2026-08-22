@@ -1,158 +1,124 @@
-# Codex master task — AvtoCena global vehicle encyclopedia V2
-
-Work in repository `jeep-jim/AvtoCena` on branch `feat/encyclopedia-knowledge-base`, created from the latest `origin/main`.
-
-Read `data/catalog/vehicle-encyclopedia-v2/AGENTS.md` first and obey it as a hard boundary.
+# AvtoCena Knowledge CORE — master task
 
 ## Objective
 
-Build a large, accurate, source-backed automotive encyclopedia for AvtoCena. Japan priority coverage is 2015-present; every other active market is 2020-present. Start with all canonical brands in `apps/web/lib/catalog/brands.ts`, then expand the denominator from every parser's observed make strings and current official manufacturer/group portfolios. Stage missing brands here and report them; do not edit production brand code.
+Build and continuously maintain one source-backed vehicle knowledge system for AvtoCena. It must serve four production consumers from the same canonical facts:
 
-The encyclopedia has two later consumers:
+1. parser identity normalization;
+2. calculation-engine enrichment;
+3. public catalog cards and offer pages;
+4. permanent SEO encyclopedia pages.
 
-1. public SEO brand/model encyclopedia pages;
-2. canonical identification/enrichment of parsed marketplace listings, so source spellings such as localized names, punctuation differences, generation/trim suffixes and aliases resolve to one correct public make/model and can inherit exact source-backed specifications.
+The previous pilot-first research plan is retired. Validation checkpoints remain mandatory, but **successful validation must not stop the global denominator build**.
 
-## Safety
+## Mandatory coverage windows
 
-- Research/stage data ONLY under `data/catalog/vehicle-encyclopedia-v2/**`.
-- Validation/research tooling may be added ONLY under `scripts/vehicle-encyclopedia/**` and tests under `tests/vehicle-encyclopedia/**`.
-- Do NOT modify `data/catalog/vehicle-knowledge/**`, live catalog generations/read models, `apps/web/**`, `packages/**`, `.github/workflows/**`, collectors, pricing, calculations, deployment, or production publication.
-- Do NOT trigger any catalog writer/import/deploy workflow.
-- Do NOT merge to `main`.
+- **Japan:** every source-backed passenger/light-passenger make, model and applicable variant from **2010-present**.
+- **China, Korea, UAE, Europe, Georgia, Kyrgyzstan:** every source-backed passenger/light-passenger make, model and applicable variant from **2020-present**.
+- Include ICE, MHEV, HEV, PHEV, EREV, BEV and FCEV vehicles inside those windows.
 
-## Existing system to understand, not modify
+These are minimum CORE windows, not priority hints.
 
-Read these files for compatibility:
+## CORE identity and calculation fields
 
-- `apps/web/lib/catalog/vehicle-knowledge.ts`
-- `apps/web/lib/catalog/model-directory.ts`
-- `apps/web/lib/catalog/brands.ts`
-- `data/catalog/vehicle-knowledge/ATTRIBUTION.md`
-- current `data/catalog/vehicle-knowledge/models.json` and `variants.json`
+For every source-backed vehicle identity preserve:
 
-The current production knowledge already supports aliases and variants. V2 must be a cleaner, much larger staging source that can later be compiled into that runtime after review.
-
-## Internet/source policy
-
-If this Codex environment has internet access disabled, DO NOT fabricate or proceed as though research succeeded. Complete the local audit/tooling portion and report that network access must be enabled.
-
-When internet is enabled, use the narrowest practical allowlist of trusted domains and safe GET/HEAD access. Prefer:
-
-1. official manufacturer technical pages, archived specs, press kits and PDFs;
-2. official government/type-approval/homologation/registration/fuel-economy/safety databases;
-3. authoritative public registries and licensed/open datasets;
-4. established automotive reference catalogs only as secondary corroboration.
-
-Do not bypass CAPTCHA, login, paywalls, robots/anti-bot controls or access restrictions. Do not use seller copy, forums, AI-generated pages or SEO farms as the sole source for specs.
-
-## Required identity model
-
-For every brand/model preserve BOTH:
-
-- stable canonical public identity (`canonicalMake`, `canonicalModel`);
-- all proven aliases/source spellings (`makeAliases`, model `aliases`, localized `sourceNames`).
-
-Aliases should include useful Chinese/Korean/Japanese/Russian spellings, punctuation/spacing variants, historic market names and source-specific forms when proven to refer to the same model.
-
-Do not merge distinct models just because normalized strings look similar. Separate model, generation, trim and variant. A trim is not a model unless the manufacturer treats it as one.
-
-Actively detect duplicate/alias clusters such as different casing, spacing, transliteration or local scripts and write them to `reports/duplicate-alias-clusters.json` before canonicalizing ambiguous cases.
-
-## Required technical data where source-backed
-
-At minimum collect when available:
-
+- canonical make and model;
+- proven aliases/source spellings/localized names;
+- market applicability;
 - production years/dates;
-- generation/platform/chassis codes and aliases;
+- generation/platform/chassis identifiers where known;
 - body type;
-- steering position/market applicability;
-- engine code and displacement;
-- fuel and powertrain kind (ICE/HEV/PHEV/BEV etc.);
-- transmission and gears;
+- powertrain kind and fuel;
+- engine code and displacement where applicable;
+- published power in hp/PS and kW;
+- transmission and gears where applicable;
 - drive layout;
-- seats/doors;
-- exact published power in hp/PS and kW with provenance;
-- ICE and electric-motor powers separately when documented;
-- battery capacity and official range standard where applicable;
-- dimensions, wheelbase, weights, clearance, tank capacity;
-- 0-100 and top speed when official/source-backed;
-- EV/PHEV exact 30-minute power ONLY when explicitly documented by homologation/type approval/CoC/official registration evidence.
+- ICE/electric motor powers separately when documented;
+- battery capacity/range standard when documented;
+- exact EV/PHEV 30-minute power only when explicitly documented by approved regulatory/official evidence.
 
-CRITICAL: never calculate or estimate `power30MinKw` from peak power, motor count, battery size or ratios. If exact documented 30-minute power is unavailable, leave it null/missing and record the gap in `reports/power30min-coverage.json`.
+Never derive `power30MinKw` from peak power, motor count, battery size or ratios. Missing exact 30-minute power remains an explicit gap.
 
-## Provenance
+## Source policy
 
-Every factual field must be traceable to one or more entries in the brand file `sources` array. Use `evidence` objects listing `sourceId` plus the exact normalized fields supported by that source.
+Prefer, in order:
 
-If authoritative sources conflict, preserve the conflict in `researchNotes` / `reports/source-conflicts.json` and leave disputed fields unresolved instead of guessing.
+1. official manufacturer technical pages, brochures, press kits and PDFs;
+2. government/type-approval/homologation/registration/efficiency datasets;
+3. licensed/open datasets and authoritative registries;
+4. established automotive catalogs as corroboration or gap fill.
 
-Respect source licenses. Store normalized facts and attribution metadata, not copied descriptive prose.
+Do not bypass CAPTCHA, login, paywalls, robots/anti-bot controls or access restrictions. Store normalized facts and provenance, not copied descriptive prose.
 
-## Work plan
+## Global denominator strategy
 
-### Phase 0A — mandatory global brand and logo denominator
+Do not research one listing at a time.
 
-This phase is a hard publication prerequisite and precedes broad model expansion.
+1. Build the make/model denominator from the union of:
+   - every active parser's observed raw and normalized identities;
+   - current production brand/model knowledge;
+   - Vehicle Encyclopedia V2;
+   - licensed/open datasets;
+   - official current manufacturer/model portfolios.
+2. Bulk-ingest source-backed records wherever a source exposes thousands of rows.
+3. Normalize them into stable brand/model/generation/variant entities.
+4. Keep ambiguous/conflicting identities unresolved until supported; never guess.
+5. Continue alphabetically/brand-by-brand after every green validation checkpoint until the entire approved denominator is exhausted.
 
-1. Reconcile the production brand list, every market parser's normalized/raw make identities, the existing logo archive and official current manufacturer/group portfolios.
-2. Add every source-backed missing passenger/light-passenger brand to V2 staging with an English/Latin canonical name and proven aliases. Unknown parser makes remain explicit unresolved queue entries; they are never discarded or guessed.
-3. Stage an authentic light-theme and dark-theme logo for each brand. Every final file must be a transparent PNG on an exact `90 × 60 px` canvas, centered without aspect-ratio distortion.
-4. Record source trace, checksum, attribution/trademark note and rights-review state. Text fallbacks and generated logos are forbidden as completion evidence.
-5. Generate machine-readable asset and publication-readiness reports. A brand cannot be publication-ready while either identity or logo gate is incomplete.
-6. Keep all assets isolated from `apps/web/**` until a separate reviewed integration task.
+## Knowledge-gap feedback loop
 
-### Phase 0 — audit and tooling
+Every production market run must emit a machine-readable knowledge-gap report containing at least:
 
-1. Inspect current production knowledge coverage and current matching rules.
-2. Quantify likely duplicate make/model alias clusters visible in current knowledge/live source spellings, but do not modify production data.
-3. Implement a validator under `scripts/vehicle-encyclopedia/` for `schema/entity-chunk.schema.json` plus semantic checks:
-   - unique brand/model/generation/variant IDs;
-   - no duplicate canonical identity inside a brand;
-   - alias collisions reported;
-   - year ranges valid;
-   - source IDs referenced by evidence exist;
-   - important technical values plausible;
-   - `power30MinKw` requires evidence from approved exact regulatory/official source types;
-   - no record may claim `complete` with missing provenance.
-4. Add tests under `tests/vehicle-encyclopedia/`.
-5. Produce initial `reports/coverage.json` and duplicate report.
+- market and source;
+- raw make/model/year;
+- canonical make/model status;
+- missing CORE fields;
+- occurrence count;
+- example offer IDs.
 
-### Phase 1 — pilot brands
+Sort gaps primarily by live occurrence count. High-frequency unresolved identities/specs are the next enrichment queue. No parser identity should silently disappear because the encyclopedia does not know it.
 
-Research the approved representative pilot set first: Audi, BMW, Toyota, BYD and Geely.
+## Runtime integration
 
-Write each entity to the matching chunked collection under `data/catalog/vehicle-encyclopedia-v2/chunks/`. Validate after every brand group. Commit in small reviewable batches.
+Production callers use **one API: Knowledge CORE**.
 
-After the pilot, STOP and report:
+Knowledge CORE consumes trusted Vehicle Encyclopedia V2 facts first. The old `vehicle-knowledge` dataset is only a temporary compatibility fallback behind the CORE API while parity is measured. New callers must not select between competing physical knowledge stores.
 
-- model/generation/variant counts per brand;
-- source-domain/source-type counts;
-- unresolved conflicts;
-- alias collisions;
-- exact 30-minute-power coverage;
-- validator/test results;
-- estimated work needed for remaining brands.
+Migration sequence:
 
-Do not silently proceed to hundreds of brands until the pilot data quality is demonstrated.
+1. route Identity Master and catalog enrichment through CORE;
+2. measure live canonical/model/exact-variant coverage on every market run;
+3. port unique good legacy facts into CORE;
+4. prove parity and no calculator regressions;
+5. then remove duplicated legacy data/scripts/readers.
 
-### Phase 2 — scalable completion
+Do not delete legacy data merely to simplify the tree before parity is proven.
 
-Only after the pilot passes the same quality bar, continue brand-by-brand in checkpoints. Prefer parallel research agents/worktrees by non-overlapping brand groups if available, with a single validation/reconciliation step before commits.
+## Quality gates
 
-Update `manifest.json` after each checkpoint. Never overwrite good source-backed data with lower-confidence data.
+Target production metrics:
 
-## Completion output
+- >=99% live offers resolve to canonical brand;
+- >=98% resolve to canonical model;
+- >=95% resolve to a sufficiently exact variant carrying required calculation/display facts;
+- 100% unresolved identities/spec gaps appear in the gap queue;
+- exact 30-minute power is never inferred;
+- no source-authoritative exact value is silently overwritten by weaker evidence.
 
-Do NOT integrate V2 into production in this task.
+Coverage claims must come from machine-readable reports, not raw JSON row counts.
 
-Deliver:
+## RichSpec / SEO phase
 
-- staged per-brand JSON files;
-- the complete staged brand denominator and `90 × 60 px` light/dark logo library with readiness reports;
-- validator + tests;
-- coverage, duplicate, conflict and 30-minute-power reports;
-- a final report with exact counts and source coverage;
-- a proposed, NOT EXECUTED migration plan mapping approved V2 data to current `VehicleKnowledgeModel` / `VehicleKnowledgeVariant` structures and SEO pages.
+After CORE coverage is healthy, enrich the same generation/variant/trim entities with richer source-backed facts such as dimensions, wheelbase, mass, clearance, tank, boot, acceleration, top speed, consumption, suspension, brakes, wheels, safety, comfort and multimedia equipment.
 
-All claims in the final report must be backed by files, test output and source metadata.
+Do not create a second encyclopedia for RichSpec. It extends the same canonical entities used by the calculator and catalog.
+
+## Completion discipline
+
+- Chunk deterministic entity collections at <=250 records where required by current V2 schema.
+- Preserve provenance for factual fields.
+- Validate after every bulk import/checkpoint.
+- Never fabricate completion when internet/source access is unavailable.
+- Never stop at a five-brand pilot after validation succeeds.
+- Update coverage/gap/conflict reports continuously.

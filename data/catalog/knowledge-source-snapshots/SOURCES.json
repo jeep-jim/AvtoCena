@@ -1,0 +1,367 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Raw/source-normalized snapshots used to build AvtoCena Knowledge CORE. These files are evidence inputs, not public catalog truth by themselves.",
+  "coverageWindows": {
+    "japan": {
+      "fromYear": 2010,
+      "toYear": 2026
+    },
+    "china": {
+      "fromYear": 2020,
+      "toYear": 2026
+    },
+    "korea": {
+      "fromYear": 2020,
+      "toYear": 2026
+    },
+    "europe": {
+      "fromYear": 2020,
+      "toYear": 2026
+    },
+    "us": {
+      "fromYear": 2020,
+      "toYear": 2026
+    },
+    "canada": {
+      "fromYear": 2020,
+      "toYear": 2026
+    },
+    "uae": {
+      "fromYear": 2020,
+      "toYear": 2026
+    },
+    "georgia": {
+      "fromYear": 2020,
+      "toYear": 2026
+    },
+    "kyrgyzstan": {
+      "fromYear": 2020,
+      "toYear": 2026
+    }
+  },
+  "rules": {
+    "storeRawProse": false,
+    "storeSourceFactsAndProvenance": true,
+    "bypassCaptchaOrLogin": false,
+    "maximumSingleGeneratedFileBytes": 8000000,
+    "photos": "Store only source image URLs when an openly usable, model-bound image exists. Photos are optional during CORE denominator collection."
+  },
+  "sources": [
+    {
+      "id": "vehiclesdb-open-catalog",
+      "authority": "open_composite_official_registers",
+      "markets": [
+        "global"
+      ],
+      "status": "bulk_ready",
+      "license": "CC-BY-4.0; preserve VehiclesDB and upstream attribution",
+      "landingUrl": "https://github.com/vehiclesdb/vehiclesdb",
+      "files": [
+        "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/manifest.json",
+        "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/catalog/car/makes.json",
+        "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/catalog/car/models.json",
+        "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/dist/vehicles.csv",
+        "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/ATTRIBUTION.md",
+        "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/SOURCES.md"
+      ],
+      "fields": [
+        "make",
+        "model",
+        "aliases",
+        "bodyTypes",
+        "availability",
+        "officialSourceIds",
+        "typeApprovalCrossRefs"
+      ],
+      "notes": "Global denominator spine. Current manifest 2026.08.2 reports 277 car makes and 4,895 car models. Bulk CSV is retained because it is easier to deterministically compile than display-oriented JSON. Do not treat it as a substitute for market-specific power/spec sources."
+    },
+    {
+      "id": "eea-co2-passenger-cars",
+      "authority": "government_regulatory_registration",
+      "markets": [
+        "europe"
+      ],
+      "status": "bulk_ready",
+      "license": "EEA public data; preserve source/attribution metadata",
+      "landingUrl": "https://www.eea.europa.eu/en/datahub/datahubitem-view/fa8b1229-3db6-495d-b18e-9c9b3267c02b",
+      "apiUrl": "https://discodata.eea.europa.eu/sql",
+      "fromYear": 2020,
+      "toYear": 2025,
+      "fields": [
+        "year",
+        "make",
+        "commercialName",
+        "type",
+        "variant",
+        "version",
+        "fuel",
+        "engineCc",
+        "powerKw",
+        "wheelbaseMm",
+        "massKg"
+      ],
+      "notes": "Snapshot unique technical tuples, not millions of duplicate registration rows. Final status is preferred; 2025 is provisional until final data exists."
+    },
+    {
+      "id": "us-epa-fueleconomy",
+      "authority": "us_government_efficiency_and_vehicle_specification",
+      "markets": [
+        "us"
+      ],
+      "status": "bulk_ready",
+      "license": "US government public data",
+      "landingUrl": "https://www.fueleconomy.gov/feg/download.shtml",
+      "bulkCsvUrl": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv",
+      "fromYear": 2020,
+      "toYear": 2026,
+      "fields": [
+        "year",
+        "make",
+        "model",
+        "baseModel",
+        "vehicleClass",
+        "engineLiters",
+        "cylinders",
+        "transmission",
+        "drive",
+        "fuel",
+        "powertrainKind",
+        "electricMotor",
+        "range"
+      ],
+      "notes": "DOE/EPA bulk CSV is preferred over per-vehicle API loops. It covers Ford, Chevrolet, GMC, Cadillac, Jeep, RAM, Tesla and other US-market vehicles alongside imports."
+    },
+    {
+      "id": "us-nhtsa-vpic",
+      "authority": "us_government_manufacturer_reported_identity",
+      "markets": [
+        "us"
+      ],
+      "status": "bulk_ready",
+      "license": "US government public data",
+      "landingUrl": "https://vpic.nhtsa.dot.gov/",
+      "apiUrl": "https://vpic.nhtsa.dot.gov/api/",
+      "fields": [
+        "makeId",
+        "make",
+        "modelId",
+        "model",
+        "manufacturer",
+        "vehicleType"
+      ],
+      "notes": "vPIC is manufacturer-submitted identity evidence for vehicles intended for US sale/import. Broad make/model calls are snapshotted; avoid high-rate per-VIN requests."
+    },
+    {
+      "id": "canada-nrcan",
+      "authority": "canada_government_vehicle_efficiency",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "status": "bulk_ready",
+      "license": "Open Government Licence - Canada",
+      "landingUrl": "https://open.canada.ca/data/en/dataset/98f1a129-f628-4ce4-b24d-6f16bf24dd64",
+      "fromYear": 2020,
+      "toYear": 2026,
+      "fields": [
+        "modelYear",
+        "make",
+        "model",
+        "vehicleClass",
+        "engineLiters",
+        "cylinders",
+        "transmission",
+        "fuel",
+        "fuelConsumption",
+        "bev",
+        "phev"
+      ],
+      "notes": "Official NRCan CSVs supplement North-American identity/spec coverage and include dedicated BEV/PHEV files through 2026."
+    },
+    {
+      "id": "miit-road-vehicle-products",
+      "authority": "government_type_approval",
+      "markets": [
+        "china"
+      ],
+      "status": "bulk_ready_with_access_guard",
+      "license": "PRC government public information; retain source URL and batch provenance",
+      "landingUrl": "https://service.miit-eidc.org.cn/miitxxgk/gonggao/xxgk/index",
+      "batchUrlTemplate": "https://service.miit-eidc.org.cn/miitxxgk/gonggao/xxgk/queryByPc?pc={batch}&querylb=cp&qyinfolb=",
+      "firstRelevantBatch": 328,
+      "latestFinalBatch": 409,
+      "latestPreviewBatch": 410,
+      "fields": [
+        "enterprise",
+        "brand",
+        "vehicleModel",
+        "vehicleName",
+        "batch",
+        "technicalParameterPage",
+        "vehiclePhoto"
+      ],
+      "notes": "MIIT/EIDC states the free system exposes vehicle technical parameters from announcement batch 173 onward and PDF parameter pages. The public browser uses doCpQuery POST for product lists; use that intended query contract at low rate. Never bypass slider/CAPTCHA on technical detail pages. Live doCpQuery verification on 2026-08-22 found batches 328-408 queryable; declared batches 409 and 410 returned missing-table responses, so they are not counted as failed data collection. The bounded enterprise-name query is supplemental regulatory evidence; AutoHome remains the broad China model/variant denominator.",
+      "latestQueryableBatch": 408,
+      "collectionQuery": {
+        "enterpriseContains": "汽车",
+        "pagesPerBatch": 2,
+        "scope": "bounded public-query evidence; not an exhaustive copy of every MIIT product row"
+      }
+    },
+    {
+      "id": "autohome-china",
+      "authority": "established_automotive_catalog",
+      "markets": [
+        "china"
+      ],
+      "status": "bulk_gap_fill",
+      "landingUrl": "https://car.autohome.com.cn/",
+      "fromYear": 2020,
+      "toYear": 2026,
+      "fields": [
+        "brand",
+        "series",
+        "spec",
+        "modelYear",
+        "marketDate",
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "motorPower",
+        "systemPower",
+        "transmission",
+        "drive",
+        "bodyType",
+        "seats",
+        "dimensions",
+        "wheelbase",
+        "curbMass",
+        "batteryKwh",
+        "range",
+        "modelImageUrl"
+      ],
+      "notes": "Used only as a structured Chinese market identity/spec corroboration and gap-fill layer behind official/regulatory evidence. Collection is series-level and deliberately low-rate: one brand index, one public brand page per brand, and one config page per discovered series; no anti-bot bypass or per-listing scraping."
+    },
+    {
+      "id": "mlit-japan-fuel-economy",
+      "authority": "government_type_approval_efficiency",
+      "markets": [
+        "japan"
+      ],
+      "status": "bulk_ready",
+      "license": "Japan MLIT public information; retain source URL/date",
+      "landingUrl": "https://www.mlit.go.jp/jidosha/jidosha_mn10_000002.html",
+      "legacy2010Url": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "current2026Url": "https://www.mlit.go.jp/jidosha/jidosha_tk10_000050.html",
+      "fromYear": 2010,
+      "toYear": 2026,
+      "fields": [
+        "manufacturer",
+        "model",
+        "typeDesignation",
+        "fuel",
+        "engineCc",
+        "fuelEconomy",
+        "vehicleClass",
+        "weight",
+        "year"
+      ],
+      "notes": "Crawl MLIT annual indexes and preserve source provenance. Prefer directly published XLS/XLSX/CSV tables; PDF text extraction is a fallback for older tables and uses pdftotext rather than OCR. Binary files are hashed and converted to JSON/text rather than committed as repository ballast."
+    },
+    {
+      "id": "korea-jeju-registration-file",
+      "authority": "government_registration",
+      "markets": [
+        "korea"
+      ],
+      "status": "bulk_ready",
+      "license": "Korean Public Data Portal: unrestricted use on dataset page",
+      "landingUrl": "https://www.data.go.kr/data/15128417/fileData.do",
+      "metadataUrl": "https://www.data.go.kr/catalog/15128417/fileData.json",
+      "fromYear": 2019,
+      "fields": [
+        "vehicleName",
+        "modelYear",
+        "engineCc",
+        "fuel",
+        "vehicleClass",
+        "vehicleType",
+        "firstRegistrationDate"
+      ],
+      "notes": "424,332-row Jeju registration extract is downloadable without login. The downloader prefers the live official file and retains its source hash/row count, but commits only distinct 2020+ technical/name tuples with observation counts because duplicate registrations add no vehicle-knowledge value. A hash-gated compact fallback is preserved from successful same-branch workflow run 32557200820 for periods when data.go.kr is unreachable from GitHub runners; its workflow artifact, raw source hash, chunk hashes and reconciled counts are all recorded."
+    },
+    {
+      "id": "korea-energy-agency-efficiency",
+      "authority": "government_efficiency",
+      "markets": [
+        "korea"
+      ],
+      "status": "live_query_ready",
+      "license": "Korea Energy Agency public information service; downstream reuse terms require review",
+      "landingUrl": "https://min24.energy.or.kr/trans_hp/AHP/HP_03/HP_03_01_010.do",
+      "fields": [
+        "modelName",
+        "manufacturer",
+        "vehicleClass",
+        "type",
+        "combinedEfficiency",
+        "cityEfficiency",
+        "highwayEfficiency",
+        "oneChargeRange",
+        "grade"
+      ],
+      "notes": "Official Korea Energy Agency live model catalog queried without login for release years 2020-present. It complements Jeju registration names with manufacturer, class, fuel, transmission, efficiency, range, emissions, release year and test-number evidence."
+    },
+    {
+      "id": "kotsa-new-registration-api",
+      "authority": "government_registration",
+      "markets": [
+        "korea"
+      ],
+      "status": "requires_free_service_key",
+      "license": "Korean Public Data Portal: unrestricted use",
+      "landingUrl": "https://www.data.go.kr/data/15059401/openapi.do",
+      "metadataUrl": "https://www.data.go.kr/catalog/15059401/openapi.json",
+      "apiBaseUrl": "https://apis.data.go.kr/B553881/newRegistlnfoService_02",
+      "fields": [
+        "registrationYear",
+        "registrationMonth",
+        "vehicleClass",
+        "region",
+        "fuel",
+        "vehicleNameCode",
+        "engineDisplacementBand",
+        "domesticImported"
+      ],
+      "notes": "Free/auto-approved API key is required by the portal. Snapshot metadata now; do not fabricate nationwide rows without an authorized key."
+    },
+    {
+      "id": "active-parser-observations",
+      "authority": "first_party_observed_market",
+      "markets": [
+        "japan",
+        "china",
+        "korea",
+        "uae",
+        "europe",
+        "georgia",
+        "kyrgyzstan"
+      ],
+      "status": "runtime_input",
+      "fields": [
+        "rawMake",
+        "rawModel",
+        "year",
+        "sourceId",
+        "engineCc",
+        "fuel",
+        "power",
+        "transmission",
+        "drive",
+        "bodyType"
+      ],
+      "notes": "Every production knowledge-gap report is part of the denominator. Source marketplace facts require verification before becoming authoritative CORE facts."
+    }
+  ]
+}

@@ -23,8 +23,8 @@ test("identity read-model migration proves offer and market counts before any wr
   assert.match(publisher, /catalog_identity_publish_brand_collisions/);
 });
 
-test("first identity release leaves the core catalog writer and recovery preservation contract untouched", () => {
+test("identity release preserves the catalog writer contract through Knowledge CORE", () => {
   assert.doesNotMatch(storage, /applyConfiguredEncyclopediaIdentity/);
   assert.doesNotMatch(storage, /identityOnlyReprojection/);
-  assert.match(storage, /exactPreserveMarkets\.has\(offer\.market\)[\s\S]*\? offer[\s\S]*enrichOfferWithVehicleKnowledge/);
+  assert.match(storage, /exactPreserveMarkets\.has\(offer\.market\)[\s\S]*\? offer[\s\S]*enrichOfferWithKnowledgeCore/);
 });

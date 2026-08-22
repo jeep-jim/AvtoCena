@@ -1,0 +1,8549 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 21,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "vauxhall:insignia",
+      "make": "Vauxhall",
+      "model": "Insignia",
+      "aliases": [
+        "INSIGNIA DESIGN ECOTEC D",
+        "INSIGNIA DESIGN NAV ECOTEC D",
+        "INSIGNIA DESIGN NAV TURBO",
+        "INSIGNIA DESIGN NAV TURBO D",
+        "INSIGNIA DESIGN NAV TURBO D A",
+        "INSIGNIA DESIGN TURBO",
+        "INSIGNIA DESIGN TURBO AUTO",
+        "INSIGNIA DESIGN TURBO D",
+        "INSIGNIA DESIGN TURBO D AUTO",
+        "INSIGNIA ELITE NAV ECOTEC D",
+        "INSIGNIA ELITE NAV TURBO",
+        "INSIGNIA ELITE NAV TURBO AUTO",
+        "INSIGNIA ELITE NAV TURBO D",
+        "INSIGNIA ELITE NAV TURBO D A",
+        "INSIGNIA GSI NAV T D 4X4 A",
+        "INSIGNIA GSI TURBO 4X4 AUTO",
+        "INSIGNIA SE NAV CDTI",
+        "INSIGNIA SE NAV TURBO D",
+        "INSIGNIA SE NAV TURBO D AUTO",
+        "INSIGNIA SRI ECOTEC D",
+        "INSIGNIA SRI NAV ECOTEC D",
+        "INSIGNIA SRI NAV TURBO",
+        "INSIGNIA SRI NAV TURBO AUTO",
+        "INSIGNIA SRI NAV TURBO D",
+        "INSIGNIA SRI NAV TURBO D AUTO",
+        "INSIGNIA SRI TURBO",
+        "INSIGNIA SRI TURBO AUTO",
+        "INSIGNIA SRI TURBO D",
+        "INSIGNIA SRI VX-LINE NAV T D",
+        "INSIGNIA SRI VX-LINE NAV T D A",
+        "INSIGNIA SRI VX-LINE NAV TUR A",
+        "INSIGNIA SRI VX-LINE NAV TURBO",
+        "INSIGNIA TECH LINE NAV E-TEC D",
+        "INSIGNIA TECH LINE NAV T D A",
+        "INSIGNIA TECH LINE NAV TURBO",
+        "INSIGNIA TECH LINE NAV TURBO A",
+        "INSIGNIA TECH LINE NAV TURBO D",
+        "INSIGNIA ULTIMATE NAV TUR D A",
+        "INSIGNIA ULTIMATE NAV TURBO A",
+        "INSIGNIA ULTIMATE NAV TURBO D"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/insignia",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Insignia"
+      }
+    },
+    {
+      "key": "vauxhall:j14",
+      "make": "Vauxhall",
+      "model": "J14",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:magnum",
+      "make": "Vauxhall",
+      "model": "Magnum",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:meriva",
+      "make": "Vauxhall",
+      "model": "Meriva",
+      "aliases": [],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:mokka",
+      "make": "Vauxhall",
+      "model": "Mokka",
+      "aliases": [
+        "MOKKA X"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/mokka",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Mokka"
+      }
+    },
+    {
+      "key": "vauxhall:monaro",
+      "make": "Vauxhall",
+      "model": "Monaro",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:nova",
+      "make": "Vauxhall",
+      "model": "Nova",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:omega",
+      "make": "Vauxhall",
+      "model": "Omega",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:royale",
+      "make": "Vauxhall",
+      "model": "Royale",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:signum",
+      "make": "Vauxhall",
+      "model": "Signum",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:sports",
+      "make": "Vauxhall",
+      "model": "Sports",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:tigra",
+      "make": "Vauxhall",
+      "model": "Tigra",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:vectra",
+      "make": "Vauxhall",
+      "model": "Vectra",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:velox",
+      "make": "Vauxhall",
+      "model": "Velox",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:ventora",
+      "make": "Vauxhall",
+      "model": "Ventora",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:victor",
+      "make": "Vauxhall",
+      "model": "Victor",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:viscount",
+      "make": "Vauxhall",
+      "model": "Viscount",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:viva",
+      "make": "Vauxhall",
+      "model": "Viva",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:vivarolife",
+      "make": "Vauxhall",
+      "model": "Vivaro Life",
+      "aliases": [
+        "Vivaro Life Combi",
+        "VIVARO LIFE EDITION S S",
+        "VIVARO LIFE ELITE S S",
+        "VIVARO LIFE ELITE S S AUTO",
+        "Vivaro-e Life",
+        "VIVARO-E LIFE EDITION",
+        "VIVARO-E LIFE ELITE"
+      ],
+      "bodyTypes": [
+        "MPV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": "vauxhall/vivaro-life",
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": "Vivaro Life"
+      }
+    },
+    {
+      "key": "vauxhall:vx",
+      "make": "Vauxhall",
+      "model": "Vx",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:vx220",
+      "make": "Vauxhall",
+      "model": "VX220",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:vx490",
+      "make": "Vauxhall",
+      "model": "VX4/90",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:vxr8",
+      "make": "Vauxhall",
+      "model": "VXR8",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:wyvern",
+      "make": "Vauxhall",
+      "model": "Wyvern",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vauxhall:zafira",
+      "make": "Vauxhall",
+      "model": "Zafira",
+      "aliases": [],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vauxhall",
+        "modelId": null,
+        "canonicalMake": "Vauxhall",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "vinfast:vf6",
+      "make": "VinFast",
+      "model": "VF 6",
+      "aliases": [
+        "VF6"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vinfast",
+        "modelId": "vinfast/vf-6",
+        "canonicalMake": "VinFast",
+        "canonicalModel": "VF 6"
+      }
+    },
+    {
+      "key": "vinfast:vf8",
+      "make": "VinFast",
+      "model": "VF 8",
+      "aliases": [
+        "VF8"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "vinfast",
+        "modelId": "vinfast/vf-8",
+        "canonicalMake": "VinFast",
+        "canonicalModel": "VF 8"
+      }
+    },
+    {
+      "key": "volga:gazm21",
+      "make": "Volga",
+      "model": "Gaz-M21",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "volga:m21",
+      "make": "Volga",
+      "model": "M21",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "volkswagen:1100",
+      "make": "Volkswagen",
+      "model": "1100",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:1200",
+      "make": "Volkswagen",
+      "model": "1200",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:1500",
+      "make": "Volkswagen",
+      "model": "1500",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:1500s",
+      "make": "Volkswagen",
+      "model": "1500 S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:1600",
+      "make": "Volkswagen",
+      "model": "1600",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:166",
+      "make": "Volkswagen",
+      "model": "166",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:18",
+      "make": "Volkswagen",
+      "model": "18",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:181",
+      "make": "Volkswagen",
+      "model": "181",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:19e",
+      "make": "Volkswagen",
+      "model": "19 E",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:204",
+      "make": "Volkswagen",
+      "model": "204",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:211",
+      "make": "Volkswagen",
+      "model": "211",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:221",
+      "make": "Volkswagen",
+      "model": "221",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:224",
+      "make": "Volkswagen",
+      "model": "224",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:241",
+      "make": "Volkswagen",
+      "model": "241",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:251",
+      "make": "Volkswagen",
+      "model": "251",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:253",
+      "make": "Volkswagen",
+      "model": "253",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:28",
+      "make": "Volkswagen",
+      "model": "28",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:3bg",
+      "make": "Volkswagen",
+      "model": "3BG",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:411",
+      "make": "Volkswagen",
+      "model": "411",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:411le",
+      "make": "Volkswagen",
+      "model": "411 Le",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:412",
+      "make": "Volkswagen",
+      "model": "412",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:7hk",
+      "make": "Volkswagen",
+      "model": "7HK",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:arteon",
+      "make": "Volkswagen",
+      "model": "Arteon",
+      "aliases": [
+        "ARTEON",
+        "Arteon 2.0 / 200kW (DSG)",
+        "Arteon 2.0 / 206kW (DSG)"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/arteon",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Arteon"
+      }
+    },
+    {
+      "key": "volkswagen:atlas",
+      "make": "Volkswagen",
+      "model": "Atlas",
+      "aliases": [
+        "ATLAS",
+        "TERAMONT",
+        "TERAMONT X"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/atlas",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Atlas"
+      }
+    },
+    {
+      "key": "volkswagen:atlascrosssport",
+      "make": "Volkswagen",
+      "model": "Atlas Cross Sport",
+      "aliases": [
+        "ATLAS CROSS SPORT"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/atlas-cross-sport",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Atlas Cross Sport"
+      }
+    },
+    {
+      "key": "volkswagen:beetle",
+      "make": "Volkswagen",
+      "model": "Beetle",
+      "aliases": [
+        "BEETLE",
+        "The Beetle 2.0 R-Line (DSG)",
+        "The Beetle Cabriolet (DSG)",
+        "The Beetle Design (DSG) The Beetle Design Leather Packge (DSG)",
+        "The Beetle Design Leather Packge (DSG)",
+        "The Beetle (DSG)",
+        "The Beetle Dune (DSG)",
+        "The Beetle R-Line (DSG)",
+        "The Beetle Turbo (DSG)",
+        "Käfer",
+        "Vocho",
+        "Fusca",
+        "Coccinelle",
+        "Type 1"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/beetle",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Beetle"
+      }
+    },
+    {
+      "key": "volkswagen:bora",
+      "make": "Volkswagen",
+      "model": "Bora",
+      "aliases": [
+        "BORA"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/bora",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Bora"
+      }
+    },
+    {
+      "key": "volkswagen:cabrio",
+      "make": "Volkswagen",
+      "model": "Cabrio",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:cabriolet",
+      "make": "Volkswagen",
+      "model": "Cabriolet",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:caddy",
+      "make": "Volkswagen",
+      "model": "Caddy",
+      "aliases": [
+        "CADDY"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/caddy",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Caddy"
+      }
+    },
+    {
+      "key": "volkswagen:california",
+      "make": "Volkswagen",
+      "model": "California",
+      "aliases": [
+        "CALIFORNIA"
+      ],
+      "bodyTypes": [
+        "van"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/california",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "California"
+      }
+    },
+    {
+      "key": "volkswagen:caravelle",
+      "make": "Volkswagen",
+      "model": "Caravelle",
+      "aliases": [
+        "ABT E-CARAVELLE 6.1",
+        "CARAVELLE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/caravelle",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Caravelle"
+      }
+    },
+    {
+      "key": "volkswagen:cc",
+      "make": "Volkswagen",
+      "model": "CC",
+      "aliases": [
+        "Volkswagen CC TSI (DSG)"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/cc",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "CC"
+      }
+    },
+    {
+      "key": "volkswagen:corrado",
+      "make": "Volkswagen",
+      "model": "Corrado",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:crafter",
+      "make": "Volkswagen",
+      "model": "Crafter",
+      "aliases": [
+        "CRAFTER",
+        "CRAFTER 2017",
+        "CRAFTER 2017 L2H2",
+        "CRAFTER CR35 STARTLINE TDI",
+        "CRAFTER CR35 TRENDLINE TDI",
+        "CRAFTER F-WAV",
+        "Crafter panel van",
+        "CRAFTER PMR",
+        "CRAFTER PMR REHATRANS",
+        "CRAFTER SKÅP",
+        "CRAFTER TRIFLEXAIR",
+        "CRAFTER-OLMEDO SPA",
+        "VW CRAFTER",
+        "VW CRAFTER STIL"
+      ],
+      "bodyTypes": [
+        "Van"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/crafter",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Crafter"
+      }
+    },
+    {
+      "key": "volkswagen:derby",
+      "make": "Volkswagen",
+      "model": "Derby",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:egolf",
+      "make": "Volkswagen",
+      "model": "E-Golf",
+      "aliases": [
+        "E-GOLF"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/e-golf",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "E-Golf"
+      }
+    },
+    {
+      "key": "volkswagen:eup",
+      "make": "Volkswagen",
+      "model": "E-Up !",
+      "aliases": [
+        "E - UP!",
+        "E-UP",
+        "E-UP!",
+        "EUP!",
+        "EUP! / /"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/e-up",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "E-Up !"
+      }
+    },
+    {
+      "key": "volkswagen:eos",
+      "make": "Volkswagen",
+      "model": "Eos",
+      "aliases": [
+        "EOS"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/eos",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Eos"
+      }
+    },
+    {
+      "key": "volkswagen:eurovan",
+      "make": "Volkswagen",
+      "model": "Eurovan",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:fox",
+      "make": "Volkswagen",
+      "model": "Fox",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:gol",
+      "make": "Volkswagen",
+      "model": "Gol",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:golf",
+      "make": "Volkswagen",
+      "model": "Golf",
+      "aliases": [
+        "Golf 1.2 / 77kW (DSG)",
+        "Golf 1.4 / 103kW (DSG)",
+        "Golf 2.0 GTI (DSG)",
+        "Golf 2.0 TDI / 110kW (DSG)",
+        "Golf Alltrack (DSG)",
+        "Golf Cabriolet (DSG)",
+        "Golf eTSI 1.0 / 81kW (DSG)",
+        "Golf eTSI 1.5 / 110kW (DSG)",
+        "Golf eTSI 1.5 / 85kW (DSG)",
+        "Golf GTI",
+        "Golf GTI 2.0 / 180kW (DSG)",
+        "Golf GTI Clubsport (DSG)",
+        "Golf GTI (DSG)",
+        "Golf GTI Performance (DSG)",
+        "Golf GTI TCR 2.0/213kW (DSG)",
+        "Golf R",
+        "Golf R 2.0 / 235kW (DSG)",
+        "Golf R (DSG)",
+        "Golf R Variant 2.0 / 235kW (DSG)",
+        "Golf R Variant (DSG)",
+        "Golf TSI Highline (DSG)",
+        "Golf TSI Trendline BlueMotion Technology (DSG)",
+        "Golf TSI Trendline / Comfortline (DSG)",
+        "Golf Variant 1.2 / 77kW (DSG)",
+        "Golf Variant 1.4 / 103kW (DSG)",
+        "Golf Variant 2.0 TDI / 110kW (DSG)",
+        "Golf Variant eTSI 1.0 / 81kW (DSG)",
+        "Golf Variant eTSI 1.5 / 110kW (DSG)",
+        "Golf Variant eTSI 1.5 / 85kW (DSG)",
+        "Golf Variant TDI / 110kW (DSG)",
+        "Golf Variant TSI Comfortline (DSG)",
+        "Golf Variant TSI Highline (DSG) Golf Variant R-line (DSG)",
+        "Golf Variant TSI Trendline BlueMotion Technology (DSG)",
+        "New Golf 1.2 / 77kW (DSG)",
+        "New Golf 1.4 / 103kW (DSG)",
+        "New Golf Alltrack (DSG)",
+        "New Golf GTI",
+        "New Golf GTI (DSG)",
+        "New Golf R",
+        "New Golf R (DSG)",
+        "New Golf R Variant (DSG)",
+        "New Golf Variant 1.2 / 77kW (DSG)",
+        "New Golf Variant 1.4 / 103kW (DSG)",
+        "Rabbit"
+      ],
+      "bodyTypes": [
+        "Compact car",
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": 2019,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/golf",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Golf"
+      }
+    },
+    {
+      "key": "volkswagen:grandcalifornia",
+      "make": "Volkswagen",
+      "model": "Grand California",
+      "aliases": [
+        "GRAND CALIFORNIA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/grand-california",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Grand California"
+      }
+    },
+    {
+      "key": "volkswagen:idbuzz",
+      "make": "Volkswagen",
+      "model": "Id. Buzz",
+      "aliases": [
+        "ID BUZZ",
+        "ID. BUZZ",
+        "ID.BUZZ",
+        "IDBUZZ"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/id-buzz",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Id. Buzz"
+      }
+    },
+    {
+      "key": "volkswagen:id3",
+      "make": "Volkswagen",
+      "model": "ID.3",
+      "aliases": [
+        "ID. 3",
+        "ID.3PRO S 150KW",
+        "ID.3PRO107KW",
+        "ID3",
+        "ID3PRO150KW"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/id-3",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "ID.3"
+      }
+    },
+    {
+      "key": "volkswagen:id4",
+      "make": "Volkswagen",
+      "model": "ID.4",
+      "aliases": [
+        "ID 4",
+        "ID. 4",
+        "ID.4PRO 150 KW",
+        "ID4",
+        "ID4GTX 220 KW"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/id-4",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "ID.4"
+      }
+    },
+    {
+      "key": "volkswagen:id5",
+      "make": "Volkswagen",
+      "model": "ID.5",
+      "aliases": [
+        "ID5",
+        "ID5GTX 220KW"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/id-5",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "ID.5"
+      }
+    },
+    {
+      "key": "volkswagen:id6",
+      "make": "Volkswagen",
+      "model": "ID.6",
+      "aliases": [
+        "ID6",
+        "ID6X PRIME",
+        "ID6X PRO"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/id-6",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "ID.6"
+      }
+    },
+    {
+      "key": "volkswagen:id7",
+      "make": "Volkswagen",
+      "model": "ID.7",
+      "aliases": [
+        "\"ID.7\"",
+        "ID7"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/id-7",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "ID.7"
+      }
+    },
+    {
+      "key": "volkswagen:iltis",
+      "make": "Volkswagen",
+      "model": "Iltis",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:jetta",
+      "make": "Volkswagen",
+      "model": "Jetta",
+      "aliases": [
+        "JETTA"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/jetta",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Jetta"
+      }
+    },
+    {
+      "key": "volkswagen:joker",
+      "make": "Volkswagen",
+      "model": "Joker",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:k70",
+      "make": "Volkswagen",
+      "model": "K70",
+      "aliases": [
+        "K 70"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/k70",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "K70"
+      }
+    },
+    {
+      "key": "volkswagen:karmannghia",
+      "make": "Volkswagen",
+      "model": "Karmann Ghia",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:kasten",
+      "make": "Volkswagen",
+      "model": "Kasten",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:lavida",
+      "make": "Volkswagen",
+      "model": "Lavida",
+      "aliases": [
+        "Lavida"
+      ],
+      "bodyTypes": [
+        "Sedan",
+        "Station wagon"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/lavida",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Lavida"
+      }
+    },
+    {
+      "key": "volkswagen:lt",
+      "make": "Volkswagen",
+      "model": "Lt",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:lupo",
+      "make": "Volkswagen",
+      "model": "Lupo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:multivan",
+      "make": "Volkswagen",
+      "model": "Multivan",
+      "aliases": [
+        "MULTIVAN"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/multivan",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Multivan"
+      }
+    },
+    {
+      "key": "volkswagen:passat",
+      "make": "Volkswagen",
+      "model": "Passat",
+      "aliases": [
+        "PASSAT",
+        "Passat 1.5 / 110kW (DSG)",
+        "Passat 1.5 TSI (DSG)",
+        "Passat 2.0TDI / 140kW(DSG) Passat Variant 2.0TDI / 140kW(DSG)",
+        "Passat 2.0TDI / 140kW Passat Variant 2.0TDI / 140kW (DSG)",
+        "Passat 2.0 TDI (DSG)",
+        "Passat Alltrack 2.0 TDI / 140kW (DSG)",
+        "Passat Alltrack TSI 4MOTION (DSG)",
+        "Passat Sedan 1.4/110kW(DSC) Passat Variant 1.4/110kW(DSC)",
+        "Passat Sedan 2.0 / 162kW (DSC)",
+        "Passat Sedan 2.0 / 162kW (DSG)",
+        "Passat Sedan 2.0TDI / 140kW (DSG)",
+        "Passat Sedan / Variant 1.4 / 110kW (DSC)",
+        "Passat Sedan / Variant 1.4 / 110kW (DSG)",
+        "Passat TSI Comfortline(DSG) Passat TSI Highline(DSG)",
+        "Passat Variant 2.0 / 162kW (DSC)",
+        "Passat Variant 2.0 / 162kW (DSG)",
+        "Passat Variant 2.0TDI / 140kW (DSG)",
+        "Passat Variant TSI Comfortline(DSG) Passat Variant TSI Highline(DSG)",
+        "Passat Variant TSI Comfortline(DSG) Passat Variant TSI Highline(DSG) Passat Variant R-Line Edition"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/passat",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Passat"
+      }
+    },
+    {
+      "key": "volkswagen:phaeton",
+      "make": "Volkswagen",
+      "model": "Phaeton",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:polo",
+      "make": "Volkswagen",
+      "model": "Polo",
+      "aliases": [
+        "POLO",
+        "VOLKSWAGEN POLO",
+        "CrossPolo (DSG)",
+        "Polo 1.0 / 70kW (DSG)",
+        "Polo 1.2 / 66kW (DSG)",
+        "Polo 1.4 / 110kW (DSG)",
+        "Polo 1.5 / 110kW (DSG)",
+        "Polo Blue GT (DSG)",
+        "Polo Blue Motion (DSG)",
+        "Polo GTI",
+        "Polo GTI 2.0 / 152kW (DSG)",
+        "Polo GTI (DSG)",
+        "Polo TSI Comfortline BlueMotion Technology (DSG)",
+        "Polo TSI Comfortline (DSG)",
+        "Polo TSI Comfortline(DSG) Polo TSI Comfortline Upgrade Package (DSG)",
+        "Polo TSI Highline (DSG)"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/polo",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Polo"
+      }
+    },
+    {
+      "key": "volkswagen:rabbit",
+      "make": "Volkswagen",
+      "model": "Rabbit",
+      "aliases": [
+        "RABBIT"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/rabbit",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Rabbit"
+      }
+    },
+    {
+      "key": "volkswagen:routan",
+      "make": "Volkswagen",
+      "model": "Routan",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:santana",
+      "make": "Volkswagen",
+      "model": "Santana",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:scirocco",
+      "make": "Volkswagen",
+      "model": "Scirocco",
+      "aliases": [
+        "SCIROCCO",
+        "Scirocco R (DSG)",
+        "Scirocco TSI / R-line (DSG)"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/scirocco",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Scirocco"
+      }
+    },
+    {
+      "key": "volkswagen:sharan",
+      "make": "Volkswagen",
+      "model": "Sharan",
+      "aliases": [
+        "Volkswagen Sharan",
+        "Sharan 1.4 / 110kW (DSG)",
+        "Sharan 2.0 TDI / 130kW (DSG)",
+        "Sharan TSI Comfortline(DSG) Sharan TSI Highline(DSG)",
+        "Sharan TSI Trendline(DSG) Sharan TSI Comfortline(DSG) Sharan TSI Highline(DSG)"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/sharan",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Sharan"
+      }
+    },
+    {
+      "key": "volkswagen:tcross",
+      "make": "Volkswagen",
+      "model": "T-Cross",
+      "aliases": [
+        "T CROSS",
+        "T-Cross (DSG)"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/t-cross",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "T-Cross"
+      }
+    },
+    {
+      "key": "volkswagen:troc",
+      "make": "Volkswagen",
+      "model": "T-Roc",
+      "aliases": [
+        "Volkswagen T-Roc",
+        "T-Roc 1.5 / 110kW (DSG)",
+        "T-Roc 2.0 TDI / 110kW (DSG)"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/t-roc",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "T-Roc"
+      }
+    },
+    {
+      "key": "volkswagen:taigo",
+      "make": "Volkswagen",
+      "model": "Taigo",
+      "aliases": [
+        "Volkswagen Taigo"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/taigo",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Taigo"
+      }
+    },
+    {
+      "key": "volkswagen:taos",
+      "make": "Volkswagen",
+      "model": "Taos",
+      "aliases": [
+        "TAOS"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/taos",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Taos"
+      }
+    },
+    {
+      "key": "volkswagen:tayron",
+      "make": "Volkswagen",
+      "model": "Tayron",
+      "aliases": [
+        "TAYRON"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/tayron",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Tayron"
+      }
+    },
+    {
+      "key": "volkswagen:tiguan",
+      "make": "Volkswagen",
+      "model": "Tiguan",
+      "aliases": [
+        "TIGUAN",
+        "tiguan",
+        "Tiguan 1.4 / 110kW (DSG)",
+        "Tiguan 1.4 / 118kW (DSG)",
+        "Tiguan 1.5 / 110kW (DSG)",
+        "Tiguan 1.5 TSI (DSG)",
+        "Tiguan 2.0 / 132kW (DSG)",
+        "Tiguan 2.0 / 140kW (DSG)",
+        "Tiguan 2.0TDI / 110kW (DSG)",
+        "Tiguan 2.0 TDI (DSG)",
+        "Tiguan 2.0TSI Leistung 4MOTION (DSG) Tiguan 2.0TSI R-Line 4MOTION (DSG)",
+        "Tiguan R 2.0 / 235kW (DSG)",
+        "Tiguan Sport & Style Tiguan R-Line (DSG)",
+        "Tiguan TSI BlueMotion Technology(DSG)"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/tiguan",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Tiguan"
+      }
+    },
+    {
+      "key": "volkswagen:tiguanallspace",
+      "make": "Volkswagen",
+      "model": "Tiguan Allspace",
+      "aliases": [
+        "TIGUAN ALLSPACE"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/tiguan-allspace",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Tiguan Allspace"
+      }
+    },
+    {
+      "key": "volkswagen:touareg",
+      "make": "Volkswagen",
+      "model": "Touareg",
+      "aliases": [
+        "TOUAREG",
+        "Touareg 3.6V6",
+        "Touareg 3.6 V6 Air suspension",
+        "Touareg Hybrid"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/touareg",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Touareg"
+      }
+    },
+    {
+      "key": "volkswagen:touran",
+      "make": "Volkswagen",
+      "model": "Touran",
+      "aliases": [
+        "Volkswagen Touran",
+        "Cross Touran (DSG)",
+        "Golf Touran 1.4 / 110kW (DSG)",
+        "Golf Touran 1.5 / 110kW (DSG)",
+        "Golf Touran 2.0 TDI / 110kW (DSG)",
+        "Golf Touran TSI Comfortline (DSG)",
+        "Golf Touran TSI Comfortline (DSG) Golf Touran TSI Highline (DSG)",
+        "Golf Touran TSI Highline (DSG)"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/touran",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Touran"
+      }
+    },
+    {
+      "key": "volkswagen:tourervan500mq",
+      "make": "Volkswagen",
+      "model": "Tourer Van 500 Mq",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:transporter",
+      "make": "Volkswagen",
+      "model": "Transporter",
+      "aliases": [
+        "Kombi",
+        "KOMBI Colorado",
+        "TRANSPORTER",
+        "TRANSPORTER 20 TDI",
+        "TRANSPORTER 20 TDI 4M",
+        "TRANSPORTER 20 TDI 4M AUT",
+        "TRANSPORTER 20 TDI AUT",
+        "TRANSPORTER 3385",
+        "TRANSPORTER 3490",
+        "TRANSPORTER CARAVELLE 2.0 TDI",
+        "TRANSPORTER CARAVELLE 2.0 TDI 4M AUT.",
+        "TRANSPORTER CARAVELLE 2.0 TDI AUT.",
+        "Transporter Kombi",
+        "TRANSPORTER L1H1",
+        "TRANSPORTER S TDI",
+        "TRANSPORTER S TDI S-A",
+        "TRANSPORTER SE TDI",
+        "TRANSPORTER SE TDI S-A",
+        "TRANSPORTER T28 HIGHLINE TDI",
+        "TRANSPORTER T30 HIGHLINE TDI",
+        "TRANSPORTER T30 ST-LN TDI BMT",
+        "TRANSPORTER T30 STARTLINE TDI",
+        "TRANSPORTER T30 TDI BMT",
+        "TRANSPORTER T30 TDI BMT S-A",
+        "TRANSPORTER T30 WINDOW TDI BMT",
+        "TRANSPORTER T32 HIGHLINE TDI",
+        "TRANSPORTER T32 S TDI BMT",
+        "TRANSPORTER T32 S TDI BMT S-A",
+        "TRANSPORTER T32 SE TDI BMT",
+        "TRANSPORTER T32 SE TDI BMT S-A",
+        "TRANSPORTER T32 SPORTLINE TDIA",
+        "TRANSPORTER T32 ST-LINE TDI SA",
+        "TRANSPORTER T32 STARTLINE TDI"
+      ],
+      "bodyTypes": [
+        "Van"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/transporter",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Transporter"
+      }
+    },
+    {
+      "key": "volkswagen:type3",
+      "make": "Volkswagen",
+      "model": "Type 3",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:up",
+      "make": "Volkswagen",
+      "model": "Up",
+      "aliases": [
+        "cross up! (ASG)",
+        "HIGH UP",
+        "MOVE UP",
+        "MOVE UP TECH EDITION",
+        "UP",
+        "UP !",
+        "UP!",
+        "up! (ASG)",
+        "up! 1.0 / 55kW (ASG)",
+        "up! BMT (ASG)",
+        "up! GTI 1.0 / 85kW",
+        "UP?",
+        "UP|"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/up",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "Up"
+      }
+    },
+    {
+      "key": "volkswagen:vanagon",
+      "make": "Volkswagen",
+      "model": "Vanagon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:variant",
+      "make": "Volkswagen",
+      "model": "Variant",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:vento",
+      "make": "Volkswagen",
+      "model": "Vento",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:westfalia",
+      "make": "Volkswagen",
+      "model": "Westfalia",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:wg2211",
+      "make": "Volkswagen",
+      "model": "WG2211",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": null,
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volkswagen:xl1",
+      "make": "Volkswagen",
+      "model": "XL1",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volkswagen",
+        "modelId": "volkswagen/xl1",
+        "canonicalMake": "Volkswagen",
+        "canonicalModel": "XL1"
+      }
+    },
+    {
+      "key": "volvo:140",
+      "make": "Volvo",
+      "model": "140",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:164",
+      "make": "Volvo",
+      "model": "164",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:1800e",
+      "make": "Volvo",
+      "model": "1800E",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:1800es",
+      "make": "Volvo",
+      "model": "1800ES",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:1800s",
+      "make": "Volvo",
+      "model": "1800S",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:240",
+      "make": "Volvo",
+      "model": "240",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:260",
+      "make": "Volvo",
+      "model": "260",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:340",
+      "make": "Volvo",
+      "model": "340",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:343",
+      "make": "Volvo",
+      "model": "343",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:345",
+      "make": "Volvo",
+      "model": "345",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:360",
+      "make": "Volvo",
+      "model": "360",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:440",
+      "make": "Volvo",
+      "model": "440",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:460",
+      "make": "Volvo",
+      "model": "460",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:480",
+      "make": "Volvo",
+      "model": "480",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:60",
+      "make": "Volvo",
+      "model": "60",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:66",
+      "make": "Volvo",
+      "model": "66",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:740",
+      "make": "Volvo",
+      "model": "740",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:760",
+      "make": "Volvo",
+      "model": "760",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/760",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "760"
+      }
+    },
+    {
+      "key": "volvo:780",
+      "make": "Volvo",
+      "model": "780",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:850",
+      "make": "Volvo",
+      "model": "850",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:940",
+      "make": "Volvo",
+      "model": "940",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:960",
+      "make": "Volvo",
+      "model": "960",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:amazon",
+      "make": "Volvo",
+      "model": "Amazon",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:b18",
+      "make": "Volvo",
+      "model": "B 18",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:c202",
+      "make": "Volvo",
+      "model": "C202",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:c30",
+      "make": "Volvo",
+      "model": "C30",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/c30",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "C30"
+      }
+    },
+    {
+      "key": "volvo:c303",
+      "make": "Volvo",
+      "model": "C303",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:c40",
+      "make": "Volvo",
+      "model": "C40",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/c40",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "C40"
+      }
+    },
+    {
+      "key": "volvo:c70",
+      "make": "Volvo",
+      "model": "C70",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/c70",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "C70"
+      }
+    },
+    {
+      "key": "volvo:duett",
+      "make": "Volvo",
+      "model": "Duett",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:ec40",
+      "make": "Volvo",
+      "model": "EC40",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/ec40",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "EC40"
+      }
+    },
+    {
+      "key": "volvo:es90",
+      "make": "Volvo",
+      "model": "ES90",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/es90",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "ES90"
+      }
+    },
+    {
+      "key": "volvo:ex30",
+      "make": "Volvo",
+      "model": "EX30",
+      "aliases": [],
+      "bodyTypes": [
+        "Small SUV",
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": 2023,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/ex30",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "EX30"
+      }
+    },
+    {
+      "key": "volvo:ex40",
+      "make": "Volvo",
+      "model": "EX40",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/ex40",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "EX40"
+      }
+    },
+    {
+      "key": "volvo:ex90",
+      "make": "Volvo",
+      "model": "EX90",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/ex90",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "EX90"
+      }
+    },
+    {
+      "key": "volvo:l3314",
+      "make": "Volvo",
+      "model": "L 3314",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:l3314a",
+      "make": "Volvo",
+      "model": "L 3314 A",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:l3304",
+      "make": "Volvo",
+      "model": "L3304",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:p18",
+      "make": "Volvo",
+      "model": "P 18",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:p1800",
+      "make": "Volvo",
+      "model": "P1800",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:pv444",
+      "make": "Volvo",
+      "model": "PV444",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:pv52",
+      "make": "Volvo",
+      "model": "PV52",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:pv544",
+      "make": "Volvo",
+      "model": "PV544",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:pv60",
+      "make": "Volvo",
+      "model": "PV60",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:pv831",
+      "make": "Volvo",
+      "model": "PV831",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:s40",
+      "make": "Volvo",
+      "model": "S40",
+      "aliases": [
+        "VOLVO S 40"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/s40",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "S40"
+      }
+    },
+    {
+      "key": "volvo:s60",
+      "make": "Volvo",
+      "model": "S60",
+      "aliases": [
+        "ボルボ S60"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/s60",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "S60"
+      }
+    },
+    {
+      "key": "volvo:s60crosscountry",
+      "make": "Volvo",
+      "model": "S60 Cross Country",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:s70",
+      "make": "Volvo",
+      "model": "S70",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:s80",
+      "make": "Volvo",
+      "model": "S80",
+      "aliases": [
+        "ボルボS80"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/s80",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "S80"
+      }
+    },
+    {
+      "key": "volvo:s90",
+      "make": "Volvo",
+      "model": "S90",
+      "aliases": [
+        "S 90",
+        "ボルボ S90"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/s90",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "S90"
+      }
+    },
+    {
+      "key": "volvo:v40",
+      "make": "Volvo",
+      "model": "V40",
+      "aliases": [
+        "Volvo V40",
+        "ボルボV40"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/v40",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "V40"
+      }
+    },
+    {
+      "key": "volvo:v40crosscountry",
+      "make": "Volvo",
+      "model": "V40 Cross Country",
+      "aliases": [
+        "ボルボV40クロスカントリー"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/v40-cross-country",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "V40 Cross Country"
+      }
+    },
+    {
+      "key": "volvo:v50",
+      "make": "Volvo",
+      "model": "V50",
+      "aliases": [],
+      "bodyTypes": [
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/v50",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "V50"
+      }
+    },
+    {
+      "key": "volvo:v60",
+      "make": "Volvo",
+      "model": "V60",
+      "aliases": [
+        "V 60",
+        "ボルボ V60"
+      ],
+      "bodyTypes": [
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/v60",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "V60"
+      }
+    },
+    {
+      "key": "volvo:v60crosscountry",
+      "make": "Volvo",
+      "model": "V60 Cross Country",
+      "aliases": [
+        "V60 CROSS COUNTRY",
+        "ボルボ V60クロスカントリー"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/v60-cross-country",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "V60 Cross Country"
+      }
+    },
+    {
+      "key": "volvo:v70",
+      "make": "Volvo",
+      "model": "V70",
+      "aliases": [
+        "ボルボV70"
+      ],
+      "bodyTypes": [
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/v70",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "V70"
+      }
+    },
+    {
+      "key": "volvo:v70xc",
+      "make": "Volvo",
+      "model": "V70 XC",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": null,
+        "canonicalMake": "Volvo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "volvo:v90",
+      "make": "Volvo",
+      "model": "V90",
+      "aliases": [
+        "ボルボ V90"
+      ],
+      "bodyTypes": [
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/v90",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "V90"
+      }
+    },
+    {
+      "key": "volvo:v90crosscountry",
+      "make": "Volvo",
+      "model": "V90 Cross Country",
+      "aliases": [
+        "V90 CROSS COUNTRY",
+        "V90CROSSCOUNTRY",
+        "ボルボ V90クロスカントリー"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/v90-cross-country",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "V90 Cross Country"
+      }
+    },
+    {
+      "key": "volvo:xc40",
+      "make": "Volvo",
+      "model": "XC40",
+      "aliases": [
+        "Volvo XC40",
+        "X+XC40",
+        "ボルボ XC40"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/xc40",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "XC40"
+      }
+    },
+    {
+      "key": "volvo:xc60",
+      "make": "Volvo",
+      "model": "XC60",
+      "aliases": [
+        "U + XC60",
+        "Volvo XC60",
+        "ボルボ XC60"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/xc60",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "XC60"
+      }
+    },
+    {
+      "key": "volvo:xc70",
+      "make": "Volvo",
+      "model": "XC70",
+      "aliases": [
+        "ボルボXC70"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/xc70",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "XC70"
+      }
+    },
+    {
+      "key": "volvo:xc90",
+      "make": "Volvo",
+      "model": "XC90",
+      "aliases": [
+        "XC 90",
+        "ボルボ XC90"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "volvo",
+        "modelId": "volvo/xc90",
+        "canonicalMake": "Volvo",
+        "canonicalModel": "XC90"
+      }
+    },
+    {
+      "key": "voyah:courage",
+      "make": "Voyah",
+      "model": "Courage",
+      "aliases": [
+        "COURAGE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "voyah",
+        "modelId": "voyah/courage",
+        "canonicalMake": "Voyah",
+        "canonicalModel": "Courage"
+      }
+    },
+    {
+      "key": "voyah:free",
+      "make": "Voyah",
+      "model": "Free",
+      "aliases": [
+        "FREE",
+        "VOYAH FREE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "voyah",
+        "modelId": "voyah/free",
+        "canonicalMake": "Voyah",
+        "canonicalModel": "Free"
+      }
+    },
+    {
+      "key": "wartburg:353",
+      "make": "Wartburg",
+      "model": "353",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "wartburg",
+        "modelId": null,
+        "canonicalMake": "Wartburg",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "wartburg:353w",
+      "make": "Wartburg",
+      "model": "353 W",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "wartburg",
+        "modelId": null,
+        "canonicalMake": "Wartburg",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "wartburg:tourist",
+      "make": "Wartburg",
+      "model": "Tourist",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "wartburg",
+        "modelId": null,
+        "canonicalMake": "Wartburg",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "westfaliamobilgmbh:nugget",
+      "make": "Westfalia Mobil Gmbh",
+      "model": "Nugget",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "westfield:se",
+      "make": "Westfield",
+      "model": "Se",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "westfield:sei",
+      "make": "Westfield",
+      "model": "Sei",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "westfield:seight",
+      "make": "Westfield",
+      "model": "Seight",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "westfield:seiw",
+      "make": "Westfield",
+      "model": "Seiw",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "westfield:seven",
+      "make": "Westfield",
+      "model": "Seven",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "willys:14ton",
+      "make": "Willys",
+      "model": "1/4 Ton",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:475",
+      "make": "Willys",
+      "model": "475",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:77",
+      "make": "Willys",
+      "model": "77",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:cj3b",
+      "make": "Willys",
+      "model": "CJ-3B",
+      "aliases": [
+        "WILLYS CJ-3B"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": "willys/cj-3b",
+        "canonicalMake": "Willys",
+        "canonicalModel": "CJ-3B"
+      }
+    },
+    {
+      "key": "willys:cj5",
+      "make": "Willys",
+      "model": "CJ-5",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:cj2a",
+      "make": "Willys",
+      "model": "CJ2A",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:jeep",
+      "make": "Willys",
+      "model": "Jeep",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:jeepcj5",
+      "make": "Willys",
+      "model": "Jeep Cj 5",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:jeepcj3b",
+      "make": "Willys",
+      "model": "Jeep Cj-3B",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:jeepcj6",
+      "make": "Willys",
+      "model": "Jeep CJ6",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:jeepm38",
+      "make": "Willys",
+      "model": "Jeep M-38",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:jeepmb",
+      "make": "Willys",
+      "model": "Jeep Mb",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:jeepster",
+      "make": "Willys",
+      "model": "Jeepster",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:knight",
+      "make": "Willys",
+      "model": "Knight",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:knight70",
+      "make": "Willys",
+      "model": "Knight 70",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:m38a1",
+      "make": "Willys",
+      "model": "M 38 A1",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:mb",
+      "make": "Willys",
+      "model": "M B",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:mbjeep",
+      "make": "Willys",
+      "model": "M B Jeep",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:m38",
+      "make": "Willys",
+      "model": "M38",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:ma",
+      "make": "Willys",
+      "model": "Ma",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:overland",
+      "make": "Willys",
+      "model": "Overland",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:stationwagon",
+      "make": "Willys",
+      "model": "Station Wagon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:whippet",
+      "make": "Willys",
+      "model": "Whippet",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "willys:willeys",
+      "make": "Willys",
+      "model": "Willeys",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "willys",
+        "modelId": null,
+        "canonicalMake": "Willys",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "wolseley:1100",
+      "make": "Wolseley",
+      "model": "1100",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "wolseley:1300",
+      "make": "Wolseley",
+      "model": "1300",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "wolseley:1300mk",
+      "make": "Wolseley",
+      "model": "1300 Mk",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "wolseley:1500",
+      "make": "Wolseley",
+      "model": "1500",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "wolseley:2200",
+      "make": "Wolseley",
+      "model": "2200",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "wolseley:hornet",
+      "make": "Wolseley",
+      "model": "Hornet",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "wolseley:hornetspecial",
+      "make": "Wolseley",
+      "model": "Hornet Special",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "wolseley:six",
+      "make": "Wolseley",
+      "model": "Six",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "wolseley:wasp",
+      "make": "Wolseley",
+      "model": "Wasp",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "wuling:airev",
+      "make": "Wuling",
+      "model": "Air EV",
+      "aliases": [
+        "五菱 Air ev晴空",
+        "Air ev晴空"
+      ],
+      "bodyTypes": [
+        "City car"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/air-ev",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Air EV"
+      }
+    },
+    {
+      "key": "wuling:asta",
+      "make": "Wuling",
+      "model": "Asta",
+      "aliases": [
+        "Xingchen",
+        "五菱 星辰"
+      ],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/xingchen",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Asta"
+      }
+    },
+    {
+      "key": "wuling:bingo",
+      "make": "Wuling",
+      "model": "Bingo",
+      "aliases": [
+        "五菱 缤果"
+      ],
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": 2024,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/bingo",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Bingo"
+      }
+    },
+    {
+      "key": "wuling:bingoplus",
+      "make": "Wuling",
+      "model": "Bingo Plus",
+      "aliases": [
+        "五菱 缤果PLUS",
+        "五菱 缤果SUV五座版"
+      ],
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/bingo-plus",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Bingo Plus"
+      }
+    },
+    {
+      "key": "wuling:bingopro",
+      "make": "Wuling",
+      "model": "Bingo Pro",
+      "aliases": [
+        "五菱 缤果Pro",
+        "五菱缤果Pro"
+      ],
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/bingo-pro",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Bingo Pro"
+      }
+    },
+    {
+      "key": "wuling:bingos",
+      "make": "Wuling",
+      "model": "Bingo S",
+      "aliases": [
+        "五菱 缤果S",
+        "五菱缤果S"
+      ],
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/bingo-s",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Bingo S"
+      }
+    },
+    {
+      "key": "wuling:hongguang",
+      "make": "Wuling",
+      "model": "Hongguang",
+      "aliases": [
+        "五菱 宏光",
+        "五菱 宏光纯电版",
+        "五菱 宏光增程版"
+      ],
+      "bodyTypes": [
+        "MPV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": 2010,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/hongguang",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Hongguang"
+      }
+    },
+    {
+      "key": "wuling:hongguangminiev",
+      "make": "Wuling",
+      "model": "Hongguang MINI EV",
+      "aliases": [
+        "Hongguang MINIEV",
+        "五菱 宏光MINIEV"
+      ],
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": 2020,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/hongguang-mini-ev",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Hongguang MINI EV"
+      }
+    },
+    {
+      "key": "wuling:hongguangplus",
+      "make": "Wuling",
+      "model": "Hongguang Plus",
+      "aliases": [
+        "五菱 宏光PLUS"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/hongguang-plus",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Hongguang Plus"
+      }
+    },
+    {
+      "key": "wuling:hongguangs",
+      "make": "Wuling",
+      "model": "Hongguang S",
+      "aliases": [
+        "五菱 宏光S"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/hongguang-s",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Hongguang S"
+      }
+    },
+    {
+      "key": "wuling:hongguangs3",
+      "make": "Wuling",
+      "model": "Hongguang S3",
+      "aliases": [
+        "五菱 宏光S3"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/hongguang-s3",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Hongguang S3"
+      }
+    },
+    {
+      "key": "wuling:hongguangv",
+      "make": "Wuling",
+      "model": "Hongguang V",
+      "aliases": [
+        "五菱 宏光V"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/hongguang-v",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Hongguang V"
+      }
+    },
+    {
+      "key": "wuling:jiachen",
+      "make": "Wuling",
+      "model": "Jiachen",
+      "aliases": [
+        "五菱 佳辰"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/jiachen",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Jiachen"
+      }
+    },
+    {
+      "key": "wuling:longka",
+      "make": "Wuling",
+      "model": "Longka",
+      "aliases": [
+        "五菱 龙卡"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/longka",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Longka"
+      }
+    },
+    {
+      "key": "wuling:rongguang",
+      "make": "Wuling",
+      "model": "Rongguang",
+      "aliases": [
+        "五菱 荣光"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/rongguang",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Rongguang"
+      }
+    },
+    {
+      "key": "wuling:rongguangnewpickup",
+      "make": "Wuling",
+      "model": "Rongguang New Pickup",
+      "aliases": [
+        "五菱 荣光新卡"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/rongguang-new-pickup",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Rongguang New Pickup"
+      }
+    },
+    {
+      "key": "wuling:rongguangpickup",
+      "make": "Wuling",
+      "model": "Rongguang Pickup",
+      "aliases": [
+        "五菱 荣光小卡"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/rongguang-pickup",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Rongguang Pickup"
+      }
+    },
+    {
+      "key": "wuling:rongguangs",
+      "make": "Wuling",
+      "model": "Rongguang S",
+      "aliases": [
+        "五菱 荣光S"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/rongguang-s",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Rongguang S"
+      }
+    },
+    {
+      "key": "wuling:star",
+      "make": "Wuling",
+      "model": "Star",
+      "aliases": [
+        "Xingyun",
+        "五菱 星云"
+      ],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/xingyun",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Star"
+      }
+    },
+    {
+      "key": "wuling:starlight",
+      "make": "Wuling",
+      "model": "Starlight",
+      "aliases": [
+        "五菱 星光"
+      ],
+      "bodyTypes": [
+        "Sedan"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/starlight",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Starlight"
+      }
+    },
+    {
+      "key": "wuling:starlight560",
+      "make": "Wuling",
+      "model": "Starlight 560",
+      "aliases": [
+        "五菱 星光560"
+      ],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/starlight-560",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Starlight 560"
+      }
+    },
+    {
+      "key": "wuling:starlight730",
+      "make": "Wuling",
+      "model": "Starlight 730",
+      "aliases": [
+        "五菱 星光730"
+      ],
+      "bodyTypes": [
+        "MPV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/starlight-730",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Starlight 730"
+      }
+    },
+    {
+      "key": "wuling:starlightl",
+      "make": "Wuling",
+      "model": "Starlight L",
+      "aliases": [
+        "五菱 星光L"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/starlight-l",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Starlight L"
+      }
+    },
+    {
+      "key": "wuling:starlights",
+      "make": "Wuling",
+      "model": "Starlight S",
+      "aliases": [
+        "五菱 星光S"
+      ],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": 2025,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/starlight-s",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Starlight S"
+      }
+    },
+    {
+      "key": "wuling:victory",
+      "make": "Wuling",
+      "model": "Victory",
+      "aliases": [
+        "Kaijie",
+        "五菱 凯捷"
+      ],
+      "bodyTypes": [
+        "MPV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/kaijie",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Victory"
+      }
+    },
+    {
+      "key": "wuling:xingchi",
+      "make": "Wuling",
+      "model": "Xing Chi",
+      "aliases": [
+        "Xingchi",
+        "五菱 星驰"
+      ],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/xingchi",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Xing Chi"
+      }
+    }
+  ]
+}

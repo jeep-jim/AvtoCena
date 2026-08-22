@@ -176,7 +176,7 @@ test("rebuild calculates first and progressively opens detail without exhausting
   assert.match(rebuildScript, /catalog\/source-cursors/);
   assert.match(rebuildScript, /storage\.readJson/);
   assert.match(rebuildScript, /storage\.writeJson/);
-  assert.match(rebuildScript, /offer = normalizeVehicleOfferSpecs\(await enrichOfferWithVehicleKnowledge\(offer\)\)/);
+  assert.match(rebuildScript, /offer = normalizeVehicleOfferSpecs\(await enrichOfferWithKnowledgeCore\(offer\)\)/);
   assert.match(rebuildScript, /calculateSafely\(offer, "calculation_before_detail"\)/);
   assert.match(rebuildScript, /detailLimitPerSource/);
   assert.match(rebuildScript, /reserveDetail/);

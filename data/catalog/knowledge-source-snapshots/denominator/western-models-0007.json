@@ -1,0 +1,3301 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model_western",
+  "chunk": 7,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "maserati:granturismo",
+      "make": "Maserati",
+      "model": "GranTurismo",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "maserati:granturismomodena",
+      "make": "Maserati",
+      "model": "Granturismo Modena",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:granturismotrofeo",
+      "make": "Maserati",
+      "model": "Granturismo Trofeo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:grecale",
+      "make": "Maserati",
+      "model": "Grecale",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "maserati:grecalegt",
+      "make": "Maserati",
+      "model": "Grecale GT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:grecalemodena",
+      "make": "Maserati",
+      "model": "Grecale Modena",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "maserati:grecaletrofeo",
+      "make": "Maserati",
+      "model": "Grecale Trofeo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "maserati:gt2stradale",
+      "make": "Maserati",
+      "model": "GT2 Stradale",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "maserati:levante",
+      "make": "Maserati",
+      "model": "Levante",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:levantegt",
+      "make": "Maserati",
+      "model": "Levante GT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:levantegts",
+      "make": "Maserati",
+      "model": "Levante GTS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "maserati:levantemodena",
+      "make": "Maserati",
+      "model": "Levante Modena",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:levantemodenav8",
+      "make": "Maserati",
+      "model": "Levante Modena V8",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:levantes",
+      "make": "Maserati",
+      "model": "Levante S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "maserati:levantetrofeo",
+      "make": "Maserati",
+      "model": "Levante Trofeo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:mc20",
+      "make": "Maserati",
+      "model": "MC20",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "maserati:mc20spyder",
+      "make": "Maserati",
+      "model": "MC20 Spyder",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "maserati:mcpura",
+      "make": "Maserati",
+      "model": "MCPURA",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "maserati:quattroporte",
+      "make": "Maserati",
+      "model": "Quattroporte",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:quattroportegt",
+      "make": "Maserati",
+      "model": "Quattroporte GT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:quattroportegts",
+      "make": "Maserati",
+      "model": "Quattroporte GTS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "maserati:quattroportemodena",
+      "make": "Maserati",
+      "model": "Quattroporte Modena",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:quattroportemodenaawd",
+      "make": "Maserati",
+      "model": "Quattroporte Modena AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "maserati:quattroportes",
+      "make": "Maserati",
+      "model": "Quattroporte S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "maserati:quattroportesq4",
+      "make": "Maserati",
+      "model": "Quattroporte S Q4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "maserati:quattroportetrofeo",
+      "make": "Maserati",
+      "model": "Quattroporte Trofeo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "mazda:2",
+      "make": "Mazda",
+      "model": "2",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mazda:3",
+      "make": "Mazda",
+      "model": "3",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:6",
+      "make": "Mazda",
+      "model": "6",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mazda:cx3",
+      "make": "Mazda",
+      "model": "CX-3",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "mazda:cx3sil",
+      "make": "Mazda",
+      "model": "CX-3 (SIL)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "mazda:cx34wd",
+      "make": "Mazda",
+      "model": "CX-3 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "mazda:cx30",
+      "make": "Mazda",
+      "model": "CX-30",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx304wd",
+      "make": "Mazda",
+      "model": "CX-30 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx304wdcylinderdeactivation",
+      "make": "Mazda",
+      "model": "CX-30 4WD (Cylinder Deactivation)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mazda:cx30turbo4wd",
+      "make": "Mazda",
+      "model": "CX-30 Turbo 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx5",
+      "make": "Mazda",
+      "model": "CX-5",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx5cylinderdeactivation",
+      "make": "Mazda",
+      "model": "CX-5 (Cylinder Deactivation)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mazda:cx54wd",
+      "make": "Mazda",
+      "model": "CX-5 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "mazda:cx54wdcylinderdeactivation",
+      "make": "Mazda",
+      "model": "CX-5 4WD (Cylinder Deactivation)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "mazda:cx54wdsil",
+      "make": "Mazda",
+      "model": "CX-5 4WD (SIL)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx5turbo4wd",
+      "make": "Mazda",
+      "model": "CX-5 Turbo 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "mazda:cx50",
+      "make": "Mazda",
+      "model": "CX-50",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx504wd",
+      "make": "Mazda",
+      "model": "CX-50 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx50hybrid4wd",
+      "make": "Mazda",
+      "model": "CX-50 Hybrid 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx50turbo4wd",
+      "make": "Mazda",
+      "model": "CX-50 Turbo 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx70",
+      "make": "Mazda",
+      "model": "CX-70",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx704wd",
+      "make": "Mazda",
+      "model": "CX-70 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx704wdhighpower",
+      "make": "Mazda",
+      "model": "CX-70 4WD (High Power)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx70phev4wd",
+      "make": "Mazda",
+      "model": "CX-70 PHEV 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx70scphev4wd",
+      "make": "Mazda",
+      "model": "CX-70 SC PHEV 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx9",
+      "make": "Mazda",
+      "model": "CX-9",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mazda:cx94wd",
+      "make": "Mazda",
+      "model": "CX-9 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mazda:cx90",
+      "make": "Mazda",
+      "model": "CX-90",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx904wd",
+      "make": "Mazda",
+      "model": "CX-90 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx904wdhighpower",
+      "make": "Mazda",
+      "model": "CX-90 4WD (High Power)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:cx90phev4wd",
+      "make": "Mazda",
+      "model": "CX-90 PHEV 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:mazda34door",
+      "make": "Mazda",
+      "model": "Mazda3 4-Door",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:mazda34doorcylinderdeactivation",
+      "make": "Mazda",
+      "model": "Mazda3 4-Door (Cylinder Deactivation)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mazda:mazda34doorsil",
+      "make": "Mazda",
+      "model": "Mazda3 4-Door (SIL)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mazda:mazda34door4wd",
+      "make": "Mazda",
+      "model": "Mazda3 4-Door 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:mazda34doorturbo4wd",
+      "make": "Mazda",
+      "model": "Mazda3 4-Door Turbo 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:mazda35door",
+      "make": "Mazda",
+      "model": "Mazda3 5-Door",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:mazda35doorsil",
+      "make": "Mazda",
+      "model": "Mazda3 5-Door (SIL)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:mazda35door4wd",
+      "make": "Mazda",
+      "model": "Mazda3 5-Door 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:mazda35doorturbo4wd",
+      "make": "Mazda",
+      "model": "Mazda3 5-Door Turbo 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:mazda6",
+      "make": "Mazda",
+      "model": "Mazda6",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mazda:mazda6turbo",
+      "make": "Mazda",
+      "model": "Mazda6 Turbo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mazda:mx30",
+      "make": "Mazda",
+      "model": "MX-30",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "mazda:mx5",
+      "make": "Mazda",
+      "model": "MX-5",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mazda:mx5sil",
+      "make": "Mazda",
+      "model": "MX-5 (SIL)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mclarenautomotive:570scoupe",
+      "make": "McLaren Automotive",
+      "model": "570S Coupe",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mclarenautomotive:570sspider",
+      "make": "McLaren Automotive",
+      "model": "570S Spider",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mclarenautomotive:600ltspider",
+      "make": "McLaren Automotive",
+      "model": "600LT Spider",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mclarenautomotive:620rcoupe",
+      "make": "McLaren Automotive",
+      "model": "620R Coupe",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mclarenautomotive:720scoupe",
+      "make": "McLaren Automotive",
+      "model": "720S Coupe",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "mclarenautomotive:720sspider",
+      "make": "McLaren Automotive",
+      "model": "720S Spider",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "mclarenautomotive:765ltcoupe",
+      "make": "McLaren Automotive",
+      "model": "765LT Coupe",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "mclarenautomotive:765ltspider",
+      "make": "McLaren Automotive",
+      "model": "765LT Spider",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "mclarenautomotive:artura",
+      "make": "McLaren Automotive",
+      "model": "Artura",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "mclarenautomotive:elva",
+      "make": "McLaren Automotive",
+      "model": "Elva",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "mclarenautomotive:gt",
+      "make": "McLaren Automotive",
+      "model": "GT",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "mclarenautomotive:sabre",
+      "make": "McLaren Automotive",
+      "model": "Sabre",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mclarenautomotive:speedtail",
+      "make": "McLaren Automotive",
+      "model": "Speedtail",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:a2204matic",
+      "make": "Mercedes-Benz",
+      "model": "A 220 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:a2204maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "A 220 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "mercedesbenz:a2504matichatch",
+      "make": "Mercedes-Benz",
+      "model": "A 250 4MATIC Hatch",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "mercedesbenz:aclass",
+      "make": "Mercedes-Benz",
+      "model": "A-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "mercedesbenz:amga354matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG A 35 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amga354matichatch",
+      "make": "Mercedes-Benz",
+      "model": "AMG A 35 4MATIC Hatch",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "mercedesbenz:amga354maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG A 35 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "mercedesbenz:amgc434matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 43 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amgc434maticcabriolet",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 43 4MATIC Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:amgc434maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 43 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:amgc434maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 43 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amgc434maticwagon",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 43 4MATIC Wagon",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amgc63",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 63",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amgc63s",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 63 S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amgc63scabriolet",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 63 S Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amgc63scoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 63 S Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amgc63seperformance",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 63 S E Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "mercedesbenz:amgc63ssedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 63 S Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amgc63sedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG C 63 Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amgcla354matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLA 35 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amgcla354maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLA 35 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amgcla454matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLA 45 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amgcla454maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLA 45 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:amgcla45s4maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLA 45 S 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amgcle534maticcabriolet",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLE 53 4MATIC+ Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amgcle534maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLE 53 4MATIC+ Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amgcls534matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLS 53 4MATIC+",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amgcls534maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG CLS 53 4MATIC+ Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:amge534matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 4MATIC+",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amge534maticcabriolet",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 4MATIC+ Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:amge534maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 4MATIC+ Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:amge534maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 4MATIC+ Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:amge534maticwagon",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 4MATIC+ Wagon",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amge53hybrid",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:amge53hybridsedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 HYBRID Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amge53hybridwagon",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 53 HYBRID Wagon",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amge634maticallterrainwagon",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 63 4MATIC+ All-Terrain Wagon",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:amge63s4matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 63 S 4MATIC+",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amge63s4maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 63 S 4MATIC+ Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:amge63s4maticwagon",
+      "make": "Mercedes-Benz",
+      "model": "AMG E 63 S 4MATIC+ Wagon",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amgeqe4maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG EQE 4MATIC+ Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:amgeqe4maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG EQE 4MATIC+ SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:amgeqs4maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG EQS 4MATIC+ Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:amgg63",
+      "make": "Mercedes-Benz",
+      "model": "AMG G 63",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amgg634x4squared",
+      "make": "Mercedes-Benz",
+      "model": "AMG G 63 4x4 Squared",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "mercedesbenz:amgg634x4squaredsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG G 63 4x4 Squared SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "mercedesbenz:amgg63suv",
+      "make": "Mercedes-Benz",
+      "model": "AMG G 63 SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggla354maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLA 35 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggla354maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLA 35 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:amggla454maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLA 45 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:amgglb354maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLB 35 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:amgglb354maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLB 35 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:amgglb35suv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLB 35 SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amgglc434matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 43 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amgglc434maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 43 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amgglc434maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 43 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amgglc63s4matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 63 S 4MATIC+",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amgglc63s4maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 63 S 4MATIC+ Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amgglc63s4maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 63 S 4MATIC+ SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amgglc63seperformancecoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 63 S E PERFORMANCE Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amgglc63seperformancesuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLC 63 S E PERFORMANCE SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggle534matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLE 53 4MATIC+",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amggle534maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLE 53 4MATIC+ Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggle534maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLE 53 4MATIC+ SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggle63s4maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLE 63 S 4MATIC+ Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggle63s4maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLE 63 S 4MATIC+ SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggls634maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "AMG GLS 63 4MATIC+ SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggt",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "mercedesbenz:amggt43coupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 43 Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggt534matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 53 4MATIC+",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:amggt534matic4doorcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 53 4MATIC+ 4-Door Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggt534maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 53 4MATIC+ Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:amggt554maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 55 4MATIC+ Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggt634matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 4MATIC+",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:amggt634matic4doorcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 4MATIC+ 4-Door Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggt634maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 4MATIC+ Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggt63pro4maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 PRO 4MATIC+ Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggt63s4matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 S 4MATIC+",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amggt63s4maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 S 4MATIC+ Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:amggt63seperformance",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 S E Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:amggt63seperformance4doorcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT 63 S E PERFORMANCE 4-Door Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amggtblackseriescoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT Black Series Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amggtccoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT C Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amggtcroadster",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT C Roadster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amggtrcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT R Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amggtrroadster",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT R Roadster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amgs634matic",
+      "make": "Mercedes-Benz",
+      "model": "AMG S 63 4MATIC+",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amgs634maticcabriolet",
+      "make": "Mercedes-Benz",
+      "model": "AMG S 63 4MATIC+ Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amgs634maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "AMG S 63 4MATIC+ Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:amgs63eperformance",
+      "make": "Mercedes-Benz",
+      "model": "AMG S 63 E Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:amgs63eperformancesedan",
+      "make": "Mercedes-Benz",
+      "model": "AMG S 63 E PERFORMANCE Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amgs65",
+      "make": "Mercedes-Benz",
+      "model": "AMG S 65",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:amgsl434maticroadster",
+      "make": "Mercedes-Benz",
+      "model": "AMG SL 43 4MATIC Roadster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amgsl554maticroadster",
+      "make": "Mercedes-Benz",
+      "model": "AMG SL 55 4MATIC+ Roadster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amgsl634maticroadster",
+      "make": "Mercedes-Benz",
+      "model": "AMG SL 63 4MATIC+ Roadster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:amgslc43",
+      "make": "Mercedes-Benz",
+      "model": "AMG SLC 43",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:c3004matic",
+      "make": "Mercedes-Benz",
+      "model": "C 300 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:c3004maticcabriolet",
+      "make": "Mercedes-Benz",
+      "model": "C 300 4MATIC Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:c3004maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "C 300 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:c3004maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "C 300 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:c3004maticwagon",
+      "make": "Mercedes-Benz",
+      "model": "C 300 4MATIC Wagon",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "mercedesbenz:c300sedan",
+      "make": "Mercedes-Benz",
+      "model": "C 300 Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:cclass",
+      "make": "Mercedes-Benz",
+      "model": "C-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "mercedesbenz:cla2504matic",
+      "make": "Mercedes-Benz",
+      "model": "CLA 250 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:cla2504maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "CLA 250 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:cla250coupe",
+      "make": "Mercedes-Benz",
+      "model": "CLA 250 Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:cla3504maticwitheqtechnology",
+      "make": "Mercedes-Benz",
+      "model": "CLA 350 4MATIC with EQ Technology",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:claclass",
+      "make": "Mercedes-Benz",
+      "model": "CLA-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "mercedesbenz:cle3004maticcabriolet",
+      "make": "Mercedes-Benz",
+      "model": "CLE 300 4MATIC Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:cle3004maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "CLE 300 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:cle4504maticcabriolet",
+      "make": "Mercedes-Benz",
+      "model": "CLE 450 4MATIC Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:cle4504maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "CLE 450 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:cleclass",
+      "make": "Mercedes-Benz",
+      "model": "CLE-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2027
+    },
+    {
+      "key": "mercedesbenz:cls4504matic",
+      "make": "Mercedes-Benz",
+      "model": "CLS 450 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:cls4504maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "CLS 450 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:clsclass",
+      "make": "Mercedes-Benz",
+      "model": "CLS-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:e3504matic",
+      "make": "Mercedes-Benz",
+      "model": "E 350 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:e3504maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "E 350 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:e4504matic",
+      "make": "Mercedes-Benz",
+      "model": "E 450 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:e4504maticallterrainwagon",
+      "make": "Mercedes-Benz",
+      "model": "E 450 4MATIC All-Terrain Wagon",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:e4504maticcabriolet",
+      "make": "Mercedes-Benz",
+      "model": "E 450 4MATIC Cabriolet",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:e4504maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "E 450 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:e4504maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "E 450 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:e4504maticwagon",
+      "make": "Mercedes-Benz",
+      "model": "E 450 4MATIC Wagon",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:eclass",
+      "make": "Mercedes-Benz",
+      "model": "E-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "mercedesbenz:eqb",
+      "make": "Mercedes-Benz",
+      "model": "EQB",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:eqb250",
+      "make": "Mercedes-Benz",
+      "model": "EQB 250+",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:eqb3004matic",
+      "make": "Mercedes-Benz",
+      "model": "EQB 300 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:eqb3504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQB 350 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "mercedesbenz:eqe",
+      "make": "Mercedes-Benz",
+      "model": "EQE",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2027
+    },
+    {
+      "key": "mercedesbenz:eqe3204maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "EQE 320 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:eqe3204maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQE 320 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:eqe3504maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "EQE 350 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:eqe3504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQE 350 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:eqe5004maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "EQE 500 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:eqe5004maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQE 500 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:eqs",
+      "make": "Mercedes-Benz",
+      "model": "EQS",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2027
+    },
+    {
+      "key": "mercedesbenz:eqs4004maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQS 400 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:eqs4504maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "EQS 450 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:eqs4504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQS 450 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:eqs5504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQS 550 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:eqs5804maticsedan",
+      "make": "Mercedes-Benz",
+      "model": "EQS 580 4MATIC Sedan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:eqs5804maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "EQS 580 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:g550",
+      "make": "Mercedes-Benz",
+      "model": "G 550",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:g550suv",
+      "make": "Mercedes-Benz",
+      "model": "G 550 SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:g580witheqtechnology",
+      "make": "Mercedes-Benz",
+      "model": "G 580 with EQ Technology",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:gclass",
+      "make": "Mercedes-Benz",
+      "model": "G-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "mercedesbenz:gla2504matic",
+      "make": "Mercedes-Benz",
+      "model": "GLA 250 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:gla2504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLA 250 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:gla250suv",
+      "make": "Mercedes-Benz",
+      "model": "GLA 250 SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:glaclass",
+      "make": "Mercedes-Benz",
+      "model": "GLA-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:glb2504matic",
+      "make": "Mercedes-Benz",
+      "model": "GLB 250 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:glb2504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLB 250 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:glb250suv",
+      "make": "Mercedes-Benz",
+      "model": "GLB 250 SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:glbclass",
+      "make": "Mercedes-Benz",
+      "model": "GLB-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:glc3004matic",
+      "make": "Mercedes-Benz",
+      "model": "GLC 300 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:glc3004maticcoupe",
+      "make": "Mercedes-Benz",
+      "model": "GLC 300 4MATIC Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:glc3004maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLC 300 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:glc350e4matic",
+      "make": "Mercedes-Benz",
+      "model": "GLC 350e 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:glc350e4maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLC 350e 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:glc63seperformancecoupe",
+      "make": "Mercedes-Benz",
+      "model": "GLC 63 S E Performance Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:glc63seperformancesuv",
+      "make": "Mercedes-Benz",
+      "model": "GLC 63 S E Performance SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "mercedesbenz:glcclass",
+      "make": "Mercedes-Benz",
+      "model": "GLC-Class",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "mercedesbenz:gle3504matic",
+      "make": "Mercedes-Benz",
+      "model": "GLE 350 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "mercedesbenz:gle3504maticsuv",
+      "make": "Mercedes-Benz",
+      "model": "GLE 350 4MATIC SUV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "mercedesbenz:gle4504matic",
+      "make": "Mercedes-Benz",
+      "model": "GLE 450 4MATIC",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    }
+  ]
+}

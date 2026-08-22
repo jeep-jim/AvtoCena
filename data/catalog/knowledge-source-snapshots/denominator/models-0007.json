@@ -1,0 +1,8291 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 7,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "ferrari:mondialt",
+      "make": "Ferrari",
+      "model": "Mondial T",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ferrari:monza",
+      "make": "Ferrari",
+      "model": "Monza",
+      "aliases": [
+        "MONZA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/monza",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "Monza"
+      }
+    },
+    {
+      "key": "ferrari:monzasp1",
+      "make": "Ferrari",
+      "model": "Monza SP1",
+      "aliases": [
+        "MONZA SP1"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/monza-sp1",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "Monza SP1"
+      }
+    },
+    {
+      "key": "ferrari:portofino",
+      "make": "Ferrari",
+      "model": "Portofino",
+      "aliases": [
+        "PORTOFINO"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/portofino",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "Portofino"
+      }
+    },
+    {
+      "key": "ferrari:portofinom",
+      "make": "Ferrari",
+      "model": "Portofino M",
+      "aliases": [
+        "FERRARI PORTOFINO M",
+        "PORTOFINO M",
+        "PORTOFINO M / /"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/portofino-m",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "Portofino M"
+      }
+    },
+    {
+      "key": "ferrari:purosangue",
+      "make": "Ferrari",
+      "model": "Purosangue",
+      "aliases": [
+        "FERRARI PUROSANGUE",
+        "PUROSANGUE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/purosangue",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "Purosangue"
+      }
+    },
+    {
+      "key": "ferrari:roma",
+      "make": "Ferrari",
+      "model": "Roma",
+      "aliases": [
+        "Ferrari Roma",
+        "FERRARI ROMA",
+        "ROMA"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/roma",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "Roma"
+      }
+    },
+    {
+      "key": "ferrari:romaspider",
+      "make": "Ferrari",
+      "model": "Roma Spider",
+      "aliases": [
+        "FERRARI ROMA SPIDER",
+        "ROMA SPIDER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "lu",
+        "nl",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/roma-spider",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "Roma Spider"
+      }
+    },
+    {
+      "key": "ferrari:sf90",
+      "make": "Ferrari",
+      "model": "SF90",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "gb",
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/sf90",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "SF90"
+      }
+    },
+    {
+      "key": "ferrari:sf90spider",
+      "make": "Ferrari",
+      "model": "SF90 Spider",
+      "aliases": [
+        "SF 90 SPIDER",
+        "SF90 SPIDER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/sf90-spider",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "SF90 Spider"
+      }
+    },
+    {
+      "key": "ferrari:sf90stradale",
+      "make": "Ferrari",
+      "model": "SF90 Stradale",
+      "aliases": [
+        "SF 90 STRADALE",
+        "SF90 STRADALE",
+        "SF90 STRADALE /"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/sf90-stradale",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "SF90 Stradale"
+      }
+    },
+    {
+      "key": "ferrari:sf90xxspider",
+      "make": "Ferrari",
+      "model": "SF90 XX Spider",
+      "aliases": [
+        "SF 90 XX SPIDER",
+        "SF90 XX SPIDER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/sf90-xx-spider",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "SF90 XX Spider"
+      }
+    },
+    {
+      "key": "ferrari:sf90xxstradale",
+      "make": "Ferrari",
+      "model": "SF90 XX Stradale",
+      "aliases": [
+        "SF 90 XX STRADALE",
+        "SF90 XX STRADALE"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "nl",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": "ferrari/sf90-xx-stradale",
+        "canonicalMake": "Ferrari",
+        "canonicalModel": "SF90 XX Stradale"
+      }
+    },
+    {
+      "key": "ferrari:testarossa",
+      "make": "Ferrari",
+      "model": "Testa Rossa",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "modelId": null,
+        "canonicalMake": "Ferrari",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:102",
+      "make": "Fiat",
+      "model": "102",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:1100",
+      "make": "Fiat",
+      "model": "1100",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:1200",
+      "make": "Fiat",
+      "model": "1200",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:124",
+      "make": "Fiat",
+      "model": "124",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:124spider",
+      "make": "Fiat",
+      "model": "124 Spider",
+      "aliases": [
+        "124 SPIDER",
+        "FIAT 124 SPIDER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/124-spider",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "124 Spider"
+      }
+    },
+    {
+      "key": "fiat:124sportspider",
+      "make": "Fiat",
+      "model": "124 Sport Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:125",
+      "make": "Fiat",
+      "model": "125",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:126",
+      "make": "Fiat",
+      "model": "126",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:127",
+      "make": "Fiat",
+      "model": "127",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:128",
+      "make": "Fiat",
+      "model": "128",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:130",
+      "make": "Fiat",
+      "model": "130",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:1300",
+      "make": "Fiat",
+      "model": "1300",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:131",
+      "make": "Fiat",
+      "model": "131",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:132",
+      "make": "Fiat",
+      "model": "132",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:133",
+      "make": "Fiat",
+      "model": "133",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:1500",
+      "make": "Fiat",
+      "model": "1500",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:1600",
+      "make": "Fiat",
+      "model": "1600",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "lu",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:220l",
+      "make": "Fiat",
+      "model": "220L",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:230",
+      "make": "Fiat",
+      "model": "230",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:230l",
+      "make": "Fiat",
+      "model": "230 L",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:2300",
+      "make": "Fiat",
+      "model": "2300",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:250",
+      "make": "Fiat",
+      "model": "250",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:280",
+      "make": "Fiat",
+      "model": "280",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:290",
+      "make": "Fiat",
+      "model": "290",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:290l",
+      "make": "Fiat",
+      "model": "290L",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:290naj",
+      "make": "Fiat",
+      "model": "290NAJ",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:500",
+      "make": "Fiat",
+      "model": "500",
+      "aliases": [
+        "500, 500C",
+        "500C",
+        "500C ABARTH",
+        "Fiat 500"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/500",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "500"
+      }
+    },
+    {
+      "key": "fiat:500abarth",
+      "make": "Fiat",
+      "model": "500 Abarth",
+      "aliases": [
+        "500 ABARTH"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/500-abarth",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "500 Abarth"
+      }
+    },
+    {
+      "key": "fiat:500e",
+      "make": "Fiat",
+      "model": "500 E",
+      "aliases": [
+        "500 / E /",
+        "500E",
+        "FIAT 500E"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/500-e",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "500 E"
+      }
+    },
+    {
+      "key": "fiat:500l",
+      "make": "Fiat",
+      "model": "500 L",
+      "aliases": [
+        "500L",
+        "FIAT 500 L",
+        "FIAT 500L"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/500-l",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "500 L"
+      }
+    },
+    {
+      "key": "fiat:500x",
+      "make": "Fiat",
+      "model": "500 X",
+      "aliases": [
+        "500X"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/500-x",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "500 X"
+      }
+    },
+    {
+      "key": "fiat:501",
+      "make": "Fiat",
+      "model": "501",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:508",
+      "make": "Fiat",
+      "model": "508",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:509",
+      "make": "Fiat",
+      "model": "509",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:514",
+      "make": "Fiat",
+      "model": "514",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:520",
+      "make": "Fiat",
+      "model": "520",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:600",
+      "make": "Fiat",
+      "model": "600",
+      "aliases": [
+        "FIAT 600"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/600",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "600"
+      }
+    },
+    {
+      "key": "fiat:600e",
+      "make": "Fiat",
+      "model": "600 E",
+      "aliases": [
+        "600E"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/600-e",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "600 E"
+      }
+    },
+    {
+      "key": "fiat:600multipla",
+      "make": "Fiat",
+      "model": "600 Multipla",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:640",
+      "make": "Fiat",
+      "model": "640",
+      "aliases": [
+        "640 SB"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/640",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "640"
+      }
+    },
+    {
+      "key": "fiat:650",
+      "make": "Fiat",
+      "model": "650",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:850",
+      "make": "Fiat",
+      "model": "850",
+      "aliases": [
+        "850 SPECIAL"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/850",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "850"
+      }
+    },
+    {
+      "key": "fiat:900",
+      "make": "Fiat",
+      "model": "900",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:a5421",
+      "make": "Fiat",
+      "model": "A 5421",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:a5880",
+      "make": "Fiat",
+      "model": "A5880",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:a5881",
+      "make": "Fiat",
+      "model": "A5881",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:abarth124spider",
+      "make": "Fiat",
+      "model": "Abarth 124 Spider",
+      "aliases": [
+        "ABARTH 124 SPIDER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "my",
+        "nl"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/abarth-124-spider",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Abarth 124 Spider"
+      }
+    },
+    {
+      "key": "fiat:abarth500",
+      "make": "Fiat",
+      "model": "Abarth 500",
+      "aliases": [
+        "ABARTH 500",
+        "FIAT ABARTH 500"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/abarth-500",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Abarth 500"
+      }
+    },
+    {
+      "key": "fiat:abarth595",
+      "make": "Fiat",
+      "model": "Abarth 595",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:abarth695",
+      "make": "Fiat",
+      "model": "Abarth 695",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:adriamobil",
+      "make": "Fiat",
+      "model": "Adria Mobil",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:adriatwin",
+      "make": "Fiat",
+      "model": "Adria Twin",
+      "aliases": [
+        "ADRIA TWIN 600SPB"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/adria-twin",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Adria Twin"
+      }
+    },
+    {
+      "key": "fiat:adriawin",
+      "make": "Fiat",
+      "model": "Adria Win",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:adriatik",
+      "make": "Fiat",
+      "model": "Adriatik",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:albea",
+      "make": "Fiat",
+      "model": "Albea",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:argenta",
+      "make": "Fiat",
+      "model": "Argenta",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:arto",
+      "make": "Fiat",
+      "model": "Arto",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:autoroller",
+      "make": "Fiat",
+      "model": "Auto-Roller",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:b504",
+      "make": "Fiat",
+      "model": "B 504",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:b514",
+      "make": "Fiat",
+      "model": "B 514",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:b524",
+      "make": "Fiat",
+      "model": "B 524",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:b544",
+      "make": "Fiat",
+      "model": "B544",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:b644",
+      "make": "Fiat",
+      "model": "B644",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:b654",
+      "make": "Fiat",
+      "model": "B654",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:barchetta",
+      "make": "Fiat",
+      "model": "Barchetta",
+      "aliases": [],
+      "bodyTypes": [
+        "roadster"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:benimar",
+      "make": "Fiat",
+      "model": "Benimar",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:berlinetta",
+      "make": "Fiat",
+      "model": "Berlinetta",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:bertone",
+      "make": "Fiat",
+      "model": "Bertone",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:brava",
+      "make": "Fiat",
+      "model": "Brava",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:bravo",
+      "make": "Fiat",
+      "model": "Bravo",
+      "aliases": [
+        "FIAT BRAVO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/bravo",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Bravo"
+      }
+    },
+    {
+      "key": "fiat:burstner",
+      "make": "Fiat",
+      "model": "Burstner",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:capron",
+      "make": "Fiat",
+      "model": "Capron",
+      "aliases": [
+        "CAPRON"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/capron",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Capron"
+      }
+    },
+    {
+      "key": "fiat:chausson",
+      "make": "Fiat",
+      "model": "Chausson",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:chaussonwelcome95",
+      "make": "Fiat",
+      "model": "Chausson Welcome 95",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:cinquecento",
+      "make": "Fiat",
+      "model": "Cinquecento",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:clevervans",
+      "make": "Fiat",
+      "model": "Clever Vans",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:coral",
+      "make": "Fiat",
+      "model": "Coral",
+      "aliases": [
+        "CORAL XL 670SL"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/coral",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Coral"
+      }
+    },
+    {
+      "key": "fiat:coupe",
+      "make": "Fiat",
+      "model": "Coupe",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:croma",
+      "make": "Fiat",
+      "model": "Croma",
+      "aliases": [
+        "FIAT CROMA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/croma",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Croma"
+      }
+    },
+    {
+      "key": "fiat:cs544k",
+      "make": "Fiat",
+      "model": "Cs 544K",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:dethleffs",
+      "make": "Fiat",
+      "model": "Dethleffs",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:deutschefiat",
+      "make": "Fiat",
+      "model": "Deutsche Fiat",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:dino",
+      "make": "Fiat",
+      "model": "Dino",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:doblò",
+      "make": "Fiat",
+      "model": "Doblò",
+      "aliases": [
+        "DOBLO",
+        "DOBLO / 1.2",
+        "DOBLO / 1.5",
+        "DOBLO 16",
+        "DOBLO 16 MULTIJET",
+        "DOBLO CARGO / 16 / MULTIJET",
+        "DOBLO CARGO / 16 / MULTIJET HEA 150",
+        "DOBLO OLMEDO HR",
+        "DOBLO TRIPOD",
+        "DOBLO' CLEAR VIEW",
+        "E-DOBLO",
+        "FIAT DOBLO",
+        "FIAT DOBLO'- OLMEDO TRIPOD",
+        "FIAT DOBLO'-OLMEDO SPA",
+        "FIAT E-DOBLÒ",
+        "ドブロ"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/doblo",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Doblò"
+      }
+    },
+    {
+      "key": "fiat:ducato",
+      "make": "Fiat",
+      "model": "Ducato",
+      "aliases": [
+        "DUCATO",
+        "DUCATO / COMBINATO 2.2 / JTD",
+        "DUCATO / PANORAMA 2.2 / JTD",
+        "DUCATO 30 COMBI MULTIJET II",
+        "DUCATO AUTOSTAR",
+        "DUCATO HOBBY",
+        "DUCATO KRONOS 295M",
+        "DUCATO SKY",
+        "DUCATO TWIN ARM",
+        "FIAT DUCATO",
+        "FIAT DUCATO - OLMEDO",
+        "FIAT DUCATO F",
+        "FIAT DUCATO PANORAMA",
+        "FIAT DUCATO-OLMEDO SPA",
+        "FIAT Professional Ducato",
+        "New Ducato"
+      ],
+      "bodyTypes": [
+        "Van"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/ducato",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Ducato"
+      }
+    },
+    {
+      "key": "fiat:elnagh",
+      "make": "Fiat",
+      "model": "Elnagh",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:elnaghp250",
+      "make": "Fiat",
+      "model": "Elnagh P250",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:euramobil",
+      "make": "Fiat",
+      "model": "Eura Mobil",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:euramobilsport",
+      "make": "Fiat",
+      "model": "Eura Mobil Sport",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:fiorino",
+      "make": "Fiat",
+      "model": "Fiorino",
+      "aliases": [
+        "FIAT FIORINO",
+        "FIORINO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/fiorino",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Fiorino"
+      }
+    },
+    {
+      "key": "fiat:flair6700",
+      "make": "Fiat",
+      "model": "Flair 6700",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:flash",
+      "make": "Fiat",
+      "model": "Flash",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:freemont",
+      "make": "Fiat",
+      "model": "Freemont",
+      "aliases": [
+        "FREEMONT"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/freemont",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Freemont"
+      }
+    },
+    {
+      "key": "fiat:ft",
+      "make": "Fiat",
+      "model": "Ft",
+      "aliases": [
+        "FT 599 HB"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/ft",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Ft"
+      }
+    },
+    {
+      "key": "fiat:globetrotter",
+      "make": "Fiat",
+      "model": "Globetrotter",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:grandepanda",
+      "make": "Fiat",
+      "model": "Grande Panda",
+      "aliases": [
+        "GRANDE PANDA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/grande-panda",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Grande Panda"
+      }
+    },
+    {
+      "key": "fiat:grandepunto",
+      "make": "Fiat",
+      "model": "Grande Punto",
+      "aliases": [
+        "GRANDE PUNTO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/grande-punto",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Grande Punto"
+      }
+    },
+    {
+      "key": "fiat:granducagarage",
+      "make": "Fiat",
+      "model": "Granduca Garage",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:heku",
+      "make": "Fiat",
+      "model": "Heku",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:hobby600",
+      "make": "Fiat",
+      "model": "Hobby 600",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:hymer",
+      "make": "Fiat",
+      "model": "Hymer",
+      "aliases": [
+        "HYMER T CL 698"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/hymer",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Hymer"
+      }
+    },
+    {
+      "key": "fiat:hymerb584",
+      "make": "Fiat",
+      "model": "Hymer B 584",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:hymerb544",
+      "make": "Fiat",
+      "model": "Hymer B544",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:hymercamp544",
+      "make": "Fiat",
+      "model": "Hymer Camp 544",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:idea",
+      "make": "Fiat",
+      "model": "Idea",
+      "aliases": [
+        "FIAT IDEA"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/idea",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Idea"
+      }
+    },
+    {
+      "key": "fiat:joint",
+      "make": "Fiat",
+      "model": "Joint",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:knaus",
+      "make": "Fiat",
+      "model": "Knaus",
+      "aliases": [
+        "KNAUS R07",
+        "KNAUS R11"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/knaus",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Knaus"
+      }
+    },
+    {
+      "key": "fiat:lanciamusa",
+      "make": "Fiat",
+      "model": "Lancia Musa",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:lanciaypsilon",
+      "make": "Fiat",
+      "model": "Lancia Ypsilon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:liberty",
+      "make": "Fiat",
+      "model": "Liberty",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:linea",
+      "make": "Fiat",
+      "model": "Linea",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:lmcliberty",
+      "make": "Fiat",
+      "model": "Lmc Liberty",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:lmcliberty6900i",
+      "make": "Fiat",
+      "model": "Lmc Liberty 6900I",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:m150",
+      "make": "Fiat",
+      "model": "M150",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:marea",
+      "make": "Fiat",
+      "model": "Marea",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:mclouis",
+      "make": "Fiat",
+      "model": "Mclouis",
+      "aliases": [
+        "MCLOUIS MC4 879",
+        "MCLOUIS MENFYS 3",
+        "MCLOUIS MENFYS 3 MAXI",
+        "MCLOUIS NEVIS 879"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/mclouis",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Mclouis"
+      }
+    },
+    {
+      "key": "fiat:multipla",
+      "make": "Fiat",
+      "model": "Multipla",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:p006",
+      "make": "Fiat",
+      "model": "P006",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:p210",
+      "make": "Fiat",
+      "model": "P210",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:p700",
+      "make": "Fiat",
+      "model": "P700",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:p740gj",
+      "make": "Fiat",
+      "model": "P740GJ",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:palioweekend",
+      "make": "Fiat",
+      "model": "Palio Weekend",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:panda",
+      "make": "Fiat",
+      "model": "Panda",
+      "aliases": [
+        "FIAT PANDA",
+        "PANDA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/panda",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Panda"
+      }
+    },
+    {
+      "key": "fiat:punto",
+      "make": "Fiat",
+      "model": "Punto",
+      "aliases": [
+        "FIAT PUNTO",
+        "PUNTO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/punto",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Punto"
+      }
+    },
+    {
+      "key": "fiat:puntoabarth",
+      "make": "Fiat",
+      "model": "Punto Abarth",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:qubo",
+      "make": "Fiat",
+      "model": "Qubo",
+      "aliases": [
+        "QUBO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/qubo",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Qubo"
+      }
+    },
+    {
+      "key": "fiat:r02r08",
+      "make": "Fiat",
+      "model": "R02/R08",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:r07",
+      "make": "Fiat",
+      "model": "R07",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/r07",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "R07"
+      }
+    },
+    {
+      "key": "fiat:r47",
+      "make": "Fiat",
+      "model": "R47",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/r47",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "R47"
+      }
+    },
+    {
+      "key": "fiat:rapido",
+      "make": "Fiat",
+      "model": "Rapido",
+      "aliases": [
+        "RAPIDO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/rapido",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Rapido"
+      }
+    },
+    {
+      "key": "fiat:rapido709f",
+      "make": "Fiat",
+      "model": "Rapido 709F",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:rapido9095df",
+      "make": "Fiat",
+      "model": "Rapido 9095DF",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:regata",
+      "make": "Fiat",
+      "model": "Regata",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:rimor",
+      "make": "Fiat",
+      "model": "Rimor",
+      "aliases": [
+        "RIMOR"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/rimor",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Rimor"
+      }
+    },
+    {
+      "key": "fiat:ritmo",
+      "make": "Fiat",
+      "model": "Ritmo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:rivieragt",
+      "make": "Fiat",
+      "model": "Riviera GT",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:s6",
+      "make": "Fiat",
+      "model": "S6",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:scudo",
+      "make": "Fiat",
+      "model": "Scudo",
+      "aliases": [
+        "FIAT SCUDO",
+        "SCUDO"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/scudo",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Scudo"
+      }
+    },
+    {
+      "key": "fiat:sea",
+      "make": "Fiat",
+      "model": "Sea",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:sedici",
+      "make": "Fiat",
+      "model": "Sedici",
+      "aliases": [
+        "FIAT SEDICI",
+        "SEDICI"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/sedici",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Sedici"
+      }
+    },
+    {
+      "key": "fiat:seicento",
+      "make": "Fiat",
+      "model": "Seicento",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:spider",
+      "make": "Fiat",
+      "model": "Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:stilo",
+      "make": "Fiat",
+      "model": "Stilo",
+      "aliases": [
+        "FIAT STILO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/stilo",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Stilo"
+      }
+    },
+    {
+      "key": "fiat:strada",
+      "make": "Fiat",
+      "model": "Strada",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:swift",
+      "make": "Fiat",
+      "model": "Swift",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:t615",
+      "make": "Fiat",
+      "model": "T 615",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:t585",
+      "make": "Fiat",
+      "model": "T585",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:talento",
+      "make": "Fiat",
+      "model": "Talento",
+      "aliases": [
+        "FIAT TALENTO",
+        "FIAT TALENTO ENAIRE",
+        "TALENTO",
+        "TALENTO LOUNGE MULTIJET II",
+        "Talento MY2020"
+      ],
+      "bodyTypes": [
+        "Van"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/talento",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Talento"
+      }
+    },
+    {
+      "key": "fiat:tempra",
+      "make": "Fiat",
+      "model": "Tempra",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:tipo",
+      "make": "Fiat",
+      "model": "Tipo",
+      "aliases": [
+        "FIAT TIPO",
+        "TIPO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/tipo",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Tipo"
+      }
+    },
+    {
+      "key": "fiat:triganofi1",
+      "make": "Fiat",
+      "model": "Trigano FI1",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:ulysse",
+      "make": "Fiat",
+      "model": "Ulysse",
+      "aliases": [
+        "FIAT ULYSSE",
+        "ULYSSE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/ulysse",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Ulysse"
+      }
+    },
+    {
+      "key": "fiat:uno",
+      "make": "Fiat",
+      "model": "Uno",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:weinsberg",
+      "make": "Fiat",
+      "model": "Weinsberg",
+      "aliases": [
+        "WEINSBERG R47"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": "fiat/weinsberg",
+        "canonicalMake": "Fiat",
+        "canonicalModel": "Weinsberg"
+      }
+    },
+    {
+      "key": "fiat:welcome",
+      "make": "Fiat",
+      "model": "Welcome",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fiat:x19",
+      "make": "Fiat",
+      "model": "X1/9",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "modelId": null,
+        "canonicalMake": "Fiat",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fisker:karma",
+      "make": "Fisker",
+      "model": "Karma",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fisker",
+        "modelId": null,
+        "canonicalMake": "Fisker",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fisker:ocean",
+      "make": "Fisker",
+      "model": "Ocean",
+      "aliases": [
+        "OCEAN"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "fi",
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fisker",
+        "modelId": "fisker/ocean",
+        "canonicalMake": "Fisker",
+        "canonicalModel": "Ocean"
+      }
+    },
+    {
+      "key": "fisker:oceanextremeone",
+      "make": "Fisker",
+      "model": "Ocean Extreme/One",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fisker",
+        "modelId": null,
+        "canonicalMake": "Fisker",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fisker:oceanone",
+      "make": "Fisker",
+      "model": "Ocean One",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fisker",
+        "modelId": null,
+        "canonicalMake": "Fisker",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "fleetwood:revolution",
+      "make": "Fleetwood",
+      "model": "Revolution",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fontvendome:autocamp",
+      "make": "Font Vendome",
+      "model": "Autocamp",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fontvendome:randovan",
+      "make": "Font Vendome",
+      "model": "Rando Van",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ford:12m",
+      "make": "Ford",
+      "model": "12M",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:1300",
+      "make": "Ford",
+      "model": "1300",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:150",
+      "make": "Ford",
+      "model": "150",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:15m",
+      "make": "Ford",
+      "model": "15M",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:17m",
+      "make": "Ford",
+      "model": "17 M",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:18",
+      "make": "Ford",
+      "model": "18",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:1935",
+      "make": "Ford",
+      "model": "1935",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:20m",
+      "make": "Ford",
+      "model": "20 M",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:26m",
+      "make": "Ford",
+      "model": "26M",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:40",
+      "make": "Ford",
+      "model": "40",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:48",
+      "make": "Ford",
+      "model": "48",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:5window",
+      "make": "Ford",
+      "model": "5 Window",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:500",
+      "make": "Ford",
+      "model": "500",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:55es",
+      "make": "Ford",
+      "model": "55 Es",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:68",
+      "make": "Ford",
+      "model": "68",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:69a",
+      "make": "Ford",
+      "model": "69A",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:78",
+      "make": "Ford",
+      "model": "78",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:91a",
+      "make": "Ford",
+      "model": "91A",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:a",
+      "make": "Ford",
+      "model": "A",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:aa",
+      "make": "Ford",
+      "model": "Aa",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:aerostar",
+      "make": "Ford",
+      "model": "Aerostar",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:anglia",
+      "make": "Ford",
+      "model": "Anglia",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:arf50p3",
+      "make": "Ford",
+      "model": "ARF50P3",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:aspire",
+      "make": "Ford",
+      "model": "Aspire",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:b",
+      "make": "Ford",
+      "model": "B",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:bmax",
+      "make": "Ford",
+      "model": "B-Max",
+      "aliases": [
+        "B-MAX"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/b-max",
+        "canonicalMake": "Ford",
+        "canonicalModel": "B-Max"
+      }
+    },
+    {
+      "key": "ford:benimar",
+      "make": "Ford",
+      "model": "Benimar",
+      "aliases": [
+        "BENIMAR TESSORO T483"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/benimar",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Benimar"
+      }
+    },
+    {
+      "key": "ford:bronco",
+      "make": "Ford",
+      "model": "Bronco",
+      "aliases": [
+        "BRONCO",
+        "FORD BRONCO"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/bronco",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Bronco"
+      }
+    },
+    {
+      "key": "ford:broncosport",
+      "make": "Ford",
+      "model": "Bronco Sport",
+      "aliases": [
+        "BRONCO SPORT",
+        "FORD BRONCO SPORT"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/bronco-sport",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Bronco Sport"
+      }
+    },
+    {
+      "key": "ford:c",
+      "make": "Ford",
+      "model": "C",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:cmax",
+      "make": "Ford",
+      "model": "C-Max",
+      "aliases": [
+        "C-MAX"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/c-max",
+        "canonicalMake": "Ford",
+        "canonicalModel": "C-Max"
+      }
+    },
+    {
+      "key": "ford:capri",
+      "make": "Ford",
+      "model": "Capri",
+      "aliases": [
+        "CAPRI"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/capri",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Capri"
+      }
+    },
+    {
+      "key": "ford:chausson",
+      "make": "Ford",
+      "model": "Chausson",
+      "aliases": [
+        "CHAUSSON 757 AUTO",
+        "CHAUSSON TITANIUM 767GA AUTO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/chausson",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Chausson"
+      }
+    },
+    {
+      "key": "ford:clenet",
+      "make": "Ford",
+      "model": "Clenet",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:club",
+      "make": "Ford",
+      "model": "Club",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:cobra",
+      "make": "Ford",
+      "model": "Cobra",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:comet",
+      "make": "Ford",
+      "model": "Comet",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:consul",
+      "make": "Ford",
+      "model": "Consul",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:consul315",
+      "make": "Ford",
+      "model": "Consul 315",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:contour",
+      "make": "Ford",
+      "model": "Contour",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:corsair",
+      "make": "Ford",
+      "model": "Corsair",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:cortina",
+      "make": "Ford",
+      "model": "Cortina",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:cougar",
+      "make": "Ford",
+      "model": "Cougar",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:country",
+      "make": "Ford",
+      "model": "Country",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:countrysquire",
+      "make": "Ford",
+      "model": "Country Squire",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:courier",
+      "make": "Ford",
+      "model": "Courier",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:crestline",
+      "make": "Ford",
+      "model": "Crestline",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:crown",
+      "make": "Ford",
+      "model": "Crown",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:crownvictoria",
+      "make": "Ford",
+      "model": "Crown Victoria",
+      "aliases": [
+        "FORD CROWN VICTORIA"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/crown-victoria",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Crown Victoria"
+      }
+    },
+    {
+      "key": "ford:custom",
+      "make": "Ford",
+      "model": "Custom",
+      "aliases": [
+        "CUSTOM"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/custom",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Custom"
+      }
+    },
+    {
+      "key": "ford:custom300",
+      "make": "Ford",
+      "model": "Custom 300",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:customline",
+      "make": "Ford",
+      "model": "Custom Line",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:deluxe",
+      "make": "Ford",
+      "model": "De Luxe",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:deluxev8",
+      "make": "Ford",
+      "model": "Deluxe V8",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:e350",
+      "make": "Ford",
+      "model": "E-350",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:e150",
+      "make": "Ford",
+      "model": "E150",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:econoline",
+      "make": "Ford",
+      "model": "Econoline",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:econovan",
+      "make": "Ford",
+      "model": "Econovan",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:ecosport",
+      "make": "Ford",
+      "model": "EcoSport",
+      "aliases": [
+        "Ford EcoSport"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/ecosport",
+        "canonicalMake": "Ford",
+        "canonicalModel": "EcoSport"
+      }
+    },
+    {
+      "key": "ford:eddehs120",
+      "make": "Ford",
+      "model": "Eddehs 120",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:edge",
+      "make": "Ford",
+      "model": "Edge",
+      "aliases": [
+        "EDGE",
+        "FORD EDGE"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/edge",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Edge"
+      }
+    },
+    {
+      "key": "ford:edsel",
+      "make": "Ford",
+      "model": "Edsel",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:eifel",
+      "make": "Ford",
+      "model": "Eifel",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:elite",
+      "make": "Ford",
+      "model": "Elite",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:escape",
+      "make": "Ford",
+      "model": "Escape",
+      "aliases": [
+        "Ford Escape"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/escape",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Escape"
+      }
+    },
+    {
+      "key": "ford:escort",
+      "make": "Ford",
+      "model": "Escort",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:escortcosworth",
+      "make": "Ford",
+      "model": "Escort Cosworth",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:euramobil",
+      "make": "Ford",
+      "model": "Eura Mobil",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:everest",
+      "make": "Ford",
+      "model": "Everest",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:excursion",
+      "make": "Ford",
+      "model": "Excursion",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:executive",
+      "make": "Ford",
+      "model": "Executive",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:exp",
+      "make": "Ford",
+      "model": "Exp",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": null,
+        "canonicalMake": "Ford",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "ford:expedition",
+      "make": "Ford",
+      "model": "Expedition",
+      "aliases": [
+        "EXPEDITION"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "modelId": "ford/expedition",
+        "canonicalMake": "Ford",
+        "canonicalModel": "Expedition"
+      }
+    }
+  ]
+}

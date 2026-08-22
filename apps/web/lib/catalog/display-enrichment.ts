@@ -2,11 +2,11 @@ import { applyEncyclopediaDisplayIdentity } from "./display-identity";
 import { applyActiveBusinessPricing } from "./live-business-pricing";
 import type { VehicleOffer } from "./types";
 import {
-  enrichOfferWithVehicleKnowledge,
   findVehicleModel,
   readVehicleKnowledgeVariants,
   vehicleKnowledgeToken,
 } from "./vehicle-knowledge";
+import { enrichOfferWithKnowledgeCore } from "./knowledge-core";
 
 function meaningful(value: unknown) {
   const text = String(value || "").trim();
@@ -55,7 +55,7 @@ function inferDrive(text: string) {
 }
 
 export async function enrichOfferForDisplay<T extends VehicleOffer>(input: T): Promise<T> {
-  const enriched = await enrichOfferWithVehicleKnowledge(input);
+  const enriched = await enrichOfferWithKnowledgeCore(input);
   const match = await findVehicleModel(enriched);
   const year = Number(enriched.year || 0);
   const variants = match

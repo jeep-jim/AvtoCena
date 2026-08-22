@@ -1,0 +1,7767 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 15,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "morris:14ton",
+      "make": "Morris",
+      "model": "1/4 Ton",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:10",
+      "make": "Morris",
+      "model": "10",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:1000",
+      "make": "Morris",
+      "model": "1000",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:1000traveller",
+      "make": "Morris",
+      "model": "1000 Traveller",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:1100",
+      "make": "Morris",
+      "model": "1100",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:1100mk",
+      "make": "Morris",
+      "model": "1100 Mk",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:1300",
+      "make": "Morris",
+      "model": "1300",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:1300gt",
+      "make": "Morris",
+      "model": "1300 GT",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:1800",
+      "make": "Morris",
+      "model": "1800",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:1800mkii",
+      "make": "Morris",
+      "model": "1800 Mkii",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:2200",
+      "make": "Morris",
+      "model": "2200",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:8seriese",
+      "make": "Morris",
+      "model": "8 Series E",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:850",
+      "make": "Morris",
+      "model": "850",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:8cwt",
+      "make": "Morris",
+      "model": "8CWT",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:clubman",
+      "make": "Morris",
+      "model": "Clubman",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:cooper",
+      "make": "Morris",
+      "model": "Cooper",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:coopers",
+      "make": "Morris",
+      "model": "Cooper S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:cowley",
+      "make": "Morris",
+      "model": "Cowley",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:cowleysix",
+      "make": "Morris",
+      "model": "Cowley Six",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:eight",
+      "make": "Morris",
+      "model": "Eight",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:eightseries",
+      "make": "Morris",
+      "model": "Eight Series",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:eightseriesi",
+      "make": "Morris",
+      "model": "Eight Series I",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:isis",
+      "make": "Morris",
+      "model": "Isis",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:ital",
+      "make": "Morris",
+      "model": "Ital",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:m8",
+      "make": "Morris",
+      "model": "M8",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:marina",
+      "make": "Morris",
+      "model": "Marina",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:mini",
+      "make": "Morris",
+      "model": "Mini",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:mini1000",
+      "make": "Morris",
+      "model": "Mini 1000",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:mini1000mk",
+      "make": "Morris",
+      "model": "Mini 1000 Mk",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:mini1275gt",
+      "make": "Morris",
+      "model": "Mini 1275GT",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:mini850",
+      "make": "Morris",
+      "model": "Mini 850",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:mini850l",
+      "make": "Morris",
+      "model": "Mini 850 L",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:miniauto",
+      "make": "Morris",
+      "model": "Mini Auto",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:miniclubman",
+      "make": "Morris",
+      "model": "Mini Clubman",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:minicooper",
+      "make": "Morris",
+      "model": "Mini Cooper",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:minicoopers",
+      "make": "Morris",
+      "model": "Mini Cooper S",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:miniminor",
+      "make": "Morris",
+      "model": "Mini Minor",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:minimk2",
+      "make": "Morris",
+      "model": "Mini Mk 2",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:minimoke",
+      "make": "Morris",
+      "model": "Mini Moke",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:minispecial",
+      "make": "Morris",
+      "model": "Mini Special",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:minor",
+      "make": "Morris",
+      "model": "Minor",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:minor1000",
+      "make": "Morris",
+      "model": "Minor 1000",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:minor1000traveller",
+      "make": "Morris",
+      "model": "Minor 1000 Traveller",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:minor8",
+      "make": "Morris",
+      "model": "Minor 8",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:minorseries",
+      "make": "Morris",
+      "model": "Minor Series",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:minortraveller",
+      "make": "Morris",
+      "model": "Minor Traveller",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:minorvan",
+      "make": "Morris",
+      "model": "Minor Van",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:mm8",
+      "make": "Morris",
+      "model": "MM8",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:moke",
+      "make": "Morris",
+      "model": "Moke",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:oxford",
+      "make": "Morris",
+      "model": "Oxford",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:oxfordseries",
+      "make": "Morris",
+      "model": "Oxford Series",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:ten",
+      "make": "Morris",
+      "model": "Ten",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "morris:tourer",
+      "make": "Morris",
+      "model": "Tourer",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "moskvich:408",
+      "make": "Moskvich",
+      "model": "408",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "moskvich:412",
+      "make": "Moskvich",
+      "model": "412",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nash:450",
+      "make": "Nash",
+      "model": "450",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nash:600",
+      "make": "Nash",
+      "model": "600",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nash:ambassador",
+      "make": "Nash",
+      "model": "Ambassador",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nash:ambassadorsix",
+      "make": "Nash",
+      "model": "Ambassador Six",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nash:ambassadorsuper",
+      "make": "Nash",
+      "model": "Ambassador Super",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nash:lafayette",
+      "make": "Nash",
+      "model": "Lafayette",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nash:metropolitan",
+      "make": "Nash",
+      "model": "Metropolitan",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nash:metropolitan1500",
+      "make": "Nash",
+      "model": "Metropolitan 1500",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nash:rambler",
+      "make": "Nash",
+      "model": "Rambler",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nash:standardsix",
+      "make": "Nash",
+      "model": "Standard Six",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nash:statesmansuper",
+      "make": "Nash",
+      "model": "Statesman Super",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "neta:v",
+      "make": "Neta",
+      "model": "V",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "neta",
+        "modelId": null,
+        "canonicalMake": "Neta",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "neta:vii",
+      "make": "Neta",
+      "model": "V-II",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "neta",
+        "modelId": null,
+        "canonicalMake": "Neta",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "neta:x",
+      "make": "Neta",
+      "model": "X",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "neta",
+        "modelId": null,
+        "canonicalMake": "Neta",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nilsson:hearse3d",
+      "make": "Nilsson",
+      "model": "Hearse 3D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nilsson:hearse5d",
+      "make": "Nilsson",
+      "model": "Hearse 5D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nilsson:s80",
+      "make": "Nilsson",
+      "model": "S80",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nilsson:volvos80",
+      "make": "Nilsson",
+      "model": "Volvo S 80",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nilsson:volvos80hearse",
+      "make": "Nilsson",
+      "model": "Volvo S80 Hearse",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nio:el6",
+      "make": "Nio",
+      "model": "EL6",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nio",
+        "modelId": "nio/el6",
+        "canonicalMake": "Nio",
+        "canonicalModel": "EL6"
+      }
+    },
+    {
+      "key": "nio:el7",
+      "make": "Nio",
+      "model": "EL7",
+      "aliases": [
+        "EL7"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "nio",
+        "modelId": "nio/el7",
+        "canonicalMake": "Nio",
+        "canonicalModel": "EL7"
+      }
+    },
+    {
+      "key": "nio:el8",
+      "make": "Nio",
+      "model": "EL8",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nio",
+        "modelId": "nio/el8",
+        "canonicalMake": "Nio",
+        "canonicalModel": "EL8"
+      }
+    },
+    {
+      "key": "nio:es8",
+      "make": "Nio",
+      "model": "ES8",
+      "aliases": [
+        "ES8",
+        "ES8.EL8"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "nio",
+        "modelId": "nio/es8",
+        "canonicalMake": "Nio",
+        "canonicalModel": "ES8"
+      }
+    },
+    {
+      "key": "nio:et5",
+      "make": "Nio",
+      "model": "ET5",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nio",
+        "modelId": "nio/et5",
+        "canonicalMake": "Nio",
+        "canonicalModel": "ET5"
+      }
+    },
+    {
+      "key": "nio:et7",
+      "make": "Nio",
+      "model": "ET7",
+      "aliases": [
+        "ET7 / /",
+        "NIO ET7"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nio",
+        "modelId": "nio/et7",
+        "canonicalMake": "Nio",
+        "canonicalModel": "ET7"
+      }
+    },
+    {
+      "key": "nio:firefly",
+      "make": "Nio",
+      "model": "Firefly",
+      "aliases": [
+        "FIREFLY"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nio",
+        "modelId": "nio/firefly",
+        "canonicalMake": "Nio",
+        "canonicalModel": "Firefly"
+      }
+    },
+    {
+      "key": "nissan:100",
+      "make": "Nissan",
+      "model": "100",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:100nx",
+      "make": "Nissan",
+      "model": "100NX",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:180sx",
+      "make": "Nissan",
+      "model": "180SX",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:200",
+      "make": "Nissan",
+      "model": "200",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:200sx",
+      "make": "Nissan",
+      "model": "200SX",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:240",
+      "make": "Nissan",
+      "model": "240",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:2402",
+      "make": "Nissan",
+      "model": "2402",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:240sx",
+      "make": "Nissan",
+      "model": "240SX",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:240z",
+      "make": "Nissan",
+      "model": "240Z",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:280",
+      "make": "Nissan",
+      "model": "280",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:300",
+      "make": "Nissan",
+      "model": "300",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:300zx",
+      "make": "Nissan",
+      "model": "300ZX",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:350",
+      "make": "Nissan",
+      "model": "350",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:350z",
+      "make": "Nissan",
+      "model": "350 Z",
+      "aliases": [
+        "350Z",
+        "NISSAN 350 Z"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/350-z",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "350 Z"
+      }
+    },
+    {
+      "key": "nissan:370",
+      "make": "Nissan",
+      "model": "370",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:370z",
+      "make": "Nissan",
+      "model": "370 Z",
+      "aliases": [
+        "370Z",
+        "NISSAN 370Z"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/370-z",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "370 Z"
+      }
+    },
+    {
+      "key": "nissan:720",
+      "make": "Nissan",
+      "model": "720",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:almera",
+      "make": "Nissan",
+      "model": "Almera",
+      "aliases": [
+        "Nissan Almera"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/almera",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Almera"
+      }
+    },
+    {
+      "key": "nissan:almeraclassic",
+      "make": "Nissan",
+      "model": "Almera Classic",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:almeratino",
+      "make": "Nissan",
+      "model": "Almera Tino",
+      "aliases": [],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:altima",
+      "make": "Nissan",
+      "model": "Altima",
+      "aliases": [
+        "ALTIMA"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/altima",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Altima"
+      }
+    },
+    {
+      "key": "nissan:ariya",
+      "make": "Nissan",
+      "model": "Ariya",
+      "aliases": [
+        "ARIYA",
+        "ARIYA / /",
+        "NISSAN ARIYA"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/ariya",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Ariya"
+      }
+    },
+    {
+      "key": "nissan:armada",
+      "make": "Nissan",
+      "model": "Armada",
+      "aliases": [
+        "ARMADA"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/armada",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Armada"
+      }
+    },
+    {
+      "key": "nissan:aura",
+      "make": "Nissan",
+      "model": "AURA",
+      "aliases": [
+        "オーラ",
+        "ノート オーラ"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/aura",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "AURA"
+      }
+    },
+    {
+      "key": "nissan:avenir",
+      "make": "Nissan",
+      "model": "Avenir",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:axxess",
+      "make": "Nissan",
+      "model": "Axxess",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:be1",
+      "make": "Nissan",
+      "model": "Be-1",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nl"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:bluebird",
+      "make": "Nissan",
+      "model": "Bluebird",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:bolero",
+      "make": "Nissan",
+      "model": "Bolero",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:caravan",
+      "make": "Nissan",
+      "model": "CARAVAN",
+      "aliases": [
+        "キャラバン",
+        "NV350 キャラバン"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/caravan",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "CARAVAN"
+      }
+    },
+    {
+      "key": "nissan:cedric",
+      "make": "Nissan",
+      "model": "Cedric",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:cefiro",
+      "make": "Nissan",
+      "model": "Cefiro",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:cherry",
+      "make": "Nissan",
+      "model": "Cherry",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:cima",
+      "make": "Nissan",
+      "model": "CIMA",
+      "aliases": [
+        "シーマ"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/cima",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "CIMA"
+      }
+    },
+    {
+      "key": "nissan:clipperrio",
+      "make": "Nissan",
+      "model": "CLIPPER RIO",
+      "aliases": [
+        "クリッパーリオ"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/clipper-rio",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "CLIPPER RIO"
+      }
+    },
+    {
+      "key": "nissan:cube",
+      "make": "Nissan",
+      "model": "CUBE",
+      "aliases": [
+        "キューブ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/cube",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "CUBE"
+      }
+    },
+    {
+      "key": "nissan:dayz",
+      "make": "Nissan",
+      "model": "DAYZ",
+      "aliases": [
+        "DAYZ",
+        "デイズ"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/dayz",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "DAYZ"
+      }
+    },
+    {
+      "key": "nissan:dayzroox",
+      "make": "Nissan",
+      "model": "DAYZ ROOX",
+      "aliases": [
+        "デイズ ルークス"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/dayz-roox",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "DAYZ ROOX"
+      }
+    },
+    {
+      "key": "nissan:dualis",
+      "make": "Nissan",
+      "model": "Dualis",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:elgrand",
+      "make": "Nissan",
+      "model": "ELGRAND",
+      "aliases": [
+        "エルグランド"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/elgrand",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "ELGRAND"
+      }
+    },
+    {
+      "key": "nissan:fairlady",
+      "make": "Nissan",
+      "model": "Fairlady",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:fairladyz",
+      "make": "Nissan",
+      "model": "Fairlady Z",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:figaro",
+      "make": "Nissan",
+      "model": "Figaro",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:frontier",
+      "make": "Nissan",
+      "model": "Frontier",
+      "aliases": [
+        "FRONTIER"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "my",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/frontier",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Frontier"
+      }
+    },
+    {
+      "key": "nissan:fuga",
+      "make": "Nissan",
+      "model": "FUGA",
+      "aliases": [
+        "フーガ"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/fuga",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "FUGA"
+      }
+    },
+    {
+      "key": "nissan:gloria",
+      "make": "Nissan",
+      "model": "Gloria",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:gtr",
+      "make": "Nissan",
+      "model": "GT-R",
+      "aliases": [
+        "GT-R"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/gt-r",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "GT-R"
+      }
+    },
+    {
+      "key": "nissan:infiniti",
+      "make": "Nissan",
+      "model": "Infiniti",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:juke",
+      "make": "Nissan",
+      "model": "Juke",
+      "aliases": [
+        "Nissan Juke",
+        "ジューク"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/juke",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Juke"
+      }
+    },
+    {
+      "key": "nissan:kicks",
+      "make": "Nissan",
+      "model": "Kicks",
+      "aliases": [
+        "KICKS",
+        "キックス"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/kicks",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Kicks"
+      }
+    },
+    {
+      "key": "nissan:kubistar",
+      "make": "Nissan",
+      "model": "Kubistar",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:lafesta",
+      "make": "Nissan",
+      "model": "Lafesta",
+      "aliases": [
+        "ラフェスタ ハイウェイスター",
+        "ラフェスタ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/lafesta",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Lafesta"
+      }
+    },
+    {
+      "key": "nissan:langley",
+      "make": "Nissan",
+      "model": "Langley",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:latio",
+      "make": "Nissan",
+      "model": "Latio",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:laurel",
+      "make": "Nissan",
+      "model": "Laurel",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:leaf",
+      "make": "Nissan",
+      "model": "LEAF",
+      "aliases": [
+        "Leaf"
+      ],
+      "bodyTypes": [
+        "Hatchback",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": 2017,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/leaf",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "LEAF"
+      }
+    },
+    {
+      "key": "nissan:leopard",
+      "make": "Nissan",
+      "model": "Leopard",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:march",
+      "make": "Nissan",
+      "model": "March",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "my",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:maxima",
+      "make": "Nissan",
+      "model": "Maxima",
+      "aliases": [
+        "MAXIMA"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/maxima",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Maxima"
+      }
+    },
+    {
+      "key": "nissan:micra",
+      "make": "Nissan",
+      "model": "Micra",
+      "aliases": [
+        "MICRA",
+        "NISSAN MICRA",
+        "Nissan Micra"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/micra",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Micra"
+      }
+    },
+    {
+      "key": "nissan:mistral",
+      "make": "Nissan",
+      "model": "Mistral",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:mitsuoka",
+      "make": "Nissan",
+      "model": "Mitsuoka",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:moco",
+      "make": "Nissan",
+      "model": "MOCO",
+      "aliases": [
+        "モコ"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/moco",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "MOCO"
+      }
+    },
+    {
+      "key": "nissan:murano",
+      "make": "Nissan",
+      "model": "Murano",
+      "aliases": [
+        "MURANO"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/murano",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Murano"
+      }
+    },
+    {
+      "key": "nissan:navara",
+      "make": "Nissan",
+      "model": "Navara",
+      "aliases": [
+        "NISSAN NAVARA"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/navara",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Navara"
+      }
+    },
+    {
+      "key": "nissan:note",
+      "make": "Nissan",
+      "model": "Note",
+      "aliases": [
+        "ノート",
+        "NOTE"
+      ],
+      "bodyTypes": [
+        "Hatchback",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": 2005,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/note",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Note"
+      }
+    },
+    {
+      "key": "nissan:nv100clipperrio",
+      "make": "Nissan",
+      "model": "NV100 Clipper Rio",
+      "aliases": [
+        "NV100クリッパー リオ"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/nv100-clipper-rio",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "NV100 Clipper Rio"
+      }
+    },
+    {
+      "key": "nissan:nv200",
+      "make": "Nissan",
+      "model": "NV200",
+      "aliases": [
+        "E NV200",
+        "E-NV200 ACENTA",
+        "E-NV200 EVALIA",
+        "E-NV200 VISIA",
+        "NISSAN E-NV200",
+        "NV200",
+        "NV200 バネット"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/nv200",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "NV200"
+      }
+    },
+    {
+      "key": "nissan:nv300",
+      "make": "Nissan",
+      "model": "NV300",
+      "aliases": [
+        "NISSAN NV300",
+        "NISSAN NV300-X82",
+        "NV300",
+        "NV300 TEKNA DCI"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/nv300",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "NV300"
+      }
+    },
+    {
+      "key": "nissan:nx",
+      "make": "Nissan",
+      "model": "NX",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:pao",
+      "make": "Nissan",
+      "model": "Pao",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:pathfinder",
+      "make": "Nissan",
+      "model": "Pathfinder",
+      "aliases": [
+        "NISSAN PATHFINDER",
+        "PATHFINDER"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/pathfinder",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Pathfinder"
+      }
+    },
+    {
+      "key": "nissan:patrol",
+      "make": "Nissan",
+      "model": "Patrol",
+      "aliases": [
+        "PATROL",
+        "Safari"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/patrol",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Patrol"
+      }
+    },
+    {
+      "key": "nissan:patrolgr",
+      "make": "Nissan",
+      "model": "Patrol Gr",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:pixo",
+      "make": "Nissan",
+      "model": "Pixo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:prairie",
+      "make": "Nissan",
+      "model": "Prairie",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:presage",
+      "make": "Nissan",
+      "model": "Presage",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz"
+      ],
+      "regions": [
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:presea",
+      "make": "Nissan",
+      "model": "Presea",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:president",
+      "make": "Nissan",
+      "model": "President",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:primastar",
+      "make": "Nissan",
+      "model": "Primastar",
+      "aliases": [
+        "NISSAN PRIMASTAR",
+        "PRIMASTAR"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/primastar",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Primastar"
+      }
+    },
+    {
+      "key": "nissan:primera",
+      "make": "Nissan",
+      "model": "Primera",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:pulsar",
+      "make": "Nissan",
+      "model": "Pulsar",
+      "aliases": [
+        "NISSAN PULSAR",
+        "PULSAR"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/pulsar",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Pulsar"
+      }
+    },
+    {
+      "key": "nissan:pulsarnx",
+      "make": "Nissan",
+      "model": "Pulsar NX",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:qashqai",
+      "make": "Nissan",
+      "model": "Qashqai",
+      "aliases": [
+        "NISSAN QASHQAI",
+        "QASHQAI"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/qashqai",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Qashqai"
+      }
+    },
+    {
+      "key": "nissan:quest",
+      "make": "Nissan",
+      "model": "Quest",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:rasheen",
+      "make": "Nissan",
+      "model": "Rasheen",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:rogue",
+      "make": "Nissan",
+      "model": "Rogue",
+      "aliases": [
+        "ROGUE"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/rogue",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Rogue"
+      }
+    },
+    {
+      "key": "nissan:roguesport",
+      "make": "Nissan",
+      "model": "Rogue Sport",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:roox",
+      "make": "Nissan",
+      "model": "ROOX",
+      "aliases": [
+        "ROOX"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/roox",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "ROOX"
+      }
+    },
+    {
+      "key": "nissan:scargo",
+      "make": "Nissan",
+      "model": "S-Cargo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:safari",
+      "make": "Nissan",
+      "model": "Safari",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:sakura",
+      "make": "Nissan",
+      "model": "Sakura",
+      "aliases": [
+        "SAKURA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/sakura",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Sakura"
+      }
+    },
+    {
+      "key": "nissan:sentra",
+      "make": "Nissan",
+      "model": "Sentra",
+      "aliases": [
+        "SENTRA"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/sentra",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Sentra"
+      }
+    },
+    {
+      "key": "nissan:serena",
+      "make": "Nissan",
+      "model": "SERENA",
+      "aliases": [
+        "セレナ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/serena",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "SERENA"
+      }
+    },
+    {
+      "key": "nissan:silvia",
+      "make": "Nissan",
+      "model": "Silvia",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:skyline",
+      "make": "Nissan",
+      "model": "SKYLINE",
+      "aliases": [
+        "スカイライン"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/skyline",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "SKYLINE"
+      }
+    },
+    {
+      "key": "nissan:skylinegtr",
+      "make": "Nissan",
+      "model": "Skyline GT R",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "my",
+        "nl"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:stagea",
+      "make": "Nissan",
+      "model": "Stagea",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:stanza",
+      "make": "Nissan",
+      "model": "Stanza",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:sunny",
+      "make": "Nissan",
+      "model": "Sunny",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:sylphy",
+      "make": "Nissan",
+      "model": "SYLPHY",
+      "aliases": [
+        "シルフィ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/sylphy",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "SYLPHY"
+      }
+    },
+    {
+      "key": "nissan:teana",
+      "make": "Nissan",
+      "model": "TEANA",
+      "aliases": [
+        "ティアナ"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/teana",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "TEANA"
+      }
+    },
+    {
+      "key": "nissan:terra",
+      "make": "Nissan",
+      "model": "Terra",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:terrano",
+      "make": "Nissan",
+      "model": "Terrano",
+      "aliases": [
+        "TERRANO"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/terrano",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Terrano"
+      }
+    },
+    {
+      "key": "nissan:tiida",
+      "make": "Nissan",
+      "model": "Tiida",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:tino",
+      "make": "Nissan",
+      "model": "Tino",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:titan",
+      "make": "Nissan",
+      "model": "Titan",
+      "aliases": [
+        "TITAN"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/titan",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Titan"
+      }
+    },
+    {
+      "key": "nissan:townstar",
+      "make": "Nissan",
+      "model": "Townstar",
+      "aliases": [
+        "TOWNSTAR"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/townstar",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Townstar"
+      }
+    },
+    {
+      "key": "nissan:truck",
+      "make": "Nissan",
+      "model": "Truck",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:urvan",
+      "make": "Nissan",
+      "model": "Urvan",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:vanette",
+      "make": "Nissan",
+      "model": "Vanette",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:versa",
+      "make": "Nissan",
+      "model": "Versa",
+      "aliases": [
+        "VERSA"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/versa",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Versa"
+      }
+    },
+    {
+      "key": "nissan:versanote",
+      "make": "Nissan",
+      "model": "Versa Note",
+      "aliases": [
+        "VERSA NOTE"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/versa-note",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Versa Note"
+      }
+    },
+    {
+      "key": "nissan:wingroad",
+      "make": "Nissan",
+      "model": "WINGROAD",
+      "aliases": [
+        "ウイングロード",
+        "ウィングロード"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/wingroad",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "WINGROAD"
+      }
+    },
+    {
+      "key": "nissan:xtrail",
+      "make": "Nissan",
+      "model": "X-Trail",
+      "aliases": [
+        "NISSAN X-TRAIL",
+        "X TRAIL",
+        "エクストレイル"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/x-trail",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "X-Trail"
+      }
+    },
+    {
+      "key": "nissan:xterra",
+      "make": "Nissan",
+      "model": "Xterra",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": null,
+        "canonicalMake": "Nissan",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "nissan:z",
+      "make": "Nissan",
+      "model": "Z",
+      "aliases": [
+        "NISSAN Z",
+        "フェアレディZ",
+        "Fairlady Z"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "nissan",
+        "modelId": "nissan/z",
+        "canonicalMake": "Nissan",
+        "canonicalModel": "Z"
+      }
+    },
+    {
+      "key": "nordcross:001",
+      "make": "Nordcross",
+      "model": "001",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "nordcross",
+        "modelId": "nordcross/001",
+        "canonicalMake": "Nordcross",
+        "canonicalModel": "001"
+      }
+    },
+    {
+      "key": "nsu:1000",
+      "make": "NSU",
+      "model": "1000",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nsu:110",
+      "make": "NSU",
+      "model": "110",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nsu:1200",
+      "make": "NSU",
+      "model": "1200",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nsu:prinz",
+      "make": "NSU",
+      "model": "Prinz",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nsu:prinz1000",
+      "make": "NSU",
+      "model": "Prinz 1000",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nsu:prinz4",
+      "make": "NSU",
+      "model": "Prinz 4",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nsu:r080",
+      "make": "NSU",
+      "model": "R080",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nsu:r080wankel",
+      "make": "NSU",
+      "model": "R080 Wankel",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nsu:ro80",
+      "make": "NSU",
+      "model": "Ro 80",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "nsu:spider",
+      "make": "NSU",
+      "model": "Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "oakland:34b",
+      "make": "Oakland",
+      "model": "34B",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "oldsmobile:442",
+      "make": "Oldsmobile",
+      "model": "442",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:66",
+      "make": "Oldsmobile",
+      "model": "66",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:88",
+      "make": "Oldsmobile",
+      "model": "88",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:98",
+      "make": "Oldsmobile",
+      "model": "98",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:98regency",
+      "make": "Oldsmobile",
+      "model": "98 Regency",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:achieva",
+      "make": "Oldsmobile",
+      "model": "Achieva",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:alero",
+      "make": "Oldsmobile",
+      "model": "Alero",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:aurora",
+      "make": "Oldsmobile",
+      "model": "Aurora",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:bravada",
+      "make": "Oldsmobile",
+      "model": "Bravada",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:business",
+      "make": "Oldsmobile",
+      "model": "Business",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:cierasl",
+      "make": "Oldsmobile",
+      "model": "Ciera SL",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:cieraslwagon",
+      "make": "Oldsmobile",
+      "model": "Ciera SL Wagon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:club",
+      "make": "Oldsmobile",
+      "model": "Club",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:customcruiser",
+      "make": "Oldsmobile",
+      "model": "Custom Cruiser",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:customcruiserwagon",
+      "make": "Oldsmobile",
+      "model": "Custom Cruiser Wagon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:cutlas",
+      "make": "Oldsmobile",
+      "model": "Cutlas",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:cutlass",
+      "make": "Oldsmobile",
+      "model": "Cutlass",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:cutlass442",
+      "make": "Oldsmobile",
+      "model": "Cutlass 4-4-2",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:cutlassbrougham",
+      "make": "Oldsmobile",
+      "model": "Cutlass Brougham",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:cutlasscalais",
+      "make": "Oldsmobile",
+      "model": "Cutlass Calais",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:cutlassciera",
+      "make": "Oldsmobile",
+      "model": "Cutlass Ciera",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:cutlasscruiser",
+      "make": "Oldsmobile",
+      "model": "Cutlass Cruiser",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:cutlasscruiserwagon",
+      "make": "Oldsmobile",
+      "model": "Cutlass Cruiser Wagon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:cutlasss",
+      "make": "Oldsmobile",
+      "model": "Cutlass S",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:cutlasssalonbrougham",
+      "make": "Oldsmobile",
+      "model": "Cutlass Salon Brougham",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:cutlasssupreme",
+      "make": "Oldsmobile",
+      "model": "Cutlass Supreme",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:cutlasssupremebrougham",
+      "make": "Oldsmobile",
+      "model": "Cutlass Supreme Brougham",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:delmont",
+      "make": "Oldsmobile",
+      "model": "Delmont",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:delmont88",
+      "make": "Oldsmobile",
+      "model": "Delmont 88",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:delta",
+      "make": "Oldsmobile",
+      "model": "Delta",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:delta88",
+      "make": "Oldsmobile",
+      "model": "Delta 88",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:delta88royale",
+      "make": "Oldsmobile",
+      "model": "Delta 88 Royale",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:delta88royalebrougham",
+      "make": "Oldsmobile",
+      "model": "Delta 88 Royale Brougham",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:delta98",
+      "make": "Oldsmobile",
+      "model": "Delta 98",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:deluxe",
+      "make": "Oldsmobile",
+      "model": "Deluxe",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:dynamic88",
+      "make": "Oldsmobile",
+      "model": "Dynamic 88",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:eightyeight",
+      "make": "Oldsmobile",
+      "model": "Eighty-Eight",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:f35",
+      "make": "Oldsmobile",
+      "model": "F35",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:f37",
+      "make": "Oldsmobile",
+      "model": "F37",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "oldsmobile:f38",
+      "make": "Oldsmobile",
+      "model": "F38",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "oldsmobile",
+        "modelId": null,
+        "canonicalMake": "Oldsmobile",
+        "canonicalModel": null
+      }
+    }
+  ]
+}

@@ -2,13 +2,13 @@
   "schemaVersion": 2,
   "workspace": "vehicle-encyclopedia-v2",
   "productionConnected": false,
-  "targetYearFrom": 2015,
+  "targetYearFrom": 2010,
   "targetYearTo": 2026,
   "coverageWindows": [
     {
       "market": "Japan",
       "marketId": "japan",
-      "yearFrom": 2015,
+      "yearFrom": 2010,
       "yearTo": 2026,
       "priority": 1
     },
@@ -27,8 +27,8 @@
       "priority": 1
     }
   ],
-  "coverageRule": "Complete every source-backed passenger/light-passenger model, generation, facelift and market variant in the window; older records are long-tail only when needed for identity, matching or SEO.",
-  "priorityRule": "Within the coverage windows, calculation/name-resolution failures and models observed in active market listings come first, then mass-market brands, then premium/exotic long-tail coverage.",
+  "coverageRule": "Complete every source-backed passenger/light-passenger model, generation, facelift and market variant in the window; unresolved live identities/specifications must be emitted to the Knowledge CORE gap queue instead of guessed or discarded.",
+  "priorityRule": "Within the coverage windows, calculation/name-resolution failures and models observed in active market listings come first, then mass-market brands, then premium/exotic long-tail coverage; after validation, continue through the full source-backed denominator rather than stopping at pilot brands.",
   "chunkSize": 250,
   "brandSource": "apps/web/lib/catalog/brands.ts plus normalized parser-observed makes and current official manufacturer/group portfolios",
   "brandDenominatorPolicy": {
@@ -55,7 +55,7 @@
       "unknownParsedMakesAllowedInPublication": false
     }
   },
-  "status": "checkpoint-seed",
+  "status": "core-integration",
   "pilotBrands": [
     "Audi",
     "BMW",
@@ -370,12 +370,12 @@
     "ZX"
   ],
   "blockedBrands": [],
-  "lastCheckpoint": "2026-08-18",
+  "lastCheckpoint": "2026-08-22",
   "notes": [
-    "Research staging only. Do not publish or modify data/catalog/vehicle-knowledge during collection.",
+    "Knowledge CORE source corpus: identities plus trusted generation/variant facts are consumed through one runtime enrichment entrypoint; legacy vehicle-knowledge remains temporary compatibility fallback until parity is measured.",
     "All canonical entity collections use deterministic chunks capped at 250 records.",
-    "Prioritize active-listing and calculator/name-resolution demand inside the approved market windows; keep the remaining CATALOG_BRANDS universe queued for later coverage.",
+    "Every live parser miss must be emitted into the market knowledge-gap report so the source-backed denominator converges toward live catalog coverage.",
     "Exact 30-minute power is source-only and must never be derived from peak power.",
-    "Japan uses the broader 2015-2026 window; all other active markets use 2020-2026 for the priority pass."
+    "Japan uses the mandatory 2010-2026 CORE window; all other active markets use 2020-2026."
   ]
 }

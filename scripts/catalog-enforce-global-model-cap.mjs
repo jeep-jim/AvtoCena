@@ -5,7 +5,7 @@ const { mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { persistCatalogOffers, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { credibleCatalogImages, hasCredibleOfferContent, isCatalogOfferBusinessLiquid, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
-const { enrichOfferWithVehicleKnowledge } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
+const { enrichOfferWithKnowledgeCore } = await import("../apps/web/lib/catalog/knowledge-core.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
@@ -84,7 +84,7 @@ function normalizeVisible(raw) {
 }
 async function selectMarket(rows, market) {
   const rejected = { quality: 0, modelYearQuota: 0 };
-  const candidates = (await Promise.all(rows.map(async (raw) => normalizeVisible(await enrichOfferWithVehicleKnowledge(raw)))))
+  const candidates = (await Promise.all(rows.map(async (raw) => normalizeVisible(await enrichOfferWithKnowledgeCore(raw)))))
     .filter((offer) => {
       const ok = offer?.id
         && offer?.market === market

@@ -1,0 +1,8709 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_model",
+  "chunk": 12,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "austin:1800",
+      "make": "Austin",
+      "model": "1800",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:2200",
+      "make": "Austin",
+      "model": "2200",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:3litre",
+      "make": "Austin",
+      "model": "3 Litre",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:a90",
+      "make": "Austin",
+      "model": "A-90",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:a10",
+      "make": "Austin",
+      "model": "A10",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:a30",
+      "make": "Austin",
+      "model": "A30",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:a35",
+      "make": "Austin",
+      "model": "A35",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:a40",
+      "make": "Austin",
+      "model": "A40",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:a50",
+      "make": "Austin",
+      "model": "A50",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:a55",
+      "make": "Austin",
+      "model": "A55",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:a60",
+      "make": "Austin",
+      "model": "A60",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:a90atlantic",
+      "make": "Austin",
+      "model": "A90 Atlantic",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:allegro",
+      "make": "Austin",
+      "model": "Allegro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:ambassador",
+      "make": "Austin",
+      "model": "Ambassador",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:ascot",
+      "make": "Austin",
+      "model": "Ascot",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:ascot124",
+      "make": "Austin",
+      "model": "Ascot 12/4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:bigseven",
+      "make": "Austin",
+      "model": "Big Seven",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:cambridge",
+      "make": "Austin",
+      "model": "Cambridge",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:champ",
+      "make": "Austin",
+      "model": "Champ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:clifton",
+      "make": "Austin",
+      "model": "Clifton",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:countryman",
+      "make": "Austin",
+      "model": "Countryman",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:eight",
+      "make": "Austin",
+      "model": "Eight",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:fx4",
+      "make": "Austin",
+      "model": "FX4",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:gipsy",
+      "make": "Austin",
+      "model": "Gipsy",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:healey",
+      "make": "Austin",
+      "model": "Healey",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:healy",
+      "make": "Austin",
+      "model": "Healy",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:jeep",
+      "make": "Austin",
+      "model": "Jeep",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:maestro",
+      "make": "Austin",
+      "model": "Maestro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:maxi",
+      "make": "Austin",
+      "model": "Maxi",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:metro",
+      "make": "Austin",
+      "model": "Metro",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:metropolitan",
+      "make": "Austin",
+      "model": "Metropolitan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:mini",
+      "make": "Austin",
+      "model": "Mini",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:mini1275gt",
+      "make": "Austin",
+      "model": "Mini 1275 GT",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:miniclubman",
+      "make": "Austin",
+      "model": "Mini Clubman",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:minicooper",
+      "make": "Austin",
+      "model": "Mini Cooper",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:minicoopers",
+      "make": "Austin",
+      "model": "Mini Cooper S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:minimoke",
+      "make": "Austin",
+      "model": "Mini Moke",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:minitraveller",
+      "make": "Austin",
+      "model": "Mini Traveller",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:minivan",
+      "make": "Austin",
+      "model": "Mini Van",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:montego",
+      "make": "Austin",
+      "model": "Montego",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:princess",
+      "make": "Austin",
+      "model": "Princess",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:princess1100",
+      "make": "Austin",
+      "model": "Princess 1100",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:rovermini",
+      "make": "Austin",
+      "model": "Rover Mini",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:seven",
+      "make": "Austin",
+      "model": "Seven",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:sheerline",
+      "make": "Austin",
+      "model": "Sheerline",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:sprite",
+      "make": "Austin",
+      "model": "Sprite",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:spritemk",
+      "make": "Austin",
+      "model": "Sprite Mk",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austin:westminster",
+      "make": "Austin",
+      "model": "Westminster",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austinhealey:100",
+      "make": "Austin-Healey",
+      "model": "100",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austinhealey:1006",
+      "make": "Austin-Healey",
+      "model": "100-6",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austinhealey:3000",
+      "make": "Austin-Healey",
+      "model": "3000",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austinhealey:sprite",
+      "make": "Austin-Healey",
+      "model": "Sprite",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "austinmorris:mini",
+      "make": "Austin-Morris",
+      "model": "Mini",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "autounion:1000",
+      "make": "Auto Union",
+      "model": "1000",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "autounion:1000sp",
+      "make": "Auto Union",
+      "model": "1000SP",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "autounion:audi",
+      "make": "Auto Union",
+      "model": "Audi",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "autounion:audi100gl",
+      "make": "Auto Union",
+      "model": "Audi 100GL",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "autounion:audi80",
+      "make": "Auto Union",
+      "model": "Audi 80",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "autounion:dkw",
+      "make": "Auto Union",
+      "model": "Dkw",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "autounion:1000s",
+      "make": "Auto-Union",
+      "model": "1000-S",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "autounion:audi100",
+      "make": "Auto-Union",
+      "model": "Audi 100",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "autounion:audi60",
+      "make": "Auto-Union",
+      "model": "Audi 60",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "autounion:dkwmunga",
+      "make": "Auto-Union",
+      "model": "Dkw Munga",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "auxun傲旋:傲旋",
+      "make": "AUXUN傲旋",
+      "model": "傲旋",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g34/M0B/50/BB/120x90_0_q95_autohomecar__ChtpWGkzH2OAWOE2AEmqNjNawMs361.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "auxun傲旋:小傲旋",
+      "make": "AUXUN傲旋",
+      "model": "小傲旋",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "china"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "autohome-china"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [
+        "https://car3.autoimg.cn/cardfs/product/g34/M07/AE/63/120x90_0_q95_autohomecar__ChtpWGjrPqKAYeNHABUk6TYA3I8028.jpg"
+      ],
+      "localNames": []
+    },
+    {
+      "sourceKey": "avatr:12",
+      "make": "Avatr",
+      "model": "12",
+      "canonical": {
+        "brandId": "avatr",
+        "modelId": "avatr/12",
+        "canonicalMake": "Avatr",
+        "canonicalModel": "12"
+      },
+      "aliases": [
+        "AVATR 12"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "Gran Coupe"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": 2023,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baic:bj30",
+      "make": "BAIC",
+      "model": "BJ30",
+      "canonical": {
+        "brandId": "baic",
+        "modelId": "baic/bj30",
+        "canonicalMake": "BAIC",
+        "canonicalModel": "BJ30"
+      },
+      "aliases": [
+        "BJ 30"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baic:bj30e",
+      "make": "BAIC",
+      "model": "BJ30E",
+      "canonical": {
+        "brandId": "baic",
+        "modelId": "baic/bj30e",
+        "canonicalMake": "BAIC",
+        "canonicalModel": "BJ30E"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "lu"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baic:bj40",
+      "make": "BAIC",
+      "model": "BJ40",
+      "canonical": {
+        "brandId": "baic",
+        "modelId": "baic/bj40",
+        "canonicalMake": "BAIC",
+        "canonicalModel": "BJ40"
+      },
+      "aliases": [
+        "BJ40 PRO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "my"
+      ],
+      "regions": [
+        "as",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baic:bj60",
+      "make": "BAIC",
+      "model": "BJ60",
+      "canonical": {
+        "brandId": "baic",
+        "modelId": "baic/bj60",
+        "canonicalMake": "BAIC",
+        "canonicalModel": "BJ60"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "lu"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baic:x35",
+      "make": "BAIC",
+      "model": "X35",
+      "canonical": {
+        "brandId": "baic",
+        "modelId": "baic/x35",
+        "canonicalMake": "BAIC",
+        "canonicalModel": "X35"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "lu"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baic:x55",
+      "make": "BAIC",
+      "model": "X55",
+      "canonical": {
+        "brandId": "baic",
+        "modelId": "baic/x55",
+        "canonicalMake": "BAIC",
+        "canonicalModel": "X55"
+      },
+      "aliases": [
+        "X55 II",
+        "BAIC X55"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "lu",
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "SUV",
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baic:x7",
+      "make": "BAIC",
+      "model": "X7",
+      "canonical": {
+        "brandId": "baic",
+        "modelId": "baic/x7",
+        "canonicalMake": "BAIC",
+        "canonicalModel": "X7"
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baic:x75",
+      "make": "BAIC",
+      "model": "X75",
+      "canonical": {
+        "brandId": "baic",
+        "modelId": "baic/x75",
+        "canonicalMake": "BAIC",
+        "canonicalModel": "X75"
+      },
+      "aliases": [
+        "X75"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:e6",
+      "make": "Baojun",
+      "model": "E6",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/e6",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "E6"
+      },
+      "aliases": [
+        "宝骏 E6"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:kiwiev",
+      "make": "Baojun",
+      "model": "KiWi EV",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/kiwi-ev",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "KiWi EV"
+      },
+      "aliases": [
+        "宝骏 KiWi EV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:rc5",
+      "make": "Baojun",
+      "model": "RC-5",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/rc-5",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "RC-5"
+      },
+      "aliases": [
+        "宝骏 RC-5"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:rc5w",
+      "make": "Baojun",
+      "model": "RC-5W",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/rc-5w",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "RC-5W"
+      },
+      "aliases": [
+        "宝骏 RC-5W"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:rc6",
+      "make": "Baojun",
+      "model": "RC-6",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/rc-6",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "RC-6"
+      },
+      "aliases": [
+        "宝骏 RC-6"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:rm5",
+      "make": "Baojun",
+      "model": "RM-5",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/rm-5",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "RM-5"
+      },
+      "aliases": [
+        "宝骏 RM-5"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:rs3",
+      "make": "Baojun",
+      "model": "RS-3",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/rs-3",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "RS-3"
+      },
+      "aliases": [
+        "宝骏 RS-3"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:rs5",
+      "make": "Baojun",
+      "model": "RS-5",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/rs-5",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "RS-5"
+      },
+      "aliases": [
+        "宝骏 RS-5"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:rs7",
+      "make": "Baojun",
+      "model": "RS-7",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/rs-7",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "RS-7"
+      },
+      "aliases": [
+        "宝骏 RS-7"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:valli",
+      "make": "Baojun",
+      "model": "Valli",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/valli",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "Valli"
+      },
+      "aliases": [
+        "宝骏 Valli"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "Wagon"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:xiangjing",
+      "make": "Baojun",
+      "model": "Xiangjing",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/xiangjing",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "Xiangjing"
+      },
+      "aliases": [
+        "Xiang Jing",
+        "宝骏 享境"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "Sedan"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:yep",
+      "make": "Baojun",
+      "model": "Yep",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/yep",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "Yep"
+      },
+      "aliases": [
+        "Baojun Yep"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": 2023,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:yepplus",
+      "make": "Baojun",
+      "model": "Yep Plus",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/yep-plus",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "Yep Plus"
+      },
+      "aliases": [
+        "宝骏 悦也Plus"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:yunduo",
+      "make": "Baojun",
+      "model": "Yunduo",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/yunduo",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "Yunduo"
+      },
+      "aliases": [
+        "宝骏云朵"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baojun:yunhai",
+      "make": "Baojun",
+      "model": "Yunhai",
+      "canonical": {
+        "brandId": "baojun",
+        "modelId": "baojun/yunhai",
+        "canonicalMake": "Baojun",
+        "canonicalModel": "Yunhai"
+      },
+      "aliases": [
+        "Yun Hai",
+        "宝骏 云海"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "barkas:b1000",
+      "make": "Barkas",
+      "model": "B1000",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "baw:ruishengm8",
+      "make": "BAW",
+      "model": "Ruisheng M8",
+      "canonical": {
+        "brandId": "baw",
+        "modelId": "baw/ruisheng-m8",
+        "canonicalMake": "BAW",
+        "canonicalModel": "Ruisheng M8"
+      },
+      "aliases": [
+        "锐胜M8"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "MPV"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "beauford:open",
+      "make": "Beauford",
+      "model": "Open",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "beauford:series3",
+      "make": "Beauford",
+      "model": "Series 3",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bedford:ca",
+      "make": "Bedford",
+      "model": "Ca",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bedford:cf",
+      "make": "Bedford",
+      "model": "CF",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bedford:cf250",
+      "make": "Bedford",
+      "model": "CF250",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bedford:dormobile",
+      "make": "Bedford",
+      "model": "Dormobile",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "belgee:x50",
+      "make": "Belgee",
+      "model": "X50",
+      "canonical": {
+        "brandId": "belgee",
+        "modelId": "belgee/x50",
+        "canonicalMake": "Belgee",
+        "canonicalModel": "X50"
+      },
+      "aliases": [
+        "BELGEE X50"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "Crossover"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:2axlerigidbody",
+      "make": "Bentley",
+      "model": "2-Axle-Rigid Body",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:3litre",
+      "make": "Bentley",
+      "model": "3 Litre",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:arnage",
+      "make": "Bentley",
+      "model": "Arnage",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:azure",
+      "make": "Bentley",
+      "model": "Azure",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:bentayga",
+      "make": "Bentley",
+      "model": "Bentayga",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": "bentley/bentayga",
+        "canonicalMake": "Bentley",
+        "canonicalModel": "Bentayga"
+      },
+      "aliases": [
+        "BENTAYGA",
+        "BENTLEY BENTAYGA"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:bentaygaewb",
+      "make": "Bentley",
+      "model": "Bentayga EWB",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:bentaygahybrid",
+      "make": "Bentley",
+      "model": "Bentayga Hybrid",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:bentaygaspeed",
+      "make": "Bentley",
+      "model": "Bentayga Speed",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:brooklands",
+      "make": "Bentley",
+      "model": "Brooklands",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:continental",
+      "make": "Bentley",
+      "model": "Continental",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": "bentley/continental",
+        "canonicalMake": "Bentley",
+        "canonicalModel": "Continental"
+      },
+      "aliases": [
+        "CONTINENTAL"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:continentalflyingspur",
+      "make": "Bentley",
+      "model": "Continental Flying Spur",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": "bentley/continental-flying-spur",
+        "canonicalMake": "Bentley",
+        "canonicalModel": "Continental Flying Spur"
+      },
+      "aliases": [
+        "CONTINENTAL FLYING SPUR W12 A"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "my",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:continentalgt",
+      "make": "Bentley",
+      "model": "Continental GT",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": "bentley/continental-gt",
+        "canonicalMake": "Bentley",
+        "canonicalModel": "Continental GT"
+      },
+      "aliases": [],
+      "markets": [
+        "global",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "Coupe",
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:continentalgtconvertible",
+      "make": "Bentley",
+      "model": "Continental GT Convertible",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:continentalgtconvertiblespeed",
+      "make": "Bentley",
+      "model": "Continental GT Convertible Speed",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:continentalgtspeed",
+      "make": "Bentley",
+      "model": "Continental GT Speed",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:continentalgtc",
+      "make": "Bentley",
+      "model": "Continental GTC",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": "bentley/continental-gtc",
+        "canonicalMake": "Bentley",
+        "canonicalModel": "Continental GTC"
+      },
+      "aliases": [
+        "CONTINENTAL GTC"
+      ],
+      "markets": [
+        "global",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:continentalgtcspeed",
+      "make": "Bentley",
+      "model": "Continental GTC Speed",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:continentalr",
+      "make": "Bentley",
+      "model": "Continental R",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:continentalsc",
+      "make": "Bentley",
+      "model": "Continental SC",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:continentalsupersports",
+      "make": "Bentley",
+      "model": "Continental Supersports",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:continentalt",
+      "make": "Bentley",
+      "model": "Continental T",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:corniche",
+      "make": "Bentley",
+      "model": "Corniche",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:eight",
+      "make": "Bentley",
+      "model": "Eight",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:flyingspur",
+      "make": "Bentley",
+      "model": "Flying Spur",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": "bentley/flying-spur",
+        "canonicalMake": "Bentley",
+        "canonicalModel": "Flying Spur"
+      },
+      "aliases": [
+        "FLYING SPUR"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:flyingspurhybrid",
+      "make": "Bentley",
+      "model": "Flying Spur Hybrid",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:flyingspurspeed",
+      "make": "Bentley",
+      "model": "Flying Spur Speed",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:mark",
+      "make": "Bentley",
+      "model": "Mark",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:mark6",
+      "make": "Bentley",
+      "model": "Mark 6",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:mk",
+      "make": "Bentley",
+      "model": "Mk",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:mk6",
+      "make": "Bentley",
+      "model": "MK6",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:mulsanne",
+      "make": "Bentley",
+      "model": "Mulsanne",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": "bentley/mulsanne",
+        "canonicalMake": "Bentley",
+        "canonicalModel": "Mulsanne"
+      },
+      "aliases": [
+        "MULSANNE"
+      ],
+      "markets": [
+        "global",
+        "us",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:rtype",
+      "make": "Bentley",
+      "model": "R Type",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:s",
+      "make": "Bentley",
+      "model": "S",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:stype",
+      "make": "Bentley",
+      "model": "S Type",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:s1",
+      "make": "Bentley",
+      "model": "S1",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:s2",
+      "make": "Bentley",
+      "model": "S2",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:s3",
+      "make": "Bentley",
+      "model": "S3",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:speedsix",
+      "make": "Bentley",
+      "model": "Speed Six",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:sports",
+      "make": "Bentley",
+      "model": "Sports",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:t",
+      "make": "Bentley",
+      "model": "T",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:tseries",
+      "make": "Bentley",
+      "model": "T-Series",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:t1",
+      "make": "Bentley",
+      "model": "T1",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:t2",
+      "make": "Bentley",
+      "model": "T2",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:turbo",
+      "make": "Bentley",
+      "model": "Turbo",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bentley:turbor",
+      "make": "Bentley",
+      "model": "Turbo R",
+      "canonical": {
+        "brandId": "bentley",
+        "modelId": null,
+        "canonicalMake": "Bentley",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "berkeley:b95",
+      "make": "Berkeley",
+      "model": "B95",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bertone:freeclimber2",
+      "make": "Bertone",
+      "model": "Freeclimber 2",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bertone:x19",
+      "make": "Bertone",
+      "model": "X1/9",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bestune:b70",
+      "make": "Bestune",
+      "model": "B70",
+      "canonical": {
+        "brandId": "bestune",
+        "modelId": "bestune/b70",
+        "canonicalMake": "Bestune",
+        "canonicalModel": "B70"
+      },
+      "aliases": [
+        "奔腾 B70"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bestune:t90",
+      "make": "Bestune",
+      "model": "T90",
+      "canonical": {
+        "brandId": "bestune",
+        "modelId": "bestune/t90",
+        "canonicalMake": "Bestune",
+        "canonicalModel": "T90"
+      },
+      "aliases": [
+        "BESTUNE T90"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [
+        "Crossover"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bestune:yueyi03",
+      "make": "Bestune",
+      "model": "Yueyi 03",
+      "canonical": {
+        "brandId": "bestune",
+        "modelId": "bestune/yueyi-03",
+        "canonicalMake": "Bestune",
+        "canonicalModel": "Yueyi 03"
+      },
+      "aliases": [
+        "奔腾 悦意03"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bestune:yueyi07",
+      "make": "Bestune",
+      "model": "Yueyi 07",
+      "canonical": {
+        "brandId": "bestune",
+        "modelId": "bestune/yueyi-07",
+        "canonicalMake": "Bestune",
+        "canonicalModel": "Yueyi 07"
+      },
+      "aliases": [
+        "奔腾 悦意07"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bestune:yueyi08",
+      "make": "Bestune",
+      "model": "Yueyi 08",
+      "canonical": {
+        "brandId": "bestune",
+        "modelId": "bestune/yueyi-08",
+        "canonicalMake": "Bestune",
+        "canonicalModel": "Yueyi 08"
+      },
+      "aliases": [
+        "奔腾 悦意08"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "binz:e250",
+      "make": "Binz",
+      "model": "E 250",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "binz:huiskamp",
+      "make": "Binz",
+      "model": "Huiskamp",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:記入要領",
+      "make": "BMW",
+      "model": "<記入要領>",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:1series",
+      "make": "BMW",
+      "model": "1 Series",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/1-series",
+        "canonicalMake": "BMW",
+        "canonicalModel": "1 Series"
+      },
+      "aliases": [
+        "1-SERIE",
+        "116",
+        "116 / / I AUT.",
+        "116 5-TURER",
+        "116 AUT.",
+        "116 D AUT",
+        "116D",
+        "116ED",
+        "116I",
+        "118",
+        "118 D",
+        "118 I AUT",
+        "118D 5-T?RER F40 B47",
+        "118D 5-T3RER F40 B47",
+        "118D 5-TÜRER F40 B47",
+        "118D 5-TURER F70 B47",
+        "118D M SPORT",
+        "118D M SPORT AUTO",
+        "118D SE",
+        "118D SE AUTO",
+        "118D SPORT",
+        "118D SPORT AUTO",
+        "118D XDRIVE",
+        "118I",
+        "120",
+        "120D",
+        "120I",
+        "123 XDRIVE",
+        "123 XDRIVE 5-TURER",
+        "123 XDRIVE AUT.",
+        "123I XDRIVE",
+        "125D",
+        "125i",
+        "128 / / TI AUT.",
+        "128I",
+        "128I XDRIVE",
+        "128TI",
+        "128TI 5-TÜRER F40 B48",
+        "128TI AUTO",
+        "135I XDRIVE",
+        "BMW 116i",
+        "BMW 118d",
+        "BMW 118i",
+        "BMW 120",
+        "BMW 120d",
+        "BMW 120i",
+        "BMW M135 xDrive",
+        "BMW M135i",
+        "BMW M135i xDrive",
+        "BMW M140i",
+        "M1 40I",
+        "M1 40I XDRIVE",
+        "M135 / / XDRIVE AUT.",
+        "M135 5-TURER F70 B48",
+        "M135 I XDRIVE AUT",
+        "M135 XDRIVE",
+        "M135I",
+        "M135I XDRIVE",
+        "M135I XDRVIE",
+        "M140I XDRIVE 5-T3RER F20 B58",
+        "SERIE 1",
+        "SERIJA 1"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:2series",
+      "make": "BMW",
+      "model": "2 Series",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/2-series",
+        "canonicalMake": "BMW",
+        "canonicalModel": "2 Series"
+      },
+      "aliases": [
+        "2 SERIES",
+        "2-SERIE",
+        "216",
+        "216 / ACTIVE TOURER / I AUT.",
+        "216 / GRAN TOURER / D AUT.",
+        "216 ACTIVE TOURER D",
+        "216 ACTIVE TOURER D AUT",
+        "216 ACTIVE TOURER I",
+        "216 AUT.",
+        "216 D AKTIVE TOURER",
+        "216 GRAN COUPE",
+        "216 GRAN COUPE D AUT",
+        "216 GRAN TOURER D",
+        "216 GRAN TOURER I",
+        "216D",
+        "216D ACTIVE TOURER",
+        "216D ACTIVE TOURER F45 B37",
+        "216D GRAN COUPé F44 B37",
+        "216d Gran Tourer",
+        "216D GRAN TOURER F46 B37",
+        "216D LUXURY",
+        "216D LUXURY AUTO",
+        "216D M SPORT",
+        "216D M SPORT AUTO",
+        "216D SE",
+        "216D SE AUTO",
+        "216D SPORT",
+        "216D SPORT AUTO",
+        "216I",
+        "216I ACTIVE TOU",
+        "216i Active Tourer",
+        "216I ACTIVE TOURER F45 B38",
+        "216I ACTIVE TOURER U06 B38",
+        "216I GRAN T",
+        "216i Gran Tourer",
+        "216I GRAN TOURER F46 B38",
+        "216I GT",
+        "216I TOURER",
+        "218",
+        "218 / ACTIVE TOURER / D XDRIVE AUT.",
+        "218 / COUPE / D",
+        "218 / GRAN TOURER / D",
+        "218 ACTIVE TOURER D",
+        "218 ACTIVE TOURER D AUT",
+        "218 ACTIVE TOURER I",
+        "218 ACTIVE TOURER I AUT",
+        "218 COUPE I",
+        "218 COUPE I AUT",
+        "218 D AUT.",
+        "218 GRAN COUPE D AUT",
+        "218 GRAN COUPE I",
+        "218 GRAN COUPE I AUT",
+        "218 GRAN TOURER D AUT",
+        "218 GRAN TOURER D XDRIVE AUT",
+        "218 GRAN TOURER I",
+        "218 GRAN TOURER I AUT",
+        "218d",
+        "218d Active Tourer",
+        "218DXDRIVE",
+        "218DXDRIVE GRAN TOURER",
+        "218I",
+        "218I ACTIVE TOURER",
+        "220",
+        "220 / ACTIVE TOURER / I AUT.",
+        "220 / COUPE / D AUT.",
+        "220 / COUPE / I AUT.",
+        "220 / GRAN COUPE / D XDRIVE AUT.",
+        "220 / GRAN COUPE / I AUT.",
+        "220 / GRAN COUPE / I XDRIVE AUT.",
+        "220 AUT.",
+        "220 D AUT.",
+        "220 D XDRIVE",
+        "220 GRAN COUPE D AUT",
+        "220 GRAN COUPE F74 B38",
+        "220d",
+        "220D ACTIVE",
+        "220D ACTIVE T",
+        "220D ACTIVE TOURER",
+        "220D ACTIVE TOURER F45 B47",
+        "220D ACTIVE TOURER U06 B47",
+        "220D CABRIO F23 B47",
+        "220D COUPé F22 B47",
+        "220D COUPE G42 B47",
+        "220D GRAN COUPé F44 B47",
+        "220D GRAN COUPE F74 B47",
+        "220D GRAN T.",
+        "220D GRAN TOURER",
+        "220D GRAN TOURER F46 B47",
+        "220D LUXURY AUTO",
+        "220D M SPORT",
+        "220D M SPORT AUTO",
+        "220D SE AUTO",
+        "220D SPORT",
+        "220D SPORT AUTO",
+        "220D XDRIVE ACTIVE TOURE",
+        "220D XDRIVE ACTIVE TOURER",
+        "220D XDRIVE ACTIVE TOURER F45",
+        "220D XDRIVE COUPé F22 B47",
+        "220D XDRIVE GRAN COUPé F44 B47",
+        "220D XDRIVE GRAN TOURE",
+        "220d xDrive Gran Tourer",
+        "220D XDRIVE GRAN TOURER F46 B4",
+        "220D XDRIVE GT",
+        "220D XDRIVE LUXURY AUTO",
+        "220D XDRIVE M SPORT AUTO",
+        "220D XDRIVE SE AUTO",
+        "220D XDRIVE SPORT AUTO",
+        "220E XDRIVE",
+        "220I",
+        "220i Active Tourer",
+        "223 / ACTIVE TOURER / D XDRIVE AUT",
+        "223 / ACTIVE TOURER / I AUT.",
+        "223 / ACTIVE TOURER / I XDRIVE AUT.",
+        "223 XDRIVE",
+        "223 XDRIVE AUT.",
+        "223 XDRIVE GRAN COUPE",
+        "223D",
+        "223D XDRIVE",
+        "223D XDRIVE ACTIVE TOURER",
+        "223D XDRIVE ACTIVE TOURER U06",
+        "223I",
+        "223I A TOURER",
+        "223i Active Tourer",
+        "223I ACTIVE TOURER U06 B48",
+        "223I XDRIVE",
+        "223I XDRIVE A.T",
+        "223I XDRIVE ACRIVE TOURER",
+        "223I XDRIVE ACTIVE TOURER",
+        "223I XDRIVE ACTIVE TOURER U06",
+        "225 / ACTIVE TOURER / E XDRIVE AUT.",
+        "225 xe iPerformance",
+        "225 XE IPERFORMANCE AUT",
+        "225d",
+        "225E",
+        "225E XDRIVE",
+        "225E XDRIVE ACTIVE TAURER",
+        "225E XDRIVE ACTIVE TOURE",
+        "225E XDRIVE ACTIVE TOURER",
+        "225I XDRIVE",
+        "225i xDrive Active Tourer",
+        "225I XDRIVE ACTIVE TOURER F45",
+        "225XE",
+        "225XE ACTIVE TOURER F45 XB2",
+        "225XE IPERFORMANCE ACTIVE TOUR",
+        "225XE LUXURY AUTO",
+        "225XE M SPORT AUTO",
+        "225XE M SPORT PREMIUM AUTO",
+        "225XE SPORT AUTO",
+        "225XE SPORT PREMIUM AUTO",
+        "228",
+        "228 XDRIVE",
+        "228I",
+        "228I XDRIVE",
+        "228IDRIVE",
+        "230 / ACTIVE TOURER / E XDRIVE AUT.",
+        "230 / COUPE / I AUT.",
+        "230D XDRIVE ACTIVE TOURER",
+        "230E XDRIVE",
+        "230E XDRIVE ACTIVE TOURE",
+        "230E XDRIVE ACTIVE TOURER",
+        "230E XDRIVE ACTIVE TOURER U06",
+        "230I",
+        "230I CABRIO F23 B48",
+        "230I COUPé F22 B48",
+        "230I COUPE G42 B48",
+        "230I M SPORT AUTO",
+        "230I XDRIVE",
+        "240I",
+        "BMW 218d",
+        "BMW 218d Active Tourer",
+        "BMW 218d Active Tourer xDrive",
+        "BMW 218d Gran Tourer",
+        "BMW 218d Gran Tourer xDrive",
+        "BMW 218d グランクーペ",
+        "BMW 218i Active Tourer",
+        "BMW 218i Gran Tourer",
+        "BMW 218i グランク-ペ",
+        "BMW 218i グランクーペ",
+        "BMW 220 Gran Coupe",
+        "BMW 220dグランクーペ",
+        "BMW 220i",
+        "BMW 220i Gran Tourer",
+        "BMW 220iActiveTourer",
+        "BMW 225i xDr. A.T.",
+        "BMW M235 xDrive GC",
+        "BMW M235i",
+        "BMW M235ix グランク-ペ",
+        "BMW M240i",
+        "BMW M240i xDrive",
+        "M235 GRAN COUPE I XDRIVE AUT",
+        "M235 XDRIVE",
+        "M235 XDRIVE AUT.",
+        "M235 XDRIVE GRAN COUPE F74 B48",
+        "M235I",
+        "M235I XDRIVE",
+        "M235I XDRIVE AUTO",
+        "M235I XDRIVE GRAN COUPé F44 B4",
+        "M240 / CABRIO / I XDRIVE AUT.",
+        "M240 / COUPE / I AUT.",
+        "M240 / COUPE / I XDRIVE AUT.",
+        "M240I",
+        "M240I AUTO",
+        "M240I COUPé F22 B58",
+        "M240I COUPE G42 B58",
+        "M240i xDrive",
+        "M240I XDRIVE CABRIO F23 B58",
+        "M240I XDRIVE COUPE",
+        "M240I XDRIVE COUPé F22 B58",
+        "M240I XDRIVE COUPE G42 B58",
+        "SERIE 2",
+        "SERIJA 2"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:228xdrivegrancoupe",
+      "make": "BMW",
+      "model": "228 xDrive Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:228ixdrivegrancoupe",
+      "make": "BMW",
+      "model": "228i xDrive Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:230icabriolet",
+      "make": "BMW",
+      "model": "230i Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:230icoupe",
+      "make": "BMW",
+      "model": "230i Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:230ixdrivecabriolet",
+      "make": "BMW",
+      "model": "230i xDrive Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:230ixdrivecoupe",
+      "make": "BMW",
+      "model": "230i xDrive Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:2製造事業者等独自の固有名詞の使用は極力避け一般的な用語を使用する適当な一般用語がない場合は欄外に固有名詞の用語説明を付す",
+      "make": "BMW",
+      "model": "2製造事業者等独自の固有名詞の使用は極力避け、一般的な用語を使用する。適当な一般用語がない場合は、欄外に固有名詞の用語説明を付す。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:3series",
+      "make": "BMW",
+      "model": "3 Series",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/3-series",
+        "canonicalMake": "BMW",
+        "canonicalModel": "3 Series"
+      },
+      "aliases": [
+        "3 SERIE",
+        "316 / / D AUT.",
+        "316d",
+        "316D LIMOUSINE G20 B47",
+        "316D LIMOUSINE MX G20 B47",
+        "316D TOURING F31 B47",
+        "316D TOURING G21 B47",
+        "316I",
+        "318",
+        "318 / TOURING / I",
+        "318 D AUT",
+        "318 I AUT",
+        "318 TOURING D",
+        "318 TOURING D AUT",
+        "318 TOURING I AUT",
+        "318D",
+        "318I",
+        "320",
+        "320 / / E AUT.",
+        "320 / TOURING / D",
+        "320 D AUT",
+        "320 D XDRIVE AUT",
+        "320 GT D AUT",
+        "320 GT D XDRIVE AUT",
+        "320 GT I AUT",
+        "320 GT I XDRIVE AUT",
+        "320 I AUT",
+        "320 I X DRIVE",
+        "320 I XDRIVE AUT",
+        "320 TOURING D AUT",
+        "320 TOURING D XDRIVE AUT",
+        "320 TOURING I AUT",
+        "320D",
+        "320D XDRIVE",
+        "320E",
+        "320ED",
+        "320I",
+        "320LI",
+        "325I",
+        "325LI XDRIVE",
+        "328",
+        "328I",
+        "330",
+        "330 / TOURING / E AUT",
+        "330 D",
+        "330 D XDRIVE",
+        "330 E",
+        "330 E XDRIVE",
+        "330 I AUT",
+        "330 I XDRIVE AUT",
+        "330 TOURING D XDRIVE AUT",
+        "330 TOURING E XDRIVE AUT",
+        "330 TOURING I AUT",
+        "330 TOURING I XDRIVE AUT",
+        "330 XDRIVE",
+        "330D LIMOUSINE G20 B57",
+        "330D LIMOUSINE MX G20 B57",
+        "330D M SPORT + EDITION AUTO",
+        "330D M SPORT AUTO",
+        "330D M SPORT MHEV AUTO",
+        "330D M SPORT PRO ED MHEV AUTO",
+        "330D M SPORT PRO EDITION AUTO",
+        "330D SPORT AUTO",
+        "330D TOURING G21 B57",
+        "330D XDRIVE GRAN TURISMO F34 N",
+        "330D XDRIVE LIMOUSINE G20 B57",
+        "330D XDRIVE LIMOUSINE MX G20 B",
+        "330D XDRIVE M SPORT + ED AUTO",
+        "330D XDRIVE M SPORT AUTO",
+        "330D XDRIVE M SPORT MHEV AUTO",
+        "330D XDRIVE M SPORT PRO ED A",
+        "330D XDRIVE SPORT AUTO",
+        "330D XDRIVE TOURING G21 B57",
+        "330D XDRVE MSPRT PRO ED MHEV A",
+        "330D XRIVE",
+        "330E IPERFORMANCE",
+        "330E LIMOUSINE G20 XB1",
+        "330E LIMOUSINE MX G20 XB1",
+        "330E LIMOUSINE MX G20 XB1U",
+        "330E M SPORT + EDITION AUTO",
+        "330E M SPORT AUTO",
+        "330E M SPORT PRO EDITION AUTO",
+        "330E SE PRO AUTO",
+        "330E SPORT PRO AUTO",
+        "330E TOURING G21 XB1",
+        "330E XDRIVE IPERFORMANCE",
+        "330E XDRIVE LIMOUSINE G20 XB1",
+        "330E XDRIVE LIMOUSINE MX G20 X",
+        "330E XDRIVE M SPORT AUTO",
+        "330E XDRIVE M SPORT PRO ED A",
+        "330E XDRIVE SE PRO AUTO",
+        "330E XDRIVE SPORT PRO AUTO",
+        "330E XDRIVE TOURING G21 XB1",
+        "330I",
+        "330IDRIVE",
+        "330IXDRIVE",
+        "330LE",
+        "330LI",
+        "330XI",
+        "335D",
+        "335D XDRIVE",
+        "335I",
+        "340",
+        "340i",
+        "340I GRAN TURISMO F34 B58",
+        "340i xDrive",
+        "BMW 318i",
+        "BMW 318i Touring",
+        "BMW 320d",
+        "BMW 320d xDrive",
+        "BMW 320d xDrive Touring",
+        "BMW 320d xDrive Tr.",
+        "BMW 320d グランツ-リスモ",
+        "BMW 320i",
+        "BMW 320i Touring",
+        "BMW 320i グランツーリスモ",
+        "BMW 328i グランツーリスモ",
+        "BMW 330i",
+        "BMW 330i Touring",
+        "BMW 335i グランツーリスモ",
+        "BMW 340i",
+        "BMW ActiveHybrid 3",
+        "BMW M340i xDrive",
+        "BMW M340i xDrive Tr.",
+        "M318D",
+        "M330D XDRIVE",
+        "M340 / TOURING / D XDRIVE AUT.",
+        "M340 D XDRIVE AUT",
+        "M340 I",
+        "M340 I XDRIVE AUT",
+        "M340 TOURING I XDRIVE AUT",
+        "M340 xDrive",
+        "M340D",
+        "M340D XDRIVE",
+        "M340D XDRIVE LIMOUSINE G20 B57",
+        "M340D XDRIVE LIMOUSINE G20 XD5",
+        "M340D XDRIVE LIMOUSINE MX G20",
+        "M340D XDRIVE MHEV AUTO",
+        "M340D XDRIVE TOURING G21 B57",
+        "M340D XDRIVE TOURING G21 XD5",
+        "M340i xDrive",
+        "M340I XDRIVE AUTO",
+        "M340I XDRIVE LIMOUSINE G20 B58",
+        "M340I XDRIVE LIMOUSINE MX G20",
+        "M340I XDRIVE MHEV AUTO",
+        "M340I XDRIVE TOURING",
+        "M340I XDRIVE TOURING G21 B58",
+        "SERIE 3",
+        "SERIJA 3"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:3co2排出量については既に計算式が入力されているため入力は不要欄を追加する場合はセルの内容をコピーする",
+      "make": "BMW",
+      "model": "3.「CO2排出量」については既に計算式が入力されているため、入力は不要。欄を追加する場合はセルの内容をコピーする。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:30cs",
+      "make": "BMW",
+      "model": "3.0CS",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": null,
+        "canonicalMake": "BMW",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:30s",
+      "make": "BMW",
+      "model": "3.0S",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": null,
+        "canonicalMake": "BMW",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:330e",
+      "make": "BMW",
+      "model": "330e",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:330esedan",
+      "make": "BMW",
+      "model": "330e Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:330exdrive",
+      "make": "BMW",
+      "model": "330e xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:330exdrivesedan",
+      "make": "BMW",
+      "model": "330e xDrive Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:330i",
+      "make": "BMW",
+      "model": "330i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:330ixdrivesedan",
+      "make": "BMW",
+      "model": "330i xDrive Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:4series",
+      "make": "BMW",
+      "model": "4 Series",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/4-series",
+        "canonicalMake": "BMW",
+        "canonicalModel": "4 Series"
+      },
+      "aliases": [
+        "4 SERIES",
+        "4-SERIE",
+        "418 D AUT",
+        "418d",
+        "418D GRAN COUPé F36 B47",
+        "418i",
+        "420 / / D AUT.",
+        "420 / / I AUT.",
+        "420 / CABRIO / D AUT.",
+        "420 / CABRIO / I AUT.",
+        "420 / COUPE / D AUT.",
+        "420 / COUPE / I AUT.",
+        "420 COUPE D XDRIVE AUT",
+        "420 D XDRIVE AUT",
+        "420 I XDRIVE",
+        "420 XDRIVE",
+        "420D",
+        "420d xDrive",
+        "420DA",
+        "420I",
+        "428I",
+        "430",
+        "430 / / D XDRIVE AUT.",
+        "430 / / I AUT.",
+        "430 / CABRIO / I XDRIVE AUT.",
+        "430 / COUPE / I XDRIVE AUT.",
+        "430 CABRIO I AUT",
+        "430 COUPE D AUT",
+        "430 COUPE D XDRIVE AUT",
+        "430 COUPE I AUT",
+        "430 I XDRIVE AUT",
+        "430D",
+        "430D CABRIO G23 B57",
+        "430D GRAN COUPE M SPORT AUTO",
+        "430D M SPORT AUTO",
+        "430D XDRIVE",
+        "430D XDRIVE COUPé F32 N57",
+        "430D XDRIVE COUPé G22 B57",
+        "430D XDRIVE GRAN COUPé F36 N57",
+        "430D XDRIVE GRAN COUPE G26 B57",
+        "430D XDRIVE GRANCOUPE MSPORT A",
+        "430D XDRIVE M SPORT AUTO",
+        "430I",
+        "430I CABRIO F33 B48",
+        "430I CABRIO G23 B48",
+        "430I COUPE",
+        "430I COUPé G22 B48",
+        "430I GRAN COUPé F36 B48",
+        "430I GRAN COUPE G26 B48",
+        "430I GRAN COUPE M SPORT AUTO",
+        "430I M SPORT AUTO",
+        "430I M SPORT PRO EDITION AUTO",
+        "430i xDrive",
+        "430I XDRIVE CABRIO F33 B48",
+        "430I XDRIVE CABRIO G23 B48",
+        "430I XDRIVE COUPé F32 B48",
+        "430I XDRIVE COUPé G22 B48",
+        "430I XDRIVE G26 B48",
+        "430I XDRIVE GRAN COUPé F36 B48",
+        "430I XDRIVE GRAN COUPE G26 B48",
+        "430I XDRIVE GRAN COUPÚ F36 B48",
+        "435",
+        "435 CABRIO D XDRIVE AUT",
+        "435D",
+        "435d xDrive",
+        "435D XDRIVE CABRIO F33 N57",
+        "435D XDRIVE GRAN COUPé F36 N57",
+        "435D XDRIVE GRANCOUPE MSPORT A",
+        "435D XDRIVE M SPORT AUTO",
+        "435I",
+        "440D XDRIVE",
+        "440i",
+        "440I CABRIO F33 B58",
+        "440I COUPé F32 B58",
+        "440I GRAN COUPé F36 B58",
+        "440I GRAN COUPE M SPORT AUTO",
+        "440I M SPORT AUTO",
+        "440I XDRIVE",
+        "440I XDRIVE CABRIO F33 B58",
+        "440I XDRIVE COUPé F32 B58",
+        "440I XDRIVE GRAN COUPé F36 B58",
+        "440I XDRIVE GRAN COUPÚ F36 B58",
+        "BMW 420d xDrive グランクーペ",
+        "BMW 420i",
+        "BMW 420i カブリオレ",
+        "BMW 420i クーペ",
+        "BMW 420i グラン クーペ",
+        "BMW 420i グランク-ペ",
+        "BMW 428i",
+        "BMW 428i グラン クーペ",
+        "BMW 430i",
+        "BMW 430i グラン クーペ",
+        "BMW 435i",
+        "BMW 435i グラン クーペ",
+        "BMW 440i",
+        "BMW 440i グラン クーペ",
+        "BMW M440i xDrive クーペ",
+        "BMW M440ix カブリオレ",
+        "BMW M440ix グランク-ペ",
+        "BMW M440ix グランクーペ",
+        "M440 / / I AUT",
+        "M440 / / I XDRIVE AUT.",
+        "M440 / CABRIO / I XDRIVE AUT.",
+        "M440 / COUPE / D XDRIVE AUT.",
+        "M440 / COUPE / I AUT",
+        "M440 COUPE I XDRIVE AUT",
+        "M440 xDrive",
+        "M440D",
+        "M440D XDRIVE",
+        "M440D XDRIVE CABRIO G23 B57",
+        "M440D XDRIVE COUPé G22 B57",
+        "M440I",
+        "M440I CABRIO G23 B58",
+        "M440I COUPé G22 B58",
+        "M440I GRAN COUPE G26 B58",
+        "M440I XDRIVE",
+        "SERIE 4",
+        "SERIJA 4"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:430icoupe",
+      "make": "BMW",
+      "model": "430i Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:430ixdrivecabriolet",
+      "make": "BMW",
+      "model": "430i xDrive Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:430ixdrivecoupe",
+      "make": "BMW",
+      "model": "430i xDrive Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:430ixdrivegrancoupe",
+      "make": "BMW",
+      "model": "430i xDrive Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:440icoupe",
+      "make": "BMW",
+      "model": "440i Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:440ixdrivecabriolet",
+      "make": "BMW",
+      "model": "440i xDrive Cabriolet",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:440ixdrivecoupe",
+      "make": "BMW",
+      "model": "440i xDrive Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:440ixdrivegrancoupe",
+      "make": "BMW",
+      "model": "440i xDrive Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:5series",
+      "make": "BMW",
+      "model": "5 Series",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/5-series",
+        "canonicalMake": "BMW",
+        "canonicalModel": "5 Series"
+      },
+      "aliases": [
+        "5 SERIE",
+        "5 SERIES",
+        "518",
+        "518 / / D AUT.",
+        "518D",
+        "518D LIMOUSINE G30 B47",
+        "518D SE AUTO",
+        "518D TOURING G31 B47",
+        "520",
+        "520 / / I AUT",
+        "520 / TOURING / D AUT.",
+        "520 D AUT",
+        "520 D XDRIVE AUT",
+        "520 TOURING D XDRIVE AUT",
+        "520D",
+        "520d xDrive",
+        "520E",
+        "520E LIMOUSINE G30 XB1",
+        "520E TOURING G31 XB1",
+        "520E XDRIVE",
+        "520I",
+        "520LD",
+        "520S XDRIVE",
+        "523D",
+        "523D XDRIVE",
+        "525D",
+        "525I",
+        "525LI",
+        "528",
+        "528I",
+        "528XI",
+        "530",
+        "530 / / I AUT.",
+        "530 / TOURING / I XDRIVE AUT",
+        "530 D",
+        "530 D AUT",
+        "530 D XDRIVE AUT",
+        "530 E AUT",
+        "530 E IPERFORMANCE AUT",
+        "530 E XDRIVE AUT",
+        "530 E XDRIVE IPERFORMANCE AUT",
+        "530 I XDRIVE AUT",
+        "530 TOURING D XDRIVE AUT",
+        "530 TOURING E AUT.",
+        "530 TOURING E XDRIVE AUT",
+        "530 XDRIVE",
+        "530D LIMOUSINE G30 B57",
+        "530D M SPORT AUTO",
+        "530D SE AUTO",
+        "530d Touring",
+        "530D TOURING G31 B57",
+        "530D XDRIVE",
+        "530E",
+        "530E XDRIVE",
+        "530I",
+        "530I LIMOUSINE G30 B48",
+        "530I M SPORT AUTO",
+        "530I SE AUTO",
+        "530I TOURING G31 B48",
+        "530I US",
+        "530I XDRIVE",
+        "530I XDRIVE LIMOUSINE G30 B48",
+        "530I XDRIVE TOURING G31 B48",
+        "530I XDRVE",
+        "530LI",
+        "530LI XDRIVE",
+        "530W XDRIVE",
+        "535",
+        "535D XDRIVE",
+        "535LE",
+        "540",
+        "540 / / D XDRIVE AUT.",
+        "540 / / I AUT.",
+        "540 / / I XDRIVE AUT.",
+        "540 / TOURING / I XDRIVE AUT.",
+        "540 TOURING D XDRIVE AUT",
+        "540 XDRIVE",
+        "540D",
+        "540d xDrive",
+        "540D XDRIVEQ",
+        "540I",
+        "540I LIMOUSINE G30 B58",
+        "540I SDRIVE",
+        "540I XDRIVE",
+        "540I XDRIVE LIMOUSINE G30 B58",
+        "540I XDRIVE M SPORT AUTO",
+        "540I XDRIVE M SPORT ED MHEV A",
+        "540I XDRIVE M SPORT MHEV AUTO",
+        "540I XDRIVE SE AUTO",
+        "540I XDRIVE SE MHEV AUTO",
+        "540I XDRIVE TOURING G31 B58",
+        "540I XDRIVE US",
+        "545 / / E XDRIVE AUT.",
+        "545 XDRIVE",
+        "545E",
+        "545E XDRIVE",
+        "545E XDRIVE LIMOUSINE G30 XB1",
+        "545E XDRIVE M SPORT AUTO",
+        "550 / / E XDRIVE AUT.",
+        "550 / TOURING / E XDRIVE AUT.",
+        "550 E XDRIVE",
+        "550E XDRIVE LIMOUSINE G60 XB1",
+        "550E XDRIVE TOURING",
+        "550I XDRIVE",
+        "BMW 523d",
+        "BMW 523d xDrive",
+        "BMW 523d xDrive ツ-リング",
+        "BMW 523d xDriveツーリング",
+        "BMW 523d ツ-リング",
+        "BMW 523d ツーリング",
+        "BMW 523I",
+        "BMW 523I ツーリング",
+        "BMW 525Li",
+        "BMW 528i",
+        "BMW 528i グランツーリスモ",
+        "BMW 528i ツーリング",
+        "BMW 530i",
+        "BMW 530i ツーリング",
+        "BMW 535i",
+        "BMW 535i xDrive ツーリング",
+        "BMW 535i ツーリング",
+        "BMW 540i",
+        "BMW 540i xDrive",
+        "BMW 540i xDrive ツーリング",
+        "BMW 550i",
+        "BMW 550i グランツーリスモ",
+        "BMW 550i ツーリンク",
+        "BMW ActiveHybrid 5",
+        "BMW M550i xDrive",
+        "M 550",
+        "M 550D",
+        "M 550d xDrive",
+        "M550 D XDRIVE AUT",
+        "M550 TOURING D XDRIVE AUT",
+        "M550D XDRIVE LIMOUSINE G30 B57",
+        "M550D XDRIVE TOURING G31 B57",
+        "M550I",
+        "M550I XDRIVE",
+        "M550I XDRIVE AUTO",
+        "M550I XDRIVE LIMOUSINE G30 N63",
+        "SERIE 5",
+        "SERIE 5 525D",
+        "SERIJA 5"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:5その他について以下に留意し記載する",
+      "make": "BMW",
+      "model": "5.「その他」について、以下に留意し記載する。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:530e",
+      "make": "BMW",
+      "model": "530e",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:530exdrive",
+      "make": "BMW",
+      "model": "530e xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:530exdrivesedan",
+      "make": "BMW",
+      "model": "530e xDrive Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:530i",
+      "make": "BMW",
+      "model": "530i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:530ixdrivesedan",
+      "make": "BMW",
+      "model": "530i xDrive Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:540i",
+      "make": "BMW",
+      "model": "540i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:540ixdrivesedan",
+      "make": "BMW",
+      "model": "540i xDrive Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:550exdrivesedan",
+      "make": "BMW",
+      "model": "550e xDrive Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:6series",
+      "make": "BMW",
+      "model": "6 Series",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/6-series",
+        "canonicalMake": "BMW",
+        "canonicalModel": "6 Series"
+      },
+      "aliases": [
+        "620 / GT / D AUT.",
+        "620 GT D XDRIVE AUT",
+        "620d",
+        "620D GRAN TURISMO G32 B47",
+        "620D M SPORT AUTO",
+        "620D SE AUTO",
+        "620d xDrive",
+        "620D XDRIVE GRAN TURISMO G32 B",
+        "620D XDRIVE M SPORT AUTO",
+        "620D XDRIVE SE AUTO",
+        "630 GT D XDRIVE AUT",
+        "630d",
+        "630D GRAN TURISMO G32 B57",
+        "630D M SPORT AUTO",
+        "630D XDRIVE",
+        "630D XDRIVE GRAN TURISMO G32 B",
+        "630D XDRIVE M SPORT AUTO",
+        "630D XDRIVE SE AUTO",
+        "630i",
+        "630I GRAN TURISMO",
+        "630I M SPORT AUTO",
+        "630I SE AUTO",
+        "640 / GT / I XDRIVE AUT",
+        "640 GT D XDRIVE AUT",
+        "640 XDRIVE",
+        "640D",
+        "640d xDrive",
+        "640D XDRIVE GRAN TURISMO G32 B",
+        "640I",
+        "640I GRAN TURISMO G32 B58",
+        "640I XDRIVE",
+        "640I XDRIVE GRAN TURISMO G32 B",
+        "640I XDRIVE M SPORT AUTO",
+        "645CI",
+        "650I",
+        "BMW 623d グランツ-リスモ",
+        "BMW 630i グラン ツーリスモ",
+        "BMW 640i カブリオレ",
+        "BMW 640i ク-ペ",
+        "BMW 640i クーペ",
+        "BMW 640i グラン クーペ",
+        "BMW 640ix グラン ツーリスモ",
+        "BMW 650i カブリオレ",
+        "BMW 650i クーペ",
+        "BMW 650i グラン クーペ",
+        "SERIE 6",
+        "SERIJA 6"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:6欄外に次の注記を行う",
+      "make": "BMW",
+      "model": "6.欄外に次の注記を行う。",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:7series",
+      "make": "BMW",
+      "model": "7 Series",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/7-series",
+        "canonicalMake": "BMW",
+        "canonicalModel": "7 Series"
+      },
+      "aliases": [
+        "7-SERIE",
+        "730 D",
+        "730 D XDRIVE AUT",
+        "730D AUTO",
+        "730D LIMOUSINE G11 B57",
+        "730D M SPORT AUTO",
+        "730D M SPORT MHEV AUTO",
+        "730D MHEV AUTO",
+        "730D X DRIVE",
+        "730D XDRIVE AUTO",
+        "730D XDRIVE G11 B57",
+        "730D XDRIVE LIMOUSINE G11 B57",
+        "730D XDRIVE M SPORT AUTO",
+        "730D XDRIVE M SPORT MHEV AUTO",
+        "730D XDRIVE MHEV AUTO",
+        "730I",
+        "730LD",
+        "730LD AUTO",
+        "730LD LIMOUSINE G12 B57",
+        "730LD M SPORT AUTO",
+        "730LD M SPORT MHEV AUTO",
+        "730LD MHEV AUTO",
+        "730LD XDRIVE",
+        "730LD XDRIVE G12 B57",
+        "730LD XDRIVE LIMOUSINE G12 B57",
+        "730LI",
+        "735",
+        "735D",
+        "735D XDRIVE",
+        "735I",
+        "740",
+        "740 D XDRIVE AUT",
+        "740 I AUT",
+        "740 LD XDRIVE AUT",
+        "740 XDRIVE",
+        "740D",
+        "740D XDRIVE",
+        "740D XDRIVE AUTO",
+        "740D XDRIVE G11 B57",
+        "740D XDRIVE LIMOUSINE G11 B57",
+        "740D XDRIVE LIMOUSINE G70 B57",
+        "740D XDRIVE M SPORT AUTO",
+        "740D XDRIVE M SPORT MHEV AUTO",
+        "740D XDRIVE MHEV AUTO",
+        "740E",
+        "740e iPerformance",
+        "740I",
+        "740I AUTO",
+        "740I LIMOUSINE G11 B58",
+        "740I M SPORT AUTO",
+        "740I XDRIVE",
+        "740LD",
+        "740Ld xDrive",
+        "740LD XDRIVE G12 B57",
+        "740LD XDRIVE LIMOUSINE G12 B57",
+        "740LD XDRIVE M SPORT AUTO",
+        "740LD XDRIVE M SPORT MHEV AUTO",
+        "740LE",
+        "740Le iPerformance",
+        "740Le xDrive iPerformance",
+        "740LI",
+        "740LI AUTO",
+        "740LI M SPORT AUTO",
+        "740LI XDRIVE",
+        "740LI XDRIVE G12 B58",
+        "745",
+        "745 E AUT",
+        "745 LE XDRIVE AUT",
+        "745E",
+        "745E AUTO",
+        "745E IPERFORMANCE",
+        "745E LIMOUSINE G11 XB1",
+        "745E M SPORT AUTO",
+        "745E XDRIVE",
+        "745LE",
+        "745LE IPERFORMANCE",
+        "745LE XDRIVE",
+        "745LE XDRIVE AUTO",
+        "745LE XDRIVE G12 XB1",
+        "745LE XDRIVE IPERFORMANCE",
+        "745LE XDRIVE M SPORT AUTO",
+        "745LE XDRIVE PERFORMANCE",
+        "750",
+        "750 / / E XDRIVE AUT",
+        "750 D XDRIVE AUT",
+        "750 LD XDRIVE AUT",
+        "750D",
+        "750d xDrive",
+        "750D XDRIVE G11 B57",
+        "750E XDRIVE",
+        "750E XDRIVE LIMOUSINE G70 XB1",
+        "750I",
+        "750I M SPORT XDRIVE AUTO",
+        "750I XDRIVE",
+        "750I XDRIVE AUTO",
+        "750I XDRIVE G11 N63",
+        "750LD XDRIVE",
+        "750LD XDRIVE G12 B57",
+        "750LI",
+        "750LI XDRIVE",
+        "750LI XDRIVE G12 N63",
+        "760E XDRIVE",
+        "760I DRIVE",
+        "760I PROTECTION XDRIVE",
+        "760LI XDRIVE",
+        "BMW 740d xDrive",
+        "BMW 740i",
+        "BMW 740Ld xDrive",
+        "BMW 740Li",
+        "BMW 750i",
+        "BMW 750i xDrive",
+        "BMW 750Li",
+        "BMW 750Li xDrive",
+        "BMW 760Li xDrive",
+        "BMW M760Li xDrive",
+        "M740D XDRIVE",
+        "M750 XDRIVE",
+        "M750E XDRIVE",
+        "M760 XDRIVE",
+        "M760E / / XDRIVE AUT",
+        "M760E XDRIVE",
+        "M760E XDRIVE LIMOUSINE G70 XB1",
+        "M760LI XDRIVE",
+        "M760LI XDRIVE AUTO",
+        "M760LI XDRIVE G12 N74",
+        "SERIE 7",
+        "SERIJA 7"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:740i",
+      "make": "BMW",
+      "model": "740i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "us"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:745lexdrive",
+      "make": "BMW",
+      "model": "745Le xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:750exdrivesedan",
+      "make": "BMW",
+      "model": "750e xDrive Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:750ixdrivesedan",
+      "make": "BMW",
+      "model": "750i xDrive Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:750lixdrivesedan",
+      "make": "BMW",
+      "model": "750Li xDrive Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:760ixdrivesedan",
+      "make": "BMW",
+      "model": "760i xDrive Sedan",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:8series",
+      "make": "BMW",
+      "model": "8 Series",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/8-series",
+        "canonicalMake": "BMW",
+        "canonicalModel": "8 Series"
+      },
+      "aliases": [
+        "8-SERIE",
+        "840 / CABRIOLET / I XDRIVE AUT.",
+        "840 / COUPE / D XDRIVE AUT.",
+        "840 / COUPE / I AUT.",
+        "840 / COUPE / I XDRIVE AUT.",
+        "840 D XDRIVE AUT",
+        "840 I XDRIVE AUT",
+        "840D",
+        "840D XDRIVE",
+        "840D XDRIVE AUTO",
+        "840D XDRIVE CABRIO G14 B57",
+        "840D XDRIVE COUPé G15 B57",
+        "840D XDRIVE GRAN COUPE",
+        "840D XDRIVE GRAN COUPé G16 B57",
+        "840D XDRIVE GRAN COUPÚ G16 B57",
+        "840D XDRIVE M SPORT MHEV AUTO",
+        "840I",
+        "840I AUTO",
+        "840I CABRIO G14 B58",
+        "840I COUPé G15 B58",
+        "840I GRAN COUPE",
+        "840I GRAN COUPé G16 B58",
+        "840I M SPORT AUTO",
+        "840I XDRIVE",
+        "840I XDRIVE CABRIO G14 B58",
+        "840I XDRIVE COUPé G15 B58",
+        "840I XDRIVE GRAN COUPE",
+        "840I XDRIVE GRAN COUPé G16 B58",
+        "840I XDRIVE GRAN COUPÚ G16 B58",
+        "850I XDRIVE",
+        "BMW 840d xDrive カブリオレ",
+        "BMW 840d xDrive ク-ペ",
+        "BMW 840d xDrive クーペ",
+        "BMW 840dx グランク-ペ",
+        "BMW 840dx グランクーペ",
+        "BMW 840i カブリオレ",
+        "BMW 840i ク-ペ",
+        "BMW 840i クーペ",
+        "BMW 840i グランク-ペ",
+        "BMW 840i グランクーペ",
+        "BMW M850i xDrive カブリオレ",
+        "BMW M850i xDrive ク-ペ",
+        "BMW M850i xDrive クーペ",
+        "BMW M850ix グランク-ペ",
+        "BMW M850ix グランクーペ",
+        "M840I XDRIVE",
+        "M850 / CABRIOLET / I XDRIVE AUT.",
+        "M850 COUPE I XDRIVE AUT",
+        "M850 I XDRIVE AUT",
+        "M850 XDRIVE GRAN COUPE",
+        "M850I",
+        "M850I XDRIVE",
+        "M850I XDRIVE AUTO",
+        "M850I XDRIVE CABRIO G14 N63",
+        "M850I XDRIVE COUPé G15 N63",
+        "M850I XDRIVE COUPÚ G15 N63",
+        "M850I XDRIVE GRAN COUPE",
+        "M850I XDRIVE GRAN COUPé G16 N6",
+        "M850I XDRIVE GRAN COUPÚ G16 N6",
+        "SERIE 8",
+        "SERIJA 8"
+      ],
+      "markets": [
+        "global",
+        "us"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "us-epa-fueleconomy"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:active",
+      "make": "BMW",
+      "model": "Active",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": null,
+        "canonicalMake": "BMW",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:activehybrid3",
+      "make": "BMW",
+      "model": "ActiveHybrid 3",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": null,
+        "canonicalMake": "BMW",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:activehybrid5",
+      "make": "BMW",
+      "model": "ActiveHybrid 5",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": null,
+        "canonicalMake": "BMW",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:activehybrid7",
+      "make": "BMW",
+      "model": "ActiveHybrid 7",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": null,
+        "canonicalMake": "BMW",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:activehybridx6",
+      "make": "BMW",
+      "model": "ActiveHybrid X6",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": null,
+        "canonicalMake": "BMW",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:alpina",
+      "make": "BMW",
+      "model": "Alpina",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/alpina",
+        "canonicalMake": "BMW",
+        "canonicalModel": "Alpina"
+      },
+      "aliases": [
+        "ALPINA D5 BITURBO AUTO",
+        "ALPINA XD3 BITURBO AUTO",
+        "BMW ALPINA B4 GRAN COUPE",
+        "BMW ALPINA XD3"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:alpinab3",
+      "make": "BMW",
+      "model": "Alpina B3",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/alpina-b3",
+        "canonicalMake": "BMW",
+        "canonicalModel": "Alpina B3"
+      },
+      "aliases": [
+        "ALPINA B3 BITURBO AUTO",
+        "ALPINA B3 GT",
+        "BMW ALPINA B3 TOURING"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:alpinab5",
+      "make": "BMW",
+      "model": "Alpina B5",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/alpina-b5",
+        "canonicalMake": "BMW",
+        "canonicalModel": "Alpina B5"
+      },
+      "aliases": [
+        "ALPINA B5 ALLRAD",
+        "ALPINA B5 BITURBO AUTO"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:alpinab6",
+      "make": "BMW",
+      "model": "Alpina B6",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": null,
+        "canonicalMake": "BMW",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmwalpina:b7",
+      "make": "Bmw Alpina",
+      "model": "B7",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:alpinab7",
+      "make": "BMW",
+      "model": "Alpina B7",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/alpina-b7",
+        "canonicalMake": "BMW",
+        "canonicalModel": "Alpina B7"
+      },
+      "aliases": [
+        "ALPINA B7"
+      ],
+      "markets": [
+        "global",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:alpinab7xdrive",
+      "make": "BMW",
+      "model": "Alpina B7 xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:alpinab8gran",
+      "make": "BMW",
+      "model": "Alpina B8 Gran",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": null,
+        "canonicalMake": "BMW",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:alpinab8grancoupe",
+      "make": "BMW",
+      "model": "Alpina B8 Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "canada"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "origins": [
+        "western"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:alpinaroadsters",
+      "make": "BMW",
+      "model": "Alpina Roadster S",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": null,
+        "canonicalMake": "BMW",
+        "canonicalModel": null
+      },
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "origins": [
+        "global"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:alpinaxb7",
+      "make": "BMW",
+      "model": "Alpina XB7",
+      "canonical": {
+        "brandId": "bmw",
+        "modelId": "bmw/alpina-xb7",
+        "canonicalMake": "BMW",
+        "canonicalModel": "Alpina XB7"
+      },
+      "aliases": [
+        "ALPINA XB7",
+        "BMW ALPINA XB7"
+      ],
+      "markets": [
+        "global",
+        "canada"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "canada-nrcan"
+      ],
+      "origins": [
+        "global",
+        "western"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw116i",
+      "make": "BMW",
+      "model": "BMW 116i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw118d",
+      "make": "BMW",
+      "model": "BMW 118d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw118i",
+      "make": "BMW",
+      "model": "BMW 118i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw120",
+      "make": "BMW",
+      "model": "BMW 120",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw120d",
+      "make": "BMW",
+      "model": "BMW 120d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw218d",
+      "make": "BMW",
+      "model": "BMW 218d",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw218dactivetourer",
+      "make": "BMW",
+      "model": "BMW 218d Active Tourer",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw218dgrantourer",
+      "make": "BMW",
+      "model": "BMW 218d Gran Tourer",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw218dgrantourerxdrive",
+      "make": "BMW",
+      "model": "BMW 218d Gran Tourer xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw218dグランクーペ",
+      "make": "BMW",
+      "model": "BMW 218d グランクーペ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw218iactivetourer",
+      "make": "BMW",
+      "model": "BMW 218i Active Tourer",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw218igrantourer",
+      "make": "BMW",
+      "model": "BMW 218i Gran Tourer",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw218iグランクペ",
+      "make": "BMW",
+      "model": "BMW 218i グランク-ペ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw218iグランクーペ",
+      "make": "BMW",
+      "model": "BMW 218i グランクーペ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw220grancoupe",
+      "make": "BMW",
+      "model": "BMW 220 Gran Coupe",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw220dグランクーペ",
+      "make": "BMW",
+      "model": "BMW 220dグランクーペ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw220i",
+      "make": "BMW",
+      "model": "BMW 220i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw318i",
+      "make": "BMW",
+      "model": "BMW 318i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw318itouring",
+      "make": "BMW",
+      "model": "BMW 318i Touring",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw320dxdrive",
+      "make": "BMW",
+      "model": "BMW 320d xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw320dxdrivetouring",
+      "make": "BMW",
+      "model": "BMW 320d xDrive Touring",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw320dxdrivetr",
+      "make": "BMW",
+      "model": "BMW 320d xDrive Tr.",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw320i",
+      "make": "BMW",
+      "model": "BMW 320i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw320itouring",
+      "make": "BMW",
+      "model": "BMW 320i Touring",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw330i",
+      "make": "BMW",
+      "model": "BMW 330i",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw330itouring",
+      "make": "BMW",
+      "model": "BMW 330i Touring",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw420dxdriveグランクーペ",
+      "make": "BMW",
+      "model": "BMW 420d xDrive グランクーペ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw420iカブリオレ",
+      "make": "BMW",
+      "model": "BMW 420i カブリオレ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw420iクーペ",
+      "make": "BMW",
+      "model": "BMW 420i クーペ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw420iグランクペ",
+      "make": "BMW",
+      "model": "BMW 420i グランク-ペ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw420iグランクーペ",
+      "make": "BMW",
+      "model": "BMW 420i グランクーペ",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026,
+      "imageUrls": [],
+      "localNames": []
+    },
+    {
+      "sourceKey": "bmw:bmw523dxdrive",
+      "make": "BMW",
+      "model": "BMW 523d xDrive",
+      "canonical": null,
+      "aliases": [],
+      "markets": [
+        "japan"
+      ],
+      "countries": [],
+      "regions": [],
+      "bodyTypes": [],
+      "sources": [
+        "mlit-japan-fuel-economy"
+      ],
+      "origins": [
+        "asia"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023,
+      "imageUrls": [],
+      "localNames": []
+    }
+  ]
+}

@@ -3,15 +3,12 @@ import path from "node:path";
 
 const { readEncyclopediaIdentityDataset, readEncyclopediaIdentityResolver } = await import("../apps/web/lib/catalog/encyclopedia-identity-data.ts");
 const { applyEncyclopediaIdentityMaster } = await import("../apps/web/lib/catalog/encyclopedia-identity-master.ts");
-const { enrichOfferWithVehicleKnowledge } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
+const { enrichOfferWithKnowledgeCore } = await import("../apps/web/lib/catalog/knowledge-core.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-v3-input";
 const concurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_IDENTITY_PREPARE_CONCURRENCY || 24)));
 
-// This is deliberately a publication-pipeline opt-in rather than the broad
-// encyclopedia production switch. It lets canonical identity go live without
-// declaring unfinished generation/specification content production-complete.
 if (process.env.CATALOG_ENCYCLOPEDIA_IDENTITY_MASTER !== "1") {
   throw new Error("catalog_encyclopedia_identity_master_not_enabled");
 }
@@ -53,21 +50,24 @@ async function applyOffer(rawOffer) {
   const canonicalModel = clean(offer.model);
   const changed = canonicalMake !== sourceMake || canonicalModel !== sourceModel;
   let knowledgeEnriched = false;
+  let exactCoreVariant = false;
 
-  // Re-run the existing calculation knowledge bridge only for identities that
-  // actually changed. The normal publisher will calculate every candidate
-  // afterwards; this step only gives it a second chance to obtain specs from a
-  // now-canonical make/model without making publication network-dependent.
-  if (changed && (!Number(offer.powerHp || 0) || !Number(offer.engineCc || 0) || !clean(offer.fuel))) {
+  // Every canonically resolved model gets one deterministic CORE enrichment
+  // pass. This is intentionally not limited to renamed offers or to three
+  // missing fields: body, drive, transmission and electrified power matter to
+  // both the calculator and public cards too.
+  if (identity.canonicalModelId) {
     const before = {
       powerHp: Number(offer.powerHp || 0),
       engineCc: Number(offer.engineCc || 0),
       fuel: clean(offer.fuel),
+      bodyType: clean(offer.bodyType),
+      transmission: clean(offer.transmission),
+      drive: clean(offer.drive),
+      power30MinKw: Number(offer.power30MinKw || 0),
     };
     try {
-      const enriched = normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer));
-      // The legacy knowledge bridge may fill missing technical data, but it is
-      // not allowed to overrule the Encyclopedia Identity Master naming choice.
+      const enriched = normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer));
       offer = normalizeVehicleOfferSpecs({
         ...enriched,
         make: canonicalMake,
@@ -77,13 +77,18 @@ async function applyOffer(rawOffer) {
           encyclopediaIdentity: identity,
         },
       });
-      knowledgeEnriched = Number(offer.powerHp || 0) !== before.powerHp
+      exactCoreVariant = Boolean(offer?.operational?.knowledgeCore?.variantId);
+      knowledgeEnriched = exactCoreVariant
+        || Number(offer.powerHp || 0) !== before.powerHp
         || Number(offer.engineCc || 0) !== before.engineCc
-        || clean(offer.fuel) !== before.fuel;
+        || clean(offer.fuel) !== before.fuel
+        || clean(offer.bodyType) !== before.bodyType
+        || clean(offer.transmission) !== before.transmission
+        || clean(offer.drive) !== before.drive
+        || Number(offer.power30MinKw || 0) !== before.power30MinKw;
     } catch {
-      // Identity is still useful even when the legacy knowledge bridge has no
-      // matching specification. The publisher keeps its existing needs-data
-      // safety semantics.
+      // Identity is still useful even when no trusted exact variant can be
+      // matched. The knowledge-gap report records this instead of guessing.
     }
   }
 
@@ -98,6 +103,7 @@ async function applyOffer(rawOffer) {
       translated: String(identity.makeSource || "").startsWith("presentation:")
         || String(identity.modelSource || "").startsWith("presentation:"),
       knowledgeEnriched,
+      exactCoreVariant,
     },
   };
 }
@@ -108,7 +114,7 @@ const names = (await fs.readdir(inputDir))
 if (!names.length) throw new Error(`catalog_identity_master_inputs_missing:${inputDir}`);
 
 const summary = {
-  version: 1,
+  version: 2,
   files: names.length,
   offers: 0,
   changed: 0,
@@ -118,6 +124,7 @@ const summary = {
   ambiguous: 0,
   translated: 0,
   knowledgeEnriched: 0,
+  exactCoreVariant: 0,
   resolverCollisions: resolver.collisions.length,
 };
 
@@ -142,6 +149,7 @@ for (const name of names) {
     ambiguous: 0,
     translated: 0,
     knowledgeEnriched: 0,
+    exactCoreVariant: 0,
   };
   for (const { stats } of applied) {
     for (const key of Object.keys(fileStats)) {
@@ -155,7 +163,7 @@ for (const name of names) {
     ...payload,
     offers,
     identityMaster: {
-      version: 1,
+      version: 2,
       appliedAt: new Date().toISOString(),
       sourceCheckpoint: dataset.manifest?.lastCheckpoint || null,
       ...fileStats,
@@ -168,5 +176,5 @@ for (const name of names) {
 
 console.log(JSON.stringify(summary, null, 2));
 if (process.env.GITHUB_STEP_SUMMARY) {
-  await fs.appendFile(process.env.GITHUB_STEP_SUMMARY, `### Encyclopedia Identity Master\n\n\`\`\`json\n${JSON.stringify(summary, null, 2)}\n\`\`\`\n`);
+  await fs.appendFile(process.env.GITHUB_STEP_SUMMARY, `### Encyclopedia Identity Master + Knowledge CORE\n\n\`\`\`json\n${JSON.stringify(summary, null, 2)}\n\`\`\`\n`);
 }

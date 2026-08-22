@@ -1,0 +1,8292 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 1,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "abarth:124spider",
+      "make": "Abarth",
+      "model": "124 Spider",
+      "aliases": [
+        "Abarth 124 Spider"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "abarth",
+        "modelId": "abarth/124-spider",
+        "canonicalMake": "Abarth",
+        "canonicalModel": "124 Spider"
+      }
+    },
+    {
+      "key": "abarth:500",
+      "make": "Abarth",
+      "model": "500",
+      "aliases": [
+        "ABARTH 500"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "abarth",
+        "modelId": "abarth/500",
+        "canonicalMake": "Abarth",
+        "canonicalModel": "500"
+      }
+    },
+    {
+      "key": "abarth:500e",
+      "make": "Abarth",
+      "model": "500e",
+      "aliases": [
+        "Abarth 500e"
+      ],
+      "bodyTypes": [
+        "Hatchback",
+        "Cabriolet"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": 2022,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "abarth",
+        "modelId": "abarth/500e",
+        "canonicalMake": "Abarth",
+        "canonicalModel": "500e"
+      }
+    },
+    {
+      "key": "abarth:595",
+      "make": "Abarth",
+      "model": "595",
+      "aliases": [
+        "595C",
+        "595C COMPETIZIONE",
+        "595C COMPETIZIONE S-A",
+        "595C PISTA 70TH ANNIVERSARY",
+        "595C PISTA 70TH ANNIVERSARY SA",
+        "595C TROFEO",
+        "595C TURISMO",
+        "595C TURISMO S-A"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "abarth",
+        "modelId": "abarth/595",
+        "canonicalMake": "Abarth",
+        "canonicalModel": "595"
+      }
+    },
+    {
+      "key": "abarth:600e",
+      "make": "Abarth",
+      "model": "600E",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "abarth",
+        "modelId": "abarth/600e",
+        "canonicalMake": "Abarth",
+        "canonicalModel": "600E"
+      }
+    },
+    {
+      "key": "abarth:695",
+      "make": "Abarth",
+      "model": "695",
+      "aliases": [
+        "695 70TH ANNIVERSARY",
+        "695 ANNIVERSARY"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "abarth",
+        "modelId": "abarth/695",
+        "canonicalMake": "Abarth",
+        "canonicalModel": "695"
+      }
+    },
+    {
+      "key": "abarth:punto",
+      "make": "Abarth",
+      "model": "Punto",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "abarth",
+        "modelId": null,
+        "canonicalMake": "Abarth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "abarth:spider",
+      "make": "Abarth",
+      "model": "Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "abarth",
+        "modelId": null,
+        "canonicalMake": "Abarth",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:25tl",
+      "make": "Acura",
+      "model": "2.5TL",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:32cl",
+      "make": "Acura",
+      "model": "3.2CL",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:32tl",
+      "make": "Acura",
+      "model": "3.2TL",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:35rl",
+      "make": "Acura",
+      "model": "3.5RL",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:adx",
+      "make": "Acura",
+      "model": "Adx",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:ilx",
+      "make": "Acura",
+      "model": "Ilx",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:integra",
+      "make": "Acura",
+      "model": "Integra",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:integraaspec",
+      "make": "Acura",
+      "model": "Integra A-Spec",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:integratypes",
+      "make": "Acura",
+      "model": "Integra Type S",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "lu"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:legend",
+      "make": "Acura",
+      "model": "Legend",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:mdx",
+      "make": "Acura",
+      "model": "Mdx",
+      "aliases": [
+        "MDX"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": "acura/mdx",
+        "canonicalMake": "Acura",
+        "canonicalModel": "Mdx"
+      }
+    },
+    {
+      "key": "acura:mdx2wd",
+      "make": "Acura",
+      "model": "Mdx 2WD",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:nsx",
+      "make": "Acura",
+      "model": "Nsx",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:rdx",
+      "make": "Acura",
+      "model": "Rdx",
+      "aliases": [
+        "RDX"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": "acura/rdx",
+        "canonicalMake": "Acura",
+        "canonicalModel": "Rdx"
+      }
+    },
+    {
+      "key": "acura:rl",
+      "make": "Acura",
+      "model": "Rl",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:rlx",
+      "make": "Acura",
+      "model": "Rlx",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:rsx",
+      "make": "Acura",
+      "model": "Rsx",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:rsxtypes",
+      "make": "Acura",
+      "model": "Rsx Type S",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:tl",
+      "make": "Acura",
+      "model": "Tl",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": null,
+        "canonicalMake": "Acura",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "acura:tlx",
+      "make": "Acura",
+      "model": "Tlx",
+      "aliases": [
+        "TLX"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": "acura/tlx",
+        "canonicalMake": "Acura",
+        "canonicalModel": "Tlx"
+      }
+    },
+    {
+      "key": "acura:tlxtypes",
+      "make": "Acura",
+      "model": "Tlx Type S",
+      "aliases": [
+        "TLX TYPE S AWD"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": "acura/tlx-type-s",
+        "canonicalMake": "Acura",
+        "canonicalModel": "Tlx Type S"
+      }
+    },
+    {
+      "key": "acura:tsx",
+      "make": "Acura",
+      "model": "Tsx",
+      "aliases": [
+        "TSX"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": "acura/tsx",
+        "canonicalMake": "Acura",
+        "canonicalModel": "Tsx"
+      }
+    },
+    {
+      "key": "acura:zdx",
+      "make": "Acura",
+      "model": "ZDX",
+      "aliases": [],
+      "bodyTypes": [
+        "SUV",
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": 2024,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "modelId": "acura/zdx",
+        "canonicalMake": "Acura",
+        "canonicalModel": "ZDX"
+      }
+    },
+    {
+      "key": "adler:trumpfjunior",
+      "make": "Adler",
+      "model": "Trumpf Junior",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ahorn:van620",
+      "make": "Ahorn",
+      "model": "Van 620",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "aion:hyptecht620premium",
+      "make": "Aion",
+      "model": "Hyptec Ht 620 Premium",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aion",
+        "modelId": null,
+        "canonicalMake": "AION",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "aion:i60",
+      "make": "AION",
+      "model": "i60",
+      "aliases": [
+        "埃安 i60"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "aion",
+        "modelId": "aion/i60",
+        "canonicalMake": "AION",
+        "canonicalModel": "i60"
+      }
+    },
+    {
+      "key": "aion:rt",
+      "make": "AION",
+      "model": "RT",
+      "aliases": [
+        "埃安 RT"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "aion",
+        "modelId": "aion/rt",
+        "canonicalMake": "AION",
+        "canonicalModel": "RT"
+      }
+    },
+    {
+      "key": "aion:ut",
+      "make": "AION",
+      "model": "UT",
+      "aliases": [
+        "埃安 UT"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aion",
+        "modelId": "aion/ut",
+        "canonicalMake": "AION",
+        "canonicalModel": "UT"
+      }
+    },
+    {
+      "key": "aion:ut420standard",
+      "make": "Aion",
+      "model": "Ut 420 Standard",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aion",
+        "modelId": null,
+        "canonicalMake": "AION",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "aion:v",
+      "make": "AION",
+      "model": "V",
+      "aliases": [
+        "AION V"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aion",
+        "modelId": "aion/v",
+        "canonicalMake": "AION",
+        "canonicalModel": "V"
+      }
+    },
+    {
+      "key": "aion:v602luxury",
+      "make": "Aion",
+      "model": "V 602 Luxury",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aion",
+        "modelId": null,
+        "canonicalMake": "AION",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "aion:yplus",
+      "make": "AION",
+      "model": "Y Plus",
+      "aliases": [
+        "埃安 Y Plus"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aion",
+        "modelId": "aion/y-plus",
+        "canonicalMake": "AION",
+        "canonicalModel": "Y Plus"
+      }
+    },
+    {
+      "key": "aito:m5",
+      "make": "AITO",
+      "model": "M5",
+      "aliases": [
+        "问界 M5"
+      ],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "aito",
+        "modelId": "aito/m5",
+        "canonicalMake": "AITO",
+        "canonicalModel": "M5"
+      }
+    },
+    {
+      "key": "aito:m6",
+      "make": "AITO",
+      "model": "M6",
+      "aliases": [
+        "问界 M6"
+      ],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "aito",
+        "modelId": "aito/m6",
+        "canonicalMake": "AITO",
+        "canonicalModel": "M6"
+      }
+    },
+    {
+      "key": "aito:m7",
+      "make": "AITO",
+      "model": "M7",
+      "aliases": [
+        "问界 M7"
+      ],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "aito",
+        "modelId": "aito/m7",
+        "canonicalMake": "AITO",
+        "canonicalModel": "M7"
+      }
+    },
+    {
+      "key": "aito:m8",
+      "make": "AITO",
+      "model": "M8",
+      "aliases": [
+        "问界 M8"
+      ],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "aito",
+        "modelId": "aito/m8",
+        "canonicalMake": "AITO",
+        "canonicalModel": "M8"
+      }
+    },
+    {
+      "key": "aito:m9",
+      "make": "AITO",
+      "model": "M9",
+      "aliases": [
+        "AITO M9"
+      ],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": 2023,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "aito",
+        "modelId": "aito/m9",
+        "canonicalMake": "AITO",
+        "canonicalModel": "M9"
+      }
+    },
+    {
+      "key": "aiways:u5",
+      "make": "Aiways",
+      "model": "U5",
+      "aliases": [
+        "AIWAYS U5",
+        "U5 / /"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aiways",
+        "modelId": "aiways/u5",
+        "canonicalMake": "Aiways",
+        "canonicalModel": "U5"
+      }
+    },
+    {
+      "key": "aiways:u6",
+      "make": "Aiways",
+      "model": "U6",
+      "aliases": [
+        "爱驰 U6"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "aiways",
+        "modelId": "aiways/u6",
+        "canonicalMake": "Aiways",
+        "canonicalModel": "U6"
+      }
+    },
+    {
+      "key": "aixam:500",
+      "make": "Aixam",
+      "model": "500",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "aixam:mac500",
+      "make": "Aixam",
+      "model": "Mac 500",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "aixam:mega",
+      "make": "Aixam",
+      "model": "Mega",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "alfaromeo:1300",
+      "make": "Alfa Romeo",
+      "model": "1300",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:145",
+      "make": "Alfa Romeo",
+      "model": "145",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:146",
+      "make": "Alfa Romeo",
+      "model": "146",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:147",
+      "make": "Alfa Romeo",
+      "model": "147",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": "alfa-romeo/147",
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": "147"
+      }
+    },
+    {
+      "key": "alfaromeo:155",
+      "make": "Alfa Romeo",
+      "model": "155",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:156",
+      "make": "Alfa Romeo",
+      "model": "156",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:159",
+      "make": "Alfa Romeo",
+      "model": "159",
+      "aliases": [
+        "ALFA ROMEO 159"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": "alfa-romeo/159",
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": "159"
+      }
+    },
+    {
+      "key": "alfaromeo:159sw",
+      "make": "Alfa Romeo",
+      "model": "159 SW",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:1600",
+      "make": "Alfa Romeo",
+      "model": "1600",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:1600spiderjunior",
+      "make": "Alfa Romeo",
+      "model": "1600 Spider Junior",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:164",
+      "make": "Alfa Romeo",
+      "model": "164",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:166",
+      "make": "Alfa Romeo",
+      "model": "166",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:1750",
+      "make": "Alfa Romeo",
+      "model": "1750",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:1750berlina",
+      "make": "Alfa Romeo",
+      "model": "1750 Berlina",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:1750gtv",
+      "make": "Alfa Romeo",
+      "model": "1750 GTV",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:1750spider",
+      "make": "Alfa Romeo",
+      "model": "1750 Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:1900css",
+      "make": "Alfa Romeo",
+      "model": "1900 Css",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:2000",
+      "make": "Alfa Romeo",
+      "model": "2000",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:2000berlina",
+      "make": "Alfa Romeo",
+      "model": "2000 Berlina",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:2000gtv",
+      "make": "Alfa Romeo",
+      "model": "2000 GTV",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:2000spider",
+      "make": "Alfa Romeo",
+      "model": "2000 Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:2000spiderveloce",
+      "make": "Alfa Romeo",
+      "model": "2000 Spider Veloce",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:2600",
+      "make": "Alfa Romeo",
+      "model": "2600",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:2600spider",
+      "make": "Alfa Romeo",
+      "model": "2600 Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:2600sprint",
+      "make": "Alfa Romeo",
+      "model": "2600 Sprint",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:33",
+      "make": "Alfa Romeo",
+      "model": "33",
+      "aliases": [
+        "ALFA ROMEO 33 STRADALE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": "alfa-romeo/33",
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": "33"
+      }
+    },
+    {
+      "key": "alfaromeo:4c",
+      "make": "Alfa Romeo",
+      "model": "4C",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": "alfa-romeo/4c",
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": "4C"
+      }
+    },
+    {
+      "key": "alfaromeo:6c",
+      "make": "Alfa Romeo",
+      "model": "6C",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:75",
+      "make": "Alfa Romeo",
+      "model": "75",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:8c",
+      "make": "Alfa Romeo",
+      "model": "8C",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:90",
+      "make": "Alfa Romeo",
+      "model": "90",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:alfa6",
+      "make": "Alfa Romeo",
+      "model": "Alfa 6",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:alfasud",
+      "make": "Alfa Romeo",
+      "model": "Alfasud",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:alfasudsprint",
+      "make": "Alfa Romeo",
+      "model": "Alfasud Sprint",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:alfasudti",
+      "make": "Alfa Romeo",
+      "model": "Alfasud Ti",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:alfetta",
+      "make": "Alfa Romeo",
+      "model": "Alfetta",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:alfettagt",
+      "make": "Alfa Romeo",
+      "model": "Alfetta GT",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:alfettagtv",
+      "make": "Alfa Romeo",
+      "model": "Alfetta GTV",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:alfettagtv2000",
+      "make": "Alfa Romeo",
+      "model": "Alfetta GTV 2000",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:alfettagtv6",
+      "make": "Alfa Romeo",
+      "model": "Alfetta GTV6",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:berlina",
+      "make": "Alfa Romeo",
+      "model": "Berlina",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:brera",
+      "make": "Alfa Romeo",
+      "model": "Brera",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:giulia",
+      "make": "Alfa Romeo",
+      "model": "Giulia",
+      "aliases": [
+        "ALFA GIULIA",
+        "ALFA GIULIA QUADRIFOGLIO",
+        "GIULIA",
+        "GIULLIA",
+        "GIULLIA LUSO TI TB AUTO",
+        "GIULLIA VELOCE TB AUTO",
+        "ジュリア"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": "alfa-romeo/giulia",
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": "Giulia"
+      }
+    },
+    {
+      "key": "alfaromeo:giulia1300ti",
+      "make": "Alfa Romeo",
+      "model": "Giulia 1300 Ti",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:giulia1600",
+      "make": "Alfa Romeo",
+      "model": "Giulia 1600",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:giulia1600spider",
+      "make": "Alfa Romeo",
+      "model": "Giulia 1600 Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:giuliagtjunior",
+      "make": "Alfa Romeo",
+      "model": "Giulia GT Junior",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:giuliasprint1600",
+      "make": "Alfa Romeo",
+      "model": "Giulia Sprint 1600",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:giuliass",
+      "make": "Alfa Romeo",
+      "model": "Giulia Ss",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:giuliasuper",
+      "make": "Alfa Romeo",
+      "model": "Giulia Super",
+      "aliases": [
+        "GIULIA SUPER TB AUTO",
+        "GIULIA SUPER TD AUTO"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": "alfa-romeo/giulia-super",
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": "Giulia Super"
+      }
+    },
+    {
+      "key": "alfaromeo:giuliasuper1600",
+      "make": "Alfa Romeo",
+      "model": "Giulia Super 1600",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:giuliati",
+      "make": "Alfa Romeo",
+      "model": "Giulia Ti",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:giulietta",
+      "make": "Alfa Romeo",
+      "model": "Giulietta",
+      "aliases": [
+        "ALFA ROMEO GIULIETTA",
+        "GIULIETTA",
+        "ALFA GIULIETTA",
+        "ジュリエッタ"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": "alfa-romeo/giulietta",
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": "Giulietta"
+      }
+    },
+    {
+      "key": "alfaromeo:giuliettaspider",
+      "make": "Alfa Romeo",
+      "model": "Giulietta Spider",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:giuliettasprint",
+      "make": "Alfa Romeo",
+      "model": "Giulietta Sprint",
+      "aliases": [
+        "GIULIETTA SPRINT JTDM-2",
+        "GIULIETTA SPRINT JTDM-2 S-A",
+        "GIULIETTA SPRINT TB"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": "alfa-romeo/giulietta-sprint",
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": "Giulietta Sprint"
+      }
+    },
+    {
+      "key": "alfaromeo:giuliettasprintspeciale",
+      "make": "Alfa Romeo",
+      "model": "Giulietta Sprint Speciale",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:giuliettati",
+      "make": "Alfa Romeo",
+      "model": "Giulietta Ti",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:gt",
+      "make": "Alfa Romeo",
+      "model": "GT",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:gt1300junior",
+      "make": "Alfa Romeo",
+      "model": "GT 1300 Junior",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:gtjunior",
+      "make": "Alfa Romeo",
+      "model": "GT Junior",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:gtjunior1600",
+      "make": "Alfa Romeo",
+      "model": "GT Junior 1600",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:gt1300",
+      "make": "Alfa Romeo",
+      "model": "GT1300",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:gtv",
+      "make": "Alfa Romeo",
+      "model": "GTV",
+      "aliases": [
+        "ALFA ROMEO GTV"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": "alfa-romeo/gtv",
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": "GTV"
+      }
+    },
+    {
+      "key": "alfaromeo:gtv2000",
+      "make": "Alfa Romeo",
+      "model": "GTV 2000",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:gtv6",
+      "make": "Alfa Romeo",
+      "model": "GTV6",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:junior",
+      "make": "Alfa Romeo",
+      "model": "Junior",
+      "aliases": [
+        "Milano",
+        "ジュニア イブリダ"
+      ],
+      "bodyTypes": [
+        "Compact crossover",
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": 2024,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": "alfa-romeo/junior",
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": "Junior"
+      }
+    },
+    {
+      "key": "alfaromeo:mito",
+      "make": "Alfa Romeo",
+      "model": "Mito",
+      "aliases": [
+        "MiTo"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": "alfa-romeo/mito",
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": "Mito"
+      }
+    },
+    {
+      "key": "alfaromeo:montreal",
+      "make": "Alfa Romeo",
+      "model": "Montreal",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:rz",
+      "make": "Alfa Romeo",
+      "model": "RZ",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:spider",
+      "make": "Alfa Romeo",
+      "model": "Spider",
+      "aliases": [
+        "SPIDER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": "alfa-romeo/spider",
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": "Spider"
+      }
+    },
+    {
+      "key": "alfaromeo:spider1600",
+      "make": "Alfa Romeo",
+      "model": "Spider 1600",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:spider2000",
+      "make": "Alfa Romeo",
+      "model": "Spider 2000",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:spiderk6",
+      "make": "Alfa Romeo",
+      "model": "Spider K6",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:spiderveloce",
+      "make": "Alfa Romeo",
+      "model": "Spider Veloce",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:spiderveloce2000",
+      "make": "Alfa Romeo",
+      "model": "Spider Veloce 2000",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:sportwagon",
+      "make": "Alfa Romeo",
+      "model": "Sport Wagon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:sprint",
+      "make": "Alfa Romeo",
+      "model": "Sprint",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:sprintveloce",
+      "make": "Alfa Romeo",
+      "model": "Sprint Veloce",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:stelvio",
+      "make": "Alfa Romeo",
+      "model": "Stelvio",
+      "aliases": [
+        "ALFA ROMEO STELVIO",
+        "ALFA STELVIO",
+        "STELVIO",
+        "ステルヴィオ"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": "alfa-romeo/stelvio",
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": "Stelvio"
+      }
+    },
+    {
+      "key": "alfaromeo:sz",
+      "make": "Alfa Romeo",
+      "model": "Sz",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": null,
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alfaromeo:tonale",
+      "make": "Alfa Romeo",
+      "model": "Tonale",
+      "aliases": [
+        "ALFA ROMEO TONALE",
+        "ALFA TONALE",
+        "TONALE",
+        "トナーレ"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "modelId": "alfa-romeo/tonale",
+        "canonicalMake": "Alfa Romeo",
+        "canonicalModel": "Tonale"
+      }
+    },
+    {
+      "key": "alpina:b3",
+      "make": "Alpina",
+      "model": "B3",
+      "aliases": [
+        "ALPINA B3",
+        "BMW ALPINA B3",
+        "BMW ALPINA B3 LIMOUSINE",
+        "BMW ALPINA B3 S BITURBO TOURING ALLRAD"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": "alpina/b3",
+        "canonicalMake": "Alpina",
+        "canonicalModel": "B3"
+      }
+    },
+    {
+      "key": "alpina:b3touring",
+      "make": "Alpina",
+      "model": "B3 Touring",
+      "aliases": [
+        "B3 TOURING"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": "alpina/b3-touring",
+        "canonicalMake": "Alpina",
+        "canonicalModel": "B3 Touring"
+      }
+    },
+    {
+      "key": "alpina:b5",
+      "make": "Alpina",
+      "model": "B5",
+      "aliases": [
+        "BMW ALPINA B5",
+        "BMW ALPINA B5 ALLRAD",
+        "BMW ALPINA B5 BITURBO",
+        "BMW ALPINA B5 BITURBO Allrad",
+        "BMW ALPINA B5 BITURBO ALLRAD (M3)",
+        "BMW ALPINA B5 BITURBO TOURING ALLRAD",
+        "BMW ALPINA B5 BITURBO TOURING ALLRAD (M3)",
+        "BMW ALPINA B5 GT",
+        "BMW ALPINA B5 GT TOURING",
+        "BMW ALPINA B5 GT TOURING ALLRAD"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": "alpina/b5",
+        "canonicalMake": "Alpina",
+        "canonicalModel": "B5"
+      }
+    },
+    {
+      "key": "alpina:b7",
+      "make": "Alpina",
+      "model": "B7",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": "alpina/b7",
+        "canonicalMake": "Alpina",
+        "canonicalModel": "B7"
+      }
+    },
+    {
+      "key": "alpina:b7biturboallrad",
+      "make": "Alpina",
+      "model": "B7 Biturbo Allrad",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": null,
+        "canonicalMake": "Alpina",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alpina:bmwalpinab33",
+      "make": "Alpina",
+      "model": "Bmw Alpina B3 3",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": null,
+        "canonicalMake": "Alpina",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alpina:bmwalpinab3biturbo",
+      "make": "Alpina",
+      "model": "Bmw Alpina B3 Biturbo",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": null,
+        "canonicalMake": "Alpina",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alpina:bmwalpinab3gt",
+      "make": "Alpina",
+      "model": "Bmw Alpina B3 GT",
+      "aliases": [
+        "BMW ALPINA B3 GT"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": "alpina/bmw-alpina-b3-gt",
+        "canonicalMake": "Alpina",
+        "canonicalModel": "Bmw Alpina B3 GT"
+      }
+    },
+    {
+      "key": "alpina:bmwalpinab3touring",
+      "make": "Alpina",
+      "model": "Bmw Alpina B3 Touring",
+      "aliases": [
+        "BMW ALPINA B3 TOURING"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": "alpina/bmw-alpina-b3-touring",
+        "canonicalMake": "Alpina",
+        "canonicalModel": "Bmw Alpina B3 Touring"
+      }
+    },
+    {
+      "key": "alpina:bmwalpinab5touring",
+      "make": "Alpina",
+      "model": "Bmw Alpina B5 Touring",
+      "aliases": [
+        "BMW ALPINA B5 TOURING AL",
+        "BMW ALPINA B5 TOURING ALL",
+        "BMW ALPINA B5 TOURING ALLRAD"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": "alpina/bmw-alpina-b5-touring",
+        "canonicalMake": "Alpina",
+        "canonicalModel": "Bmw Alpina B5 Touring"
+      }
+    },
+    {
+      "key": "alpina:bmwalpinad3",
+      "make": "Alpina",
+      "model": "Bmw Alpina D3",
+      "aliases": [
+        "BMW ALPINA D3"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": "alpina/bmw-alpina-d3",
+        "canonicalMake": "Alpina",
+        "canonicalModel": "Bmw Alpina D3"
+      }
+    },
+    {
+      "key": "alpina:bmwalpinad3biturbo",
+      "make": "Alpina",
+      "model": "Bmw Alpina D3 Biturbo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": null,
+        "canonicalMake": "Alpina",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alpina:bmwalpinad3biturbotouringallrad",
+      "make": "Alpina",
+      "model": "Bmw Alpina D3 Biturbo Touring Allrad",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": null,
+        "canonicalMake": "Alpina",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alpina:bmwalpinad5biturbotouring",
+      "make": "Alpina",
+      "model": "Bmw Alpina D5 Biturbo Touring",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": null,
+        "canonicalMake": "Alpina",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alpina:bmwalpinaroadsters",
+      "make": "Alpina",
+      "model": "Bmw Alpina Roadster S",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": null,
+        "canonicalMake": "Alpina",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alpina:bmwalpinaxd3biturbo",
+      "make": "Alpina",
+      "model": "Bmw Alpina XD3 Biturbo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": null,
+        "canonicalMake": "Alpina",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alpina:d5s",
+      "make": "Alpina",
+      "model": "D5 S",
+      "aliases": [
+        "BMW ALPINA D5 S",
+        "BMW ALPINA D5 S ALLRAD",
+        "BMW ALPINA D5 S TOU.ALLR",
+        "BMW ALPINA D5 S TOUR",
+        "BMW ALPINA D5 S TOURING ALLRAD"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": "alpina/d5-s",
+        "canonicalMake": "Alpina",
+        "canonicalModel": "D5 S"
+      }
+    },
+    {
+      "key": "alpina:xb7",
+      "make": "Alpina",
+      "model": "XB7",
+      "aliases": [
+        "BMW ALPINA XB7",
+        "BMW ALPINA XB7 MANUFAKTUR"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": "alpina/xb7",
+        "canonicalMake": "Alpina",
+        "canonicalModel": "XB7"
+      }
+    },
+    {
+      "key": "alpina:xd3",
+      "make": "Alpina",
+      "model": "XD3",
+      "aliases": [
+        "BMW ALPINA XD3"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": "alpina/xd3",
+        "canonicalMake": "Alpina",
+        "canonicalModel": "XD3"
+      }
+    },
+    {
+      "key": "alpina:xd4",
+      "make": "Alpina",
+      "model": "XD4",
+      "aliases": [
+        "BMW ALPINA XD4"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "modelId": "alpina/xd4",
+        "canonicalMake": "Alpina",
+        "canonicalModel": "XD4"
+      }
+    },
+    {
+      "key": "alpine:a106",
+      "make": "Alpine",
+      "model": "A106",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpine-cars",
+        "modelId": null,
+        "canonicalMake": "Alpine",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alpine:a110",
+      "make": "Alpine",
+      "model": "A110",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpine-cars",
+        "modelId": "alpine-cars/a110",
+        "canonicalMake": "Alpine",
+        "canonicalModel": "A110"
+      }
+    },
+    {
+      "key": "alpine:a110r",
+      "make": "Alpine",
+      "model": "A110R",
+      "aliases": [
+        "A110 R"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpine-cars",
+        "modelId": "alpine-cars/a110r",
+        "canonicalMake": "Alpine",
+        "canonicalModel": "A110R"
+      }
+    },
+    {
+      "key": "alpine:a290",
+      "make": "Alpine",
+      "model": "A290",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpine-cars",
+        "modelId": "alpine-cars/a290",
+        "canonicalMake": "Alpine",
+        "canonicalModel": "A290"
+      }
+    },
+    {
+      "key": "alpine:a290gtev",
+      "make": "Alpine",
+      "model": "A290 GT EV",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpine-cars",
+        "modelId": null,
+        "canonicalMake": "Alpine",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alpine:a310",
+      "make": "Alpine",
+      "model": "A310",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpine-cars",
+        "modelId": null,
+        "canonicalMake": "Alpine",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "alpine:a390",
+      "make": "Alpine",
+      "model": "A390",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "alpine-cars",
+        "modelId": "alpine-cars/a390",
+        "canonicalMake": "Alpine",
+        "canonicalModel": "A390"
+      }
+    },
+    {
+      "key": "alvis:firefly",
+      "make": "Alvis",
+      "model": "Firefly",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "alvis:silvereagle",
+      "make": "Alvis",
+      "model": "Silver Eagle",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "alvis:speed20",
+      "make": "Alvis",
+      "model": "Speed 20",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "alvis:speed20sc",
+      "make": "Alvis",
+      "model": "Speed 20 Sc",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "alvis:sports",
+      "make": "Alvis",
+      "model": "Sports",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "alvis:ta14",
+      "make": "Alvis",
+      "model": "TA14",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "alvis:ta21",
+      "make": "Alvis",
+      "model": "TA21",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "alvis:tc21",
+      "make": "Alvis",
+      "model": "TC21",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "alvis:tc21100",
+      "make": "Alvis",
+      "model": "TC21/100",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "alvis:td21",
+      "make": "Alvis",
+      "model": "TD21",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "amgeneral:hummer",
+      "make": "Am General",
+      "model": "Hummer",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "amberauto:a5",
+      "make": "AMBERAUTO",
+      "model": "A5",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "amberauto",
+        "modelId": "amberauto/a5",
+        "canonicalMake": "AMBERAUTO",
+        "canonicalModel": "A5"
+      }
+    },
+    {
+      "key": "ambertruck:ev160",
+      "make": "AMBERTRUCK",
+      "model": "EV 160",
+      "aliases": [],
+      "bodyTypes": [
+        "truck"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ambertruck",
+        "modelId": "ambertruck/ev-160",
+        "canonicalMake": "AMBERTRUCK",
+        "canonicalModel": "EV 160"
+      }
+    },
+    {
+      "key": "ambertruck:ev75",
+      "make": "AMBERTRUCK",
+      "model": "EV 75",
+      "aliases": [],
+      "bodyTypes": [
+        "truck"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ambertruck",
+        "modelId": "ambertruck/ev-75",
+        "canonicalMake": "AMBERTRUCK",
+        "canonicalModel": "EV 75"
+      }
+    },
+    {
+      "key": "ambertruck:jl",
+      "make": "AMBERTRUCK",
+      "model": "JL",
+      "aliases": [],
+      "bodyTypes": [
+        "truck"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ambertruck",
+        "modelId": "ambertruck/jl",
+        "canonicalMake": "AMBERTRUCK",
+        "canonicalModel": "JL"
+      }
+    },
+    {
+      "key": "ambertruck:jm",
+      "make": "AMBERTRUCK",
+      "model": "JM",
+      "aliases": [],
+      "bodyTypes": [
+        "truck"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ambertruck",
+        "modelId": "ambertruck/jm",
+        "canonicalMake": "AMBERTRUCK",
+        "canonicalModel": "JM"
+      }
+    },
+    {
+      "key": "ambertruck:sm",
+      "make": "AMBERTRUCK",
+      "model": "SM",
+      "aliases": [],
+      "bodyTypes": [
+        "truck"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ambertruck",
+        "modelId": "ambertruck/sm",
+        "canonicalMake": "AMBERTRUCK",
+        "canonicalModel": "SM"
+      }
+    },
+    {
+      "key": "ambertruck:worknf",
+      "make": "AMBERTRUCK",
+      "model": "WORK NF",
+      "aliases": [],
+      "bodyTypes": [
+        "pickup"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ambertruck",
+        "modelId": "ambertruck/work-nf",
+        "canonicalMake": "AMBERTRUCK",
+        "canonicalModel": "WORK NF"
+      }
+    },
+    {
+      "key": "amc:ambassador",
+      "make": "AMC",
+      "model": "Ambassador",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "amc",
+        "modelId": null,
+        "canonicalMake": "AMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "amc:amx",
+      "make": "AMC",
+      "model": "Amx",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "amc",
+        "modelId": null,
+        "canonicalMake": "AMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "amc:cj7",
+      "make": "AMC",
+      "model": "CJ7",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "amc",
+        "modelId": null,
+        "canonicalMake": "AMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "amc:eagle",
+      "make": "AMC",
+      "model": "Eagle",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "amc",
+        "modelId": null,
+        "canonicalMake": "AMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "amc:gremlin",
+      "make": "AMC",
+      "model": "Gremlin",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "amc",
+        "modelId": null,
+        "canonicalMake": "AMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "amc:javelin",
+      "make": "AMC",
+      "model": "Javelin",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "amc",
+        "modelId": null,
+        "canonicalMake": "AMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "amc:javelinsst",
+      "make": "AMC",
+      "model": "Javelin Sst",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "amc",
+        "modelId": null,
+        "canonicalMake": "AMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "amc:marlin",
+      "make": "AMC",
+      "model": "Marlin",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "amc",
+        "modelId": null,
+        "canonicalMake": "AMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "amc:pacer",
+      "make": "AMC",
+      "model": "Pacer",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "amc",
+        "modelId": null,
+        "canonicalMake": "AMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "amc:wrangler",
+      "make": "AMC",
+      "model": "Wrangler",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "amc",
+        "modelId": null,
+        "canonicalMake": "AMC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "american:amx",
+      "make": "American",
+      "model": "Amx",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "american:rambler",
+      "make": "American",
+      "model": "Rambler",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "amphicar:770",
+      "make": "Amphicar",
+      "model": "770",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "armstrongsiddeley:lancaster",
+      "make": "Armstrong Siddeley",
+      "model": "Lancaster",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "armstrongsiddeley:saphire",
+      "make": "Armstrong Siddeley",
+      "model": "Saphire",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "armstrongsiddeley:sapphire",
+      "make": "Armstrong Siddeley",
+      "model": "Sapphire",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "armstrongsiddeley:sapphire346",
+      "make": "Armstrong Siddeley",
+      "model": "Sapphire 346",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "armstrongsiddeley:starsapphire",
+      "make": "Armstrong Siddeley",
+      "model": "Star Sapphire",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "armstrongsiddeley:typhoon",
+      "make": "Armstrong Siddeley",
+      "model": "Typhoon",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "armstrongsiddeley:whitley",
+      "make": "Armstrong Siddeley",
+      "model": "Whitley",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "astonmartin:cygnet",
+      "make": "Aston Martin",
+      "model": "Cygnet",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": null,
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "astonmartin:dbar1",
+      "make": "Aston Martin",
+      "model": "Db AR1",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": null,
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "astonmartin:db1",
+      "make": "Aston Martin",
+      "model": "DB1",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": null,
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "astonmartin:db11",
+      "make": "Aston Martin",
+      "model": "DB11",
+      "aliases": [
+        "DB 11"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/db11",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "DB11"
+      }
+    },
+    {
+      "key": "astonmartin:db12",
+      "make": "Aston Martin",
+      "model": "DB12",
+      "aliases": [],
+      "bodyTypes": [
+        "Coupe",
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "lu",
+        "my",
+        "nl",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": 2023,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/db12",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "DB12"
+      }
+    },
+    {
+      "key": "astonmartin:db2",
+      "make": "Aston Martin",
+      "model": "DB2",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": null,
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "astonmartin:db24",
+      "make": "Aston Martin",
+      "model": "DB2/4",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": null,
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "astonmartin:db4",
+      "make": "Aston Martin",
+      "model": "DB4",
+      "aliases": [
+        "DB4 GT",
+        "DB4 GT ZAGATO"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/db4",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "DB4"
+      }
+    },
+    {
+      "key": "astonmartin:db5",
+      "make": "Aston Martin",
+      "model": "DB5",
+      "aliases": [
+        "ASTON MARTIN DB5"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/db5",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "DB5"
+      }
+    },
+    {
+      "key": "astonmartin:db6",
+      "make": "Aston Martin",
+      "model": "DB6",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": null,
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "astonmartin:db7",
+      "make": "Aston Martin",
+      "model": "DB7",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": null,
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "astonmartin:db9",
+      "make": "Aston Martin",
+      "model": "DB9",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/db9",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "DB9"
+      }
+    },
+    {
+      "key": "astonmartin:dbs",
+      "make": "Aston Martin",
+      "model": "Dbs",
+      "aliases": [
+        "DBS"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/dbs",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Dbs"
+      }
+    },
+    {
+      "key": "astonmartin:dbx",
+      "make": "Aston Martin",
+      "model": "Dbx",
+      "aliases": [
+        "Aston Martin DBX",
+        "DBX"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/dbx",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Dbx"
+      }
+    },
+    {
+      "key": "astonmartin:dbxs",
+      "make": "Aston Martin",
+      "model": "Dbx S",
+      "aliases": [
+        "DBX S"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/dbx-s",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Dbx S"
+      }
+    },
+    {
+      "key": "astonmartin:dbx707",
+      "make": "Aston Martin",
+      "model": "DBX707",
+      "aliases": [
+        "DBX 707"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "lu",
+        "nl",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/dbx707",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "DBX707"
+      }
+    },
+    {
+      "key": "astonmartin:lagonda",
+      "make": "Aston Martin",
+      "model": "Lagonda",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": null,
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "astonmartin:rapide",
+      "make": "Aston Martin",
+      "model": "Rapide",
+      "aliases": [
+        "RAPIDE AMR",
+        "Rapide AMR",
+        "RAPIDE AMR V12 AUTO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/rapide",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Rapide"
+      }
+    },
+    {
+      "key": "astonmartin:speedster",
+      "make": "Aston Martin",
+      "model": "Speedster",
+      "aliases": [
+        "SPEEDSTER"
+      ],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/speedster",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Speedster"
+      }
+    },
+    {
+      "key": "astonmartin:v8",
+      "make": "Aston Martin",
+      "model": "V8",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/v8",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "V8"
+      }
+    },
+    {
+      "key": "astonmartin:valhalla",
+      "make": "Aston Martin",
+      "model": "Valhalla",
+      "aliases": [
+        "VALHALLA"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/valhalla",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Valhalla"
+      }
+    },
+    {
+      "key": "astonmartin:valkyrie",
+      "make": "Aston Martin",
+      "model": "Valkyrie",
+      "aliases": [
+        "VALKYRIE"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/valkyrie",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Valkyrie"
+      }
+    },
+    {
+      "key": "astonmartin:valour",
+      "make": "Aston Martin",
+      "model": "Valour",
+      "aliases": [
+        "VALOUR"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "my",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/valour",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Valour"
+      }
+    },
+    {
+      "key": "astonmartin:vanquish",
+      "make": "Aston Martin",
+      "model": "Vanquish",
+      "aliases": [
+        "VANQUISH"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/vanquish",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Vanquish"
+      }
+    },
+    {
+      "key": "astonmartin:vantage",
+      "make": "Aston Martin",
+      "model": "Vantage",
+      "aliases": [
+        "VANTAGE"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": "aston-martin/vantage",
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": "Vantage"
+      }
+    },
+    {
+      "key": "astonmartin:virage",
+      "make": "Aston Martin",
+      "model": "Virage",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": null,
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "astonmartin:zagato",
+      "make": "Aston Martin",
+      "model": "Zagato",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "modelId": null,
+        "canonicalMake": "Aston Martin",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "auburn:851",
+      "make": "Auburn",
+      "model": "851",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "audi:100",
+      "make": "Audi",
+      "model": "100",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "audi:200",
+      "make": "Audi",
+      "model": "200",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "audi:4000",
+      "make": "Audi",
+      "model": "4000",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "audi:5000",
+      "make": "Audi",
+      "model": "5000",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "audi:60",
+      "make": "Audi",
+      "model": "60",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "audi:80",
+      "make": "Audi",
+      "model": "80",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "audi:90",
+      "make": "Audi",
+      "model": "90",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "audi:a1",
+      "make": "Audi",
+      "model": "A1",
+      "aliases": [
+        "Audi A1",
+        "A1/ A1 Spetback 1.4 TFSI",
+        "A1/ A1 Sportback 1.0TFSI (S-tronic)",
+        "A1/ A1 Sportback 1.4 TFSI cylinder on demand (S-tronic)",
+        "A1/ A1 Sportback 1.4 TFSI (S-tronic)",
+        "A1 Sportback 25 TFSI (S-tronic)",
+        "A1 Sportback 35 TFSI cylinder on demand (S-tronic)",
+        "A1 Sportback Citycarver 30 TFSI (S-tronic)"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a1",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A1"
+      }
+    },
+    {
+      "key": "audi:a2",
+      "make": "Audi",
+      "model": "A2",
+      "aliases": [
+        "AUDI A2"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a2",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A2"
+      }
+    },
+    {
+      "key": "audi:a3",
+      "make": "Audi",
+      "model": "A3",
+      "aliases": [
+        "AUDI A3",
+        "A3 40 TFSI (S-tronic)",
+        "A3 Sedan 1.4 TFSI cylinder on demand (S-tronic)",
+        "A3 Sedan 1.4 TFSI (S-tronic)",
+        "A3 Sedan 1.8 TFSI quattro (S-tronic)",
+        "A3 Sedan 2.0 TFSI quattro (S-tronic)",
+        "A3 Sedan 30 TFSI A3 Sedan 1.4 TFSI (S-tronic)",
+        "A3 Sedan 30 TFSI (S-tronic)",
+        "A3 Sedan 40 TFSI quattro A3 Sedan 2.0 TFSI quattro (S-tronic)",
+        "A3 Sedan 40 TFSI quattro (S-tronic)",
+        "A3 Sportback 1.4 TFSI cylinder on demand (S-tronic)",
+        "A3 Sportback 1.4 TFSI (S-tronic)",
+        "A3 Sportback 1.8 TFSI quattro (S-tronic)",
+        "A3 Sportback 2.0 TFSI quattro (S-tronic)",
+        "A3 Sportback 30 TFSI A3 Sportback 1.4 TFSI (S-tronic)",
+        "A3 Sportback 30 TFSI (S-tronic)",
+        "A3 Sportback 40 TFSI quattro A3 Sportback 2.0 TFSI quattro (S-tronic)",
+        "A3 Sportback 40 TFSI quattro (S-tronic)",
+        "A3 Sportback 40 TFSI quattro (S-tronic) A3 Sedan 40 TFSI quattro (S-tronic)",
+        "A3 Sportback / Sedan 30 TFSI (S-tronic)"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a3",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A3"
+      }
+    },
+    {
+      "key": "audi:a4",
+      "make": "Audi",
+      "model": "A4",
+      "aliases": [
+        "A4 ALLROAD QUATTRO",
+        "A4 AVANT",
+        "A4 LIMOUSINE",
+        "A4 1.4 TFSI A4 Avant 1.4 TFSI (S-tronic)",
+        "A4 2.0 TFSI A4 Avant 2.0 TFSI",
+        "A4 2.0 TFSI A4 Avant 2.0 TFSI (S-tronic)",
+        "A4 2.0 TFSI quattro A4 Avant 2.0 TFSI quattro (S-tronic)",
+        "A4 2.0 TFSI quattro (S-tronic)",
+        "A4 2.0 TFSI (S-tronic)",
+        "A4 35 TDI A4 Avant 35 TDI (S-tronic)",
+        "A4 35 TFSI A4 Avant 35 TFSI (S-tronic)",
+        "A4 35 TFSI A4 Avant 35 TFSI (S-tronic) A4 1.4 TFSI A4 Avant 1.4 TFSI (S-tronic)",
+        "A4 35 TFSI (S-tronic)",
+        "A4 40 TDI quattro A4 Avant 40 TDI quattro (S-tronic)",
+        "A4 40 TDI quattro (S-tronic)",
+        "A4 40 TFSI (S-tronic)",
+        "A4 40 TFSI (S-tronic) A4 2.0 TFSI (S-tronic)",
+        "A4 45 TFSI quattro A4 Avant 45 TFSI quattro (S-tronic)",
+        "A4 45 TFSI quattro (S-tronic)",
+        "A4 45 TFSI quattro (S-tronic) A4 2.0 TFSI quattro (S-tronic)",
+        "A4 allroad quattro (S-tronic)",
+        "A4 allroad (S-tronic)",
+        "A4 Avant 2.0 TFSI quattro (S-tronic)",
+        "A4 Avant 2.0 TFSI (S-tronic)",
+        "A4 Avant 40 TDI quattro (S-tronic)",
+        "A4 Avant 40 TFSI (S-tronic)",
+        "A4 Avant 40 TFSI (S-tronic) A4 Avant 2.0 TFSI (S-tronic)",
+        "A4 Avant 45 TFSI quattro (S-tronic)",
+        "A4 Avant 45 TFSI quattro (S-tronic) A4 Avant 2.0 TFSI quattro (S-tronic)"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a4",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A4"
+      }
+    },
+    {
+      "key": "audi:a5",
+      "make": "Audi",
+      "model": "A5",
+      "aliases": [
+        "AUDI A5",
+        "A5 2.0 TFSI quattro (S-tronic)",
+        "A5 Avant TDI quattro 150kW (S-tronic)",
+        "A5 Avant TFSI 110kW (S-tronic)",
+        "A5 Avant TFSI quattro 150kW (S-tronic)",
+        "A5 Cabriolet 2.0 TFSI quattro (S-tronic)",
+        "A5 Cabriolet 45 TFSI quattro A5 Cabriolet 2.0TFSI quattro (S-tronic)",
+        "A5 Cabriolet 45 TFSI quattro (S-tronic)",
+        "A5 Coupe 2.0TFSI quattro (S-tronic)",
+        "A5 Coupe 40 TDI quattro (S-tronic)",
+        "A5 Coupe 45 TFSI quattro A5 Coupe 2.0TFSI quattro (S-tronic)",
+        "A5 Coupe 45 TFSI quattro (S-tronic)",
+        "A5 Sportback 2.0 TFSI quattro (S-tronic)",
+        "A5 Sportback 2.0TFSI (S-tronic)",
+        "A5 Sportback 35 TDI (S-tronic)",
+        "A5 Sportback 40 TDI quattro (S-tronic)",
+        "A5 Sportback 40 TFSI A5 Sportback 2.0TFSI (S-tronic)",
+        "A5 Sportback 40 TFSI (S-tronic)",
+        "A5 Sportback 45 TFSI quattro A5 Sportback 2.0 TFSI quattro (S-tronic)",
+        "A5 Sportback 45 TFSI quattro (S-tronic)",
+        "A5 TDI quattro 150kW (S-tronic)",
+        "A5 TDI quattro 150kW (S-tronic) A5 Avant TDI quattro 150kW (S-tronic)",
+        "A5 TFSI 110kW (S-tronic)",
+        "A5 TFSI quattro 150kW (S-tronic)"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a5",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A5"
+      }
+    },
+    {
+      "key": "audi:a6",
+      "make": "Audi",
+      "model": "A6",
+      "aliases": [
+        "A 6 ALLROAD QUATTRO",
+        "A 6 AVANT",
+        "A 6 LIMOUSINE",
+        "A6 1.8 TFSI (S-tronic)",
+        "A6 2.0 TFSI quattro A6 Avant 2.0 TFSI quattro (S-tronic)",
+        "A6 2.8 FSI quattro A6 Avant 2.8 FSI quattro (S-tronic)",
+        "A6 3.0 TFSI quattro (S-tronic)",
+        "A6 3.0 TFSI quattro A6 Avant 3.0 TFSI quattro (S-tronic)",
+        "A6 40 TDI quattro",
+        "A6 40 TDI quattro (S-tronic)",
+        "A6 40 TDI quattro A6 Avant 40 TDI quattro (S-tronic)",
+        "A6 45 TFSI quattro / A6 Avant 45 TFSI quattro (S-tronic)",
+        "A6 55 TFSI quattro (S-tronic)",
+        "A6 55 TFSI quattro A6 Avant 55 TFSI quattro (S-tronic)",
+        "A6 55 TFSI quattro air sus A6 Avant 55 TFSI quattro air sus (S-tronic)",
+        "A6 allroad quattro (S-tronic)",
+        "A6 Avant 1.8 TFSI (S-tronic)",
+        "A6 Avant 3.0 TFSI quattro (S-tronic)",
+        "A6 Avant 40 TDI quattro (S-tronic)",
+        "A6 Avant 45 TFSI quattro (S-tronic)",
+        "AUDI A6"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a6",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A6"
+      }
+    },
+    {
+      "key": "audi:a7",
+      "make": "Audi",
+      "model": "A7",
+      "aliases": [
+        "A 7 SPORTBACK",
+        "A7 Sportback 2.0 TFSI quattro (S-tronic)",
+        "A7 Sportback 3.0 TFSI quattro (S-tronic)",
+        "A7 Sportback 40 TDI quattro",
+        "A7 Sportback 40 TDI quattro (S-tronic)",
+        "A7 Sportback 45 TFSI quattro (S-tronic)",
+        "A7 Sportback 55 TFSI quattro (S-tronic)",
+        "AUDI A7"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a7",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A7"
+      }
+    },
+    {
+      "key": "audi:a8",
+      "make": "Audi",
+      "model": "A8",
+      "aliases": [
+        "A 8",
+        "AUDI A8",
+        "A8 3.0 TFSI quattro",
+        "A8 4.0 TFSI quattro",
+        "A8 4.2 FSI quattro",
+        "A8 55 TFSI quattro",
+        "A8 60 TFSI quattro",
+        "A8 L 4.0 TFSI quattro",
+        "A8L 4.2 FSI quattro",
+        "A8 L 60 TFSI quattro",
+        "A8 L W12 6.3 FSI quattro"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/a8",
+        "canonicalMake": "Audi",
+        "canonicalModel": "A8"
+      }
+    },
+    {
+      "key": "audi:ai",
+      "make": "Audi",
+      "model": "Ai",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "audi:allroad",
+      "make": "Audi",
+      "model": "Allroad",
+      "aliases": [
+        "AUDI ALLROAD"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/allroad",
+        "canonicalMake": "Audi",
+        "canonicalModel": "Allroad"
+      }
+    },
+    {
+      "key": "audi:cabriolet",
+      "make": "Audi",
+      "model": "Cabriolet",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "audichina:e5sportback",
+      "make": "AUDI China",
+      "model": "E5 Sportback",
+      "aliases": [],
+      "bodyTypes": [
+        "Sportback"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": 2025,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "audi-china",
+        "modelId": "audi-china/e5-sportback",
+        "canonicalMake": "AUDI China",
+        "canonicalModel": "E5 Sportback"
+      }
+    },
+    {
+      "key": "audichina:e7x",
+      "make": "AUDI China",
+      "model": "E7X",
+      "aliases": [],
+      "bodyTypes": [
+        "SUV"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": 2026,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "audi-china",
+        "modelId": "audi-china/e7x",
+        "canonicalMake": "AUDI China",
+        "canonicalModel": "E7X"
+      }
+    },
+    {
+      "key": "audi:coupe",
+      "make": "Audi",
+      "model": "Coupe",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": null,
+        "canonicalMake": "Audi",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "audi:etron",
+      "make": "Audi",
+      "model": "e-tron",
+      "aliases": [
+        "AUDI E TRON",
+        "Audi e-tron",
+        "AUDI E-TRON",
+        "E-TRON"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/e-tron",
+        "canonicalMake": "Audi",
+        "canonicalModel": "e-tron"
+      }
+    },
+    {
+      "key": "audi:etrongt",
+      "make": "Audi",
+      "model": "e-tron GT",
+      "aliases": [
+        "AUDI E-TRON GT",
+        "E TRON GT",
+        "E-TRON GT",
+        "E-TRON GT / /"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/e-tron-gt",
+        "canonicalMake": "Audi",
+        "canonicalModel": "e-tron GT"
+      }
+    },
+    {
+      "key": "audi:q2",
+      "make": "Audi",
+      "model": "Q2",
+      "aliases": [
+        "Audi Q2",
+        "Q2 1.0 TFSI (S-tronic)",
+        "Q2 1.4 TFSI cylinder on demand (S-tronic)",
+        "Q2 30 TFSI Q2 1.0 TFSI(S-tronic)",
+        "Q2 30 TFSI (S-tronic)",
+        "Q2 35 TDI quattro (S-tronic)",
+        "Q2 35 TDI (S-tronic)",
+        "Q2 35 TFSI cylinder on demand Q2 1.4 TFSI cylinder on demand (S-tronic)",
+        "Q2 35 TFSI cylinder on demand (S-tronic)",
+        "Q2 35 TFSI (S-tronic)"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/q2",
+        "canonicalMake": "Audi",
+        "canonicalModel": "Q2"
+      }
+    },
+    {
+      "key": "audi:q3",
+      "make": "Audi",
+      "model": "Q3",
+      "aliases": [
+        "Audi Q3",
+        "Q3 1.4 TFSI",
+        "Q3 2.0 TFSI quattro (S-tronic)",
+        "Q3 35 TDI quattro",
+        "Q3 35 TDI quattro (S-tronic)",
+        "Q3 35 TFSI Sportback (S-tronic)",
+        "Q3 35 TFSI (S-tronic)",
+        "Q3 40 TDI quattro (S-tronic)"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "modelId": "audi/q3",
+        "canonicalMake": "Audi",
+        "canonicalModel": "Q3"
+      }
+    }
+  ]
+}

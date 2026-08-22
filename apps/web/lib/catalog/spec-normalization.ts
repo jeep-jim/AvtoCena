@@ -1,4 +1,5 @@
 import type { PowerDataConfidence, PowertrainKind, VehicleOffer } from "./types";
+import { catalogPowerSanity } from "./power-sanity";
 
 function rawText(value: unknown, depth = 0): string {
   if (value == null || depth > 10) return "";
@@ -313,10 +314,15 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
     || inferEngineCc(full);
   const suppliedPowerHp = reasonable(offer.powerHp, 20, 2_500);
   const rejectNumericModelPower = suspiciousMashinaNumericModelPower(offer, suppliedPowerHp);
-  const powerHp = rejectNumericModelPower
+  const candidatePowerHp = rejectNumericModelPower
     ? inferPowerHp(primary) || inferPowerHp(full)
     : suppliedPowerHp || structuredPowerHp(offer) || inferPowerHp(primary) || inferPowerHp(full);
-  const explicitPowerKw = rejectNumericModelPower ? undefined : reasonable(offer.powerKw, 10, 2_000);
+  const powerSanity = catalogPowerSanity({ ...offer, engineCc }, candidatePowerHp);
+  const powerHp = powerSanity.suspicious ? undefined : candidatePowerHp;
+  // If horsepower was rejected, do not retain a previously derived kW value
+  // from the same bad marketplace number. Verified V2/official knowledge may
+  // repopulate both fields after this normalization pass.
+  const explicitPowerKw = rejectNumericModelPower || powerSanity.suspicious ? undefined : reasonable(offer.powerKw, 10, 2_000);
   const powerKw = explicitPowerKw || (powerHp ? Math.round((powerHp / 1.35962) * 100) / 100 : undefined);
 
   // Semantic vehicle attributes are provenance-sensitive. They may only be
@@ -354,6 +360,10 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
 
   return {
     ...offer,
+    operational: powerSanity.suspicious ? {
+      ...(offer.operational || {}),
+      powerSanity: { rejected: true, reason: powerSanity.reason, rejectedPowerHp: candidatePowerHp || null },
+    } : offer.operational,
     sourceCurrency: normalizedCurrency(offer),
     fuel,
     powertrainKind,

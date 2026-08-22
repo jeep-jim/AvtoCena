@@ -14,5 +14,19 @@ const getOfferAcrossRequests = unstable_cache(
   { revalidate: 60 },
 );
 
+async function resilientOfferLookup(id: string) {
+  // A transient miss during a catalog publication must not turn a live card
+  // into a cached 404 for the full revalidation window. Retry the authoritative
+  // reader once outside the shared cache when the cached lookup misses or its
+  // storage read fails.
+  try {
+    const cached = await getOfferAcrossRequests(id);
+    if (cached) return cached;
+  } catch {
+    // Fall through to the authoritative retry below.
+  }
+  return getOffer(id);
+}
+
 // Metadata and the page render also share the lookup inside one request.
-export const getOfferForPage = cache((id: string) => getOfferAcrossRequests(id));
+export const getOfferForPage = cache((id: string) => resilientOfferLookup(id));

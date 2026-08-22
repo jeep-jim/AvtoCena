@@ -96,6 +96,8 @@ jobs:
           node --check scripts/catalog-validate-source-scale.mjs
           node --check scripts/catalog-live-postpersist-audit.mjs
           node --check scripts/catalog-apply-encyclopedia-identity-master.mjs
+          node --check scripts/catalog-build-knowledge-gaps.mjs
+          node --check scripts/catalog-verify-current-offers.mjs
           node --import tsx --test \
             tests/catalog-calculation-integrity.test.ts \
             tests/catalog-image-quality.test.ts \
@@ -104,6 +106,10 @@ jobs:
             tests/catalog-encyclopedia-identity-runtime.test.ts \
             tests/catalog-encyclopedia-identity-data.test.ts \
             tests/catalog-encyclopedia-identity-master.test.ts \
+            tests/catalog-knowledge-core-contract.test.ts \
+            tests/catalog-public-truth-seo.test.ts \
+            tests/catalog-power-authority-contract.test.ts \
+            tests/catalog-safe-model-label.test.ts \
             tests/catalog-public-safety.test.ts \
             tests/catalog-publication-gate.test.ts
 
@@ -190,6 +196,8 @@ jobs:
       CATALOG_REBUILD_MARKETS: ${{ inputs.market }}
       CATALOG_REBUILD_VALIDATION_REPORT: catalog-v3-${{ inputs.market }}-validation-report.json
       CATALOG_REBUILD_PUBLISH_REPORT: catalog-v3-${{ inputs.market }}-publish-report.json
+      CATALOG_KNOWLEDGE_GAPS_OUTPUT: catalog-v3-${{ inputs.market }}-knowledge-gaps.json
+      CATALOG_OFFER_DETAIL_VERIFY_OUTPUT: catalog-v3-${{ inputs.market }}-offer-detail-verify.json
       CATALOG_REBUILD_TARGET_PER_SOURCE: ${{ inputs.target_per_source }}
       CATALOG_PUBLISH_PREPARE_CONCURRENCY: "24"
       CATALOG_INDEX_WRITE_CONCURRENCY: "12"
@@ -217,8 +225,10 @@ jobs:
           console.log({files:files.length,total});
           if(total<=0) process.exit(1);
           NODE
-      - name: Apply Encyclopedia Identity Master
+      - name: Apply Encyclopedia Identity Master + Knowledge CORE
         run: npx tsx scripts/catalog-apply-encyclopedia-identity-master.mjs
+      - name: Build Knowledge CORE gap report
+        run: npx tsx scripts/catalog-build-knowledge-gaps.mjs
       - run: npx tsx scripts/catalog-validate-source-scale.mjs
       - name: Publish market
         run: npx tsx scripts/catalog-publish-market.mjs
@@ -235,6 +245,10 @@ jobs:
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,`### Catalog V3 ${market}\n\n\`\`\`json\n${JSON.stringify(state,null,2)}\n\`\`\`\n`);
           if(!state.published||!state.generationId||state.count<=0||state.regressionBlocked||state.publicationError) process.exit(1);
           NODE
+      - name: Verify offer detail read models
+        env:
+          CATALOG_AUDIT_ASSERT_MARKETS: ${{ inputs.market }}
+        run: npx tsx scripts/catalog-verify-current-offers.mjs
       - name: Audit published market
         env:
           CATALOG_AUDIT_ASSERT_MARKETS: ${{ inputs.market }}
@@ -247,6 +261,8 @@ jobs:
           path: |
             catalog-v3-${{ inputs.market }}-validation-report.json
             catalog-v3-${{ inputs.market }}-publish-report.json
+            catalog-v3-${{ inputs.market }}-knowledge-gaps.json
+            catalog-v3-${{ inputs.market }}-offer-detail-verify.json
             catalog-v3-${{ inputs.market }}-postpublish-audit.json
           retention-days: 3
 

@@ -1,0 +1,5507 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model_asia",
+  "chunk": 25,
+  "records": [
+    {
+      "key": "korea:포르쉐코리아주식회사:타이칸4shigh",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "타이칸 4S (High)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:타이칸gts5인승",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "타이칸 GTS (5인승)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:타이칸크로스투리스모5인승",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "타이칸 크로스 투리스모 (5인승)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:타이칸크로스투리스모4s5인승",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "타이칸 크로스 투리스모 4S (5인승)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:타이칸크로스투리스모터보5인승",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "타이칸 크로스 투리스모 터보(5 인승)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:타이칸터보",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "타이칸 터보",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:타이칸터보5인승",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "타이칸 터보 (5인승)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:타이칸터보gt",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "타이칸 터보 GT",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:타이칸터보gt바이작패키지",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "타이칸 터보 GT 바이작 패키지",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:타이칸터보s",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "타이칸 터보 S",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:타이칸터보s5인승",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "타이칸 터보 S (5인승)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:파나메라4",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "파나메라 4",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:파나메라45인승",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "파나메라 4 (5인승)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:파나메라4e하이브리드",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "파나메라 4 E-하이브리드",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:파나메라4e하이브리드5인승",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "파나메라 4 E-하이브리드 (5인승)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:파나메라gts",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "파나메라 GTS",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:파나메라gts5인승",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "파나메라 GTS (5인승)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:파나메라터보e하이브리드",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "파나메라 터보 E-하이브리드",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:파나메라터보e하이브리드5인승",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "파나메라 터보 E-하이브리드 (5인승)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:파나메라터보se하이브리드",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "파나메라 터보 S E-하이브리드",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:포르쉐코리아주식회사:파나메라터보se하이브리드5인승",
+      "market": "korea",
+      "make": "포르쉐코리아 주식회사",
+      "model": "파나메라 터보 S E-하이브리드 (5인승)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a340tfsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A3 40 TFSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a340tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A3 40 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a435tdi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A4 35 TDI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a440tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A4 40 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a440tfsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A4 40 TFSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a445tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A4 45 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a540tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A5 40 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a540tfsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A5 40 TFSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a540tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A5 40 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a545tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A5 45 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a5cabriolet45tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A5 Cabriolet 45 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a5coupe45tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A5 Coupe 45 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a5sportback40tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A5 Sportback 40 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a5sportback40tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A5 Sportback 40 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a5sportback45tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A5 Sportback 45 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a640tdi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A6 40 TDI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a640tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A6 40 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a640tfsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A6 40 TFSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a645tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A6 45 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a645tfsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A6 45 TFSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a645tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A6 45 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a650tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A6 50 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a655tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A6 55 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a6etron",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A6 e-tron",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a6etronperformance",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A6 e-tron performance",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a745tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A7 45 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a750tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A7 50 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a755tfsiequattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A7 55 TFSI e quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a755tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A7 55 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a850tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A8 50 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a8l50tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A8 L 50 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a8l55tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A8 L 55 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:a8l60tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "A8 L 60 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:arteon20tdi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Arteon 2.0TDI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:arteon20tdi4motion",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Arteon 2.0TDI 4Motion",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:atlas20tsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Atlas 2.0 TSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:atlastsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Atlas TSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:bentaygas",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Bentayga S",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:bentaygaspeed",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Bentayga Speed",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:bentaygav8",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Bentayga V8",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:bentaygav8ewb",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Bentayga V8 EWB",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:continentalgt",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Continental GT",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:continentalgts",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Continental GT S",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:continentalgtv8",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Continental GT V8",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:continentalgtc",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Continental GTC",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:etron55quattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "e-tron 55 quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:etrongtquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "e-tron GT quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:etrons",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "e-tron S",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:etronssportback",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "e-tron S Sportback",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:etronsportback55quattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "e-tron Sportback 55 quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:flyingspur",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Flying Spur",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:flyingspurs",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Flying Spur S",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:flyingspurv8",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Flying Spur V8",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:golf20gti",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Golf 2.0 GTI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:golf20tdi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Golf 2.0 TDI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:golfgti",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Golf GTI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:huracanevo",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Huracan EVO",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:huracanevorwd",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Huracan EVO RWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:huracanevospyder",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Huracan EVO Spyder",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:huracanevospyderrwd",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Huracan EVO Spyder RWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:huracansto",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Huracan STO",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:huracantecnica",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Huracan Tecnica",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:id4pro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "ID.4 Pro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:id5pro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "ID.5 Pro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:jetta",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Jetta",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q235tdi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q2 35 TDI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q335tdi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q3 35 TDI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q335tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q3 35 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q340tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q3 40 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q3sportback35tdi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q3 Sportback 35 TDI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q3sportback35tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q3 Sportback 35 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q3sportback40tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q3 Sportback 40 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q3sportbacktfsiquattro190kw",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q3 Sportback TFSI quattro 190kW",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q3tfsiquattro190kw",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q3 TFSI quattro 190kW",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q440etron",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q4 40 e-tron",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q445etron",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q4 45 e-tron",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q4etron40",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q4 e-tron 40",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q4sportback40etron",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q4 Sportback 40 e-tron",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q4sportback45etron",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q4 Sportback 45 e-tron",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q4sportbacketron40",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q4 Sportback e-tron 40",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q540tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q5 40 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q540tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q5 40 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q545tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q5 45 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q5sportback40tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q5 Sportback 40 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q5sportback40tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q5 Sportback 40 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q5sportback45tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q5 Sportback 45 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q6etron",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q6 e-tron",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q6etronperformance",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q6 e-tron performance",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q6etronperformancerange",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q6 e-tron performance range",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q6etronquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q6 e-tron quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q6sportbacketron",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q6 Sportback e-tron",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q6sportbacketronperformance",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q6 Sportback e-tron performance",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q6sportbacketronquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q6 Sportback e-tron quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q745tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q7 45 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q750tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q7 50 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q755tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q7 55 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q845tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q8 45 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q850etronquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q8 50 e-tron quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q850tdiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q8 50 TDI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q855etronquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q8 55 e-tron quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q855tfsiquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q8 55 TFSI quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:q8sportback55etronquattro",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Q8 Sportback 55 e-tron quattro",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:revuelto",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Revuelto",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:rs3",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "RS 3",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:rs5sportback",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "RS 5 Sportback",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:rs5sportbackcompetition",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "RS 5 Sportback Competition",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:rs6avant",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "RS 6 Avant",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:rs6avantperformance",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "RS 6 Avant performance",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:rs7",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "RS 7",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:rs7performance",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "RS 7 performance",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:rsetrongt",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "RS e-tron GT",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:rsetrongtperformance",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "RS e-tron GT performance",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:rsq8",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "RS Q8",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:rsq8performance",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "RS Q8 performance",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:setrongt",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "S e-tron GT",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:s3tfsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "S3 TFSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:s4tfsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "S4 TFSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:s5coupetfsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "S5 Coupe TFSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:s5tfsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "S5 TFSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:s6etron",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "S6 e-tron",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:s6tdi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "S6 TDI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:s7tdi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "S7 TDI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:s8ltfsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "S8 L TFSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:sq5sportbacktfsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "SQ5 Sportback TFSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:sq5tfsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "SQ5 TFSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:sq6etron",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "SQ6 e-tron",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:sq6sportbacketron",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "SQ6 Sportback e-tron",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:sq7tfsi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "SQ7 TFSI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:sq8sportbacketron",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "SQ8 Sportback e-tron",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:temerario",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Temerario",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:tiguan20tdi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Tiguan 2.0TDI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:tiguan20tdi4motion",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Tiguan 2.0TDI 4Motion",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:tiguanallspace",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Tiguan Allspace",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:tiguanallspace20tdi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Tiguan Allspace 2.0 TDI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:touareg30tdi",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "Touareg 3.0TDI",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:urusperformante",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "URUS Performante",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:uruss",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "URUS S",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폭스바겐그룹코리아주식회사:urusse",
+      "market": "korea",
+      "make": "폭스바겐그룹코리아 주식회사",
+      "model": "URUS SE",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폴스타오토모티브코리아유한회사:polestar2longrangedualmotor",
+      "market": "korea",
+      "make": "폴스타오토모티브코리아 유한회사",
+      "model": "Polestar 2 Long Range Dual Motor",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폴스타오토모티브코리아유한회사:polestar2longrangesinglemotor",
+      "market": "korea",
+      "make": "폴스타오토모티브코리아 유한회사",
+      "model": "Polestar 2 Long Range Single Motor",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폴스타오토모티브코리아유한회사:polestar2standardrangesinglemotor",
+      "market": "korea",
+      "make": "폴스타오토모티브코리아 유한회사",
+      "model": "Polestar 2 Standard Range Single Motor",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폴스타오토모티브코리아유한회사:polestar3dualmotor",
+      "market": "korea",
+      "make": "폴스타오토모티브코리아 유한회사",
+      "model": "Polestar 3 Dual Motor",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폴스타오토모티브코리아유한회사:polestar3performance",
+      "market": "korea",
+      "make": "폴스타오토모티브코리아 유한회사",
+      "model": "Polestar 3 Performance",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폴스타오토모티브코리아유한회사:polestar3rearmotor",
+      "market": "korea",
+      "make": "폴스타오토모티브코리아 유한회사",
+      "model": "Polestar 3 Rear Motor",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폴스타오토모티브코리아유한회사:polestar4coupedualmotor",
+      "market": "korea",
+      "make": "폴스타오토모티브코리아 유한회사",
+      "model": "Polestar 4 Coupe Dual Motor",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폴스타오토모티브코리아유한회사:polestar4coupeperformance",
+      "market": "korea",
+      "make": "폴스타오토모티브코리아 유한회사",
+      "model": "Polestar 4 Coupe Performance",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:폴스타오토모티브코리아유한회사:polestar4couperearmotor",
+      "market": "korea",
+      "make": "폴스타오토모티브코리아 유한회사",
+      "model": "Polestar 4 Coupe Rear Motor",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:피닉스코리아주:썬라이즈t01",
+      "market": "korea",
+      "make": "피닉스코리아(주)",
+      "model": "썬라이즈-T01",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:한국닛산주:infinitiq50",
+      "market": "korea",
+      "make": "한국닛산(주)",
+      "model": "INFINITI Q50",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국닛산주:leaf",
+      "market": "korea",
+      "make": "한국닛산(주)",
+      "model": "LEAF",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국닛산주:leafplus",
+      "market": "korea",
+      "make": "한국닛산(주)",
+      "model": "LEAF PLUS",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국상용트럭주식회사:한국상용09톤롱바디ev내장탑트럭",
+      "market": "korea",
+      "make": "한국상용트럭 주식회사",
+      "model": "한국상용0.9톤롱바디EV내장탑트럭",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:한국상용트럭주식회사:한국상용1톤롱바디ev트럭",
+      "market": "korea",
+      "make": "한국상용트럭 주식회사",
+      "model": "한국상용1톤롱바디EV트럭",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:chevroletbolteuv",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "CHEVROLET BOLT EUV",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:chevroletboltev",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "CHEVROLET BOLT EV",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:chevroletcoloradoawd",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "CHEVROLET COLORADO AWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:chevroletcoloradoawdmy23",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "CHEVROLET COLORADO AWD (MY23)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:chevroletcoloradorwd",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "CHEVROLET COLORADO RWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:chevroletcoloradorwdmy23",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "CHEVROLET COLORADO RWD (MY23)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:chevroletequinoxawd",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "CHEVROLET EQUINOX AWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:chevroletequinoxawdmy23",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "CHEVROLET EQUINOX AWD (MY23)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:chevroletequinoxev",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "CHEVROLET EQUINOX EV",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:chevroletequinoxfwd",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "CHEVROLET EQUINOX FWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:chevroletequinoxfwdmy23",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "CHEVROLET EQUINOX FWD (MY23)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:chevrolettahoeawd",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "CHEVROLET TAHOE AWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:chevrolettraverseawd",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "CHEVROLET TRAVERSE AWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:gmcsierra",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "GMC Sierra",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:말리부20turbo",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "말리부 2.0 TURBO",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:트랙스12터보17인치",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "트랙스 1.2터보 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:트랙스12터보18인치",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "트랙스 1.2터보 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:트랙스12터보19인치",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "트랙스 1.2터보 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:트랙스14",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "트랙스 1.4",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:트레일블레이저12turbofwd",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "트레일블레이저 1.2 TURBO FWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:트레일블레이저135turboawd",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "트레일블레이저 1.35 TURBO AWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:트레일블레이저135turbofwd",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "트레일블레이저 1.35 TURBO FWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:트레일블레이저135turbofwd17nonss",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "트레일블레이저 1.35 TURBO FWD (17\" non-S&S)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국지엠주식회사:트레일블레이저135turbofwd18nonss",
+      "market": "korea",
+      "make": "한국지엠주식회사",
+      "model": "트레일블레이저 1.35 TURBO FWD (18\" non-S&S)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:grsupra",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "GR Supra",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스es300h",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 ES300h",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스lc500convertible",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 LC500 Convertible",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스lm500hexecutive",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 LM500h Executive",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스lm500hroyal",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 LM500h ROYAL",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스ls500awd",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 LS500 AWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스ls500hawd",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 LS500h AWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스lx700h",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 LX700h",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스nx350h",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 NX350h",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스nx450h",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 NX450h+",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스rx350h",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 RX350h",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스rx450h",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 RX450h+",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스rx450hl",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 RX450hL",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스rx500h",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 RX500h",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스rz450e",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 RZ450e",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스ux250h2wd",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 UX250h 2WD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스ux250hawd",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 UX250h AWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스ux300e",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 UX300e",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:렉서스ux300h2wd",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "렉서스 UX300h 2WD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타alphardhybrid",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 Alphard Hybrid",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타camry",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 Camry",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타camryhybrid",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 Camry Hybrid",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타camryhybridle",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 Camry Hybrid LE",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타crowndualboosthybrid",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 CROWN Dual Boost Hybrid",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타crownhybrid",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 Crown Hybrid",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타gr86",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 GR86",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타highlanderhybrid",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 Highlander Hybrid",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타prius2wd",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 Prius 2WD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타priusawd",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 Prius AWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타priusphev",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 Prius PHEV",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타priusprime",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 Prius Prime",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타rav4hybrid2wd",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 RAV4 Hybrid 2WD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타rav4hybridawd",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 RAV4 Hybrid AWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타rav4phev",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 RAV4 PHEV",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타rav4phevgrs",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 RAV4 PHEV GR-S",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타rav4phevxse",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 RAV4 PHEV XSE",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타siennahybrid2wd",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 Sienna Hybrid 2WD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:한국토요타자동차주:토요타siennahybridawd",
+      "market": "korea",
+      "make": "한국토요타자동차(주)",
+      "model": "토요타 Sienna Hybrid AWD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70슈팅브레이크20tgdi2wd18인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70 슈팅브레이크 2.0T-GDI 2WD 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70슈팅브레이크20tgdi2wd19인치썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70 슈팅브레이크 2.0T-GDI 2WD 19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70슈팅브레이크20tgdi2wd19인치썸머sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70 슈팅브레이크 2.0T-GDI 2WD 19인치(썸머)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70슈팅브레이크20tgdi2wd19인치올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70 슈팅브레이크 2.0T-GDI 2WD 19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70슈팅브레이크20tgdi2wd19인치올시즌sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70 슈팅브레이크 2.0T-GDI 2WD 19인치(올시즌)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70슈팅브레이크20tgdiawd18인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70 슈팅브레이크 2.0T-GDI AWD 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70슈팅브레이크20tgdiawd18인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70 슈팅브레이크 2.0T-GDI AWD 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70슈팅브레이크20tgdiawd19인치썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70 슈팅브레이크 2.0T-GDI AWD 19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70슈팅브레이크20tgdiawd19인치썸머sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70 슈팅브레이크 2.0T-GDI AWD 19인치(썸머)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70슈팅브레이크20tgdiawd19인치올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70 슈팅브레이크 2.0T-GDI AWD 19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70슈팅브레이크20tgdiawd19인치올시즌sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70 슈팅브레이크 2.0T-GDI AWD 19인치(올시즌)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70슈팅브레이크20tgdi2wd18인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70 슈팅브레이크2.0T-GDI 2WD 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe20tgdi2wd18인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.0T-GDI 2WD 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe20tgdi2wd18인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.0T-GDI 2WD 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe20tgdi2wd19인치썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.0T-GDI 2WD 19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe20tgdi2wd19인치썸머sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.0T-GDI 2WD 19인치(썸머)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe20tgdi2wd19인치올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.0T-GDI 2WD 19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe20tgdi2wd19인치올시즌sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.0T-GDI 2WD 19인치(올시즌)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe20tgdiawd18인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.0T-GDI AWD 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe20tgdiawd18인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.0T-GDI AWD 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe20tgdiawd19인치썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.0T-GDI AWD 19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe20tgdiawd19인치썸머sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.0T-GDI AWD 19인치(썸머)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe20tgdiawd19인치올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.0T-GDI AWD 19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe20tgdiawd19인치올시즌sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.0T-GDI AWD 19인치(올시즌)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe22디젤2wd17인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.2디젤 2WD_17인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe22디젤2wd17인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.2디젤 2WD_17인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe22디젤2wd1819인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.2디젤 2WD_18/19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe22디젤awd17인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.2디젤 AWD_17인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe22디젤awd1819인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 2.2디젤 AWD_18/19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe33tgdi2wd19인치썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 3.3T-GDI 2WD 19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe33tgdi2wd19인치썸머sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 3.3T-GDI 2WD 19인치(썸머)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe33tgdi2wd19인치올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 3.3T-GDI 2WD 19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe33tgdi2wd19인치올시즌sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 3.3T-GDI 2WD 19인치(올시즌)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe33tgdiawd19인치썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 3.3T-GDI AWD 19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe33tgdiawd19인치썸머sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 3.3T-GDI AWD 19인치(썸머)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe33tgdiawd19인치올시즌sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE) 3.3T-GDI AWD 19인치(올시즌)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe33tgdiawd19인치올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE)3.3T-GDI AWD 19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdi2wd18인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI 2WD 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdi2wd18인치26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI 2WD 18인치 (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdi2wd18인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI 2WD 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdi2wd18인치빌트인캠26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI 2WD 18인치(빌트인캠) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdi2wd19인치썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI 2WD 19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdi2wd19인치썸머26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI 2WD 19인치(썸머) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdi2wd19인치올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI 2WD 19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdi2wd19인치올시즌26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI 2WD 19인치(올시즌) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdiawd18인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI AWD 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdiawd18인치26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI AWD 18인치 (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdiawd18인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI AWD 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdiawd18인치빌트인캠26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI AWD 18인치(빌트인캠) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdiawd19인치썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI AWD 19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdiawd19인치썸머26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI AWD 19인치(썸머) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdiawd19인치올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI AWD 19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdiawd19인치올시즌26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI AWD 19인치(올시즌) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisb2wd18인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B 2WD 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisb2wd18인치26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B 2WD 18인치 (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisb2wd18인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B 2WD 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisb2wd18인치빌트인캠26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B 2WD 18인치(빌트인캠) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisb2wd19인치썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B 2WD 19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisb2wd19인치썸머26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B 2WD 19인치(썸머) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisb2wd19인치올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B 2WD 19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisb2wd19인치올시즌26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B 2WD 19인치(올시즌) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisbawd18인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B AWD 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisbawd18인치26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B AWD 18인치 (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisbawd18인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B AWD 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisbawd18인치빌트인캠26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B AWD 18인치(빌트인캠) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisbawd19인치썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B AWD 19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisbawd19인치썸머26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B AWD 19인치(썸머) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisbawd19인치올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B AWD 19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe225tgdisbawd19인치올시즌26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 2.5T-GDI S/B AWD 19인치(올시즌) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdi2wd19인치썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI 2WD 19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdi2wd19인치썸머26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI 2WD 19인치(썸머) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdi2wd19인치썸머sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI 2WD 19인치(썸머)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdi2wd19인치썸머sp26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI 2WD 19인치(썸머)_SP (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdi2wd19인치올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI 2WD 19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdi2wd19인치올시즌26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI 2WD 19인치(올시즌) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdi2wd19인치올시즌sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI 2WD 19인치(올시즌)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdi2wd19인치올시즌sp26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI 2WD 19인치(올시즌)_SP (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdiawd19인치썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI AWD 19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdiawd19인치썸머26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI AWD 19인치(썸머) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdiawd19인치썸머sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI AWD 19인치(썸머)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdiawd19인치썸머sp26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI AWD 19인치(썸머)_SP (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdiawd19인치올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI AWD 19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdiawd19인치올시즌26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI AWD 19인치(올시즌) (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdiawd19인치올시즌sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI AWD 19인치(올시즌)_SP",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g70ikpe233tgdiawd19인치올시즌sp26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G70(IK PE2) 3.3T-GDI AWD 19인치(올시즌)_SP (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8022디젤2wd18인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.2디젤 2WD 18인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8022디젤2wd18인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.2디젤 2WD 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8022디젤2wd19인치sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.2디젤 2WD 19인치 (SP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8022디젤2wd19인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.2디젤 2WD 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8022디젤awd18인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.2디젤 AWD 18인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8022디젤awd18인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.2디젤 AWD 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8022디젤awd19인치sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.2디젤 AWD 19인치 (SP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8022디젤awd19인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.2디젤 AWD 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8025tgdi2wd18인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.5T-GDI 2WD 18인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8025tgdi2wd18인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.5T-GDI 2WD 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8025tgdi2wd19인치sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.5T-GDI 2WD 19인치 (SP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8025tgdi2wd19인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.5T-GDI 2WD 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8025tgdi2wd20인치22my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.5T-GDI 2WD 20인치 (22MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8025tgdi2wd20인치sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.5T-GDI 2WD 20인치 (SP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8025tgdi2wd20인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.5T-GDI 2WD 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8025tgdiawd18인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.5T-GDI AWD 18인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8025tgdiawd18인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.5T-GDI AWD 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8025tgdiawd19인치sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.5T-GDI AWD 19인치 (SP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8025tgdiawd19인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.5T-GDI AWD 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8025tgdiawd20인치22my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.5T-GDI AWD 20인치 (22MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8025tgdiawd20인치sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.5T-GDI AWD 20인치 (SP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8025tgdiawd20인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 2.5T-GDI AWD 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8035tgdi2wd19인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 3.5T-GDI 2WD 19인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8035tgdi2wd19인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 3.5T-GDI 2WD 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8035tgdi2wd20인치22my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 3.5T-GDI 2WD 20인치 (22MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8035tgdi2wd20인치sp다이내믹",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 3.5T-GDI 2WD 20인치 (SP 다이내믹)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8035tgdi2wd20인치sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 3.5T-GDI 2WD 20인치 (SP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8035tgdi2wd20인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 3.5T-GDI 2WD 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8035tgdiawd19인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 3.5T-GDI AWD 19인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8035tgdiawd19인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 3.5T-GDI AWD 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8035tgdiawd20인치22my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 3.5T-GDI AWD 20인치 (22MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8035tgdiawd20인치sp다이내믹",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 3.5T-GDI AWD 20인치 (SP 다이내믹)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8035tgdiawd20인치sp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 3.5T-GDI AWD 20인치 (SP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g8035tgdiawd20인치타이어",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 3.5T-GDI AWD 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80electrified",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 Electrified",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80electrified24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80 Electrified 24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe25tgdiawd18c",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 2.5T-GDI AWD 18\" (C)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe25tgdiawd18nc",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 2.5T-GDI AWD 18\" (nC)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe25tgdiawd19",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 2.5T-GDI AWD 19\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe25tgdiawd20",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 2.5T-GDI AWD 20\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe25tgdiawd20썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 2.5T-GDI AWD 20\"(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe25tgdiawd20올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 2.5T-GDI AWD 20\"(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe25tgdirwd18c",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 2.5T-GDI RWD 18\" (C)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe25tgdirwd18nc",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 2.5T-GDI RWD 18\" (nC)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe25tgdirwd19",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 2.5T-GDI RWD 19\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe25tgdirwd20",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 2.5T-GDI RWD 20\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe25tgdirwd20썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 2.5T-GDI RWD 20\"(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe25tgdirwd20올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 2.5T-GDI RWD 20\"(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe35tgdiawd19",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 3.5T-GDI AWD 19\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe35tgdiawd20썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 3.5T-GDI AWD 20“(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe35tgdiawd20올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 3.5T-GDI AWD 20“(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe35tgdirwd19",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 3.5T-GDI RWD 19\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe35tgdirwd20썸머",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 3.5T-GDI RWD 20“(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80pe35tgdirwd20올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(PE) 3.5T-GDI RWD 20“(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80rg3electrified개조",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(RG3) Electrified 개조",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80rg3fl25tgdiawd18인치빌트인캠무26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(RG3) FL 2.5T-GDI AWD 18인치 빌트인캠 무 26MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80rg3fl25tgdiawd18인치빌트인캠유26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(RG3) FL 2.5T-GDI AWD 18인치 빌트인캠 유 26MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80rg3fl25tgdiawd19인치26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(RG3) FL 2.5T-GDI AWD 19인치 26MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80rg3fl25tgdiawd20인치26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(RG3) FL 2.5T-GDI AWD 20인치 26MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80rg3fl25tgdiawd20인치26my올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(RG3) FL 2.5T-GDI AWD 20인치 26MY(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80rg3fl25tgdirwd18인치빌트인캠무26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(RG3) FL 2.5T-GDI RWD 18인치 빌트인캠 무 26MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80rg3fl25tgdirwd18인치빌트인캠유26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(RG3) FL 2.5T-GDI RWD 18인치 빌트인캠 유 26MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80rg3fl25tgdirwd19인치26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(RG3) FL 2.5T-GDI RWD 19인치 26MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80rg3fl25tgdirwd20인치26my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(RG3) FL 2.5T-GDI RWD 20인치 26MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80rg3fl25tgdirwd20인치26my올시즌",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(RG3) FL 2.5T-GDI RWD 20인치 26MY(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80rg3fl35tgdiawd8at5인19인치빌트인캠통합27my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(RG3) FL 3.5T-GDI AWD 8AT 5인 19인치 빌트인캠 통합(27MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g80rg3fl35tgdirwd8at5인19인치빌트인캠통합27my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G80(RG3) FL 3.5T-GDI RWD 8AT 5인 19인치 빌트인캠 통합(27MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd45인블랙라인",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 4/5인 블랙라인",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd4인19인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 4인 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd4인19인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 4인 19인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd4인19인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 4인 19인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd4인20인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 4인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd4인20인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 4인 20인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd4인20인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 4인 20인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd5인19인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 5인 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd5인19인치nc24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 5인 19인치 (nC)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd5인19인치c24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 5인 19인치(C)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd5인19인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 5인 19인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd5인19인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 5인 19인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd5인20인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 5인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd5인20인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 5인 20인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdi2wd5인20인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI 2WD 5인 20인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdiawd45인블랙라인",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI AWD 4/5인 블랙라인",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdiawd4인19인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI AWD 4인 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdiawd4인19인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI AWD 4인 19인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdiawd4인19인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI AWD 4인 19인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdiawd4인20인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI AWD 4인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdiawd4인20인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI AWD 4인 20인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdiawd4인20인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI AWD 4인 20인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdiawd5인19인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI AWD 5인 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdiawd5인19인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI AWD 5인 19인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdiawd5인19인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI AWD 5인 19인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdiawd5인20인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI AWD 5인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdiawd5인20인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI AWD 5인 20인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g9035tgdiawd5인20인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 3.5T-GDI AWD 5인 20인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd45인블랙라인",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 4/5인 블랙라인",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd4인20인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 4인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd4인20인치c24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 4인 20인치(C)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd4인20인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 4인 20인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd4인20인치nc24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 4인 20인치(nC)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd4인20인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 4인 20인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd4인21인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 4인 21인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd4인21인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 4인 21인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd4인21인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 4인 21인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd5인20인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 5인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd5인20인치c24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 5인 20인치(C)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd5인20인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 5인 20인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd5인20인치nc24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 5인 20인치(nC)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd5인20인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 5인 20인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd5인21인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 5인 21인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd5인21인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 5인 21인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdi2wd5인21인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI 2WD 5인 21인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdiawd45인블랙라인",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI AWD 4/5인 블랙라인",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdiawd4인20인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI AWD 4인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdiawd4인20인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI AWD 4인 20인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdiawd4인20인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI AWD 4인 20인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdiawd4인21인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI AWD 4인 21인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdiawd4인21인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI AWD 4인 21인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdiawd4인21인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI AWD 4인 21인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdiawd5인20인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI AWD 5인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdiawd5인20인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI AWD 5인 20인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdiawd5인20인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI AWD 5인 20인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdiawd5인21인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI AWD 5인 21인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdiawd5인21인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI AWD 5인 21인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdiawd5인21인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI AWD 5인 21인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdilongwheelbaseawd4인20인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI(LONG WHEEL BASE) AWD 4인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdilongwheelbaseawd5인20인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI(LONG WHEEL BASE) AWD 5인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdilongwheelbaseawd4인20인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI(LONGWHEELBASE)AWD4인20인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdilongwheelbaseawd5인20인치hdp",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI(LONGWHEELBASE)AWD5인20인치(HDP)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdilwbawd5인20인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-S/C 3.5T-GDI(LWB) AWD 5인 20인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdilwbawd4인20인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-SC 3.5T-GDI(LWB) AWD 4인 20인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdilwbawd4인20인치25my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-SC 3.5T-GDI(LWB) AWD 4인 20인치_25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:g90esc35tgdilwbawd5인20인치25my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "G90 e-SC 3.5T-GDI(LWB) AWD 5인 20인치_25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv60jwfl마그마빌트인캠통합",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV60 (JW FL) 마그마 빌트인캠 통합",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv604wd19인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV60 4WD 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv604wd20인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV60 4WD 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv604wd무선충전",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV60 4WD 무선충전",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv60rwd19인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV60 RWD 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv60성능형4wd21인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV60 성능형 4WD 21인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv60성능형4wd무선충전",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV60 성능형 4WD 무선충전",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv60jwfl4wd19인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV60(JW FL) 4WD 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv60jwfl4wd20인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV60(JW FL) 4WD 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv60jwflrwd19인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV60(JW FL) RWD 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv60jwfl성능형4wd21인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV60(JW FL) 성능형 4WD 21인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd18인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd18인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 18인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd18인치빌트인캠22",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 18인치 (빌트인캠)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd18인치빌트인캠24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 18인치 (빌트인캠)(24MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd18인치22",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 18인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd18인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 18인치(24MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd19인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd19인치스포츠패키지",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 19인치 (스포츠패키지)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd19인치스포츠패키지22",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 19인치 (스포츠패키지)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd19인치스포츠패키지24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 19인치 (스포츠패키지)(24MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd19인치22",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 19인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd19인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 19인치(24MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd21인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 21인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd21인치스포츠패키지",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 21인치 (스포츠패키지)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd21인치스포츠패키지22",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 21인치 (스포츠패키지)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd21인치스포츠패키지24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 21인치 (스포츠패키지)(24MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd21인치22",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 21인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤2wd21인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 2WD 21인치(24MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd18인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd18인치22",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 18인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd18인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 18인치(24MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd18인치빌트인캠",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd18인치빌트인캠22",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 18인치(빌트인캠)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd18인치빌트인캠24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 18인치(빌트인캠)(24MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd19인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd19인치24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 19인치 (24MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd19인치스포츠패키지",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 19인치 (스포츠패키지)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd19인치스포츠패키지22",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 19인치 (스포츠패키지)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd19인치스포츠패키지24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 19인치 (스포츠패키지)(24MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd19인치22",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 19인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd21인치",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 21인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd21인치스포츠패키지",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 21인치 (스포츠패키지)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd21인치스포츠패키지22",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 21인치 (스포츠패키지)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd21인치스포츠패키지24my",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 21인치 (스포츠패키지)(24MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:현대자동차주:gv7022디젤awd21인치22",
+      "market": "korea",
+      "make": "현대자동차(주)",
+      "model": "GV70 2.2디젤 AWD 21인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    }
+  ]
+}

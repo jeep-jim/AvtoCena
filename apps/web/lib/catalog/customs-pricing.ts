@@ -9,7 +9,7 @@ import { preferExplicitCombustionPowertrain } from "./powertrain-safety";
 import { convertToRub } from "./rates";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { VehicleOffer } from "./types";
-import { enrichOfferWithVehicleKnowledge } from "./vehicle-knowledge";
+import { enrichOfferWithKnowledgeCore } from "./knowledge-core";
 
 function positive(value: unknown) {
   const parsed = Number(value);
@@ -156,7 +156,7 @@ export function isPreliminaryElectrifiedCalculation(offer: Partial<VehicleOffer>
 
 async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allowCombustionPreliminary: boolean): Promise<VehicleOffer> {
   const canonical = discardRepresentativeModelPowerForCustoms(
-    await enrichOfferWithVehicleKnowledge(enrichOfferWithExplicitEngineDisplacement(input)),
+    await enrichOfferWithKnowledgeCore(enrichOfferWithExplicitEngineDisplacement(input)),
   );
   const certified = await enrichOfferWithCertifiedPower(canonical);
   const known = await enrichOfferWithPowerKnowledge(certified);
