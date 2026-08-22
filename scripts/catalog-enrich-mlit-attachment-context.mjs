@@ -20,7 +20,7 @@ const clean = (value) => String(value ?? "")
 function pageTitle(html) {
   const h1 = String(html).match(/<h1\b[^>]*>([\s\S]*?)<\/h1>/i)?.[1];
   const title = String(html).match(/<title\b[^>]*>([\s\S]*?)<\/title>/i)?.[1];
-  return clean(h1 || title || "");
+  return clean(h1 || "") || clean(title || "");
 }
 function kindFor(url) {
   const pathname = new URL(url).pathname.toLowerCase();

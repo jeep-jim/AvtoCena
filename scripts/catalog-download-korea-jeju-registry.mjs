@@ -9,6 +9,7 @@ const MAX_BYTES=Math.max(10_000_000,Math.min(150_000_000,Number(process.env.KNOW
 const CURRENT_YEAR=new Date().getFullYear();
 const sha256=(b)=>crypto.createHash("sha256").update(b).digest("hex");
 const clean=(v)=>String(v??"").normalize("NFKC").replace(/\s+/g," ").trim();
+const sleep=(ms)=>new Promise(resolve=>setTimeout(resolve,ms));
 
 function parseCsv(text){
  const rows=[];let row=[];let field="";let quoted=false;
@@ -23,9 +24,8 @@ function headerKey(v){return clean(v).replace(/[\s_()（）]/g,"").toLowerCase()
 function findIndex(headers,names){const keys=headers.map(headerKey);for(const name of names){const idx=keys.indexOf(headerKey(name));if(idx>=0)return idx;}return -1;}
 
 await fs.mkdir(OUT,{recursive:true});
-const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),120000);
-let response;try{response=await fetch(URL,{signal:controller.signal,redirect:"follow",headers:{accept:"text/csv,application/octet-stream,*/*","user-agent":"AvtoCena-KnowledgeCORE/1.0 (+https://avtocena.com; public dataset snapshot)"}});}finally{clearTimeout(timer);}
-if(!response.ok)throw new Error(`korea_jeju_http_${response.status}`);
+let response,lastError;for(let attempt=1;attempt<=5;attempt++){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),120000);try{response=await fetch(URL,{signal:controller.signal,redirect:"follow",headers:{accept:"text/csv,application/octet-stream,*/*","user-agent":"AvtoCena-KnowledgeCORE/1.0 (+https://avtocena.com; public dataset snapshot)"}});if(!response.ok)throw new Error(`korea_jeju_http_${response.status}`);break;}catch(error){lastError=error;const retryable=/korea_jeju_http_(?:408|425|429|5\d\d)|fetch failed|aborted|timeout/i.test(String(error?.message||error));if(!retryable||attempt===5)throw error;await sleep(1500*attempt);}finally{clearTimeout(timer);}}
+if(!response)throw lastError||new Error("korea_jeju_download_missing");
 const raw=Buffer.from(await response.arrayBuffer());
 if(raw.length>MAX_BYTES)throw new Error(`korea_jeju_too_large:${raw.length}`);
 const {text,encoding}=decode(raw);const parsed=parseCsv(text);const headers=(parsed.shift()||[]).map(clean);
