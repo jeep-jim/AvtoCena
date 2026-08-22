@@ -1,0 +1,112 @@
+{
+  "schemaVersion": 1,
+  "purpose": "Raw/source-normalized snapshots used to build AvtoCena Knowledge CORE. These files are evidence inputs, not public catalog truth by themselves.",
+  "coverageWindows": {
+    "japan": { "fromYear": 2010, "toYear": 2026 },
+    "china": { "fromYear": 2020, "toYear": 2026 },
+    "korea": { "fromYear": 2020, "toYear": 2026 },
+    "europe": { "fromYear": 2020, "toYear": 2026 },
+    "uae": { "fromYear": 2020, "toYear": 2026 },
+    "georgia": { "fromYear": 2020, "toYear": 2026 },
+    "kyrgyzstan": { "fromYear": 2020, "toYear": 2026 }
+  },
+  "rules": {
+    "storeRawProse": false,
+    "storeSourceFactsAndProvenance": true,
+    "bypassCaptchaOrLogin": false,
+    "maximumSingleGeneratedFileBytes": 8000000,
+    "photos": "Store only source image URLs when an openly usable, model-bound image exists. Photos are optional during CORE denominator collection."
+  },
+  "sources": [
+    {
+      "id": "vehiclesdb-open-catalog",
+      "authority": "open_composite_official_registers",
+      "markets": ["global"],
+      "status": "bulk_ready",
+      "license": "CC-BY-4.0; preserve VehiclesDB and upstream attribution",
+      "landingUrl": "https://github.com/vehiclesdb/vehiclesdb",
+      "files": [
+        "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/manifest.json",
+        "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/catalog/car/makes.json",
+        "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/catalog/car/models.json",
+        "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/ATTRIBUTION.md",
+        "https://raw.githubusercontent.com/vehiclesdb/vehiclesdb/main/SOURCES.md"
+      ],
+      "fields": ["make", "model", "aliases", "bodyTypes", "availability", "officialSourceIds", "typeApprovalCrossRefs"],
+      "notes": "Global denominator spine. Do not treat it as a substitute for market-specific power/spec sources."
+    },
+    {
+      "id": "eea-co2-passenger-cars",
+      "authority": "government_regulatory_registration",
+      "markets": ["europe"],
+      "status": "bulk_ready",
+      "license": "EEA public data; preserve source/attribution metadata",
+      "landingUrl": "https://www.eea.europa.eu/en/datahub/datahubitem-view/fa8b1229-3db6-495d-b18e-9c9b3267c02b",
+      "apiUrl": "https://discodata.eea.europa.eu/sql",
+      "fromYear": 2020,
+      "toYear": 2025,
+      "fields": ["year", "make", "commercialName", "type", "variant", "version", "fuel", "engineCc", "powerKw", "wheelbaseMm", "massKg"],
+      "notes": "Snapshot unique technical tuples, not millions of duplicate registration rows. Final status is preferred; 2025 is provisional until final data exists."
+    },
+    {
+      "id": "miit-road-vehicle-products",
+      "authority": "government_type_approval",
+      "markets": ["china"],
+      "status": "bulk_ready_with_access_guard",
+      "license": "PRC government public information; retain source URL and batch provenance",
+      "landingUrl": "https://service.miit-eidc.org.cn/miitxxgk/gonggao/xxgk/index",
+      "batchUrlTemplate": "https://service.miit-eidc.org.cn/miitxxgk/gonggao/xxgk/queryByPc?pc={batch}&querylb=cp&qyinfolb=",
+      "firstRelevantBatch": 328,
+      "latestFinalBatch": 409,
+      "latestPreviewBatch": 410,
+      "fields": ["enterprise", "brand", "vehicleModel", "vehicleName", "batch", "technicalParameterPage", "vehiclePhoto"],
+      "notes": "MIIT/EIDC states the free system exposes vehicle technical parameters from announcement batch 173 onward and PDF parameter pages. Never bypass slider/CAPTCHA; archive accessible batch pages and record access blocks explicitly."
+    },
+    {
+      "id": "mlit-japan-fuel-economy",
+      "authority": "government_type_approval_efficiency",
+      "markets": ["japan"],
+      "status": "bulk_ready",
+      "license": "Japan MLIT public information; retain source URL/date",
+      "landingUrl": "https://www.mlit.go.jp/jidosha/jidosha_mn10_000002.html",
+      "legacy2010Url": "https://www.mlit.go.jp/jidosha/jidosha_fr10_000004.html",
+      "current2026Url": "https://www.mlit.go.jp/jidosha/jidosha_tk10_000050.html",
+      "fromYear": 2010,
+      "toYear": 2026,
+      "fields": ["manufacturer", "model", "typeDesignation", "fuel", "engineCc", "fuelEconomy", "vehicleClass", "weight", "year"],
+      "notes": "Crawl the MLIT annual index and its year pages; archive HTML plus linked tabular attachments where directly public."
+    },
+    {
+      "id": "korea-jeju-registration-file",
+      "authority": "government_registration",
+      "markets": ["korea"],
+      "status": "public_file_discovery",
+      "license": "Korean Public Data Portal: unrestricted use on dataset page",
+      "landingUrl": "https://www.data.go.kr/data/15128417/fileData.do",
+      "metadataUrl": "https://www.data.go.kr/catalog/15128417/fileData.json",
+      "fromYear": 2019,
+      "fields": ["vehicleName", "modelYear", "engineCc", "fuel", "vehicleClass", "vehicleType", "firstRegistrationDate"],
+      "notes": "424k-row Jeju registration extract is downloadable without login according to the portal and is a strong Korean/localized identity spine, but it is regional and must be supplemented by nationwide KOTSA data."
+    },
+    {
+      "id": "kotsa-new-registration-api",
+      "authority": "government_registration",
+      "markets": ["korea"],
+      "status": "requires_free_service_key",
+      "license": "Korean Public Data Portal: unrestricted use",
+      "landingUrl": "https://www.data.go.kr/data/15059401/openapi.do",
+      "metadataUrl": "https://www.data.go.kr/catalog/15059401/openapi.json",
+      "apiBaseUrl": "https://apis.data.go.kr/B553881/newRegistlnfoService_02",
+      "fields": ["registrationYear", "registrationMonth", "vehicleClass", "region", "fuel", "vehicleNameCode", "engineDisplacementBand", "domesticImported"],
+      "notes": "Free/auto-approved API key is required by the portal. Snapshot metadata now; do not fabricate nationwide rows without an authorized key."
+    },
+    {
+      "id": "active-parser-observations",
+      "authority": "first_party_observed_market",
+      "markets": ["japan", "china", "korea", "uae", "europe", "georgia", "kyrgyzstan"],
+      "status": "runtime_input",
+      "fields": ["rawMake", "rawModel", "year", "sourceId", "engineCc", "fuel", "power", "transmission", "drive", "bodyType"],
+      "notes": "Every production knowledge-gap report is part of the denominator. Source marketplace facts require verification before becoming authoritative CORE facts."
+    }
+  ]
+}
