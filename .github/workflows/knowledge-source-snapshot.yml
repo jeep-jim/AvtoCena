@@ -12,12 +12,14 @@ on:
       - scripts/catalog-download-western-knowledge-sources.mjs
       - scripts/catalog-download-vehiclesdb-csv.mjs
       - scripts/catalog-download-miit-products.mjs
+      - scripts/catalog-enrich-mlit-attachment-context.mjs
       - scripts/catalog-extract-mlit-pdf-knowledge.mjs
       - scripts/catalog-extract-mlit-tabular.py
       - scripts/catalog-download-autohome-china-core.mjs
       - scripts/catalog-build-knowledge-denominator.mjs
       - scripts/catalog-extend-knowledge-denominator-west.mjs
       - scripts/catalog-extend-knowledge-denominator-asia.mjs
+      - scripts/catalog-validate-knowledge-source-corpus.mjs
       - data/catalog/knowledge-source-snapshots/SOURCES.json
       - .github/workflows/knowledge-source-snapshot.yml
 
@@ -140,6 +142,10 @@ jobs:
           KNOWLEDGE_MIIT_PAGE_SIZE: "1000"
           KNOWLEDGE_MIIT_MAX_PAGES_PER_BATCH: "100"
         run: node scripts/catalog-download-miit-products.mjs
+      - name: Rebuild Japan attachment map with year-page context
+        env:
+          KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
+        run: node scripts/catalog-enrich-mlit-attachment-context.mjs
       - name: Complete Japan passenger PDF extraction
         env:
           KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
@@ -174,17 +180,23 @@ jobs:
           const fs=require('fs'),path=require('path'),crypto=require('crypto');
           const root='data/catalog/knowledge-source-snapshots/generated';
           const manifests=[['vehiclesdb','snapshot-manifest.json'],['eea','snapshot-manifest.json'],['miit','snapshot-manifest.json'],['miit-products','products-manifest.json'],['mlit','snapshot-manifest.json'],['mlit-pdf','pdf-text-manifest.json'],['mlit-tabular','tabular-manifest.json'],['korea','snapshot-manifest.json'],['korea-jeju','jeju-registry-manifest.json'],['korea-energy','energy-agency-manifest.json'],['us','snapshot-manifest.json'],['canada','snapshot-manifest.json'],['autohome-china','snapshot-manifest.json']].map(([source,file])=>{const rootSource=source.startsWith('miit-')?'miit':source.startsWith('mlit-')?'mlit':source.startsWith('korea-')?'korea':source;const p=path.join(root,rootSource,file);try{return{source,...JSON.parse(fs.readFileSync(p,'utf8'))}}catch(error){return{source,status:'missing',errors:[{error:String(error.message||error)}]}}});
-          const walk=(dir,out=[])=>{if(!fs.existsSync(dir))return out;for(const n of fs.readdirSync(dir)){const f=path.join(dir,n),s=fs.statSync(f);s.isDirectory()?walk(f,out):out.push({path:f.replaceAll('\\','/'),bytes:s.size})}return out};const files=walk(root);const payload={schemaVersion:1,builtAt:new Date().toISOString(),status:manifests.some(x=>['failed','missing'].includes(x.status))?'partial':manifests.some(x=>String(x.status).startsWith('partial'))?'partial':'complete_snapshot_set',sources:manifests.map(x=>({source:x.source,status:x.status,fetchedAt:x.fetchedAt||null,counts:x.counts||{},errors:(x.errors||[]).slice(0,20)})),files:files.length,totalBytes:files.reduce((n,x)=>n+x.bytes,0),contentDigest:crypto.createHash('sha256').update(JSON.stringify(files)).digest('hex')};fs.writeFileSync(path.join(root,'snapshot-manifest.json'),JSON.stringify(payload,null,2)+'\n');console.log(JSON.stringify(payload,null,2));
+          const walk=(dir,out=[])=>{if(!fs.existsSync(dir))return out;for(const n of fs.readdirSync(dir)){const f=path.join(dir,n),s=fs.statSync(f);s.isDirectory()?walk(f,out):out.push({path:f.replaceAll('\\','/'),bytes:s.size})}return out};const files=walk(root);const payload={schemaVersion:1,builtAt:new Date().toISOString(),status:'awaiting_completion_gate',sources:manifests.map(x=>({source:x.source,status:x.status,fetchedAt:x.fetchedAt||null,counts:x.counts||{},errors:(x.errors||[]).slice(0,20)})),files:files.length,totalBytes:files.reduce((n,x)=>n+x.bytes,0),contentDigest:crypto.createHash('sha256').update(JSON.stringify(files)).digest('hex')};fs.writeFileSync(path.join(root,'snapshot-manifest.json'),JSON.stringify(payload,null,2)+'\n');console.log(JSON.stringify(payload,null,2));
           NODE
       - name: Validate complete source corpus
         shell: bash
+        env:
+          KNOWLEDGE_SNAPSHOT_ROOT: data/catalog/knowledge-source-snapshots/generated
+          KNOWLEDGE_DENOMINATOR_ROOT: data/catalog/knowledge-source-snapshots/denominator
+          KNOWLEDGE_COMPLETION_REPORT: data/catalog/knowledge-source-snapshots/completion-report.json
         run: |
           set -euo pipefail
-          for f in scripts/catalog-download-knowledge-source-snapshot.mjs scripts/catalog-download-korea-jeju-registry.mjs scripts/catalog-download-korea-energy-models.mjs scripts/catalog-download-western-knowledge-sources.mjs scripts/catalog-download-vehiclesdb-csv.mjs scripts/catalog-download-miit-products.mjs scripts/catalog-extract-mlit-pdf-knowledge.mjs scripts/catalog-download-autohome-china-core.mjs scripts/catalog-build-knowledge-denominator.mjs scripts/catalog-extend-knowledge-denominator-west.mjs scripts/catalog-extend-knowledge-denominator-asia.mjs; do node --check "$f"; done
+          for f in scripts/catalog-download-knowledge-source-snapshot.mjs scripts/catalog-download-korea-jeju-registry.mjs scripts/catalog-download-korea-energy-models.mjs scripts/catalog-download-western-knowledge-sources.mjs scripts/catalog-download-vehiclesdb-csv.mjs scripts/catalog-download-miit-products.mjs scripts/catalog-enrich-mlit-attachment-context.mjs scripts/catalog-extract-mlit-pdf-knowledge.mjs scripts/catalog-download-autohome-china-core.mjs scripts/catalog-build-knowledge-denominator.mjs scripts/catalog-extend-knowledge-denominator-west.mjs scripts/catalog-extend-knowledge-denominator-asia.mjs scripts/catalog-validate-knowledge-source-corpus.mjs; do node --check "$f"; done
           python -m py_compile scripts/catalog-extract-mlit-tabular.py
-          for f in data/catalog/knowledge-source-snapshots/denominator/coverage-report.json data/catalog/knowledge-source-snapshots/denominator/western-coverage-report.json data/catalog/knowledge-source-snapshots/denominator/asia-coverage-report.json data/catalog/knowledge-source-snapshots/generated/korea/jeju-registry-manifest.json data/catalog/knowledge-source-snapshots/generated/korea/energy-agency-manifest.json data/catalog/knowledge-source-snapshots/generated/autohome-china/snapshot-manifest.json data/catalog/knowledge-source-snapshots/generated/miit/products-manifest.json data/catalog/knowledge-source-snapshots/generated/mlit/pdf-text-manifest.json data/catalog/knowledge-source-snapshots/generated/mlit/tabular-manifest.json; do test -s "$f"; done
-          node - <<'NODE'
-          const fs=require('fs');const g=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/denominator/coverage-report.json'));const w=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/denominator/western-coverage-report.json'));const a=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/denominator/asia-coverage-report.json'));const k=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/generated/korea/jeju-registry-manifest.json'));const c=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/generated/autohome-china/snapshot-manifest.json'));const j=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/generated/mlit/tabular-manifest.json'));console.log(JSON.stringify({global:g.counts,west:w.counts,asia:a.counts,korea:k.counts,china:c.counts,japan:{tabularConverted:j.converted,tabularFiles:j.selected}},null,2));if(Number(g.counts?.sourceModels||0)<4000)throw new Error('global_denominator_collapse');if(Number(w.counts?.sourceModels||0)<500)throw new Error('western_denominator_collapse');if(Number(a.counts?.models||0)<1000)throw new Error('asia_denominator_collapse');if(Number(k.counts?.rowsParsed||0)<100000)throw new Error('korea_registry_collapse');if(Number(c.counts?.variants2020Plus||0)<500)throw new Error('china_variant_collapse');if(Number(j.converted||0)<5)throw new Error('mlit_tabular_collapse');
+          node scripts/catalog-validate-knowledge-source-corpus.mjs
+      - name: Mark source corpus complete
+        run: |
+          node <<'NODE'
+          const fs=require('fs');const p='data/catalog/knowledge-source-snapshots/generated/snapshot-manifest.json';const m=JSON.parse(fs.readFileSync(p,'utf8'));const c=JSON.parse(fs.readFileSync('data/catalog/knowledge-source-snapshots/completion-report.json','utf8'));if(!c.ready)throw new Error('completion_report_not_ready');m.status='complete_source_corpus';m.completion={ready:true,report:'../completion-report.json',headline:c.headline};fs.writeFileSync(p,JSON.stringify(m,null,2)+'\n');console.log(JSON.stringify(m.completion,null,2));
           NODE
       - name: Commit complete source corpus
         shell: bash
@@ -194,7 +206,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin fix/catalog-core-recovery-20260822
           git rebase origin/fix/catalog-core-recovery-20260822
-          git add data/catalog/knowledge-source-snapshots/generated data/catalog/knowledge-source-snapshots/denominator
+          git add data/catalog/knowledge-source-snapshots/generated data/catalog/knowledge-source-snapshots/denominator data/catalog/knowledge-source-snapshots/completion-report.json
           if git diff --cached --quiet; then echo "Knowledge source corpus is unchanged."; exit 0; fi
           git commit -m "Build complete vehicle knowledge source corpus"
           git push origin HEAD:fix/catalog-core-recovery-20260822
