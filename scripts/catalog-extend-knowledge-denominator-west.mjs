@@ -23,6 +23,7 @@ function parseCsv(text) {
   return rows.map(values=>Object.fromEntries(headers.map((h,i)=>[h,values[i]??""])));
 }
 async function readCsv(file){try{return parseCsv(await fs.readFile(file,"utf8"));}catch{return[];}}
+async function readJson(file,fallback=null){try{return JSON.parse(await fs.readFile(file,"utf8"));}catch{return fallback;}}
 async function ensureDir(dir){await fs.mkdir(dir,{recursive:true});}
 async function writeChunked(prefix,entityType,records){
   const files=[];
@@ -51,14 +52,26 @@ let canadaFiles=[];try{canadaFiles=(await fs.readdir(canadaDir)).filter(f=>f.end
 let canadaIncluded=0;
 for(const file of canadaFiles){for(const row of await readCsv(path.join(canadaDir,file))){const year=yearValue(row);if(!year||year<2020)continue;const make=first(row,"make");const model=first(row,"model");if(!make||!model)continue;addModel(make,model,"canada","canada-nrcan",year);evidence.push({evidenceId:`ca-nrcan:${sha256(`${file}:${JSON.stringify(row)}`).slice(0,20)}`,sourceId:"canada-nrcan",market:"canada",year,make,model,vehicleClass:first(row,"vehicle class")||null,engineLiters:num(first(row,"engine size (l)","engine size")),cylinders:num(first(row,"cylinders")),transmission:first(row,"transmission")||null,fuel:first(row,"fuel type")||null,cityL100km:num(first(row,"city (l/100 km)")),highwayL100km:num(first(row,"highway (l/100 km)")),combinedL100km:num(first(row,"combined (l/100 km)"))});canadaIncluded++;}}
 
-const nhtsaModelsPath=path.join(SNAPSHOT_ROOT,"us","nhtsa-all-models.json");
-let nhtsaIncluded=0;try{const payload=JSON.parse(await fs.readFile(nhtsaModelsPath,"utf8"));for(const row of payload.Results||[]){const make=clean(row.Make_Name||row.MakeName);const model=clean(row.Model_Name||row.ModelName);if(!make||!model)continue;addModel(make,model,"us","us-nhtsa-vpic",null);nhtsaIncluded++;}}catch{}
+let nhtsaIncluded=0;
+let nhtsaCurrentMakes=0;
+const boundedNhtsa=await readJson(path.join(SNAPSHOT_ROOT,"us","nhtsa-models-current-makes.json"),null);
+if(boundedNhtsa){
+  for(const item of boundedNhtsa.makeResults||[]){
+    nhtsaCurrentMakes++;
+    for(const row of item.results||[]){const make=clean(row.Make_Name||row.MakeName||item.queriedMake);const model=clean(row.Model_Name||row.ModelName);if(!make||!model)continue;addModel(make,model,"us","us-nhtsa-vpic",null);nhtsaIncluded++;}
+  }
+} else {
+  // Temporary compatibility with the older snapshot shape; new snapshots use
+  // bounded make-level calls derived from EPA 2020+ makes.
+  const legacy=await readJson(path.join(SNAPSHOT_ROOT,"us","nhtsa-all-models.json"),null);
+  for(const row of legacy?.Results||[]){const make=clean(row.Make_Name||row.MakeName);const model=clean(row.Model_Name||row.ModelName);if(!make||!model)continue;addModel(make,model,"us","us-nhtsa-vpic",null);nhtsaIncluded++;}
+}
 
 const models=[...modelMap.values()].sort((a,b)=>`${a.make} ${a.model}`.localeCompare(`${b.make} ${b.model}`,"en"));
 evidence.sort((a,b)=>`${a.make} ${a.model} ${a.year}`.localeCompare(`${b.make} ${b.model} ${b.year}`,"en"));
 const modelFiles=await writeChunked("western-models","source_model_western",models);
 const evidenceFiles=await writeChunked("western-variant-evidence","source_variant_evidence_western",evidence);
-const report={schemaVersion:1,builtAt:new Date().toISOString(),status:models.length&&evidence.length?"collected":"partial",counts:{sourceModels:models.length,variantEvidence:evidence.length,usFuelEconomyRowsIncluded:usIncluded,nhtsaModelsIncluded:nhtsaIncluded,canadaRowsIncluded:canadaIncluded},files:{models:modelFiles,evidence:evidenceFiles},contract:{fromYear:2020,markets:["us","canada"],note:"Source evidence only; canonical CORE promotion requires normalization and conflict checks."}};
+const report={schemaVersion:1,builtAt:new Date().toISOString(),status:models.length&&evidence.length?"collected":"partial",counts:{sourceModels:models.length,variantEvidence:evidence.length,usFuelEconomyRowsIncluded:usIncluded,nhtsaCurrentMakes,nhtsaModelsIncluded:nhtsaIncluded,canadaRowsIncluded:canadaIncluded},files:{models:modelFiles,evidence:evidenceFiles},contract:{fromYear:2020,markets:["us","canada"],note:"Source evidence only; canonical CORE promotion requires normalization and conflict checks. NHTSA is bounded to makes observed in EPA 2020+ data."}};
 await fs.writeFile(path.join(OUT_ROOT,"western-coverage-report.json"),`${JSON.stringify(report,null,2)}\n`);
 console.log(JSON.stringify(report,null,2));
 if(models.length<500)throw new Error(`western_model_denominator_too_small:${models.length}`);
