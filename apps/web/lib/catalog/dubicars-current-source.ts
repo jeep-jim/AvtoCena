@@ -1,6 +1,7 @@
 import { CATALOG_BRANDS } from "./brands";
 import { cacheImageFromUrl, stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
+import { parseCatalogHorsepowerToken } from "./power-sanity";
 import { isCatalogYearAllowed } from "./offer-quality";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
@@ -235,11 +236,13 @@ export function parseDubicarsCurrentListing(markup: string, url: string): Row | 
     || fullPlain.match(/\b([0-9]+(?:\.[0-9]+)?)L\b/i)?.[1],
   );
   const engineCc = liters ? Math.round(liters * 1_000) : integer(fullPlain.match(/([0-9][0-9, ]+)\s*cc\b/i)?.[1]);
-  const parsedPowerHp = integer(
-    fullPlain.match(/Horsepower\s*[:：]?\s*([0-9]{2,4})\s*(?:HP|PS|BHP)?\b/i)?.[1]
-    || fullPlain.match(/\b([0-9]{2,4})\s*(?:HP|PS|BHP)\b/i)?.[1]
-    || title.match(/\b([0-9]{2,4})\s*HP\b/i)?.[1],
-  );
+  const sourcePowerText = labelValue(fullPlain, ["Horsepower"], stops)
+    || fullPlain.match(/Horsepower\s*[:：]?\s*[0-9][0-9, .]*\s*(?:HP|PS|BHP)\b/i)?.[0]
+    || title.match(/\b[0-9][0-9, .]*\s*(?:HP|PS|BHP)\b/i)?.[0]
+    || "";
+  const parsedPowerHp = parseCatalogHorsepowerToken(sourcePowerText);
+  // A marketplace can contain a typo such as 1,997 HP. Preserve the source
+  // page as provenance, but never publish an extreme unverified label as fact.
   const powerHp = parsedPowerHp && parsedPowerHp <= 1_500 ? parsedPowerHp : undefined;
 
   const fuelRaw = labelValue(fullPlain, ["Fuel Type", "Fuel"], stops) || fullPlain.match(/\bFuel\s*:\s*([A-Za-z -]{3,24})/i)?.[1] || "";

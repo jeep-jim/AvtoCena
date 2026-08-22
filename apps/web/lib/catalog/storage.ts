@@ -9,7 +9,8 @@ import { catalogOfferVisibleRub, isJapanAuctionOffer, japanAuctionSoldIdentityVe
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
 import { enforceCatalogModelYearQuota, selectCatalogShowcaseDiversity } from "./inventory-quota";
-import { enrichOfferWithVehicleKnowledge, resolveVehicleModelQuery } from "./vehicle-knowledge";
+import { resolveVehicleModelQuery } from "./vehicle-knowledge";
+import { enrichOfferWithKnowledgeCore } from "./knowledge-core";
 import { applyEncyclopediaDisplayIdentityBatch } from "./display-identity";
 import { catalogPublicPriority, findCatalogPriceOutliers } from "./public-priority";
 import { deduplicatePublicCatalogOffers } from "./public-offer-deduplication";
@@ -822,6 +823,36 @@ async function runWithConcurrency(tasks: Array<() => Promise<void>>, concurrency
     }
   }));
 }
+async function assertCurrentCatalogReadModelsReady(generationId: string, offers: VehicleOffer[]) {
+  const all = await readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(
+    currentProjectionPath(CURRENT_ALL_MARKETS_PROJECTION),
+    { generationId: "", items: [] },
+  );
+  if (all.generationId !== generationId || Number(all.items?.length || 0) !== offers.length) {
+    throw new Error(`catalog_current_projection_not_ready:${all.generationId}:${Number(all.items?.length || 0)}:${generationId}:${offers.length}`);
+  }
+  const byMarket = new Map<string, VehicleOffer[]>();
+  for (const offer of offers) byMarket.set(String(offer.market || ""), [...(byMarket.get(String(offer.market || "")) || []), offer]);
+  for (const [market, rows] of byMarket) {
+    const projection = await readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(
+      currentProjectionPath(market),
+      { generationId: "", items: [] },
+    );
+    if (projection.generationId !== generationId || Number(projection.items?.length || 0) !== rows.length) {
+      throw new Error(`catalog_current_market_projection_not_ready:${market}:${projection.generationId}:${Number(projection.items?.length || 0)}:${generationId}:${rows.length}`);
+    }
+    for (const offer of rows.slice(0, 5)) {
+      const shard = await readDataJson<{ generationId: string; items: VehicleOffer[] }>(
+        currentOfferShardPath(offer.id),
+        { generationId: "", items: [] },
+      );
+      if (shard.generationId !== generationId || !(shard.items || []).some((item) => item.id === offer.id)) {
+        throw new Error(`catalog_current_offer_shard_not_ready:${market}:${offer.id}:${shard.generationId}:${generationId}`);
+      }
+    }
+  }
+}
+
 export type PersistCatalogOptions = {
   beforePersistValidate?: (publicOffers: VehicleOffer[]) => void | Promise<void>;
   beforePublishValidate?: (publishedOffers: VehicleOffer[]) => void | Promise<void>;
@@ -855,7 +886,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   ].flatMap((rows) => rows || []).map((offer) => String(offer?.id || "")).filter(Boolean));
   const normalized = await Promise.all(nextOffers.map(async (offer) => exactPreserveMarkets.has(offer.market) || protectedPublicIds.has(String(offer.id))
     ? offer
-    : normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge(offer))));
+    : normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore(offer))));
   if (growOnlyMarkets.size) {
     const current = await readAllOffersForMaintenance();
     const merged = new Map(normalized.map((offer) => [offer.id, offer]));
@@ -864,7 +895,7 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
       if (!growOnlyMarkets.has(String(offer.market)) || !hasCredibleOfferContent({ ...offer, status: "active" })) continue;
       const incoming = merged.get(offer.id);
       if (!incoming || incoming.status !== "active" || !hasCredibleOfferContent({ ...incoming, status: "active" })) {
-        const restored = normalizeVehicleOfferSpecs(await enrichOfferWithVehicleKnowledge({ ...offer, status: "active" }));
+        const restored = normalizeVehicleOfferSpecs(await enrichOfferWithKnowledgeCore({ ...offer, status: "active" }));
         merged.set(offer.id, restored);
       }
     }
@@ -926,12 +957,18 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   // they can safely fall back to these generation indexes while the optional
   // one-hop read models are refreshed.
   const manifest: CatalogManifest = { version: 2, generationId, updatedAt: now, markets };
+  // Stage every one-hop read model before the public manifest cutover. Readers
+  // compare each read model with the still-current manifest, so while staging
+  // they safely fall back to the previous immutable generation. Only after the
+  // projections AND full offer-detail shards are verified do we expose the new
+  // generation. This prevents cards from pointing at temporarily unavailable
+  // /cars/offer/:id pages.
+  await writeCurrentCatalogReadModels(generationId, publishedOffers, true);
+  await assertCurrentCatalogReadModelsReady(generationId, publishedOffers);
   for (let attempt = 0; attempt < 5; attempt++) {
     const current = await storage.readJsonWithMeta<CatalogManifest>("catalog/manifest.json", manifest);
     try {
       await storage.writeJson("catalog/manifest.json", manifest, current.found && current.etag ? { ifMatch: current.etag } : { ifNoneMatch: "*" });
-      resetCatalogReadCachesForTests();
-      await writeCurrentCatalogReadModels(generationId, publishedOffers, true);
       resetCatalogReadCachesForTests();
       return manifest;
     }

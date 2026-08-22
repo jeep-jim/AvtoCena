@@ -556,6 +556,7 @@ export function catalogOfferTitle(offer: any) {
   const base = collapseAdjacentRepeatedPhrases(china ? rawBase : stripUnresolvedHan(rawBase));
 
   let trim = china ? "" : collapseAdjacentRepeatedPhrases(publicTitleTrim(offer?.trim));
+  if (/^(?:other|другое|прочее|прочий|unknown|n\/?a)$/i.test(trim)) trim = "";
   trim = removeLeadingPhrase(trim, base);
   trim = removeLeadingPhrase(trim, make);
   trim = removeLeadingPhrase(trim, model);

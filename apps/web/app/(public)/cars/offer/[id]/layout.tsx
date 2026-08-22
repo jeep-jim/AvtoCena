@@ -4,6 +4,7 @@ import { OfferSpecGridStabilizer } from "@/components/catalog/OfferSpecGridStabi
 import { money } from "@/lib/avtocena";
 import { absoluteAvtocenaUrl, catalogOfferUrl } from "@/lib/ai-discovery";
 import { getOfferForPage } from "@/lib/catalog/offer-page-data";
+import { publicCatalogPowerHp } from "@/lib/catalog/power-sanity";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { catalogMarketLabel } from "@/lib/catalog/runtime-config";
 
@@ -19,6 +20,8 @@ function offerStructuredData(id: string, offer: any) {
   const canonical = catalogOfferUrl(id);
   const totalRub = Number(offer.totalRub || 0);
   const mileageKm = Number(offer.mileageKm || 0);
+  const engineCc = Number(offer.engineCc || 0);
+  const safePowerHp = publicCatalogPowerHp(offer);
   const images = Array.isArray(offer.images)
     ? offer.images.map((image: any) => absoluteAvtocenaUrl(image?.url)).filter(Boolean).slice(0, 12)
     : [];
@@ -36,6 +39,13 @@ function offerStructuredData(id: string, offer: any) {
     vehicleConfiguration: clean(offer.trim || offer.generation) || undefined,
     fuelType: clean(offer.fuel) || undefined,
     vehicleTransmission: clean(offer.transmission) || undefined,
+    bodyType: clean(offer.bodyType) || undefined,
+    driveWheelConfiguration: clean(offer.drive) || undefined,
+    vehicleEngine: engineCc > 0 || safePowerHp ? {
+      "@type": "EngineSpecification",
+      engineDisplacement: engineCc > 0 ? { "@type": "QuantitativeValue", value: Math.round(engineCc), unitCode: "CMQ" } : undefined,
+      enginePower: safePowerHp ? { "@type": "QuantitativeValue", value: safePowerHp, unitText: "hp" } : undefined,
+    } : undefined,
     mileageFromOdometer: mileageKm > 0 ? {
       "@type": "QuantitativeValue",
       value: Math.round(mileageKm),

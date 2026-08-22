@@ -1,5 +1,6 @@
 import { cacheImageFromUrl, stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
+import { parseCatalogHorsepowerToken } from "./power-sanity";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
 type Row = {
@@ -109,7 +110,9 @@ function parse(markup: string, url: string): Row | null {
   const mileageKm = num(plain.match(/(?:Kilometers?|Mileage)?\s*([0-9][0-9, ]+)\s*Km\b/i)?.[1]);
   const liters = Number((plain.match(/(?:Engine capacity|Engine)?\s*([0-9]+(?:\.[0-9]+)?)\s*L\b/i)?.[1] || "0"));
   const engineCc = liters ? Math.round(liters * 1000) : num(plain.match(/([0-9][0-9, ]+)\s*cc\b/i)?.[1]);
-  const powerHp = num(plain.match(/(?:Horsepower)?\s*([0-9]{2,4})\s*HP\b/i)?.[1]);
+  const sourcePowerText = plain.match(/Horsepower\s*[:：]?\s*[0-9][0-9, .]*\s*(?:HP|PS|BHP)\b/i)?.[0] || "";
+  const parsedPowerHp = parseCatalogHorsepowerToken(sourcePowerText);
+  const powerHp = parsedPowerHp && parsedPowerHp <= 1_500 ? parsedPowerHp : undefined;
   const specs = ["Fuel Type", "Transmission", "Drive type", "Vehicle type", "Color", "Model year", "Kilometers", "Engine capacity", "Horsepower"];
 
   const candidates = [...new Set([...markup.matchAll(/(?:data-src|data-original|data-lazy-src|src)=["']([^"']+\.(?:jpg|jpeg|png|webp)(?:\?[^"']*)?)["']/gi)]

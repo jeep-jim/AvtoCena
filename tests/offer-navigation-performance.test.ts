@@ -41,7 +41,9 @@ test("metadata and page share one memoized offer lookup per request", () => {
   assert.match(data, /unstable_cache\(/);
   assert.match(data, /catalog-offer-page-v1/);
   assert.match(data, /revalidate: 60/);
-  assert.match(data, /cache\(\(id: string\) => getOfferAcrossRequests\(id\)\)/);
+  assert.match(data, /async function resilientOfferLookup/);
+  assert.match(data, /return getOffer\(id\)/);
+  assert.match(data, /cache\(\(id: string\) => resilientOfferLookup\(id\)\)/);
   assert.match(page, /getOfferForPage\(id\)/);
   assert.match(layout, /getOfferForPage\(id\)/);
 });
@@ -107,7 +109,9 @@ test("catalog generation becomes public only after canonical identity and dedupl
   const manifestSwitch = storage.indexOf('await storage.writeJson("catalog/manifest.json", manifest');
   const currentReadModelRefresh = storage.indexOf("await writeCurrentCatalogReadModels(generationId, publishedOffers, true)");
   assert.ok(manifestSwitch > 0);
-  assert.ok(currentReadModelRefresh > manifestSwitch);
+  assert.ok(currentReadModelRefresh > 0);
+  assert.ok(currentReadModelRefresh < manifestSwitch);
+  assert.match(storage, /assertCurrentCatalogReadModelsReady\(generationId, publishedOffers\)/);
   assert.match(storage, /current\.generationId === manifest\.generationId/);
 });
 
