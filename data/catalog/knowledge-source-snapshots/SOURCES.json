@@ -297,9 +297,9 @@
       "markets": [
         "korea"
       ],
-      "status": "bulk_ready",
-      "license": "Korean Public Data Portal: unrestricted use on dataset page",
-      "landingUrl": "https://www.data.go.kr/dataset/15005963/fileData.do",
+      "status": "live_query_ready",
+      "license": "Korea Energy Agency public information service; downstream reuse terms require review",
+      "landingUrl": "https://min24.energy.or.kr/trans_hp/AHP/HP_03/HP_03_01_010.do",
       "fields": [
         "modelName",
         "manufacturer",
@@ -311,7 +311,7 @@
         "oneChargeRange",
         "grade"
       ],
-      "notes": "Nationwide Korea Energy Agency model dataset with roughly 2,800+ vehicle models. Public file is downloaded without login and complements Jeju registration names with manufacturer and efficiency/range evidence."
+      "notes": "Official Korea Energy Agency live model catalog queried without login for release years 2020-present. It complements Jeju registration names with manufacturer, class, fuel, transmission, efficiency, range, emissions, release year and test-number evidence."
     },
     {
       "id": "kotsa-new-registration-api",
