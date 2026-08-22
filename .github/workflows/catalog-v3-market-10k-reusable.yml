@@ -107,6 +107,9 @@ jobs:
             tests/catalog-encyclopedia-identity-data.test.ts \
             tests/catalog-encyclopedia-identity-master.test.ts \
             tests/catalog-knowledge-core-contract.test.ts \
+            tests/catalog-public-truth-seo.test.ts \
+            tests/catalog-power-authority-contract.test.ts \
+            tests/catalog-safe-model-label.test.ts \
             tests/catalog-public-safety.test.ts \
             tests/catalog-publication-gate.test.ts
 
