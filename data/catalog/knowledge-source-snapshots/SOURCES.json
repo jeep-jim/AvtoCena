@@ -289,7 +289,7 @@
         "vehicleType",
         "firstRegistrationDate"
       ],
-      "notes": "424,332-row Jeju registration extract is downloadable without login. The downloader retains the source hash/row count but commits only distinct 2020+ technical/name tuples with observation counts, because duplicate registration rows add no vehicle-knowledge value."
+      "notes": "424,332-row Jeju registration extract is downloadable without login. The downloader prefers the live official file and retains its source hash/row count, but commits only distinct 2020+ technical/name tuples with observation counts because duplicate registrations add no vehicle-knowledge value. A hash-gated compact fallback is preserved from successful same-branch workflow run 32557200820 for periods when data.go.kr is unreachable from GitHub runners; its workflow artifact, raw source hash, chunk hashes and reconciled counts are all recorded."
     },
     {
       "id": "korea-energy-agency-efficiency",

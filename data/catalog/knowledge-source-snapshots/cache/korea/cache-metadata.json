@@ -1,0 +1,27 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "korea-jeju-registration-file",
+  "sourceUrl": "https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000002922208&fileDetailSn=1&insertDataPrcus=N",
+  "rawSha256": "371a7e483f82ce7c31f351310b87a2f48c53aab3c0833afe50cdbc1d987a8ead",
+  "provenance": {
+    "repository": "jeep-jim/AvtoCena",
+    "workflowRunId": 32557200820,
+    "workflowRunNumber": 23,
+    "artifactId": 9471778308,
+    "artifactName": "knowledge-source-korea",
+    "headSha": "aaffc5d7c5bc1df8ae8401da92913f683fdf6817",
+    "artifactDigest": "sha256:0b7af4194b35f60c7e4905d69fd0ec4f85c9469f887ac936fbe200b62d882995"
+  },
+  "files": [
+    {
+      "file": "jeju-vehicle-registry-tuples-0001.json",
+      "cacheFile": "jeju-vehicle-registry-tuples-0001.json.gz",
+      "sha256": "177bed9724e49e1d56af18e3869af944ba2fc70df47471d66f5680d08a2ab050"
+    },
+    {
+      "file": "jeju-vehicle-registry-tuples-0002.json",
+      "cacheFile": "jeju-vehicle-registry-tuples-0002.json.gz",
+      "sha256": "e5f61dee045e9669654ef1bfa9aa8da14be83622074a6c3f53f7d82bc2690c7e"
+    }
+  ]
+}

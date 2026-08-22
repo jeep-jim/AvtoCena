@@ -1,9 +1,11 @@
 import fs from "node:fs/promises";
 import path from "node:path";
 import crypto from "node:crypto";
+import { gunzipSync } from "node:zlib";
 
 const ROOT=path.resolve(process.env.KNOWLEDGE_OUTPUT_ROOT||"data/catalog/knowledge-source-snapshots/generated");
 const OUT=path.join(ROOT,"korea");
+const CACHE=path.resolve(process.env.KNOWLEDGE_KOREA_CACHE||"data/catalog/knowledge-source-snapshots/cache/korea");
 const URL="https://www.data.go.kr/cmm/cmm/fileDownload.do?atchFileId=FILE_000000002922208&fileDetailSn=1&insertDataPrcus=N";
 const MAX_BYTES=Math.max(10_000_000,Math.min(150_000_000,Number(process.env.KNOWLEDGE_KOREA_MAX_BYTES||100_000_000)));
 const CURRENT_YEAR=new Date().getFullYear();
@@ -23,9 +25,18 @@ function decode(buf){
 function headerKey(v){return clean(v).replace(/[\s_()（）]/g,"").toLowerCase();}
 function findIndex(headers,names){const keys=headers.map(headerKey);for(const name of names){const idx=keys.indexOf(headerKey(name));if(idx>=0)return idx;}return -1;}
 
+async function installVerifiedCache(downloadError){
+ const metadata=JSON.parse(await fs.readFile(path.join(CACHE,"cache-metadata.json"),"utf8"));const manifest=JSON.parse(await fs.readFile(path.join(CACHE,"jeju-registry-manifest.json"),"utf8"));
+ if(metadata.sourceUrl!==URL||manifest.sourceUrl!==URL)throw new Error("korea_jeju_cache_source_mismatch");
+ if(metadata.rawSha256!==manifest.raw?.sha256||Number(manifest.raw?.rows||0)<100000)throw new Error("korea_jeju_cache_raw_provenance_invalid");
+ let tuples=0,observations=0;for(const item of metadata.files||[]){const compressed=await fs.readFile(path.join(CACHE,item.cacheFile));const bytes=gunzipSync(compressed);if(sha256(bytes)!==item.sha256)throw new Error(`korea_jeju_cache_hash_mismatch:${item.file}`);const payload=JSON.parse(bytes.toString("utf8"));if(payload.sourceId!=="korea-jeju-registration-file"||!Array.isArray(payload.records))throw new Error(`korea_jeju_cache_payload_invalid:${item.file}`);tuples+=payload.records.length;observations+=payload.records.reduce((sum,row)=>sum+Number(row.observations||0),0);await fs.writeFile(path.join(OUT,item.file),bytes);}
+ if(tuples!==Number(manifest.counts?.uniqueTuples||0)||observations!==Number(manifest.counts?.rowsIn2020Plus||0))throw new Error(`korea_jeju_cache_count_mismatch:${tuples}:${observations}`);
+ const installed={...manifest,cache:{used:true,installedAt:new Date().toISOString(),reason:String(downloadError?.message||downloadError),provenance:metadata.provenance,verification:{rawSha256:metadata.rawSha256,tupleFiles:metadata.files.length,uniqueTuples:tuples,observations}},raw:{...manifest.raw,compactedStoredInGit:true}};await fs.writeFile(path.join(OUT,"jeju-registry-manifest.json"),JSON.stringify(installed,null,2)+"\n");console.log(JSON.stringify(installed,null,2));
+}
+
 await fs.mkdir(OUT,{recursive:true});
-let response,lastError;for(let attempt=1;attempt<=5;attempt++){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),120000);try{response=await fetch(URL,{signal:controller.signal,redirect:"follow",headers:{accept:"text/csv,application/octet-stream,*/*","user-agent":"AvtoCena-KnowledgeCORE/1.0 (+https://avtocena.com; public dataset snapshot)"}});if(!response.ok)throw new Error(`korea_jeju_http_${response.status}`);break;}catch(error){lastError=error;const retryable=/korea_jeju_http_(?:408|425|429|5\d\d)|fetch failed|aborted|timeout/i.test(String(error?.message||error));if(!retryable||attempt===5)throw error;await sleep(1500*attempt);}finally{clearTimeout(timer);}}
-if(!response)throw lastError||new Error("korea_jeju_download_missing");
+let response,lastError;for(let attempt=1;attempt<=5;attempt++){const controller=new AbortController();const timer=setTimeout(()=>controller.abort(),120000);try{response=await fetch(URL,{signal:controller.signal,redirect:"follow",headers:{accept:"text/csv,application/octet-stream,*/*","user-agent":"AvtoCena-KnowledgeCORE/1.0 (+https://avtocena.com; public dataset snapshot)"}});if(!response.ok)throw new Error(`korea_jeju_http_${response.status}`);break;}catch(error){lastError=error;const retryable=/korea_jeju_http_(?:408|425|429|5\d\d)|fetch failed|aborted|timeout/i.test(String(error?.message||error));if(!retryable)throw error;if(attempt<5)await sleep(1500*attempt);}finally{clearTimeout(timer);}}
+if(!response){await installVerifiedCache(lastError||new Error("korea_jeju_download_missing"));process.exit(0);}
 const raw=Buffer.from(await response.arrayBuffer());
 if(raw.length>MAX_BYTES)throw new Error(`korea_jeju_too_large:${raw.length}`);
 const {text,encoding}=decode(raw);const parsed=parseCsv(text);const headers=(parsed.shift()||[]).map(clean);
