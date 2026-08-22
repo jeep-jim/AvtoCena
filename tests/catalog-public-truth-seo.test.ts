@@ -10,6 +10,7 @@ const layout = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]
 const presentation = fs.readFileSync(new URL("../apps/web/lib/catalog/presentation.ts", import.meta.url), "utf8");
 const currentDubicars = fs.readFileSync(new URL("../apps/web/lib/catalog/dubicars-current-source.ts", import.meta.url), "utf8");
 const exactDubicars = fs.readFileSync(new URL("../apps/web/lib/catalog/dubicars-exact-source.ts", import.meta.url), "utf8");
+const postPersistAudit = fs.readFileSync(new URL("../scripts/catalog-live-postpersist-audit.mjs", import.meta.url), "utf8");
 
 test("horsepower tokens keep thousands separators instead of truncating 1,997 to 997", () => {
   assert.equal(parseCatalogHorsepowerToken("Horsepower 1,997 HP"), 1997);
@@ -86,4 +87,11 @@ test("vehicle JSON-LD uses the same safe power contract", () => {
   assert.match(layout, /enginePower/);
   assert.match(layout, /bodyType:/);
   assert.match(layout, /driveWheelConfiguration:/);
+});
+
+test("post-publish audit blocks any asserted market that still contains suspicious horsepower", () => {
+  assert.match(postPersistAudit, /catalogPowerSanity/);
+  assert.match(postPersistAudit, /suspiciousPowerCount/);
+  assert.match(postPersistAudit, /suspiciousPowerSamples/);
+  assert.match(postPersistAudit, /suspicious_power/);
 });
