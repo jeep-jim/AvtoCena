@@ -19,6 +19,7 @@ on:
       - scripts/catalog-build-knowledge-denominator.mjs
       - scripts/catalog-extend-knowledge-denominator-west.mjs
       - scripts/catalog-extend-knowledge-denominator-asia.mjs
+      - scripts/catalog-build-knowledge-source-master.mjs
       - scripts/catalog-validate-knowledge-source-corpus.mjs
       - data/catalog/knowledge-source-snapshots/SOURCES.json
       - .github/workflows/knowledge-source-snapshot.yml
@@ -174,6 +175,11 @@ jobs:
           node scripts/catalog-build-knowledge-denominator.mjs
           node scripts/catalog-extend-knowledge-denominator-west.mjs
           node scripts/catalog-extend-knowledge-denominator-asia.mjs
+      - name: Build one source-backed knowledge master
+        env:
+          KNOWLEDGE_DENOMINATOR_ROOT: data/catalog/knowledge-source-snapshots/denominator
+          KNOWLEDGE_MASTER_ROOT: data/catalog/knowledge-source-snapshots/master
+        run: node scripts/catalog-build-knowledge-source-master.mjs
       - name: Build global snapshot manifest
         run: |
           node <<'NODE'
@@ -187,10 +193,11 @@ jobs:
         env:
           KNOWLEDGE_SNAPSHOT_ROOT: data/catalog/knowledge-source-snapshots/generated
           KNOWLEDGE_DENOMINATOR_ROOT: data/catalog/knowledge-source-snapshots/denominator
+          KNOWLEDGE_MASTER_ROOT: data/catalog/knowledge-source-snapshots/master
           KNOWLEDGE_COMPLETION_REPORT: data/catalog/knowledge-source-snapshots/completion-report.json
         run: |
           set -euo pipefail
-          for f in scripts/catalog-download-knowledge-source-snapshot.mjs scripts/catalog-download-korea-jeju-registry.mjs scripts/catalog-download-korea-energy-models.mjs scripts/catalog-download-western-knowledge-sources.mjs scripts/catalog-download-vehiclesdb-csv.mjs scripts/catalog-download-miit-products.mjs scripts/catalog-enrich-mlit-attachment-context.mjs scripts/catalog-extract-mlit-pdf-knowledge.mjs scripts/catalog-download-autohome-china-core.mjs scripts/catalog-build-knowledge-denominator.mjs scripts/catalog-extend-knowledge-denominator-west.mjs scripts/catalog-extend-knowledge-denominator-asia.mjs scripts/catalog-validate-knowledge-source-corpus.mjs; do node --check "$f"; done
+          for f in scripts/catalog-download-knowledge-source-snapshot.mjs scripts/catalog-download-korea-jeju-registry.mjs scripts/catalog-download-korea-energy-models.mjs scripts/catalog-download-western-knowledge-sources.mjs scripts/catalog-download-vehiclesdb-csv.mjs scripts/catalog-download-miit-products.mjs scripts/catalog-enrich-mlit-attachment-context.mjs scripts/catalog-extract-mlit-pdf-knowledge.mjs scripts/catalog-download-autohome-china-core.mjs scripts/catalog-build-knowledge-denominator.mjs scripts/catalog-extend-knowledge-denominator-west.mjs scripts/catalog-extend-knowledge-denominator-asia.mjs scripts/catalog-build-knowledge-source-master.mjs scripts/catalog-validate-knowledge-source-corpus.mjs; do node --check "$f"; done
           python -m py_compile scripts/catalog-extract-mlit-tabular.py
           node scripts/catalog-validate-knowledge-source-corpus.mjs
       - name: Mark source corpus complete
@@ -206,7 +213,7 @@ jobs:
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git fetch origin fix/catalog-core-recovery-20260822
           git rebase origin/fix/catalog-core-recovery-20260822
-          git add data/catalog/knowledge-source-snapshots/generated data/catalog/knowledge-source-snapshots/denominator data/catalog/knowledge-source-snapshots/completion-report.json
+          git add data/catalog/knowledge-source-snapshots/generated data/catalog/knowledge-source-snapshots/denominator data/catalog/knowledge-source-snapshots/master data/catalog/knowledge-source-snapshots/completion-report.json
           if git diff --cached --quiet; then echo "Knowledge source corpus is unchanged."; exit 0; fi
           git commit -m "Build complete vehicle knowledge source corpus"
           git push origin HEAD:fix/catalog-core-recovery-20260822
