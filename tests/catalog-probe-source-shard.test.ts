@@ -86,7 +86,7 @@ test("Catalog V2 retains verified offers, continues cursors and can use all prod
   assert.match(rebuild, /CATALOG_REBUILD_RESET_CURSOR/);
   assert.match(rebuild, /CATALOG_V2_SOURCE_SLOTS_ONLY/);
   assert.match(rebuild, /CATALOG_REBUILD_SOURCE_IDS/);
-  assert.match(rebuild, /enrichOfferWithVehicleKnowledge/);
+  assert.match(rebuild, /enrichOfferWithKnowledgeCore/);
   assert.match(rebuild, /bases\.sort\(quality\)/);
   assert.doesNotMatch(rebuild, /businessPriority/);
 });

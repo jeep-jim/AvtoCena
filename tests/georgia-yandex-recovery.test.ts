@@ -40,7 +40,7 @@ test("temporary Georgia public-internal diagnostic routes are removed after reco
 test("Georgia replacement publisher preserves the full non-Georgia maintenance array", () => {
   assert.match(replacementPublisher, /readAllOffersForMaintenance/);
   assert.match(replacementPublisher, /market === "georgia"/);
-  assert.match(replacementPublisher, /enrichOfferWithVehicleKnowledge/);
+  assert.match(replacementPublisher, /enrichOfferWithKnowledgeCore/);
   assert.match(replacementPublisher, /const projectedFull = await Promise\.all/);
   assert.match(replacementPublisher, /projectedPublicCounts/);
   assert.match(replacementPublisher, /preservation_projection_mismatch/);
