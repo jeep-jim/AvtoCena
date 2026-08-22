@@ -129,7 +129,11 @@ function fieldTrusted(variant: KnowledgeCoreVariant, field: string) {
 function sourcePowerAuthoritative(offer: VehicleOffer) {
   const source = clean((offer as any).powerDataSource).toLowerCase();
   const confidence = clean((offer as any).powerDataConfidence).toLowerCase();
-  return /documented|source_exact|homolog|coc|registration|official/.test(`${source} ${confidence}`);
+  // source_exact means only that the marketplace field was extracted exactly.
+  // It does NOT prove the seller/source value is physically or factually true.
+  // Only official/regulatory provenance is strong enough to block a conflicting
+  // uniquely matched Encyclopedia V2 variant.
+  return /homolog|type.?approval|coc|certificate|registration|government|manufacturer.?official|official.?spec|regulatory/.test(`${source} ${confidence}`);
 }
 
 async function loadCoreIndex(): Promise<CoreIndex | null> {
