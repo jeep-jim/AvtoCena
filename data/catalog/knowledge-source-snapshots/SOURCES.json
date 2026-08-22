@@ -6,6 +6,8 @@
     "china": { "fromYear": 2020, "toYear": 2026 },
     "korea": { "fromYear": 2020, "toYear": 2026 },
     "europe": { "fromYear": 2020, "toYear": 2026 },
+    "us": { "fromYear": 2020, "toYear": 2026 },
+    "canada": { "fromYear": 2020, "toYear": 2026 },
     "uae": { "fromYear": 2020, "toYear": 2026 },
     "georgia": { "fromYear": 2020, "toYear": 2026 },
     "kyrgyzstan": { "fromYear": 2020, "toYear": 2026 }
@@ -48,6 +50,42 @@
       "toYear": 2025,
       "fields": ["year", "make", "commercialName", "type", "variant", "version", "fuel", "engineCc", "powerKw", "wheelbaseMm", "massKg"],
       "notes": "Snapshot unique technical tuples, not millions of duplicate registration rows. Final status is preferred; 2025 is provisional until final data exists."
+    },
+    {
+      "id": "us-epa-fueleconomy",
+      "authority": "us_government_efficiency_and_vehicle_specification",
+      "markets": ["us"],
+      "status": "bulk_ready",
+      "license": "US government public data",
+      "landingUrl": "https://www.fueleconomy.gov/feg/download.shtml",
+      "bulkCsvUrl": "https://www.fueleconomy.gov/feg/epadata/vehicles.csv",
+      "fromYear": 2020,
+      "toYear": 2026,
+      "fields": ["year", "make", "model", "baseModel", "vehicleClass", "engineLiters", "cylinders", "transmission", "drive", "fuel", "powertrainKind", "electricMotor", "range"],
+      "notes": "DOE/EPA bulk CSV is preferred over per-vehicle API loops. It covers Ford, Chevrolet, GMC, Cadillac, Jeep, RAM, Tesla and other US-market vehicles alongside imports."
+    },
+    {
+      "id": "us-nhtsa-vpic",
+      "authority": "us_government_manufacturer_reported_identity",
+      "markets": ["us"],
+      "status": "bulk_ready",
+      "license": "US government public data",
+      "landingUrl": "https://vpic.nhtsa.dot.gov/",
+      "apiUrl": "https://vpic.nhtsa.dot.gov/api/",
+      "fields": ["makeId", "make", "modelId", "model", "manufacturer", "vehicleType"],
+      "notes": "vPIC is manufacturer-submitted identity evidence for vehicles intended for US sale/import. Broad make/model calls are snapshotted; avoid high-rate per-VIN requests."
+    },
+    {
+      "id": "canada-nrcan",
+      "authority": "canada_government_vehicle_efficiency",
+      "markets": ["canada", "us"],
+      "status": "bulk_ready",
+      "license": "Open Government Licence - Canada",
+      "landingUrl": "https://open.canada.ca/data/en/dataset/98f1a129-f628-4ce4-b24d-6f16bf24dd64",
+      "fromYear": 2020,
+      "toYear": 2026,
+      "fields": ["modelYear", "make", "model", "vehicleClass", "engineLiters", "cylinders", "transmission", "fuel", "fuelConsumption", "bev", "phev"],
+      "notes": "Official NRCan CSVs supplement North-American identity/spec coverage and include dedicated BEV/PHEV files through 2026."
     },
     {
       "id": "miit-road-vehicle-products",
