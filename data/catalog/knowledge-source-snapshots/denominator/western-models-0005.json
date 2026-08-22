@@ -1,0 +1,3373 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model_western",
+  "chunk": 5,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "hyundai:elantra",
+      "make": "Hyundai",
+      "model": "Elantra",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:elantraisg",
+      "make": "Hyundai",
+      "model": "Elantra (ISG)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "hyundai:elantrastopstart",
+      "make": "Hyundai",
+      "model": "Elantra (Stop/Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:elantragt",
+      "make": "Hyundai",
+      "model": "Elantra GT",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "hyundai:elantrahybrid",
+      "make": "Hyundai",
+      "model": "Elantra Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:elantrahybridblue",
+      "make": "Hyundai",
+      "model": "Elantra Hybrid Blue",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "hyundai:elantran",
+      "make": "Hyundai",
+      "model": "Elantra N",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:ioniq",
+      "make": "Hyundai",
+      "model": "Ioniq",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "hyundai:ioniq5",
+      "make": "Hyundai",
+      "model": "Ioniq 5",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2027
+    },
+    {
+      "key": "hyundai:ioniq5longrange",
+      "make": "Hyundai",
+      "model": "IONIQ 5 Long Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:ioniq5longrangeawd",
+      "make": "Hyundai",
+      "model": "IONIQ 5 Long Range AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "hyundai:ioniq5longrangeawd19wheels",
+      "make": "Hyundai",
+      "model": "IONIQ 5 Long Range AWD (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:ioniq5longrangeawd20wheels",
+      "make": "Hyundai",
+      "model": "IONIQ 5 Long Range AWD (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:ioniq5longrangeawdxrt",
+      "make": "Hyundai",
+      "model": "IONIQ 5 Long Range AWD XRT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:ioniq5n",
+      "make": "Hyundai",
+      "model": "IONIQ 5 N",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:ioniq5standardrange",
+      "make": "Hyundai",
+      "model": "IONIQ 5 Standard Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "hyundai:ioniq6",
+      "make": "Hyundai",
+      "model": "Ioniq 6",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2027
+    },
+    {
+      "key": "hyundai:ioniq6longrange18wheels",
+      "make": "Hyundai",
+      "model": "IONIQ 6 Long Range (18\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "hyundai:ioniq6longrange20wheels",
+      "make": "Hyundai",
+      "model": "IONIQ 6 Long Range (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "hyundai:ioniq6longrangeawd18wheels",
+      "make": "Hyundai",
+      "model": "IONIQ 6 Long Range AWD (18\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "hyundai:ioniq6longrangeawd20wheels",
+      "make": "Hyundai",
+      "model": "IONIQ 6 Long Range AWD (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "hyundai:ioniq6n",
+      "make": "Hyundai",
+      "model": "Ioniq 6 N",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "hyundai:ioniq6standardrange",
+      "make": "Hyundai",
+      "model": "IONIQ 6 Standard Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "hyundai:ioniq9",
+      "make": "Hyundai",
+      "model": "Ioniq 9",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2027
+    },
+    {
+      "key": "hyundai:ioniq9awd",
+      "make": "Hyundai",
+      "model": "IONIQ 9 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:ioniq9awdperformance",
+      "make": "Hyundai",
+      "model": "IONIQ 9 AWD Performance",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:ioniqblue",
+      "make": "Hyundai",
+      "model": "IONIQ Blue",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "hyundai:ioniqelectric",
+      "make": "Hyundai",
+      "model": "IONIQ Electric",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "hyundai:ioniqelectricplus",
+      "make": "Hyundai",
+      "model": "IONIQ Electric Plus",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "hyundai:ioniqpluginhybrid",
+      "make": "Hyundai",
+      "model": "IONIQ Plug-in Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "hyundai:kona",
+      "make": "Hyundai",
+      "model": "Kona",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "hyundai:konastopstart",
+      "make": "Hyundai",
+      "model": "Kona (Stop/Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:konaawd",
+      "make": "Hyundai",
+      "model": "Kona AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:konaawdstopstart",
+      "make": "Hyundai",
+      "model": "Kona AWD (Stop/Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:konaelectric",
+      "make": "Hyundai",
+      "model": "Kona Electric",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:konaelectric17wheels",
+      "make": "Hyundai",
+      "model": "Kona Electric (17\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "hyundai:konaelectric19wheels",
+      "make": "Hyundai",
+      "model": "Kona Electric (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "hyundai:konaelectriclongrange",
+      "make": "Hyundai",
+      "model": "Kona Electric Long Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "hyundai:konan",
+      "make": "Hyundai",
+      "model": "Kona N",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "hyundai:nexo",
+      "make": "Hyundai",
+      "model": "Nexo",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:palisade",
+      "make": "Hyundai",
+      "model": "Palisade",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "hyundai:palisadeawd",
+      "make": "Hyundai",
+      "model": "Palisade AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:palisadeawdxrtpro",
+      "make": "Hyundai",
+      "model": "Palisade AWD XRT Pro",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:palisadehybridawd",
+      "make": "Hyundai",
+      "model": "Palisade Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:santacruz",
+      "make": "Hyundai",
+      "model": "Santa Cruz",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2027
+    },
+    {
+      "key": "hyundai:santacruzawd",
+      "make": "Hyundai",
+      "model": "Santa Cruz AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:santacruzawdxrt",
+      "make": "Hyundai",
+      "model": "Santa Cruz AWD XRT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:santafe",
+      "make": "Hyundai",
+      "model": "Santa Fe",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "hyundai:santafeawd",
+      "make": "Hyundai",
+      "model": "Santa Fe AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:santafeawdxrt",
+      "make": "Hyundai",
+      "model": "Santa Fe AWD XRT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:santafehybrid",
+      "make": "Hyundai",
+      "model": "Santa Fe Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "hyundai:santafehybridawd",
+      "make": "Hyundai",
+      "model": "Santa Fe Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:santafepluginhybrid",
+      "make": "Hyundai",
+      "model": "Santa Fe Plug-in Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "hyundai:sonata",
+      "make": "Hyundai",
+      "model": "Sonata",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "hyundai:sonataawd",
+      "make": "Hyundai",
+      "model": "Sonata AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:sonatahybrid",
+      "make": "Hyundai",
+      "model": "Sonata Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:tucson",
+      "make": "Hyundai",
+      "model": "Tucson",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:tucsonawd",
+      "make": "Hyundai",
+      "model": "Tucson AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:tucsonhybrid",
+      "make": "Hyundai",
+      "model": "Tucson Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:tucsonpluginhybrid",
+      "make": "Hyundai",
+      "model": "Tucson Plug-in Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "hyundai:veloster",
+      "make": "Hyundai",
+      "model": "Veloster",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "hyundai:velostern",
+      "make": "Hyundai",
+      "model": "Veloster N",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "hyundai:velosterturbo",
+      "make": "Hyundai",
+      "model": "Veloster Turbo",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "hyundai:venue",
+      "make": "Hyundai",
+      "model": "Venue",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "ineosautomotive:grenadier",
+      "make": "INEOS Automotive",
+      "model": "Grenadier",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "ineos:grenadierbelstaffedition",
+      "make": "INEOS",
+      "model": "Grenadier Belstaff Edition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "ineos:grenadierblackedition",
+      "make": "INEOS",
+      "model": "Grenadier Black Edition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "ineos:grenadierdetour",
+      "make": "INEOS",
+      "model": "Grenadier Detour",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "ineos:grenadierfieldmasteredition",
+      "make": "INEOS",
+      "model": "Grenadier Fieldmaster Edition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "ineos:grenadierquartermaster",
+      "make": "INEOS",
+      "model": "Grenadier Quartermaster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "ineos:grenadierquartermasterblack",
+      "make": "INEOS",
+      "model": "Grenadier Quartermaster Black",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "ineos:grenadierquartermasterfieldmaster",
+      "make": "INEOS",
+      "model": "Grenadier Quartermaster Fieldmaster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "ineos:grenadierquartermastertrialmaster",
+      "make": "INEOS",
+      "model": "Grenadier Quartermaster Trialmaster",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "ineos:grenadierstationwagon",
+      "make": "INEOS",
+      "model": "Grenadier Station Wagon",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "ineos:grenadiertrialmasteredition",
+      "make": "INEOS",
+      "model": "Grenadier Trialmaster Edition",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "infiniti:q50",
+      "make": "Infiniti",
+      "model": "Q50",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "infiniti:q50awd",
+      "make": "Infiniti",
+      "model": "Q50 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "infiniti:q50awdredsport",
+      "make": "Infiniti",
+      "model": "Q50 AWD Red Sport",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "infiniti:q60",
+      "make": "Infiniti",
+      "model": "Q60",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "infiniti:q60awd",
+      "make": "Infiniti",
+      "model": "Q60 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "infiniti:q60awdredsport",
+      "make": "Infiniti",
+      "model": "Q60 AWD Red Sport",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "infiniti:qx50",
+      "make": "Infiniti",
+      "model": "QX50",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "infiniti:qx50awd",
+      "make": "Infiniti",
+      "model": "QX50 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "infiniti:qx55",
+      "make": "Infiniti",
+      "model": "QX55",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "infiniti:qx55awd",
+      "make": "Infiniti",
+      "model": "QX55 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "infiniti:qx60",
+      "make": "Infiniti",
+      "model": "QX60",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "infiniti:qx60awd",
+      "make": "Infiniti",
+      "model": "QX60 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "infiniti:qx65",
+      "make": "Infiniti",
+      "model": "QX65",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2027,
+      "yearTo": 2027
+    },
+    {
+      "key": "infiniti:qx80",
+      "make": "Infiniti",
+      "model": "QX80",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "infiniti:qx804wd",
+      "make": "Infiniti",
+      "model": "QX80 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "jaguar:epace",
+      "make": "Jaguar",
+      "model": "E-Pace",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "jaguar:epacep250",
+      "make": "Jaguar",
+      "model": "E-PACE P250",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "jaguar:epacep300",
+      "make": "Jaguar",
+      "model": "E-PACE P300",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "jaguar:fpace",
+      "make": "Jaguar",
+      "model": "F-Pace",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "jaguar:fpace25t",
+      "make": "Jaguar",
+      "model": "F-PACE 25t",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:fpace30t",
+      "make": "Jaguar",
+      "model": "F-PACE 30t",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:fpacep250",
+      "make": "Jaguar",
+      "model": "F-PACE P250",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "jaguar:fpacep340",
+      "make": "Jaguar",
+      "model": "F-PACE P340",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2022
+    },
+    {
+      "key": "jaguar:fpacep400",
+      "make": "Jaguar",
+      "model": "F-PACE P400",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "jaguar:fpacep550svr",
+      "make": "Jaguar",
+      "model": "F-PACE P550 SVR",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "jaguar:fpaces",
+      "make": "Jaguar",
+      "model": "F-PACE S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:fpacesvr",
+      "make": "Jaguar",
+      "model": "F-PACE SVR",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "jaguar:ftype",
+      "make": "Jaguar",
+      "model": "F-Type",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "jaguar:ftypeconvertible",
+      "make": "Jaguar",
+      "model": "F-TYPE Convertible",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:ftypeconvertiblerdynamic",
+      "make": "Jaguar",
+      "model": "F-TYPE Convertible R-Dynamic",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:ftypeconvertiblerdynamicawd",
+      "make": "Jaguar",
+      "model": "F-TYPE Convertible R-Dynamic AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:ftypecoupe",
+      "make": "Jaguar",
+      "model": "F-TYPE Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:ftypecouperdynamic",
+      "make": "Jaguar",
+      "model": "F-TYPE Coupe R-Dynamic",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:ftypecouperdynamicawd",
+      "make": "Jaguar",
+      "model": "F-TYPE Coupe R-Dynamic AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:ftypep300convertible",
+      "make": "Jaguar",
+      "model": "F-TYPE P300 Convertible",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "jaguar:ftypep300coupe",
+      "make": "Jaguar",
+      "model": "F-TYPE P300 Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "jaguar:ftypep380convertibleawd",
+      "make": "Jaguar",
+      "model": "F-TYPE P380 Convertible AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "jaguar:ftypep380coupeawd",
+      "make": "Jaguar",
+      "model": "F-TYPE P380 Coupe AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "jaguar:ftypep450convertible",
+      "make": "Jaguar",
+      "model": "F-TYPE P450 Convertible",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "jaguar:ftypep450convertibleawd",
+      "make": "Jaguar",
+      "model": "F-TYPE P450 Convertible AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "jaguar:ftypep450coupe",
+      "make": "Jaguar",
+      "model": "F-TYPE P450 Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "jaguar:ftypep450coupeawd",
+      "make": "Jaguar",
+      "model": "F-TYPE P450 Coupe AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "jaguar:ftypep575convertibleawd",
+      "make": "Jaguar",
+      "model": "F-TYPE P575 Convertible AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "jaguar:ftypep575coupeawd",
+      "make": "Jaguar",
+      "model": "F-TYPE P575 Coupe AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "jaguar:ftyperawdconvertible",
+      "make": "Jaguar",
+      "model": "F-TYPE R AWD Convertible",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:ftyperawdcoupe",
+      "make": "Jaguar",
+      "model": "F-TYPE R AWD Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:ftyperconvertibleawd",
+      "make": "Jaguar",
+      "model": "F-TYPE R Convertible AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "jaguar:ftypercoupeawd",
+      "make": "Jaguar",
+      "model": "F-TYPE R Coupe AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "jaguar:ftypesvrawdconvertible",
+      "make": "Jaguar",
+      "model": "F-TYPE SVR AWD Convertible",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:ftypesvrawdcoupe",
+      "make": "Jaguar",
+      "model": "F-TYPE SVR AWD Coupe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:ipace",
+      "make": "Jaguar",
+      "model": "I-Pace",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "jaguar:xe",
+      "make": "Jaguar",
+      "model": "XE",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "jaguar:xep250",
+      "make": "Jaguar",
+      "model": "XE P250",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:xep250awd",
+      "make": "Jaguar",
+      "model": "XE P250 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:xep300awd",
+      "make": "Jaguar",
+      "model": "XE P300 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:xf",
+      "make": "Jaguar",
+      "model": "XF",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "jaguar:xf25t",
+      "make": "Jaguar",
+      "model": "XF 25t",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:xf25tawd",
+      "make": "Jaguar",
+      "model": "XF 25t AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:xf30t",
+      "make": "Jaguar",
+      "model": "XF 30t",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:xf30tawd",
+      "make": "Jaguar",
+      "model": "XF 30t AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jaguar:xfp250",
+      "make": "Jaguar",
+      "model": "XF P250",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "jaguar:xfp300awd",
+      "make": "Jaguar",
+      "model": "XF P300 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "jaguar:xfsawd",
+      "make": "Jaguar",
+      "model": "XF S AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jeep:cherokee",
+      "make": "Jeep",
+      "model": "Cherokee",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:cherokee4x4activedrivei",
+      "make": "Jeep",
+      "model": "Cherokee 4X4 Active Drive I",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "jeep:cherokee4x4activedriveii",
+      "make": "Jeep",
+      "model": "Cherokee 4X4 Active Drive II",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "jeep:cherokee4x4activedrivelock",
+      "make": "Jeep",
+      "model": "Cherokee 4X4 Active Drive Lock",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "jeep:cherokee4x4trailhawkactivedrivelock",
+      "make": "Jeep",
+      "model": "Cherokee 4X4 Trailhawk Active Drive Lock",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "jeep:cherokeehybrid",
+      "make": "Jeep",
+      "model": "Cherokee Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:compass",
+      "make": "Jeep",
+      "model": "Compass",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:compass4x4",
+      "make": "Jeep",
+      "model": "Compass 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:gladiator",
+      "make": "Jeep",
+      "model": "Gladiator",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2027
+    },
+    {
+      "key": "jeep:gladiator4x4",
+      "make": "Jeep",
+      "model": "Gladiator 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:gladiator4x4ecodiesel",
+      "make": "Jeep",
+      "model": "Gladiator 4X4 EcoDiesel",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "jeep:gladiator4x4rubiconecodiesel",
+      "make": "Jeep",
+      "model": "Gladiator 4X4 Rubicon EcoDiesel",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "jeep:gladiatorpickup",
+      "make": "Jeep",
+      "model": "Gladiator Pickup",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jeep:grandcherokee",
+      "make": "Jeep",
+      "model": "Grand Cherokee",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "jeep:grandcherokee4x4",
+      "make": "Jeep",
+      "model": "Grand Cherokee 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:grandcherokee4x4classic",
+      "make": "Jeep",
+      "model": "Grand Cherokee 4X4 Classic",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:grandcherokee4x4srt",
+      "make": "Jeep",
+      "model": "Grand Cherokee 4X4 SRT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "jeep:grandcherokee4x4trackhawk",
+      "make": "Jeep",
+      "model": "Grand Cherokee 4X4 Trackhawk",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "jeep:grandcherokee4xe",
+      "make": "Jeep",
+      "model": "Grand Cherokee 4xe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "jeep:grandcherokeel4x4",
+      "make": "Jeep",
+      "model": "Grand Cherokee L 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:grandcherokeel4x4classic",
+      "make": "Jeep",
+      "model": "Grand Cherokee L 4X4 Classic",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:grandcherokeewk4x4",
+      "make": "Jeep",
+      "model": "Grand Cherokee WK 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "jeep:grandwagoneer",
+      "make": "Jeep",
+      "model": "Grand Wagoneer",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:grandwagoneer4x4",
+      "make": "Jeep",
+      "model": "Grand Wagoneer 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:grandwagoneer4x4highoutput",
+      "make": "Jeep",
+      "model": "Grand Wagoneer 4X4 (High Output)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "jeep:grandwagoneerl4x4",
+      "make": "Jeep",
+      "model": "Grand Wagoneer L 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:grandwagoneerl4x4highoutput",
+      "make": "Jeep",
+      "model": "Grand Wagoneer L 4X4 (High Output)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "jeep:recon",
+      "make": "Jeep",
+      "model": "Recon",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:reconmoab4x4",
+      "make": "Jeep",
+      "model": "Recon MOAB 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:renegade",
+      "make": "Jeep",
+      "model": "Renegade",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "jeep:renegade4x4",
+      "make": "Jeep",
+      "model": "Renegade 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "jeep:renegade4x4trailhawk",
+      "make": "Jeep",
+      "model": "Renegade 4X4 Trailhawk",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "jeep:wagoneer",
+      "make": "Jeep",
+      "model": "Wagoneer",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:wagoneer4x4",
+      "make": "Jeep",
+      "model": "Wagoneer 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "jeep:wagoneerl4x4",
+      "make": "Jeep",
+      "model": "Wagoneer L 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "jeep:wagoneersawdfalkentire",
+      "make": "Jeep",
+      "model": "Wagoneer S AWD (Falken Tire)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:wagoneersawdpirellitire",
+      "make": "Jeep",
+      "model": "Wagoneer S AWD (Pirelli Tire)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:wrangler",
+      "make": "Jeep",
+      "model": "Wrangler",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "jeep:wrangler4x4",
+      "make": "Jeep",
+      "model": "Wrangler 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jeep:wrangler4x4etorque",
+      "make": "Jeep",
+      "model": "Wrangler 4X4 eTorque",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jeep:wrangler4xe",
+      "make": "Jeep",
+      "model": "Wrangler 4xe",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2025
+    },
+    {
+      "key": "jeep:wranglerjl4x4",
+      "make": "Jeep",
+      "model": "Wrangler JL 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:wranglerjl4x4etorque",
+      "make": "Jeep",
+      "model": "Wrangler JL 4X4 eTorque",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "jeep:wranglerjl4x4rubicon",
+      "make": "Jeep",
+      "model": "Wrangler JL 4X4 Rubicon",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "jeep:wranglerjlunlimited4x4",
+      "make": "Jeep",
+      "model": "Wrangler JL Unlimited 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:wranglerjlunlimited4x4392",
+      "make": "Jeep",
+      "model": "Wrangler JL Unlimited 4X4 392",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "jeep:wranglerjlunlimited4x4ecodiesel",
+      "make": "Jeep",
+      "model": "Wrangler JL Unlimited 4X4 EcoDiesel",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "jeep:wranglerjlunlimited4x4etorque",
+      "make": "Jeep",
+      "model": "Wrangler JL Unlimited 4X4 eTorque",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "jeep:wranglerjlunlimited4x4rubicon",
+      "make": "Jeep",
+      "model": "Wrangler JL Unlimited 4X4 Rubicon",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "jeep:wranglerjlunlimited4x4rubiconecodiesel",
+      "make": "Jeep",
+      "model": "Wrangler JL Unlimited 4X4 Rubicon EcoDiesel",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "jeep:wranglerunlimited4x4",
+      "make": "Jeep",
+      "model": "Wrangler Unlimited 4X4",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jeep:wranglerunlimited4x4ecodiesel",
+      "make": "Jeep",
+      "model": "Wrangler Unlimited 4X4 EcoDiesel",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "jeep:wranglerunlimited4x4etorque",
+      "make": "Jeep",
+      "model": "Wrangler Unlimited 4X4 eTorque",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "kandi:k27",
+      "make": "Kandi",
+      "model": "K27",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "karma:gs6",
+      "make": "Karma",
+      "model": "GS-6",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "karma:gs621wheels",
+      "make": "Karma",
+      "model": "GS-6 (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "karma:gs622wheels",
+      "make": "Karma",
+      "model": "GS-6 (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "karma:revero",
+      "make": "Karma",
+      "model": "Revero",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "karma:reverogt21wheels",
+      "make": "Karma",
+      "model": "Revero GT (21\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "karma:reverogt22wheels",
+      "make": "Karma",
+      "model": "Revero GT (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "kia:cadenza",
+      "make": "Kia",
+      "model": "Cadenza",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "kia:carnival",
+      "make": "Kia",
+      "model": "Carnival",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2027
+    },
+    {
+      "key": "kia:carnivalhybrid",
+      "make": "Kia",
+      "model": "Carnival Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:ev3",
+      "make": "Kia",
+      "model": "EV3",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2027,
+      "yearTo": 2027
+    },
+    {
+      "key": "kia:ev4gtline",
+      "make": "Kia",
+      "model": "EV4 GT-Line",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:ev4light",
+      "make": "Kia",
+      "model": "EV4 Light",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:ev4wind",
+      "make": "Kia",
+      "model": "EV4 Wind",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:ev4windpremium",
+      "make": "Kia",
+      "model": "EV4 Wind Premium",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:ev6",
+      "make": "Kia",
+      "model": "EV6",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:ev6gtawd",
+      "make": "Kia",
+      "model": "EV6 GT AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "kia:ev6landawd19wheels",
+      "make": "Kia",
+      "model": "EV6 Land AWD (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "kia:ev6landawd20wheels",
+      "make": "Kia",
+      "model": "EV6 Land AWD (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "kia:ev6light",
+      "make": "Kia",
+      "model": "EV6 Light",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "kia:ev6longrange",
+      "make": "Kia",
+      "model": "EV6 Long Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "kia:ev6longrangeawd",
+      "make": "Kia",
+      "model": "EV6 Long Range AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "kia:ev6longrangeawd19wheels",
+      "make": "Kia",
+      "model": "EV6 Long Range AWD (19\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "kia:ev6longrangeawd20wheels",
+      "make": "Kia",
+      "model": "EV6 Long Range AWD (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "kia:ev6standardrange",
+      "make": "Kia",
+      "model": "EV6 Standard Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "kia:ev6wind",
+      "make": "Kia",
+      "model": "EV6 Wind",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "kia:ev9",
+      "make": "Kia",
+      "model": "EV9",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:ev9gt",
+      "make": "Kia",
+      "model": "EV9 GT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:ev9landawd",
+      "make": "Kia",
+      "model": "EV9 Land AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:ev9landawdgtline",
+      "make": "Kia",
+      "model": "EV9 Land AWD GT-Line",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:ev9light",
+      "make": "Kia",
+      "model": "EV9 Light",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:ev9wind",
+      "make": "Kia",
+      "model": "EV9 Wind",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:forte",
+      "make": "Kia",
+      "model": "Forte",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "kia:forte5",
+      "make": "Kia",
+      "model": "Forte 5",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "kia:k4",
+      "make": "Kia",
+      "model": "K4",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:k4withoutdms",
+      "make": "Kia",
+      "model": "K4 (Without DMS)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "kia:k5",
+      "make": "Kia",
+      "model": "K5",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2027
+    },
+    {
+      "key": "kia:k5awd",
+      "make": "Kia",
+      "model": "K5 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2024
+    },
+    {
+      "key": "kia:k900",
+      "make": "Kia",
+      "model": "K900",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "kia:niro",
+      "make": "Kia",
+      "model": "Niro",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "kia:niroev",
+      "make": "Kia",
+      "model": "Niro EV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:nirofe",
+      "make": "Kia",
+      "model": "Niro FE",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:niropluginhybrid",
+      "make": "Kia",
+      "model": "Niro Plug-in Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:nirotouring",
+      "make": "Kia",
+      "model": "Niro Touring",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "kia:optima",
+      "make": "Kia",
+      "model": "Optima",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "kia:optimahybrid",
+      "make": "Kia",
+      "model": "Optima Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "kia:optimapluginhybrid",
+      "make": "Kia",
+      "model": "Optima Plug-in Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "kia:rio",
+      "make": "Kia",
+      "model": "Rio",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "kia:sedona",
+      "make": "Kia",
+      "model": "Sedona",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "kia:seltos",
+      "make": "Kia",
+      "model": "Seltos",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2027
+    },
+    {
+      "key": "kia:seltosawd",
+      "make": "Kia",
+      "model": "Seltos AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:sorento",
+      "make": "Kia",
+      "model": "Sorento",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "kia:sorentoawd",
+      "make": "Kia",
+      "model": "Sorento AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:sorentohybridawd",
+      "make": "Kia",
+      "model": "Sorento Hybrid AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:sorentopluginhybrid",
+      "make": "Kia",
+      "model": "Sorento Plug-in Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "kia:soul",
+      "make": "Kia",
+      "model": "Soul",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "kia:soulev120ah",
+      "make": "Kia",
+      "model": "Soul EV (120 Ah)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "kia:soulev180ah",
+      "make": "Kia",
+      "model": "Soul EV (180 Ah)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "kia:sportage",
+      "make": "Kia",
+      "model": "Sportage",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2021Fv24",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2021Fv24] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 5,
   "rows": [
     {
@@ -1252,7 +1252,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "SpaceTourer",
+      "commercialName": "SPACETOURER",
       "type": "V",
       "variant": "Z",
       "version": "ZKXZ-N7700L",
@@ -6319,7 +6319,7 @@
     },
     {
       "year": 2021,
-      "make": "Dacia",
+      "make": "DACIA",
       "commercialName": "DUSTER",
       "type": "SR",
       "variant": "DHE2",
@@ -22938,7 +22938,7 @@
     {
       "year": 2021,
       "make": "FERRARI",
-      "commercialName": "488 PISTA SPIDER",
+      "commercialName": "488 Pista Spider",
       "type": "F 142",
       "variant": "BD",
       "version": "L",
@@ -23176,7 +23176,7 @@
     {
       "year": 2021,
       "make": "FERRARI",
-      "commercialName": "F8 TRIBUTO",
+      "commercialName": "F8 Tributo",
       "type": "F142",
       "variant": "CB",
       "version": "E",
@@ -23232,7 +23232,7 @@
     {
       "year": 2021,
       "make": "FERRARI",
-      "commercialName": "FERRARI ROMA ",
+      "commercialName": "Ferrari Roma",
       "type": "F 164",
       "variant": "BA",
       "version": "A",
@@ -23386,7 +23386,7 @@
     {
       "year": 2021,
       "make": "FERRARI",
-      "commercialName": "PORTOFINO",
+      "commercialName": "Portofino",
       "type": "F 164",
       "variant": "BC",
       "version": "A",
@@ -23400,7 +23400,7 @@
     {
       "year": 2021,
       "make": "FERRARI",
-      "commercialName": "PORTOFINO",
+      "commercialName": "Portofino",
       "type": "F164",
       "variant": "BC",
       "version": "A",
@@ -23512,7 +23512,7 @@
     {
       "year": 2021,
       "make": "FERRARI",
-      "commercialName": "SF90 Stradale",
+      "commercialName": "SF90 STRADALE",
       "type": "F173",
       "variant": "HF",
       "version": "B",
@@ -30161,8 +30161,8 @@
     },
     {
       "year": 2021,
-      "make": "FIAT",
-      "commercialName": "FIAT 500",
+      "make": "Fiat",
+      "commercialName": "Fiat 500",
       "type": "312",
       "variant": "AYD1B",
       "version": "E25M",
@@ -43728,7 +43728,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "ECOSPORT",
+      "commercialName": "EcoSport",
       "type": "JK8",
       "variant": "M1JU11X",
       "version": "5AAPANAPMDV",
@@ -43840,7 +43840,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "EcoSport",
+      "commercialName": "ECOSPORT",
       "type": "JK8",
       "variant": "M1JU11X",
       "version": "5AAPBNAPMDW",
@@ -43854,7 +43854,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "ECOSPORT",
+      "commercialName": "EcoSport",
       "type": "JK8",
       "variant": "M1JU11X",
       "version": "5AAPCNAPMDV",
@@ -43896,7 +43896,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "ECOSPORT",
+      "commercialName": "EcoSport",
       "type": "JK8",
       "variant": "M1JU11X",
       "version": "5AAPENAPMDV",
@@ -44204,7 +44204,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "ECOSPORT",
+      "commercialName": "EcoSport",
       "type": "JK8",
       "variant": "SFJL11X",
       "version": "5AAPENAPLDV",
@@ -44260,7 +44260,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "ECOSPORT",
+      "commercialName": "EcoSport",
       "type": "JK8",
       "variant": "SFJL11X",
       "version": "5AAPFNAPLDW",
@@ -44386,7 +44386,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "ECOSPORT",
+      "commercialName": "EcoSport",
       "type": "JK8",
       "variant": "Z2JB11X",
       "version": "5BDDANAPYDF",
@@ -45996,7 +45996,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JB1FX",
       "version": "5CDPTNAXJD6",
@@ -46248,7 +46248,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPRNA5ADZ",
@@ -46346,7 +46346,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPRNAQKU6",
@@ -46724,7 +46724,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPTNAQKB6",
@@ -46892,7 +46892,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPTNAQKD6",
@@ -47214,7 +47214,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPTNAXJAY",
@@ -47382,7 +47382,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPTNAXJD6",
@@ -48082,7 +48082,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPUNAXJD6",
@@ -48110,7 +48110,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPUNAXJD6",
@@ -48194,7 +48194,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5GKPRNASNAV",
@@ -48292,7 +48292,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5GKPTNASNAV",
@@ -48362,7 +48362,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5GKPTNASNAV",
@@ -49020,7 +49020,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5GKPUNASNDV",
@@ -49650,7 +49650,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPLNARBDZ",
@@ -49804,7 +49804,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPLNAXIBZ",
@@ -50280,7 +50280,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPMNAXIA6",
@@ -50308,7 +50308,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPMNAXIA6",
@@ -50378,7 +50378,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPMNAXIAZ",
@@ -50462,7 +50462,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPMNAXIBZ",
@@ -50546,7 +50546,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPMNAXID6",
@@ -50700,7 +50700,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPPNAXIAZ",
@@ -50854,7 +50854,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "BZJA1FX",
       "version": "5CFPUNAXKDY",
@@ -50966,7 +50966,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "BZJA1JX",
       "version": "5CFPTNAQBD6",
@@ -51190,7 +51190,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "BZJA1JX",
       "version": "5CFPUNAQBD6",
@@ -51204,7 +51204,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "BZJA1JX",
       "version": "5CFPUNAQBD6",
@@ -51330,7 +51330,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "BZJA1JX",
       "version": "5CFPUNAXKD6",
@@ -51498,7 +51498,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "FSJA1JX",
       "version": "5AEPCNAP7AQ",
@@ -51638,7 +51638,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "FSJA1JX",
       "version": "5AEPPNAP7AQ",
@@ -51988,7 +51988,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPLNAPJD6",
@@ -52156,7 +52156,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPMNAPJAZ",
@@ -52240,7 +52240,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPMNAPJB6",
@@ -52324,7 +52324,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPMNAPJBZ",
@@ -52464,7 +52464,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPPNAPJAZ",
@@ -52492,7 +52492,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPPNAPJAZ",
@@ -53206,7 +53206,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "XUJM1JX",
       "version": "5DCDPNAREAZ",
@@ -53668,7 +53668,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "Y7JA1JX",
       "version": "5CDPMNAQNAZ",
@@ -53724,7 +53724,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "Y7JA1JX",
       "version": "5CDPMNAQNAZ",
@@ -53780,7 +53780,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "Y7JA1JX",
       "version": "5CDPMNAQNBZ",
@@ -53808,7 +53808,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "Y7JA1JX",
       "version": "5CDPMNAQNBZ",
@@ -53920,7 +53920,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "Y7JA1JX",
       "version": "5CDPMNAQNDZ",
@@ -54004,7 +54004,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "Y7JA1JX",
       "version": "5CDPPNAQNAZ",
@@ -54228,7 +54228,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "YZJA1FX",
       "version": "5FHPBNA1HC2",
@@ -54354,7 +54354,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPANA1HCT",
@@ -54368,7 +54368,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPANA1HCT",
@@ -54410,7 +54410,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPBNA1HCT",
@@ -54466,7 +54466,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPLNA1HCT",
@@ -54494,7 +54494,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPLNA1HCU",
@@ -54550,7 +54550,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPLNABBCU",
@@ -54592,7 +54592,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPMNA1HCT",
@@ -54606,7 +54606,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPMNA1HCU",
@@ -54620,7 +54620,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPMNABBCT",
@@ -56986,7 +56986,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B3DA1MX",
       "version": "5APBU6AP8BB",
@@ -57154,7 +57154,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B3DA1NX",
       "version": "5APBU6AP8BK",
@@ -57168,7 +57168,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B3DA1PX",
       "version": "5APBH6AP8BT",
@@ -57406,7 +57406,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1MX",
       "version": "5APBT6A19BB",
@@ -57434,7 +57434,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1MX",
       "version": "5APBU6A19BB",
@@ -57462,7 +57462,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1MX",
       "version": "5APBU6AQBBB",
@@ -57616,7 +57616,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBF6A2AAR",
@@ -57700,7 +57700,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBF6AQDAR",
@@ -57742,7 +57742,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBH6A2AAR",
@@ -57756,7 +57756,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBH6A2AAR",
@@ -57784,7 +57784,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBH6A2ABR",
@@ -57798,7 +57798,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBH6A2ACR",
@@ -57812,7 +57812,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBH6A2ACR",
@@ -57826,7 +57826,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBH6AQDAR",
@@ -57882,7 +57882,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBM6AEICR",
@@ -57910,7 +57910,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBS6AQDBR",
@@ -57952,7 +57952,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBT6AQDBR",
@@ -57994,7 +57994,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBU6A2ABR",
@@ -58064,7 +58064,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBE6A19AK",
@@ -58148,7 +58148,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBE6AQBBK",
@@ -58218,7 +58218,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBF6A19BK",
@@ -58344,7 +58344,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBH6A19BK",
@@ -58386,7 +58386,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBH6A19CK",
@@ -58428,7 +58428,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBH6AB7CK",
@@ -58442,7 +58442,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBH6AQBAK",
@@ -58484,7 +58484,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBH6AQBCK",
@@ -58526,7 +58526,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBS6A19BK",
@@ -58568,7 +58568,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBT6A19BK",
@@ -58582,7 +58582,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBT6AQBBK",
@@ -58610,7 +58610,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBU6A19BK",
@@ -58764,7 +58764,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBE6A2ABX",
@@ -58890,7 +58890,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBF6A2ABX",
@@ -58918,7 +58918,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBF6A2ACX",
@@ -58960,7 +58960,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBF6AQDCX",
@@ -58974,7 +58974,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBH6A2AAX",
@@ -58988,7 +58988,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBH6A2AAX",
@@ -59016,7 +59016,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBH6A2ABX",
@@ -59044,7 +59044,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBH6A2ACX",
@@ -59072,7 +59072,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBH6AQDAX",
@@ -59086,7 +59086,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBH6AQDBX",
@@ -59100,7 +59100,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBH6AQDCX",
@@ -59282,7 +59282,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBU6A2ABX",
@@ -59506,7 +59506,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBE6AQBCT",
@@ -59590,7 +59590,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBF6A19CT",
@@ -59674,7 +59674,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBH6A19BT",
@@ -59688,7 +59688,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBH6A19BT",
@@ -59702,7 +59702,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBH6A19CT",
@@ -59716,7 +59716,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBH6A19CT",
@@ -59758,7 +59758,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBH6AQBBT",
@@ -59828,7 +59828,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBS6A19BT",
@@ -59842,7 +59842,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBS6A19BT",
@@ -59940,7 +59940,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBU6A19BT",
@@ -59954,7 +59954,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBU6A19BT",
@@ -59982,7 +59982,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBU6A19BT",
@@ -60066,7 +60066,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBZ6AB7CT",
@@ -60388,7 +60388,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCJ6AXSBP",
@@ -60612,7 +60612,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCK6AXSAP",
@@ -60654,7 +60654,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCK6AXSBP",
@@ -60668,7 +60668,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCK6AXSBP",
@@ -60710,7 +60710,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCK6AXSCP",
@@ -60752,7 +60752,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCM6A2BAP",
@@ -60878,7 +60878,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCM6A2BBP",
@@ -60990,7 +60990,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCM6AXSAP",
@@ -61032,7 +61032,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCM6AXSBP",
@@ -61088,7 +61088,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCM6AXSCP",
@@ -61228,7 +61228,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCW6AXSBP",
@@ -61368,7 +61368,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCX6AXSBP",
@@ -61382,7 +61382,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCX6AXSBP",
@@ -61802,7 +61802,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCK6A2BC7",
@@ -61844,7 +61844,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCK6A2BC7",
@@ -61956,7 +61956,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCK6AXSC7",
@@ -62026,7 +62026,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCM6A2BA7",
@@ -62194,7 +62194,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCM6A2BC7",
@@ -62250,7 +62250,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCM6AXSA7",
@@ -62320,7 +62320,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCM6AXSC7",
@@ -62334,7 +62334,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCM6AXSC7",
@@ -62628,7 +62628,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCX6AXSB7",
@@ -62642,7 +62642,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCX6AXSB7",
@@ -63174,7 +63174,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "BCDA1NX",
       "version": "5DKAF6AZHD3",
@@ -63272,7 +63272,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "BCDA1PX",
       "version": "5DKAH6AE8D6",
@@ -63342,7 +63342,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCJ6A2CBP",
@@ -63356,7 +63356,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCJ6A2CCP",
@@ -63370,7 +63370,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCJ6A2CCP",
@@ -63412,7 +63412,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCJ6AXTCP",
@@ -63440,7 +63440,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCK6A2CAP",
@@ -63524,7 +63524,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCK6AXTBP",
@@ -63538,7 +63538,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCK6AXTCP",
@@ -63622,7 +63622,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCM6A2CCP",
@@ -63636,7 +63636,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCM6AXTAP",
@@ -63650,7 +63650,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCM6AXTBP",
@@ -63748,7 +63748,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCX6A2CBP",
@@ -63762,7 +63762,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCX6A2CBP",
@@ -63846,7 +63846,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCJ6A2CB7",
@@ -63888,7 +63888,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCJ6A2CC7",
@@ -63972,7 +63972,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCK6A2CB7",
@@ -64014,7 +64014,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCK6A2CC7",
@@ -64028,7 +64028,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCK6AXTA7",
@@ -64056,7 +64056,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCK6AXTC7",
@@ -64098,7 +64098,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCM6A2CB7",
@@ -64126,7 +64126,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCM6A2CC7",
@@ -64168,7 +64168,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCM6AXTB7",
@@ -64182,7 +64182,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCM6AXTC7",
@@ -64196,7 +64196,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCV6A2CB7",
@@ -64210,7 +64210,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCV6A2CB7",
@@ -64308,7 +64308,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCX6A2CB7",
@@ -64364,7 +64364,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "N3DA1NX",
       "version": "54BBA6A2FD3",
@@ -64392,7 +64392,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "N3DA1NX",
       "version": "54BBA6AZJD3",
@@ -64406,7 +64406,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "N3DA1NX",
       "version": "54BBB6A2FD3",
@@ -64476,7 +64476,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "N3DA1NX",
       "version": "5ELBA6A2ED1",
@@ -64644,7 +64644,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "N3DA1PX",
       "version": "54BBA6AZJD5",
@@ -64658,7 +64658,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "N3DA1PX",
       "version": "54BBB6A2FD5",
@@ -64728,7 +64728,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "N3DA1PX",
       "version": "5ELBA6A2ED8",
@@ -64798,7 +64798,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "N3DA1PX",
       "version": "5ELBB6AZID8",
@@ -64980,7 +64980,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "Y1DA1NX",
       "version": "51CBE6A2HBR",
@@ -65008,7 +65008,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1NX",
       "version": "51CBE6A2HCR",
@@ -65484,7 +65484,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "Y1DA1NX",
       "version": "51CBH6A2HBR",
@@ -65778,7 +65778,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "Y1DA1PX",
       "version": "51CBE6A2HBY",
@@ -65960,7 +65960,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "Y1DA1PX",
       "version": "51CBF6A2HAY",
@@ -66128,7 +66128,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1PX",
       "version": "51CBF6AQLBY",
@@ -66744,7 +66744,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAE6AZGB4",
@@ -66912,7 +66912,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAF6AZGB4",
@@ -67206,7 +67206,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAT6AZGB4",
@@ -67234,7 +67234,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAU6AZGB4",
@@ -67248,7 +67248,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAU6AZGB4",
@@ -67262,7 +67262,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "5DHAE6AQIA2",
@@ -67542,7 +67542,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "5DHAF6AZAC2",
@@ -67682,7 +67682,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "5DHAH6AZAC2",
@@ -67766,7 +67766,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "5DHAU6AZAB2",
@@ -68116,7 +68116,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAF6AZGB6",
@@ -68340,7 +68340,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAH6AZGB6",
@@ -68382,7 +68382,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAH6AZGC6",
@@ -68424,7 +68424,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAS6AZGB6",
@@ -68536,7 +68536,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAU6AZGB6",
@@ -68816,7 +68816,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "5DHAF6AZAA5",
@@ -69124,7 +69124,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "5DHAS6AZAB5",
@@ -69208,7 +69208,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "5DHAU6AZAB5",
@@ -69320,7 +69320,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBE6A2GBR",
@@ -69334,7 +69334,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBE6A2GBR",
@@ -69810,7 +69810,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBH6A2GBR",
@@ -69852,7 +69852,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBH6A2GBR",
@@ -69964,7 +69964,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBH6AQGBR",
@@ -69992,7 +69992,7 @@
     {
       "year": 2021,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBH6AQGCR",

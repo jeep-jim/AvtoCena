@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 12,
   "rows": [
     {
@@ -40830,7 +40830,7 @@
     {
       "year": 2020,
       "make": "MINI",
-      "commercialName": "COOPER",
+      "commercialName": "Cooper",
       "type": "FMCA",
       "variant": "WJ31",
       "version": "DHW400L0",
@@ -41390,7 +41390,7 @@
     {
       "year": 2020,
       "make": "MINI",
-      "commercialName": "Cooper",
+      "commercialName": "COOPER",
       "type": "FML4",
       "variant": "XU71",
       "version": "DAW500L0",
@@ -41950,7 +41950,7 @@
     {
       "year": 2020,
       "make": "MINI",
-      "commercialName": "COOPER D",
+      "commercialName": "Cooper D",
       "type": "FML2",
       "variant": "XY31",
       "version": "CAW400L0",
@@ -42286,7 +42286,7 @@
     {
       "year": 2020,
       "make": "MINI",
-      "commercialName": "COOPER S",
+      "commercialName": "Cooper S",
       "type": "FMCA",
       "variant": "WJ51",
       "version": "DHW400L0",
@@ -42552,7 +42552,7 @@
     {
       "year": 2020,
       "make": "MINI",
-      "commercialName": "Cooper S",
+      "commercialName": "COOPER S",
       "type": "FML2",
       "variant": "XR51",
       "version": "DAW400L0",
@@ -45296,7 +45296,7 @@
     {
       "year": 2020,
       "make": "MINI",
-      "commercialName": "Countryman Cooper D ALL4",
+      "commercialName": "COUNTRYMAN COOPER D ALL4",
       "type": "FMX",
       "variant": "YY51",
       "version": "DAW50000",
@@ -46668,7 +46668,7 @@
     {
       "year": 2020,
       "make": "MINI",
-      "commercialName": "COUNTRYMAN COOPER SE ALL4",
+      "commercialName": "Countryman Cooper SE ALL4",
       "type": "FMX",
       "variant": "21BS",
       "version": "IAW50000",
@@ -46822,7 +46822,7 @@
     {
       "year": 2020,
       "make": "MINI",
-      "commercialName": "Countryman JCW ALL4",
+      "commercialName": "COUNTRYMAN JCW ALL4",
       "type": "FMX",
       "variant": "YZ91",
       "version": "DAW500L0",
@@ -47032,7 +47032,7 @@
     {
       "year": 2020,
       "make": "MINI",
-      "commercialName": "COUNTRYMAN ONE",
+      "commercialName": "Countryman One",
       "type": "FMX",
       "variant": "YW11",
       "version": "DAW500L0",
@@ -47242,7 +47242,7 @@
     {
       "year": 2020,
       "make": "MINI",
-      "commercialName": "COUNTRYMAN ONE D",
+      "commercialName": "Countryman One D",
       "type": "FMX",
       "variant": "YZ11",
       "version": "CHW500L0",
@@ -48054,7 +48054,7 @@
     {
       "year": 2020,
       "make": "MINI",
-      "commercialName": "ONE",
+      "commercialName": "One",
       "type": "FMCA",
       "variant": "WJ11",
       "version": "DHW400L0",
@@ -53696,7 +53696,7 @@
     {
       "year": 2020,
       "make": "MORGAN",
-      "commercialName": "PLUS 4",
+      "commercialName": "Plus 4",
       "type": "2000",
       "variant": "A",
       "version": "A2",
@@ -54214,7 +54214,7 @@
     {
       "year": 2020,
       "make": "MORGAN",
-      "commercialName": "Plus Four",
+      "commercialName": "PLUS FOUR",
       "type": "MP19",
       "variant": "B",
       "version": "CM15W",
@@ -54510,7 +54510,7 @@
       "make": "MORGAN",
       "commercialName": "Plus Six",
       "type": "LP19",
-      "variant": "a",
+      "variant": "A",
       "version": "CA19",
       "fuel": "PETROL",
       "engineCc": 2998,

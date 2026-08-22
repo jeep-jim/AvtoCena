@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 19,
   "rows": [
     {
@@ -61,7 +61,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDKZAX1",
@@ -509,7 +509,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDNJAX1",
@@ -537,7 +537,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDNJAX1",
@@ -733,7 +733,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDNLAX1",
@@ -775,7 +775,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDNLAX1",
@@ -803,7 +803,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDNLAX1",
@@ -1041,7 +1041,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDNLAX1",
@@ -1055,7 +1055,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDNLAX1",
@@ -1181,7 +1181,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDNLAX1",
@@ -1475,7 +1475,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDNLAX1",
@@ -1517,7 +1517,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDNLAX1",
@@ -1545,7 +1545,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPBEX0",
@@ -1587,7 +1587,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPBEX0",
@@ -1699,7 +1699,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPBEX0",
@@ -2077,7 +2077,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPBEX0",
@@ -2105,7 +2105,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPBEX0",
@@ -2232,7 +2232,7 @@
     {
       "year": 2020,
       "make": "VOLKSWAGEN",
-      "commercialName": "TIGUAN",
+      "commercialName": "tiguan",
       "type": "5N",
       "variant": "ACDPBEX0",
       "version": "FM6FM62Q036N5N3TVR24BF1CSA",
@@ -2973,7 +2973,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPBEX0",
@@ -3449,7 +3449,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -3519,7 +3519,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -4205,7 +4205,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -4289,7 +4289,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -4331,7 +4331,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -4387,7 +4387,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -4429,7 +4429,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -4583,7 +4583,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -4695,7 +4695,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -4947,7 +4947,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -5283,7 +5283,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -5339,7 +5339,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -5367,7 +5367,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -5507,7 +5507,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -5619,7 +5619,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -5661,7 +5661,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -5717,7 +5717,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -5829,7 +5829,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -6011,7 +6011,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -6137,7 +6137,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -6291,7 +6291,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -6501,7 +6501,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -6810,7 +6810,7 @@
     {
       "year": 2020,
       "make": "VOLKSWAGEN",
-      "commercialName": "Tiguan",
+      "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
       "version": "FD7FD7GC008N5N4TVR24BI1ASA0M1G",
@@ -6921,7 +6921,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -7089,7 +7089,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -7159,7 +7159,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -7901,7 +7901,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -8279,7 +8279,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -8349,7 +8349,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -8503,7 +8503,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -8531,7 +8531,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -8601,7 +8601,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -8657,7 +8657,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -8685,7 +8685,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -8713,7 +8713,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -8741,7 +8741,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -8853,7 +8853,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -8923,7 +8923,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -9007,7 +9007,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -9035,7 +9035,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -9063,7 +9063,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -9161,7 +9161,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -9889,7 +9889,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDPCAX0",
@@ -10869,7 +10869,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDTSBX0",
@@ -10897,7 +10897,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDTSBX0",
@@ -10981,7 +10981,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDTSBX0",
@@ -11457,7 +11457,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDTSBX1",
@@ -12017,7 +12017,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDTSBX1",
@@ -12157,7 +12157,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDTSBX1",
@@ -12227,7 +12227,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TIGUAN",
       "type": "5N",
       "variant": "ACDTSBX1",
@@ -20711,7 +20711,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOUAREG",
       "type": "CR",
       "variant": "ACDCBE2",
@@ -20809,7 +20809,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOUAREG",
       "type": "CR",
       "variant": "ACDENA1",
@@ -20823,7 +20823,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOUAREG",
       "type": "CR",
       "variant": "ACDENA1",
@@ -20865,7 +20865,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOUAREG",
       "type": "CR",
       "variant": "ACDENA1",
@@ -20879,7 +20879,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOUAREG",
       "type": "CR",
       "variant": "ACDENA1",
@@ -21425,7 +21425,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOUAREG",
       "type": "CR",
       "variant": "ACDEND1",
@@ -21453,7 +21453,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOUAREG",
       "type": "CR",
       "variant": "ACDEND1",
@@ -21649,7 +21649,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOUAREG",
       "type": "CR",
       "variant": "ACDEND2",
@@ -21831,7 +21831,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOUAREG",
       "type": "CR",
       "variant": "ACDMVB1",
@@ -21845,7 +21845,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOUAREG",
       "type": "CR",
       "variant": "ACDMVB1",
@@ -21887,7 +21887,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOUAREG",
       "type": "CR",
       "variant": "ACDMVB2",
@@ -22223,7 +22223,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOUAREG",
       "type": "CR",
       "variant": "ACDPYD2",
@@ -22251,7 +22251,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOUAREG",
       "type": "CR",
       "variant": "ACDPYD2",
@@ -23833,7 +23833,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DADAAF",
@@ -24001,7 +24001,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGAAC",
@@ -24323,7 +24323,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGAAC",
@@ -24561,7 +24561,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGAAF",
@@ -24631,7 +24631,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGAAF",
@@ -24659,7 +24659,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGAAF",
@@ -24687,7 +24687,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGAAF",
@@ -24757,7 +24757,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGAAF",
@@ -24827,7 +24827,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGAAF",
@@ -24883,7 +24883,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGAAF",
@@ -25737,7 +25737,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGCAF",
@@ -25765,7 +25765,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGCAF",
@@ -25779,7 +25779,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGCAF",
@@ -25793,7 +25793,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGCAF",
@@ -25905,7 +25905,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGCAF",
@@ -25919,7 +25919,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGCAF",
@@ -26045,7 +26045,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGCAF",
@@ -26059,7 +26059,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DFGCAF",
@@ -26129,7 +26129,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DGDAAF",
@@ -26465,7 +26465,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAC",
@@ -26661,7 +26661,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAC",
@@ -27151,7 +27151,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAC",
@@ -27235,7 +27235,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -27305,7 +27305,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -27319,7 +27319,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -27529,7 +27529,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -27725,7 +27725,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -27977,7 +27977,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -28103,7 +28103,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -28145,7 +28145,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -28159,7 +28159,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -28188,7 +28188,7 @@
     {
       "year": 2020,
       "make": "VOLKSWAGEN",
-      "commercialName": "TOURAN",
+      "commercialName": "Touran",
       "type": "1T",
       "variant": "DPCAAF",
       "version": "FM6FM6C90014BFS71VR21CA",
@@ -28425,7 +28425,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -28453,7 +28453,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -28579,7 +28579,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -28635,7 +28635,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -28719,7 +28719,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -28733,7 +28733,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DPCAAF",
@@ -28859,7 +28859,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DTSBAF",
@@ -28873,7 +28873,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "TOURAN",
       "type": "1T",
       "variant": "DTSBAF",
@@ -33143,7 +33143,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DFFAX0AC4",
@@ -33255,7 +33255,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DFFAX0AC4",
@@ -33409,7 +33409,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DFFAX0AC4",
@@ -33843,7 +33843,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DFFAX1AC4",
@@ -34039,7 +34039,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DFFAX1AC40",
@@ -34095,7 +34095,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DFHAX1AC4",
@@ -34137,7 +34137,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DFHAX1AC4",
@@ -34207,7 +34207,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DGTEX0AC4",
@@ -34235,7 +34235,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DGTEX0AC4",
@@ -34431,7 +34431,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DGTEX0AC4",
@@ -34445,7 +34445,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DGTEX0AC40",
@@ -34473,7 +34473,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DGTEX0AC4L",
@@ -34572,7 +34572,7 @@
     {
       "year": 2020,
       "make": "VOLKSWAGEN",
-      "commercialName": "T-ROC",
+      "commercialName": "t-roc",
       "type": "A1",
       "variant": "DKRFX0AC4",
       "version": "FM6FM6AJ0214BF1AANN0",
@@ -34585,7 +34585,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DKRFX0AC4",
@@ -34669,7 +34669,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DKRFX0AC4",
@@ -34795,7 +34795,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DKRFX0AC4L",
@@ -35131,7 +35131,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DKZAX1AC4",
@@ -35257,7 +35257,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DKZAX1AC4L",
@@ -35285,7 +35285,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DLAAX0AC4",
@@ -35439,7 +35439,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DNUEX1AC4",
@@ -35803,7 +35803,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DNUEX1AC40",
@@ -35845,7 +35845,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DNUEX1AC40",
@@ -36181,7 +36181,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DPCAX0AC4",
@@ -36811,7 +36811,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DPCAX0AC40",
@@ -36923,7 +36923,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DPCAX0AC4L",
@@ -37035,7 +37035,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DPCAX0AE2",
@@ -37077,7 +37077,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DPCAX0AE2",
@@ -37343,7 +37343,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "T-ROC",
       "type": "A1",
       "variant": "DPCAX0AE2",
@@ -43153,7 +43153,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "UP!",
       "type": "AA",
       "variant": "ABCHYE",
@@ -43181,7 +43181,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "UP!",
       "type": "AA",
       "variant": "ABCHYE",
@@ -43349,7 +43349,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "UP!",
       "type": "AA",
       "variant": "ABCHYE",
@@ -43643,7 +43643,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "UP!",
       "type": "AA",
       "variant": "ABDKRA",
@@ -43671,7 +43671,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "UP!",
       "type": "AA",
       "variant": "ABDKRA",
@@ -43713,7 +43713,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "UP!",
       "type": "AA",
       "variant": "ABDSGC",
@@ -43727,7 +43727,7 @@
     },
     {
       "year": 2020,
-      "make": "VOLKSWAGEN",
+      "make": "Volkswagen",
       "commercialName": "UP!",
       "type": "AA",
       "variant": "ABDSGC",
@@ -43797,7 +43797,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "UP!",
       "type": "AA",
       "variant": "ABEABA",
@@ -43923,7 +43923,7 @@
     },
     {
       "year": 2020,
-      "make": "Volkswagen",
+      "make": "VOLKSWAGEN",
       "commercialName": "UP!",
       "type": "AA",
       "variant": "ABEBMA",

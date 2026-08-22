@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2021Fv24",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2021Fv24] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 3,
   "rows": [
     {
@@ -117,8 +117,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "Q5 50 TFSI E",
+      "make": "Audi",
+      "commercialName": "Q5 50 TFSI e",
       "type": "FY",
       "variant": "XDRYAQ1",
       "version": "QD7AD7DK002RT71C214BIBEM8FSB30",
@@ -160,7 +160,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 55 TFSI E",
+      "commercialName": "Q5 55 TFSI e",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61B184BFAEM9FL0",
@@ -188,7 +188,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 55 TFSI E",
+      "commercialName": "Q5 55 TFSI e",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61B184BFAEM9FS0",
@@ -202,7 +202,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 55 TFSI E",
+      "commercialName": "Q5 55 TFSI e",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61C194BFAEM9FL0",
@@ -272,7 +272,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 55 TFSI e",
+      "commercialName": "Q5 55 TFSI E",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61C204BFAEM9FL0",
@@ -286,7 +286,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 55 TFSI E",
+      "commercialName": "Q5 55 TFSI e",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61C204BFAEM9FS0",
@@ -314,7 +314,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 55 TFSI e",
+      "commercialName": "Q5 55 TFSI E",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT71E214BFBEM9FL0",
@@ -649,8 +649,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "Q5 55 TFSI e",
+      "make": "AUDI",
+      "commercialName": "Q5 55 TFSI E",
       "type": "FY",
       "variant": "XDRYAQ1",
       "version": "QD7AD7DK002RT61C204BIAEM9FSB30",
@@ -761,8 +761,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "Q5 55 TFSI E",
+      "make": "Audi",
+      "commercialName": "Q5 55 TFSI e",
       "type": "FY",
       "variant": "XDRYAQ1",
       "version": "QD7AD7DK002RT61C204BIBEM9FSB30",
@@ -817,8 +817,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "Q5 55 TFSI e",
+      "make": "AUDI",
+      "commercialName": "Q5 55 TFSI E",
       "type": "FY",
       "variant": "XDRYAQ1",
       "version": "QD7AD7DK002RT71C214BIAEM9FSB30",
@@ -929,8 +929,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "Q5 55 TFSI E",
+      "make": "Audi",
+      "commercialName": "Q5 55 TFSI e",
       "type": "FY",
       "variant": "XDRYAQ1",
       "version": "QD7AD7DK002RT71C214BIBEM9FSB30",
@@ -1265,8 +1265,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "Q5 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q5 SPORTBACK",
       "type": "FY",
       "variant": "SDMGAQ1",
       "version": "QA8QA8D5025RT51C204BIBEM1FSD20",
@@ -1335,7 +1335,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDPUAQ1",
@@ -1392,7 +1392,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK",
+      "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDPUAQ1",
       "version": "QD7AD7CJ001RT21C214BIBEM1FSB1D",
@@ -1546,7 +1546,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 Sportback",
+      "commercialName": "Q5 SPORTBACK",
       "type": "FY",
       "variant": "SDPUAQ1",
       "version": "QD7AD7CJ001RT51B184BIBEM1FSB1",
@@ -1574,7 +1574,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 Sportback",
+      "commercialName": "Q5 SPORTBACK",
       "type": "FY",
       "variant": "SDPUAQ1",
       "version": "QD7AD7CJ001RT51B184BIBEM1FSB1A",
@@ -1854,7 +1854,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 Sportback",
+      "commercialName": "Q5 SPORTBACK",
       "type": "FY",
       "variant": "SDPUAQ1",
       "version": "QD7AD7CJ001RT51C204BIBEM1FLB1C",
@@ -2120,7 +2120,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK",
+      "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDTNAF1",
       "version": "FD7FD7CK007RT51B184BIAEM1FSD1",
@@ -2133,7 +2133,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDTNAF1",
@@ -2175,8 +2175,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "Q5 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q5 SPORTBACK",
       "type": "FY",
       "variant": "SDTNAF1",
       "version": "FD7FD7CK007RT51C194BIAEM1FSD10",
@@ -2203,7 +2203,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDTNAF1",
@@ -2218,7 +2218,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK",
+      "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDTNAF1",
       "version": "FD7FD7CK007RT51C204BIAEM1FSD10",
@@ -2315,7 +2315,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDTPAQ1",
@@ -2414,7 +2414,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 Sportback",
+      "commercialName": "Q5 SPORTBACK",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT21C214BIBEM1FSD1C",
@@ -2442,7 +2442,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 Sportback",
+      "commercialName": "Q5 SPORTBACK",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT21C214BIBEM1FSD1D",
@@ -2498,7 +2498,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK",
+      "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT51B184BIAEM1FLD1C",
@@ -2512,7 +2512,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 Sportback",
+      "commercialName": "Q5 SPORTBACK",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT51B184BIAEM1FLD1D",
@@ -2526,7 +2526,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK",
+      "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT51B184BIAEM1FSD1",
@@ -2554,7 +2554,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK",
+      "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT51B184BIAEM1FSD1A",
@@ -2596,7 +2596,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK",
+      "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT51B184BIAEM1FSD1C",
@@ -2834,7 +2834,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK",
+      "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT51C194BIAEM1FSD1D",
@@ -2876,7 +2876,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 Sportback",
+      "commercialName": "Q5 SPORTBACK",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT51C194BIBEM1FLD1C",
@@ -2904,7 +2904,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 Sportback",
+      "commercialName": "Q5 SPORTBACK",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT51C194BIBEM1FLD1D",
@@ -2960,7 +2960,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 Sportback",
+      "commercialName": "Q5 SPORTBACK",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT51C194BIBEM1FSD1",
@@ -3044,7 +3044,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK",
+      "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT51C194BIBEM1FSD1D",
@@ -3086,7 +3086,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 Sportback",
+      "commercialName": "Q5 SPORTBACK",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT51C204BIBEM1FLD1",
@@ -3128,7 +3128,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK",
+      "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT51C204BIBEM1FLD1C",
@@ -3254,7 +3254,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 Sportback",
+      "commercialName": "Q5 SPORTBACK",
       "type": "FY",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ002RT51C204BIBEM1FSD1B",
@@ -3267,7 +3267,7 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q5 Sportback",
       "type": "FY",
       "variant": "SDTPAQ1",
@@ -3744,7 +3744,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK 50 TFSI E",
+      "commercialName": "Q5 Sportback 50 TFSI e",
       "type": "FY",
       "variant": "SDRYAQ1",
       "version": "QD7AD7DK002RT61C194BIAEM8FLB3",
@@ -3785,8 +3785,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "Q5 Sportback 50 TFSI e",
+      "make": "AUDI",
+      "commercialName": "Q5 SPORTBACK 50 TFSI E",
       "type": "FY",
       "variant": "SDRYAQ1",
       "version": "QD7AD7DK002RT61C194BIAEM8FSB3",
@@ -3814,7 +3814,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK 50 TFSI E",
+      "commercialName": "Q5 Sportback 50 TFSI e",
       "type": "FY",
       "variant": "SDRYAQ1",
       "version": "QD7AD7DK002RT61C194BIAEM8FSB30",
@@ -3926,7 +3926,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK 50 TFSI E",
+      "commercialName": "Q5 Sportback 50 TFSI e",
       "type": "FY",
       "variant": "SDRYAQ1",
       "version": "QD7AD7DK002RT61C204BIAEM8FSB30",
@@ -4010,7 +4010,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK 50 TFSI E",
+      "commercialName": "Q5 Sportback 50 TFSI e",
       "type": "FY",
       "variant": "SDRYAQ1",
       "version": "QD7AD7DK002RT61C204BIBEM8FSB30",
@@ -4080,7 +4080,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK 50 TFSI E",
+      "commercialName": "Q5 Sportback 50 TFSI e",
       "type": "FY",
       "variant": "SDRYAQ1",
       "version": "QD7AD7DK002RT71C214BIBEM8FLB30",
@@ -4598,7 +4598,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q5 SPORTBACK 55 TFSI E",
+      "commercialName": "Q5 Sportback 55 TFSI e",
       "type": "FY",
       "variant": "SDRYAQ1",
       "version": "QD7AD7DK002RT71C214BIBEM9FLB30",
@@ -4765,7 +4765,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDCBDQ1",
@@ -5171,7 +5171,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDCBDQ2",
@@ -5591,7 +5591,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDHXAQ1",
@@ -5647,7 +5647,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDHXAQ1",
@@ -5703,7 +5703,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDHXAQ1",
@@ -5927,7 +5927,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDHXAQ2",
@@ -6837,7 +6837,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDPXAQ1",
@@ -6879,7 +6879,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDPXAQ1",
@@ -6949,7 +6949,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDPXAQ1",
@@ -6991,7 +6991,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDPXAQ1",
@@ -7299,7 +7299,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDPXAQ2",
@@ -7551,7 +7551,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDPXAQ2",
@@ -7607,7 +7607,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDPXAQ2",
@@ -7817,7 +7817,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDPXBQ1",
@@ -7887,7 +7887,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDPXBQ1",
@@ -8293,7 +8293,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDPXBQ1",
@@ -9120,7 +9120,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q7 55 TFSI E",
+      "commercialName": "Q7 55 TFSI e",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B194BIAEM8S5FLB3",
@@ -9596,7 +9596,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q7 55 TFSI E",
+      "commercialName": "Q7 55 TFSI e",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B214BIAEM8S5FL",
@@ -9638,7 +9638,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q7 55 TFSI E",
+      "commercialName": "Q7 55 TFSI e",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B214BIAEM8S5FLB3",
@@ -9904,7 +9904,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q7 60 TFSI e",
+      "commercialName": "Q7 60 TFSI E",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004R111C224BIBEM9S5FL",
@@ -10044,7 +10044,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q7 60 TFSI e",
+      "commercialName": "Q7 60 TFSI E",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B204BIAEM9S5FL",
@@ -10058,7 +10058,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q7 60 TFSI e",
+      "commercialName": "Q7 60 TFSI E",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B204BIAEM9S5FLB3",
@@ -10170,7 +10170,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q7 60 TFSI e",
+      "commercialName": "Q7 60 TFSI E",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B214BFBEM9S5FL",
@@ -10198,7 +10198,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q7 60 TFSI e",
+      "commercialName": "Q7 60 TFSI E",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B214BIAEM9S5FLB3",
@@ -10226,7 +10226,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q7 60 TFSI e",
+      "commercialName": "Q7 60 TFSI E",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B214BIBEM9S5FL",
@@ -10240,7 +10240,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q7 60 TFSI e",
+      "commercialName": "Q7 60 TFSI E",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B214BIBEM9S5FLB3",
@@ -10351,7 +10351,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDCBDQ1",
@@ -10379,7 +10379,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDCBDQ1",
@@ -10631,7 +10631,7 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDCBDQ2",
@@ -10687,7 +10687,7 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDCBDQ2",
@@ -11345,7 +11345,7 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDPXAQ1",
@@ -11457,7 +11457,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDPXAQ1",
@@ -11485,7 +11485,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDPXAQ1",
@@ -11541,7 +11541,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDPXAQ1",
@@ -11653,7 +11653,7 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDPXAQ2",
@@ -11737,7 +11737,7 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDPXAQ2",
@@ -12003,7 +12003,7 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDPXAQ2",
@@ -12367,7 +12367,7 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDPXBQ1",
@@ -12914,7 +12914,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q8 55 TFSI e",
+      "commercialName": "Q8 55 TFSI E",
       "type": "4L",
       "variant": "SDCBEQ1",
       "version": "QA8QA8D7004RT11B194BIBEM8S5FLB3",
@@ -12942,7 +12942,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q8 55 TFSI e",
+      "commercialName": "Q8 55 TFSI E",
       "type": "4L",
       "variant": "SDCBEQ1",
       "version": "QA8QA8D7004RT11C204BIBEM8S5FLB3",
@@ -13110,7 +13110,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q8 55 TFSI E",
+      "commercialName": "Q8 55 TFSI e",
       "type": "4L",
       "variant": "SDCBEQ1",
       "version": "QA8QA8D7004RT11C224BIBEM8S5FLB3",
@@ -13152,7 +13152,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q8 55 TFSI e",
+      "commercialName": "Q8 55 TFSI E",
       "type": "4L",
       "variant": "SDCBEQ1",
       "version": "QA8QA8D7004RT11C224BICEM8S5FLB3",
@@ -13306,7 +13306,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q8 60 TFSI E",
+      "commercialName": "Q8 60 TFSI e",
       "type": "4L",
       "variant": "SDCBEQ1",
       "version": "QA8QA8D7004RT11C224BIBEM9S5FLB3",
@@ -13348,7 +13348,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q8 60 TFSI E",
+      "commercialName": "Q8 60 TFSI e",
       "type": "4L",
       "variant": "SDCBEQ1",
       "version": "QA8QA8D7004RT11C224BICEM9S5FLB3",
@@ -13376,7 +13376,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "Q8 60 TFSI e",
+      "commercialName": "Q8 60 TFSI E",
       "type": "4L",
       "variant": "SDCBEQ1",
       "version": "QA8QA8D7004RT11C234BIBEM9S5FLB3",
@@ -13642,7 +13642,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "R8 Coup?",
+      "commercialName": "R8 COUP?",
       "type": "42",
       "variant": "CDMWAQ1",
       "version": "QD7AD7BZ003RT31E204BFAEM1",
@@ -14971,8 +14971,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "RS 4 Avant",
+      "make": "AUDI",
+      "commercialName": "RS 4 AVANT",
       "type": "B8",
       "variant": "A2DECAQ1",
       "version": "QA8QA8D5021RS011E19S54BIAEM1B0",
@@ -15195,8 +15195,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "RS 5 Coup?",
+      "make": "AUDI",
+      "commercialName": "RS 5 COUP?",
       "type": "B8",
       "variant": "C2DECAQ1",
       "version": "QA8QA8D5021RS011E20S44BIAEM1B0",
@@ -15238,7 +15238,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "RS 5 COUPE",
+      "commercialName": "RS 5 Coupe",
       "type": "B8",
       "variant": "C2DECAQ1",
       "version": "QA8QA8D5021RS011E20S44BIAEM1B0",
@@ -15307,8 +15307,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "RS 5 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "RS 5 Sportback",
       "type": "B8",
       "variant": "S2DECAQ1",
       "version": "QA8QA8D5021RS011E19S54BIAEM1B0",
@@ -15349,8 +15349,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "RS 5 Sportback",
+      "make": "AUDI",
+      "commercialName": "RS 5 SPORTBACK",
       "type": "B8",
       "variant": "S2DECAQ1",
       "version": "QA8QA8D5021RS011E20S54BIAEM1B0",
@@ -15378,7 +15378,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "RS 5 Sportback",
+      "commercialName": "RS 5 SPORTBACK",
       "type": "B8",
       "variant": "S2DECAQ1",
       "version": "QA8QA8D5021RS021E20S54BFAEM1",
@@ -15391,8 +15391,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "RS 5 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "RS 5 Sportback",
       "type": "B8",
       "variant": "S2DECAQ1",
       "version": "QA8QA8D5021RS021E20S54BIAEM1B0",
@@ -15518,7 +15518,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "RS 6 Avant",
+      "commercialName": "RS 6 AVANT",
       "type": "F2",
       "variant": "ADJPBQ1",
       "version": "QA8QA8D6012RS011C21S54BIAEM1H77FLB2",
@@ -15545,7 +15545,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "RS 6 Avant",
       "type": "F2",
       "variant": "ADJPBQ1",
@@ -15573,8 +15573,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "RS 6 AVANT",
+      "make": "Audi",
+      "commercialName": "RS 6 Avant",
       "type": "F2",
       "variant": "ADJPBQ1",
       "version": "QA8QA8D6012RS011E22S54BIBEM1H77FLB2",
@@ -15587,7 +15587,7 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "RS 6 Avant",
       "type": "F2",
       "variant": "ADJPBQ1",
@@ -15714,7 +15714,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "RS 6 Avant",
+      "commercialName": "RS 6 AVANT",
       "type": "F2",
       "variant": "ADJPBQ2",
       "version": "QA8QA8D6012RS021E22S54BFBEM1H77FL",
@@ -15728,7 +15728,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "RS 6 AVANT",
+      "commercialName": "RS 6 Avant",
       "type": "F2",
       "variant": "ADJPBQ2",
       "version": "QA8QA8D6012RS021E22S54BFBEM1H77FS",
@@ -15741,8 +15741,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "RS 6 Avant",
+      "make": "AUDI",
+      "commercialName": "RS 6 AVANT",
       "type": "F2",
       "variant": "ADJPBQ2",
       "version": "QA8QA8D6012RS021E22S54BIBEM1H77FLB2",
@@ -15868,7 +15868,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "RS 6 AVANT",
+      "commercialName": "RS 6 Avant",
       "type": "F2",
       "variant": "ADJPBQ2",
       "version": "QA8QA8D6012RS031E22S54BFBEM1H77FL",
@@ -15895,8 +15895,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "RS 6 Avant",
+      "make": "AUDI",
+      "commercialName": "RS 6 AVANT",
       "type": "F2",
       "variant": "ADJPBQ2",
       "version": "QA8QA8D6012RS031E22S54BIBEM1H77FLB2",
@@ -15924,7 +15924,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "RS 6 Avant",
+      "commercialName": "RS 6 AVANT",
       "type": "F2",
       "variant": "ADJPBQ2",
       "version": "QA8QA8D6012RS031E22S54BIBEM1H77FSB2",
@@ -16176,7 +16176,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "RS 7 Sportback",
+      "commercialName": "RS 7 SPORTBACK",
       "type": "F2",
       "variant": "SDJPBQ2",
       "version": "QA8QA8D6012RS031C21S54BIAEM1H77FLB2",
@@ -16483,8 +16483,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "RS e-tron GT",
+      "make": "AUDI",
+      "commercialName": "RS E-TRON GT",
       "type": "FW",
       "variant": "SBL1WQ1",
       "version": "QE2QE2G1X01RT031B210GAAEM0FL",
@@ -16665,8 +16665,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "RS e-tron GT",
+      "make": "AUDI",
+      "commercialName": "RS E-TRON GT",
       "type": "FW",
       "variant": "SBL1WQ2",
       "version": "QE2QE2G1X01RT031B210GAAEM0FL",
@@ -16805,7 +16805,7 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "RS Q3",
       "type": "F3",
       "variant": "XDNWAQ1",
@@ -17002,7 +17002,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "RS Q3 SPORTBACK",
+      "commercialName": "RS Q3 Sportback",
       "type": "F3",
       "variant": "SDNWAQ1",
       "version": "QD7AD7DL010RS041A204BIAHA6EM1B0",
@@ -17030,7 +17030,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "RS Q3 Sportback",
+      "commercialName": "RS Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDNWAQ1",
       "version": "QD7AD7DL010RS041C214BFAHA6EM1B0",
@@ -17044,7 +17044,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "RS Q3 SPORTBACK",
+      "commercialName": "RS Q3 Sportback",
       "type": "F3",
       "variant": "SDNWAQ1",
       "version": "QD7AD7DL010RS041C214BIAHA6EM1B0",
@@ -17253,7 +17253,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "RS Q8",
       "type": "4L",
       "variant": "SDHUBQ2",
@@ -18794,7 +18794,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "S3 LIMOUSINE",
+      "commercialName": "S3 Limousine",
       "type": "GY",
       "variant": "LDNFBQ1",
       "version": "QD7AD7GC001RT061C184BIAEM1MLN1B00",
@@ -19087,8 +19087,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "S3 Sportback",
+      "make": "AUDI",
+      "commercialName": "S3 SPORTBACK",
       "type": "GY",
       "variant": "SDNFBQ1",
       "version": "QD7AD7GC001RT061C184BIAEM1MLN1B0",
@@ -19185,8 +19185,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "S3 Sportback",
+      "make": "AUDI",
+      "commercialName": "S3 SPORTBACK",
       "type": "GY",
       "variant": "SDNFBQ1",
       "version": "QD7AD7GC001RT061C194BIAEM1MLN1B0",
@@ -19213,8 +19213,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "S3 Sportback",
+      "make": "AUDI",
+      "commercialName": "S3 SPORTBACK",
       "type": "GY",
       "variant": "SDNFBQ1",
       "version": "QD7AD7GC001RT061C194BIAEM1MLN1B00",
@@ -19269,8 +19269,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "S3 Sportback",
+      "make": "AUDI",
+      "commercialName": "S3 SPORTBACK",
       "type": "GY",
       "variant": "SDNFBQ1",
       "version": "QD7AD7GC001RT061C194BIAEM1MLN1B0C",
@@ -19409,8 +19409,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "S4 AVANT",
+      "make": "Audi",
+      "commercialName": "S4 Avant",
       "type": "B8",
       "variant": "A2DEWBQ1",
       "version": "QA8QA8D5016RT131E19S54BFBEM10D2",
@@ -19424,7 +19424,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "S4 AVANT",
+      "commercialName": "S4 Avant",
       "type": "B8",
       "variant": "A2DMKCQ1",
       "version": "QA8QA8D5016RT111E18S54BIBEM10D2",
@@ -19452,7 +19452,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "S4 AVANT",
+      "commercialName": "S4 Avant",
       "type": "B8",
       "variant": "A2DMKCQ1",
       "version": "QA8QA8D5016RT131E19S54BIBEM10D2",
@@ -19507,8 +19507,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "S4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "S4 Limousine",
       "type": "B8",
       "variant": "L2DEWBQ1",
       "version": "QA8QA8D5016RT131E19S54BFBEM10",
@@ -19563,8 +19563,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "S4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "S4 Limousine",
       "type": "B8",
       "variant": "L2DMKCQ1",
       "version": "QA8QA8D5016RT131E19S54BIAEM10D2",
@@ -19704,7 +19704,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "S5 Cabriolet",
+      "commercialName": "S5 CABRIOLET",
       "type": "B8",
       "variant": "K2CWGDQ1",
       "version": "QA8QA8D5025RT241E18S44BIAEM10B0",
@@ -19731,8 +19731,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "S5 Cabriolet",
+      "make": "AUDI",
+      "commercialName": "S5 CABRIOLET",
       "type": "B8",
       "variant": "K2CWGDQ1",
       "version": "QA8QA8D5025RT241E19S44BIAEM10B0",
@@ -19774,7 +19774,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "S5 CABRIOLET",
+      "commercialName": "S5 Cabriolet",
       "type": "B8",
       "variant": "K2CWGDQ1",
       "version": "QA8QA8D5025RT251E20S44BIAEM10B0",
@@ -19969,8 +19969,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "S5 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "S5 Sportback",
       "type": "B8",
       "variant": "S2DEWBQ1",
       "version": "QA8QA8D5016RT241E19S54BFBEM10",
@@ -20152,7 +20152,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "S5 SPORTBACK",
+      "commercialName": "S5 Sportback",
       "type": "B8",
       "variant": "S2DMKCQ1",
       "version": "QA8QA8D5016RT241E19S44BIAEM10D2",
@@ -20586,7 +20586,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "S6 AVANT",
+      "commercialName": "S6 Avant",
       "type": "F2",
       "variant": "ADEWAQ1",
       "version": "QA8QA8D5024RT051C20S54BFBEM1H661FL",
@@ -20852,7 +20852,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "S6 AVANT",
+      "commercialName": "S6 Avant",
       "type": "F2",
       "variant": "ADEWAQ2",
       "version": "QA8QA8D5024RT051C21S54BFBEM1H661FL",
@@ -20992,7 +20992,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "S6 Avant",
+      "commercialName": "S6 AVANT",
       "type": "F2",
       "variant": "ADMKDQ1",
       "version": "QA8QA8D5024051C21S54BIBEM1H66FLD2",
@@ -21061,8 +21061,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "S6 Avant",
+      "make": "AUDI",
+      "commercialName": "S6 AVANT",
       "type": "F2",
       "variant": "ADMKDQ1",
       "version": "QA8QA8D5024RT051C20S54BIBEM1H66FLD2",
@@ -21104,7 +21104,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "S6 AVANT",
+      "commercialName": "S6 Avant",
       "type": "F2",
       "variant": "ADMKDQ1",
       "version": "QA8QA8D5024RT051C21S54BIBEM1H66FLD2",
@@ -21383,8 +21383,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "S6 Limousine",
+      "make": "AUDI",
+      "commercialName": "S6 LIMOUSINE",
       "type": "F2",
       "variant": "LDMKDQ1",
       "version": "QA8QA8D5024051C21S54BIAEM1H56FSD2",
@@ -21411,8 +21411,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "S6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "S6 Limousine",
       "type": "F2",
       "variant": "LDMKDQ1",
       "version": "QA8QA8D5024RT051C20S54BIAEM1H56FSD2",
@@ -21524,7 +21524,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "S6 Limousine",
+      "commercialName": "S6 LIMOUSINE",
       "type": "F2",
       "variant": "LDMKDQ2",
       "version": "QA8QA8D5024RT051C20S54BIAEM1H56FLD2",
@@ -21915,8 +21915,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "S7 Sportback",
+      "make": "AUDI",
+      "commercialName": "S7 SPORTBACK",
       "type": "F2",
       "variant": "SDMKDQ1",
       "version": "QA8QA8D5024081C20S54BIBEM1H66FLD2",
@@ -22154,7 +22154,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "S7 Sportback",
+      "commercialName": "S7 SPORTBACK",
       "type": "F2",
       "variant": "SDMKDQ1",
       "version": "QA8QA8D5024RT081C20S54BIBEM1H66FLD2",
@@ -22251,8 +22251,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "S7 Sportback",
+      "make": "AUDI",
+      "commercialName": "S7 SPORTBACK",
       "type": "F2",
       "variant": "SDMKDQ1",
       "version": "QA8QA8D5024RT081C21S54BIBEM1H66FLD2",
@@ -22433,8 +22433,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "S7 Sportback",
+      "make": "AUDI",
+      "commercialName": "S7 SPORTBACK",
       "type": "F2",
       "variant": "SDMKDQ2",
       "version": "QA8QA8D5024RT081C20S54BIBEM1H66FLD2",
@@ -22489,8 +22489,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "S7 Sportback",
+      "make": "AUDI",
+      "commercialName": "S7 SPORTBACK",
       "type": "F2",
       "variant": "SDMKDQ2",
       "version": "QA8QA8D5024RT081C21S54BIBEM1H66FLD2",
@@ -22811,7 +22811,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "SQ2",
       "type": "GA",
       "variant": "XDNFCQ1",
@@ -22867,7 +22867,7 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "SQ2",
       "type": "GA",
       "variant": "XDNUEQ1",
@@ -23077,7 +23077,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "SQ5",
       "type": "FY",
       "variant": "XDEWBQ1",
@@ -23399,7 +23399,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "SQ5",
       "type": "FY",
       "variant": "XDMKCQ1",
@@ -23525,7 +23525,7 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "SQ5",
       "type": "FY",
       "variant": "XDMKCQ1",
@@ -23750,7 +23750,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "SQ5 Sportback",
+      "commercialName": "SQ5 SPORTBACK",
       "type": "FY",
       "variant": "SDMKCQ1",
       "version": "QA8QA8D5029RT31C204BIBEM1FLD20",
@@ -23792,7 +23792,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "SQ5 SPORTBACK",
+      "commercialName": "SQ5 Sportback",
       "type": "FY",
       "variant": "SDMKCQ1",
       "version": "QA8QA8D5029RT31C204BIBEM1FSD2",
@@ -23834,7 +23834,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "SQ5 Sportback",
+      "commercialName": "SQ5 SPORTBACK",
       "type": "FY",
       "variant": "SDMKCQ1",
       "version": "QA8QA8D5029RT31C204BIBEM1FSD20",
@@ -23890,7 +23890,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "SQ5 SPORTBACK",
+      "commercialName": "SQ5 Sportback",
       "type": "FY",
       "variant": "SDMKCQ1",
       "version": "QA8QA8D5029RT41C214BIAEM1FSD20",
@@ -23918,7 +23918,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "SQ5 Sportback",
+      "commercialName": "SQ5 SPORTBACK",
       "type": "FY",
       "variant": "SDMKCQ1",
       "version": "QA8QA8D5029RT41C214BIBEM1FLD2",
@@ -23959,8 +23959,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "SQ5 Sportback",
+      "make": "AUDI",
+      "commercialName": "SQ5 SPORTBACK",
       "type": "FY",
       "variant": "SDMKCQ1",
       "version": "QA8QA8D5029RT41C214BIBEM1FLD20",
@@ -23987,8 +23987,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "SQ5 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "SQ5 Sportback",
       "type": "FY",
       "variant": "SDMKCQ1",
       "version": "QA8QA8D5029RT41C214BIBEM1FSD2",
@@ -24197,7 +24197,7 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "SQ7",
       "type": "4L",
       "variant": "XDCUEQ2",
@@ -24309,7 +24309,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "SQ7",
       "type": "4L",
       "variant": "XDCUEQ2",
@@ -24379,7 +24379,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "SQ7",
       "type": "4L",
       "variant": "XDCUEQ2",
@@ -24883,7 +24883,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "SQ8",
       "type": "4L",
       "variant": "SDCUEQ2",
@@ -25653,8 +25653,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "TT COUP-",
+      "make": "Audi",
+      "commercialName": "TT Coup-",
       "type": "8J",
       "variant": "CDNPAF1",
       "version": "FD7FD7GC006RT11E17S44BIAEM1B0",
@@ -25752,7 +25752,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "TT Coup?",
+      "commercialName": "TT COUP?",
       "type": "8J",
       "variant": "CDKZBF1",
       "version": "FD7FD7GC006RT11E19S44BFAEM1B0",
@@ -25808,7 +25808,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "TT Coup?",
+      "commercialName": "TT COUP?",
       "type": "8J",
       "variant": "CDNNBF1",
       "version": "FD7FD7GC006RT11E18S44BIAEM1B0",
@@ -25850,7 +25850,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "TT COUP?",
+      "commercialName": "TT Coup?",
       "type": "8J",
       "variant": "CDNNBF1",
       "version": "FD7FD7GC006RT11E19S44BIAEM1B0",
@@ -25906,7 +25906,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "TT Coup?",
+      "commercialName": "TT COUP?",
       "type": "8J",
       "variant": "CDNPAF1",
       "version": "FD7FD7GC006RT11E18S44BIAEM1B0",
@@ -25933,8 +25933,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "TT COUP?",
+      "make": "Audi",
+      "commercialName": "TT Coup?",
       "type": "8J",
       "variant": "CDNPAF1",
       "version": "FD7FD7GC006RT11E19S44BIAEM1B0",
@@ -25976,7 +25976,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "TT Coup?",
+      "commercialName": "TT COUP?",
       "type": "8J",
       "variant": "CDNPAQ1",
       "version": "QD7AD7GC007RT11E17S44BIAEM1B0",
@@ -25990,7 +25990,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "TT Coup?",
+      "commercialName": "TT COUP?",
       "type": "8J",
       "variant": "CDNPAQ1",
       "version": "QD7AD7GC007RT11E18S44BIAEM1B0",
@@ -26017,7 +26017,7 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "TT Coup?",
       "type": "8J",
       "variant": "CDNPAQ1",
@@ -26395,8 +26395,8 @@
     },
     {
       "year": 2021,
-      "make": "AUDI",
-      "commercialName": "TT COUPE",
+      "make": "Audi",
+      "commercialName": "TT Coupe",
       "type": "8J",
       "variant": "CDNNBF1",
       "version": "FD7FD7GC006RT11E20S44BIAEM1B0",
@@ -26900,7 +26900,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "TT Roadster",
+      "commercialName": "TT ROADSTER",
       "type": "8J",
       "variant": "RDNNBF1",
       "version": "FD7FD7GC006RT11E18S24BIAEM1B0",
@@ -26928,7 +26928,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "TT ROADSTER",
+      "commercialName": "TT Roadster",
       "type": "8J",
       "variant": "RDNNBF1",
       "version": "FD7FD7GC006RT11E19S24BIAEM1B0",
@@ -26984,7 +26984,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "TT ROADSTER",
+      "commercialName": "TT Roadster",
       "type": "8J",
       "variant": "RDNPAF1",
       "version": "FD7FD7GC006RT11E17S24BIAEM1B0",
@@ -27152,7 +27152,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "TT Roadster",
+      "commercialName": "TT ROADSTER",
       "type": "8J",
       "variant": "RDNPAQ1",
       "version": "QD7AD7GC007RT11E19S24BIAEM1B0",
@@ -27320,7 +27320,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "TT RS Coup?",
+      "commercialName": "TT RS COUP?",
       "type": "8J",
       "variant": "CDNWAQ1",
       "version": "QD7AD7DL002RT41E20S44BIAEM1B0",
@@ -27459,8 +27459,8 @@
     },
     {
       "year": 2021,
-      "make": "Audi",
-      "commercialName": "TT RS Roadster",
+      "make": "AUDI",
+      "commercialName": "TT RS ROADSTER",
       "type": "8J",
       "variant": "RDNWAQ1",
       "version": "QD7AD7DL002RT31E19S24BIAEM1B0",
@@ -27530,7 +27530,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "TT RS ROADSTER",
+      "commercialName": "TT RS Roadster",
       "type": "8J",
       "variant": "RDNWAQ1",
       "version": "QD7AD7DL002RT41E20S24BIAEM1B0",
@@ -27642,7 +27642,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "TTS COUP?",
+      "commercialName": "TTS Coup?",
       "type": "8J",
       "variant": "CDNFDQ1",
       "version": "QD7AD7GC001RT21E19S44BIAEM1B0",
@@ -27810,7 +27810,7 @@
     {
       "year": 2021,
       "make": "AUDI",
-      "commercialName": "TTS Roadster",
+      "commercialName": "TTS ROADSTER",
       "type": "8J",
       "variant": "RDNFDQ1",
       "version": "QD7AD7GC001RT21E19S24BIAEM1B0",
@@ -28650,7 +28650,7 @@
     {
       "year": 2021,
       "make": "AUTOMOBILI LAMBORGHINI S.P.A.",
-      "commercialName": "Urus",
+      "commercialName": "URUS",
       "type": "636",
       "variant": "BAAA",
       "version": "AAAAAAAAAAA",
@@ -31478,7 +31478,7 @@
     {
       "year": 2021,
       "make": "BENTLEY",
-      "commercialName": "Bentayga Hybrid",
+      "commercialName": "BENTAYGA HYBRID",
       "type": "4V",
       "variant": "AE4WBD",
       "version": "1",
@@ -32276,7 +32276,7 @@
     {
       "year": 2021,
       "make": "BENTLEY",
-      "commercialName": "CONTINENTAL GT V8",
+      "commercialName": "Continental GT V8",
       "type": "3S",
       "variant": "C4BXBD",
       "version": "1",
@@ -32304,7 +32304,7 @@
     {
       "year": 2021,
       "make": "BENTLEY",
-      "commercialName": "CONTINENTAL GT V8 CONVERTIBLE",
+      "commercialName": "Continental GT V8 Convertible",
       "type": "3S",
       "variant": "D4BXBC",
       "version": "1",
@@ -32472,7 +32472,7 @@
     {
       "year": 2021,
       "make": "BENTLEY",
-      "commercialName": "FLYING SPUR",
+      "commercialName": "Flying Spur",
       "type": "3S",
       "variant": "B5AZAC",
       "version": "1",
@@ -33214,7 +33214,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "116d",
+      "commercialName": "116D",
       "type": "F1H",
       "variant": "7M71",
       "version": "IHW500LS",
@@ -33228,7 +33228,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "116D",
+      "commercialName": "116d",
       "type": "F1H",
       "variant": "7M71",
       "version": "IHW500M0",
@@ -33242,7 +33242,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "116d",
+      "commercialName": "116D",
       "type": "F1H",
       "variant": "7M71",
       "version": "IHW500MS",
@@ -34670,7 +34670,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "118i",
+      "commercialName": "118I",
       "type": "F1H",
       "variant": "7K31",
       "version": "DAW500L0",
@@ -36406,7 +36406,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "120d xDrive",
+      "commercialName": "120D XDRIVE",
       "type": "F1H",
       "variant": "7N51",
       "version": "IAW508MS",
@@ -37078,7 +37078,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "216d Gran Tourer",
+      "commercialName": "216D GRAN TOURER",
       "type": "F2GT",
       "variant": "6W51",
       "version": "IAW500L0",
@@ -37218,7 +37218,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "216d Gran Tourer",
+      "commercialName": "216D GRAN TOURER",
       "type": "F2GT",
       "variant": "6W51",
       "version": "IHW500L0",
@@ -37302,7 +37302,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "216D GRAN TOURER",
+      "commercialName": "216d Gran Tourer",
       "type": "F2GT",
       "variant": "6W51",
       "version": "IHW700L0",
@@ -37316,7 +37316,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "216D GRAN TOURER",
+      "commercialName": "216d Gran Tourer",
       "type": "F2GT",
       "variant": "6W51",
       "version": "IHW700M0",
@@ -39178,7 +39178,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "218d xDrive Gran Tourer",
+      "commercialName": "218D XDRIVE GRAN TOURER",
       "type": "F2GT",
       "variant": "6X11",
       "version": "IAW500L0",
@@ -47228,7 +47228,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "320d xDrive",
+      "commercialName": "320D XDRIVE",
       "type": "G3K",
       "variant": "31DZ",
       "version": "IAA500B0",
@@ -47508,7 +47508,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "320D XDRIVE",
+      "commercialName": "320d xDrive",
       "type": "G3L",
       "variant": "31DY",
       "version": "IAA500K0",
@@ -50742,7 +50742,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "330I",
+      "commercialName": "330i",
       "type": "G3L",
       "variant": "5R11",
       "version": "IAW507M0",
@@ -55040,7 +55040,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "518d",
+      "commercialName": "518D",
       "type": "G5L",
       "variant": "11BL",
       "version": "IAA5R0L0",
@@ -57490,7 +57490,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "530d xDrive",
+      "commercialName": "530D XDRIVE",
       "type": "G5K",
       "variant": "31AJ",
       "version": "IAA50800",
@@ -57504,7 +57504,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "530D XDRIVE",
+      "commercialName": "530d xDrive",
       "type": "G5K",
       "variant": "31AJ",
       "version": "IAA508L0",
@@ -57700,7 +57700,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "530d xDrive",
+      "commercialName": "530D XDRIVE",
       "type": "G5L",
       "variant": "31AH",
       "version": "IAA508L0",
@@ -57938,7 +57938,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "530e",
+      "commercialName": "530E",
       "type": "G5K",
       "variant": "11CG",
       "version": "IAW500L0",
@@ -59730,7 +59730,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "540d xDrive",
+      "commercialName": "540D XDRIVE",
       "type": "G5L",
       "variant": "51AH",
       "version": "IAA508L0",
@@ -60010,7 +60010,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "540i xDrive",
+      "commercialName": "540I XDRIVE",
       "type": "G5K",
       "variant": "71BM",
       "version": "IAA500M0",
@@ -60038,7 +60038,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "540I XDRIVE",
+      "commercialName": "540i xDrive",
       "type": "G5K",
       "variant": "71BM",
       "version": "IAA508L0",
@@ -61158,7 +61158,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "730d xDrive",
+      "commercialName": "730D XDRIVE",
       "type": "7L",
       "variant": "7S41",
       "version": "DAW50900",
@@ -67262,7 +67262,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "M340i xDrive",
+      "commercialName": "M340I XDRIVE",
       "type": "G3K",
       "variant": "6N11",
       "version": "IAA507B0",
@@ -68732,7 +68732,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "M440I XDRIVE",
+      "commercialName": "M440i xDrive",
       "type": "G3C",
       "variant": "11AR",
       "version": "IAA408B0",

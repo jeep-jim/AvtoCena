@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 7,
   "rows": [
     {
@@ -48,7 +48,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBZ6AEIAX",
@@ -62,7 +62,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBZ6AEIBX",
@@ -90,7 +90,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBZ6AEICX",
@@ -104,7 +104,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBZ6AEICX",
@@ -118,7 +118,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBE6AQBAT",
@@ -131,8 +131,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBE6AQBBT",
@@ -160,7 +160,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBF6AQBAT",
@@ -174,7 +174,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBF6AQBBT",
@@ -188,7 +188,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBF6AQBCT",
@@ -202,7 +202,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBH6AB7AT",
@@ -216,7 +216,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBH6AB7BT",
@@ -230,7 +230,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBH6AB7CT",
@@ -328,7 +328,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBM6AB7BT",
@@ -383,8 +383,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBU6AQBBT",
@@ -398,7 +398,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBZ6AB7AT",
@@ -468,7 +468,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "5APBZ6AB7CT",
@@ -510,7 +510,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCJ6AXSBP",
@@ -523,8 +523,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCJ6AXSBP",
@@ -538,7 +538,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DC1NX",
       "version": "5APCJ6AXSCP",
@@ -817,8 +817,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCJ6AXSA7",
@@ -832,7 +832,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCJ6AXSB7",
@@ -845,8 +845,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCJ6AXSB7",
@@ -860,7 +860,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCJ6AXSC7",
@@ -958,7 +958,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCK6AXSC7",
@@ -972,7 +972,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCM6AXSA7",
@@ -1013,8 +1013,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCM6AXSB7",
@@ -1028,7 +1028,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCM6AXSC7",
@@ -1041,8 +1041,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCM6AXSC7",
@@ -1084,7 +1084,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCX6AXSB7",
@@ -1097,8 +1097,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DC1PX",
       "version": "5APCX6AXSB7",
@@ -1238,7 +1238,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "BCDA1PX",
       "version": "5DKAE6AE8D6",
@@ -1266,7 +1266,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "BCDA1PX",
       "version": "5DKAF6AE8D6",
@@ -1294,7 +1294,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "BCDA1PX",
       "version": "5DKAH6AE8D6",
@@ -1392,7 +1392,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCJ6AXTAP",
@@ -1406,7 +1406,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCJ6AXTBP",
@@ -1447,8 +1447,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCK6AXTBP",
@@ -1475,8 +1475,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1NX",
       "version": "5ARCM6AXTAP",
@@ -1587,8 +1587,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCJ6AXTB7",
@@ -1601,8 +1601,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCJ6AXTC7",
@@ -1629,7 +1629,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1PX",
@@ -1658,7 +1658,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCM6AXTA7",
@@ -1671,7 +1671,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1PX",
@@ -1685,8 +1685,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "M0DC1PX",
       "version": "5ARCM6AXTC7",
@@ -1727,7 +1727,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Focus",
       "type": "DEH",
       "variant": "M0DC1PX",
@@ -1937,8 +1937,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "N3DA1NX",
       "version": "5ELBA6ALVD1",
@@ -1980,7 +1980,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "N3DA1NX",
       "version": "5ELBB6AZID1",
@@ -2246,7 +2246,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "N3DA1PX",
       "version": "5ELBB6AZID8",
@@ -2442,7 +2442,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1NX",
       "version": "51CBE6AQLAR",
@@ -2456,7 +2456,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1NX",
       "version": "51CBE6AQLBR",
@@ -2498,7 +2498,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1NX",
       "version": "51CBE6AQLCR",
@@ -2554,7 +2554,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1NX",
       "version": "51CBF6AQLBR",
@@ -2568,7 +2568,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "Y1DA1NX",
       "version": "51CBF6AQLCR",
@@ -2722,7 +2722,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1NX",
       "version": "51CBH6AQLCR",
@@ -3002,7 +3002,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1NX",
       "version": "5YNBH6AQKBP",
@@ -3015,8 +3015,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1NX",
       "version": "5YNBH6AQKBP",
@@ -3169,8 +3169,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1PX",
       "version": "51CBE6AQLCY",
@@ -3198,7 +3198,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "Y1DA1PX",
       "version": "51CBF6AQLAY",
@@ -3211,8 +3211,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "Y1DA1PX",
       "version": "51CBF6AQLAY",
@@ -3226,7 +3226,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "Y1DA1PX",
       "version": "51CBF6AQLBY",
@@ -3240,7 +3240,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1PX",
       "version": "51CBF6AQLBY",
@@ -3254,7 +3254,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1PX",
       "version": "51CBF6AQLCY",
@@ -3282,7 +3282,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "Y1DA1PX",
       "version": "51CBH6AENAY",
@@ -3575,8 +3575,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1PX",
       "version": "5YNBE6AQKAV",
@@ -3604,7 +3604,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1PX",
       "version": "5YNBF6AQKAV",
@@ -3617,8 +3617,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Y1DA1PX",
       "version": "5YNBF6AQKAV",
@@ -3702,7 +3702,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "Y1DA1PX",
       "version": "5YNBH6AQKBV",
@@ -3939,8 +3939,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAE6AZGA4",
@@ -3954,7 +3954,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAE6AZGB4",
@@ -3982,7 +3982,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAF6AQJA4",
@@ -3996,7 +3996,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAF6AQJB4",
@@ -4010,7 +4010,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAF6AQJC4",
@@ -4122,7 +4122,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAH6AQJB4",
@@ -4163,8 +4163,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAH6AZGB4",
@@ -4178,7 +4178,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAH6AZGC4",
@@ -4192,7 +4192,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAM6AEMA4",
@@ -4262,7 +4262,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "53BAU6AZGB4",
@@ -4317,8 +4317,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "5DHAE6AQIA2",
@@ -4332,7 +4332,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "5DHAE6AQIB2",
@@ -4346,7 +4346,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "5DHAE6AQIC2",
@@ -4430,7 +4430,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "5DHAF6AQIC2",
@@ -4542,7 +4542,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "5DHAH6AQIB2",
@@ -4570,7 +4570,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "5DHAH6AZAA2",
@@ -4583,8 +4583,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "5DHAH6AZAB2",
@@ -4626,7 +4626,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "5DHAM6AELB2",
@@ -4654,7 +4654,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1NX",
       "version": "5DHAT6AZAB2",
@@ -4723,8 +4723,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAE6AQJA6",
@@ -4766,7 +4766,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAE6AZGA6",
@@ -4780,7 +4780,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAE6AZGB6",
@@ -4794,7 +4794,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAE6AZGC6",
@@ -4807,7 +4807,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
@@ -4836,7 +4836,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAF6AQJC6",
@@ -4878,7 +4878,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAF6AZGC6",
@@ -4892,7 +4892,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAH6AEMA6",
@@ -4934,7 +4934,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAH6AQJA6",
@@ -4961,7 +4961,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
@@ -4976,7 +4976,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAH6AZGA6",
@@ -4990,7 +4990,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAH6AZGB6",
@@ -5046,7 +5046,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "53BAM6AEMC6",
@@ -5186,7 +5186,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "5DHAE6AQIC5",
@@ -5255,8 +5255,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "5DHAF6AQIB5",
@@ -5269,8 +5269,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "5DHAF6AQIC5",
@@ -5298,7 +5298,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "5DHAF6AZAB5",
@@ -5312,7 +5312,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "5DHAF6AZAC5",
@@ -5340,7 +5340,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "5DHAH6AELB5",
@@ -5368,7 +5368,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "5DHAH6AQIA5",
@@ -5381,8 +5381,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "5DHAH6AQIB5",
@@ -5396,7 +5396,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "5DHAH6AQIC5",
@@ -5438,7 +5438,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "5DHAH6AZAC5",
@@ -5521,8 +5521,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YLDA1PX",
       "version": "5DHAU6AZAB5",
@@ -5690,7 +5690,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBE6AQGAR",
@@ -5731,8 +5731,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBE6AQGBR",
@@ -5746,7 +5746,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBE6AQGCR",
@@ -5759,8 +5759,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBE6AQGCR",
@@ -5774,7 +5774,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBF6AQGAR",
@@ -5802,7 +5802,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBF6AQGBR",
@@ -5843,8 +5843,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBF6AQGCR",
@@ -5928,7 +5928,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBH6AQGAR",
@@ -5984,7 +5984,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBH6AQGCR",
@@ -6012,7 +6012,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBM6ABXAR",
@@ -6068,7 +6068,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBM6ABXCR",
@@ -6236,7 +6236,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "51CBZ6ABXCR",
@@ -6277,8 +6277,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "5YMBE6AQHAP",
@@ -6333,8 +6333,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "5YMBE6AQHCP",
@@ -6348,7 +6348,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "5YMBF6AQHAP",
@@ -6361,8 +6361,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "5YMBF6AQHAP",
@@ -6403,8 +6403,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "5YMBF6AQHBP",
@@ -6431,8 +6431,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "5YMBF6AQHCP",
@@ -6488,7 +6488,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "5YMBH6ACPCP",
@@ -6530,7 +6530,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "5YMBH6AQHAP",
@@ -6558,7 +6558,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "5YMBH6AQHBP",
@@ -6571,8 +6571,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "5YMBH6AQHBP",
@@ -6600,7 +6600,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "5YMBH6AQHCP",
@@ -6684,7 +6684,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1NX",
       "version": "5YMBM6ACPCP",
@@ -6796,7 +6796,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "51CBE6AQGAY",
@@ -6824,7 +6824,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "51CBE6AQGBY",
@@ -6865,8 +6865,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "51CBE6AQGCY",
@@ -6880,7 +6880,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "51CBF6AQGAY",
@@ -6964,7 +6964,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "51CBH6ABXAY",
@@ -7020,7 +7020,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "51CBH6ABXCY",
@@ -7090,7 +7090,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "51CBH6AQGBY",
@@ -7103,8 +7103,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "51CBH6AQGBY",
@@ -7174,7 +7174,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "51CBM6ABXBY",
@@ -7230,7 +7230,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "51CBS6AQGBY",
@@ -7314,7 +7314,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "51CBZ6ABXAY",
@@ -7398,7 +7398,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "5YMBE6AQHAV",
@@ -7411,8 +7411,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "5YMBE6AQHAV",
@@ -7467,8 +7467,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "5YMBE6AQHCV",
@@ -7482,7 +7482,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "5YMBF6AQHAV",
@@ -7495,8 +7495,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "5YMBF6AQHAV",
@@ -7510,7 +7510,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "5YMBF6AQHBV",
@@ -7538,7 +7538,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "5YMBF6AQHCV",
@@ -7677,8 +7677,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "5YMBH6AQHBV",
@@ -7720,7 +7720,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "YZDA1PX",
       "version": "5YMBM6ACPAV",
@@ -7888,7 +7888,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "Z2DA1MX",
       "version": "5ZGAH6AQMBE",
@@ -7916,7 +7916,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Z2DA1NX",
       "version": "5ZEAZ6ACCBQ",
@@ -8056,7 +8056,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "Z2DA1PX",
       "version": "5ZEAZ6ACCBW",
@@ -8098,7 +8098,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "Z2DA1PX",
       "version": "5ZGAH6AQMBW",
@@ -8210,7 +8210,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1MX",
       "version": "52DAS6AY9BH",
@@ -8308,7 +8308,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1MX",
       "version": "5ZGAU6AY8BE",
@@ -8350,7 +8350,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAE6AQABS",
@@ -8364,7 +8364,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAE6AQACS",
@@ -8378,7 +8378,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAE6AY9AS",
@@ -8391,8 +8391,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAE6AY9BS",
@@ -8406,7 +8406,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAE6AY9CS",
@@ -8434,7 +8434,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAF6AQABS",
@@ -8448,7 +8448,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAF6AQACS",
@@ -8476,7 +8476,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAF6AY9BS",
@@ -8490,7 +8490,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAF6AY9CS",
@@ -8546,7 +8546,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAH6AQABS",
@@ -8587,8 +8587,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAH6AY9BS",
@@ -8602,7 +8602,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAH6AY9CS",
@@ -8685,8 +8685,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAU6AY9BS",
@@ -8700,7 +8700,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAZ6ACAAS",
@@ -8714,7 +8714,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "52DAZ6ACABS",
@@ -8755,7 +8755,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
@@ -8798,7 +8798,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "5ZGAE6AY8BQ",
@@ -8826,7 +8826,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "5ZGAF6AP9AQ",
@@ -8840,7 +8840,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "5ZGAF6AP9BQ",
@@ -8854,7 +8854,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "5ZGAF6AP9CQ",
@@ -8938,7 +8938,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "5ZGAH6AP9BQ",
@@ -8965,7 +8965,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
@@ -8979,8 +8979,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "5ZGAH6AY8AQ",
@@ -8993,8 +8993,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "5ZGAH6AY8BQ",
@@ -9008,7 +9008,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "5ZGAH6AY8CQ",
@@ -9063,8 +9063,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "5ZGAS6AY8BQ",
@@ -9077,8 +9077,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "5ZGAT6AY8BQ",
@@ -9106,7 +9106,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1NX",
       "version": "5ZGAZ6ACBAQ",
@@ -9148,7 +9148,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAE6AQAAZ",
@@ -9162,7 +9162,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAE6AQABZ",
@@ -9176,7 +9176,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAE6AQACZ",
@@ -9232,7 +9232,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAF6AQAAZ",
@@ -9246,7 +9246,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAF6AQABZ",
@@ -9260,7 +9260,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAF6AQACZ",
@@ -9274,7 +9274,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAF6AY9AZ",
@@ -9288,7 +9288,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAF6AY9BZ",
@@ -9330,7 +9330,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAH6ACACZ",
@@ -9372,7 +9372,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAH6AQACZ",
@@ -9386,7 +9386,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAH6AY9AZ",
@@ -9399,8 +9399,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAH6AY9BZ",
@@ -9413,8 +9413,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAH6AY9CZ",
@@ -9483,8 +9483,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAT6AY9BZ",
@@ -9498,7 +9498,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAU6AY9BZ",
@@ -9512,7 +9512,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAZ6ACABZ",
@@ -9526,7 +9526,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "52DAZ6ACACZ",
@@ -9539,8 +9539,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAE6AP9AW",
@@ -9554,7 +9554,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAE6AP9BW",
@@ -9610,7 +9610,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAE6AY8CW",
@@ -9637,8 +9637,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAF6AP9BW",
@@ -9680,7 +9680,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAF6AY8AW",
@@ -9693,7 +9693,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
@@ -9707,8 +9707,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAF6AY8CW",
@@ -9792,7 +9792,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAH6AP9AW",
@@ -9834,7 +9834,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAH6AY8AW",
@@ -9847,8 +9847,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAH6AY8BW",
@@ -9861,8 +9861,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAH6AY8CW",
@@ -9960,7 +9960,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAS6AY8BW",
@@ -9974,7 +9974,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAT6AY8BW",
@@ -9988,7 +9988,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAU6AY8BW",
@@ -10030,7 +10030,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAZ6ACBBW",
@@ -10044,7 +10044,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "ZTDA1PX",
       "version": "5ZGAZ6ACBCW",
@@ -29126,7 +29126,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "GALAXY",
+      "commercialName": "Galaxy",
       "type": "WA6",
       "variant": "BCCC1KX",
       "version": "5KEAANADZF3",
@@ -29237,8 +29237,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "GALAXY",
+      "make": "Ford",
+      "commercialName": "Galaxy",
       "type": "WA6",
       "variant": "BCCC1KX",
       "version": "7KEAANADZF3",
@@ -29321,8 +29321,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Galaxy",
+      "make": "FORD",
+      "commercialName": "GALAXY",
       "type": "WA6",
       "variant": "BCCC1KX",
       "version": "7KEAANAZMF3",
@@ -29336,7 +29336,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Galaxy",
+      "commercialName": "GALAXY",
       "type": "WA6",
       "variant": "BCCC1KX",
       "version": "7KEABNAZMF3",
@@ -29378,7 +29378,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "GALAXY",
+      "commercialName": "Galaxy",
       "type": "WA6",
       "variant": "BCCC1KX",
       "version": "7KEAZNADZF3",
@@ -29420,7 +29420,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "GALAXY",
+      "commercialName": "Galaxy",
       "type": "WA6",
       "variant": "BCCC4KX",
       "version": "5NEAANAD1F8",
@@ -29489,8 +29489,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "GALAXY",
+      "make": "Ford",
+      "commercialName": "Galaxy",
       "type": "WA6",
       "variant": "BCCC4KX",
       "version": "7NEAANAD1F8",
@@ -29616,7 +29616,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "GALAXY",
+      "commercialName": "Galaxy",
       "type": "WA6",
       "variant": "BCCC4KX",
       "version": "7NEAZNAD1F8",
@@ -29756,7 +29756,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Galaxy",
+      "commercialName": "GALAXY",
       "type": "WA6",
       "variant": "YLCB1KX",
       "version": "7MDAANAD2F4",
@@ -29896,7 +29896,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Galaxy",
+      "commercialName": "GALAXY",
       "type": "WA6",
       "variant": "YMCB1KX",
       "version": "5CBAANADVFT",
@@ -30106,7 +30106,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "GALAXY",
+      "commercialName": "Galaxy",
       "type": "WA6",
       "variant": "YMCB1KX",
       "version": "7CBAANAZLFT",
@@ -30134,7 +30134,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "GALAXY",
+      "commercialName": "Galaxy",
       "type": "WA6",
       "variant": "YMCB1KX",
       "version": "7CBABNAZLFT",
@@ -30162,7 +30162,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Galaxy",
+      "commercialName": "GALAXY",
       "type": "WA6",
       "variant": "YMCB1KX",
       "version": "7CBAZNADVFT",
@@ -30316,7 +30316,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Galaxy",
+      "commercialName": "GALAXY",
       "type": "WA6",
       "variant": "YMCB1KX",
       "version": "7KEAZNADXF3",
@@ -34684,7 +34684,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DFK",
       "variant": "BGDA1HX",
       "version": "566DA6AP6AF",
@@ -34740,7 +34740,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DFK",
       "variant": "BGDA1HX",
       "version": "566DB6AP6AF",
@@ -34782,7 +34782,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DFK",
       "variant": "BGDA1HX",
       "version": "566DC6AP6AF",
@@ -35131,8 +35131,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Kuga",
+      "make": "FORD",
+      "commercialName": "KUGA",
       "type": "DFK",
       "variant": "YLDC1FX",
       "version": "577CJ6A1JAD",
@@ -35145,7 +35145,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "Kuga",
       "type": "DFK",
       "variant": "YLDC1FX",
@@ -35201,8 +35201,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Kuga",
+      "make": "FORD",
+      "commercialName": "KUGA",
       "type": "DFK",
       "variant": "YLDC1FX",
       "version": "577CL6A1JAD",
@@ -35216,7 +35216,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DFK",
       "variant": "YLDC1FX",
       "version": "577CL6AP1AD",
@@ -35243,7 +35243,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "Kuga",
       "type": "DFK",
       "variant": "YLDC1FX",
@@ -35286,7 +35286,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Kuga",
+      "commercialName": "KUGA",
       "type": "DFK",
       "variant": "YMDA4FX",
       "version": "531AE6APZAE",
@@ -35342,7 +35342,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Kuga",
+      "commercialName": "KUGA",
       "type": "DFK",
       "variant": "YMDA4FX",
       "version": "531AJ6A1IAE",
@@ -35468,7 +35468,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DFK",
       "variant": "YMDA4FX",
       "version": "531AL6APZAE",
@@ -35510,7 +35510,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DFK",
       "variant": "YMDA4FX",
       "version": "531AM6APZAE",
@@ -35705,8 +35705,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "KUGA",
+      "make": "Ford",
+      "commercialName": "Kuga",
       "type": "DFK",
       "variant": "YZDA1FX",
       "version": "555BK6AP4AA",
@@ -35972,7 +35972,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DFK",
       "variant": "ZTDA1FX",
       "version": "522AJ6AP3AC",
@@ -36000,7 +36000,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Kuga",
+      "commercialName": "KUGA",
       "type": "DFK",
       "variant": "ZTDA1FX",
       "version": "522AK6AP3AC",
@@ -36028,7 +36028,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DFK",
       "variant": "ZTDA1FX",
       "version": "522AL6A1LAC",
@@ -36042,7 +36042,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DFK",
       "variant": "ZTDA1FX",
       "version": "522AL6AP3AC",
@@ -36070,7 +36070,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DFK",
       "variant": "ZTDA1FX",
       "version": "522AM6AP3AC",
@@ -36126,7 +36126,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DFK",
       "variant": "ZTDA1FX",
       "version": "522AU6A1LAC",
@@ -36140,7 +36140,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DFK",
       "variant": "ZTDA1FX",
       "version": "522AV6A1LAC",
@@ -36210,7 +36210,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Kuga",
+      "commercialName": "KUGA",
       "type": "DFK",
       "variant": "ZTDA1FX",
       "version": "544AK6AP2AB",
@@ -36224,7 +36224,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DFK",
       "variant": "ZTDA1FX",
       "version": "544AL6A1KAB",
@@ -36406,7 +36406,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DM2",
       "variant": "M8MD1AX",
       "version": "5JGBZ6AEP1C",
@@ -36574,7 +36574,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Kuga",
+      "commercialName": "KUGA",
       "type": "DM2",
       "variant": "T7MD1AX",
       "version": "5NNAZ6AHM1E",
@@ -36630,7 +36630,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "KUGA",
+      "commercialName": "Kuga",
       "type": "DM2",
       "variant": "T7MD4AX",
       "version": "5VUAZ6AHP1D",
@@ -36699,8 +36699,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Kuga",
+      "make": "FORD",
+      "commercialName": "KUGA",
       "type": "DM2",
       "variant": "T8MC4AX",
       "version": "5VUAZ6AHR1D",
@@ -41586,7 +41586,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "MONDEO",
+      "commercialName": "Mondeo",
       "type": "BA7",
       "variant": "T7CP1EX",
       "version": "5CEAZNAAVTQ",
@@ -41614,7 +41614,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mondeo",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "T7CP1EX",
       "version": "5EJAZNAAXTR",
@@ -41642,7 +41642,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "MONDEO",
+      "commercialName": "Mondeo",
       "type": "BA7",
       "variant": "T7CP1FX",
       "version": "5CEAZNAAVTY",
@@ -41739,8 +41739,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Mondeo",
+      "make": "FORD",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "T8CP1EX",
       "version": "5EJAZNAANTR",
@@ -41782,7 +41782,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mondeo",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "T8CP1FX",
       "version": "5EJAZNAANTY",
@@ -41824,7 +41824,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mondeo",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "T8CP4FX",
       "version": "5FJAZNAAKTY",
@@ -41852,7 +41852,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mondeo",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "UNCN1EX",
       "version": "5AGBZNAAPTF",
@@ -41880,7 +41880,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mondeo",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "UNCN1EX",
       "version": "5GBBZNAARTJ",
@@ -41908,7 +41908,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mondeo",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "UNCN1FX",
       "version": "5AGBZNAAPBQ",
@@ -41978,7 +41978,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mondeo",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "YLCC1DX",
       "version": "5CEAANAEWBS",
@@ -42075,8 +42075,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Mondeo",
+      "make": "FORD",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "YLCC1EX",
       "version": "5CEAANAEWBV",
@@ -42958,7 +42958,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "MONDEO",
+      "commercialName": "Mondeo",
       "type": "BA7",
       "variant": "YLCC1EX",
       "version": "5SLAANAEXBY",
@@ -43728,7 +43728,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mondeo",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "YLCC1EX",
       "version": "5SLAZNAEXBY",
@@ -43825,7 +43825,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "Mondeo",
       "type": "BA7",
       "variant": "YLCC1FX",
@@ -44232,7 +44232,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mondeo",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "YLCC1FX",
       "version": "5CEAZNAEWBY",
@@ -44483,7 +44483,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "Mondeo",
       "type": "BA7",
       "variant": "YLCC1FX",
@@ -44651,7 +44651,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Mondeo",
       "type": "BA7",
       "variant": "YLCC1FX",
@@ -44763,7 +44763,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Mondeo",
       "type": "BA7",
       "variant": "YMCC1EX",
@@ -44792,7 +44792,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mondeo",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "YMCC1EX",
       "version": "5SLAANAZSBW",
@@ -44833,7 +44833,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Mondeo",
       "type": "BA7",
       "variant": "YMCC1EX",
@@ -45380,7 +45380,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "MONDEO",
+      "commercialName": "Mondeo",
       "type": "BA7",
       "variant": "YMCC1FX",
       "version": "5SLACNAZSBY",
@@ -45436,7 +45436,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mondeo",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "YMCC1FX",
       "version": "5SLAZNAE1BY",
@@ -45562,7 +45562,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "MONDEO",
+      "commercialName": "Mondeo",
       "type": "BA7",
       "variant": "YMCC4EX",
       "version": "5TMACNAE2BY",
@@ -45730,7 +45730,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mondeo",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "YMCC4EX",
       "version": "5TMAZNAE2BY",
@@ -45758,7 +45758,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mondeo",
+      "commercialName": "MONDEO",
       "type": "BA7",
       "variant": "YMCC4FX",
       "version": "5TMAANAE2BX",
@@ -45828,7 +45828,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "MONDEO",
+      "commercialName": "Mondeo",
       "type": "BA7",
       "variant": "YMCC4FX",
       "version": "5TMACNAZTBX",
@@ -45926,7 +45926,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "MONDEO",
+      "commercialName": "Mondeo",
       "type": "BA7H",
       "variant": "UACC1DZ",
       "version": "5LKBZNAE7TP",
@@ -46051,7 +46051,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "Mondeo",
       "type": "BA7H",
       "variant": "UACC1FZ",
@@ -46527,8 +46527,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "MONDEO HYBRID",
+      "make": "Ford",
+      "commercialName": "Mondeo Hybrid",
       "type": "BA7H",
       "variant": "UACC1DZ",
       "version": "5LKBZNAE7TP",
@@ -46611,8 +46611,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "MONDEO HYBRID",
+      "make": "Ford",
+      "commercialName": "Mondeo Hybrid",
       "type": "BA7H",
       "variant": "UACC1FZ",
       "version": "5LKBKNAE7TQ",
@@ -46639,8 +46639,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "MONDEO HYBRID",
+      "make": "Ford",
+      "commercialName": "Mondeo Hybrid",
       "type": "BA7H",
       "variant": "UACC1FZ",
       "version": "5LKBZNAE7TQ",
@@ -50014,7 +50014,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mustang",
+      "commercialName": "MUSTANG",
       "type": "LAE",
       "variant": "MF8F2AX",
       "version": "4HEBZNAAJCC",
@@ -50308,7 +50308,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mustang",
+      "commercialName": "MUSTANG",
       "type": "LAE",
       "variant": "MF8F2BX",
       "version": "4EEBZNARBCB",
@@ -50812,7 +50812,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Mustang",
+      "commercialName": "MUSTANG",
       "type": "LAE",
       "variant": "WU802AX",
       "version": "4HEBZNAD3CC",
@@ -52155,8 +52155,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "PUMA",
+      "make": "Ford",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "B7JA12X",
       "version": "5CFPLNAPGAC",
@@ -52198,7 +52198,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "PUMA",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "B7JA12X",
       "version": "5CFPPNAPGAC",
@@ -52211,8 +52211,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "PUMA",
+      "make": "Ford",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "B7JA12X",
       "version": "5CFPPNAPGAC",
@@ -52239,8 +52239,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "PUMA",
+      "make": "Ford",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "B7JA12X",
       "version": "5CFPPNAPGAD",
@@ -52324,7 +52324,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "PUMA",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "B7JA12X",
       "version": "5GTPLNAXLAP",
@@ -52365,8 +52365,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Puma",
+      "make": "FORD",
+      "commercialName": "PUMA",
       "type": "J2K",
       "variant": "B7JA12X",
       "version": "5GTPPNAXLAM",
@@ -52394,7 +52394,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Puma",
+      "commercialName": "PUMA",
       "type": "J2K",
       "variant": "B7JA12X",
       "version": "5GTPPNAXLAP",
@@ -52407,8 +52407,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Puma",
+      "make": "FORD",
+      "commercialName": "PUMA",
       "type": "J2K",
       "variant": "B7JA12X",
       "version": "5GTPPNAXLAP",
@@ -52450,7 +52450,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "PUMA",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "B7JB12X",
       "version": "5CFPTNAPHAC",
@@ -52478,7 +52478,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Puma",
+      "commercialName": "PUMA",
       "type": "J2K",
       "variant": "B7JB12X",
       "version": "5CFPTNAPHAD",
@@ -52492,7 +52492,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Puma",
+      "commercialName": "PUMA",
       "type": "J2K",
       "variant": "B7JB12X",
       "version": "5CFPTNAPHAD",
@@ -52561,8 +52561,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "PUMA",
+      "make": "Ford",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "B7JB12X",
       "version": "5CFPTNAXMAC",
@@ -52632,7 +52632,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "PUMA",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "B7JB12X",
       "version": "5CFPTNAXMAD",
@@ -52645,8 +52645,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "PUMA",
+      "make": "Ford",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "B7JB12X",
       "version": "5CFPTNAXMAD",
@@ -52674,7 +52674,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "PUMA",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "B7JB12X",
       "version": "5CFPVNAPHAC",
@@ -52688,7 +52688,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Puma",
+      "commercialName": "PUMA",
       "type": "J2K",
       "variant": "B7JB12X",
       "version": "5CFPVNAPHAC",
@@ -52716,7 +52716,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Puma",
+      "commercialName": "PUMA",
       "type": "J2K",
       "variant": "B7JB12X",
       "version": "5CFPVNAPHAD",
@@ -52729,8 +52729,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "PUMA",
+      "make": "Ford",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "B7JB12X",
       "version": "5CFPVNAPHAD",
@@ -52771,8 +52771,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "PUMA",
+      "make": "Ford",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "B7JB12X",
       "version": "5CFPVNAXMAC",
@@ -52800,7 +52800,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "PUMA",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "B7JB12X",
       "version": "5CFPVNAXMAD",
@@ -52842,7 +52842,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Puma",
+      "commercialName": "PUMA",
       "type": "J2K",
       "variant": "BZJA12X",
       "version": "5CAPTNAPIAC",
@@ -52869,7 +52869,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "Puma",
       "type": "J2K",
       "variant": "BZJA12X",
@@ -52884,7 +52884,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "PUMA",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "BZJA12X",
       "version": "5CAPTNAPIBC",
@@ -52967,8 +52967,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Puma",
+      "make": "FORD",
+      "commercialName": "PUMA",
       "type": "J2K",
       "variant": "BZJA12X",
       "version": "5CAPVNAPIAC",
@@ -52996,7 +52996,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Puma",
+      "commercialName": "PUMA",
       "type": "J2K",
       "variant": "BZJA12X",
       "version": "5CAPVNAPIAD",
@@ -53304,7 +53304,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Puma",
+      "commercialName": "PUMA",
       "type": "J2K",
       "variant": "YZJA12X",
       "version": "5FDPLNAZ1DM",
@@ -53388,7 +53388,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "PUMA",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "ZTJE12X",
       "version": "5EBDLNAQ5AT",
@@ -53430,7 +53430,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "PUMA",
+      "commercialName": "Puma",
       "type": "J2K",
       "variant": "ZTJE12X",
       "version": "5EBDPNAQ5AT",
@@ -56789,7 +56789,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "S-MAX",
       "type": "WA6",
       "variant": "BCCC1JX",
@@ -56915,7 +56915,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "S-MAX",
       "type": "WA6",
       "variant": "BCCC1JX",
@@ -57349,7 +57349,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "S-MAX",
       "type": "WA6",
       "variant": "BCCC1JX",
@@ -57741,7 +57741,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "S-MAX",
       "type": "WA6",
       "variant": "BCCC4JX",
@@ -57783,7 +57783,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "S-MAX",
       "type": "WA6",
       "variant": "BCCC4JX",
@@ -59099,7 +59099,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "S-MAX",
       "type": "WA6",
       "variant": "YMCB1JX",
@@ -59323,7 +59323,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "S-MAX",
       "type": "WA6",
       "variant": "YMCB1JX",
@@ -59407,7 +59407,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "S-MAX",
       "type": "WA6",
       "variant": "YMCB1JX",
@@ -59449,7 +59449,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "S-MAX",
       "type": "WA6",
       "variant": "YMCB1JX",
@@ -59687,7 +59687,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "S-MAX",
       "type": "WA6",
       "variant": "YMCB1JX",
@@ -60611,7 +60611,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "S-MAX",
       "type": "WA6",
       "variant": "YMCB1JX",
@@ -60919,7 +60919,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "S-MAX",
       "type": "WA6",
       "variant": "YMCB1JX",

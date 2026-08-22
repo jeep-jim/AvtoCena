@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 21,
   "rows": [
     {
@@ -21468,7 +21468,7 @@
     {
       "year": 2020,
       "make": "VOLKSWAGEN VW",
-      "commercialName": "GOLF",
+      "commercialName": "Golf",
       "type": "CD",
       "variant": "ACDFYAX0",
       "version": "FD7FD7CW002N4BFOML1BVR2A0B",
@@ -33004,7 +33004,7 @@
     {
       "year": 2020,
       "make": "VOLKSWAGEN VW",
-      "commercialName": "POLO",
+      "commercialName": "Polo",
       "type": "AW",
       "variant": "ABDKLA",
       "version": "FD7FD7CW001N2VR24BF1BA0",
@@ -43560,7 +43560,7 @@
     {
       "year": 2020,
       "make": "VOLKSWAGEN VW",
-      "commercialName": "TIGUAN",
+      "commercialName": "Tiguan",
       "type": "5N",
       "variant": "ACDPBEX0",
       "version": "FM6FM62Q036N5N2TVR24BF1ASA",
@@ -60206,7 +60206,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "S60 T6 Twin Engine",
+      "commercialName": "S60 T6 TWIN ENGINE",
       "type": "Z",
       "variant": "ZSBF",
       "version": "ZSBFUD0?",
@@ -60374,7 +60374,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "S60 T8 Twin Engine",
+      "commercialName": "S60 T8 TWIN ENGINE",
       "type": "Z",
       "variant": "ZSBM",
       "version": "ZSBMVD0",
@@ -60388,7 +60388,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "S60 T8 TWIN ENGINE",
+      "commercialName": "S60 T8 Twin Engine",
       "type": "Z",
       "variant": "ZSBM",
       "version": "ZSBMVD0?",
@@ -60430,7 +60430,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "S60 T8 Twin Engine",
+      "commercialName": "S60 T8 TWIN ENGINE",
       "type": "Z",
       "variant": "ZSBT",
       "version": "ZSBTTD0",
@@ -62180,7 +62180,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "S90 T8 TWIN ENGINE",
+      "commercialName": "S90 T8 Twin Engine",
       "type": "P",
       "variant": "PSBM",
       "version": "PSBMTD0",
@@ -62194,7 +62194,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "S90 T8 Twin Engine",
+      "commercialName": "S90 T8 TWIN ENGINE",
       "type": "P",
       "variant": "PSBM",
       "version": "PSBMTD0?",
@@ -62628,7 +62628,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V40 Cross Country",
+      "commercialName": "V40 CROSS COUNTRY",
       "type": "M",
       "variant": "MZ32",
       "version": "MZ32V0??",
@@ -62684,7 +62684,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V40 CROSS COUNTRY",
+      "commercialName": "V40 Cross Country",
       "type": "M",
       "variant": "MZ70",
       "version": "MZ70V0??",
@@ -62698,7 +62698,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V40 CROSS COUNTRY",
+      "commercialName": "V40 Cross Country",
       "type": "M",
       "variant": "MZ70",
       "version": "MZ70V1??",
@@ -62740,7 +62740,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V40 CROSS COUNTRY",
+      "commercialName": "V40 Cross Country",
       "type": "M",
       "variant": "MZ72",
       "version": "MZ72T1??",
@@ -62768,7 +62768,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V40 Cross Country",
+      "commercialName": "V40 CROSS COUNTRY",
       "type": "M",
       "variant": "MZ72",
       "version": "MZ72V1??",
@@ -65722,7 +65722,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 CROSS COUNTRY",
+      "commercialName": "V60 Cross Country",
       "type": "Z",
       "variant": "ZZ25",
       "version": "ZZ25TC0",
@@ -65750,7 +65750,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 Cross Country",
+      "commercialName": "V60 CROSS COUNTRY",
       "type": "Z",
       "variant": "ZZ25",
       "version": "ZZ25TCP",
@@ -65778,7 +65778,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 CROSS COUNTRY",
+      "commercialName": "V60 Cross Country",
       "type": "Z",
       "variant": "ZZ25",
       "version": "ZZ25VC0",
@@ -65792,7 +65792,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 CROSS COUNTRY",
+      "commercialName": "V60 Cross Country",
       "type": "Z",
       "variant": "ZZ25",
       "version": "ZZ25VC0?",
@@ -65862,7 +65862,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 Cross Country",
+      "commercialName": "V60 CROSS COUNTRY",
       "type": "Z",
       "variant": "ZZA8",
       "version": "ZZA8TC0",
@@ -65904,7 +65904,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 Cross Country",
+      "commercialName": "V60 CROSS COUNTRY",
       "type": "Z",
       "variant": "ZZA8",
       "version": "ZZA8TC0?",
@@ -65932,7 +65932,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 CROSS COUNTRY",
+      "commercialName": "V60 Cross Country",
       "type": "Z",
       "variant": "ZZA8",
       "version": "ZZA8TCP",
@@ -66002,7 +66002,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 CROSS COUNTRY",
+      "commercialName": "V60 Cross Country",
       "type": "Z",
       "variant": "ZZA8",
       "version": "ZZA8VC0?",
@@ -66016,7 +66016,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 CROSS COUNTRY",
+      "commercialName": "V60 Cross Country",
       "type": "Z",
       "variant": "ZZA8",
       "version": "ZZA8VC0?",
@@ -66044,7 +66044,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 CROSS COUNTRY",
+      "commercialName": "V60 Cross Country",
       "type": "Z",
       "variant": "ZZA8",
       "version": "ZZA8VCP?",
@@ -66128,7 +66128,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 Cross Country",
+      "commercialName": "V60 CROSS COUNTRY",
       "type": "Z",
       "variant": "ZZK5",
       "version": "ZZK5VC0",
@@ -67612,7 +67612,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 T6 TWIN ENGINE",
+      "commercialName": "V60 T6 Twin Engine",
       "type": "Z",
       "variant": "ZWBF",
       "version": "ZWBFUD0",
@@ -67668,7 +67668,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 T6 Twin Engine",
+      "commercialName": "V60 T6 TWIN ENGINE",
       "type": "Z",
       "variant": "ZWBF",
       "version": "ZWBFVD0",
@@ -67682,7 +67682,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 T6 Twin Engine",
+      "commercialName": "V60 T6 TWIN ENGINE",
       "type": "Z",
       "variant": "ZWBF",
       "version": "ZWBFVD0?",
@@ -67822,7 +67822,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 T8 Twin Engine",
+      "commercialName": "V60 T8 TWIN ENGINE",
       "type": "Z",
       "variant": "ZWBM",
       "version": "ZWBMUD0",
@@ -67850,7 +67850,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 T8 Twin Engine",
+      "commercialName": "V60 T8 TWIN ENGINE",
       "type": "Z",
       "variant": "ZWBM",
       "version": "ZWBMUD0?",
@@ -67920,7 +67920,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 T8 TWIN ENGINE",
+      "commercialName": "V60 T8 Twin Engine",
       "type": "Z",
       "variant": "ZWBM",
       "version": "ZWBMVDP",
@@ -67934,7 +67934,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 T8 TWIN ENGINE",
+      "commercialName": "V60 T8 Twin Engine",
       "type": "Z",
       "variant": "ZWBM",
       "version": "ZWBMVDP?",
@@ -67948,7 +67948,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 T8 Twin Engine",
+      "commercialName": "V60 T8 TWIN ENGINE",
       "type": "Z",
       "variant": "ZWBT",
       "version": "ZWBTTD0",
@@ -67962,7 +67962,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V60 T8 Twin Engine",
+      "commercialName": "V60 T8 TWIN ENGINE",
       "type": "Z",
       "variant": "ZWBT",
       "version": "ZWBTTD0?",

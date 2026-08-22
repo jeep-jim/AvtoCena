@@ -1,0 +1,3406 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model_western",
+  "chunk": 3,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "buick:envision",
+      "make": "Buick",
+      "model": "Envision",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "buick:envisionawd",
+      "make": "Buick",
+      "model": "Envision AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "buick:envista",
+      "make": "Buick",
+      "model": "Envista",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "buick:regal",
+      "make": "Buick",
+      "model": "Regal",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "buick:regalawd",
+      "make": "Buick",
+      "model": "Regal AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "byd:e6",
+      "make": "BYD",
+      "model": "e6",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "cadillac:celestiq",
+      "make": "Cadillac",
+      "model": "CELESTIQ",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:ct4",
+      "make": "Cadillac",
+      "model": "CT4",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:ct4awd",
+      "make": "Cadillac",
+      "model": "CT4 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:ct4v",
+      "make": "Cadillac",
+      "model": "CT4-V",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:ct4vawd",
+      "make": "Cadillac",
+      "model": "CT4-V AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:ct4vblackwing",
+      "make": "Cadillac",
+      "model": "CT4-V Blackwing",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "cadillac:ct5",
+      "make": "Cadillac",
+      "model": "CT5",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:ct5awd",
+      "make": "Cadillac",
+      "model": "CT5 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:ct5v",
+      "make": "Cadillac",
+      "model": "CT5-V",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:ct5vawd",
+      "make": "Cadillac",
+      "model": "CT5-V AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:ct5vblackwing",
+      "make": "Cadillac",
+      "model": "CT5-V Blackwing",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "cadillac:ct6",
+      "make": "Cadillac",
+      "model": "CT6",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "cadillac:ct6awd",
+      "make": "Cadillac",
+      "model": "CT6 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "cadillac:escalade",
+      "make": "Cadillac",
+      "model": "Escalade",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:escalade4wd",
+      "make": "Cadillac",
+      "model": "Escalade 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:escalade4wdnostopstart",
+      "make": "Cadillac",
+      "model": "Escalade 4WD (No Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "cadillac:escalade4wdwithoutstopstart",
+      "make": "Cadillac",
+      "model": "Escalade 4WD (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "cadillac:escaladevawd",
+      "make": "Cadillac",
+      "model": "Escalade-V AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:lyriq",
+      "make": "Cadillac",
+      "model": "LYRIQ",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2027
+    },
+    {
+      "key": "cadillac:lyriq115kwcharger",
+      "make": "Cadillac",
+      "model": "LYRIQ (11.5 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:lyriq192kwcharger",
+      "make": "Cadillac",
+      "model": "LYRIQ (19.2 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:lyriqawd",
+      "make": "Cadillac",
+      "model": "LYRIQ AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "cadillac:lyriqawd115kwcharger",
+      "make": "Cadillac",
+      "model": "LYRIQ AWD (11.5 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:lyriqawd192kwcharger",
+      "make": "Cadillac",
+      "model": "LYRIQ AWD (19.2 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:lyriqv115kwcharger",
+      "make": "Cadillac",
+      "model": "LYRIQ-V (11.5 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:lyriqv192kwcharger",
+      "make": "Cadillac",
+      "model": "LYRIQ-V (19.2 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:optiq",
+      "make": "Cadillac",
+      "model": "OPTIQ",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2027
+    },
+    {
+      "key": "cadillac:optiq115kwcharger",
+      "make": "Cadillac",
+      "model": "OPTIQ (11.5 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:optiq192kwcharger",
+      "make": "Cadillac",
+      "model": "OPTIQ (19.2 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:optiqawd115kwcharger",
+      "make": "Cadillac",
+      "model": "OPTIQ AWD (11.5 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:optiqawd192kwcharger",
+      "make": "Cadillac",
+      "model": "OPTIQ AWD (19.2 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:optiqv115kwcharger",
+      "make": "Cadillac",
+      "model": "OPTIQ-V (11.5 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:optiqv192kwcharger",
+      "make": "Cadillac",
+      "model": "OPTIQ-V (19.2 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:vistiq",
+      "make": "Cadillac",
+      "model": "VISTIQ",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2027
+    },
+    {
+      "key": "cadillac:vistiq115kwcharger",
+      "make": "Cadillac",
+      "model": "VISTIQ (11.5 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:vistiq192kwcharger",
+      "make": "Cadillac",
+      "model": "VISTIQ (19.2 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:xt4",
+      "make": "Cadillac",
+      "model": "XT4",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "cadillac:xt4awd",
+      "make": "Cadillac",
+      "model": "XT4 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "cadillac:xt5",
+      "make": "Cadillac",
+      "model": "XT5",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:xt5awd",
+      "make": "Cadillac",
+      "model": "XT5 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "cadillac:xt6",
+      "make": "Cadillac",
+      "model": "XT6",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "cadillac:xt6awd",
+      "make": "Cadillac",
+      "model": "XT6 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "chevrolet:blazer",
+      "make": "Chevrolet",
+      "model": "Blazer",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "chevrolet:blazerawd",
+      "make": "Chevrolet",
+      "model": "Blazer AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:blazerev",
+      "make": "Chevrolet",
+      "model": "Blazer EV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:blazerev22wheels",
+      "make": "Chevrolet",
+      "model": "Blazer EV (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:blazerev2ltrsawd",
+      "make": "Chevrolet",
+      "model": "Blazer EV 2LT/RS AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:blazerevltrsawd",
+      "make": "Chevrolet",
+      "model": "Blazer EV LT/RS AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:blazerevrs",
+      "make": "Chevrolet",
+      "model": "Blazer EV RS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:blazerevrwd",
+      "make": "Chevrolet",
+      "model": "Blazer EV RWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "chevrolet:blazerevssawd",
+      "make": "Chevrolet",
+      "model": "Blazer EV SS AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:bolt",
+      "make": "Chevrolet",
+      "model": "BOLT",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2027,
+      "yearTo": 2027
+    },
+    {
+      "key": "chevrolet:bolteuv",
+      "make": "Chevrolet",
+      "model": "Bolt EUV",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2023
+    },
+    {
+      "key": "chevrolet:boltev",
+      "make": "Chevrolet",
+      "model": "Bolt EV",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "chevrolet:camaro",
+      "make": "Chevrolet",
+      "model": "Camaro",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:camaross",
+      "make": "Chevrolet",
+      "model": "Camaro SS",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:camarozl1",
+      "make": "Chevrolet",
+      "model": "Camaro ZL1",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:colorado",
+      "make": "Chevrolet",
+      "model": "Colorado",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:coloradoturboplus",
+      "make": "Chevrolet",
+      "model": "Colorado (Turbo Plus)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:colorado4wd",
+      "make": "Chevrolet",
+      "model": "Colorado 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:colorado4wdturboplus",
+      "make": "Chevrolet",
+      "model": "Colorado 4WD (Turbo Plus)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:colorado4wdmudterraintire",
+      "make": "Chevrolet",
+      "model": "Colorado 4WD Mud Terrain Tire",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:colorado4wdmudterraintireturboplus",
+      "make": "Chevrolet",
+      "model": "Colorado 4WD Mud Terrain Tire (Turbo Plus)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:coloradozr24wd",
+      "make": "Chevrolet",
+      "model": "Colorado ZR2 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:coloradozr24wdturboplus",
+      "make": "Chevrolet",
+      "model": "Colorado ZR2 4WD (Turbo Plus)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:coloradozr2bison4wd",
+      "make": "Chevrolet",
+      "model": "Colorado ZR2 Bison 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:coloradozr2bison4wdturboplus",
+      "make": "Chevrolet",
+      "model": "Colorado ZR2 Bison 4WD (Turbo Plus)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:corvette",
+      "make": "Chevrolet",
+      "model": "Corvette",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "chevrolet:corvetteeray",
+      "make": "Chevrolet",
+      "model": "Corvette E-Ray",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:corvettez06",
+      "make": "Chevrolet",
+      "model": "Corvette Z06",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:corvettez06carbonaero",
+      "make": "Chevrolet",
+      "model": "Corvette Z06 Carbon Aero",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:corvettezr1",
+      "make": "Chevrolet",
+      "model": "Corvette ZR1",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:corvettezr1x",
+      "make": "Chevrolet",
+      "model": "Corvette ZR1X",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:equinox",
+      "make": "Chevrolet",
+      "model": "Equinox",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "chevrolet:equinoxawd",
+      "make": "Chevrolet",
+      "model": "Equinox AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:equinoxev",
+      "make": "Chevrolet",
+      "model": "Equinox EV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:equinoxevawd",
+      "make": "Chevrolet",
+      "model": "Equinox EV AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:equinoxevawd115kwcharger",
+      "make": "Chevrolet",
+      "model": "Equinox EV AWD (11.5 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:equinoxevawd192kwcharger",
+      "make": "Chevrolet",
+      "model": "Equinox EV AWD (19.2 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:impala",
+      "make": "Chevrolet",
+      "model": "Impala",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "chevrolet:malibu",
+      "make": "Chevrolet",
+      "model": "Malibu",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2025
+    },
+    {
+      "key": "chevrolet:silverado",
+      "make": "Chevrolet",
+      "model": "Silverado",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:silveradowithsportmode",
+      "make": "Chevrolet",
+      "model": "Silverado (With Sport Mode)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:silveradowithoutafm",
+      "make": "Chevrolet",
+      "model": "Silverado (Without AFM)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:silveradowithoutdfm",
+      "make": "Chevrolet",
+      "model": "Silverado (Without DFM)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:silverado4wd",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:silverado4wdnodfm",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD (No DFM)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "chevrolet:silverado4wdnostopstart",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD (No Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "chevrolet:silverado4wdwithsportmode",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD (With Sport Mode)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "chevrolet:silverado4wdwithoutafm",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD (Without AFM)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:silverado4wdwithoutdfm",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD (Without DFM)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:silverado4wdwithoutstopstart",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:silverado4wdcustomtrailboss",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD Custom Trail Boss",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "chevrolet:silverado4wdcustomwt",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD Custom/WT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:silverado4wdffv",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:silverado4wdlttrailboss",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD LT Trail Boss",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "chevrolet:silverado4wdmudterraintire",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD Mud Terrain Tire",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:silverado4wdmudterraintirenodfm",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD Mud Terrain Tire (No DFM)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "chevrolet:silverado4wdmudterraintirenostopstart",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD Mud Terrain Tire (No Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "chevrolet:silverado4wdmudterraintirewithsportmode",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD Mud Terrain Tire (With Sport Mode)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:silverado4wdmudterraintireffv",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD Mud Terrain Tire FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:silverado4wdtrailboss",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD Trail Boss",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:silverado4wdtrailbosswithoutafm",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD Trail Boss (Without AFM)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:silverado4wdtrailbosswithoutstopstart",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD Trail Boss (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:silverado4wdzr2",
+      "make": "Chevrolet",
+      "model": "Silverado 4WD ZR2",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:silveradocustomwt",
+      "make": "Chevrolet",
+      "model": "Silverado Custom/WT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:silveradoev3wt",
+      "make": "Chevrolet",
+      "model": "Silverado EV 3WT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:silveradoev4wt",
+      "make": "Chevrolet",
+      "model": "Silverado EV 4WT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:silveradoevltextrange115kwcharger",
+      "make": "Chevrolet",
+      "model": "Silverado EV LT Ext Range (11.5 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:silveradoevltextrange192kwcharger",
+      "make": "Chevrolet",
+      "model": "Silverado EV LT Ext Range (19.2 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:silveradoevltstdrange",
+      "make": "Chevrolet",
+      "model": "Silverado EV LT Std Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:silveradoevltrstextrange192kwcharger",
+      "make": "Chevrolet",
+      "model": "Silverado EV LT/RST Ext Range (19.2 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "chevrolet:silveradoevtrailbossextrange115kw",
+      "make": "Chevrolet",
+      "model": "Silverado EV Trail Boss Ext Range (11.5 kW)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:silveradoevwtextrange",
+      "make": "Chevrolet",
+      "model": "Silverado EV WT Ext Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:silveradoevwtextrange115kwcharger",
+      "make": "Chevrolet",
+      "model": "Silverado EV WT Ext Range (11.5 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "chevrolet:silveradoevwtextrange192kwcharger",
+      "make": "Chevrolet",
+      "model": "Silverado EV WT Ext Range (19.2 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "chevrolet:silveradoevwtmaxrange",
+      "make": "Chevrolet",
+      "model": "Silverado EV WT Max Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:silveradoevwtmaxrange192kwcharger",
+      "make": "Chevrolet",
+      "model": "Silverado EV WT Max Range (19.2 kW Charger)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "chevrolet:silveradoevwtstdrange",
+      "make": "Chevrolet",
+      "model": "Silverado EV WT Std Range",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:silveradoffv",
+      "make": "Chevrolet",
+      "model": "Silverado FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:silveradowt",
+      "make": "Chevrolet",
+      "model": "Silverado WT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "chevrolet:silveradowt4wd",
+      "make": "Chevrolet",
+      "model": "Silverado WT 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "chevrolet:sonic",
+      "make": "Chevrolet",
+      "model": "Sonic",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "chevrolet:spark",
+      "make": "Chevrolet",
+      "model": "Spark",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "chevrolet:suburban",
+      "make": "Chevrolet",
+      "model": "Suburban",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:suburbannostopstart",
+      "make": "Chevrolet",
+      "model": "Suburban (No Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "chevrolet:suburbanwithoutstopstart",
+      "make": "Chevrolet",
+      "model": "Suburban (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:suburban4wd",
+      "make": "Chevrolet",
+      "model": "Suburban 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:suburban4wdnostopstart",
+      "make": "Chevrolet",
+      "model": "Suburban 4WD (No Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "chevrolet:suburban4wdwithoutstopstart",
+      "make": "Chevrolet",
+      "model": "Suburban 4WD (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:suburban4wdffv",
+      "make": "Chevrolet",
+      "model": "Suburban 4WD FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "chevrolet:suburbanffv",
+      "make": "Chevrolet",
+      "model": "Suburban FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "chevrolet:tahoe",
+      "make": "Chevrolet",
+      "model": "Tahoe",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:tahoenostopstart",
+      "make": "Chevrolet",
+      "model": "Tahoe (No Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "chevrolet:tahoewithoutstopstart",
+      "make": "Chevrolet",
+      "model": "Tahoe (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:tahoe4wd",
+      "make": "Chevrolet",
+      "model": "Tahoe 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:tahoe4wdnostopstart",
+      "make": "Chevrolet",
+      "model": "Tahoe 4WD (No Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2022
+    },
+    {
+      "key": "chevrolet:tahoe4wdwithoutstopstart",
+      "make": "Chevrolet",
+      "model": "Tahoe 4WD (Without Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:tahoe4wdffv",
+      "make": "Chevrolet",
+      "model": "Tahoe 4WD FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "chevrolet:tahoeffv",
+      "make": "Chevrolet",
+      "model": "Tahoe FFV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "chevrolet:trailblazer",
+      "make": "Chevrolet",
+      "model": "Trailblazer",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:trailblazerawd",
+      "make": "Chevrolet",
+      "model": "Trailblazer AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:traverse",
+      "make": "Chevrolet",
+      "model": "Traverse",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "chevrolet:traverseawd",
+      "make": "Chevrolet",
+      "model": "Traverse AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:traverselimitedawd",
+      "make": "Chevrolet",
+      "model": "Traverse Limited AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "chevrolet:trax",
+      "make": "Chevrolet",
+      "model": "Trax",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chevrolet:traxsidi",
+      "make": "Chevrolet",
+      "model": "Trax (SIDI)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:trax4wd",
+      "make": "Chevrolet",
+      "model": "Trax 4WD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:trax4wdsidi",
+      "make": "Chevrolet",
+      "model": "Trax 4WD (SIDI)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "chevrolet:traxawd",
+      "make": "Chevrolet",
+      "model": "Trax AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2022
+    },
+    {
+      "key": "chrysler:300",
+      "make": "Chrysler",
+      "model": "300",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "chrysler:300awd",
+      "make": "Chrysler",
+      "model": "300 AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "chrysler:300c",
+      "make": "Chrysler",
+      "model": "300C",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "chrysler:grandcaravan",
+      "make": "Chrysler",
+      "model": "Grand Caravan",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "chrysler:pacifica",
+      "make": "Chrysler",
+      "model": "Pacifica",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "chrysler:pacificastopstart",
+      "make": "Chrysler",
+      "model": "Pacifica (Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "chrysler:pacificaawd",
+      "make": "Chrysler",
+      "model": "Pacifica AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "chrysler:pacificaawdstopstart",
+      "make": "Chrysler",
+      "model": "Pacifica AWD (Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "chrysler:pacificahybrid",
+      "make": "Chrysler",
+      "model": "Pacifica Hybrid",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chrysler:voyager",
+      "make": "Chrysler",
+      "model": "Voyager",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "chrysler:voyagerstopstart",
+      "make": "Chrysler",
+      "model": "Voyager (Stop-Start)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "dodge:challenger",
+      "make": "Dodge",
+      "model": "Challenger",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "dodge:challengermds",
+      "make": "Dodge",
+      "model": "Challenger (MDS)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "dodge:challengerawd",
+      "make": "Dodge",
+      "model": "Challenger AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "dodge:challengersrtdemon170",
+      "make": "Dodge",
+      "model": "Challenger SRT Demon 170",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "dodge:challengersrthellcat",
+      "make": "Dodge",
+      "model": "Challenger SRT Hellcat",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "dodge:challengersrthellcatwidebody",
+      "make": "Dodge",
+      "model": "Challenger SRT Hellcat Widebody",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "dodge:challengerwidebody",
+      "make": "Dodge",
+      "model": "Challenger Widebody",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "dodge:challengerwidebodymds",
+      "make": "Dodge",
+      "model": "Challenger Widebody (MDS)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "dodge:charger",
+      "make": "Dodge",
+      "model": "Charger",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "dodge:chargermds",
+      "make": "Dodge",
+      "model": "Charger (MDS)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "dodge:chargerawd",
+      "make": "Dodge",
+      "model": "Charger AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "dodge:chargerdaytonartawd24555zr18",
+      "make": "Dodge",
+      "model": "Charger Daytona R/T AWD 245/55ZR18",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "dodge:chargerdaytonartawd25545r20",
+      "make": "Dodge",
+      "model": "Charger Daytona R/T AWD 255/45R20",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "dodge:chargerdaytonartawd27540r20",
+      "make": "Dodge",
+      "model": "Charger Daytona R/T AWD 275/40R20",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "dodge:chargerdaytonartawd2dr18nexentire",
+      "make": "Dodge",
+      "model": "Charger Daytona R/T AWD 2Dr (18\" Nexen Tire)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "dodge:chargerdaytonartawd2dr20goodyeartire",
+      "make": "Dodge",
+      "model": "Charger Daytona R/T AWD 2Dr (20\" Goodyear Tire)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "dodge:chargerdaytonartawd2dr20nexentire",
+      "make": "Dodge",
+      "model": "Charger Daytona R/T AWD 2Dr (20\" Nexen Tire)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "dodge:chargerdaytonartawd30535zr20",
+      "make": "Dodge",
+      "model": "Charger Daytona R/T AWD 305/35ZR20",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "dodge:chargerdaytonascatpackawd30535zr20",
+      "make": "Dodge",
+      "model": "Charger Daytona Scat Pack AWD 305/35ZR20",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "dodge:chargerdaytonascatpackawd32535zr20rear",
+      "make": "Dodge",
+      "model": "Charger Daytona Scat Pack AWD 325/35ZR20 Rear",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "dodge:chargerdaytonascatpackawd32535zr20rear3s",
+      "make": "Dodge",
+      "model": "Charger Daytona Scat Pack AWD 325/35ZR20 Rear 3S",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "dodge:chargerdaytonascatpacktrkpackawd2dr3stire",
+      "make": "Dodge",
+      "model": "Charger Daytona Scat Pack Trk Pack AWD 2Dr 3S Tire",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "dodge:chargerdaytonascatpacktrkpackawd2drastire",
+      "make": "Dodge",
+      "model": "Charger Daytona Scat Pack Trk Pack AWD 2Dr AS Tire",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "dodge:chargerrt",
+      "make": "Dodge",
+      "model": "Charger R/T",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "dodge:chargerscatpack",
+      "make": "Dodge",
+      "model": "Charger Scat Pack",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "dodge:chargersrthellcatwidebody",
+      "make": "Dodge",
+      "model": "Charger SRT Hellcat Widebody",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "dodge:chargerwidebodymds",
+      "make": "Dodge",
+      "model": "Charger Widebody (MDS)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "dodge:durango",
+      "make": "Dodge",
+      "model": "Durango",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2027
+    },
+    {
+      "key": "dodge:durangoawd",
+      "make": "Dodge",
+      "model": "Durango AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2026
+    },
+    {
+      "key": "dodge:durangoawdsrt",
+      "make": "Dodge",
+      "model": "Durango AWD SRT",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2024
+    },
+    {
+      "key": "dodge:durangoawdsrthellcat",
+      "make": "Dodge",
+      "model": "Durango AWD SRT Hellcat",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "dodge:grandcaravan",
+      "make": "Dodge",
+      "model": "Grand Caravan",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "dodge:hornet",
+      "make": "Dodge",
+      "model": "Hornet",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "dodge:hornetawd",
+      "make": "Dodge",
+      "model": "Hornet AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "dodge:hornetrtphev",
+      "make": "Dodge",
+      "model": "Hornet R/T PHEV",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "dodge:journey",
+      "make": "Dodge",
+      "model": "Journey",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ferrari:12cilindri",
+      "make": "Ferrari",
+      "model": "12Cilindri",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "ferrari:12cilindrispider",
+      "make": "Ferrari",
+      "model": "12Cilindri Spider",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2026
+    },
+    {
+      "key": "ferrari:296gtb",
+      "make": "Ferrari",
+      "model": "296 GTB",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2026
+    },
+    {
+      "key": "ferrari:296gtbspider",
+      "make": "Ferrari",
+      "model": "296 GTB Spider",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "ferrari:296gts",
+      "make": "Ferrari",
+      "model": "296 GTS",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "ferrari:296speciale",
+      "make": "Ferrari",
+      "model": "296 Speciale",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "ferrari:296specialea",
+      "make": "Ferrari",
+      "model": "296 Speciale A",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "ferrari:488pista",
+      "make": "Ferrari",
+      "model": "488 Pista",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ferrari:488pistaspider",
+      "make": "Ferrari",
+      "model": "488 Pista Spider",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ferrari:812competizione",
+      "make": "Ferrari",
+      "model": "812 Competizione",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "ferrari:812competizionea",
+      "make": "Ferrari",
+      "model": "812 Competizione A",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "ferrari:812gts",
+      "make": "Ferrari",
+      "model": "812 GTS",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "ferrari:812superfast",
+      "make": "Ferrari",
+      "model": "812 Superfast",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2021
+    },
+    {
+      "key": "ferrari:849testarossa",
+      "make": "Ferrari",
+      "model": "849 Testarossa",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "ferrari:daytonasp3",
+      "make": "Ferrari",
+      "model": "Daytona SP3",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2025
+    },
+    {
+      "key": "ferrari:f167aba",
+      "make": "Ferrari",
+      "model": "F167 ABA",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "ferrari:f175aha",
+      "make": "Ferrari",
+      "model": "F175 AHA",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "ferrari:f8spider",
+      "make": "Ferrari",
+      "model": "F8 Spider",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2023
+    },
+    {
+      "key": "ferrari:f8tributo",
+      "make": "Ferrari",
+      "model": "F8 Tributo",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "ferrari:f80",
+      "make": "Ferrari",
+      "model": "F80",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2026,
+      "yearTo": 2026
+    },
+    {
+      "key": "ferrari:gtc4lusso",
+      "make": "Ferrari",
+      "model": "GTC4Lusso",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "ferrari:monzasp1",
+      "make": "Ferrari",
+      "model": "Monza SP1",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "ferrari:monzasp2",
+      "make": "Ferrari",
+      "model": "Monza SP2",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "ferrari:portofino",
+      "make": "Ferrari",
+      "model": "Portofino",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "ferrari:portofinom",
+      "make": "Ferrari",
+      "model": "Portofino M",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": null,
+      "yearTo": null
+    },
+    {
+      "key": "ferrari:purosangue",
+      "make": "Ferrari",
+      "model": "Purosangue",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "ferrari:roma",
+      "make": "Ferrari",
+      "model": "Roma",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2026
+    },
+    {
+      "key": "ferrari:romaspider",
+      "make": "Ferrari",
+      "model": "Roma Spider",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "ferrari:sf90",
+      "make": "Ferrari",
+      "model": "SF90",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2025,
+      "yearTo": 2025
+    },
+    {
+      "key": "ferrari:sf90spider",
+      "make": "Ferrari",
+      "model": "SF90 Spider",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2025
+    },
+    {
+      "key": "ferrari:sf90stradale",
+      "make": "Ferrari",
+      "model": "SF90 Stradale",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan"
+      ],
+      "yearFrom": 2022,
+      "yearTo": 2024
+    },
+    {
+      "key": "ferrari:sf90stradalecoupe",
+      "make": "Ferrari",
+      "model": "SF90 Stradale Coupe",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy"
+      ],
+      "yearFrom": 2021,
+      "yearTo": 2021
+    },
+    {
+      "key": "ferrari:sf90xxspider",
+      "make": "Ferrari",
+      "model": "SF90 XX Spider",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "ferrari:sf90xxstradale",
+      "make": "Ferrari",
+      "model": "SF90 XX Stradale",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2025
+    },
+    {
+      "key": "fiat:124spider",
+      "make": "Fiat",
+      "model": "124 Spider",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "fiat:500",
+      "make": "Fiat",
+      "model": "500",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "fiat:500e",
+      "make": "Fiat",
+      "model": "500e",
+      "markets": [
+        "us",
+        "canada"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2026
+    },
+    {
+      "key": "fiat:500l",
+      "make": "FIAT",
+      "model": "500L",
+      "markets": [
+        "canada",
+        "us"
+      ],
+      "sources": [
+        "canada-nrcan",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2020
+    },
+    {
+      "key": "fiat:500xawd",
+      "make": "FIAT",
+      "model": "500X AWD",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2020,
+      "yearTo": 2023
+    },
+    {
+      "key": "fisker:ocean",
+      "make": "Fisker",
+      "model": "Ocean",
+      "markets": [
+        "us"
+      ],
+      "sources": [
+        "us-epa-fueleconomy",
+        "us-nhtsa-vpic"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2024
+    },
+    {
+      "key": "fisker:oceanextreme20wheels",
+      "make": "Fisker",
+      "model": "Ocean Extreme (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "fisker:oceanextreme22wheels",
+      "make": "Fisker",
+      "model": "Ocean Extreme (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "fisker:oceanextremeone",
+      "make": "Fisker",
+      "model": "Ocean Extreme/One",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "fisker:oceansport20wheels",
+      "make": "Fisker",
+      "model": "Ocean Sport (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "fisker:oceansport22wheels",
+      "make": "Fisker",
+      "model": "Ocean Sport (22\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    },
+    {
+      "key": "fisker:oceanultra",
+      "make": "Fisker",
+      "model": "Ocean Ultra",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2023,
+      "yearTo": 2023
+    },
+    {
+      "key": "fisker:oceanultra20wheels",
+      "make": "Fisker",
+      "model": "Ocean Ultra (20\" Wheels)",
+      "markets": [
+        "canada"
+      ],
+      "sources": [
+        "canada-nrcan"
+      ],
+      "yearFrom": 2024,
+      "yearTo": 2024
+    }
+  ]
+}

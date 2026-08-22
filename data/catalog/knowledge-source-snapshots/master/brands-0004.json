@@ -1,0 +1,64 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_master_brand",
+  "chunk": 4,
+  "maxRecords": 250,
+  "records": [
+    {
+      "sourceKey": "黄海",
+      "canonicalName": "黄海",
+      "observedNames": [
+        "黄海"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 8
+    },
+    {
+      "sourceKey": "齐鲁中亚牌",
+      "canonicalName": "齐鲁中亚牌",
+      "observedNames": [
+        "齐鲁中亚牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 1
+    },
+    {
+      "sourceKey": "龙程汽车",
+      "canonicalName": "龙程汽车",
+      "observedNames": [
+        "龙程汽车"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "autohome-china"
+      ],
+      "modelCount": 2
+    },
+    {
+      "sourceKey": "龙衍牌",
+      "canonicalName": "龙衍牌",
+      "observedNames": [
+        "龙衍牌"
+      ],
+      "markets": [
+        "china"
+      ],
+      "sources": [
+        "miit-road-vehicle-products"
+      ],
+      "modelCount": 13
+    }
+  ]
+}

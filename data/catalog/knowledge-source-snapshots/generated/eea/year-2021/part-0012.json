@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2021Fv24",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2021Fv24] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 12,
   "rows": [
     {
@@ -9512,7 +9512,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "Rifter",
+      "commercialName": "RIFTER",
       "type": "E",
       "variant": "C",
       "version": "YHT2-A2C310",
@@ -9540,7 +9540,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "Rifter",
+      "commercialName": "RIFTER",
       "type": "E",
       "variant": "C",
       "version": "YHT2-A2P310",
@@ -9554,7 +9554,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "Rifter",
+      "commercialName": "RIFTER",
       "type": "E",
       "variant": "C",
       "version": "YHT2-B2C310",
@@ -9610,7 +9610,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "Rifter",
+      "commercialName": "RIFTER",
       "type": "E",
       "variant": "C",
       "version": "YHT2-C2P310",
@@ -9638,7 +9638,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "Rifter",
+      "commercialName": "RIFTER",
       "type": "E",
       "variant": "C",
       "version": "YHT2-D2C310",
@@ -9694,7 +9694,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "RIFTER",
+      "commercialName": "Rifter",
       "type": "E",
       "variant": "C",
       "version": "YHYC-A2P010",
@@ -9764,7 +9764,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "RIFTER",
+      "commercialName": "Rifter",
       "type": "E",
       "variant": "C",
       "version": "YHYC-D2P010",
@@ -9848,7 +9848,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "Rifter",
+      "commercialName": "RIFTER",
       "type": "E",
       "variant": "C",
       "version": "YHZ2-B2C310",
@@ -9918,7 +9918,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "RIFTER",
+      "commercialName": "Rifter",
       "type": "E",
       "variant": "C",
       "version": "YHZ2-C2P310",
@@ -10016,7 +10016,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "Rifter",
+      "commercialName": "RIFTER",
       "type": "E",
       "variant": "C",
       "version": "YHZJ-A2P010",
@@ -10072,7 +10072,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "Rifter",
+      "commercialName": "RIFTER",
       "type": "E",
       "variant": "C",
       "version": "YHZJ-C2P010",
@@ -10100,7 +10100,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "Rifter",
+      "commercialName": "RIFTER",
       "type": "E",
       "variant": "C",
       "version": "YHZJ-D2P010",
@@ -10114,7 +10114,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "Rifter",
+      "commercialName": "RIFTER",
       "type": "E",
       "variant": "C",
       "version": "YHZR-A2F010",
@@ -10562,7 +10562,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "RIFTER",
+      "commercialName": "Rifter",
       "type": "E",
       "variant": "R",
       "version": "HNP2-D14210",
@@ -10646,7 +10646,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "Rifter",
+      "commercialName": "RIFTER",
       "type": "E",
       "variant": "R",
       "version": "HNS3-B14410",
@@ -10674,7 +10674,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "RIFTER",
+      "commercialName": "Rifter",
       "type": "E",
       "variant": "R",
       "version": "HNS3-C14410",
@@ -11066,7 +11066,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "RIFTER TRIPOD",
+      "commercialName": "Rifter Tripod",
       "type": "E",
       "variant": "C",
       "version": "YHT2-A2C310",
@@ -12914,7 +12914,7 @@
     {
       "year": 2021,
       "make": "POLESTAR",
-      "commercialName": "POLESTAR 1",
+      "commercialName": "Polestar 1",
       "type": "P",
       "variant": "PKBD",
       "version": "PKBDTD0",
@@ -13208,7 +13208,7 @@
     {
       "year": 2021,
       "make": "POLESTAR",
-      "commercialName": "POLESTAR 2",
+      "commercialName": "Polestar 2",
       "type": "V",
       "variant": "VSED",
       "version": "VSEDEE0?",
@@ -13670,7 +13670,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "718 BOXSTER",
+      "commercialName": "718 Boxster",
       "type": "982",
       "variant": "KA12",
       "version": "42",
@@ -13725,8 +13725,8 @@
     },
     {
       "year": 2021,
-      "make": "Porsche",
-      "commercialName": "718 Boxster",
+      "make": "PORSCHE",
+      "commercialName": "718 BOXSTER",
       "type": "982",
       "variant": "KA12",
       "version": "92",
@@ -13837,8 +13837,8 @@
     },
     {
       "year": 2021,
-      "make": "Porsche",
-      "commercialName": "718 Boxster GTS",
+      "make": "PORSCHE",
+      "commercialName": "718 BOXSTER GTS",
       "type": "982",
       "variant": "KD11",
       "version": "32",
@@ -13880,7 +13880,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "718 BOXSTER GTS",
+      "commercialName": "718 Boxster GTS",
       "type": "982",
       "variant": "KD12",
       "version": "42",
@@ -13950,7 +13950,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "718 Boxster S",
+      "commercialName": "718 BOXSTER S",
       "type": "982",
       "variant": "KB11",
       "version": "51",
@@ -13978,7 +13978,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "718 BOXSTER S",
+      "commercialName": "718 Boxster S",
       "type": "982",
       "variant": "KB12",
       "version": "41",
@@ -13992,7 +13992,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "718 Boxster S",
+      "commercialName": "718 BOXSTER S",
       "type": "982",
       "variant": "KB12",
       "version": "51",
@@ -14047,7 +14047,7 @@
     },
     {
       "year": 2021,
-      "make": "Porsche",
+      "make": "PORSCHE",
       "commercialName": "718 Boxster Spyder",
       "type": "982",
       "variant": "KG11",
@@ -14103,7 +14103,7 @@
     },
     {
       "year": 2021,
-      "make": "Porsche",
+      "make": "PORSCHE",
       "commercialName": "718 Boxster Spyder",
       "type": "982",
       "variant": "KG11",
@@ -14202,7 +14202,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "718 BOXSTER T",
+      "commercialName": "718 Boxster T",
       "type": "982",
       "variant": "KA11",
       "version": "82",
@@ -14370,7 +14370,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "718 CAYMAN",
+      "commercialName": "718 Cayman",
       "type": "982",
       "variant": "CA11",
       "version": "92",
@@ -14384,7 +14384,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "718 CAYMAN",
+      "commercialName": "718 Cayman",
       "type": "982",
       "variant": "CA12",
       "version": "42",
@@ -14580,7 +14580,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "718 CAYMAN GT4",
+      "commercialName": "718 Cayman GT4",
       "type": "982",
       "variant": "CG12",
       "version": "42",
@@ -14762,7 +14762,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "718 Cayman S",
+      "commercialName": "718 CAYMAN S",
       "type": "982",
       "variant": "CB11",
       "version": "51",
@@ -14818,7 +14818,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "718 Cayman T",
+      "commercialName": "718 CAYMAN T",
       "type": "982",
       "variant": "CA11",
       "version": "72",
@@ -14860,7 +14860,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "718 CAYMAN T",
+      "commercialName": "718 Cayman T",
       "type": "982",
       "variant": "CA12",
       "version": "82",
@@ -15196,7 +15196,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "911 CARRERA",
+      "commercialName": "911 Carrera",
       "type": "992",
       "variant": "CA12",
       "version": "3410000",
@@ -15210,7 +15210,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "911 Carrera",
+      "commercialName": "911 CARRERA",
       "type": "992",
       "variant": "KA12",
       "version": "2410000",
@@ -15224,7 +15224,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "911 Carrera",
+      "commercialName": "911 CARRERA",
       "type": "992",
       "variant": "KA12",
       "version": "3410000",
@@ -15364,7 +15364,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "911 CARRERA 4",
+      "commercialName": "911 Carrera 4",
       "type": "992",
       "variant": "CA22",
       "version": "3410000",
@@ -15392,7 +15392,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "911 Carrera 4",
+      "commercialName": "911 CARRERA 4",
       "type": "992",
       "variant": "KA22",
       "version": "3410000",
@@ -15672,7 +15672,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "911 Carrera 4S",
+      "commercialName": "911 CARRERA 4S",
       "type": "992",
       "variant": "CB22",
       "version": "2400000",
@@ -15700,7 +15700,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "911 Carrera 4S",
+      "commercialName": "911 CARRERA 4S",
       "type": "992",
       "variant": "CB22",
       "version": "3410000",
@@ -15742,7 +15742,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "911 Carrera 4S",
+      "commercialName": "911 CARRERA 4S",
       "type": "992",
       "variant": "KB22",
       "version": "2400000",
@@ -15784,7 +15784,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "911 Carrera 4S",
+      "commercialName": "911 CARRERA 4S",
       "type": "992",
       "variant": "KB22",
       "version": "3410000",
@@ -16386,7 +16386,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "911 CARRERA S",
+      "commercialName": "911 Carrera S",
       "type": "992",
       "variant": "KB11",
       "version": "3410000",
@@ -16918,7 +16918,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "911 TARGA 4",
+      "commercialName": "911 Targa 4",
       "type": "992",
       "variant": "TA22",
       "version": "3410000",
@@ -16974,7 +16974,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "911 Targa 4 GTS",
+      "commercialName": "911 TARGA 4 GTS",
       "type": "992",
       "variant": "TC22",
       "version": "3410000",
@@ -17057,8 +17057,8 @@
     },
     {
       "year": 2021,
-      "make": "PORSCHE",
-      "commercialName": "911 TARGA 4S",
+      "make": "Porsche",
+      "commercialName": "911 Targa 4S",
       "type": "992",
       "variant": "TB21",
       "version": "3410000",
@@ -17226,7 +17226,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "911 Turbo",
+      "commercialName": "911 TURBO",
       "type": "992",
       "variant": "CD22",
       "version": "3400000",
@@ -17240,7 +17240,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "911 TURBO",
+      "commercialName": "911 Turbo",
       "type": "992",
       "variant": "KD22",
       "version": "3400000",
@@ -17435,8 +17435,8 @@
     },
     {
       "year": 2021,
-      "make": "Porsche",
-      "commercialName": "911 Turbo S",
+      "make": "PORSCHE",
+      "commercialName": "911 TURBO S",
       "type": "992",
       "variant": "CE22",
       "version": "3400000",
@@ -17477,8 +17477,8 @@
     },
     {
       "year": 2021,
-      "make": "Porsche",
-      "commercialName": "911 Turbo S",
+      "make": "PORSCHE",
+      "commercialName": "911 TURBO S",
       "type": "992",
       "variant": "KE22",
       "version": "3400000",
@@ -18290,7 +18290,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Cayenne",
+      "commercialName": "CAYENNE",
       "type": "9YA",
       "variant": "EA22",
       "version": "2204110",
@@ -18332,7 +18332,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Cayenne",
+      "commercialName": "CAYENNE",
       "type": "9YA",
       "variant": "EA22",
       "version": "2214110",
@@ -18346,7 +18346,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Cayenne",
+      "commercialName": "CAYENNE",
       "type": "9YA",
       "variant": "EA22",
       "version": "2215110",
@@ -18388,7 +18388,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Cayenne",
+      "commercialName": "CAYENNE",
       "type": "9YA",
       "variant": "EA22",
       "version": "2705110",
@@ -18906,7 +18906,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "CAYENNE E-HYBRID",
+      "commercialName": "Cayenne E-Hybrid",
       "type": "9YA",
       "variant": "EF22",
       "version": "1205101",
@@ -19060,7 +19060,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "CAYENNE E-HYBRID",
+      "commercialName": "Cayenne E-Hybrid",
       "type": "9YA",
       "variant": "EF22",
       "version": "1705100",
@@ -19172,7 +19172,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "CAYENNE E-HYBRID",
+      "commercialName": "Cayenne E-Hybrid",
       "type": "9YA",
       "variant": "EF22",
       "version": "2205101",
@@ -19242,7 +19242,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Cayenne E-Hybrid",
+      "commercialName": "CAYENNE E-HYBRID",
       "type": "9YA",
       "variant": "EF22",
       "version": "2214101",
@@ -19284,7 +19284,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Cayenne E-Hybrid",
+      "commercialName": "CAYENNE E-HYBRID",
       "type": "9YA",
       "variant": "EF22",
       "version": "2215101",
@@ -19620,7 +19620,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "CAYENNE GTS",
+      "commercialName": "Cayenne GTS",
       "type": "9YA",
       "variant": "EI22",
       "version": "1205110",
@@ -19634,7 +19634,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "CAYENNE GTS",
+      "commercialName": "Cayenne GTS",
       "type": "9YA",
       "variant": "EI22",
       "version": "1205210",
@@ -19662,7 +19662,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Cayenne GTS",
+      "commercialName": "CAYENNE GTS",
       "type": "9YA",
       "variant": "EI22",
       "version": "1205310",
@@ -19746,7 +19746,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "CAYENNE GTS",
+      "commercialName": "Cayenne GTS",
       "type": "9YA",
       "variant": "EI22",
       "version": "2204310",
@@ -20012,7 +20012,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Cayenne S",
+      "commercialName": "CAYENNE S",
       "type": "9YA",
       "variant": "EB22",
       "version": "1215110",
@@ -20082,7 +20082,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "CAYENNE S",
+      "commercialName": "Cayenne S",
       "type": "9YA",
       "variant": "EB22",
       "version": "2205110",
@@ -20418,7 +20418,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "CAYENNE TURBO GT",
+      "commercialName": "Cayenne Turbo GT",
       "type": "9YA",
       "variant": "EJ22",
       "version": "2204310",
@@ -20628,7 +20628,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "CAYENNE TURBO S E-HYBRID",
+      "commercialName": "Cayenne Turbo S E-Hybrid",
       "type": "9YA",
       "variant": "EH22",
       "version": "2204101",
@@ -20670,7 +20670,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "CAYENNE TURBO S E-HYBRID",
+      "commercialName": "Cayenne Turbo S E-Hybrid",
       "type": "9YA",
       "variant": "EH22",
       "version": "2205101",
@@ -20698,7 +20698,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Cayenne Turbo S E-Hybrid",
+      "commercialName": "CAYENNE TURBO S E-HYBRID",
       "type": "9YA",
       "variant": "EH22",
       "version": "2704100",
@@ -21146,7 +21146,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Macan",
+      "commercialName": "MACAN",
       "type": "95B",
       "variant": "JK22",
       "version": "2100000",
@@ -21188,7 +21188,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "MACAN",
+      "commercialName": "Macan",
       "type": "95B",
       "variant": "JK22",
       "version": "2100001",
@@ -21300,7 +21300,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Macan",
+      "commercialName": "MACAN",
       "type": "95B",
       "variant": "JT22",
       "version": "2500110",
@@ -21622,7 +21622,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "MACAN GTS",
+      "commercialName": "Macan GTS",
       "type": "95B",
       "variant": "JS22",
       "version": "2100001",
@@ -21832,7 +21832,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Macan S",
+      "commercialName": "MACAN S",
       "type": "95B",
       "variant": "JM22",
       "version": "2100001",
@@ -21915,8 +21915,8 @@
     },
     {
       "year": 2021,
-      "make": "PORSCHE",
-      "commercialName": "MACAN S",
+      "make": "Porsche",
+      "commercialName": "Macan S",
       "type": "95B",
       "variant": "JU22",
       "version": "2500110",
@@ -22000,7 +22000,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Macan Turbo",
+      "commercialName": "MACAN TURBO",
       "type": "95B",
       "variant": "JN22",
       "version": "2100000",
@@ -22014,7 +22014,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "MACAN TURBO",
+      "commercialName": "Macan Turbo",
       "type": "95B",
       "variant": "JN22",
       "version": "2100001",
@@ -22308,7 +22308,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Panamera",
+      "commercialName": "PANAMERA",
       "type": "971",
       "variant": "GL12",
       "version": "1501210",
@@ -22574,7 +22574,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Panamera 4",
+      "commercialName": "PANAMERA 4",
       "type": "971",
       "variant": "GL22",
       "version": "1402110",
@@ -22588,7 +22588,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "PANAMERA 4",
+      "commercialName": "Panamera 4",
       "type": "971",
       "variant": "GL22",
       "version": "1501110",
@@ -22742,7 +22742,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "PANAMERA 4",
+      "commercialName": "Panamera 4",
       "type": "971",
       "variant": "HL22",
       "version": "1501110",
@@ -23050,7 +23050,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Panamera 4 E-Hybrid",
+      "commercialName": "PANAMERA 4 E-HYBRID",
       "type": "971",
       "variant": "GM22",
       "version": "1402200",
@@ -23120,7 +23120,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "PANAMERA 4 E-HYBRID",
+      "commercialName": "Panamera 4 E-Hybrid",
       "type": "971",
       "variant": "GM22",
       "version": "1501200",
@@ -23301,8 +23301,8 @@
     },
     {
       "year": 2021,
-      "make": "Porsche",
-      "commercialName": "Panamera 4 E-Hybrid",
+      "make": "PORSCHE",
+      "commercialName": "PANAMERA 4 E-HYBRID",
       "type": "971",
       "variant": "HM22",
       "version": "1501200",
@@ -23526,7 +23526,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "PANAMERA 4S",
+      "commercialName": "Panamera 4S",
       "type": "971",
       "variant": "HB22",
       "version": "1705110",
@@ -23624,7 +23624,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "PANAMERA 4S E-HYBRID",
+      "commercialName": "Panamera 4S E-Hybrid",
       "type": "971",
       "variant": "GP22",
       "version": "1402100",
@@ -23665,8 +23665,8 @@
     },
     {
       "year": 2021,
-      "make": "Porsche",
-      "commercialName": "Panamera 4S E-Hybrid",
+      "make": "PORSCHE",
+      "commercialName": "PANAMERA 4S E-HYBRID",
       "type": "971",
       "variant": "GP22",
       "version": "1501100",
@@ -23974,7 +23974,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "PANAMERA GTS",
+      "commercialName": "Panamera GTS",
       "type": "971",
       "variant": "GR22",
       "version": "1401110",
@@ -23988,7 +23988,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "PANAMERA GTS",
+      "commercialName": "Panamera GTS",
       "type": "971",
       "variant": "GR22",
       "version": "1501110",
@@ -24282,7 +24282,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "PANAMERA TURBO S",
+      "commercialName": "Panamera Turbo S",
       "type": "971",
       "variant": "GS22",
       "version": "1501110",
@@ -24408,7 +24408,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "PANAMERA TURBO S E-HYBRID",
+      "commercialName": "Panamera Turbo S E-Hybrid",
       "type": "971",
       "variant": "GT22",
       "version": "1401100",
@@ -24422,7 +24422,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "PANAMERA TURBO S E-HYBRID",
+      "commercialName": "Panamera Turbo S E-Hybrid",
       "type": "971",
       "variant": "GT22",
       "version": "1402100",
@@ -24450,7 +24450,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "PANAMERA TURBO S E-HYBRID",
+      "commercialName": "Panamera Turbo S E-Hybrid",
       "type": "971",
       "variant": "GT22",
       "version": "1501100",
@@ -24506,7 +24506,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Panamera Turbo S E-Hybrid",
+      "commercialName": "PANAMERA TURBO S E-HYBRID",
       "type": "971",
       "variant": "HT22",
       "version": "1501100",
@@ -24744,7 +24744,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "TAYCAN",
+      "commercialName": "Taycan",
       "type": "Y1A",
       "variant": "JA12",
       "version": "1041000",
@@ -24841,7 +24841,7 @@
     },
     {
       "year": 2021,
-      "make": "PORSCHE",
+      "make": "Porsche",
       "commercialName": "Taycan",
       "type": "Y1A",
       "variant": "JA12",
@@ -25094,7 +25094,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "TAYCAN 4",
+      "commercialName": "Taycan 4",
       "type": "Y1A",
       "variant": "CA22",
       "version": "1051000",
@@ -25430,7 +25430,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "TAYCAN 4S",
+      "commercialName": "Taycan 4S",
       "type": "Y1A",
       "variant": "CB22",
       "version": "1041000",
@@ -25723,8 +25723,8 @@
     },
     {
       "year": 2021,
-      "make": "Porsche",
-      "commercialName": "Taycan 4S",
+      "make": "PORSCHE",
+      "commercialName": "TAYCAN 4S",
       "type": "Y1A",
       "variant": "JB22",
       "version": "1040000",
@@ -25822,7 +25822,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Taycan 4S",
+      "commercialName": "TAYCAN 4S",
       "type": "Y1A",
       "variant": "JB22",
       "version": "1041000",
@@ -25947,8 +25947,8 @@
     },
     {
       "year": 2021,
-      "make": "Porsche",
-      "commercialName": "Taycan 4S",
+      "make": "PORSCHE",
+      "commercialName": "TAYCAN 4S",
       "type": "Y1A",
       "variant": "JB22",
       "version": "1051000",
@@ -26046,7 +26046,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "taycan 4s",
+      "commercialName": "TAYCAN 4S",
       "type": "Y1A",
       "variant": "JB22",
       "version": "1051000",
@@ -26774,7 +26774,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "TAYCAN TURBO",
+      "commercialName": "Taycan Turbo",
       "type": "Y1A",
       "variant": "JC22",
       "version": "1051000",
@@ -26872,7 +26872,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "TAYCAN TURBO S",
+      "commercialName": "Taycan Turbo S",
       "type": "Y1A",
       "variant": "CD22",
       "version": "1041000",
@@ -26998,7 +26998,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Taycan Turbo S",
+      "commercialName": "TAYCAN TURBO S",
       "type": "Y1A",
       "variant": "JD22",
       "version": "1041000",
@@ -27039,7 +27039,7 @@
     },
     {
       "year": 2021,
-      "make": "Porsche",
+      "make": "PORSCHE",
       "commercialName": "Taycan Turbo S",
       "type": "Y1A",
       "variant": "JD22",
@@ -27082,7 +27082,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "TAYCAN TURBO S",
+      "commercialName": "Taycan Turbo S",
       "type": "Y1A",
       "variant": "JD22",
       "version": "1051000",
@@ -27124,7 +27124,7 @@
     {
       "year": 2021,
       "make": "PORSCHE",
-      "commercialName": "Taycan Turbo S",
+      "commercialName": "TAYCAN TURBO S",
       "type": "Y1A",
       "variant": "JD22",
       "version": "1051000",
@@ -28174,10 +28174,10 @@
     {
       "year": 2021,
       "make": "RENAULT",
-      "commercialName": "captur",
+      "commercialName": "CAPTUR",
       "type": "RJB",
-      "variant": "he2",
-      "version": "m66ua1aa5200",
+      "variant": "HE2",
+      "version": "M66UA1AA5200",
       "fuel": "PETROL",
       "engineCc": 999,
       "powerKw": 67,
@@ -29994,7 +29994,7 @@
     {
       "year": 2021,
       "make": "RENAULT",
-      "commercialName": "CLIO",
+      "commercialName": "clio",
       "type": "RJA",
       "variant": "BE2",
       "version": "MG5UA3HA5000",
@@ -45589,7 +45589,7 @@
     },
     {
       "year": 2021,
-      "make": "ROLLS-ROYCE",
+      "make": "Rolls-Royce",
       "commercialName": "Cullinan",
       "type": "RRASF02",
       "variant": "TF21",
@@ -45603,8 +45603,8 @@
     },
     {
       "year": 2021,
-      "make": "ROLLS-ROYCE",
-      "commercialName": "CULLINAN",
+      "make": "Rolls-Royce",
+      "commercialName": "Cullinan",
       "type": "RRASF02",
       "variant": "TF21",
       "version": "IAW50000",
@@ -46583,7 +46583,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "ALHAMBRA",
       "type": "7N",
       "variant": "DJKAX0AF",
@@ -49551,7 +49551,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -49593,7 +49593,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -49607,7 +49607,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -49621,7 +49621,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -49635,7 +49635,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -49663,7 +49663,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -49887,7 +49887,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -49929,7 +49929,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -50167,7 +50167,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -50251,7 +50251,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -50279,7 +50279,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -50335,7 +50335,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -50923,7 +50923,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -51203,7 +51203,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -51623,7 +51623,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -51637,7 +51637,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -51693,7 +51693,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -51889,7 +51889,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -51917,7 +51917,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAA",
@@ -53345,7 +53345,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDLAC",
@@ -54213,7 +54213,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ARONA",
       "type": "KJ",
       "variant": "XDPCA",
@@ -55445,7 +55445,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "ATECA",
       "type": "5FP",
       "variant": "SXDPCAX0",
@@ -55473,7 +55473,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "ATECA",
       "type": "5FP",
       "variant": "SXDPCAX0",
@@ -55767,7 +55767,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ATECA",
       "type": "5FP",
       "variant": "SXDTTAX0",
@@ -56817,7 +56817,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ATECA",
       "type": "5FP",
       "variant": "XDPCAX0",
@@ -56957,7 +56957,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "ATECA",
       "type": "5FP",
       "variant": "XDPCAX0",
@@ -57069,7 +57069,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "ATECA",
       "type": "5FP",
       "variant": "XDPCAX0",
@@ -57265,7 +57265,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "CUPRA ATECA",
       "type": "5FP",
       "variant": "XDNUEX1",
@@ -57377,7 +57377,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "CUPRA LEON",
       "type": "KL",
       "variant": "BDGEAX0",
@@ -57405,7 +57405,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "CUPRA LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDGEAX0",
@@ -59687,7 +59687,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "IBIZA",
       "type": "KJ",
       "variant": "BDLAA",
@@ -59743,7 +59743,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "IBIZA",
       "type": "KJ",
       "variant": "BDLAA",
@@ -59981,8 +59981,8 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
-      "commercialName": "IBIZA",
+      "make": "SEAT",
+      "commercialName": "Ibiza",
       "type": "KJ",
       "variant": "BDLAA",
       "version": "FD7SFD7CW0054BI2A1CAGA8H",
@@ -61157,7 +61157,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "IBIZA",
       "type": "KJ",
       "variant": "BDLAC",
@@ -63929,7 +63929,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDGEAX0",
@@ -63985,7 +63985,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDLAAX0",
@@ -64377,7 +64377,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDLABX0",
@@ -64433,7 +64433,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDLABX0",
@@ -64699,7 +64699,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDPBAX0",
@@ -64783,7 +64783,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDPCAX0",
@@ -64797,7 +64797,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDPCAX0",
@@ -64839,7 +64839,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDPCAX0",
@@ -64853,7 +64853,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDPCAX0",
@@ -64923,7 +64923,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDPCAX0",
@@ -65483,7 +65483,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "SBDFYAX0",
@@ -65567,7 +65567,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "SBDGEAX0",
@@ -66155,7 +66155,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "SBDPCAX0",
@@ -67317,7 +67317,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDLABX0",
@@ -67737,7 +67737,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDPCAX0",
@@ -67779,7 +67779,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDPCAX0",
@@ -68087,7 +68087,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "SFDFYAX0",
@@ -68115,7 +68115,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "SFDFYAX0",
@@ -68144,7 +68144,7 @@
     {
       "year": 2021,
       "make": "SEAT",
-      "commercialName": "Leon Sportstourer",
+      "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "SFDFYAX0",
       "version": "FD7MFD7CW0024BIVL1BBA",
@@ -68185,7 +68185,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "SFDGEAX0",
@@ -68395,7 +68395,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "SFDPBAX0",
@@ -68535,7 +68535,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "SFDPCAX0",
@@ -68577,7 +68577,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "SFDPCAX0",
@@ -69375,7 +69375,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "SEAT ATECA",
       "type": "5FP",
       "variant": "SXDNNAX1",
@@ -69459,7 +69459,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "SEAT ATECA",
       "type": "5FP",
       "variant": "SXDPCAX0",
@@ -69473,7 +69473,7 @@
     },
     {
       "year": 2021,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "SEAT ATECA",
       "type": "5FP",
       "variant": "SXDPCAX0",
@@ -69599,7 +69599,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "SEAT ATECA",
       "type": "5FP",
       "variant": "SXDPCAX0",
@@ -69683,7 +69683,7 @@
     },
     {
       "year": 2021,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "SEAT ATECA",
       "type": "5FP",
       "variant": "SXDPCAX0",

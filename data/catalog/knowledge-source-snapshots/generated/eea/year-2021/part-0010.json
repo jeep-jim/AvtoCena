@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2021Fv24",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2021Fv24] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 10,
   "rows": [
     {
@@ -28104,7 +28104,7 @@
     {
       "year": 2021,
       "make": "MG",
-      "commercialName": "MG EHS PLUG-IN HYBRID",
+      "commercialName": "MG EHS Plug-in Hybrid",
       "type": "AS23P-L",
       "variant": "3PAB1OH",
       "version": "SA5LIH",
@@ -28118,7 +28118,7 @@
     {
       "year": 2021,
       "make": "MG",
-      "commercialName": "MG EHS PLUG-IN HYBRID",
+      "commercialName": "MG EHS Plug-in Hybrid",
       "type": "AS23P-L",
       "variant": "3PAB1OH",
       "version": "SA5LIH",
@@ -28356,7 +28356,7 @@
     {
       "year": 2021,
       "make": "MG",
-      "commercialName": "MG MARVEL R ELECTRIC",
+      "commercialName": "MG Marvel R Electric",
       "type": "EP21",
       "variant": "1EAB3EI",
       "version": "UA5LJE",
@@ -28496,7 +28496,7 @@
     {
       "year": 2021,
       "make": "MG",
-      "commercialName": "MG RX6 Plug-in Hybrid",
+      "commercialName": "MG RX6 PLUG-IN HYBRID",
       "type": "AS23P-L",
       "variant": "3PAB1OH",
       "version": "SA5LIH",
@@ -28510,7 +28510,7 @@
     {
       "year": 2021,
       "make": "MG",
-      "commercialName": "MG RX6 PLUG-IN HYBRID",
+      "commercialName": "MG RX6 Plug-in Hybrid",
       "type": "AS23P-L",
       "variant": "3PAB1OH",
       "version": "SA5LIH",
@@ -30736,7 +30736,7 @@
     {
       "year": 2021,
       "make": "MINI",
-      "commercialName": "Clubman One",
+      "commercialName": "CLUBMAN ONE",
       "type": "FMK",
       "variant": "LV11",
       "version": "DHW500L0",
@@ -31562,7 +31562,7 @@
     {
       "year": 2021,
       "make": "MINI",
-      "commercialName": "COOPER",
+      "commercialName": "Cooper",
       "type": "FML2",
       "variant": "XR31",
       "version": "DAW400L0",
@@ -34838,7 +34838,7 @@
     {
       "year": 2021,
       "make": "MINI",
-      "commercialName": "COUNTRYMAN JCW ALL4",
+      "commercialName": "Countryman JCW ALL4",
       "type": "FMX",
       "variant": "YZ91",
       "version": "DAW500LT",
@@ -35384,7 +35384,7 @@
     {
       "year": 2021,
       "make": "MINI",
-      "commercialName": "JOHN COOPER WORKS",
+      "commercialName": "John Cooper Works",
       "type": "FML2",
       "variant": "XR91",
       "version": "DAW400L0",
@@ -35972,7 +35972,7 @@
     {
       "year": 2021,
       "make": "MINI",
-      "commercialName": "ONE",
+      "commercialName": "One",
       "type": "FML2",
       "variant": "XR11",
       "version": "DHW40000",
@@ -36966,7 +36966,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI",
-      "commercialName": "ECLIPSE CROSS",
+      "commercialName": "Eclipse Cross",
       "type": "GK0",
       "variant": "GK111",
       "version": "AAAAM6C5DAAA",
@@ -36980,7 +36980,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI",
-      "commercialName": "Eclipse Cross",
+      "commercialName": "ECLIPSE CROSS",
       "type": "GK0",
       "variant": "GK111",
       "version": "ABBACCB5CAAA",
@@ -37050,7 +37050,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI",
-      "commercialName": "Eclipse Cross",
+      "commercialName": "ECLIPSE CROSS",
       "type": "GK0",
       "variant": "GK121",
       "version": "ACBACCB5CAAA",
@@ -37932,7 +37932,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI",
-      "commercialName": "Mitsubishi Outlander",
+      "commercialName": "MITSUBISHI OUTLANDER",
       "type": "CW0",
       "variant": "GGP21",
       "version": "AWEJRRC5DAAA",
@@ -38100,7 +38100,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI",
-      "commercialName": "Mitsubishi SpacE Star",
+      "commercialName": "MITSUBISHI SPACE STAR",
       "type": "A00",
       "variant": "A0411",
       "version": "ACBBA5A5AAAA",
@@ -38184,7 +38184,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI",
-      "commercialName": "MITSUBISHI SPACE STAR",
+      "commercialName": "Mitsubishi SpacE Star",
       "type": "A00",
       "variant": "A0411",
       "version": "AEBCCCA5AAAA",
@@ -38282,7 +38282,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI",
-      "commercialName": "Mitsubishi SpacE Star",
+      "commercialName": "MITSUBISHI SPACE STAR",
       "type": "A00",
       "variant": "A0611",
       "version": "ABAAA5B5CAAA",
@@ -38856,7 +38856,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI",
-      "commercialName": "SPACE STAR",
+      "commercialName": "SpacE Star",
       "type": "A00",
       "variant": "A0311",
       "version": "AFBBA5A5AAAA",
@@ -38996,7 +38996,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI",
-      "commercialName": "SpacE Star",
+      "commercialName": "SPACE STAR",
       "type": "A00",
       "variant": "A0411",
       "version": "AEBCCCA5AAAA",
@@ -39612,7 +39612,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI MOTORS CORPORATION",
-      "commercialName": "MITSUBISHI ASX",
+      "commercialName": "Mitsubishi ASX",
       "type": "GA0",
       "variant": "GA311",
       "version": "AABBA5A5AAAA",
@@ -39640,7 +39640,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI MOTORS CORPORATION",
-      "commercialName": "MITSUBISHI ASX",
+      "commercialName": "Mitsubishi ASX",
       "type": "GA0",
       "variant": "GA311",
       "version": "ACBBCCA5AAAA",
@@ -39654,7 +39654,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI MOTORS CORPORATION",
-      "commercialName": "MITSUBISHI ASX",
+      "commercialName": "Mitsubishi ASX",
       "type": "GA0",
       "variant": "GA311",
       "version": "ADBBCCF5EAAA",
@@ -39668,7 +39668,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI MOTORS CORPORATION",
-      "commercialName": "MITSUBISHI ASX",
+      "commercialName": "Mitsubishi ASX",
       "type": "GA0",
       "variant": "GA321",
       "version": "AFBBCCF5EAAA",
@@ -39682,7 +39682,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI MOTORS CORPORATION",
-      "commercialName": "MITSUBISHI ECLIPSE CROSS",
+      "commercialName": "Mitsubishi Eclipse Cross",
       "type": "GK0",
       "variant": "GK111",
       "version": "AAAAM6B5CAAA",
@@ -39696,7 +39696,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI MOTORS CORPORATION",
-      "commercialName": "MITSUBISHI ECLIPSE CROSS",
+      "commercialName": "Mitsubishi Eclipse Cross",
       "type": "GK0",
       "variant": "GK111",
       "version": "AAAAM6C5DAAA",
@@ -39710,7 +39710,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI MOTORS CORPORATION",
-      "commercialName": "MITSUBISHI ECLIPSE CROSS",
+      "commercialName": "Mitsubishi Eclipse Cross",
       "type": "GK0",
       "variant": "GK111",
       "version": "ABBACCB5CAAA",
@@ -39738,7 +39738,7 @@
     {
       "year": 2021,
       "make": "MITSUBISHI MOTORS CORPORATION",
-      "commercialName": "MITSUBISHI ECLIPSE CROSS",
+      "commercialName": "Mitsubishi Eclipse Cross",
       "type": "GK0",
       "variant": "GK121",
       "version": "ACBACCB5CAAA",
@@ -40564,7 +40564,7 @@
     {
       "year": 2021,
       "make": "MORGAN",
-      "commercialName": "PLUS FOUR",
+      "commercialName": "Plus Four",
       "type": "MP19",
       "variant": "B",
       "version": "CM15W",
@@ -41433,9 +41433,9 @@
       "year": 2021,
       "make": "NISSAN",
       "commercialName": "E-NV200",
-      "type": "ME0M",
-      "variant": "B",
-      "version": "B04",
+      "type": "ME0M      ",
+      "variant": "B         ",
+      "version": "B04               ",
       "fuel": "ELECTRIC",
       "engineCc": null,
       "powerKw": 80,
@@ -41461,9 +41461,9 @@
       "year": 2021,
       "make": "NISSAN",
       "commercialName": "E-NV200",
-      "type": "ME0M      ",
-      "variant": "B         ",
-      "version": "B06               ",
+      "type": "ME0M",
+      "variant": "B",
+      "version": "B06",
       "fuel": "ELECTRIC",
       "engineCc": null,
       "powerKw": 80,
@@ -42160,7 +42160,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "LEAF 62kWh",
+      "commercialName": "LEAF 62KWH",
       "type": "ZE1",
       "variant": "A",
       "version": "A03",
@@ -42174,7 +42174,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "Leaf 62kWh",
+      "commercialName": "LEAF 62KWH",
       "type": "ZE1",
       "variant": "A",
       "version": "A03",
@@ -42524,7 +42524,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "Nissan e-NV200",
+      "commercialName": "NISSAN E-NV200",
       "type": "ME0M",
       "variant": "B",
       "version": "B04",
@@ -42551,7 +42551,7 @@
     },
     {
       "year": 2021,
-      "make": "NISSAN",
+      "make": "Nissan",
       "commercialName": "Nissan e-NV200",
       "type": "ME0M",
       "variant": "B",
@@ -42818,7 +42818,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "Nissan Juke",
+      "commercialName": "NISSAN JUKE",
       "type": "F16",
       "variant": "A",
       "version": "A14",
@@ -42847,9 +42847,9 @@
       "year": 2021,
       "make": "NISSAN",
       "commercialName": "NISSAN LEAF",
-      "type": "ZE1",
-      "variant": "A",
-      "version": "A03",
+      "type": "ZE1       ",
+      "variant": "A         ",
+      "version": "A03               ",
       "fuel": "ELECTRIC",
       "engineCc": null,
       "powerKw": 160,
@@ -42861,9 +42861,9 @@
       "year": 2021,
       "make": "NISSAN",
       "commercialName": "NISSAN LEAF",
-      "type": "ZE1",
-      "variant": "A",
-      "version": "A05",
+      "type": "ZE1       ",
+      "variant": "A         ",
+      "version": "A05               ",
       "fuel": "ELECTRIC",
       "engineCc": null,
       "powerKw": 110,
@@ -42972,7 +42972,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "Nissan Leaf 40kWh",
+      "commercialName": "NISSAN LEAF 40kWh",
       "type": "ZE1",
       "variant": "A",
       "version": "A02",
@@ -43000,7 +43000,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "NISSAN LEAF 40KWH",
+      "commercialName": "NISSAN LEAF 40kWh",
       "type": "ZE1",
       "variant": "A",
       "version": "A04",
@@ -43098,7 +43098,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "Nissan Leaf 62kWh",
+      "commercialName": "NISSAN LEAF 62KWH",
       "type": "ZE1",
       "variant": "A",
       "version": "A03",
@@ -43196,7 +43196,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "NISSAN MICRA",
+      "commercialName": "Nissan Micra",
       "type": "K14",
       "variant": "D",
       "version": "D11",
@@ -43252,7 +43252,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "NISSAN MICRA",
+      "commercialName": "Nissan Micra",
       "type": "K14",
       "variant": "D",
       "version": "D17",
@@ -43280,7 +43280,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "Nissan Micra",
+      "commercialName": "NISSAN MICRA",
       "type": "K14",
       "variant": "D",
       "version": "D20",
@@ -44008,7 +44008,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "NISSAN QASHQAI",
+      "commercialName": "Nissan Qashqai",
       "type": "J11",
       "variant": "F",
       "version": "F04",
@@ -44022,7 +44022,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "Nissan Qashqai",
+      "commercialName": "NISSAN QASHQAI",
       "type": "J11",
       "variant": "F",
       "version": "F05",
@@ -44078,7 +44078,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "Nissan Qashqai",
+      "commercialName": "NISSAN QASHQAI",
       "type": "J11",
       "variant": "F",
       "version": "F09",
@@ -44120,7 +44120,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "Nissan Qashqai",
+      "commercialName": "NISSAN QASHQAI",
       "type": "J11",
       "variant": "F",
       "version": "F11",
@@ -44148,7 +44148,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "Nissan Qashqai",
+      "commercialName": "NISSAN QASHQAI",
       "type": "J11",
       "variant": "F",
       "version": "F12",
@@ -44540,7 +44540,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "NISSAN QASHQAI",
+      "commercialName": "Nissan Qashqai",
       "type": "J12",
       "variant": "A",
       "version": "A07",
@@ -44610,7 +44610,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "NISSAN QASHQAI",
+      "commercialName": "Nissan Qashqai",
       "type": "J12",
       "variant": "A",
       "version": "A12",
@@ -44736,7 +44736,7 @@
     {
       "year": 2021,
       "make": "NISSAN",
-      "commercialName": "NISSAN QASHQAI",
+      "commercialName": "Nissan Qashqai",
       "type": "J12",
       "variant": "B",
       "version": "B04",
@@ -51105,7 +51105,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "ASTRA",
       "type": "B-K",
       "variant": "CA077DB12",
@@ -56691,7 +56691,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "ASTRA SPORTS TOURER+",
       "type": "B-K",
       "variant": "DA028DB12",
@@ -57867,7 +57867,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "ASTRA SPORTS TOURER+",
       "type": "B-K",
       "variant": "DA077DB12",
@@ -58427,7 +58427,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "ASTRA+",
       "type": "B-K",
       "variant": "CA026DB12",
@@ -58539,7 +58539,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "ASTRA+",
       "type": "B-K",
       "variant": "CA026DD12",
@@ -59603,7 +59603,7 @@
     },
     {
       "year": 2021,
-      "make": "OPEL",
+      "make": "Opel",
       "commercialName": "ASTRA+",
       "type": "B-K",
       "variant": "CA077DB12",
@@ -60500,7 +60500,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Combo Life",
+      "commercialName": "COMBO LIFE",
       "type": "E",
       "variant": "C",
       "version": "YHT2-A2C300",
@@ -60682,7 +60682,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Combo Life",
+      "commercialName": "COMBO LIFE",
       "type": "E",
       "variant": "C",
       "version": "YHZ2-A2C300",
@@ -60710,7 +60710,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "COMBO LIFE",
+      "commercialName": "Combo Life",
       "type": "E",
       "variant": "C",
       "version": "YHZ2-B2C300",
@@ -60724,7 +60724,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "COMBO LIFE",
+      "commercialName": "Combo Life",
       "type": "E",
       "variant": "C",
       "version": "YHZ2-C2C300",
@@ -60752,7 +60752,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "COMBO LIFE",
+      "commercialName": "Combo Life",
       "type": "E",
       "variant": "C",
       "version": "YHZ2-D2C300",
@@ -61186,7 +61186,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Combo Life",
+      "commercialName": "COMBO LIFE",
       "type": "E",
       "variant": "R",
       "version": "HNP2-C12100",
@@ -61242,7 +61242,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Combo Life",
+      "commercialName": "COMBO LIFE",
       "type": "E",
       "variant": "R",
       "version": "HNP2-D14200",
@@ -61354,7 +61354,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "COMBO LIFE",
+      "commercialName": "Combo Life",
       "type": "E",
       "variant": "R",
       "version": "HNS3-D14400",
@@ -62068,7 +62068,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Combo-e Life",
+      "commercialName": "COMBO-E LIFE",
       "type": "E",
       "variant": "Z",
       "version": "ZKXZ-A7U000",
@@ -62361,7 +62361,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "CORSA",
       "type": "U",
       "variant": "B",
@@ -62431,7 +62431,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "CORSA",
       "type": "U",
       "variant": "B",
@@ -62515,7 +62515,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "CORSA",
       "type": "U",
       "variant": "B",
@@ -62529,7 +62529,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "CORSA",
       "type": "U",
       "variant": "B",
@@ -62585,7 +62585,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "CORSA",
       "type": "U",
       "variant": "H",
@@ -62655,7 +62655,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "CORSA",
       "type": "U",
       "variant": "P",
@@ -62669,7 +62669,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "CORSA",
       "type": "U",
       "variant": "P",
@@ -62697,7 +62697,7 @@
     },
     {
       "year": 2021,
-      "make": "OPEL",
+      "make": "Opel",
       "commercialName": "CORSA",
       "type": "U",
       "variant": "P",
@@ -62781,7 +62781,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "CORSA",
       "type": "U",
       "variant": "P",
@@ -62809,7 +62809,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "CORSA",
       "type": "U",
       "variant": "P",
@@ -62921,7 +62921,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "CORSA",
       "type": "U",
       "variant": "P",
@@ -62963,7 +62963,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "CORSA",
       "type": "U",
       "variant": "P",

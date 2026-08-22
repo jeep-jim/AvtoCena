@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 22,
   "rows": [
     {
@@ -930,7 +930,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 CROSS COUNTRY",
+      "commercialName": "V90 Cross Country",
       "type": "P",
       "variant": "PZ06",
       "version": "PZ06UC0?",
@@ -986,7 +986,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZ06",
       "version": "PZ06VC0?",
@@ -1000,7 +1000,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 CROSS COUNTRY",
+      "commercialName": "V90 Cross Country",
       "type": "P",
       "variant": "PZ25",
       "version": "PZ25TC0",
@@ -1042,7 +1042,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 CROSS COUNTRY",
+      "commercialName": "V90 Cross Country",
       "type": "P",
       "variant": "PZ25",
       "version": "PZ25UC0",
@@ -1112,7 +1112,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 CROSS COUNTRY",
+      "commercialName": "V90 Cross Country",
       "type": "P",
       "variant": "PZ68",
       "version": "PZ68SC0?",
@@ -1322,7 +1322,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 CROSS COUNTRY",
+      "commercialName": "V90 Cross Country",
       "type": "P",
       "variant": "PZ68",
       "version": "PZ68VCP?",
@@ -1532,7 +1532,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZA8",
       "version": "PZA8TC0?",
@@ -1574,7 +1574,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 CROSS COUNTRY",
+      "commercialName": "V90 Cross Country",
       "type": "P",
       "variant": "PZA8",
       "version": "PZA8U40",
@@ -1588,7 +1588,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 CROSS COUNTRY",
+      "commercialName": "V90 Cross Country",
       "type": "P",
       "variant": "PZA8",
       "version": "PZA8U40?",
@@ -1602,7 +1602,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZA8",
       "version": "PZA8UC0",
@@ -1854,7 +1854,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZK2",
       "version": "PZK2VC0?",
@@ -1868,7 +1868,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZK2",
       "version": "PZK2VC0?",
@@ -1896,7 +1896,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 CROSS COUNTRY",
+      "commercialName": "V90 Cross Country",
       "type": "P",
       "variant": "PZK5",
       "version": "PZK5UC0",
@@ -1966,7 +1966,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZK5",
       "version": "PZK5VC0?",
@@ -1980,7 +1980,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZK5",
       "version": "PZK5VC0?",
@@ -1994,7 +1994,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZL1",
       "version": "PZL1UC0",
@@ -2022,7 +2022,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZL1",
       "version": "PZL1UC0?",
@@ -2064,7 +2064,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 CROSS COUNTRY",
+      "commercialName": "V90 Cross Country",
       "type": "P",
       "variant": "PZL1",
       "version": "PZL1VC0",
@@ -2092,7 +2092,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 CROSS COUNTRY",
+      "commercialName": "V90 Cross Country",
       "type": "P",
       "variant": "PZL1",
       "version": "PZL1VC0?",
@@ -3422,7 +3422,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 T8 Twin Engine",
+      "commercialName": "V90 T8 TWIN ENGINE",
       "type": "P",
       "variant": "PWBM",
       "version": "PWBMTD0",
@@ -3436,7 +3436,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 T8 Twin Engine",
+      "commercialName": "V90 T8 TWIN ENGINE",
       "type": "P",
       "variant": "PWBM",
       "version": "PWBMTD0?",
@@ -3534,7 +3534,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "V90 T8 TWIN ENGINE",
+      "commercialName": "V90 T8 Twin Engine",
       "type": "P",
       "variant": "PWBM",
       "version": "PWBMVD0?",
@@ -8994,7 +8994,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC40 T5 TWIN ENGINE",
+      "commercialName": "XC40 T5 Twin Engine",
       "type": "X",
       "variant": "XZBB",
       "version": "XZBBBF0",
@@ -9008,7 +9008,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC40 T5 Twin Engine",
+      "commercialName": "XC40 T5 TWIN ENGINE",
       "type": "X",
       "variant": "XZBB",
       "version": "XZBBBF0?",
@@ -9050,7 +9050,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC40 T5 TWIN ENGINE",
+      "commercialName": "XC40 T5 Twin Engine",
       "type": "X",
       "variant": "XZBB",
       "version": "XZBBTF0?",
@@ -14748,7 +14748,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC60 T8 Twin Engine",
+      "commercialName": "XC60 T8 TWIN ENGINE",
       "type": "U",
       "variant": "UZBM",
       "version": "UZBMTDP",
@@ -14790,7 +14790,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC60 T8 Twin Engine",
+      "commercialName": "XC60 T8 TWIN ENGINE",
       "type": "U",
       "variant": "UZBM",
       "version": "UZBMUD0",
@@ -14818,7 +14818,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC60 T8 Twin Engine",
+      "commercialName": "XC60 T8 TWIN ENGINE",
       "type": "U",
       "variant": "UZBM",
       "version": "UZBMUD0?",
@@ -14846,7 +14846,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC60 T8 TWIN ENGINE",
+      "commercialName": "XC60 T8 Twin Engine",
       "type": "U",
       "variant": "UZBM",
       "version": "UZBMUDP?",
@@ -14874,7 +14874,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC60 T8 Twin Engine",
+      "commercialName": "XC60 T8 TWIN ENGINE",
       "type": "U",
       "variant": "UZBM",
       "version": "UZBMVD0",
@@ -14972,7 +14972,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC60 T8 TWIN ENGINE",
+      "commercialName": "XC60 T8 Twin Engine",
       "type": "U",
       "variant": "UZBM",
       "version": "UZBMVDP?",
@@ -14986,7 +14986,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC60 T8 TWIN ENGINE",
+      "commercialName": "XC60 T8 Twin Engine",
       "type": "U",
       "variant": "UZBT",
       "version": "UZBTTD0",
@@ -15000,7 +15000,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC60 T8 TWIN ENGINE",
+      "commercialName": "XC60 T8 Twin Engine",
       "type": "U",
       "variant": "UZBT",
       "version": "UZBTTD0?",
@@ -18584,7 +18584,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC90 T8 TWIN ENGINE",
+      "commercialName": "XC90 T8 Twin Engine",
       "type": "L",
       "variant": "LFBM",
       "version": "LFBMTD0",
@@ -18598,7 +18598,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC90 T8 TWIN ENGINE",
+      "commercialName": "XC90 T8 Twin Engine",
       "type": "L",
       "variant": "LFBM",
       "version": "LFBMTD0?",
@@ -18654,7 +18654,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC90 T8 Twin Engine",
+      "commercialName": "XC90 T8 TWIN ENGINE",
       "type": "L",
       "variant": "LFBM",
       "version": "LFBMTDP?",
@@ -18724,7 +18724,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC90 T8 TWIN ENGINE",
+      "commercialName": "XC90 T8 Twin Engine",
       "type": "L",
       "variant": "LFBM",
       "version": "LFBMUD0?",
@@ -18752,7 +18752,7 @@
     {
       "year": 2020,
       "make": "VOLVO",
-      "commercialName": "XC90 T8 TWIN ENGINE",
+      "commercialName": "XC90 T8 Twin Engine",
       "type": "L",
       "variant": "LFBM",
       "version": "LFBMUDP?",
@@ -19354,7 +19354,7 @@
     {
       "year": 2020,
       "make": "VW",
-      "commercialName": "Golf",
+      "commercialName": "GOLF",
       "type": "CD",
       "variant": "ACDFYAX0",
       "version": "FD7FD7CW002N4BFOML1BVR2A0",
@@ -19522,7 +19522,7 @@
     {
       "year": 2020,
       "make": "VW",
-      "commercialName": "Golf",
+      "commercialName": "GOLF",
       "type": "CD",
       "variant": "ACDPBAX0",
       "version": "FM6FM6AJ015N4BFOVL1AVR2AGA",
@@ -19550,7 +19550,7 @@
     {
       "year": 2020,
       "make": "VW",
-      "commercialName": "Golf",
+      "commercialName": "GOLF",
       "type": "CD",
       "variant": "ACDPBAX0",
       "version": "FM6FM6AJ015N4BFOVL1BVR2AGB",

@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 5,
   "rows": [
     {
@@ -1868,7 +1868,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "X1 sDrive18d",
+      "commercialName": "X1 SDRIVE18D",
       "type": "F1X",
       "variant": "71AC",
       "version": "DAW500L0",
@@ -2596,7 +2596,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "X1 sDrive18i",
+      "commercialName": "X1 SDRIVE18I",
       "type": "F1X",
       "variant": "31AA",
       "version": "DAW500LT",
@@ -2792,7 +2792,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "X1 SDRIVE18I",
+      "commercialName": "X1 sDrive18i",
       "type": "F1X",
       "variant": "31AA",
       "version": "DHW500B0",
@@ -6054,7 +6054,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "X1 xDrive25i",
+      "commercialName": "X1 XDRIVE25I",
       "type": "F1X",
       "variant": "51AB",
       "version": "DAW508LT",
@@ -6502,7 +6502,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "X2 SDRIVE18D",
+      "commercialName": "X2 sDrive18d",
       "type": "F2X",
       "variant": "YK51",
       "version": "DAW500L0",
@@ -12732,7 +12732,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "X3 xDrive20d",
+      "commercialName": "X3 XDRIVE20D",
       "type": "G3X",
       "variant": "UZ35",
       "version": "DAW500M0",
@@ -16470,7 +16470,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "X4 xDrive20d",
+      "commercialName": "X4 XDRIVE20D",
       "type": "G4X",
       "variant": "VJ91",
       "version": "DAW500L0",
@@ -16848,7 +16848,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "X4 XDRIVE30D",
+      "commercialName": "X4 xDrive30d",
       "type": "G4X",
       "variant": "4M31",
       "version": "IAV500B0",
@@ -20474,7 +20474,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "X5 xDrive30d",
+      "commercialName": "X5 XDRIVE30D",
       "type": "G5X",
       "variant": "CV61",
       "version": "DAA509MA",
@@ -32290,7 +32290,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "Z4 M40i",
+      "commercialName": "Z4 M40I",
       "type": "G4Z",
       "variant": "HF51",
       "version": "DAW200L0",
@@ -34320,7 +34320,7 @@
     {
       "year": 2020,
       "make": "CATERHAM",
-      "commercialName": "Seven SG (SV Variant)",
+      "commercialName": "Seven SG (SV variant)",
       "type": "SG",
       "variant": "SG",
       "version": "5",
@@ -49468,7 +49468,7 @@
     {
       "year": 2020,
       "make": "CITROEN",
-      "commercialName": "C4 SPACETOURER",
+      "commercialName": "C4 spacetourer",
       "type": "3",
       "variant": "DHNS",
       "version": "4/J4S",

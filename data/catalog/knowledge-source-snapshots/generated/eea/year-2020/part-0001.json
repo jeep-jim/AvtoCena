@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 1,
   "rows": [
     {
@@ -7173,8 +7173,8 @@
     },
     {
       "year": 2020,
-      "make": "ALFA ROMEO",
-      "commercialName": "ALFA GIULIETTA",
+      "make": "Alfa Romeo",
+      "commercialName": "Alfa Giulietta",
       "type": "940",
       "variant": "FYF11",
       "version": "E30C5",
@@ -7859,8 +7859,8 @@
     },
     {
       "year": 2020,
-      "make": "Alfa Romeo",
-      "commercialName": "Giulia",
+      "make": "ALFA ROMEO",
+      "commercialName": "GIULIA",
       "type": "952",
       "variant": "ABA2",
       "version": "5ADGD",
@@ -8027,8 +8027,8 @@
     },
     {
       "year": 2020,
-      "make": "Alfa Romeo",
-      "commercialName": "Giulia",
+      "make": "ALFA ROMEO",
+      "commercialName": "GIULIA",
       "type": "952",
       "variant": "ACA4",
       "version": "5A1DG",
@@ -8041,8 +8041,8 @@
     },
     {
       "year": 2020,
-      "make": "Alfa Romeo",
-      "commercialName": "Giulia",
+      "make": "ALFA ROMEO",
+      "commercialName": "GIULIA",
       "type": "952",
       "variant": "ACA4",
       "version": "5ADG",
@@ -8153,8 +8153,8 @@
     },
     {
       "year": 2020,
-      "make": "Alfa Romeo",
-      "commercialName": "Giulia",
+      "make": "ALFA ROMEO",
+      "commercialName": "GIULIA",
       "type": "952",
       "variant": "AMA4",
       "version": "5CDG",
@@ -9917,8 +9917,8 @@
     },
     {
       "year": 2020,
-      "make": "Alfa Romeo",
-      "commercialName": "Stelvio",
+      "make": "ALFA ROMEO",
+      "commercialName": "STELVIO",
       "type": "949",
       "variant": "AXA2A",
       "version": "5CDG",
@@ -9931,8 +9931,8 @@
     },
     {
       "year": 2020,
-      "make": "Alfa Romeo",
-      "commercialName": "Stelvio",
+      "make": "ALFA ROMEO",
+      "commercialName": "STELVIO",
       "type": "949",
       "variant": "AXA2A",
       "version": "5DG",
@@ -10197,8 +10197,8 @@
     },
     {
       "year": 2020,
-      "make": "ALFA ROMEO",
-      "commercialName": "STELVIO",
+      "make": "Alfa Romeo",
+      "commercialName": "Stelvio",
       "type": "949",
       "variant": "AXM2A",
       "version": "5ADG",
@@ -12815,7 +12815,7 @@
     },
     {
       "year": 2020,
-      "make": "ASTON MARTIN",
+      "make": "Aston Martin",
       "commercialName": "DB11",
       "type": "AM5",
       "variant": "A",
@@ -13754,7 +13754,7 @@
     {
       "year": 2020,
       "make": "ASTON MARTIN",
-      "commercialName": "RAPIDE AMR",
+      "commercialName": "Rapide AMR",
       "type": "VH1(SG)",
       "variant": "SG14",
       "version": "L4ZAEG",
@@ -13936,7 +13936,7 @@
     {
       "year": 2020,
       "make": "ASTON MARTIN",
-      "commercialName": "Vanquish Zagato Shooting Brake",
+      "commercialName": "VANQUISH ZAGATO SHOOTING BRAKE",
       "type": "VH1(SAS)",
       "variant": "SU91",
       "version": "L2ZAEG",
@@ -14089,8 +14089,8 @@
     },
     {
       "year": 2020,
-      "make": "ASTON MARTIN",
-      "commercialName": "VANTAGE AMR",
+      "make": "Aston Martin",
+      "commercialName": "Vantage AMR",
       "type": "AM6",
       "variant": "C",
       "version": "051L2WMDH3750",
@@ -17785,7 +17785,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A1 City Carver",
       "type": "GB",
       "variant": "HDKRFF1",
@@ -17926,7 +17926,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 City Carver",
+      "commercialName": "A1 CITY CARVER",
       "type": "GB",
       "variant": "HDKRFF1",
       "version": "FD7FD7CW007RT81C184BFEM1A",
@@ -18052,7 +18052,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 City Carver",
+      "commercialName": "A1 CITY CARVER",
       "type": "GB",
       "variant": "HDKRFF1",
       "version": "FM6FM6AJ019RT81B174BFEM1A",
@@ -18332,7 +18332,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDKLAF1",
       "version": "FM5FM5DF009RT51B164BFAEM1A",
@@ -18430,7 +18430,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDKLAF1",
       "version": "FM5FM5DF009RT81B164BFAEM10B0",
@@ -18444,7 +18444,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDKLAF1",
       "version": "FM5FM5DF009RT81B164BFAEM1AB0",
@@ -18569,8 +18569,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "make": "Audi",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDKRFF1",
       "version": "FD7FD7CW007RT51B174BFAEM10",
@@ -18597,8 +18597,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "make": "Audi",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDKRFF1",
       "version": "FD7FD7CW007RT51B174BFAEM1A",
@@ -18654,7 +18654,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 citycarver",
+      "commercialName": "A1 CITYCARVER",
       "type": "GB",
       "variant": "HDKRFF1",
       "version": "FD7FD7CW007RT81B164BFAEM1AB0",
@@ -18710,7 +18710,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDKRFF1",
       "version": "FD7FD7CW007RT81B174BFAEM10B0",
@@ -18850,7 +18850,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDKRFF1",
       "version": "FD7FD7CW007RT81C184BFAEM1AB0",
@@ -18878,7 +18878,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 citycarver",
+      "commercialName": "A1 CITYCARVER",
       "type": "GB",
       "variant": "HDKRFF1",
       "version": "FM6FM6AJ019RT51B164BFAEM10",
@@ -18919,8 +18919,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "make": "Audi",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDKRFF1",
       "version": "FM6FM6AJ019RT51B174BFAEM10",
@@ -18962,7 +18962,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 citycarver",
+      "commercialName": "A1 CITYCARVER",
       "type": "GB",
       "variant": "HDKRFF1",
       "version": "FM6FM6AJ019RT81B164BFAEM10B0",
@@ -19115,8 +19115,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A1 citycarver",
+      "make": "AUDI",
+      "commercialName": "A1 CITYCARVER",
       "type": "GB",
       "variant": "HDLAAF1",
       "version": "FD7FD7CW009RT81B164BIAEM10B0",
@@ -19130,7 +19130,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 citycarver",
+      "commercialName": "A1 CITYCARVER",
       "type": "GB",
       "variant": "HDLAAF1",
       "version": "FD7FD7CW009RT81B164BIAEM1AB0",
@@ -19158,7 +19158,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 citycarver",
+      "commercialName": "A1 CITYCARVER",
       "type": "GB",
       "variant": "HDLAAF1",
       "version": "FD7FD7CW009RT81B174BIAEM1AB0",
@@ -19312,7 +19312,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDLACF1",
       "version": "FM5FM5DF009RT81B174BIAEM10B0",
@@ -19424,7 +19424,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDPCAF1",
       "version": "FD7FD7CW002RT61B174BFAEM1AB0",
@@ -19452,7 +19452,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDPCAF1",
       "version": "FD7FD7CW002RT61B174BFBEM1AB0",
@@ -19480,7 +19480,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDPCAF1",
       "version": "FD7FD7CW002RT61C184BFBEM1A",
@@ -19508,7 +19508,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDPCAF1",
       "version": "FD7FD7CW002RT61C184BFBEM1AB0",
@@ -19578,7 +19578,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDPCAF1",
       "version": "FD7FD7CW002RT71B174BFBEM1A",
@@ -19746,7 +19746,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 CITYCARVER",
+      "commercialName": "A1 citycarver",
       "type": "GB",
       "variant": "HDPCAF1",
       "version": "FM6FM62S032RT71B174BFAEM1A",
@@ -21496,7 +21496,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDADAF1",
       "version": "FD7FD7CW002RT21C167CPAEM1",
@@ -21523,7 +21523,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDADAF1",
@@ -21594,7 +21594,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKLAF1",
       "version": "FD7FD7CW001RT11B154BFAEM10B0",
@@ -21636,7 +21636,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDKLAF1",
       "version": "FD7FD7CW001RT11B154BFEM1A",
@@ -21649,8 +21649,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKLAF1",
       "version": "FD7FD7CW001RT11C164BFAEM10",
@@ -21720,7 +21720,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKLAF1",
       "version": "FD7FD7CW001RT11C174BFAEM10",
@@ -21748,7 +21748,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDKLAF1",
       "version": "FD7FD7CW001RT11C174BFAEM1A",
@@ -21776,7 +21776,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKLAF1",
       "version": "FD7FD7CW001RT11C174BFEM1A",
@@ -21916,7 +21916,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDKLAF1",
       "version": "FM5FM5DF002RT11B157CPAEM1",
@@ -21929,7 +21929,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKLAF1",
@@ -21958,7 +21958,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKLAF1",
       "version": "FM5FM5DF002RT11C164BFAEM1A",
@@ -21986,7 +21986,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKLAF1",
       "version": "FM5FM5DF002RT11C164BFEM1A",
@@ -22042,7 +22042,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDKLAF1",
       "version": "FM5FM5DF002RT11C174BFAEM1A",
@@ -22070,7 +22070,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDKLAF1",
       "version": "FM5FM5DF002RT11C174BFEM1A",
@@ -22098,7 +22098,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKLAF1",
       "version": "FM5FM5DF002RT11C184BFAEM10",
@@ -22126,7 +22126,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKLAF1",
       "version": "FM5FM5DF002RT11C184BFAEM1A",
@@ -22195,7 +22195,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
@@ -22238,7 +22238,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FD7FD7CW001RT11B154BFEM1A",
@@ -22252,7 +22252,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FD7FD7CW001RT11B157CPAEM1",
@@ -22280,7 +22280,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FD7FD7CW001RT11C164BFAEM10B0",
@@ -22307,7 +22307,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
@@ -22322,7 +22322,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FD7FD7CW001RT11C164BFAEM1AB0",
@@ -22335,7 +22335,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
@@ -22378,7 +22378,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FD7FD7CW001RT11C174BFAEM10B0",
@@ -22405,7 +22405,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
@@ -22741,8 +22741,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A1 Sportback",
+      "make": "AUDI",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FM6FM6AJ017RT11B157CPAEM1",
@@ -22769,7 +22769,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
@@ -22798,7 +22798,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FM6FM6AJ017RT11C167CPBEM1",
@@ -22811,8 +22811,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FM6FM6AJ017RT11C177CPAEM1",
@@ -22951,7 +22951,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
@@ -22993,8 +22993,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A1 Sportback",
+      "make": "AUDI",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FM6FM6AJ024RT11B154BFEM1A",
@@ -23007,7 +23007,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
@@ -23021,8 +23021,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FM6FM6AJ024RT11C164BFAEM10B0",
@@ -23050,7 +23050,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FM6FM6AJ024RT11C164BFAEM1AB0",
@@ -23063,7 +23063,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
@@ -23078,7 +23078,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FM6FM6AJ024RT11C174BFAEM10",
@@ -23119,7 +23119,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
@@ -23175,8 +23175,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FM6FM6AJ024RT11C184BFAEM1A",
@@ -23189,7 +23189,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
@@ -23232,7 +23232,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FM6FM6AJ024RT41C164BFAEM1A",
@@ -23302,7 +23302,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKRFF1",
       "version": "FM6FM6AJ024RT41C184BFAEM1A",
@@ -23358,7 +23358,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKZCF1",
       "version": "FD6FD6D9011RT31C174BFAEM10B0",
@@ -23400,7 +23400,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDKZCF1",
       "version": "FD6FD6D9011RT31C184BFAEM10",
@@ -23456,7 +23456,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FD7FD7CW005RT11A154BIAEM10B0",
@@ -23498,7 +23498,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FD7FD7CW005RT11B154BIAEM1AB0",
@@ -23526,7 +23526,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FD7FD7CW005RT11B164BIAEM1AB0",
@@ -23554,7 +23554,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FD7FD7CW005RT11B174BIAEM1AB0",
@@ -23567,8 +23567,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FD7FD7CW005RT11C164BIAEM10B0",
@@ -23582,7 +23582,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FD7FD7CW005RT11C164BIAEM1AB0",
@@ -23596,7 +23596,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FD7FD7CW005RT11C164BIBEM10B0",
@@ -23610,7 +23610,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FD7FD7CW005RT11C164BIBEM1AB0",
@@ -23652,7 +23652,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FD7FD7CW005RT11C174BIBEM10B0",
@@ -23666,7 +23666,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FD7FD7CW005RT11C174BIBEM1AB0",
@@ -23722,7 +23722,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FD7FD7CW005RT11C184BIBEM1AB0",
@@ -23862,7 +23862,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FM6FM6AJ019RT11B154BIAEM10B0",
@@ -23904,7 +23904,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FM6FM6AJ019RT11B164BIAEM1AB0",
@@ -23974,7 +23974,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FM6FM6AJ019RT11C164BIBEM10B0",
@@ -23988,7 +23988,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FM6FM6AJ019RT11C164BIBEM1AB0",
@@ -24002,7 +24002,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FM6FM6AJ019RT11C174BIAEM10B0",
@@ -24016,7 +24016,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FM6FM6AJ019RT11C174BIAEM1AB0",
@@ -24072,7 +24072,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FM6FM6AJ019RT11C184BIAEM1AB0",
@@ -24100,7 +24100,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLAAF1",
       "version": "FM6FM6AJ019RT11C184BIBEM1AB0",
@@ -24226,7 +24226,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDLACF1",
       "version": "FD7FD7CW005RT11A154BIAEM10B0",
@@ -24268,7 +24268,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDLACF1",
       "version": "FD7FD7CW005RT11B154BIAEM1AB0",
@@ -24324,7 +24324,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLACF1",
       "version": "FD7FD7CW005RT11B174BIAEM1AB0",
@@ -24338,7 +24338,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDLACF1",
       "version": "FD7FD7CW005RT11C164BIAEM10B0",
@@ -24352,7 +24352,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDLACF1",
       "version": "FD7FD7CW005RT11C164BIAEM1AB0",
@@ -24380,7 +24380,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDLACF1",
       "version": "FD7FD7CW005RT11C164BIBEM1AB0",
@@ -24394,7 +24394,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLACF1",
       "version": "FD7FD7CW005RT11C174BIAEM10B0",
@@ -24408,7 +24408,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLACF1",
       "version": "FD7FD7CW005RT11C174BIAEM1AB0",
@@ -24422,7 +24422,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDLACF1",
       "version": "FD7FD7CW005RT11C174BIBEM10B0",
@@ -24492,7 +24492,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDLACF1",
       "version": "FD7FD7CW005RT11C184BIBEM1AB0",
@@ -24520,7 +24520,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDLACF1",
       "version": "FM5FM5DF008RT11A154BIAEM1AB0",
@@ -24534,7 +24534,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLACF1",
       "version": "FM5FM5DF008RT11B154BIAEM10B0",
@@ -24618,7 +24618,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDLACF1",
       "version": "FM5FM5DF008RT11C164BIAEM10B0",
@@ -24646,7 +24646,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDLACF1",
       "version": "FM5FM5DF008RT11C174BIAEM10B0",
@@ -24772,7 +24772,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDPCAF1",
       "version": "FD7FD7CW002RT21C164BFAEM10B0",
@@ -24786,7 +24786,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDPCAF1",
       "version": "FD7FD7CW002RT21C164BFAEM1A",
@@ -24827,8 +24827,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDPCAF1",
       "version": "FD7FD7CW002RT21C164BIAEM10B0",
@@ -24842,7 +24842,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDPCAF1",
       "version": "FD7FD7CW002RT21C164BIAEM1AB0",
@@ -24870,7 +24870,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDPCAF1",
       "version": "FD7FD7CW002RT21C174BFAEM10B0",
@@ -24884,7 +24884,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 SPORTBACK",
+      "commercialName": "A1 Sportback",
       "type": "GB",
       "variant": "SDPCAF1",
       "version": "FD7FD7CW002RT21C174BFAEM1A",
@@ -24926,7 +24926,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDPCAF1",
       "version": "FD7FD7CW002RT21C174BFEM1A",
@@ -25192,7 +25192,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A1 Sportback",
+      "commercialName": "A1 SPORTBACK",
       "type": "GB",
       "variant": "SDPCAF1",
       "version": "FD7FD7CW002RT41C184BFAEM1A",
@@ -28076,7 +28076,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 40 e-tron",
+      "commercialName": "A3 40 E-TRON",
       "type": "8V",
       "variant": "SDGEAF1",
       "version": "FD6FD6DD001RT91A164BLAEM9",
@@ -28090,7 +28090,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 40 e-tron",
+      "commercialName": "A3 40 E-TRON",
       "type": "8V",
       "variant": "SDGEAF1",
       "version": "FD6FD6DD001RT91B174BLAEM9",
@@ -28146,7 +28146,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 40 e-tron",
+      "commercialName": "A3 40 E-TRON",
       "type": "8V",
       "variant": "SDGEAF1",
       "version": "FD6FD6DD001RTA1B174BLAEM9",
@@ -28174,7 +28174,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 40 e-tron",
+      "commercialName": "A3 40 E-TRON",
       "type": "8V",
       "variant": "SDGEAF1",
       "version": "FD6FD6DD001RTA1C184BLAEM9",
@@ -28202,7 +28202,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 40 TFSIE",
+      "commercialName": "A3 40 TFSIe",
       "type": "GY",
       "variant": "SDGEAF1",
       "version": "FD6FD6DD001RT071A164BIAEM8MLN2B30",
@@ -28216,7 +28216,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 40 TFSIE",
+      "commercialName": "A3 40 TFSIe",
       "type": "GY",
       "variant": "SDGEAF1",
       "version": "FD6FD6DD001RT071A174BIAEM8MLN2B3",
@@ -28300,7 +28300,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 40 TFSIe",
+      "commercialName": "A3 40 TFSIE",
       "type": "GY",
       "variant": "SDGEAF1",
       "version": "FD6FD6DD001RT071C184BIBEM8MLN2B3",
@@ -28313,8 +28313,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A3 40 TFSIE",
+      "make": "Audi",
+      "commercialName": "A3 40 TFSIe",
       "type": "GY",
       "variant": "SDGEAF1",
       "version": "FD6FD6DD001RT071C184BIBEM8MLN2B30",
@@ -28454,7 +28454,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 CABRIOLET",
+      "commercialName": "A3 Cabriolet",
       "type": "8V",
       "variant": "KDADAF1",
       "version": "FM6FM62S022RT51C187CPAEM1",
@@ -28551,8 +28551,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Cabriolet",
+      "make": "AUDI",
+      "commercialName": "A3 CABRIOLET",
       "type": "8V",
       "variant": "KDKZAQ1",
       "version": "QD7AD7GC003RT51C184BFAEM1",
@@ -28580,7 +28580,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 CABRIOLET",
+      "commercialName": "A3 Cabriolet",
       "type": "8V",
       "variant": "KDKZAQ1",
       "version": "QD7AD7GC003RT61E194BFAEM1",
@@ -28622,7 +28622,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Cabriolet",
+      "commercialName": "A3 CABRIOLET",
       "type": "8V",
       "variant": "KDPCAF1",
       "version": "FD7FD7CW002RT51B164BFAEM1",
@@ -28678,7 +28678,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Cabriolet",
+      "commercialName": "A3 CABRIOLET",
       "type": "8V",
       "variant": "KDPCAF1",
       "version": "FD7FD7CW002RT51C184BFBEM1",
@@ -28761,8 +28761,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Cabriolet",
+      "make": "AUDI",
+      "commercialName": "A3 CABRIOLET",
       "type": "8V",
       "variant": "KDPCAF1",
       "version": "FM6FM62S022RT51C174BFAEM1",
@@ -28916,7 +28916,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 LIMOUSINE",
+      "commercialName": "A3 Limousine",
       "type": "8V",
       "variant": "LDADAF1",
       "version": "FD7FD7CW002RT51C177CPAEM1",
@@ -28929,8 +28929,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A3 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A3 Limousine",
       "type": "8V",
       "variant": "LDADAF1",
       "version": "FD7FD7CW002RT51C177CPAEM1",
@@ -28944,7 +28944,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Limousine",
+      "commercialName": "A3 LIMOUSINE",
       "type": "8V",
       "variant": "LDADAF1",
       "version": "FD7FD7CW002RT51C187CPAEM1",
@@ -28971,8 +28971,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Limousine",
+      "make": "AUDI",
+      "commercialName": "A3 LIMOUSINE",
       "type": "8V",
       "variant": "LDADAF1",
       "version": "FD7FD7CW002RT51C187CPAEM1",
@@ -29013,8 +29013,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Limousine",
+      "make": "AUDI",
+      "commercialName": "A3 LIMOUSINE",
       "type": "8V",
       "variant": "LDADAF1",
       "version": "FD7FD7CW002RT51C187CPBEM1",
@@ -29069,7 +29069,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A3 Limousine",
       "type": "8V",
       "variant": "LDADAF1",
@@ -29084,7 +29084,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Limousine",
+      "commercialName": "A3 LIMOUSINE",
       "type": "8V",
       "variant": "LDFGAF1",
       "version": "FD7FD7GC002RT51B164BFAEM1",
@@ -29182,7 +29182,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Limousine",
+      "commercialName": "A3 LIMOUSINE",
       "type": "8V",
       "variant": "LDFGAF1",
       "version": "FD7FD7GC002RT51C184BFAEM1",
@@ -29266,7 +29266,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Limousine",
+      "commercialName": "A3 LIMOUSINE",
       "type": "8V",
       "variant": "LDFGAF1",
       "version": "FM6FM62Q025RT51C174BFAEM1",
@@ -29406,7 +29406,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Limousine",
+      "commercialName": "A3 LIMOUSINE",
       "type": "8V",
       "variant": "LDGTEF1",
       "version": "FM6FM62S027RT51B164BFAEM1",
@@ -29420,7 +29420,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 LIMOUSINE",
+      "commercialName": "A3 Limousine",
       "type": "8V",
       "variant": "LDGTEF1",
       "version": "FM6FM62S027RT51C164BFAEM1",
@@ -29447,8 +29447,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A3 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A3 Limousine",
       "type": "8V",
       "variant": "LDGTEF1",
       "version": "FM6FM62S027RT51C174BFAEM1",
@@ -29461,7 +29461,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A3 Limousine",
       "type": "8V",
       "variant": "LDGTEF1",
@@ -29517,7 +29517,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A3 Limousine",
       "type": "8V",
       "variant": "LDGTEF1",
@@ -29602,7 +29602,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 LIMOUSINE",
+      "commercialName": "A3 Limousine",
       "type": "8V",
       "variant": "LDJGAQ1",
       "version": "QD7AD7GC002RT51C184BFAEM1",
@@ -29616,7 +29616,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 LIMOUSINE",
+      "commercialName": "A3 Limousine",
       "type": "8V",
       "variant": "LDJGAQ1",
       "version": "QD7AD7GC002RT61E194BFAEM1",
@@ -29713,8 +29713,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A3 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A3 Limousine",
       "type": "8V",
       "variant": "LDKRFF1",
       "version": "FD7FD7CW001RT51C177CPAEM1",
@@ -29881,7 +29881,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A3 Limousine",
       "type": "8V",
       "variant": "LDKRFF1",
@@ -29909,7 +29909,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A3 Limousine",
       "type": "8V",
       "variant": "LDKRFF1",
@@ -30021,7 +30021,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "A3 Limousine",
       "type": "8V",
       "variant": "LDKRFF1",
@@ -30316,7 +30316,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Limousine",
+      "commercialName": "A3 LIMOUSINE",
       "type": "8V",
       "variant": "LDPCAF1",
       "version": "FD7FD7CW002RT51C184BFAEM1",
@@ -30400,7 +30400,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Limousine",
+      "commercialName": "A3 LIMOUSINE",
       "type": "8V",
       "variant": "LDPCAF1",
       "version": "FM6FM62S022RT51B164BFAEM1",
@@ -30442,7 +30442,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Limousine",
+      "commercialName": "A3 LIMOUSINE",
       "type": "8V",
       "variant": "LDPCAF1",
       "version": "FM6FM62S022RT51C174BFAEM1",
@@ -30483,8 +30483,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Limousine",
+      "make": "AUDI",
+      "commercialName": "A3 LIMOUSINE",
       "type": "8V",
       "variant": "LDPCAF1",
       "version": "FM6FM62S022RT51C184BFAEM1",
@@ -30512,7 +30512,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Limousine",
+      "commercialName": "A3 LIMOUSINE",
       "type": "GY",
       "variant": "LDFYAF1",
       "version": "FD7FD7CW002RT011A164BFAEM1MLN1B2",
@@ -30553,7 +30553,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A3 Limousine",
       "type": "GY",
       "variant": "LDFYAF1",
@@ -30581,8 +30581,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Limousine",
+      "make": "AUDI",
+      "commercialName": "A3 LIMOUSINE",
       "type": "GY",
       "variant": "LDFYAF1",
       "version": "FD7FD7CW002RT011C184BFBEM1MLN1B2",
@@ -30763,8 +30763,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A3 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A3 Limousine",
       "type": "GY",
       "variant": "LDLAAF1",
       "version": "FM6FM6AJ019RT011A164BIAEM1VLN1B0",
@@ -30876,7 +30876,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 LIMOUSINE",
+      "commercialName": "A3 Limousine",
       "type": "GY",
       "variant": "LDLAAF1",
       "version": "FM6FM6AJ019RT011C184BIBEM1VLN1B0",
@@ -30918,7 +30918,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 LIMOUSINE",
+      "commercialName": "A3 Limousine",
       "type": "GY",
       "variant": "LDPCAF1",
       "version": "FM6FM6C9003RT011A164BFAEM1MLN1B0",
@@ -30932,7 +30932,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 LIMOUSINE",
+      "commercialName": "A3 Limousine",
       "type": "GY",
       "variant": "LDPCAF1",
       "version": "FM6FM6C9003RT011B174BFAEM1MLN1B0",
@@ -30946,7 +30946,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Limousine",
+      "commercialName": "A3 LIMOUSINE",
       "type": "GY",
       "variant": "LDPCAF1",
       "version": "FM6FM6C9003RT011C184BFAEM1MLN1B0",
@@ -30959,8 +30959,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A3 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A3 Limousine",
       "type": "GY",
       "variant": "LDPCAF1",
       "version": "FM6FM6C9003RT011C184BFBEM1MLN1B0",
@@ -31114,7 +31114,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Limousine",
+      "commercialName": "A3 LIMOUSINE",
       "type": "GY",
       "variant": "LDSRBF1",
       "version": "FD7FD7GC002RT011A164BFAEM1MLN1D0",
@@ -31128,7 +31128,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Limousine",
+      "commercialName": "A3 LIMOUSINE",
       "type": "GY",
       "variant": "LDSRBF1",
       "version": "FD7FD7GC002RT011B174BFAEM1MLN1D0",
@@ -31380,7 +31380,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Limousine",
+      "commercialName": "A3 LIMOUSINE",
       "type": "GY",
       "variant": "LDTSBF1",
       "version": "FD7FD7GC002RT011A164BIAEM1MLN1D0A",
@@ -33717,8 +33717,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Sportback",
+      "make": "AUDI",
+      "commercialName": "A3 SPORTBACK",
       "type": "8V",
       "variant": "SDADAF1",
       "version": "FD7FD7CW002RT11C177CPBEM1",
@@ -33773,8 +33773,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Sportback",
+      "make": "AUDI",
+      "commercialName": "A3 SPORTBACK",
       "type": "8V",
       "variant": "SDADAF1",
       "version": "FD7FD7CW002RT11C187CPBEM1",
@@ -33788,7 +33788,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Sportback",
+      "commercialName": "A3 SPORTBACK",
       "type": "8V",
       "variant": "SDADAF1",
       "version": "FM6FM62S022RT11B167CPAEM1",
@@ -33816,7 +33816,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Sportback",
+      "commercialName": "A3 SPORTBACK",
       "type": "8V",
       "variant": "SDADAF1",
       "version": "FM6FM62S022RT11C177CPAEM1",
@@ -33900,7 +33900,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC002RT11C174BFAEM1",
@@ -33955,7 +33955,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDFGAF1",
@@ -33983,8 +33983,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Sportback",
+      "make": "AUDI",
+      "commercialName": "A3 SPORTBACK",
       "type": "8V",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC002RT11C187CPAEM1",
@@ -34026,7 +34026,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDFGAF1",
       "version": "FM6FM62Q025RT11B164BFAEM1",
@@ -34053,8 +34053,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDFGAF1",
       "version": "FM6FM62Q025RT11C174BFAEM1",
@@ -34096,7 +34096,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDFGAF1",
       "version": "FM6FM62Q025RT21E194BFAEM1",
@@ -34110,7 +34110,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDGTEF1",
       "version": "FD7FD7CW002RT11B167CPAEM1",
@@ -34165,8 +34165,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDGTEF1",
       "version": "FD7FD7CW002RT11C187CPAEM1",
@@ -34208,7 +34208,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDGTEF1",
       "version": "FM6FM62S027RT11B164BFAEM1",
@@ -34236,7 +34236,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDGTEF1",
       "version": "FM6FM62S027RT11B167CPAEM1",
@@ -34264,7 +34264,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDGTEF1",
       "version": "FM6FM62S027RT11C167CPAEM1",
@@ -34291,7 +34291,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDGTEF1",
@@ -34333,8 +34333,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDGTEF1",
       "version": "FM6FM62S027RT11C177CPAEM1",
@@ -34361,8 +34361,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDGTEF1",
       "version": "FM6FM62S027RT11C184BFAEM1",
@@ -34389,8 +34389,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDGTEF1",
       "version": "FM6FM62S027RT11C187CPAEM1",
@@ -34446,7 +34446,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDJGAQ1",
       "version": "QD7AD7GC002RT11C174BFAEM1",
@@ -34460,7 +34460,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDJGAQ1",
       "version": "QD7AD7GC002RT11C184BFAEM1",
@@ -34502,7 +34502,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDJGAQ1",
       "version": "QD7AD7GC002RT21E194BFBEM1",
@@ -34599,8 +34599,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Sportback",
+      "make": "AUDI",
+      "commercialName": "A3 SPORTBACK",
       "type": "8V",
       "variant": "SDKRFF1",
       "version": "FD7FD7CW001RT11C177CPAEM1",
@@ -34656,7 +34656,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Sportback",
+      "commercialName": "A3 SPORTBACK",
       "type": "8V",
       "variant": "SDKRFF1",
       "version": "FM6FM6AJ016RT11B167CPAEM1",
@@ -34698,7 +34698,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDKRFF1",
       "version": "FM6FM6AJ016RT11C177CPAEM1",
@@ -34767,7 +34767,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDKRFF1",
@@ -34823,8 +34823,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Sportback",
+      "make": "AUDI",
+      "commercialName": "A3 SPORTBACK",
       "type": "8V",
       "variant": "SDKRFF1",
       "version": "FM6FM6AJ019RT11C174BFAEM1",
@@ -34866,7 +34866,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDKRFF1",
       "version": "FM6FM6AJ019RT11C184BFAEM1",
@@ -34921,8 +34921,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Sportback",
+      "make": "AUDI",
+      "commercialName": "A3 SPORTBACK",
       "type": "8V",
       "variant": "SDKZAF1",
       "version": "FD7FD7GC003RT11C187CSAEM1",
@@ -34978,7 +34978,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDKZAQ1",
       "version": "QD7AD7GC003RT11C174BFAEM1",
@@ -35019,7 +35019,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A3 Sportback",
       "type": "8V",
       "variant": "SDKZAQ1",
@@ -35132,7 +35132,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Sportback",
+      "commercialName": "A3 SPORTBACK",
       "type": "8V",
       "variant": "SDPCAF1",
       "version": "FD7FD7CW002RT11B164BFAEM1",
@@ -35187,8 +35187,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Sportback",
+      "make": "AUDI",
+      "commercialName": "A3 SPORTBACK",
       "type": "8V",
       "variant": "SDPCAF1",
       "version": "FD7FD7CW002RT11C174BFAEM1",
@@ -35243,8 +35243,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Sportback",
+      "make": "AUDI",
+      "commercialName": "A3 SPORTBACK",
       "type": "8V",
       "variant": "SDPCAF1",
       "version": "FD7FD7CW002RT11C184BFAEM1",
@@ -35426,7 +35426,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Sportback",
+      "commercialName": "A3 SPORTBACK",
       "type": "8V",
       "variant": "SDPCAF1",
       "version": "FM6FM62S022RT11C184BFAEM1",
@@ -35453,8 +35453,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Sportback",
+      "make": "AUDI",
+      "commercialName": "A3 SPORTBACK",
       "type": "GY",
       "variant": "SDFYAF1",
       "version": "FD7FD7CW002RT011A164BFAEM1MLN1B2",
@@ -35496,7 +35496,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "GY",
       "variant": "SDFYAF1",
       "version": "FD7FD7CW002RT011B174BFAEM1MLN1B2",
@@ -35523,8 +35523,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Sportback",
+      "make": "AUDI",
+      "commercialName": "A3 SPORTBACK",
       "type": "GY",
       "variant": "SDFYAF1",
       "version": "FD7FD7CW002RT011B174BFBEM1MLN1B2",
@@ -35551,8 +35551,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Sportback",
+      "make": "AUDI",
+      "commercialName": "A3 SPORTBACK",
       "type": "GY",
       "variant": "SDFYAF1",
       "version": "FD7FD7CW002RT011C184BFBEM1MLN1B2",
@@ -35593,8 +35593,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Sportback",
+      "make": "AUDI",
+      "commercialName": "A3 SPORTBACK",
       "type": "GY",
       "variant": "SDFYAF1",
       "version": "FD7FD7CW002RT021C194BFBEM1MLN1B2",
@@ -35692,7 +35692,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "GY",
       "variant": "SDLAAF1",
       "version": "FD7FD7CW005RT011B174BIAEM1VLN1B20",
@@ -35832,7 +35832,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "GY",
       "variant": "SDLAAF1",
       "version": "FM6FM6AJ019RT011A164BIBEM1VLN1B0",
@@ -35860,7 +35860,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "GY",
       "variant": "SDLAAF1",
       "version": "FM6FM6AJ019RT011B174BIBEM1VLN1B0",
@@ -36069,8 +36069,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Sportback",
+      "make": "AUDI",
+      "commercialName": "A3 SPORTBACK",
       "type": "GY",
       "variant": "SDPCAF1",
       "version": "FM6FM6C9003RT011C184BFBEM1MLN1",
@@ -36098,7 +36098,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "GY",
       "variant": "SDPCAF1",
       "version": "FM6FM6C9003RT011C184BFBEM1MLN1B0",
@@ -36126,7 +36126,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Sportback",
+      "commercialName": "A3 SPORTBACK",
       "type": "GY",
       "variant": "SDPCAF1",
       "version": "FM6FM6C9003RT021C194BFBEM1MLN1",
@@ -36224,7 +36224,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Sportback",
+      "commercialName": "A3 SPORTBACK",
       "type": "GY",
       "variant": "SDPCAF1",
       "version": "FM6FM6C9013RT011B174BIAEM1MLN1B0B",
@@ -36266,7 +36266,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "GY",
       "variant": "SDPCAF1",
       "version": "FM6FM6C9013RT011C184BIBEM1MLN1B0B",
@@ -36308,7 +36308,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Sportback",
+      "commercialName": "A3 SPORTBACK",
       "type": "GY",
       "variant": "SDSRBF1",
       "version": "FD7FD7GC002RT011A164BFAEM1MLN1D0",
@@ -36335,7 +36335,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A3 Sportback",
       "type": "GY",
       "variant": "SDSRBF1",
@@ -36405,8 +36405,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A3 Sportback",
+      "make": "AUDI",
+      "commercialName": "A3 SPORTBACK",
       "type": "GY",
       "variant": "SDSRBF1",
       "version": "FD7FD7GC002RT011C184BFBEM1MLN1D0",
@@ -36447,7 +36447,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A3 Sportback",
       "type": "GY",
       "variant": "SDSRBF1",
@@ -36532,7 +36532,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "GY",
       "variant": "SDSUDF1",
       "version": "FM6FM6C9002RT011B174BFAEM1VLN1",
@@ -36630,7 +36630,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Sportback",
+      "commercialName": "A3 SPORTBACK",
       "type": "GY",
       "variant": "SDTRDF1",
       "version": "FM6FM6C9002RT011A164BIAEM1VLN1D0A",
@@ -36742,7 +36742,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK",
+      "commercialName": "A3 Sportback",
       "type": "GY",
       "variant": "SDTSBF1",
       "version": "FD7FD7GC002RT011A164BIAEM1MLN1D0A",
@@ -36798,7 +36798,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Sportback",
+      "commercialName": "A3 SPORTBACK",
       "type": "GY",
       "variant": "SDTSBF1",
       "version": "FD7FD7GC002RT011B174BIAEM1MLN1D0C",
@@ -36938,7 +36938,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 SPORTBACK G-TRON",
+      "commercialName": "A3 Sportback g-tron",
       "type": "8V",
       "variant": "SDHFAF1",
       "version": "FD7FD7CW005RT11B164BFAEM1",
@@ -37008,7 +37008,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Sportback g-tron",
+      "commercialName": "A3 SPORTBACK G-TRON",
       "type": "8V",
       "variant": "SDHFAF1",
       "version": "FD7FD7CW005RT11C174BFAEM1",
@@ -37022,7 +37022,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A3 Sportback g-tron",
+      "commercialName": "A3 SPORTBACK G-TRON",
       "type": "8V",
       "variant": "SDHFAF1",
       "version": "FD7FD7CW005RT11C177CSAEM1",
@@ -41782,7 +41782,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 allroad quattro",
+      "commercialName": "A4 ALLROAD QUATTRO",
       "type": "B8",
       "variant": "H2DCPCQ1",
       "version": "QA8QA8D5009RT141E18S54BFBEM10D0",
@@ -41894,7 +41894,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 ALLROAD QUATTRO",
+      "commercialName": "A4 allroad quattro",
       "type": "B8",
       "variant": "H2DCPEQ1",
       "version": "QA8QA8D5009RT141E18S54BFBEM10",
@@ -41950,7 +41950,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 ALLROAD QUATTRO",
+      "commercialName": "A4 allroad quattro",
       "type": "B8",
       "variant": "H2DETAQ1",
       "version": "QD7QD7CL002RT141C17S54BFBEM1",
@@ -41963,7 +41963,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "A4 allroad quattro",
       "type": "B8",
       "variant": "H2DETAQ1",
@@ -41991,8 +41991,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 ALLROAD QUATTRO",
+      "make": "Audi",
+      "commercialName": "A4 allroad quattro",
       "type": "B8",
       "variant": "H2DETAQ1",
       "version": "QD7QD7CL002RT141C17S54BFBEM1B",
@@ -42048,7 +42048,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 ALLROAD QUATTRO",
+      "commercialName": "A4 allroad quattro",
       "type": "B8",
       "variant": "H2DETAQ1",
       "version": "QD7QD7CL002RT141E18S54BFBEM1",
@@ -42075,8 +42075,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 ALLROAD QUATTRO",
+      "make": "Audi",
+      "commercialName": "A4 allroad quattro",
       "type": "B8",
       "variant": "H2DETAQ1",
       "version": "QD7QD7CL002RT141E18S54BFBEM1AD0",
@@ -42159,8 +42159,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 ALLROAD QUATTRO",
+      "make": "Audi",
+      "commercialName": "A4 allroad quattro",
       "type": "B8",
       "variant": "H2DETAQ1",
       "version": "QD7QD7CL002RT151E19S54BFBEM1A",
@@ -42188,7 +42188,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 ALLROAD QUATTRO",
+      "commercialName": "A4 allroad quattro",
       "type": "B8",
       "variant": "H2DETAQ1",
       "version": "QD7QD7CL002RT151E19S54BFBEM1B",
@@ -42369,8 +42369,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 allroad quattro",
+      "make": "AUDI",
+      "commercialName": "A4 ALLROAD QUATTRO",
       "type": "B8",
       "variant": "H2DKNAQ1",
       "version": "QD7AD7CJ004RT141E18S54BFBEM10",
@@ -42398,7 +42398,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 ALLROAD QUATTRO",
+      "commercialName": "A4 allroad quattro",
       "type": "B8",
       "variant": "H2DKNAQ1",
       "version": "QD7AD7CJ004RT141E18S57CSBEM1",
@@ -42412,7 +42412,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 allroad quattro",
+      "commercialName": "A4 ALLROAD QUATTRO",
       "type": "B8",
       "variant": "H2DKNAQ1",
       "version": "QD7AD7CJ004RT151E19S54BFBEM1",
@@ -42496,7 +42496,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 ALLROAD QUATTRO",
+      "commercialName": "A4 allroad quattro",
       "type": "B8",
       "variant": "H2DMTAQ1",
       "version": "QD7AD7CJ004RT141C17S54BIAEM10B1",
@@ -42509,8 +42509,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 ALLROAD QUATTRO",
+      "make": "Audi",
+      "commercialName": "A4 allroad quattro",
       "type": "B8",
       "variant": "H2DMTAQ1",
       "version": "QD7AD7CJ004RT141E18S54BIBEM10B1",
@@ -42537,7 +42537,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A4 allroad quattro",
       "type": "B8",
       "variant": "H2DTPAQ1",
@@ -42566,7 +42566,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 ALLROAD QUATTRO",
+      "commercialName": "A4 allroad quattro",
       "type": "B8",
       "variant": "H2DTPAQ1",
       "version": "QD7AD7CJ003RT141E18S54BIBEM10D1",
@@ -43028,7 +43028,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DCPCQ1",
       "version": "QA8QA8D5009RT091E18S54BFBEM10D0",
@@ -43237,8 +43237,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DCPEQ1",
       "version": "QA8QA8D5009RT261C17S54BFAEM10D0",
@@ -43378,7 +43378,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DCPEQ1",
       "version": "QA8QA8D5009RT271E19S54BFBEM10",
@@ -43461,8 +43461,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DETAF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1",
@@ -43517,8 +43517,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DETAF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1A",
@@ -43531,8 +43531,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DETAF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1AD0",
@@ -43545,8 +43545,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DETAF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1B",
@@ -43601,8 +43601,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DETAF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1C",
@@ -43615,8 +43615,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DETAF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1CD0",
@@ -43741,8 +43741,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DETAF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM1BD0",
@@ -43881,8 +43881,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DETAF1",
       "version": "FD7FD7CK006RT071C17S54BFAEM1",
@@ -43937,8 +43937,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DETAF1",
       "version": "FD7FD7CK006RT071C17S54BFAEM1BD0",
@@ -43951,8 +43951,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DETAF1",
       "version": "FD7FD7CK006RT071C17S54BFAEM1C",
@@ -44105,8 +44105,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DETAF1",
       "version": "FD7FD7CK006RT071E18S54BFBEM1",
@@ -44218,7 +44218,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DETAF1",
       "version": "FD7FD7CK006RT081E19S54BFBEM1",
@@ -44358,7 +44358,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DETAF1",
       "version": "FD7FD7CK006RT081E19S57CPBEM1",
@@ -44400,7 +44400,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DETAQ1",
       "version": "QD7QD7CL002RT011B17S54BFAEM1",
@@ -44945,8 +44945,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DETAQ1",
       "version": "QD7QD7CL002RT071E18S54BFBEM1",
@@ -45030,7 +45030,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DETAQ1",
       "version": "QD7QD7CL002RT071E18S54BFBEM1C",
@@ -45072,7 +45072,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DETAQ1",
       "version": "QD7QD7CL002RT081E19S54BFBEM1",
@@ -45099,8 +45099,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DETAQ1",
       "version": "QD7QD7CL002RT081E19S54BFBEM1A",
@@ -45128,7 +45128,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DETAQ1",
       "version": "QD7QD7CL002RT081E19S54BFBEM1B",
@@ -45156,7 +45156,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DETAQ1",
       "version": "QD7QD7CL002RT081E19S54BFBEM1C",
@@ -45268,7 +45268,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEUAF1",
       "version": "FD7FD7CK006RT021E18S57CPBEM1",
@@ -45296,7 +45296,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEUAF1",
       "version": "FD7FD7CK006RT031E19S57CPBEM1",
@@ -45380,7 +45380,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEUCF1",
       "version": "FM6FM6DJ010RT011B16S54BFAEM1",
@@ -45394,7 +45394,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEUCF1",
       "version": "FM6FM6DJ010RT011B16S54BFAEM10",
@@ -45422,7 +45422,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEUCF1",
       "version": "FM6FM6DJ010RT011B17S54BFAEM1",
@@ -45436,7 +45436,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEUCF1",
       "version": "FM6FM6DJ010RT011B17S54BFAEM10",
@@ -45450,7 +45450,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEUCF1",
       "version": "FM6FM6DJ010RT011B17S54BFAEM10D0",
@@ -45492,7 +45492,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEUCF1",
       "version": "FM6FM6DJ010RT011B18S54BFAEM10D0",
@@ -45618,7 +45618,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEUCF1",
       "version": "FM6FM6DJ010RT021E18S54BFBEM10",
@@ -45632,7 +45632,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEUCF1",
       "version": "FM6FM6DJ010RT021E18S54BFBEM10D0",
@@ -45660,7 +45660,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEUCF1",
       "version": "FM6FM6DJ010RT031E19S54BFBEM10D0",
@@ -45687,7 +45687,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZBF1",
@@ -45744,7 +45744,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEZBF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM10",
@@ -45786,7 +45786,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEZBF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM1",
@@ -45814,7 +45814,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEZBF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM10D1",
@@ -46024,7 +46024,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEZBF1",
       "version": "FD7FD7CK006RT021E18S54BFBEM10",
@@ -46052,7 +46052,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZBF1",
       "version": "FD7FD7CK006RT021E18S54BFBEM10D1",
@@ -46080,7 +46080,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZBF1",
       "version": "FD7FD7CK006RT031E19S54BFBEM10",
@@ -46108,7 +46108,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT011B16S54BFAEM1",
@@ -46150,7 +46150,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT011B16S54BFAEM10",
@@ -46220,7 +46220,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT011B16S54BFAEM1BD1",
@@ -46247,8 +46247,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT011B16S54BFAEM1CD1",
@@ -46262,7 +46262,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1",
@@ -46289,7 +46289,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
@@ -46331,8 +46331,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1A",
@@ -46345,8 +46345,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1AD1",
@@ -46457,8 +46457,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1CD1",
@@ -46471,8 +46471,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM1",
@@ -46499,8 +46499,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM10",
@@ -46527,8 +46527,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM1A",
@@ -46597,8 +46597,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM1C",
@@ -46625,8 +46625,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM1CD1",
@@ -47199,8 +47199,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT021E18S54BFBEM1",
@@ -47214,7 +47214,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT021E18S54BFBEM10",
@@ -47270,7 +47270,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT021E18S54BFBEM1AD1",
@@ -47284,7 +47284,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT021E18S54BFBEM1B",
@@ -47298,7 +47298,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT021E18S54BFBEM1BD1",
@@ -47312,7 +47312,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT021E18S54BFBEM1C",
@@ -47339,8 +47339,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT031E19S54BFBEM1",
@@ -47423,8 +47423,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT031E19S54BFBEM1B",
@@ -47438,7 +47438,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DEZEF1",
       "version": "FD7FD7CK006RT031E19S54BFBEM1BD1",
@@ -47788,7 +47788,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DLVAF1",
       "version": "FD7FD7CK003RT011B17S54BFAEM1",
@@ -47815,8 +47815,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DLVAF1",
       "version": "FD7FD7CK003RT011B17S54BFAEM10",
@@ -47858,7 +47858,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DLVAF1",
       "version": "FD7FD7CK003RT011B18S54BFAEM1",
@@ -48025,8 +48025,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DLVAF1",
       "version": "FD7FD7CK003RT021E18S54BFBEM1",
@@ -48054,7 +48054,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DLVAF1",
       "version": "FD7FD7CK003RT021E18S54BFBEM10",
@@ -48138,7 +48138,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DLVAF1",
       "version": "FD7FD7CK003RT031E19S54BFBEM10",
@@ -48166,7 +48166,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DLVAF1",
       "version": "FD7FD7CK003RT031E19S57CSBEM1",
@@ -48292,7 +48292,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DLVBF1",
       "version": "FD7FD7CK003RT011B16S54BFAEM1A",
@@ -48348,7 +48348,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DLVBF1",
       "version": "FD7FD7CK003RT011B17S54BFAEM1",
@@ -48375,8 +48375,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DLVBF1",
       "version": "FD7FD7CK003RT011B17S54BFAEM10",
@@ -48417,7 +48417,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DLVBF1",
@@ -48502,7 +48502,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DLVBF1",
       "version": "FD7FD7CK003RT011B18S54BFAEM1",
@@ -48670,7 +48670,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DLVBF1",
       "version": "FD7FD7CK003RT021B17S54BFAEM1",
@@ -48964,7 +48964,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DLVBF1",
       "version": "FD7FD7CK003RT021E18S54BFBEM10",
@@ -49048,7 +49048,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DLVBF1",
       "version": "FD7FD7CK003RT021E18S57CSBEM1",
@@ -49076,7 +49076,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DLVBF1",
       "version": "FD7FD7CK003RT031E19S54BFBEM1",
@@ -49188,7 +49188,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DLVBF1",
       "version": "FM6FM6DJ011RT011B16S54BFAEM1",
@@ -49202,7 +49202,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DLVBF1",
       "version": "FM6FM6DJ011RT011B16S54BFAEM10",
@@ -49243,8 +49243,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DLVBF1",
       "version": "FM6FM6DJ011RT011B17S54BFAEM10",
@@ -49705,8 +49705,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DMSAF1",
       "version": "FD7FD7CK003RT011B17S54BIAEM1AB1",
@@ -49719,7 +49719,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DMSAF1",
@@ -49775,7 +49775,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DMSAF1",
@@ -49803,8 +49803,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DMSAF1",
       "version": "FD7FD7CK003RT011B18S54BIAEM1CB1",
@@ -49887,8 +49887,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DMSAF1",
       "version": "FD7FD7CK003RT021C17S54BIAEM1BB1",
@@ -49929,8 +49929,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DMSAF1",
       "version": "FD7FD7CK003RT021E18S54BIBEM1BB1",
@@ -50308,7 +50308,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DMSBF1",
       "version": "FD7FD7CK003RT011B16S54BIAEM1AB1",
@@ -50377,8 +50377,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Avant",
+      "make": "AUDI",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DMSBF1",
       "version": "FD7FD7CK003RT011B17S54BIAEM1BB1",
@@ -50686,7 +50686,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DMSBF1",
       "version": "FD7FD7CK003RT021E18S54BIBEM1BB1",
@@ -50714,7 +50714,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DMSBF1",
       "version": "FD7FD7CK003RT021E18S54BIBEM1CB1",
@@ -50784,7 +50784,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DMSBF1",
       "version": "FM6FM6DJ011RT011B16S54BIAEM10B1",
@@ -51035,8 +51035,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTNAF1",
       "version": "FD7FD7CK006RT011B17S54BIAEM1AD1",
@@ -51049,8 +51049,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTNAF1",
       "version": "FD7FD7CK006RT011B17S54BIAEM1BD1",
@@ -51063,8 +51063,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTNAF1",
       "version": "FD7FD7CK006RT011B17S54BIAEM1CD1",
@@ -51106,7 +51106,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DTNAF1",
       "version": "FD7FD7CK006RT011B18S54BIAEM1CD1",
@@ -51134,7 +51134,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTNAF1",
       "version": "FD7FD7CK006RT021B16S54BIAEM1BD1",
@@ -51218,7 +51218,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTNAF1",
       "version": "FD7FD7CK006RT021C17S54BIAEM1BD1",
@@ -51357,8 +51357,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTNBF1",
       "version": "FD7FD7CK006RT011B16S54BIAEM1AD1",
@@ -51400,7 +51400,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant",
+      "commercialName": "A4 AVANT",
       "type": "B8",
       "variant": "A2DTNBF1",
       "version": "FD7FD7CK006RT011B17S54BIAEM1AD1",
@@ -51596,7 +51596,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTNBF1",
       "version": "FD7FD7CK006RT021E18S54BIBEM1AD1",
@@ -51610,7 +51610,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTNBF1",
       "version": "FD7FD7CK006RT021E18S54BIBEM1BD1",
@@ -51652,7 +51652,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTNBF1",
       "version": "FD7FD7CK006RT031E19S54BIBEM1BD1",
@@ -51679,8 +51679,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTPAF1",
       "version": "FD7FD7CK006RT011B17S54BIAEM1AD1",
@@ -51693,8 +51693,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTPAF1",
       "version": "FD7FD7CK006RT011B17S54BIAEM1BD1",
@@ -51707,8 +51707,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTPAF1",
       "version": "FD7FD7CK006RT011B17S54BIAEM1CD1",
@@ -51721,8 +51721,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTPAF1",
       "version": "FD7FD7CK006RT011B18S54BIAEM1AD1",
@@ -51735,8 +51735,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTPAF1",
       "version": "FD7FD7CK006RT011B18S54BIAEM1BD1",
@@ -51749,8 +51749,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTPAF1",
       "version": "FD7FD7CK006RT011B18S54BIAEM1CD1",
@@ -51805,8 +51805,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTPAF1",
       "version": "FD7FD7CK006RT071C17S54BIAEM1BD1",
@@ -51959,8 +51959,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "make": "Audi",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTPAF1",
       "version": "FD7FD7CK006RT081E19S54BIBEM1AD1",
@@ -52015,7 +52015,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTPAQ1",
@@ -52030,7 +52030,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTPAQ1",
       "version": "QD7AD7CJ003RT011B18S54BIAEM10D1",
@@ -52100,7 +52100,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT",
+      "commercialName": "A4 Avant",
       "type": "B8",
       "variant": "A2DTPAQ1",
       "version": "QD7AD7CJ003RT081E19S54BIBEM10D1",
@@ -52156,7 +52156,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant g-tron",
+      "commercialName": "A4 AVANT G-TRON",
       "type": "B8",
       "variant": "A2CVLAF1",
       "version": "FD7FD7CK005RT011B16S54BFAEM10",
@@ -52240,7 +52240,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT G-TRON",
+      "commercialName": "A4 Avant g-tron",
       "type": "B8",
       "variant": "A2CVLAF1",
       "version": "FD7FD7CK005RT011B18S54BFAEM10",
@@ -52394,7 +52394,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Avant g-tron",
+      "commercialName": "A4 AVANT G-TRON",
       "type": "B8",
       "variant": "A2CVLAF1",
       "version": "FD7FD7CK005RT031E19S54BFBEM10",
@@ -52422,7 +52422,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 AVANT G-TRON",
+      "commercialName": "A4 Avant g-tron",
       "type": "B8",
       "variant": "A2DRXAF1",
       "version": "FD7FD7CK005RT011B16S54BIAEM10C0",
@@ -52925,8 +52925,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DETAF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1",
@@ -52953,8 +52953,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DETAF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1A",
@@ -52967,8 +52967,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DETAF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1AD0",
@@ -52981,8 +52981,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DETAF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1B",
@@ -53010,7 +53010,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DETAF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1C",
@@ -53037,8 +53037,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DETAF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM1",
@@ -53051,8 +53051,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DETAF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM1A",
@@ -53079,8 +53079,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DETAF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM1B",
@@ -53457,8 +53457,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DETAF1",
       "version": "FD7FD7CK006RT071E18S54BFBEM1CD0",
@@ -53626,7 +53626,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DETAQ1",
       "version": "QD7QD7CL002RT011B17S54BFAEM1",
@@ -53668,7 +53668,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DETAQ1",
       "version": "QD7QD7CL002RT011B17S54BFAEM1B",
@@ -53709,8 +53709,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DETAQ1",
       "version": "QD7QD7CL002RT011B17S54BFAEM1C",
@@ -53751,8 +53751,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DETAQ1",
       "version": "QD7QD7CL002RT011B18S54BFAEM1A",
@@ -54046,7 +54046,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DETAQ1",
       "version": "QD7QD7CL002RT071E18S57CPBEM1",
@@ -54073,8 +54073,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DETAQ1",
       "version": "QD7QD7CL002RT081E19S54BFBEM1",
@@ -54102,7 +54102,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DETAQ1",
       "version": "QD7QD7CL002RT081E19S54BFBEM1B",
@@ -54115,8 +54115,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DETAQ1",
       "version": "QD7QD7CL002RT081E19S54BFBEM1C",
@@ -54172,7 +54172,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEUAF1",
       "version": "FD7FD7CK006RT021C17S57CPAEM1",
@@ -54185,7 +54185,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEUAF1",
@@ -54199,8 +54199,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DEUAF1",
       "version": "FD7FD7CK006RT031E19S57CPBEM1",
@@ -54241,7 +54241,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEUCF1",
@@ -54256,7 +54256,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DEUCF1",
       "version": "FM6FM6DJ010RT011B16S54BFAEM1",
@@ -54284,7 +54284,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DEUCF1",
       "version": "FM6FM6DJ010RT011B16S54BFAEM10D0",
@@ -54297,7 +54297,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEUCF1",
@@ -54311,8 +54311,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEUCF1",
       "version": "FM6FM6DJ010RT011B17S54BFAEM10",
@@ -54522,7 +54522,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEZBF1",
       "version": "FD7FD7CK006RT011B16S54BFAEM1",
@@ -54535,8 +54535,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DEZBF1",
       "version": "FD7FD7CK006RT011B16S54BFAEM10",
@@ -54606,7 +54606,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DEZBF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM10D1",
@@ -54619,8 +54619,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DEZBF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM1",
@@ -54633,8 +54633,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DEZBF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM10",
@@ -54648,7 +54648,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEZBF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM10D1",
@@ -54802,7 +54802,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DEZBF1",
       "version": "FD7FD7CK006RT021E18S54BFBEM1",
@@ -54843,8 +54843,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DEZBF1",
       "version": "FD7FD7CK006RT031E19S54BFBEM1",
@@ -54857,8 +54857,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DEZBF1",
       "version": "FD7FD7CK006RT031E19S54BFBEM10",
@@ -54885,8 +54885,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT011B16S54BFAEM1",
@@ -54928,7 +54928,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT011B16S54BFAEM10",
@@ -54942,7 +54942,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT011B16S54BFAEM1A",
@@ -55012,7 +55012,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT011B16S54BFAEM1CD1",
@@ -55026,7 +55026,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1",
@@ -55054,7 +55054,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM10",
@@ -55123,8 +55123,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1B",
@@ -55151,8 +55151,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT011B17S54BFAEM1BD1",
@@ -55347,8 +55347,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT011B18S54BFAEM1CD1",
@@ -55670,7 +55670,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT021E18S54BFAEM1",
@@ -55698,7 +55698,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT021E18S54BFAEM10",
@@ -55754,7 +55754,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT021E18S54BFAEM1B",
@@ -55866,7 +55866,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT021E18S54BFBEM1B",
@@ -55935,8 +55935,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT031E19S54BFBEM1",
@@ -55949,8 +55949,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT031E19S54BFBEM10",
@@ -55964,7 +55964,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DEZEF1",
       "version": "FD7FD7CK006RT031E19S54BFBEM1B",
@@ -56048,7 +56048,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DKNAQ1",
       "version": "QD7AD7CJ004RT071C17S54BFAEM1",
@@ -56243,8 +56243,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DLVAF1",
       "version": "FD7FD7CK003RT011B17S54BFAEM1",
@@ -56313,8 +56313,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DLVAF1",
       "version": "FD7FD7CK003RT011B18S54BFAEM1",
@@ -56397,8 +56397,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DLVAF1",
       "version": "FD7FD7CK003RT021C17S54BFAEM1",
@@ -56411,8 +56411,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DLVAF1",
       "version": "FD7FD7CK003RT021C17S54BFAEM10",
@@ -56453,7 +56453,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DLVAF1",
@@ -56482,7 +56482,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DLVAF1",
       "version": "FD7FD7CK003RT021E18S54BFAEM10",
@@ -56594,7 +56594,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DLVAF1",
       "version": "FD7FD7CK003RT031E19S54BFBEM10",
@@ -56636,7 +56636,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DLVBF1",
       "version": "FD7FD7CK003RT011B16S54BFAEM1",
@@ -56720,7 +56720,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DLVBF1",
       "version": "FD7FD7CK003RT011B16S54BFAEM1B",
@@ -56761,8 +56761,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DLVBF1",
       "version": "FD7FD7CK003RT011B17S54BFAEM1",
@@ -56790,7 +56790,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DLVBF1",
       "version": "FD7FD7CK003RT011B17S54BFAEM10",
@@ -56817,8 +56817,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DLVBF1",
       "version": "FD7FD7CK003RT011B17S54BFAEM1A",
@@ -56846,7 +56846,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DLVBF1",
       "version": "FD7FD7CK003RT011B17S54BFAEM1B",
@@ -56901,8 +56901,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A4 Limousine",
+      "make": "AUDI",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DLVBF1",
       "version": "FD7FD7CK003RT011B18S54BFAEM1",
@@ -57224,7 +57224,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DLVBF1",
       "version": "FD7FD7CK003RT021C17S57CSAEM1",
@@ -57294,7 +57294,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DLVBF1",
       "version": "FD7FD7CK003RT021E18S54BFAEM1B",
@@ -57546,7 +57546,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DLVBF1",
       "version": "FM6FM6DJ011RT011B17S54BFAEM1",
@@ -57742,7 +57742,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DLVBF1",
       "version": "FM6FM6DJ011RT021E18S54BFAEM1",
@@ -57756,7 +57756,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DLVBF1",
       "version": "FM6FM6DJ011RT021E18S54BFAEM10",
@@ -57951,8 +57951,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DMSAF1",
       "version": "FD7FD7CK003RT011B17S54BIAEM1CB1",
@@ -58554,7 +58554,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DMSBF1",
       "version": "FD7FD7CK003RT011B17S54BIAEM1AB1",
@@ -58567,7 +58567,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DMSBF1",
@@ -58596,7 +58596,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DMSBF1",
       "version": "FD7FD7CK003RT011B17S54BIAEM1CB1",
@@ -58624,7 +58624,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DMSBF1",
       "version": "FD7FD7CK003RT011B18S54BIAEM1BB1",
@@ -58805,8 +58805,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DMSBF1",
       "version": "FD7FD7CK003RT021E18S54BIAEM1AB1",
@@ -58820,7 +58820,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DMSBF1",
       "version": "FD7FD7CK003RT021E18S54BIAEM1BB1",
@@ -58862,7 +58862,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DMSBF1",
       "version": "FD7FD7CK003RT031E19S54BIAEM1BB1",
@@ -58904,7 +58904,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DMSBF1",
       "version": "FD7FD7CK003RT031E19S54BIBEM1BB1",
@@ -58945,7 +58945,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DMSBF1",
@@ -59058,7 +59058,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 Limousine",
+      "commercialName": "A4 LIMOUSINE",
       "type": "B8",
       "variant": "L2DMTAQ1",
       "version": "QD7AD7CJ004RT071C17S54BIAEM10B1",
@@ -59183,8 +59183,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DTNAF1",
       "version": "FD7FD7CK006RT011B17S54BIAEM1BD1",
@@ -59226,7 +59226,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DTNAF1",
       "version": "FD7FD7CK006RT011B18S54BIAEM1BD1",
@@ -59772,7 +59772,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DTPAQ1",
       "version": "QD7AD7CJ003RT011B17S54BIAEM10D1",
@@ -59786,7 +59786,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A4 LIMOUSINE",
+      "commercialName": "A4 Limousine",
       "type": "B8",
       "variant": "L2DTPAQ1",
       "version": "QD7AD7CJ003RT011B18S54BIAEM10D1",
@@ -65624,7 +65624,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 CABRIOLET",
+      "commercialName": "A5 Cabriolet",
       "type": "B8",
       "variant": "K2DETAF1",
       "version": "FD7FD7CK006RT171E18S44BFBEM10D0",
@@ -65652,7 +65652,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 CABRIOLET",
+      "commercialName": "A5 Cabriolet",
       "type": "B8",
       "variant": "K2DETAF1",
       "version": "FD7FD7CK006RT171E19S44BFBEM10",
@@ -65946,7 +65946,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 CABRIOLET",
+      "commercialName": "A5 Cabriolet",
       "type": "B8",
       "variant": "K2DEUAF1",
       "version": "FD7FD7CK006RT171E19S47CPBEM1",
@@ -66044,7 +66044,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 CABRIOLET",
+      "commercialName": "A5 Cabriolet",
       "type": "B8",
       "variant": "K2DEZEF1",
       "version": "FD7FD7CK006RT171E18S44BFBEM10",
@@ -66058,7 +66058,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 CABRIOLET",
+      "commercialName": "A5 Cabriolet",
       "type": "B8",
       "variant": "K2DEZEF1",
       "version": "FD7FD7CK006RT171E18S44BFBEM10D1",
@@ -66351,8 +66351,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Cabriolet",
+      "make": "AUDI",
+      "commercialName": "A5 CABRIOLET",
       "type": "B8",
       "variant": "K2DLVAF1",
       "version": "FD7FD7CK003RT171E18S44BFBEM1",
@@ -66366,7 +66366,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Cabriolet",
+      "commercialName": "A5 CABRIOLET",
       "type": "B8",
       "variant": "K2DLVAF1",
       "version": "FD7FD7CK003RT171E18S44BFBEM10",
@@ -66394,7 +66394,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 CABRIOLET",
+      "commercialName": "A5 Cabriolet",
       "type": "B8",
       "variant": "K2DLVAF1",
       "version": "FD7FD7CK003RT171E19S44BFBEM1",
@@ -66422,7 +66422,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 CABRIOLET",
+      "commercialName": "A5 Cabriolet",
       "type": "B8",
       "variant": "K2DLVAF1",
       "version": "FD7FD7CK003RT171E19S47CSBEM1",
@@ -66464,7 +66464,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Cabriolet",
+      "commercialName": "A5 CABRIOLET",
       "type": "B8",
       "variant": "K2DLVAF1",
       "version": "FD7FD7CK003RT181E20S47CSBEM1",
@@ -66548,7 +66548,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 CABRIOLET",
+      "commercialName": "A5 Cabriolet",
       "type": "B8",
       "variant": "K2DMSAF1",
       "version": "FD7FD7CK003RT171E19S44BIBEM10B1",
@@ -66576,7 +66576,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Cabriolet",
+      "commercialName": "A5 CABRIOLET",
       "type": "B8",
       "variant": "K2DMSAQ1",
       "version": "QD7AD7CJ004RT171E18S44BIBEM10B1",
@@ -66632,7 +66632,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Cabriolet",
+      "commercialName": "A5 CABRIOLET",
       "type": "B8",
       "variant": "K2DMSBF1",
       "version": "FD7FD7CK003RT171E18S44BIBEM10B1",
@@ -66660,7 +66660,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 CABRIOLET",
+      "commercialName": "A5 Cabriolet",
       "type": "B8",
       "variant": "K2DMTAQ1",
       "version": "QD7AD7CJ004RT171E18S44BIBEM10B1",
@@ -66744,7 +66744,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 CABRIOLET",
+      "commercialName": "A5 Cabriolet",
       "type": "B8",
       "variant": "K2DTPAF1",
       "version": "FD7FD7CK006RT171E18S44BIBEM10D1",
@@ -67150,7 +67150,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Coupe",
+      "commercialName": "A5 COUPE",
       "type": "B8",
       "variant": "C2DCPCQ1",
       "version": "QA8QA8D5009RT201E18S44BFAEM10",
@@ -67276,7 +67276,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Coupe",
+      "commercialName": "A5 COUPE",
       "type": "B8",
       "variant": "C2DCPCQ1",
       "version": "QA8QA8D5009RT211E20S44BFBEM10",
@@ -67514,7 +67514,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 COUPE",
+      "commercialName": "A5 Coupe",
       "type": "B8",
       "variant": "C2DETAF1",
       "version": "FD7FD7CK006RT161B18S44BFAEM10",
@@ -67597,8 +67597,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A5 COUPE",
+      "make": "Audi",
+      "commercialName": "A5 Coupe",
       "type": "B8",
       "variant": "C2DETAF1",
       "version": "FD7FD7CK006RT171E19S44BFAEM1",
@@ -67612,7 +67612,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 COUPE",
+      "commercialName": "A5 Coupe",
       "type": "B8",
       "variant": "C2DETAF1",
       "version": "FD7FD7CK006RT171E19S44BFAEM10",
@@ -67626,7 +67626,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 COUPE",
+      "commercialName": "A5 Coupe",
       "type": "B8",
       "variant": "C2DETAF1",
       "version": "FD7FD7CK006RT171E19S44BFAEM10D0",
@@ -67723,8 +67723,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A5 COUPE",
+      "make": "Audi",
+      "commercialName": "A5 Coupe",
       "type": "B8",
       "variant": "C2DETAF1",
       "version": "FD7FD7CK006RT181E20S44BFBEM10",
@@ -67737,8 +67737,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A5 COUPE",
+      "make": "Audi",
+      "commercialName": "A5 Coupe",
       "type": "B8",
       "variant": "C2DETAF1",
       "version": "FD7FD7CK006RT181E20S44BFBEM10D0",
@@ -67906,7 +67906,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 COUPE",
+      "commercialName": "A5 Coupe",
       "type": "B8",
       "variant": "C2DETAQ1",
       "version": "QD7QD7CL002RT171E19S44BFAEM10D0",
@@ -68017,8 +68017,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Coupe",
+      "make": "AUDI",
+      "commercialName": "A5 COUPE",
       "type": "B8",
       "variant": "C2DEUAF1",
       "version": "FD7FD7CK006RT171E19S47CPBEM1",
@@ -68130,7 +68130,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Coupe",
+      "commercialName": "A5 COUPE",
       "type": "B8",
       "variant": "C2DEZEF1",
       "version": "FD7FD7CK006RT161B18S44BFAEM10D1",
@@ -68143,8 +68143,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Coupe",
+      "make": "AUDI",
+      "commercialName": "A5 COUPE",
       "type": "B8",
       "variant": "C2DEZEF1",
       "version": "FD7FD7CK006RT171E19S44BFAEM1",
@@ -68172,7 +68172,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 COUPE",
+      "commercialName": "A5 Coupe",
       "type": "B8",
       "variant": "C2DEZEF1",
       "version": "FD7FD7CK006RT171E19S44BFAEM10D1",
@@ -68409,8 +68409,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Coupe",
+      "make": "AUDI",
+      "commercialName": "A5 COUPE",
       "type": "B8",
       "variant": "C2DLVAF1",
       "version": "FD7FD7CK003RT161B18S44BFAEM10",
@@ -68466,7 +68466,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Coupe",
+      "commercialName": "A5 COUPE",
       "type": "B8",
       "variant": "C2DLVAF1",
       "version": "FD7FD7CK003RT171E18S44BFAEM10",
@@ -68746,7 +68746,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 COUPE",
+      "commercialName": "A5 Coupe",
       "type": "B8",
       "variant": "C2DMSAF1",
       "version": "FD7FD7CK003RT161B18S44BIAEM10B1",
@@ -68788,7 +68788,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Coupe",
+      "commercialName": "A5 COUPE",
       "type": "B8",
       "variant": "C2DMSAF1",
       "version": "FD7FD7CK003RT171E19S44BIAEM10B1",
@@ -68886,7 +68886,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 COUPE",
+      "commercialName": "A5 Coupe",
       "type": "B8",
       "variant": "C2DMSAQ1",
       "version": "QD7AD7CJ004RT181E20S44BIBEM10B1",

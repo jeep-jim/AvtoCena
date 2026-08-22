@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 8,
   "rows": [
     {
@@ -355,8 +355,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Connect",
+      "make": "FORD",
+      "commercialName": "TOURNEO CONNECT",
       "type": "PJ2",
       "variant": "Z2GA1CEX",
       "version": "B5BAASADDADKG",
@@ -874,7 +874,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Connect",
+      "commercialName": "TOURNEO CONNECT",
       "type": "PJ2",
       "variant": "Z2GA1DEX",
       "version": "E7BBBSADDADKT",
@@ -1293,7 +1293,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Tourneo Connect",
       "type": "PJ2",
       "variant": "ZTGA1CEX",
@@ -1308,7 +1308,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Connect",
+      "commercialName": "TOURNEO CONNECT",
       "type": "PJ2",
       "variant": "ZTGA1CEX",
       "version": "B5CCASABDADJH",
@@ -1321,8 +1321,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TOURNEO CONNECT",
+      "make": "Ford",
+      "commercialName": "Tourneo Connect",
       "type": "PJ2",
       "variant": "ZTGA1CEX",
       "version": "B5CCASADDADJJ",
@@ -1378,7 +1378,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CONNECT",
+      "commercialName": "Tourneo Connect",
       "type": "PJ2",
       "variant": "ZTGA1CGX",
       "version": "B5BBASADDADIK",
@@ -1434,7 +1434,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Connect",
+      "commercialName": "TOURNEO CONNECT",
       "type": "PJ2",
       "variant": "ZTGA1CGX",
       "version": "B5CCASABDADJL",
@@ -1532,7 +1532,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CONNECT",
+      "commercialName": "Tourneo Connect",
       "type": "PJ2",
       "variant": "ZTGA1DEX",
       "version": "B5BBBSAEDAZ4T",
@@ -1685,8 +1685,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TOURNEO CONNECT",
+      "make": "Ford",
+      "commercialName": "Tourneo Connect",
       "type": "PJ2",
       "variant": "ZTGA1DEX",
       "version": "E5CCBSADDADJJ",
@@ -1756,7 +1756,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Connect",
+      "commercialName": "TOURNEO CONNECT",
       "type": "PJ2",
       "variant": "ZTGA1DEX",
       "version": "E7BBBSADDADIT",
@@ -1811,8 +1811,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TOURNEO CONNECT",
+      "make": "Ford",
+      "commercialName": "Tourneo Connect",
       "type": "PJ2",
       "variant": "ZTGA1DEX",
       "version": "E7CCBSADDADJT",
@@ -1909,8 +1909,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Connect",
+      "make": "FORD",
+      "commercialName": "TOURNEO CONNECT",
       "type": "PJ2",
       "variant": "ZTGA1DGX",
       "version": "B7BBBSAEDAZ4V",
@@ -1994,7 +1994,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CONNECT",
+      "commercialName": "Tourneo Connect",
       "type": "PJ2",
       "variant": "ZTGA1DGX",
       "version": "E5BBBSADDADIH",
@@ -2050,7 +2050,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CONNECT",
+      "commercialName": "Tourneo Connect",
       "type": "PJ2",
       "variant": "ZTGA1DGX",
       "version": "E5CCBSADDADJJ",
@@ -2105,8 +2105,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Connect",
+      "make": "FORD",
+      "commercialName": "TOURNEO CONNECT",
       "type": "PJ2",
       "variant": "ZTGA1DGX",
       "version": "E7BBBSABDADIT",
@@ -3968,7 +3968,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Courier",
+      "commercialName": "TOURNEO COURIER",
       "type": "JU2",
       "variant": "SFCE1LX",
       "version": "5AKPZNACLAH",
@@ -3982,7 +3982,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO COURIER",
+      "commercialName": "Tourneo Courier",
       "type": "JU2",
       "variant": "SFCE1LX",
       "version": "5AKPZNACLAH",
@@ -4094,7 +4094,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Courier",
+      "commercialName": "TOURNEO COURIER",
       "type": "JU2",
       "variant": "XWCA1LX",
       "version": "5DGDHNACHAL",
@@ -4136,7 +4136,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Courier",
+      "commercialName": "TOURNEO COURIER",
       "type": "JU2",
       "variant": "XWCA1LX",
       "version": "5DGDZNACHAL",
@@ -4206,7 +4206,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Courier",
+      "commercialName": "TOURNEO COURIER",
       "type": "JU2",
       "variant": "XXCA1LX",
       "version": "5DGDHNACDAL",
@@ -4234,7 +4234,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO COURIER",
+      "commercialName": "Tourneo Courier",
       "type": "JU2",
       "variant": "XXCA1LX",
       "version": "5DGDHNACDAL",
@@ -4345,8 +4345,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Courier",
+      "make": "FORD",
+      "commercialName": "TOURNEO COURIER",
       "type": "JU2",
       "variant": "XXCA1LX",
       "version": "5DGDZNACDAL",
@@ -4933,7 +4933,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFA1DSX",
@@ -4962,7 +4962,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFA1DSX",
       "version": "S8AGASADCAWWE",
@@ -5031,8 +5031,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "make": "Ford",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFA1DSX",
       "version": "S8WRASADCAFNC",
@@ -5228,7 +5228,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Custom",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BCFA1SBX",
       "version": "S9AGASADCAFGE",
@@ -5283,8 +5283,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "make": "Ford",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFA1SBX",
       "version": "S9AGCSADCAFGE",
@@ -5311,8 +5311,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Custom",
+      "make": "FORD",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BCFA1SBX",
       "version": "S9AGCSADCAWWE",
@@ -5325,8 +5325,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "make": "Ford",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFA1SBX",
       "version": "S9WJASADCAHTC",
@@ -5549,8 +5549,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Custom",
+      "make": "FORD",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BCFA1TBX",
       "version": "S8AGCSBDCAWWG",
@@ -5591,8 +5591,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Custom",
+      "make": "FORD",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BCFA1TBX",
       "version": "S8WJCSBDCAHTG",
@@ -5648,7 +5648,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFA1TBX",
       "version": "S9AGASADCAFGE",
@@ -5816,7 +5816,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFA1TBX",
       "version": "S9AGCSADCAFGE",
@@ -5956,7 +5956,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFA1TBX",
       "version": "S9AGCSADCAWWE",
@@ -6109,7 +6109,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFA1TBX",
@@ -6194,7 +6194,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFA1TBX",
       "version": "S9WRCSAFCAWZC",
@@ -6222,7 +6222,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFA1THX",
       "version": "S9AGASADCAWWE",
@@ -6334,7 +6334,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Custom",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BCFC1DSX",
       "version": "S8WRASABCAFTC",
@@ -6375,7 +6375,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFC1DSX",
@@ -6390,7 +6390,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Custom",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BCFC1DSX",
       "version": "S8WRCSABCAFTE",
@@ -6432,7 +6432,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Custom",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BCFC1DSX",
       "version": "S8WRCSAEDAFTE",
@@ -6515,7 +6515,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFC1SBX",
@@ -6544,7 +6544,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFC1SBX",
       "version": "S9WJCSAEDAFSE",
@@ -6571,7 +6571,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BCFC1SBX",
@@ -6697,8 +6697,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Custom",
+      "make": "FORD",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BCFC1TBX",
       "version": "S9WJASABCAFSC",
@@ -6753,8 +6753,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "make": "Ford",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFC1TBX",
       "version": "S9WJASADCAFSC",
@@ -6781,8 +6781,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Custom",
+      "make": "FORD",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BCFC1TBX",
       "version": "S9WJCSABCAFSE",
@@ -6879,8 +6879,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "make": "Ford",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFC1TBX",
       "version": "S9WRASAEDAWYC",
@@ -6893,7 +6893,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BCFC1TBX",
@@ -6964,7 +6964,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Custom",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BJFA1SBX",
       "version": "S9WRASADCAI4C",
@@ -7328,7 +7328,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BKFA1SBX",
       "version": "S9WRASADCAFLC",
@@ -7355,8 +7355,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "make": "Ford",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BKFA1SBX",
       "version": "S9WRASADCAFLC",
@@ -7467,8 +7467,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Custom",
+      "make": "FORD",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BKFA1SBX",
       "version": "S9WRCSADCAFLC",
@@ -7635,8 +7635,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Custom",
+      "make": "FORD",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BKFA1TBX",
       "version": "S9AGASADCAFEE",
@@ -7734,7 +7734,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BKFA1TBX",
       "version": "S9AGCSADCAFEE",
@@ -7789,8 +7789,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "TOURNEO CUSTOM",
+      "make": "FORD",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BKFA1TBX",
       "version": "S9AGCSADCAWNE",
@@ -7803,8 +7803,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Custom",
+      "make": "FORD",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BKFA1TBX",
       "version": "S9AGCSADCAWNE",
@@ -7873,8 +7873,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "make": "Ford",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BKFA1TBX",
       "version": "S9WRASADCAFLC",
@@ -7944,7 +7944,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Custom",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BKFA1TBX",
       "version": "S9WRCSADCAFLC",
@@ -8070,7 +8070,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BKFC1SBX",
       "version": "S9WRASABCAFPC",
@@ -8083,8 +8083,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Custom",
+      "make": "FORD",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BKFC1SBX",
       "version": "S9WRASABCAFPC",
@@ -8139,8 +8139,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "make": "Ford",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BKFC1SBX",
       "version": "S9WRASAEDAFPC",
@@ -8196,7 +8196,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BKFC1SBX",
       "version": "S9WRCSADCAFPE",
@@ -8251,8 +8251,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "make": "Ford",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BKFC1SBX",
       "version": "S9WRCSAEDAWQE",
@@ -8307,8 +8307,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Custom",
+      "make": "FORD",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BKFC1TBX",
       "version": "S9WRASABCAFPC",
@@ -8433,8 +8433,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Tourneo Custom",
+      "make": "FORD",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "BKFC1TBX",
       "version": "S9WRCSABCAFPE",
@@ -8448,7 +8448,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BKFC1TBX",
       "version": "S9WRCSADCAFPE",
@@ -8489,8 +8489,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "make": "Ford",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BKFC1TBX",
       "version": "S9WRCSAEDAFPE",
@@ -8517,8 +8517,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TOURNEO CUSTOM",
+      "make": "Ford",
+      "commercialName": "Tourneo Custom",
       "type": "FAC",
       "variant": "BKFC1TBX",
       "version": "S9WRCSAEDAWQE",
@@ -8882,7 +8882,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Custom",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "YMFA1DBX",
       "version": "E8APCSABCACWD",
@@ -9022,7 +9022,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Tourneo Custom",
+      "commercialName": "TOURNEO CUSTOM",
       "type": "FAC",
       "variant": "YMFA1DBX",
       "version": "S9WJASABCACQC",
@@ -21118,7 +21118,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit",
+      "commercialName": "TRANSIT",
       "type": "FAD",
       "variant": "BJFA1ECX",
       "version": "F9WTBSADCAG2C",
@@ -21985,8 +21985,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Transit",
+      "make": "FORD",
+      "commercialName": "TRANSIT",
       "type": "FAD",
       "variant": "BKFA1ECX",
       "version": "G9WTBSADCAJNA",
@@ -22223,8 +22223,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT",
+      "make": "Ford",
+      "commercialName": "Transit",
       "type": "FAD",
       "variant": "BKFA1ECX",
       "version": "G9WTCSADCAJNA",
@@ -22881,8 +22881,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT",
+      "make": "Ford",
+      "commercialName": "Transit",
       "type": "FAD",
       "variant": "BKFC1ECX",
       "version": "F9WTBSAEDAXDC",
@@ -22965,8 +22965,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT",
+      "make": "Ford",
+      "commercialName": "Transit",
       "type": "FAD",
       "variant": "BKFC1ECX",
       "version": "G9WTBSAACAGCA",
@@ -23077,8 +23077,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Transit",
+      "make": "FORD",
+      "commercialName": "TRANSIT",
       "type": "FAD",
       "variant": "BKFC1ECX",
       "version": "G9WTCHAACAGCA",
@@ -23161,8 +23161,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT",
+      "make": "Ford",
+      "commercialName": "Transit",
       "type": "FAD",
       "variant": "BKFC1ECX",
       "version": "G9WTCHAEDAGCA",
@@ -23190,7 +23190,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT",
+      "commercialName": "Transit",
       "type": "FAD",
       "variant": "BKFC1ECX",
       "version": "G9WTCHAEDAXDA",
@@ -23231,8 +23231,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT",
+      "make": "Ford",
+      "commercialName": "Transit",
       "type": "FAD",
       "variant": "BKFC1ECX",
       "version": "G9WTCHAEDAXDA",
@@ -23722,7 +23722,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT",
+      "commercialName": "Transit",
       "type": "FAD",
       "variant": "BLFA1ECX",
       "version": "G9FGCHADCAJDA",
@@ -24058,7 +24058,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT",
+      "commercialName": "Transit",
       "type": "FAD",
       "variant": "BLFA1EDX",
       "version": "G9WTCSADCAJPA",
@@ -24099,8 +24099,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT",
+      "make": "Ford",
+      "commercialName": "Transit",
       "type": "FAD",
       "variant": "BLFC1ECX",
       "version": "F9WTBSAEDAJQC",
@@ -24169,8 +24169,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT",
+      "make": "Ford",
+      "commercialName": "Transit",
       "type": "FAD",
       "variant": "BLFC1ECX",
       "version": "G9WTBSAEDAXGA",
@@ -24184,7 +24184,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit",
+      "commercialName": "TRANSIT",
       "type": "FAD",
       "variant": "BLFC1ECX",
       "version": "G9WTCHAACAJQA",
@@ -24198,7 +24198,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT",
+      "commercialName": "Transit",
       "type": "FAD",
       "variant": "BLFC1ECX",
       "version": "G9WTCHAEDAJQA",
@@ -24212,7 +24212,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT",
+      "commercialName": "Transit",
       "type": "FAD",
       "variant": "BLFC1ECX",
       "version": "G9WTCHAEDAXGA",
@@ -24478,7 +24478,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT",
+      "commercialName": "Transit",
       "type": "FAD",
       "variant": "N/A",
       "version": "N/A",
@@ -24716,7 +24716,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit",
+      "commercialName": "TRANSIT",
       "type": "FAD",
       "variant": "YLFA1ECX",
       "version": "E9WGBSABCACZC",
@@ -24730,7 +24730,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit",
+      "commercialName": "TRANSIT",
       "type": "FAD",
       "variant": "YLFA1ECX",
       "version": "E9WJBSABCACZC",
@@ -24996,7 +24996,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit",
+      "commercialName": "TRANSIT",
       "type": "FAD",
       "variant": "YMFA1ECX",
       "version": "G9WTBSABCAC7A",
@@ -25220,7 +25220,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit",
+      "commercialName": "TRANSIT",
       "type": "FAD",
       "variant": "YNFA1ECX",
       "version": "G9WMBSABCAC5A",
@@ -25234,7 +25234,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit",
+      "commercialName": "TRANSIT",
       "type": "FAD",
       "variant": "YNFA1ECX",
       "version": "G9WMCSABCAC5A",
@@ -25262,7 +25262,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit",
+      "commercialName": "TRANSIT",
       "type": "FAD",
       "variant": "YNFA1EDX",
       "version": "G9WMCSABCAC5A",
@@ -28706,7 +28706,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit Connect",
+      "commercialName": "TRANSIT CONNECT",
       "type": "PJ2",
       "variant": "Z2GA1HMX",
       "version": "E5BBBSADDADKG",
@@ -28720,7 +28720,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CONNECT",
+      "commercialName": "Transit Connect",
       "type": "PJ2",
       "variant": "Z2GA1HMX",
       "version": "E5BBBSAEDAZ3G",
@@ -28832,7 +28832,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CONNECT",
+      "commercialName": "Transit Connect",
       "type": "PJ2",
       "variant": "Z2GA1HMX",
       "version": "E7BBBSABDADKP",
@@ -28860,7 +28860,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CONNECT",
+      "commercialName": "Transit Connect",
       "type": "PJ2",
       "variant": "Z2GA1HMX",
       "version": "E7BBBSADDADKP",
@@ -28958,7 +28958,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CONNECT",
+      "commercialName": "Transit Connect",
       "type": "PJ2",
       "variant": "ZTGA1GMX",
       "version": "D5BBASAEDAZ4S",
@@ -29028,7 +29028,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CONNECT",
+      "commercialName": "Transit Connect",
       "type": "PJ2",
       "variant": "ZTGA1HMX",
       "version": "E5BBBSAEDAZ4G",
@@ -29084,7 +29084,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CONNECT",
+      "commercialName": "Transit Connect",
       "type": "PJ2",
       "variant": "ZTGA1HMX",
       "version": "E7BBBSAEDAZ4P",
@@ -29881,8 +29881,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "make": "Ford",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BCFA1EBX",
       "version": "S9AGASADCAWWE",
@@ -29966,7 +29966,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit Custom",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BCFA1EDX",
       "version": "M9AGCSADCAFGD",
@@ -30091,7 +30091,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BCFA1EIX",
@@ -30525,7 +30525,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BJFA1EBX",
@@ -30638,7 +30638,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit Custom",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BJFA1EBX",
       "version": "S9WRASAFCAWLC",
@@ -30666,7 +30666,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BJFA1EBX",
       "version": "S9WRCSADCAI4C",
@@ -30680,7 +30680,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BJFA1EBX",
       "version": "S9WRCSADCAWLC",
@@ -30848,7 +30848,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BJFA1EDX",
       "version": "S9WRCSADCAWLC",
@@ -30876,7 +30876,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BJFA1FBX",
       "version": "S6WRASADCAI4C",
@@ -30988,7 +30988,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit Custom",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BJFC1EBX",
       "version": "S9WRASAEDAI5C",
@@ -31044,7 +31044,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit Custom",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BJFC1EBX",
       "version": "S9WRCSAEDAI5C",
@@ -31744,7 +31744,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BKFA1EBX",
       "version": "S9AGASADCAFEE",
@@ -31996,7 +31996,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BKFA1EBX",
       "version": "S9WRASADCAFLC",
@@ -32080,7 +32080,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit Custom",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BKFA1EBX",
       "version": "S9WRASADCAWPC",
@@ -32150,7 +32150,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit Custom",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BKFA1EBX",
       "version": "S9WRCSADCAFLC",
@@ -32388,7 +32388,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BKFA1EBX",
       "version": "S9WRCSADCAWPC",
@@ -32863,8 +32863,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "make": "Ford",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BKFA1EDX",
       "version": "S9AGCSADCAFEE",
@@ -32961,8 +32961,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Transit Custom",
+      "make": "FORD",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BKFA1EDX",
       "version": "S9WRCSADCAFLC",
@@ -33745,8 +33745,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "make": "Ford",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BKFC1EBX",
       "version": "S9WRASADCAFPC",
@@ -33802,7 +33802,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit Custom",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BKFC1EBX",
       "version": "S9WRASAEDAWQC",
@@ -33815,8 +33815,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "make": "Ford",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BKFC1EBX",
       "version": "S9WRASAEDAWQC",
@@ -33857,7 +33857,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BKFC1EBX",
@@ -33913,8 +33913,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "make": "Ford",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BKFC1EBX",
       "version": "S9WRCSADCAFPC",
@@ -33955,8 +33955,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "make": "Ford",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BKFC1EBX",
       "version": "S9WRCSAEDAFPC",
@@ -33983,7 +33983,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BKFC1EBX",
@@ -34109,8 +34109,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Transit Custom",
+      "make": "FORD",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BKFC1EDX",
       "version": "S9WRCSABCAFPC",
@@ -34123,8 +34123,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "make": "Ford",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BKFC1EDX",
       "version": "S9WRCSADCAFPC",
@@ -34137,8 +34137,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "make": "Ford",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BKFC1EDX",
       "version": "S9WRCSAEDAFPC",
@@ -34600,7 +34600,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit Custom",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BLFA1EBX",
       "version": "M9AGCSADCAFFD",
@@ -34935,8 +34935,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Transit Custom",
+      "make": "FORD",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BLFA1EBX",
       "version": "S9WJASADCAFMC",
@@ -35020,7 +35020,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BLFA1EBX",
       "version": "S9WRCSAFCAWUC",
@@ -35300,7 +35300,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BLFA1EDX",
       "version": "S9AGASADCAFFE",
@@ -35314,7 +35314,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit Custom",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BLFA1EDX",
       "version": "S9AGCSADCAFFE",
@@ -35677,8 +35677,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Transit Custom",
+      "make": "FORD",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BLFC1EBX",
       "version": "S9WJASABCAFQC",
@@ -35719,8 +35719,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Transit Custom",
+      "make": "FORD",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BLFC1EBX",
       "version": "S9WJCSABCAFQC",
@@ -35747,7 +35747,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BLFC1EBX",
@@ -35775,8 +35775,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "make": "Ford",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BLFC1EBX",
       "version": "S9WRCSAEDAWVC",
@@ -35859,8 +35859,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "make": "Ford",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BLFC1EDX",
       "version": "S9WRCSAEDAWVC",
@@ -35916,7 +35916,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit Custom",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "BLFC1FBX",
       "version": "S6WJASABCAFQC",
@@ -35972,7 +35972,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "BLFC1FBX",
       "version": "S6WJCSAEDAFQC",
@@ -36028,7 +36028,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "M1FA1EBX",
       "version": "S8XSASABCAPSE",
@@ -36574,7 +36574,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "YMFA1EBX",
       "version": "S9WJCSABCACQC",
@@ -36616,7 +36616,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Transit Custom",
+      "commercialName": "TRANSIT CUSTOM",
       "type": "FAC",
       "variant": "YMFA1EDX",
       "version": "M9WRCSABCACYD",
@@ -36742,7 +36742,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "YNFA1EBX",
       "version": "M9APCSABCACVD",
@@ -36770,7 +36770,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "TRANSIT CUSTOM",
+      "commercialName": "Transit Custom",
       "type": "FAC",
       "variant": "YNFA1EBX",
       "version": "S9APASABCACVE",
@@ -67892,7 +67892,7 @@
     {
       "year": 2020,
       "make": "HYUNDAI",
-      "commercialName": "KONA",
+      "commercialName": "Kona",
       "type": "OS",
       "variant": "F5E11",
       "version": "E11B11",
@@ -67934,7 +67934,7 @@
     {
       "year": 2020,
       "make": "HYUNDAI",
-      "commercialName": "KONA",
+      "commercialName": "Kona",
       "type": "OS",
       "variant": "F5E11",
       "version": "E11D11",

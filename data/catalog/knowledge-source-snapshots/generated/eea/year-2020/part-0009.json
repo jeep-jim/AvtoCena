@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 9,
   "rows": [
     {
@@ -24743,8 +24743,8 @@
     },
     {
       "year": 2020,
-      "make": "Jeep",
-      "commercialName": "Cherokee",
+      "make": "JEEP",
+      "commercialName": "CHEROKEE",
       "type": "KL",
       "variant": "JETCN",
       "version": "L5HP1A",
@@ -25528,7 +25528,7 @@
     {
       "year": 2020,
       "make": "JEEP",
-      "commercialName": "Compass",
+      "commercialName": "COMPASS",
       "type": "MX",
       "variant": "JHMFL",
       "version": "K5ME1A",
@@ -25542,7 +25542,7 @@
     {
       "year": 2020,
       "make": "JEEP",
-      "commercialName": "Compass",
+      "commercialName": "COMPASS",
       "type": "MX",
       "variant": "JHMFL",
       "version": "L5ME1C",
@@ -25696,7 +25696,7 @@
     {
       "year": 2020,
       "make": "JEEP",
-      "commercialName": "Compass",
+      "commercialName": "COMPASS",
       "type": "MX",
       "variant": "JHVFV",
       "version": "K5LE1A",
@@ -26941,7 +26941,7 @@
     },
     {
       "year": 2020,
-      "make": "Jeep",
+      "make": "JEEP",
       "commercialName": "GRAND CHEROKEE",
       "type": "WK",
       "variant": "JLKCM",
@@ -26983,8 +26983,8 @@
     },
     {
       "year": 2020,
-      "make": "JEEP",
-      "commercialName": "GRAND CHEROKEE",
+      "make": "Jeep",
+      "commercialName": "Grand Cherokee",
       "type": "WK",
       "variant": "JLKCM",
       "version": "K5H82S",
@@ -27011,8 +27011,8 @@
     },
     {
       "year": 2020,
-      "make": "JEEP",
-      "commercialName": "GRAND CHEROKEE",
+      "make": "Jeep",
+      "commercialName": "Grand Cherokee",
       "type": "WK",
       "variant": "JLKCM",
       "version": "K5H82T",
@@ -27179,7 +27179,7 @@
     },
     {
       "year": 2020,
-      "make": "JEEP",
+      "make": "Jeep",
       "commercialName": "GRAND CHEROKEE TRACKHAWK",
       "type": "WK",
       "variant": "JLQCY",
@@ -28383,8 +28383,8 @@
     },
     {
       "year": 2020,
-      "make": "JEEP",
-      "commercialName": "RENEGADE",
+      "make": "Jeep",
+      "commercialName": "Renegade",
       "type": "BU",
       "variant": "AXM1B",
       "version": "E12D5T",
@@ -29993,7 +29993,7 @@
     },
     {
       "year": 2020,
-      "make": "Jeep",
+      "make": "JEEP",
       "commercialName": "RENEGADE",
       "type": "BU",
       "variant": "AXR22",
@@ -30315,8 +30315,8 @@
     },
     {
       "year": 2020,
-      "make": "Jeep",
-      "commercialName": "Renegade",
+      "make": "JEEP",
+      "commercialName": "RENEGADE",
       "type": "BU",
       "variant": "AXT23",
       "version": "19B",
@@ -31800,7 +31800,7 @@
     {
       "year": 2020,
       "make": "JEEP",
-      "commercialName": "Wrangler",
+      "commercialName": "WRANGLER",
       "type": "JK",
       "variant": "JSLFU",
       "version": "K4H72A",
@@ -31841,8 +31841,8 @@
     },
     {
       "year": 2020,
-      "make": "Jeep",
-      "commercialName": "Wrangler",
+      "make": "JEEP",
+      "commercialName": "WRANGLER",
       "type": "JK",
       "variant": "JSLFU",
       "version": "L4H72A",
@@ -31898,7 +31898,7 @@
     {
       "year": 2020,
       "make": "JEEP",
-      "commercialName": "WRANGLER",
+      "commercialName": "Wrangler",
       "type": "JK",
       "variant": "JSLFZ",
       "version": "K4H31A",
@@ -31912,7 +31912,7 @@
     {
       "year": 2020,
       "make": "JEEP",
-      "commercialName": "Wrangler",
+      "commercialName": "WRANGLER",
       "type": "JK",
       "variant": "JSLFZ",
       "version": "K4H34A",
@@ -31967,8 +31967,8 @@
     },
     {
       "year": 2020,
-      "make": "Jeep",
-      "commercialName": "Wrangler",
+      "make": "JEEP",
+      "commercialName": "WRANGLER",
       "type": "JK",
       "variant": "JSLFZ",
       "version": "L4H34A",
@@ -33004,7 +33004,7 @@
     {
       "year": 2020,
       "make": "JEEP",
-      "commercialName": "Wrangler Unlimited",
+      "commercialName": "WRANGLER UNLIMITED",
       "type": "JK",
       "variant": "JTLFU",
       "version": "J5H73A",
@@ -33101,8 +33101,8 @@
     },
     {
       "year": 2020,
-      "make": "Jeep",
-      "commercialName": "Wrangler Unlimited",
+      "make": "JEEP",
+      "commercialName": "WRANGLER UNLIMITED",
       "type": "JK",
       "variant": "JTLFU",
       "version": "L5H72A",
@@ -33297,8 +33297,8 @@
     },
     {
       "year": 2020,
-      "make": "Jeep",
-      "commercialName": "Wrangler Unlimited",
+      "make": "JEEP",
+      "commercialName": "WRANGLER UNLIMITED",
       "type": "JK",
       "variant": "JTLFZ",
       "version": "L5H34A",
@@ -34040,7 +34040,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5D11",
       "version": "D72A11",
@@ -34053,7 +34053,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5D11",
@@ -34068,7 +34068,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5D11",
       "version": "M66A11",
@@ -34096,7 +34096,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5D11",
       "version": "M66AZ1",
@@ -34110,7 +34110,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5D11",
       "version": "M68C11",
@@ -34151,7 +34151,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5D21",
@@ -34166,7 +34166,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5D21",
       "version": "M67B11",
@@ -34179,8 +34179,8 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
-      "commercialName": "CEED",
+      "make": "Kia",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5D21",
       "version": "M67BZ1",
@@ -34320,7 +34320,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5P11",
       "version": "M62C11",
@@ -34334,7 +34334,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5P21",
       "version": "M63A11",
@@ -34348,7 +34348,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5P21",
       "version": "M63A12",
@@ -34362,7 +34362,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5P21",
       "version": "M63C11",
@@ -34404,7 +34404,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5P31",
       "version": "M64B11",
@@ -34490,8 +34490,8 @@
       "make": "KIA",
       "commercialName": "ceed",
       "type": "CD",
-      "variant": "B5P51",
-      "version": "M61A11",
+      "variant": "b5p51",
+      "version": "m61a11",
       "fuel": "PETROL",
       "engineCc": 998,
       "powerKw": 73,
@@ -34501,8 +34501,8 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
-      "commercialName": "CEED",
+      "make": "Kia",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5P51",
       "version": "M61A11",
@@ -34754,7 +34754,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "BBD11",
       "version": "M66GZ1",
@@ -34782,7 +34782,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "BBD21",
       "version": "D72EZ1",
@@ -34809,8 +34809,8 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
-      "commercialName": "Ceed",
+      "make": "Kia",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "BBD21",
       "version": "M67D11",
@@ -34824,7 +34824,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "BBD21",
       "version": "M67DZ1",
@@ -34838,7 +34838,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "BBP11",
       "version": "M61D11",
@@ -34880,7 +34880,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "BBP31",
       "version": "D71E11",
@@ -35341,7 +35341,7 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
+      "make": "Kia",
       "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5D21",
@@ -35370,7 +35370,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5D21",
       "version": "M67A11",
@@ -35397,7 +35397,7 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
+      "make": "Kia",
       "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5D21",
@@ -35426,7 +35426,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5D21",
       "version": "M67BZ1",
@@ -35440,7 +35440,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5D31",
       "version": "D72AZ1",
@@ -35482,7 +35482,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5D41",
       "version": "D72AZ1",
@@ -35524,7 +35524,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5D41",
       "version": "M6GAZ1",
@@ -35692,7 +35692,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5P31",
       "version": "D71BZ1",
@@ -35734,7 +35734,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5P31",
       "version": "M64A11",
@@ -35748,7 +35748,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5P31",
       "version": "M64AZ1",
@@ -35775,8 +35775,8 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
-      "commercialName": "CEED",
+      "make": "Kia",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5P31",
       "version": "M64BZ1",
@@ -35888,7 +35888,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5P61",
       "version": "D61JZ2",
@@ -36014,7 +36014,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "FAD21",
       "version": "D72E11",
@@ -36028,7 +36028,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "FAD21",
       "version": "D72EZ1",
@@ -36055,8 +36055,8 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
-      "commercialName": "CEED",
+      "make": "Kia",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "FAD21",
       "version": "M67DZ1",
@@ -36140,7 +36140,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "FAP31",
       "version": "M64D11",
@@ -36154,7 +36154,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "FAP31",
       "version": "M64DZ1",
@@ -39919,7 +39919,7 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
+      "make": "Kia",
       "commercialName": "NIRO",
       "type": "DE",
       "variant": "C5E11",
@@ -39947,7 +39947,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "NIRO",
       "type": "DE",
       "variant": "C5E11",
@@ -40060,7 +40060,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "Niro",
+      "commercialName": "NIRO",
       "type": "DE",
       "variant": "C5P11",
       "version": "D61CZ1",
@@ -40661,8 +40661,8 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
-      "commercialName": "OPTIMA",
+      "make": "Kia",
+      "commercialName": "Optima",
       "type": "JF",
       "variant": "A5D51",
       "version": "D74AZ1",
@@ -40717,8 +40717,8 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
-      "commercialName": "OPTIMA",
+      "make": "Kia",
+      "commercialName": "Optima",
       "type": "JF",
       "variant": "A5P11",
       "version": "M61AZ1",
@@ -40801,8 +40801,8 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
-      "commercialName": "Optima",
+      "make": "KIA",
+      "commercialName": "OPTIMA",
       "type": "JF",
       "variant": "F5P11",
       "version": "A61AZ1",
@@ -40815,8 +40815,8 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
-      "commercialName": "OPTIMA",
+      "make": "Kia",
+      "commercialName": "Optima",
       "type": "JF",
       "variant": "F5P11",
       "version": "M61AZ1",
@@ -40858,7 +40858,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "OPTIMA",
+      "commercialName": "Optima",
       "type": "JF",
       "variant": "F5P51",
       "version": "A65EZ1",
@@ -41138,7 +41138,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "PICANTO",
+      "commercialName": "Picanto",
       "type": "JA",
       "variant": "F4P21",
       "version": "M53BZ1",
@@ -41221,7 +41221,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "Picanto",
       "type": "JA",
       "variant": "F5P21",
@@ -41250,7 +41250,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "PICANTO",
+      "commercialName": "Picanto",
       "type": "JA",
       "variant": "F5P31",
       "version": "A41CZ1",
@@ -41264,7 +41264,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "PICANTO",
+      "commercialName": "Picanto",
       "type": "JA",
       "variant": "F5P31",
       "version": "A41CZ1",
@@ -41320,7 +41320,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "PICANTO",
+      "commercialName": "Picanto",
       "type": "JA",
       "variant": "F5P41",
       "version": "M55CZ1",
@@ -41432,7 +41432,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "PICANTO",
+      "commercialName": "Picanto",
       "type": "JA",
       "variant": "F5PA1",
       "version": "A52DZ1",
@@ -41502,7 +41502,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "PICANTO",
+      "commercialName": "Picanto",
       "type": "JA",
       "variant": "F5PD1",
       "version": "M56DZ1",
@@ -42664,7 +42664,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "ProCeed",
+      "commercialName": "PROCEED",
       "type": "CD",
       "variant": "BAD21",
       "version": "D72E11",
@@ -42776,7 +42776,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "ProCeed",
+      "commercialName": "PROCEED",
       "type": "CD",
       "variant": "BAP11",
       "version": "M61D11",
@@ -42804,7 +42804,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "PROCEED",
+      "commercialName": "ProCeed",
       "type": "CD",
       "variant": "BAP31",
       "version": "D71E11",
@@ -43560,7 +43560,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "RIO",
+      "commercialName": "Rio",
       "type": "YB",
       "variant": "B5P31",
       "version": "M55AZ1",
@@ -43573,7 +43573,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "RIO",
       "type": "YB",
       "variant": "B5P31",
@@ -43643,8 +43643,8 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
-      "commercialName": "Rio",
+      "make": "KIA",
+      "commercialName": "RIO",
       "type": "YB",
       "variant": "B5P51",
       "version": "D71AZ1",
@@ -45338,7 +45338,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "RIO TITAN 125 MPI MT5 84 ISG",
+      "commercialName": "RIO TITAN 125 MPI MT5 84 ISG ",
       "type": "YB",
       "variant": "B5P31",
       "version": "M55AZ1",
@@ -45561,7 +45561,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "SORENTO",
       "type": "MQ4",
       "variant": "F7D12",
@@ -45575,7 +45575,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "SORENTO",
       "type": "MQ4",
       "variant": "F7D14",
@@ -45645,7 +45645,7 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
+      "make": "Kia",
       "commercialName": "SORENTO",
       "type": "MQ4",
       "variant": "F7H14",
@@ -45673,7 +45673,7 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
+      "make": "Kia",
       "commercialName": "SORENTO",
       "type": "UM",
       "variant": "C5D21",
@@ -45729,7 +45729,7 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
+      "make": "Kia",
       "commercialName": "SORENTO",
       "type": "UM",
       "variant": "C5P14",
@@ -45757,7 +45757,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "SORENTO",
       "type": "UM",
       "variant": "C7D21",
@@ -45771,7 +45771,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "SORENTO",
       "type": "UM",
       "variant": "C7D21",
@@ -45799,7 +45799,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "SORENTO",
       "type": "UM",
       "variant": "C7D24",
@@ -46457,7 +46457,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "SPORTAGE",
       "type": "QLE",
       "variant": "F5D51",
@@ -48613,7 +48613,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "STINGER",
       "type": "CK",
       "variant": "B5P41",
@@ -48669,7 +48669,7 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
+      "make": "Kia",
       "commercialName": "STINGER",
       "type": "CK",
       "variant": "B5P62",
@@ -48949,7 +48949,7 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
+      "make": "Kia",
       "commercialName": "STONIC",
       "type": "YB",
       "variant": "C5D21",
@@ -49075,7 +49075,7 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
+      "make": "Kia",
       "commercialName": "STONIC",
       "type": "YB",
       "variant": "C5P21",
@@ -49173,7 +49173,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "STONIC",
       "type": "YB",
       "variant": "C5P31",
@@ -49285,8 +49285,8 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
-      "commercialName": "Stonic",
+      "make": "KIA",
+      "commercialName": "STONIC",
       "type": "YB",
       "variant": "C5P51",
       "version": "D71DZ1",
@@ -49341,7 +49341,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "STONIC",
       "type": "YB",
       "variant": "C5P51",
@@ -49607,7 +49607,7 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
+      "make": "KIA",
       "commercialName": "STONIC",
       "type": "YB",
       "variant": "C5P81",
@@ -50798,7 +50798,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "VENGA",
+      "commercialName": "Venga",
       "type": "YNS",
       "variant": "F5P11",
       "version": "M61AZ1",
@@ -50938,7 +50938,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "XCeed",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCD11",
       "version": "D76HZ1",
@@ -50952,7 +50952,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "XCeed",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCD11",
       "version": "M6DH11",
@@ -50965,7 +50965,7 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
+      "make": "Kia",
       "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCD11",
@@ -50980,7 +50980,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCD21",
       "version": "D76H11",
@@ -51035,8 +51035,8 @@
     },
     {
       "year": 2020,
-      "make": "KIA",
-      "commercialName": "XCEED",
+      "make": "Kia",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCD21",
       "version": "M6EHZ1",
@@ -51176,7 +51176,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCP11",
       "version": "M6AH11",
@@ -51190,7 +51190,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCP31",
       "version": "D74H11",
@@ -51204,7 +51204,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "XCeed",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCP31",
       "version": "D74HZ1",
@@ -51218,7 +51218,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "XCeed",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCP31",
       "version": "M6BH11",
@@ -51231,8 +51231,8 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
-      "commercialName": "XCeed",
+      "make": "KIA",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCP31",
       "version": "M6BHZ1",
@@ -51245,8 +51245,8 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
-      "commercialName": "XCeed",
+      "make": "KIA",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCP41",
       "version": "D75H11",
@@ -51273,8 +51273,8 @@
     },
     {
       "year": 2020,
-      "make": "Kia",
-      "commercialName": "XCeed",
+      "make": "KIA",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCP41",
       "version": "M6CH11",
@@ -51344,7 +51344,7 @@
     {
       "year": 2020,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCP61",
       "version": "D61M12",
@@ -60374,7 +60374,7 @@
     {
       "year": 2020,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY",
+      "commercialName": "Discovery",
       "type": "LR",
       "variant": "S5BH2K",
       "version": "A7NA",

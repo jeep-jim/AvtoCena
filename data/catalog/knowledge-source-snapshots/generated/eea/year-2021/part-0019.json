@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2021Fv24",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2021Fv24] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 19,
   "rows": [
     {
@@ -40998,7 +40998,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V60 Cross Country",
+      "commercialName": "V60 CROSS COUNTRY",
       "type": "Z",
       "variant": "ZZA8",
       "version": "ZZA8TC0",
@@ -41012,7 +41012,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V60 Cross Country",
+      "commercialName": "V60 CROSS COUNTRY",
       "type": "Z",
       "variant": "ZZA8",
       "version": "ZZA8TC0?",
@@ -41040,7 +41040,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V60 Cross Country",
+      "commercialName": "V60 CROSS COUNTRY",
       "type": "Z",
       "variant": "ZZA8",
       "version": "ZZA8VC0",
@@ -41082,7 +41082,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V60 Cross Country",
+      "commercialName": "V60 CROSS COUNTRY",
       "type": "Z",
       "variant": "ZZA8",
       "version": "ZZA8VC0?",
@@ -42706,7 +42706,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V60 CROSS COUNTRY",
+      "commercialName": "V60 Cross Country",
       "type": "Z",
       "variant": "ZZL1",
       "version": "ZZL1VC0?",
@@ -43364,7 +43364,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V60 T6 Twin Engine",
+      "commercialName": "V60 T6 TWIN ENGINE",
       "type": "Z",
       "variant": "ZWBF",
       "version": "ZWBFUD0",
@@ -43392,7 +43392,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V60 T6 Twin Engine",
+      "commercialName": "V60 T6 TWIN ENGINE",
       "type": "Z",
       "variant": "ZWBF",
       "version": "ZWBFVD0",
@@ -43546,7 +43546,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V60 T8 Twin Engine",
+      "commercialName": "V60 T8 TWIN ENGINE",
       "type": "Z",
       "variant": "ZWBM",
       "version": "ZWBMVD0",
@@ -43574,7 +43574,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V60 T8 TWIN ENGINE",
+      "commercialName": "V60 T8 Twin Engine",
       "type": "Z",
       "variant": "ZWBM",
       "version": "ZWBMVD0?",
@@ -47200,7 +47200,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZ06",
       "version": "PZ06VC0",
@@ -47284,7 +47284,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 CROSS COUNTRY",
+      "commercialName": "V90 Cross Country",
       "type": "P",
       "variant": "PZ06",
       "version": "PZ06VC0?",
@@ -47326,7 +47326,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 CROSS COUNTRY",
+      "commercialName": "V90 Cross Country",
       "type": "P",
       "variant": "PZ25",
       "version": "PZ25TC0",
@@ -47564,7 +47564,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZ68",
       "version": "PZ68VC0",
@@ -47690,7 +47690,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZA8",
       "version": "PZA8UC0?",
@@ -47732,7 +47732,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZA8",
       "version": "PZA8VC0?",
@@ -47830,7 +47830,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZK2",
       "version": "PZK2UC0",
@@ -47844,7 +47844,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZK2",
       "version": "PZK2UC0",
@@ -49370,7 +49370,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZK2",
       "version": "PZK2VC0?",
@@ -49384,7 +49384,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 CROSS COUNTRY",
+      "commercialName": "V90 Cross Country",
       "type": "P",
       "variant": "PZK2",
       "version": "PZK2VC0?",
@@ -50378,7 +50378,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZK5",
       "version": "PZK5VC0",
@@ -50504,7 +50504,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZK5",
       "version": "PZK5VC0?",
@@ -50518,7 +50518,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 CROSS COUNTRY",
+      "commercialName": "V90 Cross Country",
       "type": "P",
       "variant": "PZK5",
       "version": "PZK5VC0?",
@@ -50532,7 +50532,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 Cross Country",
+      "commercialName": "V90 CROSS COUNTRY",
       "type": "P",
       "variant": "PZK5",
       "version": "PZK5VC0?",
@@ -51876,7 +51876,7 @@
     {
       "year": 2021,
       "make": "VOLVO",
-      "commercialName": "V90 T8 Twin Engine",
+      "commercialName": "V90 T8 TWIN ENGINE",
       "type": "P",
       "variant": "PWBM",
       "version": "PWBMVD0",
@@ -52057,7 +52057,7 @@
     },
     {
       "year": 2021,
-      "make": "Volvo",
+      "make": "VOLVO",
       "commercialName": "XC40",
       "type": "?",
       "variant": "XZ15",
@@ -52141,7 +52141,7 @@
     },
     {
       "year": 2021,
-      "make": "Volvo",
+      "make": "VOLVO",
       "commercialName": "XC40",
       "type": "?",
       "variant": "XZBB",

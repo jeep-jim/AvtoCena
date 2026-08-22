@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 15,
   "rows": [
     {
@@ -33,7 +33,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDPCAX0",
@@ -61,7 +61,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDPCAX0",
@@ -117,7 +117,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDPCAX0",
@@ -201,7 +201,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDPCAX0",
@@ -383,7 +383,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDSTBX0",
@@ -397,7 +397,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDSTBX0",
@@ -439,7 +439,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDSTBX0",
@@ -453,7 +453,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "BDSTBX0",
@@ -1783,7 +1783,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON",
       "type": "KL",
       "variant": "SBDFYAX0",
@@ -5549,7 +5549,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTOURER ST",
       "type": "5F",
       "variant": "FDFGAX0V",
@@ -5717,7 +5717,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTOURER ST",
       "type": "5F",
       "variant": "FDGTEX0V",
@@ -6333,7 +6333,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTOURER ST",
       "type": "5F",
       "variant": "FDPBAX0V",
@@ -6347,7 +6347,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTOURER ST",
       "type": "5F",
       "variant": "FDPBAX0V",
@@ -6501,7 +6501,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON SPORTOURER ST",
       "type": "5F",
       "variant": "FDPCAX0V",
@@ -6515,7 +6515,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTOURER ST",
       "type": "5F",
       "variant": "FDPCAX0V",
@@ -6655,7 +6655,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTOURER ST",
       "type": "5F",
       "variant": "FDPCAX0V",
@@ -7033,7 +7033,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "5F",
       "variant": "FDFGAX0V",
@@ -7089,7 +7089,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON SPORTSTOURER",
       "type": "5F",
       "variant": "FDFGAX0V",
@@ -7117,7 +7117,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON SPORTSTOURER",
       "type": "5F",
       "variant": "FDGTEX0V",
@@ -7355,7 +7355,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON SPORTSTOURER",
       "type": "5F",
       "variant": "FDNUCX0V",
@@ -7747,7 +7747,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDFYAX0",
@@ -7775,7 +7775,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDFYAX0",
@@ -7957,7 +7957,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDLABX0",
@@ -7985,7 +7985,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDLABX0",
@@ -8475,7 +8475,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDPCAX0",
@@ -8489,7 +8489,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDPCAX0",
@@ -8531,7 +8531,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDPCAX0",
@@ -8559,7 +8559,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDPCAX0",
@@ -8797,7 +8797,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDSTBX0",
@@ -8811,7 +8811,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDSTBX0",
@@ -8825,7 +8825,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDSTBX0",
@@ -8881,7 +8881,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDSTBX0",
@@ -8895,7 +8895,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "FDSTBX0",
@@ -8993,7 +8993,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "SFDGEAX0",
@@ -9315,7 +9315,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "SFDTTCX0",
@@ -9329,7 +9329,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON SPORTSTOURER",
       "type": "KL",
       "variant": "SFDTTCX0",
@@ -9707,7 +9707,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON ST",
       "type": "5F",
       "variant": "FDACAX0V",
@@ -9833,7 +9833,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON ST",
       "type": "5F",
       "variant": "FDADAX0V",
@@ -10043,8 +10043,8 @@
     },
     {
       "year": 2020,
-      "make": "SEAT                     ",
-      "commercialName": "LEON ST                       ",
+      "make": "Seat",
+      "commercialName": "LEON ST",
       "type": "5F",
       "variant": "FDGTEX0V",
       "version": "FM5SFM5A40517CPVLO51BA",
@@ -10309,8 +10309,8 @@
     },
     {
       "year": 2020,
-      "make": "SEAT                     ",
-      "commercialName": "LEON ST                       ",
+      "make": "SEAT",
+      "commercialName": "LEON ST",
       "type": "5F",
       "variant": "FDKRFX0V",
       "version": "FD7EFD7CW0017CPVLO51BA",
@@ -10337,8 +10337,8 @@
     },
     {
       "year": 2020,
-      "make": "SEAT                     ",
-      "commercialName": "LEON ST                       ",
+      "make": "SEAT",
+      "commercialName": "LEON ST",
       "type": "5F",
       "variant": "FDKRFX0V",
       "version": "FM6SFM6AJ0167CPVLO51BA",
@@ -10393,7 +10393,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON ST",
       "type": "5F",
       "variant": "FDKZAX0V",
@@ -10463,7 +10463,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON ST",
       "type": "5F",
       "variant": "FDNUEX1V",
@@ -10478,7 +10478,7 @@
     {
       "year": 2020,
       "make": "SEAT",
-      "commercialName": "Leon ST",
+      "commercialName": "LEON ST",
       "type": "5F",
       "variant": "FDNUEX1V",
       "version": "AD7SAD7GC0014BFMLM51CAA",
@@ -10505,7 +10505,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON ST",
       "type": "5F",
       "variant": "FDNUEX1V",
@@ -10519,8 +10519,8 @@
     },
     {
       "year": 2020,
-      "make": "SEAT                     ",
-      "commercialName": "LEON ST                       ",
+      "make": "SEAT",
+      "commercialName": "LEON ST",
       "type": "5F",
       "variant": "FDNUEX1V",
       "version": "AD7TAD7GC0017CSMLM51CA",
@@ -10547,7 +10547,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "LEON ST",
       "type": "5F",
       "variant": "FDPBAX0V",
@@ -10687,7 +10687,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "LEON ST",
       "type": "5F",
       "variant": "FDPCAX0V",
@@ -12787,7 +12787,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDADAX0",
@@ -13333,7 +13333,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDFGAX0",
@@ -13347,7 +13347,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDFGAX0",
@@ -13403,7 +13403,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDFGAX0",
@@ -14075,7 +14075,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDFGAX1",
@@ -14145,7 +14145,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDFGAX1",
@@ -14299,7 +14299,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDFGAX1",
@@ -14369,8 +14369,8 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
-      "commercialName": "TARRACO",
+      "make": "SEAT                     ",
+      "commercialName": "TARRACO                       ",
       "type": "KN",
       "variant": "XDFGAX1",
       "version": "AD7AD7GC0107CPML551CB",
@@ -14509,7 +14509,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDFHAX1",
@@ -14621,7 +14621,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDFHAX1",
@@ -14635,7 +14635,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDFHAX1",
@@ -14677,8 +14677,8 @@
     },
     {
       "year": 2020,
-      "make": "SEAT                     ",
-      "commercialName": "TARRACO                       ",
+      "make": "SEAT",
+      "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDFHAX1",
       "version": "AD7AD7DL0037CPML561CB",
@@ -15083,7 +15083,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDKZAX1",
@@ -15111,7 +15111,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDKZAX1",
@@ -15195,7 +15195,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDKZAX1",
@@ -15279,8 +15279,8 @@
     },
     {
       "year": 2020,
-      "make": "SEAT                     ",
-      "commercialName": "TARRACO                       ",
+      "make": "SEAT",
+      "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDKZAX1",
       "version": "AD7AD7GC0067CSML551CB",
@@ -15475,7 +15475,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDKZAX1",
@@ -15839,7 +15839,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDPCAX0",
@@ -15993,7 +15993,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDPCAX0",
@@ -16651,7 +16651,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDPCAX0",
@@ -16707,7 +16707,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDPCAX0",
@@ -16889,7 +16889,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDPCAX0",
@@ -17001,7 +17001,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDPCAX0",
@@ -17253,7 +17253,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDPCAX0",
@@ -17323,7 +17323,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDPCAX0",
@@ -17351,7 +17351,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDPCAX0",
@@ -17407,7 +17407,7 @@
     },
     {
       "year": 2020,
-      "make": "SEAT",
+      "make": "Seat",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDPCAX0",
@@ -17883,7 +17883,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDPCAX0",
@@ -18135,7 +18135,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDTSAX0",
@@ -18765,7 +18765,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDTUAX1",
@@ -18821,7 +18821,7 @@
     },
     {
       "year": 2020,
-      "make": "Seat",
+      "make": "SEAT",
       "commercialName": "TARRACO",
       "type": "KN",
       "variant": "XDTUAX1",
@@ -22125,7 +22125,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ABCHYAX01",
@@ -22195,7 +22195,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ABCHYBX01",
@@ -22265,7 +22265,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ABCHYEX01",
@@ -22475,7 +22475,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ABDKLDX01",
@@ -22489,7 +22489,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ABDKLDX01",
@@ -22517,7 +22517,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ABDKLDX01",
@@ -22993,7 +22993,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ABDKRCX01",
@@ -23091,7 +23091,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ABDKRCX01",
@@ -23203,7 +23203,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ABDKRCX01",
@@ -23231,7 +23231,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ABDKRCX01",
@@ -23245,7 +23245,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ABDKRCX01",
@@ -23357,7 +23357,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ACCHYEX01",
@@ -23623,7 +23623,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ACDKLDX01",
@@ -23707,7 +23707,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ACDKLDX01",
@@ -24071,11 +24071,11 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
-      "commercialName": "FABIA",
-      "type": "5J",
-      "variant": "ACDKRCX01",
-      "version": "NFM6FM6DQ0027CPN1C7B",
+      "make": "SKODA                    ",
+      "commercialName": "FABIA                         ",
+      "type": "5J                  ",
+      "variant": "ACDKRCX01                ",
+      "version": "NFM6FM6DQ0027CPN1C7B               ",
       "fuel": "PETROL",
       "engineCc": 999,
       "powerKw": 81,
@@ -24169,7 +24169,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ACDKRCX01",
@@ -24197,7 +24197,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ACDKRCX01",
@@ -24211,7 +24211,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "FABIA",
       "type": "5J",
       "variant": "ACDKRCX01",
@@ -26087,7 +26087,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDGTAX0",
@@ -26101,7 +26101,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDGTAX0",
@@ -26129,7 +26129,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDGTAX0",
@@ -26157,7 +26157,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDGTAX0",
@@ -26213,7 +26213,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDGTAX0",
@@ -26227,7 +26227,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDGTAX0",
@@ -26437,7 +26437,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDGTAX0",
@@ -26689,7 +26689,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDGTAX0",
@@ -27109,7 +27109,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDGTAX0",
@@ -27137,7 +27137,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDGTAX0",
@@ -27277,7 +27277,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDGTAX0",
@@ -27725,7 +27725,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKLAX0",
@@ -27781,7 +27781,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKLAX0",
@@ -28257,7 +28257,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -28327,7 +28327,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -28411,7 +28411,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -28439,7 +28439,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -28467,7 +28467,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -28733,7 +28733,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -28873,7 +28873,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -29209,7 +29209,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -29237,7 +29237,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -29979,7 +29979,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -30035,7 +30035,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -30064,7 +30064,7 @@
     {
       "year": 2020,
       "make": "SKODA",
-      "commercialName": "Kamiq",
+      "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
       "version": "NFM6FM6AJ0194BFSTN3N1B8A",
@@ -30119,7 +30119,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -30147,7 +30147,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -30175,7 +30175,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -30203,7 +30203,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -30385,7 +30385,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -30511,7 +30511,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -30539,7 +30539,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -30903,7 +30903,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDKRFX0",
@@ -31407,7 +31407,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDLAAX0",
@@ -31645,7 +31645,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDLAAX0",
@@ -32373,7 +32373,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -32457,7 +32457,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -32485,7 +32485,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -32541,7 +32541,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -32625,7 +32625,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -32667,7 +32667,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -32947,7 +32947,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -33269,7 +33269,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -33297,7 +33297,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -33731,7 +33731,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -33955,7 +33955,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -34067,7 +34067,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -34347,7 +34347,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -34375,7 +34375,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -34739,7 +34739,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -34921,7 +34921,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -34977,7 +34977,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -35117,7 +35117,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -35201,7 +35201,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -35411,7 +35411,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -35467,7 +35467,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -36027,7 +36027,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -36181,7 +36181,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAMIQ",
       "type": "NW",
       "variant": "ABCDPCAX0",
@@ -41165,7 +41165,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDFFAX0",
@@ -41179,7 +41179,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDFFAX0",
@@ -41557,7 +41557,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDFFAX1",
@@ -41571,7 +41571,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDFFAX1",
@@ -41599,7 +41599,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDFFAX1",
@@ -42775,7 +42775,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDGTEX0",
@@ -42873,7 +42873,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDGTEX0",
@@ -42957,7 +42957,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDGTEX0",
@@ -43041,7 +43041,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDGTEX0",
@@ -43153,7 +43153,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDGTEX0",
@@ -43237,7 +43237,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDKRFX0",
@@ -43447,7 +43447,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDKRFX0",
@@ -43475,7 +43475,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDKRFX0",
@@ -43881,7 +43881,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDKZAX1",
@@ -43965,7 +43965,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDLAAX0",
@@ -43993,7 +43993,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDLAAX0",
@@ -44161,7 +44161,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDPCAX0",
@@ -44357,7 +44357,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDPCAX0",
@@ -44413,7 +44413,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDPCAX0",
@@ -44441,7 +44441,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDPCAX0",
@@ -44581,7 +44581,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDPCAX0",
@@ -44665,7 +44665,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDPCAX0",
@@ -44791,7 +44791,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDPCAX0",
@@ -45295,7 +45295,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDPCAX0",
@@ -45365,7 +45365,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDPCAX0",
@@ -45771,7 +45771,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDTTCX1",
@@ -45841,7 +45841,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDTTCX1",
@@ -46163,7 +46163,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDTTCX1",
@@ -46219,7 +46219,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KAROQ",
       "type": "NU",
       "variant": "ACDTTCX1",
@@ -49985,7 +49985,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACCUAAX1",
@@ -50041,7 +50041,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACCUAAX1",
@@ -50069,7 +50069,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACCUAAX1",
@@ -50545,7 +50545,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX0",
@@ -50629,7 +50629,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX0",
@@ -50657,7 +50657,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX0",
@@ -50811,7 +50811,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX0",
@@ -50853,7 +50853,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX0",
@@ -50881,7 +50881,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX0",
@@ -50909,7 +50909,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX0",
@@ -50923,7 +50923,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX0",
@@ -50937,7 +50937,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX0",
@@ -51021,7 +51021,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX0",
@@ -51539,7 +51539,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX1",
@@ -51581,7 +51581,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX1",
@@ -51651,7 +51651,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX1",
@@ -51679,7 +51679,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX1",
@@ -51693,7 +51693,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX1",
@@ -51721,7 +51721,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX1",
@@ -51763,7 +51763,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX1",
@@ -52337,7 +52337,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX1",
@@ -52477,7 +52477,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFGAX1",
@@ -52617,7 +52617,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFHAX1",
@@ -52701,7 +52701,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFHAX1",
@@ -52841,7 +52841,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFHAX1",
@@ -53023,7 +53023,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFHAX1",
@@ -53079,7 +53079,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFHAX1",
@@ -53107,7 +53107,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFHAX1",
@@ -53177,7 +53177,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDFHAX1",
@@ -53485,7 +53485,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDKZAX1",
@@ -53653,7 +53653,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDKZAX1",
@@ -53695,7 +53695,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDKZAX1",
@@ -53723,7 +53723,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDKZAX1",
@@ -53877,7 +53877,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDKZAX1",
@@ -53905,7 +53905,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDKZAX1",
@@ -53919,7 +53919,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDKZAX1",
@@ -54003,7 +54003,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDKZAX1",
@@ -54031,7 +54031,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDKZAX1",
@@ -54059,7 +54059,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDKZAX1",
@@ -54129,7 +54129,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDKZAX1",
@@ -54157,7 +54157,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDKZAX1",
@@ -54549,7 +54549,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -54619,7 +54619,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -54773,7 +54773,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -54843,7 +54843,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -54871,7 +54871,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -54913,7 +54913,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -54941,7 +54941,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -54983,7 +54983,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -55039,7 +55039,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -55109,7 +55109,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -55515,7 +55515,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -55557,7 +55557,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -55613,7 +55613,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -55767,7 +55767,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -55795,7 +55795,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -55865,7 +55865,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -55893,7 +55893,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -56047,7 +56047,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -56089,7 +56089,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -56159,7 +56159,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -56257,7 +56257,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -56285,7 +56285,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -56313,7 +56313,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDPCAX0",
@@ -56789,7 +56789,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX0",
@@ -56831,7 +56831,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX0",
@@ -56915,7 +56915,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX0",
@@ -56957,7 +56957,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX0",
@@ -56985,7 +56985,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX0",
@@ -56999,7 +56999,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX0",
@@ -57125,7 +57125,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX0",
@@ -57153,7 +57153,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX0",
@@ -57181,7 +57181,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX0",
@@ -57265,7 +57265,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX0",
@@ -57867,7 +57867,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX1",
@@ -57951,7 +57951,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX1",
@@ -57965,7 +57965,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX1",
@@ -58147,7 +58147,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX1",
@@ -58161,7 +58161,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTSBX1",
@@ -58497,7 +58497,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTUAX1",
@@ -58875,7 +58875,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "KODIAQ",
       "type": "NS",
       "variant": "ACDTUAX1",
@@ -64223,7 +64223,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADADAX0",
@@ -64279,7 +64279,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADADAX0",
@@ -64293,7 +64293,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADADAX0",
@@ -64307,7 +64307,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADADAX0",
@@ -64335,7 +64335,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADFFAX0",
@@ -64349,7 +64349,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADFFAX0",
@@ -64461,7 +64461,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADFFAX0",
@@ -64545,7 +64545,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADFFAX0",
@@ -64713,7 +64713,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADGTEX0",
@@ -65147,7 +65147,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADKRFX0",
@@ -65217,7 +65217,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADKRFX0",
@@ -65483,7 +65483,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADKZAX1",
@@ -65497,7 +65497,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADKZAX1",
@@ -65609,7 +65609,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADPCAX0",
@@ -65651,7 +65651,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADPCAX0",
@@ -65679,7 +65679,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADPCAX0",
@@ -65875,7 +65875,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "AADPCAX0",
@@ -66085,7 +66085,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDADAX0",
@@ -66155,7 +66155,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDFFAX0",
@@ -66169,7 +66169,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDFFAX0",
@@ -66337,7 +66337,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDFFAX0",
@@ -66393,7 +66393,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDFFAX0",
@@ -66589,7 +66589,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDGTEX0",
@@ -66687,7 +66687,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDGTEX0",
@@ -66729,7 +66729,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDGTEX0",
@@ -67163,7 +67163,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDJGAX1",
@@ -67219,7 +67219,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDJGAX1",
@@ -67359,7 +67359,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDJGAX1",
@@ -67597,7 +67597,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDKRFX0",
@@ -67639,7 +67639,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDKRFX0",
@@ -67989,7 +67989,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDKZAX1",
@@ -68017,7 +68017,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDKZAX1",
@@ -68143,7 +68143,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDKZAX1",
@@ -68157,7 +68157,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDPCAX0",
@@ -68171,7 +68171,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDPCAX0",
@@ -68213,7 +68213,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDPCAX0",
@@ -68367,7 +68367,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDPCAX0",
@@ -68423,7 +68423,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDPCAX0",
@@ -68535,7 +68535,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDPCAX0",
@@ -68605,7 +68605,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDPCAX0",
@@ -68745,7 +68745,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDPCAX0",
@@ -68787,7 +68787,7 @@
     },
     {
       "year": 2020,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "5E",
       "variant": "ACDPCAX0",
@@ -69389,7 +69389,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADGEAX0",
@@ -69725,7 +69725,7 @@
     },
     {
       "year": 2020,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADLAAX0",

@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 10,
   "rows": [
     {
@@ -25027,7 +25027,7 @@
       "commercialName": "ELISE SPORT 220",
       "type": "1111",
       "variant": "A",
-      "version": "B",
+      "version": "b",
       "fuel": "PETROL",
       "engineCc": 1798,
       "powerKw": 161,
@@ -25237,7 +25237,7 @@
       "commercialName": "EXIGE CUP 430",
       "type": "1112",
       "variant": "C",
-      "version": "K",
+      "version": "k",
       "fuel": "PETROL",
       "engineCc": 3456,
       "powerKw": 321,
@@ -45478,7 +45478,7 @@
     {
       "year": 2020,
       "make": "MCLAREN",
-      "commercialName": "MCLAREN SENNA",
+      "commercialName": "McLaren Senna",
       "type": "MA3",
       "variant": "15C8R",
       "version": "HA",

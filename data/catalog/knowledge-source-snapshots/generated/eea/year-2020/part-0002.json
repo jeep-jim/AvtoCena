@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 2,
   "rows": [
     {
@@ -2484,7 +2484,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DCPCQ1",
       "version": "QA8QA8D5009RT221E19S44BFBEM10D0",
@@ -2567,8 +2567,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DCPCQ1",
       "version": "QA8QA8D5009RT221E19S54BFBEM1",
@@ -3029,8 +3029,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DCPEQ1",
       "version": "QA8QA8D5009RT201E18S54BFAEM10D0",
@@ -3072,7 +3072,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DCPEQ1",
       "version": "QA8QA8D5009RT201E18S54BFBEM10",
@@ -3310,7 +3310,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DCPEQ1",
       "version": "QA8QA8D5009RT201E19S54BFBEM10D0",
@@ -3408,7 +3408,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DCPEQ1",
       "version": "QA8QA8D5009RT211E20S54BFBEM1",
@@ -3590,7 +3590,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAF1",
       "version": "FD7FD7CK006RT161B18S44BFAEM1",
@@ -3673,7 +3673,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAF1",
@@ -3855,8 +3855,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAF1",
       "version": "FD7FD7CK006RT171C17S54BFAEM1",
@@ -3968,7 +3968,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DETAF1",
       "version": "FD7FD7CK006RT171E18S44BFBEM10",
@@ -4065,7 +4065,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAF1",
@@ -4079,8 +4079,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DETAF1",
       "version": "FD7FD7CK006RT171E18S54BFBEM10",
@@ -4206,7 +4206,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAF1",
       "version": "FD7FD7CK006RT171E19S44BFBEM10",
@@ -4290,7 +4290,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAF1",
       "version": "FD7FD7CK006RT171E19S54BFBEM10",
@@ -4360,7 +4360,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAF1",
       "version": "FD7FD7CK006RT181E20S44BFBEM10",
@@ -4416,7 +4416,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DETAF1",
       "version": "FD7FD7CK006RT181E20S54BFBEM10",
@@ -4430,7 +4430,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAF1",
       "version": "FD7FD7CK006RT181E20S54BFBEM10D0",
@@ -4499,8 +4499,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAQ1",
       "version": "QD7QD7CL002RT161B17S54BFAEM10",
@@ -4542,7 +4542,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAQ1",
       "version": "QD7QD7CL002RT161B18S44BFAEM10",
@@ -4583,7 +4583,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAQ1",
@@ -4808,7 +4808,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DETAQ1",
       "version": "QD7QD7CL002RT171E18S47CPBEM1",
@@ -4864,7 +4864,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAQ1",
       "version": "QD7QD7CL002RT171E18S54BFBEM1",
@@ -4962,7 +4962,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DETAQ1",
       "version": "QD7QD7CL002RT171E19S44BFBEM10D0",
@@ -4990,7 +4990,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAQ1",
       "version": "QD7QD7CL002RT171E19S54BFBEM1",
@@ -5018,7 +5018,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAQ1",
       "version": "QD7QD7CL002RT171E19S54BFBEM10",
@@ -5060,7 +5060,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAQ1",
       "version": "QD7QD7CL002RT171E19S57CPBEM1",
@@ -5102,7 +5102,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DETAQ1",
       "version": "QD7QD7CL002RT181E20S44BFBEM10",
@@ -5116,7 +5116,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DETAQ1",
       "version": "QD7QD7CL002RT181E20S44BFBEM10D0",
@@ -5171,8 +5171,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DETAQ1",
       "version": "QD7QD7CL002RT181E20S54BFBEM10",
@@ -5284,7 +5284,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEUAF1",
       "version": "FD7FD7CK006RT171E19S47CPBEM1",
@@ -5297,7 +5297,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEUAF1",
@@ -5648,7 +5648,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT161B17S44BFAEM10",
@@ -5662,7 +5662,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT161B17S44BFAEM10D1",
@@ -5676,7 +5676,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT161B17S54BFAEM1",
@@ -5718,7 +5718,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT161B18S44BFAEM1",
@@ -5760,7 +5760,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT161B18S44BFAEM10D1",
@@ -5774,7 +5774,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT161B18S54BFAEM1",
@@ -5802,7 +5802,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT161B18S54BFAEM10",
@@ -5844,7 +5844,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT161B18S54BFAEM10D1",
@@ -6012,7 +6012,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT171C17S54BFAEM1",
@@ -6026,7 +6026,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT171C17S54BFAEM10",
@@ -6068,7 +6068,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT171E18S44BFAEM10",
@@ -6152,7 +6152,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT171E18S54BFAEM10",
@@ -6180,7 +6180,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT171E18S54BFBEM1",
@@ -6194,7 +6194,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT171E18S54BFBEM1",
@@ -6250,7 +6250,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT171E19S44BFAEM10",
@@ -6278,7 +6278,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT171E19S44BFBEM1",
@@ -6320,7 +6320,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT171E19S44BFBEM10D1",
@@ -6361,8 +6361,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT171E19S54BFBEM1",
@@ -6390,7 +6390,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT171E19S54BFBEM10",
@@ -6474,7 +6474,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT181E20S44BFBEM10",
@@ -6501,8 +6501,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DEZEF1",
       "version": "FD7FD7CK006RT181E20S54BFBEM1",
@@ -6529,7 +6529,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DEZEF1",
@@ -6669,8 +6669,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DKNAQ1",
       "version": "QD7AD7CJ004RT171E18S54BFAEM1",
@@ -6711,8 +6711,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DKNAQ1",
       "version": "QD7AD7CJ004RT171E18S54BFBEM1",
@@ -6907,8 +6907,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DKNAQ1",
       "version": "QD7AD7CJ004RT171E19S54BFBEM1",
@@ -7034,7 +7034,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DKNAQ1",
       "version": "QD7AD7CJ004RT181E20S54BFBEM10",
@@ -7104,7 +7104,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVAF1",
       "version": "FD7FD7CK003RT161B17S44BFAEM10",
@@ -7118,7 +7118,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVAF1",
       "version": "FD7FD7CK003RT161B17S54BFAEM1",
@@ -7131,8 +7131,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DLVAF1",
       "version": "FD7FD7CK003RT161B17S54BFAEM10",
@@ -7160,7 +7160,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVAF1",
       "version": "FD7FD7CK003RT161B18S44BFAEM1",
@@ -7201,8 +7201,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVAF1",
       "version": "FD7FD7CK003RT161B18S54BFAEM10",
@@ -7453,8 +7453,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVAF1",
       "version": "FD7FD7CK003RT171E18S54BFAEM1",
@@ -7481,8 +7481,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVAF1",
       "version": "FD7FD7CK003RT171E18S54BFAEM1",
@@ -7664,7 +7664,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVAF1",
       "version": "FD7FD7CK003RT171E19S54BFAEM1",
@@ -7734,7 +7734,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVAF1",
       "version": "FD7FD7CK003RT171E19S54BFBEM1",
@@ -7762,7 +7762,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVAF1",
       "version": "FD7FD7CK003RT171E19S54BFBEM1",
@@ -7790,7 +7790,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVAF1",
       "version": "FD7FD7CK003RT171E19S54BFBEM10",
@@ -7999,8 +7999,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVAF1",
       "version": "FD7FD7CK003RT181E20S54BFBEM10",
@@ -8112,7 +8112,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVBF1",
       "version": "FD7FD7CK003RT171C17S44BFAEM1",
@@ -8140,7 +8140,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVBF1",
       "version": "FD7FD7CK003RT171C17S54BFAEM1",
@@ -8266,7 +8266,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVBF1",
       "version": "FD7FD7CK003RT171E18S57CSAEM1",
@@ -8322,7 +8322,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVBF1",
       "version": "FD7FD7CK003RT171E19S54BFAEM1",
@@ -8350,7 +8350,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DLVBF1",
       "version": "FD7FD7CK003RT171E19S54BFBEM1",
@@ -8560,7 +8560,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DMSAF1",
       "version": "FD7FD7CK003RT161B17S44BIAEM10B1",
@@ -8573,8 +8573,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DMSAF1",
       "version": "FD7FD7CK003RT161B17S54BIAEM10B1",
@@ -8602,7 +8602,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DMSAF1",
       "version": "FD7FD7CK003RT161B18S44BIAEM10B1",
@@ -8756,7 +8756,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DMSAF1",
       "version": "FD7FD7CK003RT171E19S44BIAEM10B1",
@@ -8854,7 +8854,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DMSAF1",
       "version": "FD7FD7CK003RT181E20S44BIBEM10B1",
@@ -8882,7 +8882,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DMSAF1",
       "version": "FD7FD7CK003RT181E20S54BIBEM10B1",
@@ -9092,7 +9092,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DMSBF1",
       "version": "FD7FD7CK003RT161B17S44BIAEM10B1",
@@ -9134,7 +9134,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DMSBF1",
       "version": "FD7FD7CK003RT161B18S44BIAEM10B1",
@@ -9148,7 +9148,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DMSBF1",
       "version": "FD7FD7CK003RT161B18S54BIAEM10B1",
@@ -9316,7 +9316,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DMSBF1",
       "version": "FD7FD7CK003RT181E20S54BIBEM10B1",
@@ -9456,7 +9456,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DMTAQ1",
       "version": "QD7AD7CJ004RT171E18S44BIAEM10B1",
@@ -9469,8 +9469,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DMTAQ1",
       "version": "QD7AD7CJ004RT171E18S54BIAEM10B1",
@@ -9484,7 +9484,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DMTAQ1",
       "version": "QD7AD7CJ004RT171E19S44BIAEM10B1",
@@ -9568,7 +9568,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DMTAQ1",
       "version": "QD7AD7CJ004RT181E20S54BIBEM10B1",
@@ -9624,7 +9624,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK",
+      "commercialName": "A5 Sportback",
       "type": "B8",
       "variant": "S2DTNAF1",
       "version": "FD7FD7CK006RT161B18S44BIAEM10D1",
@@ -9638,7 +9638,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DTNAF1",
       "version": "FD7FD7CK006RT161B18S54BIAEM10D1",
@@ -9792,7 +9792,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 Sportback",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DTNAF1",
       "version": "FD7FD7CK006RT171E19S54BIAEM10D1",
@@ -10001,8 +10001,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DTPAF1",
       "version": "FD7FD7CK006RT161B18S54BIAEM10D1",
@@ -10281,8 +10281,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DTPAQ1",
       "version": "QD7AD7CJ003RT171E19S54BIAEM10D1",
@@ -10351,8 +10351,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A5 Sportback",
+      "make": "AUDI",
+      "commercialName": "A5 SPORTBACK",
       "type": "B8",
       "variant": "S2DTPAQ1",
       "version": "QD7AD7CJ003RT181E20S54BIBEM10D1",
@@ -10394,7 +10394,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK G-TRON",
+      "commercialName": "A5 Sportback g-tron",
       "type": "B8",
       "variant": "S2CVLAF1",
       "version": "FD7FD7CK005RT161B17S44BFAEM10",
@@ -10422,7 +10422,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK G-TRON",
+      "commercialName": "A5 Sportback g-tron",
       "type": "B8",
       "variant": "S2CVLAF1",
       "version": "FD7FD7CK005RT161B17S54BFAEM10",
@@ -10450,7 +10450,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK G-TRON",
+      "commercialName": "A5 Sportback g-tron",
       "type": "B8",
       "variant": "S2CVLAF1",
       "version": "FD7FD7CK005RT161B18S54BFAEM1",
@@ -10464,7 +10464,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK G-TRON",
+      "commercialName": "A5 Sportback g-tron",
       "type": "B8",
       "variant": "S2CVLAF1",
       "version": "FD7FD7CK005RT161B18S54BFAEM10",
@@ -10576,7 +10576,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK G-TRON",
+      "commercialName": "A5 Sportback g-tron",
       "type": "B8",
       "variant": "S2CVLAF1",
       "version": "FD7FD7CK005RT171E18S54BFAEM1",
@@ -10604,7 +10604,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK G-TRON",
+      "commercialName": "A5 Sportback g-tron",
       "type": "B8",
       "variant": "S2CVLAF1",
       "version": "FD7FD7CK005RT171E18S57CSAEM1",
@@ -10618,7 +10618,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK G-TRON",
+      "commercialName": "A5 Sportback g-tron",
       "type": "B8",
       "variant": "S2CVLAF1",
       "version": "FD7FD7CK005RT171E19S44BFAEM10",
@@ -10674,7 +10674,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK G-TRON",
+      "commercialName": "A5 Sportback g-tron",
       "type": "B8",
       "variant": "S2CVLAF1",
       "version": "FD7FD7CK005RT171E19S54BFAEM10",
@@ -10702,7 +10702,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK G-TRON",
+      "commercialName": "A5 Sportback g-tron",
       "type": "B8",
       "variant": "S2CVLAF1",
       "version": "FD7FD7CK005RT171E19S54BFBEM1",
@@ -10730,7 +10730,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK G-TRON",
+      "commercialName": "A5 Sportback g-tron",
       "type": "B8",
       "variant": "S2CVLAF1",
       "version": "FD7FD7CK005RT171E19S57CSAEM1",
@@ -10814,7 +10814,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK G-TRON",
+      "commercialName": "A5 Sportback g-tron",
       "type": "B8",
       "variant": "S2DRXAF1",
       "version": "FD7FD7CK005RT161B18S44BIAEM10C0",
@@ -10828,7 +10828,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A5 SPORTBACK G-TRON",
+      "commercialName": "A5 Sportback g-tron",
       "type": "B8",
       "variant": "S2DRXAF1",
       "version": "FD7FD7CK005RT161B18S54BIAEM10C0",
@@ -15014,7 +15014,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 50 TFSI e",
+      "commercialName": "A6 50 TFSI E",
       "type": "F2",
       "variant": "LDLGAQ1",
       "version": "QD7AD7DK001RT091A18S54BFAEM8H660FS0",
@@ -15055,8 +15055,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 50 TFSI e",
+      "make": "AUDI",
+      "commercialName": "A6 50 TFSI E",
       "type": "F2",
       "variant": "LDLGAQ1",
       "version": "QD7AD7DK001RT091B18S54BFAEM8H660FS0",
@@ -15126,7 +15126,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 50 TFSI e",
+      "commercialName": "A6 50 TFSI E",
       "type": "F2",
       "variant": "LDLGAQ1",
       "version": "QD7AD7DK001RT091B18S54BFBEM8H660FS0",
@@ -15391,7 +15391,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A6 55 TFSI e",
       "type": "F2",
       "variant": "LDLGAQ1",
@@ -15462,7 +15462,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 55 TFSI e",
+      "commercialName": "A6 55 TFSI E",
       "type": "F2",
       "variant": "LDLGAQ1",
       "version": "QD7AD7DK001RT091C20S54BFBEM9H660FS0",
@@ -15546,7 +15546,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 55 TFSI e",
+      "commercialName": "A6 55 TFSI E",
       "type": "F2",
       "variant": "LDLGAQ1",
       "version": "QD7AD7DK001RT101C20S54BFBEM9H660FS0",
@@ -15629,8 +15629,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 allroad quattro",
+      "make": "AUDI",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDDVBQ1",
       "version": "QA8QA8D5023RT011B18S54BFAEM1H660FL",
@@ -15643,8 +15643,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 allroad quattro",
+      "make": "AUDI",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDDVBQ1",
       "version": "QA8QA8D5023RT011B18S54BFAEM1H660FL0",
@@ -15657,8 +15657,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 allroad quattro",
+      "make": "AUDI",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDDVBQ1",
       "version": "QA8QA8D5023RT011B19S54BFAEM1H660FL",
@@ -15671,8 +15671,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 allroad quattro",
+      "make": "AUDI",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDDVBQ1",
       "version": "QA8QA8D5023RT011B19S54BFAEM1H660FL0",
@@ -15686,7 +15686,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDDVBQ1",
       "version": "QA8QA8D5023RT011C20S54BFAEM1H660FL",
@@ -15714,7 +15714,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDDVBQ1",
       "version": "QA8QA8D5023RT011C21S54BFAEM1H660FL",
@@ -15742,7 +15742,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDDVBQ2",
       "version": "QA8QA8D5023RT011B18S54BFAEM1H660FL",
@@ -15798,7 +15798,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDDVBQ2",
       "version": "QA8QA8D5023RT011C20S54BFAEM1H660FL",
@@ -15854,7 +15854,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDDVEQ1",
       "version": "QA8QA8D5023RT011B18S54BFAEM1H660FL",
@@ -15896,7 +15896,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDDVEQ1",
       "version": "QA8QA8D5023RT011B19S54BFAEM1H660FL",
@@ -15924,7 +15924,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDDVEQ1",
       "version": "QA8QA8D5023RT011C20S54BFAEM1H660FL",
@@ -15966,7 +15966,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDDVEQ1",
       "version": "QA8QA8D5023RT011C21S54BFAEM1H660FL",
@@ -16148,7 +16148,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDEWAQ1",
       "version": "QA8QA8D5024RT011B18S54BFAEM1H661FL",
@@ -16162,7 +16162,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDEWAQ1",
       "version": "QA8QA8D5024RT011B18S54BFAEM1H661FL0",
@@ -16260,7 +16260,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDEWAQ1",
       "version": "QA8QA8D5024RT011C20S54BFAEM1H660FL",
@@ -16274,7 +16274,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDEWAQ1",
       "version": "QA8QA8D5024RT011C20S54BFAEM1H660FL0",
@@ -16848,7 +16848,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 ALLROAD QUATTRO",
+      "commercialName": "A6 allroad quattro",
       "type": "F2",
       "variant": "HDLZAQ1",
       "version": "QD7AD7HL001RT011B18S54BFAEM1H660FL0",
@@ -16946,7 +16946,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDLZAQ1",
       "version": "QD7AD7HL001RT011B19S54BIAEM1H66FLB2",
@@ -16960,7 +16960,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDLZAQ1",
       "version": "QD7AD7HL001RT011C20S54BFBEM1H660FL",
@@ -17268,7 +17268,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 allroad quattro",
+      "commercialName": "A6 ALLROAD QUATTRO",
       "type": "F2",
       "variant": "HDLZAQ2",
       "version": "QD7AD7HL001RT011C20S54BIBEM1H660FL0",
@@ -17856,7 +17856,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADDVBQ1",
       "version": "QA8QA8D5023RT031A18S54BFAEM1H660FS",
@@ -18009,8 +18009,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADDVBQ1",
       "version": "QA8QA8D5023RT031B17S54BFAEM1H660FS",
@@ -18135,8 +18135,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADDVBQ1",
       "version": "QA8QA8D5023RT031B18S54BFAEM1H550FSC",
@@ -18177,8 +18177,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADDVBQ1",
       "version": "QA8QA8D5023RT031B18S54BFAEM1H660FLA",
@@ -18191,8 +18191,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADDVBQ1",
       "version": "QA8QA8D5023RT031B18S54BFAEM1H660FLB",
@@ -18233,8 +18233,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADDVBQ1",
       "version": "QA8QA8D5023RT031B18S54BFAEM1H660FS",
@@ -18401,8 +18401,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADDVBQ1",
       "version": "QA8QA8D5023RT031B19S54BFAEM1H660FLA",
@@ -18415,8 +18415,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADDVBQ1",
       "version": "QA8QA8D5023RT031B19S54BFAEM1H660FLB",
@@ -18457,8 +18457,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADDVBQ1",
       "version": "QA8QA8D5023RT031B19S54BFAEM1H660FS",
@@ -18653,8 +18653,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADDVBQ1",
       "version": "QA8QA8D5023RT031C20S54BFAEM1H660FS",
@@ -18681,8 +18681,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADDVBQ1",
       "version": "QA8QA8D5023RT031C20S54BFAEM1H660FSB",
@@ -18738,7 +18738,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADDVBQ1",
       "version": "QA8QA8D5023RT031C20S54BFBEM1H660FLA",
@@ -19325,8 +19325,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADDVBQ2",
       "version": "QA8QA8D5023RT031B19S54BFAEM1H660FL",
@@ -20445,7 +20445,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADDVEQ1",
@@ -20572,7 +20572,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADDVEQ1",
       "version": "QA8QA8D5023RT031B19S54BFAEM1H660FL0",
@@ -20655,8 +20655,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADDVEQ1",
       "version": "QA8QA8D5023RT031B19S54BFAEM1H660FS",
@@ -20670,7 +20670,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADDVEQ1",
       "version": "QA8QA8D5023RT031B19S54BFAEM1H660FS0",
@@ -20949,8 +20949,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADDVEQ1",
       "version": "QA8QA8D5023RT031C20S54BFBEM1H660FL",
@@ -21076,7 +21076,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADDVEQ1",
       "version": "QA8QA8D5023RT031C20S54BFBEM1H660FSB",
@@ -21495,8 +21495,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADDVEQ2",
       "version": "QA8QA8D5023RT031B18S54BFAEM1H660FL",
@@ -21902,7 +21902,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADEZDF1",
       "version": "FD7FD7CK001RT031A18S54BFAEM1H460FS",
@@ -21916,7 +21916,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADEZDF1",
       "version": "FD7FD7CK001RT031A18S54BFAEM1H460FS",
@@ -21944,7 +21944,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADEZDF1",
       "version": "FD7FD7CK001RT031A18S54BFAEM1H460FS0",
@@ -22125,8 +22125,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADEZDF1",
       "version": "FD7FD7CK001RT031B18S54BFAEM1H460FS",
@@ -22196,7 +22196,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADEZDF1",
       "version": "FD7FD7CK001RT031B19S54BFAEM1H460FS",
@@ -22280,7 +22280,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADEZDF1",
       "version": "FD7FD7CK001RT031C20S54BFBEM1H460FS",
@@ -22574,7 +22574,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADFBAF1",
       "version": "FD7FD7CK0011AS57CPAEM1H46",
@@ -22630,7 +22630,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADFBAF1",
       "version": "FD7FD7CK0011BS57CPBEM1H46",
@@ -22657,7 +22657,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAF1",
@@ -22672,7 +22672,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADFBAF1",
       "version": "FD7FD7CK001RT031A18S54BFAEM1H460FS",
@@ -22686,7 +22686,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAF1",
       "version": "FD7FD7CK001RT031A18S54BFAEM1H460FS",
@@ -22853,8 +22853,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAF1",
       "version": "FD7FD7CK001RT031B17S54BFAEM1H460FSB",
@@ -22937,8 +22937,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADFBAF1",
       "version": "FD7FD7CK001RT031B18S54BFAEM1H460FS",
@@ -22952,7 +22952,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAF1",
       "version": "FD7FD7CK001RT031B18S54BFAEM1H460FSA",
@@ -22965,8 +22965,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAF1",
       "version": "FD7FD7CK001RT031B18S54BFAEM1H460FSB",
@@ -23035,7 +23035,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAF1",
@@ -23063,8 +23063,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAF1",
       "version": "FD7FD7CK001RT031B19S54BFAEM1H460FSA",
@@ -23077,7 +23077,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAF1",
@@ -23091,8 +23091,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADFBAF1",
       "version": "FD7FD7CK001RT031B19S54BFAEM1H460FSC",
@@ -23134,7 +23134,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADFBAF1",
       "version": "FD7FD7CK001RT031B19S57CPAEM1H46",
@@ -23176,7 +23176,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAF1",
       "version": "FD7FD7CK001RT031C20S54BFBEM1H460FS",
@@ -23203,7 +23203,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAF1",
@@ -23218,7 +23218,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAF1",
       "version": "FD7FD7CK001RT031C20S54BFBEM1H460FSC",
@@ -23246,7 +23246,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAF1",
       "version": "FD7FD7CK001RT031C21S54BFBEM1H460FS",
@@ -23344,7 +23344,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAQ1",
       "version": "QD7AD7CJ003RT031A18S54BFAEM1H560FS",
@@ -23386,7 +23386,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADFBAQ1",
       "version": "QD7AD7CJ003RT031A18S54BFAEM1H560FSB",
@@ -23456,7 +23456,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAQ1",
       "version": "QD7AD7CJ003RT031A18S57CPAEM1H56",
@@ -23988,7 +23988,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADFBAQ1",
       "version": "QD7AD7CJ003RT031B18S54BFBEM1H560FS",
@@ -24001,8 +24001,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAQ1",
       "version": "QD7AD7CJ003RT031B18S54BFBEM1H560FSA",
@@ -24015,8 +24015,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAQ1",
       "version": "QD7AD7CJ003RT031B18S54BFBEM1H560FSB",
@@ -24183,8 +24183,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAQ1",
       "version": "QD7AD7CJ003RT031B19S54BFBEM1H560FSA",
@@ -24197,7 +24197,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAQ1",
@@ -24212,7 +24212,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAQ1",
       "version": "QD7AD7CJ003RT031B19S54BFBEM1H560FSC",
@@ -24268,7 +24268,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAQ1",
       "version": "QD7AD7CJ003RT031C20S54BFBEM1H560FS",
@@ -24379,8 +24379,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADFBAQ1",
       "version": "QD7AD7CJ003RT031C21S54BFBEM1H560FS",
@@ -24436,7 +24436,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADFBAQ1",
       "version": "QD7AD7CJ003RT031C21S57CPBEM1H56",
@@ -24828,7 +24828,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADKNAF1",
       "version": "FD7FD7CK002RT031A18S54BFAEM1H460FSB",
@@ -24856,7 +24856,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADKNAF1",
       "version": "FD7FD7CK002RT031B17S54BFAEM1H330FS",
@@ -25023,8 +25023,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADKNAF1",
       "version": "FD7FD7CK002RT031B18S54BFAEM1H460FS",
@@ -25094,7 +25094,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADKNAF1",
       "version": "FD7FD7CK002RT031B18S54BFBEM1H460FS",
@@ -25262,7 +25262,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADKNAF1",
       "version": "FD7FD7CK002RT031B19S54BFAEM1H460FSA",
@@ -25332,7 +25332,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADKNAF1",
       "version": "FD7FD7CK002RT031B19S54BFBEM1H460FS",
@@ -25682,7 +25682,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADKNAQ1",
       "version": "QD7AD7CJ004RT031A18S54BFAEM1H560FS",
@@ -25877,8 +25877,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADKNAQ1",
       "version": "QD7AD7CJ004RT031B18S54BFAEM1H440FSA",
@@ -26059,8 +26059,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADKNAQ1",
       "version": "QD7AD7CJ004RT031B18S57CSBEM1H56",
@@ -26283,8 +26283,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "make": "Audi",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADKNAQ1",
       "version": "QD7AD7CJ004RT031B19S54BFBEM1H560FS",
@@ -26340,7 +26340,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADKNAQ1",
       "version": "QD7AD7CJ004RT031B19S57CSBEM1H56",
@@ -26620,7 +26620,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADKNAQ2",
       "version": "QD7AD7CJ004RT031B18S54BFBEM1H560FS",
@@ -27208,7 +27208,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADLZAQ1",
       "version": "QD7AD7HL001RT041C20S54BFBEM1H560FS",
@@ -27740,7 +27740,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADLZAQ2",
       "version": "QD7AD7HL001RT041C20S54BFBEM1H560FL",
@@ -27767,8 +27767,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADLZAQ2",
       "version": "QD7AD7HL001RT041C20S54BFBEM1H560FL0",
@@ -28075,8 +28075,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADMGAQ1",
       "version": "QA8QA8D5023RT031B19S54BIBEM1H66FLD2",
@@ -28356,7 +28356,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADMTAQ1",
       "version": "QD7AD7CJ004RT031A18S54BIAEM1H560FS0",
@@ -28481,8 +28481,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADMTAQ1",
       "version": "QD7AD7CJ004RT031B19S54BIAEM1H56FSB1",
@@ -28636,7 +28636,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADTPAF1",
       "version": "FD7FD7CK001RT031A18S54BIAEM1H460FS0",
@@ -28650,7 +28650,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADTPAF1",
       "version": "FD7FD7CK001RT031A18S54BIAEM1H46FSD1",
@@ -28747,8 +28747,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADTPAF1",
       "version": "FD7FD7CK001RT031B18S54BIAEM1H46FSD1",
@@ -28776,7 +28776,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADTPAF1",
       "version": "FD7FD7CK001RT031B19S54BIAEM1H460FS0",
@@ -28789,8 +28789,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADTPAF1",
       "version": "FD7FD7CK001RT031B19S54BIAEM1H46FSD1",
@@ -29378,7 +29378,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Avant",
+      "commercialName": "A6 AVANT",
       "type": "F2",
       "variant": "ADTPBF1",
       "version": "FD7FD7CK001RT031A18S54BIAEM1H460FS0",
@@ -29490,7 +29490,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 AVANT",
+      "commercialName": "A6 Avant",
       "type": "F2",
       "variant": "ADTPBF1",
       "version": "FD7FD7CK001RT031B19S54BIAEM1H460FS0",
@@ -29615,8 +29615,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Avant 55 TFSI e",
+      "make": "AUDI",
+      "commercialName": "A6 AVANT 55 TFSI E",
       "type": "F2",
       "variant": "ADLGAQ1",
       "version": "QD7AD7DK001RT101B19S54BFBEM9H660FS0",
@@ -29770,7 +29770,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDDVBQ1",
       "version": "QA8QA8D50231CS57CPAEM1H56",
@@ -30007,8 +30007,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDDVBQ1",
       "version": "QA8QA8D5023RT031B18S54BFAEM1H440FSB",
@@ -30021,8 +30021,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDDVBQ1",
       "version": "QA8QA8D5023RT031B18S54BFAEM1H440FSC",
@@ -30036,7 +30036,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDDVBQ1",
       "version": "QA8QA8D5023RT031B18S54BFAEM1H560FL",
@@ -30077,8 +30077,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDDVBQ1",
       "version": "QA8QA8D5023RT031B18S54BFAEM1H560FLB",
@@ -30091,8 +30091,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDDVBQ1",
       "version": "QA8QA8D5023RT031B18S54BFAEM1H560FLC",
@@ -30105,8 +30105,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDDVBQ1",
       "version": "QA8QA8D5023RT031B18S54BFAEM1H560FS",
@@ -30176,7 +30176,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDDVBQ1",
       "version": "QA8QA8D5023RT031B18S57CPAEM1H44",
@@ -30203,8 +30203,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDDVBQ1",
       "version": "QA8QA8D5023RT031B19S54BFAEM1H440FSA",
@@ -30217,8 +30217,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDDVBQ1",
       "version": "QA8QA8D5023RT031B19S54BFAEM1H440FSB",
@@ -30259,8 +30259,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDDVBQ1",
       "version": "QA8QA8D5023RT031B19S54BFAEM1H560FLA",
@@ -30428,7 +30428,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDDVBQ1",
       "version": "QA8QA8D5023RT031C20S54BFAEM1H560FL",
@@ -30553,8 +30553,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDDVBQ1",
       "version": "QA8QA8D5023RT031C20S57CPAEM1H56",
@@ -31100,7 +31100,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDDVEQ1",
       "version": "QA8QA8D50231CS57CPAEM1H56",
@@ -31170,7 +31170,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDDVEQ1",
       "version": "QA8QA8D5023RT031A18S54BFAEM1H560FL",
@@ -31407,8 +31407,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDDVEQ1",
       "version": "QA8QA8D5023RT031B18S54BFAEM1H440FS0",
@@ -31463,8 +31463,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDDVEQ1",
       "version": "QA8QA8D5023RT031B18S54BFAEM1H560FL",
@@ -31687,8 +31687,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDDVEQ1",
       "version": "QA8QA8D5023RT031B19S54BFAEM1H560FL",
@@ -31702,7 +31702,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDDVEQ1",
       "version": "QA8QA8D5023RT031B19S54BFAEM1H560FL0",
@@ -31813,8 +31813,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDDVEQ1",
       "version": "QA8QA8D5023RT031B19S54BFAEM1H560FSA",
@@ -31827,8 +31827,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDDVEQ1",
       "version": "QA8QA8D5023RT031B19S54BFAEM1H560FSB",
@@ -31995,8 +31995,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDDVEQ1",
       "version": "QA8QA8D5023RT031C20S54BFAEM1H560FSB",
@@ -32388,7 +32388,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDEZDF1",
       "version": "FD7FD7CK001RT031A18S54BFAEM1H360FS",
@@ -32458,7 +32458,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDEZDF1",
       "version": "FD7FD7CK001RT031B17S54BFAEM1H360FS",
@@ -32471,8 +32471,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDEZDF1",
       "version": "FD7FD7CK001RT031B17S54BFAEM1H360FS0",
@@ -32499,8 +32499,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDEZDF1",
       "version": "FD7FD7CK001RT031B18S54BFAEM1H360FS",
@@ -32640,7 +32640,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDEZDF1",
       "version": "FD7FD7CK001RT031B19S57CPAEM1H36",
@@ -32654,7 +32654,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDEZDF1",
       "version": "FD7FD7CK001RT031C20S54BFAEM1H360FS",
@@ -32668,7 +32668,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDEZDF1",
       "version": "FD7FD7CK001RT031C20S54BFAEM1H360FS0",
@@ -32836,7 +32836,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAF1",
       "version": "FD7FD7CK0011BS57CPAEM1H36",
@@ -32891,7 +32891,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAF1",
@@ -32989,8 +32989,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAF1",
       "version": "FD7FD7CK001RT031B17S54BFAEM1H360FSA",
@@ -33045,8 +33045,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDFBAF1",
       "version": "FD7FD7CK001RT031B17S57CPAEM1H36",
@@ -33059,7 +33059,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAF1",
@@ -33088,7 +33088,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAF1",
       "version": "FD7FD7CK001RT031B18S54BFAEM1H360FSA",
@@ -33101,8 +33101,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAF1",
       "version": "FD7FD7CK001RT031B18S54BFAEM1H360FSB",
@@ -33129,8 +33129,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDFBAF1",
       "version": "FD7FD7CK001RT031B18S57CPAEM1H36",
@@ -33157,7 +33157,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAF1",
@@ -33171,7 +33171,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAF1",
@@ -33185,8 +33185,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAF1",
       "version": "FD7FD7CK001RT031B19S54BFAEM1H360FSA",
@@ -33199,8 +33199,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAF1",
       "version": "FD7FD7CK001RT031B19S54BFAEM1H360FSB",
@@ -33227,8 +33227,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDFBAF1",
       "version": "FD7FD7CK001RT031B19S57CPAEM1H36",
@@ -33255,8 +33255,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDFBAF1",
       "version": "FD7FD7CK001RT031C20S54BFAEM1H360FS",
@@ -33311,8 +33311,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDFBAF1",
       "version": "FD7FD7CK001RT031C20S57CPAEM1H36",
@@ -33410,7 +33410,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAQ1",
       "version": "QD7AD7CJ003RT031A18S54BFAEM1H460FS",
@@ -33438,7 +33438,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDFBAQ1",
       "version": "QD7AD7CJ003RT031A18S54BFAEM1H460FSA",
@@ -33536,7 +33536,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAQ1",
       "version": "QD7AD7CJ003RT031B17S54BFAEM1H460FSA",
@@ -33606,7 +33606,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAQ1",
       "version": "QD7AD7CJ003RT031B18S54BFAEM1H460FS",
@@ -33633,8 +33633,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAQ1",
       "version": "QD7AD7CJ003RT031B18S54BFAEM1H460FSA",
@@ -33647,8 +33647,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAQ1",
       "version": "QD7AD7CJ003RT031B18S54BFAEM1H460FSB",
@@ -33703,7 +33703,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAQ1",
@@ -33731,8 +33731,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAQ1",
       "version": "QD7AD7CJ003RT031B19S54BFAEM1H460FSA",
@@ -33745,7 +33745,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDFBAQ1",
@@ -33801,7 +33801,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAQ1",
@@ -33857,8 +33857,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDFBAQ1",
       "version": "QD7AD7CJ003RT031C20S54BFBEM1H460FSB",
@@ -33871,8 +33871,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDFBAQ1",
       "version": "QD7AD7CJ003RT031C20S54BFBEM1H460FSC",
@@ -33914,7 +33914,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDFBAQ1",
       "version": "QD7AD7CJ003RT031C21S54BFBEM1H460FSB",
@@ -34166,7 +34166,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDKNAF1",
       "version": "FD7FD7CK002RT031A18S54BFAEM1H360FS",
@@ -34222,7 +34222,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDKNAF1",
       "version": "FD7FD7CK002RT031A18S54BFAEM1H360FSB",
@@ -34264,7 +34264,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDKNAF1",
       "version": "FD7FD7CK002RT031B17S54BFAEM1H360FS",
@@ -34347,7 +34347,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDKNAF1",
@@ -34403,8 +34403,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDKNAF1",
       "version": "FD7FD7CK002RT031B18S57CSAEM1H36",
@@ -34431,7 +34431,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDKNAF1",
@@ -34501,8 +34501,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDKNAF1",
       "version": "FD7FD7CK002RT031B19S54BFAEM1H360FSB",
@@ -34544,7 +34544,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDKNAF1",
       "version": "FD7FD7CK002RT031B19S57CSAEM1H36",
@@ -34572,7 +34572,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDKNAF1",
       "version": "FD7FD7CK002RT031C20S54BFBEM1H360FS",
@@ -34823,7 +34823,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDKNAQ1",
@@ -34852,7 +34852,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDKNAQ1",
       "version": "QD7AD7CJ004RT031B18S54BFAEM1H460FSA",
@@ -34865,8 +34865,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDKNAQ1",
       "version": "QD7AD7CJ004RT031B18S54BFAEM1H460FSB",
@@ -34908,7 +34908,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDKNAQ1",
       "version": "QD7AD7CJ004RT031B18S57CSAEM1H46",
@@ -34949,7 +34949,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDKNAQ1",
@@ -34978,7 +34978,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDKNAQ1",
       "version": "QD7AD7CJ004RT031B19S54BFAEM1H460FSA",
@@ -35048,7 +35048,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDKNAQ1",
       "version": "QD7AD7CJ004RT031C20S54BFAEM1H460FS",
@@ -35118,7 +35118,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDKNAQ1",
       "version": "QD7AD7CJ004RT031C20S54BFBEM1H460FSC",
@@ -35299,8 +35299,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDLZAQ1",
       "version": "QD7AD7HL001RT041B18S54BFAEM1H460FL",
@@ -35328,7 +35328,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDLZAQ1",
       "version": "QD7AD7HL001RT041B18S54BFAEM1H460FS",
@@ -35355,8 +35355,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDLZAQ1",
       "version": "QD7AD7HL001RT041B18S54BIAEM1H460FL0",
@@ -35426,7 +35426,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDLZAQ1",
       "version": "QD7AD7HL001RT041B19S54BFAEM1H460FL",
@@ -35537,8 +35537,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDLZAQ1",
       "version": "QD7AD7HL001RT041C20S54BFAEM1H460FL",
@@ -35663,8 +35663,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "make": "Audi",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDLZAQ1",
       "version": "QD7AD7HL001RT041C20S54BIAEM1H46FSB2",
@@ -36322,7 +36322,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDMTAF1",
       "version": "FD7FD7CK002RT031B17S54BIAEM1H360FS0",
@@ -36490,7 +36490,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDMTAQ1",
       "version": "QD7AD7CJ004RT031B18S54BIAEM1H460FS0",
@@ -36503,8 +36503,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDMTAQ1",
       "version": "QD7AD7CJ004RT031B18S54BIAEM1H46FSB1",
@@ -36560,7 +36560,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDMTAQ1",
       "version": "QD7AD7CJ004RT031C20S54BIAEM1H460FS0",
@@ -36658,7 +36658,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDTPAF1",
       "version": "FD7FD7CK001RT031A18S54BIAEM1H360FS0",
@@ -36672,7 +36672,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDTPAF1",
       "version": "FD7FD7CK001RT031B17S54BIAEM1H360FS0",
@@ -36699,8 +36699,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDTPAF1",
       "version": "FD7FD7CK001RT031B18S54BIAEM1H360FS0",
@@ -36728,7 +36728,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDTPAF1",
       "version": "FD7FD7CK001RT031B19S54BIAEM1H360FS0",
@@ -36756,7 +36756,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDTPAF1",
       "version": "FD7FD7CK001RT031B19S54BIAEM1H36FSD1",
@@ -37189,8 +37189,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A6 Limousine",
+      "make": "AUDI",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDTPBF1",
       "version": "FD7FD7CK001RT031B18S54BIAEM1H360FS0",
@@ -37218,7 +37218,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 LIMOUSINE",
+      "commercialName": "A6 Limousine",
       "type": "F2",
       "variant": "LDTPBF1",
       "version": "FD7FD7CK001RT031B19S54BIAEM1H360FS0",
@@ -37232,7 +37232,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A6 Limousine",
+      "commercialName": "A6 LIMOUSINE",
       "type": "F2",
       "variant": "LDTPBF1",
       "version": "FD7FD7CK001RT031B19S54BIAEM1H36FSD1",
@@ -41138,7 +41138,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 50 TFSI e",
+      "commercialName": "A7 50 TFSI E",
       "type": "F2",
       "variant": "SDLGAQ1",
       "version": "QD7AD7DK001RT071A18S54BFAEM8H660FS0",
@@ -41208,7 +41208,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 50 TFSI E",
+      "commercialName": "A7 50 TFSI e",
       "type": "F2",
       "variant": "SDLGAQ1",
       "version": "QD7AD7DK001RT071B18S44BFBEM8H660FS0",
@@ -41264,7 +41264,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 50 TFSI e",
+      "commercialName": "A7 50 TFSI E",
       "type": "F2",
       "variant": "SDLGAQ1",
       "version": "QD7AD7DK001RT071B18S54BFBEM8H660FS0",
@@ -41362,7 +41362,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 50 TFSI e",
+      "commercialName": "A7 50 TFSI E",
       "type": "F2",
       "variant": "SDLGAQ1",
       "version": "QD7AD7DK001RT071B19S54BFBEM8H660FS0",
@@ -41571,8 +41571,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A7 55 TFSI E",
+      "make": "Audi",
+      "commercialName": "A7 55 TFSI e",
       "type": "F2",
       "variant": "SDLGAQ1",
       "version": "QD7AD7DK001RT071B19S54BFBEM9H660FS",
@@ -41642,7 +41642,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 55 TFSI E",
+      "commercialName": "A7 55 TFSI e",
       "type": "F2",
       "variant": "SDLGAQ1",
       "version": "QD7AD7DK001RT071C20S44BFCEM9H660FS0",
@@ -43027,8 +43027,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A7 Sportback",
+      "make": "AUDI",
+      "commercialName": "A7 SPORTBACK",
       "type": "F2",
       "variant": "SDDVBQ1",
       "version": "QA8QA8D5023RT061B19S44BFAEM1H560FL",
@@ -43041,8 +43041,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A7 Sportback",
+      "make": "AUDI",
+      "commercialName": "A7 SPORTBACK",
       "type": "F2",
       "variant": "SDDVBQ1",
       "version": "QA8QA8D5023RT061B19S44BFAEM1H560FL0",
@@ -43475,8 +43475,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A7 Sportback",
+      "make": "AUDI",
+      "commercialName": "A7 SPORTBACK",
       "type": "F2",
       "variant": "SDDVBQ1",
       "version": "QA8QA8D5023RT061C21S54BFAEM1H560FS",
@@ -43545,8 +43545,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A7 Sportback",
+      "make": "AUDI",
+      "commercialName": "A7 SPORTBACK",
       "type": "F2",
       "variant": "SDDVBQ1",
       "version": "QA8QA8D5023RT061C21S57CPAEM1H56",
@@ -43882,7 +43882,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 Sportback",
+      "commercialName": "A7 SPORTBACK",
       "type": "F2",
       "variant": "SDDVBQ2",
       "version": "QA8QA8D5023RT061C21S54BFBEM1H560FL0",
@@ -44035,8 +44035,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A7 Sportback",
+      "make": "AUDI",
+      "commercialName": "A7 SPORTBACK",
       "type": "F2",
       "variant": "SDDVEQ1",
       "version": "QA8QA8D5023RT061B19S54BFAEM1H560FS",
@@ -44189,8 +44189,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A7 Sportback",
+      "make": "AUDI",
+      "commercialName": "A7 SPORTBACK",
       "type": "F2",
       "variant": "SDDVEQ1",
       "version": "QA8QA8D5023RT061C20S54BFAEM1H560FS",
@@ -44287,8 +44287,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDDVEQ1",
       "version": "QA8QA8D5023RT061C21S54BFAEM1H560FL",
@@ -44315,8 +44315,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "A7 Sportback",
+      "make": "AUDI",
+      "commercialName": "A7 SPORTBACK",
       "type": "F2",
       "variant": "SDDVEQ1",
       "version": "QA8QA8D5023RT061C21S54BFAEM1H560FS",
@@ -44371,8 +44371,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDDVEQ1",
       "version": "QA8QA8D5023RT061C21S57CPAEM1H56",
@@ -44596,7 +44596,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDFBAF1",
       "version": "FD7FD7CK0011CS57CPBEM1H46",
@@ -44834,7 +44834,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDFBAF1",
       "version": "FD7FD7CK001RT061B19S54BFAEM1H460FS",
@@ -44918,7 +44918,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDFBAF1",
       "version": "FD7FD7CK001RT061C20S44BFBEM1H460FS",
@@ -44946,7 +44946,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDFBAF1",
       "version": "FD7FD7CK001RT061C20S54BFAEM1H460FS",
@@ -44974,7 +44974,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDFBAF1",
       "version": "FD7FD7CK001RT061C20S54BFBEM1H460FS",
@@ -45100,7 +45100,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDFBAQ1",
       "version": "QD7AD7CJ003RT061A18S54BFAEM1H560FS",
@@ -45226,7 +45226,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDFBAQ1",
       "version": "QD7AD7CJ003RT061B19S44BFBEM1H440FS",
@@ -45282,7 +45282,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDFBAQ1",
       "version": "QD7AD7CJ003RT061B19S54BFBEM1H560FS",
@@ -45408,7 +45408,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDFBAQ1",
       "version": "QD7AD7CJ003RT061C20S54BFBEM1H560FS",
@@ -45478,7 +45478,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDFBAQ1",
       "version": "QD7AD7CJ003RT061C21S44BFBEM1H560FS0",
@@ -45506,7 +45506,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDFBAQ1",
       "version": "QD7AD7CJ003RT061C21S54BFBEM1H560FS",
@@ -45534,7 +45534,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDFBAQ1",
       "version": "QD7AD7CJ003RT061C21S57CPBEM1H56",
@@ -45618,7 +45618,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDFBAQ2",
       "version": "QD7AD7CJ003RT061C20S54BFBEM1H560FS",
@@ -46065,8 +46065,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDKNAQ1",
       "version": "QD7AD7CJ004RT061B19S54BFAEM1H440FS0",
@@ -46122,7 +46122,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 Sportback",
+      "commercialName": "A7 SPORTBACK",
       "type": "F2",
       "variant": "SDKNAQ1",
       "version": "QD7AD7CJ004RT061C20S44BFBEM1H440FS0",
@@ -46878,7 +46878,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDLZAQ1",
       "version": "QD7AD7HL001RT061C20S54BFBEM1H560FS",
@@ -47214,7 +47214,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 Sportback",
+      "commercialName": "A7 SPORTBACK",
       "type": "F2",
       "variant": "SDLZAQ2",
       "version": "QD7AD7HL001RT061C20S54BFBEM1H560FL",
@@ -47298,7 +47298,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 Sportback",
+      "commercialName": "A7 SPORTBACK",
       "type": "F2",
       "variant": "SDLZAQ2",
       "version": "QD7AD7HL001RT061C21S44BFBEM1H560FL",
@@ -47312,7 +47312,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 Sportback",
+      "commercialName": "A7 SPORTBACK",
       "type": "F2",
       "variant": "SDLZAQ2",
       "version": "QD7AD7HL001RT061C21S44BFBEM1H560FL0",
@@ -47354,7 +47354,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDLZAQ2",
       "version": "QD7AD7HL001RT061C21S54BFBEM1H560FL0",
@@ -47970,7 +47970,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDTPAF1",
       "version": "FD7FD7CK001RT061C20S54BIBEM1H460FS0",
@@ -48082,7 +48082,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "A7 SPORTBACK",
+      "commercialName": "A7 Sportback",
       "type": "F2",
       "variant": "SDTPAQ1",
       "version": "QD7AD7CJ003RT061C20S54BIBEM1H560FS0",
@@ -48151,7 +48151,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A8",
       "type": "F8",
       "variant": "GCVXBQ1",
@@ -49271,7 +49271,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A8",
       "type": "F8",
       "variant": "GCZSEQ2",
@@ -49299,7 +49299,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "A8",
       "type": "F8",
       "variant": "GCZSEQ2",
@@ -49971,7 +49971,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A8",
       "type": "F8",
       "variant": "LCVXBQ2",
@@ -50839,7 +50839,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A8",
       "type": "F8",
       "variant": "LDDVCQ1",
@@ -50895,7 +50895,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "A8",
       "type": "F8",
       "variant": "LDDVCQ1",
@@ -55949,8 +55949,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "AUDI E-TRON",
+      "make": "Audi",
+      "commercialName": "Audi e-tron",
       "type": "GE",
       "variant": "XBM1JQ1",
       "version": "QE1QE1G1Z01RT11C210GABEM0",
@@ -59688,7 +59688,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "e-tron",
+      "commercialName": "E-TRON",
       "type": "GE",
       "variant": "XBM1JQ1",
       "version": "QE1QE1G1Z01RT11B200GAAEM0",
@@ -59926,7 +59926,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "e-tron",
+      "commercialName": "E-TRON",
       "type": "GE",
       "variant": "XBM1JQ1",
       "version": "QE1QE1G1Z01RT11C210GABEM0",
@@ -60275,8 +60275,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "E-TRON 50",
+      "make": "Audi",
+      "commercialName": "e-tron 50",
       "type": "GE",
       "variant": "XBM2RQ1",
       "version": "QE1QE1G1Z01RT11A190GAAEM0",
@@ -60416,7 +60416,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "e-tron 50",
+      "commercialName": "E-TRON 50",
       "type": "GE",
       "variant": "XBM2RQ1",
       "version": "QE1QE1G1Z01RT11B200GAAEM0",
@@ -60429,8 +60429,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "e-tron 50",
+      "make": "AUDI",
+      "commercialName": "E-TRON 50",
       "type": "GE",
       "variant": "XBM2RQ1",
       "version": "QE1QE1G1Z01RT11B200GAAEM0",
@@ -60514,7 +60514,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "e-tron 50",
+      "commercialName": "E-TRON 50",
       "type": "GE",
       "variant": "XBM2RQ1",
       "version": "QE1QE1G1Z01RT11B200GAAEM0U",
@@ -60527,8 +60527,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "E-TRON 50",
+      "make": "Audi",
+      "commercialName": "e-tron 50",
       "type": "GE",
       "variant": "XBM2RQ1",
       "version": "QE1QE1G1Z01RT11B200GAAEM0U",
@@ -60584,7 +60584,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "e-tron 50",
+      "commercialName": "E-TRON 50",
       "type": "GE",
       "variant": "XBM2RQ1",
       "version": "QE1QE1G1Z01RT11C210GAAEM0",
@@ -60738,7 +60738,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "e-tron 50",
+      "commercialName": "E-TRON 50",
       "type": "GE",
       "variant": "XBM2RQ1",
       "version": "QE1QE1G1Z01RT11C210GABEM0",
@@ -60752,7 +60752,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "E-TRON 50",
+      "commercialName": "e-tron 50",
       "type": "GE",
       "variant": "XBM2RQ1",
       "version": "QE1QE1G1Z01RT11C210GABEM0",
@@ -60808,7 +60808,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "e-tron 50",
+      "commercialName": "E-TRON 50",
       "type": "GE",
       "variant": "XBM2RQ1",
       "version": "QE1QE1G1Z01RT11C210GABEM0U",
@@ -61074,7 +61074,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "E-TRON 55",
+      "commercialName": "e-tron 55",
       "type": "GE",
       "variant": "XBM1JQ1",
       "version": "QE1QE1G1Z01RT11A190GAAEM0",
@@ -61129,8 +61129,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "E-TRON 55",
+      "make": "Audi",
+      "commercialName": "e-tron 55",
       "type": "GE",
       "variant": "XBM1JQ1",
       "version": "QE1QE1G1Z01RT11A190GAAEM0U",
@@ -61144,7 +61144,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "e-tron 55",
+      "commercialName": "E-TRON 55",
       "type": "GE",
       "variant": "XBM1JQ1",
       "version": "QE1QE1G1Z01RT11B200GAAEM0",
@@ -61297,7 +61297,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "e-tron 55",
       "type": "GE",
       "variant": "XBM1JQ1",
@@ -61550,7 +61550,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "e-tron 55",
+      "commercialName": "E-TRON 55",
       "type": "GE",
       "variant": "XBM1JQ1",
       "version": "QE1QE1G1Z01RT11C210GAAEM0U",
@@ -61564,7 +61564,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "E-TRON 55",
+      "commercialName": "e-tron 55",
       "type": "GE",
       "variant": "XBM1JQ1",
       "version": "QE1QE1G1Z01RT11C210GABEM0",
@@ -61676,7 +61676,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "e-tron 55",
+      "commercialName": "E-TRON 55",
       "type": "GE",
       "variant": "XBM1JQ1",
       "version": "QE1QE1G1Z01RT11C210GABEM0",
@@ -61717,8 +61717,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "E-TRON 55",
+      "make": "Audi",
+      "commercialName": "e-tron 55",
       "type": "GE",
       "variant": "XBM1JQ1",
       "version": "QE1QE1G1Z01RT11C210GABEM0",
@@ -61732,7 +61732,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "e-tron 55",
+      "commercialName": "E-TRON 55",
       "type": "GE",
       "variant": "XBM1JQ1",
       "version": "QE1QE1G1Z01RT11C210GABEM0",
@@ -61843,8 +61843,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "E-TRON 55",
+      "make": "Audi",
+      "commercialName": "e-tron 55",
       "type": "GE",
       "variant": "XBM1JQ1",
       "version": "QE1QE1G1Z01RT11C210GABEM0U",
@@ -62908,7 +62908,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "e-tron S Sportback",
+      "commercialName": "E-TRON S SPORTBACK",
       "type": "GE",
       "variant": "SBMQ3Q1",
       "version": "QE1QE1G1Z02RT41C210GAAEM0V",
@@ -62964,7 +62964,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "E-TRON S SPORTBACK",
+      "commercialName": "e-tron S Sportback",
       "type": "GE",
       "variant": "SBMQ3Q1",
       "version": "QE1QE1G1Z02RT41C210GAAEM0Y",
@@ -63033,8 +63033,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "e-tron S Sportback",
+      "make": "AUDI",
+      "commercialName": "E-TRON S SPORTBACK",
       "type": "GE",
       "variant": "SBMQ3Q1",
       "version": "QE1QE1G1Z02RT61C210GAAEM0",
@@ -63370,7 +63370,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "E-TRON SPORTBACK 50",
+      "commercialName": "e-tron Sportback 50",
       "type": "GE",
       "variant": "SBM2RQ1",
       "version": "QE1QE1G1Z01RT31B200GAAEM0",
@@ -63482,7 +63482,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "e-tron Sportback 50",
+      "commercialName": "E-TRON SPORTBACK 50",
       "type": "GE",
       "variant": "SBM2RQ1",
       "version": "QE1QE1G1Z01RT31C210GAAEM0",
@@ -63663,8 +63663,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "E-TRON SPORTBACK 50",
+      "make": "Audi",
+      "commercialName": "e-tron Sportback 50",
       "type": "GE",
       "variant": "SBM2RQ1",
       "version": "QE1QE1G1Z01RT31C210GAAEM0U",
@@ -63873,8 +63873,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "e-tron Sportback 55",
+      "make": "AUDI",
+      "commercialName": "E-TRON SPORTBACK 55",
       "type": "GE",
       "variant": "SBM1JQ1",
       "version": "QE1QE1G1Z01RT31A190GAAEM0U",
@@ -64013,7 +64013,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "e-tron Sportback 55",
       "type": "GE",
       "variant": "SBM1JQ1",
@@ -64293,8 +64293,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "e-tron Sportback 55",
+      "make": "AUDI",
+      "commercialName": "E-TRON SPORTBACK 55",
       "type": "GE",
       "variant": "SBM1JQ1",
       "version": "QE1QE1G1Z01RT31C210GAAEM0",
@@ -64405,8 +64405,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "e-tron Sportback 55",
+      "make": "AUDI",
+      "commercialName": "E-TRON SPORTBACK 55",
       "type": "GE",
       "variant": "SBM1JQ1",
       "version": "QE1QE1G1Z01RT31C210GAAEM0U",
@@ -64517,8 +64517,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "e-tron Sportback 55",
+      "make": "AUDI",
+      "commercialName": "E-TRON SPORTBACK 55",
       "type": "GE",
       "variant": "SBM1JQ1",
       "version": "QE1QE1G1Z01RT31C210GABEM0",
@@ -64531,8 +64531,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "e-tron Sportback 55",
+      "make": "AUDI",
+      "commercialName": "E-TRON SPORTBACK 55",
       "type": "GE",
       "variant": "SBM1JQ1",
       "version": "QE1QE1G1Z01RT31C210GABEM0",
@@ -64826,7 +64826,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "E-TRON SPORTBACK 55",
+      "commercialName": "e-tron Sportback 55",
       "type": "GE",
       "variant": "SBM1JQ1",
       "version": "QE1QE1G1Z01RT31C220GABEM0U",
@@ -65091,7 +65091,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDADAF1",
@@ -65833,7 +65833,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDFGAQ1",
@@ -66155,7 +66155,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDGTEF1",
@@ -66673,7 +66673,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDGTEF1",
@@ -66771,7 +66771,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDGTEF1",
@@ -66925,7 +66925,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDGTEF1",
@@ -67359,7 +67359,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDKRFF1",
@@ -67387,7 +67387,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDKRFF1",
@@ -67415,7 +67415,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDKRFF1",
@@ -67457,7 +67457,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDKRFF1",
@@ -67527,7 +67527,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDKRFF1",
@@ -67975,7 +67975,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDKZAQ1",
@@ -68297,7 +68297,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDKZAQ1",
@@ -68619,7 +68619,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDPCAF1",
@@ -68661,7 +68661,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDPCAF1",
@@ -68773,7 +68773,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDPCAF1",
@@ -68913,7 +68913,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDPCAF1",
@@ -69165,7 +69165,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDPCAF1",
@@ -69375,7 +69375,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDPCAF1",
@@ -69739,7 +69739,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDPCAF1",
@@ -69753,7 +69753,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q2",
       "type": "GA",
       "variant": "XDPCAF1",

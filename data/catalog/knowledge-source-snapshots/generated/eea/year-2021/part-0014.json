@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2021Fv24",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2021Fv24] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 14,
   "rows": [
     {
@@ -19,7 +19,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADLAAX0",
@@ -47,7 +47,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADLAAX0",
@@ -75,7 +75,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADLAAX0",
@@ -635,7 +635,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -663,7 +663,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -761,7 +761,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -789,7 +789,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -943,7 +943,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1027,7 +1027,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1055,7 +1055,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1153,7 +1153,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1279,7 +1279,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1377,7 +1377,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1433,7 +1433,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1461,7 +1461,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1489,7 +1489,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1531,7 +1531,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1545,7 +1545,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1587,7 +1587,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1629,7 +1629,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1657,7 +1657,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1699,7 +1699,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1713,7 +1713,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1741,7 +1741,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1825,7 +1825,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1839,7 +1839,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADPCAX0",
@@ -1895,7 +1895,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADSTBX0",
@@ -1993,7 +1993,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADSTBX0",
@@ -2021,7 +2021,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADSTBX0",
@@ -2063,7 +2063,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADSTBX0",
@@ -2091,7 +2091,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADSTBX0",
@@ -2147,7 +2147,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADSUDX0",
@@ -2161,7 +2161,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADSUDX0",
@@ -2175,7 +2175,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADSUDX0",
@@ -2371,7 +2371,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTRBX0",
@@ -2385,7 +2385,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTRBX0",
@@ -2525,7 +2525,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTRBX0",
@@ -2749,7 +2749,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTRDX0",
@@ -2819,7 +2819,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTRDX0",
@@ -2861,7 +2861,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTRDX0",
@@ -3169,7 +3169,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTTAX0",
@@ -3309,7 +3309,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTTCX0",
@@ -3351,7 +3351,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTTCX0",
@@ -3393,7 +3393,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTTCX0",
@@ -3407,7 +3407,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTTCX0",
@@ -3463,7 +3463,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTTCX0",
@@ -3519,7 +3519,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTTCX0",
@@ -3575,7 +3575,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTTCX0",
@@ -3645,7 +3645,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTTCX0",
@@ -4051,7 +4051,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTUAX1",
@@ -4107,7 +4107,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTUAX1",
@@ -4121,7 +4121,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTUAX1",
@@ -4205,7 +4205,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "AADTUAX1",
@@ -4219,7 +4219,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDFYAX0",
@@ -4317,8 +4317,8 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
-      "commercialName": "Octavia",
+      "make": "Skoda",
+      "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDFYAX0",
       "version": "NFD7FD7CW0024BIVL0N1A0A",
@@ -4401,7 +4401,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDFYAX0",
@@ -4457,7 +4457,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDFYAX0",
@@ -4597,7 +4597,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDGEAX0",
@@ -4751,7 +4751,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDGEAX0",
@@ -4961,7 +4961,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDHFAX0",
@@ -5157,7 +5157,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDLAAX0",
@@ -5185,7 +5185,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDLAAX0",
@@ -5311,7 +5311,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDLAAX0",
@@ -5339,7 +5339,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDLAAX0",
@@ -5367,7 +5367,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDLAAX0",
@@ -5913,7 +5913,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDPCAX0",
@@ -6165,7 +6165,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDPCAX0",
@@ -6305,7 +6305,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDPCAX0",
@@ -6333,7 +6333,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDPCAX0",
@@ -6361,7 +6361,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDPCAX0",
@@ -6571,7 +6571,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDPCAX0",
@@ -6655,7 +6655,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDPCAX0",
@@ -6711,7 +6711,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDPCAX0",
@@ -6865,7 +6865,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDPCAX0",
@@ -6907,7 +6907,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDPCAX0",
@@ -7005,7 +7005,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDPCAX0",
@@ -7117,7 +7117,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDPCAX0",
@@ -7187,7 +7187,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDPCAX0",
@@ -7369,7 +7369,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDSTBX0",
@@ -7397,7 +7397,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDSTBX0",
@@ -7425,7 +7425,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDSTBX0",
@@ -7495,7 +7495,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDSTBX0",
@@ -7565,7 +7565,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDSUDX0",
@@ -7579,7 +7579,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDSUDX0",
@@ -7607,7 +7607,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDSUDX0",
@@ -7887,7 +7887,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTRBX0",
@@ -7957,7 +7957,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTRBX0",
@@ -7985,7 +7985,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTRBX0",
@@ -8139,7 +8139,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTRDX0",
@@ -8153,7 +8153,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTRDX0",
@@ -8461,7 +8461,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTRDX0",
@@ -8671,7 +8671,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTTAX0",
@@ -8755,7 +8755,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTTAX0",
@@ -8853,7 +8853,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTTCX0",
@@ -8923,7 +8923,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTTCX0",
@@ -8965,7 +8965,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTTCX0",
@@ -9105,7 +9105,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTTCX0",
@@ -9162,7 +9162,7 @@
     {
       "year": 2021,
       "make": "SKODA",
-      "commercialName": "OCTAVIA",
+      "commercialName": "Octavia",
       "type": "NX",
       "variant": "ACDTTCX0",
       "version": "NFD7FD7GC0024BIVL0N1A5A",
@@ -9203,7 +9203,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTTCX0",
@@ -9385,7 +9385,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTTCX1",
@@ -9581,7 +9581,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTTCX1",
@@ -9903,7 +9903,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTUAX1",
@@ -10001,7 +10001,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTUAX1",
@@ -10029,7 +10029,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA",
       "type": "NX",
       "variant": "ACDTUAX1",
@@ -12031,7 +12031,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "AADGEAX0",
@@ -12045,7 +12045,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "AADGEAX0",
@@ -12171,7 +12171,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "AADNPAX0",
@@ -12311,7 +12311,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "AADNPAX0",
@@ -12325,7 +12325,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "AADNPAX0",
@@ -12409,7 +12409,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "AADNPAX0",
@@ -12465,7 +12465,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "AADNPAX0",
@@ -12563,7 +12563,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "AADTUAX0",
@@ -12577,7 +12577,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "AADTUAX0",
@@ -12619,7 +12619,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "AADTUAX0",
@@ -12661,7 +12661,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "AADTUAX1",
@@ -12703,7 +12703,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "AADTUAX1",
@@ -12717,7 +12717,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "AADTUAX1",
@@ -12759,7 +12759,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "ACDGEAX0",
@@ -12801,7 +12801,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "ACDGEAX0",
@@ -13040,7 +13040,7 @@
     {
       "year": 2021,
       "make": "SKODA",
-      "commercialName": "Octavia RS",
+      "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "ACDNPAX0",
       "version": "RFD7FD7GC0034BIML4N1B2A",
@@ -13081,7 +13081,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "ACDNPAX0",
@@ -13473,7 +13473,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "ACDTUAX0",
@@ -13529,7 +13529,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA RS",
       "type": "NX",
       "variant": "ACDTUAX0",
@@ -14747,7 +14747,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "OCTAVIA SCOUT",
       "type": "NX",
       "variant": "ACDTRDX0",
@@ -14761,7 +14761,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA SCOUT",
       "type": "NX",
       "variant": "ACDTTCX1",
@@ -14803,7 +14803,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA SCOUT",
       "type": "NX",
       "variant": "ACDTTCX1",
@@ -14985,7 +14985,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA SCOUT",
       "type": "NX",
       "variant": "ACDTUAX1",
@@ -14999,7 +14999,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "OCTAVIA SCOUT",
       "type": "NX",
       "variant": "ACDTUAX1",
@@ -16063,7 +16063,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDBYAX0",
@@ -16609,7 +16609,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDGTAX0",
@@ -17001,7 +17001,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDKRFX0",
@@ -17575,7 +17575,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDKRFX0",
@@ -17603,7 +17603,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDKRFX0",
@@ -17925,7 +17925,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -18121,7 +18121,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -18135,7 +18135,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -18317,7 +18317,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -18429,7 +18429,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -18569,7 +18569,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -18597,7 +18597,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -18625,7 +18625,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -18821,7 +18821,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -18835,7 +18835,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -18905,7 +18905,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -19101,7 +19101,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -19157,7 +19157,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -19213,7 +19213,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -19311,7 +19311,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -19563,7 +19563,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -19591,7 +19591,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -19675,7 +19675,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -20053,7 +20053,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -20137,7 +20137,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLAAX0",
@@ -20599,7 +20599,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLACX0",
@@ -20795,7 +20795,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDLACX0",
@@ -21159,7 +21159,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -21355,7 +21355,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -21873,7 +21873,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -21929,7 +21929,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -22125,7 +22125,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -22307,7 +22307,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -22335,7 +22335,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -22755,7 +22755,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -22895,7 +22895,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -22979,7 +22979,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -23161,7 +23161,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -23217,7 +23217,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -23301,7 +23301,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -23357,7 +23357,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -23455,7 +23455,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SCALA",
       "type": "NW",
       "variant": "ABSDPCAX0",
@@ -25233,7 +25233,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADGEBX01",
@@ -25317,7 +25317,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADGEBX01",
@@ -25373,7 +25373,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADGEBX01",
@@ -25443,7 +25443,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADGEBX01",
@@ -25499,7 +25499,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADGEBX01",
@@ -25569,7 +25569,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADGEBX01",
@@ -25583,7 +25583,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADGEBX01",
@@ -25709,7 +25709,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADKZAX01",
@@ -25961,7 +25961,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADNFEX11",
@@ -26017,7 +26017,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADNFEX11",
@@ -26045,7 +26045,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADNFEX11",
@@ -26073,7 +26073,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADNFEX11",
@@ -26339,7 +26339,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADNNAX01",
@@ -26367,7 +26367,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADNNAX01",
@@ -26493,7 +26493,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADPCAX01",
@@ -26899,7 +26899,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADPCAX01",
@@ -27165,7 +27165,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADPCAX01",
@@ -27277,7 +27277,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADPCAX01",
@@ -27347,7 +27347,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADPCAX01",
@@ -27739,7 +27739,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADSRBX01",
@@ -27935,7 +27935,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTRAX01",
@@ -28341,7 +28341,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTSAX01",
@@ -28747,7 +28747,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTSBX01",
@@ -28803,7 +28803,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTSBX01",
@@ -28985,7 +28985,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTSBX01",
@@ -28999,7 +28999,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTSBX01",
@@ -29083,7 +29083,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTSBX01",
@@ -29097,7 +29097,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTSBX01",
@@ -29237,7 +29237,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTSBX01",
@@ -29475,7 +29475,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTUAX01",
@@ -29587,7 +29587,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTUAX01",
@@ -29685,7 +29685,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTUAX01",
@@ -29699,7 +29699,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTUAX01",
@@ -29895,7 +29895,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTUAX11",
@@ -29993,7 +29993,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTUAX11",
@@ -30021,7 +30021,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "AADTUAX11",
@@ -30427,7 +30427,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDFHAX01",
@@ -30469,7 +30469,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDFHAX11",
@@ -30525,7 +30525,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDGEBX01",
@@ -30791,7 +30791,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDGEBX01",
@@ -30945,7 +30945,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDGEBX01",
@@ -31029,7 +31029,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDGEBX01",
@@ -31057,7 +31057,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDGEBX01",
@@ -31113,7 +31113,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDGEBX01",
@@ -31267,7 +31267,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDNFEX11",
@@ -31351,7 +31351,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDNFEX11",
@@ -31449,7 +31449,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDNFEX11",
@@ -31687,7 +31687,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDNNAX01",
@@ -31757,7 +31757,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDNNAX01",
@@ -31771,7 +31771,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDNNAX01",
@@ -31827,7 +31827,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDNNAX01",
@@ -31841,7 +31841,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDNNAX01",
@@ -32737,7 +32737,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDPCAX01",
@@ -32821,7 +32821,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDPCAX01",
@@ -33045,7 +33045,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDPCAX01",
@@ -33171,7 +33171,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDSRAX01",
@@ -33353,7 +33353,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDSRBX01",
@@ -33367,7 +33367,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDSRBX01",
@@ -33619,7 +33619,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDSRBX01",
@@ -33745,7 +33745,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTRAX01",
@@ -34207,7 +34207,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSAX01",
@@ -34235,7 +34235,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSAX01",
@@ -34249,7 +34249,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSAX01",
@@ -34291,7 +34291,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSAX01",
@@ -34403,7 +34403,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSAX01",
@@ -34431,7 +34431,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSAX01",
@@ -34683,7 +34683,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSBX01",
@@ -34711,7 +34711,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSBX01",
@@ -34739,7 +34739,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSBX01",
@@ -34795,7 +34795,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSBX01",
@@ -34949,7 +34949,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSBX01",
@@ -35075,7 +35075,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSBX01",
@@ -35103,7 +35103,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSBX01",
@@ -35215,7 +35215,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSBX01",
@@ -35341,7 +35341,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSBX01",
@@ -35481,7 +35481,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTSBX01",
@@ -35691,7 +35691,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTUAX01",
@@ -35775,7 +35775,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTUAX01",
@@ -35817,7 +35817,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTUAX01",
@@ -35873,7 +35873,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTUAX01",
@@ -35929,7 +35929,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTUAX01",
@@ -35943,7 +35943,7 @@
     },
     {
       "year": 2021,
-      "make": "SKODA",
+      "make": "Skoda",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTUAX01",
@@ -36069,7 +36069,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTUAX01",
@@ -36531,7 +36531,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTUAX11",
@@ -36559,7 +36559,7 @@
     },
     {
       "year": 2021,
-      "make": "Skoda",
+      "make": "SKODA",
       "commercialName": "SUPERB",
       "type": "3T",
       "variant": "ACDTUAX11",
@@ -39738,7 +39738,7 @@
     {
       "year": 2021,
       "make": "ŠKODA",
-      "commercialName": "CITIGO",
+      "commercialName": "Citigo",
       "type": "AA",
       "variant": "ABEBMA",
       "version": "FA1FA1CZ0020GAVR0N1ESK1B16O",
@@ -61621,7 +61621,7 @@
       "year": 2021,
       "make": "SPRINTCAR",
       "commercialName": "MB Sprinter",
-      "type": "906bb35",
+      "type": "906BB35",
       "variant": "V1MD1350AXX",
       "version": "QF1AA3A2BEXX",
       "fuel": "DIESEL",
@@ -61749,7 +61749,7 @@
       "commercialName": "REXTON",
       "type": "RJ",
       "variant": "RDPL",
-      "version": "AEA21",
+      "version": "aea21",
       "fuel": "DIESEL",
       "engineCc": 2157,
       "powerKw": 131,
@@ -62838,7 +62838,7 @@
     {
       "year": 2021,
       "make": "SSANGYONG",
-      "commercialName": "SsangYong Korando",
+      "commercialName": "SSANGYONG KORANDO",
       "type": "CW",
       "variant": "AE2L",
       "version": "IEA42",
@@ -62879,8 +62879,8 @@
     },
     {
       "year": 2021,
-      "make": "SSANGYONG",
-      "commercialName": "SSANGYONG KORANDO",
+      "make": "Ssangyong",
+      "commercialName": "Ssangyong KORANDO",
       "type": "CW",
       "variant": "AETL",
       "version": "DEA21",
@@ -62894,7 +62894,7 @@
     {
       "year": 2021,
       "make": "SSANGYONG",
-      "commercialName": "SSANGYONG KORANDO",
+      "commercialName": "SsangYong Korando",
       "type": "CW",
       "variant": "AETL",
       "version": "DEA22",
@@ -62935,7 +62935,7 @@
     },
     {
       "year": 2021,
-      "make": "SSANGYONG",
+      "make": "Ssangyong",
       "commercialName": "Ssangyong KORANDO",
       "type": "CW",
       "variant": "AU2L",
@@ -62963,8 +62963,8 @@
     },
     {
       "year": 2021,
-      "make": "SSANGYONG",
-      "commercialName": "SsangYong Korando",
+      "make": "Ssangyong",
+      "commercialName": "Ssangyong KORANDO",
       "type": "CW",
       "variant": "AUTL",
       "version": "DUA22",
@@ -62992,7 +62992,7 @@
     {
       "year": 2021,
       "make": "SSANGYONG",
-      "commercialName": "Ssangyong KORANDO",
+      "commercialName": "SSANGYONG KORANDO",
       "type": "CW",
       "variant": "AX2L",
       "version": "FXB32",
@@ -63034,7 +63034,7 @@
     {
       "year": 2021,
       "make": "SSANGYONG",
-      "commercialName": "SSANGYONG KORANDO",
+      "commercialName": "SsangYong Korando",
       "type": "CW",
       "variant": "AX2L",
       "version": "KXB42",
@@ -63103,8 +63103,8 @@
     },
     {
       "year": 2021,
-      "make": "SSANGYONG",
-      "commercialName": "SSANGYONG KORANDO",
+      "make": "Ssangyong",
+      "commercialName": "Ssangyong KORANDO",
       "type": "CW",
       "variant": "AXTL",
       "version": "LXB41",
@@ -63159,8 +63159,8 @@
     },
     {
       "year": 2021,
-      "make": "Ssangyong",
-      "commercialName": "Ssangyong KORANDO",
+      "make": "SSANGYONG",
+      "commercialName": "SSANGYONG KORANDO",
       "type": "CW",
       "variant": "AY2L",
       "version": "EYB32",
@@ -63201,7 +63201,7 @@
     },
     {
       "year": 2021,
-      "make": "SSANGYONG",
+      "make": "Ssangyong",
       "commercialName": "Ssangyong KORANDO",
       "type": "CW",
       "variant": "AY2L",
@@ -63244,7 +63244,7 @@
     {
       "year": 2021,
       "make": "SSANGYONG",
-      "commercialName": "SsangYong Korando",
+      "commercialName": "SSANGYONG KORANDO",
       "type": "CW",
       "variant": "AYTL",
       "version": "GYB32",
@@ -63327,7 +63327,7 @@
     },
     {
       "year": 2021,
-      "make": "Ssangyong",
+      "make": "SSANGYONG",
       "commercialName": "Ssangyong REXTON",
       "type": "YK",
       "variant": "AETL",
@@ -63342,7 +63342,7 @@
     {
       "year": 2021,
       "make": "SSANGYONG",
-      "commercialName": "Ssangyong REXTON",
+      "commercialName": "SSANGYONG REXTON",
       "type": "YK",
       "variant": "AETL",
       "version": "BEA11",
@@ -63369,7 +63369,7 @@
     },
     {
       "year": 2021,
-      "make": "SSANGYONG",
+      "make": "Ssangyong",
       "commercialName": "Ssangyong REXTON",
       "type": "YK",
       "variant": "AETL",
@@ -63398,7 +63398,7 @@
     {
       "year": 2021,
       "make": "SSANGYONG",
-      "commercialName": "SsangYong REXTON",
+      "commercialName": "SSANGYONG REXTON",
       "type": "YK",
       "variant": "AETL",
       "version": "DEA11",
@@ -63468,7 +63468,7 @@
     {
       "year": 2021,
       "make": "SSANGYONG",
-      "commercialName": "SSANGYONG TIVOLI",
+      "commercialName": "SsangYong TIVOLI",
       "type": "XK",
       "variant": "AA2L",
       "version": "IAC44",
@@ -63482,7 +63482,7 @@
     {
       "year": 2021,
       "make": "SSANGYONG",
-      "commercialName": "SsangYong TIVOLI",
+      "commercialName": "SSANGYONG TIVOLI",
       "type": "XK",
       "variant": "AU2L",
       "version": "EUB12",
@@ -63678,7 +63678,7 @@
     {
       "year": 2021,
       "make": "SSANGYONG",
-      "commercialName": "SSANGYONG TIVOLI",
+      "commercialName": "SsangYong TIVOLI",
       "type": "XK",
       "variant": "AY2L",
       "version": "BYA22",
@@ -63734,7 +63734,7 @@
     {
       "year": 2021,
       "make": "SSANGYONG",
-      "commercialName": "SSANGYONG TIVOLI",
+      "commercialName": "Ssangyong TIVOLI",
       "type": "XK",
       "variant": "AYTL",
       "version": "DYA21",
@@ -63748,7 +63748,7 @@
     {
       "year": 2021,
       "make": "SSANGYONG",
-      "commercialName": "SsangYong TIVOLI",
+      "commercialName": "Ssangyong TIVOLI",
       "type": "XK",
       "variant": "AYTL",
       "version": "DYA22",
@@ -64882,7 +64882,7 @@
     {
       "year": 2021,
       "make": "SUBARU",
-      "commercialName": "Forester",
+      "commercialName": "FORESTER",
       "type": "S5",
       "variant": "SKE",
       "version": "C3L",
@@ -65638,7 +65638,7 @@
     {
       "year": 2021,
       "make": "SUBARU",
-      "commercialName": "Outback",
+      "commercialName": "OUTBACK",
       "type": "B6",
       "variant": "BS9",
       "version": "C8L",
@@ -66562,7 +66562,7 @@
     {
       "year": 2021,
       "make": "SUZUKI",
-      "commercialName": "Across",
+      "commercialName": "ACROSS",
       "type": "XA5P(S)(EU.M)",
       "variant": "AXAP54(N)",
       "version": "AXAP54L-ZNXGBW(1A)",
@@ -66799,7 +66799,7 @@
     },
     {
       "year": 2021,
-      "make": "Suzuki",
+      "make": "SUZUKI",
       "commercialName": "IGNIS",
       "type": "MF",
       "variant": "H91S",
@@ -68787,7 +68787,7 @@
     },
     {
       "year": 2021,
-      "make": "SUZUKI",
+      "make": "Suzuki",
       "commercialName": "SX4",
       "type": "JY",
       "variant": "AD2S",
@@ -69992,7 +69992,7 @@
     {
       "year": 2021,
       "make": "SUZUKI",
-      "commercialName": "VITARA",
+      "commercialName": "Vitara",
       "type": "LY",
       "variant": "EA1S",
       "version": "AT2",

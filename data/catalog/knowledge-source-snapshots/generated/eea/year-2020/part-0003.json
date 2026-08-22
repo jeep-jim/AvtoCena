@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 3,
   "rows": [
     {
@@ -6543,7 +6543,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDADAF1",
@@ -6991,7 +6991,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDADAF1",
@@ -7229,7 +7229,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -7257,7 +7257,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -7285,7 +7285,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -7383,7 +7383,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -7593,7 +7593,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -7621,7 +7621,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -7677,7 +7677,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -7761,7 +7761,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -7831,7 +7831,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -7887,7 +7887,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -7915,7 +7915,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -7999,7 +7999,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -8349,7 +8349,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -8629,7 +8629,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -8783,7 +8783,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -8797,7 +8797,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -8825,7 +8825,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -8853,7 +8853,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -9273,7 +9273,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAF1",
@@ -10561,7 +10561,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAQ1",
@@ -10715,7 +10715,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFGAQ1",
@@ -11023,7 +11023,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFHAQ1",
@@ -12283,7 +12283,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFYAF1",
@@ -12367,7 +12367,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFYAF1",
@@ -12451,7 +12451,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFYAF1",
@@ -12465,7 +12465,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFYAF1",
@@ -12591,7 +12591,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFYAF1",
@@ -12605,7 +12605,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFYAF1",
@@ -13109,7 +13109,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDFYAF1",
@@ -14159,7 +14159,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDKTAQ1",
@@ -15461,7 +15461,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDKTCQ1",
@@ -15475,7 +15475,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDKTCQ1",
@@ -15531,7 +15531,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDKTCQ1",
@@ -15699,7 +15699,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDKTCQ1",
@@ -15727,7 +15727,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDKTCQ1",
@@ -16217,7 +16217,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDKTCQ1",
@@ -16231,7 +16231,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDKTCQ1",
@@ -16259,7 +16259,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDKTCQ1",
@@ -16287,7 +16287,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDKTCQ1",
@@ -16511,7 +16511,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDKTCQ1",
@@ -16721,7 +16721,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDKTCQ1",
@@ -16847,7 +16847,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDPCAF1",
@@ -17155,7 +17155,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDPCAF1",
@@ -17183,7 +17183,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDPCAF1",
@@ -17281,7 +17281,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDPCAF1",
@@ -17393,7 +17393,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDPCAF1",
@@ -17911,7 +17911,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDPCAF1",
@@ -17967,7 +17967,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDPCAF1",
@@ -18331,7 +18331,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDPCAF1",
@@ -18345,7 +18345,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDPCAF1",
@@ -18359,7 +18359,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDPCAF1",
@@ -19353,7 +19353,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDTSBF1",
@@ -19437,7 +19437,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDTSBF1",
@@ -19479,7 +19479,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDTSBF1",
@@ -19829,7 +19829,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3",
       "type": "F3",
       "variant": "XDTSBF1",
@@ -27585,8 +27585,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51B174BFAHA2EM1A",
@@ -27683,8 +27683,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51B174BFAHA3EM1A",
@@ -27711,7 +27711,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
@@ -27851,8 +27851,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51B184BFAHA2EM1",
@@ -27865,7 +27865,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
@@ -27880,7 +27880,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51B184BFAHA2EM1AD0",
@@ -27893,8 +27893,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51B184BFAHA2EM1B",
@@ -27977,8 +27977,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51B184BFAHA3EM1A",
@@ -28006,7 +28006,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51B184BFAHA3EM1B",
@@ -28034,7 +28034,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51B184BFAHA3EM1BD0",
@@ -28048,7 +28048,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51B184BFAHA3EM1C",
@@ -28173,7 +28173,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
@@ -28216,7 +28216,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51B184BFAHA5EM1C",
@@ -28538,7 +28538,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51C194BFAHA3EM1A",
@@ -28552,7 +28552,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51C194BFAHA3EM1AD0",
@@ -28566,7 +28566,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51C194BFAHA3EM1B",
@@ -28607,7 +28607,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
@@ -28622,7 +28622,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51C194BFBHA3EM1A",
@@ -28636,7 +28636,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51C194BFBHA3EM1AD0",
@@ -28649,8 +28649,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51C194BFBHA3EM1B",
@@ -28692,7 +28692,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51C194BFBHA3EM1CD0",
@@ -28706,7 +28706,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51C194BFBHA4EM1",
@@ -28747,8 +28747,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51C194BFBHA4EM1B",
@@ -28762,7 +28762,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51C194BFBHA4EM1BD0",
@@ -28790,7 +28790,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT51C194BFBHA4EM1CD0",
@@ -28859,8 +28859,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C204BFBHA3EM1",
@@ -28887,8 +28887,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C204BFBHA3EM1B",
@@ -28902,7 +28902,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C204BFBHA3EM1BD0",
@@ -28916,7 +28916,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C204BFBHA3EM1C",
@@ -28958,7 +28958,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C204BFBHA4EM1A",
@@ -28985,7 +28985,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
@@ -29014,7 +29014,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C204BFBHA4EM1C",
@@ -29042,7 +29042,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C204BFBHA4EM1CD0",
@@ -29084,7 +29084,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C204BFBHA5EM1BD0",
@@ -29098,7 +29098,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C204BFBHA5EM1C",
@@ -29210,7 +29210,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C914BFBHA3EM1A",
@@ -29237,8 +29237,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C914BFBHA3EM1B",
@@ -29252,7 +29252,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C914BFBHA3EM1BD0",
@@ -29293,8 +29293,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C914BFBHA4EM1",
@@ -29308,7 +29308,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C914BFBHA4EM1A",
@@ -29350,7 +29350,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C914BFBHA4EM1BD0",
@@ -29363,8 +29363,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C914BFBHA4EM1C",
@@ -29406,7 +29406,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C914BFBHA5EM1B",
@@ -29434,7 +29434,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAF1",
       "version": "FD7FD7GC009RT61C914BFBHA5EM1C",
@@ -29630,7 +29630,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAQ1",
       "version": "QD7AD7GC010RT51B184BFAHA5EM1A",
@@ -29938,7 +29938,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAQ1",
       "version": "QD7AD7GC010RT61C204BFAHA5EM1C",
@@ -30008,7 +30008,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAQ1",
       "version": "QD7AD7GC010RT61C914BFAHA5EM1B",
@@ -30484,7 +30484,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAQ1",
       "version": "QM6AM6BB003RT51C194BFAHA5EM1",
@@ -30498,7 +30498,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAQ1",
       "version": "QM6AM6BB003RT51C194BFAHA5EM1A",
@@ -30525,8 +30525,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAQ1",
       "version": "QM6AM6BB003RT51C194BFAHA5EM1B",
@@ -30540,7 +30540,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAQ1",
       "version": "QM6AM6BB003RT51C194BFAHA5EM1BD0",
@@ -30554,7 +30554,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFGAQ1",
       "version": "QM6AM6BB003RT51C194BFAHA5EM1C",
@@ -30638,7 +30638,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAQ1",
       "version": "QM6AM6BB003RT61C204BFAHA5EM1BD0",
@@ -30652,7 +30652,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFGAQ1",
       "version": "QM6AM6BB003RT61C204BFAHA5EM1C",
@@ -30722,7 +30722,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFGAQ1",
       "version": "QM6AM6BB003RT61C914BFAHA5EM1B",
@@ -30862,7 +30862,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFHAQ1",
       "version": "QD7AD7DL003RT51B174BFAHA5EM1",
@@ -30974,7 +30974,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFHAQ1",
       "version": "QD7AD7DL003RT51B184BFAHA4EM1A",
@@ -31001,8 +31001,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFHAQ1",
       "version": "QD7AD7DL003RT51B184BFAHA4EM1B",
@@ -31072,7 +31072,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFHAQ1",
       "version": "QD7AD7DL003RT51B184BFAHA5EM1A",
@@ -31100,7 +31100,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFHAQ1",
       "version": "QD7AD7DL003RT51B184BFAHA5EM1B",
@@ -31128,7 +31128,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFHAQ1",
       "version": "QD7AD7DL003RT51B184BFAHA5EM1C",
@@ -31464,7 +31464,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFHAQ1",
       "version": "QD7AD7DL003RT51C194BFAHA5EM1B",
@@ -31520,7 +31520,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFHAQ1",
       "version": "QD7AD7DL003RT51C194BFBHA5EM1",
@@ -31660,7 +31660,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFHAQ1",
       "version": "QD7AD7DL003RT61C204BFBHA5EM1",
@@ -31926,7 +31926,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFHAQ1",
       "version": "QD7AD7DL003RT61C914BFBHA5EM1B",
@@ -31954,7 +31954,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFHAQ1",
       "version": "QD7AD7DL003RT61C914BFBHA5EM1C",
@@ -31968,7 +31968,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFHAQ1",
       "version": "QD7AD7DL003RT61C914BFBHA5EM1CD0",
@@ -32010,7 +32010,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT51A184BIAHA3EM10B2",
@@ -32023,7 +32023,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFYAF1",
@@ -32065,8 +32065,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT51B174BFAHA3EM1A",
@@ -32318,7 +32318,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT51B184BFAHA3EM1AB2",
@@ -32388,7 +32388,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT51B184BFAHA3EM1C",
@@ -32401,7 +32401,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFYAF1",
@@ -32430,7 +32430,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT51B184BFAHA4EM10",
@@ -32458,7 +32458,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT51B184BFAHA4EM1A",
@@ -32471,8 +32471,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT51B184BFAHA4EM1AB2",
@@ -32485,8 +32485,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT51B184BFAHA4EM1B",
@@ -32905,8 +32905,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT51C194BFAHA3EM1AB2",
@@ -32919,8 +32919,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT51C194BFAHA3EM1B",
@@ -33158,7 +33158,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT51C194BFAHA5EM1CB2",
@@ -33228,7 +33228,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT61C204BFAHA3EM1AB2",
@@ -33256,7 +33256,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT61C204BFAHA3EM1BB2",
@@ -33297,8 +33297,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT61C204BFAHA4EM10",
@@ -33340,7 +33340,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT61C204BFAHA4EM1AB2",
@@ -33354,7 +33354,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT61C204BFAHA4EM1B",
@@ -33367,7 +33367,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDFYAF1",
@@ -33396,7 +33396,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT61C204BFAHA4EM1C",
@@ -33424,7 +33424,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT61C204BFAHA4EM1CB2",
@@ -33578,7 +33578,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT61C914BFAHA3EM1AB2",
@@ -33620,7 +33620,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT61C914BFAHA3EM1BB2",
@@ -33675,8 +33675,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT61C914BFAHA4EM10",
@@ -33718,7 +33718,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT61C914BFAHA4EM1AB2",
@@ -33760,7 +33760,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDFYAF1",
       "version": "FD7FD7GC008RT61C914BFAHA4EM1BB2",
@@ -34012,7 +34012,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT51B174BFAHA5EM1C",
@@ -34110,7 +34110,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT51B184BFAHA4EM1B",
@@ -34151,8 +34151,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT51B184BFAHA4EM1C",
@@ -34264,7 +34264,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT51B184BFAHA5EM1C",
@@ -34292,7 +34292,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT51B184BFAHA5EM1CB0",
@@ -34600,7 +34600,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT51C194BFAHA4EM1B",
@@ -34614,7 +34614,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT51C194BFAHA4EM1BB0",
@@ -34683,8 +34683,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT51C194BFAHA5EM1B",
@@ -34712,7 +34712,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT51C194BFAHA5EM1C",
@@ -34810,7 +34810,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT51C194BFBHA5EM1B",
@@ -34852,7 +34852,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT51C194BFBHA5EM1C",
@@ -35076,7 +35076,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT61C204BFBHA5EM1B",
@@ -35104,7 +35104,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT61C204BFBHA5EM1C",
@@ -35216,7 +35216,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT61C914BFAHA4EM1B",
@@ -35244,7 +35244,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTAQ1",
       "version": "QD7AD7DL004RT61C914BFAHA4EM1BB0",
@@ -35537,8 +35537,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDKTCQ1",
       "version": "QD7AD7DL004RT51B174BFAHA4EM1BB0",
@@ -35593,8 +35593,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDKTCQ1",
       "version": "QD7AD7DL004RT51B174BFAHA5EM1BB0",
@@ -35678,7 +35678,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDKTCQ1",
       "version": "QD7AD7DL004RT51B184BFAHA4EM1BB0",
@@ -35789,8 +35789,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTCQ1",
       "version": "QD7AD7DL004RT51B184BFAHA5EM1BB0",
@@ -35818,7 +35818,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDKTCQ1",
       "version": "QD7AD7DL004RT51B184BFAHA5EM1C",
@@ -35832,7 +35832,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDKTCQ1",
       "version": "QD7AD7DL004RT51B184BFAHA5EM1CB0",
@@ -36027,7 +36027,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDKTCQ1",
@@ -36098,7 +36098,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDKTCQ1",
       "version": "QD7AD7DL004RT51C194BFAHA5EM1A",
@@ -36139,8 +36139,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDKTCQ1",
       "version": "QD7AD7DL004RT51C194BFAHA5EM1BB0",
@@ -36168,7 +36168,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDKTCQ1",
       "version": "QD7AD7DL004RT51C194BFAHA5EM1CB0",
@@ -36224,7 +36224,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTCQ1",
       "version": "QD7AD7DL004RT61C204BFAHA4EM1BB0",
@@ -36294,7 +36294,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTCQ1",
       "version": "QD7AD7DL004RT61C204BFAHA5EM1B",
@@ -36336,7 +36336,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDKTCQ1",
       "version": "QD7AD7DL004RT61C204BFAHA5EM1CB0",
@@ -36461,8 +36461,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDKTCQ1",
       "version": "QD7AD7DL004RT61C914BFAHA5EM1B",
@@ -36475,7 +36475,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDKTCQ1",
@@ -36573,8 +36573,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT41A174BFAHA1EM1AB0",
@@ -36671,8 +36671,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT41A174BFAHA2EM1AB0",
@@ -36685,8 +36685,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT41A174BFAHA2EM1B",
@@ -36826,7 +36826,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51B184BFAHA1EM1AB0",
@@ -36839,8 +36839,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51B184BFAHA1EM1B",
@@ -36910,7 +36910,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51B184BFAHA2EM1",
@@ -36923,8 +36923,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51B184BFAHA2EM1A",
@@ -36938,7 +36938,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51B184BFAHA2EM1AB0",
@@ -36951,8 +36951,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51B184BFAHA2EM1B",
@@ -37021,8 +37021,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51B184BFAHA3EM1",
@@ -37064,7 +37064,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51B184BFAHA3EM1B",
@@ -37078,7 +37078,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51B184BFAHA3EM1BB0",
@@ -37092,7 +37092,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51B184BFAHA3EM1C",
@@ -37442,7 +37442,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51C194BFAHA1EM1B",
@@ -37456,7 +37456,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51C194BFAHA1EM1BB0",
@@ -37582,7 +37582,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51C194BFAHA3EM1A",
@@ -37624,7 +37624,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51C194BFAHA3EM1BB0",
@@ -37652,7 +37652,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51C194BFAHA3EM1C",
@@ -37666,7 +37666,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT51C194BFAHA4EM1B",
@@ -37848,7 +37848,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT61C204BFAHA3EM1B",
@@ -37876,7 +37876,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT61C204BFAHA3EM1C",
@@ -38057,8 +38057,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT61C914BFAHA2EM1B",
@@ -38072,7 +38072,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM62Q036RT61C914BFAHA2EM1BB0",
@@ -38225,8 +38225,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM6C9011RT41A174BIAHA1EM1AB0",
@@ -38380,7 +38380,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM6C9011RT51A184BIAHA1EM1BB0",
@@ -38463,8 +38463,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM6C9011RT51B184BIAHA1EM1AB0",
@@ -38478,7 +38478,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM6C9011RT51B184BIAHA1EM1BB0",
@@ -38506,7 +38506,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM6C9011RT51B184BIAHA2EM1AB0",
@@ -38519,7 +38519,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDPCAF1",
@@ -38968,7 +38968,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDPCAF1",
       "version": "FM6FM6C9011RT61C204BIBHA4EM1BB0",
@@ -39359,8 +39359,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "make": "Audi",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDTSBF1",
       "version": "FD7FD7GC009RT51B174BIAHA3EM1BD0",
@@ -39429,7 +39429,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDTSBF1",
@@ -39500,7 +39500,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDTSBF1",
       "version": "FD7FD7GC009RT51B184BIAHA3EM1BD0",
@@ -39542,7 +39542,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDTSBF1",
       "version": "FD7FD7GC009RT51B184BIAHA4EM1BD0",
@@ -39668,7 +39668,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDTSBF1",
       "version": "FD7FD7GC009RT51C194BIAHA3EM1AD0",
@@ -39682,7 +39682,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDTSBF1",
       "version": "FD7FD7GC009RT51C194BIAHA3EM1BD0",
@@ -39766,7 +39766,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDTSBF1",
       "version": "FD7FD7GC009RT51C194BIBHA4EM1BD0",
@@ -39822,7 +39822,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDTSBF1",
       "version": "FD7FD7GC009RT61C204BIAHA3EM1AD0",
@@ -39892,7 +39892,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDTSBF1",
       "version": "FD7FD7GC009RT61C204BIBHA3EM1CD0",
@@ -39948,7 +39948,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDTSBF1",
       "version": "FD7FD7GC009RT61C204BIBHA4EM1CD0",
@@ -39962,7 +39962,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDTSBF1",
       "version": "FD7FD7GC009RT61C204BIBHA5EM1CD0",
@@ -40032,7 +40032,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDTSBF1",
       "version": "FD7FD7GC009RT61C914BIAHA4EM1BD0",
@@ -40088,7 +40088,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 Sportback",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDTSBF1",
       "version": "FD7FD7GC009RT61C914BIBHA5EM1BD0",
@@ -40354,7 +40354,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q3 SPORTBACK",
+      "commercialName": "Q3 Sportback",
       "type": "F3",
       "variant": "SDTSBQ1",
       "version": "QD7AD7GC010RT61C914BIBHA5EM10D0",
@@ -40801,8 +40801,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDTUAQ1",
       "version": "QD7AD7GC010RT61C204BIBHA5EM1CD0",
@@ -41585,7 +41585,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDCPEQ1",
@@ -42173,7 +42173,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDETAQ1",
@@ -42495,7 +42495,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDETAQ1",
@@ -42999,7 +42999,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDETBQ1",
@@ -43027,7 +43027,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDETBQ1",
@@ -43181,7 +43181,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDETBQ1",
@@ -43307,7 +43307,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDETBQ1",
@@ -43461,7 +43461,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDEUAF1",
@@ -43475,7 +43475,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDEUAF1",
@@ -44147,7 +44147,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDFBAQ1",
@@ -45533,7 +45533,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDNTAQ1",
@@ -45785,7 +45785,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDNTAQ1",
@@ -45911,7 +45911,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDNTAQ1",
@@ -45939,7 +45939,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDNTAQ1",
@@ -45967,7 +45967,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDNTAQ1",
@@ -46079,7 +46079,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDNTAQ1",
@@ -46975,7 +46975,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDTPAQ1",
@@ -47143,7 +47143,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDTPAQ1",
@@ -47185,7 +47185,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q5",
       "type": "FY",
       "variant": "XDTPAQ1",
@@ -47620,7 +47620,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q5 50 TFSI e",
+      "commercialName": "Q5 50 TFSI E",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61B184BFAEM8FL0",
@@ -47648,7 +47648,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q5 50 TFSI E",
+      "commercialName": "Q5 50 TFSI e",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61B184BFAEM8FS",
@@ -47872,7 +47872,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q5 50 TFSI e",
+      "commercialName": "Q5 50 TFSI E",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61C194BFBEM8FL0",
@@ -47899,8 +47899,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q5 50 TFSI e",
+      "make": "AUDI",
+      "commercialName": "Q5 50 TFSI E",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61C194BFBEM8FS",
@@ -47927,8 +47927,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q5 50 TFSI e",
+      "make": "AUDI",
+      "commercialName": "Q5 50 TFSI E",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61C194BFBEM8FS0",
@@ -48026,7 +48026,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q5 50 TFSI E",
+      "commercialName": "Q5 50 TFSI e",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61C204BFBEM8FS",
@@ -48054,7 +48054,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q5 50 TFSI e",
+      "commercialName": "Q5 50 TFSI E",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61C204BFBEM8FS0",
@@ -48179,8 +48179,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q5 55 TFSI e",
+      "make": "AUDI",
+      "commercialName": "Q5 55 TFSI E",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61B184BFAEM9FL",
@@ -48208,7 +48208,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q5 55 TFSI e",
+      "commercialName": "Q5 55 TFSI E",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61B184BFAEM9FL0",
@@ -48236,7 +48236,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q5 55 TFSI e",
+      "commercialName": "Q5 55 TFSI E",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61B184BFAEM9FS0",
@@ -48320,7 +48320,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q5 55 TFSI E",
+      "commercialName": "Q5 55 TFSI e",
       "type": "FY",
       "variant": "XDLGAQ1",
       "version": "QD7AD7DK002RT61C194BFAEM9FS",
@@ -50279,7 +50279,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDCBDQ1",
@@ -50769,7 +50769,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDCBDQ2",
@@ -51245,7 +51245,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDHXAQ1",
@@ -51721,7 +51721,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDHXAQ1",
@@ -52043,7 +52043,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDHXAQ2",
@@ -52883,7 +52883,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDHXCQ1",
@@ -52967,7 +52967,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDHXCQ1",
@@ -53009,7 +53009,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDHXCQ1",
@@ -53051,7 +53051,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDHXCQ1",
@@ -53401,7 +53401,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDHXCQ2",
@@ -53597,7 +53597,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDPXAQ1",
@@ -53625,7 +53625,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q7",
       "type": "4L",
       "variant": "XDPXAQ1",
@@ -54647,8 +54647,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q7 55 TFSI E",
+      "make": "Audi",
+      "commercialName": "Q7 55 TFSI e",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004R111C224BIBEM8S5FLB3",
@@ -54718,7 +54718,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q7 55 TFSI e",
+      "commercialName": "Q7 55 TFSI E",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B194BFBEM8S5FL",
@@ -54732,7 +54732,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q7 55 TFSI e",
+      "commercialName": "Q7 55 TFSI E",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B194BFBEM8S5FS",
@@ -54830,7 +54830,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q7 55 TFSI e",
+      "commercialName": "Q7 55 TFSI E",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B194BIBEM8S5FL",
@@ -54871,8 +54871,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q7 55 TFSI e",
+      "make": "AUDI",
+      "commercialName": "Q7 55 TFSI E",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B204BFBEM8S5FL",
@@ -55067,8 +55067,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q7 55 TFSI E",
+      "make": "Audi",
+      "commercialName": "Q7 55 TFSI e",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B214BFBEM8S5FL",
@@ -55333,8 +55333,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "Q7 60 TFSI e",
+      "make": "AUDI",
+      "commercialName": "Q7 60 TFSI E",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B204BFBEM9S5FL",
@@ -55474,7 +55474,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "Q7 60 TFSI e",
+      "commercialName": "Q7 60 TFSI E",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B214BIAEM9S5FLB3",
@@ -55487,8 +55487,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "Q7 60 TFSI E",
+      "make": "Audi",
+      "commercialName": "Q7 60 TFSI e",
       "type": "4L",
       "variant": "XDCBEQ1",
       "version": "QA8QA8D7004RT81B214BIBEM9S5FL",
@@ -56691,7 +56691,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDCBDQ1",
@@ -56803,7 +56803,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDCBDQ1",
@@ -57265,7 +57265,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDHXAQ1",
@@ -57391,7 +57391,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDHXAQ1",
@@ -57671,7 +57671,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDHXAQ2",
@@ -58119,7 +58119,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDPXAQ1",
@@ -58231,7 +58231,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "Q8",
       "type": "4L",
       "variant": "SDPXAQ2",
@@ -59128,7 +59128,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "R8 COUPE",
+      "commercialName": "R8 Coupe",
       "type": "42",
       "variant": "CDMWAQ1",
       "version": "QD7AD7BZ003RT31E204BIAEM1",
@@ -60471,8 +60471,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "RS 3 Limousine",
+      "make": "AUDI",
+      "commercialName": "RS 3 LIMOUSINE",
       "type": "8V",
       "variant": "LDNWAQ1",
       "version": "QD7AD7DL002RS31E194BFAEM1",
@@ -60500,7 +60500,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "RS 3 Limousine",
+      "commercialName": "RS 3 LIMOUSINE",
       "type": "8V",
       "variant": "LDNWAQ1",
       "version": "QD7AD7DL002RS31E914BFAEM1",
@@ -60625,8 +60625,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "RS 3 Sportback",
+      "make": "AUDI",
+      "commercialName": "RS 3 SPORTBACK",
       "type": "8V",
       "variant": "SDNWAQ1",
       "version": "QD7AD7DL002RS11E914BFAEM1",
@@ -60640,7 +60640,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "RS 3 SPORTBACK",
+      "commercialName": "RS 3 Sportback",
       "type": "8V",
       "variant": "SDNWAQ1",
       "version": "QD7AD7DL002RS11E917CSEM1",
@@ -60696,7 +60696,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "RS 3 SPORTBACK",
+      "commercialName": "RS 3 Sportback",
       "type": "8V",
       "variant": "SDNWAQ1",
       "version": "QD7AD7DL002RS21E914BFAEM1",
@@ -60821,7 +60821,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "RS 4 Avant",
       "type": "B8",
       "variant": "A2DECAQ1",
@@ -60835,7 +60835,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "RS 4 Avant",
       "type": "B8",
       "variant": "A2DECAQ1",
@@ -60878,7 +60878,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "RS 4 Avant",
+      "commercialName": "RS 4 AVANT",
       "type": "B8",
       "variant": "A2DECAQ1",
       "version": "QA8QA8D5021RS021E204BFAEM1",
@@ -60934,7 +60934,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "RS 4 Avant",
+      "commercialName": "RS 4 AVANT",
       "type": "B8",
       "variant": "A2DECAQ1",
       "version": "QA8QA8D5021RS21E207CPAEM1",
@@ -61186,7 +61186,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "RS 5 COUPE",
+      "commercialName": "RS 5 Coupe",
       "type": "B8",
       "variant": "C2DECAQ1",
       "version": "QA8QA8D5021RS011E19S44BFAEM1",
@@ -61228,7 +61228,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "RS 5 Coupe",
+      "commercialName": "RS 5 COUPE",
       "type": "B8",
       "variant": "C2DECAQ1",
       "version": "QA8QA8D5021RS021E20S44BFAEM1",
@@ -61410,7 +61410,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "RS 5 Sportback",
+      "commercialName": "RS 5 SPORTBACK",
       "type": "B8",
       "variant": "S2DECAQ1",
       "version": "QA8QA8D5021RS21E207CPAEM1",
@@ -61577,7 +61577,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "RS 6 Avant",
       "type": "F2",
       "variant": "ADJPBQ1",
@@ -61605,8 +61605,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "RS 6 AVANT",
+      "make": "Audi",
+      "commercialName": "RS 6 Avant",
       "type": "F2",
       "variant": "ADJPBQ1",
       "version": "QA8QA8D6012RS011E22S54BFBEM1H77FL",
@@ -61731,8 +61731,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "RS 6 Avant",
+      "make": "AUDI",
+      "commercialName": "RS 6 AVANT",
       "type": "F2",
       "variant": "ADJPBQ2",
       "version": "QA8QA8D6012RS021C21S54BFAEM1H77FL",
@@ -61760,7 +61760,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "RS 6 Avant",
+      "commercialName": "RS 6 AVANT",
       "type": "F2",
       "variant": "ADJPBQ2",
       "version": "QA8QA8D6012RS021C21S54BFBEM1H77FL",
@@ -61815,8 +61815,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "RS 6 AVANT",
+      "make": "Audi",
+      "commercialName": "RS 6 Avant",
       "type": "F2",
       "variant": "ADJPBQ2",
       "version": "QA8QA8D6012RS021E22S54BFBEM1H77FL",
@@ -61829,8 +61829,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "RS 6 AVANT",
+      "make": "Audi",
+      "commercialName": "RS 6 Avant",
       "type": "F2",
       "variant": "ADJPBQ2",
       "version": "QA8QA8D6012RS021E22S54BFBEM1H77FS",
@@ -62417,8 +62417,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "RS 7 Sportback",
+      "make": "AUDI",
+      "commercialName": "RS 7 SPORTBACK",
       "type": "F2",
       "variant": "SDJPBQ1",
       "version": "QA8QA8D6012RS011E22S54BFBEM1H77FS",
@@ -62530,7 +62530,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "RS 7 SPORTBACK",
+      "commercialName": "RS 7 Sportback",
       "type": "F2",
       "variant": "SDJPBQ2",
       "version": "QA8QA8D6012RS021E22S54BFBEM1H77FS",
@@ -62586,7 +62586,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "RS 7 SPORTBACK",
+      "commercialName": "RS 7 Sportback",
       "type": "F2",
       "variant": "SDJPBQ2",
       "version": "QA8QA8D6012RS031E22S54BFBEM1H77FL",
@@ -62739,7 +62739,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "RS Q3",
       "type": "F3",
       "variant": "XDNWAQ1",
@@ -63062,7 +63062,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "RS Q3 SPORTBACK",
+      "commercialName": "RS Q3 Sportback",
       "type": "F3",
       "variant": "SDNWAQ1",
       "version": "QD7AD7DL010RS031A204BFAHA6EM1B0",
@@ -63089,8 +63089,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "RS Q3 Sportback",
+      "make": "AUDI",
+      "commercialName": "RS Q3 SPORTBACK",
       "type": "F3",
       "variant": "SDNWAQ1",
       "version": "QD7AD7DL010RS031A204BIAHA6EM1B0",
@@ -63118,7 +63118,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "RS Q3 SPORTBACK",
+      "commercialName": "RS Q3 Sportback",
       "type": "F3",
       "variant": "SDNWAQ1",
       "version": "QD7AD7DL010RS031C214BFAHA6EM1B0",
@@ -63188,7 +63188,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "RS Q3 SPORTBACK",
+      "commercialName": "RS Q3 Sportback",
       "type": "F3",
       "variant": "SDNWAQ1",
       "version": "QD7AD7DL010RS041C214BFAHA6EM1",
@@ -63509,7 +63509,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "RS Q8",
       "type": "4L",
       "variant": "SDHUBQ2",
@@ -63551,7 +63551,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "RS Q8",
       "type": "4L",
       "variant": "SDHUBQ2",
@@ -66197,8 +66197,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "S4 Avant",
+      "make": "AUDI",
+      "commercialName": "S4 AVANT",
       "type": "B8",
       "variant": "A2DEWBQ1",
       "version": "QA8QA8D5016RT111E18S54BFBEM10",
@@ -66268,7 +66268,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "S4 Avant",
+      "commercialName": "S4 AVANT",
       "type": "B8",
       "variant": "A2DEWBQ1",
       "version": "QA8QA8D5016RT131E19S54BFBEM10",
@@ -67080,7 +67080,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "S5 Coupe",
+      "commercialName": "S5 COUPE",
       "type": "B8",
       "variant": "C2DEWBQ1",
       "version": "QA8QA8D5016RT251E20S44BFBEM10D2",
@@ -67373,8 +67373,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "S5 Sportback",
+      "make": "AUDI",
+      "commercialName": "S5 SPORTBACK",
       "type": "B8",
       "variant": "S2DEWBQ1",
       "version": "QA8QA8D5016RT241E19S54BFBEM10D2",
@@ -67486,7 +67486,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "S5 Sportback",
+      "commercialName": "S5 SPORTBACK",
       "type": "B8",
       "variant": "S2DEWBQ1",
       "version": "QA8QA8D5016RT251E20S54BFBEM10",
@@ -67513,8 +67513,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "S5 Sportback",
+      "make": "AUDI",
+      "commercialName": "S5 SPORTBACK",
       "type": "B8",
       "variant": "S2DEWBQ1",
       "version": "QA8QA8D5016RT251E20S54BFBEM10D2",
@@ -68186,7 +68186,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "S6 AVANT",
+      "commercialName": "S6 Avant",
       "type": "F2",
       "variant": "ADEWAQ1",
       "version": "QA8QA8D5024RT051C20S54BFBEM1H661FLB",
@@ -68325,8 +68325,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "S6 Avant",
+      "make": "AUDI",
+      "commercialName": "S6 AVANT",
       "type": "F2",
       "variant": "ADEWAQ1",
       "version": "QA8QA8D5024RT051C21S54BFBEM1H661FL",
@@ -68368,7 +68368,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "S6 Avant",
+      "commercialName": "S6 AVANT",
       "type": "F2",
       "variant": "ADEWAQ1",
       "version": "QA8QA8D5024RT051C21S54BFBEM1H661FLC",
@@ -68647,8 +68647,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "S6 Avant",
+      "make": "AUDI",
+      "commercialName": "S6 AVANT",
       "type": "F2",
       "variant": "ADEWAQ2",
       "version": "QA8QA8D5024RT051C21S54BFBEM1H661FL",
@@ -68956,7 +68956,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "S6 LIMOUSINE",
+      "commercialName": "S6 Limousine",
       "type": "F2",
       "variant": "LDEWAQ1",
       "version": "QA8QA8D5024RT051C20S54BFAEM1H561FSA",
@@ -68997,8 +68997,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "S6 Limousine",
+      "make": "AUDI",
+      "commercialName": "S6 LIMOUSINE",
       "type": "F2",
       "variant": "LDEWAQ1",
       "version": "QA8QA8D5024RT051C21S54BFAEM1H561FL",
@@ -69208,7 +69208,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "S6 Limousine",
+      "commercialName": "S6 LIMOUSINE",
       "type": "F2",
       "variant": "LDEWAQ2",
       "version": "QA8QA8D5024RT051C21S54BFAEM1H561FL",
@@ -69222,7 +69222,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "S6 Limousine",
+      "commercialName": "S6 LIMOUSINE",
       "type": "F2",
       "variant": "LDEWAQ2",
       "version": "QA8QA8D5024RT051C21S54BFAEM1H561FL",
@@ -69908,7 +69908,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "S7 Sportback",
+      "commercialName": "S7 SPORTBACK",
       "type": "F2",
       "variant": "SDEWAQ1",
       "version": "QA8QA8D5024RT081C20S44BFBEM1H661FL",
@@ -69949,8 +69949,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "S7 Sportback",
+      "make": "AUDI",
+      "commercialName": "S7 SPORTBACK",
       "type": "F2",
       "variant": "SDEWAQ1",
       "version": "QA8QA8D5024RT081C20S54BFAEM1H661FL",

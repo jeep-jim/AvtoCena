@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 4,
   "rows": [
     {
@@ -258,7 +258,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "S7 Sportback",
+      "commercialName": "S7 SPORTBACK",
       "type": "F2",
       "variant": "SDEWAQ1",
       "version": "QA8QA8D5024RT081C21S54BFBEM1H661FL0",
@@ -510,7 +510,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "S7 Sportback",
+      "commercialName": "S7 SPORTBACK",
       "type": "F2",
       "variant": "SDEWAQ2",
       "version": "QA8QA8D5024RT081C21S54BFBEM1H661FL",
@@ -523,8 +523,8 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
-      "commercialName": "S7 Sportback",
+      "make": "AUDI",
+      "commercialName": "S7 SPORTBACK",
       "type": "F2",
       "variant": "SDEWAQ2",
       "version": "QA8QA8D5024RT081C21S54BFBEM1H661FL0",
@@ -985,7 +985,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "S8",
       "type": "F8",
       "variant": "LCWWBQ2",
@@ -1097,7 +1097,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "S8",
       "type": "F8",
       "variant": "LCWWBQ2",
@@ -1237,7 +1237,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "SQ2",
       "type": "GA",
       "variant": "XDNUEQ1",
@@ -1615,7 +1615,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "SQ5",
       "type": "FY",
       "variant": "XDEWBQ1",
@@ -1979,7 +1979,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "SQ5",
       "type": "FY",
       "variant": "XDEWBQ1",
@@ -2455,7 +2455,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "SQ7",
       "type": "4L",
       "variant": "XDMVAQ1",
@@ -2497,7 +2497,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "SQ7",
       "type": "4L",
       "variant": "XDMVAQ1",
@@ -2553,7 +2553,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "SQ7",
       "type": "4L",
       "variant": "XDMVAQ1",
@@ -2595,7 +2595,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "SQ7",
       "type": "4L",
       "variant": "XDMVAQ1",
@@ -2623,7 +2623,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "SQ7",
       "type": "4L",
       "variant": "XDMVAQ2",
@@ -3295,7 +3295,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "SQ8",
       "type": "4L",
       "variant": "SDHVAQ1",
@@ -3561,7 +3561,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "SQ8",
       "type": "4L",
       "variant": "SDHVAQ2",
@@ -4906,7 +4906,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TT COUPE",
+      "commercialName": "TT Coupe",
       "type": "8J",
       "variant": "CDKTBQ1",
       "version": "QD7AD7GC007RT11E19S47CSAEM1",
@@ -4919,7 +4919,7 @@
     },
     {
       "year": 2020,
-      "make": "Audi",
+      "make": "AUDI",
       "commercialName": "TT Coupe",
       "type": "8J",
       "variant": "CDKTBQ1",
@@ -5046,7 +5046,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TT COUPE",
+      "commercialName": "TT Coupe",
       "type": "8J",
       "variant": "CDKZBF1",
       "version": "FD7FD7GC006RT11E18S44BFAEM1B0",
@@ -5060,7 +5060,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TT COUPE",
+      "commercialName": "TT Coupe",
       "type": "8J",
       "variant": "CDKZBF1",
       "version": "FD7FD7GC006RT11E18S47CSAEM1",
@@ -5087,8 +5087,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "TT COUPE",
+      "make": "Audi",
+      "commercialName": "TT Coupe",
       "type": "8J",
       "variant": "CDKZBF1",
       "version": "FD7FD7GC006RT11E19S44BFAEM1",
@@ -5116,7 +5116,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TT COUPE",
+      "commercialName": "TT Coupe",
       "type": "8J",
       "variant": "CDKZBF1",
       "version": "FD7FD7GC006RT11E19S47CSAEM1",
@@ -5129,7 +5129,7 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
+      "make": "Audi",
       "commercialName": "TT Coupe",
       "type": "8J",
       "variant": "CDKZBF1",
@@ -5409,8 +5409,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "TT COUPÉ",
+      "make": "Audi",
+      "commercialName": "TT Coupé",
       "type": "8J",
       "variant": "CDKZBF1",
       "version": "FD7FD7GC006RT11E17S44BFAEM1",
@@ -5479,8 +5479,8 @@
     },
     {
       "year": 2020,
-      "make": "AUDI",
-      "commercialName": "TT COUPÉ",
+      "make": "Audi",
+      "commercialName": "TT Coupé",
       "type": "8J",
       "variant": "CDKZBF1",
       "version": "FD7FD7GC006RT11E19S44BFAEM1",
@@ -5942,7 +5942,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TT ROADSTER",
+      "commercialName": "TT Roadster",
       "type": "8J",
       "variant": "RDKTBQ1",
       "version": "QD7AD7GC007RT11E20S27CSAEM1",
@@ -5956,7 +5956,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TT Roadster",
+      "commercialName": "TT ROADSTER",
       "type": "8J",
       "variant": "RDKZBF1",
       "version": "FD7FD7GC006RT11E17S24BFAEM1",
@@ -5998,7 +5998,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TT Roadster",
+      "commercialName": "TT ROADSTER",
       "type": "8J",
       "variant": "RDKZBF1",
       "version": "FD7FD7GC006RT11E18S24BFAEM1B0",
@@ -6026,7 +6026,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TT ROADSTER",
+      "commercialName": "TT Roadster",
       "type": "8J",
       "variant": "RDKZBF1",
       "version": "FD7FD7GC006RT11E19S24BFAEM1",
@@ -6040,7 +6040,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TT ROADSTER",
+      "commercialName": "TT Roadster",
       "type": "8J",
       "variant": "RDKZBF1",
       "version": "FD7FD7GC006RT11E19S24BFAEM1B0",
@@ -6054,7 +6054,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TT ROADSTER",
+      "commercialName": "TT Roadster",
       "type": "8J",
       "variant": "RDKZBF1",
       "version": "FD7FD7GC006RT11E19S27CSAEM1",
@@ -6222,7 +6222,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TT RS Coupe",
+      "commercialName": "TT RS COUPE",
       "type": "8J",
       "variant": "CDNWAQ1",
       "version": "QD7AD7DL002RT31E20S44BFAEM1",
@@ -6362,7 +6362,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TT RS Coupe",
+      "commercialName": "TT RS COUPE",
       "type": "8J",
       "variant": "CDNWAQ1",
       "version": "QD7AD7DL002RT41E20S44BFAEM1",
@@ -6432,7 +6432,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TT RS Coupé",
+      "commercialName": "TT RS COUPÉ",
       "type": "8J",
       "variant": "CDNWAQ1",
       "version": "QD7AD7DL002RT31E20S44BFAEM1",
@@ -6488,7 +6488,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TT RS ROADSTER",
+      "commercialName": "TT RS Roadster",
       "type": "8J",
       "variant": "RDNWAQ1",
       "version": "QD7AD7DL002RT31E19S24BFAEM1",
@@ -8126,7 +8126,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TTS Coupe",
+      "commercialName": "TTS COUPE",
       "type": "8J",
       "variant": "CDNUFQ1",
       "version": "QD7AD7GC001RT21E18S44BFAEM1",
@@ -8140,7 +8140,7 @@
     {
       "year": 2020,
       "make": "AUDI",
-      "commercialName": "TTS Coupe",
+      "commercialName": "TTS COUPE",
       "type": "8J",
       "variant": "CDNUFQ1",
       "version": "QD7AD7GC001RT21E18S44BFAEM1B0",
@@ -10324,7 +10324,7 @@
     {
       "year": 2020,
       "make": "BENTLEY",
-      "commercialName": "Bentayga Hybrid",
+      "commercialName": "BENTAYGA HYBRID",
       "type": "4V",
       "variant": "AE4WBD",
       "version": "1",
@@ -10394,7 +10394,7 @@
     {
       "year": 2020,
       "make": "BENTLEY",
-      "commercialName": "Bentayga Hybrid",
+      "commercialName": "BENTAYGA HYBRID",
       "type": "4V",
       "variant": "AE5WBD",
       "version": "1",
@@ -10478,7 +10478,7 @@
     {
       "year": 2020,
       "make": "BENTLEY",
-      "commercialName": "Bentayga Speed",
+      "commercialName": "BENTAYGA SPEED",
       "type": "4V",
       "variant": "AF5ZAD",
       "version": "1",
@@ -10674,7 +10674,7 @@
     {
       "year": 2020,
       "make": "BENTLEY",
-      "commercialName": "Bentayga V8",
+      "commercialName": "BENTAYGA V8",
       "type": "4V",
       "variant": "AD4XAD",
       "version": "1",
@@ -10744,7 +10744,7 @@
     {
       "year": 2020,
       "make": "BENTLEY",
-      "commercialName": "Bentayga V8",
+      "commercialName": "BENTAYGA V8",
       "type": "4V",
       "variant": "AD5XAD",
       "version": "1",
@@ -10757,7 +10757,7 @@
     },
     {
       "year": 2020,
-      "make": "Bentley",
+      "make": "BENTLEY",
       "commercialName": "BENTAYGA V8",
       "type": "4V",
       "variant": "AD5XAD",
@@ -11332,7 +11332,7 @@
     {
       "year": 2020,
       "make": "BENTLEY",
-      "commercialName": "CONTINENTAL GT",
+      "commercialName": "Continental GT",
       "type": "3S",
       "variant": "C4AZAC",
       "version": "1",
@@ -11402,7 +11402,7 @@
     {
       "year": 2020,
       "make": "BENTLEY",
-      "commercialName": "Continental GT",
+      "commercialName": "CONTINENTAL GT",
       "type": "3S",
       "variant": "D4AZAB",
       "version": "1",
@@ -11416,7 +11416,7 @@
     {
       "year": 2020,
       "make": "BENTLEY",
-      "commercialName": "CONTINENTAL GT",
+      "commercialName": "Continental GT",
       "type": "3S",
       "variant": "D4AZAC",
       "version": "1",
@@ -11696,7 +11696,7 @@
     {
       "year": 2020,
       "make": "BENTLEY",
-      "commercialName": "CONTINENTAL GT CONVERTIBLE",
+      "commercialName": "Continental GT Convertible",
       "type": "3S",
       "variant": "D4AZAC",
       "version": "1",
@@ -11864,7 +11864,7 @@
     {
       "year": 2020,
       "make": "BENTLEY",
-      "commercialName": "CONTINENTAL GT V8",
+      "commercialName": "Continental GT V8",
       "type": "3S",
       "variant": "C4BXBD",
       "version": "1",
@@ -12074,7 +12074,7 @@
     {
       "year": 2020,
       "make": "BENTLEY",
-      "commercialName": "CONTINENTAL GT V8 CONVERTIBLE",
+      "commercialName": "Continental GT V8 Convertible",
       "type": "3S",
       "variant": "D4BXBC",
       "version": "1",
@@ -12536,7 +12536,7 @@
     {
       "year": 2020,
       "make": "BENTLEY",
-      "commercialName": "MULSANNE SPEED",
+      "commercialName": "Mulsanne Speed",
       "type": "3Y",
       "variant": "BD5ZC",
       "version": "1",
@@ -13068,7 +13068,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "116d",
+      "commercialName": "116D",
       "type": "F1H",
       "variant": "7M71",
       "version": "IHW500L0",
@@ -15434,7 +15434,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "118I",
+      "commercialName": "118i",
       "type": "F1H",
       "variant": "7K31",
       "version": "DAW500BS",
@@ -15518,7 +15518,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "118I",
+      "commercialName": "118i",
       "type": "F1H",
       "variant": "7K31",
       "version": "DAW500LS",
@@ -31394,7 +31394,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "230i",
+      "commercialName": "230I",
       "type": "1C",
       "variant": "2H71",
       "version": "DAW400L0",
@@ -38758,7 +38758,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "330D",
+      "commercialName": "330d",
       "type": "G3K",
       "variant": "6L91",
       "version": "DAW507B0",
@@ -47718,7 +47718,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "430I",
+      "commercialName": "430i",
       "type": "3C",
       "variant": "4H71",
       "version": "DAW500K0",
@@ -55082,7 +55082,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "530d xDrive",
+      "commercialName": "530D XDRIVE",
       "type": "G5K",
       "variant": "31AJ",
       "version": "IAA507L0",
@@ -55404,7 +55404,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "530d xDrive",
+      "commercialName": "530D XDRIVE",
       "type": "G5K",
       "variant": "JN51",
       "version": "DAW507LM",
@@ -57042,7 +57042,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "530i",
+      "commercialName": "530I",
       "type": "G5K",
       "variant": "31BM",
       "version": "IAA500L0",
@@ -65904,7 +65904,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "M135I XDRIVE",
+      "commercialName": "M135i xDrive",
       "type": "F1H",
       "variant": "7L11",
       "version": "DAW500MG",
@@ -66422,7 +66422,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "M2 Competition",
+      "commercialName": "M2 COMPETITION",
       "type": "M3",
       "variant": "2U71",
       "version": "DAW400V0",
@@ -67850,7 +67850,7 @@
     {
       "year": 2020,
       "make": "BMW",
-      "commercialName": "M340I XDRIVE",
+      "commercialName": "M340i xDrive",
       "type": "G3K",
       "variant": "6N11",
       "version": "IAA500B0",

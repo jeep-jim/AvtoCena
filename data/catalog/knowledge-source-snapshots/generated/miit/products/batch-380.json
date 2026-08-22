@@ -1,0 +1,1809 @@
+{
+  "schemaVersion": 1,
+  "sourceId": "miit-road-vehicle-products",
+  "batch": 380,
+  "status": "sampled",
+  "totalExpected": 5745,
+  "products": [
+    {
+      "qymc": "一汽-大众汽车有限公司",
+      "cpsb": "大众牌",
+      "clxh": "FV7157NADEG",
+      "clmc": "轿车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "AA430391"
+    },
+    {
+      "qymc": "一汽-大众汽车有限公司",
+      "cpsb": "奥迪(AUDI)牌",
+      "clxh": "FV71510HADEB",
+      "clmc": "轿车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "AA124780"
+    },
+    {
+      "qymc": "一汽-大众汽车有限公司",
+      "cpsb": "奥迪(AUDI)牌",
+      "clxh": "FV71510HADEG",
+      "clmc": "轿车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9311797"
+    },
+    {
+      "qymc": "一汽丰田汽车有限公司",
+      "cpsb": "丰田(TOYOTA)牌",
+      "clxh": "TV7207HEV6P",
+      "clmc": "混合动力轿车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9910049"
+    },
+    {
+      "qymc": "一汽吉林汽车有限公司",
+      "cpsb": "森雅牌",
+      "clxh": "CA7157M6A1",
+      "clmc": "轿车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9B13274"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA1040P40L3BEVA84",
+      "clmc": "纯电动载货汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z4146849"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA1040P40L3BEVA84",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3441016"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA1049P40L2BEVA85",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3753066"
+    },
+    {
+      "qymc": "一汽解放青岛汽车有限公司",
+      "cpsb": "解放牌",
+      "clxh": "CA5040XXYP40L3BEVA84",
+      "clmc": "纯电动厢式运输车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y4109625"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1120T1BEVL1",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3803709"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1121T1BEVL1",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3773369"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1161T1F",
+      "clmc": "载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3241315"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1162T1F",
+      "clmc": "载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3522905"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1180T1BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3604934"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1180T1F",
+      "clmc": "载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3424450"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1180T1PHEV",
+      "clmc": "插电式混合动力载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3701040"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1180T2BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3605614"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1180TEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3187147"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1181T1BEVL2",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3773350"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1181T1F",
+      "clmc": "载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3279869"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1181T1PHEV",
+      "clmc": "插电式混合动力载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3783511"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1182T1BEVL2",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3803731"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1250T1F",
+      "clmc": "载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3435598"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1251T1BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3370325"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1251T2BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3378855"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1251T3BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3461157"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T1BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3228517"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T1BEV1",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3700616"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T1BEV2",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3522770"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T1F",
+      "clmc": "载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3188381"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T1FCEV",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3622914"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T1FCEV1",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3622151"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T1FCEV2",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3604544"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T2BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3458622"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T2BEV2",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3473643"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T2BEV3",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3570060"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T2F",
+      "clmc": "载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3241389"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T3BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3458147"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T4BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3487212"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T5BEV",
+      "clmc": "换电式纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3516321"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T5BEV1",
+      "clmc": "换电式纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3605401"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T5BEV2",
+      "clmc": "换电式纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3630139"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T6BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3502084"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T7BEV",
+      "clmc": "换电式纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3534830"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T7BEV1",
+      "clmc": "换电式纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3651038"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T8BEV",
+      "clmc": "换电式纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3578484"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1310T8BEV1",
+      "clmc": "换电式纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3578101"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1311T1BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3241472"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1311T1FCEV",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3440437"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1311T1HEV",
+      "clmc": "混合动力载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3701983"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1311T2BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3353866"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1311T2FCEV",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3461545"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1311T7BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3458156"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1311T8BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3712625"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1311T9BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3712602"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1312T1BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3353816"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1312T1FCEV",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3462361"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1312T2BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3392874"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1312T3BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3503243"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1312T4BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3473185"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1313T1BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3354485"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1313T1F",
+      "clmc": "载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3449040"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1313T1FCEV",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3462291"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1313T2FCEV",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3475167"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1313T3FCEV",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3671958"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1313T4BEV1",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3545604"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1313T4FCEV",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3534702"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1313T7FCEV",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3622184"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1314T1BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3700200"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1314T1BEV1",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3712560"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1315T1BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3393337"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1315T2BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3474772"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1316T1BEV",
+      "clmc": "纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3407134"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1316T1FCEV",
+      "clmc": "燃料电池载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3753127"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1316T2BEV",
+      "clmc": "换电式纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3691540"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1316T2BEV1",
+      "clmc": "换电式纯电动载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3773346"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM1320T1F",
+      "clmc": "载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3392495"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM2251T1F",
+      "clmc": "越野自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3499729"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM2251ZZX1F",
+      "clmc": "越野自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y9130232"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM2311T1F",
+      "clmc": "越野自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3520744"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM2311ZZX1F",
+      "clmc": "越野自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z2142532"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM2315T1F",
+      "clmc": "越野载货汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3473902"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3120T1BEV",
+      "clmc": "纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3763261"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3120ZZX1BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "AA024512"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3180T6BEV",
+      "clmc": "纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3732887"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3180ZZX6BEV1",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9D18189"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3250T1F",
+      "clmc": "自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3408949"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3250ZZX1F",
+      "clmc": "自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y0109118"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251T1F",
+      "clmc": "自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3432866"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251T1FA",
+      "clmc": "自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3671653"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251T1PHEV",
+      "clmc": "插电式混合动力自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3712542"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251T3BEV",
+      "clmc": "纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3605831"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251T5BEV",
+      "clmc": "纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3691343"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251T6BEV",
+      "clmc": "纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3773342"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251ZZX1BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "X7170517"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251ZZX1F",
+      "clmc": "自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y3114294"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251ZZX1FA",
+      "clmc": "自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9710909"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251ZZX1PHEV",
+      "clmc": "插电式混合动力自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9B13022"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251ZZX2BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "X7169327"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251ZZX3BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z2141656"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251ZZX4BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9065029"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251ZZX5BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9910382"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3251ZZX6BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "AA125730"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3252T1BEV",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3651194"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3252T1F",
+      "clmc": "自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3516226"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3252T2BEV",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3630101"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3252T5BEV",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3622919"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3252ZZX1BEV",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9510247"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3252ZZX1F",
+      "clmc": "自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z1136169"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3252ZZX2BEV",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9311543"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3252ZZX5BEV",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9213146"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM33105S2SEV",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z4146779"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM33105S2SEV",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3547124"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3310T1F",
+      "clmc": "自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3407458"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3310T1FA",
+      "clmc": "自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3534397"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3310T1PHEV",
+      "clmc": "插电式混合动力自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3700576"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3310T2F",
+      "clmc": "自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3278178"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3310ZZX1F",
+      "clmc": "自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y0108038"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3310ZZX1FA",
+      "clmc": "自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z3144414"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3310ZZX1PHEV",
+      "clmc": "插电式混合动力自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9A11471"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3310ZZX2F",
+      "clmc": "自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y0108702"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311T1F",
+      "clmc": "自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3422172"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311T1PHEV",
+      "clmc": "插电式混合动力自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3722755"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311T2F",
+      "clmc": "自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3370588"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311T6BEV",
+      "clmc": "纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3534007"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311TH6BEV",
+      "clmc": "纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3803707"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311TH6BEV1",
+      "clmc": "纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3803726"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311TH6SEV",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3803688"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZH6BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "AA430960"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZH6BEV1",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "AA431272"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZH6SEV",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "AA431088"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZZX1BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "W4151471"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZZX1F",
+      "clmc": "自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y2102647"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZZX1FCEV",
+      "clmc": "燃料电池自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y4110338"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZZX1PHEV",
+      "clmc": "插电式混合动力自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9C16393"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZZX2BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "X5164754"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZZX2BEV2",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9710792"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZZX2F",
+      "clmc": "自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y1101947"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZZX6BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z3145355"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZZX6BEV1",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9D18801"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZZX7BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y5117921"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZZX8BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9B13557"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3311ZZX9BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9B13763"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T1BEV1",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3743001"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T1F",
+      "clmc": "自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3422651"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T2BEV1",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3591727"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T3BEV1",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3562445"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T3BEV2",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3650206"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T3BEV3",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3622716"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T3BEV4",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3650227"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T4BEV",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3534549"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T5BEV",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3563030"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T5BEV2",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3605602"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T5BEV4",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3670531"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T7BEV",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3562623"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T7BEV1",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3690172"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T8BEV",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3550812"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312T9BEV",
+      "clmc": "换电式纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3590998"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX1BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y7124683"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX1BEV1",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9E21097"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX1F",
+      "clmc": "自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y2102287"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX2BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "X9102335"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX3BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z0131949"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX3BEV1",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z6152295"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX3BEV2",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9511142"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX3BEV3",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9212654"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX3BEV4",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9510172"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX3BEV5",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9710276"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX4BEV",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z3144838"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX4BEV1",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z5149877"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX5BEV",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z6152494"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX5BEV1",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z6152548"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX5BEV2",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9065529"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX5BEV3",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9212224"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX5BEV4",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9710696"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX7BEV",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z6152154"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX7BEV1",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9911364"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX8BEV",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z5151355"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3312ZZX9BEV",
+      "clmc": "换电式纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9066029"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3313T1F",
+      "clmc": "自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3422992"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3313T6FCEV",
+      "clmc": "燃料电池自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3630285"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3313T7FCEV",
+      "clmc": "燃料电池自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3722723"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3313T8FCEV",
+      "clmc": "燃料电池自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3722812"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3313ZZX1F",
+      "clmc": "自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y2104184"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3313ZZX1FCEV",
+      "clmc": "燃料电池自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y6122701"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3313ZZX2FCEV",
+      "clmc": "燃料电池自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Y7123896"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3313ZZX3FCEV",
+      "clmc": "燃料电池自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9811284"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3313ZZX4FCEV",
+      "clmc": "燃料电池自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z3144503"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3313ZZX5FCEV",
+      "clmc": "燃料电池自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "AA226787"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3313ZZX6FCEV",
+      "clmc": "燃料电池自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9212154"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3313ZZX7FCEV",
+      "clmc": "燃料电池自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9C14781"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3314T1BEV",
+      "clmc": "纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3562813"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3314T2BEV",
+      "clmc": "纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3562814"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3314T3BEV",
+      "clmc": "纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3579064"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3314T4BEV",
+      "clmc": "纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3712667"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3314T5BEV",
+      "clmc": "纯电动自卸汽车底盘",
+      "gppc": 380,
+      "dataTag": "D",
+      "cpid": "3743010"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3314ZZX1BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z6152463"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3314ZZX1BEV2",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9811013"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3314ZZX2BEV",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "Z6153155"
+    },
+    {
+      "qymc": "三一汽车制造有限公司",
+      "cpsb": "三一牌",
+      "clxh": "SYM3314ZZX2BEV3",
+      "clmc": "纯电动自卸汽车",
+      "gppc": 380,
+      "dataTag": "Z",
+      "cpid": "A9811061"
+    }
+  ]
+}

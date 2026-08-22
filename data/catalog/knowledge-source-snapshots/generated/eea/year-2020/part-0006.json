@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2020Fv22",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2020Fv22] WHERE [Year]=2020 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 6,
   "rows": [
     {
@@ -11906,7 +11906,7 @@
     {
       "year": 2020,
       "make": "FERRARI",
-      "commercialName": "F8 Tributo",
+      "commercialName": "F8 TRIBUTO",
       "type": "F 142",
       "variant": "CB",
       "version": "E",
@@ -21103,8 +21103,8 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
-      "commercialName": "Abarth 500",
+      "make": "FIAT",
+      "commercialName": "ABARTH 500",
       "type": "312",
       "variant": "AXF11",
       "version": "07KT",
@@ -21131,8 +21131,8 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
-      "commercialName": "Abarth 500",
+      "make": "FIAT",
+      "commercialName": "ABARTH 500",
       "type": "312",
       "variant": "AXF11",
       "version": "07KV",
@@ -21187,7 +21187,7 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
+      "make": "Fiat",
       "commercialName": "ABARTH 500",
       "type": "312",
       "variant": "AXF1A",
@@ -21369,8 +21369,8 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
-      "commercialName": "ABARTH 500",
+      "make": "Fiat",
+      "commercialName": "Abarth 500",
       "type": "312",
       "variant": "AXZ11",
       "version": "21F",
@@ -25429,7 +25429,7 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
+      "make": "FIAT",
       "commercialName": "FIAT 500",
       "type": "312",
       "variant": "AXA1A",
@@ -25541,7 +25541,7 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
+      "make": "Fiat",
       "commercialName": "FIAT 500",
       "type": "312",
       "variant": "AXA1A",
@@ -26311,7 +26311,7 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
+      "make": "FIAT",
       "commercialName": "FIAT 500L",
       "type": "199",
       "variant": "LYB1B",
@@ -26339,7 +26339,7 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
+      "make": "FIAT",
       "commercialName": "FIAT 500L",
       "type": "199",
       "variant": "LYB1B",
@@ -26479,8 +26479,8 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
-      "commercialName": "Fiat 500L",
+      "make": "FIAT",
+      "commercialName": "FIAT 500L",
       "type": "199",
       "variant": "LYB1B",
       "version": "L1AR",
@@ -26675,8 +26675,8 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
-      "commercialName": "FIAT 500L",
+      "make": "Fiat",
+      "commercialName": "Fiat 500L",
       "type": "199",
       "variant": "LYS1B",
       "version": "EAF5",
@@ -26703,8 +26703,8 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
-      "commercialName": "Fiat 500L",
+      "make": "FIAT",
+      "commercialName": "FIAT 500L",
       "type": "199",
       "variant": "LYS1B",
       "version": "EAH5",
@@ -28145,8 +28145,8 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
-      "commercialName": "FIAT 500X",
+      "make": "Fiat",
+      "commercialName": "Fiat 500X",
       "type": "334",
       "variant": "AXM11",
       "version": "E15N5",
@@ -29293,8 +29293,8 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
-      "commercialName": "FIAT 500X",
+      "make": "Fiat",
+      "commercialName": "Fiat 500X",
       "type": "334",
       "variant": "AXM1B",
       "version": "E12Z5T",
@@ -29307,8 +29307,8 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
-      "commercialName": "FIAT 500X",
+      "make": "Fiat",
+      "commercialName": "Fiat 500X",
       "type": "334",
       "variant": "AXM1B",
       "version": "E12Z8",
@@ -29657,8 +29657,8 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
-      "commercialName": "FIAT 500X",
+      "make": "Fiat",
+      "commercialName": "Fiat 500X",
       "type": "334",
       "variant": "AXN1B",
       "version": "E13AG5F",
@@ -29671,7 +29671,7 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
+      "make": "FIAT",
       "commercialName": "FIAT 500X",
       "type": "334",
       "variant": "AXN1B",
@@ -29937,8 +29937,8 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
-      "commercialName": "FIAT 500X",
+      "make": "Fiat",
+      "commercialName": "Fiat 500X",
       "type": "334",
       "variant": "AXN1B",
       "version": "E13AS5F",
@@ -30637,7 +30637,7 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
+      "make": "FIAT",
       "commercialName": "FIAT 500X",
       "type": "334",
       "variant": "AXN1B",
@@ -31715,8 +31715,8 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
-      "commercialName": "Fiat 500X",
+      "make": "FIAT",
+      "commercialName": "FIAT 500X",
       "type": "334",
       "variant": "AXR11",
       "version": "E17L5",
@@ -31813,7 +31813,7 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
+      "make": "FIAT",
       "commercialName": "FIAT 500X",
       "type": "334",
       "variant": "AXR11",
@@ -31883,8 +31883,8 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
-      "commercialName": "Fiat 500X",
+      "make": "FIAT",
+      "commercialName": "FIAT 500X",
       "type": "334",
       "variant": "AXR11",
       "version": "E17N8L",
@@ -31953,8 +31953,8 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
-      "commercialName": "Fiat 500X",
+      "make": "FIAT",
+      "commercialName": "FIAT 500X",
       "type": "334",
       "variant": "AXR11",
       "version": "E17P8T",
@@ -32681,7 +32681,7 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
+      "make": "Fiat",
       "commercialName": "FIAT DOBLO'",
       "type": "263",
       "variant": "AXG1B",
@@ -33311,8 +33311,8 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
-      "commercialName": "Fiat Ducato",
+      "make": "FIAT",
+      "commercialName": "FIAT DUCATO",
       "type": "250",
       "variant": "BENPB",
       "version": "HE9",
@@ -33423,8 +33423,8 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
-      "commercialName": "FIAT DUCATO",
+      "make": "Fiat",
+      "commercialName": "Fiat Ducato",
       "type": "250",
       "variant": "BENRB",
       "version": "HE9M",
@@ -35607,7 +35607,7 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
+      "make": "FIAT",
       "commercialName": "FIAT TIPO",
       "type": "356",
       "variant": "HXA1B",
@@ -35705,7 +35705,7 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
+      "make": "Fiat",
       "commercialName": "FIAT TIPO",
       "type": "356",
       "variant": "HXF1B",
@@ -35873,8 +35873,8 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
-      "commercialName": "Fiat Tipo",
+      "make": "FIAT",
+      "commercialName": "FIAT TIPO",
       "type": "356",
       "variant": "HXG1B",
       "version": "H8E5B",
@@ -36367,7 +36367,7 @@
       "commercialName": "FIAT TIPO",
       "type": "356",
       "variant": "WXA1B",
-      "version": "W6l",
+      "version": "W6L",
       "fuel": "PETROL",
       "engineCc": 1368,
       "powerKw": 70,
@@ -36489,7 +36489,7 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
+      "make": "Fiat",
       "commercialName": "FIAT TIPO",
       "type": "356",
       "variant": "WXG11",
@@ -36657,8 +36657,8 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
-      "commercialName": "Fiat Tipo",
+      "make": "FIAT",
+      "commercialName": "FIAT TIPO",
       "type": "356",
       "variant": "WXG1B",
       "version": "W8E5B",
@@ -37203,8 +37203,8 @@
     },
     {
       "year": 2020,
-      "make": "Fiat",
-      "commercialName": "Panda",
+      "make": "FIAT",
+      "commercialName": "PANDA",
       "type": "312",
       "variant": "PXA1A",
       "version": "EP0BK2",
@@ -37217,7 +37217,7 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
+      "make": "Fiat",
       "commercialName": "PANDA",
       "type": "312",
       "variant": "PXA1A",
@@ -37497,8 +37497,8 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
-      "commercialName": "PANDA",
+      "make": "Fiat",
+      "commercialName": "Panda",
       "type": "312",
       "variant": "PXA1A",
       "version": "P0BN",
@@ -39905,8 +39905,8 @@
     },
     {
       "year": 2020,
-      "make": "FIAT",
-      "commercialName": "TALENTO",
+      "make": "Fiat",
+      "commercialName": "Talento",
       "type": "FJL",
       "variant": "AM9R",
       "version": "ML6TA7110D3",
@@ -48361,7 +48361,7 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
+      "make": "Ford",
       "commercialName": "EcoSport",
       "type": "JK8",
       "variant": "M1JU11X",
@@ -48432,7 +48432,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "EcoSport",
+      "commercialName": "ECOSPORT",
       "type": "JK8",
       "variant": "M1JU11X",
       "version": "5AAPBNAPMDV",
@@ -48460,7 +48460,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "EcoSport",
+      "commercialName": "ECOSPORT",
       "type": "JK8",
       "variant": "M1JU11X",
       "version": "5AAPBNAPMDW",
@@ -48474,7 +48474,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "ECOSPORT",
+      "commercialName": "EcoSport",
       "type": "JK8",
       "variant": "M1JU11X",
       "version": "5AAPZNAB4DV",
@@ -48544,7 +48544,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "ECOSPORT",
+      "commercialName": "EcoSport",
       "type": "JK8",
       "variant": "M1JU11X",
       "version": "5CBPANAPNDE",
@@ -48628,7 +48628,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "ECOSPORT",
+      "commercialName": "EcoSport",
       "type": "JK8",
       "variant": "M1JU11X",
       "version": "5CBPZNABZDF",
@@ -48670,7 +48670,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "EcoSport",
+      "commercialName": "ECOSPORT",
       "type": "JK8",
       "variant": "SFJL11X",
       "version": "5AAPANAPLDV",
@@ -48683,8 +48683,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "ECOSPORT",
+      "make": "Ford",
+      "commercialName": "EcoSport",
       "type": "JK8",
       "variant": "SFJL11X",
       "version": "5AAPANAPLDV",
@@ -48725,8 +48725,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "EcoSport",
+      "make": "FORD",
+      "commercialName": "ECOSPORT",
       "type": "JK8",
       "variant": "SFJL11X",
       "version": "5AAPANAPLDW",
@@ -48880,7 +48880,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "EcoSport",
+      "commercialName": "ECOSPORT",
       "type": "JK8",
       "variant": "SFJL11X",
       "version": "5AAPZNAB3SV",
@@ -48978,7 +48978,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "ECOSPORT",
+      "commercialName": "EcoSport",
       "type": "JK8",
       "variant": "YYJF11X",
       "version": "5AAPZNAB5DV",
@@ -49006,7 +49006,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "EcoSport",
+      "commercialName": "ECOSPORT",
       "type": "JK8",
       "variant": "YYJF11X",
       "version": "5AAPZNAB5SV",
@@ -49034,7 +49034,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "EcoSport",
+      "commercialName": "ECOSPORT",
       "type": "JK8",
       "variant": "Z2JA11X",
       "version": "5BDDZNAB6DF",
@@ -49104,7 +49104,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "EcoSport",
+      "commercialName": "ECOSPORT",
       "type": "JK8",
       "variant": "Z2JB11X",
       "version": "5BDDANAPYDG",
@@ -49160,7 +49160,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "EcoSport",
+      "commercialName": "ECOSPORT",
       "type": "JK8",
       "variant": "ZTJC41X",
       "version": "5DEDZNAB1DB",
@@ -50420,7 +50420,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "EDGE",
+      "commercialName": "Edge",
       "type": "SBF",
       "variant": "BCCB4YX",
       "version": "5DEAZNADGTD",
@@ -50434,7 +50434,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "EDGE",
+      "commercialName": "Edge",
       "type": "SBF",
       "variant": "BCCB4YX",
       "version": "5DEAZNAE5TD",
@@ -50602,7 +50602,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "EDGE",
+      "commercialName": "Edge",
       "type": "SBF",
       "variant": "YLCA4YX",
       "version": "5LFAZNADSTE",
@@ -50630,7 +50630,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "EDGE",
+      "commercialName": "Edge",
       "type": "SBF",
       "variant": "YLCA4YX",
       "version": "5LFAZNAE6TE",
@@ -50658,7 +50658,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "EDGE",
+      "commercialName": "Edge",
       "type": "SBF",
       "variant": "YLCA4YX",
       "version": "5LFAZNANYTE",
@@ -50685,7 +50685,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Edge",
       "type": "SBF",
       "variant": "YLCA4YX",
@@ -50728,7 +50728,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Edge",
+      "commercialName": "EDGE",
       "type": "SBF",
       "variant": "YMCA1YX",
       "version": "5KGACNADETG",
@@ -51274,7 +51274,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Explorer",
+      "commercialName": "EXPLORER",
       "type": "WUJ",
       "variant": "BQWA4YX",
       "version": "7ABAZNAPDAB",
@@ -52142,7 +52142,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPRNAXJA6",
@@ -52156,7 +52156,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPRNAXJU6",
@@ -52184,7 +52184,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPTNAXJA6",
@@ -52211,7 +52211,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
@@ -52282,7 +52282,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPTNAXJB6",
@@ -52310,7 +52310,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPTNAXJB6",
@@ -52366,7 +52366,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPTNAXJD6",
@@ -52393,7 +52393,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
@@ -52435,7 +52435,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
@@ -52450,7 +52450,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPUNAXJA6",
@@ -52534,7 +52534,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPUNAXJB6",
@@ -52576,7 +52576,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPUNAXJD6",
@@ -52604,7 +52604,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPUNAXJD6",
@@ -52618,7 +52618,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "B7JB1JX",
       "version": "5CDPUNAXJDY",
@@ -52688,7 +52688,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1FX",
       "version": "5CDPLNAPKD6",
@@ -52786,7 +52786,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1FX",
       "version": "5CDPMNAPKD6",
@@ -52940,7 +52940,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1FX",
       "version": "5GKPMNAXIDX",
@@ -53024,7 +53024,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5CDPLNAPKA6",
@@ -53122,7 +53122,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5CDPLNAPKBZ",
@@ -53136,7 +53136,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5CDPLNAPKD6",
@@ -53206,7 +53206,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5CDPLNAPKDZ",
@@ -53248,7 +53248,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5CDPMNAPKAZ",
@@ -53304,7 +53304,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5CDPMNAPKBZ",
@@ -53402,7 +53402,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5CDPMNAPKDZ",
@@ -53458,7 +53458,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPLNAXIAZ",
@@ -53542,7 +53542,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPLNAXIBZ",
@@ -53626,7 +53626,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPLNAXIDZ",
@@ -53710,7 +53710,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPMNAXIAZ",
@@ -53737,8 +53737,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FIESTA",
+      "make": "Ford",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPMNAXIAZ",
@@ -53794,7 +53794,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPMNAXIBZ",
@@ -53836,7 +53836,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPMNAXID6",
@@ -53878,7 +53878,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPMNAXIDZ",
@@ -53906,7 +53906,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPMNAXIDZ",
@@ -53920,7 +53920,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "B7JC1JX",
       "version": "5GKPPNAXIAZ",
@@ -54101,8 +54101,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Fiesta",
+      "make": "FORD",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "BZJA1JX",
       "version": "5CFPTNAXKD6",
@@ -54270,7 +54270,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "FSJA1JX",
       "version": "5AEPPNAP7AQ",
@@ -54396,7 +54396,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1FX",
       "version": "5CDPMNAPJD6",
@@ -54410,7 +54410,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "M0JB1FX",
       "version": "5CDPMNAPJD6",
@@ -54424,7 +54424,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "M0JB1FX",
       "version": "5CDPMNAPJDY",
@@ -54522,7 +54522,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPLNAPJAZ",
@@ -54606,7 +54606,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPLNAPJBZ",
@@ -54634,7 +54634,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPLNAPJBZ",
@@ -54648,7 +54648,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPLNAPJD6",
@@ -54732,7 +54732,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPLNAPJDZ",
@@ -54746,7 +54746,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPMNAPJA6",
@@ -54816,7 +54816,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPMNAPJAZ",
@@ -54844,7 +54844,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPMNAPJAZ",
@@ -54885,8 +54885,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Fiesta",
+      "make": "FORD",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPMNAPJB6",
@@ -54900,7 +54900,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPMNAPJBZ",
@@ -54942,7 +54942,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPMNAPJD6",
@@ -54984,7 +54984,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPMNAPJDZ",
@@ -55026,7 +55026,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPPNAPJAZ",
@@ -55054,7 +55054,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M0JB1JX",
       "version": "5CDPPNAPJAZ",
@@ -55110,7 +55110,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "M1JP1FX",
       "version": "5CDPLNABEDT",
@@ -55138,7 +55138,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M1JP1FX",
       "version": "5CDPZNABEDT",
@@ -55390,7 +55390,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M1JP1JX",
       "version": "5CDPZNABEDW",
@@ -55446,7 +55446,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "M1JP1JX",
       "version": "5CDPZNABEDX",
@@ -55474,7 +55474,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "Q0JC1JX",
       "version": "5CDPZNABGB6",
@@ -55726,7 +55726,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJN1JX",
       "version": "5CDPLNABDB6",
@@ -55754,7 +55754,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJN1JX",
       "version": "5CDPLNABDB6",
@@ -55838,7 +55838,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "SFJN1JX",
       "version": "5CDPLNABDDX",
@@ -55880,7 +55880,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJN1JX",
       "version": "5CDPLNABDDX",
@@ -55908,7 +55908,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "SFJN1JX",
       "version": "5CDPZNABDAW",
@@ -55950,7 +55950,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "SFJN1JX",
       "version": "5CDPZNABDAX",
@@ -56006,7 +56006,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJN1JX",
       "version": "5CDPZNABDAX",
@@ -56062,7 +56062,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJN1JX",
       "version": "5CDPZNABDB6",
@@ -56188,7 +56188,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "SFJN1JX",
       "version": "5CDPZNABDDX",
@@ -56202,7 +56202,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJN1JX",
       "version": "5CDPZNABDDX",
@@ -56244,7 +56244,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "SFJN1JX",
       "version": "5CDPZNABDDX",
@@ -56300,7 +56300,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "SFJP1FX",
       "version": "5BAPLNABJDT",
@@ -56636,7 +56636,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJP1JX",
       "version": "5BAPLNABJBZ",
@@ -56664,7 +56664,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJP1JX",
       "version": "5BAPLNABJBZ",
@@ -56706,7 +56706,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "SFJP1JX",
       "version": "5BAPLNABJDX",
@@ -56748,7 +56748,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJP1JX",
       "version": "5BAPLNABJDY",
@@ -56902,7 +56902,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJP1JX",
       "version": "5BAPMNABJBZ",
@@ -57000,7 +57000,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJP1JX",
       "version": "5BAPPNABJAY",
@@ -57013,8 +57013,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FIESTA",
+      "make": "Ford",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJP1JX",
       "version": "5BAPPNABJAY",
@@ -57056,7 +57056,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJP1JX",
       "version": "5BAPZNABJAX",
@@ -57070,7 +57070,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJP1JX",
       "version": "5BAPZNABJAY",
@@ -57210,7 +57210,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "SFJP1JX",
       "version": "5BAPZNABJDY",
@@ -57238,7 +57238,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "SFJP1JX",
       "version": "5BAPZNABJDY",
@@ -57588,7 +57588,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "XUJM1FX",
       "version": "5DCDMNAREDY",
@@ -57686,7 +57686,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "XUJM1JX",
       "version": "5DCDLNAREAZ",
@@ -57714,7 +57714,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "XUJM1JX",
       "version": "5DCDLNAREBZ",
@@ -57826,7 +57826,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "XUJM1JX",
       "version": "5DCDMNAREB6",
@@ -57896,7 +57896,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "XUJM1JX",
       "version": "5DCDPNAREAZ",
@@ -57952,7 +57952,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "XUJM1JX",
       "version": "5DCDZNABHAY",
@@ -58022,7 +58022,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "XUJN1JX",
       "version": "5DCDLNABPAX",
@@ -58036,7 +58036,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "XUJN1JX",
       "version": "5DCDZNABPAX",
@@ -58190,7 +58190,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "XYJD1JX",
       "version": "5APPZNABLAP",
@@ -58218,7 +58218,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "XYJD1JX",
       "version": "5APPZNABLAP",
@@ -58316,7 +58316,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "XYJE1JX",
       "version": "5APPZNABMAM",
@@ -58386,7 +58386,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YYJG1FX",
       "version": "5CFPMNABFDT",
@@ -58442,7 +58442,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YYJG1JX",
       "version": "5CFPLNABFB6",
@@ -58526,7 +58526,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "YYJG1JX",
       "version": "5CFPLNABFDX",
@@ -58596,7 +58596,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YYJG1JX",
       "version": "5CFPMNABFDW",
@@ -58610,7 +58610,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YYJG1JX",
       "version": "5CFPMNABFDX",
@@ -58638,7 +58638,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YYJG1JX",
       "version": "5CFPZNABFB6",
@@ -58680,7 +58680,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YYJG1JX",
       "version": "5CFPZNABFDX",
@@ -58708,7 +58708,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "YZJA1FX",
       "version": "5FHPLNA1HC2",
@@ -58820,7 +58820,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YZJA1FX",
       "version": "5FHPMNABBC2",
@@ -58945,8 +58945,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FIESTA",
+      "make": "Ford",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPLNABBCT",
@@ -58960,7 +58960,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPLNABBCT",
@@ -59002,7 +59002,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPLNABBCU",
@@ -59016,7 +59016,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPLNABBCU",
@@ -59072,7 +59072,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPMNA1HCU",
@@ -59100,7 +59100,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FIESTA",
+      "commercialName": "Fiesta",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPMNABBCT",
@@ -59128,7 +59128,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPMNABBCU",
@@ -59142,7 +59142,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Fiesta",
+      "commercialName": "FIESTA",
       "type": "JHH",
       "variant": "YZJA1JX",
       "version": "5FHPZNABBCT",
@@ -68536,7 +68536,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B3DA1NX",
       "version": "5APBU6AP8BK",
@@ -68550,7 +68550,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B3DA1NX",
       "version": "5APBZ6ABYBK",
@@ -68676,7 +68676,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B3DA1PX",
       "version": "5APBU6AP8BT",
@@ -68717,7 +68717,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1MX",
@@ -68732,7 +68732,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1MX",
       "version": "51FBH6AQDBF",
@@ -68746,7 +68746,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1MX",
       "version": "51FBM6AEIBF",
@@ -68773,7 +68773,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1MX",
@@ -68857,8 +68857,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1MX",
       "version": "5APBU6AQBBB",
@@ -68872,7 +68872,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1MX",
       "version": "5APBZ6AB7BB",
@@ -68886,7 +68886,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBE6AQDAR",
@@ -68900,7 +68900,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBE6AQDBR",
@@ -68956,7 +68956,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBF6AQDCR",
@@ -69026,7 +69026,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBH6AQDAR",
@@ -69040,7 +69040,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBH6AQDBR",
@@ -69054,7 +69054,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBH6AQDCR",
@@ -69137,8 +69137,8 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
-      "commercialName": "Focus",
+      "make": "FORD",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBU6AQDBR",
@@ -69152,7 +69152,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBZ6AEIAR",
@@ -69166,7 +69166,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "51FBZ6AEIBR",
@@ -69194,7 +69194,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBE6AQBAK",
@@ -69222,7 +69222,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBE6AQBCK",
@@ -69235,8 +69235,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBF6AQBAK",
@@ -69264,7 +69264,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBF6AQBBK",
@@ -69348,7 +69348,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBH6AB7BK",
@@ -69446,7 +69446,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBH6AQBCK",
@@ -69502,7 +69502,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBM6AB7BK",
@@ -69544,7 +69544,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBS6AQBBK",
@@ -69571,7 +69571,7 @@
     },
     {
       "year": 2020,
-      "make": "Ford",
+      "make": "FORD",
       "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
@@ -69586,7 +69586,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBZ6AB7AK",
@@ -69628,7 +69628,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBZ6AB7BK",
@@ -69642,7 +69642,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBZ6AB7BK",
@@ -69670,7 +69670,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBZ6AB7CK",
@@ -69684,7 +69684,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1NX",
       "version": "5APBZ6AB7CK",
@@ -69698,7 +69698,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBE6AQDAX",
@@ -69712,7 +69712,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBE6AQDBX",
@@ -69726,7 +69726,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBE6AQDCX",
@@ -69754,7 +69754,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBF6AQDBX",
@@ -69782,7 +69782,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "FOCUS",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBH6AEIAX",
@@ -69824,7 +69824,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBH6AEIBX",
@@ -69880,7 +69880,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBH6AQDAX",
@@ -69893,8 +69893,8 @@
     },
     {
       "year": 2020,
-      "make": "FORD",
-      "commercialName": "FOCUS",
+      "make": "Ford",
+      "commercialName": "Focus",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBH6AQDBX",
@@ -69950,7 +69950,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBM6AEIBX",
@@ -69978,7 +69978,7 @@
     {
       "year": 2020,
       "make": "FORD",
-      "commercialName": "Focus",
+      "commercialName": "FOCUS",
       "type": "DEH",
       "variant": "B7DA1PX",
       "version": "51FBM6AEICX",

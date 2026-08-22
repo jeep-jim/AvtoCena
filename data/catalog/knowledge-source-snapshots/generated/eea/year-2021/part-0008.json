@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2021Fv24",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2021Fv24] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 8,
   "rows": [
     {
@@ -104,7 +104,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "ODCDC0",
       "version": "50AA030",
@@ -230,7 +230,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "ODCDC0",
       "version": "70AA010",
@@ -258,7 +258,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "ODCDC0",
       "version": "70AA030",
@@ -272,7 +272,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "ODCDC0",
       "version": "70AC020",
@@ -328,7 +328,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OHFDC0",
       "version": "5XAA030",
@@ -355,7 +355,7 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
+      "make": "LAND ROVER",
       "commercialName": "Defender",
       "type": "LE",
       "variant": "OMCDC0",
@@ -440,7 +440,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OMCDC0",
       "version": "60AA000",
@@ -537,8 +537,8 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
-      "commercialName": "Defender",
+      "make": "LAND ROVER",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OPDDC0",
       "version": "50AA030",
@@ -594,7 +594,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OPDDC0",
       "version": "50AA060",
@@ -622,7 +622,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OPDDC0",
       "version": "50AC020",
@@ -678,7 +678,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OPDDC0",
       "version": "5PAA020",
@@ -720,7 +720,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OPDDC0",
       "version": "5PAA060",
@@ -734,7 +734,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OPDDC0",
       "version": "60AA020",
@@ -818,7 +818,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OPDDC0",
       "version": "70AA020",
@@ -957,8 +957,8 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
-      "commercialName": "Defender",
+      "make": "LAND ROVER",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OPDDC0",
       "version": "7PAA030",
@@ -1056,7 +1056,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OUADC0",
       "version": "50AA020",
@@ -1070,7 +1070,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUADC0",
       "version": "50AA030",
@@ -1084,7 +1084,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OUADC0",
       "version": "50AA040",
@@ -1140,7 +1140,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUADC0",
       "version": "50AA060",
@@ -1294,7 +1294,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUADC0",
       "version": "50CC050",
@@ -1546,7 +1546,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUADC0",
       "version": "70AA030",
@@ -1728,7 +1728,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUCDC0",
       "version": "50AA020",
@@ -1741,7 +1741,7 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
+      "make": "LAND ROVER",
       "commercialName": "Defender",
       "type": "LE",
       "variant": "OUCDC0",
@@ -1798,7 +1798,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OUCDC0",
       "version": "50AA060",
@@ -1826,7 +1826,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUCDC0",
       "version": "50AC020",
@@ -1882,7 +1882,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUCDC0",
       "version": "50AC050",
@@ -1896,7 +1896,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OUCDC0",
       "version": "50AC060",
@@ -1952,7 +1952,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OUCDC0",
       "version": "5PAA020",
@@ -2008,7 +2008,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUCDC0",
       "version": "5PAA060",
@@ -2106,7 +2106,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OUCDC0",
       "version": "60AC020",
@@ -2204,7 +2204,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUCDC0",
       "version": "70AA030",
@@ -2218,7 +2218,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUCDC0",
       "version": "70AA050",
@@ -2358,7 +2358,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUCDC0",
       "version": "7PAA060",
@@ -2414,7 +2414,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUEDC0",
       "version": "50AA020",
@@ -2484,7 +2484,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OUEDC0",
       "version": "50AA040",
@@ -2512,7 +2512,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUEDC0",
       "version": "50AA060",
@@ -2554,7 +2554,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OUEDC0",
       "version": "50AC020",
@@ -2610,7 +2610,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUEDC0",
       "version": "50AC040",
@@ -2624,7 +2624,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUEDC0",
       "version": "50AC050",
@@ -2652,7 +2652,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUEDC0",
       "version": "50CA040",
@@ -2666,7 +2666,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OUEDC0",
       "version": "50CA050",
@@ -2750,7 +2750,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "OUEDC0",
       "version": "5XAA060",
@@ -2792,7 +2792,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUEDC0",
       "version": "60AA020",
@@ -3058,7 +3058,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUEDC0",
       "version": "70AA060",
@@ -3114,7 +3114,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "OUEDC0",
       "version": "70AC030",
@@ -6824,7 +6824,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery",
+      "commercialName": "DISCOVERY",
       "type": "LR",
       "variant": "HDBDA0",
       "version": "50AA010",
@@ -6991,7 +6991,7 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
+      "make": "Land Rover",
       "commercialName": "Discovery",
       "type": "LR",
       "variant": "HPCDA0",
@@ -7047,7 +7047,7 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
+      "make": "Land Rover",
       "commercialName": "Discovery",
       "type": "LR",
       "variant": "HUADA0",
@@ -7090,7 +7090,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY",
+      "commercialName": "Discovery",
       "type": "LR",
       "variant": "HUADA0",
       "version": "50AA040",
@@ -7202,7 +7202,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY",
+      "commercialName": "Discovery",
       "type": "LR",
       "variant": "HUADA0",
       "version": "70AA030",
@@ -7244,7 +7244,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY",
+      "commercialName": "Discovery",
       "type": "LR",
       "variant": "HUADA0",
       "version": "70AB000",
@@ -7300,7 +7300,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY",
+      "commercialName": "Discovery",
       "type": "LR",
       "variant": "HUBDA0",
       "version": "50AA030",
@@ -7314,7 +7314,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery",
+      "commercialName": "DISCOVERY",
       "type": "LR",
       "variant": "HUBDA0",
       "version": "50AA040",
@@ -7342,7 +7342,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery",
+      "commercialName": "DISCOVERY",
       "type": "LR",
       "variant": "HUBDA0",
       "version": "50AB000",
@@ -7369,7 +7369,7 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
+      "make": "LAND ROVER",
       "commercialName": "Discovery",
       "type": "LR",
       "variant": "HUBDA0",
@@ -7538,7 +7538,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY",
+      "commercialName": "Discovery",
       "type": "LR",
       "variant": "S5BH2L",
       "version": "A7NBB",
@@ -7636,7 +7636,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY",
+      "commercialName": "Discovery",
       "type": "LR",
       "variant": "S5CE2L",
       "version": "A5FHB",
@@ -7720,7 +7720,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY",
+      "commercialName": "Discovery",
       "type": "LR",
       "variant": "S5CE2L",
       "version": "A7IDB",
@@ -7734,7 +7734,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY",
+      "commercialName": "Discovery",
       "type": "LR",
       "variant": "S5CE2L",
       "version": "A7IDC",
@@ -8224,7 +8224,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "CLADD0",
       "version": "50CA010",
@@ -8238,7 +8238,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "CLADD0",
       "version": "50CA020",
@@ -8280,7 +8280,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "CLADD0",
       "version": "70CA010",
@@ -8546,7 +8546,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "CTEDD0",
       "version": "70CA040",
@@ -8714,7 +8714,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "CVEDG0",
       "version": "50CA020",
@@ -8727,8 +8727,8 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
-      "commercialName": "Discovery Sport",
+      "make": "LAND ROVER",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "CVEDG0",
       "version": "70CA010",
@@ -8742,7 +8742,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "CVEDG0",
       "version": "70CA020",
@@ -8798,7 +8798,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "HLADD0",
       "version": "50CA020",
@@ -8868,7 +8868,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "HLADD0",
       "version": "50CB010",
@@ -8952,7 +8952,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "HLADD0",
       "version": "70CA020",
@@ -9022,7 +9022,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "HLBDD0",
       "version": "50CA020",
@@ -9120,7 +9120,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "HLBDD0",
       "version": "50CB030",
@@ -9372,7 +9372,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "HODDC0",
       "version": "50CB000",
@@ -9386,7 +9386,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "HTEDD0",
       "version": "50CA010",
@@ -9414,7 +9414,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "HTEDD0",
       "version": "50CA020",
@@ -9427,7 +9427,7 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
+      "make": "LAND ROVER",
       "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "HTEDD0",
@@ -9470,7 +9470,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "HTEDD0",
       "version": "50CA040",
@@ -9498,7 +9498,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "HTEDD0",
       "version": "50CA060",
@@ -9512,7 +9512,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "HTEDD0",
       "version": "50CB010",
@@ -9582,7 +9582,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "HTEDD0",
       "version": "50CB040",
@@ -9596,7 +9596,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "HTEDD0",
       "version": "50CB050",
@@ -9624,7 +9624,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "HTEDD0",
       "version": "70CA010",
@@ -9680,7 +9680,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "HTEDD0",
       "version": "70CA040",
@@ -9707,8 +9707,8 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
-      "commercialName": "Discovery Sport",
+      "make": "LAND ROVER",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "HTEDD0",
       "version": "70CB010",
@@ -9721,8 +9721,8 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "make": "Land Rover",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "HTEDD0",
       "version": "70CB010",
@@ -9820,7 +9820,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "HTFDD0",
       "version": "50CA020",
@@ -9834,7 +9834,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "HTFDD0",
       "version": "50CA020",
@@ -9876,7 +9876,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "HTFDD0",
       "version": "50CA040",
@@ -9890,7 +9890,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "HTFDD0",
       "version": "50CA050",
@@ -9918,7 +9918,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "HTFDD0",
       "version": "50CB010",
@@ -10016,7 +10016,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "HTFDD0",
       "version": "50CB050",
@@ -10618,7 +10618,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "S5CA2L",
       "version": "A5OBA",
@@ -10632,7 +10632,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "S5CA2L",
       "version": "A5OBB",
@@ -10646,7 +10646,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "S5CA2L",
       "version": "A5OBC",
@@ -10660,7 +10660,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "S5CA2L",
       "version": "A7LAA",
@@ -10674,7 +10674,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "S5CA2L",
       "version": "A7LAB",
@@ -10842,7 +10842,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "S5CD2L",
       "version": "A5OAC",
@@ -10912,7 +10912,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "S5CD2L",
       "version": "A7LAA",
@@ -10925,7 +10925,7 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
+      "make": "LAND ROVER",
       "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "S5CD2L",
@@ -10996,7 +10996,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "S5DC2L",
       "version": "A5NAC",
@@ -11094,7 +11094,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "S5EF2L",
       "version": "A5AAA",
@@ -11164,7 +11164,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "S5EF2L",
       "version": "A5KAA",
@@ -11234,7 +11234,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Discovery Sport",
+      "commercialName": "DISCOVERY SPORT",
       "type": "LC",
       "variant": "S5EF2L",
       "version": "A5KBB",
@@ -11276,7 +11276,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "S5EF2L",
       "version": "A7PAB",
@@ -11416,7 +11416,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DISCOVERY SPORT",
+      "commercialName": "Discovery Sport",
       "type": "LC",
       "variant": "S5FF2L",
       "version": "B5LAD",
@@ -13250,7 +13250,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover",
+      "commercialName": "RANGE ROVER",
       "type": "LG",
       "variant": "L5IT2M",
       "version": "D4FAA",
@@ -13516,7 +13516,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER",
+      "commercialName": "Range Rover",
       "type": "LG",
       "variant": "L5T12M",
       "version": "D5NAC",
@@ -13600,7 +13600,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER",
+      "commercialName": "Range Rover",
       "type": "LG",
       "variant": "L5U22M",
       "version": "D5OBA",
@@ -13614,7 +13614,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER",
+      "commercialName": "Range Rover",
       "type": "LG",
       "variant": "L5US2M",
       "version": "D5OCA",
@@ -13669,8 +13669,8 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
-      "commercialName": "Range Rover",
+      "make": "LAND ROVER",
+      "commercialName": "RANGE ROVER",
       "type": "LG",
       "variant": "S5IR2L",
       "version": "D5IBA",
@@ -13726,7 +13726,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER",
+      "commercialName": "Range Rover",
       "type": "LG",
       "variant": "S5IR2M",
       "version": "D5IBA",
@@ -13768,7 +13768,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER",
+      "commercialName": "Range Rover",
       "type": "LG",
       "variant": "S5IR2M",
       "version": "D5ICA",
@@ -13851,8 +13851,8 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER",
+      "make": "Land Rover",
+      "commercialName": "Range Rover",
       "type": "LG",
       "variant": "S5IR2N",
       "version": "D5ICA",
@@ -13908,7 +13908,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER",
+      "commercialName": "Range Rover",
       "type": "LG",
       "variant": "S5IT2M",
       "version": "D5IAA",
@@ -13963,7 +13963,7 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
+      "make": "Land Rover",
       "commercialName": "Range Rover",
       "type": "LG",
       "variant": "S5KU2L",
@@ -14118,7 +14118,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER",
+      "commercialName": "Range Rover",
       "type": "LG",
       "variant": "S5SS2L",
       "version": "D5OBA",
@@ -14201,8 +14201,8 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER",
+      "make": "Land Rover",
+      "commercialName": "Range Rover",
       "type": "LG",
       "variant": "S5SS2M",
       "version": "D5OBA",
@@ -14229,8 +14229,8 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
-      "commercialName": "Range Rover",
+      "make": "LAND ROVER",
+      "commercialName": "RANGE ROVER",
       "type": "LG",
       "variant": "S5SS2N",
       "version": "D5OAA",
@@ -14398,7 +14398,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER",
+      "commercialName": "Range Rover",
       "type": "LG",
       "variant": "S5T12M",
       "version": "D5RAC",
@@ -14538,7 +14538,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover",
+      "commercialName": "RANGE ROVER",
       "type": "LG",
       "variant": "S5U22M",
       "version": "D5UAA",
@@ -14594,7 +14594,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER",
+      "commercialName": "Range Rover",
       "type": "LG",
       "variant": "S5U22M",
       "version": "D5UBA",
@@ -14622,7 +14622,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover",
+      "commercialName": "RANGE ROVER",
       "type": "LG",
       "variant": "S5U22N",
       "version": "D5UAA",
@@ -14692,7 +14692,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER",
+      "commercialName": "Range Rover",
       "type": "LG",
       "variant": "S5US2M",
       "version": "D5TAB",
@@ -14706,7 +14706,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover",
+      "commercialName": "RANGE ROVER",
       "type": "LG",
       "variant": "S5US2M",
       "version": "D5TBA",
@@ -14734,7 +14734,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER",
+      "commercialName": "Range Rover",
       "type": "LG",
       "variant": "S5US2N",
       "version": "D5TAA",
@@ -14762,7 +14762,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover",
+      "commercialName": "RANGE ROVER",
       "type": "LG",
       "variant": "S5US2N",
       "version": "D5TBA",
@@ -15714,7 +15714,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "CNGDH0",
       "version": "50CA010",
@@ -15728,7 +15728,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "CNGDH0",
       "version": "50CA020",
@@ -15756,7 +15756,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "CNGDH0",
       "version": "50CA040",
@@ -15811,8 +15811,8 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
-      "commercialName": "Range Rover Evoque",
+      "make": "LAND ROVER",
+      "commercialName": "RANGE ROVER EVOQUE",
       "type": "LZ",
       "variant": "CTEDD0",
       "version": "50CA010",
@@ -15853,8 +15853,8 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
-      "commercialName": "Range Rover Evoque",
+      "make": "LAND ROVER",
+      "commercialName": "RANGE ROVER EVOQUE",
       "type": "LZ",
       "variant": "CTEDD0",
       "version": "50CA050",
@@ -15868,7 +15868,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "CVEDG0",
       "version": "50CA000",
@@ -15979,8 +15979,8 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "make": "Land Rover",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "HLADD0",
       "version": "50CA010",
@@ -16008,7 +16008,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "HLADD0",
       "version": "50CA020",
@@ -16050,7 +16050,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "HLADD0",
       "version": "50CA050",
@@ -16064,7 +16064,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "HLADD0",
       "version": "50CB000",
@@ -16203,8 +16203,8 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "make": "Land Rover",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "HLBDD0",
       "version": "50CA050",
@@ -16246,7 +16246,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "HLBDD0",
       "version": "50CB000",
@@ -16288,7 +16288,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "HLBDD0",
       "version": "50CB020",
@@ -16330,7 +16330,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "HLBDD0",
       "version": "5VCA010",
@@ -16526,7 +16526,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "HLCDD0",
       "version": "5VCA010",
@@ -16665,8 +16665,8 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "make": "Land Rover",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "HTEDD0",
       "version": "50CA020",
@@ -16708,7 +16708,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "HTEDD0",
       "version": "50CA040",
@@ -16749,7 +16749,7 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
+      "make": "LAND ROVER",
       "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "HTFDD0",
@@ -16806,7 +16806,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "HTFDD0",
       "version": "50CA020",
@@ -16847,8 +16847,8 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "make": "Land Rover",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "HTFDD0",
       "version": "50CA050",
@@ -17142,7 +17142,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Evoque",
+      "commercialName": "RANGE ROVER EVOQUE",
       "type": "LZ",
       "variant": "S5AA2L",
       "version": "A5DAA",
@@ -17170,7 +17170,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "S5AA2L",
       "version": "A5DAB",
@@ -17240,7 +17240,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "S5AB2L",
       "version": "A5DCB",
@@ -17352,7 +17352,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "S5CC2L",
       "version": "A5BAA",
@@ -17380,7 +17380,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER EVOQUE",
+      "commercialName": "Range Rover Evoque",
       "type": "LZ",
       "variant": "S5CC2L",
       "version": "A5BAB",
@@ -18892,7 +18892,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5AN2M",
       "version": "A5FDA",
@@ -18976,7 +18976,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5AN2N",
       "version": "A5FDA",
@@ -19088,7 +19088,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5AO2M",
       "version": "A5AAA",
@@ -19116,7 +19116,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5AO2N",
       "version": "A5AAA",
@@ -19172,7 +19172,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Sport",
+      "commercialName": "RANGE ROVER SPORT",
       "type": "LW",
       "variant": "S5CD2L",
       "version": "A5CAA",
@@ -19298,7 +19298,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5CH2L",
       "version": "A7DDA",
@@ -19396,7 +19396,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5GM2M",
       "version": "A5JAC",
@@ -19494,7 +19494,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5GM2N",
       "version": "A5JAC",
@@ -19522,7 +19522,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5GM2N",
       "version": "A7AAC",
@@ -19634,7 +19634,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Sport",
+      "commercialName": "RANGE ROVER SPORT",
       "type": "LW",
       "variant": "S5JM2M",
       "version": "A5DAA",
@@ -19662,7 +19662,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5JM2N",
       "version": "A5DAA",
@@ -19732,7 +19732,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5KP2L",
       "version": "A5CAC",
@@ -19774,7 +19774,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5KP2M",
       "version": "A5CAA",
@@ -19816,7 +19816,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Sport",
+      "commercialName": "RANGE ROVER SPORT",
       "type": "LW",
       "variant": "S5KP2M",
       "version": "A7KAA",
@@ -19830,7 +19830,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Sport",
+      "commercialName": "RANGE ROVER SPORT",
       "type": "LW",
       "variant": "S5KP2M",
       "version": "A7KAC",
@@ -19914,7 +19914,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Sport",
+      "commercialName": "RANGE ROVER SPORT",
       "type": "LW",
       "variant": "S5LD2M",
       "version": "A5FAA",
@@ -19927,8 +19927,8 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "make": "Land Rover",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5LD2M",
       "version": "A5FBA",
@@ -19970,7 +19970,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Sport",
+      "commercialName": "RANGE ROVER SPORT",
       "type": "LW",
       "variant": "S5LD2N",
       "version": "A5FAA",
@@ -19983,8 +19983,8 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "make": "Land Rover",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5LD2N",
       "version": "A5FBA",
@@ -20012,7 +20012,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5LM2M",
       "version": "A5FAA",
@@ -20068,7 +20068,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Sport",
+      "commercialName": "RANGE ROVER SPORT",
       "type": "LW",
       "variant": "S5LM2M",
       "version": "A5FDA",
@@ -20207,8 +20207,8 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "make": "Land Rover",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5LM2N",
       "version": "A7LDA",
@@ -20292,7 +20292,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER SPORT",
+      "commercialName": "Range Rover Sport",
       "type": "LW",
       "variant": "S5LQ2N",
       "version": "A5FAA",
@@ -21020,7 +21020,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "HDBDC0",
       "version": "50AA000",
@@ -21048,7 +21048,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "HDBDC0",
       "version": "50AB000",
@@ -21062,7 +21062,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "HDBDC0",
       "version": "50AB010",
@@ -21160,7 +21160,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Velar",
+      "commercialName": "RANGE ROVER VELAR",
       "type": "LY",
       "variant": "HMCDC0",
       "version": "50CA000",
@@ -21188,7 +21188,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Velar",
+      "commercialName": "RANGE ROVER VELAR",
       "type": "LY",
       "variant": "HMCDC0",
       "version": "50CB000",
@@ -21202,7 +21202,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "HPDDC0",
       "version": "50AA000",
@@ -21258,7 +21258,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "HPDDC0",
       "version": "50AB000",
@@ -21300,7 +21300,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Velar",
+      "commercialName": "RANGE ROVER VELAR",
       "type": "LY",
       "variant": "HPDDC0",
       "version": "50AB040",
@@ -21398,7 +21398,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "HTADC0",
       "version": "50AB000",
@@ -21481,7 +21481,7 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
+      "make": "Land Rover",
       "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "HTADC0",
@@ -21537,8 +21537,8 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
-      "commercialName": "Range Rover Velar",
+      "make": "LAND ROVER",
+      "commercialName": "RANGE ROVER VELAR",
       "type": "LY",
       "variant": "HTADC0",
       "version": "50CA030",
@@ -21580,7 +21580,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Velar",
+      "commercialName": "RANGE ROVER VELAR",
       "type": "LY",
       "variant": "HTADC0",
       "version": "50CB000",
@@ -21650,7 +21650,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "HUCDC0",
       "version": "50AA000",
@@ -21692,7 +21692,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "HUCDC0",
       "version": "50AA030",
@@ -21776,7 +21776,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Velar",
+      "commercialName": "RANGE ROVER VELAR",
       "type": "LY",
       "variant": "HUCDC0",
       "version": "50AB030",
@@ -21790,7 +21790,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "HUCDC0",
       "version": "50AB050",
@@ -21846,7 +21846,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "S5BB2L",
       "version": "A5BAA",
@@ -21860,7 +21860,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "S5BB2L",
       "version": "A5BBA",
@@ -21874,7 +21874,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "S5BB2L",
       "version": "A5BCA",
@@ -21944,7 +21944,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "S5BB2L",
       "version": "A5BHB",
@@ -21986,7 +21986,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Velar",
+      "commercialName": "RANGE ROVER VELAR",
       "type": "LY",
       "variant": "S5CC2L",
       "version": "A5CAA",
@@ -22014,7 +22014,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Velar",
+      "commercialName": "RANGE ROVER VELAR",
       "type": "LY",
       "variant": "S5CC2L",
       "version": "A5CDB",
@@ -22238,7 +22238,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "S5DC2L",
       "version": "A5FDA",
@@ -22252,7 +22252,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Range Rover Velar",
+      "commercialName": "RANGE ROVER VELAR",
       "type": "LY",
       "variant": "S5DC2L",
       "version": "A5FEA",
@@ -22294,7 +22294,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "S5DC2L",
       "version": "A5FJB",
@@ -22364,7 +22364,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "S5DD2L",
       "version": "A5FBA",
@@ -22392,7 +22392,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "S5DD2L",
       "version": "A5FCB",
@@ -22420,7 +22420,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "RANGE ROVER VELAR",
+      "commercialName": "Range Rover Velar",
       "type": "LY",
       "variant": "S5DD2L",
       "version": "A5FDB",
@@ -23541,7 +23541,7 @@
       "year": 2021,
       "make": "LEXUS",
       "commercialName": "LEXUS CT200H",
-      "type": "A10(A)",
+      "type": "A10(a)",
       "variant": "ZWA10(H)",
       "version": "ZWA10L-AHXBBW(1M)",
       "fuel": "PETROL",
@@ -24031,7 +24031,7 @@
       "year": 2021,
       "make": "LEXUS",
       "commercialName": "LEXUS IS300H",
-      "type": "XE2(a)",
+      "type": "XE2(A)",
       "variant": "AVE30(E)",
       "version": "AVE30L-AEXLHW(1W)",
       "fuel": "PETROL",
@@ -24045,7 +24045,7 @@
       "year": 2021,
       "make": "LEXUS",
       "commercialName": "LEXUS IS300H",
-      "type": "XE2(a)",
+      "type": "XE2(A)",
       "variant": "AVE30(E)",
       "version": "AVE30L-AEXLHW(1X)",
       "fuel": "PETROL",
@@ -24059,7 +24059,7 @@
       "year": 2021,
       "make": "LEXUS",
       "commercialName": "LEXUS IS300H",
-      "type": "XE2(A)",
+      "type": "XE2(a)",
       "variant": "AVE30(E)",
       "version": "AVE30L-AEXLHW(3X)",
       "fuel": "PETROL",
@@ -25065,7 +25065,7 @@
     },
     {
       "year": 2021,
-      "make": "Lexus",
+      "make": "LEXUS",
       "commercialName": "LEXUS NX300H",
       "type": "AZ1",
       "variant": "AYZ15(W)",
@@ -28779,7 +28779,7 @@
       "commercialName": "ELISE CUP 250",
       "type": "1111",
       "variant": "A",
-      "version": "D",
+      "version": "d",
       "fuel": "PETROL",
       "engineCc": 1798,
       "powerKw": null,
@@ -28849,7 +28849,7 @@
       "commercialName": "ELISE SPORT 220",
       "type": "1111",
       "variant": "A",
-      "version": "b",
+      "version": "B",
       "fuel": "PETROL",
       "engineCc": 1798,
       "powerKw": null,
@@ -28916,7 +28916,7 @@
     {
       "year": 2021,
       "make": "LOTUS",
-      "commercialName": "Elise Sport 240",
+      "commercialName": "ELISE SPORT 240",
       "type": "1111",
       "variant": "A",
       "version": "E",
@@ -29185,7 +29185,7 @@
       "commercialName": "EXIGE SPORT 390",
       "type": "1112",
       "variant": "C",
-      "version": "P",
+      "version": "p",
       "fuel": "PETROL",
       "engineCc": 3456,
       "powerKw": 296,
@@ -29241,7 +29241,7 @@
       "commercialName": "EXIGE SPORT 410",
       "type": "1112",
       "variant": "C",
-      "version": "L",
+      "version": "l",
       "fuel": "PETROL",
       "engineCc": 3456,
       "powerKw": 306,
@@ -30302,7 +30302,7 @@
     {
       "year": 2021,
       "make": "MASERATI",
-      "commercialName": "Ghibli GT Hybrid",
+      "commercialName": "GHIBLI GT HYBRID",
       "type": "M156",
       "variant": "7L2",
       "version": "5APD",
@@ -30358,7 +30358,7 @@
     {
       "year": 2021,
       "make": "MASERATI",
-      "commercialName": "Ghibli Modena S Q4",
+      "commercialName": "GHIBLI MODENA S Q4",
       "type": "M156",
       "variant": "7E4",
       "version": "5AP1",
@@ -30652,7 +30652,7 @@
     {
       "year": 2021,
       "make": "MASERATI",
-      "commercialName": "Levante Diesel",
+      "commercialName": "LEVANTE DIESEL",
       "type": "M156",
       "variant": "1G4",
       "version": "5HDG",
@@ -30722,7 +30722,7 @@
     {
       "year": 2021,
       "make": "MASERATI",
-      "commercialName": "Levante GT Hybrid",
+      "commercialName": "LEVANTE GT HYBRID",
       "type": "M156",
       "variant": "1L4",
       "version": "5APD",
@@ -30918,7 +30918,7 @@
     {
       "year": 2021,
       "make": "MASERATI",
-      "commercialName": "LEVANTE TROFEO",
+      "commercialName": "Levante Trofeo",
       "type": "M156",
       "variant": "1H4",
       "version": "5HAP1",
@@ -31170,7 +31170,7 @@
     {
       "year": 2021,
       "make": "MASERATI",
-      "commercialName": "Quattroporte Trofeo",
+      "commercialName": "QUATTROPORTE TROFEO",
       "type": "M156",
       "variant": "6H2",
       "version": "5HAP",
@@ -31225,7 +31225,7 @@
     },
     {
       "year": 2021,
-      "make": "Maxus",
+      "make": "MAXUS",
       "commercialName": "MAXUS EUNIQ 5",
       "type": "SV5A",
       "variant": "0800",
@@ -39290,7 +39290,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "Mazda CX-3",
+      "commercialName": "MAZDA CX-3",
       "type": "DJ1",
       "variant": "6W7",
       "version": "ARW0C",
@@ -39317,8 +39317,8 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
-      "commercialName": "Mazda CX-3",
+      "make": "MAZDA",
+      "commercialName": "MAZDA CX-3",
       "type": "DJ1",
       "variant": "6WE",
       "version": "6NW01",
@@ -39360,7 +39360,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA CX-3",
+      "commercialName": "Mazda CX-3",
       "type": "DJ1",
       "variant": "6WE",
       "version": "6NW0A",
@@ -39388,7 +39388,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "Mazda CX-3",
+      "commercialName": "MAZDA CX-3",
       "type": "DJ1",
       "variant": "6WE",
       "version": "6NW0C",
@@ -39863,7 +39863,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA CX-30",
       "type": "DM",
       "variant": "6W8",
@@ -40059,7 +40059,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA CX-30",
       "type": "DM",
       "variant": "6WE",
@@ -40143,7 +40143,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA CX-30",
       "type": "DM",
       "variant": "6WG",
@@ -40199,7 +40199,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA CX-30",
       "type": "DM",
       "variant": "6WH",
@@ -40227,7 +40227,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA CX-30",
       "type": "DM",
       "variant": "6WH",
@@ -40255,7 +40255,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA CX-30",
       "type": "DM",
       "variant": "6WH",
@@ -40283,7 +40283,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA CX-30",
       "type": "DM",
       "variant": "6WH",
@@ -40493,7 +40493,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA CX-30",
       "type": "DM",
       "variant": "FWG",
@@ -40619,7 +40619,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA CX-30",
       "type": "DM",
       "variant": "FWG",
@@ -40675,7 +40675,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA CX-30",
       "type": "DM",
       "variant": "FWH",
@@ -40689,7 +40689,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA CX-30",
       "type": "DM",
       "variant": "FWH",
@@ -41460,7 +41460,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "6W1",
       "version": "6AW0",
@@ -41501,8 +41501,8 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "make": "Mazda",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "6W1",
       "version": "6EW0",
@@ -41515,7 +41515,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "6W1",
@@ -41529,7 +41529,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "6W1",
@@ -41543,8 +41543,8 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "make": "Mazda",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "6W1",
       "version": "AAW0",
@@ -41572,7 +41572,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "6W1",
       "version": "AEW0A",
@@ -41585,8 +41585,8 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
-      "commercialName": "Mazda CX-5",
+      "make": "MAZDA",
+      "commercialName": "MAZDA CX-5",
       "type": "KF",
       "variant": "6W1",
       "version": "AEW0B",
@@ -41670,7 +41670,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "6W7",
       "version": "6EW0",
@@ -41683,8 +41683,8 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "make": "Mazda",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "6W7",
       "version": "AAW0",
@@ -41697,7 +41697,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "6W7",
@@ -41712,7 +41712,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "6W7",
       "version": "AEW0A",
@@ -41725,8 +41725,8 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "make": "Mazda",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "6W7",
       "version": "AEW0B",
@@ -41753,8 +41753,8 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
-      "commercialName": "Mazda CX-5",
+      "make": "MAZDA",
+      "commercialName": "MAZDA CX-5",
       "type": "KF",
       "variant": "6WE",
       "version": "6AW0",
@@ -41767,8 +41767,8 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "make": "Mazda",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "6WE",
       "version": "6AW0A",
@@ -41795,7 +41795,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "6WE",
@@ -41978,7 +41978,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "GW1",
       "version": "AAW0",
@@ -42020,7 +42020,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "GW1",
       "version": "AEW0B",
@@ -42118,7 +42118,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "GW7",
       "version": "6AW0",
@@ -42159,7 +42159,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "GW7",
@@ -42174,7 +42174,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "Mazda CX-5",
+      "commercialName": "MAZDA CX-5",
       "type": "KF",
       "variant": "GW7",
       "version": "AEW0B",
@@ -42188,7 +42188,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "GWE",
       "version": "6AW0",
@@ -42215,8 +42215,8 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "make": "Mazda",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "GWE",
       "version": "6EW0",
@@ -42230,7 +42230,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "GWE",
       "version": "6EW0A",
@@ -42300,7 +42300,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "Mazda CX-5",
+      "commercialName": "MAZDA CX-5",
       "type": "KF",
       "variant": "GWM",
       "version": "AFW0",
@@ -42314,7 +42314,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "commercialName": "Mazda CX-5",
       "type": "KF",
       "variant": "GWM",
       "version": "AFW0A",
@@ -42426,7 +42426,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA CX-5",
+      "commercialName": "Mazda CX-5",
       "type": "KFE",
       "variant": "6WE",
       "version": "6EW0AMMB",
@@ -43363,7 +43363,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "Mazda MX-5",
       "type": "ND",
       "variant": "6E7",
@@ -43420,7 +43420,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "Mazda MX-5",
+      "commercialName": "MAZDA MX-5",
       "type": "ND",
       "variant": "6E7",
       "version": "6DW1",
@@ -43434,7 +43434,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "Mazda MX-5",
+      "commercialName": "MAZDA MX-5",
       "type": "ND",
       "variant": "6E7",
       "version": "6DW2",
@@ -43448,7 +43448,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA MX-5",
+      "commercialName": "Mazda MX-5",
       "type": "ND",
       "variant": "6E7",
       "version": "8CW1",
@@ -43504,7 +43504,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "Mazda MX-5",
+      "commercialName": "MAZDA MX-5",
       "type": "ND",
       "variant": "6EA",
       "version": "6DW1",
@@ -43518,7 +43518,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "Mazda MX-5",
+      "commercialName": "MAZDA MX-5",
       "type": "ND",
       "variant": "6EA",
       "version": "6DW1",
@@ -43867,7 +43867,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA2",
       "type": "DJ1",
       "variant": "6HF",
@@ -43881,7 +43881,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA2",
       "type": "DJ1",
       "variant": "6HF",
@@ -43923,7 +43923,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA2",
       "type": "DJ1",
       "variant": "6HF",
@@ -44441,7 +44441,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA3",
       "type": "BP",
       "variant": "6HE",
@@ -44526,7 +44526,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA3",
+      "commercialName": "Mazda3",
       "type": "BP",
       "variant": "6HH",
       "version": "6GW00",
@@ -44609,7 +44609,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA3",
       "type": "BP",
       "variant": "6S8",
@@ -44637,8 +44637,8 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
-      "commercialName": "Mazda3",
+      "make": "Mazda",
+      "commercialName": "MAZDA3",
       "type": "BP",
       "variant": "6SE",
       "version": "6GW00",
@@ -44861,7 +44861,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6HE",
@@ -44917,8 +44917,8 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
-      "commercialName": "Mazda3",
+      "make": "Mazda",
+      "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6HE",
       "version": "6GW00",
@@ -45057,7 +45057,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6HE",
@@ -45141,7 +45141,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6HG",
@@ -45225,7 +45225,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6HG",
@@ -45239,7 +45239,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6HG",
@@ -45323,7 +45323,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6HH",
@@ -45393,7 +45393,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6HH",
@@ -45505,7 +45505,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6HH",
@@ -45604,7 +45604,7 @@
     {
       "year": 2021,
       "make": "MAZDA",
-      "commercialName": "MAZDA3",
+      "commercialName": "Mazda3",
       "type": "BPE",
       "variant": "6SE",
       "version": "6CW00",
@@ -45617,7 +45617,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6SE",
@@ -45673,7 +45673,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6SE",
@@ -45687,7 +45687,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6SE",
@@ -45757,7 +45757,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6SE",
@@ -45883,7 +45883,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6SG",
@@ -46023,7 +46023,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6SH",
@@ -46107,8 +46107,8 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
-      "commercialName": "Mazda3",
+      "make": "Mazda",
+      "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "6SH",
       "version": "AGW02",
@@ -46219,7 +46219,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "FHH",
@@ -46275,7 +46275,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA3",
       "type": "BPE",
       "variant": "FHH",
@@ -47381,8 +47381,8 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
-      "commercialName": "MAZDA6",
+      "make": "MAZDA",
+      "commercialName": "Mazda6",
       "type": "GH",
       "variant": "622",
       "version": "8BW00",
@@ -47395,7 +47395,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "626",
@@ -47535,7 +47535,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "627",
@@ -47577,7 +47577,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "627",
@@ -47619,7 +47619,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "627",
@@ -47633,7 +47633,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "627",
@@ -47661,7 +47661,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "627",
@@ -47703,7 +47703,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "62M",
@@ -47745,7 +47745,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "62M",
@@ -47843,7 +47843,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "696",
@@ -47899,7 +47899,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "697",
@@ -47913,7 +47913,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "697",
@@ -47983,7 +47983,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "697",
@@ -48011,7 +48011,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "697",
@@ -48039,7 +48039,7 @@
     },
     {
       "year": 2021,
-      "make": "MAZDA",
+      "make": "Mazda",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "697",
@@ -48109,7 +48109,7 @@
     },
     {
       "year": 2021,
-      "make": "Mazda",
+      "make": "MAZDA",
       "commercialName": "MAZDA6",
       "type": "GH",
       "variant": "F92",

@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2021Fv24",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2021Fv24] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 11,
   "rows": [
     {
@@ -831,7 +831,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "CROSSLAND",
       "type": "P7 MONOCAB C",
       "variant": "EA024DB12",
@@ -943,7 +943,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "CROSSLAND",
       "type": "P7 MONOCAB C",
       "variant": "EA025DB12",
@@ -4949,7 +4949,7 @@
       "year": 2021,
       "make": "OPEL",
       "commercialName": "CROSSLAND X",
-      "type": "P7 Monocab C",
+      "type": "P7 MONOCAB C",
       "variant": "EA025DB12",
       "version": "BA1VADPH0A5",
       "fuel": "PETROL",
@@ -5018,7 +5018,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Crossland X",
+      "commercialName": "CROSSLAND X",
       "type": "P7 MONOCAB C",
       "variant": "EA025DB12",
       "version": "BD1VADPH0A5",
@@ -7831,7 +7831,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "GRANDLAND X",
       "type": "Z",
       "variant": "4",
@@ -8251,7 +8251,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "GRANDLAND X",
       "type": "Z",
       "variant": "C",
@@ -8503,7 +8503,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "GRANDLAND X",
       "type": "Z",
       "variant": "R",
@@ -8699,7 +8699,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "GRANDLAND X",
       "type": "Z",
       "variant": "R",
@@ -12269,7 +12269,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "INSIGNIA GRAND SPORT",
       "type": "Z-B",
       "variant": "CA094DB12",
@@ -12718,7 +12718,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "INSIGNIA GRAND SPORT",
+      "commercialName": "Insignia Grand Sport",
       "type": "Z-B",
       "variant": "CF077DB12",
       "version": "BE1ZAUCABA5",
@@ -14229,7 +14229,7 @@
     },
     {
       "year": 2021,
-      "make": "Opel",
+      "make": "OPEL",
       "commercialName": "INSIGNIA SPORTS TOURER",
       "type": "Z-B",
       "variant": "DF064CB12",
@@ -15741,7 +15741,7 @@
     },
     {
       "year": 2021,
-      "make": "OPEL",
+      "make": "Opel",
       "commercialName": "MOKKA",
       "type": "U",
       "variant": "S",
@@ -18696,7 +18696,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Movano",
+      "commercialName": "MOVANO",
       "type": "MW",
       "variant": "J48C",
       "version": "S1E15G9",
@@ -18920,7 +18920,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Vivaro",
+      "commercialName": "VIVARO",
       "type": "V",
       "variant": "A",
       "version": "YHVK-P2F00P",
@@ -19256,7 +19256,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "VIVARO",
+      "commercialName": "Vivaro",
       "type": "V",
       "variant": "E",
       "version": "AHXK-P2F00P",
@@ -19466,7 +19466,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Vivaro",
+      "commercialName": "VIVARO",
       "type": "V",
       "variant": "E",
       "version": "EHTM-N2S20N",
@@ -19522,7 +19522,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "VIVARO",
+      "commercialName": "Vivaro",
       "type": "V",
       "variant": "E",
       "version": "EHTM-P2S20N",
@@ -20376,7 +20376,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "VIVARO / ZAFIRA LIFE",
+      "commercialName": "Vivaro / Zafira Life",
       "type": "V",
       "variant": "A",
       "version": "YHVK-P2F00P",
@@ -20432,7 +20432,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "VIVARO / ZAFIRA LIFE",
+      "commercialName": "Vivaro / Zafira Life",
       "type": "V",
       "variant": "A",
       "version": "YHVM-N2S10K",
@@ -20460,7 +20460,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Vivaro / Zafira Life",
+      "commercialName": "VIVARO / ZAFIRA LIFE",
       "type": "V",
       "variant": "A",
       "version": "YHVM-N2S10N",
@@ -20516,7 +20516,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Vivaro / Zafira Life",
+      "commercialName": "VIVARO / ZAFIRA LIFE",
       "type": "V",
       "variant": "A",
       "version": "YHVM-P2S10L",
@@ -20600,7 +20600,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Vivaro / Zafira Life",
+      "commercialName": "VIVARO / ZAFIRA LIFE",
       "type": "V",
       "variant": "E",
       "version": "AHK8-P2F00N",
@@ -20950,7 +20950,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "VIVARO / ZAFIRA LIFE",
+      "commercialName": "Vivaro / Zafira Life",
       "type": "V",
       "variant": "E",
       "version": "EHS7-P2S20N",
@@ -21062,7 +21062,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Vivaro / Zafira Life",
+      "commercialName": "VIVARO / ZAFIRA LIFE",
       "type": "V",
       "variant": "E",
       "version": "EHTM-N2S20L",
@@ -21832,7 +21832,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Vivaro / Zafira Life",
+      "commercialName": "VIVARO / ZAFIRA LIFE",
       "type": "V",
       "variant": "Z",
       "version": "ZKXZ-P7800L",
@@ -25920,7 +25920,7 @@
     {
       "year": 2021,
       "make": "OPEL",
-      "commercialName": "Zafira Life",
+      "commercialName": "ZAFIRA LIFE",
       "type": "V",
       "variant": "E",
       "version": "EHTM-P2N20N",
@@ -32500,7 +32500,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "3008 / 1.6 / AUT. 4x4 HY",
+      "commercialName": "3008 / 1.6 / AUT. 4X4 HY",
       "type": "M",
       "variant": "4",
       "version": "5GBU-C1J000",
@@ -64826,7 +64826,7 @@
     {
       "year": 2021,
       "make": "PEUGEOT",
-      "commercialName": "Expert Traveller",
+      "commercialName": "EXPERT TRAVELLER",
       "type": "V",
       "variant": "E",
       "version": "AHXK-P2200N",

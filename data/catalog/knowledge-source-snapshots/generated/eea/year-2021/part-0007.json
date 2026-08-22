@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2021Fv24",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2021Fv24] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 7,
   "rows": [
     {
@@ -1630,7 +1630,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "i 10                                              ",
+      "commercialName": "I 10                                              ",
       "type": "AC3",
       "variant": "A5P31",
       "version": "M54B11",
@@ -1826,7 +1826,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "I 10                                              ",
+      "commercialName": "i 10                                              ",
       "type": "AC3",
       "variant": "B5P31",
       "version": "M54A11",
@@ -2120,7 +2120,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "i 20                                              ",
+      "commercialName": "I 20                                              ",
       "type": "BC3",
       "variant": "B5P51",
       "version": "M62CZ3",
@@ -2358,7 +2358,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "i 20                                              ",
+      "commercialName": "I 20                                              ",
       "type": "BC3",
       "variant": "B5P81",
       "version": "D71CZ3",
@@ -2512,7 +2512,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "i 20                                              ",
+      "commercialName": "I 20                                              ",
       "type": "GB",
       "variant": "B5P71",
       "version": "M53AZ1",
@@ -2679,8 +2679,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai                                           ",
-      "commercialName": "i10                                               ",
+      "make": "HYUNDAI                                           ",
+      "commercialName": "I10                                               ",
       "type": "AC3",
       "variant": "A5P31",
       "version": "M54B11",
@@ -2707,8 +2707,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai                                           ",
-      "commercialName": "i10                                               ",
+      "make": "HYUNDAI                                           ",
+      "commercialName": "I10                                               ",
       "type": "AC3",
       "variant": "A5P51",
       "version": "M55B11",
@@ -2721,7 +2721,7 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai                                           ",
+      "make": "HYUNDAI                                           ",
       "commercialName": "i10                                               ",
       "type": "AC3",
       "variant": "A5P51",
@@ -2791,8 +2791,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai                                           ",
-      "commercialName": "i10                                               ",
+      "make": "HYUNDAI",
+      "commercialName": "I10",
       "type": "AC3",
       "variant": "B4P11",
       "version": "A51A11",
@@ -2903,8 +2903,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai                                           ",
-      "commercialName": "i10                                               ",
+      "make": "HYUNDAI                                           ",
+      "commercialName": "I10                                               ",
       "type": "AC3",
       "variant": "B4P11",
       "version": "M51A11",
@@ -2946,7 +2946,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "I10                                               ",
+      "commercialName": "i10                                               ",
       "type": "AC3",
       "variant": "B4P11",
       "version": "M52A11",
@@ -3044,7 +3044,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "i10                                               ",
+      "commercialName": "I10                                               ",
       "type": "AC3",
       "variant": "B4P31",
       "version": "A52A11",
@@ -3225,8 +3225,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI                                           ",
-      "commercialName": "I10                                               ",
+      "make": "Hyundai                                           ",
+      "commercialName": "i10                                               ",
       "type": "AC3",
       "variant": "B5P11",
       "version": "M53A11",
@@ -3449,8 +3449,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI                                           ",
-      "commercialName": "I10                                               ",
+      "make": "HYUNDAI",
+      "commercialName": "I10",
       "type": "AC3",
       "variant": "B5P31",
       "version": "M54A11",
@@ -3926,7 +3926,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "i20                                               ",
+      "commercialName": "I20                                               ",
       "type": "BC3",
       "variant": "B5P11",
       "version": "M51AZ2",
@@ -3939,7 +3939,7 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI                                           ",
+      "make": "Hyundai                                           ",
       "commercialName": "i20                                               ",
       "type": "BC3",
       "variant": "B5P11",
@@ -3953,8 +3953,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI                                           ",
-      "commercialName": "i20                                               ",
+      "make": "HYUNDAI",
+      "commercialName": "I20",
       "type": "BC3",
       "variant": "B5P11",
       "version": "M51AZ2",
@@ -4037,8 +4037,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai                                           ",
-      "commercialName": "i20                                               ",
+      "make": "HYUNDAI                                           ",
+      "commercialName": "I20                                               ",
       "type": "BC3",
       "variant": "B5P11",
       "version": "M51AZ3",
@@ -4234,7 +4234,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "i20                                               ",
+      "commercialName": "I20                                               ",
       "type": "BC3",
       "variant": "B5P51",
       "version": "D71CW3",
@@ -4303,7 +4303,7 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI                                           ",
+      "make": "Hyundai                                           ",
       "commercialName": "i20                                               ",
       "type": "BC3",
       "variant": "B5P51",
@@ -4345,8 +4345,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai                                           ",
-      "commercialName": "i20                                               ",
+      "make": "HYUNDAI                                           ",
+      "commercialName": "I20                                               ",
       "type": "BC3",
       "variant": "B5P51",
       "version": "D71CZ3",
@@ -4430,7 +4430,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "I20                                               ",
+      "commercialName": "i20                                               ",
       "type": "BC3",
       "variant": "B5P51",
       "version": "M62CW2",
@@ -4458,7 +4458,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "I20                                               ",
+      "commercialName": "i20                                               ",
       "type": "BC3",
       "variant": "B5P51",
       "version": "M62CW3",
@@ -4528,7 +4528,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "i20                                               ",
+      "commercialName": "I20                                               ",
       "type": "BC3",
       "variant": "B5P51",
       "version": "M62CZ2",
@@ -4541,8 +4541,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai                                           ",
-      "commercialName": "i20                                               ",
+      "make": "HYUNDAI                                           ",
+      "commercialName": "I20                                               ",
       "type": "BC3",
       "variant": "B5P51",
       "version": "M62CZ3",
@@ -4556,7 +4556,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "I20                                               ",
+      "commercialName": "i20                                               ",
       "type": "BC3",
       "variant": "B5P51",
       "version": "M62CZ3",
@@ -4682,7 +4682,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "I20                                               ",
+      "commercialName": "i20                                               ",
       "type": "BC3",
       "variant": "B5P71",
       "version": "D71CZ3",
@@ -4793,8 +4793,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI                                           ",
-      "commercialName": "I20                                               ",
+      "make": "Hyundai                                           ",
+      "commercialName": "i20                                               ",
       "type": "BC3",
       "variant": "B5P71",
       "version": "M62CZ1",
@@ -4822,7 +4822,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "I20                                               ",
+      "commercialName": "i20                                               ",
       "type": "BC3",
       "variant": "B5P71",
       "version": "M62CZ3",
@@ -4919,8 +4919,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI                                           ",
-      "commercialName": "I20                                               ",
+      "make": "Hyundai                                           ",
+      "commercialName": "i20                                               ",
       "type": "BC3",
       "variant": "B5P81",
       "version": "D71CZ3",
@@ -5130,7 +5130,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "I20                                               ",
+      "commercialName": "i20                                               ",
       "type": "GB",
       "variant": "B5P31",
       "version": "M51AZ1",
@@ -5158,7 +5158,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "i20                                               ",
+      "commercialName": "I20                                               ",
       "type": "GB",
       "variant": "B5P71",
       "version": "D71AZ1",
@@ -5172,7 +5172,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI                                           ",
-      "commercialName": "i20                                               ",
+      "commercialName": "I20                                               ",
       "type": "GB",
       "variant": "B5P71",
       "version": "D71AZ1",
@@ -6544,7 +6544,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "B5D21",
       "version": "D72BZ15",
@@ -6614,7 +6614,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "B5D31",
       "version": "M68BZ1",
@@ -6628,7 +6628,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "B5D41",
       "version": "D72BZ1",
@@ -6768,7 +6768,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "B5P31",
       "version": "D71BZ1",
@@ -6838,7 +6838,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "B5P51",
       "version": "D81DZ15",
@@ -6852,7 +6852,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "B5P51",
       "version": "D81EZ1",
@@ -6921,8 +6921,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "i30",
+      "make": "HYUNDAI",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "B5P61",
       "version": "D73A11",
@@ -6992,7 +6992,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "B5P61",
       "version": "D73B11",
@@ -7005,8 +7005,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "i30",
+      "make": "HYUNDAI",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "B5P61",
       "version": "M61A11",
@@ -7034,7 +7034,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "B5P61",
       "version": "M61A111",
@@ -7075,8 +7075,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "I30",
+      "make": "Hyundai",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "B5P71",
       "version": "M6CA11",
@@ -7132,7 +7132,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "B5P71",
       "version": "M6CA11",
@@ -7243,7 +7243,7 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
+      "make": "HYUNDAI",
       "commercialName": "i30",
       "type": "PDE",
       "variant": "B5P71",
@@ -7412,7 +7412,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "B5P81",
       "version": "M61A11",
@@ -7468,7 +7468,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "B5P81",
       "version": "M61B11",
@@ -7565,8 +7565,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "I30",
+      "make": "Hyundai",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "B5P91",
       "version": "D71AZZ",
@@ -7580,7 +7580,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "B5P91",
       "version": "D71AZZ",
@@ -7635,8 +7635,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "i30",
+      "make": "HYUNDAI",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "B5P91",
       "version": "D71BZ1",
@@ -7734,7 +7734,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "B5P91",
       "version": "M6DAZ1",
@@ -7803,8 +7803,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "I30",
+      "make": "Hyundai",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "B5P91",
       "version": "M6DAZZ",
@@ -7930,7 +7930,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "B5P91",
       "version": "M6DBZZ",
@@ -7971,8 +7971,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "i30",
+      "make": "HYUNDAI",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BAD41",
       "version": "D72GZ1",
@@ -7986,7 +7986,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BAD41",
       "version": "M68GZ1",
@@ -8014,7 +8014,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BAP31",
       "version": "D71GZ1",
@@ -8070,7 +8070,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BAP51",
       "version": "D81DZ14",
@@ -8084,7 +8084,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BAP51",
       "version": "D81EZ1",
@@ -8154,7 +8154,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BAP61",
       "version": "D73BZ11",
@@ -8196,7 +8196,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BAP61",
       "version": "M61BZ1",
@@ -8378,7 +8378,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BAP91",
       "version": "D71BZ15",
@@ -8434,7 +8434,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BAP91",
       "version": "D71FZ1",
@@ -8476,7 +8476,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BAP91",
       "version": "D71FZZ",
@@ -8518,7 +8518,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BAP91",
       "version": "D71GZ1",
@@ -8532,7 +8532,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BAP91",
       "version": "D71GZ1",
@@ -8616,7 +8616,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BAP91",
       "version": "M6DBZ15",
@@ -8644,7 +8644,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BAP91",
       "version": "M6DBZZ",
@@ -8770,7 +8770,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BAP91",
       "version": "M6DGZ1",
@@ -8784,7 +8784,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BAP91",
       "version": "M6DGZ1",
@@ -8938,7 +8938,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BBP61",
       "version": "M61HZ1",
@@ -9036,7 +9036,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BBP91",
       "version": "D71FZ15",
@@ -9063,8 +9063,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "I30",
+      "make": "Hyundai",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BBP91",
       "version": "D71FZZ5",
@@ -9106,7 +9106,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BBP91",
       "version": "D71IZ1",
@@ -9120,7 +9120,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BBP91",
       "version": "D71IZZ",
@@ -9148,7 +9148,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BBP91",
       "version": "M6DFZ15",
@@ -9161,7 +9161,7 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
+      "make": "HYUNDAI",
       "commercialName": "i30",
       "type": "PDE",
       "variant": "BBP91",
@@ -9190,7 +9190,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BBP91",
       "version": "M6DFZZ5",
@@ -9218,7 +9218,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BBP91",
       "version": "M6DIZ1",
@@ -9260,7 +9260,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BBP91",
       "version": "M6DIZZ",
@@ -9288,7 +9288,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BCD41",
       "version": "D72IZ1",
@@ -9301,8 +9301,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "I30",
+      "make": "Hyundai",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BCD41",
       "version": "M68IZ1",
@@ -9512,7 +9512,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BCP91",
       "version": "D71FZ14",
@@ -9525,7 +9525,7 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
+      "make": "HYUNDAI",
       "commercialName": "i30",
       "type": "PDE",
       "variant": "BCP91",
@@ -9623,7 +9623,7 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
+      "make": "HYUNDAI",
       "commercialName": "i30",
       "type": "PDE",
       "variant": "BCP91",
@@ -9666,7 +9666,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BCP91",
       "version": "M6DFZ14",
@@ -9721,8 +9721,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "I30",
+      "make": "Hyundai",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BCP91",
       "version": "M6DIZ1",
@@ -9750,7 +9750,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BCP91",
       "version": "M6DIZZ",
@@ -9763,8 +9763,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "I30",
+      "make": "Hyundai",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BCP91",
       "version": "M6DIZZ",
@@ -9778,7 +9778,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BDP51",
       "version": "M6BEZ1",
@@ -9806,7 +9806,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BED41",
       "version": "D72IZ1",
@@ -9819,8 +9819,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "i30",
+      "make": "HYUNDAI",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BED41",
       "version": "M68IZ1",
@@ -9946,7 +9946,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BEP91",
       "version": "D71FZ12",
@@ -9960,7 +9960,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BEP91",
       "version": "D71FZ12",
@@ -10015,8 +10015,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "i30",
+      "make": "HYUNDAI",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BEP91",
       "version": "D71IZ1",
@@ -10086,7 +10086,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "BEP91",
       "version": "M6DFZ12",
@@ -10128,7 +10128,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BEP91",
       "version": "M6DIZ1",
@@ -10142,7 +10142,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BEP91",
       "version": "M6DIZ1",
@@ -10155,8 +10155,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "i30",
+      "make": "HYUNDAI",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "BEP91",
       "version": "M6DIZZ",
@@ -10197,8 +10197,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "i30",
+      "make": "HYUNDAI",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "F5D21",
       "version": "D72BZ1",
@@ -10212,7 +10212,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "F5D21",
       "version": "D72BZ11",
@@ -10324,7 +10324,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "F5D31",
       "version": "M68BZ1",
@@ -10393,8 +10393,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "I30",
+      "make": "Hyundai",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "F5D41",
       "version": "M68BZ1",
@@ -10422,7 +10422,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "F5P11",
       "version": "M61B11",
@@ -10464,7 +10464,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "F5P21",
       "version": "M63B11",
@@ -10492,7 +10492,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "F5P31",
       "version": "M64BZ1",
@@ -10575,7 +10575,7 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
+      "make": "HYUNDAI",
       "commercialName": "i30",
       "type": "PDE",
       "variant": "F5P61",
@@ -10603,7 +10603,7 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
+      "make": "HYUNDAI",
       "commercialName": "i30",
       "type": "PDE",
       "variant": "F5P61",
@@ -10659,8 +10659,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "i30",
+      "make": "HYUNDAI",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "F5P61",
       "version": "M61A112",
@@ -10744,7 +10744,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "F5P71",
       "version": "M6CA11",
@@ -10786,7 +10786,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "F5P71",
       "version": "M6CA11",
@@ -10813,7 +10813,7 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
+      "make": "HYUNDAI",
       "commercialName": "i30",
       "type": "PDE",
       "variant": "F5P71",
@@ -10996,7 +10996,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "F5P81",
       "version": "D73B11",
@@ -11108,7 +11108,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "F5P91",
       "version": "D71AZ1",
@@ -11122,7 +11122,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "F5P91",
       "version": "D71AZ1",
@@ -11136,7 +11136,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "F5P91",
       "version": "D71AZ11",
@@ -11360,7 +11360,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDE",
       "variant": "F5P91",
       "version": "D71BZZ",
@@ -11500,7 +11500,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDE",
       "variant": "F5P91",
       "version": "M6DAZZ",
@@ -11793,8 +11793,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "I30",
+      "make": "Hyundai",
+      "commercialName": "i30",
       "type": "PDH",
       "variant": "B5P31",
       "version": "D71AZ1",
@@ -11864,7 +11864,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDH",
       "variant": "B5P61",
       "version": "M61B11",
@@ -11877,8 +11877,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "I30",
+      "make": "Hyundai",
+      "commercialName": "i30",
       "type": "PDH",
       "variant": "B5P71",
       "version": "M6CB11",
@@ -11906,7 +11906,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDH",
       "variant": "B5P81",
       "version": "D73B11",
@@ -11933,7 +11933,7 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
+      "make": "Hyundai",
       "commercialName": "i30",
       "type": "PDH",
       "variant": "BAP11",
@@ -12088,7 +12088,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30",
+      "commercialName": "i30",
       "type": "PDH",
       "variant": "BBP91",
       "version": "D71IZZ",
@@ -12115,8 +12115,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "I30",
+      "make": "Hyundai",
+      "commercialName": "i30",
       "type": "PDH",
       "variant": "BBP91",
       "version": "M6DIZZ",
@@ -12213,7 +12213,7 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
+      "make": "Hyundai",
       "commercialName": "i30",
       "type": "PDH",
       "variant": "BEP61",
@@ -12451,8 +12451,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "i30",
+      "make": "HYUNDAI",
+      "commercialName": "I30",
       "type": "PDH",
       "variant": "F5P61",
       "version": "D73B11",
@@ -12480,7 +12480,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDH",
       "variant": "F5P61",
       "version": "M61B11",
@@ -12521,8 +12521,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "I30",
+      "make": "Hyundai",
+      "commercialName": "i30",
       "type": "PDH",
       "variant": "F5P71",
       "version": "M6CB11",
@@ -12536,7 +12536,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "i30",
+      "commercialName": "I30",
       "type": "PDH",
       "variant": "F5P81",
       "version": "D73B11",
@@ -12563,7 +12563,7 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
+      "make": "Hyundai",
       "commercialName": "i30",
       "type": "PDH",
       "variant": "F5P91",
@@ -12577,8 +12577,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "i30",
+      "make": "HYUNDAI",
+      "commercialName": "I30",
       "type": "PDH",
       "variant": "F5P91",
       "version": "M6DBZ1",
@@ -14411,7 +14411,7 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
+      "make": "Hyundai",
       "commercialName": "i30N",
       "type": "PDE",
       "variant": "B5P41",
@@ -14425,8 +14425,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "i30N",
+      "make": "HYUNDAI",
+      "commercialName": "I30N",
       "type": "PDE",
       "variant": "B5P51",
       "version": "D81DZ15",
@@ -14523,8 +14523,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "I30N",
+      "make": "Hyundai",
+      "commercialName": "i30N",
       "type": "PDE",
       "variant": "B5P51",
       "version": "M6BEZ1",
@@ -14551,8 +14551,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "i30N",
+      "make": "HYUNDAI",
+      "commercialName": "I30N",
       "type": "PDE",
       "variant": "BAP51",
       "version": "D81DZ14",
@@ -14566,7 +14566,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "I30N",
+      "commercialName": "i30N",
       "type": "PDE",
       "variant": "BAP51",
       "version": "D81EZ1",
@@ -15545,7 +15545,7 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
+      "make": "HYUNDAI",
       "commercialName": "IONIQ5",
       "type": "NE",
       "variant": "F5E42",
@@ -16119,8 +16119,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "Kona",
+      "make": "HYUNDAI",
+      "commercialName": "KONA",
       "type": "OS",
       "variant": "F5D21",
       "version": "D72AY1",
@@ -16133,8 +16133,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "Kona",
+      "make": "HYUNDAI",
+      "commercialName": "KONA",
       "type": "OS",
       "variant": "F5D21",
       "version": "D72AY1Y1",
@@ -16288,7 +16288,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "Kona",
+      "commercialName": "KONA",
       "type": "OS",
       "variant": "F5E11",
       "version": "E11B11",
@@ -16316,7 +16316,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "Kona",
+      "commercialName": "KONA",
       "type": "OS",
       "variant": "F5E11",
       "version": "E11B11",
@@ -16358,7 +16358,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "KONA",
+      "commercialName": "Kona",
       "type": "OS",
       "variant": "F5E11",
       "version": "E11D11",
@@ -16400,7 +16400,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "KONA",
+      "commercialName": "Kona",
       "type": "OS",
       "variant": "F5E11",
       "version": "E11D11",
@@ -16484,7 +16484,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "Kona",
+      "commercialName": "KONA",
       "type": "OS",
       "variant": "F5E21",
       "version": "E11B11",
@@ -16525,8 +16525,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "Kona",
+      "make": "HYUNDAI",
+      "commercialName": "KONA",
       "type": "OS",
       "variant": "F5E21",
       "version": "E11D11",
@@ -16567,8 +16567,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "Kona",
+      "make": "HYUNDAI",
+      "commercialName": "KONA",
       "type": "OS",
       "variant": "F5P11",
       "version": "M61A11",
@@ -16595,8 +16595,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "Kona",
+      "make": "HYUNDAI",
+      "commercialName": "KONA",
       "type": "OS",
       "variant": "F5P21",
       "version": "D73A11",
@@ -16638,7 +16638,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "Kona",
+      "commercialName": "KONA",
       "type": "OS",
       "variant": "F5P31",
       "version": "D61CY1",
@@ -16693,8 +16693,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "KONA",
+      "make": "Hyundai",
+      "commercialName": "Kona",
       "type": "OS",
       "variant": "F5P31",
       "version": "D61CZ1",
@@ -16792,7 +16792,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "KONA",
+      "commercialName": "Kona",
       "type": "OS",
       "variant": "F5P41",
       "version": "D74A11Y1",
@@ -16833,8 +16833,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "Kona",
+      "make": "HYUNDAI",
+      "commercialName": "KONA",
       "type": "OS",
       "variant": "F5P41",
       "version": "M61A11",
@@ -16917,8 +16917,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "Kona",
+      "make": "HYUNDAI",
+      "commercialName": "KONA",
       "type": "OS",
       "variant": "F5P41",
       "version": "M61A11Y1",
@@ -16973,8 +16973,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "Kona",
+      "make": "HYUNDAI",
+      "commercialName": "KONA",
       "type": "OS",
       "variant": "F5P51",
       "version": "M61A11",
@@ -17016,7 +17016,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "Kona",
+      "commercialName": "KONA",
       "type": "OS",
       "variant": "F5P51",
       "version": "M61A12",
@@ -17057,8 +17057,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "Kona",
+      "make": "HYUNDAI",
+      "commercialName": "KONA",
       "type": "OS",
       "variant": "F5P61",
       "version": "D73A11",
@@ -17169,8 +17169,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "KONA",
+      "make": "Hyundai",
+      "commercialName": "Kona",
       "type": "OS",
       "variant": "F5P61",
       "version": "D73A12Y1",
@@ -17211,8 +17211,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "KONA",
+      "make": "Hyundai",
+      "commercialName": "Kona",
       "type": "OS",
       "variant": "F5P64",
       "version": "D73A11",
@@ -17408,7 +17408,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "KONA",
+      "commercialName": "Kona",
       "type": "OSE",
       "variant": "F5E11",
       "version": "E11B11",
@@ -17435,8 +17435,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "Kona",
+      "make": "HYUNDAI",
+      "commercialName": "KONA",
       "type": "OSE",
       "variant": "F5E11",
       "version": "E11B11",
@@ -17520,7 +17520,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "KONA",
+      "commercialName": "Kona",
       "type": "OSE",
       "variant": "F5P31",
       "version": "D61CZ1",
@@ -17534,7 +17534,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "Kona",
+      "commercialName": "KONA",
       "type": "OSEV",
       "variant": "F5E11",
       "version": "E11B11",
@@ -17673,8 +17673,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "KONA",
+      "make": "Hyundai",
+      "commercialName": "Kona",
       "type": "OSHEV",
       "variant": "F5E11",
       "version": "E11B11",
@@ -18373,8 +18373,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "Kona,Kauai",
+      "make": "HYUNDAI",
+      "commercialName": "KONA,KAUAI",
       "type": "OS",
       "variant": "F5E11",
       "version": "E11B11",
@@ -18415,8 +18415,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "KONA,KAUAI",
+      "make": "Hyundai",
+      "commercialName": "Kona,Kauai",
       "type": "OS",
       "variant": "F5E11",
       "version": "E11D11",
@@ -18555,8 +18555,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "Kona,Kauai",
+      "make": "HYUNDAI",
+      "commercialName": "KONA,KAUAI",
       "type": "OS",
       "variant": "F5P31",
       "version": "D61CY1",
@@ -18681,8 +18681,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "Kona,Kauai",
+      "make": "HYUNDAI",
+      "commercialName": "KONA,KAUAI",
       "type": "OS",
       "variant": "F5P41",
       "version": "M61A11",
@@ -19983,8 +19983,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "KonaKauai",
+      "make": "HYUNDAI",
+      "commercialName": "KONAKAUAI",
       "type": "OS",
       "variant": "F5E11",
       "version": "E11B11",
@@ -20082,7 +20082,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "konaKauai",
+      "commercialName": "KONAKAUAI",
       "type": "OS",
       "variant": "F5E21",
       "version": "E11D11",
@@ -20095,8 +20095,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "KONAKAUAI",
+      "make": "Hyundai",
+      "commercialName": "KonaKauai",
       "type": "OS",
       "variant": "F5P11",
       "version": "M61A11",
@@ -20151,8 +20151,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "KonaKauai",
+      "make": "HYUNDAI",
+      "commercialName": "KONAKAUAI",
       "type": "OS",
       "variant": "F5P31",
       "version": "D61CZ1",
@@ -20194,7 +20194,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "konaKauai",
+      "commercialName": "KONAKAUAI",
       "type": "OS",
       "variant": "F5P41",
       "version": "D74A11",
@@ -20544,7 +20544,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "konaKauai",
+      "commercialName": "KONAKAUAI",
       "type": "OSE",
       "variant": "F5E21",
       "version": "E11B11",
@@ -20894,7 +20894,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "SANTAFE",
+      "commercialName": "SantaFe",
       "type": "TM",
       "variant": "A5D11",
       "version": "D81AE4",
@@ -20908,7 +20908,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "SantaFe",
+      "commercialName": "SANTAFE",
       "type": "TM",
       "variant": "A5D12",
       "version": "D81AE1",
@@ -20936,7 +20936,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "SantaFe",
+      "commercialName": "SANTAFE",
       "type": "TM",
       "variant": "A5D12",
       "version": "D81AE4",
@@ -21117,7 +21117,7 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
+      "make": "HYUNDAI",
       "commercialName": "SantaFe",
       "type": "TM",
       "variant": "A5P32",
@@ -21201,8 +21201,8 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "SantaFe",
+      "make": "HYUNDAI",
+      "commercialName": "SANTAFE",
       "type": "TM",
       "variant": "A7D12",
       "version": "D81AE1",
@@ -21230,7 +21230,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "SANTAFE",
+      "commercialName": "SantaFe",
       "type": "TM",
       "variant": "A7D12",
       "version": "D81AE4",
@@ -21299,7 +21299,7 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
+      "make": "Hyundai",
       "commercialName": "SantaFe",
       "type": "TM",
       "variant": "A7D32",
@@ -21762,8 +21762,8 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "TUCSON",
-      "type": "NX4E",
+      "commercialName": "Tucson",
+      "type": "NX4e",
       "variant": "F5D21",
       "version": "D72A11",
       "fuel": "DIESEL",
@@ -21776,8 +21776,8 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "TUCSON",
-      "type": "NX4E",
+      "commercialName": "Tucson",
+      "type": "NX4e",
       "variant": "F5D21",
       "version": "D72A13",
       "fuel": "DIESEL",
@@ -21818,8 +21818,8 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "TUCSON",
-      "type": "NX4E",
+      "commercialName": "Tucson",
+      "type": "NX4e",
       "variant": "F5D21",
       "version": "D72A14",
       "fuel": "DIESEL",
@@ -21860,7 +21860,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "TUCSON",
+      "commercialName": "Tucson",
       "type": "NX4e",
       "variant": "F5D21",
       "version": "D72D24",
@@ -21902,7 +21902,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "Tucson",
+      "commercialName": "TUCSON",
       "type": "NX4e",
       "variant": "F5D21",
       "version": "M64A15",
@@ -21917,7 +21917,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSON",
-      "type": "NX4E",
+      "type": "NX4e",
       "variant": "F5D24",
       "version": "D72A11",
       "fuel": "DIESEL",
@@ -21999,9 +21999,9 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
+      "make": "Hyundai",
       "commercialName": "TUCSON",
-      "type": "NX4E",
+      "type": "NX4e",
       "variant": "F5D24",
       "version": "D72A15",
       "fuel": "DIESEL",
@@ -22056,8 +22056,8 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "TUCSON",
-      "type": "NX4E",
+      "commercialName": "Tucson",
+      "type": "NX4e",
       "variant": "F5P11",
       "version": "M61A12",
       "fuel": "PETROL",
@@ -22168,8 +22168,8 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "Tucson",
-      "type": "NX4e",
+      "commercialName": "TUCSON",
+      "type": "NX4E",
       "variant": "F5P11",
       "version": "M61D24",
       "fuel": "PETROL",
@@ -22181,9 +22181,9 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
+      "make": "Hyundai",
       "commercialName": "TUCSON",
-      "type": "NX4E",
+      "type": "NX4e",
       "variant": "F5P14",
       "version": "M61A12",
       "fuel": "PETROL",
@@ -22237,9 +22237,9 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
+      "make": "HYUNDAI",
       "commercialName": "TUCSON",
-      "type": "NX4e",
+      "type": "NX4E",
       "variant": "F5P21",
       "version": "D71A11",
       "fuel": "PETROL",
@@ -22294,8 +22294,8 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "TUCSON",
-      "type": "NX4E",
+      "commercialName": "Tucson",
+      "type": "NX4e",
       "variant": "F5P21",
       "version": "D71A14",
       "fuel": "PETROL",
@@ -22433,7 +22433,7 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
+      "make": "HYUNDAI",
       "commercialName": "TUCSON",
       "type": "NX4e",
       "variant": "F5P21",
@@ -22449,7 +22449,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSON",
-      "type": "NX4E",
+      "type": "NX4e",
       "variant": "F5P21",
       "version": "M61D24",
       "fuel": "PETROL",
@@ -22476,7 +22476,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "Tucson",
+      "commercialName": "TUCSON",
       "type": "NX4e",
       "variant": "F5P31",
       "version": "M61A13",
@@ -22504,7 +22504,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "TUCSON",
+      "commercialName": "Tucson",
       "type": "NX4e",
       "variant": "F5P31",
       "version": "M61A15",
@@ -22533,7 +22533,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSON",
-      "type": "NX4e",
+      "type": "NX4E",
       "variant": "F5P34",
       "version": "D71A11",
       "fuel": "PETROL",
@@ -22547,7 +22547,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSON",
-      "type": "NX4E",
+      "type": "NX4e",
       "variant": "F5P34",
       "version": "D71A13",
       "fuel": "PETROL",
@@ -22559,7 +22559,7 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
+      "make": "Hyundai",
       "commercialName": "TUCSON",
       "type": "NX4e",
       "variant": "F5P34",
@@ -22615,7 +22615,7 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
+      "make": "Hyundai",
       "commercialName": "TUCSON",
       "type": "NX4e",
       "variant": "F5P34",
@@ -22644,7 +22644,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "TUCSON",
+      "commercialName": "Tucson",
       "type": "NX4e",
       "variant": "F5P34",
       "version": "D71D24",
@@ -22673,7 +22673,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSON",
-      "type": "NX4e",
+      "type": "NX4E",
       "variant": "F5P41",
       "version": "A61B11",
       "fuel": "PETROL",
@@ -22699,7 +22699,7 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
+      "make": "Hyundai",
       "commercialName": "TUCSON",
       "type": "NX4e",
       "variant": "F5P41",
@@ -22713,8 +22713,8 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI                                           ",
-      "commercialName": "TUCSON                                            ",
+      "make": "HYUNDAI",
+      "commercialName": "TUCSON",
       "type": "NX4E",
       "variant": "F5P41",
       "version": "A61B14",
@@ -22743,7 +22743,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSON",
-      "type": "NX4e",
+      "type": "NX4E",
       "variant": "F5P41",
       "version": "A61E24",
       "fuel": "PETROL",
@@ -22771,7 +22771,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSON",
-      "type": "NX4E",
+      "type": "NX4e",
       "variant": "F5P44",
       "version": "A61B13",
       "fuel": "PETROL",
@@ -22785,7 +22785,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSON",
-      "type": "NX4E",
+      "type": "NX4e",
       "variant": "F5P44",
       "version": "A61B14",
       "fuel": "PETROL",
@@ -22826,8 +22826,8 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "Tucson",
-      "type": "NX4e",
+      "commercialName": "TUCSON",
+      "type": "NX4E",
       "variant": "F5P44",
       "version": "A61E24",
       "fuel": "PETROL",
@@ -22869,7 +22869,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSON",
-      "type": "NX4e",
+      "type": "NX4E",
       "variant": "F5P74",
       "version": "A63E11",
       "fuel": "PETROL/ELECTRIC",
@@ -23707,9 +23707,9 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "TUCSON,IX35",
-      "type": "NX4E",
+      "make": "Hyundai",
+      "commercialName": "TUCSON,ix35",
+      "type": "NX4e",
       "variant": "F5D21",
       "version": "D72A11",
       "fuel": "DIESEL",
@@ -23833,9 +23833,9 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "TUCSON,ix35",
-      "type": "NX4e",
+      "make": "HYUNDAI",
+      "commercialName": "TUCSON,IX35",
+      "type": "NX4E",
       "variant": "F5P11",
       "version": "M61A14",
       "fuel": "PETROL",
@@ -23847,9 +23847,9 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "TUCSON,IX35",
-      "type": "NX4E",
+      "make": "Hyundai",
+      "commercialName": "TUCSON,ix35",
+      "type": "NX4e",
       "variant": "F5P21",
       "version": "D71A11",
       "fuel": "PETROL",
@@ -23875,9 +23875,9 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "TUCSON,IX35",
-      "type": "NX4E",
+      "make": "Hyundai",
+      "commercialName": "TUCSON,ix35",
+      "type": "NX4e",
       "variant": "F5P21",
       "version": "D71A14",
       "fuel": "PETROL",
@@ -23947,7 +23947,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSON,IX35",
-      "type": "NX4E",
+      "type": "NX4e",
       "variant": "F5P21",
       "version": "M61A14",
       "fuel": "PETROL",
@@ -24171,7 +24171,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSON,IX35",
-      "type": "NX4E",
+      "type": "NX4e",
       "variant": "F5P44",
       "version": "A61B14",
       "fuel": "PETROL",
@@ -24183,9 +24183,9 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "TUCSON,ix35",
-      "type": "NX4e",
+      "make": "HYUNDAI",
+      "commercialName": "TUCSON,IX35",
+      "type": "NX4E",
       "variant": "F5P74",
       "version": "A63E11",
       "fuel": "PETROL/ELECTRIC",
@@ -24744,8 +24744,8 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "TUCSON.IX35",
-      "type": "NX4E",
+      "commercialName": "TUCSON.ix35",
+      "type": "NX4e",
       "variant": "F5P44",
       "version": "A61B14",
       "fuel": "PETROL",
@@ -25317,9 +25317,9 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "TUCSONIX35",
-      "type": "NX4E",
+      "make": "Hyundai",
+      "commercialName": "TUCSONix35",
+      "type": "NX4e",
       "variant": "F5D11",
       "version": "M62A14",
       "fuel": "DIESEL",
@@ -25333,7 +25333,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSONIX35",
-      "type": "NX4e",
+      "type": "NX4E",
       "variant": "F5D21",
       "version": "D72A11",
       "fuel": "DIESEL",
@@ -25359,9 +25359,9 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "TUCSONIX35",
-      "type": "NX4E",
+      "make": "Hyundai",
+      "commercialName": "TUCSONix35",
+      "type": "NX4e",
       "variant": "F5D21",
       "version": "D72A14",
       "fuel": "DIESEL",
@@ -25388,7 +25388,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "TUCSONix35",
+      "commercialName": "TUCSONIX35",
       "type": "NX4E",
       "variant": "F5D21",
       "version": "D72D24",
@@ -25415,9 +25415,9 @@
     },
     {
       "year": 2021,
-      "make": "HYUNDAI",
-      "commercialName": "TUCSONIX35",
-      "type": "NX4E",
+      "make": "Hyundai",
+      "commercialName": "TUCSONix35",
+      "type": "NX4e",
       "variant": "F5D21",
       "version": "M64A15",
       "fuel": "DIESEL",
@@ -25430,7 +25430,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "TUCSONix35",
+      "commercialName": "TUCSONIX35",
       "type": "NX4E",
       "variant": "F5D21",
       "version": "M64D24",
@@ -25457,9 +25457,9 @@
     },
     {
       "year": 2021,
-      "make": "Hyundai",
-      "commercialName": "TUCSONix35",
-      "type": "NX4e",
+      "make": "HYUNDAI",
+      "commercialName": "TUCSONIX35",
+      "type": "NX4E",
       "variant": "F5D24",
       "version": "D72A14",
       "fuel": "DIESEL",
@@ -25655,7 +25655,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSONIX35",
-      "type": "NX4E",
+      "type": "NX4e",
       "variant": "F5P21",
       "version": "D71A14",
       "fuel": "PETROL",
@@ -25697,7 +25697,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSONIX35",
-      "type": "NX4e",
+      "type": "NX4E",
       "variant": "F5P21",
       "version": "D71D24",
       "fuel": "PETROL",
@@ -25739,7 +25739,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSONIX35",
-      "type": "NX4e",
+      "type": "NX4E",
       "variant": "F5P21",
       "version": "M61A13",
       "fuel": "PETROL",
@@ -26089,7 +26089,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSONIX35",
-      "type": "NX4e",
+      "type": "NX4E",
       "variant": "F5P41",
       "version": "A61E24",
       "fuel": "PETROL",
@@ -26103,7 +26103,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSONIX35",
-      "type": "NX4E",
+      "type": "NX4e",
       "variant": "F5P44",
       "version": "A61B11",
       "fuel": "PETROL",
@@ -26145,7 +26145,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSONIX35",
-      "type": "NX4e",
+      "type": "NX4E",
       "variant": "F5P44",
       "version": "A61B14",
       "fuel": "PETROL",
@@ -26173,7 +26173,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSONIX35",
-      "type": "NX4e",
+      "type": "NX4E",
       "variant": "F5P44",
       "version": "A61E24",
       "fuel": "PETROL",
@@ -26187,7 +26187,7 @@
       "year": 2021,
       "make": "HYUNDAI",
       "commercialName": "TUCSONIX35",
-      "type": "NX4e",
+      "type": "NX4E",
       "variant": "F5P74",
       "version": "A63E11",
       "fuel": "PETROL/ELECTRIC",
@@ -26200,7 +26200,7 @@
     {
       "year": 2021,
       "make": "HYUNDAI",
-      "commercialName": "TUCSONIX35",
+      "commercialName": "TUCSONix35",
       "type": "NX4E",
       "variant": "F5P74",
       "version": "A63E21",
@@ -31366,7 +31366,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "A",
       "version": "517B",
@@ -31491,8 +31491,8 @@
     },
     {
       "year": 2021,
-      "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "make": "Jaguar",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "A",
       "version": "523C",
@@ -31576,7 +31576,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "Jaguar E-PACE",
+      "commercialName": "JAGUAR E-PACE",
       "type": "DF",
       "variant": "B",
       "version": "525B",
@@ -31646,7 +31646,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "B",
       "version": "528B",
@@ -31716,7 +31716,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "Jaguar E-PACE",
+      "commercialName": "JAGUAR E-PACE",
       "type": "DF",
       "variant": "B",
       "version": "531B",
@@ -31744,7 +31744,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "B",
       "version": "532B",
@@ -31800,7 +31800,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "C",
       "version": "503A",
@@ -31884,7 +31884,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "Jaguar E-PACE",
+      "commercialName": "JAGUAR E-PACE",
       "type": "DF",
       "variant": "CLCDD0",
       "version": "5VCA030",
@@ -31968,7 +31968,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "Jaguar E-PACE",
+      "commercialName": "JAGUAR E-PACE",
       "type": "DF",
       "variant": "CNADH0",
       "version": "50CA040",
@@ -32066,7 +32066,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "CNADH0",
       "version": "5VCA010",
@@ -32080,7 +32080,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "CNADH0",
       "version": "5VCA020",
@@ -32150,7 +32150,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "CTBDD0",
       "version": "5VCA030",
@@ -32178,7 +32178,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "CVBDG0",
       "version": "50CA010",
@@ -32234,7 +32234,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "CVBDG0",
       "version": "5VCA010",
@@ -32247,8 +32247,8 @@
     },
     {
       "year": 2021,
-      "make": "Jaguar",
-      "commercialName": "Jaguar E-PACE",
+      "make": "JAGUAR",
+      "commercialName": "JAGUAR E-PACE",
       "type": "DF",
       "variant": "CVBDG0",
       "version": "5VCA020",
@@ -32304,7 +32304,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "Jaguar E-PACE",
+      "commercialName": "JAGUAR E-PACE",
       "type": "DF",
       "variant": "D",
       "version": "506A",
@@ -32430,7 +32430,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HLCDD0",
       "version": "50CA000",
@@ -32500,7 +32500,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HLCDD0",
       "version": "50CA021",
@@ -32583,8 +32583,8 @@
     },
     {
       "year": 2021,
-      "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "make": "Jaguar",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HLCDD0",
       "version": "50CB010",
@@ -32752,7 +32752,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HLCDD0",
       "version": "5VCA030",
@@ -32793,7 +32793,7 @@
     },
     {
       "year": 2021,
-      "make": "Jaguar",
+      "make": "JAGUAR",
       "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HLEDD0",
@@ -33046,7 +33046,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HOCDC0",
       "version": "50CA000",
@@ -33073,8 +33073,8 @@
     },
     {
       "year": 2021,
-      "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "make": "Jaguar",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HOCDC0",
       "version": "50CB000",
@@ -33129,8 +33129,8 @@
     },
     {
       "year": 2021,
-      "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "make": "Jaguar",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HTBDD0",
       "version": "50CA010",
@@ -33172,7 +33172,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HTBDD0",
       "version": "50CA040",
@@ -33200,7 +33200,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HTBDD0",
       "version": "50CB000",
@@ -33214,7 +33214,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HTBDD0",
       "version": "50CB010",
@@ -33228,7 +33228,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HTBDD0",
       "version": "50CB020",
@@ -33284,7 +33284,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HTBDD0",
       "version": "5VCA010",
@@ -33367,7 +33367,7 @@
     },
     {
       "year": 2021,
-      "make": "Jaguar",
+      "make": "JAGUAR",
       "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HTDDD0",
@@ -33382,7 +33382,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HTDDD0",
       "version": "50CA020",
@@ -33452,7 +33452,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HTDDD0",
       "version": "50CB010",
@@ -33536,7 +33536,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR E-PACE",
+      "commercialName": "Jaguar E-PACE",
       "type": "DF",
       "variant": "HTDDD0",
       "version": "5VCA020",
@@ -34628,7 +34628,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-PACE",
+      "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "C",
       "version": "505A0",
@@ -34642,7 +34642,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "Jaguar F-PACE",
+      "commercialName": "JAGUAR F-PACE",
       "type": "DC",
       "variant": "C",
       "version": "505A1",
@@ -34656,7 +34656,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-PACE",
+      "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "C",
       "version": "505B0",
@@ -34670,7 +34670,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-PACE",
+      "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "C",
       "version": "505B1",
@@ -34796,7 +34796,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-PACE",
+      "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "D",
       "version": "508B0",
@@ -34838,7 +34838,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-PACE",
+      "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "E",
       "version": "505A0",
@@ -34907,7 +34907,7 @@
     },
     {
       "year": 2021,
-      "make": "Jaguar",
+      "make": "JAGUAR",
       "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "E",
@@ -34922,7 +34922,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-PACE",
+      "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "G",
       "version": "502A1",
@@ -34978,7 +34978,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-PACE",
+      "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "HDCDC0",
       "version": "50CB000",
@@ -35033,7 +35033,7 @@
     },
     {
       "year": 2021,
-      "make": "JAGUAR",
+      "make": "Jaguar",
       "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "HHFDC0",
@@ -35047,8 +35047,8 @@
     },
     {
       "year": 2021,
-      "make": "Jaguar",
-      "commercialName": "Jaguar F-PACE",
+      "make": "JAGUAR",
+      "commercialName": "JAGUAR F-PACE",
       "type": "DC",
       "variant": "HHFDC0",
       "version": "50CB010",
@@ -35075,8 +35075,8 @@
     },
     {
       "year": 2021,
-      "make": "JAGUAR",
-      "commercialName": "JAGUAR F-PACE",
+      "make": "Jaguar",
+      "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "HMDDC0",
       "version": "50CA000",
@@ -35118,7 +35118,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-PACE",
+      "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "HMDDC0",
       "version": "50CB000",
@@ -35202,7 +35202,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "Jaguar F-PACE",
+      "commercialName": "JAGUAR F-PACE",
       "type": "DC",
       "variant": "HTADC0",
       "version": "50CA000",
@@ -35230,7 +35230,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-PACE",
+      "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "HTADC0",
       "version": "50CA010",
@@ -35328,7 +35328,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-PACE",
+      "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "HTBDC0",
       "version": "50CA000",
@@ -35355,7 +35355,7 @@
     },
     {
       "year": 2021,
-      "make": "JAGUAR",
+      "make": "Jaguar",
       "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "HTBDC0",
@@ -35369,8 +35369,8 @@
     },
     {
       "year": 2021,
-      "make": "JAGUAR",
-      "commercialName": "JAGUAR F-PACE",
+      "make": "Jaguar",
+      "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "HTBDC0",
       "version": "50CA020",
@@ -35398,7 +35398,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "Jaguar F-PACE",
+      "commercialName": "JAGUAR F-PACE",
       "type": "DC",
       "variant": "HTBDC0",
       "version": "50CB000",
@@ -35425,8 +35425,8 @@
     },
     {
       "year": 2021,
-      "make": "JAGUAR",
-      "commercialName": "JAGUAR F-PACE",
+      "make": "Jaguar",
+      "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "HTBDC0",
       "version": "50CB010",
@@ -35482,7 +35482,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "Jaguar F-PACE",
+      "commercialName": "JAGUAR F-PACE",
       "type": "DC",
       "variant": "HUDDC0",
       "version": "50CA010",
@@ -35523,7 +35523,7 @@
     },
     {
       "year": 2021,
-      "make": "Jaguar",
+      "make": "JAGUAR",
       "commercialName": "Jaguar F-PACE",
       "type": "DC",
       "variant": "HUDDC0",
@@ -35678,7 +35678,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-TYPE",
+      "commercialName": "Jaguar F-TYPE",
       "type": "QQ6",
       "variant": "DDADF0",
       "version": "20CE000",
@@ -35720,7 +35720,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-TYPE",
+      "commercialName": "Jaguar F-TYPE",
       "type": "QQ6",
       "variant": "DHBDC0",
       "version": "20CE000",
@@ -35734,7 +35734,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-TYPE",
+      "commercialName": "Jaguar F-TYPE",
       "type": "QQ6",
       "variant": "DHBDF0",
       "version": "20CE000",
@@ -35789,8 +35789,8 @@
     },
     {
       "year": 2021,
-      "make": "Jaguar",
-      "commercialName": "Jaguar F-TYPE",
+      "make": "JAGUAR",
+      "commercialName": "JAGUAR F-TYPE",
       "type": "QQ6",
       "variant": "DHCDC0",
       "version": "20CE000",
@@ -35888,7 +35888,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-TYPE",
+      "commercialName": "Jaguar F-TYPE",
       "type": "QQ6",
       "variant": "EHBDC0",
       "version": "20CE000",
@@ -35902,7 +35902,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-TYPE",
+      "commercialName": "Jaguar F-TYPE",
       "type": "QQ6",
       "variant": "EHBDC0",
       "version": "20CE000",
@@ -35930,7 +35930,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR F-TYPE",
+      "commercialName": "Jaguar F-TYPE",
       "type": "QQ6",
       "variant": "EHBDF0",
       "version": "20CE000",
@@ -35999,8 +35999,8 @@
     },
     {
       "year": 2021,
-      "make": "JAGUAR",
-      "commercialName": "JAGUAR F-TYPE",
+      "make": "Jaguar",
+      "commercialName": "Jaguar F-TYPE",
       "type": "QQ6",
       "variant": "G",
       "version": "203",
@@ -36182,7 +36182,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR I-PACE",
+      "commercialName": "Jaguar I-PACE",
       "type": "DH",
       "variant": "CIAAA0",
       "version": "50D0000",
@@ -36252,7 +36252,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR I-PACE",
+      "commercialName": "Jaguar I-PACE",
       "type": "DH",
       "variant": "CIBAA0",
       "version": "50D0000",
@@ -36587,8 +36587,8 @@
     },
     {
       "year": 2021,
-      "make": "Jaguar",
-      "commercialName": "Jaguar XE",
+      "make": "JAGUAR",
+      "commercialName": "JAGUAR XE",
       "type": "JA",
       "variant": "ATADC0",
       "version": "50CA010",
@@ -36644,7 +36644,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XE",
+      "commercialName": "Jaguar XE",
       "type": "JA",
       "variant": "ATADC0",
       "version": "50CB010",
@@ -36770,7 +36770,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XE",
+      "commercialName": "Jaguar XE",
       "type": "JA",
       "variant": "ATADF0",
       "version": "50CB010",
@@ -36784,7 +36784,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XE",
+      "commercialName": "Jaguar XE",
       "type": "JA",
       "variant": "ATADF0",
       "version": "50CB020",
@@ -36896,7 +36896,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XE",
+      "commercialName": "Jaguar XE",
       "type": "JA",
       "variant": "B",
       "version": "506B1",
@@ -36951,7 +36951,7 @@
     },
     {
       "year": 2021,
-      "make": "Jaguar",
+      "make": "JAGUAR",
       "commercialName": "Jaguar XE",
       "type": "JA",
       "variant": "C",
@@ -36980,7 +36980,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "Jaguar XE",
+      "commercialName": "JAGUAR XE",
       "type": "JA",
       "variant": "D",
       "version": "508A1",
@@ -36994,7 +36994,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "Jaguar XE",
+      "commercialName": "JAGUAR XE",
       "type": "JA",
       "variant": "D",
       "version": "508B1",
@@ -37344,7 +37344,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XF",
+      "commercialName": "Jaguar XF",
       "type": "JB",
       "variant": "ADBDF0",
       "version": "50CA010",
@@ -37414,7 +37414,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XF",
+      "commercialName": "Jaguar XF",
       "type": "JB",
       "variant": "ADCDC0",
       "version": "50CB000",
@@ -37498,7 +37498,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XF",
+      "commercialName": "Jaguar XF",
       "type": "JB",
       "variant": "ATADF0",
       "version": "50CA010",
@@ -37540,7 +37540,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XF",
+      "commercialName": "Jaguar XF",
       "type": "JB",
       "variant": "ATADF0",
       "version": "50CB010",
@@ -37568,7 +37568,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XF",
+      "commercialName": "Jaguar XF",
       "type": "JB",
       "variant": "B",
       "version": "505A0",
@@ -37708,7 +37708,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XF",
+      "commercialName": "Jaguar XF",
       "type": "JB",
       "variant": "CTADC0",
       "version": "50EA010",
@@ -37750,7 +37750,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XF",
+      "commercialName": "Jaguar XF",
       "type": "JB",
       "variant": "CTADC0",
       "version": "50EB010",
@@ -37959,8 +37959,8 @@
     },
     {
       "year": 2021,
-      "make": "JAGUAR",
-      "commercialName": "JAGUAR XF",
+      "make": "Jaguar",
+      "commercialName": "Jaguar XF",
       "type": "JB",
       "variant": "D",
       "version": "523A0",
@@ -38002,7 +38002,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XF",
+      "commercialName": "Jaguar XF",
       "type": "JB",
       "variant": "D",
       "version": "523B1",
@@ -38072,7 +38072,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "Jaguar XF",
+      "commercialName": "JAGUAR XF",
       "type": "JB",
       "variant": "F",
       "version": "508A1",
@@ -38086,7 +38086,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "Jaguar XF",
+      "commercialName": "JAGUAR XF",
       "type": "JB",
       "variant": "F",
       "version": "508B0",
@@ -38198,7 +38198,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "Jaguar XF",
+      "commercialName": "JAGUAR XF",
       "type": "JB",
       "variant": "J",
       "version": "516A0",
@@ -38212,7 +38212,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XF",
+      "commercialName": "Jaguar XF",
       "type": "JB",
       "variant": "J",
       "version": "516A1",
@@ -38282,7 +38282,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XF",
+      "commercialName": "Jaguar XF",
       "type": "JB",
       "variant": "K",
       "version": "505A0",
@@ -38310,7 +38310,7 @@
     {
       "year": 2021,
       "make": "JAGUAR",
-      "commercialName": "JAGUAR XF",
+      "commercialName": "Jaguar XF",
       "type": "JB",
       "variant": "K",
       "version": "505B1",
@@ -40438,7 +40438,7 @@
     {
       "year": 2021,
       "make": "JEEP",
-      "commercialName": "Compass",
+      "commercialName": "COMPASS",
       "type": "MX",
       "variant": "J3MFL",
       "version": "L5ME1C",
@@ -40508,7 +40508,7 @@
     {
       "year": 2021,
       "make": "JEEP",
-      "commercialName": "Compass",
+      "commercialName": "COMPASS",
       "type": "MX",
       "variant": "JHMFE",
       "version": "L5LN1C",
@@ -40550,7 +40550,7 @@
     {
       "year": 2021,
       "make": "JEEP",
-      "commercialName": "Compass",
+      "commercialName": "COMPASS",
       "type": "MX",
       "variant": "JHMFL",
       "version": "L5ME1C",
@@ -40564,7 +40564,7 @@
     {
       "year": 2021,
       "make": "JEEP",
-      "commercialName": "COMPASS",
+      "commercialName": "Compass",
       "type": "MX",
       "variant": "JHTFE",
       "version": "K5MN1B",
@@ -40606,7 +40606,7 @@
     {
       "year": 2021,
       "make": "JEEP",
-      "commercialName": "COMPASS",
+      "commercialName": "Compass",
       "type": "MX",
       "variant": "JHVFV",
       "version": "K5LE1A",
@@ -40662,7 +40662,7 @@
     {
       "year": 2021,
       "make": "JEEP",
-      "commercialName": "COMPASS",
+      "commercialName": "Compass",
       "type": "MX",
       "variant": "JHVFV",
       "version": "L5LE1C",
@@ -43854,7 +43854,7 @@
     {
       "year": 2021,
       "make": "JEEP",
-      "commercialName": "WRANGLER",
+      "commercialName": "Wrangler",
       "type": "JK",
       "variant": "JSLFZ",
       "version": "M4H61A",
@@ -44722,7 +44722,7 @@
     {
       "year": 2021,
       "make": "JEEP",
-      "commercialName": "Wrangler Unlimited",
+      "commercialName": "WRANGLER UNLIMITED",
       "type": "JK",
       "variant": "JTLFZ",
       "version": "M5H64A",
@@ -45492,7 +45492,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5D11",
       "version": "M63B11",
@@ -45520,7 +45520,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5D11",
       "version": "M63BZ1",
@@ -45534,7 +45534,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5D11",
       "version": "M66A11",
@@ -45548,7 +45548,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5D11",
       "version": "M66AZ1",
@@ -45716,7 +45716,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5P11",
       "version": "M61A11",
@@ -45828,7 +45828,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5P21",
       "version": "M61B11",
@@ -45842,7 +45842,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5P21",
       "version": "M61B11",
@@ -45856,7 +45856,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5P21",
       "version": "M61B12",
@@ -45912,7 +45912,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5P31",
       "version": "D71BZ1",
@@ -45996,7 +45996,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5P31",
       "version": "M64BZ1",
@@ -46024,7 +46024,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5P41",
       "version": "D72C11",
@@ -46136,7 +46136,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5P41",
       "version": "D72CZ2",
@@ -46164,7 +46164,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5P41",
       "version": "M62B11",
@@ -46290,7 +46290,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "B5P51",
       "version": "D72B11",
@@ -46346,7 +46346,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5P51",
       "version": "M61A11",
@@ -46360,7 +46360,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "B5P71",
       "version": "D73F12",
@@ -46500,7 +46500,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "BBD21",
       "version": "D72E11",
@@ -46528,7 +46528,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "BBD21",
       "version": "M67D11",
@@ -46556,7 +46556,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "BBP11",
       "version": "M61G11",
@@ -46570,7 +46570,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "BBP31",
       "version": "D71E11",
@@ -46626,7 +46626,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "BBP41",
       "version": "D73F11",
@@ -46640,7 +46640,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "BBP41",
       "version": "M69F11",
@@ -46864,7 +46864,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "BCP61",
       "version": "D61KZ1",
@@ -46990,7 +46990,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5D11",
       "version": "D74A11",
@@ -47004,7 +47004,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5D11",
       "version": "D74AZ1",
@@ -47074,7 +47074,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5D11",
       "version": "M66A11",
@@ -47130,7 +47130,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5D21",
       "version": "D72AZ1",
@@ -47158,7 +47158,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5D21",
       "version": "M67AZ1",
@@ -47284,7 +47284,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5P11",
       "version": "M61A11",
@@ -47410,7 +47410,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5P31",
       "version": "D71AZ1",
@@ -47480,7 +47480,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5P31",
       "version": "M64AZ1",
@@ -47564,7 +47564,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5P41",
       "version": "D72C12",
@@ -47592,7 +47592,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5P41",
       "version": "D72CZ1",
@@ -47606,7 +47606,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5P41",
       "version": "D72CZ1",
@@ -47662,7 +47662,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5P41",
       "version": "M62B11",
@@ -47760,7 +47760,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5P41",
       "version": "M62BZ1",
@@ -47774,7 +47774,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5P41",
       "version": "M62BZ1",
@@ -47788,7 +47788,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5P41",
       "version": "M62BZ2",
@@ -47802,7 +47802,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5P41",
       "version": "M62BZ2",
@@ -47816,7 +47816,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5P51",
       "version": "D72B11",
@@ -47830,7 +47830,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5P51",
       "version": "D72BZ1",
@@ -47886,7 +47886,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5P51",
       "version": "M61A11",
@@ -47900,7 +47900,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5P61",
       "version": "D61J11",
@@ -47928,7 +47928,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5P61",
       "version": "D61J12",
@@ -47942,7 +47942,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "F5P61",
       "version": "D61JZ1",
@@ -47956,7 +47956,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "F5P61",
       "version": "D61JZ2",
@@ -48124,7 +48124,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "CEED",
+      "commercialName": "Ceed",
       "type": "CD",
       "variant": "FAP11",
       "version": "M61G11",
@@ -48152,7 +48152,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Ceed",
+      "commercialName": "CEED",
       "type": "CD",
       "variant": "FAP31",
       "version": "D71EZ1",
@@ -51792,7 +51792,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "OPTIMA",
+      "commercialName": "Optima",
       "type": "JF",
       "variant": "A5D51",
       "version": "D74AZ1",
@@ -51946,7 +51946,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "PICANTO",
+      "commercialName": "Picanto",
       "type": "JA",
       "variant": "F4P71",
       "version": "A51DZ1",
@@ -52086,7 +52086,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "PICANTO",
+      "commercialName": "Picanto",
       "type": "JA",
       "variant": "F5P11",
       "version": "M51BZ1",
@@ -52128,7 +52128,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "PICANTO",
+      "commercialName": "Picanto",
       "type": "JA",
       "variant": "F5P21",
       "version": "M51BZ1",
@@ -52184,7 +52184,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "PICANTO",
+      "commercialName": "Picanto",
       "type": "JA",
       "variant": "F5P31",
       "version": "M54CZ1",
@@ -52226,7 +52226,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Picanto",
+      "commercialName": "PICANTO",
       "type": "JA",
       "variant": "F5P41",
       "version": "M55CZ1",
@@ -52296,7 +52296,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "PICANTO",
+      "commercialName": "Picanto",
       "type": "JA",
       "variant": "F5P71",
       "version": "M57DZ1",
@@ -52366,7 +52366,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "Picanto",
+      "commercialName": "PICANTO",
       "type": "JA",
       "variant": "F5PA1",
       "version": "A52DZ1",
@@ -52408,7 +52408,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "PICANTO",
+      "commercialName": "Picanto",
       "type": "JA",
       "variant": "F5PA1",
       "version": "M55DZ1",
@@ -52422,7 +52422,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "PICANTO",
+      "commercialName": "Picanto",
       "type": "JA",
       "variant": "F5PA1",
       "version": "M55DZ1",
@@ -52450,7 +52450,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "PICANTO",
+      "commercialName": "Picanto",
       "type": "JA",
       "variant": "F5PB1",
       "version": "M55DZ1",
@@ -53234,7 +53234,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "ProCeed",
+      "commercialName": "PROCEED",
       "type": "CD",
       "variant": "BAD21",
       "version": "M67D11",
@@ -53318,7 +53318,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "ProCeed",
+      "commercialName": "PROCEED",
       "type": "CD",
       "variant": "BAP21",
       "version": "M61D11",
@@ -53360,7 +53360,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "ProCeed",
+      "commercialName": "PROCEED",
       "type": "CD",
       "variant": "BAP31",
       "version": "D71E11",
@@ -53374,7 +53374,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "PROCEED",
+      "commercialName": "ProCeed",
       "type": "CD",
       "variant": "BAP31",
       "version": "D71EZ1",
@@ -53388,7 +53388,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "ProCeed",
+      "commercialName": "PROCEED",
       "type": "CD",
       "variant": "BAP31",
       "version": "M64D11",
@@ -53444,7 +53444,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "PROCEED",
+      "commercialName": "ProCeed",
       "type": "CD",
       "variant": "BAP41",
       "version": "D72D12",
@@ -53486,7 +53486,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "ProCeed",
+      "commercialName": "PROCEED",
       "type": "CD",
       "variant": "BAP41",
       "version": "D72DZ2",
@@ -53570,7 +53570,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "PROCEED",
+      "commercialName": "ProCeed",
       "type": "CD",
       "variant": "BAP41",
       "version": "M62D12",
@@ -53738,7 +53738,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "PROCEED",
+      "commercialName": "ProCeed",
       "type": "CD",
       "variant": "BAP71",
       "version": "D73F12",
@@ -57420,7 +57420,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "SPORTAGE",
+      "commercialName": "Sportage",
       "type": "QLE",
       "variant": "F5P11",
       "version": "M611Z1",
@@ -61242,7 +61242,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCD11",
       "version": "D77H11",
@@ -61298,7 +61298,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCeed",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCD11",
       "version": "M6DH11",
@@ -61396,7 +61396,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCD21",
       "version": "M6EH11",
@@ -61410,7 +61410,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCD21",
       "version": "M6EHZ1",
@@ -61494,7 +61494,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCD41",
       "version": "D76HZ1",
@@ -61536,7 +61536,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCP11",
       "version": "M6AH11",
@@ -61564,7 +61564,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCeed",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCP31",
       "version": "D74H11",
@@ -61620,7 +61620,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCeed",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCP31",
       "version": "M6BH11",
@@ -61662,7 +61662,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCP31",
       "version": "M6BHZ1",
@@ -61718,7 +61718,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCeed",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCP41",
       "version": "D75H12",
@@ -61760,7 +61760,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCeed",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCP41",
       "version": "D75HZ2",
@@ -61774,7 +61774,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCP41",
       "version": "M65H12",
@@ -61858,7 +61858,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCeed",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCP51",
       "version": "D75H11",
@@ -61886,7 +61886,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCP51",
       "version": "D75HZ1",
@@ -61914,7 +61914,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCP51",
       "version": "M65H11",
@@ -61970,7 +61970,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCP61",
       "version": "D61K12",
@@ -62026,7 +62026,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCEED",
+      "commercialName": "XCeed",
       "type": "CD",
       "variant": "BCP61",
       "version": "D61M12",
@@ -62054,7 +62054,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCeed",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCP61",
       "version": "D61MZ2",
@@ -62068,7 +62068,7 @@
     {
       "year": 2021,
       "make": "KIA",
-      "commercialName": "XCeed",
+      "commercialName": "XCEED",
       "type": "CD",
       "variant": "BCP71",
       "version": "D76H12",
@@ -65288,7 +65288,7 @@
     {
       "year": 2021,
       "make": "LAMBORGHINI",
-      "commercialName": "Aventador",
+      "commercialName": "AVENTADOR",
       "type": "834",
       "variant": "V",
       "version": "21ACC",
@@ -65386,7 +65386,7 @@
     {
       "year": 2021,
       "make": "LAMBORGHINI",
-      "commercialName": "Huracan",
+      "commercialName": "HURACAN",
       "type": "724",
       "variant": "A1",
       "version": "1AAEAFHH",
@@ -65694,7 +65694,7 @@
     {
       "year": 2021,
       "make": "LAMBORGHINI",
-      "commercialName": "Urus",
+      "commercialName": "URUS",
       "type": "636",
       "variant": "BAAA",
       "version": "AAAAAAAAAAA",
@@ -65735,8 +65735,8 @@
     },
     {
       "year": 2021,
-      "make": "LAMBORGHINI",
-      "commercialName": "URUS",
+      "make": "Lamborghini",
+      "commercialName": "Urus",
       "type": "636",
       "variant": "BAAA",
       "version": "AAAABAAAAAA",
@@ -66324,7 +66324,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "HCABC0",
       "version": "60AA010",
@@ -66366,7 +66366,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "HCABC0",
       "version": "70AA010",
@@ -66450,7 +66450,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "HCBBC0",
       "version": "50AA020",
@@ -66618,7 +66618,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "HCBBC0",
       "version": "70AA010",
@@ -66646,7 +66646,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "HCBBC0",
       "version": "70AA020",
@@ -66688,7 +66688,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "HCBBC0",
       "version": "70AC020",
@@ -66772,7 +66772,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "HDCBC0",
       "version": "60AA030",
@@ -66828,7 +66828,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "HPDCC0",
       "version": "50AA010",
@@ -66912,7 +66912,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "HPDCC0",
       "version": "50AC020",
@@ -66968,7 +66968,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "HPDCC0",
       "version": "5PAA030",
@@ -67052,7 +67052,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "HPDCC0",
       "version": "70AA030",
@@ -67234,7 +67234,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "NDCDC0",
       "version": "50CA010",
@@ -67429,7 +67429,7 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
+      "make": "LAND ROVER",
       "commercialName": "Defender",
       "type": "LE",
       "variant": "NHFDC0",
@@ -67458,7 +67458,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "NPDDC0",
       "version": "50AA020",
@@ -67542,7 +67542,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "NPDDC0",
       "version": "50AC020",
@@ -67570,7 +67570,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NPDDC0",
       "version": "50AC030",
@@ -67612,7 +67612,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NPDDC0",
       "version": "50CA020",
@@ -67892,7 +67892,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "NPDDC0",
       "version": "5PAA030",
@@ -68004,7 +68004,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NPDDC0",
       "version": "60AA020",
@@ -68200,7 +68200,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUADC0",
       "version": "50AA010",
@@ -68214,7 +68214,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUADC0",
       "version": "50AA020",
@@ -68242,7 +68242,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "NUADC0",
       "version": "50AA040",
@@ -68255,8 +68255,8 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "make": "Land Rover",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUADC0",
       "version": "50AA050",
@@ -68298,7 +68298,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "NUADC0",
       "version": "50AC020",
@@ -68508,7 +68508,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUADC0",
       "version": "50CC040",
@@ -68662,7 +68662,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUADC0",
       "version": "60AA020",
@@ -68746,7 +68746,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUADC0",
       "version": "60CA010",
@@ -68886,7 +68886,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUCDC0",
       "version": "50AA030",
@@ -68913,8 +68913,8 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "make": "Land Rover",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUCDC0",
       "version": "50AA050",
@@ -68956,7 +68956,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUCDC0",
       "version": "50AC020",
@@ -68970,7 +68970,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "NUCDC0",
       "version": "50AC030",
@@ -69109,7 +69109,7 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
+      "make": "LAND ROVER",
       "commercialName": "Defender",
       "type": "LE",
       "variant": "NUCDC0",
@@ -69390,7 +69390,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "Defender",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "NUEDC0",
       "version": "50AA030",
@@ -69431,8 +69431,8 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "make": "Land Rover",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUEDC0",
       "version": "50AA050",
@@ -69446,7 +69446,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUEDC0",
       "version": "50AA060",
@@ -69460,7 +69460,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUEDC0",
       "version": "50AC010",
@@ -69516,7 +69516,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUEDC0",
       "version": "50AC050",
@@ -69642,7 +69642,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUEDC0",
       "version": "50CC020",
@@ -69739,8 +69739,8 @@
     },
     {
       "year": 2021,
-      "make": "Land Rover",
-      "commercialName": "Defender",
+      "make": "LAND ROVER",
+      "commercialName": "DEFENDER",
       "type": "LE",
       "variant": "NUEDC0",
       "version": "5XAA030",
@@ -69824,7 +69824,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUEDC0",
       "version": "60AA010",
@@ -69851,8 +69851,8 @@
     },
     {
       "year": 2021,
-      "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "make": "Land Rover",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUEDC0",
       "version": "60AA020",
@@ -69866,7 +69866,7 @@
     {
       "year": 2021,
       "make": "LAND ROVER",
-      "commercialName": "DEFENDER",
+      "commercialName": "Defender",
       "type": "LE",
       "variant": "NUEDC0",
       "version": "60AA020",

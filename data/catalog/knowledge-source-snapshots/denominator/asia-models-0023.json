@@ -1,0 +1,5507 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model_asia",
+  "chunk": 23,
+  "records": [
+    {
+      "key": "korea:기아주식회사:레이tampe210mpi4at5인14인치빌트인캠없음26my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "레이(TAM PE2) 1.0MPI 4AT 5인 14인치 빌트인캠 없음 (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:레이tampe210mpi4at5인15인치빌트인캠없음26my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "레이(TAM PE2) 1.0MPI 4AT 5인 15인치 빌트인캠 없음 (26MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:레이tampe210mpi5인14인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "레이(TAM PE2) 1.0MPI 5인 14인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:레이tampe2밴10mpi4at1인15인치빌트인캠없음27my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "레이(TAM PE2) 밴 1.0MPI 4AT 1인 15인치 빌트인캠 없음 (27MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:레이tampe2밴10mpi4at2인15인치빌트인캠없음27my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "레이(TAM PE2) 밴 1.0MPI 4AT 2인 15인치 빌트인캠 없음 (27MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:레이tampe210mpi15인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "레이(TAM PE2)1.0MPI 15인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모닝25my10가솔린14",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모닝 25MY 1.0가솔린 14\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모닝25my10가솔린14밴",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모닝 25MY 1.0가솔린 14\" 밴",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모닝25my10가솔린16",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모닝 25MY 1.0가솔린 16\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모닝jape10가솔린14인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모닝(JA PE)_1.0가솔린_14인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모닝jape10가솔린14인치타이어밴형",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모닝(JA PE)_1.0가솔린_14인치타이어_밴형",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모닝jape10가솔린16인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모닝(JA PE)_1.0가솔린_16인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모닝jape210가솔린14인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모닝(JA PE2)_1.0가솔린_14인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모닝jape210가솔린14인치타이어밴형",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모닝(JA PE2)_1.0가솔린_14인치타이어_밴형",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모닝jape210가솔린16인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모닝(JA PE2)_1.0가솔린_16인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모닝jape210가솔린14인치빌트인캠없음25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모닝(JA) PE2 1.0가솔린 14인치 빌트인캠 없음 (25MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모닝jape210가솔린14인치빌트인캠없음밴형25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모닝(JA) PE2 1.0가솔린 14인치 빌트인캠 없음 밴형 (25MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모닝jape210가솔린16인치빌트인캠없음25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모닝(JA) PE2 1.0가솔린 16인치 빌트인캠 없음 (25MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모하비30디젤4wd5인18인치타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모하비 3.0 디젤 4WD 5인 18인치타이어 (21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모하비30디젤4wd5인18인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모하비 3.0 디젤 4WD 5인 18인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모하비30디젤4wd5인20인치타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모하비 3.0 디젤 4WD 5인 20인치타이어 (21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모하비30디젤4wd5인20인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모하비 3.0 디젤 4WD 5인 20인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모하비30디젤4wd6인18인치타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모하비 3.0 디젤 4WD 6인 18인치타이어 (21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모하비30디젤4wd6인18인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모하비 3.0 디젤 4WD 6인 18인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모하비30디젤4wd6인20인치타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모하비 3.0 디젤 4WD 6인 20인치타이어 (21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모하비30디젤4wd6인20인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모하비 3.0 디젤 4WD 6인 20인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모하비30디젤4wd7인18인치타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모하비 3.0 디젤 4WD 7인 18인치타이어 (21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모하비30디젤4wd7인18인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모하비 3.0 디젤 4WD 7인 18인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모하비30디젤4wd7인20인치타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모하비 3.0 디젤 4WD 7인 20인치타이어 (21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:모하비30디젤4wd7인20인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "모하비 3.0 디젤 4WD 7인 20인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고pu전기차25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 (PU) 전기차 (25MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤25tlpdi2wd초장축5at더블캡",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 2.5T-LPDi 2WD 초장축 5AT 더블캡",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤25tlpdi2wd초장축5at킹캡",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 2.5T-LPDi 2WD 초장축 5AT 킹캡",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤25tlpdi2wd초장축5at표준캡",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 2.5T-LPDi 2WD 초장축 5AT 표준캡",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤25tlpdi2wd초장축6mt더블캡",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 2.5T-LPDi 2WD 초장축 6MT 더블캡",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤25tlpdi2wd초장축6mt킹캡",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 2.5T-LPDi 2WD 초장축 6MT 킹캡",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤25tlpdi2wd초장축6mt표준캡",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 2.5T-LPDi 2WD 초장축 6MT 표준캡",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤25tlpdi4x4장축6mt더블캡",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 2.5T-LPDi 4X4 장축 6MT 더블캡",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤25tlpdi4x4장축6mt킹캡",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 2.5T-LPDi 4X4 장축 6MT 킹캡",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤25tlpdi4x4장축6mt표준캡",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 2.5T-LPDi 4X4 장축 6MT 표준캡",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤3방덤프4x4장축킹캡mt",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 3방덤프 4X4장축 킹캡 MT",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤3방덤프4x4장축킹캡mt22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 3방덤프 4X4장축 킹캡(MT)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤4x4장축더블캡22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 4X4장축 더블캡(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤4x4장축슈퍼캡22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 4X4장축 슈퍼캡(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤4x4장축표준캡22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 4X4장축 표준캡(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤일반덤프4x4장축킹캡mt",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 일반덤프 4X4장축 킹캡 MT",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤일반덤프4x4장축킹캡mt22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 일반덤프 4X4장축 킹캡(MT)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤초장축더블캡at22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 초장축 더블캡 AT(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤초장축더블캡mt22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 초장축 더블캡 MT(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤초장축슈퍼캡at22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 초장축 슈퍼캡 AT(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤초장축슈퍼캡mt22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 초장축 슈퍼캡 MT(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤초장축표준캡at22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 초장축 표준캡 AT(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고1톤초장축표준캡mt22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 1톤 초장축 표준캡 MT(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고전기차",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 전기차",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고전기차22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 전기차 (22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:봉고전기차24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "봉고 전기차 (24MY)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스16디젤2wd16타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스 1.6디젤 2WD 16\" 타이어 (21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스16디젤2wd17타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스 1.6디젤 2WD 17\" 타이어 (21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스16디젤2wd18타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스 1.6디젤 2WD 18\" 타이어 (21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스16디젤4wd16타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스 1.6디젤 4WD 16\" 타이어 (21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스16디젤4wd17타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스 1.6디젤 4WD 17\" 타이어 (21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스16디젤4wd18타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스 1.6디젤 4WD 18\" 타이어 (21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스pe16tgdi2wd16인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(PE) 1.6T-GDI 2WD 16인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스pe16tgdi2wd16인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(PE) 1.6T-GDI 2WD 16인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스pe16tgdi2wd18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(PE) 1.6T-GDI 2WD 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스pe16tgdi4wd16인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(PE) 1.6T-GDI 4WD 16인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스pe16tgdi4wd18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(PE) 1.6T-GDI 4WD 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스pe20가솔린2wd16인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(PE) 2.0 가솔린 2WD 16 인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스pe20가솔린2wd18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(PE) 2.0 가솔린 2WD 18 인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스pe20가솔린4wd16인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(PE) 2.0 가솔린 4WD 16 인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스pe20가솔린4wd16인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(PE) 2.0 가솔린 4WD 16 인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스pe20가솔린4wd18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(PE) 2.0 가솔린 4WD 18 인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스sp316tgdi2wd8at16인치빌트인캠off",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(SP3) 1.6T-GDI 2WD 8AT 16인치 빌트인캠 Off",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스sp316tgdi2wd8at16인치빌트인캠on",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(SP3) 1.6T-GDI 2WD 8AT 16인치 빌트인캠 On",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스sp316tgdi2wd8at18인치빌트인캠off",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(SP3) 1.6T-GDI 2WD 8AT 18인치 빌트인캠 Off",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스sp316tgdi2wd8at18인치빌트인캠on",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(SP3) 1.6T-GDI 2WD 8AT 18인치 빌트인캠 On",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스sp316tgdi2wd8at19인치빌트인캠통합",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(SP3) 1.6T-GDI 2WD 8AT 19인치 빌트인캠 통합",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스sp316tgdi4wd8at18인치빌트인캠통합",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(SP3) 1.6T-GDI 4WD 8AT 18인치 빌트인캠 통합",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스sp316tgdi4wd8at19인치빌트인캠통합",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(SP3) 1.6T-GDI 4WD 8AT 19인치 빌트인캠 통합",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스sp3hev16gdi2wd6dct16인치빌트인캠off",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(SP3) HEV 1.6GDI 2WD 6DCT 16인치 빌트인캠 Off",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스sp3hev16gdi2wd6dct16인치빌트인캠on",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(SP3) HEV 1.6GDI 2WD 6DCT 16인치 빌트인캠 On",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스sp3hev16gdi2wd6dct18인치빌트인캠off",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(SP3) HEV 1.6GDI 2WD 6DCT 18인치 빌트인캠 Off",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스sp3hev16gdi2wd6dct18인치빌트인캠on",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(SP3) HEV 1.6GDI 2WD 6DCT 18인치 빌트인캠 On",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:셀토스sp3hev16gdi2wd6dct19인치빌트인캠통합",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "셀토스(SP3) HEV 1.6GDI 2WD 6DCT 19인치 빌트인캠 통합",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스팅어ckpe25tgdi2wd18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스팅어(CK PE) 2.5T-GDI 2WD_18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스팅어ckpe25tgdi2wd19인치썸머",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스팅어(CK PE) 2.5T-GDI 2WD_19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스팅어ckpe25tgdi2wd19인치올시즌",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스팅어(CK PE) 2.5T-GDI 2WD_19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스팅어ckpe25tgdiawd18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스팅어(CK PE) 2.5T-GDI AWD_18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스팅어ckpe25tgdiawd19인치썸머",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스팅어(CK PE) 2.5T-GDI AWD_19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스팅어ckpe25tgdiawd19인치올시즌",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스팅어(CK PE) 2.5T-GDI AWD_19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스팅어ckpe33tgdi2wd19인치썸머",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스팅어(CK PE) 3.3T-GDI 2WD_19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스팅어ckpe33tgdi2wd19인치올시즌",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스팅어(CK PE) 3.3T-GDI 2WD_19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스팅어ckpe33tgdiawd19인치썸머",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스팅어(CK PE) 3.3T-GDI AWD_19인치(썸머)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스팅어ckpe33tgdiawd19인치올시즌",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스팅어(CK PE) 3.3T-GDI AWD_19인치(올시즌)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi2wd7dct17인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 2WD 7DCT 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi2wd7dct17인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 2WD 7DCT 17인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi2wd7dct18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 2WD 7DCT 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi2wd7dct18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 2WD 7DCT 18인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi2wd7dct18인치빌트인캠24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 2WD 7DCT 18인치 (빌트인캠)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi2wd7dct18인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 2WD 7DCT 18인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi2wd7dct19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 2WD 7DCT 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi2wd7dct19인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 2WD 7DCT 19인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi2wd7dct19인치빌트인캠24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 2WD 7DCT 19인치 (빌트인캠)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi2wd7dct19인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 2WD 7DCT 19인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi4wd7dct17인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 4WD 7DCT 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi4wd7dct17인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 4WD 7DCT 17인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi4wd7dct18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 4WD 7DCT 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi4wd7dct18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 4WD 7DCT 18인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi4wd7dct18인치빌트인캠24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 4WD 7DCT 18인치 (빌트인캠)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi4wd7dct18인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 4WD 7DCT 18인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi4wd7dct19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 4WD 7DCT 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi4wd7dct19인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 4WD 7DCT 19인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi4wd7dct19인치빌트인캠24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 4WD 7DCT 19인치 (빌트인캠)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi4wd7dct19인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 4WD 7DCT 19인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdihev2wd24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI HEV 2WD_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdihev2wd빌트인캠24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI HEV 2WD(빌트인캠)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdihev4wd24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI HEV 4WD_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdihev4wd빌트인캠24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI HEV 4WD(빌트인캠)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi하이브리드4wd6at",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 하이브리드 4WD 6AT",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi하이브리드4wd6at빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 하이브리드 4WD 6AT (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi하이브리드6at",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 하이브리드 6AT",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16tgdi하이브리드6at빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6T-GDI 하이브리드 6AT (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16디젤2wdpe17타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6디젤 2WD (PE/17“ 타이어)(21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16디젤2wdpe18타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6디젤 2WD (PE/18“ 타이어)(21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16디젤2wdpe19타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6디젤 2WD (PE/19“ 타이어)(21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16디젤4wdpe17타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6디젤 4WD (PE/17“ 타이어)(21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16디젤4wdpe18타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6디젤 4WD (PE/18“ 타이어)(21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지16디젤4wdpe19타이어21",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 1.6디젤 4WD (PE/19“ 타이어)(21)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20lpi17인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0 LPI 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20lpi17인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0 LPI 17인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20lpi18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0 LPI 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20lpi18인치빌트인캠24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0 LPI 18인치 (빌트인캠) _24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20lpi18인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0 LPI 18인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20lpi18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0 LPI 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20lpi19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0 LPI 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20lpi19인치빌트인캠24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0 LPI 19인치 (빌트인캠) _24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20lpi19인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0 LPI 19인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20lpi19인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0 LPI 19인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at17인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at17인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 17인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at17인치22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 17인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 18인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at18인치빌트인캠24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 18인치 (빌트인캠)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at18인치빌트인캠22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 18인치 (빌트인캠)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at18인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 18인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at18인치22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 18인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at19인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 19인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at19인치빌트인캠24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 19인치 (빌트인캠)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at19인치빌트인캠22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 19인치 (빌트인캠)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at19인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 19인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤2wd8at19인치22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 2WD 8AT 19인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤4wd8at17인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 4WD 8AT 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤4wd8at17인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 4WD 8AT 17인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤4wd8at17인치22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 4WD 8AT 17인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤4wd8at18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 4WD 8AT 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤4wd8at18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 4WD 8AT 18인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤4wd8at18인치빌트인캠24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 4WD 8AT 18인치 (빌트인캠)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤4wd8at18인치빌트인캠22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 4WD 8AT 18인치 (빌트인캠)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤4wd8at18인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 4WD 8AT 18인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤4wd8at18인치22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 4WD 8AT 18인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤4wd8at19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 4WD 8AT 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤4wd8at19인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 4WD 8AT 19인치 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤4wd8at19인치빌트인캠24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 4WD 8AT 19인치 (빌트인캠)_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤4wd8at19인치24my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 4WD 8AT 19인치_24MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지20디젤4wd8at19인치22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지 2.0디젤 4WD 8AT 19인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5hevpe16tgdi2wd6at17인치빌트인캠무",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) HEV PE 1.6T-GDI 2WD 6AT 17인치 빌트인캠 무",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5hevpe16tgdi2wd6at17인치빌트인캠유",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) HEV PE 1.6T-GDI 2WD 6AT 17인치 빌트인캠 유",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5hevpe16tgdi2wd6at18인치빌트인캠무",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) HEV PE 1.6T-GDI 2WD 6AT 18인치 빌트인캠 무",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5hevpe16tgdi2wd6at18인치빌트인캠유",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) HEV PE 1.6T-GDI 2WD 6AT 18인치 빌트인캠 유",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5hevpe16tgdi2wd6at19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) HEV PE 1.6T-GDI 2WD 6AT 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5hevpe16tgdi4wd6at17인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) HEV PE 1.6T-GDI 4WD 6AT 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5hevpe16tgdi4wd6at18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) HEV PE 1.6T-GDI 4WD 6AT 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5hevpe16tgdi4wd6at19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) HEV PE 1.6T-GDI 4WD 6AT 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5pe16tgdi2wd8at17인치빌트인캠무",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) PE 1.6T-GDI 2WD 8AT 17인치 빌트인캠 무",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5pe16tgdi2wd8at17인치빌트인캠유",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) PE 1.6T-GDI 2WD 8AT 17인치 빌트인캠 유",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5pe16tgdi2wd8at18인치빌트인캠무",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) PE 1.6T-GDI 2WD 8AT 18인치 빌트인캠 무",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5pe16tgdi2wd8at18인치빌트인캠유",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) PE 1.6T-GDI 2WD 8AT 18인치 빌트인캠 유",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5pe16tgdi2wd8at19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) PE 1.6T-GDI 2WD 8AT 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5pe16tgdi4wd8at17인치빌트인캠무",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) PE 1.6T-GDI 4WD 8AT 17인치 빌트인캠 무",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5pe16tgdi4wd8at17인치빌트인캠유",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) PE 1.6T-GDI 4WD 8AT 17인치 빌트인캠 유",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5pe16tgdi4wd8at18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) PE 1.6T-GDI 4WD 8AT 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5pe16tgdi4wd8at19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) PE 1.6T-GDI 4WD 8AT 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5pe20lpi2wd6at17인치빌트인캠무",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) PE 2.0LPI 2WD 6AT 17인치 빌트인캠 무",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5pe20lpi2wd6at17인치빌트인캠유",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) PE 2.0LPI 2WD 6AT 17인치 빌트인캠 유",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5pe20lpi2wd6at18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) PE 2.0LPI 2WD 6AT 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:스포티지nq5pe20lpi2wd6at19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "스포티지(NQ5) PE 2.0LPI 2WD 6AT 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드2wd5인17빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 2WD 5인 17\"(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드2wd5인17인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 2WD 5인 17인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드2wd5인19인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 2WD 5인 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드2wd6인17빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 2WD 6인 17\"(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드2wd6인17인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 2WD 6인 17인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드2wd6인19인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 2WD 6인 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드2wd7인17빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 2WD 7인 17\"(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드2wd7인17인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 2WD 7인 17인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드2wd7인19인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 2WD 7인 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드4wd5인17인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 4WD 5인 17인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드4wd5인19인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 4WD 5인 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드4wd6인17인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 4WD 6인 17인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드4wd6인19인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 4WD 6인 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드4wd7인17인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 4WD 7인 17인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토16tgdi하이브리드4wd7인19인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 1.6T-GDI 하이브리드 4WD 7인 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd5인18인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 5인 18인치 타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd5인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 5인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd5인18인치타이어빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 5인 18인치타이어 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd5인18인치타이어빌트인캠22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 5인 18인치타이어 (빌트인캠)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd5인20인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 5인 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd5인20인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 5인 20인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd6인18인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 6인 18인치 타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd6인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 6인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd6인18인치타이어빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 6인 18인치타이어 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd6인18인치타이어빌트인캠22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 6인 18인치타이어 (빌트인캠)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd6인20인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 6인 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd6인20인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 6인 20인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd7인18인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 7인 18인치 타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd7인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 7인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd7인18인치타이어빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 7인 18인치타이어 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd7인18인치타이어빌트인캠22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 7인 18인치타이어 (빌트인캠)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd7인20인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 7인 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤2wd7인20인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 2WD 7인 20인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤4wd5인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 4WD 5인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤4wd5인18인치타이어빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 4WD 5인 18인치타이어 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤4wd5인18인치타이어빌트인캠22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 4WD 5인 18인치타이어 (빌트인캠)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤4wd5인18인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 4WD 5인 18인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤4wd5인20인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 4WD 5인 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤4wd5인20인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 4WD 5인 20인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤4wd6인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 4WD 6인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤4wd6인18인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 4WD 6인 18인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤4wd6인20인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 4WD 6인 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤4wd6인20인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 4WD 6인 20인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤4wd7인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 4WD 7인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤4wd7인18인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 4WD 7인 18인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤4wd7인20인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 4WD 7인 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토22디젤4wd7인20인치타이어22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토 2.2디젤 4WD 7인 20인치타이어(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe16tgdi하이브리드2wd5인17인치빌트인캠무25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 1.6T-GDI 하이브리드 2WD 5인 17인치 빌트인캠 무 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe16tgdi하이브리드2wd5인17인치빌트인캠유25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 1.6T-GDI 하이브리드 2WD 5인 17인치 빌트인캠 유 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe16tgdi하이브리드2wd5인18인치빌트인캠무25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 1.6T-GDI 하이브리드 2WD 5인 18인치 빌트인캠 무 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe16tgdi하이브리드2wd5인18인치빌트인캠유25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 1.6T-GDI 하이브리드 2WD 5인 18인치 빌트인캠 유 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe16tgdi하이브리드2wd6인17인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 1.6T-GDI 하이브리드 2WD 6인 17인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe16tgdi하이브리드2wd6인18인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 1.6T-GDI 하이브리드 2WD 6인 18인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe16tgdi하이브리드2wd7인17인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 1.6T-GDI 하이브리드 2WD 7인 17인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe16tgdi하이브리드2wd7인18인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 1.6T-GDI 하이브리드 2WD 7인 18인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe16tgdi하이브리드4wd5인17인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 1.6T-GDI 하이브리드 4WD 5인 17인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe16tgdi하이브리드4wd5인18인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 1.6T-GDI 하이브리드 4WD 5인 18인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe16tgdi하이브리드4wd6인17인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 1.6T-GDI 하이브리드 4WD 6인 17인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe16tgdi하이브리드4wd6인18인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 1.6T-GDI 하이브리드 4WD 6인 18인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe16tgdi하이브리드4wd7인17인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 1.6T-GDI 하이브리드 4WD 7인 17인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe16tgdi하이브리드4wd7인18인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 1.6T-GDI 하이브리드 4WD 7인 18인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤2wd5인18인치빌트인캠무25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 2WD 5인 18인치 빌트인캠 무 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤2wd5인18인치빌트인캠유25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 2WD 5인 18인치 빌트인캠 유 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤2wd5인20인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 2WD 5인 20인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤2wd6인18인치빌트인캠무25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 2WD 6인 18인치 빌트인캠 무 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤2wd6인18인치빌트인캠유25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 2WD 6인 18인치 빌트인캠 유 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤2wd6인20인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 2WD 6인 20인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤2wd7인18인치빌트인캠무25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 2WD 7인 18인치 빌트인캠 무 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤2wd7인18인치빌트인캠유25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 2WD 7인 18인치 빌트인캠 유 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤2wd7인20인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 2WD 7인 20인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤4wd5인18인치빌트인캠무25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 4WD 5인 18인치 빌트인캠 무 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤4wd5인18인치빌트인캠유25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 4WD 5인 18인치 빌트인캠 유 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤4wd5인20인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 4WD 5인 20인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤4wd6인18인치빌트인캠무25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 4WD 6인 18인치 빌트인캠 무 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤4wd6인18인치빌트인캠유25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 4WD 6인 18인치 빌트인캠 유 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤4wd6인20인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 4WD 6인 20인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤4wd7인18인치빌트인캠무25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 4WD 7인 18인치 빌트인캠 무 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤4wd7인18인치빌트인캠유25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 4WD 7인 18인치 빌트인캠 유 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe22디젤4wd7인20인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.2디젤 4WD 7인 20인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi2wd5인18인치빌트인캠무25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 2WD 5인 18인치 빌트인캠 무 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi2wd5인18인치빌트인캠유25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 2WD 5인 18인치 빌트인캠 유 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi2wd5인20인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 2WD 5인 20인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi2wd6인18인치빌트인캠무25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 2WD 6인 18인치 빌트인캠 무 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi2wd6인18인치빌트인캠유25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 2WD 6인 18인치 빌트인캠 유 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi2wd6인20인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 2WD 6인 20인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi2wd7인18인치빌트인캠무25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 2WD 7인 18인치 빌트인캠 무 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi2wd7인18인치빌트인캠유25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 2WD 7인 18인치 빌트인캠 유 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi2wd7인20인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 2WD 7인 20인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi4wd5인18인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 4WD 5인 18인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi4wd5인20인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 4WD 5인 20인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi4wd6인18인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 4WD 6인 18인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi4wd6인20인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 4WD 6인 20인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi4wd7인18인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 4WD 7인 18인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4pe25tgdi4wd7인20인치25my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4 PE) 2.5T-GDI 4WD 7인 20인치 25MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq425tgdi2wd5인18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) 2.5T-GDI 2WD 5인 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq425tgdi2wd5인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) 2.5T-GDI 2WD 5인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq425tgdi2wd5인20인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) 2.5T-GDI 2WD 5인 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq425tgdi2wd6인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) 2.5T-GDI 2WD 6인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq425tgdi2wd6인20인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) 2.5T-GDI 2WD 6인 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq425tgdi2wd7인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) 2.5T-GDI 2WD 7인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq425tgdi2wd7인20인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) 2.5T-GDI 2WD 7인 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq425tgdi4wd5인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) 2.5T-GDI 4WD 5인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq425tgdi4wd5인20인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) 2.5T-GDI 4WD 5인 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq425tgdi4wd6인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) 2.5T-GDI 4WD 6인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq425tgdi4wd6인20인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) 2.5T-GDI 4WD 6인 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq425tgdi4wd7인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) 2.5T-GDI 4WD 7인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq425tgdi4wd7인20인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) 2.5T-GDI 4WD 7인 20인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4hevpe16tgdi2wd6at5인19인치빌트인캠통합26my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) HEV PE 1.6T-GDI 2WD 6AT 5인 19인치 빌트인캠 통합 26MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4hevpe16tgdi2wd6at6인19인치빌트인캠통합26my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) HEV PE 1.6T-GDI 2WD 6AT 6인 19인치 빌트인캠 통합 26MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4hevpe16tgdi2wd6at7인19인치빌트인캠통합26my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) HEV PE 1.6T-GDI 2WD 6AT 7인 19인치 빌트인캠 통합 26MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4hevpe16tgdi4wd6at5인19인치빌트인캠통합26my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) HEV PE 1.6T-GDI 4WD 6AT 5인 19인치 빌트인캠 통합 26MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4hevpe16tgdi4wd6at6인19인치빌트인캠통합26my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) HEV PE 1.6T-GDI 4WD 6AT 6인 19인치 빌트인캠 통합 26MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토mq4hevpe16tgdi4wd6at7인19인치빌트인캠통합26my",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(MQ4) HEV PE 1.6T-GDI 4WD 6AT 7인 19인치 빌트인캠 통합 26MY",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe16tgdihev2wd5인17인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 1.6T-GDI HEV 2WD 5인 17인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe16tgdihev2wd5인18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 1.6T-GDI HEV 2WD 5인 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe16tgdi하이브리드2wd5인17인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 1.6T-GDI 하이브리드 2WD 5인 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe16tgdi하이브리드2wd5인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 1.6T-GDI 하이브리드 2WD 5인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe16tgdi하이브리드2wd6인17인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 1.6T-GDI 하이브리드 2WD 6인 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe16tgdi하이브리드2wd6인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 1.6T-GDI 하이브리드 2WD 6인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe16tgdi하이브리드2wd7인17인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 1.6T-GDI 하이브리드 2WD 7인 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe16tgdi하이브리드2wd7인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 1.6T-GDI 하이브리드 2WD 7인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe16tgdi하이브리드4wd5인17인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 1.6T-GDI 하이브리드 4WD 5인 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe16tgdi하이브리드4wd5인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 1.6T-GDI 하이브리드 4WD 5인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe16tgdi하이브리드4wd6인17인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 1.6T-GDI 하이브리드 4WD 6인 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe16tgdi하이브리드4wd6인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 1.6T-GDI 하이브리드 4WD 6인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe16tgdi하이브리드4wd7인17인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 1.6T-GDI 하이브리드 4WD 7인 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe16tgdi하이브리드4wd7인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 1.6T-GDI 하이브리드 4WD 7인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤2wd5인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 2WD 5인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤2wd5인18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 2WD 5인 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤2wd5인20인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 2WD 5인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤2wd6인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 2WD 6인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤2wd6인18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 2WD 6인 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤2wd6인20인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 2WD 6인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤2wd7인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 2WD 7인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤2wd7인18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 2WD 7인 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤2wd7인20인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 2WD 7인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤4wd5인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 4WD 5인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤4wd5인18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 4WD 5인 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤4wd5인20인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 4WD 5인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤4wd6인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 4WD 6인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤4wd6인18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 4WD 6인 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤4wd6인20인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 4WD 6인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤4wd7인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 4WD 7인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤4wd7인18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 4WD 7인 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe22디젤4wd7인20인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.2디젤 4WD 7인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi2wd5인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 2WD 5인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi2wd5인18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 2WD 5인 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi2wd5인20인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 2WD 5인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi2wd6인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 2WD 6인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi2wd6인18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 2WD 6인 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi2wd6인20인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 2WD 6인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi2wd7인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 2WD 7인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi2wd7인18인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 2WD 7인 18인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi2wd7인20인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 2WD 7인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi4wd5인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 4WD 5인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi4wd5인20인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 4WD 5인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi4wd6인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 4WD 6인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi4wd6인20인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 4WD 6인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi4wd7인18인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 4WD 7인 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:쏘렌토pe25tgdi4wd7인20인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "쏘렌토(PE) 2.5T-GDI 4WD 7인 20인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤11인18인치22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 11인 18인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승합차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤11인18인치빌트인캠22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 11인 18인치(빌트인캠)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승합차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤11인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 11인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승합차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤11인18인치타이어빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 11인 18인치타이어(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승합차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤7인19인치22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 7인 19인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤7인19인치빌트인캠22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 7인 19인치(빌트인캠)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤7인19인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 7인 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤7인19인치타이어빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 7인 19인치타이어(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤9인18인치19인치22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 9인 18인치/19인치(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤9인18인치19인치빌트인캠22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 9인 18인치/19인치(빌트인캠)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤9인18인치19인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 9인 18인치/19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤9인18인치19인치타이어빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 9인 18인치/19인치타이어(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤하이리무진7인19인치22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 하이리무진 7인(19인치)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤하이리무진7인승19타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 하이리무진 7인승(19\"타이어)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤하이리무진9인18인치19인치22",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 하이리무진 9인(18인치/19인치)(22)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22디젤하이리무진9인승1819타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 2.2디젤 하이리무진 9인승(18\"/19\"타이어)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발35gdi11인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 3.5GDI 11인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승합차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발35gdi11인18인치타이어빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 3.5GDI 11인 18인치타이어(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승합차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발35gdi7인19인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 3.5GDI 7인 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발35gdi7인19인치타이어빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 3.5GDI 7인 19인치타이어(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발35gdi9인18인치19인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 3.5GDI 9인 18인치/19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발35gdi9인18인치19인치타이어빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 3.5GDI 9인 18인치/19인치타이어 (빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발35gdi하이리무진4인승19인치20인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 3.5GDI 하이리무진 4인승 (19인치/20인치)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발35gdi하이리무진7인승19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 3.5GDI 하이리무진 7인승 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발35gdi하이리무진9인승19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발 3.5GDI 하이리무진 9인승 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22my22디젤11인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(22MY) 2.2디젤 11인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승합차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22my22디젤11인18인치타이어빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(22MY) 2.2디젤 11인 18인치타이어(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승합차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22my22디젤7인19인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(22MY) 2.2디젤 7인 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22my22디젤7인19인치타이어빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(22MY) 2.2디젤 7인 19인치타이어(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22my22디젤9인18인치19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(22MY) 2.2디젤 9인 18인치/19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22my22디젤9인18인치19인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(22MY) 2.2디젤 9인 18인치/19인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22my22디젤하이리무진7인승19타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(22MY) 2.2디젤 하이리무진 7인승(19\"타이어)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22my35gdi11인18인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(22MY) 3.5GDI 11인 18인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승합차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22my35gdi11인18인치타이어빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(22MY) 3.5GDI 11인 18인치타이어(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승합차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22my35gdi7인19인치타이어",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(22MY) 3.5GDI 7인 19인치타이어",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22my35gdi7인19인치타이어빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(22MY) 3.5GDI 7인 19인치타이어(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22my35gdi9인18인치19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(22MY) 3.5GDI 9인 18인치/19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22my35gdi9인18인치19인치빌트인캠",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(22MY) 3.5GDI 9인 18인치/19인치(빌트인캠)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발22my35gdi하이리무진7인승19인치",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(22MY) 3.5GDI 하이리무진 7인승 19인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe22디젤7인19c",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 2.2디젤 7인 19\" (C)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe22디젤7인19nc",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 2.2디젤 7인 19\" (nC)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe22디젤9인1819c",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 2.2디젤 9인 18/19\" (C)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe22디젤9인1819nc",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 2.2디젤 9인 18/19\" (nC)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe22디젤하이리무진7인19",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 2.2디젤 하이리무진 7인 19\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe22디젤하이리무진9인1819",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 2.2디젤 하이리무진 9인 18/19\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe35gdi7인19c",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 3.5GDI 7인 19\"(C)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe35gdi7인19nc",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 3.5GDI 7인 19\"(nC)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe35gdi9인18c",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 3.5GDI 9인 18\"(C)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe35gdi9인18nc",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 3.5GDI 9인 18\"(nC)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe35gdi9인19c",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 3.5GDI 9인 19\"(C)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe35gdi9인19nc",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 3.5GDI 9인 19\"(nC)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe35gdi하이리무진4인19",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 3.5GDI 하이리무진 4인 19\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe35gdi하이리무진7인19",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 3.5GDI 하이리무진 7인 19\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pe35gdi하이리무진9인1819",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) 3.5GDI 하이리무진 9인 18/19\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pehev16tgdi79인19",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) HEV 1.6T-GDI 7/9인 19\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pehev16tgdi9인18c",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) HEV 1.6T-GDI 9인 18\"(C)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pehev16tgdi9인18nc",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) HEV 1.6T-GDI 9인 18\"(nC)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pehev16tgdi하이리무진4인19",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) HEV 1.6T-GDI 하이리무진 4인 19\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pehev16tgdi하이리무진7인19",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) HEV 1.6T-GDI 하이리무진 7인 19“",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:카니발ka4pehev16tgdi하이리무진9인1819",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "카니발(KA4 PE) HEV 1.6T-GDI 하이리무진 9인 18/19\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk125tgdi2wd8at5인17인치빌트인캠무",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) 2.5T-GDI 2WD 8AT 5인 17인치 (빌트인캠 무)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk125tgdi2wd8at5인17인치빌트인캠유",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) 2.5T-GDI 2WD 8AT 5인 17인치 (빌트인캠 유)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk125tgdi2wd8at5인17인치커스터마이징패키지빌트인캠통합",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) 2.5T-GDI 2WD 8AT 5인 17인치 커스터마이징 패키지 (빌트인캠 통합)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk125tgdi2wd8at5인18인치빌트인캠무",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) 2.5T-GDI 2WD 8AT 5인 18인치 (빌트인캠 무)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk125tgdi2wd8at5인18인치빌트인캠유",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) 2.5T-GDI 2WD 8AT 5인 18인치 (빌트인캠 유)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk125tgdi2wd8at5인18인치커스터마이징패키지빌트인캠통합",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) 2.5T-GDI 2WD 8AT 5인 18인치 커스터마이징 패키지 (빌트인캠 통합)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk125tgdi4wd8at5인17인치빌트인캠무",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) 2.5T-GDI 4WD 8AT 5인 17인치 (빌트인캠 무)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk125tgdi4wd8at5인17인치빌트인캠유",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) 2.5T-GDI 4WD 8AT 5인 17인치 (빌트인캠 유)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk125tgdi4wd8at5인17인치커스터마이징패키지빌트인캠통합",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) 2.5T-GDI 4WD 8AT 5인 17인치 커스터마이징 패키지 (빌트인캠 통합)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk125tgdi4wd8at5인18인치빌트인캠무",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) 2.5T-GDI 4WD 8AT 5인 18인치 (빌트인캠 무)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk125tgdi4wd8at5인18인치빌트인캠유",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) 2.5T-GDI 4WD 8AT 5인 18인치 (빌트인캠 유)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk125tgdi4wd8at5인18인치커스터마이징패키지빌트인캠통합",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) 2.5T-GDI 4WD 8AT 5인 18인치 커스터마이징 패키지 (빌트인캠 통합)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk1xpro25tgdi4wd8at5인17인치빌트인캠무",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) X-PRO 2.5T-GDI 4WD 8AT 5인 17인치 (빌트인캠 무)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk1xpro25tgdi4wd8at5인17인치빌트인캠유",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) X-PRO 2.5T-GDI 4WD 8AT 5인 17인치 (빌트인캠 유)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만tk1xpro25tgdi4wd8at5인17인치커스터마이징패키지빌트인캠통합",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 (TK1) X-PRO 2.5T-GDI 4WD 8AT 5인 17인치 커스터마이징 패키지 (빌트인캠 통합)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만25tgdi오픈베드",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 2.5T-GDI 오픈베드",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:기아주식회사:타스만25tgdi오픈베드2wd",
+      "market": "korea",
+      "make": "기아 주식회사",
+      "model": "타스만 2.5T-GDI 오픈베드 2WD",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:eletre",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "ELETRE",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:eletre600",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "ELETRE 600",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:eletre600gtse",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "ELETRE 600 GT SE",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:eletre600se",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "ELETRE 600 SE",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:eletre600sportse",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "ELETRE 600 SPORT SE",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:eletre900",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "ELETRE 900",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:eletre900sport",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "ELETRE 900 SPORT",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:eletre900sportcarbon",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "ELETRE 900 SPORT CARBON",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:eletrer",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "ELETRE R",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:eletres",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "ELETRE S",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:emeya",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "EMEYA",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:emeya600",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "EMEYA 600",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:emeya600gtse",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "EMEYA 600 GT SE",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:emeya600sportse",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "EMEYA 600 SPORT SE",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:emeya900",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "EMEYA 900",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:emeyar",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "Emeya R",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:emeyas",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "EMEYA S",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:emira",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "EMIRA",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:emiraturbose",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "EMIRA TURBO SE",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:로터스카스코리아주식회사:emirav6",
+      "market": "korea",
+      "make": "로터스카스코리아 주식회사",
+      "model": "EMIRA V6",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:arkana1317tirelrrc",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "ARKANA 1.3 (17\" tire) LRRC",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:arkana1318tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "ARKANA 1.3 (18\" tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:arkana1616tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "ARKANA 1.6 (16\" tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:arkana1617tirelrrc",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "ARKANA 1.6 (17\" tire) LRRC",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:arkana1618tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "ARKANA 1.6 (18\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:arkana하이브리드17인치",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "ARKANA 하이브리드 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:arkana하이브리드18인치",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "ARKANA 하이브리드 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:filantee3e4ea1920",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "FILANTE_E3/E4/EA_19\"/20\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:masterbusph213p",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "Master Bus Ph2 13p",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승합차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:mastervanph2l1h1",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "Master VAN Ph2 L1H1",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:mastervanph2l2h2",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "Master VAN Ph2 L2H2",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:qm6",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "QM6",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "화물차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:qm620lplisulev3018tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "QM6 2.0 LPLi SULEV30 (18\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:qm620lplisulev3019tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "QM6 2.0 LPLi SULEV30 (19\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:qm6new20diesel4wd18tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "QM6 New 2.0 DIESEL (4WD 18\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:qm6new20diesel4wd19tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "QM6 New 2.0 DIESEL (4WD 19\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:scenice3e319",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "SCENIC_E3/E3+_19\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:scenice420",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "SCENIC_E4_20\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:sm61316tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "SM6 1.3 (16\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:sm61317tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "SM6 1.3 (17\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:sm61318tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "SM6 1.3 (18\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:sm61319tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "SM6 1.3 (19\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:sm61818tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "SM6 1.8 (18\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:sm61819tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "SM6 1.8 (19\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:sm620lplinew16tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "SM6 2.0 LPLi New (16\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:sm620lplinew17tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "SM6 2.0 LPLi New (17\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:sm620lplinew18tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "SM6 2.0 LPLi New (18\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:sm620lplinew19tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "SM6 2.0 LPLi New (19\" Tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:xm31317tirelrrc",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "XM3 1.3 (17\" tire) LRRC",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:xm31318tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "XM3 1.3 (18\" tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:xm31616tire",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "XM3 1.6 (16\" tire)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:xm31617tirelrrc",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "XM3 1.6 (17\" tire) LRRC",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:xm3하이브리드17인치",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "XM3 하이브리드 17인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:xm3하이브리드18인치",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "XM3 하이브리드 18인치",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:콜레오스2wde2eale41920",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "콜레오스 2WD_E2/EAL/E4_19”/20”",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:콜레오스4wdea419",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "콜레오스 4WD_EA4_19”",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:콜레오스4wdeal20",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "콜레오스 4WD_EAL_20”",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:콜레오스하이브리드e219",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "콜레오스 하이브리드_E2_ 19\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:르노코리아주식회사:콜레오스하이브리드eale41920",
+      "market": "korea",
+      "make": "르노코리아 주식회사",
+      "model": "콜레오스 하이브리드_EAL/E4_ 19\"/20\"",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamga354matic",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG A 35 4MATIC",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamga45s4matic",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG A 45 S 4MATIC+",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamga354maticnew",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG A35 4MATIC (NEW)",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamga454matic",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG A45 4MATIC +",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamgc434matic",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG C 43 4MATIC",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamgc434maticcoupe",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG C43 4MATIC Coupe",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamgc63scoupe",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG C63 S Coupe",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamgcla45s4matic",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG CLA 45 S 4MATIC+",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamgcle534maticcabriolet",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG CLE 53 4MATIC + Cabriolet",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamgcle534maticcoupe",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG CLE 53 4MATIC+ Coupe",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamgcls534matic",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG CLS53 4MATIC +",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamge53hybrid4matic",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG E 53 Hybrid 4MATIC+",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamge634matic",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG E 63 4MATIC +",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamge534matic",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG E53 4MATIC +",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamge534maticcoupe",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG E53 4MATIC + Coupe",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    },
+    {
+      "key": "korea:메르세데스벤츠코리아주:mercedesamgeqe534matic",
+      "market": "korea",
+      "make": "메르세데스-벤츠코리아(주)",
+      "model": "Mercedes-AMG EQE 53 4MATIC +",
+      "sources": [
+        "korea-energy-agency-efficiency"
+      ],
+      "aliases": [],
+      "vehicleClass": "승용차"
+    }
+  ]
+}

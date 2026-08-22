@@ -1,6 +1,6 @@
 {
-  "source": "EEA CO2Emission.latest.co2cars",
-  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
+  "source": "EEA CO2Emission.latest.co2cars_2021Fv24",
+  "query": "SELECT [Year] AS year,[Mk] AS make,[Cn] AS commercialName,[T] AS type,[Va] AS variant,[Ve] AS version,[Ft] AS fuel,[Ec (cm3)] AS engineCc,[Ep (KW)] AS powerKw,[W (mm)] AS wheelbaseMm,[M (kg)] AS massKg,COUNT(*) AS observations FROM [CO2Emission].[latest].[co2cars_2021Fv24] WHERE [Year]=2021 AND [Status]='F' AND [Mk] IS NOT NULL AND [Cn] IS NOT NULL GROUP BY [Year],[Mk],[Cn],[T],[Va],[Ve],[Ft],[Ec (cm3)],[Ep (KW)],[W (mm)],[M (kg)]",
   "page": 4,
   "rows": [
     {
@@ -146,7 +146,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "M850I XDRIVE",
+      "commercialName": "M850i xDrive",
       "type": "G8C",
       "variant": "BC41",
       "version": "IAW40000",
@@ -5970,7 +5970,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "X2 xDrive20d",
+      "commercialName": "X2 XDRIVE20D",
       "type": "F2X",
       "variant": "YL11",
       "version": "IAW500M0",
@@ -9092,7 +9092,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "X3 xDrive20d",
+      "commercialName": "X3 XDRIVE20D",
       "type": "G3X",
       "variant": "31BG",
       "version": "IAV500B0",
@@ -9176,7 +9176,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "X3 xDrive20d",
+      "commercialName": "X3 XDRIVE20D",
       "type": "G3X",
       "variant": "35BG",
       "version": "IAV500B0",
@@ -12830,7 +12830,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "X4 XDRIVE30D",
+      "commercialName": "X4 xDrive30d",
       "type": "G4X",
       "variant": "4M31",
       "version": "IAV500B0",
@@ -12844,7 +12844,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "X4 XDRIVE30D",
+      "commercialName": "X4 xDrive30d",
       "type": "G4X",
       "variant": "4M31",
       "version": "IAV500BA",
@@ -13964,7 +13964,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "X5 M50I",
+      "commercialName": "X5 M50i",
       "type": "G5X",
       "variant": "JU41",
       "version": "DAW409M0",
@@ -14020,7 +14020,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "X5 M50i",
+      "commercialName": "X5 M50I",
       "type": "G5X",
       "variant": "JU41",
       "version": "IAA509B0",
@@ -16876,7 +16876,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "X5 XDRIVE30D",
+      "commercialName": "X5 xDrive30d",
       "type": "G5X",
       "variant": "JU81",
       "version": "IAF509LA",
@@ -16890,7 +16890,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "X5 XDRIVE30D",
+      "commercialName": "X5 xDrive30d",
       "type": "G5X",
       "variant": "JU81",
       "version": "IAF509LB",
@@ -17940,7 +17940,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "X5 XDRIVE30D",
+      "commercialName": "X5 xDrive30d",
       "type": "X5",
       "variant": "KS41",
       "version": "6A150000",
@@ -20250,7 +20250,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "X5 XDRIVE45E",
+      "commercialName": "X5 xDrive45e",
       "type": "G5X",
       "variant": "TA61",
       "version": "IAA50900",
@@ -21720,7 +21720,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "X6 XDRIVE30D",
+      "commercialName": "X6 xDrive30d",
       "type": "G6X",
       "variant": "GT81",
       "version": "IAE509BE",
@@ -21748,7 +21748,7 @@
     {
       "year": 2021,
       "make": "BMW",
-      "commercialName": "X6 XDRIVE30D",
+      "commercialName": "X6 xDrive30d",
       "type": "G6X",
       "variant": "GT81",
       "version": "IAE509LE",
@@ -32528,7 +32528,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Berlingo",
+      "commercialName": "BERLINGO",
       "type": "E",
       "variant": "C",
       "version": "YHT2-A2C300",
@@ -32556,7 +32556,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Berlingo",
+      "commercialName": "BERLINGO",
       "type": "E",
       "variant": "C",
       "version": "YHT2-A2P300",
@@ -32584,7 +32584,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Berlingo",
+      "commercialName": "BERLINGO",
       "type": "E",
       "variant": "C",
       "version": "YHT2-C2C300",
@@ -32598,7 +32598,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Berlingo",
+      "commercialName": "BERLINGO",
       "type": "E",
       "variant": "C",
       "version": "YHT2-C2P300",
@@ -32640,7 +32640,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Berlingo",
+      "commercialName": "BERLINGO",
       "type": "E",
       "variant": "C",
       "version": "YHT2-D2C300",
@@ -32654,7 +32654,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Berlingo",
+      "commercialName": "BERLINGO",
       "type": "E",
       "variant": "C",
       "version": "YHT2-D2P300",
@@ -32668,7 +32668,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Berlingo",
+      "commercialName": "BERLINGO",
       "type": "E",
       "variant": "C",
       "version": "YHYC-A22000",
@@ -32682,7 +32682,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Berlingo",
+      "commercialName": "BERLINGO",
       "type": "E",
       "variant": "C",
       "version": "YHYC-A2E000",
@@ -32738,7 +32738,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Berlingo",
+      "commercialName": "BERLINGO",
       "type": "E",
       "variant": "C",
       "version": "YHYC-C22000",
@@ -32752,7 +32752,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "BERLINGO",
+      "commercialName": "Berlingo",
       "type": "E",
       "variant": "C",
       "version": "YHYC-C2P000",
@@ -32822,7 +32822,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Berlingo",
+      "commercialName": "BERLINGO",
       "type": "E",
       "variant": "C",
       "version": "YHZ2-A2C300",
@@ -32850,7 +32850,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "BERLINGO",
+      "commercialName": "Berlingo",
       "type": "E",
       "variant": "C",
       "version": "YHZ2-B2C300",
@@ -32892,7 +32892,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "BERLINGO",
+      "commercialName": "Berlingo",
       "type": "E",
       "variant": "C",
       "version": "YHZ2-C2C300",
@@ -33102,7 +33102,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Berlingo",
+      "commercialName": "BERLINGO",
       "type": "E",
       "variant": "C",
       "version": "YHZR-A2P000",
@@ -33158,7 +33158,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "BERLINGO",
+      "commercialName": "Berlingo",
       "type": "E",
       "variant": "C",
       "version": "YHZR-C2P000",
@@ -33186,7 +33186,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "BERLINGO",
+      "commercialName": "Berlingo",
       "type": "E",
       "variant": "C",
       "version": "YHZR-D2P000",
@@ -33326,7 +33326,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "BERLINGO",
+      "commercialName": "Berlingo",
       "type": "E",
       "variant": "R",
       "version": "HNP2-A12100",
@@ -33396,7 +33396,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "BERLINGO",
+      "commercialName": "Berlingo",
       "type": "E",
       "variant": "R",
       "version": "HNP2-B12100",
@@ -37652,7 +37652,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "C4 SPACETOURER",
+      "commercialName": "C4 spacetourer",
       "type": "3",
       "variant": "AEHY",
       "version": "4/R7S",
@@ -37708,7 +37708,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "C4 SPACETOURER",
+      "commercialName": "C4 spacetourer",
       "type": "3",
       "variant": "AHNS",
       "version": "2/J4S",
@@ -37735,8 +37735,8 @@
     },
     {
       "year": 2021,
-      "make": "CITROEN",
-      "commercialName": "C4 SPACETOURER",
+      "make": "Citroen",
+      "commercialName": "C4 spacetourer",
       "type": "3",
       "variant": "AHNS",
       "version": "2/L4S",
@@ -37750,7 +37750,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "C4 SPACETOURER",
+      "commercialName": "C4 spacetourer",
       "type": "3",
       "variant": "AHNS",
       "version": "4/J4S",
@@ -37820,7 +37820,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "C4 spacetourer",
+      "commercialName": "C4 SPACETOURER",
       "type": "3",
       "variant": "AYHZ",
       "version": "4/N4S",
@@ -37890,7 +37890,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "C4 spacetourer",
+      "commercialName": "C4 SPACETOURER",
       "type": "3",
       "variant": "DHNS",
       "version": "4/J4S",
@@ -37918,7 +37918,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "C4 SPACETOURER",
+      "commercialName": "C4 spacetourer",
       "type": "3",
       "variant": "DYHZ",
       "version": "P/4S",
@@ -38631,7 +38631,7 @@
     },
     {
       "year": 2021,
-      "make": "Citroen",
+      "make": "CITROEN",
       "commercialName": "C5 AIRCROSS",
       "type": "A",
       "variant": "4",
@@ -61634,7 +61634,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Jumpy Space Tourer",
+      "commercialName": "JUMPY SPACE TOURER",
       "type": "V",
       "variant": "A",
       "version": "YHVM-P2N10N",
@@ -62068,7 +62068,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Jumpy Space Tourer",
+      "commercialName": "JUMPY SPACE TOURER",
       "type": "V",
       "variant": "E",
       "version": "EHTM-P2N20N",
@@ -62180,7 +62180,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "JUMPY SPACE TOURER",
+      "commercialName": "Jumpy Space Tourer",
       "type": "V",
       "variant": "E",
       "version": "EHZ7-N2N20N",
@@ -62698,7 +62698,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Jumpy Space Tourer",
+      "commercialName": "JUMPY SPACE TOURER",
       "type": "V",
       "variant": "Z",
       "version": "ZKXZ-P7R00N",
@@ -63846,7 +63846,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Jumpy SpaceTourer",
+      "commercialName": "JUMPY SPACETOURER",
       "type": "V",
       "variant": "A",
       "version": "YHVM-P2N10N",
@@ -64196,7 +64196,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "JUMPY SPACETOURER",
+      "commercialName": "Jumpy SpaceTourer",
       "type": "V",
       "variant": "E",
       "version": "AHXK-P2F00L",
@@ -64532,7 +64532,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Jumpy SpaceTourer",
+      "commercialName": "JUMPY SPACETOURER",
       "type": "V",
       "variant": "E",
       "version": "EHTM-N2N20N",
@@ -64560,7 +64560,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "JUMPY SPACETOURER",
+      "commercialName": "Jumpy SpaceTourer",
       "type": "V",
       "variant": "E",
       "version": "EHTM-N2S20N",
@@ -64588,7 +64588,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Jumpy SpaceTourer",
+      "commercialName": "JUMPY SPACETOURER",
       "type": "V",
       "variant": "E",
       "version": "EHTM-P2N20N",
@@ -64602,7 +64602,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Jumpy SpaceTourer",
+      "commercialName": "JUMPY SPACETOURER",
       "type": "V",
       "variant": "E",
       "version": "EHTM-P2S20L",
@@ -64728,7 +64728,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Jumpy SpaceTourer",
+      "commercialName": "JUMPY SPACETOURER",
       "type": "V",
       "variant": "E",
       "version": "EHZ7-N2N20N",
@@ -64924,7 +64924,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Jumpy SpaceTourer",
+      "commercialName": "JUMPY SPACETOURER",
       "type": "V",
       "variant": "E",
       "version": "EHZ8-N2200L",
@@ -65246,7 +65246,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "Jumpy SpaceTourer",
+      "commercialName": "JUMPY SPACETOURER",
       "type": "V",
       "variant": "Z",
       "version": "ZKXZ-M7700N",
@@ -65652,7 +65652,7 @@
     {
       "year": 2021,
       "make": "CITROEN",
-      "commercialName": "JUMPY SPACETOURER",
+      "commercialName": "Jumpy SpaceTourer",
       "type": "V",
       "variant": "Z",
       "version": "ZKXZ-P7800N",

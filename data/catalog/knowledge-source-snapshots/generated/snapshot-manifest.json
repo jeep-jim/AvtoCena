@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "builtAt": "2026-08-22T03:43:12.670Z",
-  "status": "partial",
+  "builtAt": "2026-08-22T11:21:41.734Z",
+  "status": "complete_source_corpus",
   "sources": [
     {
       "source": "vehiclesdb",
       "status": "complete",
-      "fetchedAt": "2026-08-22T03:40:15.797Z",
+      "fetchedAt": "2026-08-22T10:30:39.224Z",
       "counts": {
         "makes": 277,
         "models": 4895
@@ -16,33 +16,128 @@
     {
       "source": "eea",
       "status": "complete",
-      "fetchedAt": "2026-08-22T03:40:07.640Z",
+      "fetchedAt": "2026-08-22T10:30:36.533Z",
       "counts": {
         "year2020": 106618,
         "year2021": 97459,
-        "year2022": 0,
-        "year2023": 0,
-        "year2024": 0,
-        "year2025": 0,
-        "technicalTuples": 204077
+        "year2022": 90609,
+        "year2023": 96720,
+        "year2024": 132513,
+        "year2025": 153160,
+        "technicalTuples": 677079
       },
       "errors": []
     },
     {
       "source": "miit",
       "status": "complete",
-      "fetchedAt": "2026-08-22T03:40:11.036Z",
+      "fetchedAt": "2026-08-22T10:30:42.911Z",
       "counts": {
-        "batchesRequested": 83,
-        "extractedHtmlRows": 249,
+        "batchesRequested": 81,
+        "extractedHtmlRows": 243,
         "blockedBatches": 0
       },
       "errors": []
     },
     {
+      "source": "miit-products",
+      "status": "complete_bounded_batch_sample",
+      "fetchedAt": "2026-08-22T10:42:03.746Z",
+      "counts": {
+        "batchesRequested": 81,
+        "batchesComplete": 81,
+        "products": 16200,
+        "totalMatchesReported": 497981,
+        "blockedBatches": 0,
+        "failedBatches": 0
+      },
+      "errors": [
+        {
+          "batch": 328,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 329,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 330,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 331,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 332,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 333,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 334,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 335,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 336,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 337,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 338,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 339,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 340,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 341,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 342,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 343,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 344,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 345,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 346,
+          "warning": "server_page_size_100_requested_1000"
+        },
+        {
+          "batch": 347,
+          "warning": "server_page_size_100_requested_1000"
+        }
+      ]
+    },
+    {
       "source": "mlit",
       "status": "complete",
-      "fetchedAt": "2026-08-22T03:40:11.867Z",
+      "fetchedAt": "2026-08-22T10:30:44.168Z",
       "counts": {
         "htmlPages": 32,
         "extractedHtmlRows": 0,
@@ -51,16 +146,239 @@
       "errors": []
     },
     {
+      "source": "mlit-pdf",
+      "status": "complete",
+      "fetchedAt": "2026-08-22T10:44:49.640Z",
+      "counts": {},
+      "errors": []
+    },
+    {
+      "source": "mlit-tabular",
+      "status": "complete",
+      "fetchedAt": "2026-08-22T10:45:27Z",
+      "counts": {},
+      "errors": []
+    },
+    {
       "source": "korea",
       "status": "partial",
-      "fetchedAt": "2026-08-22T03:40:10.495Z",
+      "fetchedAt": "2026-08-22T10:30:43.467Z",
       "counts": {
         "publicDownloadCandidates": 0
       },
+      "errors": [
+        {
+          "url": "https://www.data.go.kr/data/15128417/fileData.do",
+          "error": "fetch_failed:https://www.data.go.kr/data/15128417/fileData.do"
+        },
+        {
+          "url": "https://www.data.go.kr/catalog/15128417/fileData.json",
+          "error": "fetch_failed:https://www.data.go.kr/catalog/15128417/fileData.json"
+        },
+        {
+          "url": "https://www.data.go.kr/catalog/15059401/openapi.json",
+          "error": "fetch_failed:https://www.data.go.kr/catalog/15059401/openapi.json"
+        },
+        {
+          "url": "https://www.data.go.kr/catalog/15057664/openapi.json",
+          "error": "fetch_failed:https://www.data.go.kr/catalog/15057664/openapi.json"
+        }
+      ]
+    },
+    {
+      "source": "korea-jeju",
+      "status": "complete_compacted_2020_plus_observation_window",
+      "fetchedAt": "2026-08-22T06:32:57.078Z",
+      "counts": {
+        "rowsParsed": 424332,
+        "rowsIn2020Plus": 380863,
+        "rowsWithExplicitModelYear": 0,
+        "rowsWithFirstRegistrationWindowOnly": 380863,
+        "rowsRejectedMissingOrOutsideYearWindow": 43469,
+        "uniqueTuples": 6792
+      },
       "errors": []
+    },
+    {
+      "source": "korea-energy",
+      "status": "complete",
+      "fetchedAt": "2026-08-22T10:47:52.579Z",
+      "counts": {
+        "models": 3370,
+        "responseRows": 3370,
+        "byReleaseYear": {
+          "2020": 452,
+          "2021": 547,
+          "2022": 495,
+          "2023": 537,
+          "2024": 659,
+          "2025": 451,
+          "2026": 229
+        }
+      },
+      "errors": []
+    },
+    {
+      "source": "us",
+      "status": "complete",
+      "fetchedAt": "2026-08-22T10:30:41.676Z",
+      "counts": {
+        "fuelEconomyRows": 50242,
+        "nhtsaMakes": 12340,
+        "nhtsaCurrentMakesQueried": 59,
+        "nhtsaCurrentMakeResponses": 59,
+        "nhtsaCurrentModels": 2341
+      },
+      "errors": []
+    },
+    {
+      "source": "canada",
+      "status": "complete",
+      "fetchedAt": "2026-08-22T10:31:04.938Z",
+      "counts": {
+        "rows": 12971
+      },
+      "errors": []
+    },
+    {
+      "source": "autohome-china",
+      "status": "partial",
+      "fetchedAt": "2026-08-22T10:47:52.620Z",
+      "counts": {
+        "brands": 396,
+        "seriesDiscovered": 3938,
+        "series": 2114,
+        "seriesFetched": 2143,
+        "variants2020Plus": 17924,
+        "seriesFailed": 1795,
+        "variantsRejectedMissingOrOutsideYearWindow": 261
+      },
+      "errors": [
+        {
+          "seriesId": 15,
+          "seriesName": "宝来经典",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 16,
+          "seriesName": "捷达",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 19,
+          "seriesName": "奥迪A4",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 45,
+          "seriesName": "兰德酷路泽",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 56,
+          "seriesName": "奔驰C级(进口)",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 57,
+          "seriesName": "奔驰M级",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 76,
+          "seriesName": "爱迪尔",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 86,
+          "seriesName": "夏朗",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 89,
+          "seriesName": "派力奥",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 90,
+          "seriesName": "西耶那",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 91,
+          "seriesName": "周末风",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 99,
+          "seriesName": "标致307",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 107,
+          "seriesName": "普瑞维亚",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 109,
+          "seriesName": "花冠",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 126,
+          "seriesName": "菱帅",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 144,
+          "seriesName": "高尔",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 148,
+          "seriesName": "奥迪TT",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 149,
+          "seriesName": "桑塔纳经典",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 155,
+          "seriesName": "乐驰",
+          "error": "config_json_missing"
+        },
+        {
+          "seriesId": 159,
+          "seriesName": "宝马X5(进口)",
+          "error": "config_json_missing"
+        }
+      ]
     }
   ],
-  "files": 289,
-  "totalBytes": 75141563,
-  "contentDigest": "27d4a238dbab12bcb3faaf5ffcff90343f972965a1541f3326738de6159ad3f5"
+  "files": 785,
+  "totalBytes": 301787204,
+  "contentDigest": "235c4c086205a43c4a2cb9bf2e8320c1a2b9ad7843d2431b5abed4d7f49fffde",
+  "completion": {
+    "ready": true,
+    "report": "../completion-report.json",
+    "headline": {
+      "masterBrands": 754,
+      "masterModels": 20590,
+      "masterModelsWithCanonicalV2": 1625,
+      "globalSourceBrands": 1172,
+      "globalSourceModels": 5285,
+      "globalVariantEvidence": 671507,
+      "westernSourceModels": 2479,
+      "westernVariantEvidence": 16585,
+      "asiaSourceModels": 13306,
+      "asiaVariantEvidence": 48494,
+      "chinaVariants": 17924,
+      "koreaJejuTuples": 6792,
+      "koreaEnergyModels": 3370,
+      "japanMlitRows": 4208,
+      "miitProducts": 16200
+    }
+  }
 }

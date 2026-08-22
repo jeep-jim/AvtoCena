@@ -2,7 +2,7 @@
   "schemaVersion": 1,
   "id": "miit-road-vehicle-products",
   "authority": "government_type_approval",
-  "fetchedAt": "2026-08-22T03:40:11.036Z",
+  "fetchedAt": "2026-08-22T10:30:42.911Z",
   "status": "complete",
   "files": [
     {
@@ -976,35 +976,11 @@
       "bytes": 359,
       "sha256": "1041efda000b405a2e8b41b98b13ec79afed65232e3b63091923b410a4c14365",
       "sourceUrl": "https://service.miit-eidc.org.cn/miitxxgk/gonggao/xxgk/queryByPc?pc=408&querylb=cp&qyinfolb="
-    },
-    {
-      "file": "miit/batches/batch-409.html",
-      "bytes": 5820,
-      "sha256": "16d29cd88a4e2178982e47667572feeb4c7f47540ce139bd3396ca7f8eb9c1c7",
-      "sourceUrl": "https://service.miit-eidc.org.cn/miitxxgk/gonggao/xxgk/queryByPc?pc=409&querylb=cp&qyinfolb="
-    },
-    {
-      "file": "miit/batches/batch-409.json",
-      "bytes": 359,
-      "sha256": "0e5fe79f9921a98fa7ecf982dadebfd1b487806d8e8d7a79b146743a9c1db594",
-      "sourceUrl": "https://service.miit-eidc.org.cn/miitxxgk/gonggao/xxgk/queryByPc?pc=409&querylb=cp&qyinfolb="
-    },
-    {
-      "file": "miit/batches/batch-410.html",
-      "bytes": 5820,
-      "sha256": "16d29cd88a4e2178982e47667572feeb4c7f47540ce139bd3396ca7f8eb9c1c7",
-      "sourceUrl": "https://service.miit-eidc.org.cn/miitxxgk/gonggao/xxgk/queryByPc?pc=410&querylb=cp&qyinfolb="
-    },
-    {
-      "file": "miit/batches/batch-410.json",
-      "bytes": 359,
-      "sha256": "f0ad199fbea84a00aad55c9d65597a408001df8cab7fc13a014f2f72813e99ff",
-      "sourceUrl": "https://service.miit-eidc.org.cn/miitxxgk/gonggao/xxgk/queryByPc?pc=410&querylb=cp&qyinfolb="
     }
   ],
   "counts": {
-    "batchesRequested": 83,
-    "extractedHtmlRows": 249,
+    "batchesRequested": 81,
+    "extractedHtmlRows": 243,
     "blockedBatches": 0
   },
   "errors": [],
