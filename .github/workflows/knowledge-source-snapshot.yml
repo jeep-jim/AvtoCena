@@ -60,7 +60,7 @@ jobs:
           KNOWLEDGE_EEA_PAGE_SIZE: "5000"
           KNOWLEDGE_EEA_MAX_PAGES_PER_YEAR: "250"
           KNOWLEDGE_MIIT_FIRST_BATCH: "328"
-          KNOWLEDGE_MIIT_LAST_BATCH: "410"
+          KNOWLEDGE_MIIT_LAST_BATCH: "408"
           KNOWLEDGE_MLIT_MAX_PAGES: "150"
         run: node scripts/catalog-download-knowledge-source-snapshot.mjs
       - name: Download and compact Korean public registry
@@ -139,9 +139,10 @@ jobs:
         env:
           KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
           KNOWLEDGE_MIIT_FIRST_BATCH: "328"
-          KNOWLEDGE_MIIT_LAST_BATCH: "410"
+          KNOWLEDGE_MIIT_LAST_BATCH: "408"
           KNOWLEDGE_MIIT_PAGE_SIZE: "1000"
-          KNOWLEDGE_MIIT_MAX_PAGES_PER_BATCH: "100"
+          KNOWLEDGE_MIIT_MAX_PAGES_PER_BATCH: "2"
+          KNOWLEDGE_MIIT_ENTERPRISE_QUERY: "汽车"
         run: node scripts/catalog-download-miit-products.mjs
       - name: Rebuild Japan attachment map with year-page context
         env:
