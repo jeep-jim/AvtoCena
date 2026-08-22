@@ -1,0 +1,274 @@
+{
+  "schemaVersion": 1,
+  "id": "eea-co2-passenger-cars",
+  "authority": "government_regulatory_registration",
+  "fetchedAt": "2026-08-22T03:40:07.640Z",
+  "status": "complete",
+  "files": [
+    {
+      "file": "eea/year-2020/part-0001.json",
+      "bytes": 1651214,
+      "sha256": "8844087c201f593e6842cf8b99da1dbc9c4c2e98d323edc0174943cdc5f4e1ba",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=1&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0002.json",
+      "bytes": 1677268,
+      "sha256": "8b2590c9dfa13370a6a56a54c11bdd22323308570007ccf5baff88464686a352",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=2&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0003.json",
+      "bytes": 1676858,
+      "sha256": "e5d3bec76de8484c6067b542ea37cc9d16db9aa156ed35b6615c53182b050739",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=3&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0004.json",
+      "bytes": 1561095,
+      "sha256": "b58a25aa1f6764fca17d7205559c79ee92d5fca79339294dda49c2007ac0560d",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=4&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0005.json",
+      "bytes": 1562738,
+      "sha256": "0f1399b46a92129da8a60f524c3d488500fd1267e809f6229695d9047f0678a5",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=5&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0006.json",
+      "bytes": 1561040,
+      "sha256": "08a398bcf1be1bbdcf1f7ea712e9a7dfb3bfa80d72dca5bc097278f44d79051f",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=6&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0007.json",
+      "bytes": 1600079,
+      "sha256": "c13b58a1fd59f02cae76b6cecdb3814b3f3ac97eb925544e5ff885062f42211c",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=7&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0008.json",
+      "bytes": 1594266,
+      "sha256": "d067c3d1a86ff381fcf8bffc55a5890973c73cf50e84318c4f85659dcb089d4b",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=8&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0009.json",
+      "bytes": 1594010,
+      "sha256": "30c869df56c8ff1994efce330ff6ca7a213bfd8627f6f54f1223a2b9f44f7102",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=9&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0010.json",
+      "bytes": 1606804,
+      "sha256": "a4b74c52c9138028c53065b9204731eab2c389a822defe176e8d2f0154d1ebc1",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=10&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0011.json",
+      "bytes": 1629980,
+      "sha256": "bf630b0e5c3f39c08256c8ef63d7e5a91fa3871c41aa54b50c20be5fe2604daf",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=11&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0012.json",
+      "bytes": 1619074,
+      "sha256": "91a59e0369f1d28675a0793628c6bf32fd885173c488004b0ca820f53167ae87",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=12&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0013.json",
+      "bytes": 1581077,
+      "sha256": "6b0fffa2e27a18a6b5b77b07cf9cb34404ea53ac25d163b6beea1a0e3cca3e2c",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=13&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0014.json",
+      "bytes": 1593572,
+      "sha256": "90c7126871662d882154ee67db9eeee8748445041daa049091fd190ef717dca2",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=14&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0015.json",
+      "bytes": 1651961,
+      "sha256": "ae20bc3261c39b2b1ffce47c8a9dcadf4aaf4a134f4fcafd73144611553e1670",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=15&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0016.json",
+      "bytes": 1640724,
+      "sha256": "b4b3fec935ae75d951d74e833cfb85c63e3240a399a59951e71f0ec4df523912",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=16&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0017.json",
+      "bytes": 1669812,
+      "sha256": "da6930479c2fb7ac7b9cd90332c71bd2a8a5e1f321dc213da6b605127c2ca66a",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=17&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0018.json",
+      "bytes": 1680731,
+      "sha256": "379c291be4d4babe957b5225551295b0acff323d595b003a36f3d2a657c746bf",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=18&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0019.json",
+      "bytes": 1678703,
+      "sha256": "a7a390553dbfae27c38dbe7c47e6e149e37ad1cf55c9d4e1e457382f535b66ef",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=19&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0020.json",
+      "bytes": 1667399,
+      "sha256": "ffcf3875d536566332b3316203fd7e0c724bf3d1677e67bac5ec720f2a0917a6",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=20&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0021.json",
+      "bytes": 1649928,
+      "sha256": "dd6380adf72817772ac3d5cb6cfdfb5fd017e1de721404cc457c0f0121b8d5a6",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=21&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2020/part-0022.json",
+      "bytes": 514163,
+      "sha256": "29d4f177e92e238f3961eb4cc40431bd915261e405c92d406a1b34222c368b9b",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2020%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=22&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0001.json",
+      "bytes": 1665246,
+      "sha256": "5f26ae7c65a62afcdd272d45f218fddbe204b4a6e9e0226d4ba6f673c24cf880",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=1&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0002.json",
+      "bytes": 1657928,
+      "sha256": "696b15b46a653a769b14c81c97f86040775bcd83100ac8b4b0d51d9e01b6404e",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=2&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0003.json",
+      "bytes": 1598031,
+      "sha256": "2c75d18643329edf53735642f4755293eb419959cfeab49af95e6228a0d4296e",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=3&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0004.json",
+      "bytes": 1585123,
+      "sha256": "841b2664a39c6e0b968b42e4294a8efe5d6543778192a4a1805007770b5a41eb",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=4&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0005.json",
+      "bytes": 1556915,
+      "sha256": "5f010cbb5422a99d394a9a44c86ead4f735ff79a700a1f494f5a554541a19bba",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=5&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0006.json",
+      "bytes": 1600113,
+      "sha256": "5323be70d26ad38e66097c583bed2e0729fa06196e3b50b501a7ae51a48228f8",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=6&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0007.json",
+      "bytes": 1590006,
+      "sha256": "32b54604345960988579f305246d4a1aad2c7df1e8bde6dc60835144afd0163b",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=7&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0008.json",
+      "bytes": 1597695,
+      "sha256": "3fa5e552ffd05992e597e08997be60485ffa1d9a055ba5ac5d8894a1b6273edc",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=8&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0009.json",
+      "bytes": 1640480,
+      "sha256": "04d60395556c064a684a7c96c44826ca6cb74ba7aca18c421f0821cbc1ddc281",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=9&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0010.json",
+      "bytes": 1613325,
+      "sha256": "46374633e08fd4adc6e01ca82b6d0d760a745333c0a1adca9f134a45ee9e4d6c",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=10&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0011.json",
+      "bytes": 1607272,
+      "sha256": "c35d35e8fcaedd6a1dd58ff117ebc83383e9337da7487983fec1627f6bfecead",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=11&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0012.json",
+      "bytes": 1590041,
+      "sha256": "4c4e06e88e78eb02dd721fef86fbbbbb37d2b40cf08c53077a6ae3e8ab603d38",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=12&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0013.json",
+      "bytes": 1640263,
+      "sha256": "c15051992249e67f0973eb187571ac88706f245bf85ba0df1366589db2641a77",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=13&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0014.json",
+      "bytes": 1632687,
+      "sha256": "fb87d7bb212de5bdcdfe98161478218a2411139bc86da9c6978f721e9caac662",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=14&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0015.json",
+      "bytes": 1649923,
+      "sha256": "e5b98d40e1da5c3700e0ff8dd47431ca2b487ff3de2ef40afd55616348db6182",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=15&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0016.json",
+      "bytes": 1680903,
+      "sha256": "40ecb393ed024a59b8a281da0d061d08a9a0f2e6823b9495ca6ff19cfe7bc6b8",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=16&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0017.json",
+      "bytes": 1680510,
+      "sha256": "35c9b6f61c9feb760b5bef786105f84da0f2d7d6c854950581bc4a099ab32552",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=17&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0018.json",
+      "bytes": 1686558,
+      "sha256": "f432c9abdbad3c6b35a9cb77c5625c2f54138174a2eb232f2008f535b8c49484",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=18&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0019.json",
+      "bytes": 1578347,
+      "sha256": "201045926ca7ccaa03e82bc7d49be750781f98ba65975680c2bac4fe127ba143",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=19&nrOfHits=5000"
+    },
+    {
+      "file": "eea/year-2021/part-0020.json",
+      "bytes": 758159,
+      "sha256": "270a79dfb1dd8b22e245f3e911c344b4123907e3628935f74afdb7ed1d3b079b",
+      "sourceUrl": "https://discodata.eea.europa.eu/sql?query=SELECT%20%5BYear%5D%20AS%20year%2C%5BMk%5D%20AS%20make%2C%5BCn%5D%20AS%20commercialName%2C%5BT%5D%20AS%20type%2C%5BVa%5D%20AS%20variant%2C%5BVe%5D%20AS%20version%2C%5BFt%5D%20AS%20fuel%2C%5BEc%20(cm3)%5D%20AS%20engineCc%2C%5BEp%20(KW)%5D%20AS%20powerKw%2C%5BW%20(mm)%5D%20AS%20wheelbaseMm%2C%5BM%20(kg)%5D%20AS%20massKg%2CCOUNT(*)%20AS%20observations%20FROM%20%5BCO2Emission%5D.%5Blatest%5D.%5Bco2cars%5D%20WHERE%20%5BYear%5D%3D2021%20AND%20%5BStatus%5D%3D'F'%20AND%20%5BMk%5D%20IS%20NOT%20NULL%20AND%20%5BCn%5D%20IS%20NOT%20NULL%20GROUP%20BY%20%5BYear%5D%2C%5BMk%5D%2C%5BCn%5D%2C%5BT%5D%2C%5BVa%5D%2C%5BVe%5D%2C%5BFt%5D%2C%5BEc%20(cm3)%5D%2C%5BEp%20(KW)%5D%2C%5BW%20(mm)%5D%2C%5BM%20(kg)%5D&p=20&nrOfHits=5000"
+    }
+  ],
+  "counts": {
+    "year2020": 106618,
+    "year2021": 97459,
+    "year2022": 0,
+    "year2023": 0,
+    "year2024": 0,
+    "year2025": 0,
+    "technicalTuples": 204077
+  },
+  "errors": [],
+  "notes": [
+    "Rows are DISTINCT-by-GROUP technical identity tuples with observation counts; duplicate registration microdata is intentionally not copied to GitHub."
+  ]
+}

@@ -1,0 +1,49 @@
+{
+  "schemaVersion": 1,
+  "id": "korea-government-open-data",
+  "authority": "government_registration",
+  "fetchedAt": "2026-08-22T03:40:10.495Z",
+  "status": "partial",
+  "files": [
+    {
+      "file": "korea/jeju-file-page.html",
+      "bytes": 208293,
+      "sha256": "f5309921647c519700e1b4c261dd32f6b9991c374d652c1fd76463d8bd7b42bd",
+      "sourceUrl": "https://www.data.go.kr/data/15128417/fileData.do",
+      "contentType": "text/html;charset=UTF-8"
+    },
+    {
+      "file": "korea/jeju-file-metadata.json",
+      "bytes": 1555,
+      "sha256": "bf077f628494e4d630f04786450dbb8c74b50a2393bcc5a0966d0d72c8dd056c",
+      "sourceUrl": "https://www.data.go.kr/catalog/15128417/fileData.json",
+      "contentType": "application/json;charset=UTF-8"
+    },
+    {
+      "file": "korea/kotsa-new-registration-metadata.json",
+      "bytes": 1403,
+      "sha256": "b82aa051f1788e2f8803840548c5b698f2422e68dd5528735214b3712800ff02",
+      "sourceUrl": "https://www.data.go.kr/catalog/15059401/openapi.json",
+      "contentType": "application/json;charset=UTF-8"
+    },
+    {
+      "file": "korea/kotsa-manufacturer-metadata.json",
+      "bytes": 1468,
+      "sha256": "930fc27ee7c9f037898f74a29c79c053443d6eba4224646ceac73758d9f474ae",
+      "sourceUrl": "https://www.data.go.kr/catalog/15057664/openapi.json",
+      "contentType": "application/json;charset=UTF-8"
+    },
+    {
+      "file": "korea/download-candidates.json",
+      "bytes": 3,
+      "sha256": "37517e5f3dc66819f61f5a7bb8ace1921282415f10551d2defa5c3eb0985b570"
+    }
+  ],
+  "counts": {
+    "publicDownloadCandidates": 0
+  },
+  "errors": [],
+  "notes": [
+    "The Jeju file dataset advertises 424,332 rows and no-login file download, but the portal's generated download action may not be exposed as a static href. Nationwide KOTSA APIs require a free service key; this snapshot never invents or bypasses one."
+  ]
+}

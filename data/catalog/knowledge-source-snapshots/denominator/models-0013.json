@@ -1,0 +1,8788 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 13,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "mercedesbenz:123c",
+      "make": "Mercedes-Benz",
+      "model": "123 C",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:123d",
+      "make": "Mercedes-Benz",
+      "model": "123 D",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:123t",
+      "make": "Mercedes-Benz",
+      "model": "123 T",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:124",
+      "make": "Mercedes-Benz",
+      "model": "124",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:124c",
+      "make": "Mercedes-Benz",
+      "model": "124 C",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:124t",
+      "make": "Mercedes-Benz",
+      "model": "124 T",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:126c",
+      "make": "Mercedes-Benz",
+      "model": "126 C",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:140",
+      "make": "Mercedes-Benz",
+      "model": "140",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:163",
+      "make": "Mercedes-Benz",
+      "model": "163",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:164",
+      "make": "Mercedes-Benz",
+      "model": "164",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:170",
+      "make": "Mercedes-Benz",
+      "model": "170",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:170d",
+      "make": "Mercedes-Benz",
+      "model": "170 D",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:170da",
+      "make": "Mercedes-Benz",
+      "model": "170 DA",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:170ds",
+      "make": "Mercedes-Benz",
+      "model": "170 DS",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:170s",
+      "make": "Mercedes-Benz",
+      "model": "170 S",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:170sv",
+      "make": "Mercedes-Benz",
+      "model": "170 S-V",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:170sb",
+      "make": "Mercedes-Benz",
+      "model": "170 Sb",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:170sd",
+      "make": "Mercedes-Benz",
+      "model": "170 SD",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:170v",
+      "make": "Mercedes-Benz",
+      "model": "170 V",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:170va",
+      "make": "Mercedes-Benz",
+      "model": "170 VA",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:170vb",
+      "make": "Mercedes-Benz",
+      "model": "170 Vb",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:180",
+      "make": "Mercedes-Benz",
+      "model": "180",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:180b",
+      "make": "Mercedes-Benz",
+      "model": "180 B",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:180c",
+      "make": "Mercedes-Benz",
+      "model": "180 C",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:180d",
+      "make": "Mercedes-Benz",
+      "model": "180 D",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:190",
+      "make": "Mercedes-Benz",
+      "model": "190",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:190b",
+      "make": "Mercedes-Benz",
+      "model": "190 B",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:190c",
+      "make": "Mercedes-Benz",
+      "model": "190 C",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:190d",
+      "make": "Mercedes-Benz",
+      "model": "190 D",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:190dc",
+      "make": "Mercedes-Benz",
+      "model": "190 DC",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:190e",
+      "make": "Mercedes-Benz",
+      "model": "190 E",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:190sl",
+      "make": "Mercedes-Benz",
+      "model": "190 SL",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:200d",
+      "make": "Mercedes-Benz",
+      "model": "200 D",
+      "aliases": [
+        "200D"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/200-d",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "200 D"
+      }
+    },
+    {
+      "key": "mercedesbenz:200e",
+      "make": "Mercedes-Benz",
+      "model": "200 E",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:200ge",
+      "make": "Mercedes-Benz",
+      "model": "200 GE",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:200t",
+      "make": "Mercedes-Benz",
+      "model": "200 T",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:200te",
+      "make": "Mercedes-Benz",
+      "model": "200 TE",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:201",
+      "make": "Mercedes-Benz",
+      "model": "201",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:202",
+      "make": "Mercedes-Benz",
+      "model": "202",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:203",
+      "make": "Mercedes-Benz",
+      "model": "203",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:203k",
+      "make": "Mercedes-Benz",
+      "model": "203 K",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:207",
+      "make": "Mercedes-Benz",
+      "model": "207",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:207d",
+      "make": "Mercedes-Benz",
+      "model": "207 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:208",
+      "make": "Mercedes-Benz",
+      "model": "208",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:208d",
+      "make": "Mercedes-Benz",
+      "model": "208 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:209d",
+      "make": "Mercedes-Benz",
+      "model": "209 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:210",
+      "make": "Mercedes-Benz",
+      "model": "210",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:210d",
+      "make": "Mercedes-Benz",
+      "model": "210 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:211",
+      "make": "Mercedes-Benz",
+      "model": "211",
+      "aliases": [
+        "211 CDI"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/211",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "211"
+      }
+    },
+    {
+      "key": "mercedesbenz:211k",
+      "make": "Mercedes-Benz",
+      "model": "211 K",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:212",
+      "make": "Mercedes-Benz",
+      "model": "212",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/212",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "212"
+      }
+    },
+    {
+      "key": "mercedesbenz:212d",
+      "make": "Mercedes-Benz",
+      "model": "212 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:212kamg",
+      "make": "Mercedes-Benz",
+      "model": "212 K AMG",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:213",
+      "make": "Mercedes-Benz",
+      "model": "213",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:216",
+      "make": "Mercedes-Benz",
+      "model": "216",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:219",
+      "make": "Mercedes-Benz",
+      "model": "219",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:220",
+      "make": "Mercedes-Benz",
+      "model": "220",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:220a",
+      "make": "Mercedes-Benz",
+      "model": "220 A",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:220ce",
+      "make": "Mercedes-Benz",
+      "model": "220 CE",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:220d",
+      "make": "Mercedes-Benz",
+      "model": "220 D",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:220e",
+      "make": "Mercedes-Benz",
+      "model": "220 E",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:220s",
+      "make": "Mercedes-Benz",
+      "model": "220 S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:220sb",
+      "make": "Mercedes-Benz",
+      "model": "220 Sb",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:220se",
+      "make": "Mercedes-Benz",
+      "model": "220 SE",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:220sebc",
+      "make": "Mercedes-Benz",
+      "model": "220 SE B/c",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:220seb",
+      "make": "Mercedes-Benz",
+      "model": "220 SEb",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:220te",
+      "make": "Mercedes-Benz",
+      "model": "220 TE",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:230",
+      "make": "Mercedes-Benz",
+      "model": "230",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:230b",
+      "make": "Mercedes-Benz",
+      "model": "230 B",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:230c",
+      "make": "Mercedes-Benz",
+      "model": "230 C",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:230ce",
+      "make": "Mercedes-Benz",
+      "model": "230 CE",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:230e",
+      "make": "Mercedes-Benz",
+      "model": "230 E",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/230-e",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "230 E"
+      }
+    },
+    {
+      "key": "mercedesbenz:230g",
+      "make": "Mercedes-Benz",
+      "model": "230 G",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:230ge",
+      "make": "Mercedes-Benz",
+      "model": "230 GE",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:230s",
+      "make": "Mercedes-Benz",
+      "model": "230 S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:230sl",
+      "make": "Mercedes-Benz",
+      "model": "230 SL",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:230t",
+      "make": "Mercedes-Benz",
+      "model": "230 T",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:230te",
+      "make": "Mercedes-Benz",
+      "model": "230 TE",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:240",
+      "make": "Mercedes-Benz",
+      "model": "240",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:240d",
+      "make": "Mercedes-Benz",
+      "model": "240 D",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:240gd",
+      "make": "Mercedes-Benz",
+      "model": "240 GD",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:240td",
+      "make": "Mercedes-Benz",
+      "model": "240 TD",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:245g",
+      "make": "Mercedes-Benz",
+      "model": "245 G",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:250",
+      "make": "Mercedes-Benz",
+      "model": "250",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:250c",
+      "make": "Mercedes-Benz",
+      "model": "250 C",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:250ce",
+      "make": "Mercedes-Benz",
+      "model": "250 CE",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:250d",
+      "make": "Mercedes-Benz",
+      "model": "250 D",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:250gd",
+      "make": "Mercedes-Benz",
+      "model": "250 GD",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:250s",
+      "make": "Mercedes-Benz",
+      "model": "250 S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:250se",
+      "make": "Mercedes-Benz",
+      "model": "250 SE",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:250sec",
+      "make": "Mercedes-Benz",
+      "model": "250 SEC",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:250sl",
+      "make": "Mercedes-Benz",
+      "model": "250 SL",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:250t",
+      "make": "Mercedes-Benz",
+      "model": "250 T",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:250td",
+      "make": "Mercedes-Benz",
+      "model": "250 TD",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:260",
+      "make": "Mercedes-Benz",
+      "model": "260",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:260e",
+      "make": "Mercedes-Benz",
+      "model": "260 E",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:260se",
+      "make": "Mercedes-Benz",
+      "model": "260 SE",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:270",
+      "make": "Mercedes-Benz",
+      "model": "270",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:280",
+      "make": "Mercedes-Benz",
+      "model": "280",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:280c",
+      "make": "Mercedes-Benz",
+      "model": "280 C",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:280ce",
+      "make": "Mercedes-Benz",
+      "model": "280 CE",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:280e",
+      "make": "Mercedes-Benz",
+      "model": "280 E",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:280ge",
+      "make": "Mercedes-Benz",
+      "model": "280 GE",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/280-ge",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "280 GE"
+      }
+    },
+    {
+      "key": "mercedesbenz:280s",
+      "make": "Mercedes-Benz",
+      "model": "280 S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:280se",
+      "make": "Mercedes-Benz",
+      "model": "280 SE",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:280sel",
+      "make": "Mercedes-Benz",
+      "model": "280 SEL",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:280sl",
+      "make": "Mercedes-Benz",
+      "model": "280 SL",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:280slc",
+      "make": "Mercedes-Benz",
+      "model": "280 SLC",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:280te",
+      "make": "Mercedes-Benz",
+      "model": "280 TE",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:290",
+      "make": "Mercedes-Benz",
+      "model": "290",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:290gd",
+      "make": "Mercedes-Benz",
+      "model": "290 GD",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300",
+      "make": "Mercedes-Benz",
+      "model": "300",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/300",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "300"
+      }
+    },
+    {
+      "key": "mercedesbenz:300b",
+      "make": "Mercedes-Benz",
+      "model": "300 B",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300c",
+      "make": "Mercedes-Benz",
+      "model": "300 C",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300cd",
+      "make": "Mercedes-Benz",
+      "model": "300 CD",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300ce",
+      "make": "Mercedes-Benz",
+      "model": "300 CE",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300ce24",
+      "make": "Mercedes-Benz",
+      "model": "300 CE-24",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300d",
+      "make": "Mercedes-Benz",
+      "model": "300 D",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300e",
+      "make": "Mercedes-Benz",
+      "model": "300 E",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300e24",
+      "make": "Mercedes-Benz",
+      "model": "300 E-24",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300gd",
+      "make": "Mercedes-Benz",
+      "model": "300 GD",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300ge",
+      "make": "Mercedes-Benz",
+      "model": "300 GE",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300s",
+      "make": "Mercedes-Benz",
+      "model": "300 S",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300sd",
+      "make": "Mercedes-Benz",
+      "model": "300 SD",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300sdl",
+      "make": "Mercedes-Benz",
+      "model": "300 SDL",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300se",
+      "make": "Mercedes-Benz",
+      "model": "300 SE",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300sel",
+      "make": "Mercedes-Benz",
+      "model": "300 SEL",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300sl",
+      "make": "Mercedes-Benz",
+      "model": "300 SL",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300slroadster",
+      "make": "Mercedes-Benz",
+      "model": "300 SL Roadster",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300sl24",
+      "make": "Mercedes-Benz",
+      "model": "300 SL-24",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300td",
+      "make": "Mercedes-Benz",
+      "model": "300 TD",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300tdt",
+      "make": "Mercedes-Benz",
+      "model": "300 TDT",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300te",
+      "make": "Mercedes-Benz",
+      "model": "300 TE",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:300te24",
+      "make": "Mercedes-Benz",
+      "model": "300 TE-24",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:3000",
+      "make": "Mercedes-Benz",
+      "model": "3000",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:307d",
+      "make": "Mercedes-Benz",
+      "model": "307 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:308",
+      "make": "Mercedes-Benz",
+      "model": "308",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:308d",
+      "make": "Mercedes-Benz",
+      "model": "308 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:309",
+      "make": "Mercedes-Benz",
+      "model": "309",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:309d",
+      "make": "Mercedes-Benz",
+      "model": "309 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:310",
+      "make": "Mercedes-Benz",
+      "model": "310",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:310d",
+      "make": "Mercedes-Benz",
+      "model": "310 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:310dka",
+      "make": "Mercedes-Benz",
+      "model": "310 D-Ka",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:311",
+      "make": "Mercedes-Benz",
+      "model": "311",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:312",
+      "make": "Mercedes-Benz",
+      "model": "312",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:312d",
+      "make": "Mercedes-Benz",
+      "model": "312 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:313",
+      "make": "Mercedes-Benz",
+      "model": "313",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:315",
+      "make": "Mercedes-Benz",
+      "model": "315",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:316",
+      "make": "Mercedes-Benz",
+      "model": "316",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:316ngt",
+      "make": "Mercedes-Benz",
+      "model": "316 NGT",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:318",
+      "make": "Mercedes-Benz",
+      "model": "318",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:319",
+      "make": "Mercedes-Benz",
+      "model": "319",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:320",
+      "make": "Mercedes-Benz",
+      "model": "320",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:320ce",
+      "make": "Mercedes-Benz",
+      "model": "320 CE",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:320e",
+      "make": "Mercedes-Benz",
+      "model": "320 E",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:350",
+      "make": "Mercedes-Benz",
+      "model": "350",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/350",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "350"
+      }
+    },
+    {
+      "key": "mercedesbenz:350gd",
+      "make": "Mercedes-Benz",
+      "model": "350 GD",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:350s",
+      "make": "Mercedes-Benz",
+      "model": "350 S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:350sdl",
+      "make": "Mercedes-Benz",
+      "model": "350 SDL",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:350se",
+      "make": "Mercedes-Benz",
+      "model": "350 SE",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:350sl",
+      "make": "Mercedes-Benz",
+      "model": "350 SL",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:350slc",
+      "make": "Mercedes-Benz",
+      "model": "350 SLC",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:380",
+      "make": "Mercedes-Benz",
+      "model": "380",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:380se",
+      "make": "Mercedes-Benz",
+      "model": "380 SE",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:380sec",
+      "make": "Mercedes-Benz",
+      "model": "380 SEC",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:380sel",
+      "make": "Mercedes-Benz",
+      "model": "380 SEL",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:380sl",
+      "make": "Mercedes-Benz",
+      "model": "380 SL",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:380slc",
+      "make": "Mercedes-Benz",
+      "model": "380 SLC",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:400",
+      "make": "Mercedes-Benz",
+      "model": "400",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:400e",
+      "make": "Mercedes-Benz",
+      "model": "400 E",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:400se",
+      "make": "Mercedes-Benz",
+      "model": "400 SE",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:408d",
+      "make": "Mercedes-Benz",
+      "model": "408 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:410",
+      "make": "Mercedes-Benz",
+      "model": "410",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:410d",
+      "make": "Mercedes-Benz",
+      "model": "410 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:410ka",
+      "make": "Mercedes-Benz",
+      "model": "410 KA",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:412d",
+      "make": "Mercedes-Benz",
+      "model": "412 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:413",
+      "make": "Mercedes-Benz",
+      "model": "413",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:416",
+      "make": "Mercedes-Benz",
+      "model": "416",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:420",
+      "make": "Mercedes-Benz",
+      "model": "420",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:420se",
+      "make": "Mercedes-Benz",
+      "model": "420 SE",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:420sec",
+      "make": "Mercedes-Benz",
+      "model": "420 SEC",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:420sel",
+      "make": "Mercedes-Benz",
+      "model": "420 SEL",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:420sl",
+      "make": "Mercedes-Benz",
+      "model": "420 SL",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:450",
+      "make": "Mercedes-Benz",
+      "model": "450",
+      "aliases": [
+        "450 4MATIC"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/450",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "450"
+      }
+    },
+    {
+      "key": "mercedesbenz:450se",
+      "make": "Mercedes-Benz",
+      "model": "450 SE",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:450sel",
+      "make": "Mercedes-Benz",
+      "model": "450 SEL",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:450sl",
+      "make": "Mercedes-Benz",
+      "model": "450 SL",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:450slc",
+      "make": "Mercedes-Benz",
+      "model": "450 SLC",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:450sel69",
+      "make": "Mercedes-Benz",
+      "model": "450SEL6.9",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:500",
+      "make": "Mercedes-Benz",
+      "model": "500",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:500e",
+      "make": "Mercedes-Benz",
+      "model": "500 E",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:500s",
+      "make": "Mercedes-Benz",
+      "model": "500 S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:500se",
+      "make": "Mercedes-Benz",
+      "model": "500 SE",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:500sec",
+      "make": "Mercedes-Benz",
+      "model": "500 SEC",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "my",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:500sel",
+      "make": "Mercedes-Benz",
+      "model": "500 SEL",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:500sl",
+      "make": "Mercedes-Benz",
+      "model": "500 SL",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:518",
+      "make": "Mercedes-Benz",
+      "model": "518",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:560",
+      "make": "Mercedes-Benz",
+      "model": "560",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:560sec",
+      "make": "Mercedes-Benz",
+      "model": "560 SEC",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:560sel",
+      "make": "Mercedes-Benz",
+      "model": "560 SEL",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:560sl",
+      "make": "Mercedes-Benz",
+      "model": "560 SL",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:600",
+      "make": "Mercedes-Benz",
+      "model": "600",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:600se",
+      "make": "Mercedes-Benz",
+      "model": "600 SE",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:600sec",
+      "make": "Mercedes-Benz",
+      "model": "600 SEC",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:600sel",
+      "make": "Mercedes-Benz",
+      "model": "600 SEL",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:600sl",
+      "make": "Mercedes-Benz",
+      "model": "600 SL",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:609d",
+      "make": "Mercedes-Benz",
+      "model": "609 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:63amg",
+      "make": "Mercedes-Benz",
+      "model": "63 AMG",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:814d",
+      "make": "Mercedes-Benz",
+      "model": "814 D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:aclass",
+      "make": "Mercedes-Benz",
+      "model": "A-Class",
+      "aliases": [
+        "A / 250 / 4-MATIC AUT. HYBRID",
+        "A 150",
+        "A 160",
+        "A 170",
+        "A 180",
+        "A 180 D",
+        "A 200",
+        "A 200 D",
+        "A 220",
+        "A 220 4-MATIC AUT",
+        "A 220 4-MATIC AUT. HYBRID",
+        "A 220 4MATIC",
+        "A 220 AMG LINE 4MATIC AUTO",
+        "A 220 AMG LINE AUTO",
+        "A 220 AMG LINE EXECUTIVE AUTO",
+        "A 220 AMG LINE PREM + 4MATIC A",
+        "A 220 AMG LINE PREMIUM + AUTO",
+        "A 220 AMG LINE PREMIUM AUTO",
+        "A 220 AMG LINE PREMIUM D 4M A",
+        "A 220 AMG LINE PREMIUM+ D 4M A",
+        "A 220 D",
+        "A 220 D AMG LINE AUTO",
+        "A 220 D AMG LINE EXECUTIVE A",
+        "A 220 D AMG LINE PREMIUM + A",
+        "A 220 D AMG LINE PREMIUM AUTO",
+        "A 220 D AUT",
+        "A 250",
+        "A 250 4-MATIC AUT",
+        "A 250 AMG LINE AUTO",
+        "A 250 AMG LINE E AUTO",
+        "A 250 AMG LINE EXECUTIVE AUTO",
+        "A 250 AMG LINE EXECUTIVE E A",
+        "A 250 AMG LINE PREMIUM + A",
+        "A 250 AMG LINE PREMIUM + E A",
+        "A 250 AMG LINE PREMIUM AUTO",
+        "A 250 AMG LINE PREMIUM E AUTO",
+        "A 250 AUT",
+        "A 250 E",
+        "A 250 SPORT E AUTO",
+        "A 35 AMG 4MATIC",
+        "A 45 AMG 4MATIC",
+        "A-KLASSE",
+        "A180 セダン",
+        "A200 4MATIC",
+        "A200 SPECIAL EDITION A",
+        "A200d セダン",
+        "A220D 4MATIC",
+        "A22D",
+        "A250 4MATIC",
+        "A250 4MATIC セダン",
+        "A35",
+        "A45 AMG",
+        "Mercedes-AMG A35 4M",
+        "メルセデスAMG A35 4M セダン",
+        "メルセデスAMG A45 4MATIC",
+        "メルセデスAMG A45 S 4M+"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/a-class",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "A-Class"
+      }
+    },
+    {
+      "key": "mercedesbenz:adriatik",
+      "make": "Mercedes-Benz",
+      "model": "Adriatik",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:ambulance",
+      "make": "Mercedes-Benz",
+      "model": "Ambulance",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:amg",
+      "make": "Mercedes-Benz",
+      "model": "AMG",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/amg",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "AMG"
+      }
+    },
+    {
+      "key": "mercedesbenz:amggt",
+      "make": "Mercedes-Benz",
+      "model": "AMG GT",
+      "aliases": [
+        "メルセデス AMG GT",
+        "メルセデスAMG GT43 4M+",
+        "メルセデスAMG GT43 クーペ",
+        "メルセデスAMG GT53 4M+",
+        "メルセデスAMG GT63 4M+ クーペ",
+        "メルセデスAMG GT63PR 4M+ クーペ",
+        "メルセデスAMG GT63S 4M+",
+        "メルセデス AMG GT S"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/amg-gt",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "AMG GT"
+      }
+    },
+    {
+      "key": "mercedesbenz:atego",
+      "make": "Mercedes-Benz",
+      "model": "Atego",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:bclass",
+      "make": "Mercedes-Benz",
+      "model": "B-Class",
+      "aliases": [
+        "B / 220 D / AUT.",
+        "B / 250 / 4-MATIC AUT. HYBRID",
+        "B / 250 / AUT.",
+        "B / 250 E / AUT. HYBRID",
+        "B 160 D",
+        "B 18 D",
+        "B 180",
+        "B 180 D",
+        "B 200",
+        "B 200 D",
+        "B 220",
+        "B 220 4-MATIC AUT",
+        "B 220 4MATIC",
+        "B 220 AMG LINE D AUTO",
+        "B 220 AMG LINE EXECUTIVE 4M A",
+        "B 220 AMG LINE EXECUTIVE D A",
+        "B 220 AMG LINE PREMIUM + D A",
+        "B 220 AMG LINE PREMIUM 4M A",
+        "B 220 AMG LINE PREMIUM D AUTO",
+        "B 220 CDI 4MATIC",
+        "B 220 D",
+        "B 220 D 4MATIC",
+        "B 250",
+        "B 250 4-MATIC AUT",
+        "B 250 AMG LINE EXECUTIVE AUTO",
+        "B 250 AMG LINE EXECUTIVE E A",
+        "B 250 AMG LINE PREMIUM + AUTO",
+        "B 250 AMG LINE PREMIUM AUTO",
+        "B 250 AMG LINE PREMIUM E AUTO",
+        "B 250 AMG LINE PREMIUM+ E AUTO",
+        "B 250E",
+        "B-KLASSE",
+        "B160",
+        "B250 4MATIC",
+        "B690 MC"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/b-class",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "B-Class"
+      }
+    },
+    {
+      "key": "mercedesbenz:benz",
+      "make": "Mercedes-Benz",
+      "model": "Benz",
+      "aliases": [
+        "BENZ"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/benz",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Benz"
+      }
+    },
+    {
+      "key": "mercedesbenz:binz",
+      "make": "Mercedes-Benz",
+      "model": "Binz",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:bm",
+      "make": "Mercedes-Benz",
+      "model": "Bm",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:brabus",
+      "make": "Mercedes-Benz",
+      "model": "Brabus",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:bravia",
+      "make": "Mercedes-Benz",
+      "model": "Bravia",
+      "aliases": [
+        "BRAVIA SWAN 699"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/bravia",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Bravia"
+      }
+    },
+    {
+      "key": "mercedesbenz:burstner",
+      "make": "Mercedes-Benz",
+      "model": "Burstner",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:cclass",
+      "make": "Mercedes-Benz",
+      "model": "C-Class",
+      "aliases": [
+        "C / 220 T / D 4-MATIC AUT. HYBRID",
+        "C / 220 T / D 4-MATIC AUT. HYBRID ALL-TERRAIN",
+        "C / 220 T / D AUT. HYBRID",
+        "C / 300 / 4-MATIC AUT. HYBRID",
+        "C / 300 / AUT.",
+        "C / 300 T / E AUT. HYBRID",
+        "C 160",
+        "C 160 AUT",
+        "C 180",
+        "C 180D",
+        "C 200",
+        "C 200 D",
+        "C 220",
+        "C 220 AMG LINE D 4MATIC AUTO",
+        "C 220 AMG LINE D AUTO",
+        "C 220 AMG LINE ED PREM + D A",
+        "C 220 AMG LINE ED PREM D A",
+        "C 220 AMG LINE EDITION D 4M A",
+        "C 220 AMG LINE EDITION D AUTO",
+        "C 220 AMG LINE PREMIUM + D A",
+        "C 220 AMG LINE PREMIUM D 4M A",
+        "C 220 AMG LINE PREMIUM D AUTO",
+        "C 220 AMG LINE PREMIUM+ D 4M A",
+        "C 220 AMG LNE ED PREM + D 4M A",
+        "C 220 AMG LNE NGT ED PRM + D A",
+        "C 220 BLUETEC",
+        "C 220 CDI",
+        "C 220 D",
+        "C 220 D 4MATIC",
+        "C 220 d ステーションワゴン",
+        "C 220 SE D AUTO",
+        "C 220 SPORT D AUTO",
+        "C 220 SPORT EDITION PREM + D A",
+        "C 220 SPORT EDITION PREM D A",
+        "C 220 SPORT PREMIUM + D AUTO",
+        "C 220 T D 4-MATIC AUT",
+        "C 220 T D AUT",
+        "C 220D 4MATIC ALL-TERRAI",
+        "C 220D 4MATIC ALL-TERRAIN",
+        "C 230",
+        "C 250 CDI",
+        "C 250 WITH EQ TECHNOLOGY",
+        "C 260 L",
+        "C 300",
+        "C 300 4MATIC",
+        "C 300 4MATIC WITH EQ T.",
+        "C 300 AMG LINE AUTO",
+        "C 300 AMG LINE D AUTO",
+        "C 300 AMG LINE E 4MATIC AUTO",
+        "C 300 AMG LINE ED PREM + A",
+        "C 300 AMG LINE ED PREM + D A",
+        "C 300 AMG LINE ED PREM + DE A",
+        "C 300 AMG LINE ED PREM + E A",
+        "C 300 AMG LINE ED PREM D A",
+        "C 300 AMG LINE ED PREM MHEV A",
+        "C 300 AMG LINE ED PREMIUM DE A",
+        "C 300 AMG LINE ED PREMIUM E A",
+        "C 300 AMG LINE EDITION AUTO",
+        "C 300 AMG LINE EDITION D 4M A",
+        "C 300 AMG LINE EDITION D AUTO",
+        "C 300 AMG LINE EDITION DE AUTO",
+        "C 300 AMG LINE EDITION E AUTO",
+        "C 300 AMG LINE EDITION PREM A",
+        "C 300 AMG LINE EXEC MHEV 4M A",
+        "C 300 AMG LINE NGT ED PREM + A",
+        "C 300 AMG LINE NIGHT ED PREM A",
+        "C 300 AMG LINE PREM MHEV 4M A",
+        "C 300 AMG LINE PREMIUM + AUTO",
+        "C 300 AMG LINE PREMIUM + D A",
+        "C 300 AMG LINE PREMIUM AUTO",
+        "C 300 AMG LINE PREMIUM D 4M A",
+        "C 300 AMG LINE PREMIUM D AUTO",
+        "C 300 AMG LINE PREMIUM E 4M A",
+        "C 300 AMG LINE PREMIUM+ D 4M A",
+        "C 300 AMG LN NGHT ED MHEV 4M A",
+        "C 300 AMG LN NGT ED PRM + DE A",
+        "C 300 AMG LN NGT ED PRM D 4M A",
+        "C 300 AMG LN NGT ED PRM+D 4M A",
+        "C 300 AMG LNE NGT ED PRM + D A",
+        "C 300 D",
+        "C 300 DE",
+        "C 300 E",
+        "C 300 H",
+        "C 300 SPORT ED PREMIUM + DE A",
+        "C 300 SPORT ED PREMIUM DE AUTO",
+        "C 300 SPORT EDITION DE AUTO",
+        "C 300 SPORT EDITION E AUTO",
+        "C 300 SPORT EDITION PREM + A",
+        "C 300 SPORT EDITION PREM E A",
+        "C 300 SPORT MHEV 4MATIC AUTO",
+        "C 300 SPORT PREMIUM AUTO",
+        "C 300 T 4-MATIC AUT. HYBRID",
+        "C 300 T DE AUT HYBRID",
+        "C 300 WITH EQ TECHNOLOGY",
+        "C 300D 4MATIC",
+        "C 320",
+        "C 350 CDI",
+        "C 350 E",
+        "C 400 4MATIC",
+        "C 400 4MATIC WITH EQ T.",
+        "C 400 E 4MATIC",
+        "C 43 AMG",
+        "C 43 AMG 4M",
+        "C 43 AMG 4M KOMBI",
+        "C 63 AMG S",
+        "C 63 AMG S E PERFORMANCE",
+        "C 63 E S 4MATIC",
+        "C 63 E S AMG",
+        "C 63E AMG",
+        "C-KLASSE",
+        "C180 カブリオレ",
+        "C180 クーペ",
+        "C180 ステーションワゴン",
+        "C200 4MATIC",
+        "C200 4MATIC SW",
+        "C200 4MATIC ステーションワゴン",
+        "C200 AMG LN NGT ED PREM MHEV A",
+        "C200 AMG LN NGT ED PRM+ MHEV A",
+        "C200 ステーションワゴン",
+        "C200CGI",
+        "C200CGI ステーションワゴン",
+        "C220d 4MATIC AT",
+        "C220d 4MATIC SW",
+        "C230 ESPRIT KOMP AUTO",
+        "C250",
+        "C250 ステーションワゴン",
+        "C250CGI",
+        "C250CGI クーペ",
+        "C250CGI ステーションワゴン",
+        "C300 AMG LN NGT ED PRM+ MHEV A",
+        "C300 DE 4MATIC",
+        "C300 E 4MATIC",
+        "C300 カブリオレ",
+        "C300 クーペ",
+        "C350",
+        "C350 ステーションワゴン",
+        "C450 AMG 4MATIC",
+        "C450 AMG 4MATIC ステーションワゴン",
+        "C63",
+        "C63 ステーションワゴン",
+        "C63S",
+        "C63S ステーションワゴン",
+        "メルセデス AMG C43 4M SW",
+        "メルセデス AMG C43 4M カブリオレ",
+        "メルセデス AMG C43 4M クーペ",
+        "メルセデス AMG C43 4M ステーションワゴン",
+        "メルセデス AMG C43 4MATIC",
+        "メルセデス AMG C63 クーペ",
+        "メルセデス AMG C63S カブリオレ",
+        "メルセデス AMG C63S クーペ",
+        "メルセデスAMG C63",
+        "メルセデスAMG C63 SW",
+        "メルセデスAMG C63S",
+        "メルセデスAMG C63S SW"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/c-class",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "C-Class"
+      }
+    },
+    {
+      "key": "mercedesbenz:cabriolet",
+      "make": "Mercedes-Benz",
+      "model": "Cabriolet",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:carthago",
+      "make": "Mercedes-Benz",
+      "model": "Carthago",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:citan",
+      "make": "Mercedes-Benz",
+      "model": "Citan",
+      "aliases": [
+        "CITAN",
+        "E CITAN TOURER",
+        "ECITAN",
+        "ECITAN TOURER/EQT",
+        "ECITAN TOURIER"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/citan",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Citan"
+      }
+    },
+    {
+      "key": "mercedesbenz:cl",
+      "make": "Mercedes-Benz",
+      "model": "Cl",
+      "aliases": [
+        "CL 500 550",
+        "CL63",
+        "CL65"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/cl",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Cl"
+      }
+    },
+    {
+      "key": "mercedesbenz:cla",
+      "make": "Mercedes-Benz",
+      "model": "CLA",
+      "aliases": [
+        "CLA 180 シューティングブレーク",
+        "CLA 250 4MATIC シューティングブレーク",
+        "CLA 250 シューティングブレーク",
+        "CLA180",
+        "CLA180 SB",
+        "CLA200d",
+        "CLA200d SB",
+        "CLA220 4MATIC",
+        "CLA220 4MATIC SB",
+        "CLA220D",
+        "CLA250",
+        "CLA250 4M SB",
+        "CLA250 4MATIC",
+        "CLA250E",
+        "CLA45 AMG",
+        "CLA45 AMG 4MATIC シューティングブレーク",
+        "メルセデス AMG CLA45 4M",
+        "メルセデスAMG CLA35 4M",
+        "メルセデスAMG CLA35 4M SB",
+        "メルセデスAMG CLA45 S 4M+",
+        "メルセデスAMG CLA45 S 4M+ SB"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/cla",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "CLA"
+      }
+    },
+    {
+      "key": "mercedesbenz:clase",
+      "make": "Mercedes-Benz",
+      "model": "Clase",
+      "aliases": [
+        "CLASE A",
+        "CLASE B",
+        "CLASE C",
+        "CLASE GLB",
+        "CLASE T",
+        "CLASE V"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/clase",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Clase"
+      }
+    },
+    {
+      "key": "mercedesbenz:classe",
+      "make": "Mercedes-Benz",
+      "model": "Classe",
+      "aliases": [
+        "CLASSE A",
+        "CLASSE B",
+        "CLASSE C",
+        "CLASSE CLA",
+        "CLASSE CLE",
+        "CLASSE CLS",
+        "CLASSE E",
+        "CLASSE EQA",
+        "CLASSE EQB",
+        "CLASSE EQC",
+        "CLASSE EQE",
+        "CLASSE EQS",
+        "CLASSE EQV",
+        "CLASSE G",
+        "CLASSE GLA",
+        "CLASSE GLB",
+        "CLASSE GLC",
+        "CLASSE GLE",
+        "CLASSE GLS",
+        "CLASSE S",
+        "CLASSE SL",
+        "CLASSE SLC",
+        "CLASSE T",
+        "CLASSE V",
+        "Classe V 220d",
+        "Classe V 250d",
+        "Classe V 300d"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/classe",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Classe"
+      }
+    },
+    {
+      "key": "mercedesbenz:clc",
+      "make": "Mercedes-Benz",
+      "model": "Clc",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:cle",
+      "make": "Mercedes-Benz",
+      "model": "CLE",
+      "aliases": [
+        "CLE200",
+        "CLE200 クーペ",
+        "CLE200カブリオレ",
+        "CLE220D",
+        "メルセデスAMG CLE53 4M+ C",
+        "メルセデスAMG CLE53 4M+ CA"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/cle",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "CLE"
+      }
+    },
+    {
+      "key": "mercedesbenz:clk",
+      "make": "Mercedes-Benz",
+      "model": "CLK",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:cls",
+      "make": "Mercedes-Benz",
+      "model": "CLS",
+      "aliases": [
+        "CLS 220 d",
+        "CLS 220 d シューティングブレーク",
+        "CLS400",
+        "CLS400 シューティングブレーク",
+        "CLS450 4MATIC",
+        "CLS550",
+        "CLS550 4MATIC",
+        "CLS63 S",
+        "CLS63S 4MATIC",
+        "CLS63S 4MATIC SB",
+        "メルセデスAMG CLS53 4M+"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/cls",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "CLS"
+      }
+    },
+    {
+      "key": "mercedesbenz:coupe",
+      "make": "Mercedes-Benz",
+      "model": "Coupe",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:d",
+      "make": "Mercedes-Benz",
+      "model": "D",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:daimler",
+      "make": "Mercedes-Benz",
+      "model": "Daimler",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:daimlerchrysler",
+      "make": "Mercedes-Benz",
+      "model": "Daimlerchrysler",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:diesel",
+      "make": "Mercedes-Benz",
+      "model": "Diesel",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:eclass",
+      "make": "Mercedes-Benz",
+      "model": "E-Class",
+      "aliases": [
+        "E / 220 T / D 4 MATIC AUT. HYBRID",
+        "E / 300 / AUT. HYBRID",
+        "E / 300 E / 4-MATIC AUT. HYBRID",
+        "E / 300 E / AUT. HYBRID",
+        "E / 300 T DE 4-MATIC AUT. HYBRID",
+        "E / 400 E / 4-MATIC AUT. HYBRID",
+        "E / 400 T / D 4 MATIC AUT. ALL TERAIN",
+        "E / 450 / 4-MATIC AUT. HYBRID",
+        "E / 450 D / 4-MATIC AUT. HYBRID",
+        "E 180",
+        "E 200",
+        "E 200 D",
+        "E 22 D 4MATIC ALLTERRAIN",
+        "E 220",
+        "E 220 4MATIC",
+        "E 220 AMG LINE D 4MATIC AUTO",
+        "E 220 AMG LINE ED PREM + D A",
+        "E 220 AMG LINE ED PREM D A",
+        "E 220 AMG LINE EDITION D AUTO",
+        "E 220 AMG LN NGT ED PRM D 4M A",
+        "E 220 AMG LN NGT ED PRM+D 4M A",
+        "E 220 AMG LNE NGT ED PRM + D A",
+        "E 220 AMG LNE NIGHT ED PRM D A",
+        "E 220 BlueTEC",
+        "E 220 BlueTEC ステーションワゴン",
+        "E 220 CDI",
+        "E 220 D",
+        "E 220 D 4MATIC",
+        "E 220 SPORT D AUTO",
+        "E 220 T D 4 MATIC AUT",
+        "E 220 T D 4 MATIC AUT ALL TERAIN",
+        "E 220 T D AUT",
+        "E 250 CDI",
+        "E 250 CDI 4MATIC",
+        "E 260",
+        "E 260 4MATIC",
+        "E 260 L",
+        "E 300 AMG LINE AUTO",
+        "E 300 AMG LINE D AUTO",
+        "E 300 AMG LINE DE AUTO",
+        "E 300 AMG LINE E AUTO",
+        "E 300 AMG LINE ED PREMIUM D A",
+        "E 300 AMG LINE EDITION D AUTO",
+        "E 300 AMG LINE EDITION DE AUTO",
+        "E 300 AMG LINE EDITION E AUTO",
+        "E 300 AMG LINE NGT ED PREM + A",
+        "E 300 AMG LINE PREMIUM + AUTO",
+        "E 300 AMG LINE PREMIUM + DE A",
+        "E 300 AMG LINE PREMIUM + E A",
+        "E 300 AMG LINE PREMIUM AUTO",
+        "E 300 AMG LINE PREMIUM D AUTO",
+        "E 300 AMG LINE PREMIUM DE AUTO",
+        "E 300 AMG LINE PREMIUM E 4M A",
+        "E 300 AMG LINE PREMIUM E AUTO",
+        "E 300 AMG LINE PREMIUM+ E 4M A",
+        "E 300 AMG LN NGT ED PRM + DE A",
+        "E 300 AMG LN NIGHT ED PREM+D A",
+        "E 300 AMG LNE NGT ED PREM+ E A",
+        "E 300 BLUETEC HYBRID",
+        "E 300 D",
+        "E 300 D 4MATIC",
+        "E 300 D AMG LINE PREMIUM + A",
+        "E 300 D AUT",
+        "E 300 D E ALLTERRAIN",
+        "E 300 DE",
+        "E 300 DE 4MATIC",
+        "E 300 E 4MATIC",
+        "E 300 E L",
+        "E 300 L",
+        "E 300 SE DE AUTO",
+        "E 300 SE E AUTO",
+        "E 300 SE PREMIUM + DE AUTO",
+        "E 300 SE PREMIUM + E AUTO",
+        "E 300 SE PREMIUM DE AUTO",
+        "E 300DE 4MATIC ALLTERRAI",
+        "E 300DE 4MATIC ALLTERRAIN",
+        "E 300E",
+        "E 320",
+        "E 320CDI",
+        "E 330D 4MATIC ALLTERRAIN",
+        "E 350 4MATIC",
+        "E 350 AMG LINE AUTO",
+        "E 350 AMG LINE ED PREM + D A",
+        "E 350 AMG LINE ED PREMIUM D A",
+        "E 350 AMG LINE EDITION D AUTO",
+        "E 350 AMG LINE PREMIUM + AUTO",
+        "E 350 AMG LNE NGHT ED PREM D A",
+        "E 350 AMG LNE NGT ED PREM+ D A",
+        "E 350 BlueTEC",
+        "E 350 BlueTEC ステーションワゴン",
+        "E 350 CDI",
+        "E 350 D",
+        "E 350 E",
+        "E 350 E AMG LINE AUTO",
+        "E 350 E AMG LINE PREMIUM AUTO",
+        "E 400 ALL TERRAIN ED D 4M A",
+        "E 400 AMG LINE D 4MATIC AUTO",
+        "E 400 AMG LINE ED PRM + D 4M A",
+        "E 400 AMG LINE EDITION D 4M A",
+        "E 400 AMG LINE PREM + D 4M A",
+        "E 400 AMG LINE PREMIUM D 4M A",
+        "E 400 AMG LN NGT ED PRM D 4M A",
+        "E 400 AMG LN NGT ED PRM+D 4M A",
+        "E 400 d",
+        "E 400 D 4 MATIC",
+        "E 400 D 4-MATIC AUT",
+        "E 400 D 4MATIC ALLTERRAI",
+        "E 400 D 4MATIC ALLTERRAIN",
+        "E 400 d MATIC AllTerain",
+        "E 400 E 4MATIC",
+        "E 450",
+        "E 450 4MATIC ALLTERRAIN",
+        "E 450 4MATIC C",
+        "E 450 4MATIC STATIONWAGON",
+        "E 450 4MATIC T",
+        "E 450 AMG LINE 4MATIC AUTO",
+        "E 450 AMG LINE ED PREM + 4M A",
+        "E 450 AMG LINE EDITION 4M A",
+        "E 450 AMG LINE PREMIUM + 4M A",
+        "E 450 AMG LN NGT ED PRM + 4M A",
+        "E 450 AMG LNE NGHT ED PREM 4MA",
+        "E 450 AMG LNE NGT ED PRM+ 4M A",
+        "E 450 D 4MATIC",
+        "E 450 D 4MATIC ALLTERRAI",
+        "E 450 D 4MATIC ALLTERRAIN",
+        "E 63 AMG S-MODELL",
+        "E-CLASS",
+        "E-KLASSE",
+        "E200 4MATIC",
+        "E200 4MATIC SW",
+        "E200 4MATIC ステーションワゴン",
+        "E200 カブリオレ",
+        "E200 クーペ",
+        "E200 ステーションワゴン",
+        "E220D 4 MATIC ALLTERRAIN",
+        "E220d 4MATIC AT",
+        "E220d 4MATIC SW",
+        "E220d ステーションワゴン",
+        "E250",
+        "E250 CDI COLEMAN MILNE AUTO",
+        "E250 カブリオレ",
+        "E250 クーペ",
+        "E250 ステーションワゴン",
+        "E300",
+        "E300 4MATIC",
+        "E300 4MATIC ステーションワゴン",
+        "E300 BLUETEC",
+        "E300 E T",
+        "E300 クーペ",
+        "E300 ステーションワゴン",
+        "E300カブリオレ",
+        "E350",
+        "E350 ステーションワゴン",
+        "E400",
+        "E400 4MATIC",
+        "E400 4MATIC カブリオレ",
+        "E400 4MATIC クーペ",
+        "E400 4MATIC ステーションワゴン",
+        "E400 HYBRID",
+        "E400 カブリオレ",
+        "E400 クーペ",
+        "E400 ステーションワゴン",
+        "E450 4M AT",
+        "E450 4MATIC",
+        "E450 4MATIC SW",
+        "E450 4MATIC WITH EQ TECHN",
+        "E450 4MATIC カブリオレ",
+        "E450 4MATIC クーペ",
+        "E450 4MATIC ステーションワゴン",
+        "E53 4MATIC+ カブリオレ",
+        "E53 4MATIC+ クーペ",
+        "E550",
+        "E550 ステーションワゴン",
+        "E63",
+        "E63 4MATIC",
+        "E63 4MATIC ステーションワゴン",
+        "E63S",
+        "E63S 4MATIC",
+        "E63S 4MATIC ステーションワゴン",
+        "メルセデス AMG E43 4M SW",
+        "メルセデス AMG E43 4M ステーションワゴン",
+        "メルセデス AMG E43 4MATIC",
+        "メルセデス AMG E53 4MATIC+",
+        "メルセデス AMG E53 4MATIC+ ステーションワゴン",
+        "メルセデス AMG E63 4M+ ステーションワゴン",
+        "メルセデス AMG E63 4M+SW",
+        "メルセデス AMG E63 4MATIC+",
+        "メルセデス AMG E63S 4M+",
+        "メルセデス AMG E63S 4M+ SW",
+        "メルセデス AMG E63S 4M+ ステーションワゴン",
+        "メルセデスAMG E53 4M+ CA",
+        "メルセデスAMG E53 4M+ SW",
+        "メルセデスAMG E53 4M+ クーペ"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/e-class",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "E-Class"
+      }
+    },
+    {
+      "key": "mercedesbenz:electric",
+      "make": "Mercedes-Benz",
+      "model": "Electric",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:elnagh",
+      "make": "Mercedes-Benz",
+      "model": "Elnagh",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": null,
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "mercedesbenz:eqa",
+      "make": "Mercedes-Benz",
+      "model": "EQA",
+      "aliases": [
+        "EQA350 4MATIC"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/eqa",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "EQA"
+      }
+    },
+    {
+      "key": "mercedesbenz:eqb",
+      "make": "Mercedes-Benz",
+      "model": "EQB",
+      "aliases": [
+        "EQB250",
+        "EQB250+"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/eqb",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "EQB"
+      }
+    },
+    {
+      "key": "mercedesbenz:eqc",
+      "make": "Mercedes-Benz",
+      "model": "EQC",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/eqc",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "EQC"
+      }
+    },
+    {
+      "key": "mercedesbenz:eqe",
+      "make": "Mercedes-Benz",
+      "model": "EQE",
+      "aliases": [
+        "EQE300",
+        "EQE350"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/eqe",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "EQE"
+      }
+    },
+    {
+      "key": "mercedesbenz:eqs",
+      "make": "Mercedes-Benz",
+      "model": "EQS",
+      "aliases": [
+        "EQS450"
+      ],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/eqs",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "EQS"
+      }
+    },
+    {
+      "key": "mercedesbenz:eqt",
+      "make": "Mercedes-Benz",
+      "model": "Eqt",
+      "aliases": [
+        "EQT"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/eqt",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "Eqt"
+      }
+    },
+    {
+      "key": "mercedesbenz:eqv",
+      "make": "Mercedes-Benz",
+      "model": "EQV",
+      "aliases": [],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/eqv",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "EQV"
+      }
+    },
+    {
+      "key": "mercedesbenz:esprinter",
+      "make": "Mercedes-Benz",
+      "model": "eSprinter",
+      "aliases": [
+        "ESPRINTER"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "mercedes-benz",
+        "modelId": "mercedes-benz/esprinter",
+        "canonicalMake": "Mercedes-Benz",
+        "canonicalModel": "eSprinter"
+      }
+    }
+  ]
+}

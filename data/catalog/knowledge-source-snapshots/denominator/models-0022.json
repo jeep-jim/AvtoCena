@@ -1,0 +1,1000 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 22,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "wuling:yangguang",
+      "make": "Wuling",
+      "model": "Yangguang",
+      "aliases": [
+        "五菱 扬光",
+        "五菱扬光"
+      ],
+      "bodyTypes": [
+        "Van"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/yangguang",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Yangguang"
+      }
+    },
+    {
+      "key": "wuling:zhengcheng",
+      "make": "Wuling",
+      "model": "Zhengcheng",
+      "aliases": [
+        "五菱 征程"
+      ],
+      "bodyTypes": [
+        "MPV",
+        "Van"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/zhengcheng",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Zhengcheng"
+      }
+    },
+    {
+      "key": "wuling:zhiguang",
+      "make": "Wuling",
+      "model": "Zhiguang",
+      "aliases": [
+        "五菱 之光",
+        "五菱 之光EV"
+      ],
+      "bodyTypes": [
+        "Van"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "wuling",
+        "modelId": "wuling/zhiguang",
+        "canonicalMake": "Wuling",
+        "canonicalModel": "Zhiguang"
+      }
+    },
+    {
+      "key": "xcite:xcross7",
+      "make": "XCITE",
+      "model": "X-Cross 7",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "xcite",
+        "modelId": "xcite/x-cross-7",
+        "canonicalMake": "XCITE",
+        "canonicalModel": "X-Cross 7"
+      }
+    },
+    {
+      "key": "xcite:xcross8",
+      "make": "XCITE",
+      "model": "X-Cross 8",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "xcite",
+        "modelId": "xcite/x-cross-8",
+        "canonicalMake": "XCITE",
+        "canonicalModel": "X-Cross 8"
+      }
+    },
+    {
+      "key": "xev:yoyopro",
+      "make": "Xev",
+      "model": "Yoyo Pro",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "xiaomi:su7max",
+      "make": "Xiaomi",
+      "model": "SU7 Max",
+      "aliases": [
+        "XIAOMI SU7 MAX"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "xiaomi",
+        "modelId": "xiaomi/su7-max",
+        "canonicalMake": "Xiaomi",
+        "canonicalModel": "SU7 Max"
+      }
+    },
+    {
+      "key": "xpeng:g3",
+      "make": "XPeng",
+      "model": "G3",
+      "aliases": [
+        "G3"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "xpeng",
+        "modelId": "xpeng/g3",
+        "canonicalMake": "XPeng",
+        "canonicalModel": "G3"
+      }
+    },
+    {
+      "key": "xpeng:g6",
+      "make": "XPeng",
+      "model": "G6",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "xpeng",
+        "modelId": "xpeng/g6",
+        "canonicalMake": "XPeng",
+        "canonicalModel": "G6"
+      }
+    },
+    {
+      "key": "xpeng:g6longrange",
+      "make": "XPeng",
+      "model": "G6 Long Range",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "xpeng",
+        "modelId": null,
+        "canonicalMake": "XPeng",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "xpeng:g6standardrange",
+      "make": "XPeng",
+      "model": "G6 Standard Range",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "xpeng",
+        "modelId": null,
+        "canonicalMake": "XPeng",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "xpeng:g9",
+      "make": "XPeng",
+      "model": "G9",
+      "aliases": [
+        "XPENG G9"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "xpeng",
+        "modelId": "xpeng/g9",
+        "canonicalMake": "XPeng",
+        "canonicalModel": "G9"
+      }
+    },
+    {
+      "key": "xpeng:monam03",
+      "make": "XPeng",
+      "model": "MONA M03",
+      "aliases": [
+        "小鹏 M03"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "xpeng",
+        "modelId": "xpeng/mona-m03",
+        "canonicalMake": "XPeng",
+        "canonicalModel": "MONA M03"
+      }
+    },
+    {
+      "key": "xpeng:p7",
+      "make": "XPeng",
+      "model": "P7",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "xpeng",
+        "modelId": "xpeng/p7",
+        "canonicalMake": "XPeng",
+        "canonicalModel": "P7"
+      }
+    },
+    {
+      "key": "xpeng:p7plus",
+      "make": "XPeng",
+      "model": "P7+",
+      "aliases": [
+        "小鹏 P7+"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "xpeng",
+        "modelId": "xpeng/p7-plus",
+        "canonicalMake": "XPeng",
+        "canonicalModel": "P7+"
+      }
+    },
+    {
+      "key": "xpeng:p7i",
+      "make": "XPeng",
+      "model": "P7I",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "xpeng",
+        "modelId": "xpeng/p7i",
+        "canonicalMake": "XPeng",
+        "canonicalModel": "P7I"
+      }
+    },
+    {
+      "key": "xpeng:x9",
+      "make": "XPeng",
+      "model": "X9",
+      "aliases": [
+        "小鹏 X9"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "my",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "xpeng",
+        "modelId": "xpeng/x9",
+        "canonicalMake": "XPeng",
+        "canonicalModel": "X9"
+      }
+    },
+    {
+      "key": "yucon:microlineryucon",
+      "make": "Yucon",
+      "model": "Microliner Yucon",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "yudo:3",
+      "make": "Yudo",
+      "model": "3",
+      "aliases": [
+        "YUDO 3"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "yudo",
+        "modelId": "yudo/3",
+        "canonicalMake": "Yudo",
+        "canonicalModel": "3"
+      }
+    },
+    {
+      "key": "yugo:45a",
+      "make": "Yugo",
+      "model": "45A",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "yugo:55a",
+      "make": "Yugo",
+      "model": "55A",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "zastava:1100",
+      "make": "Zastava",
+      "model": "1100",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "zastava:750",
+      "make": "Zastava",
+      "model": "750",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "zastava:yugo",
+      "make": "Zastava",
+      "model": "Yugo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "zaz:968",
+      "make": "ZAZ",
+      "model": "968",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "zaz:forza",
+      "make": "ZAZ",
+      "model": "Forza",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "zaz:lanos",
+      "make": "ZAZ",
+      "model": "Lanos",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "zaz:sens",
+      "make": "ZAZ",
+      "model": "Sens",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "zaz:t13110",
+      "make": "ZAZ",
+      "model": "T13110",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "zeekr:001",
+      "make": "Zeekr",
+      "model": "001",
+      "aliases": [
+        "ZEEKR 001"
+      ],
+      "bodyTypes": [
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "zeekr",
+        "modelId": "zeekr/001",
+        "canonicalMake": "Zeekr",
+        "canonicalModel": "001"
+      }
+    },
+    {
+      "key": "zeekr:009",
+      "make": "Zeekr",
+      "model": "009",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "zeekr",
+        "modelId": null,
+        "canonicalMake": "Zeekr",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "zeekr:7gt",
+      "make": "Zeekr",
+      "model": "7GT",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "zeekr",
+        "modelId": null,
+        "canonicalMake": "Zeekr",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "zeekr:7x",
+      "make": "Zeekr",
+      "model": "7X",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "zeekr",
+        "modelId": "zeekr/7x",
+        "canonicalMake": "Zeekr",
+        "canonicalModel": "7X"
+      }
+    },
+    {
+      "key": "zeekr:x",
+      "make": "Zeekr",
+      "model": "X",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "zeekr",
+        "modelId": "zeekr/x",
+        "canonicalMake": "Zeekr",
+        "canonicalModel": "X"
+      }
+    },
+    {
+      "key": "zenos:e10",
+      "make": "Zenos",
+      "model": "E10",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    }
+  ]
+}

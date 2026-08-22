@@ -1,0 +1,8361 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_model",
+  "chunk": 10,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "ineos:grenadier",
+      "make": "INEOS",
+      "model": "Grenadier",
+      "aliases": [
+        "GRENADIER",
+        "GRENADIER TRIALMASTER",
+        "GRENADIER TRIALMASTER M1 DSL",
+        "INEOS GRENADIER",
+        "INEOS GRENADIER /"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ineos",
+        "modelId": "ineos/grenadier",
+        "canonicalMake": "INEOS",
+        "canonicalModel": "Grenadier"
+      }
+    },
+    {
+      "key": "infiniti:ex",
+      "make": "Infiniti",
+      "model": "EX",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:ex25",
+      "make": "Infiniti",
+      "model": "EX25",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:ex30",
+      "make": "Infiniti",
+      "model": "EX30",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:ex30d",
+      "make": "Infiniti",
+      "model": "EX30D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:ex35",
+      "make": "Infiniti",
+      "model": "EX35",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": "infiniti/ex35",
+        "canonicalMake": "Infiniti",
+        "canonicalModel": "EX35"
+      }
+    },
+    {
+      "key": "infiniti:ex37",
+      "make": "Infiniti",
+      "model": "EX37",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:fx30",
+      "make": "Infiniti",
+      "model": "FX30",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:fx30d",
+      "make": "Infiniti",
+      "model": "FX30D",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:fx35",
+      "make": "Infiniti",
+      "model": "FX35",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:fx37",
+      "make": "Infiniti",
+      "model": "FX37",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:fx45",
+      "make": "Infiniti",
+      "model": "FX45",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:fx50",
+      "make": "Infiniti",
+      "model": "FX50",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:fx50s",
+      "make": "Infiniti",
+      "model": "FX50S",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:g20",
+      "make": "Infiniti",
+      "model": "G20",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:g25",
+      "make": "Infiniti",
+      "model": "G25",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:g25x",
+      "make": "Infiniti",
+      "model": "G25X",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": "infiniti/g25x",
+        "canonicalMake": "Infiniti",
+        "canonicalModel": "G25X"
+      }
+    },
+    {
+      "key": "infiniti:g35",
+      "make": "Infiniti",
+      "model": "G35",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": "infiniti/g35",
+        "canonicalMake": "Infiniti",
+        "canonicalModel": "G35"
+      }
+    },
+    {
+      "key": "infiniti:g35x",
+      "make": "Infiniti",
+      "model": "G35X",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:g37",
+      "make": "Infiniti",
+      "model": "G37",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:g37x",
+      "make": "Infiniti",
+      "model": "G37X",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:i30",
+      "make": "Infiniti",
+      "model": "I30",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:i35",
+      "make": "Infiniti",
+      "model": "I35",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:j30",
+      "make": "Infiniti",
+      "model": "J30",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:jx35",
+      "make": "Infiniti",
+      "model": "JX35",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:m",
+      "make": "Infiniti",
+      "model": "M",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": "infiniti/m",
+        "canonicalMake": "Infiniti",
+        "canonicalModel": "M"
+      }
+    },
+    {
+      "key": "infiniti:m25",
+      "make": "Infiniti",
+      "model": "M25",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:m30",
+      "make": "Infiniti",
+      "model": "M30",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:m35",
+      "make": "Infiniti",
+      "model": "M35",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:m35h",
+      "make": "Infiniti",
+      "model": "M35H",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:m35x",
+      "make": "Infiniti",
+      "model": "M35X",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:m37",
+      "make": "Infiniti",
+      "model": "M37",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": "infiniti/m37",
+        "canonicalMake": "Infiniti",
+        "canonicalModel": "M37"
+      }
+    },
+    {
+      "key": "infiniti:m37x",
+      "make": "Infiniti",
+      "model": "M37X",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:m45",
+      "make": "Infiniti",
+      "model": "M45",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:m45x",
+      "make": "Infiniti",
+      "model": "M45X",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:m56",
+      "make": "Infiniti",
+      "model": "M56",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:m56x",
+      "make": "Infiniti",
+      "model": "M56X",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:q30",
+      "make": "Infiniti",
+      "model": "Q30",
+      "aliases": [
+        "INFINITI Q 30",
+        "INFINITI Q30"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": "infiniti/q30",
+        "canonicalMake": "Infiniti",
+        "canonicalModel": "Q30"
+      }
+    },
+    {
+      "key": "infiniti:q30s",
+      "make": "Infiniti",
+      "model": "Q30S",
+      "aliases": [
+        "INFINITI Q30S",
+        "Infiniti Q30S"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": "infiniti/q30s",
+        "canonicalMake": "Infiniti",
+        "canonicalModel": "Q30S"
+      }
+    },
+    {
+      "key": "infiniti:q40",
+      "make": "Infiniti",
+      "model": "Q40",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:q45",
+      "make": "Infiniti",
+      "model": "Q45",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:q50",
+      "make": "Infiniti",
+      "model": "Q50",
+      "aliases": [
+        "INFINITI Q 50",
+        "Infiniti Q50",
+        "INFINITI Q50"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": "infiniti/q50",
+        "canonicalMake": "Infiniti",
+        "canonicalModel": "Q50"
+      }
+    },
+    {
+      "key": "infiniti:q50s",
+      "make": "Infiniti",
+      "model": "Q50S",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:q50sredsport",
+      "make": "Infiniti",
+      "model": "Q50S Red Sport",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:q60",
+      "make": "Infiniti",
+      "model": "Q60",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:q60sredsport",
+      "make": "Infiniti",
+      "model": "Q60S Red Sport",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:q70",
+      "make": "Infiniti",
+      "model": "Q70",
+      "aliases": [
+        "INFINITI Q70"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": "infiniti/q70",
+        "canonicalMake": "Infiniti",
+        "canonicalModel": "Q70"
+      }
+    },
+    {
+      "key": "infiniti:qx30",
+      "make": "Infiniti",
+      "model": "QX30",
+      "aliases": [
+        "INFINITI QX30"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": "infiniti/qx30",
+        "canonicalMake": "Infiniti",
+        "canonicalModel": "QX30"
+      }
+    },
+    {
+      "key": "infiniti:qx4",
+      "make": "Infiniti",
+      "model": "QX4",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:qx50",
+      "make": "Infiniti",
+      "model": "QX50",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:qx55",
+      "make": "Infiniti",
+      "model": "QX55",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:qx56",
+      "make": "Infiniti",
+      "model": "QX56",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:qx60",
+      "make": "Infiniti",
+      "model": "QX60",
+      "aliases": [
+        "INFINITI QX60"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": "infiniti/qx60",
+        "canonicalMake": "Infiniti",
+        "canonicalModel": "QX60"
+      }
+    },
+    {
+      "key": "infiniti:qx70",
+      "make": "Infiniti",
+      "model": "QX70",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": null,
+        "canonicalMake": "Infiniti",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "infiniti:qx80",
+      "make": "Infiniti",
+      "model": "QX80",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "infiniti",
+        "modelId": "infiniti/qx80",
+        "canonicalMake": "Infiniti",
+        "canonicalModel": "QX80"
+      }
+    },
+    {
+      "key": "innocenti:mini",
+      "make": "Innocenti",
+      "model": "Mini",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "international:scout",
+      "make": "International",
+      "model": "Scout",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "international:scout800a",
+      "make": "International",
+      "model": "Scout 800A",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "international:scouttraveller",
+      "make": "International",
+      "model": "Scout Traveller",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "international:travelall",
+      "make": "International",
+      "model": "Travelall",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "iso:grifo",
+      "make": "Iso",
+      "model": "Grifo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "isorivolta:lele",
+      "make": "Iso Rivolta",
+      "model": "Lele",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "isuzu:amigo",
+      "make": "Isuzu",
+      "model": "Amigo",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:ascender",
+      "make": "Isuzu",
+      "model": "Ascender",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:axiom",
+      "make": "Isuzu",
+      "model": "Axiom",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:bellet",
+      "make": "Isuzu",
+      "model": "Bellet",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:bellett",
+      "make": "Isuzu",
+      "model": "Bellett",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:bighorn",
+      "make": "Isuzu",
+      "model": "Bighorn",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:crewcab",
+      "make": "Isuzu",
+      "model": "Crew Cab",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:dmax",
+      "make": "Isuzu",
+      "model": "D-Max",
+      "aliases": [
+        "D-MAX",
+        "DMAX"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "fi",
+        "gb",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": "isuzu/d-max",
+        "canonicalMake": "Isuzu",
+        "canonicalModel": "D-Max"
+      }
+    },
+    {
+      "key": "isuzu:gemini",
+      "make": "Isuzu",
+      "model": "Gemini",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:hombrepickup",
+      "make": "Isuzu",
+      "model": "Hombre Pickup",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:mu",
+      "make": "Isuzu",
+      "model": "Mu",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:mux",
+      "make": "Isuzu",
+      "model": "Mu-X",
+      "aliases": [
+        "MU-X"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": "isuzu/mu-x",
+        "canonicalMake": "Isuzu",
+        "canonicalModel": "Mu-X"
+      }
+    },
+    {
+      "key": "isuzu:oasis",
+      "make": "Isuzu",
+      "model": "Oasis",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:piazza",
+      "make": "Isuzu",
+      "model": "Piazza",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:piazzaturbo",
+      "make": "Isuzu",
+      "model": "Piazza Turbo",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:trooper",
+      "make": "Isuzu",
+      "model": "Trooper",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:ubs",
+      "make": "Isuzu",
+      "model": "Ubs",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "isuzu:vehicross",
+      "make": "Isuzu",
+      "model": "Vehicross",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "isuzu",
+        "modelId": null,
+        "canonicalMake": "Isuzu",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "izh:2125",
+      "make": "IZh",
+      "model": "2125",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "jac:ejs4",
+      "make": "JAC",
+      "model": "E-JS4",
+      "aliases": [
+        "E-JS4"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "jac",
+        "modelId": "jac/e-js4",
+        "canonicalMake": "JAC",
+        "canonicalModel": "E-JS4"
+      }
+    },
+    {
+      "key": "jac:e30x",
+      "make": "JAC",
+      "model": "E30X",
+      "aliases": [
+        "E30X",
+        "E30X; E30X; E-JS3; E-JS3",
+        "E30X; E30X; E-JS3; ES3; E"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "jac",
+        "modelId": "jac/e30x",
+        "canonicalMake": "JAC",
+        "canonicalModel": "E30X"
+      }
+    },
+    {
+      "key": "jac:es4",
+      "make": "JAC",
+      "model": "ES4",
+      "aliases": [
+        "ES4",
+        "ES4 ESE14 E-S4 E-JS4"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "jac",
+        "modelId": "jac/es4",
+        "canonicalMake": "JAC",
+        "canonicalModel": "ES4"
+      }
+    },
+    {
+      "key": "jac:iev7s",
+      "make": "JAC",
+      "model": "iEV7S",
+      "aliases": [
+        "IEV7S",
+        "IEV7S E-S2 E-S2",
+        "IEV7S, E-S2"
+      ],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "jac",
+        "modelId": "jac/iev7s",
+        "canonicalMake": "JAC",
+        "canonicalModel": "iEV7S"
+      }
+    },
+    {
+      "key": "jac:js4",
+      "make": "JAC",
+      "model": "JS4",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jac",
+        "modelId": null,
+        "canonicalMake": "JAC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jac:js6",
+      "make": "JAC",
+      "model": "JS6",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jac",
+        "modelId": null,
+        "canonicalMake": "JAC",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jacyiwei:3",
+      "make": "JAC Yiwei",
+      "model": "3",
+      "aliases": [
+        "钇为3",
+        "E30X"
+      ],
+      "bodyTypes": [
+        "Hatchback"
+      ],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": 2023,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "jac-yiwei",
+        "modelId": "jac-yiwei/3",
+        "canonicalMake": "JAC Yiwei",
+        "canonicalModel": "3"
+      }
+    },
+    {
+      "key": "jaecoo:5pure",
+      "make": "Jaecoo",
+      "model": "5 Pure",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaecoo",
+        "modelId": null,
+        "canonicalMake": "Jaecoo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaecoo:jaecoo5",
+      "make": "Jaecoo",
+      "model": "Jaecoo 5",
+      "aliases": [
+        "JAECOO 5",
+        "JAECOO5"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "th"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaecoo",
+        "modelId": "jaecoo/jaecoo-5",
+        "canonicalMake": "Jaecoo",
+        "canonicalModel": "Jaecoo 5"
+      }
+    },
+    {
+      "key": "jaecoo:jaecoo6",
+      "make": "Jaecoo",
+      "model": "Jaecoo 6",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th"
+      ],
+      "regions": [
+        "as"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaecoo",
+        "modelId": null,
+        "canonicalMake": "Jaecoo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaecoo:jaecoo7",
+      "make": "Jaecoo",
+      "model": "Jaecoo 7",
+      "aliases": [
+        "JAECOO 7",
+        "JAECOO7"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaecoo",
+        "modelId": "jaecoo/jaecoo-7",
+        "canonicalMake": "Jaecoo",
+        "canonicalModel": "Jaecoo 7"
+      }
+    },
+    {
+      "key": "jaecoo:jaecoo8",
+      "make": "Jaecoo",
+      "model": "Jaecoo 8",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaecoo",
+        "modelId": null,
+        "canonicalMake": "Jaecoo",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:24",
+      "make": "Jaguar",
+      "model": "24",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:240",
+      "make": "Jaguar",
+      "model": "240",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:38s",
+      "make": "Jaguar",
+      "model": "3.8S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:340",
+      "make": "Jaguar",
+      "model": "340",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:340mk",
+      "make": "Jaguar",
+      "model": "340 Mk",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:340mkii",
+      "make": "Jaguar",
+      "model": "340 Mkii",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:385",
+      "make": "Jaguar",
+      "model": "385",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:420",
+      "make": "Jaguar",
+      "model": "420",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:420g",
+      "make": "Jaguar",
+      "model": "420 G",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:ctype",
+      "make": "Jaguar",
+      "model": "C-Type",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:dtype",
+      "make": "Jaguar",
+      "model": "D-Type",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:epace",
+      "make": "Jaguar",
+      "model": "E-Pace",
+      "aliases": [
+        "E-PACE"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/e-pace",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "E-Pace"
+      }
+    },
+    {
+      "key": "jaguar:etype",
+      "make": "Jaguar",
+      "model": "E-Type",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:fpace",
+      "make": "Jaguar",
+      "model": "F-Pace",
+      "aliases": [
+        "F-PACE"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/f-pace",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "F-Pace"
+      }
+    },
+    {
+      "key": "jaguar:ftype",
+      "make": "Jaguar",
+      "model": "F-Type",
+      "aliases": [
+        "F-TYPE",
+        "F-TYPE SVR"
+      ],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/f-type",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "F-Type"
+      }
+    },
+    {
+      "key": "jaguar:fprd",
+      "make": "Jaguar",
+      "model": "Fp Rd",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:ipace",
+      "make": "Jaguar",
+      "model": "I-Pace",
+      "aliases": [
+        "I PACE",
+        "I-PACE",
+        "JAGUAR I PACE",
+        "JAGUAR I-PACE",
+        "Jaguar I-PACE"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/i-pace",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "I-Pace"
+      }
+    },
+    {
+      "key": "jaguar:mark",
+      "make": "Jaguar",
+      "model": "Mark",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mark1",
+      "make": "Jaguar",
+      "model": "Mark 1",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mark10",
+      "make": "Jaguar",
+      "model": "Mark 10",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mark11",
+      "make": "Jaguar",
+      "model": "Mark 11",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mark2",
+      "make": "Jaguar",
+      "model": "Mark 2",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mark7",
+      "make": "Jaguar",
+      "model": "Mark 7",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mark8",
+      "make": "Jaguar",
+      "model": "Mark 8",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:marki",
+      "make": "Jaguar",
+      "model": "Mark I",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:markix",
+      "make": "Jaguar",
+      "model": "Mark Ix",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:markx",
+      "make": "Jaguar",
+      "model": "Mark X",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mk",
+      "make": "Jaguar",
+      "model": "Mk",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mk7m",
+      "make": "Jaguar",
+      "model": "Mk 7 M",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mki",
+      "make": "Jaguar",
+      "model": "Mk I",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mkix",
+      "make": "Jaguar",
+      "model": "Mk Ix",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mkx",
+      "make": "Jaguar",
+      "model": "Mk X",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mk1",
+      "make": "Jaguar",
+      "model": "MK1",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mk10",
+      "make": "Jaguar",
+      "model": "MK10",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mk11",
+      "make": "Jaguar",
+      "model": "MK11",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mk2",
+      "make": "Jaguar",
+      "model": "MK2",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mk4",
+      "make": "Jaguar",
+      "model": "MK4",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mk5",
+      "make": "Jaguar",
+      "model": "MK5",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mk7",
+      "make": "Jaguar",
+      "model": "MK7",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mk9",
+      "make": "Jaguar",
+      "model": "MK9",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:mkii",
+      "make": "Jaguar",
+      "model": "Mkii",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:s",
+      "make": "Jaguar",
+      "model": "S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:stype",
+      "make": "Jaguar",
+      "model": "S-Type",
+      "aliases": [
+        "S-TYPE"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/s-type",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "S-Type"
+      }
+    },
+    {
+      "key": "jaguar:stypev6",
+      "make": "Jaguar",
+      "model": "S-Type V6",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:stypev8",
+      "make": "Jaguar",
+      "model": "S-Type V8",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:sovereign",
+      "make": "Jaguar",
+      "model": "Sovereign",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:ss",
+      "make": "Jaguar",
+      "model": "Ss",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:ss100",
+      "make": "Jaguar",
+      "model": "SS100",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:superv8",
+      "make": "Jaguar",
+      "model": "Super V8",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:vandenplas",
+      "make": "Jaguar",
+      "model": "Vanden Plas",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xtype",
+      "make": "Jaguar",
+      "model": "X-Type",
+      "aliases": [
+        "JAGUAR X-TYPE 30 V6 SPORT"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/x-type",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "X-Type"
+      }
+    },
+    {
+      "key": "jaguar:xe",
+      "make": "Jaguar",
+      "model": "Xe",
+      "aliases": [
+        "XE",
+        "XE AWD"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/xe",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "Xe"
+      }
+    },
+    {
+      "key": "jaguar:xf",
+      "make": "Jaguar",
+      "model": "XF",
+      "aliases": [
+        "XF",
+        "XF AWD",
+        "XF Premium Luxury/ XF Portfolio",
+        "XF Sport Brake",
+        "XF Sport Brake AWD"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/xf",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "XF"
+      }
+    },
+    {
+      "key": "jaguar:xfr",
+      "make": "Jaguar",
+      "model": "Xfr",
+      "aliases": [
+        "XFR"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/xfr",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "Xfr"
+      }
+    },
+    {
+      "key": "jaguar:xj",
+      "make": "Jaguar",
+      "model": "Xj",
+      "aliases": [
+        "Jaguar XJ",
+        "JAGUAR XJ",
+        "XJ",
+        "XJ Luxury/ Premium Luxury",
+        "XJ Supersport",
+        "XJ Supersport LWB リアビジネスシート仕様",
+        "XJ Supersport LWB/ XJ Portolio LWB",
+        "XJ50 V6 D AUTO"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/xj",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "Xj"
+      }
+    },
+    {
+      "key": "jaguar:xjs",
+      "make": "Jaguar",
+      "model": "XJ-S",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xj12",
+      "make": "Jaguar",
+      "model": "XJ12",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xj220",
+      "make": "Jaguar",
+      "model": "XJ220",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xj40",
+      "make": "Jaguar",
+      "model": "XJ40",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xj42",
+      "make": "Jaguar",
+      "model": "XJ42",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xj6",
+      "make": "Jaguar",
+      "model": "XJ6",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xj8",
+      "make": "Jaguar",
+      "model": "XJ8",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xjr",
+      "make": "Jaguar",
+      "model": "Xjr",
+      "aliases": [
+        "JAGUAR XJR"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": "jaguar/xjr",
+        "canonicalMake": "Jaguar",
+        "canonicalModel": "Xjr"
+      }
+    },
+    {
+      "key": "jaguar:xjrs",
+      "make": "Jaguar",
+      "model": "Xjr-S",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xk",
+      "make": "Jaguar",
+      "model": "Xk",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xk120",
+      "make": "Jaguar",
+      "model": "XK120",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xk140",
+      "make": "Jaguar",
+      "model": "XK140",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xk150",
+      "make": "Jaguar",
+      "model": "XK150",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xk8",
+      "make": "Jaguar",
+      "model": "XK8",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xkr",
+      "make": "Jaguar",
+      "model": "Xkr",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jaguar:xkrs",
+      "make": "Jaguar",
+      "model": "Xkr-S",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jaguar",
+        "modelId": null,
+        "canonicalMake": "Jaguar",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jeep:avenger",
+      "make": "Jeep",
+      "model": "Avenger",
+      "aliases": [
+        "Jeep Avenger",
+        "アベンジャー 4xe"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/avenger",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Avenger"
+      }
+    },
+    {
+      "key": "jeep:cherokee",
+      "make": "Jeep",
+      "model": "Cherokee",
+      "aliases": [
+        "Jeep Cherokee",
+        "チェロキー",
+        "ジープ・チェロキー"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/cherokee",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Cherokee"
+      }
+    },
+    {
+      "key": "jeep:cherokeesport",
+      "make": "Jeep",
+      "model": "Cherokee Sport",
+      "aliases": [
+        "CHEROKEE SPORT"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/cherokee-sport",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Cherokee Sport"
+      }
+    },
+    {
+      "key": "jeep:cherokeewagoneer",
+      "make": "Jeep",
+      "model": "Cherokee Wagoneer",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jeep:cj",
+      "make": "Jeep",
+      "model": "Cj",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jeep:cj15",
+      "make": "Jeep",
+      "model": "Cj 15",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jeep:cj5",
+      "make": "Jeep",
+      "model": "CJ-5",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jeep:cj7",
+      "make": "Jeep",
+      "model": "CJ-7",
+      "aliases": [
+        "CJ7"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/cj-7",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "CJ-7"
+      }
+    },
+    {
+      "key": "jeep:cj8",
+      "make": "Jeep",
+      "model": "CJ8",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jeep:commander",
+      "make": "Jeep",
+      "model": "Commander",
+      "aliases": [
+        "COMMANDER",
+        "コマンダー"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/commander",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Commander"
+      }
+    },
+    {
+      "key": "jeep:compass",
+      "make": "Jeep",
+      "model": "Compass",
+      "aliases": [
+        "Jeep Compass",
+        "コンパス"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/compass",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Compass"
+      }
+    },
+    {
+      "key": "jeep:gladiator",
+      "make": "Jeep",
+      "model": "Gladiator",
+      "aliases": [
+        "GLADIATOR"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/gladiator",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Gladiator"
+      }
+    },
+    {
+      "key": "jeep:gpw",
+      "make": "Jeep",
+      "model": "Gpw",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jeep:grandcherokee",
+      "make": "Jeep",
+      "model": "Grand Cherokee",
+      "aliases": [
+        "GRAND CHEROKEE",
+        "GRAND-CHEROKEE",
+        "JEEP GRAND CHEROKEE",
+        "グランド チェロキー",
+        "ジープ・グランド チェロキー"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/grand-cherokee",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Grand Cherokee"
+      }
+    },
+    {
+      "key": "jeep:grandwagoneer",
+      "make": "Jeep",
+      "model": "Grand Wagoneer",
+      "aliases": [
+        "GRAND WAGONEER",
+        "JEEP GRAND WAGONEER"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/grand-wagoneer",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Grand Wagoneer"
+      }
+    },
+    {
+      "key": "jeep:laredo",
+      "make": "Jeep",
+      "model": "Laredo",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jeep:liberty",
+      "make": "Jeep",
+      "model": "Liberty",
+      "aliases": [
+        "LIBERTY"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/liberty",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Liberty"
+      }
+    },
+    {
+      "key": "jeep:m38a1",
+      "make": "Jeep",
+      "model": "M38A1",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jeep:mb",
+      "make": "Jeep",
+      "model": "Mb",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jeep:patriot",
+      "make": "Jeep",
+      "model": "Patriot",
+      "aliases": [
+        "PATRIOT",
+        "ジープ・パトリオット"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/patriot",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Patriot"
+      }
+    },
+    {
+      "key": "jeep:recon",
+      "make": "Jeep",
+      "model": "Recon",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "us"
+      ],
+      "regions": [
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jeep:renegade",
+      "make": "Jeep",
+      "model": "Renegade",
+      "aliases": [
+        "Jeep Renegade",
+        "レネゲード",
+        "ジープ・レネゲード"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/renegade",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Renegade"
+      }
+    },
+    {
+      "key": "jeep:wagoneer",
+      "make": "Jeep",
+      "model": "Wagoneer",
+      "aliases": [
+        "JEEP WAGONEER",
+        "WAGONEER"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/wagoneer",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Wagoneer"
+      }
+    },
+    {
+      "key": "jeep:wagoneers",
+      "make": "Jeep",
+      "model": "Wagoneer S",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jeep:willys",
+      "make": "Jeep",
+      "model": "Willys",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": null,
+        "canonicalMake": "Jeep",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jeep:wrangler",
+      "make": "Jeep",
+      "model": "Wrangler",
+      "aliases": [
+        "JEEP WRANGLER",
+        "WRANGLER",
+        "ラングラー",
+        "ジープ・ラングラー"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/wrangler",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Wrangler"
+      }
+    },
+    {
+      "key": "jeep:wranglerunlimited",
+      "make": "Jeep",
+      "model": "Wrangler Unlimited",
+      "aliases": [
+        "JEEP WRANGLER UNLIMITED",
+        "WRANGLER UNLIMITED",
+        "ラングラー アンリミッテド",
+        "ラングラー アンリミテッド",
+        "ジープ・ラングラー アンリミッテド"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jeep",
+        "modelId": "jeep/wrangler-unlimited",
+        "canonicalMake": "Jeep",
+        "canonicalModel": "Wrangler Unlimited"
+      }
+    },
+    {
+      "key": "jensen:541r",
+      "make": "Jensen",
+      "model": "541R",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "jensen:cv8",
+      "make": "Jensen",
+      "model": "CV8",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "jensen:ff",
+      "make": "Jensen",
+      "model": "Ff",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "jensen:gt",
+      "make": "Jensen",
+      "model": "GT",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "jensen:healey",
+      "make": "Jensen",
+      "model": "Healey",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "jensen:healy",
+      "make": "Jensen",
+      "model": "Healy",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "jensen:intercepter",
+      "make": "Jensen",
+      "model": "Intercepter",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "jensen:interceptor",
+      "make": "Jensen",
+      "model": "Interceptor",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "jensen:interceptor111",
+      "make": "Jensen",
+      "model": "Interceptor 111",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "jensen:interceptormk",
+      "make": "Jensen",
+      "model": "Interceptor Mk",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "jensen:jensenhealey",
+      "make": "Jensen",
+      "model": "Jensen-Healey",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "jensen:sv8",
+      "make": "Jensen",
+      "model": "S-V8",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "jensen:sp",
+      "make": "Jensen",
+      "model": "Sp",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "jetour:dashing",
+      "make": "Jetour",
+      "model": "Dashing",
+      "aliases": [
+        "DASHING"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "my",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jetour",
+        "modelId": "jetour/dashing",
+        "canonicalMake": "Jetour",
+        "canonicalModel": "Dashing"
+      }
+    },
+    {
+      "key": "jetour:t1",
+      "make": "Jetour",
+      "model": "T1",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "my",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jetour",
+        "modelId": null,
+        "canonicalMake": "Jetour",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jetour:t1idm",
+      "make": "Jetour",
+      "model": "T1 I-Dm",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jetour",
+        "modelId": null,
+        "canonicalMake": "Jetour",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jetour:t2",
+      "make": "Jetour",
+      "model": "T2",
+      "aliases": [
+        "JETOUR T2"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jetour",
+        "modelId": "jetour/t2",
+        "canonicalMake": "Jetour",
+        "canonicalModel": "T2"
+      }
+    },
+    {
+      "key": "jetour:x50",
+      "make": "Jetour",
+      "model": "X50",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jetour",
+        "modelId": null,
+        "canonicalMake": "Jetour",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jetour:x70plus",
+      "make": "Jetour",
+      "model": "X70 Plus",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "my"
+      ],
+      "regions": [
+        "as",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "jetour",
+        "modelId": null,
+        "canonicalMake": "Jetour",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "jmev:elight",
+      "make": "JMEV",
+      "model": "ELIGHT",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "jmev",
+        "modelId": "jmev/elight",
+        "canonicalMake": "JMEV",
+        "canonicalModel": "ELIGHT"
+      }
+    },
+    {
+      "key": "jmev:ev2",
+      "make": "JMEV",
+      "model": "EV2",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "jmev",
+        "modelId": "jmev/ev2",
+        "canonicalMake": "JMEV",
+        "canonicalModel": "EV2"
+      }
+    },
+    {
+      "key": "jmev:ev3",
+      "make": "JMEV",
+      "model": "EV3",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "jmev",
+        "modelId": "jmev/ev3",
+        "canonicalMake": "JMEV",
+        "canonicalModel": "EV3"
+      }
+    },
+    {
+      "key": "jmev:ewind",
+      "make": "JMEV",
+      "model": "EWIND",
+      "aliases": [],
+      "bodyTypes": [],
+      "markets": [],
+      "countries": [],
+      "regions": [],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "jmev",
+        "modelId": "jmev/ewind",
+        "canonicalMake": "JMEV",
+        "canonicalModel": "EWIND"
+      }
+    },
+    {
+      "key": "juliacamper:yosemite",
+      "make": "Julia Camper",
+      "model": "Yosemite",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "kaiser:deluxe",
+      "make": "Kaiser",
+      "model": "De Luxe",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "kaiser:jeep",
+      "make": "Kaiser",
+      "model": "Jeep",
+      "aliases": [],
+      "bodyTypes": [
+        "convertible"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "kaiser:k545",
+      "make": "Kaiser",
+      "model": "K545",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "kaiser:manhattan",
+      "make": "Kaiser",
+      "model": "Manhattan",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "kaiser:special",
+      "make": "Kaiser",
+      "model": "Special",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "karma:revero",
+      "make": "Karma",
+      "model": "Revero",
+      "aliases": [],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "karma:reverogt",
+      "make": "Karma",
+      "model": "Revero GT",
+      "aliases": [],
+      "bodyTypes": [
+        "coupe"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "kgm:actyon",
+      "make": "KGM",
+      "model": "Actyon",
+      "aliases": [
+        "ACTYON",
+        "KGM ACTYON"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kgm",
+        "modelId": "kgm/actyon",
+        "canonicalMake": "KGM",
+        "canonicalModel": "Actyon"
+      }
+    },
+    {
+      "key": "kgm:korando",
+      "make": "KGM",
+      "model": "Korando",
+      "aliases": [
+        "KGM KORANDO",
+        "KORANDO"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "lu",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kgm",
+        "modelId": "kgm/korando",
+        "canonicalMake": "KGM",
+        "canonicalModel": "Korando"
+      }
+    },
+    {
+      "key": "kgm:rexton",
+      "make": "KGM",
+      "model": "Rexton",
+      "aliases": [
+        "REXTON"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "lu",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kgm",
+        "modelId": "kgm/rexton",
+        "canonicalMake": "KGM",
+        "canonicalModel": "Rexton"
+      }
+    },
+    {
+      "key": "kgm:tivoli",
+      "make": "KGM",
+      "model": "Tivoli",
+      "aliases": [
+        "TIVOLI"
+      ],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "gb",
+        "lu"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kgm",
+        "modelId": "kgm/tivoli",
+        "canonicalMake": "KGM",
+        "canonicalModel": "Tivoli"
+      }
+    },
+    {
+      "key": "kgm:torres",
+      "make": "KGM",
+      "model": "Torres",
+      "aliases": [
+        "KGM TORRES",
+        "TORRES"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kgm",
+        "modelId": "kgm/torres",
+        "canonicalMake": "KGM",
+        "canonicalModel": "Torres"
+      }
+    },
+    {
+      "key": "kgm:torresevx",
+      "make": "KGM",
+      "model": "Torres Evx",
+      "aliases": [
+        "TORRES EVX"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kgm",
+        "modelId": "kgm/torres-evx",
+        "canonicalMake": "KGM",
+        "canonicalModel": "Torres Evx"
+      }
+    },
+    {
+      "key": "kia:amanti",
+      "make": "Kia",
+      "model": "Amanti",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:avella",
+      "make": "Kia",
+      "model": "Avella",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:borrego",
+      "make": "Kia",
+      "model": "Borrego",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:cadenza",
+      "make": "Kia",
+      "model": "Cadenza",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "fi",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:carens",
+      "make": "Kia",
+      "model": "Carens",
+      "aliases": [
+        "CARENS"
+      ],
+      "bodyTypes": [
+        "mpv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/carens",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Carens"
+      }
+    },
+    {
+      "key": "kia:carnival",
+      "make": "Kia",
+      "model": "Carnival",
+      "aliases": [
+        "CARNIVAL",
+        "KIA CARNIVAL"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/carnival",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Carnival"
+      }
+    },
+    {
+      "key": "kia:ceed",
+      "make": "Kia",
+      "model": "Ceed",
+      "aliases": [
+        "CEE D",
+        "CEED",
+        "CEED.",
+        "CEEDSW GOLD 10 TGDI GPF MT6 1",
+        "CEEDSW GOLD 14 TGDI GPF DCT7",
+        "CEEDSW GOLD 14 TGDI GPF MT6 1",
+        "CEEDSW GOLD 16 CRDI SCR DCT7",
+        "CEEDSW GOLD 16 CRDI SCR MT6 1",
+        "CEEDSW GOLD UVO 10 TGDI GPF M",
+        "CEEDSW GOLD UVO 14 TGDI GPF D",
+        "CEEDSW GOLD UVO 14 TGDI GPF M",
+        "CEEDSW GOLD UVO 16 CRDI SCR D",
+        "CEEDSW GOLD UVO 16 CRDI SCR H",
+        "CEEDSW GOLD UVO 16 CRDI SCR M",
+        "CEEDSW GT-LINE UVO 14 TGDI GP",
+        "CEEDSW GT-LINE UVO 16 CRDI SC",
+        "CEEDSW PHEV GOLD UVO 16 GDI G",
+        "CEEDSW PHEV OE25 16 GDI GPF D",
+        "CEEDSW PHEV PLATIN UVO 16 GDI",
+        "CEEDSW PLATIN 14 TGDI GPF DCT",
+        "CEEDSW PLATIN 14 TGDI GPF MT6",
+        "CEEDSW PLATIN 16 CRDI SCR HP",
+        "CEEDSW PLATIN UVO 14 TGDI GPF",
+        "CEEDSW PLATIN UVO 16 CRDI SCR",
+        "CEEDSW SILBER 10 TGDI GPF MT6",
+        "CEEDSW SILBER 14 MPI MT6 100",
+        "CEEDSW SILBER 14 TGDI GPF DCT",
+        "CEEDSW SILBER 14 TGDI GPF MT6",
+        "CEEDSW SILBER 16 CRDI SCR DCT",
+        "CEEDSW SILBER 16 CRDI SCR MT6",
+        "CEEDSW SILBER UVO 10 TGDI GPF",
+        "CEEDSW SILBER UVO 14 TGDI GPF",
+        "CEEDSW SILBER UVO 16 CRDI SCR",
+        "CEEDSW TITAN 10 TGDI GPF MT6",
+        "CEEDSW TITAN 14 MPI MT6 100 I",
+        "CEEDSW TITAN 16 CRDI SCR MT6",
+        "CEEDSW/GOLD/UVO/1.0 TGDI/MT6/1",
+        "CEEDSW/GOLD/UVO/1.5 TGDI 48V/D",
+        "CEEDSW/GOLD/UVO/1.5 TGDI/MT6/1",
+        "CEEDSW/GOLD/UVO/1.6 CRDI 48V/D",
+        "CEEDSW/GOLD/UVO/1.6 CRDI 48V/I",
+        "CEEDSW/GT-LINE/1.4 TGDI GPF/DC",
+        "CEEDSW/GT-LINE/1.4 TGDI GPF/MT",
+        "CEEDSW/GT-LINE/1.6 CRDI SCR/HP",
+        "CEEDSW/GT-LINE/UVO/1.5 TGDI 48",
+        "CEEDSW/GT-LINE/UVO/1.5 TGDI/MT",
+        "CEEDSW/GT-LINE/UVO/1.6 CRDI 48",
+        "CEEDSW/PHEV/SILBER/1.6 GDI GPF",
+        "CEEDSW/PLATIN/UVO/1.5 TGDI 48V",
+        "CEEDSW/PLATIN/UVO/1.5 TGDI/MT6",
+        "CEEDSW/PLATIN/UVO/1.6 CRDI 48V",
+        "CEEDSW/SILBER/UVO/1.0 TGDI/MT6",
+        "CEEDSW/SILBER/UVO/1.5 TGDI 48V",
+        "CEEDSW/SILBER/UVO/1.5 TGDI/MT6",
+        "CEEDSW/SILBER/UVO/1.6 CRDI 48V",
+        "CEEDSW/TITAN/1.0 TGDI/MT6/100",
+        "CEEDSW/TITAN/1.0 TGDI/MT6/120",
+        "KIA CEED"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/ceed",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Ceed"
+      }
+    },
+    {
+      "key": "kia:cerato",
+      "make": "Kia",
+      "model": "Cerato",
+      "aliases": [
+        "CERATO"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/cerato",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Cerato"
+      }
+    },
+    {
+      "key": "kia:clarus",
+      "make": "Kia",
+      "model": "Clarus",
+      "aliases": [
+        "CLARUS SX AUTO"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/clarus",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Clarus"
+      }
+    },
+    {
+      "key": "kia:credos",
+      "make": "Kia",
+      "model": "Credos",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:eniro",
+      "make": "Kia",
+      "model": "E-Niro",
+      "aliases": [
+        "E NIRO",
+        "E-NIRO"
+      ],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/e-niro",
+        "canonicalMake": "Kia",
+        "canonicalModel": "E-Niro"
+      }
+    },
+    {
+      "key": "kia:ev2",
+      "make": "Kia",
+      "model": "EV2",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "lu",
+        "nl"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/ev2",
+        "canonicalMake": "Kia",
+        "canonicalModel": "EV2"
+      }
+    },
+    {
+      "key": "kia:ev3",
+      "make": "Kia",
+      "model": "EV3",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/ev3",
+        "canonicalMake": "Kia",
+        "canonicalModel": "EV3"
+      }
+    },
+    {
+      "key": "kia:ev4",
+      "make": "Kia",
+      "model": "EV4",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/ev4",
+        "canonicalMake": "Kia",
+        "canonicalModel": "EV4"
+      }
+    },
+    {
+      "key": "kia:ev5",
+      "make": "Kia",
+      "model": "EV5",
+      "aliases": [],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/ev5",
+        "canonicalMake": "Kia",
+        "canonicalModel": "EV5"
+      }
+    },
+    {
+      "key": "kia:ev6",
+      "make": "Kia",
+      "model": "EV6",
+      "aliases": [],
+      "bodyTypes": [
+        "Crossover",
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": 2021,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/ev6",
+        "canonicalMake": "Kia",
+        "canonicalModel": "EV6"
+      }
+    },
+    {
+      "key": "kia:ev9",
+      "make": "Kia",
+      "model": "EV9",
+      "aliases": [
+        "E V 9"
+      ],
+      "bodyTypes": [
+        "suv"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "as",
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/ev9",
+        "canonicalMake": "Kia",
+        "canonicalModel": "EV9"
+      }
+    },
+    {
+      "key": "kia:forte",
+      "make": "Kia",
+      "model": "Forte",
+      "aliases": [
+        "FORTE",
+        "KIA FORTE"
+      ],
+      "bodyTypes": [
+        "sedan"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "es",
+        "nl",
+        "nz",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "oc"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/forte",
+        "canonicalMake": "Kia",
+        "canonicalModel": "Forte"
+      }
+    },
+    {
+      "key": "kia:joice",
+      "make": "Kia",
+      "model": "Joice",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "regions": [
+        "eu"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:k2500",
+      "make": "Kia",
+      "model": "K2500",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:k3",
+      "make": "Kia",
+      "model": "K3",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ua"
+      ],
+      "regions": [
+        "eu",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": null,
+        "canonicalMake": "Kia",
+        "canonicalModel": null
+      }
+    },
+    {
+      "key": "kia:k4",
+      "make": "Kia",
+      "model": "K4",
+      "aliases": [],
+      "bodyTypes": [
+        "hatchback",
+        "wagon"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nl",
+        "ua",
+        "us"
+      ],
+      "regions": [
+        "eu",
+        "na",
+        "sa"
+      ],
+      "yearFrom": null,
+      "yearTo": null,
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "kia",
+        "modelId": "kia/k4",
+        "canonicalMake": "Kia",
+        "canonicalModel": "K4"
+      }
+    }
+  ]
+}

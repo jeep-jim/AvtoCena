@@ -1,0 +1,4938 @@
+{
+  "schemaVersion": 1,
+  "entityType": "source_brand",
+  "chunk": 1,
+  "maxRecords": 250,
+  "records": [
+    {
+      "key": "vrigt",
+      "observedNames": [
+        "?VRIGT"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "212",
+      "observedNames": [
+        "212"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "212",
+        "canonicalMake": "212"
+      }
+    },
+    {
+      "key": "66",
+      "observedNames": [
+        "66"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "abarth",
+      "observedNames": [
+        "Abarth",
+        "ABARTH"
+      ],
+      "aliases": [
+        "Abarth & C."
+      ],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "Italy",
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "abarth",
+        "canonicalMake": "Abarth"
+      }
+    },
+    {
+      "key": "abteline",
+      "observedNames": [
+        "ABT E-LINE"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "abtaudi",
+      "observedNames": [
+        "ABT-AUDI"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ac",
+      "observedNames": [
+        "AC"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ac-cars",
+        "canonicalMake": "AC"
+      }
+    },
+    {
+      "key": "acura",
+      "observedNames": [
+        "Acura",
+        "ACURA"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "Japan",
+        "ca",
+        "us",
+        "ua",
+        "nl",
+        "lu",
+        "es",
+        "fi",
+        "gb",
+        "my",
+        "ar"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "acura",
+        "canonicalMake": "Acura"
+      }
+    },
+    {
+      "key": "adidorvoituressas",
+      "observedNames": [
+        "ADIDOR VOITURES SAS"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "adler",
+      "observedNames": [
+        "Adler"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "adria",
+      "observedNames": [
+        "ADRIA"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ahorn",
+      "observedNames": [
+        "Ahorn"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "aion",
+      "observedNames": [
+        "AION",
+        "Aion"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "th",
+        "es",
+        "nl",
+        "fi"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "aion",
+        "canonicalMake": "AION"
+      }
+    },
+    {
+      "key": "aito",
+      "observedNames": [
+        "AITO"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [
+        "China"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "aito",
+        "canonicalMake": "AITO"
+      }
+    },
+    {
+      "key": "aiways",
+      "observedNames": [
+        "Aiways",
+        "AIWAYS"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "aiways",
+        "canonicalMake": "Aiways"
+      }
+    },
+    {
+      "key": "aixam",
+      "observedNames": [
+        "Aixam"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "alko",
+      "observedNames": [
+        "AL-KO"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "alfaromeo",
+      "observedNames": [
+        "Alfa Romeo",
+        "ALFA ROMEO"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "Italy",
+        "nl",
+        "nz",
+        "fi",
+        "gb",
+        "ua",
+        "es",
+        "lu",
+        "us",
+        "my",
+        "ca",
+        "de",
+        "ie",
+        "ar"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "alfa-romeo",
+        "canonicalMake": "Alfa Romeo"
+      }
+    },
+    {
+      "key": "allied",
+      "observedNames": [
+        "ALLIED"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "alliedvehiclesltd",
+      "observedNames": [
+        "ALLIED VEHICLES LTD"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "alpina",
+      "observedNames": [
+        "Alpina",
+        "ALPINA"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "fi",
+        "nz",
+        "es"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "alpina",
+        "canonicalMake": "Alpina"
+      }
+    },
+    {
+      "key": "alpine",
+      "observedNames": [
+        "Alpine",
+        "ALPINE"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "nz"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "alpine-cars",
+        "canonicalMake": "Alpine"
+      }
+    },
+    {
+      "key": "alvis",
+      "observedNames": [
+        "Alvis"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "fi"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "amgeneral",
+      "observedNames": [
+        "Am General"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "amatörbygge",
+      "observedNames": [
+        "AMATÖRBYGGE"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ambarella",
+      "observedNames": [
+        "AMBARELLA"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "amberauto",
+      "observedNames": [
+        "AMBERAUTO"
+      ],
+      "aliases": [
+        "АМБЕРАВТО"
+      ],
+      "markets": [],
+      "countries": [
+        "Russia"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "amberauto",
+        "canonicalMake": "AMBERAUTO"
+      }
+    },
+    {
+      "key": "ambertruck",
+      "observedNames": [
+        "AMBERTRUCK"
+      ],
+      "aliases": [
+        "АМБЕРТРАК"
+      ],
+      "markets": [],
+      "countries": [
+        "Russia"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ambertruck",
+        "canonicalMake": "AMBERTRUCK"
+      }
+    },
+    {
+      "key": "amc",
+      "observedNames": [
+        "AMC"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "amc",
+        "canonicalMake": "AMC"
+      }
+    },
+    {
+      "key": "american",
+      "observedNames": [
+        "American"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "amfbrunsgmbhandcokg",
+      "observedNames": [
+        "AMF-BRUNS GMBH&COKG"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "amphicar",
+      "observedNames": [
+        "Amphicar"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "apal",
+      "observedNames": [
+        "APAL"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "api",
+      "observedNames": [
+        "API"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "apicz",
+      "observedNames": [
+        "API CZ"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "arcfox",
+      "observedNames": [
+        "ARCFOX"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "arcfox",
+        "canonicalMake": "ARCFOX"
+      }
+    },
+    {
+      "key": "armstrongsiddeley",
+      "observedNames": [
+        "Armstrong Siddeley"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "fi"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "aro",
+      "observedNames": [
+        "Aro"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "aro",
+        "canonicalMake": "Aro"
+      }
+    },
+    {
+      "key": "asia",
+      "observedNames": [
+        "Asia"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "asia",
+        "canonicalMake": "Asia"
+      }
+    },
+    {
+      "key": "astonmartin",
+      "observedNames": [
+        "Aston Martin",
+        "ASTON MARTIN",
+        "ASTON-MARTIN"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "United Kingdom",
+        "gb",
+        "nl",
+        "us",
+        "ca",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nz",
+        "ua",
+        "th"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "aston-martin",
+        "canonicalMake": "Aston Martin"
+      }
+    },
+    {
+      "key": "astonmartinlagonda",
+      "observedNames": [
+        "ASTON MARTIN LAGONDA"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "auburn",
+      "observedNames": [
+        "Auburn"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "audi",
+      "observedNames": [
+        "Audi",
+        "AUDI"
+      ],
+      "aliases": [
+        "AUDI AG",
+        "아우디"
+      ],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "Germany",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "us",
+        "lu",
+        "ca",
+        "ar",
+        "de",
+        "es",
+        "ie",
+        "my",
+        "th"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "audi",
+        "canonicalMake": "Audi"
+      }
+    },
+    {
+      "key": "audichina",
+      "observedNames": [
+        "AUDI China"
+      ],
+      "aliases": [
+        "AUDI"
+      ],
+      "markets": [],
+      "countries": [
+        "China"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "audi-china",
+        "canonicalMake": "AUDI China"
+      }
+    },
+    {
+      "key": "audisport",
+      "observedNames": [
+        "AUDI SPORT"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "austin",
+      "observedNames": [
+        "Austin"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "fi",
+        "gb",
+        "ua",
+        "lu",
+        "my",
+        "es"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "austinrover",
+      "observedNames": [
+        "AUSTIN ROVER"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "austinhealey",
+      "observedNames": [
+        "Austin-Healey"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "lu",
+        "nl",
+        "nz",
+        "ar"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "austinmorris",
+      "observedNames": [
+        "Austin-Morris"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "autounion",
+      "observedNames": [
+        "Auto Union",
+        "Auto-Union"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "fi"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "automobillamborghini",
+      "observedNames": [
+        "AUTOMOBIL LAMBORGHINI"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "automobililamborghin",
+      "observedNames": [
+        "AUTOMOBILI LAMBORGHIN"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "automobililamborghinis",
+      "observedNames": [
+        "AUTOMOBILI LAMBORGHINI S",
+        "AUTOMOBILI LAMBORGHINI S."
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "avatr",
+      "observedNames": [
+        "Avatr"
+      ],
+      "aliases": [
+        "AVATR"
+      ],
+      "markets": [],
+      "countries": [
+        "China"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "avatr",
+        "canonicalMake": "Avatr"
+      }
+    },
+    {
+      "key": "avelingbarford",
+      "observedNames": [
+        "AVELING BARFORD"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "avtovaz",
+      "observedNames": [
+        "AVTOVAZ"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "b40",
+      "observedNames": [
+        "B40"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "backdraft",
+      "observedNames": [
+        "BACKDRAFT"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "baic",
+      "observedNames": [
+        "BAIC"
+      ],
+      "aliases": [
+        "BAIC Group"
+      ],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "China",
+        "ar",
+        "lu",
+        "nl",
+        "my",
+        "es",
+        "nz"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "baic",
+        "canonicalMake": "BAIC"
+      }
+    },
+    {
+      "key": "baojun",
+      "observedNames": [
+        "Baojun"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [
+        "China"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "baojun",
+        "canonicalMake": "Baojun"
+      }
+    },
+    {
+      "key": "barkas",
+      "observedNames": [
+        "Barkas"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "baw",
+      "observedNames": [
+        "BAW"
+      ],
+      "aliases": [
+        "Beijing Automobile Works"
+      ],
+      "markets": [],
+      "countries": [
+        "China"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "baw",
+        "canonicalMake": "BAW"
+      }
+    },
+    {
+      "key": "beauford",
+      "observedNames": [
+        "Beauford"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bedford",
+      "observedNames": [
+        "Bedford"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "belgee",
+      "observedNames": [
+        "Belgee"
+      ],
+      "aliases": [
+        "BELGEE"
+      ],
+      "markets": [],
+      "countries": [
+        "Belarus"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "belgee",
+        "canonicalMake": "Belgee"
+      }
+    },
+    {
+      "key": "benimar",
+      "observedNames": [
+        "BENIMAR"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bentley",
+      "observedNames": [
+        "Bentley",
+        "BENTLEY"
+      ],
+      "aliases": [
+        "Bentley Motors"
+      ],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "United Kingdom",
+        "fi",
+        "nl",
+        "nz",
+        "ca",
+        "gb",
+        "ua",
+        "us",
+        "es",
+        "de",
+        "lu",
+        "my",
+        "th"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "bentley",
+        "canonicalMake": "Bentley"
+      }
+    },
+    {
+      "key": "bergadana",
+      "observedNames": [
+        "BERGADANA"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "berkeley",
+      "observedNames": [
+        "Berkeley"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bertone",
+      "observedNames": [
+        "Bertone"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz",
+        "us"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bestune",
+      "observedNames": [
+        "Bestune"
+      ],
+      "aliases": [
+        "BESTUNE"
+      ],
+      "markets": [],
+      "countries": [
+        "China"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "bestune",
+        "canonicalMake": "Bestune"
+      }
+    },
+    {
+      "key": "bierman",
+      "observedNames": [
+        "BIERMAN"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "binz",
+      "observedNames": [
+        "Binz"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bmw",
+      "observedNames": [
+        "BMW"
+      ],
+      "aliases": [
+        "BMW AG",
+        "BMW I"
+      ],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "Germany",
+        "ar",
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "bmw",
+        "canonicalMake": "BMW"
+      }
+    },
+    {
+      "key": "bmwi",
+      "observedNames": [
+        "BMW I",
+        "BMW i"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "bmw",
+        "canonicalMake": "BMW"
+      }
+    },
+    {
+      "key": "bmwalpina",
+      "observedNames": [
+        "Bmw Alpina"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ua",
+        "us"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bmwbrilliancerc",
+      "observedNames": [
+        "BMW BRILLIANCE (RC)"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bmwm",
+      "observedNames": [
+        "BMW M"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bobygd",
+      "observedNames": [
+        "BOBYGD"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bogie",
+      "observedNames": [
+        "BOGIE"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bond",
+      "observedNames": [
+        "Bond"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "borgward",
+      "observedNames": [
+        "Borgward",
+        "BORGWARD"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "borgward",
+        "canonicalMake": "Borgward"
+      }
+    },
+    {
+      "key": "brabus",
+      "observedNames": [
+        "Brabus"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "brabus",
+        "canonicalMake": "Brabus"
+      }
+    },
+    {
+      "key": "brabusautomotive",
+      "observedNames": [
+        "BRABUS AUTOMOTIVE"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bravia",
+      "observedNames": [
+        "Bravia"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "lu",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bricklin",
+      "observedNames": [
+        "Bricklin"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "brilliance",
+      "observedNames": [
+        "Brilliance"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "brilliance",
+        "canonicalMake": "Brilliance"
+      }
+    },
+    {
+      "key": "bristol",
+      "observedNames": [
+        "Bristol"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bronto",
+      "observedNames": [
+        "BRONTO"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bttb32",
+      "observedNames": [
+        "BTTB 32"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bugatti",
+      "observedNames": [
+        "Bugatti",
+        "BUGATTI"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ca",
+        "us"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "bugatti",
+        "canonicalMake": "Bugatti"
+      }
+    },
+    {
+      "key": "buick",
+      "observedNames": [
+        "Buick",
+        "BUICK"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "United States",
+        "nl",
+        "nz",
+        "ua",
+        "us",
+        "fi",
+        "ca",
+        "gb",
+        "lu"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "buick",
+        "canonicalMake": "Buick"
+      }
+    },
+    {
+      "key": "bunkervan",
+      "observedNames": [
+        "BUNKERVAN"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "bürstnergmbh",
+      "observedNames": [
+        "Bürstner Gmbh"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "lu"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "byd",
+      "observedNames": [
+        "BYD"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "China",
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "ie",
+        "th",
+        "ua",
+        "us"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "byd",
+        "canonicalMake": "BYD"
+      }
+    },
+    {
+      "key": "c51e",
+      "observedNames": [
+        "C51E"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "cadillac",
+      "observedNames": [
+        "Cadillac",
+        "CADILLAC"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "United States",
+        "nl",
+        "nz",
+        "fi",
+        "us",
+        "ca",
+        "lu",
+        "ua",
+        "gb",
+        "es",
+        "de",
+        "my"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "cadillac",
+        "canonicalMake": "Cadillac"
+      }
+    },
+    {
+      "key": "campereve",
+      "observedNames": [
+        "Campereve"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "carbodies",
+      "observedNames": [
+        "Carbodies"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "gb"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "cargolifting",
+      "observedNames": [
+        "CARGO LIFTING"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "caterham",
+      "observedNames": [
+        "Caterham",
+        "CATERHAM"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "es",
+        "lu",
+        "nl",
+        "fi",
+        "nz"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "caterham",
+        "canonicalMake": "Caterham"
+      }
+    },
+    {
+      "key": "caterhamcarsltd",
+      "observedNames": [
+        "Caterham Cars Ltd",
+        "CATERHAM CARS LTD"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "cbf",
+      "observedNames": [
+        "CBF"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "cckwestfield",
+      "observedNames": [
+        "CCK-WESTFIELD"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "challenger",
+      "observedNames": [
+        "CHALLENGER"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "chamonix",
+      "observedNames": [
+        "Chamonix"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "changan",
+      "observedNames": [
+        "Changan"
+      ],
+      "aliases": [
+        "CHANGAN"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "China",
+        "gb",
+        "th",
+        "nl",
+        "ua"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "changan",
+        "canonicalMake": "Changan"
+      }
+    },
+    {
+      "key": "changannevo",
+      "observedNames": [
+        "Changan NEVO"
+      ],
+      "aliases": [
+        "Changan Qiyuan",
+        "长安启源"
+      ],
+      "markets": [],
+      "countries": [
+        "China"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "changan-nevo",
+        "canonicalMake": "Changan NEVO"
+      }
+    },
+    {
+      "key": "changfeng",
+      "observedNames": [
+        "Changfeng"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "changfeng",
+        "canonicalMake": "Changfeng"
+      }
+    },
+    {
+      "key": "changhe",
+      "observedNames": [
+        "Changhe"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "changhe",
+        "canonicalMake": "Changhe"
+      }
+    },
+    {
+      "key": "charlie",
+      "observedNames": [
+        "CHARLIE"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "chausson",
+      "observedNames": [
+        "CHAUSSON"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "checker",
+      "observedNames": [
+        "Checker"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "chery",
+      "observedNames": [
+        "Chery"
+      ],
+      "aliases": [
+        "Chery Automobile",
+        "Chery Fulwin",
+        "Chery Fengyun",
+        "奇瑞风云"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "China",
+        "th",
+        "ua",
+        "my",
+        "nl",
+        "gb",
+        "ar",
+        "nz",
+        "es"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "chery",
+        "canonicalMake": "Chery"
+      }
+    },
+    {
+      "key": "chevrolet",
+      "observedNames": [
+        "Chevrolet",
+        "CHEVROLET"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "United States",
+        "fi",
+        "nl",
+        "nz",
+        "my",
+        "lu",
+        "ua",
+        "ca",
+        "us",
+        "es",
+        "gb",
+        "th",
+        "ar"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "chevrolet",
+        "canonicalMake": "Chevrolet"
+      }
+    },
+    {
+      "key": "chevroletgmc",
+      "observedNames": [
+        "Chevrolet GMC"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "chrysler",
+      "observedNames": [
+        "Chrysler",
+        "CHRYSLER"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "ca",
+        "fi",
+        "ua",
+        "us",
+        "nz",
+        "es",
+        "lu"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "chrysler",
+        "canonicalMake": "Chrysler"
+      }
+    },
+    {
+      "key": "chryslerllcjeep",
+      "observedNames": [
+        "CHRYSLER LLC JEEP"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ci",
+      "observedNames": [
+        "CI"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ciimo",
+      "observedNames": [
+        "CIIMO"
+      ],
+      "aliases": [
+        "Ciimo",
+        "思铭"
+      ],
+      "markets": [],
+      "countries": [
+        "China"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "ciimo",
+        "canonicalMake": "CIIMO"
+      }
+    },
+    {
+      "key": "cirelli",
+      "observedNames": [
+        "Cirelli"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "cirelli",
+        "canonicalMake": "Cirelli"
+      }
+    },
+    {
+      "key": "citroën",
+      "observedNames": [
+        "Citroën",
+        "CITROËN"
+      ],
+      "aliases": [
+        "Citroen"
+      ],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "France",
+        "lu",
+        "nl",
+        "fi",
+        "nz",
+        "gb",
+        "ua",
+        "es",
+        "de",
+        "ie",
+        "ar",
+        "my"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "citroen",
+        "canonicalMake": "Citroën"
+      }
+    },
+    {
+      "key": "citroen",
+      "observedNames": [
+        "CITROEN",
+        "Citroen"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "citroen",
+        "canonicalMake": "Citroën"
+      }
+    },
+    {
+      "key": "citroends",
+      "observedNames": [
+        "CITROEN DS",
+        "CITROEN / DS"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "coda",
+      "observedNames": [
+        "Coda"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "coda",
+        "canonicalMake": "Coda"
+      }
+    },
+    {
+      "key": "commer",
+      "observedNames": [
+        "Commer"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "continental",
+      "observedNames": [
+        "Continental"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "csgt40",
+      "observedNames": [
+        "CSGT 40"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "cuby",
+      "observedNames": [
+        "CUBY"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "cupra",
+      "observedNames": [
+        "Cupra",
+        "CUPRA"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "de",
+        "ie"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "cupra",
+        "canonicalMake": "Cupra"
+      }
+    },
+    {
+      "key": "dacia",
+      "observedNames": [
+        "Dacia",
+        "DACIA"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "nl",
+        "ua",
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "ie",
+        "lu",
+        "nz"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "dacia",
+        "canonicalMake": "Dacia"
+      }
+    },
+    {
+      "key": "dadi",
+      "observedNames": [
+        "Dadi"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dadi",
+        "canonicalMake": "Dadi"
+      }
+    },
+    {
+      "key": "daewoo",
+      "observedNames": [
+        "Daewoo"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "gb",
+        "ua",
+        "fi",
+        "lu",
+        "us",
+        "ca"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "daewoo",
+        "canonicalMake": "Daewoo"
+      }
+    },
+    {
+      "key": "dahl",
+      "observedNames": [
+        "DAHL"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "daihatsu",
+      "observedNames": [
+        "Daihatsu"
+      ],
+      "aliases": [
+        "ダイハツ"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "Japan",
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "ua",
+        "th",
+        "lu",
+        "us",
+        "es",
+        "my"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "daihatsu",
+        "canonicalMake": "Daihatsu"
+      }
+    },
+    {
+      "key": "daimler",
+      "observedNames": [
+        "Daimler"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "gb",
+        "fi",
+        "lu"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "daimlerag",
+      "observedNames": [
+        "DAIMLER AG"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "daimlerbenz",
+      "observedNames": [
+        "DAIMLER BENZ"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "dallara",
+      "observedNames": [
+        "Dallara",
+        "DALLARA"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "avtocena-v2",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "dallara",
+        "canonicalMake": "Dallara"
+      }
+    },
+    {
+      "key": "dangel",
+      "observedNames": [
+        "DANGEL"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "datsun",
+      "observedNames": [
+        "Datsun"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "gb",
+        "nl",
+        "nz",
+        "lu",
+        "es"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "datsun",
+        "canonicalMake": "Datsun"
+      }
+    },
+    {
+      "key": "davidbrown",
+      "observedNames": [
+        "DAVID BROWN"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "dayun",
+      "observedNames": [
+        "Dayun"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dayun",
+        "canonicalMake": "Dayun"
+      }
+    },
+    {
+      "key": "delorean",
+      "observedNames": [
+        "De Lorean"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "fi"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "desoto",
+      "observedNames": [
+        "De Soto"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "fi"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "detomaso",
+      "observedNames": [
+        "De Tomaso"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "deepal",
+      "observedNames": [
+        "Deepal"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "nl",
+        "ua",
+        "th"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "deepal",
+        "canonicalMake": "Deepal"
+      }
+    },
+    {
+      "key": "delage",
+      "observedNames": [
+        "Delage"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "fi"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "denza",
+      "observedNames": [
+        "Denza"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "my",
+        "nz",
+        "th",
+        "ua"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "denza",
+        "canonicalMake": "Denza"
+      }
+    },
+    {
+      "key": "dethleffs",
+      "observedNames": [
+        "DETHLEFFS"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "dfm",
+      "observedNames": [
+        "DFM"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "dfsk",
+      "observedNames": [
+        "DFSK"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "es",
+        "gb",
+        "lu",
+        "nl",
+        "ar",
+        "fi",
+        "ua"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "dfsk",
+        "canonicalMake": "DFSK"
+      }
+    },
+    {
+      "key": "dfskmotor",
+      "observedNames": [
+        "DFSK MOTOR"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "dfsksokon",
+      "observedNames": [
+        "DFSK SOKON"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "dfskseressokon",
+      "observedNames": [
+        "DFSK, SERES, SOKON"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "divisegurcatalunya",
+      "observedNames": [
+        "DIVISEGUR CATALUNYA"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "dodge",
+      "observedNames": [
+        "Dodge",
+        "DODGE"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "fi",
+        "us",
+        "ca",
+        "gb",
+        "ua",
+        "es",
+        "lu",
+        "my",
+        "ar"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "dodge",
+        "canonicalMake": "Dodge"
+      }
+    },
+    {
+      "key": "dodgebrothers",
+      "observedNames": [
+        "Dodge Brothers"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "dongfeng",
+      "observedNames": [
+        "Dongfeng",
+        "DONGFENG"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "ar",
+        "de",
+        "es",
+        "fi",
+        "nl",
+        "nz",
+        "ua"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "dongfeng",
+        "canonicalMake": "Dongfeng"
+      }
+    },
+    {
+      "key": "dongfengaeolus",
+      "observedNames": [
+        "Dongfeng Aeolus"
+      ],
+      "aliases": [
+        "东风风神"
+      ],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dongfeng-aeolus",
+        "canonicalMake": "Dongfeng Aeolus"
+      }
+    },
+    {
+      "key": "dongfengeπ",
+      "observedNames": [
+        "Dongfeng eπ"
+      ],
+      "aliases": [
+        "东风奕派"
+      ],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dongfeng-epi",
+        "canonicalMake": "Dongfeng eπ"
+      }
+    },
+    {
+      "key": "dongfengnammi",
+      "observedNames": [
+        "Dongfeng Nammi"
+      ],
+      "aliases": [
+        "东风纳米"
+      ],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "dongfeng-nammi",
+        "canonicalMake": "Dongfeng Nammi"
+      }
+    },
+    {
+      "key": "donkervoort",
+      "observedNames": [
+        "Donkervoort",
+        "DONKERVOORT"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "lu",
+        "nl",
+        "fi"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "donkervoort",
+        "canonicalMake": "Donkervoort"
+      }
+    },
+    {
+      "key": "dr",
+      "observedNames": [
+        "DR"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "avtocena-v2",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "dr-automobiles",
+        "canonicalMake": "DR"
+      }
+    },
+    {
+      "key": "dreamer",
+      "observedNames": [
+        "DREAMER"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "dringhcfporsche",
+      "observedNames": [
+        "DRINGHCFPORSCHE"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "dsautomobiles",
+      "observedNames": [
+        "DS Automobiles",
+        "DS AUTOMOBILES"
+      ],
+      "aliases": [
+        "DS"
+      ],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "avtocena-v2",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "canonicalMake": "DS Automobiles"
+      }
+    },
+    {
+      "key": "ds",
+      "observedNames": [
+        "DS"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "de",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "nl",
+        "nz",
+        "ua",
+        "ar"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "ds-automobiles",
+        "canonicalMake": "DS Automobiles"
+      }
+    },
+    {
+      "key": "ego",
+      "observedNames": [
+        "e.GO",
+        "E.go",
+        "EGO",
+        "E.GO"
+      ],
+      "aliases": [
+        "EGO"
+      ],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "nl",
+        "ua"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "ego-mobile",
+        "canonicalMake": "e.GO"
+      }
+    },
+    {
+      "key": "eagle",
+      "observedNames": [
+        "Eagle"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "United States",
+        "ca",
+        "us",
+        "gb",
+        "nl",
+        "ua"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "eagle",
+        "canonicalMake": "Eagle"
+      }
+    },
+    {
+      "key": "ebro",
+      "observedNames": [
+        "EBRO"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "ebro",
+        "canonicalMake": "EBRO"
+      }
+    },
+    {
+      "key": "edsel",
+      "observedNames": [
+        "Edsel"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "fi",
+        "lu"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "egentillverkat",
+      "observedNames": [
+        "EGENTILLVERKAT"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "elaris",
+      "observedNames": [
+        "Elaris",
+        "ELARIS"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "avtocena-v2",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "elaris",
+        "canonicalMake": "Elaris"
+      }
+    },
+    {
+      "key": "electrajacetana",
+      "observedNames": [
+        "ELECTRA JACETANA"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "elios",
+      "observedNames": [
+        "ELIOS"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "emc",
+      "observedNames": [
+        "EMC"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "emc",
+        "canonicalMake": "EMC"
+      }
+    },
+    {
+      "key": "eonyx",
+      "observedNames": [
+        "EONYX"
+      ],
+      "aliases": [
+        "EONY X"
+      ],
+      "markets": [],
+      "countries": [
+        "Russia"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "eonyx",
+        "canonicalMake": "EONYX"
+      }
+    },
+    {
+      "key": "essex",
+      "observedNames": [
+        "Essex"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "esteo",
+      "observedNames": [
+        "ESTEO"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "esteo",
+        "canonicalMake": "ESTEO"
+      }
+    },
+    {
+      "key": "esther7",
+      "observedNames": [
+        "ESTHER 7"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "etrusco",
+      "observedNames": [
+        "ETRUSCO"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "eunos",
+      "observedNames": [
+        "Eunos"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "euramobil",
+      "observedNames": [
+        "EURA-MOBIL"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "eurocarrocera",
+      "observedNames": [
+        "EUROCARROCERA"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "evo",
+      "observedNames": [
+        "EVO"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "evo",
+        "canonicalMake": "EVO"
+      }
+    },
+    {
+      "key": "evolute",
+      "observedNames": [
+        "EVOLUTE"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [
+        "Russia"
+      ],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "evolute",
+        "canonicalMake": "EVOLUTE"
+      }
+    },
+    {
+      "key": "excalibur",
+      "observedNames": [
+        "Excalibur"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "exeed",
+      "observedNames": [
+        "EXEED"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "exeed",
+        "canonicalMake": "EXEED"
+      }
+    },
+    {
+      "key": "exlantix",
+      "observedNames": [
+        "Exlantix"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "exlantix",
+        "canonicalMake": "Exlantix"
+      }
+    },
+    {
+      "key": "fangchengbao",
+      "observedNames": [
+        "FANGCHENGBAO"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "fangchengbao",
+        "canonicalMake": "FANGCHENGBAO"
+      }
+    },
+    {
+      "key": "farizon",
+      "observedNames": [
+        "Farizon"
+      ],
+      "aliases": [
+        "Farizon Auto"
+      ],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "farizon",
+        "canonicalMake": "Farizon"
+      }
+    },
+    {
+      "key": "faw",
+      "observedNames": [
+        "FAW"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "lu"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "faw",
+        "canonicalMake": "FAW"
+      }
+    },
+    {
+      "key": "fcaitalyspa",
+      "observedNames": [
+        "FCA ITALY SPA"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fengshenaeolus",
+      "observedNames": [
+        "FENGSHEN AEOLUS"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ferrari",
+      "observedNames": [
+        "Ferrari",
+        "FERRARI"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "ca",
+        "de",
+        "es",
+        "fi",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "us",
+        "ar",
+        "gb",
+        "ua"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "ferrari",
+        "canonicalMake": "Ferrari"
+      }
+    },
+    {
+      "key": "fiat",
+      "observedNames": [
+        "Fiat",
+        "FIAT"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "es",
+        "nl",
+        "fi",
+        "gb",
+        "nz",
+        "lu",
+        "ua",
+        "ca",
+        "my",
+        "us",
+        "de",
+        "ie",
+        "ar"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "fiat",
+        "canonicalMake": "Fiat"
+      }
+    },
+    {
+      "key": "fiatautospa",
+      "observedNames": [
+        "FIAT AUTO SPA"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fiatcapron",
+      "observedNames": [
+        "FIAT CAPRON"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fiatetrusco",
+      "observedNames": [
+        "FIAT ETRUSCO"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fiatsea",
+      "observedNames": [
+        "FIAT SEA"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "firefly",
+      "observedNames": [
+        "firefly"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "firefly",
+        "canonicalMake": "firefly"
+      }
+    },
+    {
+      "key": "fisker",
+      "observedNames": [
+        "Fisker"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "ua",
+        "us",
+        "de",
+        "gb",
+        "ca"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "fisker",
+        "canonicalMake": "Fisker"
+      }
+    },
+    {
+      "key": "fleetwood",
+      "observedNames": [
+        "Fleetwood"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "lu",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fontvendome",
+      "observedNames": [
+        "Font Vendome"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "es",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "forcemotors",
+      "observedNames": [
+        "FORCE MOTORS"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "ford",
+      "observedNames": [
+        "Ford",
+        "FORD"
+      ],
+      "aliases": [
+        "Ford Motor Company",
+        "FORD-CNG TECHNIK",
+        "포드"
+      ],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "United States",
+        "fi",
+        "nl",
+        "nz",
+        "es",
+        "ca",
+        "ua",
+        "us",
+        "gb",
+        "lu",
+        "de",
+        "ie",
+        "ar",
+        "my",
+        "th"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "canonicalMake": "Ford"
+      }
+    },
+    {
+      "key": "fordcngtechnik",
+      "observedNames": [
+        "FORD - CNG-TECHNIK",
+        "FORD CNG TECHNIK",
+        "FORD CNG-TECHNIK",
+        "FORD-CNG TECHNIK",
+        "FORD-CNG-TECHNIK",
+        "FORD -CNG-TECHNIK",
+        "FORD-CNG-Technik"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "ford",
+        "canonicalMake": "Ford"
+      }
+    },
+    {
+      "key": "fordd",
+      "observedNames": [
+        "FORD (D)"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fordusa",
+      "observedNames": [
+        "FORD (USA)"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fordcngtecknik",
+      "observedNames": [
+        "FORD CNG-TECKNIK",
+        "FORD-CNG-TECKNIK"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fordcustom",
+      "observedNames": [
+        "FORD CUSTOM"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fordmotorcompanymexiko",
+      "observedNames": [
+        "FORD MOTOR COMPANY MEXIKO"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fordmustang",
+      "observedNames": [
+        "FORD MUSTANG"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fordwgmbh",
+      "observedNames": [
+        "FORD W GMBH"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fordcnsgtechnik",
+      "observedNames": [
+        "FORD-CNSG-TECHNIK"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "forster",
+      "observedNames": [
+        "FORSTER"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "forthing",
+      "observedNames": [
+        "Forthing"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "forthing",
+        "canonicalMake": "Forthing"
+      }
+    },
+    {
+      "key": "foton",
+      "observedNames": [
+        "Foton"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "foton",
+        "canonicalMake": "Foton"
+      }
+    },
+    {
+      "key": "fs",
+      "observedNames": [
+        "FS"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "fso",
+      "observedNames": [
+        "FSO"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "g01",
+      "observedNames": [
+        "G01"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gac",
+      "observedNames": [
+        "GAC"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "fi",
+        "nz",
+        "my",
+        "th"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "gac",
+        "canonicalMake": "GAC"
+      }
+    },
+    {
+      "key": "gaz",
+      "observedNames": [
+        "GAZ"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "ua",
+        "fi",
+        "es"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "geely",
+      "observedNames": [
+        "Geely"
+      ],
+      "aliases": [
+        "Geely Auto"
+      ],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "China",
+        "de",
+        "es",
+        "lu",
+        "nl",
+        "ua",
+        "ar",
+        "nz",
+        "th"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "geely",
+        "canonicalMake": "Geely"
+      }
+    },
+    {
+      "key": "geelygalaxy",
+      "observedNames": [
+        "Geely Galaxy"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "geely-galaxy",
+        "canonicalMake": "Geely Galaxy"
+      }
+    },
+    {
+      "key": "genesis",
+      "observedNames": [
+        "Genesis",
+        "GENESIS"
+      ],
+      "aliases": [
+        "제네시스"
+      ],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "ca",
+        "us",
+        "gb",
+        "nl",
+        "nz",
+        "de",
+        "my"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "genesis",
+        "canonicalMake": "Genesis"
+      }
+    },
+    {
+      "key": "geo",
+      "observedNames": [
+        "Geo"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "ca",
+        "nl",
+        "us"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": {
+        "brandId": "geo",
+        "canonicalMake": "Geo"
+      }
+    },
+    {
+      "key": "ginetta",
+      "observedNames": [
+        "Ginetta"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "globecar",
+      "observedNames": [
+        "GLOBECAR"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gmdaewoo",
+      "observedNames": [
+        "Gm Daewoo"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gmc",
+      "observedNames": [
+        "GMC"
+      ],
+      "aliases": [],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "ca",
+        "es",
+        "fi",
+        "ua",
+        "us",
+        "lu",
+        "th"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "gmc",
+        "canonicalMake": "GMC"
+      }
+    },
+    {
+      "key": "goggomobil",
+      "observedNames": [
+        "Goggomobil"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "fi",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "goliath",
+      "observedNames": [
+        "Goliath"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz",
+        "fi"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "graham",
+      "observedNames": [
+        "Graham"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nl",
+        "nz"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gramtec",
+      "observedNames": [
+        "GRAMTEC"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "greatwall",
+      "observedNames": [
+        "Great Wall",
+        "GREAT WALL"
+      ],
+      "aliases": [
+        "GREAT WALL MOTOR CO LTD",
+        "GREAT WALL MOTOR COMPANY",
+        "GREAT WALL MOTOR COMPANY LIMITED"
+      ],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "gb",
+        "nl",
+        "my",
+        "nz",
+        "ua",
+        "ar",
+        "de",
+        "lu",
+        "th"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "canonicalMake": "Great Wall"
+      }
+    },
+    {
+      "key": "greatwallmotorcompany",
+      "observedNames": [
+        "GREAT WALL MOTOR COMPANY"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "great-wall",
+        "canonicalMake": "Great Wall"
+      }
+    },
+    {
+      "key": "greentour",
+      "observedNames": [
+        "GREEN TOUR"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "gumpertaiwaysautomobile",
+      "observedNames": [
+        "GUMPERT AIWAYS AUTOMOBILE"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hkansroadster",
+      "observedNames": [
+        "H?KANS ROADSTER"
+      ],
+      "aliases": [],
+      "markets": [
+        "europe"
+      ],
+      "countries": [],
+      "sources": [
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hafei",
+      "observedNames": [
+        "Hafei"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "hafei",
+        "canonicalMake": "Hafei"
+      }
+    },
+    {
+      "key": "haima",
+      "observedNames": [
+        "Haima"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "haima",
+        "canonicalMake": "Haima"
+      }
+    },
+    {
+      "key": "haval",
+      "observedNames": [
+        "Haval",
+        "HAVAL"
+      ],
+      "aliases": [
+        "HAVAL"
+      ],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "China",
+        "nl",
+        "nz",
+        "ua",
+        "th",
+        "ar"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "haval",
+        "canonicalMake": "Haval"
+      }
+    },
+    {
+      "key": "hawtai",
+      "observedNames": [
+        "Hawtai"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "hawtai",
+        "canonicalMake": "Hawtai"
+      }
+    },
+    {
+      "key": "hedmos",
+      "observedNames": [
+        "HEDMOS"
+      ],
+      "aliases": [
+        "示界"
+      ],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "hedmos",
+        "canonicalMake": "HEDMOS"
+      }
+    },
+    {
+      "key": "hillman",
+      "observedNames": [
+        "Hillman"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "gb",
+        "nz",
+        "fi",
+        "nl"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "hiphi",
+      "observedNames": [
+        "HiPhi"
+      ],
+      "aliases": [],
+      "markets": [],
+      "countries": [],
+      "sources": [
+        "avtocena-v2"
+      ],
+      "canonical": {
+        "brandId": "hiphi",
+        "canonicalMake": "HiPhi"
+      }
+    },
+    {
+      "key": "holden",
+      "observedNames": [
+        "Holden"
+      ],
+      "aliases": [],
+      "markets": [
+        "global"
+      ],
+      "countries": [
+        "nz",
+        "nl",
+        "gb"
+      ],
+      "sources": [
+        "vehiclesdb-open-catalog"
+      ],
+      "canonical": null
+    },
+    {
+      "key": "honda",
+      "observedNames": [
+        "Honda",
+        "HONDA"
+      ],
+      "aliases": [
+        "Honda Motor Co., Ltd.",
+        "ホンダ"
+      ],
+      "markets": [
+        "global",
+        "europe"
+      ],
+      "countries": [
+        "Japan",
+        "ca",
+        "es",
+        "fi",
+        "gb",
+        "lu",
+        "my",
+        "nl",
+        "nz",
+        "th",
+        "ua",
+        "us",
+        "de",
+        "ie",
+        "ar"
+      ],
+      "sources": [
+        "avtocena-v2",
+        "vehiclesdb-open-catalog",
+        "eea-co2-passenger-cars"
+      ],
+      "canonical": {
+        "brandId": "honda",
+        "canonicalMake": "Honda"
+      }
+    }
+  ]
+}
