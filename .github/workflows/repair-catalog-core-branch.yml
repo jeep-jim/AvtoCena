@@ -7,6 +7,9 @@ on:
     paths:
       - scripts/repair-catalog-core-20260822.mjs
       - scripts/repair-knowledge-core-20260822.mjs
+      - scripts/repair-public-truth-seo-20260822.mjs
+      - apps/web/lib/catalog/power-sanity.ts
+      - tests/catalog-public-truth-seo.test.ts
       - .github/workflows/repair-catalog-core-branch.yml
   pull_request:
     branches:
@@ -14,10 +17,13 @@ on:
     paths:
       - scripts/repair-catalog-core-20260822.mjs
       - scripts/repair-knowledge-core-20260822.mjs
+      - scripts/repair-public-truth-seo-20260822.mjs
       - apps/web/lib/catalog/knowledge-core.ts
+      - apps/web/lib/catalog/power-sanity.ts
       - scripts/catalog-build-knowledge-gaps.mjs
       - scripts/catalog-verify-current-offers.mjs
       - tests/catalog-knowledge-core-contract.test.ts
+      - tests/catalog-public-truth-seo.test.ts
       - .github/workflows/repair-catalog-core-branch.yml
 
 permissions:
@@ -46,13 +52,16 @@ jobs:
         run: node scripts/repair-catalog-core-20260822.mjs
       - name: Apply unified Knowledge CORE integration
         run: node scripts/repair-knowledge-core-20260822.mjs
+      - name: Apply public truth and SEO repair
+        run: node scripts/repair-public-truth-seo-20260822.mjs
       - name: Validate repaired catalog core
         run: |
           node --check scripts/catalog-verify-current-offers.mjs
           node --check scripts/catalog-build-knowledge-gaps.mjs
           node --check scripts/repair-catalog-core-20260822.mjs
           node --check scripts/repair-knowledge-core-20260822.mjs
-          node --import tsx --test tests/offer-navigation-performance.test.ts tests/catalog-production-hardening.test.ts tests/catalog-knowledge-core-contract.test.ts
+          node --check scripts/repair-public-truth-seo-20260822.mjs
+          node --import tsx --test tests/offer-navigation-performance.test.ts tests/catalog-production-hardening.test.ts tests/catalog-knowledge-core-contract.test.ts tests/catalog-public-truth-seo.test.ts
           npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
       - name: Commit repaired source
         shell: bash
@@ -63,6 +72,12 @@ jobs:
           git add \
             apps/web/lib/catalog/storage.ts \
             apps/web/lib/catalog/offer-page-data.ts \
+            apps/web/lib/catalog/spec-normalization.ts \
+            apps/web/lib/catalog/dubicars-current-source.ts \
+            apps/web/lib/catalog/dubicars-exact-source.ts \
+            apps/web/lib/catalog/presentation.ts \
+            'apps/web/app/(public)/cars/offer/[id]/page.tsx' \
+            'apps/web/app/(public)/cars/offer/[id]/layout.tsx' \
             scripts/catalog-apply-encyclopedia-identity-master.mjs \
             tests/offer-navigation-performance.test.ts \
             .github/workflows/catalog-v3-market-10k-reusable.yml \
@@ -73,5 +88,5 @@ jobs:
             echo "Recovery transformations are already applied."
             exit 0
           fi
-          git commit -m "Unify catalog publication and Knowledge CORE"
+          git commit -m "Unify catalog truth, publication and Knowledge CORE"
           git push origin HEAD:fix/catalog-core-recovery-20260822
