@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { credibleCatalogImages, isCatalogOfferBusinessLiquid, isCrediblePublicOffer } from "../apps/web/lib/catalog/offer-quality";
 import { isLikelyVehicleImage, rankedCatalogImageUrls } from "../apps/web/lib/catalog/image-quality";
+import { coherentGoonetImages } from "../apps/web/lib/catalog/goonet-exact-source";
 
 const jpegPhoto = {
   id: "photo",
@@ -123,6 +124,34 @@ test("rejects catalog cards without real source make and model identity", () => 
   for (const model of ["", "unknown", "N/A", "Модель уточняется", "неизвестно", "미상", "未知"]) {
     assert.equal(isCrediblePublicOffer({ ...rawOffer, model } as any), false, `model=${model || "<empty>"}`);
   }
+});
+
+test("uses Goo-net's listing-level primary exterior photo ahead of dealer gallery assets", () => {
+  const primary = "https://picture1.goo-net.com/9880260426/00804420/J/98802604260080442000700.jpg";
+  const dealerGallery = Array.from(
+    { length: 5 },
+    (_, index) => `https://picture1.goo-net.com/080/0804420/J/0804420A20260425D0070${index + 1}.jpg`,
+  );
+  const unrelated = [
+    "https://picture1.goo-net.com/common/recommend/J/recommend01.jpg",
+    "https://picture1.goo-net.com/common/recommend/J/recommend02.jpg",
+  ];
+
+  assert.deepEqual(coherentGoonetImages([...dealerGallery, ...unrelated, primary], 5), [
+    primary,
+    ...dealerGallery.slice(0, 4),
+  ]);
+});
+
+test("preserves Goo-net's coherent-gallery fallback when no source primary exists", () => {
+  const gallery = Array.from(
+    { length: 4 },
+    (_, index) => `https://picture1.goo-net.com/080/0804420/J/0804420A20260425D0070${index + 1}.jpg`,
+  );
+  assert.deepEqual(coherentGoonetImages([
+    "https://picture1.goo-net.com/other/listing/J/other01.jpg",
+    ...gallery,
+  ], 3), gallery.slice(0, 3));
 });
 
 test("keeps a server-validated compact Japan projection visible with one ranked cover", () => {
