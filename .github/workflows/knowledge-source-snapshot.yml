@@ -213,8 +213,6 @@ jobs:
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git fetch origin fix/catalog-core-recovery-20260822
-          git rebase origin/fix/catalog-core-recovery-20260822
           git add data/catalog/knowledge-source-snapshots/generated data/catalog/knowledge-source-snapshots/denominator data/catalog/knowledge-source-snapshots/master data/catalog/knowledge-source-snapshots/completion-report.json
           if git diff --cached --quiet; then echo "Knowledge source corpus is unchanged."; exit 0; fi
           git commit -m "Build complete vehicle knowledge source corpus"
