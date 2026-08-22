@@ -112,6 +112,8 @@ test("catalog generation becomes public only after canonical identity and dedupl
   assert.ok(currentReadModelRefresh > 0);
   assert.ok(currentReadModelRefresh < manifestSwitch);
   assert.match(storage, /assertCurrentCatalogReadModelsReady\(generationId, publishedOffers\)/);
+  assert.match(storage, /shardRepresentatives/);
+  assert.match(storage, /new Map\(rows\.map\(\(offer\) => \[currentOfferShardName\(offer\.id\), offer\]\)\)/);
   assert.match(storage, /current\.generationId === manifest\.generationId/);
 });
 

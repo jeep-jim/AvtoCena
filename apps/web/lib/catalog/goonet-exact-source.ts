@@ -157,9 +157,23 @@ function collectPageImages(markup: string, pageUrl: string, structured: any[]) {
   return unique;
 }
 
-function coherentImages(urls: string[], limit: number) {
+function isSourcePrimaryImage(value: string) {
+  try {
+    const pathname = new URL(value).pathname;
+    // Goo-net's listing-level primary photo is an all-numeric offer identity
+    // followed by the 00 frame. Dealer gallery assets contain letters (for
+    // example D00701.jpg), so this avoids promoting those banners as covers.
+    return /\/J\/\d{18,}00\.(?:jpe?g|png|webp)$/i.test(pathname);
+  } catch {
+    return false;
+  }
+}
+
+export function coherentGoonetImages(urls: string[], limit: number) {
+  const primary = urls.find(isSourcePrimaryImage);
+  const galleryUrls = urls.filter((value) => value !== primary);
   const groups = new Map<string, string[]>();
-  for (const value of urls) {
+  for (const value of galleryUrls) {
     try {
       const parsed = new URL(value);
       const parts = parsed.pathname.split("/").filter(Boolean);
@@ -168,8 +182,8 @@ function coherentImages(urls: string[], limit: number) {
     } catch { /* invalid source URL */ }
   }
   const best = [...groups.values()].sort((a, b) => b.length - a.length)[0];
-  const selected = best && best.length >= 3 ? best : urls;
-  return selected.slice(0, limit);
+  const selected = best && best.length >= 3 ? best : galleryUrls;
+  return [...(primary ? [primary] : []), ...selected].slice(0, limit);
 }
 
 function parse(markup: string, url: string): Row | null {
@@ -193,7 +207,7 @@ function parse(markup: string, url: string): Row | null {
   const mileageKm = num(String(vehicle.mileageFromOdometer?.value || vehicle.mileageFromOdometer || plain.match(/([0-9][0-9, ]+)\s*km/i)?.[1] || ""));
   const engineCc = num(String(vehicle.vehicleEngine?.engineDisplacement || plain.match(/([0-9][0-9, ]+)\s*cc/i)?.[1] || ""));
   const maxImages = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120));
-  const images = coherentImages(collectPageImages(markup, url, structured), maxImages);
+  const images = coherentGoonetImages(collectPageImages(markup, url, structured), maxImages);
   if (!images.length) return null;
 
   return {

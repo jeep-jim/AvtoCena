@@ -841,7 +841,11 @@ async function assertCurrentCatalogReadModelsReady(generationId: string, offers:
     if (projection.generationId !== generationId || Number(projection.items?.length || 0) !== rows.length) {
       throw new Error(`catalog_current_market_projection_not_ready:${market}:${projection.generationId}:${Number(projection.items?.length || 0)}:${generationId}:${rows.length}`);
     }
-    for (const offer of rows.slice(0, 5)) {
+    // Verify one representative from every physical offer shard. Sampling the
+    // first five rows let a later shard disappear while its card projection was
+    // already public, producing a valid-looking card that navigated to 404.
+    const shardRepresentatives = [...new Map(rows.map((offer) => [currentOfferShardName(offer.id), offer])).values()];
+    for (const offer of shardRepresentatives) {
       const shard = await readDataJson<{ generationId: string; items: VehicleOffer[] }>(
         currentOfferShardPath(offer.id),
         { generationId: "", items: [] },

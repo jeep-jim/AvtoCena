@@ -281,31 +281,6 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
     bodyValue ? { label: "Кузов", value: bodyValue, icon: "body" as const } : null,
   ]).filter(Boolean) as SpecItem[];
 
-  const readableTrim = knownValue(o.trimLabel);
-  const publicTrim = /^(?:other|другое|прочее|прочий|unknown|n\/?a)$/i.test(readableTrim) ? "" : readableTrim;
-  const readableFacts = [
-    ["Марка", knownValue(o.makeLabel)],
-    ["Модель", knownValue(o.modelLabel)],
-    ["Комплектация", publicTrim],
-    ["Год выпуска", o.year ? `${o.year}` : ""],
-    ["Пробег", mileageKm > 0 ? `${money(mileageKm)} км` : ""],
-    ["Объём двигателя", Number(o.engineCc || 0) > 0 ? `${money(o.engineCc)} см³` : ""],
-    ["Топливо", fuelValue],
-    ["Мощность", safePowerHp ? `${safePowerHp} л.с.` : ""],
-    ["Коробка передач", transmissionValue],
-    ["Привод", driveLabel],
-    ["Кузов", bodyValue],
-    ["Рынок", knownValue(o.marketLabel)],
-  ].filter((item) => item[1]) as Array<[string, string]>;
-  const factualSummary = [
-    `${knownValue(o.makeLabel)} ${knownValue(o.modelLabel)}`.trim(),
-    o.year ? `${o.year} года` : "",
-    Number(o.engineCc || 0) > 0 ? `двигатель ${(Number(o.engineCc) / 1000).toFixed(Number(o.engineCc) % 1000 ? 1 : 0)} л` : "",
-    fuelValue ? `топливо — ${fuelValue.toLowerCase()}` : "",
-    driveLabel ? `${driveLabel.toLowerCase()}` : "",
-    transmissionValue ? `коробка — ${transmissionValue.toLowerCase()}` : "",
-  ].filter(Boolean).join(", ");
-
   return <main className="ac-offer-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
     <section className="relative z-0 mx-auto w-full max-w-[1500px] px-4 py-7 md:px-8 md:py-10">
@@ -342,16 +317,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
         </div>
       </div>
 
-      <section aria-labelledby="vehicle-facts-heading" className="mt-10 rounded-[1.7rem] bg-[var(--ac-surface-2)] p-5 md:mt-14 md:p-7">
-        <h2 id="vehicle-facts-heading" className="text-2xl font-black tracking-[-0.03em] md:text-3xl">Характеристики {o.makeLabel} {o.modelLabel}</h2>
-        {factualSummary ? <p className="mt-3 max-w-5xl text-sm font-semibold leading-6 text-[var(--ac-muted)] md:text-base">{factualSummary}. Данные нормализованы АвтоЦеной по карточке источника и проверенной базе знаний; сомнительные характеристики не публикуются как факт.</p> : null}
-        <dl className="mt-6 grid gap-x-8 gap-y-0 md:grid-cols-2">
-          {readableFacts.map(([label, value]) => <div key={label} className="flex min-w-0 items-start justify-between gap-5 border-b border-white/10 py-3 text-sm md:text-base"><dt className="text-[var(--ac-muted)]">{label}</dt><dd className="min-w-0 text-right font-bold text-[var(--ac-text)]">{value}</dd></div>)}
-        </dl>
-        {sourceUrl ? <p className="mt-5 text-xs font-semibold text-[var(--ac-muted)]">Исходное объявление: <a href={sourceUrl} target="_blank" rel="nofollow noopener noreferrer" className="underline underline-offset-4">проверить у продавца</a>. АвтоЦена не копирует рекламное описание продавца и показывает только нормализованные факты.</p> : null}
-      </section>
-
-            <Suspense fallback={<SimilarOffersFallback />}><SimilarOffers current={raw} /></Suspense>
+      <Suspense fallback={<SimilarOffersFallback />}><SimilarOffers current={raw} /></Suspense>
     </section>
     <style dangerouslySetInnerHTML={{ __html: `
       html:not([data-theme="light"]) .ac-offer-page .ac-offer-spec-tile{background:#11141c!important}

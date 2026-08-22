@@ -69,14 +69,12 @@ test("both DubiCars adapters use full-token horsepower parsing", () => {
   assert.doesNotMatch(currentDubicars, /Horsepower\\s\*\[:：\]\?\\s\*\(\[0-9\]\{2,4\}\)/);
 });
 
-test("offer detail renders crawlable factual specs and hides generic Other trim", () => {
-  assert.match(page, /id="vehicle-facts-heading"/);
-  assert.match(page, /Характеристики \{o\.makeLabel\} \{o\.modelLabel\}/);
-  assert.match(page, /<dl className=/);
-  assert.match(page, /readableFacts/);
+test("offer detail keeps one compact specification surface without a duplicated facts block", () => {
+  assert.match(page, /ac-offer-spec-grid/);
+  assert.doesNotMatch(page, /id="vehicle-facts-heading"/);
+  assert.doesNotMatch(page, /Характеристики \{o\.makeLabel\} \{o\.modelLabel\}/);
+  assert.doesNotMatch(page, /readableFacts|factualSummary/);
   assert.match(page, /publicCatalogPowerHp\(raw\)/);
-  assert.match(page, /сомнительные характеристики не публикуются как факт/);
-  assert.match(page, /rel="nofollow noopener noreferrer"/);
   assert.match(presentation, /other\|другое\|прочее\|прочий/);
 });
 
