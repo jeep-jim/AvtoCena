@@ -167,6 +167,7 @@ jobs:
           KNOWLEDGE_OUTPUT_ROOT: data/catalog/knowledge-source-snapshots/generated
           KNOWLEDGE_AUTOHOME_MAX_SERIES: "6000"
           KNOWLEDGE_AUTOHOME_DELAY_MS: "150"
+          KNOWLEDGE_AUTOHOME_CONCURRENCY: "2"
         run: node scripts/catalog-download-autohome-china-core.mjs
       - name: Build source-evidence denominators
         env:
