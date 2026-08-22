@@ -8,6 +8,14 @@ const { classifyCatalogV2Offer } = await import("../apps/web/lib/catalog/catalog
 const { catalogV2SourceIds } = await import("../apps/web/lib/catalog/catalog-v2-source-registry.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { enrichOfferWithKnowledgeCore } = await import("../apps/web/lib/catalog/knowledge-core.ts");
+const {
+  catalogPartitionInitialCursor,
+  catalogPartitionNextCursor,
+  catalogPartitionStorageSuffix,
+  catalogRetainedOfferBelongsToPartition,
+  catalogSourceAssignedToShard,
+  catalogSourcePagePartition,
+} = await import("../apps/web/lib/catalog/source-page-partition.ts");
 const { readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { getJsonStorage, readChunkedDataJson } = await import("../apps/web/lib/data.ts");
 const { replaceChunkedDataJson } = await import("../apps/web/lib/replace-chunked-data.ts");
@@ -46,11 +54,6 @@ if (!market) throw new Error("catalog_market_missing");
 process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = String(minimumImages);
 process.env.CATALOG_MAX_IMAGES_PER_OFFER = String(networkImageLimit);
 
-function shardOf(value) {
-  let hash = 2166136261;
-  for (const char of String(value)) { hash ^= char.charCodeAt(0); hash = Math.imul(hash, 16777619); }
-  return Math.abs(hash >>> 0) % shardCount;
-}
 function cleanSourceId(sourceId) { return String(sourceId).replace(/[^a-z0-9_-]/gi, "-"); }
 function key(image) { return String(image?.checksum || image?.id || image?.objectKey || image?.url || ""); }
 function images(list) {
@@ -71,8 +74,9 @@ function quality(a, b) {
   return compareCatalogPublicPriority(a, b)
     || currentTime(b) - currentTime(a);
 }
-function cursorPath(sourceId) { return `catalog/source-cursors/${market}/${cleanSourceId(sourceId)}.json`; }
-function candidatePath(sourceId) { return `catalog/source-candidates/${market}/${cleanSourceId(sourceId)}.json`; }
+function partitionFor(sourceId) { return catalogSourcePagePartition(sourceId, shardIndex, shardCount); }
+function cursorPath(sourceId) { return `catalog/source-cursors/${market}/${cleanSourceId(sourceId)}${catalogPartitionStorageSuffix(partitionFor(sourceId))}.json`; }
+function candidatePath(sourceId) { return `catalog/source-candidates/${market}/${cleanSourceId(sourceId)}${catalogPartitionStorageSuffix(partitionFor(sourceId))}.json`; }
 function expired() { return Date.now() >= deadline; }
 async function pool(rows, limit, worker) {
   if (!rows.length) return [];
@@ -93,7 +97,9 @@ const requestedSources = v2SourceSlotsOnly
   : String(process.env.CATALOG_REBUILD_SOURCE_IDS || "").split(",").map((value) => value.trim());
 const configured = requestedSources
   .filter((value) => value && !value.startsWith("__") && adapters.has(value));
-const retentionSourceIds = [...new Set(v2SourceSlotsOnly ? configured : registered)].filter((id) => shardOf(id) === shardIndex).sort();
+const retentionSourceIds = [...new Set(v2SourceSlotsOnly ? configured : registered)]
+  .filter((id) => catalogSourceAssignedToShard(id, shardIndex, shardCount))
+  .sort();
 const liveSourceIds = ignoreProbe
   ? [...retentionSourceIds]
   : [...new Set(configured)].filter((id) => retentionSourceIds.includes(id));
@@ -152,11 +158,11 @@ function report(stopReason = "running") {
   const priorityOffers = offers.filter(isMassMarketPriority).length;
   const imageCounts = offers.map((offer) => Number(offer?.images?.length || 0));
   return {
-    version: 41, market, shardIndex, shardCount, generatedAt: new Date().toISOString(), targetPerSource,
+    version: 42, market, shardIndex, shardCount, generatedAt: new Date().toISOString(), targetPerSource,
     minimumMarketTarget, count: offers.length, sourceIds, liveSourceIds, retentionSourceIds,
     partial: offers.length < Math.ceil(minimumMarketTarget / shardCount), stopReason,
     report: {
-      version: 41, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages, networkImageLimit,
+      version: 42, market, shardIndex, shardCount, targetPerSource, minimumImages, preferredImages, maximumImages, networkImageLimit,
       detailLimitPerSource, maxPagesPerSource, maxTotalPages, maxEmptyPages, maxSourceErrors,
       detailReservationsBySource: numericCounts(detailReservations), detailSuccessBySource: numericCounts(detailSuccessBySource),
       detailDeferredBySource: numericCounts(detailDeferredBySource), detailDeferred, calculationPending, galleriesAccumulated,
@@ -238,7 +244,8 @@ try { internalRows = await readAllOffersForMaintenance(); } catch (error) { addE
 for (const row of [...publicRows, ...internalRows].sort(quality)) {
   const sourceId = String(row?.sourceId || "");
   const bucket = retained.get(sourceId);
-  if (!bucket || !row?.id || bucket.has(row.id) || bucket.size >= targetPerSource || firstSeen(row) < cutoff) continue;
+  if (!bucket || !row?.id || !catalogRetainedOfferBelongsToPartition(row.id, partitionFor(sourceId))
+    || bucket.has(row.id) || bucket.size >= targetPerSource || firstSeen(row) < cutoff) continue;
   const offer = normalizeVehicleOfferSpecs({ ...row, status: "active", images: images(row.images) });
   if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer)) bucket.set(offer.id, offer);
 }
@@ -327,11 +334,13 @@ async function prepare(base, source) {
 }
 
 const states = await pool(liveSourceIds, sourceConcurrency, async (sourceId) => {
+  const partition = partitionFor(sourceId);
   let saved = { cursor: null, cycle: 0, pagesVisited: 0 };
   try { saved = await storage.readJson(cursorPath(sourceId), saved); } catch (error) { addError({ sourceId, stage: "cursor_read", error: String(error?.message || error) }); }
-  const initialCursor = resetCursor ? null : saved.cursor || null;
+  const partitionStart = catalogPartitionInitialCursor(partition);
+  const initialCursor = resetCursor ? partitionStart : saved.cursor || partitionStart;
   return { sourceId, source: adapters.get(sourceId), cursor: initialCursor, initialCursor,
-    cycle: Number(saved.cycle || 0), pagesVisited: Number(saved.pagesVisited || 0), pages: 0, errors: 0, empty: 0, done: false, stopReason: "running", seenCursors: new Set() };
+    partition, cycle: Number(saved.cycle || 0), pagesVisited: Number(saved.pagesVisited || 0), pages: 0, errors: 0, empty: 0, done: false, stopReason: "running", seenCursors: new Set() };
 });
 const pagePrepareConcurrency = Math.max(1, Math.floor(prepareConcurrency / Math.max(1, Math.min(sourceConcurrency, liveSourceIds.length || 1))));
 
@@ -368,7 +377,7 @@ async function fetchOne(state) {
     if (offer && bucket.size < targetPerSource) bucket.set(offer.id, offer);
   }
   state.empty = bucket.size === before ? state.empty + 1 : 0;
-  const nextCursor = fetched?.nextCursor || null;
+  const nextCursor = catalogPartitionNextCursor(state.cursor, fetched?.nextCursor || null, state.partition);
   const finished = Boolean((fetched?.finished && !nextCursor) || !nextCursor);
   try {
     await storage.writeJson(cursorPath(state.sourceId), { version: 2, market, sourceId: state.sourceId,
@@ -398,7 +407,8 @@ for (const state of states) {
   sourceReports.push({ sourceId: state.sourceId, mode: "live", target: targetPerSource, freshSaved: fresh.get(state.sourceId).size,
     restoredSaved: retained.get(state.sourceId).size, pages: state.pages, errors: state.errors, emptyPages: state.empty,
     detailReserved: Number(detailReservations.get(state.sourceId) || 0), detailSucceeded: Number(detailSuccessBySource.get(state.sourceId) || 0),
-    detailDeferred: Number(detailDeferredBySource.get(state.sourceId) || 0), initialCursor: state.initialCursor, nextCursor: state.cursor,
+    detailDeferred: Number(detailDeferredBySource.get(state.sourceId) || 0), partition: state.partition,
+    initialCursor: state.initialCursor, nextCursor: state.cursor,
     cycle: state.cycle, pagesVisited: state.pagesVisited, stopReason: state.stopReason });
 }
 for (const sourceId of retentionSourceIds.filter((id) => !liveSourceIds.includes(id))) {

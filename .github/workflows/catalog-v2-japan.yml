@@ -24,5 +24,5 @@ jobs:
       target_per_source: "30000"
       target_per_market: "30000"
       maximum_per_market: "30000"
-      priority_target: "24000"
+      priority_target: "0"
     secrets: inherit

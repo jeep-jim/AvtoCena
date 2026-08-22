@@ -85,7 +85,7 @@ test("automatic catalog runs use one sequential queue and Japan runs four times 
   assert.match(sequentialQueue, /if: always\(\)/);
   assert.match(sequentialQueue, /retention_ms: "2592000000"/);
   assert.match(sequentialQueue, /target_per_market: "30000"/);
-  assert.match(sequentialQueue, /priority_target: "24000"/);
+  assert.match(sequentialQueue, /priority_target: "0"/);
   assert.match(market10kReusable, /CATALOG_V2_PRIORITY_TARGET: \$\{\{ inputs\.priority_target \}\}/);
   assert.match(market10kReusable, /CATALOG_PRIORITY_MAX_TOTAL_RUB: "8000000"/);
   assert.match(market10kReusable, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "2"/);

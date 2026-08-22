@@ -28,7 +28,7 @@ on:
       priority_target:
         required: false
         type: string
-        default: "8000"
+        default: "500"
       reset_cursor:
         required: false
         type: boolean
@@ -77,6 +77,7 @@ env:
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_COLLECTION_IMAGE_LIMIT: "30"
   CATALOG_IMAGE_STORAGE_MODE: "source_urls_only"
+  CATALOG_REBUILD_PAGE_PARTITION_COUNT: "3"
 
 jobs:
   validate:
@@ -110,6 +111,7 @@ jobs:
             tests/catalog-public-truth-seo.test.ts \
             tests/catalog-power-authority-contract.test.ts \
             tests/catalog-safe-model-label.test.ts \
+            tests/catalog-source-page-partition.test.ts \
             tests/catalog-public-safety.test.ts \
             tests/catalog-publication-gate.test.ts
 

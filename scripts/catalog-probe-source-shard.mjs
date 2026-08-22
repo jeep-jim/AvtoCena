@@ -2,6 +2,7 @@ import fs from "node:fs/promises";
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
 const { requiredCatalogSourceIds } = await import("../apps/web/lib/catalog/required-catalog-sources.ts");
+const { catalogSourceAssignedToShard } = await import("../apps/web/lib/catalog/source-page-partition.ts");
 
 const market = String(process.env.CATALOG_REBUILD_MARKET || "").trim();
 const shardIndex = Math.max(0, Number(process.env.CATALOG_REBUILD_SHARD_INDEX || 0));
@@ -25,15 +26,6 @@ const additionalPriorityPlan = {
 };
 
 if (!Object.prototype.hasOwnProperty.call(additionalPriorityPlan, market)) throw new Error(`unsupported_probe_market_${market || "missing"}`);
-
-function stableShard(value) {
-  let hash = 2166136261;
-  for (const char of String(value)) {
-    hash ^= char.charCodeAt(0);
-    hash = Math.imul(hash, 16777619);
-  }
-  return Math.abs(hash >>> 0) % shardCount;
-}
 
 function withTimeout(promise, sourceId) {
   let timer;
@@ -136,7 +128,7 @@ const priorityOrder = [...requiredSourceIds, ...additionalPriorityPlan[market]];
 const priorityRank = new Map(priorityOrder.map((sourceId, index) => [sourceId, index]));
 const planned = plannedAll
   .sort((left, right) => (priorityRank.get(left) ?? 10_000) - (priorityRank.get(right) ?? 10_000) || left.localeCompare(right));
-const sourceIds = planned.filter((sourceId) => stableShard(sourceId) === shardIndex);
+const sourceIds = planned.filter((sourceId) => catalogSourceAssignedToShard(sourceId, shardIndex, shardCount));
 const results = await runWithConcurrency(sourceIds, concurrency, (sourceId) => probe(sourceId, adapters));
 const activeSourceIds = results.filter((row) => row.active).map((row) => row.sourceId);
 const inactiveSourceIds = results.filter((row) => !row.active).map((row) => row.sourceId);
