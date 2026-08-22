@@ -1,0 +1,50 @@
+name: Repair catalog core recovery branch
+
+on:
+  push:
+    branches:
+      - fix/catalog-core-recovery-20260822
+    paths:
+      - scripts/repair-catalog-core-20260822.mjs
+      - .github/workflows/repair-catalog-core-branch.yml
+
+permissions:
+  contents: write
+
+concurrency:
+  group: repair-catalog-core-recovery-20260822
+  cancel-in-progress: false
+
+jobs:
+  repair:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-core-recovery-20260822
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Apply deterministic repair
+        run: node scripts/repair-catalog-core-20260822.mjs
+      - name: Validate patched publication path
+        run: |
+          node --check scripts/catalog-verify-current-offers.mjs
+          node --import tsx --test tests/offer-navigation-performance.test.ts tests/catalog-production-hardening.test.ts
+      - name: Commit repaired source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add apps/web/lib/catalog/storage.ts apps/web/lib/catalog/offer-page-data.ts tests/offer-navigation-performance.test.ts .github/workflows/catalog-v3-market-10k-reusable.yml
+          if git diff --cached --quiet; then
+            echo "Repair already applied."
+            exit 0
+          fi
+          git commit -m "Fix atomic catalog cutover and offer detail health"
+          git push origin HEAD:fix/catalog-core-recovery-20260822
