@@ -6,6 +6,18 @@ on:
       - fix/catalog-core-recovery-20260822
     paths:
       - scripts/repair-catalog-core-20260822.mjs
+      - scripts/repair-knowledge-core-20260822.mjs
+      - .github/workflows/repair-catalog-core-branch.yml
+  pull_request:
+    branches:
+      - main
+    paths:
+      - scripts/repair-catalog-core-20260822.mjs
+      - scripts/repair-knowledge-core-20260822.mjs
+      - apps/web/lib/catalog/knowledge-core.ts
+      - scripts/catalog-build-knowledge-gaps.mjs
+      - scripts/catalog-verify-current-offers.mjs
+      - tests/catalog-knowledge-core-contract.test.ts
       - .github/workflows/repair-catalog-core-branch.yml
 
 permissions:
@@ -17,8 +29,9 @@ concurrency:
 
 jobs:
   repair:
+    if: github.event_name == 'push' || github.head_ref == 'fix/catalog-core-recovery-20260822'
     runs-on: ubuntu-latest
-    timeout-minutes: 30
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
         with:
@@ -29,22 +42,36 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Apply deterministic repair
+      - name: Apply deterministic publication repair
         run: node scripts/repair-catalog-core-20260822.mjs
-      - name: Validate patched publication path
+      - name: Apply unified Knowledge CORE integration
+        run: node scripts/repair-knowledge-core-20260822.mjs
+      - name: Validate repaired catalog core
         run: |
           node --check scripts/catalog-verify-current-offers.mjs
-          node --import tsx --test tests/offer-navigation-performance.test.ts tests/catalog-production-hardening.test.ts
+          node --check scripts/catalog-build-knowledge-gaps.mjs
+          node --check scripts/repair-catalog-core-20260822.mjs
+          node --check scripts/repair-knowledge-core-20260822.mjs
+          node --import tsx --test tests/offer-navigation-performance.test.ts tests/catalog-production-hardening.test.ts tests/catalog-knowledge-core-contract.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
       - name: Commit repaired source
         shell: bash
         run: |
           set -euo pipefail
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add apps/web/lib/catalog/storage.ts apps/web/lib/catalog/offer-page-data.ts tests/offer-navigation-performance.test.ts .github/workflows/catalog-v3-market-10k-reusable.yml
+          git add \
+            apps/web/lib/catalog/storage.ts \
+            apps/web/lib/catalog/offer-page-data.ts \
+            scripts/catalog-apply-encyclopedia-identity-master.mjs \
+            tests/offer-navigation-performance.test.ts \
+            .github/workflows/catalog-v3-market-10k-reusable.yml \
+            .github/workflows/ci.yml \
+            data/catalog/vehicle-encyclopedia-v2/manifest.json \
+            data/catalog/vehicle-encyclopedia-v2/CODEX_MASTER_TASK.md
           if git diff --cached --quiet; then
-            echo "Repair already applied."
+            echo "Recovery transformations are already applied."
             exit 0
           fi
-          git commit -m "Fix atomic catalog cutover and offer detail health"
+          git commit -m "Unify catalog publication and Knowledge CORE"
           git push origin HEAD:fix/catalog-core-recovery-20260822
