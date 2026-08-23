@@ -155,7 +155,8 @@ test("Japan Transit sold-auction statistics participates in the production regis
   assert.equal(ids.has("japantransit_japan_stat_open"), true);
   assert.match(carsPage, /Аукционная статистика/);
   assert.doesNotMatch(carsPage, /Аукционная статистика Японии/);
-  assert.match(carsPage, /isJapanAuctionResult/);
+  assert.match(carsPage, /balanceBusinessRows/);
+  assert.doesNotMatch(carsPage, /isJapanAuctionResult\(offer\) \? 5_000/);
 });
 
 test("probe keeps mandatory sources in network work while optional sources still require a live probe", () => {

@@ -155,7 +155,7 @@ test("recovery preservation gates keep untouched markets byte-stable and canonic
   assert.match(recoveryPublisher, /function stableJsonValue/);
 });
 
-test("standard one-market publisher expires stale target rows and canonicalizes every market deterministically", () => {
+test("standard one-market publisher expires stale target rows, reapplies quality policy, and canonicalizes every market deterministically", () => {
   assert.match(standardMarketPublisher, /readAllOffersForMaintenance/);
   assert.match(standardMarketPublisher, /preservePublicOffersByMarket: preservedPublicRowsByMarket/);
   assert.match(standardMarketPublisher, /beforePersistValidate\(publicOffers\)/);
@@ -163,9 +163,13 @@ test("standard one-market publisher expires stale target rows and canonicalizes 
   assert.match(standardMarketPublisher, /catalog_prewrite_preservation_gate_failed/);
   assert.match(standardMarketPublisher, /catalog_public_regression_guard/);
   assert.match(standardMarketPublisher, /previousPublicCount = currentMarketRows\.length/);
-  assert.match(standardMarketPublisher, /safelyRetainedCurrentRows = currentRetainedRows\.filter\(\(offer\) => japanAuctionSoldIdentityVerified\(offer\)\)/);
+  assert.match(standardMarketPublisher, /currentRetainedRows[\s\S]*goonet_japan_exact/);
   assert.match(standardMarketPublisher, /if \(!japanAuctionSoldIdentityVerified\(offer\)\) return \{ offer: null, reason: "japan_auction_sold_identity_unverified" \}/);
-  assert.match(standardMarketPublisher, /selectedMarketOffersById = new Map\(safelyRetainedCurrentRows/);
+  assert.match(standardMarketPublisher, /selectCatalogV2MarketOffers\(selected\.sort\(qualityOrder\), v2Policy\)/);
+  assert.match(standardMarketPublisher, /lowPowerMinShare/);
+  assert.match(standardMarketPublisher, /selectionCandidateLimit/);
+  assert.match(standardMarketPublisher, /selectedMarketOffersById = new Map/);
+  assert.doesNotMatch(standardMarketPublisher, /safelyRetainedCurrentRows = currentRetainedRows/);
   assert.equal(standardMarketPublisher.includes(String.raw`\n// legacy`), false);
   assert.match(standardMarketPublisher, /expectedPublishedHashByMarket/);
   assert.match(standardMarketPublisher, /expectedPublishedByMarket\[otherMarket\] = rows\.length/);

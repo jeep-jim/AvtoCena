@@ -103,10 +103,14 @@ test("catalog cards preserve the compact layout and never render source currency
   assert.doesNotMatch(catalogCard, /ориентир под ключ/);
 });
 
-test("catalog prioritizes Japan sold lots and cars up to 6 million rubles and 160 hp", () => {
+test("catalog prioritizes affordable low-power cars and diversifies market pages", () => {
   assert.match(carsPage, /PRIORITY_MAX_RUB = 6_000_000/);
   assert.match(carsPage, /PRIORITY_MAX_POWER_HP = 160/);
-  assert.match(carsPage, /isJapanAuctionResult\(offer\) \? 5_000/);
+  assert.doesNotMatch(carsPage, /isJapanAuctionResult\(offer\) \? 5_000/);
+  assert.match(carsPage, /if \(lowPower\) score \+= 1_600/);
+  assert.match(carsPage, /MARKET_DIVERSITY_WINDOW_PAGES = 8/);
+  assert.match(carsPage, /readDiverseDefaultMarketPage/);
+  assert.match(carsPage, /balanceBusinessRows/);
   assert.match(carsPage, /\.sort\(businessOrder\)/);
   assert.match(carsPage, /const rub = offerRubValue\(offer\)/);
 });

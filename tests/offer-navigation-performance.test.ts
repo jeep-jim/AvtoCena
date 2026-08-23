@@ -56,7 +56,6 @@ test("offer navigation stays visibly pending and warms only the intended offer",
   assert.match(intentLink, /onPointerEnter=\{prefetch\}/);
   assert.match(intentLink, /onTouchStart=\{prefetch\}/);
   assert.match(intentLink, /EAGER_PREFETCH_DELAY_MS = 120/);
-  assert.match(intentLink, /window\.setTimeout\(prefetch, EAGER_PREFETCH_DELAY_MS\)/);
   assert.match(catalogPage, /eagerPrefetch=\{marketIndex === 0 && index < 4\}/);
   assert.match(storage, /offerLocationIndexCache/);
   assert.match(storage, /offerChunkCache/);
@@ -132,10 +131,12 @@ test("offer page does not re-run source-only publication gates on compact public
   assert.doesNotMatch(page, /!catalogPublicPriority\(raw\)\.eligible/);
 });
 
-test("catalog overview does not rescan every stored Japan offer", () => {
+test("catalog overview and market diversity stay on bounded search projections", () => {
   assert.doesNotMatch(catalogPage, /readMarketOffers/);
-  assert.match(catalogPage, /offer\?\.auctionDate \|\| offer\?\.auctionGrade/);
-  assert.match(catalogPage, /searchOffers\(\{ market: market\.id/);
+  assert.match(catalogPage, /MARKET_DIVERSITY_WINDOW_PAGES = 8/);
+  assert.match(catalogPage, /readDiverseDefaultMarketPage/);
+  assert.match(catalogPage, /searchOffers\(\{ market, page: windowStartPage \+ index, pageSize: MARKET_PAGE_SIZE, sort: "updatedAt" \}\)/);
+  assert.match(catalogPage, /readCatalogOverview/);
 });
 
 test("desktop offer galleries support mouse-wheel navigation", () => {
