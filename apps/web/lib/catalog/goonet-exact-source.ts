@@ -169,6 +169,15 @@ function isSourcePrimaryImage(value: string) {
   }
 }
 
+export function goonetPrimaryImageUrl(pageUrl: string) {
+  const listingId = pageUrl.match(/\/([0-9]{21})\/?(?:[?#]|$)/)?.[1] || "";
+  if (!listingId) return "";
+  // Goo-net's original primary image path is encoded entirely in its stable
+  // 21-digit listing id: 10-digit stock partition, 8-digit date/dealer
+  // partition, then the listing id plus the 00 primary frame.
+  return `https://picture1.goo-net.com/${listingId.slice(0, 10)}/${listingId.slice(10, 18)}/J/${listingId}00.jpg`;
+}
+
 export function coherentGoonetImages(urls: string[], limit: number) {
   const primary = urls.find(isSourcePrimaryImage);
   const galleryUrls = urls.filter((value) => value !== primary);
@@ -207,7 +216,9 @@ function parse(markup: string, url: string): Row | null {
   const mileageKm = num(String(vehicle.mileageFromOdometer?.value || vehicle.mileageFromOdometer || plain.match(/([0-9][0-9, ]+)\s*km/i)?.[1] || ""));
   const engineCc = num(String(vehicle.vehicleEngine?.engineDisplacement || plain.match(/([0-9][0-9, ]+)\s*cc/i)?.[1] || ""));
   const maxImages = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120));
-  const images = coherentGoonetImages(collectPageImages(markup, url, structured), maxImages);
+  const collectedImages = collectPageImages(markup, url, structured);
+  const primaryImage = goonetPrimaryImageUrl(url);
+  const images = coherentGoonetImages(primaryImage ? [primaryImage, ...collectedImages] : collectedImages, maxImages);
   if (!images.length) return null;
 
   return {

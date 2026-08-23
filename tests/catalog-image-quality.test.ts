@@ -2,7 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import { credibleCatalogImages, isCatalogOfferBusinessLiquid, isCrediblePublicOffer } from "../apps/web/lib/catalog/offer-quality";
 import { isLikelyVehicleImage, rankedCatalogImageUrls } from "../apps/web/lib/catalog/image-quality";
-import { coherentGoonetImages } from "../apps/web/lib/catalog/goonet-exact-source";
+import { coherentGoonetImages, goonetPrimaryImageUrl } from "../apps/web/lib/catalog/goonet-exact-source";
 
 const jpegPhoto = {
   id: "photo",
@@ -141,6 +141,22 @@ test("uses Goo-net's listing-level primary exterior photo ahead of dealer galler
     primary,
     ...dealerGallery.slice(0, 4),
   ]);
+});
+
+test("derives Goo-net's official primary photo from the stable listing id", () => {
+  assert.equal(
+    goonetPrimaryImageUrl("https://www.goo-net-exchange.com/usedcars/HONDA/VEZEL/988026042600804420007/"),
+    "https://picture1.goo-net.com/9880260426/00804420/J/98802604260080442000700.jpg",
+  );
+  assert.equal(
+    goonetPrimaryImageUrl("https://www.goo-net-exchange.com/usedcars/SUZUKI/JIMNY/700070353330260822001/"),
+    "https://picture1.goo-net.com/7000703533/30260822/J/70007035333026082200100.jpg",
+  );
+  assert.equal(
+    goonetPrimaryImageUrl("https://www.goo-net-exchange.com/usedcars/TOYOTA/ALPHARD/700040138730260807004/"),
+    "https://picture1.goo-net.com/7000401387/30260807/J/70004013873026080700400.jpg",
+  );
+  assert.equal(goonetPrimaryImageUrl("https://www.goo-net-exchange.com/usedcars/HONDA/VEZEL/not-a-listing/"), "");
 });
 
 test("preserves Goo-net's coherent-gallery fallback when no source primary exists", () => {
