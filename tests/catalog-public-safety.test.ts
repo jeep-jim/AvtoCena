@@ -106,9 +106,13 @@ test("preliminary price is never exposed as a delivered public total", () => {
   assert.equal(catalogOfferVisibleRub(offer), 0);
 });
 
-test("public priority requires calculation-critical specifications for every powertrain", async () => {
+test("public priority reports calculation-critical gaps while source-priced inventory remains eligible", async () => {
   const { catalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority");
-  const combustion = calculatedOffer(3_200_000) as any;
+  const combustion = {
+    ...calculatedOffer(3_200_000),
+    sourcePrice: 1_500_000,
+    sourceCurrency: "RUB",
+  } as any;
   assert.equal(catalogPublicPriority({ ...combustion, engineCc: undefined }).reason, "missing_engine_cc");
   assert.equal(catalogPublicPriority({ ...combustion, powerHp: undefined }).reason, "missing_power_hp");
 
