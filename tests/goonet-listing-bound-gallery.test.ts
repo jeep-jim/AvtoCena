@@ -1,5 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
+import { credibleCatalogImages } from "../apps/web/lib/catalog/offer-quality";
 import {
   coherentGoonetImages,
   goonetListingId,
@@ -13,6 +14,19 @@ const primary = goonetPrimaryImageUrl(page);
 
 function frame(index: number) {
   return primary.replace(/00\.jpg$/i, `${String(index).padStart(2, "0")}.jpg`);
+}
+
+function image(url: string) {
+  return {
+    id: "",
+    objectKey: "",
+    width: 1280,
+    height: 853,
+    size: 0,
+    checksum: "",
+    mimeType: "image/jpeg",
+    url,
+  };
 }
 
 test("Goo-net gallery only accepts exact listing-id frames and keeps 00 as cover", () => {
@@ -48,4 +62,28 @@ test("Goo-net has no fallback cover when the exact primary frame is unavailable"
   // The deterministic primary URL is still returned first, but fetchImages must
   // successfully download this exact frame or the whole offer is rejected.
   assert.equal(rows[0], primary);
+});
+
+test("central catalog sanitizer removes retained Goo-net dealer/catalog assets and keeps exact frames", () => {
+  const dirty = [
+    image("https://catalogphoto.goo-net.com/carphoto/35101510_201808z.jpg"),
+    image("https://picture1.goo-net.com/070/0704382/J/0704382A20260804G00201.jpg"),
+    image(frame(3)),
+    image(primary),
+    image(frame(1)),
+  ];
+  const clean = credibleCatalogImages(dirty as any);
+  assert.deepEqual(clean.map((row) => row.url), [primary, frame(1), frame(3)]);
+});
+
+test("central Goo-net sanitizer rejects legacy-only or ambiguous exact listing galleries", () => {
+  const legacyOnly = [
+    image("https://catalogphoto.goo-net.com/carphoto/35101510_201808z.jpg"),
+    image("https://picture1.goo-net.com/070/0704382/J/0704382A20260804G00201.jpg"),
+  ];
+  assert.deepEqual(credibleCatalogImages(legacyOnly as any), []);
+
+  const otherListingId = "111111111111111111111";
+  const otherPrimary = `https://picture1.goo-net.com/${otherListingId.slice(0, 10)}/${otherListingId.slice(10, 18)}/J/${otherListingId}00.jpg`;
+  assert.deepEqual(credibleCatalogImages([image(primary), image(otherPrimary)] as any), []);
 });
