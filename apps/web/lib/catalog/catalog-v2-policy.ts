@@ -1,9 +1,18 @@
 import type { VehicleOffer } from "./types";
 
 export type CatalogV2Tier = "japan_auction" | "priority" | "recent" | "extended" | "rejected";
-export type CatalogV2PolicyOptions = { priorityTarget: number; maximumPerMarket: number; priorityMaxAgeYears: number; recentMaxAgeYears: number; priorityMaxPowerHp: number; priorityMaxTotalRub: number; hardMaxTotalRub: number };
+export type CatalogV2PolicyOptions = {
+  priorityTarget: number;
+  maximumPerMarket: number;
+  priorityMaxAgeYears: number;
+  recentMaxAgeYears: number;
+  priorityMaxPowerHp: number;
+  priorityMaxTotalRub: number;
+  hardMaxTotalRub: number;
+  lowPowerMinShare: number;
+};
 export type CatalogV2Classification = { tier: CatalogV2Tier; eligible: boolean; reason: string; ageYears?: number; totalRub?: number; powerHp?: number; popularityDecile?: number };
-export type CatalogV2Selection = { selected: VehicleOffer[]; priorityCount: number; auctionCount: number; recentCount: number; extendedCount: number; fallbackUnlocked: boolean; shortageToUnlock: number; rejected: Record<string, number> };
+export type CatalogV2Selection = { selected: VehicleOffer[]; priorityCount: number; lowPowerCount: number; auctionCount: number; recentCount: number; extendedCount: number; fallbackUnlocked: boolean; shortageToUnlock: number; rejected: Record<string, number> };
 
 export const CATALOG_V2_DEFAULT_POLICY: CatalogV2PolicyOptions = {
   priorityTarget: 24_000,
@@ -11,8 +20,9 @@ export const CATALOG_V2_DEFAULT_POLICY: CatalogV2PolicyOptions = {
   priorityMaxAgeYears: 6,
   recentMaxAgeYears: 15,
   priorityMaxPowerHp: 160,
-  priorityMaxTotalRub: 8_000_000,
+  priorityMaxTotalRub: 6_000_000,
   hardMaxTotalRub: Number.MAX_SAFE_INTEGER,
+  lowPowerMinShare: 0.8,
 };
 
 function number(value: unknown) { const parsed = Number(value); return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined; }
@@ -37,12 +47,7 @@ function removeConflictingBodyDefault(offer: VehicleOffer) {
 export function isJapanAuctionOffer(offer: Partial<VehicleOffer>) { if (offer.market !== "japan") return false; const raw = rawObject(offer); const sourceId = String(offer.sourceId || "").toLowerCase(); const venue = String(offer.auctionName || offer.operational?.sourceVenueName || "").toLowerCase(); const rawKind = String(raw.catalogKind || raw.offerType || raw.auctionType || "").toLowerCase(); return offer.offerType === "auction" || offer.catalogKind === "auction_result" || /(?:auction|auc|jpauc|japantransit|carvector|uss|ju|taa|caa|jaa|arai|haa|zip|aucnet|baya)/.test(sourceId) || /(?:auction|オークション|uss|ju|taa|caa|jaa|arai|haa|zip|aucnet)/i.test(venue) || /(?:auction|auction_result|past_auction)/.test(rawKind); }
 export function isCompletedJapanAuction(offer: Partial<VehicleOffer>) { if (!isJapanAuctionOffer(offer)) return false; const raw = rawObject(offer); const sourceId = String(offer.sourceId || "").toLowerCase(); const status = String(raw.auctionStatus || raw.saleStatus || raw.status || offer.auctionResult || offer.status || "").toLowerCase(); return /(?:past|stat|sold|result|history)/.test(sourceId) || /(?:sold|completed|finished|result|past|落札|成約)/i.test(status); }
 
-/**
- * Business priority is deliberately independent from age. Japan keeps 2010+
- * inventory, while all other live markets are 2020+. Within those year gates
- * the first 80% of each market is built from cars <= 8M RUB and <= 160 hp.
- * Missing price/power does not get treated as a proven priority match.
- */
+/** The commercial priority layer is affordable and <=160 hp. */
 export function isCatalogPriorityOffer(offer: Partial<VehicleOffer>, options: CatalogV2PolicyOptions = CATALOG_V2_DEFAULT_POLICY) {
   const totalRub = number(offer.totalRub);
   const powerHp = number(offer.powerHp);
@@ -50,6 +55,12 @@ export function isCatalogPriorityOffer(offer: Partial<VehicleOffer>, options: Ca
     && totalRub <= options.priorityMaxTotalRub
     && powerHp !== undefined
     && powerHp <= options.priorityMaxPowerHp;
+}
+
+/** Low-power share is a separate hard mix contract: at least 80% <=160 hp. */
+export function isCatalogLowPowerOffer(offer: Partial<VehicleOffer>, options: CatalogV2PolicyOptions = CATALOG_V2_DEFAULT_POLICY) {
+  const powerHp = number(offer.powerHp);
+  return powerHp !== undefined && powerHp <= options.priorityMaxPowerHp;
 }
 
 export function classifyCatalogV2Offer(offer: Partial<VehicleOffer>, options: CatalogV2PolicyOptions = CATALOG_V2_DEFAULT_POLICY): CatalogV2Classification {
@@ -61,10 +72,12 @@ export function classifyCatalogV2Offer(offer: Partial<VehicleOffer>, options: Ca
   if (totalRub !== undefined && totalRub > options.hardMaxTotalRub) return { tier: "rejected", eligible: false, reason: "hard_price_cap", ageYears, powerHp, totalRub, popularityDecile: popularity };
   if (offer.market === "japan" && isJapanAuctionOffer(offer)) {
     if (!isCompletedJapanAuction(offer)) return { tier: "rejected", eligible: false, reason: "japan_auction_not_completed", ageYears, powerHp, totalRub, popularityDecile: popularity };
-    return { tier: "japan_auction", eligible: true, reason: "completed_auction", ageYears, powerHp, totalRub, popularityDecile: popularity };
+    return isCatalogPriorityOffer(offer, options)
+      ? { tier: "priority", eligible: true, reason: "japan_completed_priority", ageYears, powerHp, totalRub, popularityDecile: popularity }
+      : { tier: "japan_auction", eligible: true, reason: "completed_auction", ageYears, powerHp, totalRub, popularityDecile: popularity };
   }
   return isCatalogPriorityOffer(offer, options)
-    ? { tier: "priority", eligible: true, reason: "affordable_recent", ageYears, powerHp, totalRub, popularityDecile: popularity }
+    ? { tier: "priority", eligible: true, reason: "affordable_low_power", ageYears, powerHp, totalRub, popularityDecile: popularity }
     : { tier: "recent", eligible: true, reason: "market_year_eligible", ageYears, powerHp, totalRub, popularityDecile: popularity };
 }
 
@@ -72,11 +85,14 @@ function freshness(offer: Partial<VehicleOffer>) { return Date.parse(String(offe
 function imageCount(offer: Partial<VehicleOffer>) { return Array.isArray(offer.images) ? Math.min(30, offer.images.length) : 0; }
 function order(left: VehicleOffer, right: VehicleOffer, options: CatalogV2PolicyOptions) {
   const a = classifyCatalogV2Offer(left, options), b = classifyCatalogV2Offer(right, options);
+  const lowPowerDelta = Number(isCatalogLowPowerOffer(right, options)) - Number(isCatalogLowPowerOffer(left, options));
   const priorityDelta = Number(isCatalogPriorityOffer(right, options)) - Number(isCatalogPriorityOffer(left, options));
-  const tier = (value: CatalogV2Tier) => value === "priority" ? 0 : value === "japan_auction" ? 1 : 2;
-  return priorityDelta
-    || tier(a.tier) - tier(b.tier)
+  const tier = (value: CatalogV2Tier) => value === "priority" ? 0 : value === "recent" ? 1 : value === "japan_auction" ? 2 : 3;
+  return lowPowerDelta
+    || priorityDelta
+    || Number(a.ageYears ?? Number.MAX_SAFE_INTEGER) - Number(b.ageYears ?? Number.MAX_SAFE_INTEGER)
     || Number(a.totalRub || Number.MAX_SAFE_INTEGER) - Number(b.totalRub || Number.MAX_SAFE_INTEGER)
+    || tier(a.tier) - tier(b.tier)
     || imageCount(right) - imageCount(left)
     || freshness(right) - freshness(left)
     || String(left.id).localeCompare(String(right.id));
@@ -96,23 +112,38 @@ export function selectCatalogV2MarketOffers(offers: VehicleOffer[], options: Cat
   accepted.sort((left, right) => order(left, right, options));
   const maximum = Math.max(1, Number(options.maximumPerMarket || 30_000));
   const requestedPriorityTarget = Math.max(0, Math.min(maximum, Number(options.priorityTarget || 0)));
-  const priority = accepted.filter((offer) => isCatalogPriorityOffer(offer, options));
-  const fallback = accepted.filter((offer) => !isCatalogPriorityOffer(offer, options));
-  // priorityTarget is a fill/ordering goal, never an admission gate. If a market
-  // has fewer priority cars, every otherwise-valid fallback row is still allowed
-  // to fill the market up to its maximum.
-  const fallbackUnlocked = true;
-  const selected = [...priority, ...fallback].slice(0, maximum);
-  const shortageToUnlock = Math.max(0, requestedPriorityTarget - priority.length);
+  const minimumLowPowerShare = Math.max(0, Math.min(1, Number(options.lowPowerMinShare ?? 0.8)));
+  const lowPower = accepted.filter((offer) => isCatalogLowPowerOffer(offer, options));
+  const highPower = accepted.filter((offer) => !isCatalogLowPowerOffer(offer, options));
+  const lowPowerNeededForFullMarket = Math.ceil(maximum * minimumLowPowerShare);
+  const initialLowPowerCount = Math.min(lowPower.length, lowPowerNeededForFullMarket);
+  const selected: VehicleOffer[] = lowPower.slice(0, initialLowPowerCount);
+  const proportionalHighPowerLimit = minimumLowPowerShare <= 0
+    ? maximum
+    : minimumLowPowerShare >= 1
+      ? 0
+      : Math.floor(initialLowPowerCount * (1 - minimumLowPowerShare) / minimumLowPowerShare);
+  const highPowerCount = Math.min(highPower.length, maximum - selected.length, proportionalHighPowerLimit);
+  selected.push(...highPower.slice(0, highPowerCount));
+  if (selected.length < maximum) selected.push(...lowPower.slice(initialLowPowerCount, initialLowPowerCount + maximum - selected.length));
+
+  const priorityCount = selected.filter((offer) => isCatalogPriorityOffer(offer, options)).length;
+  const lowPowerCount = selected.filter((offer) => isCatalogLowPowerOffer(offer, options)).length;
+  const shortageToUnlock = Math.max(
+    Math.max(0, requestedPriorityTarget - priorityCount),
+    Math.max(0, lowPowerNeededForFullMarket - lowPower.length),
+  );
+  const ratioLocked = Math.max(0, highPower.length - highPowerCount);
 
   return {
     selected,
-    priorityCount: selected.filter((offer) => isCatalogPriorityOffer(offer, options)).length,
+    priorityCount,
+    lowPowerCount,
     auctionCount: selected.filter((offer) => isCompletedJapanAuction(offer)).length,
     recentCount: selected.filter((offer) => classifyCatalogV2Offer(offer, options).tier === "recent").length,
     extendedCount: 0,
-    fallbackUnlocked,
+    fallbackUnlocked: minimumLowPowerShare <= 0 || highPowerCount > 0,
     shortageToUnlock,
-    rejected: { ...rejected, fallback_locked: 0 },
+    rejected: { ...rejected, fallback_locked: ratioLocked },
   };
 }
