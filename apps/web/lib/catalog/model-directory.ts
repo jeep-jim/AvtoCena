@@ -210,14 +210,28 @@ export const findBrandModelBySlug = cache(async (rawMake: string, rawSlug: strin
 });
 
 export const readAllModelSeoLinks = cache(async () => {
-  const { models } = await readKnowledge();
-  return models.filter((model) => model.active !== false).map((model) => ({
-    make: canonicalCatalogBrand(model.make),
-    brandSlug: catalogBrandSlug(model.make),
-    model: model.model,
-    modelSlug: catalogModelSlug(model),
-    updatedAt: model.updatedAt,
-  }));
+  // Sitemap generation only needs model identity. Loading all variants and power
+  // references here made the dynamic sitemap shard exceed the serverless budget.
+  const [canonicalModels, sourceModels] = await Promise.all([
+    readEncyclopediaKnowledgeModels(),
+    readSourceBackedEncyclopediaModels(),
+  ]);
+  const byIdentity = new Map<string, any>();
+  for (const source of sourceModels) byIdentity.set(modelKey(source.make, source.model), source);
+  for (const canonical of canonicalModels) {
+    if (canonical.active === false) continue;
+    byIdentity.set(modelKey(canonical.make, canonical.model), canonical);
+  }
+  return [...byIdentity.values()].map((model) => {
+    const make = canonicalCatalogBrand(model.make);
+    return {
+      make,
+      brandSlug: catalogBrandSlug(make),
+      model: model.model,
+      modelSlug: catalogModelSlug(model),
+      updatedAt: model.updatedAt,
+    };
+  });
 });
 
 // Production catalog restart marker: 2026-07-29T13:27:00Z
