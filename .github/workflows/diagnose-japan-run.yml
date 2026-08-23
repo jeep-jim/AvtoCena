@@ -1,37 +1,21 @@
-name: Diagnose Japan image source
+name: Diagnose latest production failures
 
 on:
   pull_request:
 
 permissions:
+  actions: read
   contents: read
 
 jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - name: Probe Japan image renditions
+      - name: Show latest workflow runs
+        env:
+          GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
-          node --input-type=module <<'NODE'
-          import sharp from 'sharp';
-          const urls = [
-            'https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585471/001.jpg?w=133&ts=1781661830',
-            'https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585471/001.jpg?ts=1781661830',
-            'https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585471/001.jpg',
-          ];
-          for (const url of urls) {
-            try {
-              const r=await fetch(url,{headers:{'user-agent':'Mozilla/5.0'},redirect:'follow',signal:AbortSignal.timeout(20000)});
-              const b=Buffer.from(await r.arrayBuffer());
-              const meta=await sharp(b).metadata();
-              console.log(JSON.stringify({url,status:r.status,bytes:b.length,width:meta.width,height:meta.height,format:meta.format}));
-            } catch(e) { console.log(JSON.stringify({url,error:String(e.message||e)})); }
-          }
-          NODE
+          set -euo pipefail
+          gh api --method GET "repos/${GITHUB_REPOSITORY}/actions/runs?per_page=30" \
+            --jq '.workflow_runs[] | {id,name,run_number,status,conclusion,event,head_sha,head_branch,created_at,updated_at,html_url}'
