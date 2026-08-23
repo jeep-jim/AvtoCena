@@ -26,8 +26,11 @@ function toBrand(name: string, slug = catalogBrandSlug(name), aliases: string[] 
 
 /**
  * A route-safe brand directory shared by live catalog identities and V2.
- * The legacy Drom list remains a logo/source compatibility layer, but it is no
- * longer allowed to decide whether a valid live or source-backed brand URL 404s.
+ *
+ * The encyclopedia is a product dataset, not a projection of today's live
+ * offers. A brand must therefore stay visible in /cars/autocatalog even when
+ * it currently has zero listings. Live facets may add newly observed brands,
+ * but they are never allowed to hide the canonical encyclopedia corpus.
  */
 export async function readCatalogBrandDirectory() {
   const [dataset, facets] = await Promise.all([
@@ -62,12 +65,8 @@ export async function readCatalogBrandDirectory() {
     const publicName = canonicalCatalogBrand(translateCatalogText(rawMake) || clean(rawMake));
     if (publicName) add(toBrand(publicName));
   }
-  const activeBrandSlugs = new Set((facets.makes || [])
-    .map((rawMake: unknown) => canonicalCatalogBrand(translateCatalogText(rawMake) || clean(rawMake)))
-    .filter(Boolean)
-    .map((name: string) => catalogBrandSlug(name)));
+
   return [...brands.values()]
-    .filter((brand) => activeBrandSlugs.has(brand.slug || catalogBrandSlug(brand.name)))
     .sort((left, right) => left.name.localeCompare(right.name, "ru"));
 }
 
