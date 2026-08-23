@@ -7,9 +7,8 @@ function clean(value: unknown) {
 }
 
 /**
- * Public inventory diversity is bounded per market + canonical make + exact
- * model + model year. Different years of the same model must never compete for
- * the same 20-card bucket.
+ * Public inventory diversity key per market + canonical make + exact model +
+ * model year. The key is also used for diagnostics/showcase coverage.
  */
 export function catalogModelYearQuotaKey(
   offer: Pick<VehicleOffer, "market" | "make" | "model" | "year"> | Partial<VehicleOffer>,
@@ -35,9 +34,10 @@ export function catalogExactModelKey(
 
 /**
  * Enforce the public model-year cap without changing the caller's quality
- * order. This is intentionally part of the canonical publication path: brand
- * normalization can merge formerly separate source buckets, so the final
- * public identity must be capped after identity normalization and deduplication.
+ * order. Japan is intentionally uncapped at publication: its month-long stock
+ * is meant to accumulate every real listing/result we can validate. Diversity
+ * for Japan is handled by showcase/search ordering rather than deleting real
+ * cars from the public dataset.
  */
 export function enforceCatalogModelYearQuota<T extends Partial<VehicleOffer>>(
   rows: readonly T[],
@@ -47,6 +47,11 @@ export function enforceCatalogModelYearQuota<T extends Partial<VehicleOffer>>(
   const kept: T[] = [];
   const removed: T[] = [];
   for (const row of rows) {
+    const market = clean(row?.market);
+    if (market === "japan") {
+      kept.push(row);
+      continue;
+    }
     const key = catalogModelYearQuotaKey(row);
     const count = key ? Number(counts.get(key) || 0) : 0;
     const protectedRow = options.protectedIds?.has(String(row?.id || "")) === true;
@@ -111,11 +116,10 @@ export function selectCatalogShowcaseDiversity<T extends { market?: unknown; mak
 }
 
 /**
- * Select a bounded result without letting a dense/new model-year bucket consume
- * the output before other discovered years get represented. Every discovered
- * model-year receives one turn before any bucket receives a second turn, then
- * the process repeats. Rows inside one bucket can still be ranked by source
- * quality via `compare`. A bucket can never exceed the shared 20-card quota.
+ * Select a bounded collector result without letting a dense/new model-year
+ * bucket consume the output before other discovered years get represented.
+ * This helper is still useful for bounded source collection; the public Japan
+ * dataset itself is not capped by model-year.
  */
 export function selectCatalogModelYearCoverageFirst<T extends Partial<VehicleOffer>>(
   rows: readonly T[],
