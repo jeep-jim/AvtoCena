@@ -52,5 +52,5 @@ test("active V3 pipeline owns approved market rules", () => {
   assert.match(queue, /japan/);
   assert.match(reusable, /CATALOG_V2_LOW_POWER_MIN_SHARE: "0\.8"/);
   assert.match(reusable, /CATALOG_PRIORITY_MAX_POWER_HP: "160"/);
-  assert.match(reusable, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "2"/);
+  assert.match(reusable, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"/);
 });
