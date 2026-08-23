@@ -17,7 +17,7 @@ import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { getOfferForPage } from "@/lib/catalog/offer-page-data";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
 import { publicCatalogPowerHp } from "@/lib/catalog/power-sanity";
-import { catalogOfferVisibleRub, catalogPublicPriority } from "@/lib/catalog/public-priority";
+import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { publicOffer, searchOffers } from "@/lib/catalog/storage";
@@ -206,12 +206,15 @@ function OfferPriceBreakdown({ offer }: { offer: any }) {
 export default async function OfferPage({ params }: { params: Promise<{ id: string }> }) {
   const { id } = await params;
   const offer = await getOfferForPage(id);
-  if (!offer || !isCrediblePublicOffer(offer)) notFound();
+  // getOfferForPage reads only immutable records that already passed the
+  // publication gate. Re-validating their compact representation here can no
+  // longer see source-only evidence removed from operational.raw and used to
+  // turn valid Georgia/Kyrgyzstan cards into a soft 404.
+  if (!offer) notFound();
 
   const enrichedOffer = await enrichOfferForDisplay(offer);
   const sourceUrl = safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);
   const raw: any = normalizeVehicleOfferSpecs(publicOffer(enrichedOffer));
-  if (!catalogPublicPriority(raw).eligible) notFound();
   const presented = presentCatalogOffer(raw);
   const visibleRub = catalogOfferVisibleRub(raw);
   const o = {
