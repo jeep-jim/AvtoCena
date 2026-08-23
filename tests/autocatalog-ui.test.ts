@@ -73,7 +73,8 @@ test("brand and model pages use Autocatalog copy, saved previews and no aggregat
 
 test("removed offers return a real not-found response instead of a soft 200 page", () => {
   const offerPage = source("apps/web/app/(public)/cars/offer/[id]/page.tsx");
-  assert.match(offerPage, /if \(!offer \|\| !isCrediblePublicOffer\(offer\)\) notFound\(\)/);
+  assert.match(offerPage, /if \(!offer\) notFound\(\)/);
+  assert.doesNotMatch(offerPage, /!offer \|\| !isCrediblePublicOffer\(offer\)/);
   assert.doesNotMatch(offerPage, /function MissingOffer/);
 });
 
