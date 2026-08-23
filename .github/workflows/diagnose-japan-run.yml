@@ -32,3 +32,4 @@ jobs:
             } catch(e) { console.log(JSON.stringify({suffix,error:String(e.message||e)})); }
           }
           NODE
+          echo complete
