@@ -102,6 +102,7 @@ for (const market of markets) {
   const restoredIds = new Set();
   const validIds = new Set();
   const freshBySource = new Map();
+  const candidatesBySource = new Map();
   const invalid = [];
   const processFailures = [];
   const marketProbes = probePayloads.filter(({ payload }) => payload.market === market);
@@ -128,6 +129,8 @@ for (const market of markets) {
     if (["rebuild_process_failed", "collection_not_completed"].includes(payload.stopReason)
       || ["rebuild_process_failed", "collection_not_completed"].includes(payload.report?.stopReason)) processFailures.push(filename);
     for (const offer of payload.offers) {
+      const sourceId = String(offer?.sourceId || "unknown");
+      candidatesBySource.set(sourceId, Number(candidatesBySource.get(sourceId) || 0) + 1);
       const errors = validateOffer(offer);
       if (errors.length) {
         if (invalid.length < 100) invalid.push({ id: offer?.id, sourceId: offer?.sourceId, errors });
@@ -137,7 +140,6 @@ for (const market of markets) {
       const origin = String(offer?.operational?.galleryRebuiltFrom || "");
       if (origin === "fresh_listing") {
         freshIds.add(offer.id);
-        const sourceId = String(offer.sourceId || "unknown");
         freshBySource.set(sourceId, Number(freshBySource.get(sourceId) || 0) + 1);
       } else {
         restoredIds.add(offer.id);
@@ -145,13 +147,17 @@ for (const market of markets) {
     }
   }
 
+  const requiredProductiveSourceIds = [...requiredSourceIds].filter((sourceId) => Number(candidatesBySource.get(sourceId) || 0) > 0);
+  const requiredUnproductiveSourceIds = [...requiredSourceIds].filter((sourceId) => !requiredProductiveSourceIds.includes(sourceId));
   const threshold = Math.max(1, Number(minimumFresh[market] || 1));
   const productiveSources = [...freshBySource.values()].filter((count) => count > 0).length;
   const requiredSourcesAttempted = marketPayloads.length > 0
     && requiredSourceIds.size > 0
     && missingRequiredAdapters.size === 0
     && requiredUnattemptedSourceIds.length === 0;
-  const requiredSourcesHealthy = requiredSourcesAttempted && requiredUnhealthySourceIds.length === 0;
+  const requiredSourcesHealthy = requiredSourcesAttempted
+    && requiredUnhealthySourceIds.length === 0
+    && requiredUnproductiveSourceIds.length === 0;
   const row = {
     artifacts: marketPayloads.length,
     valid: validIds.size,
@@ -166,6 +172,7 @@ for (const market of markets) {
     minimumProductiveSources,
     sourceTargetReached: productiveSources >= minimumProductiveSources,
     freshBySource: Object.fromEntries([...freshBySource.entries()].sort(([left], [right]) => left.localeCompare(right))),
+    candidatesBySource: Object.fromEntries([...candidatesBySource.entries()].sort(([left], [right]) => left.localeCompare(right))),
     invalidOffers: invalid,
     processFailures,
     sourceProbeArtifacts: marketProbes.length,
@@ -179,11 +186,13 @@ for (const market of markets) {
     requiredUnattemptedSourceIds: requiredUnattemptedSourceIds.sort(),
     requiredHealthySourceIds: requiredHealthySourceIds.sort(),
     requiredUnhealthySourceIds: requiredUnhealthySourceIds.sort(),
+    requiredProductiveSourceIds: requiredProductiveSourceIds.sort(),
+    requiredUnproductiveSourceIds: requiredUnproductiveSourceIds.sort(),
     requiredSourcesAttempted,
     requiredSourcesHealthy,
     // Backward-compatible names. Availability now means every canonical source
-    // reached the real collector, and complete means every canonical source
-    // completed at least one real page without a source-error stop.
+    // reached the real collector, and complete means every canonical source both
+    // crawled successfully and contributed at least one retained/fresh candidate.
     requiredSourcesAvailable: requiredSourcesAttempted,
     requiredSourcesComplete: requiredSourcesHealthy,
     stopReasons: marketPayloads.map(({ payload }) => payload.stopReason || payload.report?.stopReason || "unknown"),
@@ -194,6 +203,7 @@ for (const market of markets) {
   if (!marketProbes.length) warnings.push(`${market}:missing_probe_artifacts`);
   if (row.requiredUnattemptedSourceIds.length) warnings.push(`${market}:required_sources_unattempted:${row.requiredUnattemptedSourceIds.join(",")}`);
   if (row.requiredUnhealthySourceIds.length) warnings.push(`${market}:required_sources_unhealthy:${row.requiredUnhealthySourceIds.join(",")}`);
+  if (row.requiredUnproductiveSourceIds.length) warnings.push(`${market}:required_sources_unproductive:${row.requiredUnproductiveSourceIds.join(",")}`);
   if (!row.requiredSourcesComplete) warnings.push(`${market}:required_sources_incomplete`);
   if (processFailures.length) warnings.push(`${market}:rebuild_process_failed`);
   if (freshIds.size < threshold) warnings.push(`${market}:fresh_${freshIds.size}_below_${threshold}`);
@@ -210,8 +220,8 @@ const blockingMarkets = markets.filter((market) => {
   const row = byMarket[market];
   // Volume can be below target while a source is temporarily sparse, but a run
   // must never publish a new generation after silently dropping a canonical
-  // source. All required sites must participate in the real crawl and complete
-  // at least one page without a terminal source error.
+  // source. All required sites must participate in the real crawl, complete at
+  // least one page without a terminal source error, and contribute candidates.
   return !row
     || row.artifacts === 0
     || row.sourceProbeArtifacts === 0
@@ -221,7 +231,7 @@ const blockingMarkets = markets.filter((market) => {
     || !row.requiredSourcesHealthy;
 });
 const report = {
-  version: 24,
+  version: 25,
   checkedAt: new Date().toISOString(),
   mode: "per_market_volume_and_integrity_audit",
   inputDir,
