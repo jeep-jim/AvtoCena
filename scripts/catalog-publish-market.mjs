@@ -41,6 +41,7 @@ const v2Policy = {
   priorityMaxPowerHp,
   priorityMaxTotalRub,
   hardMaxTotalRub: Math.max(priorityMaxTotalRub, Number(process.env.CATALOG_V2_HARD_MAX_TOTAL_RUB || 100_000_000)),
+  lowPowerMinShare: Math.max(0, Math.min(1, Number(process.env.CATALOG_V2_LOW_POWER_MIN_SHARE || 0.8))),
 };
 const COMMERCIAL_RE = /\b(?:truck|dump|tipper|bus|minibus|kei\s*truck|commercial|cargo|lorry|tractor|forklift|excavator|machinery|canter|fighter|ranger|dutro|forward|giga|elf|profia|8\s*tonne|8\s*ton)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
 const publishLockPath = "catalog/import-lock.json";
@@ -301,6 +302,7 @@ const outageGraceExpiredCount = [...retentionDecisions.values()].filter((decisio
 
 const candidatesById = new Map();
 for (const offer of currentRetainedRows
+  .filter((offer) => !(market === "japan" && String(offer?.sourceId || "") === "goonet_japan_exact"))
   .sort((left, right) => freshness(left) - freshness(right))) {
   candidatesById.set(offer.id, mergeOfferVersions({ ...offer, status: "active" }, candidatesById.get(offer.id)));
 }
@@ -315,8 +317,9 @@ const selectedIds = new Set();
 const imageOwners = new Map();
 const sourceCounts = new Map();
 const rejectionReasons = {};
+const selectionCandidateLimit = Math.max(maximumPerMarket, Math.min(100_000, maximumPerMarket * 3));
 
-for (let start = 0; start < orderedCandidates.length && selected.length < maximumPerMarket; start += prepareConcurrency) {
+for (let start = 0; start < orderedCandidates.length && selected.length < selectionCandidateLimit; start += prepareConcurrency) {
   const batch = orderedCandidates.slice(start, start + prepareConcurrency);
   const audited = await runWithConcurrency(batch, prepareConcurrency, auditCandidate);
   for (const result of audited) {
@@ -349,12 +352,11 @@ for (let start = 0; start < orderedCandidates.length && selected.length < maximu
   }
 }
 
+// Retained rows already entered candidatesById and passed the same audit as fresh
+// rows. Do not append them again after selection: that used to bypass the 80%
+// low-power mix and could resurrect legacy Goonet cards with obsolete covers.
 const v2Selection = selectCatalogV2MarketOffers(selected.sort(qualityOrder), v2Policy);
-// Retention must not bypass newly tightened public safety gates. In particular,
-// legacy Japanese auction-result rows may predate exact sold/photo provenance;
-// keep the retention window, but do not inherit those rows into a new generation.
-const safelyRetainedCurrentRows = currentRetainedRows.filter((offer) => japanAuctionSoldIdentityVerified(offer));
-const selectedMarketOffersById = new Map(safelyRetainedCurrentRows.map((offer) => [String(offer.id), offer]));
+const selectedMarketOffersById = new Map();
 for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) selectedMarketOffersById.set(String(offer.id), offer);
 const selectedMarketOffers = [...selectedMarketOffersById.values()].slice(0, maximumPerMarket);
 const preservedByMarket = {};
@@ -479,7 +481,7 @@ const preliminaryRejectedCount = canonicalTargetPreview.qualityRejected
     || offer?.calculationSnapshot?.pricingConfidence === "preliminary")
   .length;
 const report = {
-  version: 3,
+  version: 4,
   mode: "catalog_v2_independent_market",
   market,
   publishedAt: new Date().toISOString(),
@@ -527,6 +529,8 @@ const report = {
       calculatedShare: selectedMarketOffers.length ? Number((calculatedCount / selectedMarketOffers.length).toFixed(4)) : 0,
       preliminaryRejectedCount,
       priorityCount: v2Selection.priorityCount,
+      lowPowerCount: v2Selection.lowPowerCount,
+      lowPowerShare: selectedMarketOffers.length ? Number((v2Selection.lowPowerCount / selectedMarketOffers.length).toFixed(4)) : 0,
       auctionCount: v2Selection.auctionCount,
       recentCount: v2Selection.recentCount,
       extendedCount: v2Selection.extendedCount,
