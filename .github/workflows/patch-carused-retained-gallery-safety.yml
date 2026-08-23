@@ -1,0 +1,157 @@
+name: Apply Carused retained gallery safety patch
+
+on:
+  push:
+    branches:
+      - fix/carused-retained-gallery-safety-20260824
+    paths:
+      - .github/workflows/patch-carused-retained-gallery-safety.yml
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/carused-retained-gallery-safety-20260824
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Apply targeted collector fix and regression coverage
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          script_path = Path('scripts/catalog-rebuild-source-shard.mjs')
+          s = script_path.read_text()
+
+          anchor = '''function firstSeen(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.firstSeenAt || offer?.updatedAt || "")) || 0; }'''
+          assert anchor in s
+          helper = r'''const CARUSED_SOURCE_ID = "carused_japan_open";
+          function cleanCarusedGallery(list) {
+            const grouped = new Map();
+            for (const image of images(list)) {
+              try {
+                const url = new URL(String(image?.url || "").replace(/&amp;/g, "&"));
+                if (url.hostname !== "d1og64tg0ubvon.cloudfront.net") continue;
+                const match = url.pathname.match(/^\/refno-cars\/(?:[^/]+\/)+(\d+)\/(\d+)\.(?:jpe?g|png|webp|avif)$/i);
+                if (!match) continue;
+                url.searchParams.delete("w");
+                const group = match[1];
+                const frame = Number(match[2]);
+                if (!grouped.has(group)) grouped.set(group, new Map());
+                const bucket = grouped.get(group);
+                const key = url.pathname;
+                if (!bucket.has(key)) bucket.set(key, { frame, image: { ...image, url: url.toString() } });
+              } catch {}
+            }
+            const ranked = [...grouped.entries()].sort((a, b) => b[1].size - a[1].size || a[0].localeCompare(b[0]));
+            if (!ranked.length) return [];
+            if (ranked[1] && ranked[1][1].size === ranked[0][1].size) return [];
+            return images([...ranked[0][1].values()].sort((a, b) => a.frame - b.frame).map((row) => row.image));
+          }
+          '''
+          s = s.replace(anchor, helper + anchor, 1)
+
+          old_retention = '''const offer = normalizeVehicleOfferSpecs({ ...row, status: "active", images: images(row.images) });
+              if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer))'''
+          new_retention = '''let offer = normalizeVehicleOfferSpecs({ ...row, status: "active", images: images(row.images) });
+              if (sourceId === CARUSED_SOURCE_ID) offer = normalizeVehicleOfferSpecs({ ...offer, images: cleanCarusedGallery(offer.images) });
+              if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer))'''
+          assert s.count(old_retention) == 1
+          s = s.replace(old_retention, new_retention, 1)
+
+          old_public = '''const offer = normalizeVehicleOfferSpecs({ ...row, status: "active", images: images(row.images) });
+            if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer)) bucket.set(offer.id, offer);'''
+          new_public = '''let offer = normalizeVehicleOfferSpecs({ ...row, status: "active", images: images(row.images) });
+            if (sourceId === CARUSED_SOURCE_ID) offer = normalizeVehicleOfferSpecs({ ...offer, images: cleanCarusedGallery(offer.images) });
+            if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer)) bucket.set(offer.id, offer);'''
+          assert s.count(old_public) == 1
+          s = s.replace(old_public, new_public, 1)
+
+          old_accum = '''const accumulatedImages = images([...(previous?.images || []), ...(base?.images || [])]);'''
+          new_accum = '''const accumulatedImages = sourceId === CARUSED_SOURCE_ID
+              ? cleanCarusedGallery([...(previous?.images || []), ...(base?.images || [])])
+              : images([...(previous?.images || []), ...(base?.images || [])]);'''
+          assert old_accum in s
+          s = s.replace(old_accum, new_accum, 1)
+
+          old_gallery = '''let gallery = images(offer.images);'''
+          new_gallery = '''let gallery = sourceId === CARUSED_SOURCE_ID ? cleanCarusedGallery(offer.images) : images(offer.images);'''
+          assert old_gallery in s
+          s = s.replace(old_gallery, new_gallery, 1)
+
+          old_detail_needed = '''const detailNeeded = mandatoryPhotoMissing || criticalSpecsMissing || priorityGalleryMissing;'''
+          new_detail_needed = '''const carusedGalleryIncomplete = sourceId === CARUSED_SOURCE_ID && gallery.length < preferredImages;
+            const detailNeeded = mandatoryPhotoMissing || criticalSpecsMissing || priorityGalleryMissing || carusedGalleryIncomplete;'''
+          assert old_detail_needed in s
+          s = s.replace(old_detail_needed, new_detail_needed, 1)
+
+          old_merge = '''const detailedImages = (await source.fetchImages(offer)) || [];
+                  offer = normalizeVehicleOfferSpecs(offer);
+                  gallery = images([...gallery, ...detailedImages]);
+                  detailEnriched++;'''
+          new_merge = '''const detailedImages = (await source.fetchImages(offer)) || [];
+                  offer = normalizeVehicleOfferSpecs(offer);
+                  if (sourceId === CARUSED_SOURCE_ID) {
+                    const detailedGallery = cleanCarusedGallery(detailedImages);
+                    if (detailedGallery.length >= minimumImages) gallery = detailedGallery;
+                    else if (gallery.length < minimumImages) gallery = [];
+                  } else {
+                    gallery = images([...gallery, ...detailedImages]);
+                  }
+                  detailEnriched++;'''
+          assert old_merge in s
+          s = s.replace(old_merge, new_merge, 1)
+
+          old_count = '''gallerySourceImageCount: Math.max(gallery.length, Number(offer.operational?.gallerySourceImageCount || 0)), galleryPreferredCount: preferredImages,'''
+          new_count = '''gallerySourceImageCount: sourceId === CARUSED_SOURCE_ID ? gallery.length : Math.max(gallery.length, Number(offer.operational?.gallerySourceImageCount || 0)), galleryPreferredCount: preferredImages,'''
+          assert old_count in s
+          s = s.replace(old_count, new_count, 1)
+
+          script_path.write_text(s)
+
+          test_path = Path('tests/carused-retained-gallery-safety.test.ts')
+          test_path.write_text(r'''import assert from "node:assert/strict";
+          import fs from "node:fs";
+          import test from "node:test";
+
+          const collector = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard.mjs", import.meta.url), "utf8");
+
+          test("Carused retention cannot preserve mixed neighbour-stock galleries", () => {
+            assert.match(collector, /const CARUSED_SOURCE_ID = "carused_japan_open"/);
+            assert.match(collector, /function cleanCarusedGallery\(list\)/);
+            assert.match(collector, /ranked\[1\].*size === ranked\[0\].*return \[\]/s);
+            assert.match(collector, /url\.searchParams\.delete\("w"\)/);
+            assert.match(collector, /sourceId === CARUSED_SOURCE_ID.*cleanCarusedGallery\(offer\.images\)/s);
+          });
+
+          test("fresh Carused detail gallery replaces retention instead of being appended behind it", () => {
+            assert.match(collector, /carusedGalleryIncomplete = sourceId === CARUSED_SOURCE_ID/);
+            assert.match(collector, /const detailedGallery = cleanCarusedGallery\(detailedImages\)/);
+            assert.match(collector, /detailedGallery\.length >= minimumImages\) gallery = detailedGallery/);
+            assert.match(collector, /gallerySourceImageCount: sourceId === CARUSED_SOURCE_ID \? gallery\.length/);
+          });
+          ''')
+
+          ci_path = Path('.github/workflows/ci.yml')
+          ci = ci_path.read_text()
+          old_ci = 'tests/catalog-source-retention.test.ts tests/catalog-current-pipeline-contract.test.ts'
+          new_ci = old_ci + ' tests/carused-retained-gallery-safety.test.ts'
+          assert old_ci in ci and new_ci not in ci
+          ci_path.write_text(ci.replace(old_ci, new_ci, 1))
+          PY
+
+          node --check scripts/catalog-rebuild-source-shard.mjs
+          node --import tsx --test tests/carused-retained-gallery-safety.test.ts
+
+          rm .github/workflows/patch-carused-retained-gallery-safety.yml
+          git config user.name "jeep-jim"
+          git config user.email "yokkey@ya.ru"
+          git add scripts/catalog-rebuild-source-shard.mjs tests/carused-retained-gallery-safety.test.ts .github/workflows/ci.yml .github/workflows/patch-carused-retained-gallery-safety.yml
+          git commit -m "Fix retained Carused gallery contamination"
+          git push origin HEAD:fix/carused-retained-gallery-safety-20260824
