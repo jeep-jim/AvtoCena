@@ -1,0 +1,23 @@
+name: Diagnose Japan rerun 20260824
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/diag-japan-run-20260824-0439.yml'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find Japan run for marker SHA
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_SHA: 8e46084e0e93141c957de8817047cf90cf1c546f
+        run: |
+          set -euo pipefail
+          gh api --method GET "repos/${GITHUB_REPOSITORY}/actions/workflows/catalog-v2-japan.yml/runs?event=push&branch=main&per_page=20" \
+            --jq '.workflow_runs[] | select(.head_sha == env.TARGET_SHA) | {id,run_number,status,conclusion,event,head_sha,head_branch,created_at,updated_at,html_url}'
