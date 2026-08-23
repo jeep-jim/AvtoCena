@@ -41,7 +41,6 @@ export default async function AutocatalogPage() {
 
   const mergedModels = new Map<string, { make: string; id: string }>();
   for (const model of sourceModels) {
-    if (model.active === false) continue;
     const make = canonicalCatalogBrand(clean(model.make));
     if (!make || !clean(model.model)) continue;
     mergedModels.set(modelIdentity(make, model.model), { make, id: clean(model.id) || clean(model.model) });
