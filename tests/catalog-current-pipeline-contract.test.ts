@@ -9,6 +9,7 @@ const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/Cata
 const sitemapIndex = fs.readFileSync(new URL("../apps/web/app/(public)/cars/models-sitemap.xml/route.ts", import.meta.url), "utf8");
 const sitemapShard = fs.readFileSync(new URL("../apps/web/app/(public)/cars/models-sitemap/[id]/route.ts", import.meta.url), "utf8");
 const fastGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
+const fullGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
 
 test("V3 keeps the two-photo general admission contract while source-specific gates may be stricter", () => {
   assert.match(reusable, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "2"/);
@@ -34,27 +35,31 @@ test("model sitemap shards stay comfortably below production gateway response li
   assert.match(sitemapShard, /const MODELS_PER_SITEMAP = 5_000/);
 });
 
-test("Carused detail gallery keeps one exact stock family, source resolution and up to 30 photos", () => {
-  const primary = "https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585471/001.jpg?w=133&amp;ts=1781661830";
-  const unrelated = "https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585470/001.jpg?w=133&amp;ts=1781662733";
+test("Carused exact detail gallery beats a misleading list thumbnail and keeps up to 30 source-resolution photos", () => {
+  // This mirrors production YGF03597: the old list parser put 5585471 first,
+  // while the exact detail page's deep 45-photo vehicle gallery is 5585470.
+  const misleadingListPrimary = "https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585471/001.jpg?w=133&amp;ts=1781661830";
+  const realListHint = "https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585470/001.jpg?w=133&amp;ts=1781662733";
   assert.equal(
-    carusedSourceImageUrl(primary),
+    carusedSourceImageUrl(misleadingListPrimary),
     "https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585471/001.jpg?ts=1781661830",
   );
-  assert.deepEqual(carusedExactListingUrls([primary, unrelated]), [
-    "https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585471/001.jpg?ts=1781661830",
-  ]);
+  assert.equal(carusedExactListingUrls([misleadingListPrimary, realListHint]).length, 1);
 
-  const exact = Array.from({ length: 45 }, (_, index) => {
+  const realDetailGallery = Array.from({ length: 45 }, (_, index) => {
     const frame = String(index + 1).padStart(3, "0");
-    return `https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585471/${frame}.jpg?w=133&amp;ts=1781661830`;
+    return `https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585470/${frame}.jpg?w=133&amp;ts=1781662733`;
   });
-  const markup = `<main>${exact.map((url) => `<img src="${url}">`).join("")}<aside><img src="${unrelated}"></aside></main>`;
-  const gallery = carusedListingGalleryUrls(markup, primary, 30);
+  const recommendationNoise = [misleadingListPrimary,
+    "https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0601/4767566/001.jpg?w=133",
+    "https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0601/4767566/002.jpg?w=133"];
+  const markup = `<main>${realDetailGallery.map((url) => `<img src="${url}">`).join("")}</main><aside>${recommendationNoise.map((url) => `<img src="${url}">`).join("")}</aside>`;
+  const gallery = carusedListingGalleryUrls(markup, misleadingListPrimary, 30);
   assert.equal(gallery.length, 30);
-  assert.equal(gallery[0].includes("/5585471/001.jpg"), true);
-  assert.equal(gallery[29].includes("/5585471/030.jpg"), true);
-  assert.equal(gallery.every((url) => url.includes("/5585471/") && !url.includes("w=133")), true);
+  assert.equal(gallery[0].includes("/5585470/001.jpg"), true);
+  assert.equal(gallery[29].includes("/5585470/030.jpg"), true);
+  assert.equal(gallery.every((url) => url.includes("/5585470/") && !url.includes("w=133")), true);
   assert.match(fastGallery, /exactCarusedGallery/);
   assert.match(fastGallery, /carusedImages\.length >= minimum/);
+  assert.match(fullGallery, /isCarused && detailed\.length >= minimum/);
 });
