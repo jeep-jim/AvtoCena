@@ -8,6 +8,7 @@ import {
 import { readEncyclopediaIdentityDataset } from "./encyclopedia-identity-data";
 import { EncyclopediaIdentitySlugResolver } from "./encyclopedia-identity-slugs";
 import { readSourceBackedEncyclopediaModels } from "./knowledge-source-master";
+import { translateCatalogText } from "./presentation";
 
 function clean(value: unknown) {
   return String(value || "").replace(/\s+/g, " ").trim();
@@ -94,7 +95,12 @@ export async function resolveCatalogBrandBySlug(rawSlug: string): Promise<Catalo
 export function catalogBrandMatches(brand: CatalogBrand, rawMake: unknown) {
   const raw = clean(rawMake);
   if (!raw) return false;
-  const sourceSlugs = new Set([raw, canonicalCatalogBrand(raw)]
+  // Localized spellings are a matching input only; unlike the old facets path
+  // they can never create a new public brand. This preserves Chinese/Japanese/
+  // Korean aliases for an already-resolved canonical brand without letting
+  // arbitrary live parser labels pollute the encyclopedia directory.
+  const translated = clean(translateCatalogText(raw));
+  const sourceSlugs = new Set([raw, translated, canonicalCatalogBrand(raw), canonicalCatalogBrand(translated)]
     .filter(Boolean)
     .map((candidate) => catalogBrandSlug(canonicalCatalogBrand(candidate))));
   const brandSlugs = new Set([brand.name, brand.slug, ...(brand.aliases || [])]
