@@ -1,0 +1,21 @@
+name: Diagnose latest Japan run
+
+on:
+  pull_request:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show latest Japan workflow runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          gh api --method GET "repos/${GITHUB_REPOSITORY}/actions/workflows/catalog-v2-japan.yml/runs?per_page=10" \
+            --jq '.workflow_runs[] | {id,run_number,status,conclusion,event,head_sha,created_at,updated_at,html_url}'
