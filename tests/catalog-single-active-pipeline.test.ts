@@ -52,5 +52,10 @@ test("active V3 pipeline owns approved market rules", () => {
   assert.match(queue, /japan/);
   assert.match(reusable, /CATALOG_V2_LOW_POWER_MIN_SHARE: "0\.8"/);
   assert.match(reusable, /CATALOG_PRIORITY_MAX_POWER_HP: "160"/);
-  assert.match(reusable, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"/);
+  // Two photos is the general admission floor; collectors still prefer up to 30
+  // and source-specific adapters may require more before publishing a listing.
+  assert.match(reusable, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "2"/);
+  assert.doesNotMatch(reusable, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"/);
+  assert.match(reusable, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
+  assert.match(reusable, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
 });
