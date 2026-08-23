@@ -1,6 +1,7 @@
 import { cache } from "react";
 import { canonicalCatalogBrand, catalogBrandSlug } from "./brands";
 import { readEncyclopediaKnowledgeModels, readEncyclopediaKnowledgeVariants } from "./encyclopedia";
+import { readSourceBackedEncyclopediaModels } from "./knowledge-source-master";
 import { readVehiclePowerKnowledge } from "./power-knowledge";
 import { readCatalogBrandModelCounts } from "./storage";
 import {
@@ -29,6 +30,11 @@ export type CatalogModelDirectoryItem = VehicleKnowledgeModel & {
   count: number;
   marketCounts: Record<string, number>;
   knowledge: CatalogModelKnowledgeSummary;
+  sourceBacked?: boolean;
+  sourceIds?: string[];
+  sourceOrigins?: string[];
+  modelBoundImageCandidates?: string[];
+  canonicalModelId?: string;
 };
 
 function clean(value: unknown) {
@@ -84,18 +90,40 @@ function explicitPowerKw(row: any) {
   return hp ? hp / 1.35962 : undefined;
 }
 
-export function catalogModelSlug(model: Pick<VehicleKnowledgeModel, "id" | "model">) {
+export function catalogModelSlug(model: Pick<VehicleKnowledgeModel, "id" | "model" | "sourceVersion">) {
+  if (String(model.sourceVersion || "").startsWith("Knowledge source master")) return slugify(model.model);
   const idTail = String(model.id || "").split("/").slice(1).join("/");
   return slugify(idTail || model.model);
 }
 
 const readKnowledge = cache(async () => {
-  const [models, variants, references] = await Promise.all([
+  const [canonicalModels, sourceModels, variants, references] = await Promise.all([
     readEncyclopediaKnowledgeModels(),
+    readSourceBackedEncyclopediaModels(),
     readEncyclopediaKnowledgeVariants(),
     readVehiclePowerKnowledge(),
   ]);
-  return { models, variants, references };
+  // V2/runtime models are authoritative for canonical identity. Source-master
+  // rows expand the directory only where that make+model identity is not yet
+  // represented; aliases/provenance can still be merged into the canonical row.
+  const byIdentity = new Map<string, any>();
+  for (const source of sourceModels) byIdentity.set(modelKey(source.make, source.model), source);
+  for (const canonical of canonicalModels) {
+    const key = modelKey(canonical.make, canonical.model);
+    const source = byIdentity.get(key);
+    byIdentity.set(key, source ? {
+      ...source,
+      ...canonical,
+      aliases: unique([...(source.aliases || []), ...(canonical.aliases || [])]),
+      regions: unique([...(source.regions || []), ...(canonical.regions || [])]),
+      sourceBacked: true,
+      sourceIds: source.sourceIds,
+      sourceOrigins: source.sourceOrigins,
+      modelBoundImageCandidates: source.modelBoundImageCandidates,
+      canonicalModelId: canonical.id,
+    } : canonical);
+  }
+  return { models: [...byIdentity.values()] as CatalogModelDirectoryItem[], variants, references };
 });
 
 function summarizeModel(model: VehicleKnowledgeModel, variants: any[], references: any[]): CatalogModelKnowledgeSummary {
@@ -153,7 +181,7 @@ export const readBrandModelDirectory = cache(async (rawMake: string): Promise<Ca
     counters.set(recognized.id, { count: item.count, marketCounts: item.marketCounts });
   }
 
-  const canonicalModels = models.map((model) => {
+  const directoryModels = models.map((model) => {
     const count = counters.get(model.id) || { count: 0, marketCounts: {} };
     const modelVariants = variantsByModel.get(model.id) || [];
     const modelReferences = referencesByModel.get(modelKey(make, model.model)) || [];
@@ -164,13 +192,10 @@ export const readBrandModelDirectory = cache(async (rawMake: string): Promise<Ca
       count: count.count,
       marketCounts: count.marketCounts,
       knowledge: summarizeModel(model, modelVariants, modelReferences),
-    };
+    } as CatalogModelDirectoryItem;
   });
 
-  // Unknown live parser strings must never create public/SEO model entities.
-  // They remain valid offers in the market catalog and wait for a future safe
-  // Encyclopedia V2 alias/model match instead of polluting the directory.
-  return canonicalModels.sort((left, right) => Number(right.count > 0) - Number(left.count > 0)
+  return directoryModels.sort((left, right) => Number(right.count > 0) - Number(left.count > 0)
     || right.count - left.count
     || Number(left.popularityDecile || 10) - Number(right.popularityDecile || 10)
     || left.model.localeCompare(right.model, "ru"));
@@ -185,8 +210,8 @@ export const findBrandModelBySlug = cache(async (rawMake: string, rawSlug: strin
 });
 
 export const readAllModelSeoLinks = cache(async () => {
-  const models = (await readEncyclopediaKnowledgeModels()).filter((model) => model.active !== false);
-  return models.map((model) => ({
+  const { models } = await readKnowledge();
+  return models.filter((model) => model.active !== false).map((model) => ({
     make: canonicalCatalogBrand(model.make),
     brandSlug: catalogBrandSlug(model.make),
     model: model.model,
