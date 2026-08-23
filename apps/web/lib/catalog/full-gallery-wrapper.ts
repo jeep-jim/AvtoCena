@@ -58,9 +58,6 @@ function sourceGalleryUrls(offer: VehicleOffer) {
     }
   }
   const unique = [...new Set(urls)];
-  // Carused list markup can include neighbouring inventory. Anchor every list
-  // image to the first exact refno-cars object family, so an adjacent stock ID
-  // can never become photo #2 (or the cover) of this vehicle.
   return /^https:\/\/carused\.jp\/car-list\/detail\//i.test(sourceUrl)
     ? carusedExactListingUrls(unique)
     : unique;
@@ -113,18 +110,21 @@ export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
       Math.max(2, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 2)),
     );
     const sourceUrl = String((offer.operational as any)?.sourceUrl || "");
+    const isCarused = source.sourceId === "carused_japan_open" && /^https:\/\/carused\.jp\/car-list\/detail\//i.test(sourceUrl);
 
     const listingUrls = sourceGalleryUrls(offer);
     let detailed: CatalogImage[] = [];
-    if (listingUrls.length < limit && original) {
+    if ((isCarused || listingUrls.length < limit) && original) {
       detailed = await original(offer).catch(() => [] as CatalogImage[]);
     }
 
-    const result = uniqueExternalImages(
-      [...listingUrls, ...detailed],
-      sourceUrl,
-      limit,
-    );
+    // For Carused, the exact detail parser is authoritative. Search/list markup
+    // demonstrably contains neighbouring stock image IDs, so never prepend its
+    // thumbnails when a coherent detail gallery was recovered.
+    const values = isCarused && detailed.length >= minimum
+      ? detailed
+      : [...listingUrls, ...detailed];
+    const result = uniqueExternalImages(values, sourceUrl, limit);
     const verified = result.length >= minimum;
 
     offer.operational = {
