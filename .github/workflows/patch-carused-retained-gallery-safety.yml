@@ -1,9 +1,9 @@
 name: Apply Carused retained gallery safety patch
 
 on:
-  push:
+  pull_request:
     branches:
-      - fix/carused-retained-gallery-safety-20260824
+      - main
     paths:
       - .github/workflows/patch-carused-retained-gallery-safety.yml
 
