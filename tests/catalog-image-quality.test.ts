@@ -1,7 +1,7 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { credibleCatalogImages, isCatalogOfferBusinessLiquid, isCrediblePublicOffer } from "../apps/web/lib/catalog/offer-quality";
-import { isLikelyVehicleImage, rankedCatalogImageUrls } from "../apps/web/lib/catalog/image-quality";
+import { catalogImageDeliveryUrl, isLikelyVehicleImage, rankedCatalogImageUrls } from "../apps/web/lib/catalog/image-quality";
 import { coherentGoonetImages, goonetPrimaryImageUrl } from "../apps/web/lib/catalog/goonet-exact-source";
 
 const jpegPhoto = {
@@ -74,6 +74,17 @@ test("renders source-only JSON gallery URLs directly", () => {
   const gallery = Array.from({ length: 5 }, (_, index) => sourcePhoto(index + 1));
   assert.deepEqual(rankedCatalogImageUrls({ images: gallery }), gallery.map((image) => image.url));
   assert.equal(rankedCatalogImageUrls({ images: gallery }).some((url) => url.startsWith("/api/catalog/images/")), false);
+});
+
+test("upgrades Carused 133px thumbnails to the exact source image object", () => {
+  const tiny = "https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585471/001.jpg?w=133&ts=1781661830";
+  assert.equal(
+    catalogImageDeliveryUrl(tiny),
+    "https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585471/001.jpg?ts=1781661830",
+  );
+  assert.deepEqual(rankedCatalogImageUrls({ images: [{ url: tiny, mimeType: "image/jpeg" }] }), [
+    "https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585471/001.jpg?ts=1781661830",
+  ]);
 });
 
 test("rejects website and listing URLs that have no image delivery evidence", () => {

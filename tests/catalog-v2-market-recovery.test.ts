@@ -91,7 +91,7 @@ test("automatic catalog runs use one sequential queue and Japan runs four times 
   assert.match(market10kReusable, /CATALOG_V2_LOW_POWER_MIN_SHARE: "0\.8"/);
   assert.match(market10kReusable, /CATALOG_PRIORITY_MAX_TOTAL_RUB: "6000000"/);
   assert.match(market10kReusable, /CATALOG_PUBLIC_MAX_TOTAL_RUB: "6000000"/);
-  assert.match(market10kReusable, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"/);
+  assert.match(market10kReusable, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "2"/);
   assert.match(market10kReusable, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
   assert.match(market10kReusable, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
   assert.match(market10kReusable, /CATALOG_IMAGE_STORAGE_MODE: "source_urls_only"/);

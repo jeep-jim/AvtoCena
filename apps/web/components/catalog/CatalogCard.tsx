@@ -1,5 +1,5 @@
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
-import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
+import { catalogImageDeliveryUrl, rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { catalogMarketLabel } from "@/lib/catalog/runtime-config";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
@@ -30,7 +30,7 @@ function ThirtyMinuteIcon({ dense = false }: { dense?: boolean }) {
 
 export function CatalogCard({ offer, compact = false, dense = false, eagerPrefetch = false }: { offer: any; compact?: boolean; dense?: boolean; eagerPrefetch?: boolean }) {
   const normalizedOffer = normalizeVehicleOfferSpecs(offer);
-  const projectedCover = String((offer as any)?.cardImageUrl || "").trim();
+  const projectedCover = catalogImageDeliveryUrl((offer as any)?.cardImageUrl);
   const rankedImages = projectedCover ? [projectedCover] : rankedCatalogImageUrls(normalizedOffer);
   const presented = presentCatalogOffer(normalizedOffer);
   const o = { ...presented, marketLabel: catalogMarketLabel(normalizedOffer.market), images: rankedImages };
@@ -43,9 +43,10 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const imageUrl = o.images[0] || "";
 
   /* Never render raw totalRub directly. It becomes public only after the full
-     calculation and public sanity limits pass in catalogOfferVisibleRub(). */
+     calculation and public sanity limits pass in catalogOfferVisibleRub(). A
+     valid source-priced listing still renders while that calculation is pending;
+     CatalogPrice shows the explicit no-invention fallback "Цена по запросу". */
   const visibleRub = catalogOfferVisibleRub(normalizedOffer);
-  if (!visibleRub) return null;
   const displayOffer = {
     ...o,
     totalRub: visibleRub || null,

@@ -2,7 +2,7 @@ import fs from "node:fs/promises";
 
 const { readCurrentPublicCatalogProjection } = await import("../apps/web/lib/catalog/storage.ts");
 const { hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
-const { catalogRequiredSpecificationRejectionReason } = await import("../apps/web/lib/catalog/public-priority.ts");
+const { catalogOfferVisibleRub, catalogRequiredSpecificationRejectionReason } = await import("../apps/web/lib/catalog/public-priority.ts");
 
 const OUTPUT = process.env.CATALOG_VISIBLE_CALCULATION_AUDIT_OUTPUT || "catalog-visible-calculation-coverage.json";
 const SAMPLE_LIMIT = Math.max(20, Math.min(500, Number(process.env.CATALOG_VISIBLE_CALCULATION_SAMPLE_LIMIT || 200)));
@@ -83,6 +83,7 @@ const unresolvedModels = new Map();
 const invalidReady = [];
 const readyUnclassified = [];
 const invalidSpecifications = [];
+const unsafePendingVisiblePrices = [];
 const statusCounts = new Map();
 const visibleModels = new Set();
 let readyExact = 0;
@@ -102,7 +103,7 @@ for (const offer of visible) {
   const specificationRejection = catalogRequiredSpecificationRejectionReason(offer);
   if (specificationRejection) invalidSpecifications.push({ id: offer.id, market, make: offer.make, model: offer.model, reason: specificationRejection });
 
-  const marketRow = byMarket.get(market) || { visible: 0, ready: 0, readyExact: 0, needsData: 0, preliminary: 0, auctionStart: 0, unresolvedIdentity: 0, invalidReady: 0 };
+  const marketRow = byMarket.get(market) || { visible: 0, ready: 0, readyExact: 0, needsData: 0, preliminary: 0, auctionStart: 0, unresolvedIdentity: 0, invalidReady: 0, unsafePendingVisiblePrice: 0 };
   marketRow.visible++;
 
   const identityResolved = hasCredibleCatalogIdentity(offer);
@@ -141,7 +142,7 @@ for (const offer of visible) {
         readyUnclassified.push({ id: offer.id, market, make: offer.make, model: offer.model, year: offer.year });
       }
     }
-  } else if (status === "needs_data" || status === "preliminary_power_pending") {
+  } else if (status === "needs_data" || status === "needs_power_data" || status === "preliminary_power_pending") {
     needsData++;
     marketRow.needsData++;
     if (status === "preliminary_power_pending") {
@@ -158,11 +159,33 @@ for (const offer of visible) {
     marketRow.auctionStart++;
   }
 
+  // Pending/incomplete inventory is product-valid, but it must never masquerade
+  // as a completed delivered-RUB calculation. The compact public projection
+  // carries only an admitted public price, so any positive value here is a real
+  // safety violation; missing specs by themselves are diagnostics, not a reason
+  // to delete a real source-priced vehicle from the catalog.
+  const pendingOrIncomplete = Boolean(specificationRejection)
+    || ["needs_data", "needs_power_data", "preliminary_power_pending"].includes(status);
+  const visibleRub = catalogOfferVisibleRub(offer);
+  if (pendingOrIncomplete && visibleRub > 0) {
+    marketRow.unsafePendingVisiblePrice++;
+    unsafePendingVisiblePrices.push({
+      id: offer.id,
+      market,
+      make: offer.make,
+      model: offer.model,
+      calculationStatus: status,
+      specificationRejection: specificationRejection || null,
+      visibleRub,
+    });
+  }
+
   byMarket.set(market, marketRow);
 }
 
+const allIdentitiesResolved = resolvedIdentity === visible.length;
 const report = {
-  version: 1,
+  version: 2,
   auditedAt: new Date().toISOString(),
   mode: "production_visible_read_only",
   totals: {
@@ -180,21 +203,27 @@ const report = {
     auctionStart,
     invalidReady: invalidReady.length,
     invalidSpecifications: invalidSpecifications.length,
+    unsafePendingVisiblePrices: unsafePendingVisiblePrices.length,
     readyWithoutConfidenceLabel: readyUnclassified.length,
   },
   statusCounts: Object.fromEntries([...statusCounts.entries()].sort((a, b) => b[1] - a[1])),
   byMarket: Object.fromEntries([...byMarket.entries()].sort((a, b) => a[0].localeCompare(b[0]))),
   invalidReady: invalidReady.slice(0, SAMPLE_LIMIT),
   invalidSpecifications: invalidSpecifications.slice(0, SAMPLE_LIMIT),
+  unsafePendingVisiblePrices: unsafePendingVisiblePrices.slice(0, SAMPLE_LIMIT),
   unresolvedModels: sortedCounts(unresolvedModels),
   needsDataQueue: sortedCounts(needsDataModels),
   readyWithoutConfidenceLabel: readyUnclassified.slice(0, SAMPLE_LIMIT),
   releaseGate: {
     noInvalidReady: invalidReady.length === 0,
+    allIdentitiesResolved,
+    noUnsafePendingVisiblePrices: unsafePendingVisiblePrices.length === 0,
+    // Diagnostic compatibility fields: pending/spec-incomplete inventory is
+    // intentionally allowed while its delivered price remains hidden.
     noInvalidSpecifications: invalidSpecifications.length === 0,
     noPreliminaryPublicPrices: preliminary === 0,
     noNeedsDataPublicCards: needsData === 0,
-    pass: invalidReady.length === 0 && invalidSpecifications.length === 0 && preliminary === 0 && needsData === 0,
+    pass: invalidReady.length === 0 && allIdentitiesResolved && unsafePendingVisiblePrices.length === 0,
   },
 };
 
@@ -209,6 +238,7 @@ if (process.env.GITHUB_OUTPUT) {
   await fs.appendFile(process.env.GITHUB_OUTPUT, `preliminary=${report.totals.preliminary}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `invalid_ready=${report.totals.invalidReady}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `invalid_specifications=${report.totals.invalidSpecifications}\n`);
+  await fs.appendFile(process.env.GITHUB_OUTPUT, `unsafe_pending_visible_prices=${report.totals.unsafePendingVisiblePrices}\n`);
 }
 
 if (!report.releaseGate.pass) process.exitCode = 1;

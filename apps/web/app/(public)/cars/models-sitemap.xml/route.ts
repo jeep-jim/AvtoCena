@@ -2,7 +2,11 @@ import { readAllModelSeoLinks } from "@/lib/catalog/model-directory";
 
 export const dynamic = "force-dynamic";
 
-const MODELS_PER_SITEMAP = 45_000;
+// The saved Knowledge CORE now contributes ~20k source-backed models. A single
+// 20k+ URL XML response can exceed the Serverless Containers / gateway response
+// budget even though reading the identity index itself succeeds. Keep shards
+// deliberately small; the sitemap index remains the single discovery endpoint.
+const MODELS_PER_SITEMAP = 5_000;
 
 function xmlEscape(value: unknown) {
   return String(value ?? "")

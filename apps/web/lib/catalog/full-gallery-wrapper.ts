@@ -1,3 +1,4 @@
+import { carusedExactListingUrls, carusedSourceImageUrl } from "./carused-gallery";
 import type { CatalogImage, CatalogSourceAdapter, VehicleOffer } from "./types";
 
 const BAD_IMAGE_RE = /logo|icon|avatar|qrcode|placeholder|banner|bnr|promo|promotion|campaign|advert|thumbnail|thumb|tracking|pixel|seller|dealer|recommend|related|similar|favicon|badge|social|share|twitter|facebook|instagram|linkedin|youtube|tiktok|whatsapp|telegram|pinterest|threads|no[-_ ]?photo|no[-_ ]?image|coming[-_ ]?soon|repair|maintenance|wrench|spanner|service[-_ ]?image|camera[-_ ]?off|car[-_ ]?silhouette|dummy/i;
@@ -20,7 +21,7 @@ function absoluteImageUrl(value: unknown, baseUrl = "") {
     const url = new URL(normalized, baseUrl || undefined);
     if (!["http:", "https:"].includes(url.protocol)) return "";
     if (/\/api\/catalog\/images\//i.test(url.pathname)) return "";
-    return url.toString();
+    return carusedSourceImageUrl(url.toString());
   } catch {
     return "";
   }
@@ -56,7 +57,10 @@ function sourceGalleryUrls(offer: VehicleOffer) {
       }
     }
   }
-  return [...new Set(urls)];
+  const unique = [...new Set(urls)];
+  return /^https:\/\/carused\.jp\/car-list\/detail\//i.test(sourceUrl)
+    ? carusedExactListingUrls(unique)
+    : unique;
 }
 
 function externalImage(value: unknown, baseUrl = ""): CatalogImage | null {
@@ -106,18 +110,21 @@ export function fullGallery<T extends CatalogSourceAdapter>(source: T): T {
       Math.max(2, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 2)),
     );
     const sourceUrl = String((offer.operational as any)?.sourceUrl || "");
+    const isCarused = source.sourceId === "carused_japan_open" && /^https:\/\/carused\.jp\/car-list\/detail\//i.test(sourceUrl);
 
     const listingUrls = sourceGalleryUrls(offer);
     let detailed: CatalogImage[] = [];
-    if (listingUrls.length < limit && original) {
+    if ((isCarused || listingUrls.length < limit) && original) {
       detailed = await original(offer).catch(() => [] as CatalogImage[]);
     }
 
-    const result = uniqueExternalImages(
-      [...listingUrls, ...detailed],
-      sourceUrl,
-      limit,
-    );
+    // For Carused, the exact detail parser is authoritative. Search/list markup
+    // demonstrably contains neighbouring stock image IDs, so never prepend its
+    // thumbnails when a coherent detail gallery was recovered.
+    const values = isCarused && detailed.length >= minimum
+      ? detailed
+      : [...listingUrls, ...detailed];
+    const result = uniqueExternalImages(values, sourceUrl, limit);
     const verified = result.length >= minimum;
 
     offer.operational = {

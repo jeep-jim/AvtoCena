@@ -9,7 +9,7 @@ const { catalogOfferVisibleRub, catalogRequiredSpecificationRejectionReason, jap
 const output = String(process.env.CATALOG_AUDIT_OUTPUT || "catalog-live-postpersist-audit.json");
 const assertMarkets = new Set(String(process.env.CATALOG_AUDIT_ASSERT_MARKETS || "").split(",").map((v) => v.trim()).filter(Boolean));
 const maxOffersPerModelYear = Math.max(1, Number(process.env.CATALOG_AUDIT_MAX_PER_MODEL_YEAR || CATALOG_MAX_OFFERS_PER_MODEL_YEAR));
-const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_AUDIT_MIN_IMAGES_PER_OFFER || 5));
+const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_AUDIT_MIN_IMAGES_PER_OFFER || process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
 // Legacy compatibility markers only. Superseded gates are deliberately non-operative:
 // market === "korea" no longer fails on belowFiveImagesCount; korea:below_five_images is diagnostic history only.
 // preliminary_public_price is superseded by unsafe_pending_visible_price; incomplete_specifications is diagnostics-only while pending inventory stays visible without a delivered RUB price.
