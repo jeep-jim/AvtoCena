@@ -1,0 +1,24 @@
+name: Diagnose latest production runs
+
+on:
+  pull_request:
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show latest Japan, deploy and visible-audit runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          for wf in catalog-v2-japan.yml deploy-yandex.yml catalog-visible-calculation-coverage.yml; do
+            echo "--- $wf ---"
+            gh api --method GET "repos/${GITHUB_REPOSITORY}/actions/workflows/${wf}/runs?per_page=5" \
+              --jq '.workflow_runs[] | {id,run_number,status,conclusion,event,head_sha,head_branch,created_at,updated_at,html_url}' || true
+          done
