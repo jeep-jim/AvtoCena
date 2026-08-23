@@ -42,7 +42,7 @@ jobs:
       target_per_source: "30000"
       target_per_market: "30000"
       maximum_per_market: "30000"
-      priority_target: "0"
+      priority_target: "24000"
       reset_cursor: true
     secrets: inherit
 
@@ -57,7 +57,7 @@ jobs:
       target_per_source: "10000"
       target_per_market: "10000"
       maximum_per_market: "10000"
-      priority_target: "500"
+      priority_target: "8000"
       reset_cursor: false
     secrets: inherit
 
@@ -72,7 +72,7 @@ jobs:
       target_per_source: "10000"
       target_per_market: "10000"
       maximum_per_market: "10000"
-      priority_target: "500"
+      priority_target: "8000"
       reset_cursor: false
     secrets: inherit
 
@@ -87,7 +87,7 @@ jobs:
       target_per_source: "10000"
       target_per_market: "10000"
       maximum_per_market: "10000"
-      priority_target: "500"
+      priority_target: "8000"
       reset_cursor: false
     secrets: inherit
 
@@ -102,7 +102,7 @@ jobs:
       target_per_source: "10000"
       target_per_market: "10000"
       maximum_per_market: "10000"
-      priority_target: "500"
+      priority_target: "8000"
       reset_cursor: false
     secrets: inherit
 
@@ -117,7 +117,7 @@ jobs:
       target_per_source: "10000"
       target_per_market: "10000"
       maximum_per_market: "10000"
-      priority_target: "100"
+      priority_target: "8000"
       reset_cursor: false
     secrets: inherit
 
@@ -132,6 +132,6 @@ jobs:
       target_per_source: "10000"
       target_per_market: "10000"
       maximum_per_market: "10000"
-      priority_target: "500"
+      priority_target: "8000"
       reset_cursor: false
     secrets: inherit
