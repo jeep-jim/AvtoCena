@@ -126,6 +126,12 @@ test("offer detail trusts already-published compact records and falls back when 
   assert.doesNotMatch(storage, /find\(\(offer\) => offer\.id === id && isPublicOffer\(offer\)\)/);
 });
 
+test("offer page does not re-run source-only publication gates on compact public records", () => {
+  assert.match(page, /if \(!offer\) notFound\(\)/);
+  assert.doesNotMatch(page, /!offer \|\| !isCrediblePublicOffer\(offer\)/);
+  assert.doesNotMatch(page, /!catalogPublicPriority\(raw\)\.eligible/);
+});
+
 test("catalog overview does not rescan every stored Japan offer", () => {
   assert.doesNotMatch(catalogPage, /readMarketOffers/);
   assert.match(catalogPage, /offer\?\.auctionDate \|\| offer\?\.auctionGrade/);
