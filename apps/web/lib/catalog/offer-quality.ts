@@ -13,6 +13,7 @@ const REQUIRED_SOURCE_IDS = new Set(Object.values(REQUIRED_CATALOG_SOURCES).flat
 const GEORGIA_ALLOWED_SOURCE_IDS = new Set(["myauto_georgia_list", "myauto_georgia_exact", "autopapa_georgia_open"]);
 const BUSINESS_LIQUIDITY_RECENT_YEARS = 5;
 const BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP = 160;
+const CARUSED_IMAGE_HOST = "d1og64tg0ubvon.cloudfront.net";
 export const CATALOG_NON_JAPAN_MIN_YEAR = 2020;
 export const CATALOG_JAPAN_MIN_YEAR = 2010;
 
@@ -76,9 +77,36 @@ function imageIdentity(image: CatalogImage) {
     || String(image.checksum || image.id || image.objectKey || image.url || "");
 }
 
+function coherentCarusedImages(input: CatalogImage[]) {
+  const groups = new Map<string, Map<string, { frame: number; image: CatalogImage }>>();
+  let sawCarused = false;
+  for (const image of input || []) {
+    try {
+      const url = new URL(String(image?.url || "").replace(/&amp;/g, "&"));
+      if (url.hostname.toLowerCase() !== CARUSED_IMAGE_HOST) continue;
+      const match = url.pathname.match(/^\/refno-cars\/(?:[^/]+\/)+(\d+)\/(\d+)\.(?:jpe?g|png|webp|avif)$/i);
+      if (!match) continue;
+      sawCarused = true;
+      url.searchParams.delete("w");
+      const group = match[1];
+      const frame = Number(match[2]);
+      if (!groups.has(group)) groups.set(group, new Map());
+      const bucket = groups.get(group)!;
+      if (!bucket.has(url.pathname)) bucket.set(url.pathname, { frame, image: { ...image, url: url.toString() } });
+    } catch { /* ignore non-source URLs */ }
+  }
+  if (!sawCarused) return null;
+  const ranked = [...groups.entries()].sort((a, b) => b[1].size - a[1].size || a[0].localeCompare(b[0]));
+  if (!ranked.length) return [];
+  if (ranked[1] && ranked[1][1].size === ranked[0][1].size) return [];
+  return [...ranked[0][1].values()].sort((a, b) => a.frame - b.frame).map((row) => row.image);
+}
+
 export function credibleCatalogImages(images: CatalogImage[]) {
+  const carused = coherentCarusedImages(images || []);
+  const candidates = carused === null ? (images || []) : carused;
   const unique = new Map<string, CatalogImage>();
-  for (const image of images || []) {
+  for (const image of candidates) {
     const url = String(image?.url || image?.objectKey || "");
     if (!image || !url || BAD_IMAGE_RE.test(url) || !isLikelyVehicleImage(image)) continue;
     const key = imageIdentity(image);
