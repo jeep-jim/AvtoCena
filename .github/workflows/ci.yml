@@ -63,13 +63,13 @@ jobs:
       - name: Open source model normalization tests
         run: node --import tsx --test tests/open-source-normalizer.test.ts
       - name: Power normalization and public truth tests
-        run: node --import tsx --test tests/catalog-power-normalization.test.ts tests/catalog-knowledge-power-conflict.test.ts tests/catalog-public-truth-seo.test.ts tests/catalog-power-authority-contract.test.ts
+        run: node --import tsx --test tests/catalog-power-normalization.test.ts tests/catalog-knowledge-power-conflict.test.ts tests/catalog-public-truth-seo.test.ts tests/catalog-power-authority-contract.test.ts tests/catalog-public-safety.test.ts
       - name: Public 30-minute power display tests
         run: node --import tsx --test tests/catalog-power-display.test.ts
       - name: Estimated EV publication tests
         run: node --import tsx --test tests/catalog-estimated-power-publication.test.ts
       - name: Vehicle Knowledge CORE and model search tests
-        run: node --import tsx --test tests/vehicle-knowledge.test.ts tests/catalog-knowledge-core-contract.test.ts tests/knowledge-source-master-runtime.test.ts
+        run: node --import tsx --test tests/vehicle-knowledge.test.ts tests/catalog-knowledge-core-contract.test.ts tests/knowledge-source-master-runtime.test.ts tests/catalog-encyclopedia-identity-master.test.ts
       - name: Live offer display enrichment tests
         run: node --import tsx --test tests/catalog-display-enrichment.test.ts tests/catalog-display-identity.test.ts tests/catalog-public-offer-deduplication.test.ts tests/catalog-brand-routing.test.ts tests/autocatalog-ui.test.ts tests/autocatalog-flat-ui.test.ts tests/catalog-safe-model-label.test.ts
       - name: Current read-model and AI product feed tests
