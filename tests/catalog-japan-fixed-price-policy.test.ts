@@ -34,7 +34,7 @@ test("Japan accepts fixed-price dealer listings without an auction result", () =
   const classification = classifyCatalogV2Offer(listing);
   assert.equal(classification.eligible, true);
   assert.equal(classification.tier, "priority");
-  assert.equal(classification.reason, "affordable_recent");
+  assert.equal(classification.reason, "affordable_low_power");
 });
 
 test("Japan still rejects unfinished auction lots and accepts completed results", () => {
@@ -53,7 +53,8 @@ test("Japan still rejects unfinished auction lots and accepts completed results"
     auctionResult: "sold",
   });
   assert.equal(isCompletedJapanAuction(completed), true);
-  assert.equal(classifyCatalogV2Offer(completed).tier, "japan_auction");
+  assert.equal(classifyCatalogV2Offer(completed).tier, "priority");
+  assert.equal(classifyCatalogV2Offer(completed).reason, "japan_completed_priority");
 });
 
 test("Japan includes model year 2010 but rejects older stock", () => {
