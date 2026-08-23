@@ -27,7 +27,13 @@ export async function generateMetadata({ searchParams }: { searchParams?: Promis
     : "Узнайте, какой автомобиль можно привезти под ваш бюджет и сколько он будет стоить под ключ в России.";
   const canonical = city ? `/?city=${encodeURIComponent(city)}` : "/";
   const openGraphUrl = city ? `https://avtocena.com/?city=${encodeURIComponent(city)}` : "https://avtocena.com";
-  return { title, description, alternates: { canonical }, openGraph: { title, description, url: openGraphUrl, type: "website" } };
+  return {
+    title,
+    description,
+    alternates: { canonical },
+    openGraph: { title, description, url: openGraphUrl, type: "website" },
+    verification: { google: "fKoSCYRhUlLSknjTU-ak0YWhATWdUCZLyVLCv5N0te8" },
+  };
 }
 
 export default async function HomePage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
