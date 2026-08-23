@@ -841,20 +841,26 @@ async function assertCurrentCatalogReadModelsReady(generationId: string, offers:
     if (projection.generationId !== generationId || Number(projection.items?.length || 0) !== rows.length) {
       throw new Error(`catalog_current_market_projection_not_ready:${market}:${projection.generationId}:${Number(projection.items?.length || 0)}:${generationId}:${rows.length}`);
     }
-    // Verify one representative from every physical offer shard. Sampling the
-    // first five rows let a later shard disappear while its card projection was
-    // already public, producing a valid-looking card that navigated to 404.
-    const shardRepresentatives = [...new Map(rows.map((offer) => [currentOfferShardName(offer.id), offer])).values()];
-    for (const offer of shardRepresentatives) {
-      const shard = await readDataJson<{ generationId: string; items: VehicleOffer[] }>(
-        currentOfferShardPath(offer.id),
-        { generationId: "", items: [] },
-      );
-      if (shard.generationId !== generationId || !(shard.items || []).some((item) => item.id === offer.id)) {
-        throw new Error(`catalog_current_offer_shard_not_ready:${market}:${offer.id}:${shard.generationId}:${generationId}`);
-      }
-    }
   }
+  // Verify every public ID while reading each physical shard only once. A
+  // representative proves that the object exists, but not that every projected
+  // card was written into it.
+  const offersByCurrentShard = new Map<string, VehicleOffer[]>();
+  for (const offer of offers) {
+    const shard = currentOfferShardName(offer.id);
+    offersByCurrentShard.set(shard, [...(offersByCurrentShard.get(shard) || []), offer]);
+  }
+  await mapWithConcurrency([...offersByCurrentShard.entries()], 12, async ([shardName, expectedOffers]) => {
+    const shard = await readDataJson<{ generationId: string; items: VehicleOffer[] }>(
+      `catalog/public/offers/${shardName}.json`,
+      { generationId: "", items: [] },
+    );
+    const actualIds = new Set((shard.items || []).map((item) => item.id));
+    const missing = expectedOffers.find((offer) => !actualIds.has(offer.id));
+    if (shard.generationId !== generationId || missing) {
+      throw new Error(`catalog_current_offer_shard_not_ready:${missing?.market || "all"}:${missing?.id || shardName}:${shard.generationId}:${generationId}`);
+    }
+  });
 }
 
 export type PersistCatalogOptions = {
@@ -1159,7 +1165,13 @@ export async function publishCurrentCatalogReadModels() {
 export async function getOffer(id: string) {
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
   if (current.generationId === manifest.generationId) {
-    return (current.items || []).find((item) => item.id === id && isPublicOffer(item)) || null;
+    // Current offer shards contain only records that were already admitted by
+    // persistCatalogOffers. Do not re-run source validation after compact public
+    // storage intentionally removed operational.raw; that made valid Georgia and
+    // Kyrgyzstan cards navigate to a soft 404. If a shard is incomplete, fall
+    // through to the immutable generation index instead of returning early.
+    const currentOffer = (current.items || []).find((item) => item.id === id);
+    if (currentOffer) return currentOffer;
   }
   if (offerLookupCacheGeneration !== manifest.generationId) {
     offerLookupCacheGeneration = manifest.generationId;
@@ -1183,7 +1195,8 @@ export async function getOffer(id: string) {
     }
   }
   const chunk = await chunkPromise;
-  return chunk.find((offer) => offer.id === id && isPublicOffer(offer)) || null;
+  // Generation chunks are also immutable, already-filtered public storage.
+  return chunk.find((offer) => offer.id === id) || null;
 }
 export async function searchOffers(params: CatalogSearchParams) {
   const page = Math.max(1, Number(params.page || 1));
