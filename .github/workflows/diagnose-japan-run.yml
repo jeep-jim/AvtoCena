@@ -19,16 +19,4 @@ jobs:
       - name: Probe AJES image renditions
         shell: bash
         run: |
-          node <<'NODE'
-          const sharp = require('sharp');
-          const base='https://8.ajes.com/imgs/4LjrJwYXyeYH0oPqGRSPyQEkSAuPv7Ee4yu1NFVnkdX82YGEKroADWRDGJ43isnAz9e';
-          for (const suffix of ['', '&w=320', '&w=640', '&w=1024', '&w=1600']) {
-            const url=base+suffix;
-            try {
-              const r=await fetch(url,{headers:{'user-agent':'Mozilla/5.0','referer':'https://prestigemotorsport.com.au/auctions/'},redirect:'follow',signal:AbortSignal.timeout(20000)});
-              const b=Buffer.from(await r.arrayBuffer());
-              let meta={}; try { meta=await sharp(b).metadata(); } catch(e) { meta={decodeError:String(e.message||e)}; }
-              console.log(JSON.stringify({url,status:r.status,type:r.headers.get('content-type'),contentLength:r.headers.get('content-length'),bytes:b.length,width:meta.width,height:meta.height,format:meta.format}));
-            } catch(e) { console.log(JSON.stringify({url,error:String(e.message||e)})); }
-          }
-          NODE
+          echo "AJES diagnostic"
