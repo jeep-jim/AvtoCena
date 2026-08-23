@@ -166,8 +166,8 @@ const payload = {
   plannedSourceIds: sourceIds,
   activeSourceIds,
   inactiveSourceIds,
-  sourceIdsForRebuild: sourceIdsForRebuildList,
-  sourceIdsForRebuildCsv: sourceIdsForRebuild,
+  sourceIdsForRebuild,
+  sourceIdsForRebuildList,
   results,
 };
 
