@@ -103,6 +103,7 @@ const readKnowledge = cache(async () => {
     readEncyclopediaKnowledgeVariants(),
     readVehiclePowerKnowledge(),
   ]);
+  // Unknown live parser strings must never create public/SEO model entities.
   // V2/runtime models are authoritative for canonical identity. Source-master
   // rows expand the directory only where that make+model identity is not yet
   // represented; aliases/provenance can still be merged into the canonical row.
