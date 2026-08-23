@@ -57,7 +57,7 @@ export function isCatalogPriorityOffer(offer: Partial<VehicleOffer>, options: Ca
     && powerHp <= options.priorityMaxPowerHp;
 }
 
-/** Low-power share is a separate hard mix contract: at least 80% <=160 hp. */
+/** <=160 hp remains a ranking/coverage target, never an admission gate. */
 export function isCatalogLowPowerOffer(offer: Partial<VehicleOffer>, options: CatalogV2PolicyOptions = CATALOG_V2_DEFAULT_POLICY) {
   const powerHp = number(offer.powerHp);
   return powerHp !== undefined && powerHp <= options.priorityMaxPowerHp;
@@ -109,31 +109,19 @@ export function selectCatalogV2MarketOffers(offers: VehicleOffer[], options: Cat
     accepted.push(offer);
   }
 
+  // Priority defines ordering only. Never throw away otherwise valid inventory
+  // merely because the market cannot supply an arbitrary low-power percentage.
+  // This is especially important for Japan: the encyclopedia/calculator may
+  // resolve a broad mix of cars, and every valid resolved listing should be
+  // allowed to fill the market up to the configured maximum.
   accepted.sort((left, right) => order(left, right, options));
   const maximum = Math.max(1, Number(options.maximumPerMarket || 30_000));
   const requestedPriorityTarget = Math.max(0, Math.min(maximum, Number(options.priorityTarget || 0)));
-  const minimumLowPowerShare = Math.max(0, Math.min(1, Number(options.lowPowerMinShare ?? 0.8)));
-  const lowPower = accepted.filter((offer) => isCatalogLowPowerOffer(offer, options));
-  const highPower = accepted.filter((offer) => !isCatalogLowPowerOffer(offer, options));
-  const lowPowerNeededForFullMarket = Math.ceil(maximum * minimumLowPowerShare);
-  const initialLowPowerCount = Math.min(lowPower.length, lowPowerNeededForFullMarket);
-  const selected: VehicleOffer[] = lowPower.slice(0, initialLowPowerCount);
-  const proportionalHighPowerLimit = minimumLowPowerShare <= 0
-    ? maximum
-    : minimumLowPowerShare >= 1
-      ? 0
-      : Math.max(0, Math.floor(initialLowPowerCount / minimumLowPowerShare + 1e-9) - initialLowPowerCount);
-  const highPowerCount = Math.min(highPower.length, maximum - selected.length, proportionalHighPowerLimit);
-  selected.push(...highPower.slice(0, highPowerCount));
-  if (selected.length < maximum) selected.push(...lowPower.slice(initialLowPowerCount, initialLowPowerCount + maximum - selected.length));
+  const selected = accepted.slice(0, maximum);
 
   const priorityCount = selected.filter((offer) => isCatalogPriorityOffer(offer, options)).length;
   const lowPowerCount = selected.filter((offer) => isCatalogLowPowerOffer(offer, options)).length;
-  const shortageToUnlock = Math.max(
-    Math.max(0, requestedPriorityTarget - priorityCount),
-    Math.max(0, lowPowerNeededForFullMarket - lowPower.length),
-  );
-  const ratioLocked = Math.max(0, highPower.length - highPowerCount);
+  const shortageToUnlock = Math.max(0, requestedPriorityTarget - priorityCount);
 
   return {
     selected,
@@ -142,8 +130,8 @@ export function selectCatalogV2MarketOffers(offers: VehicleOffer[], options: Cat
     auctionCount: selected.filter((offer) => isCompletedJapanAuction(offer)).length,
     recentCount: selected.filter((offer) => classifyCatalogV2Offer(offer, options).tier === "recent").length,
     extendedCount: 0,
-    fallbackUnlocked: minimumLowPowerShare <= 0 || highPowerCount > 0,
+    fallbackUnlocked: true,
     shortageToUnlock,
-    rejected: { ...rejected, fallback_locked: ratioLocked },
+    rejected,
   };
 }
