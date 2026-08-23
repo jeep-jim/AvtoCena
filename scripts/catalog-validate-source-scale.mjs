@@ -251,7 +251,7 @@ const blockingMarkets = markets.filter((market) => {
 const report = {
   version: 26,
   checkedAt: new Date().toISOString(),
-  mode: "per_market_volume_integrity_and_source_continuity_audit",
+  mode: "per_market_volume_and_integrity_audit_with_source_continuity",
   inputDir,
   files: filenames,
   probeFiles: probeFilenames,
