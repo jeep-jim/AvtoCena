@@ -7,6 +7,7 @@ import {
 } from "./brands";
 import { readEncyclopediaIdentityDataset } from "./encyclopedia-identity-data";
 import { EncyclopediaIdentitySlugResolver } from "./encyclopedia-identity-slugs";
+import { readSourceBackedEncyclopediaModels } from "./knowledge-source-master";
 import { translateCatalogText } from "./presentation";
 import { readCatalogFacets } from "./storage";
 
@@ -25,23 +26,28 @@ function toBrand(name: string, slug = catalogBrandSlug(name), aliases: string[] 
 }
 
 /**
- * A route-safe brand directory shared by live catalog identities and V2.
+ * One public brand directory for the complete saved knowledge corpus.
  *
- * The encyclopedia is a product dataset, not a projection of today's live
- * offers. A brand must therefore stay visible in /cars/autocatalog even when
- * it currently has zero listings. Live facets may add newly observed brands,
- * but they are never allowed to hide the canonical encyclopedia corpus.
+ * V2 remains the canonical authority where it has a match, but source-master
+ * brands are not hidden just because they have no live offer today or have not
+ * yet been linked to V2. Live facets may add observed aliases; they never prune
+ * the encyclopedia.
  */
 export async function readCatalogBrandDirectory() {
-  const [dataset, facets] = await Promise.all([
+  const [dataset, sourceModels, facets] = await Promise.all([
     readEncyclopediaIdentityDataset(),
+    readSourceBackedEncyclopediaModels(),
     readCatalogFacets().catch(() => ({ makes: [] as string[] } as any)),
   ]);
   const brands = new Map<string, CatalogBrand>();
   const add = (brand: CatalogBrand) => {
     const key = brand.slug || catalogBrandSlug(brand.name);
     const current = brands.get(key);
-    brands.set(key, current ? { ...brand, ...current, aliases: [...new Set([...(current.aliases || []), ...(brand.aliases || [])])] } : brand);
+    brands.set(key, current ? {
+      ...brand,
+      ...current,
+      aliases: [...new Set([...(current.aliases || []), ...(brand.aliases || [])])],
+    } : brand);
   };
 
   for (const brand of CATALOG_BRANDS) {
@@ -61,13 +67,17 @@ export async function readCatalogBrandDirectory() {
       ...safeAliasValues(brand.aliases),
     ].filter(Boolean)));
   }
+  for (const model of sourceModels) {
+    const publicName = canonicalCatalogBrand(model.make);
+    if (!publicName) continue;
+    add(toBrand(publicName, catalogBrandSlug(publicName), [model.make]));
+  }
   for (const rawMake of facets.makes || []) {
     const publicName = canonicalCatalogBrand(translateCatalogText(rawMake) || clean(rawMake));
     if (publicName) add(toBrand(publicName));
   }
 
-  return [...brands.values()]
-    .sort((left, right) => left.name.localeCompare(right.name, "ru"));
+  return [...brands.values()].sort((left, right) => left.name.localeCompare(right.name, "ru"));
 }
 
 export async function resolveCatalogBrandBySlug(rawSlug: string): Promise<CatalogBrand | null> {
