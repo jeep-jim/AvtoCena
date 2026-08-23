@@ -122,7 +122,7 @@ export function selectCatalogV2MarketOffers(offers: VehicleOffer[], options: Cat
     ? maximum
     : minimumLowPowerShare >= 1
       ? 0
-      : Math.floor(initialLowPowerCount * (1 - minimumLowPowerShare) / minimumLowPowerShare);
+      : Math.max(0, Math.floor(initialLowPowerCount / minimumLowPowerShare + 1e-9) - initialLowPowerCount);
   const highPowerCount = Math.min(highPower.length, maximum - selected.length, proportionalHighPowerLimit);
   selected.push(...highPower.slice(0, highPowerCount));
   if (selected.length < maximum) selected.push(...lowPower.slice(initialLowPowerCount, initialLowPowerCount + maximum - selected.length));
