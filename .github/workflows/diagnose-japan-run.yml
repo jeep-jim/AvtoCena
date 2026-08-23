@@ -19,8 +19,8 @@ jobs:
       - name: Probe AJES image renditions
         shell: bash
         run: |
-          node <<'NODE'
-          const sharp = require('sharp');
+          node --input-type=module <<'NODE'
+          import sharp from 'sharp';
           const base='https://8.ajes.com/imgs/4LjrJwYXyeYH0oPqGRSPyQEkSAuPv7Ee4yu1NFVnkdX82YGEKroADWRDGJ43isnAz9e';
           for (const suffix of ['', '&w=320', '&w=640', '&w=1024', '&w=1600']) {
             const url=base+suffix;
