@@ -112,9 +112,18 @@ test("catalog generation becomes public only after canonical identity and dedupl
   assert.ok(currentReadModelRefresh > 0);
   assert.ok(currentReadModelRefresh < manifestSwitch);
   assert.match(storage, /assertCurrentCatalogReadModelsReady\(generationId, publishedOffers\)/);
-  assert.match(storage, /shardRepresentatives/);
-  assert.match(storage, /new Map\(rows\.map\(\(offer\) => \[currentOfferShardName\(offer\.id\), offer\]\)\)/);
+  assert.match(storage, /offersByCurrentShard/);
+  assert.match(storage, /const actualIds = new Set\(\(shard\.items \|\| \[\]\)\.map\(\(item\) => item\.id\)\)/);
+  assert.match(storage, /expectedOffers\.find\(\(offer\) => !actualIds\.has\(offer\.id\)\)/);
   assert.match(storage, /current\.generationId === manifest\.generationId/);
+});
+
+test("offer detail trusts already-published compact records and falls back when a current shard misses an id", () => {
+  assert.match(storage, /const currentOffer = \(current\.items \|\| \[\]\)\.find\(\(item\) => item\.id === id\)/);
+  assert.match(storage, /if \(currentOffer\) return currentOffer/);
+  assert.match(storage, /return chunk\.find\(\(offer\) => offer\.id === id\) \|\| null/);
+  assert.doesNotMatch(storage, /find\(\(item\) => item\.id === id && isPublicOffer\(item\)\)/);
+  assert.doesNotMatch(storage, /find\(\(offer\) => offer\.id === id && isPublicOffer\(offer\)\)/);
 });
 
 test("catalog overview does not rescan every stored Japan offer", () => {
