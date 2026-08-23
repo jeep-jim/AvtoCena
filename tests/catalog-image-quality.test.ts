@@ -186,7 +186,7 @@ test("keeps a server-validated compact Japan projection visible with one ranked 
     cardProjectionVersion: 1,
   };
   assert.equal(isCrediblePublicOffer(japanProjection as any), true);
-  assert.equal(isCrediblePublicOffer({ ...japanProjection, cardProjectionVersion: undefined } as any), true);
+  assert.equal(isCrediblePublicOffer({ ...japanProjection, cardProjectionVersion: undefined } as any), false);
 });
 
 test("accepts raw source price without knowledge calculation", () => {
