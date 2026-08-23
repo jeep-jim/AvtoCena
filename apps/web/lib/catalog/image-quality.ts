@@ -20,12 +20,31 @@ function finite(value: unknown) {
   return Number.isFinite(result) && result > 0 ? result : 0;
 }
 
+export function catalogImageDeliveryUrl(value: unknown) {
+  const source = text(value);
+  if (!source) return "";
+  try {
+    const url = new URL(source);
+    // Carused list cards deliberately request 133px thumbnails. The same exact
+    // listing-bound object returns its source 640x480 JPEG when the resize query
+    // is omitted. Never stretch the 133x100 thumbnail in the customer UI.
+    if (url.hostname.toLowerCase() === "d1og64tg0ubvon.cloudfront.net"
+      && /^\/refno-cars\//i.test(url.pathname)) {
+      url.searchParams.delete("w");
+      return url.toString();
+    }
+    return source;
+  } catch {
+    return source;
+  }
+}
+
 function stablePublicImageUrl(image: CatalogImageLike) {
   const sourceUrl = text(image.url);
   const id = text(image.id);
   const objectKey = text(image.objectKey);
   if (id && objectKey) return `/api/catalog/images/${encodeURIComponent(id)}`;
-  return sourceUrl;
+  return catalogImageDeliveryUrl(sourceUrl);
 }
 
 function canonicalUrl(value: unknown) {
