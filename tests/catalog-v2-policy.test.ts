@@ -124,7 +124,7 @@ test("selection shrinks instead of flooding a market with high-power fallback", 
 
 test("affordable recent low-power cars sort ahead of old expensive high-power cars", () => {
   const rows = [
-    offer("old-expensive", { year: 2015, powerHp: 220, totalRub: 8_000_000 }),
+    offer("old-expensive", { year: 2020, powerHp: 220, totalRub: 8_000_000 }),
     offer("recent-cheap", { year: 2025, powerHp: 120, totalRub: 2_000_000 }),
     offer("recent-cheap-2", { year: 2024, powerHp: 130, totalRub: 2_200_000 }),
     offer("recent-cheap-3", { year: 2023, powerHp: 140, totalRub: 2_400_000 }),
@@ -135,10 +135,10 @@ test("affordable recent low-power cars sort ahead of old expensive high-power ca
   assert.equal(result.selected.at(-1)?.id, "old-expensive");
 });
 
-test("Japan publishes only completed auction lots with an explicit final price", () => {
-  const privateListing = offer("private", { market: "japan", sourceId: "tcv_japan_open" });
-  assert.equal(isJapanAuctionOffer(privateListing), false);
-  assert.equal(classifyCatalogV2Offer(privateListing).reason, "japan_non_auction");
+test("Japan supports fixed listings but auction rows must be completed", () => {
+  const fixedListing = offer("fixed", { market: "japan", sourceId: "jpcenter_japan_catalog_open" });
+  assert.equal(isJapanAuctionOffer(fixedListing), false);
+  assert.equal(classifyCatalogV2Offer(fixedListing).eligible, true);
 
   const currentAuction = offer("current-auction", {
     market: "japan",
@@ -159,7 +159,7 @@ test("Japan publishes only completed auction lots with an explicit final price",
     auctionResult: "sold",
     status: "sold",
   });
-  assert.equal(classifyCatalogV2Offer(missingFinalPrice).reason, "japan_final_price_missing");
+  assert.equal(classifyCatalogV2Offer(missingFinalPrice).reason, "source_price_missing");
 
   const completedAuction = offer("completed-auction", {
     market: "japan",
@@ -172,8 +172,8 @@ test("Japan publishes only completed auction lots with an explicit final price",
   });
   assert.equal(isCompletedJapanAuction(completedAuction), true);
   assert.equal(classifyCatalogV2Offer(completedAuction).tier, "japan_auction");
-  const result = selectCatalogV2MarketOffers([privateListing, currentAuction, missingFinalPrice, completedAuction], policy({ priorityTarget: 0, lowPowerMinShare: 0 }));
-  assert.deepEqual(result.selected.map((row) => row.id), ["completed-auction"]);
+  const result = selectCatalogV2MarketOffers([fixedListing, currentAuction, missingFinalPrice, completedAuction], policy({ priorityTarget: 0, lowPowerMinShare: 0 }));
+  assert.deepEqual(result.selected.map((row) => row.id).sort(), ["completed-auction", "fixed"]);
 });
 
 test("completed Japanese <=160 hp <=6m lot enters the priority layer", () => {
@@ -190,7 +190,7 @@ test("completed Japanese <=160 hp <=6m lot enters the priority layer", () => {
   assert.equal(classification.reason, "japan_completed_priority");
 });
 
-test("incomplete calculation remains in collection classification but cannot masquerade as priority", () => {
+test("incomplete calculation remains in collection classification but cannot masquerade as low-power priority", () => {
   const pending = offer("pending", {
     totalRub: null,
     powerHp: undefined,
