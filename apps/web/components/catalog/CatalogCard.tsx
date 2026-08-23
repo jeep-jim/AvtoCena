@@ -43,9 +43,10 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const imageUrl = o.images[0] || "";
 
   /* Never render raw totalRub directly. It becomes public only after the full
-     calculation and public sanity limits pass in catalogOfferVisibleRub(). */
+     calculation and public sanity limits pass in catalogOfferVisibleRub(). A
+     valid source-priced listing still renders while that calculation is pending;
+     CatalogPrice shows the explicit no-invention fallback "Цена по запросу". */
   const visibleRub = catalogOfferVisibleRub(normalizedOffer);
-  if (!visibleRub) return null;
   const displayOffer = {
     ...o,
     totalRub: visibleRub || null,
