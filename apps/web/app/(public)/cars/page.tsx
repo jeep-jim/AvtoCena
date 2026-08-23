@@ -29,6 +29,7 @@ function catalogBreadcrumbHref(filters: { market?: string; make?: string; model?
 const marketOrder = PUBLIC_CATALOG_MARKETS.map((id) => ({ id, label: CATALOG_MARKET_LABELS[id] }));
 const OVERVIEW_CARDS = 6;
 const MARKET_PAGE_SIZE = 48;
+const MARKET_DIVERSITY_WINDOW_PAGES = 8;
 const PRIORITY_MAX_RUB = 6_000_000;
 const PRIORITY_MAX_POWER_HP = 160;
 const PRIORITY_MIN_YEAR = new Date().getFullYear() - 6;
@@ -57,12 +58,6 @@ function offerFreshness(offer: any) {
   return Date.parse(String(offer?.auctionDate || offer?.operational?.sourcePublishedAt || offer?.firstSeenAt || offer?.updatedAt || "")) || 0;
 }
 
-function isJapanAuctionResult(offer: any) {
-  return offer?.market === "japan" && (offer?.catalogKind === "auction_result"
-    || (offer?.offerType === "auction" && offer?.auctionResult === "sold")
-    || Boolean(offer?.auctionDate || offer?.auctionGrade));
-}
-
 function offerRubValue(offer: any) {
   const totalRub = Number(offer?.totalRub || 0);
   if (totalRub > 0) return totalRub;
@@ -84,9 +79,9 @@ function businessPriority(offer: any) {
   const affordable = rub > 0 && rub <= PRIORITY_MAX_RUB;
   const lowPower = power > 0 && power <= PRIORITY_MAX_POWER_HP;
   const recent = year >= PRIORITY_MIN_YEAR;
-  let score = isJapanAuctionResult(offer) ? 5_000 : 0;
+  let score = 0;
   if (affordable) score += 1_600;
-  if (lowPower) score += 800;
+  if (lowPower) score += 1_600;
   if (recent) score += 800;
   if (affordable && lowPower && recent) score += 3_200;
   if (rub > 0) score += 200;
@@ -149,6 +144,22 @@ function balanceBusinessRows(rows: any[]) {
   return balanced;
 }
 
+async function readDiverseDefaultMarketPage(market: string, page: number) {
+  const windowIndex = Math.floor((Math.max(1, page) - 1) / MARKET_DIVERSITY_WINDOW_PAGES);
+  const windowStartPage = windowIndex * MARKET_DIVERSITY_WINDOW_PAGES + 1;
+  const offsetWithinWindow = ((Math.max(1, page) - 1) % MARKET_DIVERSITY_WINDOW_PAGES) * MARKET_PAGE_SIZE;
+  const resultPages = await Promise.all(Array.from({ length: MARKET_DIVERSITY_WINDOW_PAGES }, (_, index) =>
+    searchOffers({ market, page: windowStartPage + index, pageSize: MARKET_PAGE_SIZE, sort: "updatedAt" })));
+  const firstResult = resultPages[0];
+  const candidates = balanceBusinessRows(resultPages.flatMap((result) => (result.items as any[]).filter(isCrediblePublicOffer)));
+  return {
+    items: candidates.slice(offsetWithinWindow, offsetWithinWindow + MARKET_PAGE_SIZE),
+    total: firstResult?.total || 0,
+    page: Math.max(1, page),
+    pageSize: MARKET_PAGE_SIZE,
+  };
+}
+
 export default async function CarsPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
   const params = (await searchParams) || {};
   const selectedMarket = first(params.market);
@@ -188,7 +199,12 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
         const page = selectedMarket ? requestedPage : 1;
 
         if (!hasFilters && !customSort) {
-          const indexedPageSize = selectedMarket ? pageSize : Math.min(48, Math.max(pageSize * 4, 24));
+          if (selectedMarket) {
+            const indexed = await readDiverseDefaultMarketPage(market.id, page);
+            const visible = await applyActiveBusinessPricingBatch(indexed.items);
+            return { ...market, items: balanceBusinessRows(visible), total: indexed.total, page: indexed.page, pageSize };
+          }
+          const indexedPageSize = Math.min(48, Math.max(pageSize * 4, 24));
           const indexed = await searchOffers({ market: market.id, page, pageSize: indexedPageSize, sort: "updatedAt" });
           const candidates = balanceBusinessRows((indexed.items as any[]).filter(isCrediblePublicOffer));
           const visible = await applyActiveBusinessPricingBatch(candidates.slice(0, pageSize));
