@@ -14,6 +14,8 @@ const GEORGIA_ALLOWED_SOURCE_IDS = new Set(["myauto_georgia_list", "myauto_georg
 const BUSINESS_LIQUIDITY_RECENT_YEARS = 5;
 const BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP = 160;
 const CARUSED_IMAGE_HOST = "d1og64tg0ubvon.cloudfront.net";
+const GOONET_CATALOG_IMAGE_HOST = "catalogphoto.goo-net.com";
+const GOONET_PICTURE_HOST_RE = /(?:^|\.)picture\d*\.goo-net\.com$/i;
 export const CATALOG_NON_JAPAN_MIN_YEAR = 2020;
 export const CATALOG_JAPAN_MIN_YEAR = 2010;
 
@@ -102,9 +104,38 @@ function coherentCarusedImages(input: CatalogImage[]) {
   return [...ranked[0][1].values()].sort((a, b) => a.frame - b.frame).map((row) => row.image);
 }
 
+function coherentGoonetImages(input: CatalogImage[]) {
+  const groups = new Map<string, Map<string, { frame: number; image: CatalogImage }>>();
+  let sawGoonet = false;
+  for (const image of input || []) {
+    try {
+      const url = new URL(String(image?.url || "").replace(/&amp;/g, "&"));
+      const host = url.hostname.toLowerCase();
+      if (host !== GOONET_CATALOG_IMAGE_HOST && !GOONET_PICTURE_HOST_RE.test(host)) continue;
+      sawGoonet = true;
+      if (!GOONET_PICTURE_HOST_RE.test(host)) continue;
+      const match = url.pathname.match(/\/J\/(\d{21})(\d{2})\.(?:jpe?g|png|webp|avif)$/i);
+      if (!match) continue;
+      const listingId = match[1];
+      const frame = Number(match[2]);
+      if (!groups.has(listingId)) groups.set(listingId, new Map());
+      const bucket = groups.get(listingId)!;
+      if (!bucket.has(url.pathname)) bucket.set(url.pathname, { frame, image });
+    } catch { /* ignore non-source URLs */ }
+  }
+  if (!sawGoonet) return null;
+  if (groups.size !== 1) return [];
+  const bucket = [...groups.values()][0];
+  const rows = [...bucket.values()].sort((a, b) => a.frame - b.frame);
+  if (!rows.some((row) => row.frame === 0)) return [];
+  return rows.map((row) => row.image);
+}
+
 export function credibleCatalogImages(images: CatalogImage[]) {
   const carused = coherentCarusedImages(images || []);
-  const candidates = carused === null ? (images || []) : carused;
+  let candidates = carused === null ? (images || []) : carused;
+  const goonet = coherentGoonetImages(candidates);
+  if (goonet !== null) candidates = goonet;
   const unique = new Map<string, CatalogImage>();
   for (const image of candidates) {
     const url = String(image?.url || image?.objectKey || "");
