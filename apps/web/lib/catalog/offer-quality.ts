@@ -150,8 +150,10 @@ export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
 
 function minimumImageCount(offer: VehicleOffer) {
   if (Number((offer as any).cardProjectionVersion || 0) >= 1) return 1;
-  const configured = Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || process.env.CATALOG_MIN_IMAGES || 2);
-  return Number.isFinite(configured) ? Math.max(1, Math.min(30, Math.round(configured))) : 2;
+  const configuredValue = process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || process.env.CATALOG_MIN_IMAGES;
+  if (!configuredValue) return 1;
+  const configured = Number(configuredValue);
+  return Number.isFinite(configured) ? Math.max(1, Math.min(30, Math.round(configured))) : 1;
 }
 
 function mandatorySourcePhotoIdentityVerified(offer: VehicleOffer) {
