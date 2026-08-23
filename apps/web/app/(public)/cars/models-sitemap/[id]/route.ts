@@ -2,7 +2,7 @@ import { readAllModelSeoLinks } from "@/lib/catalog/model-directory";
 
 export const dynamic = "force-dynamic";
 
-const MODELS_PER_SITEMAP = 45_000;
+const MODELS_PER_SITEMAP = 5_000;
 
 function xmlEscape(value: unknown) {
   return String(value ?? "")
