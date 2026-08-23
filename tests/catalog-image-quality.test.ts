@@ -95,25 +95,25 @@ test("removes repeated images with the same checksum", () => {
   assert.deepEqual(rankedCatalogImageUrls({ images: [jpegPhoto, copy, copy] }), ["/api/catalog/images/photo"]);
 });
 
-test("enforces five photos for Korea and preserves existing strict market contracts", () => {
-  assert.equal(isCrediblePublicOffer({ ...rawOffer, images: rawOffer.images.slice(0, 4) } as any), false);
-  assert.equal(isCrediblePublicOffer(rawOffer as any), true);
-
-  const georgia = { ...rawOffer, market: "georgia", sourceId: "autopapa_georgia_open", sourceCurrency: "USD" };
-  assert.equal(isCrediblePublicOffer({ ...georgia, images: rawOffer.images.slice(0, 4) } as any), false);
-  assert.equal(isCrediblePublicOffer(georgia as any), true);
-
-  const autoHome = { ...rawOffer, market: "china", sourceId: "autohome_new_china_open", sourceCurrency: "CNY" };
-  assert.equal(isCrediblePublicOffer({ ...autoHome, images: rawOffer.images.slice(0, 4) } as any), false);
-  assert.equal(isCrediblePublicOffer(autoHome as any), true);
-
-  const europe = { ...rawOffer, market: "europe", sourceId: "mobile_de_open", sourceCurrency: "EUR" };
-  assert.equal(isCrediblePublicOffer({ ...europe, images: rawOffer.images.slice(0, 4) } as any), false);
-  assert.equal(isCrediblePublicOffer(europe as any), true);
-
-  const japan = { ...rawOffer, market: "japan", sourceId: "japan_live", sourceCurrency: "JPY" };
-  assert.equal(isCrediblePublicOffer({ ...japan, images: rawOffer.images.slice(0, 4) } as any), false);
-  assert.equal(isCrediblePublicOffer(japan as any), true);
+test("uses the configured V3 two-photo admission contract across live source markets", () => {
+  const previous = process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER;
+  process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = "2";
+  try {
+    const liveMarkets = [
+      rawOffer,
+      { ...rawOffer, market: "georgia", sourceId: "autopapa_georgia_open", sourceCurrency: "USD" },
+      { ...rawOffer, market: "china", sourceId: "autohome_new_china_open", sourceCurrency: "CNY" },
+      { ...rawOffer, market: "europe", sourceId: "mobile_de_open", sourceCurrency: "EUR" },
+      { ...rawOffer, market: "japan", sourceId: "japan_live", sourceCurrency: "JPY" },
+    ];
+    for (const offer of liveMarkets) {
+      assert.equal(isCrediblePublicOffer({ ...offer, images: rawOffer.images.slice(0, 1) } as any), false, `${offer.market}: one image`);
+      assert.equal(isCrediblePublicOffer({ ...offer, images: rawOffer.images.slice(0, 2) } as any), true, `${offer.market}: two images`);
+    }
+  } finally {
+    if (previous === undefined) delete process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER;
+    else process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = previous;
+  }
 });
 
 test("rejects catalog cards without real source make and model identity", () => {
@@ -202,7 +202,7 @@ test("rejects an advertising payment string used as the source title", () => {
   } as any), false);
 });
 
-test("older high-power combustion listings stay out even when power is model-wide", () => {
+test("business liquidity remains a ranking signal but does not override Japan's year gate", () => {
   const olderJapan = {
     ...rawOffer,
     market: "japan",
@@ -213,6 +213,7 @@ test("older high-power combustion listings stay out even when power is model-wid
     powerDataSource: "vehicle-model-representative:toyota/crown",
   };
   assert.equal(isCatalogOfferBusinessLiquid(olderJapan as any), false);
+  assert.equal(isCrediblePublicOffer(olderJapan as any), true);
   assert.equal(isCatalogOfferBusinessLiquid({
     ...olderJapan,
     powerDataConfidence: "reference",

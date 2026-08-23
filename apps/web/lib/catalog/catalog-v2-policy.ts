@@ -98,10 +98,11 @@ export function selectCatalogV2MarketOffers(offers: VehicleOffer[], options: Cat
   const requestedPriorityTarget = Math.max(0, Math.min(maximum, Number(options.priorityTarget || 0)));
   const priority = accepted.filter((offer) => isCatalogPriorityOffer(offer, options));
   const fallback = accepted.filter((offer) => !isCatalogPriorityOffer(offer, options));
-  const fallbackUnlocked = requestedPriorityTarget === 0 || priority.length >= requestedPriorityTarget;
-  const selected = fallbackUnlocked
-    ? [...priority, ...fallback].slice(0, maximum)
-    : priority.slice(0, maximum);
+  // priorityTarget is a fill/ordering goal, never an admission gate. If a market
+  // has fewer priority cars, every otherwise-valid fallback row is still allowed
+  // to fill the market up to its maximum.
+  const fallbackUnlocked = true;
+  const selected = [...priority, ...fallback].slice(0, maximum);
   const shortageToUnlock = Math.max(0, requestedPriorityTarget - priority.length);
 
   return {
@@ -112,6 +113,6 @@ export function selectCatalogV2MarketOffers(offers: VehicleOffer[], options: Cat
     extendedCount: 0,
     fallbackUnlocked,
     shortageToUnlock,
-    rejected: { ...rejected, fallback_locked: fallbackUnlocked ? 0 : fallback.length },
+    rejected: { ...rejected, fallback_locked: 0 },
   };
 }
