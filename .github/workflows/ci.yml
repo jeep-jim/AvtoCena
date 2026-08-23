@@ -40,6 +40,24 @@ jobs:
         run: node --import tsx --test tests/catalog-source-scale.test.ts
       - name: Catalog production hardening tests
         run: node --import tsx --test tests/catalog-production-hardening.test.ts tests/catalog-v2-market-recovery.test.ts tests/catalog-v6-shared-publish-lock.test.ts tests/catalog-operations.test.ts tests/catalog-source-retention.test.ts
+      - name: Catalog market preflight parity tests
+        run: |
+          node --import tsx --test \
+            tests/catalog-calculation-integrity.test.ts \
+            tests/catalog-image-quality.test.ts \
+            tests/catalog-v2-policy.test.ts \
+            tests/catalog-v2-market-recovery.test.ts \
+            tests/catalog-encyclopedia-identity-application.test.ts \
+            tests/catalog-encyclopedia-identity-runtime.test.ts \
+            tests/catalog-encyclopedia-identity-data.test.ts \
+            tests/catalog-encyclopedia-identity-master.test.ts \
+            tests/catalog-knowledge-core-contract.test.ts \
+            tests/catalog-public-truth-seo.test.ts \
+            tests/catalog-power-authority-contract.test.ts \
+            tests/catalog-safe-model-label.test.ts \
+            tests/catalog-source-page-partition.test.ts \
+            tests/catalog-public-safety.test.ts \
+            tests/catalog-publication-gate.test.ts
       - name: Catalog model-year inventory quota tests
         run: node --import tsx --test tests/catalog-model-year-quota.test.ts tests/catalog-global-model-cap.test.ts
       - name: Japan auction statistics tests
