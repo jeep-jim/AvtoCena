@@ -150,11 +150,8 @@ export function isCatalogOfferBusinessLiquid(offer: VehicleOffer) {
 
 function minimumImageCount(offer: VehicleOffer) {
   if (Number((offer as any).cardProjectionVersion || 0) >= 1) return 1;
-  if (offer.market === "georgia") return 5;
-  if (offer.market === "korea") return 5;
-  if (["autohome_new_china_open", "mobile_de_open"].includes(String(offer.sourceId || ""))) return 5;
-  if (offer.market === "japan") return offer.sourceId === "jpauc_japan_past_open" ? 3 : 5;
-  return 1;
+  const configured = Number(process.env.CATALOG_MIN_IMAGES || 2);
+  return Number.isFinite(configured) ? Math.max(1, Math.min(30, Math.round(configured))) : 2;
 }
 
 function mandatorySourcePhotoIdentityVerified(offer: VehicleOffer) {
@@ -187,7 +184,11 @@ function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true) {
   if (isEncarNonCashContractOffer(offer)) return false;
   if (!meaningfulTitle(title)) return false;
   if (!isCatalogYearAllowed(year, offer.market)) return false;
-  if (!isCatalogOfferBusinessLiquid(offer)) return false;
+  // Year gates define admission (Japan 2010+, other markets 2020+). The old
+  // business-liquidity rule silently rejected otherwise valid older ICE cars
+  // above 160 hp, contradicting that contract. Keep only semantic safety here;
+  // price/power/age preference belongs to ordering, not publication eligibility.
+  if (!isCatalogKnownBodySemanticValid(offer) || !isCatalogKnownK9EngineSemanticValid(offer)) return false;
   if (!sourcePriceOk(offer) || !mileageOk(offer)) return false;
   if (isNonPassengerCatalogBodyType(offer.bodyType)) return false;
   if (NON_VEHICLE_RE.test([title, offer.make, offer.model, offer.trim, offer.bodyType].map(clean).join(" "))) return false;
