@@ -7,8 +7,8 @@ import {
 } from "./brands";
 import { readEncyclopediaIdentityDataset } from "./encyclopedia-identity-data";
 import { EncyclopediaIdentitySlugResolver } from "./encyclopedia-identity-slugs";
+import { readSourceBackedEncyclopediaModels } from "./knowledge-source-master";
 import { translateCatalogText } from "./presentation";
-import { readCatalogFacets } from "./storage";
 
 function clean(value: unknown) {
   return String(value || "").replace(/\s+/g, " ").trim();
@@ -25,20 +25,27 @@ function toBrand(name: string, slug = catalogBrandSlug(name), aliases: string[] 
 }
 
 /**
- * A route-safe brand directory shared by live catalog identities and V2.
- * The legacy Drom list remains a logo/source compatibility layer, but it is no
- * longer allowed to decide whether a valid live or source-backed brand URL 404s.
+ * One public brand directory for the complete saved knowledge corpus.
+ *
+ * V2 remains canonical authority where it has a match. Source-master brands
+ * remain visible while they wait for a V2 link. Raw live parser strings are
+ * deliberately NOT allowed to create encyclopedia brands: that was the source
+ * of entries such as "212" and other catalog garbage.
  */
 export async function readCatalogBrandDirectory() {
-  const [dataset, facets] = await Promise.all([
+  const [dataset, sourceModels] = await Promise.all([
     readEncyclopediaIdentityDataset(),
-    readCatalogFacets().catch(() => ({ makes: [] as string[] } as any)),
+    readSourceBackedEncyclopediaModels(),
   ]);
   const brands = new Map<string, CatalogBrand>();
   const add = (brand: CatalogBrand) => {
     const key = brand.slug || catalogBrandSlug(brand.name);
     const current = brands.get(key);
-    brands.set(key, current ? { ...brand, ...current, aliases: [...new Set([...(current.aliases || []), ...(brand.aliases || [])])] } : brand);
+    brands.set(key, current ? {
+      ...brand,
+      ...current,
+      aliases: [...new Set([...(current.aliases || []), ...(brand.aliases || [])])],
+    } : brand);
   };
 
   for (const brand of CATALOG_BRANDS) {
@@ -58,17 +65,13 @@ export async function readCatalogBrandDirectory() {
       ...safeAliasValues(brand.aliases),
     ].filter(Boolean)));
   }
-  for (const rawMake of facets.makes || []) {
-    const publicName = canonicalCatalogBrand(translateCatalogText(rawMake) || clean(rawMake));
-    if (publicName) add(toBrand(publicName));
+  for (const model of sourceModels) {
+    const publicName = canonicalCatalogBrand(model.make);
+    if (!publicName) continue;
+    add(toBrand(publicName, catalogBrandSlug(publicName), [model.make]));
   }
-  const activeBrandSlugs = new Set((facets.makes || [])
-    .map((rawMake: unknown) => canonicalCatalogBrand(translateCatalogText(rawMake) || clean(rawMake)))
-    .filter(Boolean)
-    .map((name: string) => catalogBrandSlug(name)));
-  return [...brands.values()]
-    .filter((brand) => activeBrandSlugs.has(brand.slug || catalogBrandSlug(brand.name)))
-    .sort((left, right) => left.name.localeCompare(right.name, "ru"));
+
+  return [...brands.values()].sort((left, right) => left.name.localeCompare(right.name, "ru"));
 }
 
 export async function resolveCatalogBrandBySlug(rawSlug: string): Promise<CatalogBrand | null> {
@@ -92,6 +95,10 @@ export async function resolveCatalogBrandBySlug(rawSlug: string): Promise<Catalo
 export function catalogBrandMatches(brand: CatalogBrand, rawMake: unknown) {
   const raw = clean(rawMake);
   if (!raw) return false;
+  // Localized spellings are a matching input only; unlike the old facets path
+  // they can never create a new public brand. This preserves Chinese/Japanese/
+  // Korean aliases for an already-resolved canonical brand without letting
+  // arbitrary live parser labels pollute the encyclopedia directory.
   const translated = clean(translateCatalogText(raw));
   const sourceSlugs = new Set([raw, translated, canonicalCatalogBrand(raw), canonicalCatalogBrand(translated)]
     .filter(Boolean)

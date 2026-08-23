@@ -157,42 +157,50 @@ function collectPageImages(markup: string, pageUrl: string, structured: any[]) {
   return unique;
 }
 
-function isSourcePrimaryImage(value: string) {
+export function goonetListingId(pageUrl: string) {
+  return pageUrl.match(/\/([0-9]{21})\/?(?:[?#]|$)/)?.[1] || "";
+}
+
+export function isGoonetListingFrame(value: string, listingId: string) {
+  if (!listingId) return false;
   try {
-    const pathname = new URL(value).pathname;
-    // Goo-net's listing-level primary photo is an all-numeric offer identity
-    // followed by the 00 frame. Dealer gallery assets contain letters (for
-    // example D00701.jpg), so this avoids promoting those banners as covers.
-    return /\/J\/\d{18,}00\.(?:jpe?g|png|webp)$/i.test(pathname);
+    const parsed = new URL(value);
+    if (!/(?:^|\.)picture\d*\.goo-net\.com$/i.test(parsed.hostname)) return false;
+    return new RegExp(`/J/${listingId}\\d{2}\\.(?:jpe?g|png|webp)$`, "i").test(parsed.pathname);
   } catch {
     return false;
   }
 }
 
+function isSourcePrimaryImage(value: string, listingId?: string) {
+  const id = listingId || value.match(/\/J\/(\d{21})00\.(?:jpe?g|png|webp)$/i)?.[1] || "";
+  if (!id || !isGoonetListingFrame(value, id)) return false;
+  try { return new RegExp(`/J/${id}00\\.(?:jpe?g|png|webp)$`, "i").test(new URL(value).pathname); }
+  catch { return false; }
+}
+
 export function goonetPrimaryImageUrl(pageUrl: string) {
-  const listingId = pageUrl.match(/\/([0-9]{21})\/?(?:[?#]|$)/)?.[1] || "";
+  const listingId = goonetListingId(pageUrl);
   if (!listingId) return "";
-  // Goo-net's original primary image path is encoded entirely in its stable
-  // 21-digit listing id: 10-digit stock partition, 8-digit date/dealer
-  // partition, then the listing id plus the 00 primary frame.
   return `https://picture1.goo-net.com/${listingId.slice(0, 10)}/${listingId.slice(10, 18)}/J/${listingId}00.jpg`;
 }
 
-export function coherentGoonetImages(urls: string[], limit: number) {
-  const primary = urls.find(isSourcePrimaryImage);
-  const galleryUrls = urls.filter((value) => value !== primary);
-  const groups = new Map<string, string[]>();
-  for (const value of galleryUrls) {
-    try {
-      const parsed = new URL(value);
-      const parts = parsed.pathname.split("/").filter(Boolean);
-      const key = `${parsed.hostname.toLowerCase()}/${parts.slice(0, Math.max(1, parts.length - 1)).join("/")}`;
-      groups.set(key, [...(groups.get(key) || []), value]);
-    } catch { /* invalid source URL */ }
-  }
-  const best = [...groups.values()].sort((a, b) => b.length - a.length)[0];
-  const selected = best && best.length >= 3 ? best : galleryUrls;
-  return [...(primary ? [primary] : []), ...selected].slice(0, limit);
+/**
+ * Only images whose filename contains the exact 21-digit listing id may enter a
+ * Goo-net offer. This drops dealer banners, option comics and unrelated assets.
+ * Frame 00 is always the cover and we never fall back to a dashboard/interior
+ * image when that source-bound primary cannot be verified.
+ */
+export function coherentGoonetImages(urls: string[], limit: number, pageUrl = "") {
+  const listingId = goonetListingId(pageUrl)
+    || urls.map((value) => value.match(/\/J\/(\d{21})\d{2}\.(?:jpe?g|png|webp)$/i)?.[1] || "").find(Boolean)
+    || "";
+  if (!listingId) return [];
+  const primary = urls.find((value) => isSourcePrimaryImage(value, listingId)) || goonetPrimaryImageUrl(pageUrl);
+  if (!primary || !isSourcePrimaryImage(primary, listingId)) return [];
+  const exactFrames = [...new Set(urls.filter((value) => isGoonetListingFrame(value, listingId)))];
+  const secondary = exactFrames.filter((value) => !isSourcePrimaryImage(value, listingId)).sort((left, right) => left.localeCompare(right, "en"));
+  return [primary, ...secondary].slice(0, limit);
 }
 
 function parse(markup: string, url: string): Row | null {
@@ -218,11 +226,11 @@ function parse(markup: string, url: string): Row | null {
   const maxImages = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120));
   const collectedImages = collectPageImages(markup, url, structured);
   const primaryImage = goonetPrimaryImageUrl(url);
-  const images = coherentGoonetImages(primaryImage ? [primaryImage, ...collectedImages] : collectedImages, maxImages);
-  if (!images.length) return null;
+  const images = coherentGoonetImages(primaryImage ? [primaryImage, ...collectedImages] : collectedImages, maxImages, url);
+  if (!images.length || images[0] !== primaryImage) return null;
 
   return {
-    id: url.match(/\/([0-9]{12,})\/?(?:[?#]|$)/)?.[1] || url,
+    id: goonetListingId(url) || url,
     url,
     title,
     make,
@@ -274,7 +282,7 @@ export class GoonetExactAdapter implements CatalogSourceAdapter {
 
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as Row;
-    if (!row.id || !row.images.length) return null;
+    if (!row.id || !row.images.length || !isSourcePrimaryImage(row.images[0], row.id)) return null;
     const now = new Date().toISOString();
     return normalizeVehicleOfferSpecs({
       id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: "japan", offerType: "fixed", status: "active",
@@ -288,6 +296,7 @@ export class GoonetExactAdapter implements CatalogSourceAdapter {
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
     const limit = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120));
+    const minimum = Math.max(2, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 2));
     const sourceUrl = String(offer.operational?.sourceUrl || "");
     let row = offer.operational.raw as Row;
     if (sourceUrl) {
@@ -301,17 +310,54 @@ export class GoonetExactAdapter implements CatalogSourceAdapter {
       }
     }
 
-    const saved: CatalogImage[] = [];
-    for (const url of [...new Set(row?.images || [])].slice(0, limit)) {
-      const image = await cacheImageFromUrl(url, "japan", { headers: { ...H, referer: row.url || sourceUrl } }).catch(() => null);
+    const listingId = goonetListingId(row?.url || sourceUrl) || String(offer.sourceOfferId || "");
+    const sourceImages = coherentGoonetImages(row?.images || [], limit, row?.url || sourceUrl);
+    const primaryUrl = sourceImages[0] || "";
+    const operational: any = offer.operational || {};
+    const raw: any = operational.raw || row || {};
+    const markRejected = () => {
+      operational.photoIdentityVerified = false;
+      operational.gallerySafetyMode = "goonet_listing_bound_frames_v1";
+      raw.photoIdentityVerified = false;
+      raw.listingBoundImages = false;
+      raw.detailIdentityVerified = false;
+      operational.raw = raw;
+      offer.operational = operational;
+    };
+
+    if (!listingId || !isSourcePrimaryImage(primaryUrl, listingId)) {
+      markRejected();
+      return [];
+    }
+
+    const primary = await cacheImageFromUrl(primaryUrl, "japan", { headers: { ...H, referer: row?.url || sourceUrl } }).catch(() => null);
+    if (!primary || primary.size <= 8_000) {
+      markRejected();
+      return [];
+    }
+
+    const saved: CatalogImage[] = [primary];
+    for (const url of sourceImages.slice(1, limit)) {
+      if (!isGoonetListingFrame(url, listingId)) continue;
+      const image = await cacheImageFromUrl(url, "japan", { headers: { ...H, referer: row?.url || sourceUrl } }).catch(() => null);
       if (image && image.size > 8_000) saved.push(image);
     }
-    (offer.operational as any).galleryImageCount = saved.length;
-    (offer.operational as any).galleryRefreshedAt = new Date().toISOString();
-    return saved.slice(0, limit);
+
+    const verified = saved.length >= minimum;
+    operational.galleryImageCount = saved.length;
+    operational.galleryRefreshedAt = new Date().toISOString();
+    operational.gallerySafetyMode = "goonet_listing_bound_frames_v1";
+    operational.photoIdentityVerified = verified;
+    raw.photoIdentityVerified = verified;
+    raw.listingBoundImages = verified;
+    raw.detailIdentityVerified = verified;
+    raw.primaryListingFrameVerified = verified;
+    operational.raw = raw;
+    offer.operational = operational;
+    return verified ? saved.slice(0, limit) : [];
   }
 
-  async healthCheck() { return { ok: true, message: "Goo-net exact model and detail pages with complete galleries", checkedAt: new Date().toISOString() }; }
+  async healthCheck() { return { ok: true, message: "Goo-net exact listings require a verified listing-bound 00 vehicle cover and exact-id gallery frames", checkedAt: new Date().toISOString() }; }
 }
 
 export const goonetJapanExactSource = new GoonetExactAdapter();

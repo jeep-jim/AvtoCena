@@ -126,8 +126,10 @@ test("rejects catalog cards without real source make and model identity", () => 
   }
 });
 
-test("uses Goo-net's listing-level primary exterior photo ahead of dealer gallery assets", () => {
+test("uses only Goo-net listing-bound frames and never dealer gallery assets", () => {
+  const page = "https://www.goo-net-exchange.com/usedcars/HONDA/VEZEL/988026042600804420007/";
   const primary = "https://picture1.goo-net.com/9880260426/00804420/J/98802604260080442000700.jpg";
+  const exactSecondary = [1, 2, 3, 4].map((index) => primary.replace(/00\.jpg$/, `${String(index).padStart(2, "0")}.jpg`));
   const dealerGallery = Array.from(
     { length: 5 },
     (_, index) => `https://picture1.goo-net.com/080/0804420/J/0804420A20260425D0070${index + 1}.jpg`,
@@ -137,9 +139,9 @@ test("uses Goo-net's listing-level primary exterior photo ahead of dealer galler
     "https://picture1.goo-net.com/common/recommend/J/recommend02.jpg",
   ];
 
-  assert.deepEqual(coherentGoonetImages([...dealerGallery, ...unrelated, primary], 5), [
+  assert.deepEqual(coherentGoonetImages([...dealerGallery, ...unrelated, ...exactSecondary, primary], 5, page), [
     primary,
-    ...dealerGallery.slice(0, 4),
+    ...exactSecondary,
   ]);
 });
 
@@ -159,7 +161,7 @@ test("derives Goo-net's official primary photo from the stable listing id", () =
   assert.equal(goonetPrimaryImageUrl("https://www.goo-net-exchange.com/usedcars/HONDA/VEZEL/not-a-listing/"), "");
 });
 
-test("preserves Goo-net's coherent-gallery fallback when no source primary exists", () => {
+test("rejects Goo-net dealer-gallery fallback when no exact listing identity exists", () => {
   const gallery = Array.from(
     { length: 4 },
     (_, index) => `https://picture1.goo-net.com/080/0804420/J/0804420A20260425D0070${index + 1}.jpg`,
@@ -167,7 +169,7 @@ test("preserves Goo-net's coherent-gallery fallback when no source primary exist
   assert.deepEqual(coherentGoonetImages([
     "https://picture1.goo-net.com/other/listing/J/other01.jpg",
     ...gallery,
-  ], 3), gallery.slice(0, 3));
+  ], 3), []);
 });
 
 test("keeps a server-validated compact Japan projection visible with one ranked cover", () => {

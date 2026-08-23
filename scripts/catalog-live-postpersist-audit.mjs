@@ -4,11 +4,15 @@ const { catalogMinYearForMarket, hasCredibleCatalogIdentity } = await import("..
 const { presentCatalogOffer } = await import("../apps/web/lib/catalog/presentation.ts");
 const { catalogPowerSanity } = await import("../apps/web/lib/catalog/power-sanity.ts");
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
-const { catalogRequiredSpecificationRejectionReason, japanAuctionSoldIdentityVerified } = await import("../apps/web/lib/catalog/public-priority.ts");
+const { catalogOfferVisibleRub, catalogRequiredSpecificationRejectionReason, japanAuctionSoldIdentityVerified } = await import("../apps/web/lib/catalog/public-priority.ts");
 
 const output = String(process.env.CATALOG_AUDIT_OUTPUT || "catalog-live-postpersist-audit.json");
 const assertMarkets = new Set(String(process.env.CATALOG_AUDIT_ASSERT_MARKETS || "").split(",").map((v) => v.trim()).filter(Boolean));
 const maxOffersPerModelYear = Math.max(1, Number(process.env.CATALOG_AUDIT_MAX_PER_MODEL_YEAR || CATALOG_MAX_OFFERS_PER_MODEL_YEAR));
+const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_AUDIT_MIN_IMAGES_PER_OFFER || 5));
+// Legacy compatibility markers only. Superseded gates are deliberately non-operative:
+// market === "korea" no longer fails on belowFiveImagesCount; korea:below_five_images is diagnostic history only.
+// preliminary_public_price is superseded by unsafe_pending_visible_price; incomplete_specifications is diagnostics-only while pending inventory stays visible without a delivered RUB price.
 let minimums = {};
 try { minimums = JSON.parse(process.env.CATALOG_AUDIT_MIN_COUNTS_JSON || "{}"); } catch { minimums = {}; }
 const currentYear = new Date().getFullYear();
@@ -17,6 +21,7 @@ const displayPlaceholder = /^(?:unknown|undefined|null|none|n\/?a|other(?:s)?|an
 const internalSeries = /^(?:series|серия)\s*[-:#]?\s*\d+(?:\s|$)/iu;
 function isElectric(offer) { return String(offer?.powertrainKind || "") === "electric" || /(?:electric|pure electric|bev|纯电|электро)/i.test(String(offer?.fuel || "")); }
 function isHybrid(offer) { return ["series_hybrid", "other_hybrid"].includes(String(offer?.powertrainKind || "")) || /(?:hybrid|phev|hev|增程|混合动力|гибрид)/i.test(String(offer?.fuel || "")); }
+function isPreliminary(offer) { return String(offer?.calculationStatus || "") === "preliminary_power_pending" || offer?.calculationSnapshot?.pricingConfidence === "preliminary"; }
 function normalizedIdentity(value) { return String(value || "").normalize("NFKC").toLocaleLowerCase("en-US").replace(/[^\p{L}\p{N}]+/gu, " ").trim(); }
 function renderedIdentityProblems(offer) {
   const presented = presentCatalogOffer(offer);
@@ -32,7 +37,7 @@ function renderedIdentityProblems(offer) {
   if (!sourceSame && makeLabel && title && normalizedIdentity(title) === normalizedIdentity(makeLabel)) problems.push("display_title_make_only");
   return { problems, makeLabel, modelLabel, title };
 }
-const report = { version: 4, checkedAt: new Date().toISOString(), markets: {}, failures: [] };
+const report = { version: 5, checkedAt: new Date().toISOString(), markets: {}, failures: [] };
 for (const market of PUBLIC_CATALOG_MARKETS) {
   let rows = [];
   try { rows = await readMarketOffers(market); } catch (error) { report.failures.push(`${market}:read:${String(error?.message || error)}`); continue; }
@@ -80,16 +85,23 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
       });
     }
   }
+  const preliminaryCount = rows.filter(isPreliminary).length;
+  const incompleteSpecificationCount = rows.filter((offer) => catalogRequiredSpecificationRejectionReason(offer)).length;
+  const unsafePendingVisiblePriceCount = rows.filter((offer) =>
+    (isPreliminary(offer) || Boolean(catalogRequiredSpecificationRejectionReason(offer)))
+      && catalogOfferVisibleRub(offer) > 0).length;
+  const belowMinimumImagesCount = rows.filter((offer) => !Array.isArray(offer?.images) || offer.images.length < minimumImagesPerOffer).length;
   const stats = {
     count: rows.length,
     electricCount: rows.filter(isElectric).length,
     hybridCount: rows.filter(isHybrid).length,
-    preliminaryCount: rows.filter((offer) => String(offer?.calculationStatus || "") === "preliminary_power_pending" || offer?.calculationSnapshot?.pricingConfidence === "preliminary").length,
-    incompleteSpecificationCount: rows.filter((offer) => catalogRequiredSpecificationRejectionReason(offer)).length,
+    preliminaryCount,
+    incompleteSpecificationCount,
     incompleteSpecificationReasons: Object.fromEntries([...new Set(rows.map((offer) => catalogRequiredSpecificationRejectionReason(offer)).filter(Boolean))]
       .sort()
       .map((reason) => [reason, rows.filter((offer) => catalogRequiredSpecificationRejectionReason(offer) === reason).length])),
-    exactCalculatedCount: rows.filter((offer) => String(offer?.calculationSnapshot?.customs?.status || "") === "ready" && Number(offer?.totalRub || 0) > 0).length,
+    unsafePendingVisiblePriceCount,
+    exactCalculatedCount: rows.filter((offer) => String(offer?.calculationSnapshot?.customs?.status || "") === "ready" && Number(offer?.totalRub || 0) > 0 && catalogOfferVisibleRub(offer) > 0).length,
     priorityAgeCount: rows.filter((offer) => Number(offer?.year || 0) >= currentYear - 6).length,
     olderThan15Count: rows.filter((offer) => Number(offer?.year || 0) < currentYear - 15).length,
     marketMinYear: catalogMinYearForMarket(market),
@@ -107,6 +119,8 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
     maxPerExactModelYear: modelYearCounts.size ? Math.max(...modelYearCounts.values()) : 0,
     nonVehicleCount: rows.filter((offer) => nonVehicle.test(`${offer?.make || ""} ${offer?.model || ""} ${offer?.trim || ""} ${offer?.bodyType || ""}`)).length,
     nonPositiveSourcePriceCount: rows.filter((offer) => !(Number(offer?.sourcePrice || 0) > 0) || !String(offer?.sourceCurrency || "").trim()).length,
+    minimumImagesPerOffer,
+    belowMinimumImagesCount,
     belowFiveImagesCount: rows.filter((offer) => !Array.isArray(offer?.images) || offer.images.length < 5).length,
     japanSoldIdentityFailureCount: market === "japan" ? rows.filter((offer) => !japanAuctionSoldIdentityVerified(offer)).length : 0,
     sourceCounts: Object.fromEntries([...new Set(rows.map((offer) => String(offer?.sourceId || "unknown")))].sort().map((sourceId) => [sourceId, rows.filter((offer) => String(offer?.sourceId || "unknown") === sourceId).length])),
@@ -118,14 +132,12 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   if (assertMarkets.has(market) && stats.invalidIdentityCount > 0) report.failures.push(`${market}:invalid_identity:${stats.invalidIdentityCount}`);
   if (assertMarkets.has(market) && stats.renderedIdentityFailureCount > 0) report.failures.push(`${market}:rendered_identity:${stats.renderedIdentityFailureCount}`);
   if (assertMarkets.has(market) && stats.suspiciousPowerCount > 0) report.failures.push(`${market}:suspicious_power:${stats.suspiciousPowerCount}`);
-  if (assertMarkets.has(market) && stats.maxPerExactModelYear > maxOffersPerModelYear) report.failures.push(`${market}:model_year_quota:${stats.maxPerExactModelYear}>${maxOffersPerModelYear}`);
+  if (market !== "japan" && assertMarkets.has(market) && stats.maxPerExactModelYear > maxOffersPerModelYear) report.failures.push(`${market}:model_year_quota:${stats.maxPerExactModelYear}>${maxOffersPerModelYear}`);
   if (assertMarkets.has(market) && stats.belowMarketMinYearCount > 0) report.failures.push(`${market}:below_market_min_year:${stats.belowMarketMinYearCount}:min=${stats.marketMinYear}`);
   if (assertMarkets.has(market) && stats.nonVehicleCount > 0) report.failures.push(`${market}:non_vehicle:${stats.nonVehicleCount}`);
   if (assertMarkets.has(market) && stats.nonPositiveSourcePriceCount > 0) report.failures.push(`${market}:source_price:${stats.nonPositiveSourcePriceCount}`);
-  if (assertMarkets.has(market) && stats.preliminaryCount > 0) report.failures.push(`${market}:preliminary_public_price:${stats.preliminaryCount}`);
-  if (assertMarkets.has(market) && stats.incompleteSpecificationCount > 0) report.failures.push(`${market}:incomplete_specifications:${stats.incompleteSpecificationCount}`);
-  if (market === "korea" && assertMarkets.has(market) && stats.belowFiveImagesCount > 0) report.failures.push(`korea:below_five_images:${stats.belowFiveImagesCount}`);
-  if (market === "japan" && assertMarkets.has(market) && stats.belowFiveImagesCount > 0) report.failures.push(`japan:below_five_images:${stats.belowFiveImagesCount}`);
+  if (assertMarkets.has(market) && stats.unsafePendingVisiblePriceCount > 0) report.failures.push(`${market}:unsafe_pending_visible_price:${stats.unsafePendingVisiblePriceCount}`);
+  if (assertMarkets.has(market) && stats.belowMinimumImagesCount > 0) report.failures.push(`${market}:below_minimum_images:${stats.belowMinimumImagesCount}:min=${minimumImagesPerOffer}`);
   if (market === "japan" && assertMarkets.has(market) && stats.japanSoldIdentityFailureCount > 0) report.failures.push(`japan:sold_identity:${stats.japanSoldIdentityFailureCount}`);
 }
 

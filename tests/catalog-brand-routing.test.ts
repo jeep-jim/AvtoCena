@@ -17,10 +17,12 @@ test("brand routes resolve both legacy and source-backed V2 identities", async (
   assert.equal(catalogBrandMatches(mercedes!, "梅赛德斯-奔驰"), true);
 });
 
-test("brand directory is filtered by live catalog facets", () => {
+test("brand directory keeps the encyclopedia corpus even without live offers", () => {
   const source = fs.readFileSync(new URL("../apps/web/lib/catalog/catalog-brand-directory.ts", import.meta.url), "utf8");
-  assert.match(source, /const activeBrandSlugs = new Set\(\(facets\.makes \|\| \[\]\)/);
-  assert.match(source, /\.filter\(\(brand\) => activeBrandSlugs\.has/);
+  assert.match(source, /readEncyclopediaIdentityDataset/);
+  assert.match(source, /for \(const brand of dataset\?\.brands \|\| \[\]\)/);
+  assert.doesNotMatch(source, /activeBrandSlugs/);
+  assert.doesNotMatch(source, /\.filter\(\(brand\) => activeBrandSlugs\.has/);
 });
 
 test("a brand alias cannot make unrelated catalog makes match", () => {

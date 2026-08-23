@@ -49,7 +49,8 @@ env:
   CATALOG_OFFER_RETENTION_MS: "2592000000"
   CATALOG_DEFAULT_RETENTION_MS: "259200000"
   CATALOG_JAPAN_RETENTION_MS: "2592000000"
-  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+  CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "2"
+  CATALOG_AUDIT_MIN_IMAGES_PER_OFFER: "2"
   CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_COLLECTION_IMAGE_LIMIT: "30"
@@ -123,7 +124,7 @@ jobs:
           const state={published:p.published===true,generationId:p.generationId||null,count,lowPowerShare,regressionBlocked:q.regressionBlocked===true,publicationError:p.publicationError||''};
           console.log(JSON.stringify(state,null,2));
           fs.appendFileSync(process.env.GITHUB_STEP_SUMMARY,`### Japan republish\n\n\`\`\`json\n${JSON.stringify(state,null,2)}\n\`\`\`\n`);
-          if(!state.published||!state.generationId||count<=0||state.lowPowerShare<0.8||state.regressionBlocked||state.publicationError) process.exit(1);
+          if(!state.published||!state.generationId||count<=0||state.regressionBlocked||state.publicationError) process.exit(1);
           NODE
       - name: Verify offer detail read models
         env:

@@ -259,7 +259,10 @@ async function auditCandidate(sourceOffer) {
     if (offer.images.length < minimumImagesPerOffer) return { offer: null, reason: "images" };
     offer = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer));
     const calculationStatus = String(offer.calculationStatus || "");
-    const calculationPending = calculationStatus === "needs_data" || calculationStatus.startsWith("needs_");
+    const calculationPending = calculationStatus === "needs_data"
+      || calculationStatus.startsWith("needs_")
+      || calculationStatus === "preliminary_power_pending"
+      || calculationStatus === "estimated";
     if (!hasExactCalculation(offer) && !calculationPending) return { offer: null, reason: "calculation" };
     if (!isCrediblePublicOffer(offer)) return { offer: null, reason: "quality" };
     if (!japanAuctionSoldIdentityVerified(offer)) return { offer: null, reason: "japan_auction_sold_identity_unverified" };
@@ -353,8 +356,8 @@ for (let start = 0; start < orderedCandidates.length && selected.length < select
 }
 
 // Retained rows already entered candidatesById and passed the same audit as fresh
-// rows. Do not append them again after selection: that used to bypass the 80%
-// low-power mix and could resurrect legacy Goonet cards with obsolete covers.
+// rows. Priority only controls ordering; valid fallback inventory fills the
+// remaining market capacity instead of being discarded by a power-mix quota.
 const v2Selection = selectCatalogV2MarketOffers(selected.sort(qualityOrder), v2Policy);
 const selectedMarketOffersById = new Map();
 for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) selectedMarketOffersById.set(String(offer.id), offer);
@@ -475,13 +478,14 @@ const byMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((marketId) => [
   marketId === market ? (nextPublicCount || selectedMarketOffers.length) : Number(preservedByMarket[marketId] || 0),
 ]));
 const publishedMarketCount = Number(byMarket[market] || 0);
-const calculatedCount = canonicalTargetPreview.offers.length;
+const calculatedCount = canonicalTargetPreview.offers.filter((offer) => hasExactCalculation(offer)).length;
+const calculationPendingCount = canonicalTargetPreview.offers.length - calculatedCount;
 const preliminaryRejectedCount = canonicalTargetPreview.qualityRejected
   .filter((offer) => String(offer?.calculationStatus || "") === "preliminary_power_pending"
     || offer?.calculationSnapshot?.pricingConfidence === "preliminary")
   .length;
 const report = {
-  version: 4,
+  version: 5,
   mode: "catalog_v2_independent_market",
   market,
   publishedAt: new Date().toISOString(),
@@ -526,7 +530,8 @@ const report = {
       regressionBlocked,
       published: publishedMarketCount,
       calculatedCount,
-      calculatedShare: selectedMarketOffers.length ? Number((calculatedCount / selectedMarketOffers.length).toFixed(4)) : 0,
+      calculationPendingCount,
+      calculatedShare: canonicalTargetPreview.offers.length ? Number((calculatedCount / canonicalTargetPreview.offers.length).toFixed(4)) : 0,
       preliminaryRejectedCount,
       priorityCount: v2Selection.priorityCount,
       lowPowerCount: v2Selection.lowPowerCount,

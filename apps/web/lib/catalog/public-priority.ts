@@ -173,8 +173,8 @@ export function japanAuctionSoldIdentityVerified(offer: Partial<VehicleOffer> | 
 
 function publicPriceLimits() {
   // The preferred limit only affects ordering. The 15M ceiling is a product
-  // invariant: an environment override may tighten it, but cannot accidentally
-  // return unaffordable inventory to the public catalog.
+  // invariant for a displayed delivered price. Inventory with an unfinished
+  // calculation can still be shown, but it receives no public delivered total.
   const requestedPreferredRub = Number(process.env.CATALOG_PUBLIC_MAX_TOTAL_RUB || 8_000_000);
   const requestedAbsoluteRub = Number(process.env.CATALOG_PUBLIC_ABSOLUTE_MAX_TOTAL_RUB || CATALOG_PUBLIC_HARD_MAX_TOTAL_RUB);
   const absoluteMaximumRub = Math.min(
@@ -211,8 +211,8 @@ export function catalogPublicEconomicRejectionReason(offer: Partial<VehicleOffer
 
 export function catalogOfferVisibleRub(offer: Partial<VehicleOffer> | any) {
   // Never trust a legacy projected amount without re-checking the underlying
-  // calculation contract. Older projections may contain a lower-bound price
-  // produced before the utilization fee was known.
+  // calculation contract. Unfinished calculations may remain visible as
+  // inventory, but they never expose a delivered price.
   const status = String(offer?.calculationStatus || "");
   const pricingConfidence = String(offer?.calculationSnapshot?.pricingConfidence || "");
   const projectionVersion = Number(offer?.cardProjectionVersion || 0);
@@ -273,18 +273,29 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
   const maximumAgeYears = Math.max(1, Number(process.env.CATALOG_PRIORITY_MAX_AGE_YEARS || 6));
   const popularDecile = Math.max(1, Math.min(10, Number(process.env.CATALOG_PRIORITY_POPULARITY_DECILE || 5)));
   const rawTotalRub = Math.round(positive(offer?.totalRub, 1_000_000_000));
+  const specificationRejection = catalogRequiredSpecificationRejectionReason(offer);
+  const sourcePriced = positive(offer?.sourcePrice, 1_000_000_000) > 0 && Boolean(String(offer?.sourceCurrency || "").trim());
   const base = { visibleRub, ageYears, powerHp, popularityDecile, calculated, preliminary, imageCount, japanAuction };
 
-  // A preliminary number is a lower bound: it explicitly omits the utilization
-  // fee (and may omit excise/VAT components). It must never be exposed as the
-  // delivered price of a public card. Keep it in maintenance storage so the
-  // enrichment queue can finish it, but publish only complete calculations.
-  if (preliminary) return { eligible: false, tier: 99, reason: "preliminary_price_incomplete", ...base };
-  if (!calculated) return { eligible: false, tier: 99, reason: "missing_full_calculation", ...base };
-  const specificationRejection = catalogRequiredSpecificationRejectionReason(offer);
-  if (specificationRejection) return { eligible: false, tier: 99, reason: specificationRejection, ...base };
   if (japanAuction && !japanAuctionSoldIdentityVerified(offer)) return { eligible: false, tier: 99, reason: "japan_auction_sold_identity_unverified", ...base };
   if (!regionalPhotoIdentityVerified(offer)) return { eligible: false, tier: 99, reason: "unverified_regional_photo_identity", ...base };
+
+  // Inventory and delivered-price readiness are separate contracts. A real,
+  // source-priced listing may stay public while the encyclopedia/CORE finishes
+  // the exact customs inputs. Such a card has visibleRub=0, therefore the UI
+  // shows "Цена по запросу"/preliminary state instead of inventing a delivered
+  // total. Exact calculated cards always rank ahead of pending inventory.
+  if (preliminary || !calculated || specificationRejection) {
+    if (!sourcePriced) return { eligible: false, tier: 99, reason: "missing_source_price", ...base };
+    return {
+      eligible: true,
+      tier: preliminary ? 8 : 9,
+      reason: preliminary ? "calculation_pending_power" : specificationRejection || "calculation_pending",
+      ...base,
+      visibleRub: 0,
+    };
+  }
+
   if (!rawTotalRub) return { eligible: false, tier: 99, reason: "missing_ruble_price", ...base };
   const economicRejection = catalogPublicEconomicRejectionReason(offer);
   if (economicRejection) return { eligible: false, tier: 99, reason: economicRejection, ...base };
