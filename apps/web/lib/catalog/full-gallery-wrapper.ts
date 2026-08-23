@@ -1,3 +1,4 @@
+import { carusedExactListingUrls, carusedSourceImageUrl } from "./carused-gallery";
 import type { CatalogImage, CatalogSourceAdapter, VehicleOffer } from "./types";
 
 const BAD_IMAGE_RE = /logo|icon|avatar|qrcode|placeholder|banner|bnr|promo|promotion|campaign|advert|thumbnail|thumb|tracking|pixel|seller|dealer|recommend|related|similar|favicon|badge|social|share|twitter|facebook|instagram|linkedin|youtube|tiktok|whatsapp|telegram|pinterest|threads|no[-_ ]?photo|no[-_ ]?image|coming[-_ ]?soon|repair|maintenance|wrench|spanner|service[-_ ]?image|camera[-_ ]?off|car[-_ ]?silhouette|dummy/i;
@@ -20,7 +21,7 @@ function absoluteImageUrl(value: unknown, baseUrl = "") {
     const url = new URL(normalized, baseUrl || undefined);
     if (!["http:", "https:"].includes(url.protocol)) return "";
     if (/\/api\/catalog\/images\//i.test(url.pathname)) return "";
-    return url.toString();
+    return carusedSourceImageUrl(url.toString());
   } catch {
     return "";
   }
@@ -56,7 +57,13 @@ function sourceGalleryUrls(offer: VehicleOffer) {
       }
     }
   }
-  return [...new Set(urls)];
+  const unique = [...new Set(urls)];
+  // Carused list markup can include neighbouring inventory. Anchor every list
+  // image to the first exact refno-cars object family, so an adjacent stock ID
+  // can never become photo #2 (or the cover) of this vehicle.
+  return /^https:\/\/carused\.jp\/car-list\/detail\//i.test(sourceUrl)
+    ? carusedExactListingUrls(unique)
+    : unique;
 }
 
 function externalImage(value: unknown, baseUrl = ""): CatalogImage | null {
