@@ -24,7 +24,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Inspect exact Probox internal row
+      - name: Inspect exact Probox internal row and source page
         shell: bash
         run: |
           node --import tsx --input-type=module <<'NODE'
@@ -32,20 +32,29 @@ jobs:
           const rows = await readAllOffersForMaintenance();
           const offer = rows.find((row) => String(row.id) === '0f9e3ab6d54902d209298f88');
           if (!offer) throw new Error('internal_offer_not_found');
-          const raw = offer?.operational?.raw || {};
+          const sourceUrl = String(offer?.operational?.sourceUrl || '');
+          const existing = (offer.images || []).map((x) => String(x?.url || x));
+          const primary = existing[0] || String(offer?.operational?.raw?.images?.[0] || '');
+          const group = new URL(primary.replace(/&amp;/g,'&')).pathname.match(/\/([0-9]+)\/[0-9]+\.(?:jpe?g|png|webp)$/i)?.[1] || '';
+          const response = await fetch(sourceUrl, { headers: { 'user-agent': 'Mozilla/5.0', 'accept-language': 'en-US,en;q=0.9' } });
+          const html = await response.text();
+          const decoded = html.replace(/\\\//g,'/').replace(/&amp;/g,'&');
+          const urls = [...decoded.matchAll(/https?:\/\/d1og64tg0ubvon\.cloudfront\.net\/refno-cars\/[^"'<>\s]+?\.(?:jpe?g|png|webp)(?:\?[^"'<>\s]*)?/gi)].map((m)=>m[0]);
+          const exact = [...new Set(urls.filter((u)=>{try{return new URL(u).pathname.includes(`/${group}/`)}catch{return false}}))];
+          const groups = {};
+          for (const u of urls) { try { const g=new URL(u).pathname.match(/\/([0-9]+)\/[0-9]+\.(?:jpe?g|png|webp)$/i)?.[1]; if(g) groups[g]=(groups[g]||0)+1; } catch {} }
           console.log(JSON.stringify({
             id: offer.id,
             sourceId: offer.sourceId,
             sourceOfferId: offer.sourceOfferId,
-            sourceUrl: offer?.operational?.sourceUrl,
-            imageCount: Array.isArray(offer.images) ? offer.images.length : 0,
-            images: (offer.images || []).map((x) => x?.url || x),
-            rawKeys: Object.keys(raw),
-            rawImages: raw.images || null,
-            rawPhotos: raw.photos || null,
-            rawGallery: raw.gallery || null,
-            rawImageUrls: raw.imageUrls || null,
-            rawPhotoUrls: raw.photoUrls || null,
-            rawParsedImages: raw?.parsed?.images || null,
+            sourceUrl,
+            storedImageCount: existing.length,
+            storedImages: existing,
+            primaryGroup: group,
+            detailHttpStatus: response.status,
+            detailBytes: html.length,
+            exactGroupUniqueImageCount: exact.length,
+            exactFirstFive: exact.slice(0,5),
+            allRefnoGroups: Object.entries(groups).sort((a,b)=>b[1]-a[1]).slice(0,10),
           }, null, 2));
           NODE
