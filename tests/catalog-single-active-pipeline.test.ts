@@ -13,12 +13,25 @@ function hasSchedule(source: string) {
   return /^\s{2}schedule\s*:/m.test(source) || /^\s{4}-\s*cron\s*:/m.test(source);
 }
 
-test("Catalog V3 sequential queue is the only automatically scheduled catalog writer", () => {
-  const scheduled = fs.readdirSync(root)
+function writesCatalogMarkets(source: string) {
+  return /catalog-v3-market-10k-reusable\.yml|catalog-publish-(?:market|source-scale|fresh)\.mjs|catalog-rebuild-source-shard\.mjs/.test(source);
+}
+
+test("Catalog V3 sequential queue is the only automatically scheduled catalog market writer", () => {
+  const scheduledWriters = fs.readdirSync(root)
     .filter((name) => /^catalog.*\.ya?ml$/i.test(name))
-    .filter((name) => hasSchedule(text(name)))
+    .filter((name) => {
+      const source = text(name);
+      return hasSchedule(source) && writesCatalogMarkets(source);
+    })
     .sort();
-  assert.deepEqual(scheduled, ["catalog-v3-sequential-queue.yml"]);
+  assert.deepEqual(scheduledWriters, ["catalog-v3-sequential-queue.yml"]);
+
+  // Object-storage cleanup may remain scheduled because it only removes expired
+  // generations/orphans behind its grace window and never publishes a market.
+  const cleanup = text("catalog-storage-cleanup.yml");
+  assert.equal(hasSchedule(cleanup), true);
+  assert.equal(writesCatalogMarkets(cleanup), false);
 });
 
 test("saved Knowledge CORE source corpus cannot restart its multi-hour crawl on a schedule", () => {
