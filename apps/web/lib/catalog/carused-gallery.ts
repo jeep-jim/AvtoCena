@@ -47,30 +47,69 @@ function imageSequence(value: string) {
   }
 }
 
-/**
- * Extract only the current Carused listing's photo object family. Carused pages
- * can contain recommendation cards from neighbouring stock IDs; those must
- * never be mixed into the vehicle gallery. `primaryUrl` anchors the exact
- * refno-cars directory observed on the listing card.
- */
-export function carusedListingGalleryUrls(markup: string, primaryUrl: unknown, limit = 30) {
-  const group = carusedImageGroup(primaryUrl);
-  if (!group) return [];
-  const candidates: string[] = [];
+function uniqueByObject(values: string[]) {
+  const byPath = new Map<string, string>();
+  for (const value of values) {
+    try {
+      const url = new URL(value);
+      const key = `${url.hostname.toLowerCase()}${url.pathname}`;
+      if (!byPath.has(key)) byPath.set(key, value);
+    } catch {
+      // ignore malformed image values
+    }
+  }
+  return [...byPath.values()];
+}
+
+function groupedDetailImages(markup: string) {
+  const groups = new Map<string, string[]>();
   const decoded = decode(markup);
   for (const match of decoded.matchAll(/https?:\/\/d1og64tg0ubvon\.cloudfront\.net\/refno-cars\/[^"'<>\s]+?\.(?:jpe?g|webp|png)(?:\?[^"'<>\s]*)?/gi)) {
     const url = carusedSourceImageUrl(match[0]);
-    if (url && carusedImageGroup(url) === group) candidates.push(url);
+    const group = carusedImageGroup(url);
+    if (!url || !group) continue;
+    const rows = groups.get(group) || [];
+    rows.push(url);
+    groups.set(group, rows);
   }
-  return [...new Set(candidates)]
-    .sort((left, right) => imageSequence(left) - imageSequence(right))
-    .slice(0, Math.max(1, Math.min(30, limit)));
+  return [...groups.entries()].map(([group, values]) => ({
+    group,
+    urls: uniqueByObject(values).sort((left, right) => imageSequence(left) - imageSequence(right)),
+  }));
 }
 
+/**
+ * Extract only the current Carused listing's real gallery. Search/list markup
+ * can put a neighbouring stock card before the current listing, so the first
+ * thumbnail is NOT an identity anchor. On the exact detail page, the current
+ * vehicle is the one coherent refno-cars family with the deep numbered gallery;
+ * recommendation groups contain only a few images. Prefer the deepest family,
+ * using the list-card group only as a tie-breaker.
+ */
+export function carusedListingGalleryUrls(markup: string, primaryUrl: unknown, limit = 30) {
+  const preferredGroup = carusedImageGroup(primaryUrl);
+  const groups = groupedDetailImages(markup)
+    .filter((row) => row.urls.length >= 2)
+    .sort((left, right) => right.urls.length - left.urls.length
+      || Number(right.group === preferredGroup) - Number(left.group === preferredGroup)
+      || left.group.localeCompare(right.group));
+  const selected = groups[0];
+  if (!selected) return [];
+  return selected.urls.slice(0, Math.max(1, Math.min(30, limit)));
+}
+
+/** List-page evidence is never allowed to mix two stock image families. */
 export function carusedExactListingUrls(values: unknown[]) {
   const normalized = values.map(carusedSourceImageUrl).filter(Boolean);
-  const primary = normalized.find((value) => carusedImageGroup(value));
-  const group = carusedImageGroup(primary);
-  if (!group) return normalized;
-  return normalized.filter((value) => carusedImageGroup(value) === group);
+  const groups = new Map<string, string[]>();
+  for (const value of normalized) {
+    const group = carusedImageGroup(value);
+    if (!group) continue;
+    const rows = groups.get(group) || [];
+    rows.push(value);
+    groups.set(group, rows);
+  }
+  if (!groups.size) return normalized;
+  const selected = [...groups.values()].sort((left, right) => right.length - left.length)[0];
+  return uniqueByObject(selected);
 }
