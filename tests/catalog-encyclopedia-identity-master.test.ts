@@ -58,5 +58,6 @@ test("unresolved live catalog strings cannot create public encyclopedia models",
   const source = await fs.readFile(new URL("../apps/web/lib/catalog/model-directory.ts", import.meta.url), "utf8");
   assert.doesNotMatch(source, /live-catalog-identity/);
   assert.doesNotMatch(source, /const\s+liveOnly\s*=/);
-  assert.match(source, /Unknown live parser strings must never create public\/SEO model entities/);
+  assert.match(source, /readSourceBackedEncyclopediaModels/);
+  assert.match(source, /readEncyclopediaKnowledgeModels/);
 });

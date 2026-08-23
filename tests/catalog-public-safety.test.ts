@@ -11,6 +11,8 @@ function calculatedOffer(totalRub: number, market = "korea") {
   return {
     totalRub,
     market,
+    sourcePrice: 1_500_000,
+    sourceCurrency: "RUB",
     powertrainKind: "combustion",
     engineCc: 1_998,
     powerHp: 150,
