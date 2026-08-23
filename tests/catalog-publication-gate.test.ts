@@ -66,7 +66,7 @@ test("fresh publisher keeps verified current offers but caps every market at the
   assert.match(freshPublisher, /generationId/);
 });
 
-test("production source-scale audit validates exact calculations and mandatory source participation", () => {
+test("production source-scale audit requires mandatory source participation and multi-source continuity", () => {
   assert.match(validator, /galleryRebuiltFrom/);
   assert.match(validator, /fresh_listing/);
   assert.match(validator, /per_market_volume_and_integrity_audit/);
@@ -77,13 +77,15 @@ test("production source-scale audit validates exact calculations and mandatory s
   assert.match(validator, /requiredSourcesAvailable/);
   assert.match(validator, /requiredSourcesAttempted/);
   assert.match(validator, /requiredSourcesHealthy/);
+  assert.match(validator, /requiredSourceContinuity/);
   assert.match(validator, /requiredUnattemptedSourceIds/);
   assert.match(validator, /requiredUnhealthySourceIds/);
   assert.match(validator, /collectorLiveSourceIds/);
   assert.match(validator, /\|\| !row\.requiredSourcesAttempted/);
-  assert.match(validator, /\|\| !row\.requiredSourcesHealthy/);
+  assert.match(validator, /\|\| !row\.requiredSourceContinuity/);
+  assert.match(validator, /\|\| !row\.sourceTargetReached/);
+  assert.doesNotMatch(validator, /\|\| !row\.requiredSourcesHealthy/);
   assert.doesNotMatch(validator, /\|\| !row\.freshThresholdReached/);
-  assert.doesNotMatch(validator, /\|\| !row\.sourceTargetReached/);
   assert.match(validator, /blockingMarkets/);
   assert.match(publisher, /calculateOfferWithRussiaCustoms/);
   assert.match(publisher, /previousManifestPreserved/);
