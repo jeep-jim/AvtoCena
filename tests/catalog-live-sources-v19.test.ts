@@ -120,7 +120,7 @@ test("commercial vehicles are excluded from priority passenger-car sources", () 
   assert.match(priority, /truck\|dump\|tipper\|bus/);
 });
 
-test("Catalog V2 probes every configured source slot, crawls live sites and retains inactive sites", () => {
+test("Catalog V2 probes every configured slot but always crawls mandatory sources", () => {
   assert.match(workflow, /Catalog V2 production/);
   assert.match(workflow, /max-parallel: 20/);
   assert.match(workflow, /market: \[korea, china, japan, uae, europe, georgia, kyrgyzstan\]/);
@@ -131,8 +131,9 @@ test("Catalog V2 probes every configured source slot, crawls live sites and reta
   assert.match(workflow, /CATALOG_REBUILD_SHARD_COUNT: "5"/);
   assert.match(workflow, /shard: \[0, 1, 2, 3, 4\]/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "259200000"/);
-  assert.match(probe, /sourceIdsForRebuild = activeSourceIds\.join/);
-  assert.match(probe, /sourceIdsForRebuild/);
+  assert.match(probe, /requiredSourceIdsForShard/);
+  assert.match(probe, /sourceIdsForRebuildList = \[\.\.\.new Set\(\[\.\.\.requiredSourceIdsForShard, \.\.\.activeSourceIds\]\)\]/);
+  assert.match(probe, /sourceIdsForRebuild = sourceIdsForRebuildList\.join/);
   assert.match(rebuild, /targetPerSource/);
   assert.match(rebuild, /retentionSourceIds/);
   assert.match(rebuild, /liveSourceIds/);

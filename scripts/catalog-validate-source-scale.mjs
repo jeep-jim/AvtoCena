@@ -102,6 +102,7 @@ for (const market of markets) {
   const restoredIds = new Set();
   const validIds = new Set();
   const freshBySource = new Map();
+  const candidatesBySource = new Map();
   const invalid = [];
   const processFailures = [];
   const marketProbes = probePayloads.filter(({ payload }) => payload.market === market);
@@ -110,11 +111,26 @@ for (const market of markets) {
   const activeSourceIds = new Set(marketProbes.flatMap(({ payload }) => payload.activeSourceIds || []));
   const missingRequiredAdapters = new Set(marketProbes.flatMap(({ payload }) => payload.missingRequiredAdapters || []));
   const requiredInactiveSourceIds = [...requiredSourceIds].filter((sourceId) => !requiredActiveSourceIds.has(sourceId));
+  const collectorSourceReports = marketPayloads.flatMap(({ payload }) => Array.isArray(payload?.report?.sources) ? payload.report.sources : []);
+  const collectorLiveSourceIds = new Set(marketPayloads.flatMap(({ payload }) => [
+    ...(Array.isArray(payload?.liveSourceIds) ? payload.liveSourceIds : []),
+    ...(Array.isArray(payload?.report?.liveSourceIds) ? payload.report.liveSourceIds : []),
+  ]));
+  const requiredAttemptedSourceIds = [...requiredSourceIds].filter((sourceId) => collectorLiveSourceIds.has(sourceId));
+  const requiredUnattemptedSourceIds = [...requiredSourceIds].filter((sourceId) => !collectorLiveSourceIds.has(sourceId));
+  const requiredHealthySourceIds = [...requiredSourceIds].filter((sourceId) => collectorSourceReports.some((source) =>
+    source?.sourceId === sourceId
+    && source?.mode === "live"
+    && Number(source?.pages || 0) > 0
+    && String(source?.stopReason || "") !== "source_errors"));
+  const requiredUnhealthySourceIds = [...requiredSourceIds].filter((sourceId) => !requiredHealthySourceIds.includes(sourceId));
 
   for (const { filename, payload } of marketPayloads) {
     if (["rebuild_process_failed", "collection_not_completed"].includes(payload.stopReason)
       || ["rebuild_process_failed", "collection_not_completed"].includes(payload.report?.stopReason)) processFailures.push(filename);
     for (const offer of payload.offers) {
+      const sourceId = String(offer?.sourceId || "unknown");
+      candidatesBySource.set(sourceId, Number(candidatesBySource.get(sourceId) || 0) + 1);
       const errors = validateOffer(offer);
       if (errors.length) {
         if (invalid.length < 100) invalid.push({ id: offer?.id, sourceId: offer?.sourceId, errors });
@@ -124,7 +140,6 @@ for (const market of markets) {
       const origin = String(offer?.operational?.galleryRebuiltFrom || "");
       if (origin === "fresh_listing") {
         freshIds.add(offer.id);
-        const sourceId = String(offer.sourceId || "unknown");
         freshBySource.set(sourceId, Number(freshBySource.get(sourceId) || 0) + 1);
       } else {
         restoredIds.add(offer.id);
@@ -132,8 +147,17 @@ for (const market of markets) {
     }
   }
 
+  const requiredProductiveSourceIds = [...requiredSourceIds].filter((sourceId) => Number(candidatesBySource.get(sourceId) || 0) > 0);
+  const requiredUnproductiveSourceIds = [...requiredSourceIds].filter((sourceId) => !requiredProductiveSourceIds.includes(sourceId));
   const threshold = Math.max(1, Number(minimumFresh[market] || 1));
   const productiveSources = [...freshBySource.values()].filter((count) => count > 0).length;
+  const requiredSourcesAttempted = marketPayloads.length > 0
+    && requiredSourceIds.size > 0
+    && missingRequiredAdapters.size === 0
+    && requiredUnattemptedSourceIds.length === 0;
+  const requiredSourcesHealthy = requiredSourcesAttempted
+    && requiredUnhealthySourceIds.length === 0
+    && requiredUnproductiveSourceIds.length === 0;
   const row = {
     artifacts: marketPayloads.length,
     valid: validIds.size,
@@ -148,6 +172,7 @@ for (const market of markets) {
     minimumProductiveSources,
     sourceTargetReached: productiveSources >= minimumProductiveSources,
     freshBySource: Object.fromEntries([...freshBySource.entries()].sort(([left], [right]) => left.localeCompare(right))),
+    candidatesBySource: Object.fromEntries([...candidatesBySource.entries()].sort(([left], [right]) => left.localeCompare(right))),
     invalidOffers: invalid,
     processFailures,
     sourceProbeArtifacts: marketProbes.length,
@@ -156,21 +181,30 @@ for (const market of markets) {
     requiredActiveSourceIds: [...requiredActiveSourceIds].sort(),
     requiredInactiveSourceIds: requiredInactiveSourceIds.sort(),
     missingRequiredAdapters: [...missingRequiredAdapters].sort(),
-    requiredSourcesAvailable: marketProbes.length > 0
-      && requiredSourceIds.size > 0
-      && requiredActiveSourceIds.size > 0
-      && missingRequiredAdapters.size === 0,
-    requiredSourcesComplete: marketProbes.length > 0
-      && requiredSourceIds.size > 0
-      && requiredInactiveSourceIds.length === 0
-      && missingRequiredAdapters.size === 0,
+    collectorLiveSourceIds: [...collectorLiveSourceIds].sort(),
+    requiredAttemptedSourceIds: requiredAttemptedSourceIds.sort(),
+    requiredUnattemptedSourceIds: requiredUnattemptedSourceIds.sort(),
+    requiredHealthySourceIds: requiredHealthySourceIds.sort(),
+    requiredUnhealthySourceIds: requiredUnhealthySourceIds.sort(),
+    requiredProductiveSourceIds: requiredProductiveSourceIds.sort(),
+    requiredUnproductiveSourceIds: requiredUnproductiveSourceIds.sort(),
+    requiredSourcesAttempted,
+    requiredSourcesHealthy,
+    // Backward-compatible names. Availability now means every canonical source
+    // reached the real collector, and complete means every canonical source both
+    // crawled successfully and contributed at least one retained/fresh candidate.
+    requiredSourcesAvailable: requiredSourcesAttempted,
+    requiredSourcesComplete: requiredSourcesHealthy,
     stopReasons: marketPayloads.map(({ payload }) => payload.stopReason || payload.report?.stopReason || "unknown"),
   };
   byMarket[market] = row;
   if (validIds.size > 0) publishableMarkets.push(market);
   if (!marketPayloads.length) warnings.push(`${market}:missing_artifacts`);
   if (!marketProbes.length) warnings.push(`${market}:missing_probe_artifacts`);
-  if (!row.requiredSourcesComplete) warnings.push(`${market}:required_sources_inactive:${row.requiredInactiveSourceIds.join(",") || "unknown"}`);
+  if (row.requiredUnattemptedSourceIds.length) warnings.push(`${market}:required_sources_unattempted:${row.requiredUnattemptedSourceIds.join(",")}`);
+  if (row.requiredUnhealthySourceIds.length) warnings.push(`${market}:required_sources_unhealthy:${row.requiredUnhealthySourceIds.join(",")}`);
+  if (row.requiredUnproductiveSourceIds.length) warnings.push(`${market}:required_sources_unproductive:${row.requiredUnproductiveSourceIds.join(",")}`);
+  if (!row.requiredSourcesComplete) warnings.push(`${market}:required_sources_incomplete`);
   if (processFailures.length) warnings.push(`${market}:rebuild_process_failed`);
   if (freshIds.size < threshold) warnings.push(`${market}:fresh_${freshIds.size}_below_${threshold}`);
   if (validIds.size < targetPerMarket) warnings.push(`${market}:valid_${validIds.size}_below_${targetPerMarket}`);
@@ -184,19 +218,20 @@ if (minimumFresh.__configError) warnings.push(`minimum_fresh_config:${minimumFre
 const degradedMarkets = markets.filter((market) => !byMarket[market]?.marketTargetReached || !byMarket[market]?.sourceTargetReached);
 const blockingMarkets = markets.filter((market) => {
   const row = byMarket[market];
-  // Freshness and target volume are growth signals, not publication-safety
-  // signals. A market with a non-empty, fully validated retained inventory
-  // must still be publishable while an upstream source is temporarily sparse.
-  // Invalid/incomplete offers have already been excluded from row.valid.
+  // Volume can be below target while a source is temporarily sparse, but a run
+  // must never publish a new generation after silently dropping a canonical
+  // source. All required sites must participate in the real crawl, complete at
+  // least one page without a terminal source error, and contribute candidates.
   return !row
     || row.artifacts === 0
     || row.sourceProbeArtifacts === 0
     || row.processFailures.length > 0
     || row.valid <= 0
-    || !row.requiredSourcesAvailable;
+    || !row.requiredSourcesAttempted
+    || !row.requiredSourcesHealthy;
 });
 const report = {
-  version: 23,
+  version: 25,
   checkedAt: new Date().toISOString(),
   mode: "per_market_volume_and_integrity_audit",
   inputDir,

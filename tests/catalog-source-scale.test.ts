@@ -158,10 +158,12 @@ test("Japan Transit sold-auction statistics participates in the production regis
   assert.match(carsPage, /isJapanAuctionResult/);
 });
 
-test("probe limits network work to active sources while rebuild retains the complete registry", () => {
+test("probe keeps mandatory sources in network work while optional sources still require a live probe", () => {
   assert.match(probeScript, /catalogImportSources\s*\.filter/);
   assert.match(probeScript, /registeredSourceCount/);
-  assert.match(probeScript, /sourceIdsForRebuild = activeSourceIds\.join/);
+  assert.match(probeScript, /requiredSourceIdsForShard/);
+  assert.match(probeScript, /sourceIdsForRebuildList = \[\.\.\.new Set\(\[\.\.\.requiredSourceIdsForShard, \.\.\.activeSourceIds\]\)\]/);
+  assert.match(probeScript, /sourceIdsForRebuild = sourceIdsForRebuildList\.join/);
   assert.match(rebuildScript, /catalogImportSources\s*\.filter/);
   assert.match(rebuildScript, /retentionSourceIds/);
   assert.match(rebuildScript, /liveSourceIds/);

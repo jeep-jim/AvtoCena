@@ -129,6 +129,7 @@ const priorityRank = new Map(priorityOrder.map((sourceId, index) => [sourceId, i
 const planned = plannedAll
   .sort((left, right) => (priorityRank.get(left) ?? 10_000) - (priorityRank.get(right) ?? 10_000) || left.localeCompare(right));
 const sourceIds = planned.filter((sourceId) => catalogSourceAssignedToShard(sourceId, shardIndex, shardCount));
+const requiredSourceIdsForShard = requiredSourceIds.filter((sourceId) => catalogSourceAssignedToShard(sourceId, shardIndex, shardCount));
 const results = await runWithConcurrency(sourceIds, concurrency, (sourceId) => probe(sourceId, adapters));
 const activeSourceIds = results.filter((row) => row.active).map((row) => row.sourceId);
 const inactiveSourceIds = results.filter((row) => !row.active).map((row) => row.sourceId);
@@ -137,11 +138,16 @@ const requiredResults = results.filter((row) => requiredSourceIds.includes(row.s
 const requiredActiveSourceIds = requiredResults.filter((row) => row.active).map((row) => row.sourceId);
 const requiredInactiveSourceIds = requiredResults.filter((row) => !row.active).map((row) => row.sourceId);
 
-// Only sources that returned usable cards are handed to the network collector.
-// Every mandatory source is nevertheless probed on every normal market run.
-const sourceIdsForRebuild = activeSourceIds.join(",") || "__no_active_sources__";
+// Probe is only an accelerator for optional sources. A short probe may time out,
+// see an empty first page, or hit a transient block; it must never remove one of
+// AvtoCena's canonical required sites from the real collector. Every mandatory
+// source assigned to this shard is therefore handed to the collector regardless
+// of probe result, while optional sources still need a successful probe.
+const sourceIdsForRebuildList = [...new Set([...requiredSourceIdsForShard, ...activeSourceIds])]
+  .filter((sourceId) => adapters.has(sourceId));
+const sourceIdsForRebuild = sourceIdsForRebuildList.join(",") || "__no_active_sources__";
 const payload = {
-  version: 30,
+  version: 31,
   market,
   shardIndex,
   shardCount,
@@ -152,6 +158,7 @@ const payload = {
   allowRequiredSubset,
   registeredSourceCount: registered.length,
   requiredSourceIds,
+  requiredSourceIdsForShard,
   missingRequiredAdapters,
   requiredActiveSourceIds,
   requiredInactiveSourceIds,
@@ -160,6 +167,7 @@ const payload = {
   activeSourceIds,
   inactiveSourceIds,
   sourceIdsForRebuild,
+  sourceIdsForRebuildList,
   results,
 };
 

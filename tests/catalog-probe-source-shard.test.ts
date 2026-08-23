@@ -18,10 +18,13 @@ const knowledgeBlock = workflow.slice(workflow.indexOf("\n  knowledge:"), workfl
 const collectBlock = workflow.slice(workflow.indexOf("\n  collect:"), workflow.indexOf("\n  publish:"));
 const publishBlock = workflow.slice(workflow.indexOf("\n  publish:"), workflow.indexOf("\n  health:"));
 
-test("probe activates productive adapters and prevents two-hour no-progress crawls", () => {
+test("probe accelerates optional sources but can never drop a mandatory source from the real crawl", () => {
   assert.match(probe, /catalogImportSources\s*\.filter/);
   assert.match(probe, /activeSourceIds/);
   assert.match(probe, /inactiveSourceIds/);
+  assert.match(probe, /requiredSourceIdsForShard/);
+  assert.match(probe, /sourceIdsForRebuildList = \[\.\.\.new Set\(\[\.\.\.requiredSourceIdsForShard, \.\.\.activeSourceIds\]\)\]/);
+  assert.match(probe, /sourceIdsForRebuild = sourceIdsForRebuildList\.join/);
   assert.match(probe, /GITHUB_ENV/);
   assert.match(probe, /CATALOG_REBUILD_SOURCE_IDS=\$\{sourceIdsForRebuild\}/);
   assert.match(probe, /CATALOG_V2_SOURCE_SLOTS_ONLY=0/);
@@ -30,6 +33,35 @@ test("probe activates productive adapters and prevents two-hour no-progress craw
   assert.match(probe, /CATALOG_REBUILD_MAX_SOURCE_ERRORS=3/);
   assert.match(collectBlock, /Diagnose source routes and select productive adapters/);
   assert.match(collectBlock, /Collect productive registered sources with checkpoints/);
+});
+
+test("canonical mandatory market source contract cannot silently drift", () => {
+  const required = [
+    ["dubizzle_uae_open", "https://uae.dubizzle.com/"],
+    ["dubicars_uae_exact", "https://www.dubicars.com/"],
+    ["encar_direct", "https://www.encar.com/"],
+    ["kcar_korea_open", "https://www.kcar.com/"],
+    ["mobile_de_open", "https://www.mobile.de/"],
+    ["autoscout_europe_open", "https://www.autoscout24.com/"],
+    ["myauto_georgia_list", "https://www.myauto.ge/"],
+    ["autopapa_georgia_open", "https://autopapa.ge/"],
+    ["autohome_used_china_open", "https://www.che168.com/"],
+    ["dongchedi_china_open", "https://www.dongchedi.com/"],
+    ["guazi_china_open", "https://www.guazi.com/"],
+    ["autohome_new_china_open", "https://www.autohome.com.cn/"],
+    ["jpauc_japan_past_open", "https://jpauc.com/auction/past"],
+    ["carvector_japan_stat_open", "https://carvector.com/stat"],
+    ["prestige_japan_auctions_open", "https://prestigemotorsport.com.au/auctions/"],
+    ["auctiondatasearch_japan_open", "https://www.auctiondatasearch.jp/"],
+    ["jpcenter_japan_catalog_open", "https://jp.center/"],
+    ["mashina_kyrgyzstan_exact", "https://www.mashina.kg/"],
+  ];
+  for (const [sourceId, canonicalUrl] of required) {
+    assert.match(requiredSources, new RegExp(sourceId));
+    assert.match(requiredSources, new RegExp(canonicalUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
+  }
+  assert.match(sourceRegistry, /catalog_required_sources_contract_broken/);
+  assert.match(sourceRegistry, /excluded_from_collection/);
 });
 
 test("Japan rollout combines mandatory and optional completed auction histories", () => {
@@ -91,13 +123,17 @@ test("Catalog V2 retains verified offers, continues cursors and can use all prod
   assert.doesNotMatch(rebuild, /businessPriority/);
 });
 
-test("volume shortages remain explicit diagnostics", () => {
+test("volume shortages remain explicit diagnostics but missing mandatory sources block publication", () => {
   assert.match(validator, /per_market_volume_and_integrity_audit/);
   assert.match(validator, /targetPerMarket/);
   assert.match(validator, /warnings/);
   assert.match(validator, /publishableMarkets/);
   assert.match(validator, /blockingMarkets/);
+  assert.match(validator, /requiredSourcesAttempted/);
+  assert.match(validator, /requiredSourcesHealthy/);
   assert.match(validator, /requiredSourcesComplete/);
+  assert.match(validator, /required_sources_unattempted/);
+  assert.match(validator, /required_sources_unhealthy/);
   assert.match(validator, /if \(!report\.ok\) process\.exitCode = 1/);
 });
 
