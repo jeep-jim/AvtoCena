@@ -16,19 +16,22 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Probe AJES image renditions
+      - name: Probe Japan image renditions
         shell: bash
         run: |
           node --input-type=module <<'NODE'
           import sharp from 'sharp';
-          const base='https://8.ajes.com/imgs/4LjrJwYXyeYH0oPqGRSPyQEkSAuPv7Ee4yu1NFVnkdX82YGEKroADWRDGJ43isnAz9e';
-          for (const suffix of ['', '&w=320', '&w=640', '&w=1024', '&w=1600']) {
-            const url=base+suffix;
+          const urls = [
+            'https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585471/001.jpg?w=133&ts=1781661830',
+            'https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585471/001.jpg?ts=1781661830',
+            'https://d1og64tg0ubvon.cloudfront.net/refno-cars/2026/0611/5585471/001.jpg',
+          ];
+          for (const url of urls) {
             try {
-              const r=await fetch(url,{headers:{'user-agent':'Mozilla/5.0','referer':'https://prestigemotorsport.com.au/auctions/'},redirect:'follow',signal:AbortSignal.timeout(20000)});
+              const r=await fetch(url,{headers:{'user-agent':'Mozilla/5.0'},redirect:'follow',signal:AbortSignal.timeout(20000)});
               const b=Buffer.from(await r.arrayBuffer());
               const meta=await sharp(b).metadata();
-              console.log(JSON.stringify({suffix,status:r.status,bytes:b.length,width:meta.width,height:meta.height,format:meta.format}));
-            } catch(e) { console.log(JSON.stringify({suffix,error:String(e.message||e)})); }
+              console.log(JSON.stringify({url,status:r.status,bytes:b.length,width:meta.width,height:meta.height,format:meta.format}));
+            } catch(e) { console.log(JSON.stringify({url,error:String(e.message||e)})); }
           }
           NODE
