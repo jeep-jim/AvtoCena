@@ -27,8 +27,8 @@ jobs:
             try {
               const r=await fetch(url,{headers:{'user-agent':'Mozilla/5.0','referer':'https://prestigemotorsport.com.au/auctions/'},redirect:'follow',signal:AbortSignal.timeout(20000)});
               const b=Buffer.from(await r.arrayBuffer());
-              let meta={}; try { meta=await sharp(b).metadata(); } catch(e) { meta={decodeError:String(e.message||e)}; }
-              console.log(JSON.stringify({url,status:r.status,type:r.headers.get('content-type'),contentLength:r.headers.get('content-length'),bytes:b.length,width:meta.width,height:meta.height,format:meta.format}));
-            } catch(e) { console.log(JSON.stringify({url,error:String(e.message||e)})); }
+              const meta=await sharp(b).metadata();
+              console.log(JSON.stringify({suffix,status:r.status,bytes:b.length,width:meta.width,height:meta.height,format:meta.format}));
+            } catch(e) { console.log(JSON.stringify({suffix,error:String(e.message||e)})); }
           }
           NODE
