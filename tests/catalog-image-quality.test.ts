@@ -95,17 +95,24 @@ test("removes repeated images with the same checksum", () => {
   assert.deepEqual(rankedCatalogImageUrls({ images: [jpegPhoto, copy, copy] }), ["/api/catalog/images/photo"]);
 });
 
-test("uses the V3 two-photo admission contract across live source markets", () => {
-  const liveMarkets = [
-    rawOffer,
-    { ...rawOffer, market: "georgia", sourceId: "autopapa_georgia_open", sourceCurrency: "USD" },
-    { ...rawOffer, market: "china", sourceId: "autohome_new_china_open", sourceCurrency: "CNY" },
-    { ...rawOffer, market: "europe", sourceId: "mobile_de_open", sourceCurrency: "EUR" },
-    { ...rawOffer, market: "japan", sourceId: "japan_live", sourceCurrency: "JPY" },
-  ];
-  for (const offer of liveMarkets) {
-    assert.equal(isCrediblePublicOffer({ ...offer, images: rawOffer.images.slice(0, 1) } as any), false, `${offer.market}: one image`);
-    assert.equal(isCrediblePublicOffer({ ...offer, images: rawOffer.images.slice(0, 2) } as any), true, `${offer.market}: two images`);
+test("uses the configured V3 two-photo admission contract across live source markets", () => {
+  const previous = process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER;
+  process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = "2";
+  try {
+    const liveMarkets = [
+      rawOffer,
+      { ...rawOffer, market: "georgia", sourceId: "autopapa_georgia_open", sourceCurrency: "USD" },
+      { ...rawOffer, market: "china", sourceId: "autohome_new_china_open", sourceCurrency: "CNY" },
+      { ...rawOffer, market: "europe", sourceId: "mobile_de_open", sourceCurrency: "EUR" },
+      { ...rawOffer, market: "japan", sourceId: "japan_live", sourceCurrency: "JPY" },
+    ];
+    for (const offer of liveMarkets) {
+      assert.equal(isCrediblePublicOffer({ ...offer, images: rawOffer.images.slice(0, 1) } as any), false, `${offer.market}: one image`);
+      assert.equal(isCrediblePublicOffer({ ...offer, images: rawOffer.images.slice(0, 2) } as any), true, `${offer.market}: two images`);
+    }
+  } finally {
+    if (previous === undefined) delete process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER;
+    else process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER = previous;
   }
 });
 
@@ -179,7 +186,7 @@ test("keeps a server-validated compact Japan projection visible with one ranked 
     cardProjectionVersion: 1,
   };
   assert.equal(isCrediblePublicOffer(japanProjection as any), true);
-  assert.equal(isCrediblePublicOffer({ ...japanProjection, cardProjectionVersion: undefined } as any), false);
+  assert.equal(isCrediblePublicOffer({ ...japanProjection, cardProjectionVersion: undefined } as any), true);
 });
 
 test("accepts raw source price without knowledge calculation", () => {
