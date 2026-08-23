@@ -9,8 +9,18 @@ const markets = String(process.env.CATALOG_REBUILD_MARKETS || "korea,china,japan
   .map((value) => value.trim())
   .filter(Boolean);
 const outputFile = process.env.CATALOG_REBUILD_VALIDATION_REPORT || "catalog-source-scale-validation-report.json";
-const minimumProductiveSources = Math.max(1, Number(process.env.CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES || 1));
+const configuredMinimumProductiveSources = Number(process.env.CATALOG_PUBLISH_MIN_PRODUCTIVE_SOURCES || 0);
 const targetPerMarket = Math.max(1_000, Number(process.env.CATALOG_PUBLISH_TARGET_PER_MARKET || 1_000));
+
+const defaultMinimumProductiveSources = {
+  korea: 2,
+  china: 2,
+  japan: 2,
+  uae: 2,
+  europe: 2,
+  georgia: 2,
+  kyrgyzstan: 1,
+};
 
 const defaultMinimumFresh = {
   korea: 50,
@@ -150,7 +160,8 @@ for (const market of markets) {
   const requiredProductiveSourceIds = [...requiredSourceIds].filter((sourceId) => Number(candidatesBySource.get(sourceId) || 0) > 0);
   const requiredUnproductiveSourceIds = [...requiredSourceIds].filter((sourceId) => !requiredProductiveSourceIds.includes(sourceId));
   const threshold = Math.max(1, Number(minimumFresh[market] || 1));
-  const productiveSources = [...freshBySource.values()].filter((count) => count > 0).length;
+  const minimumProductiveSources = Math.max(1, configuredMinimumProductiveSources || Number(defaultMinimumProductiveSources[market] || 2));
+  const productiveSources = [...candidatesBySource.values()].filter((count) => count > 0).length;
   const requiredSourcesAttempted = marketPayloads.length > 0
     && requiredSourceIds.size > 0
     && missingRequiredAdapters.size === 0
@@ -158,6 +169,7 @@ for (const market of markets) {
   const requiredSourcesHealthy = requiredSourcesAttempted
     && requiredUnhealthySourceIds.length === 0
     && requiredUnproductiveSourceIds.length === 0;
+  const requiredSourceContinuity = requiredSourcesAttempted && requiredProductiveSourceIds.length > 0;
   const row = {
     artifacts: marketPayloads.length,
     valid: validIds.size,
@@ -190,9 +202,11 @@ for (const market of markets) {
     requiredUnproductiveSourceIds: requiredUnproductiveSourceIds.sort(),
     requiredSourcesAttempted,
     requiredSourcesHealthy,
-    // Backward-compatible names. Availability now means every canonical source
-    // reached the real collector, and complete means every canonical source both
-    // crawled successfully and contributed at least one retained/fresh candidate.
+    requiredSourceContinuity,
+    // Availability is the hard contract: every configured canonical source must
+    // reach the real collector. Complete/healthy is diagnostic because external
+    // sites may temporarily return 403/429 or require login. Such an outage must
+    // be visible, but must not erase an otherwise healthy multi-source market.
     requiredSourcesAvailable: requiredSourcesAttempted,
     requiredSourcesComplete: requiredSourcesHealthy,
     stopReasons: marketPayloads.map(({ payload }) => payload.stopReason || payload.report?.stopReason || "unknown"),
@@ -204,43 +218,48 @@ for (const market of markets) {
   if (row.requiredUnattemptedSourceIds.length) warnings.push(`${market}:required_sources_unattempted:${row.requiredUnattemptedSourceIds.join(",")}`);
   if (row.requiredUnhealthySourceIds.length) warnings.push(`${market}:required_sources_unhealthy:${row.requiredUnhealthySourceIds.join(",")}`);
   if (row.requiredUnproductiveSourceIds.length) warnings.push(`${market}:required_sources_unproductive:${row.requiredUnproductiveSourceIds.join(",")}`);
-  if (!row.requiredSourcesComplete) warnings.push(`${market}:required_sources_incomplete`);
+  if (!row.requiredSourcesComplete) warnings.push(`${market}:required_sources_degraded`);
   if (processFailures.length) warnings.push(`${market}:rebuild_process_failed`);
   if (freshIds.size < threshold) warnings.push(`${market}:fresh_${freshIds.size}_below_${threshold}`);
   if (validIds.size < targetPerMarket) warnings.push(`${market}:valid_${validIds.size}_below_${targetPerMarket}`);
   if (productiveSources < minimumProductiveSources) warnings.push(`${market}:productive_sources_${productiveSources}_below_${minimumProductiveSources}`);
+  if (!requiredSourceContinuity) warnings.push(`${market}:no_productive_required_source`);
   if (invalid.length) warnings.push(`${market}:invalid_offers_${invalid.length}`);
 }
 
 if (fileErrors.length) warnings.push(`generation_file_errors_${fileErrors.length}`);
 if (minimumFresh.__configError) warnings.push(`minimum_fresh_config:${minimumFresh.__configError}`);
 
-const degradedMarkets = markets.filter((market) => !byMarket[market]?.marketTargetReached || !byMarket[market]?.sourceTargetReached);
+const degradedMarkets = markets.filter((market) => !byMarket[market]?.marketTargetReached || !byMarket[market]?.sourceTargetReached || !byMarket[market]?.requiredSourcesComplete);
 const blockingMarkets = markets.filter((market) => {
   const row = byMarket[market];
-  // Volume can be below target while a source is temporarily sparse, but a run
-  // must never publish a new generation after silently dropping a canonical
-  // source. All required sites must participate in the real crawl, complete at
-  // least one page without a terminal source error, and contribute candidates.
+  // Required sources are never allowed to disappear silently: every canonical
+  // adapter must be registered and attempted. A temporary external 403/429 or
+  // zero-fresh result is degraded telemetry, not a reason to throw away a
+  // multi-source run that still contains valid verified inventory. We still
+  // require multiple productive independent sources (one for Kyrgyzstan) and at
+  // least one productive canonical source before a new generation may publish.
   return !row
     || row.artifacts === 0
     || row.sourceProbeArtifacts === 0
     || row.processFailures.length > 0
     || row.valid <= 0
     || !row.requiredSourcesAttempted
-    || !row.requiredSourcesHealthy;
+    || !row.requiredSourceContinuity
+    || !row.sourceTargetReached;
 });
 const report = {
-  version: 25,
+  version: 26,
   checkedAt: new Date().toISOString(),
-  mode: "per_market_volume_and_integrity_audit",
+  mode: "per_market_volume_integrity_and_source_continuity_audit",
   inputDir,
   files: filenames,
   probeFiles: probeFilenames,
   fileErrors,
   targetPerMarket,
   minimumFresh,
-  minimumProductiveSources,
+  minimumProductiveSourcesByMarket: defaultMinimumProductiveSources,
+  configuredMinimumProductiveSources,
   byMarket,
   publishableMarkets,
   degradedMarkets,
