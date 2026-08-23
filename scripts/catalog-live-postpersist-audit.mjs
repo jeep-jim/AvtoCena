@@ -10,6 +10,8 @@ const output = String(process.env.CATALOG_AUDIT_OUTPUT || "catalog-live-postpers
 const assertMarkets = new Set(String(process.env.CATALOG_AUDIT_ASSERT_MARKETS || "").split(",").map((v) => v.trim()).filter(Boolean));
 const maxOffersPerModelYear = Math.max(1, Number(process.env.CATALOG_AUDIT_MAX_PER_MODEL_YEAR || CATALOG_MAX_OFFERS_PER_MODEL_YEAR));
 const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_AUDIT_MIN_IMAGES_PER_OFFER || 5));
+// Legacy compatibility marker only. The old Korea-only five-image admission gate is retired:
+// market === "korea" no longer fails on belowFiveImagesCount; korea:below_five_images is diagnostic history only.
 let minimums = {};
 try { minimums = JSON.parse(process.env.CATALOG_AUDIT_MIN_COUNTS_JSON || "{}"); } catch { minimums = {}; }
 const currentYear = new Date().getFullYear();
