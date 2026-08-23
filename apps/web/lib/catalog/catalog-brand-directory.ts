@@ -8,8 +8,6 @@ import {
 import { readEncyclopediaIdentityDataset } from "./encyclopedia-identity-data";
 import { EncyclopediaIdentitySlugResolver } from "./encyclopedia-identity-slugs";
 import { readSourceBackedEncyclopediaModels } from "./knowledge-source-master";
-import { translateCatalogText } from "./presentation";
-import { readCatalogFacets } from "./storage";
 
 function clean(value: unknown) {
   return String(value || "").replace(/\s+/g, " ").trim();
@@ -28,16 +26,15 @@ function toBrand(name: string, slug = catalogBrandSlug(name), aliases: string[] 
 /**
  * One public brand directory for the complete saved knowledge corpus.
  *
- * V2 remains the canonical authority where it has a match, but source-master
- * brands are not hidden just because they have no live offer today or have not
- * yet been linked to V2. Live facets may add observed aliases; they never prune
- * the encyclopedia.
+ * V2 remains canonical authority where it has a match. Source-master brands
+ * remain visible while they wait for a V2 link. Raw live parser strings are
+ * deliberately NOT allowed to create encyclopedia brands: that was the source
+ * of entries such as "212" and other catalog garbage.
  */
 export async function readCatalogBrandDirectory() {
-  const [dataset, sourceModels, facets] = await Promise.all([
+  const [dataset, sourceModels] = await Promise.all([
     readEncyclopediaIdentityDataset(),
     readSourceBackedEncyclopediaModels(),
-    readCatalogFacets().catch(() => ({ makes: [] as string[] } as any)),
   ]);
   const brands = new Map<string, CatalogBrand>();
   const add = (brand: CatalogBrand) => {
@@ -72,10 +69,6 @@ export async function readCatalogBrandDirectory() {
     if (!publicName) continue;
     add(toBrand(publicName, catalogBrandSlug(publicName), [model.make]));
   }
-  for (const rawMake of facets.makes || []) {
-    const publicName = canonicalCatalogBrand(translateCatalogText(rawMake) || clean(rawMake));
-    if (publicName) add(toBrand(publicName));
-  }
 
   return [...brands.values()].sort((left, right) => left.name.localeCompare(right.name, "ru"));
 }
@@ -101,8 +94,7 @@ export async function resolveCatalogBrandBySlug(rawSlug: string): Promise<Catalo
 export function catalogBrandMatches(brand: CatalogBrand, rawMake: unknown) {
   const raw = clean(rawMake);
   if (!raw) return false;
-  const translated = clean(translateCatalogText(raw));
-  const sourceSlugs = new Set([raw, translated, canonicalCatalogBrand(raw), canonicalCatalogBrand(translated)]
+  const sourceSlugs = new Set([raw, canonicalCatalogBrand(raw)]
     .filter(Boolean)
     .map((candidate) => catalogBrandSlug(canonicalCatalogBrand(candidate))));
   const brandSlugs = new Set([brand.name, brand.slug, ...(brand.aliases || [])]
