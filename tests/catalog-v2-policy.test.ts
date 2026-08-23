@@ -73,7 +73,7 @@ test("Catalog V2 source registry keeps every configured adapter valid", () => {
   assert.deepEqual(failures, []);
 });
 
-test("default production policy is 30k with an 80 percent <=160 hp contract", () => {
+test("default production policy is 30k with an 80 percent <=160 hp priority target", () => {
   assert.equal(CATALOG_V2_DEFAULT_POLICY.maximumPerMarket, 30_000);
   assert.equal(CATALOG_V2_DEFAULT_POLICY.priorityTarget, 24_000);
   assert.equal(CATALOG_V2_DEFAULT_POLICY.lowPowerMinShare, 0.8);
@@ -81,7 +81,7 @@ test("default production policy is 30k with an 80 percent <=160 hp contract", ()
   assert.equal(CATALOG_V2_DEFAULT_POLICY.priorityMaxTotalRub, 6_000_000);
 });
 
-test("commercial priority is <=160 hp and <=6m while low-power mix is price-independent", () => {
+test("commercial priority is <=160 hp and <=6m while low-power ranking is price-independent", () => {
   assert.equal(classifyCatalogV2Offer(offer("priority")).tier, "priority");
   assert.equal(classifyCatalogV2Offer(offer("power", { powerHp: 161 })).tier, "recent");
   assert.equal(classifyCatalogV2Offer(offer("price", { totalRub: 6_000_001 })).tier, "recent");
@@ -97,7 +97,7 @@ test("year gates keep Japan at 2010+ and other markets at 2020+", () => {
   assert.equal(classifyCatalogV2Offer(japan2010).eligible, true);
 });
 
-test("selection never lets >160 hp exceed 20 percent when enough low-power cars exist", () => {
+test("low-power cars sort first but high-power cars still fill remaining capacity", () => {
   const rows = [
     ...Array.from({ length: 8 }, (_, index) => offer(`low-${index}`, { powerHp: 150 })),
     ...Array.from({ length: 20 }, (_, index) => offer(`high-${index}`, { powerHp: 220 })),
@@ -106,20 +106,21 @@ test("selection never lets >160 hp exceed 20 percent when enough low-power cars 
   assert.equal(result.selected.length, 10);
   assert.equal(result.lowPowerCount, 8);
   assert.equal(result.selected.filter((row) => Number(row.powerHp || 0) > 160).length, 2);
-  assert.equal(result.lowPowerCount / result.selected.length, 0.8);
-  assert.ok(result.rejected.fallback_locked >= 18);
+  assert.equal(result.selected.slice(0, 8).every((row) => Number(row.powerHp || 0) <= 160), true);
+  assert.equal(result.rejected.fallback_locked, undefined);
 });
 
-test("selection shrinks instead of flooding a market with high-power fallback", () => {
+test("selection fills a market instead of shrinking it when low-power stock is scarce", () => {
   const rows = [
     ...Array.from({ length: 4 }, (_, index) => offer(`low-${index}`, { powerHp: 150 })),
     ...Array.from({ length: 20 }, (_, index) => offer(`high-${index}`, { powerHp: 220 })),
   ];
   const result = selectCatalogV2MarketOffers(rows, policy({ maximumPerMarket: 10, priorityTarget: 8 }));
-  assert.equal(result.selected.length, 5);
+  assert.equal(result.selected.length, 10);
   assert.equal(result.lowPowerCount, 4);
-  assert.equal(result.selected.filter((row) => Number(row.powerHp || 0) > 160).length, 1);
-  assert.equal(result.lowPowerCount / result.selected.length, 0.8);
+  assert.equal(result.selected.filter((row) => Number(row.powerHp || 0) > 160).length, 6);
+  assert.equal(result.selected.slice(0, 4).every((row) => Number(row.powerHp || 0) <= 160), true);
+  assert.equal(result.fallbackUnlocked, true);
 });
 
 test("affordable recent low-power cars sort ahead of old expensive high-power cars", () => {
@@ -183,6 +184,7 @@ test("completed Japanese <=160 hp <=6m lot enters the priority layer", () => {
     offerType: "auction",
     catalogKind: "auction_result",
     auctionResult: "sold",
+    status: "sold",
   });
   const classification = classifyCatalogV2Offer(auction);
   assert.equal(classification.eligible, true);
@@ -190,7 +192,7 @@ test("completed Japanese <=160 hp <=6m lot enters the priority layer", () => {
   assert.equal(classification.reason, "japan_completed_priority");
 });
 
-test("incomplete calculation remains in collection classification but cannot masquerade as low-power priority", () => {
+test("incomplete calculation remains eligible inventory but cannot masquerade as low-power priority", () => {
   const pending = offer("pending", {
     totalRub: null,
     powerHp: undefined,
@@ -201,6 +203,6 @@ test("incomplete calculation remains in collection classification but cannot mas
   assert.equal(classification.eligible, true);
   assert.equal(classification.tier, "recent");
   const selected = selectCatalogV2MarketOffers([pending]);
-  assert.equal(selected.selected.length, 0);
+  assert.equal(selected.selected.length, 1);
   assert.equal(selected.lowPowerCount, 0);
 });
