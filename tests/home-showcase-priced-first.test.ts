@@ -1,3 +1,19 @@
+import assert from "node:assert/strict";
+import fs from "node:fs";
 import test from "node:test";
 
-test("homepage priced showcase patch is applied by PR workflow", () => {});
+const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
+const card = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
+
+test("homepage prefers safe delivered-price projections before pending inventory", () => {
+  assert.match(storage, /function selectHomepageShowcase\(rows: CatalogSearchProjection\[\], limit: number\)/);
+  assert.match(storage, /const priced = rows\.filter\(\(row\) => Number\(row\.totalRub \|\| 0\) > 0\)/);
+  assert.match(storage, /const pending = rows\.filter\(\(row\) => Number\(row\.totalRub \|\| 0\) <= 0/);
+  assert.match(storage, /return selectHomepageShowcase\(rows, limit\)\.map\(publicOfferFromProjection\)/);
+  assert.match(storage, /const diverse = selectHomepageShowcase\(candidates, limit\)/);
+});
+
+test("pending inventory still fails closed instead of inventing a customer price", () => {
+  assert.match(card, /const visibleRub = catalogOfferVisibleRub\(offer\)/);
+  assert.match(card, /visibleRub > 0 \? formatRub\(visibleRub\) : "Цена по запросу"/);
+});

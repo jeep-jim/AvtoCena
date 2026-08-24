@@ -1347,6 +1347,19 @@ export async function searchOffers(params: CatalogSearchParams) {
   return { generationId: manifest.generationId, total, page, pageSize, items: items.map(publicOffer), usedIndexShards: used.length ? used : [`catalog/generations/${manifest.generationId}/indexes/order-updatedAt.json`] };
 }
 
+function selectHomepageShowcase(rows: CatalogSearchProjection[], limit: number) {
+  // The homepage is a sales showcase, not a diagnostics queue. Prefer rows whose
+  // compact public projection already contains a validated delivered RUB total.
+  // Unpriced/pending inventory remains available in the catalog and may fill a
+  // showcase only when a market genuinely has fewer than `limit` priced rows.
+  const priced = rows.filter((row) => Number(row.totalRub || 0) > 0);
+  const pricedSelection = selectCatalogShowcaseDiversity(priced, limit);
+  if (pricedSelection.length >= limit) return pricedSelection;
+  const selectedIds = new Set(pricedSelection.map((row) => row.id));
+  const pending = rows.filter((row) => Number(row.totalRub || 0) <= 0 && !selectedIds.has(row.id));
+  return [...pricedSelection, ...selectCatalogShowcaseDiversity(pending, limit - pricedSelection.length)].slice(0, limit);
+}
+
 export async function readHomeCatalogSnapshot(perMarket = 6) {
   const manifest = await readManifest();
   const limit = Math.min(12, Math.max(1, Number(perMarket || 6)));
@@ -1367,7 +1380,7 @@ export async function readHomeCatalogSnapshot(perMarket = 6) {
         const rows = projectionRows.filter((row) => row.market === market && projectionCanRenderCard(row));
         marketCounts[market] = Number(manifest.markets?.[market]?.count || rows.length);
         catalogSearchProjectionSort(rows, "updatedAt");
-        return selectCatalogShowcaseDiversity(rows, limit).map(publicOfferFromProjection);
+        return selectHomepageShowcase(rows, limit).map(publicOfferFromProjection);
       });
       return {
         generationId: manifest.generationId,
@@ -1406,7 +1419,7 @@ export async function readHomeCatalogSnapshot(perMarket = 6) {
     const candidates = projection
       .filter((row) => allowed.has(row.id) && byId.byId[row.id] && projectionCanRenderCard(row))
       .sort((a, b) => Number(orderRank.get(a.id) ?? Number.MAX_SAFE_INTEGER) - Number(orderRank.get(b.id) ?? Number.MAX_SAFE_INTEGER));
-    const diverse = selectCatalogShowcaseDiversity(candidates, limit);
+    const diverse = selectHomepageShowcase(candidates, limit);
     selectedIds.push(...diverse.map((row) => row.id));
     if (diverse.length >= limit) continue;
     const alreadySelected = new Set(diverse.map((row) => row.id));
