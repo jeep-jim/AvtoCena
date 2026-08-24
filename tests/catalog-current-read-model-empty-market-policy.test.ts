@@ -38,6 +38,15 @@ test("homepage fast read-model path cannot turn an existing manifest market into
   assert.match(storageSource, /if \(projectionComplete\)/);
 });
 
+test("current read-model republisher preserves every immutable public row", () => {
+  const start = storageSource.indexOf("export async function publishCurrentCatalogReadModels");
+  const end = storageSource.indexOf("\nexport async function getOffer", start);
+  assert.ok(start >= 0 && end > start);
+  const implementation = storageSource.slice(start, end);
+  assert.doesNotMatch(implementation, /\.filter\(isPublicOffer\)/);
+  assert.match(implementation, /catalog_current_readmodel_manifest_count_mismatch/);
+  assert.match(implementation, /writeCurrentCatalogReadModels\(manifest\.generationId, storedOffers, true\)/);
+});
 
 const homeRouteSource = fs.readFileSync(new URL("../apps/web/app/api/catalog/home/route.ts", import.meta.url), "utf8");
 const offerPageSource = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");
