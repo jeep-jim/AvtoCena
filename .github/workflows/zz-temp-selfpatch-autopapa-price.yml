@@ -1,0 +1,123 @@
+name: TEMP patch AutoPapa exact price
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/zz-temp-selfpatch-autopapa-price.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.event.pull_request.head.ref == 'fix/autopapa-exact-detail-price-20260824'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Apply exact AutoPapa price patch
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          autopapa = Path('apps/web/lib/catalog/autopapa-georgia-source.ts')
+          text = autopapa.read_text()
+          anchor = '''export function autoPapaDetailPowerHp(markup: string) {\n  const text = plain(markup);\n  const start = text.search(/\\bBody\\s+Type\\s*:/i);\n  if (start < 0) return undefined;\n  const carDescription = text.indexOf("Car description", start);\n  const facts = text.slice(start, carDescription > start ? carDescription : Math.min(text.length, start + 1_800));\n  const match = facts.match(/\\bPower\\s*:\\s*([0-9]{1,4}(?:[.,][0-9]+)?)\\s*(?:hp|horsepower)\\b/i);\n  if (!match) return undefined;\n  const value = Number(match[1].replace(",", "."));\n  return Number.isFinite(value) && value >= 20 && value <= 2_500 ? value : undefined;\n}\n'''
+          addition = anchor + '''\n/**\n * AutoPapa detail pages can contain several dollar amounts: the live asking\n * price beside the primary H1, Georgian customs helper estimates, recommendation\n * cards and even stale seller-entered text such as `Cena: ...`. Only the amount\n * in the primary header before the first `STARTING PRICE ...` helper block is\n * authoritative for the source vehicle price.\n */\nexport function autoPapaDetailPriceUsd(markup: string) {\n  const h1Index = markup.search(/<h1\\b/i);\n  if (h1Index < 0) return undefined;\n  const tail = markup.slice(h1Index, Math.min(markup.length, h1Index + 6_000));\n  const helperIndex = tail.search(/STARTING\\s+PRICE\\s+(?:AT|IN)\\b/i);\n  const primaryHeader = plain(tail.slice(0, helperIndex >= 0 ? helperIndex : Math.min(tail.length, 2_500)));\n  const tokens = [\n    ...primaryHeader.matchAll(/(?:USD|US\\$|\\$)\\s*([0-9][0-9\\s,.'’]{1,18})/gi),\n    ...primaryHeader.matchAll(/([0-9][0-9\\s,.'’]{1,18})\\s*(?:USD|US\\$|\\$)/gi),\n  ];\n  for (const match of tokens) {\n    const value = integer(match[1]);\n    if (value && value >= 500 && value <= 5_000_000) return value;\n  }\n  return undefined;\n}\n'''
+          if 'export function autoPapaDetailPriceUsd' not in text:
+              if anchor not in text:
+                  raise SystemExit('AutoPapa power parser anchor missing')
+              text = text.replace(anchor, addition, 1)
+
+          old = '''  const originals = autoPapaDetailOriginalPhotoUrls(markup, responseUrl).slice(0, 30);\n  const powerHp = String(offer.powertrainKind || "") === "combustion" ? autoPapaDetailPowerHp(markup) : undefined;\n  return { sourceOfferId, originals, powerHp };\n'''
+          new = '''  const originals = autoPapaDetailOriginalPhotoUrls(markup, responseUrl).slice(0, 30);\n  const priceUsd = autoPapaDetailPriceUsd(markup);\n  const powerHp = String(offer.powertrainKind || "") === "combustion" ? autoPapaDetailPowerHp(markup) : undefined;\n  return { sourceOfferId, originals, powerHp, ...(priceUsd ? { priceUsd } : {}) };\n'''
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif 'const priceUsd = autoPapaDetailPriceUsd(markup);' not in text:
+              raise SystemExit('AutoPapa exact facts block missing')
+
+          old = '''      autoPapaDetailIdentityVerified: true,\n      autoPapaDetailOriginals: facts.originals,\n      ...(facts.powerHp ? { autoPapaDetailPowerHp: facts.powerHp } : {}),\n'''
+          new = '''      autoPapaDetailIdentityVerified: true,\n      autoPapaDetailOriginals: facts.originals,\n      autoPapaDetailPriceVerified: Boolean(facts.priceUsd),\n      ...(facts.priceUsd ? { autoPapaDetailPriceUsd: facts.priceUsd } : {}),\n      ...(facts.powerHp ? { autoPapaDetailPowerHp: facts.powerHp } : {}),\n'''
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif 'autoPapaDetailPriceVerified' not in text:
+              raise SystemExit('AutoPapa raw exact facts block missing')
+
+          old = '''  if (facts.powerHp) {\n    offer.powerHp = facts.powerHp;\n'''
+          new = '''  if (facts.priceUsd) {\n    offer.sourcePrice = facts.priceUsd;\n    offer.sourceCurrency = "USD";\n  }\n  if (facts.powerHp) {\n    offer.powerHp = facts.powerHp;\n'''
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif 'offer.sourcePrice = facts.priceUsd;' not in text:
+              raise SystemExit('AutoPapa exact enrichment power block missing')
+          autopapa.write_text(text)
+
+          importer = Path('apps/web/lib/catalog/importer-impl.ts')
+          text = importer.read_text()
+          old = '''export function needsSourceDetailFactRefresh(offer: VehicleOffer | undefined) {\n  if (!offer || offer.sourceId !== "autopapa_georgia_open") return false;\n  if (String(offer.powertrainKind || "") !== "combustion") return false;\n  return String(offer.calculationStatus || "") === "preliminary_power_pending"\n    || !(Number.isFinite(Number(offer.powerHp)) && Number(offer.powerHp) > 0);\n}\n'''
+          new = '''export function needsSourceDetailFactRefresh(offer: VehicleOffer | undefined) {\n  if (!offer || offer.sourceId !== "autopapa_georgia_open") return false;\n  // AutoPapa list cards are discovery only. The exact detail page owns the live\n  // asking price (and optional combustion power), so verify it on every seen row.\n  // This also repairs older records whose list-card price was accidentally used.\n  return true;\n}\n'''
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif 'AutoPapa list cards are discovery only' not in text:
+              raise SystemExit('needsSourceDetailFactRefresh block missing')
+
+          anchor = '''            if (images.length < maxImagesPerOffer) report.underfilledImages++;\n\n            const calculated = await calculateOfferWithRussiaCustoms({ ...base, images, firstSeenAt: previous?.firstSeenAt || base.firstSeenAt });\n'''
+          replacement = '''            if (images.length < maxImagesPerOffer) report.underfilledImages++;\n\n            if (base.sourceId === "autopapa_georgia_open") {\n              const exactRaw = base.operational?.raw as any;\n              if (exactRaw?.autoPapaDetailPriceVerified !== true\n                || !(Number(exactRaw?.autoPapaDetailPriceUsd || 0) > 0)\n                || Math.round(Number(base.sourcePrice || 0)) !== Math.round(Number(exactRaw.autoPapaDetailPriceUsd || 0))) {\n                report.skipped++;\n                report.rejectedByQuality++;\n                if (previous) existing.set(base.id, { ...previous, status: "stale" });\n                continue;\n              }\n            }\n\n            const calculated = await calculateOfferWithRussiaCustoms({ ...base, images, firstSeenAt: previous?.firstSeenAt || base.firstSeenAt });\n'''
+          if anchor in text:
+              text = text.replace(anchor, replacement, 1)
+          elif 'exactRaw?.autoPapaDetailPriceVerified' not in text:
+              raise SystemExit('importer calculation anchor missing')
+          importer.write_text(text)
+
+          recovery = Path('apps/web/lib/catalog/georgia-yandex-recovery.ts')
+          text = recovery.read_text()
+          old = '''import { autoPapaDetailOriginalPhotoUrls, autoPapaDetailPowerHp, autoPapaGeorgiaSource } from "./autopapa-georgia-source";'''
+          new = '''import { autoPapaExactDetailFacts, autoPapaGeorgiaSource } from "./autopapa-georgia-source";'''
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif 'autoPapaExactDetailFacts' not in text:
+              raise SystemExit('Georgia recovery AutoPapa import missing')
+
+          old = '''  const urls = autoPapaDetailOriginalPhotoUrls(detail.markup, detail.response.url || detailUrl).slice(0, 30);\n  if (!urls.length) throw new Error("autopapa_gallery_empty");\n  const sourceExactPowerHp = String(offer.powertrainKind || "") === "combustion"\n    ? autoPapaDetailPowerHp(detail.markup)\n    : undefined;\n\n  return normalizeVehicleOfferSpecs({\n    ...offer,\n    powerHp: sourceExactPowerHp || offer.powerHp,\n'''
+          new = '''  const facts = autoPapaExactDetailFacts(offer, detail.markup, detail.response.url || detailUrl);\n  if (!facts) throw new Error("autopapa_detail_identity");\n  const urls = facts.originals.slice(0, 30);\n  if (!urls.length) throw new Error("autopapa_gallery_empty");\n  if (!(Number(facts.priceUsd || 0) > 0)) throw new Error("autopapa_detail_price_missing");\n  const sourceExactPowerHp = facts.powerHp;\n\n  return normalizeVehicleOfferSpecs({\n    ...offer,\n    sourcePrice: facts.priceUsd,\n    sourceCurrency: "USD",\n    powerHp: sourceExactPowerHp || offer.powerHp,\n'''
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif 'autopapa_detail_price_missing' not in text:
+              raise SystemExit('Georgia recovery AutoPapa detail block missing')
+
+          old = '''        detailIdentityVerified: true,\n        autoPapaDetailPowerHp: sourceExactPowerHp || null,\n'''
+          new = '''        detailIdentityVerified: true,\n        autoPapaDetailPriceVerified: true,\n        autoPapaDetailPriceUsd: facts.priceUsd,\n        autoPapaListPriceUsd: offer.sourcePrice || null,\n        autoPapaDetailPowerHp: sourceExactPowerHp || null,\n'''
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif 'autoPapaListPriceUsd' not in text:
+              raise SystemExit('Georgia recovery raw block missing')
+          recovery.write_text(text)
+
+          tests = Path('tests/autopapa-georgia-current-parser-20260812.test.ts')
+          text = tests.read_text()
+          old = '''  autoPapaDetailOriginalPhotoUrls,\n  autoPapaDetailPowerHp,\n'''
+          new = '''  autoPapaDetailOriginalPhotoUrls,\n  autoPapaDetailPowerHp,\n  autoPapaDetailPriceUsd,\n'''
+          if old in text:
+              text = text.replace(old, new, 1)
+          elif 'autoPapaDetailPriceUsd' not in text:
+              raise SystemExit('AutoPapa test import anchor missing')
+
+          addition = '''\n\ntest("AutoPapa exact detail price ignores customs helper prices and stale seller text", () => {\n  const markup = `\n    <header><h1>Hyundai Kona</h1><strong class="price">$4 938</strong></header>\n    <section>STARTING PRICE AT A REDUCTION IN GEORGIA, INCLUDING CUSTOMS CLEARANCE (BARGAINING) $6 314</section>\n    <section>STARTING PRICE IN GEORGIA INCLUDING CUSTOMS CLEARANCE $6 130</section>\n    <div>Body Type: SUV Power: Engine Vol: 2.0 l Mileage: 27 000 K. km</div>\n    <div>Car description</div>\n    <div>More details VIN: KM8K22AB4PU044726 Cena : 12900 $, 2023 god 4 mesac</div>\n    <aside>Top listings Hyundai Kona $12 700</aside>\n  `;\n  assert.equal(autoPapaDetailPriceUsd(markup), 4_938);\n});\n\ntest("AutoPapa exact detail facts promote only the identity-bound primary asking price", () => {\n  const offer = exactOffer();\n  offer.sourceOfferId = "958003";\n  offer.operational.sourceUrl = "https://autopapa.ge/en/usd/hyundai/kona/958003";\n  offer.sourcePrice = 3_608;\n  offer.sourceCurrency = "USD";\n  const markup = `\n    <header><h1>Hyundai Kona</h1><span>$4 938</span></header>\n    <div>STARTING PRICE AT A REDUCTION IN GEORGIA $6 314</div>\n    <div>Body Type: SUV Power: Engine Vol: 2.0 l</div><div>Car description</div>\n    <div>More details Cena : 12900 $</div>\n  `;\n  const facts = enrichAutoPapaOfferFromExactDetail(offer, markup, "https://autopapa.ge/en/usd/hyundai/kona/958003");\n  assert.equal(facts?.priceUsd, 4_938);\n  assert.equal(offer.sourcePrice, 4_938);\n  assert.equal(offer.sourceCurrency, "USD");\n  assert.equal((offer.operational.raw as any).autoPapaDetailPriceVerified, true);\n  assert.equal((offer.operational.raw as any).autoPapaDetailPriceUsd, 4_938);\n});\n'''
+          if 'AutoPapa exact detail price ignores customs helper prices' not in text:
+              text += addition
+          tests.write_text(text)
+          PY
+      - name: Commit patch to PR branch
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/lib/catalog/autopapa-georgia-source.ts apps/web/lib/catalog/importer-impl.ts apps/web/lib/catalog/georgia-yandex-recovery.ts tests/autopapa-georgia-current-parser-20260812.test.ts
+          if git diff --cached --quiet; then
+            echo 'AutoPapa price patch already applied'
+            exit 0
+          fi
+          git commit -m 'Verify AutoPapa price from exact detail header'
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
