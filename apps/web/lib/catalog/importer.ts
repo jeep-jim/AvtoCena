@@ -37,6 +37,7 @@ import { autohomeNewExactSource } from "./autohome-new-exact-source";
 import { autoscoutEuropeExactSource } from "./autoscout-exact-source";
 import { mobileDeExactSource } from "./mobile-de-exact-source";
 import { dubizzleUaeExactSource } from "./dubizzle-exact-source";
+import { carswitchUaeExactSource } from "./carswitch-exact-source";
 import { kcarKoreaExactSource } from "./kcar-exact-source";
 import { kbChaChaChaExactSource } from "./kbchachacha-exact-source";
 import { carvectorJapanCurrentSource } from "./carvector-current-source";
@@ -103,6 +104,7 @@ const completeSources = [
   autoscoutEuropeExactSource,
   mobileDeExactSource,
   dubizzleUaeExactSource,
+  carswitchUaeExactSource,
   jpaucPastSource,
   encarCompleteSource,
   kcarKoreaExactSource,
@@ -136,6 +138,7 @@ const dedicatedDetailSourceIds = new Set([
   "autoscout_europe_open",
   "mobile_de_open",
   "dubizzle_uae_open",
+  "carswitch_uae_open",
   "dubicars_uae_exact",
   "kcar_korea_open",
   "kbchachacha_korea_open",
