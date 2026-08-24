@@ -9,36 +9,48 @@ on:
 
 permissions:
   actions: read
-  contents: read
+  contents: write
 
 jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Show deploy runs and live homepage state
+      - uses: actions/checkout@v4
+        with:
+          ref: diag/production-home-deploy-20260824
+      - name: Capture deploy runs and live homepage state
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
         run: |
           set -euo pipefail
-          echo '--- latest deploys ---'
-          gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/deploy-yandex.yml/runs?per_page=5" --jq '.workflow_runs[] | {id,run_number,status,conclusion,head_sha,created_at,updated_at,html_url}'
-          echo '--- live home ---'
+          gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/deploy-yandex.yml/runs?per_page=5" --jq '[.workflow_runs[] | {id,run_number,status,conclusion,head_sha,created_at,updated_at,html_url}]' > /tmp/deploys.json
           curl -fsS --retry 3 --retry-delay 2 'https://avtocena.com/api/catalog/home' -o /tmp/home.json
-          node <<'NODE'
+          offer=$(node -e "const x=require('/tmp/home.json'); const r=(x.items||[]).find(x=>x.market==='japan')||(x.items||[])[0]; process.stdout.write(r?.id||'')")
+          stack=0; powertext=0; requestprice=0
+          if [ -n "$offer" ]; then
+            curl -fsS --retry 3 --retry-delay 2 "https://avtocena.com/cars/offer/${offer}?powerHp=150" -o /tmp/offer.html
+            stack=$(grep -o 'ac-offer-spec-stack' /tmp/offer.html | wc -l | tr -d ' ' || true)
+            powertext=$(grep -o 'Вы выбрали 150 л.с.' /tmp/offer.html | wc -l | tr -d ' ' || true)
+            requestprice=$(grep -o 'Цена по запросу' /tmp/offer.html | wc -l | tr -d ' ' || true)
+          fi
+          STACK="$stack" POWERTEXT="$powertext" REQUESTPRICE="$requestprice" OFFER="$offer" node <<'NODE'
           const fs=require('fs');
           const x=JSON.parse(fs.readFileSync('/tmp/home.json','utf8'));
+          const deploys=JSON.parse(fs.readFileSync('/tmp/deploys.json','utf8'));
           const items=Array.isArray(x.items)?x.items:[];
           const by={}; for(const r of items){const m=String(r.market||''); (by[m] ||= []).push(r.id);}
-          console.log(JSON.stringify({generationId:x.generationId,total:x.total,marketCounts:x.marketCounts,itemCount:items.length,itemCounts:Object.fromEntries(Object.entries(by).map(([k,v])=>[k,v.length])),marketsMissingCards:Object.entries(x.marketCounts||{}).filter(([m,c])=>Number(c)>0 && !(by[m]||[]).length).map(([m])=>m)},null,2));
-          const sample=items.find(x=>x.market==='japan') || items[0];
-          if(sample) console.log('sampleOffer='+sample.id);
+          const output={
+            capturedAt:new Date().toISOString(),
+            deploys,
+            home:{generationId:x.generationId,total:x.total,marketCounts:x.marketCounts,itemCount:items.length,itemCounts:Object.fromEntries(Object.entries(by).map(([k,v])=>[k,v.length])),marketsMissingCards:Object.entries(x.marketCounts||{}).filter(([m,c])=>Number(c)>0 && !(by[m]||[]).length).map(([m])=>m)},
+            sample:{offerId:process.env.OFFER||null,stackCount:Number(process.env.STACK||0),powerTextCount:Number(process.env.POWERTEXT||0),requestPriceCount:Number(process.env.REQUESTPRICE||0)}
+          };
+          fs.writeFileSync('.diag-production-home-output.json',JSON.stringify(output,null,2)+'\n');
+          console.log(JSON.stringify(output,null,2));
           NODE
-          offer=$(node -e "const x=require('/tmp/home.json'); const r=(x.items||[]).find(x=>x.market==='japan')||(x.items||[])[0]; process.stdout.write(r?.id||'')")
-          if [ -n "$offer" ]; then
-            echo '--- sample power scenario page ---'
-            curl -fsS --retry 3 --retry-delay 2 "https://avtocena.com/cars/offer/${offer}?powerHp=150" -o /tmp/offer.html
-            echo "stack_count=$(grep -o 'ac-offer-spec-stack' /tmp/offer.html | wc -l | tr -d ' ')"
-            echo "power_text_count=$(grep -o 'Вы выбрали 150 л.с.' /tmp/offer.html | wc -l | tr -d ' ')"
-            echo "request_price_count=$(grep -o 'Цена по запросу' /tmp/offer.html | wc -l | tr -d ' ')"
-          fi
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add .diag-production-home-output.json
+          git commit -m 'Capture production homepage and deploy state' || exit 0
+          git push origin HEAD:diag/production-home-deploy-20260824
