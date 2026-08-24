@@ -43,7 +43,9 @@ jobs:
       target_per_market: "30000"
       maximum_per_market: "30000"
       priority_target: "24000"
-      reset_cursor: true
+      # Weekly automation must continue from persisted source cursors so the
+      # 30-day Japan inventory expands instead of re-reading the first pages.
+      reset_cursor: false
     secrets: inherit
 
   korea:
