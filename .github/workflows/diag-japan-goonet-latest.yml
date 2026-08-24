@@ -25,3 +25,17 @@ jobs:
           echo '--- recent Japan runs ---'
           gh api --method GET "repos/${GITHUB_REPOSITORY}/actions/workflows/catalog-v2-japan.yml/runs?per_page=5" \
             --jq '.workflow_runs[] | {id,run_number,status,conclusion,event,head_sha,head_branch,created_at,updated_at,html_url}'
+
+      - name: Inspect exact Goo-net listing image URLs
+        env:
+          PAGE: https://www.goo-net-exchange.com/usedcars/HONDA/FIT/402026080500704382002/
+          SYNTHETIC_PRIMARY: https://picture1.goo-net.com/4020260805/00704382/J/40202608050070438200200.jpg
+        run: |
+          set -euo pipefail
+          tmp=$(mktemp)
+          status=$(curl -L -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36' -sS -o "$tmp" -w '%{http_code}' "$PAGE")
+          echo "page_status=$status bytes=$(wc -c < "$tmp")"
+          echo '--- page image URLs ---'
+          grep -Eo 'https?://[^"'"'"'<> ]+\.(jpg|jpeg|png|webp)(\?[^"'"'"'<> ]*)?' "$tmp" | sed 's/&amp;/\&/g' | grep -Ei 'goo-net' | sort -u | head -100 || true
+          echo '--- synthetic numeric primary status ---'
+          curl -L -A 'Mozilla/5.0' -sS -o /dev/null -w 'status=%{http_code} effective=%{url_effective}\n' "$SYNTHETIC_PRIMARY" || true
