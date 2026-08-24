@@ -1,0 +1,46 @@
+name: Apply home read-model fallback
+
+on:
+  push:
+    branches:
+      - fix/home-readmodel-fallback-20260824
+    paths:
+      - .home-readmodel-trigger
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/home-readmodel-fallback-20260824
+          fetch-depth: 1
+      - name: Require a complete current homepage projection
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          p=Path('apps/web/lib/catalog/storage.ts')
+          s=p.read_text()
+          old='''  if (currentProjection.generationId === manifest.generationId) {\n    const marketCounts: Record<string, number> = {};\n    const items = MARKETS.flatMap((market) => {\n      const rows = (currentProjection.items || []).filter((row) => row.market === market && projectionCanRenderCard(row));\n      marketCounts[market] = rows.length;\n      catalogSearchProjectionSort(rows, "updatedAt");\n      return selectCatalogShowcaseDiversity(rows, limit).map(publicOfferFromProjection);\n    });\n    return {\n      generationId: manifest.generationId,\n      items,\n      marketCounts,\n      total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),\n    };\n  }\n'''
+          new='''  if (currentProjection.generationId === manifest.generationId) {\n    const projectionRows = currentProjection.items || [];\n    // Current read models are replaced independently from the immutable public\n    // generation. During that short window a combined projection can have the\n    // new generation id while one market shard is still absent. Never publish a\n    // false zero on the homepage: use the fast path only when every market that\n    // exists in the manifest has at least one renderable projection row.\n    const projectionComplete = MARKETS.every((market) =>\n      Number(manifest.markets?.[market]?.count || 0) <= 0\n        || projectionRows.some((row) => row.market === market && projectionCanRenderCard(row)));\n    if (projectionComplete) {\n      const marketCounts: Record<string, number> = {};\n      const items = MARKETS.flatMap((market) => {\n        const rows = projectionRows.filter((row) => row.market === market && projectionCanRenderCard(row));\n        marketCounts[market] = Number(manifest.markets?.[market]?.count || rows.length);\n        catalogSearchProjectionSort(rows, "updatedAt");\n        return selectCatalogShowcaseDiversity(rows, limit).map(publicOfferFromProjection);\n      });\n      return {\n        generationId: manifest.generationId,\n        items,\n        marketCounts,\n        total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),\n      };\n    }\n  }\n'''
+          if old not in s: raise SystemExit('home current projection block not found')
+          p.write_text(s.replace(old,new,1))
+
+          tp=Path('tests/catalog-current-read-model-empty-market-policy.test.ts')
+          t=tp.read_text()
+          add='''\nconst storageSource = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");\n\ntest("homepage fast read-model path cannot turn an existing manifest market into a false zero", () => {\n  assert.match(storageSource, /const projectionComplete = MARKETS\.every/);\n  assert.match(storageSource, /manifest\.markets\?\.\[market\]\?\.count/);\n  assert.match(storageSource, /projectionRows\.some\(\(row\) => row\.market === market && projectionCanRenderCard\(row\)\)/);\n  assert.match(storageSource, /if \(projectionComplete\)/);\n});\n'''
+          if 'homepage fast read-model path cannot turn' not in t: tp.write_text(t+add)
+          PY
+      - name: Commit source patch
+        shell: bash
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add apps/web/lib/catalog/storage.ts tests/catalog-current-read-model-empty-market-policy.test.ts
+          git commit -m "Fallback when homepage current projection is incomplete"
+          git push origin HEAD:fix/home-readmodel-fallback-20260824
