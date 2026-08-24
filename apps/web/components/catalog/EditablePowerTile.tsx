@@ -9,7 +9,6 @@ export function EditablePowerTile({
   currentHp,
   requiresConfirmation,
   scenarioSource,
-  fullWidth = false,
 }: {
   currentHp: number;
   requiresConfirmation: boolean;
@@ -69,7 +68,7 @@ export function EditablePowerTile({
     <div
       aria-label={`Мощность: ${current} л.с.`}
       className="ac-editable-power ac-offer-spec-tile relative min-w-0 rounded-2xl px-3.5 py-3.5"
-      style={fullWidth ? { gridColumn: "1 / -1" } : undefined}
+      style={{ gridColumn: "1 / -1" }}
     >
       <div className="flex min-w-0 items-start gap-3">
         <svg viewBox="0 0 24 24" className="ac-editable-power__icon mt-0.5 h-5 w-5 shrink-0" fill="none" stroke="currentColor" strokeWidth="1.9" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="M13.5 2.8 5.8 13h5.1l-.7 8.2L18.3 11h-5.1z" /></svg>
@@ -82,7 +81,7 @@ export function EditablePowerTile({
         </div>
       </div>
 
-      <div className="mt-3 grid grid-cols-[minmax(0,1fr)_minmax(118px,0.46fr)] gap-2">
+      <div className="mt-3 grid grid-cols-[minmax(0,1fr)_minmax(132px,.48fr)] gap-2">
         <div className="relative min-w-0">
           <select
             aria-label="Выбрать мощность в лошадиных силах"
@@ -113,15 +112,16 @@ export function EditablePowerTile({
             value={manual}
             onChange={(event) => setManual(event.target.value)}
             aria-label="Ввести мощность вручную"
-            className="h-full min-w-0 flex-1 bg-transparent px-3 text-center text-[13px] font-black outline-none"
+            className="h-full min-w-0 flex-1 bg-transparent px-2.5 text-center text-[13px] font-black outline-none"
           />
-          <button type="submit" className="ac-editable-power__apply h-full shrink-0 px-3 text-[11px] font-black" aria-label="Пересчитать по введённой мощности">л.с. ↻</button>
+          <button type="submit" className="ac-editable-power__apply h-full shrink-0 px-2.5 text-[11px] font-black" aria-label="Пересчитать по введённой мощности">л.с. ↻</button>
         </form>
       </div>
     </div>
     <style>{`
       .ac-offer-spec-grid > .ac-editable-power {
         grid-column: 1 / -1 !important;
+        width: 100% !important;
       }
       .ac-editable-power__icon {
         color: var(--ac-text);
@@ -190,11 +190,12 @@ export function EditablePowerTile({
           padding-right: .75rem !important;
         }
         .ac-editable-power > div:last-of-type {
-          grid-template-columns: minmax(0, 1fr) minmax(106px, .48fr) !important;
+          grid-template-columns: minmax(0,1fr) minmax(124px,.48fr) !important;
+          gap: .45rem !important;
         }
         .ac-editable-power__apply {
-          padding-left: .55rem !important;
-          padding-right: .55rem !important;
+          padding-left: .45rem !important;
+          padding-right: .45rem !important;
         }
       }
     `}</style>
