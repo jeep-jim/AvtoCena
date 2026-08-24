@@ -1,0 +1,37 @@
+name: Diagnose Goo-net gallery pattern
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/diag-goonet-gallery-pattern.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Download five live Goo-net galleries
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p samples
+          cat > samples.txt <<'EOF'
+          s0|https://picture1.goo-net.com/4020260805/00704382/J/40202608050070438200200.jpg|https://picture1.goo-net.com/070/0704382/J/0704382A20260804G002
+          s1|https://picture1.goo-net.com/9880260608/01310040/J/98802606080131004001100.jpg|https://picture1.goo-net.com/131/1310040/J/1310040A20260607D011
+          s2|https://picture1.goo-net.com/7000204644/30260721/J/70002046443026072100200.jpg|https://picture1.goo-net.com/020/0204644/J/0204644A30260721W002
+          s3|https://picture1.goo-net.com/9560260530/00551544/J/95602605300055154400200.jpg|https://picture1.goo-net.com/055/0551544/J/0551544A20260529G002
+          s4|https://picture1.goo-net.com/7000205508/30260511/J/70002055083026051100100.jpg|https://picture1.goo-net.com/020/0205508/J/0205508A30260511W001
+          EOF
+          while IFS='|' read -r name primary stock; do
+            curl -L -A 'Mozilla/5.0' -sS "$primary" -o "samples/${name}-00.jpg"
+            for n in 01 02 03 04 05 06 07 08 09 10; do
+              curl -L -A 'Mozilla/5.0' -sS "${stock}${n}.jpg" -o "samples/${name}-${n}.jpg" || true
+            done
+          done < samples.txt
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goonet-gallery-pattern
+          path: samples/*.jpg
+          retention-days: 1
