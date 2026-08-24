@@ -20,7 +20,7 @@ export type RequiredCatalogSource = {
  */
 export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCatalogSource[]> = {
   uae: [
-    { sourceId: "dubizzle_uae_open", label: "Dubizzle", canonicalUrl: "https://uae.dubizzle.com/", role: "primary", required: true, anchor: true },
+    { sourceId: "carswitch_uae_open", label: "CarSwitch", canonicalUrl: "https://carswitch.com/", role: "primary", required: true, anchor: true },
     { sourceId: "dubicars_uae_exact", label: "DubiCars", canonicalUrl: "https://www.dubicars.com/", role: "primary", required: true, anchor: true },
   ],
   korea: [
