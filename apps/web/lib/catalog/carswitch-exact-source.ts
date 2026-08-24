@@ -104,6 +104,14 @@ function jsonScripts(markup: string) {
     .filter(Boolean);
 }
 
+function decodeJsonScript(script: string) {
+  try {
+    return JSON.parse(script.replace(/&quot;/gi, '"').replace(/&amp;/gi, "&"));
+  } catch {
+    return null;
+  }
+}
+
 function itemLists(value: unknown): any[] {
   if (Array.isArray(value)) return value.flatMap(itemLists);
   if (!value || typeof value !== "object") return [];
@@ -113,6 +121,17 @@ function itemLists(value: unknown): any[] {
   const own = types.some((item) => item.toLowerCase() === "itemlist") ? [row] : [];
   const graph = Array.isArray(row["@graph"]) ? itemLists(row["@graph"]) : [];
   return [...own, ...graph];
+}
+
+function vehicleEntities(value: unknown): Record<string, unknown>[] {
+  if (Array.isArray(value)) return value.flatMap(vehicleEntities);
+  if (!value || typeof value !== "object") return [];
+  const row = value as Record<string, unknown>;
+  const type = row["@type"];
+  const types = Array.isArray(type) ? type.map(String) : [String(type || "")];
+  const own = types.some((item) => ["car", "product", "vehicle"].includes(item.toLowerCase())) ? [row] : [];
+  const nested = Object.values(row).flatMap((child) => child && typeof child === "object" ? vehicleEntities(child) : []);
+  return [...own, ...nested];
 }
 
 function imagesFromEntity(entity: Record<string, unknown>) {
@@ -152,12 +171,36 @@ function entityPrice(entity: Record<string, unknown>) {
   return undefined;
 }
 
+function rowTrim(entity: Record<string, unknown>, identity: NonNullable<ReturnType<typeof exactIdentity>>) {
+  const escape = (value: string) => value.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  let value = clean(entity.name);
+  value = value.replace(new RegExp(`^${identity.year}\\s+`, "i"), "");
+  value = value.replace(new RegExp(`^${escape(identity.make)}\\s+`, "i"), "");
+  value = value.replace(new RegExp(`^${escape(identity.model)}\\s*`, "i"), "");
+  return value.trim() || undefined;
+}
+
+function rowFromEntity(entity: Record<string, unknown>, identity: NonNullable<ReturnType<typeof exactIdentity>>, minimumImages: number): CarSwitchExactRow | null {
+  const price = entityPrice(entity);
+  const images = imagesFromEntity(entity);
+  if (!price || images.length < minimumImages) return null;
+  return {
+    ...identity,
+    trim: rowTrim(entity, identity),
+    mileageKm: entityMileage(entity),
+    price,
+    currency: "AED",
+    images,
+    vin: clean(entity.vehicleIdentificationNumber) || undefined,
+  };
+}
+
 export function parseCarSwitchExactListing(markup: string): CarSwitchExactRow[] {
   const output: CarSwitchExactRow[] = [];
   const seen = new Set<string>();
   for (const script of jsonScripts(markup)) {
-    let decoded: unknown;
-    try { decoded = JSON.parse(script.replace(/&quot;/gi, '"').replace(/&amp;/gi, "&")); } catch { continue; }
+    const decoded = decodeJsonScript(script);
+    if (!decoded) continue;
     for (const list of itemLists(decoded)) {
       const elements = Array.isArray(list.itemListElement) ? list.itemListElement : [];
       for (const element of elements) {
@@ -167,32 +210,40 @@ export function parseCarSwitchExactListing(markup: string): CarSwitchExactRow[] 
         if (!identity || seen.has(identity.id)) continue;
         const mainEntity = ((element as any).mainEntity || (element as any).item?.mainEntity || (element as any).item) as Record<string, unknown> | undefined;
         if (!mainEntity || typeof mainEntity !== "object") continue;
-        const price = entityPrice(mainEntity);
-        const images = imagesFromEntity(mainEntity);
-        if (!price || images.length < 2) continue;
-        const name = clean(mainEntity.name);
-        const trim = name.replace(new RegExp(`^${identity.year}\\s+`, "i"), "").replace(new RegExp(`^${identity.make.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}\\s+`, "i"), "").trim();
+        // CarSwitch list JSON-LD currently exposes one exact vehicle image. Keep
+        // that row for discovery; fetchImages() binds the full gallery from the
+        // same exact vehicle's detail JSON-LD before publication.
+        const row = rowFromEntity(mainEntity, identity, 1);
+        if (!row) continue;
         seen.add(identity.id);
-        output.push({
-          ...identity,
-          trim: trim && trim.toLowerCase() !== identity.model.toLowerCase() ? trim : undefined,
-          mileageKm: entityMileage(mainEntity),
-          price,
-          currency: "AED",
-          images,
-          vin: clean(mainEntity.vehicleIdentificationNumber) || undefined,
-        });
+        output.push(row);
       }
     }
   }
   return output;
 }
 
-async function request(url: string) {
+export function parseCarSwitchExactDetail(markup: string, expectedSourceUrl: string): CarSwitchExactRow | null {
+  const expected = exactIdentity(expectedSourceUrl);
+  if (!expected) return null;
+  for (const script of jsonScripts(markup)) {
+    const decoded = decodeJsonScript(script);
+    if (!decoded) continue;
+    for (const entity of vehicleEntities(decoded)) {
+      const identity = exactIdentity(clean(entity.url));
+      if (!identity || identity.id !== expected.id || identity.sourceUrl !== expected.sourceUrl) continue;
+      const row = rowFromEntity(entity, expected, 2);
+      if (row) return row;
+    }
+  }
+  return null;
+}
+
+async function request(url: string, referer = LIST_URL) {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), Math.max(5_000, Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 30_000)));
   try {
-    const response = await fetch(url, { headers: HEADERS, redirect: "follow", signal: controller.signal });
+    const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
     const markup = await response.text();
     if ([401, 403, 429].includes(response.status) || BLOCK_RE.test(markup.slice(0, 10_000))) throw new Error(`carswitch_exact_blocked_${response.status}`);
     if (!response.ok) throw new Error(`carswitch_exact_http_${response.status}`);
@@ -226,17 +277,18 @@ export class CarSwitchUaeExactAdapter implements CatalogSourceAdapter {
 
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as CarSwitchExactRow;
-    if (!row?.id || !row.sourceUrl || !row.make || !row.model || !isCatalogYearAllowed(row.year, "uae") || !(row.price > 0) || row.images.length < 2) return null;
+    if (!row?.id || !row.sourceUrl || !row.make || !row.model || !isCatalogYearAllowed(row.year, "uae") || !(row.price > 0) || row.images.length < 1) return null;
     const now = new Date().toISOString();
+    const galleryVerified = row.images.length >= 2;
     return {
       id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: "uae", offerType: "fixed", status: "active",
       sourceTitle: `${row.year} ${row.make} ${row.model}${row.trim ? ` ${row.trim}` : ""}`.trim(), make: row.make, model: row.model, trim: row.trim, year: row.year,
       mileageKm: row.mileageKm, sourcePrice: row.price, sourceCurrency: "AED", priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data",
       firstSeenAt: now, updatedAt: now,
       operational: {
-        sourceUrl: row.sourceUrl, sourceVenueName: "CarSwitch UAE", exactDetail: true, exactFields: true, exactPhotos: true,
-        galleryVerified: true, galleryImageCount: row.images.length, gallerySafetyMode: "carswitch_itemlist_exact_vehicle_jsonld_v1", galleryStoredAs: "json_urls", photoIdentityVerified: true,
-        raw: { parsed: row, images: row.images, listingBoundImages: true, detailIdentityVerified: true, photoIdentityVerified: true, cashPriceAuthority: "schema_org_offer_price", vehicleIdentificationNumber: row.vin || null },
+        sourceUrl: row.sourceUrl, sourceVenueName: "CarSwitch UAE", exactDetail: false, exactFields: true, exactPhotos: galleryVerified,
+        galleryVerified, galleryImageCount: row.images.length, gallerySafetyMode: galleryVerified ? "carswitch_exact_vehicle_detail_jsonld_v2" : "carswitch_itemlist_exact_vehicle_jsonld_discovery_v2", galleryStoredAs: "json_urls", photoIdentityVerified: galleryVerified,
+        raw: { parsed: row, images: row.images, listingBoundImages: true, detailIdentityVerified: false, photoIdentityVerified: galleryVerified, cashPriceAuthority: "schema_org_offer_price", vehicleIdentificationNumber: row.vin || null },
       },
     } as VehicleOffer;
   }
@@ -245,12 +297,42 @@ export class CarSwitchUaeExactAdapter implements CatalogSourceAdapter {
     const raw = offer.operational?.raw as { parsed?: CarSwitchExactRow; images?: string[] } | undefined;
     const row = raw?.parsed;
     if (!row || row.id !== String(offer.sourceOfferId || "") || exactIdentity(row.sourceUrl)?.id !== row.id) return [];
+    const { response, markup } = await request(row.sourceUrl, LIST_URL);
+    const responseIdentity = exactIdentity(response.url || row.sourceUrl);
+    if (!responseIdentity || responseIdentity.id !== row.id) throw new Error(`carswitch_exact_detail_identity_${row.id}`);
+    const detail = parseCarSwitchExactDetail(markup, row.sourceUrl);
+    if (!detail || detail.id !== row.id || detail.images.length < 2) throw new Error(`carswitch_exact_detail_gallery_${row.id}`);
+
+    offer.sourcePrice = detail.price;
+    offer.sourceCurrency = "AED";
+    offer.mileageKm = detail.mileageKm || offer.mileageKm;
+    offer.trim = detail.trim || offer.trim;
+    const op = offer.operational as any;
+    op.exactDetail = true;
+    op.exactFields = true;
+    op.exactPhotos = true;
+    op.galleryVerified = true;
+    op.galleryImageCount = detail.images.length;
+    op.gallerySafetyMode = "carswitch_exact_vehicle_detail_jsonld_v2";
+    op.galleryStoredAs = "json_urls";
+    op.photoIdentityVerified = true;
+    op.raw = {
+      ...(op.raw || {}),
+      parsed: detail,
+      images: detail.images,
+      listingBoundImages: true,
+      detailIdentityVerified: true,
+      photoIdentityVerified: true,
+      cashPriceAuthority: "schema_org_offer_price_exact_detail",
+      vehicleIdentificationNumber: detail.vin || row.vin || null,
+    };
+
     const limit = Math.min(30, Math.max(2, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
-    return [...new Set(raw?.images || row.images || [])].slice(0, limit).map(asImage);
+    return detail.images.slice(0, limit).map(asImage);
   }
 
   mapStatus(): OfferStatus { return "active"; }
-  async healthCheck() { return { ok: true, message: "CarSwitch exact ItemList vehicle JSON-LD adapter", checkedAt: new Date().toISOString() }; }
+  async healthCheck() { return { ok: true, message: "CarSwitch exact ItemList discovery + exact detail vehicle JSON-LD gallery", checkedAt: new Date().toISOString() }; }
 }
 
 export const carswitchUaeExactSource = new CarSwitchUaeExactAdapter();
