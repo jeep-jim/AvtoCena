@@ -19,15 +19,8 @@ jobs:
           page='https://www.goo-net-exchange.com/usedcars/HONDA/FIT/402026080500704382002/'
           exact_base='https://picture1.goo-net.com/4020260805/00704382/J/402026080500704382002'
           stock_base='https://picture1.goo-net.com/070/0704382/J/0704382A20260804G002'
-          tmp=$(mktemp)
-          code=$(curl -L -A 'Mozilla/5.0' -sS -o "$tmp" -w '%{http_code}' "$page" || true)
-          echo "PAGE_HTTP=$code BYTES=$(wc -c < "$tmp")"
-          echo 'PAGE_IMAGE_URLS:'
-          grep -Eo 'https?://[^"'"'"' <>]+\.(jpg|jpeg|png|webp)' "$tmp" | grep -E 'goo-net\.com/.*/J/' | head -n 80 || true
-          echo 'EXACT_ID_OCCURRENCES:'
-          grep -Eo '402026080500704382002[0-9]{2}\.(jpg|jpeg|png|webp)' "$tmp" | sort -u | head -n 40 || true
-          echo 'STOCK_FAMILY_OCCURRENCES:'
-          grep -Eo '0704382A20260804G002[0-9]{2}\.(jpg|jpeg|png|webp)' "$tmp" | sort -u | head -n 40 || true
+          code=$(curl -L -A 'Mozilla/5.0' -sS -o page.html -w '%{http_code}' "$page" || true)
+          echo "PAGE_HTTP=$code BYTES=$(wc -c < page.html)"
           for suffix in 00 01 02 03 10 20 30; do
             u="${exact_base}${suffix}.jpg"
             echo "EXACT_${suffix} $(curl -L -A 'Mozilla/5.0' -sS -o /dev/null -w '%{http_code} %{content_type} %{size_download}' "$u" || true)"
@@ -36,19 +29,18 @@ jobs:
             u="${stock_base}${suffix}.jpg"
             echo "STOCK_${suffix} $(curl -L -A 'Mozilla/5.0' -sS -o /dev/null -w '%{http_code} %{content_type} %{size_download}' "$u" || true)"
           done
-          e=$(mktemp --suffix=.jpg)
-          s=$(mktemp --suffix=.jpg)
-          curl -L -A 'Mozilla/5.0' -sS "${exact_base}00.jpg" -o "$e"
-          curl -L -A 'Mozilla/5.0' -sS "${stock_base}01.jpg" -o "$s"
-          echo "EXACT00_SHA=$(sha256sum "$e" | awk '{print $1}') SIZE=$(wc -c < "$e") TYPE=$(file -b "$e")"
-          echo "STOCK01_SHA=$(sha256sum "$s" | awk '{print $1}') SIZE=$(wc -c < "$s") TYPE=$(file -b "$s")"
-          python - "$e" "$s" <<'PY'
-          import sys
-          from PIL import Image, ImageChops, ImageStat
-          a=Image.open(sys.argv[1]).convert('RGB')
-          b=Image.open(sys.argv[2]).convert('RGB')
-          print('EXACT00_DIM', a.size, 'STOCK01_DIM', b.size)
-          b2=b.resize(a.size)
-          stat=ImageStat.Stat(ImageChops.difference(a,b2))
-          print('MEAN_ABS_DIFF', sum(stat.mean)/3)
-          PY
+          curl -L -A 'Mozilla/5.0' -sS "${exact_base}00.jpg" -o exact00.jpg
+          curl -L -A 'Mozilla/5.0' -sS "${stock_base}01.jpg" -o stock01.jpg
+          curl -L -A 'Mozilla/5.0' -sS "${stock_base}02.jpg" -o stock02.jpg
+          curl -L -A 'Mozilla/5.0' -sS "${stock_base}10.jpg" -o stock10.jpg
+          echo "EXACT00_SHA=$(sha256sum exact00.jpg | awk '{print $1}') SIZE=$(wc -c < exact00.jpg) TYPE=$(file -b exact00.jpg)"
+          echo "STOCK01_SHA=$(sha256sum stock01.jpg | awk '{print $1}') SIZE=$(wc -c < stock01.jpg) TYPE=$(file -b stock01.jpg)"
+      - uses: actions/upload-artifact@v4
+        with:
+          name: goonet-live-sample
+          path: |
+            exact00.jpg
+            stock01.jpg
+            stock02.jpg
+            stock10.jpg
+          retention-days: 1
