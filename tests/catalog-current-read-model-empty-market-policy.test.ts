@@ -4,6 +4,8 @@ import test from "node:test";
 
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-current-read-models.yml", import.meta.url), "utf8");
 const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-current-read-models.mjs", import.meta.url), "utf8");
+const deployWorkflow = fs.readFileSync(new URL("../.github/workflows/deploy-yandex.yml", import.meta.url), "utf8");
+const parityAudit = fs.readFileSync(new URL("../scripts/catalog-audit-current-readmodel-parity.mjs", import.meta.url), "utf8");
 
 test("current read-model workflow exposes failures hidden by tee", () => {
   assert.match(workflow, /set -o pipefail/);
@@ -46,6 +48,24 @@ test("current read-model republisher preserves every immutable public row", () =
   assert.doesNotMatch(implementation, /\.filter\(isPublicOffer\)/);
   assert.match(implementation, /catalog_current_readmodel_manifest_count_mismatch/);
   assert.match(implementation, /writeCurrentCatalogReadModels\(manifest\.generationId, storedOffers, true\)/);
+});
+
+test("deploy checks all seven live markets instead of treating Korea as the catalog smoke test", () => {
+  assert.match(deployWorkflow, /for market in korea china japan uae europe georgia kyrgyzstan/);
+  assert.match(deployWorkflow, /api\/catalog\/search\?market=\$market&pageSize=1/);
+  assert.match(deployWorkflow, /jq -e '\.total > 0 and \(\.items \| length\) > 0'/);
+  assert.match(deployWorkflow, /cars\?market=\$market/);
+});
+
+test("deploy fails when one-hop read models diverge from the immutable manifest", () => {
+  assert.match(parityAudit, /catalog\/manifest\.json/);
+  assert.match(parityAudit, /catalog\/public\/projection\/all\.json/);
+  assert.match(parityAudit, /catalog\/public\/projection\/\$\{market\}\.json/);
+  assert.match(parityAudit, /catalog_current_readmodel_manifest_mismatch/);
+  assert.match(parityAudit, /projectionGenerationId !== generationId/);
+  assert.match(parityAudit, /items\.length !== expected/);
+  assert.match(deployWorkflow, /catalog-audit-current-readmodel-parity\.mjs/);
+  assert.match(deployWorkflow, /catalog-current-readmodel-parity-\$\{\{ github\.sha \}\}/);
 });
 
 const homeRouteSource = fs.readFileSync(new URL("../apps/web/app/api/catalog/home/route.ts", import.meta.url), "utf8");
