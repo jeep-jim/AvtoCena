@@ -46,3 +46,34 @@ test("Guazi RU normalized offer keeps USD FOB price and listing-bound photo", ()
   assert.match(String(offer?.operational?.sourceUrl), /\/products\/toyota-highlander/);
   assert.equal((offer?.operational?.raw as any)?.images?.length, 1);
 });
+
+test("diagnostic: GitHub runner reports current Guazi listing shape", async () => {
+  const response = await fetch("https://en.guazi.com/used-cars/", {
+    headers: {
+      accept: "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8",
+      "accept-language": "zh-CN,zh;q=0.9,en;q=0.6",
+      "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36",
+    },
+    redirect: "follow",
+  });
+  const body = await response.text();
+  const productHrefCount = [...body.matchAll(/href\s*=\s*["'][^"']*\/products\/[^"']+\.html[^"']*["']/gi)].length;
+  const productTokenCount = [...body.matchAll(/\/products\/[A-Za-z0-9._/-]+\.html/g)].length;
+  const usedTitleCount = [...body.matchAll(/Used [^<]{3,160}20[0-9]{2}/g)].length;
+  const fobPriceCount = [...body.matchAll(/FOB\s*Price[^0-9$]*\$?[0-9,]+/gi)].length;
+  const markers = [...body.matchAll(/<title[^>]*>([^<]{0,200})<\/title>|captcha|challenge|cloudflare|access denied|[0-9,]{4,}\s+RESULTS/gi)]
+    .slice(0, 20)
+    .map((match) => match[0].replace(/\s+/g, " "));
+  console.log("GUAZI_RUNNER_DIAGNOSTIC", JSON.stringify({
+    status: response.status,
+    finalUrl: response.url,
+    contentType: response.headers.get("content-type"),
+    bytes: body.length,
+    productHrefCount,
+    productTokenCount,
+    usedTitleCount,
+    fobPriceCount,
+    markers,
+  }));
+  assert.equal(response.ok, true);
+});
