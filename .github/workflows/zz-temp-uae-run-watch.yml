@@ -6,11 +6,38 @@ on:
       - '.github/workflows/zz-temp-uae-run-watch.yml'
 
 permissions:
-  actions: read
+  actions: write
   contents: read
 
 jobs:
+  unblock:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Cancel only stale pre-fix UAE run
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          api='https://api.github.com/repos/jeep-jim/AvtoCena'
+          hdr=(-H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json')
+          run="$(curl -fsS "${hdr[@]}" "$api/actions/runs/32741199815")"
+          echo "$run" | jq '{id,name,head_sha,status,conclusion,run_attempt,html_url}'
+          name="$(echo "$run" | jq -r '.name')"
+          sha="$(echo "$run" | jq -r '.head_sha')"
+          status="$(echo "$run" | jq -r '.status')"
+          if [ "$name" = 'Catalog V3 · UAE · 10k · 13972485ec66d93e24350b91bf18b459a8353e92' ] && [ "$sha" = '13972485ec66d93e24350b91bf18b459a8353e92' ] && [ "$status" != 'completed' ]; then
+            code="$(curl -sS -o cancel.json -w '%{http_code}' -X POST "${hdr[@]}" "$api/actions/runs/32741199815/cancel")"
+            echo "cancel_http=$code"
+            cat cancel.json || true
+            test "$code" = '202'
+          else
+            echo 'stale run already completed or identity changed; no cancellation needed'
+          fi
+
   inspect:
+    needs: unblock
+    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Inspect fresh UAE rebuild trigger
@@ -21,6 +48,7 @@ jobs:
           set -euo pipefail
           api='https://api.github.com/repos/jeep-jim/AvtoCena'
           hdr=(-H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json')
+          sleep 10
           echo '=== marker merge workflows ==='
           curl -fsS "${hdr[@]}" "$api/actions/runs?head_sha=ab0eda264c29e62d2bc2cbd3ba82ec3e4ab88ad6&per_page=30" | jq '[.workflow_runs[]|{id,name,path,event,status,conclusion,run_attempt,created_at,updated_at,html_url}]'
           echo '=== previous UAE run ==='
