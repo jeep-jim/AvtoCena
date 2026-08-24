@@ -1,0 +1,21 @@
+name: Diagnose one-time catalog refresh status
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show one-time refresh runs
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          gh api --method GET "repos/${GITHUB_REPOSITORY}/actions/workflows/catalog-v3-run-now-20260824.yml/runs?per_page=10" --jq '.workflow_runs[] | {id,run_number,status,conclusion,event,head_sha,created_at,updated_at,html_url}'
