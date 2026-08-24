@@ -128,3 +128,27 @@ test("CarSwitch fetchImages upgrades one-image discovery to exact detail gallery
     globalThis.fetch = originalFetch;
   }
 });
+
+
+test("CarSwitch retries a transient 202 listing shell before parsing", async () => {
+  const adapter = new CarSwitchUaeExactAdapter();
+  const originalFetch = globalThis.fetch;
+  const originalDelay = process.env.CATALOG_CARSWITCH_RETRY_DELAY_MS;
+  let calls = 0;
+  process.env.CATALOG_CARSWITCH_RETRY_DELAY_MS = "0";
+  globalThis.fetch = async () => {
+    calls++;
+    if (calls === 1) return new Response("<html>processing</html>", { status: 202, headers: { "content-type": "text/html" } });
+    return new Response(listingMarkup, { status: 200, headers: { "content-type": "text/html; charset=utf-8" } });
+  };
+  try {
+    const page = await adapter.fetchPage("4");
+    assert.equal(calls, 2);
+    assert.equal(page.items.length, 1);
+    assert.equal((page.items[0] as any).id, "858598");
+  } finally {
+    globalThis.fetch = originalFetch;
+    if (originalDelay === undefined) delete process.env.CATALOG_CARSWITCH_RETRY_DELAY_MS;
+    else process.env.CATALOG_CARSWITCH_RETRY_DELAY_MS = originalDelay;
+  }
+});
