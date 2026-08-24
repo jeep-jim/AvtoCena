@@ -1,0 +1,40 @@
+name: Diagnose Guazi runner response 2026-08-24
+
+on:
+  push:
+    branches:
+      - diag/guazi-runner-response-20260824
+
+permissions:
+  contents: read
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect Guazi listing response
+        shell: bash
+        run: |
+          set -euo pipefail
+          body="$(mktemp)"
+          headers="$(mktemp)"
+          curl -L --max-redirs 5 --max-time 40 -sS \
+            -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150.0.0.0 Safari/537.36' \
+            -H 'accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8' \
+            -H 'accept-language: zh-CN,zh;q=0.9,en;q=0.6' \
+            -D "$headers" \
+            -o "$body" \
+            -w 'http_code=%{http_code}\nfinal_url=%{url_effective}\ncontent_type=%{content_type}\n' \
+            'https://en.guazi.com/used-cars/'
+          echo "bytes=$(wc -c < "$body")"
+          echo "product_href_count=$(grep -Eo 'href=["'"'][^"'"']*/products/[^"'"']+\.html[^"'"']*["'"']' "$body" | wc -l)"
+          echo "product_token_count=$(grep -Eo '/products/[A-Za-z0-9._/-]+\.html' "$body" | wc -l)"
+          echo "used_title_count=$(grep -Eo 'Used [^<]{3,160}20[0-9]{2}' "$body" | wc -l)"
+          echo "fob_price_count=$(grep -Eo 'FOB[[:space:]]*Price[^0-9$]*\$?[0-9,]+' "$body" | wc -l)"
+          echo 'response headers:'
+          tail -40 "$headers"
+          echo 'document markers:'
+          grep -Eoi '<title[^>]*>[^<]{0,200}</title>|captcha|challenge|cloudflare|access denied|202,[0-9]{3}[[:space:]]+RESULTS|RESULTS' "$body" | head -40 || true
+          echo 'first product paths:'
+          grep -Eo '/products/[A-Za-z0-9._/-]+\.html' "$body" | head -10 || true
+          rm -f "$body" "$headers"
