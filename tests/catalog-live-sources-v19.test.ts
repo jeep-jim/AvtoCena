@@ -3,6 +3,7 @@ import fs from "node:fs";
 import test from "node:test";
 import { parseAutoGeorgiaMoney } from "../apps/web/lib/catalog/auto-georgia-enriched-source";
 import { DubicarsCurrentAdapter, parseDubicarsCurrentListing } from "../apps/web/lib/catalog/dubicars-current-source";
+import { CarSwitchUaeExactAdapter, parseCarSwitchExactListing } from "../apps/web/lib/catalog/carswitch-exact-source";
 
 const priority = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-market-sources.ts", import.meta.url), "utf8");
 const fastGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
@@ -112,6 +113,35 @@ test("DubiCars price-on-request listing cannot borrow a recommendation price", (
   assert.ok(offer);
   assert.equal(offer.sourcePrice, null);
   assert.equal(offer.calculationStatus, "needs_data");
+});
+
+test("CarSwitch exact JSON-LD binds one vehicle cash price and rejects category/installment noise", () => {
+  const markup = `
+    <a href="/uae/used-cars/8-seater-cars-for-sale">8-seater cars Price 300 AED</a>
+    <script type="application/ld+json" id="id-item-list-schema">{
+      "@context":"https://schema.org","@type":"ItemList","itemListElement":[
+        {"@type":"ItemPage","url":"https://carswitch.com/dubai/used-car/volkswagen/teramont/2023/862878","position":"1","mainEntity":{"@type":["Product","Car"],"name":"2023 Volkswagen Teramont SE","vehicleIdentificationNumber":"BUYWITHCS00862878","image":["https://d1esl34bhh6pms.cloudfront.net/cars/used/images/original/a.webp","https://d1esl34bhh6pms.cloudfront.net/cars/used/images/original/b.webp"],"mileageFromOdometer":{"@type":"QuantitativeValue","value":73700,"unitCode":"KMT"},"offers":{"@type":"Offer","availability":"https://schema.org/InStock","price":"101000","priceCurrency":"AED"}}},
+        {"@type":"ItemPage","url":"https://carswitch.com/dubai/used-car/dodge/charger/2013/862241","position":"2","mainEntity":{"@type":["Product","Car"],"name":"2013 Dodge Charger","image":["https://d1esl34bhh6pms.cloudfront.net/cars/used/images/original/c.webp","https://d1esl34bhh6pms.cloudfront.net/cars/used/images/original/d.webp"],"offers":{"@type":"Offer","price":"18500","priceCurrency":"AED"}}}
+      ]}
+    </script>
+    <div>Price 101,000 AED</div><div>Installments 1,980 AED / month</div>`;
+  const rows = parseCarSwitchExactListing(markup);
+  assert.equal(rows.length, 1);
+  assert.equal(rows[0].id, "862878");
+  assert.equal(rows[0].make, "Volkswagen");
+  assert.equal(rows[0].model, "Teramont");
+  assert.equal(rows[0].year, 2023);
+  assert.equal(rows[0].price, 101_000);
+  assert.equal(rows[0].currency, "AED");
+  assert.equal(rows[0].mileageKm, 73_700);
+  assert.equal(rows[0].images.length, 2);
+  const offer = new CarSwitchUaeExactAdapter().normalizeOffer(rows[0]);
+  assert.ok(offer);
+  assert.equal(offer.sourcePrice, 101_000);
+  assert.equal((offer.operational?.raw as any)?.cashPriceAuthority, "schema_org_offer_price");
+  assert.equal(offer.operational?.sourceUrl, "https://carswitch.com/dubai/used-car/volkswagen/teramont/2023/862878");
+  assert.match(importer, /carswitchUaeExactSource/);
+  assert.match(importer, /"carswitch_uae_open"/);
 });
 
 test("commercial vehicles are excluded from priority passenger-car sources", () => {
