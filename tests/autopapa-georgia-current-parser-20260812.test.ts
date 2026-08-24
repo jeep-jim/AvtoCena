@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   autoPapaDetailOriginalPhotoUrls,
   autoPapaDetailPowerHp,
+  autoPapaDetailPriceUsd,
   autoPapaExactDetailFacts,
   enrichAutoPapaOfferFromExactDetail,
   parseAutoPapaGeorgiaListing,
@@ -152,4 +153,38 @@ test("AutoPapa seller peak power is not promoted to EV or hybrid utilization pow
     assert.equal(offer.powerHp, undefined);
     assert.equal(offer.powerDataSource, undefined);
   }
+});
+
+
+test("AutoPapa exact detail price ignores customs helper prices and stale seller text", () => {
+  const markup = `
+    <header><h1>Hyundai Kona</h1><strong class="price">$4 938</strong></header>
+    <section>STARTING PRICE AT A REDUCTION IN GEORGIA, INCLUDING CUSTOMS CLEARANCE (BARGAINING) $6 314</section>
+    <section>STARTING PRICE IN GEORGIA INCLUDING CUSTOMS CLEARANCE $6 130</section>
+    <div>Body Type: SUV Power: Engine Vol: 2.0 l Mileage: 27 000 K. km</div>
+    <div>Car description</div>
+    <div>More details VIN: KM8K22AB4PU044726 Cena : 12900 $, 2023 god 4 mesac</div>
+    <aside>Top listings Hyundai Kona $12 700</aside>
+  `;
+  assert.equal(autoPapaDetailPriceUsd(markup), 4_938);
+});
+
+test("AutoPapa exact detail facts promote only the identity-bound primary asking price", () => {
+  const offer = exactOffer();
+  offer.sourceOfferId = "958003";
+  offer.operational.sourceUrl = "https://autopapa.ge/en/usd/hyundai/kona/958003";
+  offer.sourcePrice = 3_608;
+  offer.sourceCurrency = "USD";
+  const markup = `
+    <header><h1>Hyundai Kona</h1><span>$4 938</span></header>
+    <div>STARTING PRICE AT A REDUCTION IN GEORGIA $6 314</div>
+    <div>Body Type: SUV Power: Engine Vol: 2.0 l</div><div>Car description</div>
+    <div>More details Cena : 12900 $</div>
+  `;
+  const facts = enrichAutoPapaOfferFromExactDetail(offer, markup, "https://autopapa.ge/en/usd/hyundai/kona/958003");
+  assert.equal(facts?.priceUsd, 4_938);
+  assert.equal(offer.sourcePrice, 4_938);
+  assert.equal(offer.sourceCurrency, "USD");
+  assert.equal((offer.operational.raw as any).autoPapaDetailPriceVerified, true);
+  assert.equal((offer.operational.raw as any).autoPapaDetailPriceUsd, 4_938);
 });

@@ -20,12 +20,15 @@ test("Georgia Yandex recovery snapshot is read-only and canonical", () => {
   assert.doesNotMatch(recovery, /auto_georgia_open|www\.auto\.ge|mymarket|ss\.ge/i);
 });
 
-test("Georgia recovery snapshot binds official full galleries", () => {
+test("Georgia recovery snapshot binds official full galleries and exact AutoPapa asking price", () => {
   assert.match(recovery, /parseMyAutoListingImageUrl/);
   assert.match(recovery, /myAutoProductSnapshotFromInfo/);
   assert.match(recovery, /String\(info\.car_id/);
   assert.match(recovery, /String\(info\.photo/);
-  assert.match(recovery, /autoPapaDetailOriginalPhotoUrls/);
+  assert.match(recovery, /autoPapaExactDetailFacts/);
+  assert.match(recovery, /autopapa_detail_price_missing/);
+  assert.match(recovery, /sourcePrice: facts\.priceUsd/);
+  assert.match(recovery, /autoPapaDetailPriceVerified: true/);
   assert.match(recovery, /myauto_(?:list_plus_product|exact_product)_large_formula/);
   assert.match(recovery, /autopapa_exact_detail_originals/);
 });

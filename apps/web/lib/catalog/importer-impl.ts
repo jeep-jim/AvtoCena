@@ -61,9 +61,10 @@ export function needsSourceOrderedGalleryRefresh(offer: VehicleOffer | undefined
 
 export function needsSourceDetailFactRefresh(offer: VehicleOffer | undefined) {
   if (!offer || offer.sourceId !== "autopapa_georgia_open") return false;
-  if (String(offer.powertrainKind || "") !== "combustion") return false;
-  return String(offer.calculationStatus || "") === "preliminary_power_pending"
-    || !(Number.isFinite(Number(offer.powerHp)) && Number(offer.powerHp) > 0);
+  // AutoPapa list cards are discovery only. The exact detail page owns the live
+  // asking price (and optional combustion power), so verify it on every seen row.
+  // This also repairs older records whose list-card price was accidentally used.
+  return true;
 }
 
 function mergeOfferBase(previous: VehicleOffer | undefined, base: VehicleOffer, seenAt: string, scanCycleId: string) {
@@ -321,6 +322,18 @@ export async function importCatalog(sourceIdsOrOptions?: string[] | CatalogImpor
               continue;
             }
             if (images.length < maxImagesPerOffer) report.underfilledImages++;
+
+            if (base.sourceId === "autopapa_georgia_open") {
+              const exactRaw = base.operational?.raw as any;
+              if (exactRaw?.autoPapaDetailPriceVerified !== true
+                || !(Number(exactRaw?.autoPapaDetailPriceUsd || 0) > 0)
+                || Math.round(Number(base.sourcePrice || 0)) !== Math.round(Number(exactRaw.autoPapaDetailPriceUsd || 0))) {
+                report.skipped++;
+                report.rejectedByQuality++;
+                if (previous) existing.set(base.id, { ...previous, status: "stale" });
+                continue;
+              }
+            }
 
             const calculated = await calculateOfferWithRussiaCustoms({ ...base, images, firstSeenAt: previous?.firstSeenAt || base.firstSeenAt });
             const offer = applyPriceTrend(calculated, previous, startedAt);

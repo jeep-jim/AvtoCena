@@ -125,6 +125,30 @@ export function autoPapaDetailPowerHp(markup: string) {
   return Number.isFinite(value) && value >= 20 && value <= 2_500 ? value : undefined;
 }
 
+/**
+ * AutoPapa detail pages can contain several dollar amounts: the live asking
+ * price beside the primary H1, Georgian customs helper estimates, recommendation
+ * cards and even stale seller-entered text such as `Cena: ...`. Only the amount
+ * in the primary header before the first `STARTING PRICE ...` helper block is
+ * authoritative for the source vehicle price.
+ */
+export function autoPapaDetailPriceUsd(markup: string) {
+  const h1Index = markup.search(/<h1\b/i);
+  if (h1Index < 0) return undefined;
+  const tail = markup.slice(h1Index, Math.min(markup.length, h1Index + 6_000));
+  const helperIndex = tail.search(/STARTING\s+PRICE\s+(?:AT|IN)\b/i);
+  const primaryHeader = plain(tail.slice(0, helperIndex >= 0 ? helperIndex : Math.min(tail.length, 2_500)));
+  const tokens = [
+    ...primaryHeader.matchAll(/(?:USD|US\$|\$)\s*([0-9][0-9\s,.'’]{1,18})/gi),
+    ...primaryHeader.matchAll(/([0-9][0-9\s,.'’]{1,18})\s*(?:USD|US\$|\$)/gi),
+  ];
+  for (const match of tokens) {
+    const value = integer(match[1]);
+    if (value && value >= 500 && value <= 5_000_000) return value;
+  }
+  return undefined;
+}
+
 function autoPapaDetailIdentity(url: string) {
   try { return new URL(url).pathname.match(DETAIL_PATH_RE)?.[1] || ""; } catch { return ""; }
 }
@@ -135,8 +159,9 @@ export function autoPapaExactDetailFacts(offer: Partial<VehicleOffer>, markup: s
   if (offer.sourceId !== "autopapa_georgia_open" || !/^\d{5,}$/.test(sourceOfferId)) return null;
   if (autoPapaDetailIdentity(requestedUrl) !== sourceOfferId || autoPapaDetailIdentity(responseUrl) !== sourceOfferId) return null;
   const originals = autoPapaDetailOriginalPhotoUrls(markup, responseUrl).slice(0, 30);
+  const priceUsd = autoPapaDetailPriceUsd(markup);
   const powerHp = String(offer.powertrainKind || "") === "combustion" ? autoPapaDetailPowerHp(markup) : undefined;
-  return { sourceOfferId, originals, powerHp };
+  return { sourceOfferId, originals, powerHp, ...(priceUsd ? { priceUsd } : {}) };
 }
 
 export function enrichAutoPapaOfferFromExactDetail(offer: VehicleOffer, markup: string, responseUrl: string) {
@@ -151,9 +176,15 @@ export function enrichAutoPapaOfferFromExactDetail(offer: VehicleOffer, markup: 
       ...raw,
       autoPapaDetailIdentityVerified: true,
       autoPapaDetailOriginals: facts.originals,
+      autoPapaDetailPriceVerified: Boolean(facts.priceUsd),
+      ...(facts.priceUsd ? { autoPapaDetailPriceUsd: facts.priceUsd } : {}),
       ...(facts.powerHp ? { autoPapaDetailPowerHp: facts.powerHp } : {}),
     },
   };
+  if (facts.priceUsd) {
+    offer.sourcePrice = facts.priceUsd;
+    offer.sourceCurrency = "USD";
+  }
   if (facts.powerHp) {
     offer.powerHp = facts.powerHp;
     offer.powerKw = Math.round((facts.powerHp / 1.3596216173) * 100) / 100;
