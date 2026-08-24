@@ -1,0 +1,119 @@
+name: Catalog V3 · One-time all-market refresh 2026-08-24
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - .github/workflows/catalog-v3-run-now-20260824.yml
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v3-sequential-production
+  cancel-in-progress: false
+
+jobs:
+  japan:
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
+    with:
+      market: japan
+      display_name: Япония
+      retention_ms: "2592000000"
+      target_per_source: "30000"
+      target_per_market: "30000"
+      maximum_per_market: "30000"
+      priority_target: "24000"
+      reset_cursor: true
+    secrets: inherit
+
+  korea:
+    needs: japan
+    if: always()
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
+    with:
+      market: korea
+      display_name: Корея
+      retention_ms: "259200000"
+      target_per_source: "10000"
+      target_per_market: "10000"
+      maximum_per_market: "10000"
+      priority_target: "8000"
+      reset_cursor: false
+    secrets: inherit
+
+  china:
+    needs: korea
+    if: always()
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
+    with:
+      market: china
+      display_name: Китай
+      retention_ms: "259200000"
+      target_per_source: "10000"
+      target_per_market: "10000"
+      maximum_per_market: "10000"
+      priority_target: "8000"
+      reset_cursor: false
+    secrets: inherit
+
+  uae:
+    needs: china
+    if: always()
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
+    with:
+      market: uae
+      display_name: ОАЭ
+      retention_ms: "259200000"
+      target_per_source: "10000"
+      target_per_market: "10000"
+      maximum_per_market: "10000"
+      priority_target: "8000"
+      reset_cursor: false
+    secrets: inherit
+
+  europe:
+    needs: uae
+    if: always()
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
+    with:
+      market: europe
+      display_name: Европа
+      retention_ms: "259200000"
+      target_per_source: "10000"
+      target_per_market: "10000"
+      maximum_per_market: "10000"
+      priority_target: "8000"
+      reset_cursor: false
+    secrets: inherit
+
+  georgia:
+    needs: europe
+    if: always()
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
+    with:
+      market: georgia
+      display_name: Грузия
+      retention_ms: "259200000"
+      target_per_source: "10000"
+      target_per_market: "10000"
+      maximum_per_market: "10000"
+      priority_target: "8000"
+      reset_cursor: false
+    secrets: inherit
+
+  kyrgyzstan:
+    needs: georgia
+    if: always()
+    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
+    with:
+      market: kyrgyzstan
+      display_name: Кыргызстан
+      retention_ms: "259200000"
+      target_per_source: "10000"
+      target_per_market: "10000"
+      maximum_per_market: "10000"
+      priority_target: "8000"
+      reset_cursor: false
+    secrets: inherit
