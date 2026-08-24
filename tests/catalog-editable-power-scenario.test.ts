@@ -69,3 +69,12 @@ test("power is the only editable offer specification on desktop and mobile", () 
   assert.match(catalogCard, /л\.с\. · уточнить/);
   assert.match(customsPricing, /powerRequiresConfirmation/);
 });
+
+
+test("customer-entered horsepower stays visible as an on-page preliminary calculation", () => {
+  assert.match(offerPage, /const customerScenarioRub = safeRequestedPowerHp/);
+  assert.match(offerPage, /powerScenario\?\.source === "customer_input"/);
+  assert.match(offerPage, /customerScenarioRub \|\| catalogOfferVisibleRub\(raw\)/);
+  assert.match(offerPage, /scenarioSource=\{powerScenario\?\.source \|\| null\} fullWidth/);
+  assert.match(editableTile, /style=\{\{ gridColumn: "1 \/ -1" \}\}/);
+});

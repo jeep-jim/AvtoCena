@@ -229,7 +229,17 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const sourceUrl = safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);
   const raw: any = normalizeVehicleOfferSpecs(publicOffer(pricedOffer));
   const presented = presentCatalogOffer(raw);
-  const visibleRub = catalogOfferVisibleRub(raw);
+  const powerScenario = readCatalogPowerScenario(raw);
+  // A user-entered horsepower value is an explicit on-page calculation scenario.
+  // It never mutates the stored/catalog price, but the detail page must show the
+  // resulting estimate instead of reverting to “Цена по запросу”.
+  const customerScenarioRub = safeRequestedPowerHp
+    && powerScenario?.source === "customer_input"
+    && Number(raw.totalRub || 0) > 0
+    && Number(raw.totalRub || 0) <= 15_000_000
+      ? Math.round(Number(raw.totalRub))
+      : 0;
+  const visibleRub = customerScenarioRub || catalogOfferVisibleRub(raw);
   const o = {
     ...presented,
     totalRub: visibleRub || null,
@@ -247,7 +257,6 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const makeHref = `/cars/brand/${catalogBrandSlug(raw.make || "")}`;
   const powerDisplay = catalogPowerDisplay(raw);
   const safePowerHp = publicCatalogPowerHp(raw);
-  const powerScenario = readCatalogPowerScenario(raw);
   const preliminaryPricing = Boolean(powerScenario)
     || String(raw?.calculationStatus || "") === "preliminary_power_pending"
     || raw?.calculationSnapshot?.pricingConfidence === "preliminary";
@@ -316,7 +325,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
             : <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />}
           {!japanAuction && o.priceMode === "auction_start" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p> : null}
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
-            <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{specs.map((spec, index) => spec.label === "Мощность" ? <EditablePowerTile key={spec.label} currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} scenarioSource={powerScenario?.source || null} fullWidth={specs.length % 2 === 1 && index === specs.length - 1} /> : <SpecTile key={spec.label} {...spec} fullWidth={specs.length % 2 === 1 && index === specs.length - 1} />)}</div>
+            <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{specs.map((spec, index) => spec.label === "Мощность" ? <EditablePowerTile key={spec.label} currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} scenarioSource={powerScenario?.source || null} fullWidth /> : <SpecTile key={spec.label} {...spec} fullWidth={specs.length % 2 === 1 && index === specs.length - 1} />)}</div>
             <div className="mt-4"><OfferPriceBreakdown offer={o} /></div>
             <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               {japanAuction ? <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
