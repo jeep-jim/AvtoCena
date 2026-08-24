@@ -47,3 +47,34 @@ test("Guazi RU normalized offer keeps USD FOB price and listing-bound photo", ()
   assert.match(String(offer?.operational?.sourceUrl), /\/products\/toyota-highlander/);
   assert.equal((offer?.operational?.raw as any)?.images?.length, 1);
 });
+
+test("diagnostic: deployed Yandex egress endpoints report live source results", async () => {
+  const targets = [
+    ["guazi", "https://avtocena.com/api/internal/guazi-egress-b8c4d1?page=1"],
+    ["myauto", "https://avtocena.com/api/internal/georgia-recovery-e2f913?source=myauto&pages=1&startPage=1"],
+    ["autopapa", "https://avtocena.com/api/internal/georgia-recovery-e2f913?source=autopapa&pages=1&startPage=1"],
+  ] as const;
+  for (const [name, url] of targets) {
+    const started = Date.now();
+    try {
+      const response = await fetch(url, { cache: "no-store", signal: AbortSignal.timeout(35_000) });
+      const body = await response.text();
+      let parsed: any = null;
+      try { parsed = JSON.parse(body); } catch {}
+      console.log("YANDEX_EGRESS_LIVE", JSON.stringify({
+        name,
+        status: response.status,
+        durationMs: Date.now() - started,
+        count: Number(parsed?.count ?? parsed?.items?.length ?? NaN),
+        partial: parsed?.partial,
+        message: parsed?.message,
+        rawSourceCounts: parsed?.report?.rawSourceCounts,
+        sourceCounts: parsed?.report?.sourceCounts,
+        rejected: parsed?.report?.rejected,
+        preview: body.replace(/\s+/g, " ").slice(0, 500),
+      }));
+    } catch (error) {
+      console.log("YANDEX_EGRESS_LIVE", JSON.stringify({ name, error: String((error as Error)?.message || error), durationMs: Date.now() - started }));
+    }
+  }
+});
