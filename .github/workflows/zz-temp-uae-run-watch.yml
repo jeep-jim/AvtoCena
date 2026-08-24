@@ -1,0 +1,31 @@
+name: TEMP UAE rebuild watch
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/zz-temp-uae-run-watch.yml'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect UAE rebuild and Georgia publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          api='https://api.github.com/repos/jeep-jim/AvtoCena'
+          hdr=(-H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json')
+          echo '=== main marker commit workflows ==='
+          curl -fsS "${hdr[@]}" "$api/actions/runs?head_sha=13972485ec66d93e24350b91bf18b459a8353e92&per_page=30" | jq '[.workflow_runs[]|{id,name,path,event,status,conclusion,run_attempt,created_at,updated_at,html_url}]'
+          echo '=== Georgia run ==='
+          curl -fsS "${hdr[@]}" "$api/actions/runs/32728973874" | jq '{id,status,conclusion,run_attempt,created_at,updated_at,html_url}'
+          echo '=== production target ==='
+          curl -L --retry 2 --max-time 45 -fsS 'https://avtocena.com/cars/offer/243f5ab811ee7e86251ba6f7' -o offer.html || true
+          echo "bytes=$(wc -c < offer.html 2>/dev/null || echo 0)"
+          grep -Eo '.{0,120}(299.?216|959.?682|1.?543.?107|2.?219.?245|4935|12900|seller_declared_cena).{0,120}' offer.html 2>/dev/null | head -60 || true
