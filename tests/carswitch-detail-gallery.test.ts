@@ -47,6 +47,13 @@ const detailMarkup = `
     "url":"https://carswitch.com/abudhabi/used-car/nissan/patrol/2024/858598",
     "name":"Nissan Patrol SE Platinum 2024 4.0",
     "vehicleIdentificationNumber":"BUYFROMCS00858598",
+    "vehicleEngine":{"@type":"EngineSpecification","fuelType":"Petrol","engineDisplacement":"4.0"},
+    "vehicleTransmission":"Automatic",
+    "vehicleConfiguration":"SE Platinum",
+    "color":"White",
+    "bodyType":"SUV",
+    "driveWheelConfiguration":"4WD",
+    "vehicleSeatingCapacity":"8",
     "image":[
       "https://d1esl34bhh6pms.cloudfront.net/cars/used/images/original/a",
       "https://d1esl34bhh6pms.cloudfront.net/cars/used/images/original/b",
@@ -101,6 +108,12 @@ test("CarSwitch exact detail parser binds the gallery to the same vehicle URL", 
   assert.equal(row.price, 209_000);
   assert.equal(row.images.length, 10);
   assert.equal(row.vin, "BUYFROMCS00858598");
+  assert.equal(row.engineCc, 4000);
+  assert.equal(row.fuel, "petrol");
+  assert.equal(row.transmission, "automatic");
+  assert.equal(row.drive, "awd");
+  assert.equal(row.bodyType, "suv");
+  assert.equal(row.color, "White");
   assert.ok(row.images.every((url) => !url.includes("related")));
 });
 
@@ -120,6 +133,12 @@ test("CarSwitch fetchImages upgrades one-image discovery to exact detail gallery
     assert.equal(images.length, 10);
     assert.equal(offer.sourcePrice, 209_000);
     assert.equal(offer.sourceCurrency, "AED");
+    assert.equal(offer.engineCc, 4000);
+    assert.equal(offer.fuel, "petrol");
+    assert.equal(offer.transmission, "automatic");
+    assert.equal(offer.drive, "awd");
+    assert.equal(offer.bodyType, "suv");
+    assert.equal(offer.color, "White");
     assert.equal(offer.operational?.galleryVerified, true);
     assert.equal(offer.operational?.photoIdentityVerified, true);
     assert.equal((offer.operational?.raw as any)?.cashPriceAuthority, "schema_org_offer_price_exact_detail");
