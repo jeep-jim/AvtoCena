@@ -103,7 +103,7 @@ test("large collection persists candidate pools instead of discarding incomplete
 
 test("canonical anchor sites are fixed for all seven markets and USA remains future", () => {
   const urls = (market: keyof typeof CATALOG_V2_SOURCE_SLOTS) => new Set(CATALOG_V2_SOURCE_SLOTS[market].map((source) => source.canonicalUrl));
-  assert.deepEqual([...urls("uae")].filter((url) => /dubizzle|dubicars/.test(url)), ["https://uae.dubizzle.com/", "https://www.dubicars.com/"]);
+  assert.deepEqual([...urls("uae")].filter((url) => /carswitch|dubicars/.test(url)), ["https://carswitch.com/", "https://www.dubicars.com/"]);
   assert.ok(urls("korea").has("https://www.encar.com/"));
   assert.ok(urls("korea").has("https://www.kcar.com/"));
   assert.ok(urls("europe").has("https://www.mobile.de/"));
