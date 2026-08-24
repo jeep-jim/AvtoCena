@@ -1,0 +1,78 @@
+name: Apply final homepage and power production patch
+
+on:
+  push:
+    branches:
+      - fix/home-power-production-final-20260824
+    paths:
+      - .home-power-production-final-trigger
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/home-power-production-final-20260824
+          fetch-depth: 1
+      - name: Apply production fixes
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          # 1) Power editor: place it structurally outside the two-column spec grids.
+          page = Path('apps/web/app/(public)/cars/offer/[id]/page.tsx')
+          s = page.read_text()
+          marker = '  ]).filter(Boolean) as SpecItem[];\n\n  return <main'
+          insert = '''  ]).filter(Boolean) as SpecItem[];\n  // Keep the editable power control out of the two-column spec grid entirely.\n  // This prevents a tall half-width grid row on narrow phones and guarantees the\n  // same full-width two-control layout on desktop and mobile.\n  const nonEditableSpecs = specs.filter((spec) => spec.label !== "Мощность");\n  const primarySpecs = nonEditableSpecs.slice(0, Math.min(4, nonEditableSpecs.length));\n  const secondarySpecs = nonEditableSpecs.slice(primarySpecs.length);\n\n  return <main'''
+          if marker not in s:
+              raise SystemExit('offer specs marker not found')
+          s = s.replace(marker, insert, 1)
+          old_grid = '''            <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{specs.map((spec, index) => spec.label === "Мощность" ? <EditablePowerTile key={spec.label} currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} scenarioSource={powerScenario?.source || null} fullWidth /> : <SpecTile key={spec.label} {...spec} fullWidth={specs.length % 2 === 1 && index === specs.length - 1} />)}</div>'''
+          new_grid = '''            <div className="ac-offer-spec-stack min-w-0 space-y-2.5">\n              <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{primarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={primarySpecs.length % 2 === 1 && index === primarySpecs.length - 1} />)}</div>\n              <EditablePowerTile currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} scenarioSource={powerScenario?.source || null} fullWidth />\n              {secondarySpecs.length ? <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{secondarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={secondarySpecs.length % 2 === 1 && index === secondarySpecs.length - 1} />)}</div> : null}\n            </div>'''
+          if old_grid not in s:
+              raise SystemExit('offer power grid not found')
+          page.write_text(s.replace(old_grid, new_grid, 1))
+
+          # 2) Homepage API: if a manifest-present market has no homepage rows,
+          # recover a tiny showcase via normal search (which already falls back to
+          # immutable generation indexes). Never return count-with-no-cards.
+          route = Path('apps/web/app/api/catalog/home/route.ts')
+          r = route.read_text()
+          r = r.replace('import { readHomeCatalogSnapshot } from "@/lib/catalog/storage";', 'import { readHomeCatalogSnapshot, searchOffers } from "@/lib/catalog/storage";')
+          old = '''    const result = await readHomeCatalogSnapshot(6);\n    const items = await applyEncyclopediaDisplayIdentityBatch((result.items || []) as any[]);\n    return NextResponse.json({ ...result, items }, {'''
+          new = '''    const result = await readHomeCatalogSnapshot(6);\n    let rows = [...(result.items || [])] as any[];\n    const missingMarkets = Object.entries(result.marketCounts || {})\n      .filter(([market, count]) => Number(count || 0) > 0 && !rows.some((row) => String(row?.market || "") === market))\n      .map(([market]) => market);\n    if (missingMarkets.length) {\n      const recovered = await Promise.all(missingMarkets.map(async (market) => {\n        try {\n          const result = await searchOffers({ market: market as any, page: 1, pageSize: 6, sort: "updatedAt" });\n          return result.items || [];\n        } catch (error) {\n          console.error("catalog_home_market_recovery_failed", market, error);\n          return [];\n        }\n      }));\n      const seen = new Set(rows.map((row) => String(row?.id || "")));\n      for (const row of recovered.flat()) {\n        const id = String((row as any)?.id || "");\n        if (!id || seen.has(id)) continue;\n        seen.add(id);\n        rows.push(row as any);\n      }\n    }\n    const items = await applyEncyclopediaDisplayIdentityBatch(rows);\n    return NextResponse.json({ ...result, items }, {'''
+          if old not in r:
+              raise SystemExit('home api block not found')
+          route.write_text(r.replace(old, new, 1))
+
+          # 3) Deploy audit: compact projections keep powerDataSource but may omit
+          # the nested powerScenario. Recognise the durable source marker too.
+          audit = Path('scripts/catalog-audit-visible-calculation-coverage.mjs')
+          a = audit.read_text()
+          old = '''  const scenario = offer?.calculationSnapshot?.powerScenario;\n  if (scenario?.requiresConfirmation === true) return { exactEnoughForReady: false, reasons: [], powerDataConfidence: "estimated", powerDataSource: `power_scenario:${scenario.source || "unknown"}`, totalThirtyMinuteKw: null };'''
+          new = '''  const scenario = offer?.calculationSnapshot?.powerScenario;\n  const scenarioSource = clean(offer?.powerDataSource);\n  if (scenario?.requiresConfirmation === true || /^power_scenario:/i.test(scenarioSource)) return {\n    exactEnoughForReady: false,\n    reasons: [],\n    powerDataConfidence: "estimated",\n    powerDataSource: scenarioSource || `power_scenario:${scenario?.source || "unknown"}`,\n    totalThirtyMinuteKw: null,\n  };'''
+          if old not in a:
+              raise SystemExit('visible audit scenario block not found')
+          audit.write_text(a.replace(old, new, 1))
+
+          # 4) Regression coverage in an existing CI test file.
+          test = Path('tests/catalog-current-read-model-empty-market-policy.test.ts')
+          t = test.read_text()
+          add = '''\n\nconst homeRouteSource = fs.readFileSync(new URL("../apps/web/app/api/catalog/home/route.ts", import.meta.url), "utf8");\nconst offerPageSource = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");\nconst visibleAuditSource = fs.readFileSync(new URL("../scripts/catalog-audit-visible-calculation-coverage.mjs", import.meta.url), "utf8");\n\ntest("homepage route actively backfills a manifest-present market when its showcase rows are missing", () => {\n  assert.match(homeRouteSource, /const missingMarkets = Object\.entries\(result\.marketCounts/);\n  assert.match(homeRouteSource, /searchOffers\(\{ market: market as any, page: 1, pageSize: 6/);\n  assert.match(homeRouteSource, /catalog_home_market_recovery_failed/);\n});\n\ntest("editable power is structurally full-width rather than sharing a spec-grid row", () => {\n  assert.match(offerPageSource, /const nonEditableSpecs = specs\.filter/);\n  assert.match(offerPageSource, /ac-offer-spec-stack/);\n  assert.match(offerPageSource, /<EditablePowerTile currentHp=\{editablePowerHp\}[^>]* fullWidth \/>/);\n  assert.doesNotMatch(offerPageSource, /spec\.label === "Мощность" \? <EditablePowerTile/);\n});\n\ntest("visible calculation audit recognises compact power-scenario markers", () => {\n  assert.match(visibleAuditSource, /\^power_scenario:/);\n  assert.match(visibleAuditSource, /scenarioSource \|\| `power_scenario:/);\n});\n'''
+          if 'homepage route actively backfills' not in t:
+              test.write_text(t + add)
+          PY
+      - name: Commit production patch
+        shell: bash
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add 'apps/web/app/(public)/cars/offer/[id]/page.tsx' apps/web/app/api/catalog/home/route.ts scripts/catalog-audit-visible-calculation-coverage.mjs tests/catalog-current-read-model-empty-market-policy.test.ts
+          git commit -m "Guarantee full-width power editor and homepage market recovery"
+          git push origin HEAD:fix/home-power-production-final-20260824
