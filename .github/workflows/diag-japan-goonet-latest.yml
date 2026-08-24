@@ -1,0 +1,27 @@
+name: Diagnose Japan Goo-net rerun
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/diag-japan-goonet-latest.yml'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find target Japan run
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_SHA: 8f3a7e44acb6e7ea66f7bd8e822f69155d84e318
+        run: |
+          set -euo pipefail
+          echo '--- matching Japan runs ---'
+          gh api --method GET "repos/${GITHUB_REPOSITORY}/actions/workflows/catalog-v2-japan.yml/runs?per_page=20" \
+            --jq '.workflow_runs[] | select(.head_sha == env.TARGET_SHA) | {id,run_number,status,conclusion,event,head_sha,head_branch,created_at,updated_at,html_url}'
+          echo '--- recent Japan runs ---'
+          gh api --method GET "repos/${GITHUB_REPOSITORY}/actions/workflows/catalog-v2-japan.yml/runs?per_page=5" \
+            --jq '.workflow_runs[] | {id,run_number,status,conclusion,event,head_sha,head_branch,created_at,updated_at,html_url}'
