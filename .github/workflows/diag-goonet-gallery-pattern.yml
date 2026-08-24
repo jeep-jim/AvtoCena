@@ -20,7 +20,7 @@ jobs:
         run: |
           set -euo pipefail
           mkdir -p input samples
-          gh run download 32665797079 -n catalog-v3-japan-2 -D input
+          gh run download 32665797079 -R jeep-jim/AvtoCena -n catalog-v3-japan-2 -D input
           node <<'NODE'
           const fs=require('fs');
           const file=fs.readdirSync('input').find(x=>x.startsWith('catalog-rebuild-japan-2')&&x.endsWith('.json'));
