@@ -1,0 +1,58 @@
+name: Apply home catalog stability patch
+
+on:
+  push:
+    branches:
+      - fix/power-ui-home-stability-20260824
+    paths:
+      - .home-stability-trigger
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/power-ui-home-stability-20260824
+          fetch-depth: 1
+      - name: Patch homepage public-read-model hydration
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+
+          path = Path('apps/web/components/home/HomePageClient.tsx')
+          source = path.read_text()
+          source = source.replace('import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";\n', '')
+
+          old = '''function toItem(raw: any): Item | null {\n  if (!isCrediblePublicOffer(raw as any)) return null;\n  const offer = presentCatalogOffer(raw);\n  return { raw, id: offer.id, make: canonicalCatalogBrand(String(offer.makeLabel || raw.make || "")), model: String(offer.modelLabel || raw.model || ""), market: offer.market, bodyType: String(raw.bodyType || "") || undefined, fuel: String(raw.fuel || "") || undefined };\n}\n'''
+          new = '''function toItem(raw: any): Item | null {\n  // `/api/catalog/home` and the SSR snapshot only expose rows already admitted by\n  // the canonical public publisher. Re-running deep source/photo validation in\n  // the browser breaks compact projection rows because their private provenance\n  // was intentionally removed. Trust the public read model and validate only the\n  // fields the homepage actually renders.\n  const offer = presentCatalogOffer(raw);\n  const id = String(offer.id || raw?.id || "").trim();\n  const make = canonicalCatalogBrand(String(offer.makeLabel || raw?.make || ""));\n  const model = String(offer.modelLabel || raw?.model || "").trim();\n  const market = String(offer.market || raw?.market || "").trim();\n  if (!id || !make || !model || !marketIds.includes(market)) return null;\n  return { raw, id, make, model, market, bodyType: String(raw?.bodyType || "") || undefined, fuel: String(raw?.fuel || "") || undefined };\n}\n'''
+          if old not in source:
+              raise SystemExit('toItem pattern not found')
+          source = source.replace(old, new, 1)
+
+          old = '''        const unique = new Map<string, Item>();\n        (Array.isArray(catalogPayload?.items) ? catalogPayload.items : []).forEach((raw: any) => { const item = toItem(raw); if (item) unique.set(item.id, item); });\n        setItems([...unique.values()]);\n        setMarketCounts(catalogPayload?.marketCounts && typeof catalogPayload.marketCounts === "object" ? catalogPayload.marketCounts : {});\n        setCount(Number(catalogPayload?.total || 0));\n'''
+          new = '''        const unique = new Map<string, Item>();\n        (Array.isArray(catalogPayload?.items) ? catalogPayload.items : []).forEach((raw: any) => { const item = toItem(raw); if (item) unique.set(item.id, item); });\n        const incomingItems = [...unique.values()];\n        const incomingCounts = catalogPayload?.marketCounts && typeof catalogPayload.marketCounts === "object" ? catalogPayload.marketCounts as Record<string, number> : {};\n        // A current-read-model shard can briefly lag the immutable public manifest\n        // during publication. Never replace a visible market with an empty/partial\n        // browser refresh: keep its last known cards until the new shard is ready.\n        setItems((previousItems) => marketIds.flatMap((marketId) => {\n          const nextMarketItems = incomingItems.filter((item) => item.market === marketId);\n          const previousMarketItems = previousItems.filter((item) => item.market === marketId);\n          return nextMarketItems.length ? nextMarketItems : previousMarketItems;\n        }));\n        setMarketCounts((previousCounts) => Object.fromEntries(marketIds.map((marketId) => {\n          const incomingCount = Math.max(0, Number(incomingCounts[marketId] || 0));\n          const previousCount = Math.max(0, Number(previousCounts[marketId] || 0));\n          return [marketId, incomingCount > 0 ? incomingCount : previousCount];\n        })));\n        setCount((previousCount) => {\n          const incomingTotal = Math.max(0, Number(catalogPayload?.total || 0));\n          return incomingTotal > 0 ? incomingTotal : previousCount;\n        });\n'''
+          if old not in source:
+              raise SystemExit('loadCatalog pattern not found')
+          source = source.replace(old, new, 1)
+          path.write_text(source)
+
+          test_path = Path('tests/catalog-current-read-model-empty-market-policy.test.ts')
+          tests = test_path.read_text()
+          addition = '''\nconst homeClient = fs.readFileSync(new URL("../apps/web/components/home/HomePageClient.tsx", import.meta.url), "utf8");\n\ntest("homepage never erases an admitted market while a compact read-model shard catches up", () => {\n  assert.doesNotMatch(homeClient, /isCrediblePublicOffer\(raw/);\n  assert.match(homeClient, /nextMarketItems\.length \? nextMarketItems : previousMarketItems/);\n  assert.match(homeClient, /incomingCount > 0 \? incomingCount : previousCount/);\n  assert.match(homeClient, /incomingTotal > 0 \? incomingTotal : previousCount/);\n});\n'''
+          if 'homepage never erases an admitted market' not in tests:
+              test_path.write_text(tests + addition)
+          PY
+      - name: Commit source changes
+        shell: bash
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add apps/web/components/home/HomePageClient.tsx tests/catalog-current-read-model-empty-market-policy.test.ts
+          git commit -m "Keep homepage markets stable across read-model refreshes"
+          git push origin HEAD:fix/power-ui-home-stability-20260824
