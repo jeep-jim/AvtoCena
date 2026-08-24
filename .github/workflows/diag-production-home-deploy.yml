@@ -1,0 +1,44 @@
+name: Diagnose production homepage and deploy
+
+on:
+  push:
+    branches:
+      - diag/production-home-deploy-20260824
+    paths:
+      - .diag-production-home-trigger
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Show deploy runs and live homepage state
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo '--- latest deploys ---'
+          gh api "repos/${GITHUB_REPOSITORY}/actions/workflows/deploy-yandex.yml/runs?per_page=5" --jq '.workflow_runs[] | {id,run_number,status,conclusion,head_sha,created_at,updated_at,html_url}'
+          echo '--- live home ---'
+          curl -fsS --retry 3 --retry-delay 2 'https://avtocena.com/api/catalog/home' -o /tmp/home.json
+          node <<'NODE'
+          const fs=require('fs');
+          const x=JSON.parse(fs.readFileSync('/tmp/home.json','utf8'));
+          const items=Array.isArray(x.items)?x.items:[];
+          const by={}; for(const r of items){const m=String(r.market||''); (by[m] ||= []).push(r.id);}
+          console.log(JSON.stringify({generationId:x.generationId,total:x.total,marketCounts:x.marketCounts,itemCount:items.length,itemCounts:Object.fromEntries(Object.entries(by).map(([k,v])=>[k,v.length])),marketsMissingCards:Object.entries(x.marketCounts||{}).filter(([m,c])=>Number(c)>0 && !(by[m]||[]).length).map(([m])=>m)},null,2));
+          const sample=items.find(x=>x.market==='japan') || items[0];
+          if(sample) console.log('sampleOffer='+sample.id);
+          NODE
+          offer=$(node -e "const x=require('/tmp/home.json'); const r=(x.items||[]).find(x=>x.market==='japan')||(x.items||[])[0]; process.stdout.write(r?.id||'')")
+          if [ -n "$offer" ]; then
+            echo '--- sample power scenario page ---'
+            curl -fsS --retry 3 --retry-delay 2 "https://avtocena.com/cars/offer/${offer}?powerHp=150" -o /tmp/offer.html
+            echo "stack_count=$(grep -o 'ac-offer-spec-stack' /tmp/offer.html | wc -l | tr -d ' ')"
+            echo "power_text_count=$(grep -o 'Вы выбрали 150 л.с.' /tmp/offer.html | wc -l | tr -d ' ')"
+            echo "request_price_count=$(grep -o 'Цена по запросу' /tmp/offer.html | wc -l | tr -d ' ')"
+          fi
