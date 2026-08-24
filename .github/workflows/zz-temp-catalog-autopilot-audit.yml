@@ -1,0 +1,98 @@
+name: TEMP catalog autopilot final audit
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/zz-temp-catalog-autopilot-audit.yml'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  actions-and-production:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect market run and schedules
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          api='https://api.github.com/repos/jeep-jim/AvtoCena'
+          hdr=(-H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json')
+          echo '=== runs for Georgia rebuild merge b663 ==='
+          curl -fsS "${hdr[@]}" "$api/actions/runs?head_sha=b663837f730296f1b119f8859eeaab16cf538402&per_page=30" | jq '[.workflow_runs[]|{id,name,event,status,conclusion,created_at,updated_at,html_url}]'
+          echo '=== sequential queue recent runs ==='
+          curl -fsS "${hdr[@]}" "$api/actions/workflows/catalog-v3-sequential-queue.yml/runs?per_page=12" | jq '[.workflow_runs[]|{id,event,status,conclusion,created_at,updated_at,head_sha,html_url}]'
+          for f in japan korea china uae europe georgia kyrgyzstan; do
+            echo "=== $f operator recent runs ==="
+            curl -fsS "${hdr[@]}" "$api/actions/workflows/catalog-v2-$f.yml/runs?per_page=5" | jq '[.workflow_runs[]|{id,event,status,conclusion,created_at,updated_at,head_sha,html_url}]'
+          done
+          echo '=== production seven-market totals ==='
+          for market in japan korea china uae europe georgia kyrgyzstan; do
+            payload="$(curl -L --retry 2 --max-time 45 -fsS "https://avtocena.com/api/catalog/search?market=$market&pageSize=1")"
+            jq -n --arg market "$market" --argjson p "$payload" '{market:$market,total:($p.total//0),items:($p.items|length),firstId:($p.items[0].id//null)}'
+          done
+          echo '=== target offer production ==='
+          curl -L --retry 2 --max-time 45 -fsS 'https://avtocena.com/cars/offer/243f5ab811ee7e86251ba6f7' -o offer.html || true
+          echo "bytes=$(wc -c < offer.html 2>/dev/null || echo 0)"
+          grep -Eo '.{0,100}(299.?216|1.?543.?107|12900|12.?900).{0,100}' offer.html 2>/dev/null | head -30 || true
+
+  object-storage:
+    runs-on: ubuntu-latest
+    env:
+      JSON_STORAGE_DRIVER: object
+      YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+      YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+      YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+      YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+      YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+      YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Audit current stored inventory and required sources
+        shell: bash
+        run: |
+          node --import tsx <<'NODE'
+          const { readAllOffersForMaintenance } = await import('./apps/web/lib/catalog/storage.ts');
+          const { REQUIRED_CATALOG_SOURCES } = await import('./apps/web/lib/catalog/required-catalog-sources.ts');
+          const markets=['japan','korea','china','uae','europe','georgia','kyrgyzstan'];
+          const rows=await readAllOffersForMaintenance();
+          const out={checkedAt:new Date().toISOString(),total:rows.length,markets:{}};
+          for(const market of markets){
+            const m=rows.filter(o=>o.market===market);
+            const bySource={};
+            let latest=null, oldest=null;
+            for(const o of m){
+              bySource[o.sourceId]=(bySource[o.sourceId]||0)+1;
+              const t=String(o.operational?.sourcePublishedAt||o.updatedAt||o.firstSeenAt||'');
+              if(t && (!latest || t>latest)) latest=t;
+              if(t && (!oldest || t<oldest)) oldest=t;
+            }
+            const required=REQUIRED_CATALOG_SOURCES[market].map(s=>({sourceId:s.sourceId,count:bySource[s.sourceId]||0}));
+            out.markets[market]={count:m.length,latest,oldest,required,topSources:Object.entries(bySource).sort((a,b)=>b[1]-a[1]).slice(0,12)};
+          }
+          const target=rows.find(o=>o.id==='243f5ab811ee7e86251ba6f7'||String(o.sourceOfferId)==='958003');
+          out.target=target?{
+            id:target.id,sourceId:target.sourceId,sourceOfferId:target.sourceOfferId,market:target.market,
+            sourcePrice:target.sourcePrice,sourceCurrency:target.sourceCurrency,totalRub:target.totalRub,updatedAt:target.updatedAt,firstSeenAt:target.firstSeenAt,
+            sourceUrl:target.operational?.sourceUrl,
+            priceVerified:target.operational?.raw?.autoPapaDetailPriceVerified,
+            detailPriceUsd:target.operational?.raw?.autoPapaDetailPriceUsd,
+            priceAuthority:target.operational?.raw?.autoPapaDetailPriceAuthority,
+            sellerDeclaredPriceUsd:target.operational?.raw?.autoPapaSellerDeclaredPriceUsd,
+            structuredPriceUsd:target.operational?.raw?.autoPapaStructuredPriceUsd,
+            carBreakdown:target.calculationSnapshot?.breakdown?.find?.(x=>x?.id==='car')?.amountRub
+          }:null;
+          const autopapa=rows.filter(o=>o.sourceId==='autopapa_georgia_open');
+          out.autoPapa={count:autopapa.length,verified:autopapa.filter(o=>o.operational?.raw?.autoPapaDetailPriceVerified===true).length,sellerCena:autopapa.filter(o=>o.operational?.raw?.autoPapaDetailPriceAuthority==='seller_declared_cena').length,structured:autopapa.filter(o=>o.operational?.raw?.autoPapaDetailPriceAuthority==='structured_primary').length};
+          console.log(JSON.stringify(out,null,2));
+          NODE
