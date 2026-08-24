@@ -1,4 +1,4 @@
-import { autoPapaDetailOriginalPhotoUrls, autoPapaDetailPowerHp, autoPapaGeorgiaSource } from "./autopapa-georgia-source";
+import { autoPapaExactDetailFacts, autoPapaGeorgiaSource } from "./autopapa-georgia-source";
 import { calculateOfferWithPreliminaryPowerPricing, isPreliminaryPowerPendingCalculation } from "./customs-pricing";
 import { enrichOfferWithCertifiedPower } from "./power-reference";
 import { credibleCatalogImages, isCatalogMarketSourceAllowed, isCatalogYearAllowed } from "./offer-quality";
@@ -187,14 +187,17 @@ async function prepareAutoPapa(offer: VehicleOffer) {
   if (!detailUrl || !expectedPath.test(new URL(detailUrl).pathname)) throw new Error("autopapa_detail_identity");
   const detail = await fetchMarkup(detailUrl);
   if (!expectedPath.test(new URL(detail.response.url || detailUrl).pathname)) throw new Error("autopapa_redirect_identity");
-  const urls = autoPapaDetailOriginalPhotoUrls(detail.markup, detail.response.url || detailUrl).slice(0, 30);
+  const facts = autoPapaExactDetailFacts(offer, detail.markup, detail.response.url || detailUrl);
+  if (!facts) throw new Error("autopapa_detail_identity");
+  const urls = facts.originals.slice(0, 30);
   if (!urls.length) throw new Error("autopapa_gallery_empty");
-  const sourceExactPowerHp = String(offer.powertrainKind || "") === "combustion"
-    ? autoPapaDetailPowerHp(detail.markup)
-    : undefined;
+  if (!(Number(facts.priceUsd || 0) > 0)) throw new Error("autopapa_detail_price_missing");
+  const sourceExactPowerHp = facts.powerHp;
 
   return normalizeVehicleOfferSpecs({
     ...offer,
+    sourcePrice: facts.priceUsd,
+    sourceCurrency: "USD",
     powerHp: sourceExactPowerHp || offer.powerHp,
     powerKw: sourceExactPowerHp
       ? Math.round((sourceExactPowerHp / 1.359621617) * 10) / 10
@@ -215,6 +218,9 @@ async function prepareAutoPapa(offer: VehicleOffer) {
         listingBoundImages: true,
         photoIdentityVerified: true,
         detailIdentityVerified: true,
+        autoPapaDetailPriceVerified: true,
+        autoPapaDetailPriceUsd: facts.priceUsd,
+        autoPapaListPriceUsd: offer.sourcePrice || null,
         autoPapaDetailPowerHp: sourceExactPowerHp || null,
       },
     },
