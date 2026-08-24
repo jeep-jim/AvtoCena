@@ -28,3 +28,12 @@ test("homepage never erases an admitted market while a compact read-model shard 
   assert.match(homeClient, /incomingCount > 0 \? incomingCount : previousCount/);
   assert.match(homeClient, /incomingTotal > 0 \? incomingTotal : previousCount/);
 });
+
+const storageSource = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", import.meta.url), "utf8");
+
+test("homepage fast read-model path cannot turn an existing manifest market into a false zero", () => {
+  assert.match(storageSource, /const projectionComplete = MARKETS\.every/);
+  assert.match(storageSource, /manifest\.markets\?\.\[market\]\?\.count/);
+  assert.match(storageSource, /projectionRows\.some\(\(row\) => row\.market === market && projectionCanRenderCard\(row\)\)/);
+  assert.match(storageSource, /if \(projectionComplete\)/);
+});

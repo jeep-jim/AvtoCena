@@ -1335,19 +1335,30 @@ export async function readHomeCatalogSnapshot(perMarket = 6) {
   const limit = Math.min(12, Math.max(1, Number(perMarket || 6)));
   const currentProjection = await readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION);
   if (currentProjection.generationId === manifest.generationId) {
-    const marketCounts: Record<string, number> = {};
-    const items = MARKETS.flatMap((market) => {
-      const rows = (currentProjection.items || []).filter((row) => row.market === market && projectionCanRenderCard(row));
-      marketCounts[market] = rows.length;
-      catalogSearchProjectionSort(rows, "updatedAt");
-      return selectCatalogShowcaseDiversity(rows, limit).map(publicOfferFromProjection);
-    });
-    return {
-      generationId: manifest.generationId,
-      items,
-      marketCounts,
-      total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
-    };
+    const projectionRows = currentProjection.items || [];
+    // Current read models are replaced independently from the immutable public
+    // generation. During that short window a combined projection can have the
+    // new generation id while one market shard is still absent. Never publish a
+    // false zero on the homepage: use the fast path only when every market that
+    // exists in the manifest has at least one renderable projection row.
+    const projectionComplete = MARKETS.every((market) =>
+      Number(manifest.markets?.[market]?.count || 0) <= 0
+        || projectionRows.some((row) => row.market === market && projectionCanRenderCard(row)));
+    if (projectionComplete) {
+      const marketCounts: Record<string, number> = {};
+      const items = MARKETS.flatMap((market) => {
+        const rows = projectionRows.filter((row) => row.market === market && projectionCanRenderCard(row));
+        marketCounts[market] = Number(manifest.markets?.[market]?.count || rows.length);
+        catalogSearchProjectionSort(rows, "updatedAt");
+        return selectCatalogShowcaseDiversity(rows, limit).map(publicOfferFromProjection);
+      });
+      return {
+        generationId: manifest.generationId,
+        items,
+        marketCounts,
+        total: Object.values(marketCounts).reduce((sum, count) => sum + count, 0),
+      };
+    }
   }
   const [byId, order, marketShards] = await Promise.all([
     readIndex<{ byId: Record<string, OfferLocation> }>(manifest.generationId, "offers-by-id.json", { byId: {} }),
