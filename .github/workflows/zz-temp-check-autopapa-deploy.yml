@@ -1,0 +1,32 @@
+name: TEMP check AutoPapa deploy
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/zz-temp-check-autopapa-deploy.yml'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check deploy and current production offer
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_SHA: 97dd1d1a686f1b758ab5a9f01f5c3b9aa3c89a24
+        shell: bash
+        run: |
+          set -euo pipefail
+          runs="$(curl -fsS -H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json' "https://api.github.com/repos/jeep-jim/AvtoCena/actions/runs?head_sha=$TARGET_SHA&per_page=30")"
+          echo "$runs" | jq '{runs:[.workflow_runs[]|{id,name,event,status,conclusion,head_sha,created_at,updated_at,html_url}]}'
+          deploy="$(jq -c '[.workflow_runs[] | select(.name=="Deploy to Yandex Cloud")][0] // null' <<<"$runs")"
+          echo "DEPLOY=$deploy"
+          curl -L --retry 3 --retry-delay 2 --max-time 45 -fsS 'https://avtocena.com/cars/offer/243f5ab811ee7e86251ba6f7' -o offer.html || true
+          echo "OFFER_BYTES=$(wc -c < offer.html 2>/dev/null || echo 0)"
+          grep -Eo '.{0,80}(299.?216|1.?543.?107|12900|12.?900).{0,80}' offer.html 2>/dev/null | head -20 || true
+          test "$deploy" != "null"
+          test "$(jq -r '.status' <<<"$deploy")" = "completed"
+          test "$(jq -r '.conclusion' <<<"$deploy")" = "success"
