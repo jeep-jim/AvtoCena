@@ -1,0 +1,53 @@
+name: TEMP patch deploy catalog parity
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/zz-temp-selfpatch-deploy-parity.yml'
+      - 'scripts/catalog-audit-current-readmodel-parity.mjs'
+      - 'tests/catalog-current-read-model-empty-market-policy.test.ts'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.event.pull_request.head.ref == 'fix/deploy-seven-market-readmodel-parity-20260824'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+          fetch-depth: 0
+      - name: Patch deploy workflow
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('.github/workflows/deploy-yandex.yml')
+          text = path.read_text()
+          old = '''          echo '2/9 public catalog'\n          catalog_json="$("${CURL[@]}" 'https://avtocena.com/api/catalog/search?market=korea&pageSize=1')"\n          offer_id="$(jq -r '.items[0].id // empty' <<<"$catalog_json")"\n          test -n "$offer_id"\n          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars'\n          "${CURL[@]}" -o /dev/null "https://avtocena.com/cars/offer/$offer_id"\n'''
+          new = '''          echo '2/9 public catalog · all seven markets'\n          first_offer_id=''\n          for market in korea china japan uae europe georgia kyrgyzstan; do\n            catalog_json="$("${CURL[@]}" "https://avtocena.com/api/catalog/search?market=$market&pageSize=1")"\n            jq -e '.total > 0 and (.items | length) > 0' <<<"$catalog_json" >/dev/null\n            offer_id="$(jq -r '.items[0].id // empty' <<<"$catalog_json")"\n            test -n "$offer_id"\n            "${CURL[@]}" -o /dev/null "https://avtocena.com/cars?market=$market"\n            if [ -z "$first_offer_id" ]; then first_offer_id="$offer_id"; fi\n          done\n          "${CURL[@]}" -o /dev/null 'https://avtocena.com/cars'\n          "${CURL[@]}" -o /dev/null "https://avtocena.com/cars/offer/$first_offer_id"\n'''
+          if old not in text:
+              raise SystemExit('deploy catalog smoke block not found exactly')
+          text = text.replace(old, new, 1)
+
+          anchor = '''      - name: Audit every visible catalog calculation\n'''
+          insert = '''      - name: Audit current read-model parity\n        env:\n          JSON_STORAGE_DRIVER: object\n          YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}\n          YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}\n          YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}\n          YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}\n          YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}\n          YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}\n          CATALOG_CURRENT_READMODEL_PARITY_OUTPUT: catalog-current-readmodel-parity.json\n        run: node --import tsx scripts/catalog-audit-current-readmodel-parity.mjs\n\n      - name: Upload current read-model parity report\n        if: always()\n        uses: actions/upload-artifact@v4\n        with:\n          name: catalog-current-readmodel-parity-${{ github.sha }}\n          path: catalog-current-readmodel-parity.json\n          if-no-files-found: warn\n          retention-days: 7\n\n'''
+          if anchor not in text:
+              raise SystemExit('visible calculation audit anchor not found')
+          text = text.replace(anchor, insert + anchor, 1)
+          path.write_text(text)
+          PY
+      - name: Commit patch to PR branch
+        shell: bash
+        run: |
+          if git diff --quiet -- .github/workflows/deploy-yandex.yml; then
+            echo 'deploy patch already applied'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add .github/workflows/deploy-yandex.yml
+          git commit -m 'Guard deploy with seven-market read-model parity'
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
