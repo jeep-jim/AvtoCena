@@ -1,0 +1,28 @@
+name: Diagnostic UAE run lookup 20260824
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/diag-uae-run-lookup-20260824.yml'
+
+permissions:
+  contents: read
+  actions: read
+
+jobs:
+  lookup:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Lookup UAE push run for marker SHA
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          TARGET_SHA: 9e739d3c30f31a96f7f3911ea702bc1aa54d680b
+        run: |
+          set -euo pipefail
+          api="https://api.github.com/repos/${REPO}/actions/runs?event=push&head_sha=${TARGET_SHA}&per_page=100"
+          json="$(curl -fsSL -H "Authorization: Bearer ${GH_TOKEN}" -H 'Accept: application/vnd.github+json' "$api")"
+          echo '=== runs for target sha ==='
+          jq -c '.workflow_runs[] | {id,name,path,display_title,event,status,conclusion,head_sha,run_number,run_attempt,created_at,updated_at,html_url}' <<<"$json"
+          echo '=== matching UAE workflows ==='
+          jq -c '.workflow_runs[] | select((.name|ascii_downcase|contains("uae")) or (.path|ascii_downcase|contains("uae"))) | {id,name,path,display_title,event,status,conclusion,head_sha,run_number,run_attempt,created_at,updated_at,html_url}' <<<"$json"
