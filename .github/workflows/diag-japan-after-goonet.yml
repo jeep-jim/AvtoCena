@@ -1,0 +1,26 @@
+name: Diagnose Japan after Goo-net fix
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/diag-japan-after-goonet.yml'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find Japan rerun
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TARGET_SHA: 337daa390f6a9134646d1c3eb910179ee111ae72
+        run: |
+          set -euo pipefail
+          gh api --method GET "repos/${GITHUB_REPOSITORY}/actions/workflows/catalog-v2-japan.yml/runs?per_page=10" \
+            --jq '.workflow_runs[] | select(.head_sha == env.TARGET_SHA) | {id,run_number,status,conclusion,event,head_sha,created_at,updated_at,html_url}'
+          echo '--- recent ---'
+          gh api --method GET "repos/${GITHUB_REPOSITORY}/actions/workflows/catalog-v2-japan.yml/runs?per_page=3" \
+            --jq '.workflow_runs[] | {id,run_number,status,conclusion,event,head_sha,created_at,updated_at,html_url}'
