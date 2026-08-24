@@ -6,6 +6,7 @@ import {
   goonetListingId,
   goonetPrimaryImageUrl,
   isGoonetListingFrame,
+  isGoonetPageBoundJFrame,
 } from "../apps/web/lib/catalog/goonet-exact-source";
 
 const listingId = "989025071000203288001";
@@ -27,6 +28,13 @@ function image(url: string) {
     mimeType: "image/jpeg",
     url,
   };
+}
+
+const liveListingId = "402026080500704382002";
+const livePage = `https://www.goo-net-exchange.com/usedcars/HONDA/FIT/${liveListingId}/`;
+const livePrimary = goonetPrimaryImageUrl(livePage);
+function liveFrame(index: number, family = "0704382A20260804G002") {
+  return `https://picture1.goo-net.com/070/0704382/J/${family}${String(index).padStart(2, "0")}.jpg`;
 }
 
 test("Goo-net gallery only accepts exact listing-id frames and keeps 00 as cover", () => {
@@ -54,6 +62,24 @@ test("Goo-net source-bound frame check rejects dealer assets and another offer",
   assert.equal(isGoonetListingFrame(primary.replace(listingId, "111111111111111111111"), listingId), false);
 });
 
+test("Goo-net exact page accepts its coherent long J family behind the verified 00 cover", () => {
+  const catalog = "https://catalogphoto.goo-net.com/carphoto/10101044_201506j.jpg";
+  const shortDealer = "https://picture1.goo-net.com/070/0704382/J/D00701.jpg";
+  const competingSingle = liveFrame(1, "0704382A20260804G999");
+  const rows = coherentGoonetImages([
+    catalog,
+    shortDealer,
+    liveFrame(3),
+    competingSingle,
+    liveFrame(1),
+    liveFrame(2),
+  ], 30, livePage);
+  assert.equal(rows[0], livePrimary);
+  assert.deepEqual(rows, [livePrimary, liveFrame(1), liveFrame(2), liveFrame(3)]);
+  assert.equal(isGoonetPageBoundJFrame(liveFrame(1)), true);
+  assert.equal(isGoonetPageBoundJFrame(shortDealer), false);
+});
+
 test("Goo-net has no fallback cover when the exact primary frame is unavailable", () => {
   const rows = coherentGoonetImages([
     "https://picture1.goo-net.com/9890250710/00203288/J/D00701.jpg",
@@ -76,6 +102,19 @@ test("central catalog sanitizer removes retained Goo-net dealer/catalog assets a
   assert.deepEqual(clean.map((row) => row.url), [primary, frame(1), frame(3)]);
 });
 
+test("central Goo-net sanitizer recovers one dominant retained exact-page J family", () => {
+  const dirty = [
+    image("https://catalogphoto.goo-net.com/carphoto/10101044_201506j.jpg"),
+    image("https://picture1.goo-net.com/070/0704382/J/D00701.jpg"),
+    image(liveFrame(3)),
+    image(liveFrame(1, "0704382A20260804G999")),
+    image(liveFrame(1)),
+    image(liveFrame(2)),
+  ];
+  const clean = credibleCatalogImages(dirty as any);
+  assert.deepEqual(clean.map((row) => row.url), [liveFrame(1), liveFrame(2), liveFrame(3)]);
+});
+
 test("central Goo-net sanitizer rejects legacy-only or ambiguous exact listing galleries", () => {
   const legacyOnly = [
     image("https://catalogphoto.goo-net.com/carphoto/35101510_201808z.jpg"),
@@ -86,4 +125,12 @@ test("central Goo-net sanitizer rejects legacy-only or ambiguous exact listing g
   const otherListingId = "111111111111111111111";
   const otherPrimary = `https://picture1.goo-net.com/${otherListingId.slice(0, 10)}/${otherListingId.slice(10, 18)}/J/${otherListingId}00.jpg`;
   assert.deepEqual(credibleCatalogImages([image(primary), image(otherPrimary)] as any), []);
+
+  const tiedPageFamilies = [
+    image(liveFrame(1)),
+    image(liveFrame(2)),
+    image(liveFrame(1, "0704382A20260804G999")),
+    image(liveFrame(2, "0704382A20260804G999")),
+  ];
+  assert.deepEqual(credibleCatalogImages(tiedPageFamilies as any), []);
 });
