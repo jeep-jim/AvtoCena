@@ -304,6 +304,12 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
     driveLabel ? { label: "Привод", value: driveLabel, icon: "drive" as const } : null,
     bodyValue ? { label: "Кузов", value: bodyValue, icon: "body" as const } : null,
   ]).filter(Boolean) as SpecItem[];
+  // Keep the editable power control out of the two-column spec grid entirely.
+  // This prevents a tall half-width grid row on narrow phones and guarantees the
+  // same full-width two-control layout on desktop and mobile.
+  const nonEditableSpecs = specs.filter((spec) => spec.label !== "Мощность");
+  const primarySpecs = nonEditableSpecs.slice(0, Math.min(4, nonEditableSpecs.length));
+  const secondarySpecs = nonEditableSpecs.slice(primarySpecs.length);
 
   return <main className="ac-offer-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
     <PublicHeader backHref="/cars" backLabel="В каталог" />
@@ -325,7 +331,11 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
             : <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />}
           {!japanAuction && o.priceMode === "auction_start" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p> : null}
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
-            <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{specs.map((spec, index) => spec.label === "Мощность" ? <EditablePowerTile key={spec.label} currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} scenarioSource={powerScenario?.source || null} fullWidth /> : <SpecTile key={spec.label} {...spec} fullWidth={specs.length % 2 === 1 && index === specs.length - 1} />)}</div>
+            <div className="ac-offer-spec-stack min-w-0 space-y-2.5">
+              <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{primarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={primarySpecs.length % 2 === 1 && index === primarySpecs.length - 1} />)}</div>
+              <EditablePowerTile currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} scenarioSource={powerScenario?.source || null} fullWidth />
+              {secondarySpecs.length ? <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{secondarySpecs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={secondarySpecs.length % 2 === 1 && index === secondarySpecs.length - 1} />)}</div> : null}
+            </div>
             <div className="mt-4"><OfferPriceBreakdown offer={o} /></div>
             <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               {japanAuction ? <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">
