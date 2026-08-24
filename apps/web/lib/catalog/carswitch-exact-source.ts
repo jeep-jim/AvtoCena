@@ -240,15 +240,32 @@ export function parseCarSwitchExactDetail(markup: string, expectedSourceUrl: str
 }
 
 async function request(url: string, referer = LIST_URL) {
-  const controller = new AbortController();
-  const timer = setTimeout(() => controller.abort(), Math.max(5_000, Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 30_000)));
-  try {
-    const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
-    const markup = await response.text();
-    if ([401, 403, 429].includes(response.status) || BLOCK_RE.test(markup.slice(0, 10_000))) throw new Error(`carswitch_exact_blocked_${response.status}`);
-    if (!response.ok) throw new Error(`carswitch_exact_http_${response.status}`);
-    return { response, markup };
-  } finally { clearTimeout(timer); }
+  const timeoutMs = Math.max(5_000, Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 30_000));
+  const retryDelayMs = Math.max(0, Number(process.env.CATALOG_CARSWITCH_RETRY_DELAY_MS || 750));
+  let lastStatus = 0;
+  let lastBytes = 0;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), timeoutMs);
+    try {
+      const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
+      const markup = await response.text();
+      lastStatus = response.status;
+      lastBytes = markup.length;
+      if ([401, 403, 429].includes(response.status) || BLOCK_RE.test(markup.slice(0, 10_000))) throw new Error(`carswitch_exact_blocked_${response.status}`);
+      const transientShell = response.status === 202 || (response.status === 200 && markup.length < 50_000);
+      if (transientShell) {
+        if (attempt < 3) {
+          if (retryDelayMs > 0) await new Promise((resolve) => setTimeout(resolve, retryDelayMs * attempt));
+          continue;
+        }
+        throw new Error(`carswitch_exact_transient_status_${response.status}_bytes_${markup.length}`);
+      }
+      if (!response.ok) throw new Error(`carswitch_exact_http_${response.status}`);
+      return { response, markup };
+    } finally { clearTimeout(timer); }
+  }
+  throw new Error(`carswitch_exact_transient_status_${lastStatus}_bytes_${lastBytes}`);
 }
 
 function asImage(url: string): CatalogImage {
