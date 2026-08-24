@@ -27,9 +27,12 @@ jobs:
           end=text.index("\n          PY\n", start)
           code='\n'.join(line[10:] if line.startswith('          ') else line for line in text[start:end].splitlines())
           exec(compile(code, 'embedded-power-patch', 'exec'), {'__name__':'__main__'})
-          Path('.github/workflows/run-editable-power-patch-on-pr.yml').unlink(missing_ok=True)
-          Path('.power-feature-trigger').unlink(missing_ok=True)
           PY
+          # The repository token may write source code but GitHub blocks workflow-file
+          # changes unless the token has the dedicated workflows permission. The
+          # one-shot patch only needs source/test changes, so keep every workflow
+          # exactly as it was on the branch and push the feature itself.
+          git checkout -- .github/workflows
       - name: Commit feature
         shell: bash
         run: |
