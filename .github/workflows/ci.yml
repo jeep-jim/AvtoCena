@@ -65,7 +65,7 @@ jobs:
       - name: Japan Prestige partition rotation tests
         run: node --import tsx --test tests/prestige-japan-partition-plan.test.ts
       - name: Catalog live sources v23 tests
-        run: node --import tsx --test tests/catalog-live-sources-v19.test.ts
+        run: node --import tsx --test tests/catalog-live-sources-v19.test.ts tests/carswitch-detail-gallery.test.ts
       - name: Guazi China RU listing tests
         run: node --import tsx --test tests/guazi-ru-source.test.ts
       - name: MyAuto Georgia listing tests
