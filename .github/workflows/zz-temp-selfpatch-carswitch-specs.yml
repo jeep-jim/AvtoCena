@@ -1,0 +1,79 @@
+name: TEMP CarSwitch exact specs selfpatch
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/zz-temp-selfpatch-carswitch-specs.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - name: Bind exact CarSwitch specs before recalculation
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('apps/web/lib/catalog/carswitch-exact-source.ts')
+          s=p.read_text()
+
+          old='''  images: string[];\n  vin?: string;\n};'''
+          new='''  images: string[];\n  vin?: string;\n  engineCc?: number;\n  fuel?: string;\n  transmission?: string;\n  drive?: string;\n  bodyType?: string;\n  color?: string;\n};'''
+          if old not in s: raise SystemExit('row type anchor missing')
+          s=s.replace(old,new,1)
+
+          anchor='''function entityPrice(entity: Record<string, unknown>) {'''
+          helpers='''function entityEngineCc(entity: Record<string, unknown>) {\n  const engine = entity.vehicleEngine;\n  if (!engine || typeof engine !== "object") return undefined;\n  const raw = clean((engine as any).engineDisplacement).replace(",", ".");\n  const match = raw.match(/([0-9]+(?:\\.[0-9]+)?)/);\n  if (!match) return undefined;\n  const value = Number(match[1]);\n  if (!Number.isFinite(value) || value <= 0) return undefined;\n  if (value >= 0.3 && value <= 10) return Math.round(value * 1_000);\n  if (value >= 300 && value <= 10_000) return Math.round(value);\n  return undefined;\n}\n\nfunction entityFuel(entity: Record<string, unknown>) {\n  const engine = entity.vehicleEngine;\n  const raw = clean((engine && typeof engine === "object" ? (engine as any).fuelType : undefined) || entity.fuelType).toLowerCase();\n  if (/hybrid|phev|hev|mhev/.test(raw)) return "hybrid";\n  if (/diesel/.test(raw)) return "diesel";\n  if (/petrol|gasoline/.test(raw)) return "petrol";\n  if (/electric|battery/.test(raw)) return "electric";\n  if (/lpg|cng/.test(raw)) return "lpg";\n  return undefined;\n}\n\nfunction entityTransmission(entity: Record<string, unknown>) {\n  const raw = clean(entity.vehicleTransmission).toLowerCase();\n  if (/cvt/.test(raw)) return "cvt";\n  if (/dct|dual clutch/.test(raw)) return "dct";\n  if (/manual/.test(raw)) return "manual";\n  if (/automatic|auto/.test(raw)) return "automatic";\n  return undefined;\n}\n\nfunction entityDrive(entity: Record<string, unknown>) {\n  const raw = clean(entity.driveWheelConfiguration).toLowerCase();\n  if (/4wd|awd|4x4|all[- ]?wheel|four[- ]?wheel/.test(raw)) return "awd";\n  if (/fwd|front[- ]?wheel|2wd/.test(raw)) return "fwd";\n  if (/rwd|rear[- ]?wheel/.test(raw)) return "rwd";\n  return undefined;\n}\n\nfunction entityBodyType(entity: Record<string, unknown>) {\n  const raw = clean(entity.bodyType).toLowerCase();\n  if (/pickup|pick-up/.test(raw)) return "pickup";\n  if (/minivan|mpv/.test(raw)) return "minivan";\n  if (/van/.test(raw)) return "van";\n  if (/suv|crossover/.test(raw)) return "suv";\n  if (/sedan|saloon/.test(raw)) return "sedan";\n  if (/hatch/.test(raw)) return "hatchback";\n  if (/wagon|estate/.test(raw)) return "wagon";\n  if (/coupe|coupé/.test(raw)) return "coupe";\n  if (/convertible|cabrio|roadster/.test(raw)) return "convertible";\n  return undefined;\n}\n\n'''
+          if anchor not in s: raise SystemExit('entityPrice anchor missing')
+          s=s.replace(anchor,helpers+anchor,1)
+
+          old='''    images,\n    vin: clean(entity.vehicleIdentificationNumber) || undefined,\n  };'''
+          new='''    images,\n    vin: clean(entity.vehicleIdentificationNumber) || undefined,\n    engineCc: entityEngineCc(entity),\n    fuel: entityFuel(entity),\n    transmission: entityTransmission(entity),\n    drive: entityDrive(entity),\n    bodyType: entityBodyType(entity),\n    color: clean(entity.color) || undefined,\n  };'''
+          if old not in s: raise SystemExit('rowFromEntity output anchor missing')
+          s=s.replace(old,new,1)
+
+          old='''      mileageKm: row.mileageKm, sourcePrice: row.price, sourceCurrency: "AED", priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data",'''
+          new='''      mileageKm: row.mileageKm, engineCc: row.engineCc, fuel: row.fuel, transmission: row.transmission, drive: row.drive, bodyType: row.bodyType, color: row.color,\n      sourcePrice: row.price, sourceCurrency: "AED", priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data",'''
+          if old not in s: raise SystemExit('normalize offer specs anchor missing')
+          s=s.replace(old,new,1)
+
+          old='''    offer.mileageKm = detail.mileageKm || offer.mileageKm;\n    offer.trim = detail.trim || offer.trim;\n    const op = offer.operational as any;'''
+          new='''    offer.mileageKm = detail.mileageKm || offer.mileageKm;\n    offer.trim = detail.trim || offer.trim;\n    offer.engineCc = detail.engineCc || offer.engineCc;\n    offer.fuel = detail.fuel || offer.fuel;\n    offer.transmission = detail.transmission || offer.transmission;\n    offer.drive = detail.drive || offer.drive;\n    offer.bodyType = detail.bodyType || offer.bodyType;\n    offer.color = detail.color || offer.color;\n    const op = offer.operational as any;'''
+          if old not in s: raise SystemExit('detail mutation anchor missing')
+          s=s.replace(old,new,1)
+          p.write_text(s)
+
+          t=Path('tests/carswitch-detail-gallery.test.ts')
+          x=t.read_text()
+          old='''    "vehicleIdentificationNumber":"BUYFROMCS00858598",\n    "image":['''
+          new='''    "vehicleIdentificationNumber":"BUYFROMCS00858598",\n    "vehicleEngine":{"@type":"EngineSpecification","fuelType":"Petrol","engineDisplacement":"4.0"},\n    "vehicleTransmission":"Automatic",\n    "vehicleConfiguration":"SE Platinum",\n    "color":"White",\n    "bodyType":"SUV",\n    "driveWheelConfiguration":"4WD",\n    "vehicleSeatingCapacity":"8",\n    "image":['''
+          # The fixture has listing and detail occurrences; enrich only the exact detail root after its URL/name.
+          detail_anchor='''    "name":"Nissan Patrol SE Platinum 2024 4.0",\n    "vehicleIdentificationNumber":"BUYFROMCS00858598",\n    "image":['''
+          detail_new='''    "name":"Nissan Patrol SE Platinum 2024 4.0",\n    "vehicleIdentificationNumber":"BUYFROMCS00858598",\n    "vehicleEngine":{"@type":"EngineSpecification","fuelType":"Petrol","engineDisplacement":"4.0"},\n    "vehicleTransmission":"Automatic",\n    "vehicleConfiguration":"SE Platinum",\n    "color":"White",\n    "bodyType":"SUV",\n    "driveWheelConfiguration":"4WD",\n    "vehicleSeatingCapacity":"8",\n    "image":['''
+          if detail_anchor not in x: raise SystemExit('detail fixture anchor missing')
+          x=x.replace(detail_anchor,detail_new,1)
+
+          parse_assert='''  assert.equal(row.vin, "BUYFROMCS00858598");\n  assert.ok(row.images.every((url) => !url.includes("related")));'''
+          parse_new='''  assert.equal(row.vin, "BUYFROMCS00858598");\n  assert.equal(row.engineCc, 4000);\n  assert.equal(row.fuel, "petrol");\n  assert.equal(row.transmission, "automatic");\n  assert.equal(row.drive, "awd");\n  assert.equal(row.bodyType, "suv");\n  assert.equal(row.color, "White");\n  assert.ok(row.images.every((url) => !url.includes("related")));'''
+          if parse_assert not in x: raise SystemExit('detail parser assertions anchor missing')
+          x=x.replace(parse_assert,parse_new,1)
+
+          fetch_assert='''    assert.equal(offer.sourceCurrency, "AED");\n    assert.equal(offer.operational?.galleryVerified, true);'''
+          fetch_new='''    assert.equal(offer.sourceCurrency, "AED");\n    assert.equal(offer.engineCc, 4000);\n    assert.equal(offer.fuel, "petrol");\n    assert.equal(offer.transmission, "automatic");\n    assert.equal(offer.drive, "awd");\n    assert.equal(offer.bodyType, "suv");\n    assert.equal(offer.color, "White");\n    assert.equal(offer.operational?.galleryVerified, true);'''
+          if fetch_assert not in x: raise SystemExit('fetch assertions anchor missing')
+          x=x.replace(fetch_assert,fetch_new,1)
+          t.write_text(x)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/lib/catalog/carswitch-exact-source.ts tests/carswitch-detail-gallery.test.ts
+          git diff --cached --check
+          git commit -m 'Use exact CarSwitch structured specs before pricing'
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
