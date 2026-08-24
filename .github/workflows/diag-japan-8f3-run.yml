@@ -1,0 +1,22 @@
+name: Diagnose Japan 8f3 run
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/diag-japan-8f3-run.yml'
+
+permissions:
+  actions: read
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Find Japan run for marker 8f3
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          gh api --method GET "repos/${GITHUB_REPOSITORY}/actions/workflows/catalog-v2-japan.yml/runs?per_page=30" \
+            --jq '.workflow_runs[] | select(.head_sha=="8f3a7e44acb6e7ea66f7bd8e822f69155d84e318") | {id,run_number,status,conclusion,event,head_sha,head_branch,created_at,updated_at,html_url}'
