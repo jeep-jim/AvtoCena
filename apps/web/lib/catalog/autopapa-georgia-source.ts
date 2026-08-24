@@ -155,7 +155,7 @@ export function autoPapaSellerDeclaredPriceUsd(markup: string) {
   return value && value >= 500 && value <= 5_000_000 ? value : undefined;
 }
 
-export function autoPapaStructuredPrimaryPriceUsd(markup: string, identity?: Pick<VehicleOffer, "make" | "model">) {
+export function autoPapaStructuredPrimaryPriceUsd(markup: string, identity?: Partial<Pick<VehicleOffer, "make" | "model">>) {
   const text = plain(markup);
   const helperIndex = text.search(/\bSTARTING\s+PRICE\s+(?:AT|IN)\b/i);
   const factsIndex = text.search(/\bBody\s+Type\s*:/i);
