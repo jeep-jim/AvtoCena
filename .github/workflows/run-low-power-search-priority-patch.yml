@@ -1,0 +1,127 @@
+name: Apply low-power search priority patch
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.event.pull_request.head.ref == 'fix/catalog-low-power-search-priority-20260824' && github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/catalog-low-power-search-priority-20260824
+          fetch-depth: 1
+      - name: Patch default catalog ordering
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          storage = Path('apps/web/lib/catalog/storage.ts')
+          text = storage.read_text()
+          old = '''function projectionFreshness(row: CatalogSearchProjection) { return Date.parse(String(row.auctionDate || row.sourcePublishedAt || row.firstSeenAt || row.updatedAt || "")) || 0; }
+          export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt") {
+            return rows.sort((a, b) => sort === "totalRub" ? projectionNumber(a.totalRub, Infinity) - projectionNumber(b.totalRub, Infinity)
+              : sort === "totalRubDesc" ? projectionNumber(b.totalRub, -Infinity) - projectionNumber(a.totalRub, -Infinity)
+                : sort === "year" ? Number(b.year || 0) - Number(a.year || 0)
+                  : sort === "yearAsc" ? Number(a.year || 0) - Number(b.year || 0)
+                : sort === "mileage" ? projectionNumber(a.mileageKm, 0) - projectionNumber(b.mileageKm, 0)
+                  : projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || "")));
+          }
+          '''.replace('          ','')
+          new = '''function projectionFreshness(row: CatalogSearchProjection) { return Date.parse(String(row.auctionDate || row.sourcePublishedAt || row.firstSeenAt || row.updatedAt || "")) || 0; }
+          function projectionFreshnessCompare(a: CatalogSearchProjection, b: CatalogSearchProjection) {
+            return projectionFreshness(b) - projectionFreshness(a) || String(b.updatedAt || "").localeCompare(String(a.updatedAt || ""));
+          }
+          function catalogSearchLowPowerPriority(rows: CatalogSearchProjection[]) {
+            const lowPower = rows.filter((row) => {
+              const hp = projectionUtilizationPowerHp(row);
+              return hp > 0 && hp <= 160.01;
+            }).sort(projectionFreshnessCompare);
+            const other = rows.filter((row) => {
+              const hp = projectionUtilizationPowerHp(row);
+              return !(hp > 0 && hp <= 160.01);
+            }).sort(projectionFreshnessCompare);
+            if (!lowPower.length || !other.length) return [...lowPower, ...other];
+            const result: CatalogSearchProjection[] = [];
+            let lowIndex = 0;
+            let otherIndex = 0;
+            // Commercial default: four mass-market <=160 hp cars, then one
+            // higher/unknown-power car. With enough supply every 20-card page
+            // therefore contains at least 16 low-power cars, while powerful cars
+            // remain discoverable and are never removed from inventory.
+            while (lowIndex < lowPower.length || otherIndex < other.length) {
+              for (let index = 0; index < 4 && lowIndex < lowPower.length; index++) result.push(lowPower[lowIndex++]);
+              if (otherIndex < other.length) result.push(other[otherIndex++]);
+              if (lowIndex >= lowPower.length) {
+                while (otherIndex < other.length) result.push(other[otherIndex++]);
+              }
+            }
+            return result;
+          }
+          export function catalogSearchProjectionSort(rows: CatalogSearchProjection[], sort = "updatedAt") {
+            if (sort === "updatedAt") {
+              const prioritized = catalogSearchLowPowerPriority(rows);
+              rows.splice(0, rows.length, ...prioritized);
+              return rows;
+            }
+            return rows.sort((a, b) => sort === "totalRub" ? projectionNumber(a.totalRub, Infinity) - projectionNumber(b.totalRub, Infinity)
+              : sort === "totalRubDesc" ? projectionNumber(b.totalRub, -Infinity) - projectionNumber(a.totalRub, -Infinity)
+                : sort === "year" ? Number(b.year || 0) - Number(a.year || 0)
+                  : sort === "yearAsc" ? Number(a.year || 0) - Number(b.year || 0)
+                : sort === "mileage" ? projectionNumber(a.mileageKm, 0) - projectionNumber(b.mileageKm, 0)
+                  : projectionFreshnessCompare(a, b));
+          }
+          '''.replace('          ','')
+          if old not in text:
+              raise SystemExit('catalog sort anchor not found')
+          storage.write_text(text.replace(old,new,1))
+
+          tests = Path('tests/catalog-filter-search.test.ts')
+          t = tests.read_text()
+          marker = '''test("catalog sort directions used by the filter UI reach the search projection", () => {
+          '''.replace('          ','')
+          if marker not in t:
+              raise SystemExit('test anchor missing')
+          addition = '''
+          test("default catalog order keeps an 80 percent <=160 hp commercial priority without hiding powerful cars", () => {
+            const now = Date.now();
+            const low = Array.from({ length: 16 }, (_, index) => ({
+              id: `low-${index}`, market: "korea", make: "Mass", model: `Low ${index}`, year: 2024,
+              powerHp: 100 + (index % 6) * 10, updatedAt: new Date(now - (index + 20) * 1000).toISOString(),
+            }));
+            const high = Array.from({ length: 4 }, (_, index) => ({
+              id: `high-${index}`, market: "korea", make: "Premium", model: `High ${index}`, year: 2024,
+              powerHp: 220 + index * 20, updatedAt: new Date(now - index * 1000).toISOString(),
+            }));
+            const ordered = catalogSearchProjectionSort([...high, ...low] as any[], "updatedAt");
+            assert.equal(ordered.length, 20);
+            assert.equal(ordered.filter((row: any) => Number(row.powerHp) <= 160).length, 16);
+            for (let offset = 0; offset < 20; offset += 5) {
+              assert.ok(ordered.slice(offset, offset + 4).every((row: any) => Number(row.powerHp) <= 160));
+              assert.ok(Number((ordered[offset + 4] as any).powerHp) > 160);
+            }
+          });
+
+          '''.replace('          ','')
+          tests.write_text(t.replace(marker, addition + marker, 1))
+          PY
+          # Never let this feature commit touch workflow files; the temporary
+          # runner is removed separately through the GitHub API after it pushes.
+          git checkout -- .github/workflows
+      - name: Test and push source changes
+        shell: bash
+        run: |
+          npm ci
+          npx tsx --test tests/catalog-filter-search.test.ts tests/catalog-model-year-inventory-quota.test.ts
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add apps/web/lib/catalog/storage.ts tests/catalog-filter-search.test.ts
+          git diff --cached --stat
+          git commit -m "Prioritize <=160 hp cars in default catalog order"
+          git push origin HEAD:fix/catalog-low-power-search-priority-20260824
