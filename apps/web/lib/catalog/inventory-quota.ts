@@ -1,9 +1,21 @@
 import type { VehicleOffer } from "./types";
 
 export const CATALOG_MAX_OFFERS_PER_MODEL_YEAR = 20;
+export const CATALOG_SHOWCASE_MAX_POWER_HP = 160;
+export const CATALOG_SHOWCASE_LOW_POWER_MIN_SHARE = 0.8;
 
 function clean(value: unknown) {
   return String(value || "").replace(/\s+/g, " ").trim().toLocaleLowerCase("en-US");
+}
+
+function positivePowerHp(value: unknown) {
+  const power = Number(value);
+  return Number.isFinite(power) && power > 0 && power <= 2_500 ? power : 0;
+}
+
+function isShowcaseLowPower(row: { powerHp?: unknown }) {
+  const power = positivePowerHp(row.powerHp);
+  return power > 0 && power <= CATALOG_SHOWCASE_MAX_POWER_HP;
 }
 
 /**
@@ -66,11 +78,14 @@ export function enforceCatalogModelYearQuota<T extends Partial<VehicleOffer>>(
 }
 
 /**
- * Keep a small public showcase representative: prefer a new make first, then
- * a new exact model, and only use duplicate models when the market has no
- * other renderable candidates. Input order remains the freshness ranking.
+ * Keep a small public showcase representative while enforcing the commercial
+ * priority the product promises: when enough <=160 hp cars exist, at least 80%
+ * of the showcase comes from that group. Higher-power cars are NOT discarded;
+ * they remain available and fill the remaining showcase slots after the target
+ * share is satisfied. Inside each pool we still prefer a new make first, then a
+ * new exact model, and finally duplicate models, preserving the caller's order.
  */
-export function selectCatalogShowcaseDiversity<T extends { market?: unknown; make?: unknown; model?: unknown }>(
+export function selectCatalogShowcaseDiversity<T extends { market?: unknown; make?: unknown; model?: unknown; powerHp?: unknown }>(
   rows: readonly T[],
   limit: number,
 ) {
@@ -82,31 +97,40 @@ export function selectCatalogShowcaseDiversity<T extends { market?: unknown; mak
   const makes = new Set<string>();
   const models = new Set<string>();
   const append = (row: T) => {
+    if (selectedRows.has(row)) return;
     selected.push(row);
     selectedRows.add(row);
     makes.add(clean(row.make));
     const modelKey = catalogExactModelKey(row as Partial<VehicleOffer>);
     if (modelKey) models.add(modelKey);
   };
+  const fillDiverse = (pool: readonly T[], target: number) => {
+    if (selected.length >= target) return;
+    for (const row of pool) {
+      const make = clean(row.make);
+      const modelKey = catalogExactModelKey(row as Partial<VehicleOffer>);
+      if (!make || !modelKey || selectedRows.has(row) || makes.has(make) || models.has(modelKey)) continue;
+      append(row);
+      if (selected.length >= target) return;
+    }
+    for (const row of pool) {
+      const modelKey = catalogExactModelKey(row as Partial<VehicleOffer>);
+      if (!modelKey || selectedRows.has(row) || models.has(modelKey)) continue;
+      append(row);
+      if (selected.length >= target) return;
+    }
+    for (const row of pool) {
+      if (selectedRows.has(row)) continue;
+      append(row);
+      if (selected.length >= target) return;
+    }
+  };
 
-  for (const row of rows) {
-    const make = clean(row.make);
-    const modelKey = catalogExactModelKey(row as Partial<VehicleOffer>);
-    if (!make || !modelKey || makes.has(make) || models.has(modelKey)) continue;
-    append(row);
-    if (selected.length >= boundedLimit) return selected;
-  }
-  for (const row of rows) {
-    const modelKey = catalogExactModelKey(row as Partial<VehicleOffer>);
-    if (!modelKey || selectedRows.has(row) || models.has(modelKey)) continue;
-    append(row);
-    if (selected.length >= boundedLimit) return selected;
-  }
-  for (const row of rows) {
-    if (selectedRows.has(row)) continue;
-    append(row);
-    if (selected.length >= boundedLimit) break;
-  }
+  const lowPowerRows = rows.filter(isShowcaseLowPower);
+  const requestedLowPower = Math.ceil(boundedLimit * CATALOG_SHOWCASE_LOW_POWER_MIN_SHARE);
+  const lowPowerTarget = Math.min(requestedLowPower, lowPowerRows.length);
+  fillDiverse(lowPowerRows, lowPowerTarget);
+  fillDiverse(rows, boundedLimit);
   return selected;
 }
 
