@@ -6,38 +6,11 @@ on:
       - '.github/workflows/zz-temp-uae-run-watch.yml'
 
 permissions:
-  actions: write
+  actions: read
   contents: read
 
 jobs:
-  unblock:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Cancel only stale pre-fix UAE run
-        env:
-          GH_TOKEN: ${{ github.token }}
-        shell: bash
-        run: |
-          set -euo pipefail
-          api='https://api.github.com/repos/jeep-jim/AvtoCena'
-          hdr=(-H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json')
-          run="$(curl -fsS "${hdr[@]}" "$api/actions/runs/32741199815")"
-          echo "$run" | jq '{id,name,head_sha,status,conclusion,run_attempt,html_url}'
-          name="$(echo "$run" | jq -r '.name')"
-          sha="$(echo "$run" | jq -r '.head_sha')"
-          status="$(echo "$run" | jq -r '.status')"
-          if [ "$name" = 'Catalog V3 · UAE · 10k · 13972485ec66d93e24350b91bf18b459a8353e92' ] && [ "$sha" = '13972485ec66d93e24350b91bf18b459a8353e92' ] && [ "$status" != 'completed' ]; then
-            code="$(curl -sS -o cancel.json -w '%{http_code}' -X POST "${hdr[@]}" "$api/actions/runs/32741199815/cancel")"
-            echo "cancel_http=$code"
-            cat cancel.json || true
-            test "$code" = '202'
-          else
-            echo 'stale run already completed or identity changed; no cancellation needed'
-          fi
-
   inspect:
-    needs: unblock
-    if: always()
     runs-on: ubuntu-latest
     steps:
       - name: Inspect fresh UAE rebuild trigger
@@ -48,11 +21,28 @@ jobs:
           set -euo pipefail
           api='https://api.github.com/repos/jeep-jim/AvtoCena'
           hdr=(-H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json')
-          sleep 10
           echo '=== marker merge workflows ==='
           curl -fsS "${hdr[@]}" "$api/actions/runs?head_sha=ab0eda264c29e62d2bc2cbd3ba82ec3e4ab88ad6&per_page=30" | jq '[.workflow_runs[]|{id,name,path,event,status,conclusion,run_attempt,created_at,updated_at,html_url}]'
-          echo '=== previous UAE run ==='
-          curl -fsS "${hdr[@]}" "$api/actions/runs/32741199815" | jq '{id,status,conclusion,run_attempt,created_at,updated_at,html_url}'
+          echo '=== fresh UAE run ==='
+          curl -fsS "${hdr[@]}" "$api/actions/runs/32747455843" | jq '{id,status,conclusion,run_attempt,created_at,updated_at,html_url}'
           echo '=== Georgia production ==='
           curl -L --retry 2 --max-time 45 -fsS 'https://avtocena.com/cars/offer/243f5ab811ee7e86251ba6f7' -o offer.html || true
           grep -Eo '.{0,100}(959.?682|2.?219.?245|12900).{0,100}' offer.html 2>/dev/null | head -30 || true
+
+  carswitch-page4:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Probe page 4 repeatedly
+        shell: bash
+        run: |
+          set -euo pipefail
+          ua='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150 Safari/537.36'
+          url='https://carswitch.com/uae/used-cars/search?app_route=listing&page=4'
+          for i in 1 2 3 4 5; do
+            code="$(curl -L -sS --max-time 45 -A "$ua" -H 'Accept: text/html,application/xhtml+xml,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.9' -o "p$i.html" -w '%{http_code}' "$url" || true)"
+            bytes="$(wc -c < "p$i.html" 2>/dev/null || echo 0)"
+            itemlists="$(grep -oi 'ItemList' "p$i.html" 2>/dev/null | wc -l || true)"
+            cars="$(grep -Eo 'https://carswitch.com/(dubai|abudhabi|sharjah|ajman|umm-al-quwain|ras-al-khaimah|fujairah)/used-car/[^"< ]+' "p$i.html" 2>/dev/null | sort -u | wc -l || true)"
+            echo "attempt=$i code=$code bytes=$bytes itemlist_markers=$itemlists exact_urls=$cars"
+            sleep 5
+          done
