@@ -105,7 +105,8 @@ function coherentCarusedImages(input: CatalogImage[]) {
 }
 
 function coherentGoonetImages(input: CatalogImage[]) {
-  const groups = new Map<string, Map<string, { frame: number; image: CatalogImage }>>();
+  const exactGroups = new Map<string, Map<string, { frame: number; image: CatalogImage }>>();
+  const pageGroups = new Map<string, Map<string, { frame: number; image: CatalogImage }>>();
   let sawGoonet = false;
   for (const image of input || []) {
     try {
@@ -114,21 +115,44 @@ function coherentGoonetImages(input: CatalogImage[]) {
       if (host !== GOONET_CATALOG_IMAGE_HOST && !GOONET_PICTURE_HOST_RE.test(host)) continue;
       sawGoonet = true;
       if (!GOONET_PICTURE_HOST_RE.test(host)) continue;
-      const match = url.pathname.match(/\/J\/(\d{21})(\d{2})\.(?:jpe?g|png|webp|avif)$/i);
-      if (!match) continue;
-      const listingId = match[1];
-      const frame = Number(match[2]);
-      if (!groups.has(listingId)) groups.set(listingId, new Map());
-      const bucket = groups.get(listingId)!;
+
+      const exact = url.pathname.match(/\/J\/(\d{21})(\d{2})\.(?:jpe?g|png|webp|avif)$/i);
+      if (exact) {
+        const listingId = exact[1];
+        const frame = Number(exact[2]);
+        if (!exactGroups.has(listingId)) exactGroups.set(listingId, new Map());
+        const bucket = exactGroups.get(listingId)!;
+        if (!bucket.has(url.pathname)) bucket.set(url.pathname, { frame, image });
+        continue;
+      }
+
+      const pageFrame = url.pathname.match(/\/J\/([A-Z0-9]{12,})(\d{2})\.(?:jpe?g|png|webp|avif)$/i);
+      if (!pageFrame || !/[A-Z]/i.test(pageFrame[1])) continue;
+      const family = pageFrame[1].toUpperCase();
+      const frame = Number(pageFrame[2]);
+      if (!pageGroups.has(family)) pageGroups.set(family, new Map());
+      const bucket = pageGroups.get(family)!;
       if (!bucket.has(url.pathname)) bucket.set(url.pathname, { frame, image });
     } catch { /* ignore non-source URLs */ }
   }
   if (!sawGoonet) return null;
-  if (groups.size !== 1) return [];
-  const bucket = [...groups.values()][0];
-  const rows = [...bucket.values()].sort((a, b) => a.frame - b.frame);
-  if (!rows.some((row) => row.frame === 0)) return [];
-  return rows.map((row) => row.image);
+  if (exactGroups.size > 1) return [];
+
+  const exactRows = exactGroups.size === 1
+    ? [...[...exactGroups.values()][0].values()].sort((a, b) => a.frame - b.frame)
+    : [];
+  const exactCover = exactRows.find((row) => row.frame === 0);
+  if (exactRows.length >= 2 && exactCover) return exactRows.map((row) => row.image);
+
+  const rankedPageGroups = [...pageGroups.entries()].sort((a, b) => b[1].size - a[1].size || a[0].localeCompare(b[0]));
+  if (!rankedPageGroups.length || rankedPageGroups[0][1].size < 2) return [];
+  if (rankedPageGroups[1] && rankedPageGroups[1][1].size === rankedPageGroups[0][1].size) return [];
+  const pageRows = [...rankedPageGroups[0][1].values()].sort((a, b) => a.frame - b.frame);
+  if (!pageRows.some((row) => row.frame === 1)) return [];
+  return [
+    ...(exactCover ? [exactCover.image] : []),
+    ...pageRows.map((row) => row.image),
+  ];
 }
 
 export function credibleCatalogImages(images: CatalogImage[]) {
