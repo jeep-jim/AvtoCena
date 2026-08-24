@@ -237,6 +237,11 @@ jobs:
         run: npx tsx scripts/catalog-build-knowledge-gaps.mjs
       - run: npx tsx scripts/catalog-validate-source-scale.mjs
       - name: Publish market
+        env:
+          # Europe currently peaks above Node's ~3.5 GB default old-space limit
+          # while atomically rebuilding all seven market indexes. Keep the
+          # higher heap scoped to publish only; collection and validation stay unchanged.
+          NODE_OPTIONS: "--max-old-space-size=6144"
         run: npx tsx scripts/catalog-publish-market.mjs
       - name: Require safe publication
         run: |
