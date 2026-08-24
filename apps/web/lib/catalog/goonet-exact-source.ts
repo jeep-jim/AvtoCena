@@ -172,6 +172,17 @@ export function isGoonetListingFrame(value: string, listingId: string) {
   }
 }
 
+export function isGoonetPageBoundJFrame(value: string) {
+  try {
+    const parsed = new URL(value);
+    if (!/(?:^|\.)picture\d*\.goo-net\.com$/i.test(parsed.hostname)) return false;
+    const match = parsed.pathname.match(/\/J\/([A-Z0-9]{12,})(\d{2})\.(?:jpe?g|png|webp)$/i);
+    return Boolean(match && /[A-Z]/i.test(match[1]));
+  } catch {
+    return false;
+  }
+}
+
 function isSourcePrimaryImage(value: string, listingId?: string) {
   const id = listingId || value.match(/\/J\/(\d{21})00\.(?:jpe?g|png|webp)$/i)?.[1] || "";
   if (!id || !isGoonetListingFrame(value, id)) return false;
@@ -185,11 +196,34 @@ export function goonetPrimaryImageUrl(pageUrl: string) {
   return `https://picture1.goo-net.com/${listingId.slice(0, 10)}/${listingId.slice(10, 18)}/J/${listingId}00.jpg`;
 }
 
+function coherentPageBoundGoonetJImages(urls: string[]) {
+  const groups = new Map<string, Map<string, { frame: number; url: string }>>();
+  for (const value of urls || []) {
+    try {
+      const parsed = new URL(value);
+      if (!/(?:^|\.)picture\d*\.goo-net\.com$/i.test(parsed.hostname)) continue;
+      const match = parsed.pathname.match(/\/J\/([A-Z0-9]{12,})(\d{2})\.(?:jpe?g|png|webp)$/i);
+      if (!match || !/[A-Z]/i.test(match[1])) continue;
+      const family = match[1].toUpperCase();
+      const frame = Number(match[2]);
+      if (!groups.has(family)) groups.set(family, new Map());
+      const bucket = groups.get(family)!;
+      if (!bucket.has(parsed.pathname)) bucket.set(parsed.pathname, { frame, url: parsed.toString() });
+    } catch { /* ignore unrelated source assets */ }
+  }
+  const ranked = [...groups.entries()].sort((a, b) => b[1].size - a[1].size || a[0].localeCompare(b[0]));
+  if (!ranked.length || ranked[0][1].size < 2) return [];
+  if (ranked[1] && ranked[1][1].size === ranked[0][1].size) return [];
+  const rows = [...ranked[0][1].values()].sort((a, b) => a.frame - b.frame);
+  if (!rows.some((row) => row.frame === 1)) return [];
+  return rows.map((row) => row.url);
+}
+
 /**
- * Only images whose filename contains the exact 21-digit listing id may enter a
- * Goo-net offer. This drops dealer banners, option comics and unrelated assets.
- * Frame 00 is always the cover and we never fall back to a dashboard/interior
- * image when that source-bound primary cannot be verified.
+ * Goo-net exposes one deterministic 21-digit frame-00 cover, while the exact
+ * detail page's real multi-photo gallery uses a coherent long alphanumeric J
+ * family. The page-bound family is accepted only when it has a unique dominant
+ * sequence beginning at frame 01; dealer/banner/catalog families are ignored.
  */
 export function coherentGoonetImages(urls: string[], limit: number, pageUrl = "") {
   const listingId = goonetListingId(pageUrl)
@@ -198,9 +232,16 @@ export function coherentGoonetImages(urls: string[], limit: number, pageUrl = ""
   if (!listingId) return [];
   const primary = urls.find((value) => isSourcePrimaryImage(value, listingId)) || goonetPrimaryImageUrl(pageUrl);
   if (!primary || !isSourcePrimaryImage(primary, listingId)) return [];
+
   const exactFrames = [...new Set(urls.filter((value) => isGoonetListingFrame(value, listingId)))];
-  const secondary = exactFrames.filter((value) => !isSourcePrimaryImage(value, listingId)).sort((left, right) => left.localeCompare(right, "en"));
-  return [primary, ...secondary].slice(0, limit);
+  const exactSecondary = exactFrames
+    .filter((value) => !isSourcePrimaryImage(value, listingId))
+    .sort((left, right) => left.localeCompare(right, "en"));
+  if (exactSecondary.length) return [primary, ...exactSecondary].slice(0, limit);
+
+  const pageBound = coherentPageBoundGoonetJImages(urls);
+  if (!pageBound.length) return [primary].slice(0, limit);
+  return [primary, ...pageBound].slice(0, limit);
 }
 
 function parse(markup: string, url: string): Row | null {
@@ -317,7 +358,7 @@ export class GoonetExactAdapter implements CatalogSourceAdapter {
     const raw: any = operational.raw || row || {};
     const markRejected = () => {
       operational.photoIdentityVerified = false;
-      operational.gallerySafetyMode = "goonet_listing_bound_frames_v1";
+      operational.gallerySafetyMode = "goonet_exact_page_bound_j_v2";
       raw.photoIdentityVerified = false;
       raw.listingBoundImages = false;
       raw.detailIdentityVerified = false;
@@ -338,7 +379,7 @@ export class GoonetExactAdapter implements CatalogSourceAdapter {
 
     const saved: CatalogImage[] = [primary];
     for (const url of sourceImages.slice(1, limit)) {
-      if (!isGoonetListingFrame(url, listingId)) continue;
+      if (!isGoonetListingFrame(url, listingId) && !isGoonetPageBoundJFrame(url)) continue;
       const image = await cacheImageFromUrl(url, "japan", { headers: { ...H, referer: row?.url || sourceUrl } }).catch(() => null);
       if (image && image.size > 8_000) saved.push(image);
     }
@@ -346,7 +387,7 @@ export class GoonetExactAdapter implements CatalogSourceAdapter {
     const verified = saved.length >= minimum;
     operational.galleryImageCount = saved.length;
     operational.galleryRefreshedAt = new Date().toISOString();
-    operational.gallerySafetyMode = "goonet_listing_bound_frames_v1";
+    operational.gallerySafetyMode = "goonet_exact_page_bound_j_v2";
     operational.photoIdentityVerified = verified;
     raw.photoIdentityVerified = verified;
     raw.listingBoundImages = verified;
@@ -357,7 +398,7 @@ export class GoonetExactAdapter implements CatalogSourceAdapter {
     return verified ? saved.slice(0, limit) : [];
   }
 
-  async healthCheck() { return { ok: true, message: "Goo-net exact listings require a verified listing-bound 00 vehicle cover and exact-id gallery frames", checkedAt: new Date().toISOString() }; }
+  async healthCheck() { return { ok: true, message: "Goo-net exact listings require a verified 21-digit frame-00 cover plus a coherent exact-page J gallery", checkedAt: new Date().toISOString() }; }
 }
 
 export const goonetJapanExactSource = new GoonetExactAdapter();
