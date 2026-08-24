@@ -51,7 +51,7 @@ jobs:
           rows=[]
           for raw in scripts:
               try: obj=json.loads(html.unescape(raw.strip()))
-              except Exception as e: continue
+              except Exception: continue
               stack=[obj]
               while stack:
                   x=stack.pop()
@@ -74,7 +74,6 @@ jobs:
                   g=x.get('@graph')
                   if isinstance(g,(list,dict)): stack.append(g)
           print('ROWS',len(rows))
-          for r in rows[:20]: print(json.dumps(r,ensure_ascii=False))
           exact=[]
           pat=re.compile(r'^https?://(?:www\.)?carswitch\.com/(?:dubai|abudhabi|sharjah|ajman|umm-al-quwain|ras-al-khaimah|fujairah)/used-car/[^/]+/[^/]+/(20\d{2})/(\d{5,12})/?$',re.I)
           for r in rows:
@@ -85,9 +84,37 @@ jobs:
               target=exact[0]['url']
               st,final,ct,d=get(target)
               print('DETAIL',st,final,ct,'bytes',len(d),'target',target)
-              urls=set(re.findall(r'https?:\\?/\\?/[^"\'<>\\\s]+?\.(?:jpe?g|webp|png)(?:\?[^"\'<>\\\s]*)?',d,re.I))
-              urls={u.replace('\\/','/') for u in urls if 'cloudfront' in u or 'carswitch' in u}
-              print('DETAIL_IMAGE_URLS',len(urls))
               print('DETAIL_LD_SCRIPTS',len(re.findall(r'application/ld\+json',d,re.I)))
               print('DETAIL_MARKERS',{'vehicleIdentificationNumber':len(re.findall('vehicleIdentificationNumber',d,re.I)),'mileageFromOdometer':len(re.findall('mileageFromOdometer',d,re.I)),'priceCurrency':len(re.findall('priceCurrency',d,re.I))})
           PY
+
+  carswitch-fix-live:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/carswitch-detail-gallery-20260824
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Exercise fixed adapter against live CarSwitch
+        env:
+          CATALOG_REBUILD_MARKET: uae
+          CATALOG_SOURCE_TIMEOUT_MS: "45000"
+          CATALOG_MAX_IMAGES_PER_OFFER: "30"
+        shell: bash
+        run: |
+          node --import tsx <<'NODE'
+          const { carswitchUaeExactSource } = await import('./apps/web/lib/catalog/carswitch-exact-source.ts');
+          const page = await carswitchUaeExactSource.fetchPage('1');
+          const rows = Array.isArray(page.items) ? page.items : [];
+          const offers = rows.map((row) => carswitchUaeExactSource.normalizeOffer(row)).filter(Boolean);
+          console.log(JSON.stringify({fetched: rows.length, normalized: offers.length, nextCursor: page.nextCursor, first: offers[0] ? {id: offers[0].sourceOfferId, sourcePrice: offers[0].sourcePrice, sourceCurrency: offers[0].sourceCurrency, discoveryImages: offers[0].operational?.galleryImageCount, url: offers[0].operational?.sourceUrl} : null}, null, 2));
+          if (!offers.length) throw new Error('carswitch_fix_no_normalized_offers');
+          const offer = offers[0];
+          const detailImages = await carswitchUaeExactSource.fetchImages(offer);
+          console.log(JSON.stringify({id: offer.sourceOfferId, detailImages: detailImages.length, priceAfterDetail: offer.sourcePrice, galleryVerified: offer.operational?.galleryVerified, priceAuthority: offer.operational?.raw?.cashPriceAuthority, vin: offer.operational?.raw?.vehicleIdentificationNumber}, null, 2));
+          if (detailImages.length < 2 || offer.operational?.galleryVerified !== true) throw new Error('carswitch_fix_detail_gallery_not_verified');
+          NODE
