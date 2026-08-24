@@ -131,19 +131,25 @@ for (const offer of visible) {
     if (!identityResolved) hardReasons.push("unresolved_model_identity");
     if (!totalRub) hardReasons.push("missing_total_rub");
     if (hardReasons.length) {
-      marketRow.invalidReady++;
-      invalidReady.push({
-        id: offer.id,
-        market,
-        make: offer.make,
-        model: offer.model,
-        trim: offer.trim || null,
-        year: offer.year,
-        calculationStatus: status,
-        reasons: hardReasons,
-        powerDataConfidence: exact.powerDataConfidence,
-        powerDataSource: exact.powerDataSource,
-      });
+      const visibleRub = catalogOfferVisibleRub(offer);
+      const safelyHiddenEstimated = status === "estimated" && visibleRub === 0 && identityResolved;
+      if (safelyHiddenEstimated) {
+        increment(needsDataModels, `${market} · ${pair} · ${[...new Set(hardReasons)].join(",")}`);
+      } else {
+        marketRow.invalidReady++;
+        invalidReady.push({
+          id: offer.id,
+          market,
+          make: offer.make,
+          model: offer.model,
+          trim: offer.trim || null,
+          year: offer.year,
+          calculationStatus: status,
+          reasons: hardReasons,
+          powerDataConfidence: exact.powerDataConfidence,
+          powerDataSource: exact.powerDataSource,
+        });
+      }
     } else if (status === "ready") {
       readyExact++;
       marketRow.readyExact++;
