@@ -37,7 +37,7 @@ test("probe accelerates optional sources but can never drop a mandatory source f
 
 test("canonical mandatory market source contract cannot silently drift", () => {
   const required = [
-    ["dubizzle_uae_open", "https://uae.dubizzle.com/"],
+    ["carswitch_uae_open", "https://carswitch.com/"],
     ["dubicars_uae_exact", "https://www.dubicars.com/"],
     ["encar_direct", "https://www.encar.com/"],
     ["kcar_korea_open", "https://www.kcar.com/"],
