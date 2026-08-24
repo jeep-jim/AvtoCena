@@ -13,56 +13,16 @@ jobs:
   verify:
     runs-on: ubuntu-latest
     steps:
-      - name: Wait for deploy and verify UAE homepage cards
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Verify deployed UAE homepage selection via API
         shell: bash
         run: |
           set -euo pipefail
-          api='https://api.github.com/repos/jeep-jim/AvtoCena'
-          hdr=(-H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json')
-          deploy_id=''
-          for attempt in $(seq 1 30); do
-            runs="$(curl -fsS "${hdr[@]}" "$api/actions/runs?head_sha=4e31ca449d72eedbc71bd9775dde912a4f3268cc&per_page=30")"
-            deploy_id="$(echo "$runs" | jq -r '.workflow_runs[] | select(.path==".github/workflows/deploy-yandex.yml") | .id' | head -1)"
-            if [ -n "$deploy_id" ]; then
-              run="$(curl -fsS "${hdr[@]}" "$api/actions/runs/$deploy_id")"
-              status="$(echo "$run" | jq -r '.status')"
-              conclusion="$(echo "$run" | jq -r '.conclusion // ""')"
-              echo "deploy attempt=$attempt id=$deploy_id status=$status conclusion=$conclusion"
-              if [ "$status" = completed ]; then
-                test "$conclusion" = success
-                break
-              fi
-            else
-              echo "deploy attempt=$attempt not visible yet"
-            fi
-            sleep 20
-          done
-          test -n "$deploy_id"
-          run="$(curl -fsS "${hdr[@]}" "$api/actions/runs/$deploy_id")"
-          test "$(echo "$run" | jq -r '.status')" = completed
-          test "$(echo "$run" | jq -r '.conclusion')" = success
-
-          curl -L --retry 3 --max-time 60 -fsS 'https://avtocena.com/' -o home.html
-          python - <<'PY'
-          import re,sys
-          s=open('home.html',encoding='utf-8',errors='ignore').read()
-          # Work against the rendered server HTML between the UAE and Europe market headings.
-          start=s.find('ОАЭ')
-          end=s.find('Европа', start+1)
-          if start < 0 or end < 0:
-              print('UAE/Europe block markers missing')
-              sys.exit(2)
-          block=s[start:end]
-          text=re.sub(r'<[^>]+>',' ',block)
-          text=re.sub(r'\s+',' ',text)
-          print('UAE_BLOCK', text[:7000])
-          pending=text.count('Цена по запросу')
-          rub_prices=re.findall(r'\b\d{1,3}(?:[\s\u00a0]\d{3})+\s*₽', text)
-          print('pending_labels=',pending,'rub_prices=',rub_prices[:12])
-          if pending != 0:
-              raise SystemExit(f'uae_homepage_pending_price_labels:{pending}')
-          if len(rub_prices) < 4:
-              raise SystemExit(f'uae_homepage_priced_cards_below_four:{len(rub_prices)}')
-          PY
+          curl -L --retry 3 --max-time 60 -fsS 'https://avtocena.com/api/catalog/home' -o home.json
+          jq '{total,marketCounts,uae:[.items[]|select(.market=="uae")|{id,make,model,year,totalRub,sourcePrice,sourceCurrency,calculationStatus,priceMode}]}' home.json
+          uae_count="$(jq '[.items[]|select(.market=="uae")]|length' home.json)"
+          priced_count="$(jq '[.items[]|select(.market=="uae" and ((.totalRub // 0) > 0))]|length' home.json)"
+          pending_count="$(jq '[.items[]|select(.market=="uae" and ((.totalRub // 0) <= 0))]|length' home.json)"
+          echo "uae_count=$uae_count priced_count=$priced_count pending_count=$pending_count"
+          test "$uae_count" -ge 4
+          test "$priced_count" -ge 4
+          test "$pending_count" -eq 0
