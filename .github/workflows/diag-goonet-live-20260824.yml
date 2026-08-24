@@ -36,3 +36,19 @@ jobs:
             u="${stock_base}${suffix}.jpg"
             echo "STOCK_${suffix} $(curl -L -A 'Mozilla/5.0' -sS -o /dev/null -w '%{http_code} %{content_type} %{size_download}' "$u" || true)"
           done
+          e=$(mktemp --suffix=.jpg)
+          s=$(mktemp --suffix=.jpg)
+          curl -L -A 'Mozilla/5.0' -sS "${exact_base}00.jpg" -o "$e"
+          curl -L -A 'Mozilla/5.0' -sS "${stock_base}01.jpg" -o "$s"
+          echo "EXACT00_SHA=$(sha256sum "$e" | awk '{print $1}') SIZE=$(wc -c < "$e") TYPE=$(file -b "$e")"
+          echo "STOCK01_SHA=$(sha256sum "$s" | awk '{print $1}') SIZE=$(wc -c < "$s") TYPE=$(file -b "$s")"
+          python - "$e" "$s" <<'PY'
+          import sys
+          from PIL import Image, ImageChops, ImageStat
+          a=Image.open(sys.argv[1]).convert('RGB')
+          b=Image.open(sys.argv[2]).convert('RGB')
+          print('EXACT00_DIM', a.size, 'STOCK01_DIM', b.size)
+          b2=b.resize(a.size)
+          stat=ImageStat.Stat(ImageChops.difference(a,b2))
+          print('MEAN_ABS_DIFF', sum(stat.mean)/3)
+          PY
