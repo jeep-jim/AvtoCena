@@ -1,0 +1,41 @@
+name: Run editable power patch on PR
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    if: github.event.pull_request.head.ref == 'feat/editable-power-pricing-20260824' && github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: feat/editable-power-pricing-20260824
+          fetch-depth: 1
+      - name: Execute embedded one-shot patch
+        shell: bash
+        run: |
+          python <<'PY'
+          from pathlib import Path
+          text=Path('.github/workflows/apply-editable-power-patch.yml').read_text()
+          start=text.index("          python <<'PY'\n") + len("          python <<'PY'\n")
+          end=text.index("\n          PY\n", start)
+          code='\n'.join(line[10:] if line.startswith('          ') else line for line in text[start:end].splitlines())
+          exec(compile(code, 'embedded-power-patch', 'exec'), {'__name__':'__main__'})
+          Path('.github/workflows/run-editable-power-patch-on-pr.yml').unlink(missing_ok=True)
+          Path('.power-feature-trigger').unlink(missing_ok=True)
+          PY
+      - name: Commit feature
+        shell: bash
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+          git add -A
+          git diff --cached --stat
+          git commit -m "Add editable power fallback pricing"
+          git push origin HEAD:feat/editable-power-pricing-20260824
