@@ -23,8 +23,7 @@ jobs:
           hdr=(-H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json')
           for run in 32668061153 32600106926 32529628020; do
             echo "=== schedule run $run ==="
-            curl -fsS "${hdr[@]}" "$api/actions/runs/$run/jobs?per_page=100" \
-              | jq '[.jobs[]|{id,name,status,conclusion,failedSteps:[.steps[]?|select(.conclusion=="failure")|.name]}] | {failed:[.[]|select(.conclusion=="failure")], successCount:([.[]|select(.conclusion=="success")]|length), skippedCount:([.[]|select(.conclusion=="skipped")]|length)}'
+            curl -fsS "${hdr[@]}" "$api/actions/runs/$run/jobs?per_page=100" | jq '[.jobs[]|{id,name,status,conclusion,failedSteps:[.steps[]?|select(.conclusion=="failure")|.name]}] | {failed:[.[]|select(.conclusion=="failure")], successCount:([.[]|select(.conclusion=="success")]|length), skippedCount:([.[]|select(.conclusion=="skipped")]|length)}'
           done
 
   uae-live-source-probe:
@@ -46,26 +45,18 @@ jobs:
         shell: bash
         run: |
           node --import tsx <<'NODE'
-          const { catalogImportSources } = await import('./apps/web/lib/catalog/importer.ts');
-          const ids=['dubicars_uae_exact','dubizzle_uae_open','carswitch_uae_open','dubicars_clean'];
-          for(const id of ids){
-            const s=catalogImportSources.find(x=>x.sourceId===id);
-            if(!s){ console.log(JSON.stringify({id,missing:true})); continue; }
-            const out={id,market:s.market,accessMode:s.accessMode};
-            try{
-              const h=await s.healthCheck?.(); out.health=h||null;
-            }catch(e){out.healthError=String(e?.message||e);}
+          const { dubicarsUaeCurrentSource } = await import('./apps/web/lib/catalog/dubicars-current-source.ts');
+          const { dubizzleUaeExactSource } = await import('./apps/web/lib/catalog/dubizzle-exact-source.ts');
+          const { scaleMarketSources } = await import('./apps/web/lib/catalog/scale-market-sources.ts');
+          const sources=[dubicarsUaeCurrentSource,dubizzleUaeExactSource,...scaleMarketSources.filter(x=>x.market==='uae' && x.sourceId!=='dubizzle_uae_open')];
+          const dedup=[...new Map(sources.map(s=>[s.sourceId,s])).values()];
+          for(const s of dedup){
+            const out={id:s.sourceId,market:s.market,accessMode:s.accessMode};
+            try{const h=await s.healthCheck?.(); out.health=h||null;}catch(e){out.healthError=String(e?.message||e);}
             try{
               const p=await s.fetchPage('1');
               out.count=Number(p?.count||p?.items?.length||0); out.finished=Boolean(p?.finished); out.nextCursor=p?.nextCursor||null; out.pageHealth=p?.health||null;
-              const sample=[];
-              for(const raw of (p?.items||[]).slice(0,5)){
-                try{
-                  const o=s.normalizeOffer(raw);
-                  sample.push(o?{id:o.id,sourceOfferId:o.sourceOfferId,make:o.make,model:o.model,year:o.year,sourcePrice:o.sourcePrice,sourceCurrency:o.sourceCurrency,images:o.operational?.raw?.images?.length||o.images?.length||0,sourceUrl:o.operational?.sourceUrl}:null);
-                }catch(e){sample.push({normalizeError:String(e?.message||e)});}
-              }
-              out.sample=sample;
+              out.sample=(p?.items||[]).slice(0,5).map(raw=>{try{const o=s.normalizeOffer(raw);return o?{sourceOfferId:o.sourceOfferId,make:o.make,model:o.model,year:o.year,sourcePrice:o.sourcePrice,sourceCurrency:o.sourceCurrency,images:o.operational?.raw?.images?.length||o.operational?.raw?.parsed?.images?.length||o.images?.length||0,sourceUrl:o.operational?.sourceUrl}:null;}catch(e){return {normalizeError:String(e?.message||e)}}});
             }catch(e){out.fetchError=String(e?.message||e);}
             console.log(JSON.stringify(out));
           }
@@ -116,16 +107,9 @@ jobs:
           const { readAllOffersForMaintenance } = await import('./apps/web/lib/catalog/storage.ts');
           const { REQUIRED_CATALOG_SOURCES } = await import('./apps/web/lib/catalog/required-catalog-sources.ts');
           const markets=['japan','korea','china','uae','europe','georgia','kyrgyzstan'];
-          const rows=await readAllOffersForMaintenance();
-          const out={checkedAt:new Date().toISOString(),total:rows.length,markets:{}};
-          for(const market of markets){
-            const m=rows.filter(o=>o.market===market); const bySource={}; let latest=null;
-            for(const o of m){bySource[o.sourceId]=(bySource[o.sourceId]||0)+1; const t=String(o.operational?.sourcePublishedAt||o.updatedAt||o.firstSeenAt||''); if(t&&(!latest||t>latest))latest=t;}
-            out.markets[market]={count:m.length,latest,required:REQUIRED_CATALOG_SOURCES[market].map(s=>({sourceId:s.sourceId,count:bySource[s.sourceId]||0})),topSources:Object.entries(bySource).sort((a,b)=>b[1]-a[1]).slice(0,10)};
-          }
+          const rows=await readAllOffersForMaintenance(); const out={checkedAt:new Date().toISOString(),total:rows.length,markets:{}};
+          for(const market of markets){const m=rows.filter(o=>o.market===market);const bySource={};let latest=null;for(const o of m){bySource[o.sourceId]=(bySource[o.sourceId]||0)+1;const t=String(o.operational?.sourcePublishedAt||o.updatedAt||o.firstSeenAt||'');if(t&&(!latest||t>latest))latest=t;}out.markets[market]={count:m.length,latest,required:REQUIRED_CATALOG_SOURCES[market].map(s=>({sourceId:s.sourceId,count:bySource[s.sourceId]||0})),topSources:Object.entries(bySource).sort((a,b)=>b[1]-a[1]).slice(0,10)};}
           const target=rows.find(o=>o.id==='243f5ab811ee7e86251ba6f7'||String(o.sourceOfferId)==='958003');
           out.target=target?{id:target.id,sourceId:target.sourceId,sourceOfferId:target.sourceOfferId,sourcePrice:target.sourcePrice,sourceCurrency:target.sourceCurrency,totalRub:target.totalRub,updatedAt:target.updatedAt,sourceUrl:target.operational?.sourceUrl,priceVerified:target.operational?.raw?.autoPapaDetailPriceVerified,detailPriceUsd:target.operational?.raw?.autoPapaDetailPriceUsd,priceAuthority:target.operational?.raw?.autoPapaDetailPriceAuthority,sellerDeclaredPriceUsd:target.operational?.raw?.autoPapaSellerDeclaredPriceUsd,structuredPriceUsd:target.operational?.raw?.autoPapaStructuredPriceUsd,carBreakdown:target.calculationSnapshot?.breakdown?.find?.(x=>x?.id==='car')?.amountRub}:null;
-          const autopapa=rows.filter(o=>o.sourceId==='autopapa_georgia_open');
-          out.autoPapa={count:autopapa.length,verified:autopapa.filter(o=>o.operational?.raw?.autoPapaDetailPriceVerified===true).length,sellerCena:autopapa.filter(o=>o.operational?.raw?.autoPapaDetailPriceAuthority==='seller_declared_cena').length,structured:autopapa.filter(o=>o.operational?.raw?.autoPapaDetailPriceAuthority==='structured_primary').length};
-          console.log(JSON.stringify(out,null,2));
+          const autopapa=rows.filter(o=>o.sourceId==='autopapa_georgia_open');out.autoPapa={count:autopapa.length,verified:autopapa.filter(o=>o.operational?.raw?.autoPapaDetailPriceVerified===true).length,sellerCena:autopapa.filter(o=>o.operational?.raw?.autoPapaDetailPriceAuthority==='seller_declared_cena').length,structured:autopapa.filter(o=>o.operational?.raw?.autoPapaDetailPriceAuthority==='structured_primary').length};console.log(JSON.stringify(out,null,2));
           NODE
