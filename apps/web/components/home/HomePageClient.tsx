@@ -15,7 +15,6 @@ import { PublicHeader } from "@/components/layout/PublicHeader";
 import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } from "@/lib/affiliate-links";
 import { appendAttributionToSearchParams } from "@/lib/attribution";
 import { canonicalCatalogBrand } from "@/lib/catalog/brands";
-import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 
@@ -69,9 +68,18 @@ function isElectricOffer(value: { fuel?: string; raw?: any }) {
   return fuel === "electric" || fuel === "электро" || fuel === "электромобиль" || fuel === "bev";
 }
 function toItem(raw: any): Item | null {
-  if (!isCrediblePublicOffer(raw as any)) return null;
+  // `/api/catalog/home` and the SSR snapshot only expose rows already admitted by
+  // the canonical public publisher. Re-running deep source/photo validation in
+  // the browser breaks compact projection rows because their private provenance
+  // was intentionally removed. Trust the public read model and validate only the
+  // fields the homepage actually renders.
   const offer = presentCatalogOffer(raw);
-  return { raw, id: offer.id, make: canonicalCatalogBrand(String(offer.makeLabel || raw.make || "")), model: String(offer.modelLabel || raw.model || ""), market: offer.market, bodyType: String(raw.bodyType || "") || undefined, fuel: String(raw.fuel || "") || undefined };
+  const id = String(offer.id || raw?.id || "").trim();
+  const make = canonicalCatalogBrand(String(offer.makeLabel || raw?.make || ""));
+  const model = String(offer.modelLabel || raw?.model || "").trim();
+  const market = String(offer.market || raw?.market || "").trim();
+  if (!id || !make || !model || !marketIds.includes(market)) return null;
+  return { raw, id, make, model, market, bodyType: String(raw?.bodyType || "") || undefined, fuel: String(raw?.fuel || "") || undefined };
 }
 
 function balancedMarketItems(items: Item[], limit = 6) {
@@ -209,9 +217,25 @@ export default function HomePageClient({ initialCity = "", initialOffers = [], i
         if (cancelled) return;
         const unique = new Map<string, Item>();
         (Array.isArray(catalogPayload?.items) ? catalogPayload.items : []).forEach((raw: any) => { const item = toItem(raw); if (item) unique.set(item.id, item); });
-        setItems([...unique.values()]);
-        setMarketCounts(catalogPayload?.marketCounts && typeof catalogPayload.marketCounts === "object" ? catalogPayload.marketCounts : {});
-        setCount(Number(catalogPayload?.total || 0));
+        const incomingItems = [...unique.values()];
+        const incomingCounts = catalogPayload?.marketCounts && typeof catalogPayload.marketCounts === "object" ? catalogPayload.marketCounts as Record<string, number> : {};
+        // A current-read-model shard can briefly lag the immutable public manifest
+        // during publication. Never replace a visible market with an empty/partial
+        // browser refresh: keep its last known cards until the new shard is ready.
+        setItems((previousItems) => marketIds.flatMap((marketId) => {
+          const nextMarketItems = incomingItems.filter((item) => item.market === marketId);
+          const previousMarketItems = previousItems.filter((item) => item.market === marketId);
+          return nextMarketItems.length ? nextMarketItems : previousMarketItems;
+        }));
+        setMarketCounts((previousCounts) => Object.fromEntries(marketIds.map((marketId) => {
+          const incomingCount = Math.max(0, Number(incomingCounts[marketId] || 0));
+          const previousCount = Math.max(0, Number(previousCounts[marketId] || 0));
+          return [marketId, incomingCount > 0 ? incomingCount : previousCount];
+        })));
+        setCount((previousCount) => {
+          const incomingTotal = Math.max(0, Number(catalogPayload?.total || 0));
+          return incomingTotal > 0 ? incomingTotal : previousCount;
+        });
         setKnowledgeMakes((Array.isArray(makePayload?.items) ? makePayload.items : []).map((item: any) => String(item?.value || item?.label || "")).filter(Boolean));
         setCatalogStatus("ready");
       } catch { if (!cancelled) setCatalogStatus((current) => current === "loading" ? "error" : current); }
