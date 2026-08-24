@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { GuaziRuAdapter, parseGuaziRuMarkup } from "../apps/web/lib/catalog/guazi-ru-source";
+import "./catalog-yandex-source-bridge.test";
 
 const markup = `
 <section>

@@ -51,6 +51,7 @@ import { strictSourceDetail } from "./strict-source-detail-wrapper";
 import { normalizeOpenSource } from "./open-source-normalizer";
 import { regionalLiveOverrides } from "./regional-live-overrides";
 import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
+import { withGithubYandexSourceBridge } from "./yandex-source-bridge";
 import {
   CATALOG_DAILY_TARGET_PER_MARKET,
   CATALOG_DAILY_TARGET_TOTAL,
@@ -69,6 +70,9 @@ if (process.env.CATALOG_REBUILD_MARKET || rawListingMode) {
 
 const beforwardPublicSource = catalogSources.find((source) => source.sourceId === "beforward_public");
 const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGallery(normalizeOpenSource(source));
+const myAutoCollectionSource = withGithubYandexSourceBridge(myAutoListSource, "myauto");
+const autoPapaCollectionSource = withGithubYandexSourceBridge(autoPapaGeorgiaSource, "autopapa");
+const guaziCollectionSource = withGithubYandexSourceBridge(guaziChinaExactSource, "guazi");
 // Georgia is canonical-only: MyAuto plus the dedicated AutoPapa adapter. Do not
 // let the generic scale adapter with the same sourceId replace the dedicated one.
 const allowedScaleSources = scaleMarketSources.filter((source) => source.market !== "georgia");
@@ -76,8 +80,8 @@ const bannedGeorgiaSourceIds = new Set(["auto_georgia_open", "mymarket_georgia_o
 
 const completeSources = [
   prepareSource(guaziRuSource),
-  prepareSource(myAutoListSource),
-  prepareSource(autoPapaGeorgiaSource),
+  prepareSource(myAutoCollectionSource),
+  prepareSource(autoPapaCollectionSource),
   ...regionalLiveOverrides.map(prepareSource),
   ...scopedMarketSources.map(prepareSource),
   ...exactMarketSources.map(prepareSource),
@@ -92,7 +96,7 @@ const completeSources = [
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
   prepareSource(mashinaKyrgyzstanListSource),
   prepareSource(carvectorJapanCurrentSource),
-  guaziChinaExactSource,
+  guaziCollectionSource,
   che168GlobalExactSource,
   autohomeNewExactSource,
   prestigeJapanExactSource,
