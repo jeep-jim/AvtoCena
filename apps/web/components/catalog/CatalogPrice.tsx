@@ -1,6 +1,7 @@
 import { AuctionCardPrice } from "@/components/catalog/AuctionCardPrice";
 import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
 import { PriceTrend } from "@/components/catalog/PriceTrend";
+import { isCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 
 export function CatalogPrice({
   offer,
@@ -23,7 +24,8 @@ export function CatalogPrice({
 
   if (totalRub > 0) {
     if (japanAuction) return <AuctionCardPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} />;
-    const preliminary = String(offer?.calculationStatus || "") === "preliminary_power_pending"
+    const preliminary = isCatalogPowerScenario(offer)
+      || String(offer?.calculationStatus || "") === "preliminary_power_pending"
       || offer?.calculationSnapshot?.pricingConfidence === "preliminary";
     if (preliminary) return <PreliminaryPrice offer={offer} label={label} dense={dense} priceClassName={priceClassName} highlightElectrified={highlightElectrified} />;
     return <PriceTrend offer={offer} label={label} dense={dense} priceClassName={priceClassName} highlightElectrified={highlightElectrified} />;

@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { money } from "@/lib/avtocena";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
+import { EditablePowerTile } from "@/components/catalog/EditablePowerTile";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
@@ -18,6 +19,8 @@ import { getOfferForPage } from "@/lib/catalog/offer-page-data";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
 import { publicCatalogPowerHp } from "@/lib/catalog/power-sanity";
 import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
+import { calculateOfferWithRussiaCustoms, calculateOfferWithUserPowerScenario } from "@/lib/catalog/customs-pricing";
+import { DEFAULT_CATALOG_POWER_FALLBACK_HP, readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { publicOffer, searchOffers } from "@/lib/catalog/storage";
@@ -203,8 +206,11 @@ function OfferPriceBreakdown({ offer }: { offer: any }) {
   </details>;
 }
 
-export default async function OfferPage({ params }: { params: Promise<{ id: string }> }) {
+export default async function OfferPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ powerHp?: string }> }) {
   const { id } = await params;
+  const query = searchParams ? await searchParams : {};
+  const requestedPowerHp = Number(query?.powerHp || 0);
+  const safeRequestedPowerHp = Number.isFinite(requestedPowerHp) && requestedPowerHp >= 20 && requestedPowerHp <= 2500 ? Math.round(requestedPowerHp) : 0;
   const offer = await getOfferForPage(id);
   // getOfferForPage reads only immutable records that already passed the
   // publication gate. Re-validating their compact representation here can no
@@ -213,8 +219,15 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   if (!offer) notFound();
 
   const enrichedOffer = await enrichOfferForDisplay(offer);
+  const initialPublic: any = normalizeVehicleOfferSpecs(publicOffer(enrichedOffer));
+  const initialVisibleRub = catalogOfferVisibleRub(initialPublic);
+  const pricedOffer = safeRequestedPowerHp
+    ? await calculateOfferWithUserPowerScenario(enrichedOffer as any, safeRequestedPowerHp)
+    : initialVisibleRub > 0
+      ? enrichedOffer
+      : await calculateOfferWithRussiaCustoms(enrichedOffer as any);
   const sourceUrl = safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);
-  const raw: any = normalizeVehicleOfferSpecs(publicOffer(enrichedOffer));
+  const raw: any = normalizeVehicleOfferSpecs(publicOffer(pricedOffer));
   const presented = presentCatalogOffer(raw);
   const visibleRub = catalogOfferVisibleRub(raw);
   const o = {
@@ -234,7 +247,9 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const makeHref = `/cars/brand/${catalogBrandSlug(raw.make || "")}`;
   const powerDisplay = catalogPowerDisplay(raw);
   const safePowerHp = publicCatalogPowerHp(raw);
-  const preliminaryPricing = String(raw?.calculationStatus || "") === "preliminary_power_pending"
+  const powerScenario = readCatalogPowerScenario(raw);
+  const preliminaryPricing = Boolean(powerScenario)
+    || String(raw?.calculationStatus || "") === "preliminary_power_pending"
     || raw?.calculationSnapshot?.pricingConfidence === "preliminary";
   const powertrainKind = String(raw.powertrainKind || "").toLowerCase();
   const fuelKind = String(raw.fuel || o.fuelLabel || "").toLowerCase();
@@ -254,11 +269,8 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
   const thirtyMinuteInfo = powerDisplay?.estimated
     ? "Для предварительной цены использована доступная расчётная мощность. Точную 30-минутную мощность менеджер подтвердит по документам автомобиля."
     : "Максимальная мощность электромотора, которую автомобиль может поддерживать в течение 30 минут. По этому значению рассчитывается утилизационный сбор.";
-  const peakPowerTile = powerValue
-    ? { label: "Мощность", value: powerValue, icon: "power" as const }
-    : preliminaryPricing && electrified
-      ? { label: "Мощность", value: "Мощность уточняется", icon: "power" as const }
-      : null;
+  const editablePowerHp = Math.max(20, Math.round(powerScenario?.horsepower || safePowerHp || (Number(o.powerKw || 0) > 0 ? Number(o.powerKw) / 0.73549875 : DEFAULT_CATALOG_POWER_FALLBACK_HP)));
+  const peakPowerTile = { label: "Мощность", value: powerValue || `${editablePowerHp} л.с.`, icon: "power" as const };
   const powerTile = powerDisplay && electrified
     ? { label: "30-минутная мощность", value: powerDisplay.thirtyMinuteLabel, icon: "thirtyMinute" as const, info: thirtyMinuteInfo }
     : null;
@@ -304,7 +316,7 @@ export default async function OfferPage({ params }: { params: Promise<{ id: stri
             : <PriceTrend offer={o} label="Ориентир стоимости" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel highlightElectrified={electrified} />}
           {!japanAuction && o.priceMode === "auction_start" ? <p className="mt-2 rounded-2xl bg-amber-400/10 p-3 text-sm font-bold text-amber-200">Расчёт сделан от стартовой цены. Финальная стоимость аукциона может измениться.</p> : null}
           <aside className="ac-offer-detail-stack mt-4 min-w-0">
-            <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{specs.map((spec, index) => <SpecTile key={spec.label} {...spec} fullWidth={specs.length % 2 === 1 && index === specs.length - 1} />)}</div>
+            <div className="ac-offer-spec-grid grid min-w-0 grid-cols-2 gap-2.5" style={{ gridTemplateColumns: "repeat(2, minmax(0, 1fr))", gridAutoFlow: "row" }}>{specs.map((spec, index) => spec.label === "Мощность" ? <EditablePowerTile key={spec.label} currentHp={editablePowerHp} requiresConfirmation={Boolean(powerScenario) || !safePowerHp} scenarioSource={powerScenario?.source || null} fullWidth={specs.length % 2 === 1 && index === specs.length - 1} /> : <SpecTile key={spec.label} {...spec} fullWidth={specs.length % 2 === 1 && index === specs.length - 1} />)}</div>
             <div className="mt-4"><OfferPriceBreakdown offer={o} /></div>
             <div className="ac-offer-status mt-4 rounded-[1.35rem] bg-[var(--ac-surface-2)] p-4">
               {japanAuction ? <p className="ac-offer-status-copy text-xs font-bold leading-5 text-[var(--ac-text)] xl:text-[11px] 2xl:text-xs">

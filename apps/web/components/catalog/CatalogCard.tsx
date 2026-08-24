@@ -4,6 +4,7 @@ import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { catalogMarketLabel } from "@/lib/catalog/runtime-config";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
 import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
+import { readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { CatalogPrice } from "@/components/catalog/CatalogPrice";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
@@ -35,6 +36,7 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
   const presented = presentCatalogOffer(normalizedOffer);
   const o = { ...presented, marketLabel: catalogMarketLabel(normalizedOffer.market), images: rankedImages };
   const powerDisplay = catalogPowerDisplay(normalizedOffer);
+  const powerScenario = readCatalogPowerScenario(normalizedOffer);
   const powertrainKind = String(normalizedOffer.powertrainKind || "").toLowerCase();
   const fuelKind = String(normalizedOffer.fuel || o.fuelLabel || "").toLowerCase();
   const isElectric = powertrainKind === "electric" || ["electric", "электро", "электромобиль", "bev"].includes(fuelKind);
@@ -80,7 +82,9 @@ export function CatalogCard({ offer, compact = false, dense = false, eagerPrefet
           <div className={`flex flex-nowrap overflow-x-auto whitespace-nowrap font-bold text-white/58 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden ${dense ? "mt-2 gap-1 text-[8px] sm:mt-3 sm:gap-2 sm:text-[11px]" : "mt-3 gap-2 text-[11px]"}`}>
             {o.mileageKm ? <span className={tagClass}><MileageIcon dense={dense} /><span>{new Intl.NumberFormat("ru-RU").format(o.mileageKm)} км</span></span> : null}
             <span className={tagClass}><EngineIcon dense={dense} fuel={!o.engineCc && !isElectric} electric={isElectric} /><span>{engineLabel}</span></span>
-            {isElectrified && o.powerKw
+            {powerScenario
+              ? <span className={`${tagClass} border border-amber-400/35 bg-amber-400/10 text-amber-100`} title="Предварительная мощность — можно изменить в карточке автомобиля"><PowerIcon dense={dense} /><span>{Math.round(powerScenario.horsepower)} л.с. · уточнить</span></span>
+              : isElectrified && o.powerKw
               ? <span className={tagClass}><PowerIcon dense={dense} /><span>{o.powerKw} кВт</span></span>
               : o.powerHp
               ? <span className={tagClass}><PowerIcon dense={dense} /><span>{o.powerHp} л.с.</span></span>
