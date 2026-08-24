@@ -10,6 +10,7 @@ import { convertToRub } from "./rates";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { VehicleOffer } from "./types";
 import { enrichOfferWithKnowledgeCore } from "./knowledge-core";
+import { applyCatalogPowerScenario, isCatalogPowerScenario, readCatalogPowerScenario, resolveCatalogPowerScenario } from "./power-scenario";
 
 function positive(value: unknown) {
   const parsed = Number(value);
@@ -92,6 +93,7 @@ function hasTrustedUtilizationPower(offer: VehicleOffer) {
 }
 
 function exactUtilizationPowerProblem(offer: VehicleOffer) {
+  if (isCatalogPowerScenario(offer)) return null;
   const kind = String(offer.powertrainKind || "");
   if (!["electric", "series_hybrid", "other_hybrid"].includes(kind)) return null;
 
@@ -154,17 +156,22 @@ export function isPreliminaryElectrifiedCalculation(offer: Partial<VehicleOffer>
   return isElectrifiedKind(offer?.powertrainKind) && isPreliminaryPowerPendingCalculation(offer);
 }
 
-async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allowCombustionPreliminary: boolean): Promise<VehicleOffer> {
-  const canonical = discardRepresentativeModelPowerForCustoms(
-    await enrichOfferWithKnowledgeCore(enrichOfferWithExplicitEngineDisplacement(input)),
-  );
+async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allowCombustionPreliminary: boolean, requestedPowerHp?: number): Promise<VehicleOffer> {
+  const coreEnriched = await enrichOfferWithKnowledgeCore(enrichOfferWithExplicitEngineDisplacement(input));
+  const representativePowerHp = String(coreEnriched.powerDataSource || "").startsWith("vehicle-model-representative:")
+    ? positive(coreEnriched.powerHp)
+    : 0;
+  const canonical = discardRepresentativeModelPowerForCustoms(coreEnriched);
   const certified = await enrichOfferWithCertifiedPower(canonical);
   const known = await enrichOfferWithPowerKnowledge(certified);
   const normalized = preferExplicitCombustionPowertrain(normalizeVehicleOfferSpecs(known) as VehicleOffer) as VehicleOffer;
   const electrified = isElectrifiedKind(normalized.powertrainKind);
-  const offer = electrified && positive(normalized.utilizationPowerKw) && !hasTrustedUtilizationPower(normalized)
-    ? { ...normalized, utilizationPowerKw: undefined }
+  const exactOffer = electrified && positive(normalized.utilizationPowerKw) && !hasTrustedUtilizationPower(normalized)
+    ? { ...normalized, utilizationPowerKw: undefined } as VehicleOffer
     : normalized;
+  const scenario = resolveCatalogPowerScenario(exactOffer, { requestedHp: requestedPowerHp, representativeHp: representativePowerHp || undefined });
+  const offer = scenario ? applyCatalogPowerScenario(exactOffer, scenario) : exactOffer;
+  const powerScenario = readCatalogPowerScenario(offer);
 
   const rate = await convertToRub(offer.sourcePrice, offer.sourceCurrency);
   if (!rate) {
@@ -249,7 +256,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     icePowerKw: offer.icePowerKw,
     power30MinKw: motor30MinKnown ? offer.power30MinKw : undefined,
     power30MinKwByMotor: motor30MinKnown && Array.isArray(offer.power30MinKwByMotor) ? offer.power30MinKwByMotor : undefined,
-    utilizationPowerKw: hasTrustedUtilizationPower(offer) ? offer.utilizationPowerKw : undefined,
+    utilizationPowerKw: powerScenario ? offer.utilizationPowerKw : hasTrustedUtilizationPower(offer) ? offer.utilizationPowerKw : undefined,
     powertrainKind: offer.powertrainKind,
     productionDate: offer.productionDate,
     year: offer.year,
@@ -343,13 +350,13 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     customsRub: customs.totalCustomsRub,
   });
 
-  const powerEstimated = ["reference", "estimated"].includes(String(offer.powerDataConfidence || ""));
+  const powerEstimated = Boolean(powerScenario) || ["reference", "estimated"].includes(String(offer.powerDataConfidence || ""));
   const customsAssumed = customs.personalUseAssumed || customs.vehicleCategoryAssumed;
   const priceEstimated = market.estimated || powerEstimated || customs.ageEstimated || customsAssumed || offer.priceMode === "estimated";
   const warnings = [
     ...market.warnings,
     ...customs.warnings,
-    ...(powerEstimated ? ["Мощность подставлена по базе модели/модификации и должна быть подтверждена менеджером по конкретному автомобилю."] : []),
+    ...(powerScenario ? [`Предварительный сценарий мощности: ${powerScenario.horsepower} л.с. Значение влияет на утильсбор и должно быть подтверждено по документам автомобиля.`] : powerEstimated ? ["Мощность подставлена по базе модели/модификации и должна быть подтверждена менеджером по конкретному автомобилю."] : []),
   ];
 
   return {
@@ -372,6 +379,8 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
       priceIncludesUtilizationFee: true,
       priceIncludesAllCustoms: true,
       vehicleKnowledge: (offer.operational?.raw as any)?.vehicleKnowledgeModel || null,
+      powerScenario: powerScenario || undefined,
+      powerRequiresConfirmation: Boolean(powerScenario),
       warnings,
     },
     calculationStatus: offer.priceMode === "auction_start"
@@ -384,6 +393,10 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
 
 export async function calculateOfferWithRussiaCustoms(input: VehicleOffer): Promise<VehicleOffer> {
   return calculateOfferWithRussiaCustomsInternal(input, false);
+}
+
+export async function calculateOfferWithUserPowerScenario(input: VehicleOffer, horsepower: number): Promise<VehicleOffer> {
+  return calculateOfferWithRussiaCustomsInternal(input, false, horsepower);
 }
 
 // Recovery imports may publish a clearly marked lower bound when an exact sold

@@ -1,4 +1,5 @@
 import type { VehicleOffer } from "./types";
+import { isCatalogPowerScenario } from "./power-scenario";
 
 export type CatalogPublicPriority = {
   eligible: boolean;
@@ -94,6 +95,13 @@ export function catalogRequiredSpecificationRejectionReason(offer: Partial<Vehic
     offer?.utilizationPowerKw || offer?.calculationSnapshot?.customs?.utilizationPowerKw,
     2_000,
   );
+  if (isCatalogPowerScenario(offer)) {
+    if (["combustion", "series_hybrid", "other_hybrid"].includes(kind) && !engineCc) return "missing_engine_cc";
+    if (kind === "unknown" || !kind) return "unknown_powertrain_kind";
+    if (!powerHp && !powerKw) return "missing_peak_power";
+    if (!utilizationPowerKw) return "missing_utilization_power_kw";
+    return "";
+  }
 
   if (kind === "combustion") {
     if (!engineCc) return "missing_engine_cc";
