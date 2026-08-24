@@ -1,6 +1,7 @@
 import fs from "node:fs/promises";
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
+const { needsSourceDetailFactRefresh } = await import("../apps/web/lib/catalog/importer-impl.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
 const { credibleCatalogImages, isCrediblePublicOffer } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { compareCatalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority.ts");
@@ -69,6 +70,15 @@ function images(list) {
 }
 function firstSeen(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.firstSeenAt || offer?.updatedAt || "")) || 0; }
 function currentTime(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0; }
+function hasVerifiedAutoPapaPrice(offer) {
+  if (String(offer?.sourceId || "") !== "autopapa_georgia_open") return true;
+  const raw = offer?.operational?.raw || {};
+  const exact = Number(raw?.autoPapaDetailPriceUsd || 0);
+  return raw?.autoPapaDetailPriceVerified === true
+    && exact > 0
+    && String(raw?.autoPapaDetailPriceAuthority || "").length > 0
+    && Math.round(Number(offer?.sourcePrice || 0)) === Math.round(exact);
+}
 function isMassMarketPriority(offer) { return classifyCatalogV2Offer(offer).tier === "priority"; }
 function quality(a, b) {
   return compareCatalogPublicPriority(a, b)
@@ -227,7 +237,7 @@ for (const sourceId of sourceIds) {
     for (const row of rows.sort(quality)) {
       if (!row?.id || bucket.has(row.id) || bucket.size >= targetPerSource || firstSeen(row) < cutoff) continue;
       const offer = normalizeVehicleOfferSpecs({ ...row, status: "active", images: images(row.images) });
-      if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer)) {
+      if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer) && hasVerifiedAutoPapaPrice(offer)) {
         bucket.set(offer.id, offer);
         candidatePoolsLoaded++;
       }
@@ -247,7 +257,7 @@ for (const row of [...publicRows, ...internalRows].sort(quality)) {
   if (!bucket || !row?.id || !catalogRetainedOfferBelongsToPartition(row.id, partitionFor(sourceId))
     || bucket.has(row.id) || bucket.size >= targetPerSource || firstSeen(row) < cutoff) continue;
   const offer = normalizeVehicleOfferSpecs({ ...row, status: "active", images: images(row.images) });
-  if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer)) bucket.set(offer.id, offer);
+  if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer) && hasVerifiedAutoPapaPrice(offer)) bucket.set(offer.id, offer);
 }
 await checkpoint("retention_loaded");
 
@@ -298,7 +308,8 @@ async function prepare(base, source) {
   const criticalSpecsMissing = !Number(offer.powerHp || 0) || combustionSpecsMissing || !String(offer.fuel || "").trim();
   const mandatoryPhotoMissing = gallery.length < minimumImages;
   const priorityGalleryMissing = gallery.length < preferredImages && isMassMarketPriority(offer);
-  const detailNeeded = mandatoryPhotoMissing || criticalSpecsMissing || priorityGalleryMissing;
+  const detailFactsNeeded = needsSourceDetailFactRefresh(offer) && !hasVerifiedAutoPapaPrice(offer);
+  const detailNeeded = mandatoryPhotoMissing || criticalSpecsMissing || priorityGalleryMissing || detailFactsNeeded;
   let detailDeferredForOffer = false;
 
   if (detailNeeded && source?.fetchImages && !expired()) {
@@ -319,6 +330,7 @@ async function prepare(base, source) {
     }
   }
 
+  if (sourceId === "autopapa_georgia_open" && !hasVerifiedAutoPapaPrice(offer)) { reject("source_detail_price"); return null; }
   if (gallery.length < minimumImages) { reject(detailDeferredForOffer ? "images_detail_budget" : "images"); return null; }
   const now = new Date().toISOString();
   offer = normalizeVehicleOfferSpecs({
