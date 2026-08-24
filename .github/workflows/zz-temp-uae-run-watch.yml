@@ -29,3 +29,65 @@ jobs:
           curl -L --retry 2 --max-time 45 -fsS 'https://avtocena.com/cars/offer/243f5ab811ee7e86251ba6f7' -o offer.html || true
           echo "bytes=$(wc -c < offer.html 2>/dev/null || echo 0)"
           grep -Eo '.{0,120}(299.?216|959.?682|1.?543.?107|2.?219.?245|4935|12900|seller_declared_cena).{0,120}' offer.html 2>/dev/null | head -60 || true
+
+  carswitch-structure:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect listing JSON-LD and one exact detail
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          import json,re,urllib.request,html
+          UA='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150 Safari/537.36'
+          def get(url):
+              req=urllib.request.Request(url,headers={'User-Agent':UA,'Accept':'text/html,application/xhtml+xml,*/*;q=0.8','Accept-Language':'en-US,en;q=0.9'})
+              with urllib.request.urlopen(req,timeout=45) as r:
+                  return r.getcode(),r.geturl(),r.headers.get('content-type',''),r.read().decode('utf-8','ignore')
+          status,url,ctype,s=get('https://carswitch.com/uae/used-cars/search?app_route=listing&page=1')
+          print('LIST',status,url,ctype,'bytes',len(s))
+          scripts=re.findall(r'<script\b[^>]*type=["\']application/ld\+json["\'][^>]*>([\s\S]*?)</script>',s,re.I)
+          print('LD_SCRIPTS',len(scripts))
+          rows=[]
+          for raw in scripts:
+              try: obj=json.loads(html.unescape(raw.strip()))
+              except Exception as e: continue
+              stack=[obj]
+              while stack:
+                  x=stack.pop()
+                  if isinstance(x,list): stack.extend(x); continue
+                  if not isinstance(x,dict): continue
+                  typ=x.get('@type')
+                  types=typ if isinstance(typ,list) else [typ]
+                  if any(str(t).lower()=='itemlist' for t in types):
+                      for el in x.get('itemListElement') or []:
+                          if not isinstance(el,dict): continue
+                          ent=el.get('mainEntity') or (el.get('item') or {}).get('mainEntity') if isinstance(el.get('item'),dict) else el.get('mainEntity')
+                          if not isinstance(ent,dict): ent=el.get('item') if isinstance(el.get('item'),dict) else None
+                          u=el.get('url') or (el.get('item') or {}).get('url') if isinstance(el.get('item'),dict) else el.get('url')
+                          if not isinstance(ent,dict) or not u: continue
+                          imgs=ent.get('image') or []
+                          if not isinstance(imgs,list): imgs=[imgs]
+                          off=ent.get('offers') or {}
+                          if isinstance(off,list): off=off[0] if off else {}
+                          rows.append({'url':u,'name':ent.get('name'),'price':off.get('price') if isinstance(off,dict) else None,'currency':off.get('priceCurrency') if isinstance(off,dict) else None,'images':len(imgs),'mileage':(ent.get('mileageFromOdometer') or {}).get('value') if isinstance(ent.get('mileageFromOdometer'),dict) else None})
+                  g=x.get('@graph')
+                  if isinstance(g,(list,dict)): stack.append(g)
+          print('ROWS',len(rows))
+          for r in rows[:20]: print(json.dumps(r,ensure_ascii=False))
+          exact=[]
+          pat=re.compile(r'^https?://(?:www\.)?carswitch\.com/(?:dubai|abudhabi|sharjah|ajman|umm-al-quwain|ras-al-khaimah|fujairah)/used-car/[^/]+/[^/]+/(20\d{2})/(\d{5,12})/?$',re.I)
+          for r in rows:
+              m=pat.match(str(r['url']))
+              if m and int(m.group(1))>=2020: exact.append(r)
+          print('EXACT_2020_PLUS',len(exact),'IMAGE_COUNTS',sorted({r['images'] for r in exact})[:20])
+          if exact:
+              target=exact[0]['url']
+              st,final,ct,d=get(target)
+              print('DETAIL',st,final,ct,'bytes',len(d),'target',target)
+              urls=set(re.findall(r'https?:\\?/\\?/[^"\'<>\\\s]+?\.(?:jpe?g|webp|png)(?:\?[^"\'<>\\\s]*)?',d,re.I))
+              urls={u.replace('\\/','/') for u in urls if 'cloudfront' in u or 'carswitch' in u}
+              print('DETAIL_IMAGE_URLS',len(urls))
+              print('DETAIL_LD_SCRIPTS',len(re.findall(r'application/ld\+json',d,re.I)))
+              print('DETAIL_MARKERS',{'vehicleIdentificationNumber':len(re.findall('vehicleIdentificationNumber',d,re.I)),'mileageFromOdometer':len(re.findall('mileageFromOdometer',d,re.I)),'priceCurrency':len(re.findall('priceCurrency',d,re.I))})
+          PY
