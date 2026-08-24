@@ -1,0 +1,85 @@
+{
+  "capturedAt": "2026-08-24T06:38:26.182Z",
+  "deploys": [
+    {
+      "conclusion": null,
+      "created_at": "2026-08-24T06:34:12Z",
+      "head_sha": "43683b071ae4d7a1522ce318f7442135dd2d11cb",
+      "html_url": "https://github.com/jeep-jim/AvtoCena/actions/runs/32697865762",
+      "id": 32697865762,
+      "run_number": 1168,
+      "status": "in_progress",
+      "updated_at": "2026-08-24T06:34:16Z"
+    },
+    {
+      "conclusion": "failure",
+      "created_at": "2026-08-24T05:31:24Z",
+      "head_sha": "71466e99f2f4bca5dc05f01449d397d0d6a22d1d",
+      "html_url": "https://github.com/jeep-jim/AvtoCena/actions/runs/32693833752",
+      "id": 32693833752,
+      "run_number": 1167,
+      "status": "completed",
+      "updated_at": "2026-08-24T05:35:36Z"
+    },
+    {
+      "conclusion": "failure",
+      "created_at": "2026-08-24T05:11:50Z",
+      "head_sha": "8253ca6d5bfe8246ed00abe0fd9dc15c16891973",
+      "html_url": "https://github.com/jeep-jim/AvtoCena/actions/runs/32692656577",
+      "id": 32692656577,
+      "run_number": 1166,
+      "status": "completed",
+      "updated_at": "2026-08-24T05:16:03Z"
+    },
+    {
+      "conclusion": "failure",
+      "created_at": "2026-08-24T04:56:16Z",
+      "head_sha": "a0a75a0965dbf45a97dfc26645c4726e3340ef94",
+      "html_url": "https://github.com/jeep-jim/AvtoCena/actions/runs/32691800156",
+      "id": 32691800156,
+      "run_number": 1165,
+      "status": "completed",
+      "updated_at": "2026-08-24T05:01:00Z"
+    },
+    {
+      "conclusion": "failure",
+      "created_at": "2026-08-24T04:43:46Z",
+      "head_sha": "4c56cb554fdc15d2dd93c143ba07c1f6c594cd5a",
+      "html_url": "https://github.com/jeep-jim/AvtoCena/actions/runs/32691088302",
+      "id": 32691088302,
+      "run_number": 1164,
+      "status": "completed",
+      "updated_at": "2026-08-24T04:48:50Z"
+    }
+  ],
+  "home": {
+    "generationId": "gen_1787552792195_950e6499",
+    "total": 28956,
+    "marketCounts": {
+      "korea": 6809,
+      "china": 5644,
+      "japan": 4990,
+      "uae": 1098,
+      "europe": 5075,
+      "georgia": 2489,
+      "kyrgyzstan": 2851
+    },
+    "itemCount": 42,
+    "itemCounts": {
+      "korea": 6,
+      "china": 6,
+      "japan": 6,
+      "uae": 6,
+      "europe": 6,
+      "georgia": 6,
+      "kyrgyzstan": 6
+    },
+    "marketsMissingCards": []
+  },
+  "sample": {
+    "offerId": "0db995ca16a1c3a2ed30c30d",
+    "stackCount": 2,
+    "powerTextCount": 1,
+    "requestPriceCount": 0
+  }
+}
