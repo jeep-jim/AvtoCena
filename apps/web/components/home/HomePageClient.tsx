@@ -78,7 +78,7 @@ function toItem(raw: any): Item | null {
   const make = canonicalCatalogBrand(String(offer.makeLabel || raw?.make || ""));
   const model = String(offer.modelLabel || raw?.model || "").trim();
   const market = String(offer.market || raw?.market || "").trim();
-  if (!id || !make || !model || !marketIds.includes(market)) return null;
+  if (!id || !make || !model || !marketIds.some((marketId) => String(marketId) === market)) return null;
   return { raw, id, make, model, market, bodyType: String(raw?.bodyType || "") || undefined, fuel: String(raw?.fuel || "") || undefined };
 }
 
