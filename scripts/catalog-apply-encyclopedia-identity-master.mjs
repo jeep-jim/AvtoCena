@@ -1,5 +1,6 @@
 import fs from "node:fs/promises";
 import path from "node:path";
+import { writeJsonObjectWithArrayAtomic } from "./lib/write-json-object-with-array.mjs";
 
 const { readEncyclopediaIdentityDataset, readEncyclopediaIdentityResolver } = await import("../apps/web/lib/catalog/encyclopedia-identity-data.ts");
 const { applyEncyclopediaIdentityMaster } = await import("../apps/web/lib/catalog/encyclopedia-identity-master.ts");
@@ -161,7 +162,6 @@ for (const name of names) {
 
   const output = {
     ...payload,
-    offers,
     identityMaster: {
       version: 2,
       appliedAt: new Date().toISOString(),
@@ -169,9 +169,7 @@ for (const name of names) {
       ...fileStats,
     },
   };
-  const temporary = `${filename}.identity-master.tmp`;
-  await fs.writeFile(temporary, JSON.stringify(output, null, 2));
-  await fs.rename(temporary, filename);
+  await writeJsonObjectWithArrayAtomic(filename, output, "offers", offers);
 }
 
 console.log(JSON.stringify(summary, null, 2));
