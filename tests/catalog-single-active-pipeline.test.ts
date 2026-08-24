@@ -59,3 +59,14 @@ test("active V3 pipeline owns approved market rules", () => {
   assert.match(reusable, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
   assert.match(reusable, /CATALOG_COLLECTION_IMAGE_LIMIT: "30"/);
 });
+
+test("weekly Japan accumulation preserves source cursors while retaining 30 days", () => {
+  const queue = text("catalog-v3-sequential-queue.yml");
+  const japanJob = queue.match(/\n  japan:\n([\s\S]*?)\n  korea:/)?.[1] || "";
+  assert.match(japanJob, /retention_ms: "2592000000"/);
+  assert.match(japanJob, /target_per_source: "30000"/);
+  assert.match(japanJob, /target_per_market: "30000"/);
+  assert.match(japanJob, /maximum_per_market: "30000"/);
+  assert.match(japanJob, /reset_cursor: false/);
+  assert.doesNotMatch(japanJob, /reset_cursor: true/);
+});
