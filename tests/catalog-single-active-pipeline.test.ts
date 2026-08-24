@@ -76,6 +76,5 @@ test("Japan marker pushes continue accumulation while explicit dispatch remains 
   assert.match(workflow, /push:/);
   assert.match(workflow, /workflow_dispatch:/);
   assert.match(workflow, /\.github\/market-runs\/japan/);
-  assert.match(workflow, /reset_cursor: \$\{\{ github\.event_name == 'workflow_dispatch' \}\}/);
-  assert.doesNotMatch(workflow, /reset_cursor: \$\{\{ github\.event_name != 'schedule' \}\}/);
+  assert.match(workflow, /^\s+reset_cursor: \$\{\{ github\.event_name == 'workflow_dispatch' \}\}$/m);
 });
