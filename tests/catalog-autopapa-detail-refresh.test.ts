@@ -15,24 +15,17 @@ function offer(overrides: Partial<VehicleOffer> = {}) {
   } as VehicleOffer;
 }
 
-test("existing AutoPapa combustion preliminary rows force an exact detail refresh even with a complete gallery", () => {
-  assert.equal(needsSourceDetailFactRefresh(offer({ images: Array.from({ length: 30 }) as any })), true);
-});
-
-test("AutoPapa combustion rows with missing power still request exact detail facts", () => {
-  assert.equal(needsSourceDetailFactRefresh(offer({ calculationStatus: "estimated", powerHp: undefined })), true);
-});
-
-test("already powered AutoPapa combustion rows do not force an extra detail request", () => {
-  assert.equal(needsSourceDetailFactRefresh(offer({ calculationStatus: "estimated", powerHp: 147 })), false);
-});
-
-test("electrified AutoPapa rows never use the seller peak-power detail refresh gate", () => {
-  for (const powertrainKind of ["electric", "series_hybrid", "other_hybrid"] as const) {
-    assert.equal(needsSourceDetailFactRefresh(offer({ powertrainKind })), false);
+test("every seen AutoPapa row forces an exact detail refresh because the detail page owns price", () => {
+  for (const row of [
+    offer({ images: Array.from({ length: 30 }) as any }),
+    offer({ calculationStatus: "estimated", powerHp: 147 }),
+    offer({ powertrainKind: "electric", calculationStatus: "estimated", powerHp: 204 }),
+    offer({ powertrainKind: "other_hybrid", calculationStatus: "estimated", powerHp: 180 }),
+  ]) {
+    assert.equal(needsSourceDetailFactRefresh(row), true);
   }
 });
 
 test("the AutoPapa-specific detail refresh gate cannot affect another source", () => {
-  assert.equal(needsSourceDetailFactRefresh(offer({ sourceId: "myauto_georgia_open" })), false);
+  assert.equal(needsSourceDetailFactRefresh(offer({ sourceId: "myauto_georgia_list" })), false);
 });
