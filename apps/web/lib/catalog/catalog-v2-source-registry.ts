@@ -40,7 +40,7 @@ export const CATALOG_V2_SOURCE_SLOTS: Record<CatalogMarket, readonly CatalogV2So
   ],
   uae: [
     ...REQUIRED_CATALOG_SOURCES.uae,
-    { sourceId: "carswitch_uae_open", label: "CarSwitch", canonicalUrl: "https://carswitch.com/", role: "secondary" },
+    { sourceId: "dubizzle_uae_open", label: "Dubizzle", canonicalUrl: "https://uae.dubizzle.com/", role: "secondary" },
     { sourceId: "yallamotor_uae_open", label: "YallaMotor", canonicalUrl: "https://uae.yallamotor.com/", role: "secondary" },
     { sourceId: "beforward_public", label: "BE FORWARD UAE", canonicalUrl: "https://www.beforward.jp/", role: "secondary" },
   ],
