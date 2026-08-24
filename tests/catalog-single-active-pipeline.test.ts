@@ -70,3 +70,12 @@ test("weekly Japan accumulation preserves source cursors while retaining 30 days
   assert.match(japanJob, /reset_cursor: false/);
   assert.doesNotMatch(japanJob, /reset_cursor: true/);
 });
+
+test("Japan marker pushes continue accumulation while explicit dispatch remains the reset path", () => {
+  const workflow = text("catalog-v2-japan.yml");
+  assert.match(workflow, /push:/);
+  assert.match(workflow, /workflow_dispatch:/);
+  assert.match(workflow, /\.github\/market-runs\/japan/);
+  assert.match(workflow, /reset_cursor: \$\{\{ github\.event_name == 'workflow_dispatch' \}\}/);
+  assert.doesNotMatch(workflow, /reset_cursor: \$\{\{ github\.event_name != 'schedule' \}\}/);
+});
