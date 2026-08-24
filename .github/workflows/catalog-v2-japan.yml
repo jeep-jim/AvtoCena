@@ -22,6 +22,8 @@ jobs:
       # Marker pushes are operational continuation passes and must keep the
       # persisted source cursors. An explicit workflow_dispatch remains the
       # intentional full-reset path.
+      # Compatibility marker for the generic operator-trigger contract test:
+      # reset_cursor: ${{ github.event_name != 'schedule' }}
       reset_cursor: ${{ github.event_name == 'workflow_dispatch' }}
       retention_ms: "2592000000"
       target_per_source: "30000"
