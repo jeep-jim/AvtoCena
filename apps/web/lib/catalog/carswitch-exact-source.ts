@@ -253,7 +253,7 @@ async function request(url: string, referer = LIST_URL) {
       lastStatus = response.status;
       lastBytes = markup.length;
       if ([401, 403, 429].includes(response.status) || BLOCK_RE.test(markup.slice(0, 10_000))) throw new Error(`carswitch_exact_blocked_${response.status}`);
-      const transientShell = response.status === 202 || (response.status === 200 && markup.length < 50_000);
+      const transientShell = response.status === 202;
       if (transientShell) {
         if (attempt < 3) {
           if (retryDelayMs > 0) await new Promise((resolve) => setTimeout(resolve, retryDelayMs * attempt));
