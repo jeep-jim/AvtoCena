@@ -1,0 +1,87 @@
+name: TEMP CarSwitch transient retry selfpatch
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/zz-temp-selfpatch-carswitch-retry.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Patch transient retry and regression
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+
+          source = Path('apps/web/lib/catalog/carswitch-exact-source.ts')
+          text = source.read_text()
+          old = '''async function request(url: string, referer = LIST_URL) {
+            const controller = new AbortController();
+            const timer = setTimeout(() => controller.abort(), Math.max(5_000, Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 30_000)));
+            try {
+              const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
+              const markup = await response.text();
+              if ([401, 403, 429].includes(response.status) || BLOCK_RE.test(markup.slice(0, 10_000))) throw new Error(`carswitch_exact_blocked_${response.status}`);
+              if (!response.ok) throw new Error(`carswitch_exact_http_${response.status}`);
+              return { response, markup };
+            } finally { clearTimeout(timer); }
+          }
+          '''
+          new = '''async function request(url: string, referer = LIST_URL) {
+            const timeoutMs = Math.max(5_000, Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 30_000));
+            const retryDelayMs = Math.max(0, Number(process.env.CATALOG_CARSWITCH_RETRY_DELAY_MS || 750));
+            let lastStatus = 0;
+            let lastBytes = 0;
+            for (let attempt = 1; attempt <= 3; attempt++) {
+              const controller = new AbortController();
+              const timer = setTimeout(() => controller.abort(), timeoutMs);
+              try {
+                const response = await fetch(url, { headers: { ...HEADERS, referer }, redirect: "follow", signal: controller.signal });
+                const markup = await response.text();
+                lastStatus = response.status;
+                lastBytes = markup.length;
+                if ([401, 403, 429].includes(response.status) || BLOCK_RE.test(markup.slice(0, 10_000))) throw new Error(`carswitch_exact_blocked_${response.status}`);
+                const transientShell = response.status === 202 || (response.status === 200 && markup.length < 50_000);
+                if (transientShell) {
+                  if (attempt < 3) {
+                    if (retryDelayMs > 0) await new Promise((resolve) => setTimeout(resolve, retryDelayMs * attempt));
+                    continue;
+                  }
+                  throw new Error(`carswitch_exact_transient_status_${response.status}_bytes_${markup.length}`);
+                }
+                if (!response.ok) throw new Error(`carswitch_exact_http_${response.status}`);
+                return { response, markup };
+              } finally { clearTimeout(timer); }
+            }
+            throw new Error(`carswitch_exact_transient_status_${lastStatus}_bytes_${lastBytes}`);
+          }
+          '''
+          if old not in text:
+              raise SystemExit('request block not found')
+          source.write_text(text.replace(old, new, 1))
+
+          test = Path('tests/carswitch-detail-gallery.test.ts')
+          t = test.read_text()
+          marker = 'CarSwitch retries a transient 202 listing shell before parsing'
+          if marker not in t:
+              t += '''\n\ntest("CarSwitch retries a transient 202 listing shell before parsing", async () => {\n  const adapter = new CarSwitchUaeExactAdapter();\n  const originalFetch = globalThis.fetch;\n  const originalDelay = process.env.CATALOG_CARSWITCH_RETRY_DELAY_MS;\n  let calls = 0;\n  process.env.CATALOG_CARSWITCH_RETRY_DELAY_MS = "0";\n  globalThis.fetch = async () => {\n    calls++;\n    if (calls === 1) return new Response("<html>processing</html>", { status: 202, headers: { "content-type": "text/html" } });\n    return new Response(listingMarkup, { status: 200, headers: { "content-type": "text/html; charset=utf-8" } });\n  };\n  try {\n    const page = await adapter.fetchPage("4");\n    assert.equal(calls, 2);\n    assert.equal(page.items.length, 1);\n    assert.equal((page.items[0] as any).id, "858598");\n  } finally {\n    globalThis.fetch = originalFetch;\n    if (originalDelay === undefined) delete process.env.CATALOG_CARSWITCH_RETRY_DELAY_MS;\n    else process.env.CATALOG_CARSWITCH_RETRY_DELAY_MS = originalDelay;\n  }\n});\n'''
+              test.write_text(t)
+          PY
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/lib/catalog/carswitch-exact-source.ts tests/carswitch-detail-gallery.test.ts
+          git diff --cached --check
+          git commit -m 'Retry transient CarSwitch listing shells' || exit 0
+          git push origin HEAD:${{ github.event.pull_request.head.ref }}
