@@ -128,6 +128,9 @@ test("AutoPapa exact detail facts require both requested and redirected URLs to 
     sourceOfferId: "932906",
     originals: ["https://autopapa.ge/system/car/photos/009/066/596/original.jpg?1770802545"],
     powerHp: 147,
+    priceAuthority: undefined,
+    sellerDeclaredPriceUsd: undefined,
+    structuredPriceUsd: undefined,
   });
   assert.equal(autoPapaExactDetailFacts(exactOffer(), markup, "https://autopapa.ge/en/usd/toyota/camry/953315"), null);
 });
@@ -156,7 +159,7 @@ test("AutoPapa seller peak power is not promoted to EV or hybrid utilization pow
 });
 
 
-test("AutoPapa exact detail price ignores customs helper prices and stale seller text", () => {
+test("AutoPapa seller-declared Cena overrides teaser and customs-helper prices", () => {
   const markup = `
     <header><h1>Hyundai Kona</h1><strong class="price">$4 938</strong></header>
     <section>STARTING PRICE AT A REDUCTION IN GEORGIA, INCLUDING CUSTOMS CLEARANCE (BARGAINING) $6 314</section>
@@ -166,12 +169,14 @@ test("AutoPapa exact detail price ignores customs helper prices and stale seller
     <div>More details VIN: KM8K22AB4PU044726 Cena : 12900 $, 2023 god 4 mesac</div>
     <aside>Top listings Hyundai Kona $12 700</aside>
   `;
-  assert.equal(autoPapaDetailPriceUsd(markup), 4_938);
+  assert.equal(autoPapaDetailPriceUsd(markup), 12_900);
 });
 
-test("AutoPapa exact detail facts promote only the identity-bound primary asking price", () => {
+test("AutoPapa exact detail facts promote seller-declared Cena for the identity-bound offer", () => {
   const offer = exactOffer();
   offer.sourceOfferId = "958003";
+  offer.make = "Hyundai";
+  offer.model = "Kona";
   offer.operational.sourceUrl = "https://autopapa.ge/en/usd/hyundai/kona/958003";
   offer.sourcePrice = 3_608;
   offer.sourceCurrency = "USD";
@@ -182,9 +187,13 @@ test("AutoPapa exact detail facts promote only the identity-bound primary asking
     <div>More details Cena : 12900 $</div>
   `;
   const facts = enrichAutoPapaOfferFromExactDetail(offer, markup, "https://autopapa.ge/en/usd/hyundai/kona/958003");
-  assert.equal(facts?.priceUsd, 4_938);
-  assert.equal(offer.sourcePrice, 4_938);
+  assert.equal(facts?.priceUsd, 12_900);
+  assert.equal(facts?.sellerDeclaredPriceUsd, 12_900);
+  assert.equal(facts?.structuredPriceUsd, 4_938);
+  assert.equal(facts?.priceAuthority, "seller_declared_cena");
+  assert.equal(offer.sourcePrice, 12_900);
   assert.equal(offer.sourceCurrency, "USD");
   assert.equal((offer.operational.raw as any).autoPapaDetailPriceVerified, true);
-  assert.equal((offer.operational.raw as any).autoPapaDetailPriceUsd, 4_938);
+  assert.equal((offer.operational.raw as any).autoPapaDetailPriceUsd, 12_900);
+  assert.equal((offer.operational.raw as any).autoPapaDetailPriceAuthority, "seller_declared_cena");
 });
