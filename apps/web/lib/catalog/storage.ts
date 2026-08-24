@@ -1158,9 +1158,26 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
 export async function publishCurrentCatalogReadModels() {
   const manifest = await readManifest();
   const marketIds = Object.keys(manifest.markets || {}).filter((market) => Number(manifest.markets[market]?.count || 0) > 0);
-  const storedOffers = (await mapWithConcurrency(marketIds, Math.min(7, Math.max(1, marketIds.length)), (market) => readMarketOffers(market))).flat()
-    .filter(isPublicOffer);
-  return writeCurrentCatalogReadModels(manifest.generationId, storedOffers);
+  // Rows in the immutable public generation were already admitted by the
+  // strict source/publication gates. Re-running isPublicOffer here would
+  // apply source-gallery checks to compact storage rows whose raw
+  // provenance was intentionally removed and can collapse a healthy
+  // market (notably Goo-net Japan) in the one-hop read model.
+  const storedOffers = (await mapWithConcurrency(
+    marketIds,
+    Math.min(7, Math.max(1, marketIds.length)),
+    (market) => readMarketOffers(market),
+  )).flat();
+  const expectedTotal = marketIds.reduce((sum, market) => sum + Number(manifest.markets[market]?.count || 0), 0);
+  if (storedOffers.length !== expectedTotal) {
+    throw new Error(`catalog_current_readmodel_manifest_count_mismatch:${storedOffers.length}:${expectedTotal}`);
+  }
+  for (const market of marketIds) {
+    const expected = Number(manifest.markets[market]?.count || 0);
+    const actual = storedOffers.filter((offer) => String(offer.market || '') === market).length;
+    if (actual !== expected) throw new Error(`catalog_current_readmodel_manifest_count_mismatch:${market}:${actual}:${expected}`);
+  }
+  return writeCurrentCatalogReadModels(manifest.generationId, storedOffers, true);
 }
 export async function getOffer(id: string) {
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
