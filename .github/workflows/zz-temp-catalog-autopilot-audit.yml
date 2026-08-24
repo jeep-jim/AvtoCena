@@ -10,10 +10,10 @@ permissions:
   contents: read
 
 jobs:
-  actions-and-production:
+  schedule-failures:
     runs-on: ubuntu-latest
     steps:
-      - name: Inspect market run and schedules
+      - name: Inspect last scheduled queue failures
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -21,23 +21,74 @@ jobs:
           set -euo pipefail
           api='https://api.github.com/repos/jeep-jim/AvtoCena'
           hdr=(-H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json')
-          echo '=== runs for Georgia rebuild merge b663 ==='
-          curl -fsS "${hdr[@]}" "$api/actions/runs?head_sha=b663837f730296f1b119f8859eeaab16cf538402&per_page=30" | jq '[.workflow_runs[]|{id,name,event,status,conclusion,created_at,updated_at,html_url}]'
-          echo '=== sequential queue recent runs ==='
-          curl -fsS "${hdr[@]}" "$api/actions/workflows/catalog-v3-sequential-queue.yml/runs?per_page=12" | jq '[.workflow_runs[]|{id,event,status,conclusion,created_at,updated_at,head_sha,html_url}]'
-          for f in japan korea china uae europe georgia kyrgyzstan; do
-            echo "=== $f operator recent runs ==="
-            curl -fsS "${hdr[@]}" "$api/actions/workflows/catalog-v2-$f.yml/runs?per_page=5" | jq '[.workflow_runs[]|{id,event,status,conclusion,created_at,updated_at,head_sha,html_url}]'
+          for run in 32668061153 32600106926 32529628020; do
+            echo "=== schedule run $run ==="
+            curl -fsS "${hdr[@]}" "$api/actions/runs/$run/jobs?per_page=100" \
+              | jq '[.jobs[]|{id,name,status,conclusion,failedSteps:[.steps[]?|select(.conclusion=="failure")|.name]}] | {failed:[.[]|select(.conclusion=="failure")], successCount:([.[]|select(.conclusion=="success")]|length), skippedCount:([.[]|select(.conclusion=="skipped")]|length)}'
           done
-          echo '=== production seven-market totals ==='
+
+  uae-live-source-probe:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Probe UAE source adapters from the production collector environment
+        env:
+          CATALOG_REBUILD_MARKET: uae
+          CATALOG_RAW_LISTING_MODE: "1"
+          CATALOG_SOURCE_TIMEOUT_MS: "25000"
+        shell: bash
+        run: |
+          node --import tsx <<'NODE'
+          const { catalogImportSources } = await import('./apps/web/lib/catalog/importer.ts');
+          const ids=['dubicars_uae_exact','dubizzle_uae_open','carswitch_uae_open','dubicars_clean'];
+          for(const id of ids){
+            const s=catalogImportSources.find(x=>x.sourceId===id);
+            if(!s){ console.log(JSON.stringify({id,missing:true})); continue; }
+            const out={id,market:s.market,accessMode:s.accessMode};
+            try{
+              const h=await s.healthCheck?.(); out.health=h||null;
+            }catch(e){out.healthError=String(e?.message||e);}
+            try{
+              const p=await s.fetchPage('1');
+              out.count=Number(p?.count||p?.items?.length||0); out.finished=Boolean(p?.finished); out.nextCursor=p?.nextCursor||null; out.pageHealth=p?.health||null;
+              const sample=[];
+              for(const raw of (p?.items||[]).slice(0,5)){
+                try{
+                  const o=s.normalizeOffer(raw);
+                  sample.push(o?{id:o.id,sourceOfferId:o.sourceOfferId,make:o.make,model:o.model,year:o.year,sourcePrice:o.sourcePrice,sourceCurrency:o.sourceCurrency,images:o.operational?.raw?.images?.length||o.images?.length||0,sourceUrl:o.operational?.sourceUrl}:null);
+                }catch(e){sample.push({normalizeError:String(e?.message||e)});}
+              }
+              out.sample=sample;
+            }catch(e){out.fetchError=String(e?.message||e);}
+            console.log(JSON.stringify(out));
+          }
+          NODE
+
+  production-now:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check Georgia run and seven market totals
+        env:
+          GH_TOKEN: ${{ github.token }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          api='https://api.github.com/repos/jeep-jim/AvtoCena'
+          hdr=(-H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json')
+          curl -fsS "${hdr[@]}" "$api/actions/runs/32728973874/jobs?per_page=100" | jq '{jobs:[.jobs[]|{id,name,status,conclusion,failedSteps:[.steps[]?|select(.conclusion=="failure")|.name]}]}'
           for market in japan korea china uae europe georgia kyrgyzstan; do
             payload="$(curl -L --retry 2 --max-time 45 -fsS "https://avtocena.com/api/catalog/search?market=$market&pageSize=1")"
-            jq -n --arg market "$market" --argjson p "$payload" '{market:$market,total:($p.total//0),items:($p.items|length),firstId:($p.items[0].id//null)}'
+            jq -n --arg market "$market" --argjson p "$payload" '{market:$market,total:($p.total//0),firstId:($p.items[0].id//null)}'
           done
-          echo '=== target offer production ==='
           curl -L --retry 2 --max-time 45 -fsS 'https://avtocena.com/cars/offer/243f5ab811ee7e86251ba6f7' -o offer.html || true
-          echo "bytes=$(wc -c < offer.html 2>/dev/null || echo 0)"
-          grep -Eo '.{0,100}(299.?216|1.?543.?107|12900|12.?900).{0,100}' offer.html 2>/dev/null | head -30 || true
+          grep -Eo '.{0,120}(299.?216|4935|12900|12.?900|seller_declared_cena).{0,120}' offer.html 2>/dev/null | head -40 || true
 
   object-storage:
     runs-on: ubuntu-latest
@@ -58,7 +109,7 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Audit current stored inventory and required sources
+      - name: Audit current stored inventory and price provenance
         shell: bash
         run: |
           node --import tsx <<'NODE'
@@ -68,30 +119,12 @@ jobs:
           const rows=await readAllOffersForMaintenance();
           const out={checkedAt:new Date().toISOString(),total:rows.length,markets:{}};
           for(const market of markets){
-            const m=rows.filter(o=>o.market===market);
-            const bySource={};
-            let latest=null, oldest=null;
-            for(const o of m){
-              bySource[o.sourceId]=(bySource[o.sourceId]||0)+1;
-              const t=String(o.operational?.sourcePublishedAt||o.updatedAt||o.firstSeenAt||'');
-              if(t && (!latest || t>latest)) latest=t;
-              if(t && (!oldest || t<oldest)) oldest=t;
-            }
-            const required=REQUIRED_CATALOG_SOURCES[market].map(s=>({sourceId:s.sourceId,count:bySource[s.sourceId]||0}));
-            out.markets[market]={count:m.length,latest,oldest,required,topSources:Object.entries(bySource).sort((a,b)=>b[1]-a[1]).slice(0,12)};
+            const m=rows.filter(o=>o.market===market); const bySource={}; let latest=null;
+            for(const o of m){bySource[o.sourceId]=(bySource[o.sourceId]||0)+1; const t=String(o.operational?.sourcePublishedAt||o.updatedAt||o.firstSeenAt||''); if(t&&(!latest||t>latest))latest=t;}
+            out.markets[market]={count:m.length,latest,required:REQUIRED_CATALOG_SOURCES[market].map(s=>({sourceId:s.sourceId,count:bySource[s.sourceId]||0})),topSources:Object.entries(bySource).sort((a,b)=>b[1]-a[1]).slice(0,10)};
           }
           const target=rows.find(o=>o.id==='243f5ab811ee7e86251ba6f7'||String(o.sourceOfferId)==='958003');
-          out.target=target?{
-            id:target.id,sourceId:target.sourceId,sourceOfferId:target.sourceOfferId,market:target.market,
-            sourcePrice:target.sourcePrice,sourceCurrency:target.sourceCurrency,totalRub:target.totalRub,updatedAt:target.updatedAt,firstSeenAt:target.firstSeenAt,
-            sourceUrl:target.operational?.sourceUrl,
-            priceVerified:target.operational?.raw?.autoPapaDetailPriceVerified,
-            detailPriceUsd:target.operational?.raw?.autoPapaDetailPriceUsd,
-            priceAuthority:target.operational?.raw?.autoPapaDetailPriceAuthority,
-            sellerDeclaredPriceUsd:target.operational?.raw?.autoPapaSellerDeclaredPriceUsd,
-            structuredPriceUsd:target.operational?.raw?.autoPapaStructuredPriceUsd,
-            carBreakdown:target.calculationSnapshot?.breakdown?.find?.(x=>x?.id==='car')?.amountRub
-          }:null;
+          out.target=target?{id:target.id,sourceId:target.sourceId,sourceOfferId:target.sourceOfferId,sourcePrice:target.sourcePrice,sourceCurrency:target.sourceCurrency,totalRub:target.totalRub,updatedAt:target.updatedAt,sourceUrl:target.operational?.sourceUrl,priceVerified:target.operational?.raw?.autoPapaDetailPriceVerified,detailPriceUsd:target.operational?.raw?.autoPapaDetailPriceUsd,priceAuthority:target.operational?.raw?.autoPapaDetailPriceAuthority,sellerDeclaredPriceUsd:target.operational?.raw?.autoPapaSellerDeclaredPriceUsd,structuredPriceUsd:target.operational?.raw?.autoPapaStructuredPriceUsd,carBreakdown:target.calculationSnapshot?.breakdown?.find?.(x=>x?.id==='car')?.amountRub}:null;
           const autopapa=rows.filter(o=>o.sourceId==='autopapa_georgia_open');
           out.autoPapa={count:autopapa.length,verified:autopapa.filter(o=>o.operational?.raw?.autoPapaDetailPriceVerified===true).length,sellerCena:autopapa.filter(o=>o.operational?.raw?.autoPapaDetailPriceAuthority==='seller_declared_cena').length,structured:autopapa.filter(o=>o.operational?.raw?.autoPapaDetailPriceAuthority==='structured_primary').length};
           console.log(JSON.stringify(out,null,2));
