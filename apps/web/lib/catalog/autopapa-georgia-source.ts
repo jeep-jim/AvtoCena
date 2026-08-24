@@ -132,21 +132,55 @@ export function autoPapaDetailPowerHp(markup: string) {
  * in the primary header before the first `STARTING PRICE ...` helper block is
  * authoritative for the source vehicle price.
  */
-export function autoPapaDetailPriceUsd(markup: string) {
-  const h1Index = markup.search(/<h1\b/i);
-  if (h1Index < 0) return undefined;
-  const tail = markup.slice(h1Index, Math.min(markup.length, h1Index + 6_000));
-  const helperIndex = tail.search(/STARTING\s+PRICE\s+(?:AT|IN)\b/i);
-  const primaryHeader = plain(tail.slice(0, helperIndex >= 0 ? helperIndex : Math.min(tail.length, 2_500)));
-  const tokens = [
-    ...primaryHeader.matchAll(/(?:USD|US\$|\$)\s*([0-9][0-9\s,.'’]{1,18})/gi),
-    ...primaryHeader.matchAll(/([0-9][0-9\s,.'’]{1,18})\s*(?:USD|US\$|\$)/gi),
-  ];
-  for (const match of tokens) {
-    const value = integer(match[1]);
-    if (value && value >= 500 && value <= 5_000_000) return value;
+function autoPapaSinglePriceToken(value: string) {
+  const values = [
+    ...value.matchAll(/(?:USD|US\$|\$)\s*([0-9][0-9\s,.'’]{1,18})/gi),
+    ...value.matchAll(/([0-9][0-9\s,.'’]{1,18})\s*(?:USD|US\$|\$)/gi),
+  ]
+    .map((match) => integer(match[1]))
+    .filter((price): price is number => Boolean(price && price >= 500 && price <= 5_000_000));
+  const unique = [...new Set(values)];
+  return unique.length === 1 ? unique[0] : undefined;
+}
+
+export function autoPapaSellerDeclaredPriceUsd(markup: string) {
+  const text = plain(markup);
+  const start = text.search(/\bMore\s+details\b/i);
+  if (start < 0) return undefined;
+  const tail = text.slice(start, Math.min(text.length, start + 2_500));
+  const end = tail.search(/\b(?:let\s+me\s+know\s+when\s+a\s+car\s+like\s+this\s+is\s+found|add\s+to\s+favorites|send\s+to\s+friend|Report\s+ad|views|created\s+at)\b/i);
+  const details = tail.slice(0, end > 0 ? end : tail.length);
+  const match = details.match(/\b(?:Cena|Цена)\s*:\s*([0-9][0-9\s,.'’]{1,18})\s*(?:USD|US\$|\$)/i);
+  const value = integer(match?.[1]);
+  return value && value >= 500 && value <= 5_000_000 ? value : undefined;
+}
+
+export function autoPapaStructuredPrimaryPriceUsd(markup: string, identity?: Partial<Pick<VehicleOffer, "make" | "model">>) {
+  const text = plain(markup);
+  const helperIndex = text.search(/\bSTARTING\s+PRICE\s+(?:AT|IN)\b/i);
+  const factsIndex = text.search(/\bBody\s+Type\s*:/i);
+  const primaryEnd = helperIndex >= 0 ? helperIndex : factsIndex >= 0 ? factsIndex : Math.min(text.length, 6_000);
+  const primary = text.slice(0, primaryEnd);
+  const title = [identity?.make, identity?.model].map((value) => String(value || "").trim()).filter(Boolean).join(" " );
+  if (title) {
+    const escaped = title.split(/\s+/).map((token) => token.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("\\s+");
+    const matches = [...primary.matchAll(new RegExp(escaped, "ig"))];
+    for (let index = matches.length - 1; index >= 0; index--) {
+      const match = matches[index];
+      const start = Number(match.index || 0) + match[0].length;
+      const price = autoPapaSinglePriceToken(primary.slice(start, Math.min(primary.length, start + 320)));
+      if (price) return price;
+    }
   }
-  return undefined;
+  return autoPapaSinglePriceToken(primary.slice(Math.max(0, primary.length - 900)));
+}
+
+/**
+ * Seller-entered `Cena: ... $` in this exact vehicle's More details block is
+ * authoritative when present. The structured title price is only a fallback.
+ */
+export function autoPapaDetailPriceUsd(markup: string, identity?: Pick<VehicleOffer, "make" | "model">) {
+  return autoPapaSellerDeclaredPriceUsd(markup) || autoPapaStructuredPrimaryPriceUsd(markup, identity);
 }
 
 function autoPapaDetailIdentity(url: string) {
@@ -159,9 +193,12 @@ export function autoPapaExactDetailFacts(offer: Partial<VehicleOffer>, markup: s
   if (offer.sourceId !== "autopapa_georgia_open" || !/^\d{5,}$/.test(sourceOfferId)) return null;
   if (autoPapaDetailIdentity(requestedUrl) !== sourceOfferId || autoPapaDetailIdentity(responseUrl) !== sourceOfferId) return null;
   const originals = autoPapaDetailOriginalPhotoUrls(markup, responseUrl).slice(0, 30);
-  const priceUsd = autoPapaDetailPriceUsd(markup);
+  const sellerDeclaredPriceUsd = autoPapaSellerDeclaredPriceUsd(markup);
+  const structuredPriceUsd = autoPapaStructuredPrimaryPriceUsd(markup, offer);
+  const priceUsd = sellerDeclaredPriceUsd || structuredPriceUsd;
+  const priceAuthority = sellerDeclaredPriceUsd ? "seller_declared_cena" : structuredPriceUsd ? "structured_primary" : undefined;
   const powerHp = String(offer.powertrainKind || "") === "combustion" ? autoPapaDetailPowerHp(markup) : undefined;
-  return { sourceOfferId, originals, powerHp, ...(priceUsd ? { priceUsd } : {}) };
+  return { sourceOfferId, originals, powerHp, priceAuthority, sellerDeclaredPriceUsd, structuredPriceUsd, ...(priceUsd ? { priceUsd } : {}) };
 }
 
 export function enrichAutoPapaOfferFromExactDetail(offer: VehicleOffer, markup: string, responseUrl: string) {
@@ -178,6 +215,9 @@ export function enrichAutoPapaOfferFromExactDetail(offer: VehicleOffer, markup: 
       autoPapaDetailOriginals: facts.originals,
       autoPapaDetailPriceVerified: Boolean(facts.priceUsd),
       ...(facts.priceUsd ? { autoPapaDetailPriceUsd: facts.priceUsd } : {}),
+      ...(facts.priceAuthority ? { autoPapaDetailPriceAuthority: facts.priceAuthority } : {}),
+      ...(facts.sellerDeclaredPriceUsd ? { autoPapaSellerDeclaredPriceUsd: facts.sellerDeclaredPriceUsd } : {}),
+      ...(facts.structuredPriceUsd ? { autoPapaStructuredPriceUsd: facts.structuredPriceUsd } : {}),
       ...(facts.powerHp ? { autoPapaDetailPowerHp: facts.powerHp } : {}),
     },
   };

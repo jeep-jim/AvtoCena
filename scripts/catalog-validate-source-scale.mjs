@@ -159,6 +159,8 @@ for (const market of markets) {
 
   const requiredProductiveSourceIds = [...requiredSourceIds].filter((sourceId) => Number(candidatesBySource.get(sourceId) || 0) > 0);
   const requiredUnproductiveSourceIds = [...requiredSourceIds].filter((sourceId) => !requiredProductiveSourceIds.includes(sourceId));
+  const requiredFreshProductiveSourceIds = [...requiredSourceIds].filter((sourceId) => Number(freshBySource.get(sourceId) || 0) > 0);
+  const requiredFreshUnproductiveSourceIds = [...requiredSourceIds].filter((sourceId) => !requiredFreshProductiveSourceIds.includes(sourceId));
   const threshold = Math.max(1, Number(minimumFresh[market] || 1));
   const minimumProductiveSources = Math.max(1, configuredMinimumProductiveSources || Number(defaultMinimumProductiveSources[market] || 2));
   const productiveSources = [...candidatesBySource.values()].filter((count) => count > 0).length;
@@ -200,6 +202,8 @@ for (const market of markets) {
     requiredUnhealthySourceIds: requiredUnhealthySourceIds.sort(),
     requiredProductiveSourceIds: requiredProductiveSourceIds.sort(),
     requiredUnproductiveSourceIds: requiredUnproductiveSourceIds.sort(),
+    requiredFreshProductiveSourceIds: requiredFreshProductiveSourceIds.sort(),
+    requiredFreshUnproductiveSourceIds: requiredFreshUnproductiveSourceIds.sort(),
     requiredSourcesAttempted,
     requiredSourcesHealthy,
     requiredSourceContinuity,
@@ -218,6 +222,7 @@ for (const market of markets) {
   if (row.requiredUnattemptedSourceIds.length) warnings.push(`${market}:required_sources_unattempted:${row.requiredUnattemptedSourceIds.join(",")}`);
   if (row.requiredUnhealthySourceIds.length) warnings.push(`${market}:required_sources_unhealthy:${row.requiredUnhealthySourceIds.join(",")}`);
   if (row.requiredUnproductiveSourceIds.length) warnings.push(`${market}:required_sources_unproductive:${row.requiredUnproductiveSourceIds.join(",")}`);
+  if (row.requiredFreshUnproductiveSourceIds.length) warnings.push(`${market}:required_sources_without_fresh_verified_rows:${row.requiredFreshUnproductiveSourceIds.join(",")}`);
   if (!row.requiredSourcesComplete) warnings.push(`${market}:required_sources_degraded`);
   if (processFailures.length) warnings.push(`${market}:rebuild_process_failed`);
   if (freshIds.size < threshold) warnings.push(`${market}:fresh_${freshIds.size}_below_${threshold}`);
@@ -246,6 +251,7 @@ const blockingMarkets = markets.filter((market) => {
     || row.valid <= 0
     || !row.requiredSourcesAttempted
     || !row.requiredSourceContinuity
+    || (market === "georgia" && row.requiredFreshUnproductiveSourceIds.length > 0)
     || !row.sourceTargetReached;
 });
 const report = {
