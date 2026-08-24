@@ -17,6 +17,11 @@ jobs:
         with:
           ref: ${{ github.event.pull_request.head.ref }}
           fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
       - name: Apply corrected AutoPapa seller price authority
         shell: bash
         run: |
@@ -27,8 +32,7 @@ jobs:
           text = source.read_text()
           old = '''export function autoPapaDetailPriceUsd(markup: string) {\n  const h1Index = markup.search(/<h1\\b/i);\n  if (h1Index < 0) return undefined;\n  const tail = markup.slice(h1Index, Math.min(markup.length, h1Index + 6_000));\n  const helperIndex = tail.search(/STARTING\\s+PRICE\\s+(?:AT|IN)\\b/i);\n  const primaryHeader = plain(tail.slice(0, helperIndex >= 0 ? helperIndex : Math.min(tail.length, 2_500)));\n  const tokens = [\n    ...primaryHeader.matchAll(/(?:USD|US\\$|\\$)\\s*([0-9][0-9\\s,.'’]{1,18})/gi),\n    ...primaryHeader.matchAll(/([0-9][0-9\\s,.'’]{1,18})\\s*(?:USD|US\\$|\\$)/gi),\n  ];\n  for (const match of tokens) {\n    const value = integer(match[1]);\n    if (value && value >= 500 && value <= 5_000_000) return value;\n  }\n  return undefined;\n}\n'''
           new = '''function autoPapaSinglePriceToken(value: string) {\n  const values = [\n    ...value.matchAll(/(?:USD|US\\$|\\$)\\s*([0-9][0-9\\s,.'’]{1,18})/gi),\n    ...value.matchAll(/([0-9][0-9\\s,.'’]{1,18})\\s*(?:USD|US\\$|\\$)/gi),\n  ]\n    .map((match) => integer(match[1]))\n    .filter((price): price is number => Boolean(price && price >= 500 && price <= 5_000_000));\n  const unique = [...new Set(values)];\n  return unique.length === 1 ? unique[0] : undefined;\n}\n\nexport function autoPapaSellerDeclaredPriceUsd(markup: string) {\n  const text = plain(markup);\n  const start = text.search(/\\bMore\\s+details\\b/i);\n  if (start < 0) return undefined;\n  const tail = text.slice(start, Math.min(text.length, start + 2_500));\n  const end = tail.search(/\\b(?:let\\s+me\\s+know\\s+when\\s+a\\s+car\\s+like\\s+this\\s+is\\s+found|add\\s+to\\s+favorites|send\\s+to\\s+friend|Report\\s+ad|views|created\\s+at)\\b/i);\n  const details = tail.slice(0, end > 0 ? end : tail.length);\n  const match = details.match(/\\b(?:Cena|Цена)\\s*:\\s*([0-9][0-9\\s,.'’]{1,18})\\s*(?:USD|US\\$|\\$)/i);\n  const value = integer(match?.[1]);\n  return value && value >= 500 && value <= 5_000_000 ? value : undefined;\n}\n\nexport function autoPapaStructuredPrimaryPriceUsd(markup: string, identity?: Pick<VehicleOffer, \"make\" | \"model\">) {\n  const text = plain(markup);\n  const helperIndex = text.search(/\\bSTARTING\\s+PRICE\\s+(?:AT|IN)\\b/i);\n  const factsIndex = text.search(/\\bBody\\s+Type\\s*:/i);\n  const primaryEnd = helperIndex >= 0 ? helperIndex : factsIndex >= 0 ? factsIndex : Math.min(text.length, 6_000);\n  const primary = text.slice(0, primaryEnd);\n  const title = [identity?.make, identity?.model].map((value) => String(value || \"\").trim()).filter(Boolean).join(\" \" );\n  if (title) {\n    const escaped = title.split(/\\s+/).map((token) => token.replace(/[.*+?^${}()|[\\]\\\\]/g, \"\\\\$&\")).join(\"\\\\s+\");\n    const matches = [...primary.matchAll(new RegExp(escaped, \"ig\"))];\n    for (let index = matches.length - 1; index >= 0; index--) {\n      const match = matches[index];\n      const start = Number(match.index || 0) + match[0].length;\n      const price = autoPapaSinglePriceToken(primary.slice(start, Math.min(primary.length, start + 320)));\n      if (price) return price;\n    }\n  }\n  return autoPapaSinglePriceToken(primary.slice(Math.max(0, primary.length - 900)));\n}\n\n/**\n * Seller-entered `Cena: ... $` in this exact vehicle's More details block is\n * authoritative when present. The structured title price is only a fallback.\n */\nexport function autoPapaDetailPriceUsd(markup: string, identity?: Pick<VehicleOffer, \"make\" | \"model\">) {\n  return autoPapaSellerDeclaredPriceUsd(markup) || autoPapaStructuredPrimaryPriceUsd(markup, identity);\n}\n'''
-          if old not in text:
-              raise SystemExit('AutoPapa old price parser block not found')
+          if old not in text: raise SystemExit('AutoPapa old price parser block not found')
           text = text.replace(old, new, 1)
           old_facts = '''  const priceUsd = autoPapaDetailPriceUsd(markup);\n  const powerHp = String(offer.powertrainKind || \"\") === \"combustion\" ? autoPapaDetailPowerHp(markup) : undefined;\n  return { sourceOfferId, originals, powerHp, ...(priceUsd ? { priceUsd } : {}) };\n'''
           new_facts = '''  const sellerDeclaredPriceUsd = autoPapaSellerDeclaredPriceUsd(markup);\n  const structuredPriceUsd = autoPapaStructuredPrimaryPriceUsd(markup, offer);\n  const priceUsd = sellerDeclaredPriceUsd || structuredPriceUsd;\n  const priceAuthority = sellerDeclaredPriceUsd ? \"seller_declared_cena\" : structuredPriceUsd ? \"structured_primary\" : undefined;\n  const powerHp = String(offer.powertrainKind || \"\") === \"combustion\" ? autoPapaDetailPowerHp(markup) : undefined;\n  return { sourceOfferId, originals, powerHp, priceAuthority, sellerDeclaredPriceUsd, structuredPriceUsd, ...(priceUsd ? { priceUsd } : {}) };\n'''
@@ -48,8 +52,7 @@ jobs:
 
           rebuild = Path('scripts/catalog-rebuild-source-shard.mjs')
           text = rebuild.read_text()
-          anchor = 'const { catalogImportSources } = await import(\"../apps/web/lib/catalog/importer.ts\");\\n'
-          anchor = anchor.encode().decode('unicode_escape')
+          anchor = 'const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");\n'
           if 'needsSourceDetailFactRefresh' not in text:
               text = text.replace(anchor, anchor + 'const { needsSourceDetailFactRefresh } = await import("../apps/web/lib/catalog/importer-impl.ts");\n', 1)
           anchor2 = 'function currentTime(offer) { return Date.parse(String(offer?.operational?.sourcePublishedAt || offer?.updatedAt || offer?.firstSeenAt || "")) || 0; }\n'
@@ -58,11 +61,9 @@ jobs:
               if anchor2 not in text: raise SystemExit('rebuild helper anchor missing')
               text = text.replace(anchor2, anchor2 + helper, 1)
           old = '      if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer)) {\n        bucket.set(offer.id, offer);\n'
-          if old in text:
-              text = text.replace(old, '      if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer) && hasVerifiedAutoPapaPrice(offer)) {\n        bucket.set(offer.id, offer);\n', 1)
+          if old in text: text = text.replace(old, '      if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer) && hasVerifiedAutoPapaPrice(offer)) {\n        bucket.set(offer.id, offer);\n', 1)
           old = '  if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer)) bucket.set(offer.id, offer);\n'
-          if old in text:
-              text = text.replace(old, '  if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer) && hasVerifiedAutoPapaPrice(offer)) bucket.set(offer.id, offer);\n', 1)
+          if old in text: text = text.replace(old, '  if (offer.images.length >= minimumImages && isCrediblePublicOffer(offer) && hasVerifiedAutoPapaPrice(offer)) bucket.set(offer.id, offer);\n', 1)
           old = '  const detailNeeded = mandatoryPhotoMissing || criticalSpecsMissing || priorityGalleryMissing;\n'
           if old not in text: raise SystemExit('rebuild detailNeeded anchor missing')
           text = text.replace(old, '  const detailFactsNeeded = needsSourceDetailFactRefresh(offer) && !hasVerifiedAutoPapaPrice(offer);\n  const detailNeeded = mandatoryPhotoMissing || criticalSpecsMissing || priorityGalleryMissing || detailFactsNeeded;\n', 1)
@@ -89,23 +90,16 @@ jobs:
           if old not in text: raise SystemExit('validator blocking block missing')
           validator.write_text(text.replace(old, new, 1))
 
-          test_file = Path('tests/catalog-autopapa-seller-price-authority.test.ts')
-          test_file.write_text('''import assert from "node:assert/strict";\nimport fs from "node:fs";\nimport test from "node:test";\nimport { autoPapaDetailPriceUsd, autoPapaExactDetailFacts, autoPapaSellerDeclaredPriceUsd, autoPapaStructuredPrimaryPriceUsd } from "../apps/web/lib/catalog/autopapa-georgia-source";\nimport type { VehicleOffer } from "../apps/web/lib/catalog/types";\n\nconst markup = `<html><body><div>Hyundai Kona $4 938</div><div>STARTING PRICE AT A REDUCTION IN GEORGIA $6 314</div><div>STARTING PRICE IN GEORGIA INCLUDING CUSTOMS CLEARANCE $6 130</div><div>Body Type: SUV Power: 149 hp</div><div>Car description</div><section>More details VIN : KM8K22AB4PU044726 Cena : 12900 $, 2023 god 4 mesac, prabeg : 27 000 kilometer</section><a>let me know when a car like this is found</a><aside>Top listings Hyundai Kona $12 700</aside></body></html>`;\n\ntest("seller-declared Cena is authoritative", () => {\n  assert.equal(autoPapaSellerDeclaredPriceUsd(markup), 12900);\n  assert.equal(autoPapaStructuredPrimaryPriceUsd(markup, { make: "Hyundai", model: "Kona" }), 4938);\n  assert.equal(autoPapaDetailPriceUsd(markup, { make: "Hyundai", model: "Kona" }), 12900);\n});\n\ntest("listing 958003 facts expose seller price authority", () => {\n  const offer = { sourceId: "autopapa_georgia_open", sourceOfferId: "958003", make: "Hyundai", model: "Kona", powertrainKind: "combustion", operational: { sourceUrl: "https://autopapa.ge/en/usd/hyundai/kona/958003" } } as VehicleOffer;\n  const facts = autoPapaExactDetailFacts(offer, markup, "https://autopapa.ge/en/usd/hyundai/kona/958003");\n  assert.ok(facts);\n  assert.equal(facts.priceUsd, 12900);\n  assert.equal(facts.sellerDeclaredPriceUsd, 12900);\n  assert.equal(facts.structuredPriceUsd, 4938);\n  assert.equal(facts.priceAuthority, "seller_declared_cena");\n});\n\ntest("V3 rejects unverified retained AutoPapa prices and zero-fresh Georgia source runs", () => {\n  const rebuild = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard.mjs", import.meta.url), "utf8");\n  const validator = fs.readFileSync(new URL("../scripts/catalog-validate-source-scale.mjs", import.meta.url), "utf8");\n  assert.match(rebuild, /function hasVerifiedAutoPapaPrice/);\n  assert.match(rebuild, /reject\\("source_detail_price"\\)/);\n  assert.match(validator, /requiredFreshUnproductiveSourceIds/);\n  assert.match(validator, /market === "georgia" && row\\.requiredFreshUnproductiveSourceIds\\.length > 0/);\n});\n''')
-
-          ci = Path('.github/workflows/ci.yml')
-          text = ci.read_text()
-          needle = 'tests/autopapa-georgia-current-parser-20260812.test.ts tests/catalog-preliminary-power-recovery.test.ts'
-          repl = 'tests/autopapa-georgia-current-parser-20260812.test.ts tests/catalog-autopapa-detail-refresh.test.ts tests/catalog-autopapa-seller-price-authority.test.ts tests/catalog-preliminary-power-recovery.test.ts'
-          if needle in text: text = text.replace(needle, repl, 1)
-          elif 'tests/catalog-autopapa-seller-price-authority.test.ts' not in text: raise SystemExit('CI anchor missing')
-          ci.write_text(text)
+          Path('tests/catalog-autopapa-seller-price-authority.test.ts').write_text('''import assert from "node:assert/strict";\nimport fs from "node:fs";\nimport test from "node:test";\nimport { autoPapaDetailPriceUsd, autoPapaExactDetailFacts, autoPapaSellerDeclaredPriceUsd, autoPapaStructuredPrimaryPriceUsd } from "../apps/web/lib/catalog/autopapa-georgia-source";\nimport type { VehicleOffer } from "../apps/web/lib/catalog/types";\n\nconst markup = `<html><body><div>Hyundai Kona $4 938</div><div>STARTING PRICE AT A REDUCTION IN GEORGIA $6 314</div><div>Body Type: SUV Power: 149 hp</div><div>Car description</div><section>More details VIN : KM8K22AB4PU044726 Cena : 12900 $, 2023 god 4 mesac, prabeg : 27 000 kilometer</section><a>let me know when a car like this is found</a></body></html>`;\n\ntest("seller Cena overrides teaser", () => {\n  assert.equal(autoPapaSellerDeclaredPriceUsd(markup), 12900);\n  assert.equal(autoPapaStructuredPrimaryPriceUsd(markup, { make: "Hyundai", model: "Kona" }), 4938);\n  assert.equal(autoPapaDetailPriceUsd(markup, { make: "Hyundai", model: "Kona" }), 12900);\n});\n\ntest("958003 facts record seller authority", () => {\n  const offer = { sourceId: "autopapa_georgia_open", sourceOfferId: "958003", make: "Hyundai", model: "Kona", powertrainKind: "combustion", operational: { sourceUrl: "https://autopapa.ge/en/usd/hyundai/kona/958003" } } as VehicleOffer;\n  const facts = autoPapaExactDetailFacts(offer, markup, "https://autopapa.ge/en/usd/hyundai/kona/958003");\n  assert.ok(facts);\n  assert.equal(facts.priceUsd, 12900);\n  assert.equal(facts.priceAuthority, "seller_declared_cena");\n});\n\ntest("V3 rejects unverified retained AutoPapa prices", () => {\n  const rebuild = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard.mjs", import.meta.url), "utf8");\n  const validator = fs.readFileSync(new URL("../scripts/catalog-validate-source-scale.mjs", import.meta.url), "utf8");\n  assert.match(rebuild, /function hasVerifiedAutoPapaPrice/);\n  assert.match(rebuild, /reject\\("source_detail_price"\\)/);\n  assert.match(validator, /requiredFreshUnproductiveSourceIds/);\n});\n''')
           PY
+      - name: Verify seller price contract
+        run: node --import tsx --test tests/catalog-autopapa-seller-price-authority.test.ts
       - name: Commit corrected source patch
         shell: bash
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add apps/web/lib/catalog/autopapa-georgia-source.ts apps/web/lib/catalog/georgia-yandex-recovery.ts scripts/catalog-rebuild-source-shard.mjs scripts/catalog-validate-source-scale.mjs tests/catalog-autopapa-seller-price-authority.test.ts .github/workflows/ci.yml
+          git add apps/web/lib/catalog/autopapa-georgia-source.ts apps/web/lib/catalog/georgia-yandex-recovery.ts scripts/catalog-rebuild-source-shard.mjs scripts/catalog-validate-source-scale.mjs tests/catalog-autopapa-seller-price-authority.test.ts
           git diff --cached --quiet && exit 0
           git commit -m 'Use seller-declared AutoPapa Cena as source price'
           git push origin HEAD:${{ github.event.pull_request.head.ref }}
