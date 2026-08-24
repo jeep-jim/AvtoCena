@@ -13,7 +13,7 @@ jobs:
   inspect:
     runs-on: ubuntu-latest
     steps:
-      - name: Inspect CarSwitch merge deployment and UAE runs
+      - name: Inspect fresh UAE rebuild trigger
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -21,43 +21,10 @@ jobs:
           set -euo pipefail
           api='https://api.github.com/repos/jeep-jim/AvtoCena'
           hdr=(-H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json')
-          echo '=== CarSwitch detail fix merge workflows ==='
-          curl -fsS "${hdr[@]}" "$api/actions/runs?head_sha=2e7d24c4032bca7e2d230e13c4ee6f8c1e703b1a&per_page=30" | jq '[.workflow_runs[]|{id,name,path,event,status,conclusion,run_attempt,created_at,updated_at,html_url}]'
-          echo '=== old UAE run (pre-detail-fix snapshot) ==='
+          echo '=== marker merge workflows ==='
+          curl -fsS "${hdr[@]}" "$api/actions/runs?head_sha=ab0eda264c29e62d2bc2cbd3ba82ec3e4ab88ad6&per_page=30" | jq '[.workflow_runs[]|{id,name,path,event,status,conclusion,run_attempt,created_at,updated_at,html_url}]'
+          echo '=== previous UAE run ==='
           curl -fsS "${hdr[@]}" "$api/actions/runs/32741199815" | jq '{id,status,conclusion,run_attempt,created_at,updated_at,html_url}'
-          echo '=== Georgia final ==='
-          curl -fsS "${hdr[@]}" "$api/actions/runs/32728973874" | jq '{id,status,conclusion,run_attempt,created_at,updated_at,html_url}'
-          echo '=== production target ==='
+          echo '=== Georgia production ==='
           curl -L --retry 2 --max-time 45 -fsS 'https://avtocena.com/cars/offer/243f5ab811ee7e86251ba6f7' -o offer.html || true
-          grep -Eo '.{0,120}(959.?682|2.?219.?245|12900|seller_declared_cena).{0,120}' offer.html 2>/dev/null | head -50 || true
-
-  carswitch-fix-live:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: main
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 24
-          cache: npm
-      - run: npm ci
-      - name: Exercise merged adapter against live CarSwitch
-        env:
-          CATALOG_REBUILD_MARKET: uae
-          CATALOG_SOURCE_TIMEOUT_MS: "45000"
-          CATALOG_MAX_IMAGES_PER_OFFER: "30"
-        shell: bash
-        run: |
-          node --import tsx <<'NODE'
-          const { carswitchUaeExactSource } = await import('./apps/web/lib/catalog/carswitch-exact-source.ts');
-          const page = await carswitchUaeExactSource.fetchPage('1');
-          const rows = Array.isArray(page.items) ? page.items : [];
-          const offers = rows.map((row) => carswitchUaeExactSource.normalizeOffer(row)).filter(Boolean);
-          console.log(JSON.stringify({fetched:rows.length,normalized:offers.length,first:offers[0]?{id:offers[0].sourceOfferId,price:offers[0].sourcePrice,discoveryImages:offers[0].operational?.galleryImageCount,url:offers[0].operational?.sourceUrl}:null},null,2));
-          if (!offers.length) throw new Error('carswitch_main_no_offers');
-          const offer=offers[0];
-          const images=await carswitchUaeExactSource.fetchImages(offer);
-          console.log(JSON.stringify({id:offer.sourceOfferId,detailImages:images.length,price:offer.sourcePrice,galleryVerified:offer.operational?.galleryVerified,authority:offer.operational?.raw?.cashPriceAuthority,vin:offer.operational?.raw?.vehicleIdentificationNumber},null,2));
-          if(images.length<2||offer.operational?.galleryVerified!==true) throw new Error('carswitch_main_detail_not_verified');
-          NODE
+          grep -Eo '.{0,100}(959.?682|2.?219.?245|12900).{0,100}' offer.html 2>/dev/null | head -30 || true
