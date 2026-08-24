@@ -1,0 +1,43 @@
+name: TEMP CarSwitch structure
+
+on:
+  pull_request:
+    paths:
+      - '.github/workflows/zz-temp-carswitch-structure.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    if: github.event.pull_request.head.ref == 'diag/catalog-autopilot-final-audit-20260824'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect current CarSwitch search structure
+        shell: bash
+        run: |
+          set -euo pipefail
+          url='https://carswitch.com/uae/used-cars/search?app_route=listing'
+          curl -L --max-time 45 --retry 2 -fsS -A 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150 Safari/537.36' "$url" -o page.html
+          echo "BYTES=$(wc -c < page.html)"
+          echo "PRICE=$(grep -Eo 'Price' page.html | wc -l || true) INSTALLMENTS=$(grep -Eio 'Installments?|AED/mo|AED / month' page.html | wc -l || true) NEXT_DATA=$(grep -o '__NEXT_DATA__' page.html | wc -l || true) NEXT_PUSH=$(grep -o '__next_f.push' page.html | wc -l || true)"
+          echo '=== unique used-car hrefs ==='
+          python - <<'PY'
+          import re, html
+          s=open('page.html',encoding='utf-8',errors='ignore').read()
+          hrefs=[]
+          for m in re.finditer(r'href=["\']([^"\']+)["\']',s,re.I):
+              u=html.unescape(m.group(1)).replace('\\/','/')
+              if '/uae/used-car' in u and u not in hrefs: hrefs.append(u)
+          for u in hrefs[:120]: print(u)
+          print('HREF_COUNT',len(hrefs))
+          print('UUID32',len(set(re.findall(r'[a-f0-9]{32}',s,re.I))))
+          print('LONG_NUM_IDS',len(set(re.findall(r'(?<!\d)\d{6,12}(?!\d)',s))))
+          for marker in ['car_id','carId','listing_id','listingId','stock_id','stockId','vehicle_id','vehicleId','product_id','productId']:
+              print(marker, len(re.findall(marker,s,re.I)))
+          # short sanitized contexts around cash-price markers and likely links
+          txt=re.sub(r'\s+',' ',s)
+          for pat in [r'Price.{0,160}AED',r'AED.{0,160}Install',r'/uae/used-cars/.{0,220}']:
+              print('===',pat,'===')
+              for m in list(re.finditer(pat,txt,re.I))[:15]: print(txt[max(0,m.start()-120):min(len(txt),m.end()+120)])
+          PY
