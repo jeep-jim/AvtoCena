@@ -7,13 +7,44 @@ on:
 
 permissions:
   actions: read
-  contents: read
+  contents: write
 
 jobs:
-  inspect:
+  patch-carswitch-retry:
     runs-on: ubuntu-latest
     steps:
-      - name: Inspect fresh UAE rebuild trigger
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/carswitch-transient-202-retry-20260824
+      - name: Restrict transient retry to observed 202 response
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('apps/web/lib/catalog/carswitch-exact-source.ts')
+          s=p.read_text()
+          old='const transientShell = response.status === 202 || (response.status === 200 && markup.length < 50_000);'
+          new='const transientShell = response.status === 202;'
+          if old not in s:
+              if new in s: raise SystemExit(0)
+              raise SystemExit('transient expression missing')
+          p.write_text(s.replace(old,new,1))
+          PY
+          if git diff --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/lib/catalog/carswitch-exact-source.ts
+          git diff --cached --check
+          git commit -m 'Retry only observed CarSwitch 202 shell'
+          git push origin HEAD:fix/carswitch-transient-202-retry-20260824
+
+  inspect:
+    needs: patch-carswitch-retry
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect UAE rebuild
         env:
           GH_TOKEN: ${{ github.token }}
         shell: bash
@@ -21,28 +52,6 @@ jobs:
           set -euo pipefail
           api='https://api.github.com/repos/jeep-jim/AvtoCena'
           hdr=(-H "Authorization: Bearer $GH_TOKEN" -H 'Accept: application/vnd.github+json')
-          echo '=== marker merge workflows ==='
-          curl -fsS "${hdr[@]}" "$api/actions/runs?head_sha=ab0eda264c29e62d2bc2cbd3ba82ec3e4ab88ad6&per_page=30" | jq '[.workflow_runs[]|{id,name,path,event,status,conclusion,run_attempt,created_at,updated_at,html_url}]'
-          echo '=== fresh UAE run ==='
           curl -fsS "${hdr[@]}" "$api/actions/runs/32747455843" | jq '{id,status,conclusion,run_attempt,created_at,updated_at,html_url}'
-          echo '=== Georgia production ==='
           curl -L --retry 2 --max-time 45 -fsS 'https://avtocena.com/cars/offer/243f5ab811ee7e86251ba6f7' -o offer.html || true
           grep -Eo '.{0,100}(959.?682|2.?219.?245|12900).{0,100}' offer.html 2>/dev/null | head -30 || true
-
-  carswitch-page4:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Probe page 4 repeatedly
-        shell: bash
-        run: |
-          set -euo pipefail
-          ua='Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/150 Safari/537.36'
-          url='https://carswitch.com/uae/used-cars/search?app_route=listing&page=4'
-          for i in 1 2 3 4 5; do
-            code="$(curl -L -sS --max-time 45 -A "$ua" -H 'Accept: text/html,application/xhtml+xml,*/*;q=0.8' -H 'Accept-Language: en-US,en;q=0.9' -o "p$i.html" -w '%{http_code}' "$url" || true)"
-            bytes="$(wc -c < "p$i.html" 2>/dev/null || echo 0)"
-            itemlists="$(grep -oi 'ItemList' "p$i.html" 2>/dev/null | wc -l || true)"
-            cars="$(grep -Eo 'https://carswitch.com/(dubai|abudhabi|sharjah|ajman|umm-al-quwain|ras-al-khaimah|fujairah)/used-car/[^"< ]+' "p$i.html" 2>/dev/null | sort -u | wc -l || true)"
-            echo "attempt=$i code=$code bytes=$bytes itemlist_markers=$itemlists exact_urls=$cars"
-            sleep 5
-          done
