@@ -37,3 +37,26 @@ test("homepage fast read-model path cannot turn an existing manifest market into
   assert.match(storageSource, /projectionRows\.some\(\(row\) => row\.market === market && projectionCanRenderCard\(row\)\)/);
   assert.match(storageSource, /if \(projectionComplete\)/);
 });
+
+
+const homeRouteSource = fs.readFileSync(new URL("../apps/web/app/api/catalog/home/route.ts", import.meta.url), "utf8");
+const offerPageSource = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");
+const visibleAuditSource = fs.readFileSync(new URL("../scripts/catalog-audit-visible-calculation-coverage.mjs", import.meta.url), "utf8");
+
+test("homepage route actively backfills a manifest-present market when its showcase rows are missing", () => {
+  assert.match(homeRouteSource, /const missingMarkets = Object\.entries\(result\.marketCounts/);
+  assert.match(homeRouteSource, /searchOffers\(\{ market: market as any, page: 1, pageSize: 6/);
+  assert.match(homeRouteSource, /catalog_home_market_recovery_failed/);
+});
+
+test("editable power is structurally full-width rather than sharing a spec-grid row", () => {
+  assert.match(offerPageSource, /const nonEditableSpecs = specs\.filter/);
+  assert.match(offerPageSource, /ac-offer-spec-stack/);
+  assert.match(offerPageSource, /<EditablePowerTile currentHp=\{editablePowerHp\}[^>]* fullWidth \/>/);
+  assert.doesNotMatch(offerPageSource, /spec\.label === "Мощность" \? <EditablePowerTile/);
+});
+
+test("visible calculation audit recognises compact power-scenario markers", () => {
+  assert.match(visibleAuditSource, /\^power_scenario:/);
+  assert.match(visibleAuditSource, /scenarioSource \|\| `power_scenario:/);
+});

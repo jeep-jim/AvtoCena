@@ -27,7 +27,14 @@ function totalThirtyMinuteKw(offer) {
 
 function exactPowerState(offer, requireExactProvenance = false) {
   const scenario = offer?.calculationSnapshot?.powerScenario;
-  if (scenario?.requiresConfirmation === true) return { exactEnoughForReady: false, reasons: [], powerDataConfidence: "estimated", powerDataSource: `power_scenario:${scenario.source || "unknown"}`, totalThirtyMinuteKw: null };
+  const scenarioSource = clean(offer?.powerDataSource);
+  if (scenario?.requiresConfirmation === true || /^power_scenario:/i.test(scenarioSource)) return {
+    exactEnoughForReady: false,
+    reasons: [],
+    powerDataConfidence: "estimated",
+    powerDataSource: scenarioSource || `power_scenario:${scenario?.source || "unknown"}`,
+    totalThirtyMinuteKw: null,
+  };
   const kind = clean(offer?.powertrainKind).toLowerCase();
   const engineCc = positive(offer?.engineCc);
   const powerHp = positive(offer?.powerHp);
