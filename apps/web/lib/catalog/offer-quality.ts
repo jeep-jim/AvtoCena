@@ -264,7 +264,7 @@ function mandatorySourcePhotoIdentityVerified(offer: VehicleOffer) {
   return false;
 }
 
-function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true) {
+function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true, checkGalleryCoherence = true) {
   const year = Number(offer.year || 0);
   const title = listingTitle(offer);
   if (checkSourcePolicy && !isCatalogMarketSourceAllowed(offer)) return false;
@@ -276,6 +276,12 @@ function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true) {
   if (!sourcePriceOk(offer) || !mileageOk(offer)) return false;
   if (isNonPassengerCatalogBodyType(offer.bodyType)) return false;
   if (NON_VEHICLE_RE.test([title, offer.make, offer.model, offer.trim, offer.bodyType].map(clean).join(" "))) return false;
+  if (!checkGalleryCoherence) {
+    return (offer.images || []).some((image) => {
+      const url = String(image?.url || image?.objectKey || "");
+      return Boolean(url) && !BAD_IMAGE_RE.test(url) && isLikelyVehicleImage(image);
+    });
+  }
   return credibleCatalogImages(offer.images || []).length >= minimumImageCount(offer);
 }
 
@@ -286,5 +292,6 @@ export function hasCredibleOfferContent(offer: VehicleOffer) {
 }
 
 export function isCrediblePublicOffer(offer: VehicleOffer) {
-  return offer.status === "active" && credibleCoreContent(offer, false);
+  const compactProjection = Number((offer as any).cardProjectionVersion || 0) >= 1;
+  return offer.status === "active" && credibleCoreContent(offer, false, !compactProjection);
 }
