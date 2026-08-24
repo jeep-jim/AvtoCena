@@ -7,41 +7,44 @@ on:
 
 permissions:
   contents: read
+  actions: read
 
 jobs:
   inspect:
     runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ github.token }}
     steps:
-      - name: Download live Goo-net gallery frames after promotional prefix
+      - name: Download retained Japan shard and sample stock frame 04
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p samples
-          cat > samples.txt <<'EOF'
-          s0|https://picture1.goo-net.com/4020260805/00704382/J/40202608050070438200200.jpg|https://picture1.goo-net.com/070/0704382/J/0704382A20260804G002
-          s1|https://picture1.goo-net.com/9880260608/01310040/J/98802606080131004001100.jpg|https://picture1.goo-net.com/131/1310040/J/1310040A20260607D011
-          s2|https://picture1.goo-net.com/7000204644/30260721/J/70002046443026072100200.jpg|https://picture1.goo-net.com/020/0204644/J/0204644A30260721W002
-          s3|https://picture1.goo-net.com/9560260530/00551544/J/95602605300055154400200.jpg|https://picture1.goo-net.com/055/0551544/J/0551544A20260529G002
-          s4|https://picture1.goo-net.com/7000205508/30260511/J/70002055083026051100100.jpg|https://picture1.goo-net.com/020/0205508/J/0205508A30260511W001
-          s5|https://picture1.goo-net.com/7001161072/30251128/J/70011610723025112800100.jpg|https://picture1.goo-net.com/116/1161072/J/1161072A30251128W001
-          s6|https://picture1.goo-net.com/7000204020/30260820/J/70002040203026082000200.jpg|https://picture1.goo-net.com/020/0204020/J/0204020A30260820W002
-          s7|https://picture1.goo-net.com/9610260802/00803466/J/96102608020080346600200.jpg|https://picture1.goo-net.com/080/0803466/J/0803466A20260801G002
-          s8|https://picture1.goo-net.com/7000201190/30260702/J/70002011903026070200100.jpg|https://picture1.goo-net.com/020/0201190/J/0201190A30260702W001
-          s9|https://picture1.goo-net.com/7000302639/20260730/J/70003026392026073000600.jpg|https://picture1.goo-net.com/030/0302639/J/0302639A20260730W006
-          s10|https://picture1.goo-net.com/7000520271/30260809/J/70005202713026080902600.jpg|https://picture1.goo-net.com/052/0520271/J/0520271A30260809W026
-          s11|https://picture1.goo-net.com/7000710156/30260622/J/70007101563026062200100.jpg|https://picture1.goo-net.com/071/0710156/J/0710156A30260622W001
-          s12|https://picture1.goo-net.com/7001002110/30260629/J/70010021103026062900300.jpg|https://picture1.goo-net.com/100/1002110/J/1002110A30260629W003
-          s13|https://picture1.goo-net.com/9060260706/00100309/J/90602607060010030900200.jpg|https://picture1.goo-net.com/010/0100309/J/0100309A20260705E002
-          s14|https://picture1.goo-net.com/7001002110/20251129/J/70010021102025112900200.jpg|https://picture1.goo-net.com/100/1002110/J/1002110A20251129W002
-          EOF
-          while IFS='|' read -r name primary stock; do
-            curl -L -A 'Mozilla/5.0' -sS "$primary" -o "samples/${name}-00.jpg"
-            for n in 04 05 06 07 08 09 10 20 30; do
-              curl -L -A 'Mozilla/5.0' -sS "${stock}${n}.jpg" -o "samples/${name}-${n}.jpg" || true
-            done
-          done < samples.txt
+          mkdir -p input samples
+          gh run download 32665797079 -n catalog-v3-japan-2 -D input
+          node <<'NODE'
+          const fs=require('fs');
+          const file=fs.readdirSync('input').find(x=>x.startsWith('catalog-rebuild-japan-2')&&x.endsWith('.json'));
+          const data=JSON.parse(fs.readFileSync(`input/${file}`,'utf8'));
+          const urls=[];
+          for(const offer of data.offers||[]){
+            if(offer.sourceId!=='goonet_japan_exact') continue;
+            const hit=(offer.images||[]).map(x=>String(x?.url||'')).find(u=>/\/J\/[A-Za-z0-9]{20}04\.(?:jpg|jpeg|png|webp)(?:[?#]|$)/i.test(u));
+            if(hit&&!urls.includes(hit)) urls.push(hit);
+            if(urls.length>=200) break;
+          }
+          fs.writeFileSync('urls.txt',urls.join('\n'));
+          console.log({sample:urls.length});
+          NODE
+          i=0
+          while IFS= read -r url; do
+            [ -n "$url" ] || continue
+            printf -v name 'samples/%03d.jpg' "$i"
+            curl --max-time 12 -L -A 'Mozilla/5.0' -sS "$url" -o "$name" || rm -f "$name"
+            i=$((i+1))
+          done < urls.txt
+          echo "DOWNLOADED=$(find samples -type f -name '*.jpg' | wc -l)"
       - uses: actions/upload-artifact@v4
         with:
-          name: goonet-gallery-pattern-extended
+          name: goonet-frame04-200
           path: samples/*.jpg
           retention-days: 1
