@@ -1,6 +1,6 @@
+import type { Currency } from "../types";
+
 export type RussiaCustomsAgeBand = "up_to_3_years" | "from_3_to_5_years" | "over_5_years";
-export type RussiaCustomsStatus = "ready" | "needs_data";
-export type RussiaPowertrainKind = "combustion" | "electric" | "series_hybrid" | "other_hybrid" | "unknown";
 
 export type RussiaCustomsInput = {
   customsValueRub: number;
@@ -12,24 +12,27 @@ export type RussiaCustomsInput = {
   power30MinKw?: number;
   power30MinKwByMotor?: number[];
   utilizationPowerKw?: number;
-  powertrainKind?: RussiaPowertrainKind;
+  powertrainKind?: "combustion" | "electric" | "series_hybrid" | "other_hybrid" | "unknown";
   productionDate?: string;
   year?: number;
   fuel?: string;
-  importedAt?: Date;
+  vehicleCategory?: "M1" | "N1" | "unknown";
+  tnVedCode?: string;
+  grossVehicleWeightKg?: number;
+  bodyType?: string;
+  make?: string;
+  model?: string;
+  sourceTitle?: string;
   personalUseEligible?: boolean;
+  importedAt?: Date;
 };
 
 export type RussiaCustomsResult = {
-  status: RussiaCustomsStatus;
-  ruleVersion: "rf_personal_m1_2026-01-01";
-  ageMonths?: number;
-  ageBand?: RussiaCustomsAgeBand;
-  ageEstimated?: boolean;
-  possibleAgeBands?: RussiaCustomsAgeBand[];
-  customsValueRub: number;
-  customsValueEur: number;
-  customsClearanceFeeRub: number;
+  status: "ready" | "needs_data";
+  ageBand: RussiaCustomsAgeBand;
+  vehicleCategory: "M1" | "N1" | "unknown";
+  personalUseEligible: boolean;
+  customsClearanceRub: number;
   importDutyRub: number;
   exciseRub: number;
   vatRub: number;
@@ -58,8 +61,8 @@ function rows(values: Array<[number, number, number]>): CoefficientRow[] {
 
 // Коэффициенты календарного 2026 года из раздела I перечня к постановлению
 // Правительства РФ № 1291 в редакции постановления от 01.11.2025 № 1713.
-// В официальной таблице после пары 01.12.2025 идут пары 2026, 2027 и далее;
-// здесь зафиксирована именно пара 01.01.2026–31.12.2026. Мощность — кВт.
+// Используем именно колонку 01.01.2026–31.12.2026 по дате ввоза; следующая
+// годовая пара в официальной таблице относится уже к 2027 году. Мощность — кВт.
 const EV_2026 = rows([
   [58.84, 40.04, 70.44], [73.55, 49.56, 82.08], [95.61, 65.88, 95.64],
   [117.68, 78, 111.36], [139.75, 92.4, 129.72], [161.81, 109.68, 151.2],
@@ -135,258 +138,215 @@ function possibleProductionMonths(production: { year: number; month?: number }, 
   return Array.from({ length: Math.max(1, lastMonth) }, (_, index) => ({ year: production.year, month: index + 1 }));
 }
 
+function legalProductionReference(input: RussiaCustomsInput) {
+  const production = parseProductionMonth(input.productionDate, input.year);
+  if (!production) return null;
+  const importedAt = input.importedAt || new Date();
+  const candidates = possibleProductionMonths(production, importedAt)
+    .map((item) => ({ item, age: ageBand(completedMonths(item, importedAt)) }));
+  const unique = [...new Set(candidates.map((item) => item.age))];
+  if (unique.length !== 1) return null;
+  const item = candidates[Math.floor((candidates.length - 1) / 2)]?.item || candidates[0]?.item;
+  if (!item) return null;
+  return { production: item, ageBand: unique[0], importedAt };
+}
+
+function vehicleCategoryForInput(input: RussiaCustomsInput) {
+  const explicit = String(input.vehicleCategory || "").toUpperCase();
+  if (explicit === "M1" || explicit === "N1") return explicit as "M1" | "N1";
+  const text = `${input.tnVedCode || ""} ${input.bodyType || ""} ${input.make || ""} ${input.model || ""} ${input.sourceTitle || ""}`.toLowerCase();
+  if (/\b8704\b|\bn1\b|pickup|pick-up|пикап|cargo|commercial/.test(text)) return "N1";
+  if (/sedan|suv|crossover|coupe|hatch|wagon|minivan|mpv|roadster|convertible|cabrio|offroad|кроссовер|седан|хэтч|универсал|минивэн|купе/.test(text)) return "M1";
+  return "unknown";
+}
+
+function personalUseEligible(input: RussiaCustomsInput, category: "M1" | "N1" | "unknown") {
+  if (typeof input.personalUseEligible === "boolean") return input.personalUseEligible;
+  if (category !== "M1") return false;
+  return true;
+}
+
 export function customsClearanceFeeRub(customsValueRub: number) {
   if (customsValueRub <= 200_000) return 1_231;
   if (customsValueRub <= 450_000) return 2_462;
   if (customsValueRub <= 1_200_000) return 4_924;
   if (customsValueRub <= 2_700_000) return 13_541;
   if (customsValueRub <= 4_200_000) return 18_465;
-  if (customsValueRub <= 5_500_000) return 21_344;
-  if (customsValueRub <= 10_000_000) return 49_240;
-  return 73_860;
+  if (customsValueRub <= 5_500_000) return 24_617;
+  if (customsValueRub <= 7_000_000) return 27_079;
+  return 30_800;
 }
 
-function newCarDutyEur(customsValueEur: number, engineCc: number) {
-  const tier = customsValueEur <= 8_500
-    ? { percent: 0.54, minimumPerCc: 2.5 }
-    : customsValueEur <= 16_700
-      ? { percent: 0.48, minimumPerCc: 3.5 }
-      : customsValueEur <= 42_300
-        ? { percent: 0.48, minimumPerCc: 5.5 }
-        : customsValueEur <= 84_500
-          ? { percent: 0.48, minimumPerCc: 7.5 }
-          : customsValueEur <= 169_000
-            ? { percent: 0.48, minimumPerCc: 15 }
-            : { percent: 0.48, minimumPerCc: 20 };
-  return Math.max(customsValueEur * tier.percent, engineCc * tier.minimumPerCc);
+const UP_TO_3_YEARS_DUTY = [
+  { maxEur: 8_500, rate: 0.54, minEurPerCc: 2.5 },
+  { maxEur: 16_700, rate: 0.48, minEurPerCc: 3.5 },
+  { maxEur: 42_300, rate: 0.48, minEurPerCc: 5.5 },
+  { maxEur: 84_500, rate: 0.48, minEurPerCc: 7.5 },
+  { maxEur: 169_000, rate: 0.48, minEurPerCc: 15 },
+  { maxEur: Infinity, rate: 0.48, minEurPerCc: 20 },
+];
+
+function dutyForYoungVehicle(customsValueRub: number, eurRateRub: number, engineCc: number) {
+  const customsValueEur = customsValueRub / eurRateRub;
+  const row = UP_TO_3_YEARS_DUTY.find((item) => customsValueEur <= item.maxEur) || UP_TO_3_YEARS_DUTY[UP_TO_3_YEARS_DUTY.length - 1];
+  return Math.round(Math.max(customsValueRub * row.rate, engineCc * row.minEurPerCc * eurRateRub));
 }
 
-function usedCarRateEurPerCc(engineCc: number, band: Exclude<RussiaCustomsAgeBand, "up_to_3_years">) {
-  if (band === "from_3_to_5_years") {
-    if (engineCc <= 1_000) return 1.5;
-    if (engineCc <= 1_500) return 1.7;
-    if (engineCc <= 1_800) return 2.5;
-    if (engineCc <= 2_300) return 2.7;
-    if (engineCc <= 3_000) return 3;
-    return 3.6;
-  }
-  if (engineCc <= 1_000) return 3;
-  if (engineCc <= 1_500) return 3.2;
-  if (engineCc <= 1_800) return 3.5;
-  if (engineCc <= 2_300) return 4.8;
-  if (engineCc <= 3_000) return 5;
-  return 5.7;
+function dutyForUsedVehicle(engineCc: number, eurRateRub: number, ageBandValue: RussiaCustomsAgeBand) {
+  const old = ageBandValue === "over_5_years";
+  const eurPerCc = engineCc <= 1_000 ? (old ? 3 : 1.5)
+    : engineCc <= 1_500 ? (old ? 3.2 : 1.7)
+      : engineCc <= 1_800 ? (old ? 3.5 : 2.5)
+        : engineCc <= 2_300 ? (old ? 4.8 : 2.7)
+          : engineCc <= 3_000 ? (old ? 5 : 3)
+            : (old ? 5.7 : 3.6);
+  return Math.round(engineCc * eurPerCc * eurRateRub);
 }
 
-function unifiedDutyRub(customsValueEur: number, eurRateRub: number, engineCc: number, band: RussiaCustomsAgeBand) {
-  const dutyEur = band === "up_to_3_years"
-    ? newCarDutyEur(customsValueEur, engineCc)
-    : engineCc * usedCarRateEurPerCc(engineCc, band);
-  return Math.round(dutyEur * eurRateRub);
+function exactThirtyMinutePower(input: RussiaCustomsInput) {
+  const byMotor = Array.isArray(input.power30MinKwByMotor)
+    ? input.power30MinKwByMotor.map(positive).filter((item): item is number => Boolean(item))
+    : [];
+  return positive(input.power30MinKw) || (byMotor.length ? byMotor.reduce((sum, item) => sum + item, 0) : undefined);
 }
 
-function normalizePowertrain(input: RussiaCustomsInput): RussiaPowertrainKind {
-  if (input.powertrainKind && input.powertrainKind !== "unknown") return input.powertrainKind;
-  const fuel = String(input.fuel || "").toLowerCase();
-  if (/series|range|reev|erev|последователь|增程/.test(fuel)) return "series_hybrid";
-  if (/hybrid|phev|hev|mhev|гибрид|混合动力/.test(fuel)) return "other_hybrid";
-  if (/electric|battery|bev|электро|纯电/.test(fuel) && !positive(input.engineCc)) return "electric";
-  if (positive(input.engineCc)) return "combustion";
-  return "unknown";
-}
-
-function sumPower(values?: number[]) {
-  const powers = (values || []).map(positive).filter((value): value is number => value !== undefined);
-  return powers.length ? Math.round(powers.reduce((sum, value) => sum + value, 0) * 100) / 100 : undefined;
-}
-
-export function utilizationPowerKwForInput(input: RussiaCustomsInput, kind = normalizePowertrain(input)) {
+export function utilizationPowerKwForInput(input: RussiaCustomsInput) {
   const explicit = positive(input.utilizationPowerKw);
   if (explicit) return explicit;
-  const thirtyMinute = sumPower(input.power30MinKwByMotor) || positive(input.power30MinKw);
-  const ice = positive(input.icePowerKw)
-    || (kind === "combustion" ? positive(input.powerKw)
-      || (positive(input.powerHp) ? Number(input.powerHp) * 0.73549875 : undefined) : undefined);
-  if (kind === "electric" || kind === "series_hybrid") return thirtyMinute;
-  if (kind === "other_hybrid") return ice && thirtyMinute ? Math.round((ice + thirtyMinute) * 100) / 100 : undefined;
-  if (kind === "combustion") return ice;
+  const kind = input.powertrainKind || "combustion";
+  const motor = exactThirtyMinutePower(input);
+  if (kind === "electric") return motor;
+  if (kind === "series_hybrid" || kind === "other_hybrid") {
+    const ice = positive(input.icePowerKw);
+    if (!ice || !motor) return undefined;
+    return ice + motor;
+  }
+  return positive(input.powerKw) || (positive(input.powerHp) ? Number(input.powerHp) * 0.73549875 : undefined);
+}
+
+function electricExcisePowerKw(input: RussiaCustomsInput) {
+  if (input.powertrainKind === "electric") return exactThirtyMinutePower(input);
   return undefined;
 }
 
-function coefficientFrom(coefficientRows: CoefficientRow[], powerKw: number, band: RussiaCustomsAgeBand) {
-  const row = coefficientRows.find((candidate) => powerKw <= candidate.maxKw) || coefficientRows[coefficientRows.length - 1];
-  return band === "up_to_3_years" ? row.newVehicle : row.usedVehicle;
-}
-
-function combustionRows(engineCc: number) {
-  if (engineCc <= 1_000) return ICE_UP_TO_1000_2026;
-  if (engineCc <= 2_000) return ICE_1000_TO_2000_2026;
-  if (engineCc <= 3_000) return ICE_2000_TO_3000_2026;
-  if (engineCc <= 3_500) return ICE_3000_TO_3500_2026;
-  return ICE_OVER_3500_2026;
-}
-
-export function utilizationCoefficient2026(params: {
-  powertrainKind: RussiaPowertrainKind;
-  utilizationPowerKw: number;
-  engineCc?: number;
-  ageBand: RussiaCustomsAgeBand;
-  personalUseEligible?: boolean;
-}) {
-  const personalUse = params.personalUseEligible !== false;
-  if (params.powertrainKind === "electric" || params.powertrainKind === "series_hybrid") {
-    if (personalUse && params.utilizationPowerKw <= PERSONAL_ELECTRIC_LIMIT_KW) {
-      return params.ageBand === "up_to_3_years" ? 0.17 : 0.26;
-    }
-    return coefficientFrom(EV_2026, params.utilizationPowerKw, params.ageBand);
-  }
-  if (params.powertrainKind === "combustion" || params.powertrainKind === "other_hybrid") {
-    const engineCc = positive(params.engineCc);
-    if (!engineCc) return undefined;
-    if (personalUse && engineCc <= PERSONAL_COMBUSTION_LIMIT_CC
-      && params.utilizationPowerKw <= PERSONAL_COMBUSTION_LIMIT_KW) {
-      return params.ageBand === "up_to_3_years" ? 0.17 : 0.26;
-    }
-    return coefficientFrom(combustionRows(engineCc), params.utilizationPowerKw, params.ageBand);
+function combustionExcisePowerHp(input: RussiaCustomsInput) {
+  if (input.powertrainKind === "combustion" || !input.powertrainKind) {
+    return positive(input.powerHp) || (positive(input.powerKw) ? Number(input.powerKw) / 0.73549875 : undefined);
   }
   return undefined;
 }
 
-function exciseRateRubPerHp2026(powerKw: number) {
-  if (powerKw <= 67.5) return 0;
-  if (powerKw <= 112.5) return 64;
-  if (powerKw <= 150) return 613;
-  if (powerKw <= 225) return 1_004;
-  if (powerKw <= 300) return 1_711;
-  if (powerKw <= 375) return 1_771;
-  return 1_829;
+function utilizationCoefficientForPower(input: RussiaCustomsInput, utilizationPowerKw: number, ageBandValue: RussiaCustomsAgeBand) {
+  const used = ageBandValue !== "up_to_3_years";
+  const kind = input.powertrainKind || "combustion";
+  if (kind === "electric" || kind === "series_hybrid" || kind === "other_hybrid") {
+    return coefficient(EV_2026, utilizationPowerKw, used);
+  }
+  const cc = Number(input.engineCc || 0);
+  if (cc <= 1_000) return coefficient(ICE_UP_TO_1000_2026, utilizationPowerKw, used);
+  if (cc <= 2_000) return coefficient(ICE_1000_TO_2000_2026, utilizationPowerKw, used);
+  if (cc <= 3_000) return coefficient(ICE_2000_TO_3000_2026, utilizationPowerKw, used);
+  if (cc <= 3_500) return coefficient(ICE_3000_TO_3500_2026, utilizationPowerKw, used);
+  return coefficient(ICE_OVER_3500_2026, utilizationPowerKw, used);
 }
 
-function pureElectricKnownCustomsPayment(input: RussiaCustomsInput, customsValueRub: number) {
-  const excisePowerKw = positive(input.powerKw)
-    || (positive(input.powerHp) ? Number(input.powerHp) * 0.75 : undefined);
-  const importDutyRub = Math.round(customsValueRub * EV_IMPORT_DUTY_RATE);
-  if (!excisePowerKw) {
-    // We can still calculate the exact 15% duty and the VAT base that does not
-    // depend on excise. The unknown excise and its incremental VAT stay excluded
-    // from the preliminary lower-bound price until source/certified power is known.
-    const vatRub = Math.round((customsValueRub + importDutyRub) * VAT_RATE_2026);
-    return { importDutyRub, exciseRub: 0, vatRub, excisePowerKnown: false };
+export function utilizationCoefficient2026(input: RussiaCustomsInput, utilizationPowerKw: number, ageBandValue: RussiaCustomsAgeBand) {
+  const personalEligible = personalUseEligible(input, vehicleCategoryForInput(input));
+  const kind = input.powertrainKind || "combustion";
+  if (personalEligible && ageBandValue === "up_to_3_years") {
+    if (kind === "combustion" && Number(input.engineCc || 0) <= PERSONAL_COMBUSTION_LIMIT_CC && utilizationPowerKw <= PERSONAL_COMBUSTION_LIMIT_KW) return 0.17;
+    if (kind === "electric" && utilizationPowerKw <= PERSONAL_ELECTRIC_LIMIT_KW) return 0.17;
   }
-  const excisePowerHp = positive(input.powerHp) || excisePowerKw / 0.75;
-  const exciseRub = Math.round(excisePowerHp * exciseRateRubPerHp2026(excisePowerKw));
-  const vatRub = Math.round((customsValueRub + importDutyRub + exciseRub) * VAT_RATE_2026);
-  return { importDutyRub, exciseRub, vatRub, excisePowerKnown: true };
+  if (personalEligible && ageBandValue !== "up_to_3_years") {
+    if (kind === "combustion" && Number(input.engineCc || 0) <= PERSONAL_COMBUSTION_LIMIT_CC && utilizationPowerKw <= PERSONAL_COMBUSTION_LIMIT_KW) return 0.26;
+    if (kind === "electric" && utilizationPowerKw <= PERSONAL_ELECTRIC_LIMIT_KW) return 0.26;
+  }
+  return utilizationCoefficientForPower(input, utilizationPowerKw, ageBandValue);
+}
+
+function coefficient(table: CoefficientRow[], powerKw: number, used: boolean) {
+  const row = table.find((item) => powerKw <= item.maxKw) || table[table.length - 1];
+  return used ? row.usedVehicle : row.newVehicle;
+}
+
+function exciseRateRubPerHp(powerHp: number) {
+  if (powerHp <= 90) return 0;
+  if (powerHp <= 150) return 61;
+  if (powerHp <= 200) return 583;
+  if (powerHp <= 300) return 955;
+  if (powerHp <= 400) return 1_628;
+  if (powerHp <= 500) return 1_685;
+  return 1_740;
+}
+
+function exciseRubForPowerHp(powerHp: number) {
+  return Math.round(powerHp * exciseRateRubPerHp(powerHp));
+}
+
+function zeroDutyVehicle(input: RussiaCustomsInput) {
+  const text = `${input.tnVedCode || ""} ${input.fuel || ""}`.toLowerCase();
+  return input.powertrainKind === "electric" || /\b8703\s*80\b/.test(text);
+}
+
+function passengerCustoms(input: RussiaCustomsInput, ageBandValue: RussiaCustomsAgeBand) {
+  const engineCc = positive(input.engineCc);
+  const kind = input.powertrainKind || "combustion";
+  if (!zeroDutyVehicle(input) && !engineCc) return { dutyRub: 0, exciseRub: 0, vatRub: 0, missing: ["engine_cc"] };
+  if (zeroDutyVehicle(input)) {
+    const powerKw = electricExcisePowerKw(input);
+    if (!powerKw) return { dutyRub: 0, exciseRub: 0, vatRub: 0, missing: ["electric_excise_power_kw"] };
+    const powerHp = powerKw / 0.73549875;
+    const exciseRub = exciseRubForPowerHp(powerHp);
+    const dutyRub = Math.round(input.customsValueRub * EV_IMPORT_DUTY_RATE);
+    const vatRub = Math.round((input.customsValueRub + dutyRub + exciseRub) * VAT_RATE_2026);
+    return { dutyRub, exciseRub, vatRub, missing: [] as string[] };
+  }
+  const dutyRub = ageBandValue === "up_to_3_years"
+    ? dutyForYoungVehicle(input.customsValueRub, input.eurRateRub, engineCc!)
+    : dutyForUsedVehicle(engineCc!, input.eurRateRub, ageBandValue);
+  return { dutyRub, exciseRub: 0, vatRub: 0, missing: [] as string[] };
 }
 
 export function calculateRussiaCustomsForIndividual(input: RussiaCustomsInput): RussiaCustomsResult {
+  const production = legalProductionReference(input);
+  const category = vehicleCategoryForInput(input);
+  const personalEligible = personalUseEligible(input, category);
   const missing: string[] = [];
   const warnings: string[] = [];
-  const customsValueRub = positive(input.customsValueRub) || 0;
-  const eurRateRub = positive(input.eurRateRub) || 0;
-  const engineCc = positive(input.engineCc);
-  const importedAt = input.importedAt || new Date();
-  const production = parseProductionMonth(input.productionDate, input.year);
-  const powertrainKind = normalizePowertrain(input);
-  const utilizationPowerKw = utilizationPowerKwForInput(input, powertrainKind);
-  const pureElectric = powertrainKind === "electric";
-  const needsCombustionDisplacement = powertrainKind === "combustion"
-    || powertrainKind === "series_hybrid" || powertrainKind === "other_hybrid";
 
-  if (!customsValueRub) missing.push("customs_value");
-  if (!eurRateRub) missing.push("eur_rate");
   if (!production) missing.push("production_date");
-  if (powertrainKind === "unknown") missing.push("powertrain_kind");
-  if (!utilizationPowerKw) missing.push(
-    powertrainKind === "electric" || powertrainKind === "series_hybrid"
-      ? "certified_30_minute_power_kw" : "utilization_power_kw",
-  );
-  if (pureElectric && !positive(input.powerKw) && !positive(input.powerHp)) missing.push("electric_excise_power_kw");
-  if (needsCombustionDisplacement && !engineCc) missing.push("engine_cc");
+  if (category === "unknown") missing.push("vehicle_category");
+  if (category === "N1") missing.push("n1_customs_tariff");
 
-  const ageCandidates = production
-    ? possibleProductionMonths(production, importedAt).map((candidate) => {
-      const months = completedMonths(candidate, importedAt);
-      return { months, band: ageBand(months) };
-    })
-    : [];
-  const possibleAgeBands = [...new Set(ageCandidates.map((candidate) => candidate.band))];
-  const ageEstimated = Boolean(production && !production.month);
-  const exactAgeMonths = production?.month ? ageCandidates[0]?.months : undefined;
-  const customsValueEur = eurRateRub ? customsValueRub / eurRateRub : 0;
-  const customsClearance = customsValueRub ? customsClearanceFeeRub(customsValueRub) : 0;
+  const ageBandValue = production?.ageBand || "up_to_3_years";
+  const customsClearanceRub = customsClearanceFeeRub(input.customsValueRub);
+  const utilizationPowerKw = utilizationPowerKwForInput(input);
+  if (!utilizationPowerKw) missing.push("utilization_power_kw");
 
-  const calculations = possibleAgeBands.map((band) => {
-    const coefficient = utilizationPowerKw ? utilizationCoefficient2026({
-      powertrainKind,
-      utilizationPowerKw,
-      engineCc,
-      ageBand: band,
-      personalUseEligible: input.personalUseEligible,
-    }) : undefined;
-    const utilizationFeeRub = coefficient === undefined ? undefined : Math.round(UTILIZATION_BASE_RUB * coefficient);
-    let importDutyRub = 0;
-    let exciseRub = 0;
-    let vatRub = 0;
-    if (customsValueRub && pureElectric) {
-      ({ importDutyRub, exciseRub, vatRub } = pureElectricKnownCustomsPayment(input, customsValueRub));
-    } else if (customsValueEur && eurRateRub && engineCc && !pureElectric) {
-      importDutyRub = unifiedDutyRub(customsValueEur, eurRateRub, engineCc, band);
-    }
-    return {
-      band, importDutyRub, exciseRub, vatRub, coefficient, utilizationFeeRub,
-      total: customsClearance + importDutyRub + exciseRub + vatRub + (utilizationFeeRub || 0),
-    };
-  });
+  const passenger = category === "M1" ? passengerCustoms(input, ageBandValue) : { dutyRub: 0, exciseRub: 0, vatRub: 0, missing: [] as string[] };
+  missing.push(...passenger.missing);
 
-  const selected = [...calculations].sort((left, right) => right.total - left.total)[0];
-  const band = selected?.band || possibleAgeBands[0];
-  const importDutyRub = selected?.importDutyRub || 0;
-  const exciseRub = selected?.exciseRub || 0;
-  const vatRub = selected?.vatRub || 0;
-  const utilizationCoefficient = selected?.coefficient;
-  const utilizationFeeRub = selected?.utilizationFeeRub;
+  const utilizationCoefficient = utilizationPowerKw
+    ? utilizationCoefficient2026(input, utilizationPowerKw, ageBandValue)
+    : undefined;
+  const utilizationFeeRub = utilizationCoefficient ? Math.round(UTILIZATION_BASE_RUB * utilizationCoefficient) : undefined;
 
-  if (ageEstimated && possibleAgeBands.length) warnings.push(
-    `Месяц производства не указан: выбран максимальный платёж из категорий ${possibleAgeBands.join(", ")}.`,
-  );
-  if ((powertrainKind === "electric" || powertrainKind === "series_hybrid") && !utilizationPowerKw) warnings.push(
-    "Нужна максимальная 30-минутная мощность из ОТТС, СБКТС, ЗОЕТС или ЭПТС; пиковая мощность для утильсбора не используется. До её получения утильсбор не включается в предварительный итог.",
-  );
-  if (pureElectric && !positive(input.powerKw) && !positive(input.powerHp)) warnings.push(
-    "Мощность электродвигателя для акциза не подтверждена источником: акциз и зависящая от него часть НДС не включены в предварительный итог.",
-  );
-  if (powertrainKind === "other_hybrid" && !utilizationPowerKw) warnings.push(
-    "Нужна сумма мощности ДВС и максимальной 30-минутной мощности всех тяговых электромоторов.",
-  );
-  if (powertrainKind === "series_hybrid") warnings.push(
-    "Последовательный гибрид использует 30-минутную мощность для утильсбора, но таможенный платёж рассчитывается по объёму его ДВС, а не как для чистого электромобиля.",
-  );
-  if (input.personalUseEligible !== false) warnings.push(
-    "Льготный коэффициент физического лица применяется только при соблюдении условий личного пользования; для ДВС и иных гибридов дополнительно требуется объём не более 3000 см³ и мощность не более 117,68 кВт, для электромобилей и последовательных гибридов — не более 58,84 кВт.",
-  );
-  warnings.push(
-    "Таможенная стоимость должна включать цену автомобиля и подтверждённые расходы по доставке до границы ЕАЭС; логистика не подставляется автоматически.",
-  );
-
-  if (utilizationPowerKw && utilizationCoefficient === undefined) missing.push("utilization_coefficient");
-  const knownCustomsRub = customsClearance + importDutyRub + exciseRub + vatRub;
-  const complete = missing.length === 0 && utilizationFeeRub !== undefined && Boolean(band);
-  const totalCustomsRub = complete ? knownCustomsRub + utilizationFeeRub : undefined;
+  const knownCustomsRub = customsClearanceRub + passenger.dutyRub + passenger.exciseRub + passenger.vatRub + (utilizationFeeRub || 0);
+  const totalCustomsRub = missing.length ? undefined : knownCustomsRub;
+  if (!personalEligible) warnings.push("Льготный утилизационный коэффициент для личного использования не применён.");
+  if (missing.includes("utilization_power_kw")) warnings.push("Для расчёта утилизационного сбора требуется мощность в кВт по правилам категории M1.");
+  if (missing.includes("vehicle_category")) warnings.push("Категория транспортного средства не подтверждена. Расчёт M1 не применяется автоматически.");
+  if (missing.includes("n1_customs_tariff")) warnings.push("Для N1 требуется отдельная таможенная методика; тариф M1 не применяется.");
 
   return {
-    status: complete ? "ready" : "needs_data",
-    ruleVersion: "rf_personal_m1_2026-01-01",
-    ageMonths: exactAgeMonths,
-    ageBand: band,
-    ageEstimated,
-    possibleAgeBands,
-    customsValueRub,
-    customsValueEur: Math.round(customsValueEur * 100) / 100,
-    customsClearanceFeeRub: customsClearance,
-    importDutyRub,
-    exciseRub,
-    vatRub,
+    status: missing.length ? "needs_data" : "ready",
+    ageBand: ageBandValue,
+    vehicleCategory: category,
+    personalUseEligible: personalEligible,
+    customsClearanceRub,
+    importDutyRub: passenger.dutyRub,
+    exciseRub: passenger.exciseRub,
+    vatRub: passenger.vatRub,
     utilizationPowerKw,
     utilizationCoefficient,
     utilizationFeeRub,
@@ -395,23 +355,11 @@ export function calculateRussiaCustomsForIndividual(input: RussiaCustomsInput): 
     missing: [...new Set(missing)],
     warnings,
     breakdown: [
-      { id: "customs-clearance", title: "Таможенный сбор за оформление", amountRub: customsClearance },
-      {
-        id: "import-duty",
-        title: pureElectric ? "Ввозная пошлина 15%" : "Единая ставка таможенных платежей",
-        amountRub: importDutyRub,
-        note: ageEstimated ? `${band}; месяц оценён консервативно` : band,
-      },
-      ...(pureElectric ? [
-        { id: "excise", title: "Акциз", amountRub: exciseRub, note: "Ставка 2026 года по мощности электродвигателя" },
-        { id: "vat", title: "НДС 22%", amountRub: vatRub, note: "Таможенная стоимость + пошлина + акциз" },
-      ] : []),
-      {
-        id: "utilization-fee",
-        title: "Утилизационный сбор",
-        amountRub: utilizationFeeRub,
-        note: utilizationCoefficient === undefined ? "Требуются точные данные" : `20 000 ₽ × ${utilizationCoefficient}`,
-      },
+      { id: "customs-clearance", title: "Таможенное оформление", amountRub: customsClearanceRub },
+      { id: "import-duty", title: "Единая ставка / пошлина", amountRub: passenger.dutyRub },
+      { id: "excise", title: "Акциз", amountRub: passenger.exciseRub },
+      { id: "vat", title: "НДС", amountRub: passenger.vatRub },
+      { id: "utilization-fee", title: "Утилизационный сбор", amountRub: utilizationFeeRub },
     ],
   };
 }
