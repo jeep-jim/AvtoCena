@@ -1,0 +1,72 @@
+name: TEMP fix strict source fixtures
+
+on:
+  push:
+    branches:
+      - fix/strict-market-source-whitelist-20260825-r2
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/strict-market-source-whitelist-20260825-r2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Align image-quality fixtures with strict source provenance
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          p = Path('tests/catalog-image-quality.test.ts')
+          t = p.read_text()
+          def repl(old, new):
+              global t
+              if new in t:
+                  return
+              if old not in t:
+                  raise SystemExit('missing anchor: ' + old[:160])
+              t = t.replace(old, new, 1)
+
+          repl(
+            '''  calculationStatus: "needs_knowledge",\n  images: Array.from({ length: 5 }, (_, index) => sourcePhoto(index + 1)),\n};''',
+            '''  calculationStatus: "needs_knowledge",\n  images: Array.from({ length: 5 }, (_, index) => sourcePhoto(index + 1)),\n  operational: {\n    sourceUrl: "https://www.encar.com/dc/dc_cardetailview.do?carid=100",\n    photoIdentityVerified: true,\n  },\n};''')
+
+          repl(
+            '''      { ...rawOffer, market: "georgia", sourceId: "autopapa_georgia_open", sourceCurrency: "USD" },\n      { ...rawOffer, market: "china", sourceId: "autohome_new_china_open", sourceCurrency: "CNY" },\n      { ...rawOffer, market: "europe", sourceId: "mobile_de_open", sourceCurrency: "EUR" },\n      { ...rawOffer, market: "japan", sourceId: "jpauc_japan_past_open", sourceCurrency: "JPY" },''',
+            '''      { ...rawOffer, market: "georgia", sourceId: "autopapa_georgia_open", sourceCurrency: "USD", operational: { sourceUrl: "https://autopapa.ge/en/car/100", photoIdentityVerified: true } },\n      { ...rawOffer, market: "china", sourceId: "autohome_new_china_open", sourceCurrency: "CNY", operational: { sourceUrl: "https://www.autohome.com.cn/100/", photoIdentityVerified: true } },\n      { ...rawOffer, market: "europe", sourceId: "mobile_de_open", sourceCurrency: "EUR", operational: { sourceUrl: "https://www.mobile.de/auto-inserat/100.html", photoIdentityVerified: true } },\n      { ...rawOffer, market: "japan", sourceId: "jpauc_japan_past_open", sourceCurrency: "JPY", operational: { sourceUrl: "https://jpauc.com/auction/past/100", photoIdentityVerified: true } },''')
+
+          repl(
+            '''    sourceId: undefined,\n    sourceOfferId: undefined,\n    sourceTitle: undefined,\n    market: "japan",''',
+            '''    sourceId: "jpcenter_japan_catalog_open",\n    sourceOfferId: "JP-CENTER-100",\n    sourceTitle: undefined,\n    market: "japan",''')
+
+          repl(
+            '''    images: rawOffer.images.slice(0, 1),\n    cardProjectionVersion: 1,\n  };\n  assert.equal(isCrediblePublicOffer(japanProjection as any), true);''',
+            '''    images: rawOffer.images.slice(0, 1),\n    cardProjectionVersion: 1,\n    operational: { sourceUrl: "https://jp.center/car/JP-CENTER-100", photoIdentityVerified: true },\n  };\n  assert.equal(isCrediblePublicOffer(japanProjection as any), true);\n  assert.equal(isCrediblePublicOffer({ ...japanProjection, sourceId: undefined } as any), false);\n  assert.equal(isCrediblePublicOffer({ ...japanProjection, operational: { sourceUrl: "https://www.goo-net-exchange.com/usedcars/TOYOTA/COROLLA/100/" } } as any), false);''')
+
+          repl(
+            '''    sourceId: "jpauc_japan_past_open",\n    year: new Date().getFullYear() - 7,''',
+            '''    sourceId: "jpauc_japan_past_open",\n    operational: { sourceUrl: "https://jpauc.com/auction/past/older-100", photoIdentityVerified: true },\n    year: new Date().getFullYear() - 7,''')
+
+          p.write_text(t)
+          PY
+      - name: Verify corrected strict-source fixtures
+        run: |
+          node --import tsx --test tests/catalog-image-quality.test.ts tests/catalog-source-scale.test.ts tests/catalog-probe-source-shard.test.ts tests/catalog-estimated-power-publication.test.ts
+      - name: Commit fixture corrections
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add tests/catalog-image-quality.test.ts
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Align image tests with strict catalog source provenance"
+          git push origin HEAD:fix/strict-market-source-whitelist-20260825-r2
