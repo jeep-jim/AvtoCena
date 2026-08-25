@@ -133,26 +133,17 @@ test("does not publish a complete customs price without utilization power", () =
   assert.ok(result.missing.includes("utilization_power_kw"));
 });
 
-test("Genesis GV70 304 PS is converted to 223.59 kW and uses the 2026 2-3L coefficient", () => {
+test("Genesis GV70 304 PS maps to 223.59162 kW and the 2026 2-3L row", () => {
   const utilizationPowerKw = utilizationPowerKwForInput({
-    customsValueRub: 2_449_066,
-    eurRateRub: 100,
-    engineCc: 2_497,
-    powerHp: 304,
-    productionDate: "2025-01",
-    fuel: "petrol",
-    importedAt,
+    customsValueRub: 2_449_066, eurRateRub: 100, engineCc: 2_497, powerHp: 304,
+    productionDate: "2025-01", fuel: "petrol", importedAt,
   });
   assert.equal(utilizationPowerKw, 223.59162);
   const result = calculateRussiaCustomsForIndividual({
-    customsValueRub: 2_449_066,
-    eurRateRub: 100,
-    engineCc: 2_497,
-    powerHp: 304,
-    productionDate: "2025-01",
-    fuel: "petrol",
-    importedAt,
+    customsValueRub: 2_449_066, eurRateRub: 100, engineCc: 2_497, powerHp: 304,
+    productionDate: "2025-01", fuel: "petrol", importedAt,
   });
+  assert.equal(result.status, "ready");
   assert.equal(result.utilizationPowerKw, 223.59162);
   assert.equal(result.utilizationCoefficient, 131.04);
   assert.equal(result.utilizationFeeRub, 2_620_800);
