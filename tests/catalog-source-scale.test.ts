@@ -42,6 +42,7 @@ const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", im
 const carsPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
 const dealerDemo = fs.readFileSync(new URL("../apps/web/components/dealers/DealerDemoDashboard.tsx", import.meta.url), "utf8");
 const japanOpenSources = fs.readFileSync(new URL("../apps/web/lib/catalog/japan-auction-open-sources.ts", import.meta.url), "utf8");
+const postPersistAudit = fs.readFileSync(new URL("../scripts/catalog-live-postpersist-audit.mjs", import.meta.url), "utf8");
 
 test("source-scale catalog supports 100000 verified offers per source and market", () => {
   assert.equal(CATALOG_DAILY_TARGET_PER_SOURCE, 100_000);
@@ -137,6 +138,9 @@ test("non-whitelisted source ids and source links are rejected centrally", () =>
   assert.match(storage, /sourceAllowedInternalOffers = nextOffers\.filter\(hasAllowedCatalogSourceProvenance\)/);
   assert.match(storage, /catalog_append_public_source_forbidden/);
   assert.match(storage, /protectedPublicIds\.has\(String\(offer\.id\)\) && hasAllowedCatalogSourceProvenance\(offer\)/);
+  assert.match(postPersistAudit, /forbiddenSourceRows = rows\.filter\(\(offer\) => !hasAllowedCatalogSourceProvenance\(offer\)\)/);
+  assert.match(postPersistAudit, /forbidden_source/);
+  assert.match(postPersistAudit, /Source provenance is a global production invariant/);
 });
 
 test("Japan production registry contains only the five approved sources", () => {
