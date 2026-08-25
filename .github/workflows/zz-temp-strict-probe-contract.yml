@@ -1,0 +1,72 @@
+name: TEMP strict probe contract
+
+on:
+  push:
+    branches:
+      - fix/strict-market-source-whitelist-20260825-r2
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/strict-market-source-whitelist-20260825-r2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Make probe strict and align contract tests
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          probe = Path('scripts/catalog-probe-source-shard.mjs')
+          text = probe.read_text()
+          old = '''// Only optional accelerators live here. The mandatory sites are sourced exclusively\n// from required-catalog-sources.ts so they cannot drift between workflows and code.\nconst additionalPriorityPlan = {\n  korea: [],\n  china: ["guazi_china_ru", "guazi_china_export", "che168_dealer_exact", "sohu_auto_china_open", "che168_china_exact"],\n  japan: ["japantransit_japan_stat_open", "auctions22_japan_past_open"],\n  uae: ["dubicars_clean", "beforward_uae"],\n  europe: ["otomoto_europe_exact", "otomoto_pl_open", "autouncle_europe"],\n  georgia: ["auto_georgia_open", "ss_georgia_open", "myauto_georgia_exact"],\n  kyrgyzstan: [],\n};\n\nif (!Object.prototype.hasOwnProperty.call(additionalPriorityPlan, market)) throw new Error(`unsupported_probe_market_${market || "missing"}`);\n'''
+          new = '''// Production probing is exclusive: only the owner-approved sources from\n// required-catalog-sources.ts may be contacted. No accelerator/fallback site can\n// be added here or injected through CATALOG_PROBE_SOURCE_IDS.\nconst supportedMarkets = new Set(["korea", "china", "japan", "uae", "europe", "georgia", "kyrgyzstan"]);\nif (!supportedMarkets.has(market)) throw new Error(`unsupported_probe_market_${market || "missing"}`);\n'''
+          if old not in text:
+              raise SystemExit('probe optional plan anchor missing')
+          text = text.replace(old, new, 1)
+          old = '''const configured = String(process.env.CATALOG_PROBE_SOURCE_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);\nconst plannedAll = configured.length && allowRequiredSubset\n  ? [...new Set(configured)]\n  : [...new Set([...requiredSourceIds, ...configured, ...additionalPriorityPlan[market], ...registered])];\nconst priorityOrder = [...requiredSourceIds, ...additionalPriorityPlan[market]];\n'''
+          new = '''const configured = String(process.env.CATALOG_PROBE_SOURCE_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);\nconst configuredApproved = configured.filter((sourceId) => requiredSourceIds.includes(sourceId));\nconst plannedAll = configuredApproved.length && allowRequiredSubset\n  ? [...new Set(configuredApproved)]\n  : [...requiredSourceIds];\nconst priorityOrder = [...requiredSourceIds];\n'''
+          if old not in text:
+              raise SystemExit('probe planning anchor missing')
+          text = text.replace(old, new, 1)
+          old = '''// Probe is only an accelerator for optional sources. A short probe may time out,\n// see an empty first page, or hit a transient block; it must never remove one of\n// AvtoCena's canonical required sites from the real collector. Every mandatory\n// source assigned to this shard is therefore handed to the collector regardless\n// of probe result, while optional sources still need a successful probe.\n'''
+          new = '''// A short probe may time out, see an empty first page, or hit a transient block;\n// it must never remove one of AvtoCena's approved sites from the real collector.\n// Every approved source assigned to this shard is therefore handed to the\n// collector regardless of probe result. There are no optional production sites.\n'''
+          if old not in text:
+              raise SystemExit('probe rebuild comment anchor missing')
+          probe.write_text(text.replace(old, new, 1))
+
+          tests = Path('tests/catalog-probe-source-shard.test.ts')
+          text = tests.read_text()
+          text = text.replace('test("probe accelerates optional sources but can never drop a mandatory source from the real crawl", () => {', 'test("probe contacts only approved sources and can never drop one from the real crawl", () => {', 1)
+          text = text.replace('assert.match(sourceRegistry, /catalog_required_sources_contract_broken/);', 'assert.match(sourceRegistry, /catalog_strict_source_allowlist_broken/);', 1)
+          start = text.index('test("Japan rollout combines mandatory and optional completed auction histories", () => {')
+          end = text.index('\n\ntest("listing photos stay source-bound', start)
+          replacement = '''test("Japan rollout uses only the five owner-approved sources", () => {\n  for (const sourceId of [\n    "jpauc_japan_past_open",\n    "carvector_japan_stat_open",\n    "prestige_japan_auctions_open",\n    "auctiondatasearch_japan_open",\n    "jpcenter_japan_catalog_open",\n  ]) {\n    assert.match(requiredSources, new RegExp(sourceId));\n  }\n  assert.doesNotMatch(probe, /japantransit_japan_stat_open|auctions22_japan_past_open|jpauc_japan_current_open|auctions22_japan_upcoming_open/);\n  assert.match(probe, /configuredApproved = configured\.filter\(\(sourceId\) => requiredSourceIds\.includes\(sourceId\)\)/);\n  assert.match(probe, /plannedAll = configuredApproved\.length && allowRequiredSubset[\\s\\S]*: \[\.\.\.requiredSourceIds\]/);\n  assert.match(sourceRegistry, /japan: \[\.\.\.REQUIRED_CATALOG_SOURCES\.japan\]/);\n  assert.match(japanWorkflow, /workflow_dispatch:/);\n  assert.doesNotMatch(japanWorkflow, /^\\s+schedule:/m);\n  assert.match(japanWorkflow, /retention_ms: "2592000000"/);\n  assert.match(japanWorkflow, /catalog-v3-market-10k-reusable\\.yml/);\n  assert.doesNotMatch(japanWorkflow, /\\bneeds:/);\n  assert.match(sequentialQueue, /schedule:/);\n  assert.match(sequentialQueue, /cron: "17 21 \\* \\* \\*"/);\n  assert.match(sequentialQueue, /01\\|08\\|15\\|22/);\n  assert.match(sequentialQueue, /target_per_market: "30000"/);\n  assert.match(sequentialQueue, /retention_ms: "2592000000"/);\n});'''
+          text = text[:start] + replacement + text[end:]
+          tests.write_text(text)
+          PY
+      - name: Verify probe, source and type contracts
+        run: |
+          node --import tsx --test tests/catalog-probe-source-shard.test.ts
+          node --import tsx --test tests/catalog-source-scale.test.ts tests/catalog-image-quality.test.ts tests/catalog-production-hardening.test.ts
+          node --check scripts/catalog-probe-source-shard.mjs
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+      - name: Commit non-workflow changes
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add scripts/catalog-probe-source-shard.mjs tests/catalog-probe-source-shard.test.ts
+          git commit -m 'Restrict catalog probes to approved sources'
+          git push origin HEAD:fix/strict-market-source-whitelist-20260825-r2
