@@ -291,6 +291,6 @@ export function hasCredibleOfferContent(offer: VehicleOffer) {
 
 export function isCrediblePublicOffer(offer: VehicleOffer) {
   const compactProjection = Number((offer as any).cardProjectionVersion || 0) >= 1;
-  if (compactProjection) return offer.status === "active" && credibleCoreContent(offer, true, false);
+  if (compactProjection) return offer.status === "active" && credibleCoreContent(offer, false, false);
   return offer.status === "active" && credibleCoreContent(offer, true);
 }

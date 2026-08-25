@@ -115,7 +115,7 @@ test("uses the configured V3 two-photo admission contract across live source mar
       { ...rawOffer, market: "georgia", sourceId: "autopapa_georgia_open", sourceCurrency: "USD" },
       { ...rawOffer, market: "china", sourceId: "autohome_new_china_open", sourceCurrency: "CNY" },
       { ...rawOffer, market: "europe", sourceId: "mobile_de_open", sourceCurrency: "EUR" },
-      { ...rawOffer, market: "japan", sourceId: "japan_live", sourceCurrency: "JPY" },
+      { ...rawOffer, market: "japan", sourceId: "jpauc_japan_past_open", sourceCurrency: "JPY" },
     ];
     for (const offer of liveMarkets) {
       assert.equal(isCrediblePublicOffer({ ...offer, images: rawOffer.images.slice(0, 1) } as any), false, `${offer.market}: one image`);
@@ -219,6 +219,7 @@ test("business liquidity remains a ranking signal but does not override Japan's 
   const olderJapan = {
     ...rawOffer,
     market: "japan",
+    sourceId: "jpauc_japan_past_open",
     year: new Date().getFullYear() - 7,
     fuel: "petrol",
     powerHp: 220,
