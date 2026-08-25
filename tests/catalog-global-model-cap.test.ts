@@ -6,9 +6,9 @@ const script = fs.readFileSync("scripts/catalog-enforce-global-model-cap.mjs", "
 const workflow = fs.readFileSync(".github/workflows/catalog-global-model-cap.yml", "utf8");
 const japanStrictWorkflow = fs.readFileSync(".github/workflows/catalog-japan-strict-merge-publish.yml", "utf8");
 const kcarRepairWorkflow = fs.readFileSync(".github/workflows/catalog-kcar-exterior-gallery-repair.yml", "utf8");
+const removedCombinedWriter = ".github/workflows/catalog-live-daily-working-markets.yml";
 
 const liveWriterWorkflowPaths = [
-  ".github/workflows/catalog-live-daily-working-markets.yml",
   ".github/workflows/catalog-live-recovery-uae-kyrgyzstan.yml",
   ".github/workflows/catalog-global-model-cap.yml",
   ".github/workflows/catalog-kcar-exterior-gallery-repair.yml",
@@ -61,7 +61,8 @@ test("K Car repair post-write audit uses the canonical model-year cap and no sta
   assert.doesNotMatch(kcarRepairWorkflow, /japan\\?\"?:5000/);
 });
 
-test("every production catalog writer uses the shared non-cancelling concurrency slot", () => {
+test("every remaining production catalog writer uses the shared non-cancelling concurrency slot", () => {
+  assert.equal(fs.existsSync(removedCombinedWriter), false);
   for (const path of liveWriterWorkflowPaths) {
     const source = fs.readFileSync(path, "utf8");
     assert.match(source, sharedWriterConcurrency, `${path} must use the shared writer slot`);
