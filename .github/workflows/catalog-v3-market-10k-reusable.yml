@@ -242,6 +242,11 @@ jobs:
           # while atomically rebuilding all seven market indexes. Keep the
           # higher heap scoped to publish only; collection and validation stay unchanged.
           NODE_OPTIONS: "--max-old-space-size=6144"
+          # Publication reads all existing market chunks before the atomic swap.
+          # Object Storage has shown repeatable transient GET failures on that path;
+          # retry longer here without weakening any catalog/source/publication gate.
+          YC_OBJECT_STORAGE_MAX_ATTEMPTS: "12"
+          YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS: "60000"
         run: npx tsx scripts/catalog-publish-market.mjs
       - name: Require safe publication
         run: |
