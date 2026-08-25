@@ -43,7 +43,7 @@ test("all catalog filters use the projection when optional categorical shards ar
         breakdown: ["car", "topavto-commission", "broker", "svh", "laboratory", "sbkts", "epts", "rf-delivery", "customs"]
           .map((id) => ({ id, amountRub: 1 })),
       },
-      firstSeenAt: now, updatedAt: now, operational: { sourceUrl: "https://www.encar.com/dc/dc_cardetailview.do?carid=FILTER" },
+      firstSeenAt: now, updatedAt: now, operational: { sourceUrl: "https://www.encar.com/dc/dc_cardetailview.do?carid=FILTER", photoIdentityVerified: true },
     } as any]);
 
     const manifest = await readDataJson<any>("catalog/manifest.json", {});

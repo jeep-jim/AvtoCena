@@ -22,6 +22,11 @@ export function isCatalogMarketSourceAllowed(offer: Pick<VehicleOffer, "market" 
   return isAllowedCatalogSourceId(offer.market, offer.sourceId);
 }
 
+export function hasAllowedCatalogSourceProvenance(offer: VehicleOffer) {
+  return isCatalogMarketSourceAllowed(offer)
+    && isAllowedCatalogSourceUrl(offer.market, offer.sourceId, offer.operational?.sourceUrl);
+}
+
 export function catalogMinYearForMarket(marketValue: unknown) {
   const market = String(marketValue || "").trim().toLowerCase();
   return market === "japan" ? CATALOG_JAPAN_MIN_YEAR : CATALOG_NON_JAPAN_MIN_YEAR;
@@ -284,13 +289,14 @@ function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true, chec
 }
 
 export function hasCredibleOfferContent(offer: VehicleOffer) {
-  return credibleCoreContent(offer)
-    && isAllowedCatalogSourceUrl(offer.market, offer.sourceId, offer.operational?.sourceUrl)
+  return hasAllowedCatalogSourceProvenance(offer)
+    && credibleCoreContent(offer, false)
     && mandatorySourcePhotoIdentityVerified(offer);
 }
 
 export function isCrediblePublicOffer(offer: VehicleOffer) {
+  if (offer.status !== "active" || !hasAllowedCatalogSourceProvenance(offer)) return false;
   const compactProjection = Number((offer as any).cardProjectionVersion || 0) >= 1;
-  if (compactProjection) return offer.status === "active" && credibleCoreContent(offer, false, false);
-  return offer.status === "active" && credibleCoreContent(offer, true);
+  if (compactProjection) return credibleCoreContent(offer, false, false);
+  return credibleCoreContent(offer, false);
 }

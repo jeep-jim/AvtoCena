@@ -132,6 +132,11 @@ test("non-whitelisted source ids and source links are rejected centrally", () =>
   assert.equal(isAllowedCatalogSourceUrl("japan", "jpauc_japan_past_open", "https://jpauc.com/auction/detail/123"), true);
   assert.equal(isAllowedCatalogSourceUrl("japan", "jpauc_japan_past_open", "https://www.goo-net-exchange.com/usedcars/TOYOTA/SIENTA/123/"), false);
   assert.equal(isAllowedCatalogSourceUrl("china", "guazi_china_open", "https://en.guazi.com/products/test.html"), true);
+  assert.match(offerQuality, /hasAllowedCatalogSourceProvenance/);
+  assert.match(offerQuality, /if \(offer\.status !== "active" \|\| !hasAllowedCatalogSourceProvenance\(offer\)\) return false/);
+  assert.match(storage, /sourceAllowedInternalOffers = nextOffers\.filter\(hasAllowedCatalogSourceProvenance\)/);
+  assert.match(storage, /catalog_append_public_source_forbidden/);
+  assert.match(storage, /protectedPublicIds\.has\(String\(offer\.id\)\) && hasAllowedCatalogSourceProvenance\(offer\)/);
 });
 
 test("Japan production registry contains only the five approved sources", () => {
@@ -184,7 +189,8 @@ test("rebuild calculates first and progressively opens detail without exhausting
 });
 
 test("real listings stay public while exact customs calculation is pending", () => {
-  assert.match(offerQuality, /return offer\.status === "active" && credibleCoreContent\(offer, true\)/);
+  assert.match(offerQuality, /if \(offer\.status !== "active" \|\| !hasAllowedCatalogSourceProvenance\(offer\)\) return false/);
+  assert.match(offerQuality, /return credibleCoreContent\(offer, false\)/);
   assert.doesNotMatch(offerQuality, /Boolean\(offer\.totalRub\)/);
   assert.doesNotMatch(storage, /hasCredibleOfferContent\(o\) && Boolean\(o\.totalRub\)/);
   assert.doesNotMatch(carsPage, /Boolean\(offer\.totalRub\) && isCrediblePublicOffer/);
