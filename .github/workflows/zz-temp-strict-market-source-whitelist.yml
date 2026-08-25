@@ -1,0 +1,126 @@
+name: TEMP strict market source whitelist
+
+on:
+  push:
+    branches:
+      - fix/strict-market-source-whitelist-20260825-r2
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/strict-market-source-whitelist-20260825-r2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Enforce exact production source allowlist
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          required = Path('apps/web/lib/catalog/required-catalog-sources.ts')
+          text = required.read_text()
+          old = ''' * Эти площадки являются несменяемым ядром каждого рынка:\n * - их нельзя заменить дополнительными источниками;\n * - каждый источник проверяется и парсится отдельно;\n * - рынок не считается готовым, пока не подтверждён каждый обязательный источник;\n * - дополнительные площадки разрешены только сверх этого набора.\n */'''
+          new = ''' * Это единственный разрешённый production-набор каждого рынка:\n * - никакие дополнительные площадки не допускаются в сбор, retention или публикацию;\n * - каждый перечисленный источник проверяется и парсится отдельно;\n * - рынок не считается готовым, пока не подтверждён каждый источник из этого списка;\n * - sourceId и кликабельный sourceUrl обязаны принадлежать этому allowlist.\n */'''
+          if old not in text:
+              raise SystemExit('required source contract comment anchor missing')
+          text = text.replace(old, new, 1)
+          anchor = '''export function requiredCatalogSourceIds(market: CatalogMarket) {\n  return REQUIRED_CATALOG_SOURCES[market].map((source) => source.sourceId);\n}\n'''
+          insert = '''export function requiredCatalogSourceIds(market: CatalogMarket) {\n  return REQUIRED_CATALOG_SOURCES[market].map((source) => source.sourceId);\n}\n\nexport function isAllowedCatalogSourceId(market: CatalogMarket, sourceId: unknown) {\n  const id = String(sourceId || \"\").trim();\n  return REQUIRED_CATALOG_SOURCES[market].some((source) => source.sourceId === id);\n}\n\nfunction registrableHost(hostname: string) {\n  const host = hostname.toLowerCase().replace(/^www\\./, \"\");\n  const parts = host.split(\".\").filter(Boolean);\n  if (parts.length <= 2) return host;\n  const suffix2 = parts.slice(-2).join(\".\");\n  const multiLabel = new Set([\"com.au\", \"com.cn\", \"co.kr\", \"co.jp\"]);\n  return multiLabel.has(suffix2) ? parts.slice(-3).join(\".\") : parts.slice(-2).join(\".\");\n}\n\nexport function isAllowedCatalogSourceUrl(market: CatalogMarket, sourceId: unknown, urlValue: unknown) {\n  const id = String(sourceId || \"\").trim();\n  const allowed = REQUIRED_CATALOG_SOURCES[market].find((source) => source.sourceId === id);\n  if (!allowed) return false;\n  try {\n    const actual = new URL(String(urlValue || \"\"));\n    const canonical = new URL(allowed.canonicalUrl);\n    return /^https?:$/.test(actual.protocol) && registrableHost(actual.hostname) === registrableHost(canonical.hostname);\n  } catch {\n    return false;\n  }\n}\n'''
+          if anchor not in text:
+              raise SystemExit('required source helper anchor missing')
+          required.write_text(text.replace(anchor, insert, 1))
+
+          registry = Path('apps/web/lib/catalog/catalog-v2-source-registry.ts')
+          registry.write_text('''import type { CatalogMarket } from "./types";\nimport {\n  REQUIRED_CATALOG_SOURCES,\n  requiredCatalogSourceIds,\n  type RequiredCatalogSource,\n} from "./required-catalog-sources";\n\nexport type CatalogV2SourceSlot = {\n  sourceId: string;\n  label: string;\n  canonicalUrl: string;\n  role: "primary" | "secondary" | "auction_history" | "knowledge";\n  required?: boolean;\n  anchor?: boolean;\n};\n\n/**\n * Production source registry is a hard allowlist. The only collectible source\n * slots are the exact sites declared in required-catalog-sources.ts. Historical\n * adapters may remain in the repository for diagnostics, but they cannot enter\n * collection, retention or publication until this allowlist itself is changed.\n */\nexport const CATALOG_V2_SOURCE_SLOTS: Record<CatalogMarket, readonly CatalogV2SourceSlot[]> = {\n  korea: [...REQUIRED_CATALOG_SOURCES.korea],\n  china: [...REQUIRED_CATALOG_SOURCES.china],\n  japan: [...REQUIRED_CATALOG_SOURCES.japan],\n  uae: [...REQUIRED_CATALOG_SOURCES.uae],\n  europe: [...REQUIRED_CATALOG_SOURCES.europe],\n  georgia: [...REQUIRED_CATALOG_SOURCES.georgia],\n  kyrgyzstan: [...REQUIRED_CATALOG_SOURCES.kyrgyzstan],\n};\n\n/** USA is future-only metadata and is not part of PUBLIC_CATALOG_MARKETS or collection. */\nexport const CATALOG_FUTURE_USA_ANCHORS = [\n  { label: "Stat.vin", canonicalUrl: "https://stat.vin/" },\n  { label: "BidCars", canonicalUrl: "https://bid.cars/" },\n  { label: "AuctionStat", canonicalUrl: "https://auctionstat.com/" },\n] as const;\n\n// Compatibility export. Strict markets use their exact allowlist length instead\n// of a synthetic minimum number of sources.\nexport const CATALOG_V2_MIN_SOURCE_SLOTS = 1;\n\nfunction sourceIsCollectible(source: CatalogV2SourceSlot) {\n  return source.required === true && source.anchor === true;\n}\n\nexport function catalogV2SourceIds(market: CatalogMarket) {\n  return CATALOG_V2_SOURCE_SLOTS[market]\n    .filter(sourceIsCollectible)\n    .map((source) => source.sourceId);\n}\n\nexport function catalogV2RequiredSourceIds(market: CatalogMarket) {\n  return requiredCatalogSourceIds(market);\n}\n\nexport function catalogV2AnchorSourceIds(market: CatalogMarket) {\n  return catalogV2SourceIds(market);\n}\n\nexport function catalogV2KnowledgeSourceIds(_market: CatalogMarket) {\n  return [];\n}\n\nfunction assertExactAllowedSources() {\n  const failures: string[] = [];\n\n  for (const [marketName, requiredSources] of Object.entries(REQUIRED_CATALOG_SOURCES)) {\n    const market = marketName as CatalogMarket;\n    const registered = CATALOG_V2_SOURCE_SLOTS[market];\n    const expectedIds = requiredSources.map((source) => source.sourceId);\n    const actualIds = registered.map((source) => source.sourceId);\n\n    if (registered.length !== requiredSources.length) {\n      failures.push(`${market}:unexpected_source_count:${registered.length}:${requiredSources.length}`);\n    }\n    if (actualIds.join("|") !== expectedIds.join("|")) {\n      failures.push(`${market}:source_order_or_membership_changed`);\n    }\n\n    for (const required of requiredSources as readonly RequiredCatalogSource[]) {\n      const source = registered.find((candidate) => candidate.sourceId === required.sourceId);\n      if (!source) {\n        failures.push(`${market}:${required.sourceId}:missing`);\n        continue;\n      }\n      if (source.canonicalUrl !== required.canonicalUrl) failures.push(`${market}:${required.sourceId}:url_changed`);\n      if (!source.required || !source.anchor) failures.push(`${market}:${required.sourceId}:not_required`);\n      if (!sourceIsCollectible(source)) failures.push(`${market}:${required.sourceId}:excluded_from_collection`);\n    }\n  }\n\n  if (failures.length) throw new Error(`catalog_strict_source_allowlist_broken:${failures.join(",")}`);\n}\n\nexport function assertCatalogV2SourceRegistry() {\n  assertExactAllowedSources();\n  return true;\n}\n''')
+
+          importer = Path('apps/web/lib/catalog/importer.ts')
+          text = importer.read_text()
+          old = 'import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";'
+          new = 'import { REQUIRED_CATALOG_SOURCES, isAllowedCatalogSourceId } from "./required-catalog-sources";'
+          if old not in text:
+              raise SystemExit('importer required source import anchor missing')
+          text = text.replace(old, new, 1)
+          old_loop = '''for (const replacement of completeSources) {\n  const index = catalogImportSources.findIndex((source) => source.sourceId === replacement.sourceId);\n  if (index >= 0) catalogImportSources[index] = replacement;\n  else catalogImportSources.push(replacement);\n}\nfor (let index = catalogImportSources.length - 1; index >= 0; index--) {\n  if (bannedGeorgiaSourceIds.has(catalogImportSources[index].sourceId)) catalogImportSources.splice(index, 1);\n}\n'''
+          new_loop = '''for (const replacement of completeSources) {\n  if (replacement.market === "multi" || !isAllowedCatalogSourceId(replacement.market, replacement.sourceId)) continue;\n  const index = catalogImportSources.findIndex((source) => source.sourceId === replacement.sourceId);\n  if (index >= 0) catalogImportSources[index] = replacement;\n  else catalogImportSources.push(replacement);\n}\n\n// Hard production allowlist: dormant adapters may exist in source modules, but\n// they can never reach collection or retention unless explicitly listed in\n// REQUIRED_CATALOG_SOURCES for that market. This also removes previously added\n// expansion sources such as Goo-net, CarSwitch, KB ChaChaCha and OTOMOTO.\nfor (let index = catalogImportSources.length - 1; index >= 0; index--) {\n  const source = catalogImportSources[index];\n  if (source.market === "multi" || !isAllowedCatalogSourceId(source.market, source.sourceId)) {\n    catalogImportSources.splice(index, 1);\n  }\n}\n'''
+          if old_loop not in text:
+              raise SystemExit('importer replacement/filter loop anchor missing')
+          importer.write_text(text.replace(old_loop, new_loop, 1))
+
+          quality = Path('apps/web/lib/catalog/offer-quality.ts')
+          text = quality.read_text()
+          old = 'import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";'
+          new = 'import { REQUIRED_CATALOG_SOURCES, isAllowedCatalogSourceId, isAllowedCatalogSourceUrl } from "./required-catalog-sources";'
+          if old not in text:
+              raise SystemExit('offer-quality required source import anchor missing')
+          text = text.replace(old, new, 1)
+          text = text.replace('const GEORGIA_ALLOWED_SOURCE_IDS = new Set(["myauto_georgia_list", "myauto_georgia_exact", "autopapa_georgia_open"]);\n', '', 1)
+          old_func = '''export function isCatalogMarketSourceAllowed(offer: Pick<VehicleOffer, "market" | "sourceId">) {\n  if (String(offer.market || "") !== "georgia") return true;\n  return GEORGIA_ALLOWED_SOURCE_IDS.has(String(offer.sourceId || ""));\n}\n'''
+          new_func = '''export function isCatalogMarketSourceAllowed(offer: Pick<VehicleOffer, "market" | "sourceId">) {\n  return isAllowedCatalogSourceId(offer.market, offer.sourceId);\n}\n'''
+          if old_func not in text:
+              raise SystemExit('offer-quality source-policy function anchor missing')
+          text = text.replace(old_func, new_func, 1)
+          old_content = '''export function hasCredibleOfferContent(offer: VehicleOffer) {\n  return credibleCoreContent(offer)\n    && /^https?:\\/\\//i.test(clean(offer.operational?.sourceUrl))\n    && mandatorySourcePhotoIdentityVerified(offer);\n}\n'''
+          new_content = '''export function hasCredibleOfferContent(offer: VehicleOffer) {\n  return credibleCoreContent(offer)\n    && isAllowedCatalogSourceUrl(offer.market, offer.sourceId, offer.operational?.sourceUrl)\n    && mandatorySourcePhotoIdentityVerified(offer);\n}\n'''
+          if old_content not in text:
+              raise SystemExit('offer-quality credible source url anchor missing')
+          text = text.replace(old_content, new_content, 1)
+          old_public = '''export function isCrediblePublicOffer(offer: VehicleOffer) {\n  const compactProjection = Number((offer as any).cardProjectionVersion || 0) >= 1;\n  if (compactProjection) return offer.status === "active" && credibleCoreContent(offer, false, false);\n  return offer.status === "active" && credibleCoreContent(offer, false);\n}\n'''
+          new_public = '''export function isCrediblePublicOffer(offer: VehicleOffer) {\n  const compactProjection = Number((offer as any).cardProjectionVersion || 0) >= 1;\n  if (compactProjection) return offer.status === "active" && credibleCoreContent(offer, true, false);\n  return offer.status === "active" && credibleCoreContent(offer, true);\n}\n'''
+          if old_public not in text:
+              raise SystemExit('offer-quality public predicate anchor missing')
+          quality.write_text(text.replace(old_public, new_public, 1))
+
+          reindex = Path('.github/workflows/catalog-reindex-vehicle-knowledge.yml')
+          text = reindex.read_text()
+          anchor = '      - "apps/web/lib/catalog/customs-pricing.ts"\n'
+          extra = '''      - "apps/web/lib/catalog/customs-pricing.ts"\n      - "apps/web/lib/catalog/required-catalog-sources.ts"\n      - "apps/web/lib/catalog/catalog-v2-source-registry.ts"\n      - "apps/web/lib/catalog/importer.ts"\n      - "apps/web/lib/catalog/offer-quality.ts"\n'''
+          if anchor not in text:
+              raise SystemExit('reindex path anchor missing')
+          reindex.write_text(text.replace(anchor, extra, 1))
+
+          test_file = Path('tests/catalog-source-scale.test.ts')
+          text = test_file.read_text()
+          import_anchor = '''import {\n  CATALOG_FUTURE_USA_ANCHORS,\n  CATALOG_V2_SOURCE_SLOTS,\n} from "../apps/web/lib/catalog/catalog-v2-source-registry";\n'''
+          import_replacement = import_anchor + '''import {\n  REQUIRED_CATALOG_SOURCES,\n  isAllowedCatalogSourceId,\n  isAllowedCatalogSourceUrl,\n} from "../apps/web/lib/catalog/required-catalog-sources";\n'''
+          if import_anchor not in text:
+              raise SystemExit('source-scale registry import anchor missing')
+          text = text.replace(import_anchor, import_replacement, 1)
+
+          start = text.index('test("canonical anchor sites are fixed for all seven markets and USA remains future"')
+          end = text.index('test("probe keeps mandatory sources in network work while optional sources still require a live probe"', start)
+          replacement = '''test("production source registry exactly matches the owner-approved allowlist", () => {\n  for (const market of PUBLIC_CATALOG_MARKETS) {\n    const expected = REQUIRED_CATALOG_SOURCES[market];\n    assert.deepEqual(\n      CATALOG_V2_SOURCE_SLOTS[market].map((source) => [source.sourceId, source.canonicalUrl]),\n      expected.map((source) => [source.sourceId, source.canonicalUrl]),\n      `${market}: source slots must be exact`,\n    );\n    assert.deepEqual(\n      catalogImportSources.filter((source) => source.market === market).map((source) => source.sourceId).sort(),\n      expected.map((source) => source.sourceId).sort(),\n      `${market}: importer must contain no extra adapters`,\n    );\n  }\n  assert.deepEqual(CATALOG_FUTURE_USA_ANCHORS.map((source) => source.canonicalUrl), ["https://stat.vin/", "https://bid.cars/", "https://auctionstat.com/"]);\n});\n\ntest("non-whitelisted source ids and source links are rejected centrally", () => {\n  assert.equal(isAllowedCatalogSourceId("japan", "goonet_japan_exact"), false);\n  assert.equal(isAllowedCatalogSourceId("japan", "japantransit_japan_stat_open"), false);\n  assert.equal(isAllowedCatalogSourceId("uae", "carswitch_uae_open"), false);\n  assert.equal(isAllowedCatalogSourceId("korea", "kbchachacha_korea_open"), false);\n  assert.equal(isAllowedCatalogSourceId("europe", "otomoto_europe_exact"), false);\n  assert.equal(isAllowedCatalogSourceUrl("japan", "jpauc_japan_past_open", "https://jpauc.com/auction/detail/123"), true);\n  assert.equal(isAllowedCatalogSourceUrl("japan", "jpauc_japan_past_open", "https://www.goo-net-exchange.com/usedcars/TOYOTA/SIENTA/123/"), false);\n  assert.equal(isAllowedCatalogSourceUrl("china", "guazi_china_open", "https://en.guazi.com/products/test.html"), true);\n});\n\ntest("Japan production registry contains only the five approved sources", () => {\n  const ids = new Set(catalogImportSources.filter((source) => source.market === "japan").map((source) => source.sourceId));\n  for (const sourceId of ["jpauc_japan_past_open", "carvector_japan_stat_open", "prestige_japan_auctions_open", "auctiondatasearch_japan_open", "jpcenter_japan_catalog_open"]) {\n    assert.equal(ids.has(sourceId), true, `${sourceId} must be registered`);\n  }\n  for (const sourceId of ["goonet_japan_exact", "japantransit_japan_stat_open", "jpauc_japan_current_open", "auctions22_japan_past_open", "auctions22_japan_upcoming_open", "beforward_public"]) {\n    assert.equal(ids.has(sourceId), false, `${sourceId} must not be registered`);\n  }\n  assert.match(carsPage, /Аукционная статистика/);\n  assert.doesNotMatch(carsPage, /Аукционная статистика Японии/);\n});\n\n'''
+          text = text[:start] + replacement + text[end:]
+
+          text = text.replace('assert.match(offerQuality, /return offer\\.status === "active" && credibleCoreContent\\(offer, false\\)/);', 'assert.match(offerQuality, /return offer\\.status === "active" && credibleCoreContent\\(offer, true\\)/);', 1)
+
+          pattern = re.compile(r'test\("requested high-volume public sources are registered", \(\) => \{[\s\S]*?\n\}\);\n\n(?=test\("bootstrap replacements follow current regional public routes")')
+          text, count = pattern.subn('''test("dormant expansion adapters never enter the production importer", () => {\n  const ids = new Set(catalogImportSources.map((source) => source.sourceId));\n  for (const sourceId of [\n    "autowini_korea_open", "kbchachacha_korea_open", "bobaedream_korea_open",\n    "yallamotor_uae_open", "carswitch_uae_open", "lalafo_kyrgyzstan_open",\n    "bazar_kyrgyzstan_open", "turbo_kyrgyzstan_open", "omarket_kyrgyzstan_open",\n    "goonet_japan_exact", "japantransit_japan_stat_open", "otomoto_europe_exact",\n  ]) {\n    assert.equal(ids.has(sourceId), false, `${sourceId} must remain outside production`);\n  }\n});\n\n''', text, count=1)
+          if count != 1:
+              raise SystemExit(f'expanded source test replacement count={count}')
+          test_file.write_text(text)
+          PY
+      - name: Run strict source tests and typechecks
+        run: |
+          node --import tsx --test tests/catalog-source-scale.test.ts
+          node --import tsx --test tests/catalog-production-hardening.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+      - name: Commit strict production allowlist
+        shell: bash
+        run: |
+          git rm .github/workflows/zz-temp-strict-market-source-whitelist.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/lib/catalog/required-catalog-sources.ts apps/web/lib/catalog/catalog-v2-source-registry.ts apps/web/lib/catalog/importer.ts apps/web/lib/catalog/offer-quality.ts .github/workflows/catalog-reindex-vehicle-knowledge.yml tests/catalog-source-scale.test.ts
+          git commit -m 'Enforce exact market source allowlist'
+          git push origin HEAD:fix/strict-market-source-whitelist-20260825-r2
