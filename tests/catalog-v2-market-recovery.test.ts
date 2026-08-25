@@ -7,8 +7,8 @@ const cleanup = fs.readFileSync(new URL("../scripts/catalog-clean-failed-generat
 const capacityWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-emergency-capacity-cleanup.yml", import.meta.url), "utf8");
 const market10kReusable = fs.readFileSync(new URL("../.github/workflows/catalog-v3-market-10k-reusable.yml", import.meta.url), "utf8");
 const sequentialQueue = fs.readFileSync(new URL("../.github/workflows/catalog-v3-sequential-queue.yml", import.meta.url), "utf8");
+const removedCombinedWriter = new URL("../.github/workflows/catalog-live-daily-working-markets.yml", import.meta.url);
 const retiredScheduledWriters = [
-  "catalog-live-daily-working-markets.yml",
   "catalog-live-recovery-uae-kyrgyzstan.yml",
   "catalog-live-recovery-georgia-yandex-v2.yml",
 ].map((file) => ({ file, content: fs.readFileSync(new URL(`../.github/workflows/${file}`, import.meta.url), "utf8") }));
@@ -99,6 +99,7 @@ test("automatic catalog runs use one sequential queue and Japan runs four times 
 });
 
 test("retired combined writers cannot collide with the sequential schedule", () => {
+  assert.equal(fs.existsSync(removedCombinedWriter), false);
   for (const { file, content } of retiredScheduledWriters) {
     assert.match(content, /workflow_dispatch:/, `${file} must remain manually recoverable`);
     assert.doesNotMatch(content, /^\s+schedule:/m, `${file} must not retain a duplicate schedule`);

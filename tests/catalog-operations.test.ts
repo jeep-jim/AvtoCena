@@ -14,16 +14,8 @@ test("production year gates keep Japan at 2010+ and every other market at 2020+"
   }
 });
 
-test("legacy combined market writer is manual-only and leaves gallery repair manual", () => {
-  const workflow = fs.readFileSync(".github/workflows/catalog-live-daily-working-markets.yml", "utf8");
-  assert.doesNotMatch(workflow, /^\s+schedule:/m);
-  assert.match(workflow, /for market in korea china europe/);
-  assert.match(workflow, /RECOVERY_BATCH_MARKETS: korea,china,europe/);
-  assert.match(workflow, /catalog-live-recovery-publish-batch\.mjs/);
-  assert.doesNotMatch(workflow, /CATALOG_GALLERY_SOURCE_IDS/);
-  assert.match(workflow, /continue-on-error: true/);
-  assert.match(workflow, /if: always\(\) && needs\.validate\.result == 'success'/);
-  assert.match(workflow, /group: catalog-live-daily-working-markets/);
+test("legacy combined market writer is deleted and gallery repair remains manual", () => {
+  assert.equal(fs.existsSync(".github/workflows/catalog-live-daily-working-markets.yml"), false);
 
   const refresh = fs.readFileSync("scripts/catalog-refresh-galleries.mjs", "utf8");
   assert.match(refresh, /needsSourceOrderedGalleryRefresh\(offer\)/);
