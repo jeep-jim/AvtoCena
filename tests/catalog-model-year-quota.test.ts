@@ -166,9 +166,9 @@ test("generic recovery retains source-bound combustion offers as explicit prelim
   assert.match(source, /preliminaryCount:\s*offers\.filter\(isPreliminaryPowerPendingCalculation\)/);
 });
 
-test("daily and legacy recovery workflows expose only model-year quota and canonical Georgia sources", () => {
+test("active and legacy recovery workflows expose only model-year quota and canonical Georgia sources", () => {
+  assert.equal(fs.existsSync(".github/workflows/catalog-live-daily-working-markets.yml"), false);
   for (const path of [
-    ".github/workflows/catalog-live-daily-working-markets.yml",
     ".github/workflows/catalog-live-recovery-6-markets.yml",
     ".github/workflows/catalog-live-recovery-uae-georgia-direct.yml",
   ]) {
@@ -178,9 +178,6 @@ test("daily and legacy recovery workflows expose only model-year quota and canon
     assert.doesNotMatch(workflow, /CATALOG_MAX_OFFERS_PER_MODEL: "20"/, `${path} must not expose model-only quota`);
     assert.doesNotMatch(workflow, /CATALOG_AUDIT_MAX_PER_MODEL: "20"/, `${path} must not audit model-only quota`);
   }
-
-  const daily = fs.readFileSync(".github/workflows/catalog-live-daily-working-markets.yml", "utf8");
-  assert.doesNotMatch(daily, /myauto_georgia_list|autopapa_georgia_open/);
 
   const georgiaV2 = fs.readFileSync(".github/workflows/catalog-live-recovery-georgia-yandex-v2.yml", "utf8");
   assert.match(georgiaV2, /myauto_georgia_list/);
