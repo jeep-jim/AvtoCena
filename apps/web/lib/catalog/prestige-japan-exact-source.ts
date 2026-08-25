@@ -197,7 +197,12 @@ async function request(url: string, init?: RequestInit) {
   const timeout = Math.max(8_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000));
   const response = await fetch(url, { ...init, headers: { ...HEADERS, ...(init?.headers || {}) }, redirect: "follow", signal: AbortSignal.timeout(timeout) });
   const body = await response.text();
-  if (!response.ok) throw new Error(`prestige_japan_exact_http_${response.status}:${url}`);
+  if (!response.ok) {
+    const diagnostic = clean(body).replace(/[\r\n]+/g, " ").slice(0, 240);
+    const server = clean(response.headers.get("server") || "unknown");
+    const contentType = clean(response.headers.get("content-type") || "unknown");
+    throw new Error(`prestige_japan_exact_http_${response.status}:${url}:server=${server}:content_type=${contentType}:body=${diagnostic}`);
+  }
   return { response, body };
 }
 async function poolMap<T, R>(rows: T[], limit: number, worker: (row: T) => Promise<R | null>) {
