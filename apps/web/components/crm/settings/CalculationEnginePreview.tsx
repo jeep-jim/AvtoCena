@@ -118,7 +118,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
     : null;
   const business = customs?.status === "ready" && Number(customs.totalCustomsRub) > 0
     ? calculateAvtocenaFromBusinessConfig({
-        marketId,
+        marketId: marketId as any,
         marketConfig: resolved.config,
         sourcePriceRub: Number(sourceRate?.sourcePriceRub || 0),
         customsRub: Number(customs.totalCustomsRub),
