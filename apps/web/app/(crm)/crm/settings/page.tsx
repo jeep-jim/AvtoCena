@@ -22,7 +22,7 @@ export default async function CrmSettingsPage({ searchParams }: { searchParams?:
   const message = first(query.message);
 
   return (
-    <CrmShell activeHref="/crm/settings" title="Рынки и расчёт" subtitle="Коммерческие расходы семи рынков, которые сразу участвуют в цене автомобиля. Таможня и утильсбор рассчитываются ядром отдельно по характеристикам конкретной машины.">
+    <CrmShell activeHref="/crm/settings" title="Рынки и расчёт" subtitle="Сверху — живой контроль того же расчётного ядра, которым считаются карточки сайта. Ниже — коммерческие расходы семи рынков; таможня и утильсбор считаются отдельно по характеристикам конкретной машины.">
       {state === "saved" ? <div className="mb-4 rounded-2xl bg-emerald-400/12 px-4 py-3 text-sm font-black text-emerald-300">Новая версия сохранена. Карточки используют её сразу; фоновый пересчёт обновит весь поисковый индекс.</div> : null}
       {state === "error" ? <div className="mb-4 rounded-2xl bg-red-500/15 px-4 py-3 text-sm font-black text-red-200">{message || "Не удалось сохранить настройки рынка."}</div> : null}
       <CalculationEnginePreview markets={markets} query={query} />
