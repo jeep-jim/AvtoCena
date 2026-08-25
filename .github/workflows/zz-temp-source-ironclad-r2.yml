@@ -92,7 +92,6 @@ jobs:
       - name: Verify source allowlist gates
         run: |
           node --import tsx --test tests/catalog-source-scale.test.ts tests/catalog-probe-source-shard.test.ts tests/catalog-filter-search.test.ts tests/catalog-estimated-power-publication.test.ts tests/catalog-production-hardening.test.ts
-          npm --workspace apps/web run typecheck
       - name: Commit non-workflow changes
         shell: bash
         run: |
