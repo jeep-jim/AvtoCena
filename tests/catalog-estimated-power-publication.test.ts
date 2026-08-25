@@ -20,7 +20,7 @@ function electricOffer(overrides: Partial<VehicleOffer> = {}): VehicleOffer {
   const { calculationSnapshot, ...rest } = overrides;
   return {
     id: "offer_estimated_ev",
-    sourceId: "che168_china_exact",
+    sourceId: "autohome_used_china_open",
     sourceOfferId: "123",
     market: "china",
     offerType: "fixed",
@@ -51,7 +51,7 @@ function electricOffer(overrides: Partial<VehicleOffer> = {}): VehicleOffer {
     },
     firstSeenAt: "2026-07-25T00:00:00.000Z",
     updatedAt: "2026-07-25T00:00:00.000Z",
-    operational: { sourceUrl: "https://che168.com/123", raw: {} },
+    operational: { sourceUrl: "https://www.che168.com/123", raw: {} },
     ...rest,
   } as VehicleOffer;
 }
