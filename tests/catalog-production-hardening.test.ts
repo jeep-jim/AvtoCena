@@ -348,11 +348,13 @@ test("Dubizzle refuses semantic inference when Car Overview labels are absent", 
   assert.deepEqual(fields, {});
 });
 
-test("customs engine uses the 2026 coefficient columns rather than the 2025 columns", () => {
-  assert.match(customs, /\[58\.84, 44\.05, 77\.48\]/);
-  assert.match(customs, /\[139\.75, 49\.5, 82\.1\]/);
-  assert.match(customs, /\[117\.68, 123\.78, 187\.4\]/);
-  assert.doesNotMatch(customs, /\[58\.84, 40\.04, 70\.44\]/);
+test("customs engine uses the calendar-2026 coefficient columns rather than the next-year columns", () => {
+  assert.match(customs, /\[58\.84, 40\.04, 70\.44\]/);
+  assert.match(customs, /\[139\.75, 45, 74\.64\]/);
+  assert.match(customs, /\[117\.68, 112\.52, 170\.36\]/);
+  assert.match(customs, /\[228, 131\.04, 188\.52\]/);
+  assert.doesNotMatch(customs, /\[58\.84, 44\.05, 77\.48\]/);
+  assert.doesNotMatch(customs, /\[228, 144\.14, 207\.37\]/);
 });
 
 test("production control document fixes the CRM readiness gate", () => {
