@@ -2,6 +2,11 @@ name: Catalog V3 · Sequential production queue
 
 on:
   workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/catalog-v3-run-all"
   schedule:
     # 04:17 in the product timezone (+07). Japan joins on local days 1/8/15/22.
     - cron: "17 21 * * *"
@@ -27,7 +32,7 @@ jobs:
             01|08|15|22) run_japan=true ;;
             *) run_japan=false ;;
           esac
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ]; then run_japan=true; fi
+          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ github.event_name }}" = "push" ]; then run_japan=true; fi
           echo "run_japan=$run_japan" >> "$GITHUB_OUTPUT"
           echo "Local day: $local_day; Japan: $run_japan" >> "$GITHUB_STEP_SUMMARY"
 
