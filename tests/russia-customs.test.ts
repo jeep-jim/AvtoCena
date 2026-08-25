@@ -133,6 +133,31 @@ test("does not publish a complete customs price without utilization power", () =
   assert.ok(result.missing.includes("utilization_power_kw"));
 });
 
+test("Genesis GV70 304 PS is converted to 223.59 kW and uses the 2026 2-3L coefficient", () => {
+  const utilizationPowerKw = utilizationPowerKwForInput({
+    customsValueRub: 2_449_066,
+    eurRateRub: 100,
+    engineCc: 2_497,
+    powerHp: 304,
+    productionDate: "2025-01",
+    fuel: "petrol",
+    importedAt,
+  });
+  assert.equal(utilizationPowerKw, 223.59162);
+  const result = calculateRussiaCustomsForIndividual({
+    customsValueRub: 2_449_066,
+    eurRateRub: 100,
+    engineCc: 2_497,
+    powerHp: 304,
+    productionDate: "2025-01",
+    fuel: "petrol",
+    importedAt,
+  });
+  assert.equal(result.utilizationPowerKw, 223.59162);
+  assert.equal(result.utilizationCoefficient, 131.04);
+  assert.equal(result.utilizationFeeRub, 2_620_800);
+});
+
 test("uses the full 2026 coefficient above the personal power threshold", () => {
   const result = calculateRussiaCustomsForIndividual({
     customsValueRub: 2_000_000,
@@ -144,9 +169,9 @@ test("uses the full 2026 coefficient above the personal power threshold", () => 
     importedAt,
   });
   assert.equal(result.status, "ready");
-  assert.equal(result.utilizationCoefficient, 82.1);
-  assert.equal(result.utilizationFeeRub, 1_642_000);
-  assert.equal(result.totalCustomsRub, 2_195_541);
+  assert.equal(result.utilizationCoefficient, 74.64);
+  assert.equal(result.utilizationFeeRub, 1_492_800);
+  assert.equal(result.totalCustomsRub, 2_046_341);
 });
 
 test("does not apply the personal ICE privilege above 3000 cc", () => {
@@ -157,30 +182,30 @@ test("does not apply the personal ICE privilege above 3000 cc", () => {
     ageBand: "up_to_3_years",
     personalUseEligible: true,
   });
-  assert.equal(coefficient, 142.12);
+  assert.equal(coefficient, 129.2);
 });
 
 test("uses representative 2026 rows for every engine-volume band", () => {
   assert.equal(utilizationCoefficient2026({
     powertrainKind: "combustion", utilizationPowerKw: 150, engineCc: 900,
     ageBand: "over_5_years", personalUseEligible: false,
-  }), 32.21);
+  }), 29.28);
   assert.equal(utilizationCoefficient2026({
     powertrainKind: "combustion", utilizationPowerKw: 250, engineCc: 1_500,
     ageBand: "up_to_3_years", personalUseEligible: false,
-  }), 80.26);
+  }), 72.96);
   assert.equal(utilizationCoefficient2026({
     powertrainKind: "combustion", utilizationPowerKw: 300, engineCc: 2_500,
     ageBand: "over_5_years", personalUseEligible: false,
-  }), 231.53);
+  }), 210.48);
   assert.equal(utilizationCoefficient2026({
     powertrainKind: "combustion", utilizationPowerKw: 350, engineCc: 3_200,
     ageBand: "up_to_3_years", personalUseEligible: false,
-  }), 218.46);
+  }), 198.6);
   assert.equal(utilizationCoefficient2026({
     powertrainKind: "combustion", utilizationPowerKw: 400, engineCc: 4_000,
     ageBand: "over_5_years", personalUseEligible: false,
-  }), 378.71);
+  }), 344.28);
 });
 
 test("sums documented motor powers for electric and hybrid vehicles", () => {
@@ -221,9 +246,9 @@ test("pure EV excise uses certified 30-minute power, never peak power", () => {
   assert.equal(result.importDutyRub, 300_000);
   assert.equal(result.exciseRub, 7_680);
   assert.equal(result.vatRub, 507_690);
-  assert.equal(result.utilizationCoefficient, 72.47);
-  assert.equal(result.utilizationFeeRub, 1_449_400);
-  assert.equal(result.totalCustomsRub, 2_278_311);
+  assert.equal(result.utilizationCoefficient, 65.88);
+  assert.equal(result.utilizationFeeRub, 1_317_600);
+  assert.equal(result.totalCustomsRub, 2_146_511);
 });
 
 test("pure EV peak power alone cannot produce an exact excise or utilization fee", () => {
@@ -258,8 +283,8 @@ test("uses engine displacement duty for a series hybrid", () => {
   assert.equal(result.importDutyRub, 525_000);
   assert.equal(result.exciseRub, 0);
   assert.equal(result.vatRub, 0);
-  assert.equal(result.utilizationCoefficient, 54.52);
-  assert.equal(result.totalCustomsRub, 1_620_324);
+  assert.equal(result.utilizationCoefficient, 49.56);
+  assert.equal(result.totalCustomsRub, 1_521_124);
 });
 
 test("N1 and unclassified pickups fail closed instead of receiving an M1 tariff", () => {
@@ -333,8 +358,8 @@ test("personal-use privilege is explicit in the result and can be disabled", () 
   assert.match(assumed.warnings.join(" "), /льготный утильсбор/i);
   assert.equal(ineligible.personalUseAssumed, false);
   assert.equal(ineligible.vehicleCategoryAssumed, false);
-  assert.equal(ineligible.utilizationCoefficient, 77.48);
-  assert.equal(ineligible.utilizationFeeRub, 1_549_600);
+  assert.equal(ineligible.utilizationCoefficient, 70.44);
+  assert.equal(ineligible.utilizationFeeRub, 1_408_800);
 });
 
 test("legal production reference accepts exact, month-only and year-only source values", () => {
