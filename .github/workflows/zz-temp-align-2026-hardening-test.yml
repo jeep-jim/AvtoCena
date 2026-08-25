@@ -1,0 +1,49 @@
+name: TEMP align 2026 hardening test
+
+on:
+  push:
+    branches:
+      - fix/russia-utilization-2026-coefficients-20260825
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/russia-utilization-2026-coefficients-20260825
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Replace obsolete next-year coefficient assertion
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('tests/catalog-production-hardening.test.ts')
+          text = path.read_text()
+          old = '''test("customs engine uses the 2026 coefficient columns rather than the 2025 columns", () => {\n  assert.match(customs, /\\[58\\.84, 44\\.05, 77\\.48\\]/);\n  assert.match(customs, /\\[139\\.75, 49\\.5, 82\\.1\\]/);\n  assert.match(customs, /\\[117\\.68, 123\\.78, 187\\.4\\]/);\n  assert.doesNotMatch(customs, /\\[58\\.84, 40\\.04, 70\\.44\\]/);\n});'''
+          new = '''test("customs engine uses the calendar-2026 coefficient columns rather than the next-year columns", () => {\n  assert.match(customs, /\\[58\\.84, 40\\.04, 70\\.44\\]/);\n  assert.match(customs, /\\[139\\.75, 45, 74\\.64\\]/);\n  assert.match(customs, /\\[117\\.68, 112\\.52, 170\\.36\\]/);\n  assert.match(customs, /\\[228, 131\\.04, 188\\.52\\]/);\n  assert.doesNotMatch(customs, /\\[58\\.84, 44\\.05, 77\\.48\\]/);\n  assert.doesNotMatch(customs, /\\[228, 144\\.14, 207\\.37\\]/);\n});'''
+          if old not in text:
+              raise SystemExit('obsolete hardening assertion not found')
+          path.write_text(text.replace(old, new, 1))
+          PY
+      - name: Run affected suites
+        run: |
+          node --import tsx --test tests/russia-customs.test.ts
+          node --import tsx --test tests/catalog-production-hardening.test.ts tests/catalog-v2-market-recovery.test.ts tests/catalog-v6-shared-publish-lock.test.ts tests/catalog-operations.test.ts tests/catalog-source-retention.test.ts tests/catalog-current-pipeline-contract.test.ts
+      - name: Commit assertion alignment and remove helper
+        shell: bash
+        run: |
+          git rm .github/workflows/zz-temp-align-2026-hardening-test.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add tests/catalog-production-hardening.test.ts
+          git commit -m 'Align production hardening with calendar 2026 coefficients'
+          git push origin HEAD:fix/russia-utilization-2026-coefficients-20260825
