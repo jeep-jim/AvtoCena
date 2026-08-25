@@ -3,7 +3,7 @@ import sharp from "sharp";
 import { getJsonStorage, readDataJson, StorageConflictError } from "../data";
 import { publishAiProductFeed } from "../ai-discovery";
 import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOffer, VehicleOffer } from "./types";
-import { hasCredibleOfferContent, isCatalogYearAllowed } from "./offer-quality";
+import { hasAllowedCatalogSourceProvenance, hasCredibleOfferContent, isCatalogYearAllowed } from "./offer-quality";
 import { rankedCatalogImageUrls } from "./image-quality";
 import { catalogOfferVisibleRub, isJapanAuctionOffer, japanAuctionSoldIdentityVerified } from "./public-priority";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
@@ -917,12 +917,17 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   for (const [market, rows] of Object.entries(preservedPublicOffersByMarket)) {
     for (const offer of rows || []) {
       if (!offer?.id || String(offer.market || "") !== market) throw new Error(`catalog_preserved_public_row_invalid:${market}:${String(offer?.id || "missing")}`);
+      // Preservation is byte-stable only for owner-approved provenance. Legacy
+      // rows from removed sites are deliberately purged instead of being carried
+      // into another immutable public generation.
+      if (!hasAllowedCatalogSourceProvenance(offer)) continue;
       publicOffers.push(offer);
     }
   }
   for (const [market, rows] of Object.entries(appendPublicOffersByMarket)) {
     for (const offer of rows || []) {
       if (!offer?.id || String(offer.market || "") !== market) throw new Error(`catalog_append_public_row_invalid:${market}:${String(offer?.id || "missing")}`);
+      if (!hasAllowedCatalogSourceProvenance(offer)) throw new Error(`catalog_append_public_source_forbidden:${market}:${String(offer?.sourceId || "missing")}:${String(offer?.id || "missing")}`);
       publicOffers.push(offer);
     }
   }
@@ -944,7 +949,8 @@ export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: 
   const generationId = `gen_${Date.now()}_${crypto.randomUUID().slice(0, 8)}`;
   const now = new Date().toISOString();
   const japanArchive = await persistJapanAuctionHistory(storage, publicOffers.filter((offer) => offer.market === "japan"));
-  await persistInternalCatalog(storage, generationId, nextOffers);
+  const sourceAllowedInternalOffers = nextOffers.filter(hasAllowedCatalogSourceProvenance);
+  await persistInternalCatalog(storage, generationId, sourceAllowedInternalOffers);
   const byMarket = new Map<string, VehicleOffer[]>();
   for (const offer of publishedOffers) byMarket.set(offer.market, [...(byMarket.get(offer.market) || []), offer]);
   const markets: CatalogManifest["markets"] = {};
@@ -1038,7 +1044,7 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], _sk
   // A one-market writer must not rename, reprice or delete another market.
   // Protected rows were read from the active public generation and hash-gated
   // by the caller; only that market's own refresh may revalidate them.
-  const protectedRows = storedOffers.filter((offer) => protectedPublicIds.has(String(offer.id)));
+  const protectedRows = storedOffers.filter((offer) => protectedPublicIds.has(String(offer.id)) && hasAllowedCatalogSourceProvenance(offer));
   const mutableRows = storedOffers.filter((offer) => !protectedPublicIds.has(String(offer.id)));
   const identifiedOffers = await applyEncyclopediaDisplayIdentityBatch(mutableRows);
   const qualityRejected = identifiedOffers.filter((offer) => !isPublicOffer(offer));

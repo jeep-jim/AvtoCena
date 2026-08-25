@@ -13,19 +13,11 @@ const concurrency = Math.max(1, Math.min(12, Number(process.env.CATALOG_PROBE_CO
 const outputFile = process.env.CATALOG_PROBE_OUTPUT || `catalog-probe-${market}-${shardIndex}.json`;
 const allowRequiredSubset = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_PROBE_ALLOW_REQUIRED_SUBSET || ""));
 
-// Only optional accelerators live here. The mandatory sites are sourced exclusively
-// from required-catalog-sources.ts so they cannot drift between workflows and code.
-const additionalPriorityPlan = {
-  korea: [],
-  china: ["guazi_china_ru", "guazi_china_export", "che168_dealer_exact", "sohu_auto_china_open", "che168_china_exact"],
-  japan: ["japantransit_japan_stat_open", "auctions22_japan_past_open"],
-  uae: ["dubicars_clean", "beforward_uae"],
-  europe: ["otomoto_europe_exact", "otomoto_pl_open", "autouncle_europe"],
-  georgia: ["auto_georgia_open", "ss_georgia_open", "myauto_georgia_exact"],
-  kyrgyzstan: [],
-};
-
-if (!Object.prototype.hasOwnProperty.call(additionalPriorityPlan, market)) throw new Error(`unsupported_probe_market_${market || "missing"}`);
+// Production probing is exclusive: only the owner-approved sources from
+// required-catalog-sources.ts may be contacted. No accelerator/fallback site can
+// be added here or injected through CATALOG_PROBE_SOURCE_IDS.
+const supportedMarkets = new Set(["korea", "china", "japan", "uae", "europe", "georgia", "kyrgyzstan"]);
+if (!supportedMarkets.has(market)) throw new Error(`unsupported_probe_market_${market || "missing"}`);
 
 function withTimeout(promise, sourceId) {
   let timer;
@@ -121,10 +113,11 @@ const registered = catalogImportSources
   .map((source) => source.sourceId);
 const requiredSourceIds = requiredCatalogSourceIds(market);
 const configured = String(process.env.CATALOG_PROBE_SOURCE_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);
-const plannedAll = configured.length && allowRequiredSubset
-  ? [...new Set(configured)]
-  : [...new Set([...requiredSourceIds, ...configured, ...additionalPriorityPlan[market], ...registered])];
-const priorityOrder = [...requiredSourceIds, ...additionalPriorityPlan[market]];
+const configuredApproved = configured.filter((sourceId) => requiredSourceIds.includes(sourceId));
+const plannedAll = configuredApproved.length && allowRequiredSubset
+  ? [...new Set(configuredApproved)]
+  : [...requiredSourceIds];
+const priorityOrder = [...requiredSourceIds];
 const priorityRank = new Map(priorityOrder.map((sourceId, index) => [sourceId, index]));
 const planned = plannedAll
   .sort((left, right) => (priorityRank.get(left) ?? 10_000) - (priorityRank.get(right) ?? 10_000) || left.localeCompare(right));
@@ -138,11 +131,10 @@ const requiredResults = results.filter((row) => requiredSourceIds.includes(row.s
 const requiredActiveSourceIds = requiredResults.filter((row) => row.active).map((row) => row.sourceId);
 const requiredInactiveSourceIds = requiredResults.filter((row) => !row.active).map((row) => row.sourceId);
 
-// Probe is only an accelerator for optional sources. A short probe may time out,
-// see an empty first page, or hit a transient block; it must never remove one of
-// AvtoCena's canonical required sites from the real collector. Every mandatory
-// source assigned to this shard is therefore handed to the collector regardless
-// of probe result, while optional sources still need a successful probe.
+// A short probe may time out, see an empty first page, or hit a transient block;
+// it must never remove one of AvtoCena's approved sites from the real collector.
+// Every approved source assigned to this shard is therefore handed to the
+// collector regardless of probe result. There are no optional production sites.
 const sourceIdsForRebuildList = [...new Set([...requiredSourceIdsForShard, ...activeSourceIds])]
   .filter((sourceId) => adapters.has(sourceId));
 const sourceIdsForRebuild = sourceIdsForRebuildList.join(",") || "__no_active_sources__";

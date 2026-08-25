@@ -18,7 +18,7 @@ const knowledgeBlock = workflow.slice(workflow.indexOf("\n  knowledge:"), workfl
 const collectBlock = workflow.slice(workflow.indexOf("\n  collect:"), workflow.indexOf("\n  publish:"));
 const publishBlock = workflow.slice(workflow.indexOf("\n  publish:"), workflow.indexOf("\n  health:"));
 
-test("probe accelerates optional sources but can never drop a mandatory source from the real crawl", () => {
+test("probe contacts only approved sources and can never drop one from the real crawl", () => {
   assert.match(probe, /catalogImportSources\s*\.filter/);
   assert.match(probe, /activeSourceIds/);
   assert.match(probe, /inactiveSourceIds/);
@@ -60,23 +60,24 @@ test("canonical mandatory market source contract cannot silently drift", () => {
     assert.match(requiredSources, new RegExp(sourceId));
     assert.match(requiredSources, new RegExp(canonicalUrl.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")));
   }
-  assert.match(sourceRegistry, /catalog_required_sources_contract_broken/);
+  assert.match(sourceRegistry, /catalog_strict_source_allowlist_broken/);
   assert.match(sourceRegistry, /excluded_from_collection/);
 });
 
-test("Japan rollout combines mandatory and optional completed auction histories", () => {
-  const japanPlanStart = probe.indexOf("  japan:");
-  const japanPlanEnd = probe.indexOf("\n  uae:", japanPlanStart);
-  const japanPlan = probe.slice(japanPlanStart, japanPlanEnd);
-  assert.ok(japanPlanStart >= 0 && japanPlanEnd > japanPlanStart);
-  assert.match(requiredSources, /jpauc_japan_past_open/);
-  assert.match(requiredSources, /carvector_japan_stat_open/);
-  assert.match(requiredSources, /auctiondatasearch_japan_open/);
-  assert.match(japanPlan, /japantransit_japan_stat_open/);
-  assert.match(japanPlan, /auctions22_japan_past_open/);
-  assert.doesNotMatch(japanPlan, /jpauc_japan_current_open/);
-  assert.doesNotMatch(japanPlan, /auctions22_japan_upcoming_open/);
-  assert.match(sourceRegistry, /market === "japan"\) return source\.role === "auction_history"/);
+test("Japan rollout uses only the five owner-approved sources", () => {
+  for (const sourceId of [
+    "jpauc_japan_past_open",
+    "carvector_japan_stat_open",
+    "prestige_japan_auctions_open",
+    "auctiondatasearch_japan_open",
+    "jpcenter_japan_catalog_open",
+  ]) {
+    assert.match(requiredSources, new RegExp(sourceId));
+  }
+  assert.doesNotMatch(probe, /japantransit_japan_stat_open|auctions22_japan_past_open|jpauc_japan_current_open|auctions22_japan_upcoming_open/);
+  assert.match(probe, /configuredApproved = configured\.filter\(\(sourceId\) => requiredSourceIds\.includes\(sourceId\)\)/);
+  assert.match(probe, /plannedAll = configuredApproved\.length && allowRequiredSubset[\s\S]*: \[\.\.\.requiredSourceIds\]/);
+  assert.match(sourceRegistry, /japan: \[\.\.\.REQUIRED_CATALOG_SOURCES\.japan\]/);
   assert.match(japanWorkflow, /workflow_dispatch:/);
   assert.doesNotMatch(japanWorkflow, /^\s+schedule:/m);
   assert.match(japanWorkflow, /retention_ms: "2592000000"/);

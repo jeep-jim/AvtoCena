@@ -35,7 +35,7 @@ test("all catalog filters use the projection when optional categorical shards ar
       mimeType: "image/jpeg",
     }));
     await persistCatalogOffers([{
-      id: "filter-target", sourceId: "filter-test", sourceOfferId: "FILTER", market: "korea", offerType: "fixed", status: "active",
+      id: "filter-target", sourceId: "encar_direct", sourceOfferId: "FILTER", market: "korea", offerType: "fixed", status: "active",
       make: "Hyundai", model: "Avante (CN7)", year: 2021, sourcePrice: 18_000_000, sourceCurrency: "KRW", priceMode: "fixed", images,
       totalRub: 2_021_912, mileageKm: 61_114, engineCc: 1_598, powerHp: 123, fuel: "petrol", transmission: "automatic", drive: "fwd", bodyType: "sedan",
       calculationStatus: "ready", calculationSnapshot: {
@@ -43,7 +43,7 @@ test("all catalog filters use the projection when optional categorical shards ar
         breakdown: ["car", "topavto-commission", "broker", "svh", "laboratory", "sbkts", "epts", "rf-delivery", "customs"]
           .map((id) => ({ id, amountRub: 1 })),
       },
-      firstSeenAt: now, updatedAt: now, operational: { sourceUrl: "https://example.test/filter-target" },
+      firstSeenAt: now, updatedAt: now, operational: { sourceUrl: "https://www.encar.com/dc/dc_cardetailview.do?carid=FILTER", photoIdentityVerified: true },
     } as any]);
 
     const manifest = await readDataJson<any>("catalog/manifest.json", {});

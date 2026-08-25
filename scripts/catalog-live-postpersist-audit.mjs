@@ -1,6 +1,6 @@
 const { readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime-config.ts");
-const { catalogMinYearForMarket, hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { catalogMinYearForMarket, hasAllowedCatalogSourceProvenance, hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { presentCatalogOffer } = await import("../apps/web/lib/catalog/presentation.ts");
 const { catalogPowerSanity } = await import("../apps/web/lib/catalog/power-sanity.ts");
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, catalogExactModelKey } = await import("../apps/web/lib/catalog/inventory-quota.ts");
@@ -37,7 +37,7 @@ function renderedIdentityProblems(offer) {
   if (!sourceSame && makeLabel && title && normalizedIdentity(title) === normalizedIdentity(makeLabel)) problems.push("display_title_make_only");
   return { problems, makeLabel, modelLabel, title };
 }
-const report = { version: 5, checkedAt: new Date().toISOString(), markets: {}, failures: [] };
+const report = { version: 6, checkedAt: new Date().toISOString(), markets: {}, failures: [] };
 for (const market of PUBLIC_CATALOG_MARKETS) {
   let rows = [];
   try { rows = await readMarketOffers(market); } catch (error) { report.failures.push(`${market}:read:${String(error?.message || error)}`); continue; }
@@ -85,6 +85,7 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
       });
     }
   }
+  const forbiddenSourceRows = rows.filter((offer) => !hasAllowedCatalogSourceProvenance(offer));
   const preliminaryCount = rows.filter(isPreliminary).length;
   const incompleteSpecificationCount = rows.filter((offer) => catalogRequiredSpecificationRejectionReason(offer)).length;
   const unsafePendingVisiblePriceCount = rows.filter((offer) =>
@@ -93,6 +94,8 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   const belowMinimumImagesCount = rows.filter((offer) => !Array.isArray(offer?.images) || offer.images.length < minimumImagesPerOffer).length;
   const stats = {
     count: rows.length,
+    forbiddenSourceCount: forbiddenSourceRows.length,
+    forbiddenSourceSamples: forbiddenSourceRows.slice(0, 30).map((offer) => ({ id: offer?.id, sourceId: offer?.sourceId, sourceUrl: offer?.operational?.sourceUrl || null })),
     electricCount: rows.filter(isElectric).length,
     hybridCount: rows.filter(isHybrid).length,
     preliminaryCount,
@@ -126,6 +129,9 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
     sourceCounts: Object.fromEntries([...new Set(rows.map((offer) => String(offer?.sourceId || "unknown")))].sort().map((sourceId) => [sourceId, rows.filter((offer) => String(offer?.sourceId || "unknown") === sourceId).length])),
   };
   report.markets[market] = stats;
+  // Source provenance is a global production invariant, not a target-market-only quality gate.
+  // Any forbidden source anywhere blocks every subsequent publication.
+  if (stats.forbiddenSourceCount > 0) report.failures.push(`${market}:forbidden_source:${stats.forbiddenSourceCount}`);
   const min = Number(minimums?.[market] || 0);
   if (min > 0 && stats.count < min) report.failures.push(`${market}:count_below_min:${stats.count}<${min}`);
   if (assertMarkets.has(market) && stats.count === 0) report.failures.push(`${market}:empty`);
