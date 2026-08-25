@@ -1,0 +1,72 @@
+name: TEMP source postpublish audit gate
+
+on:
+  push:
+    branches:
+      - fix/strict-market-source-whitelist-20260825-r2
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/strict-market-source-whitelist-20260825-r2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Add global forbidden-source postpublish gate
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          def repl(path, old, new):
+              p=Path(path); t=p.read_text()
+              if new in t: return
+              if old not in t: raise SystemExit(f"missing anchor {path}: {old[:160]}")
+              p.write_text(t.replace(old,new,1))
+
+          audit="scripts/catalog-live-postpersist-audit.mjs"
+          repl(audit,
+            'const { catalogMinYearForMarket, hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");',
+            'const { catalogMinYearForMarket, hasAllowedCatalogSourceProvenance, hasCredibleCatalogIdentity } = await import("../apps/web/lib/catalog/offer-quality.ts");')
+          repl(audit,
+            'const report = { version: 5, checkedAt: new Date().toISOString(), markets: {}, failures: [] };',
+            'const report = { version: 6, checkedAt: new Date().toISOString(), markets: {}, failures: [] };')
+          repl(audit,
+            '  const preliminaryCount = rows.filter(isPreliminary).length;',
+            '  const forbiddenSourceRows = rows.filter((offer) => !hasAllowedCatalogSourceProvenance(offer));\n  const preliminaryCount = rows.filter(isPreliminary).length;')
+          repl(audit,
+            '    count: rows.length,\n    electricCount:',
+            '    count: rows.length,\n    forbiddenSourceCount: forbiddenSourceRows.length,\n    forbiddenSourceSamples: forbiddenSourceRows.slice(0, 30).map((offer) => ({ id: offer?.id, sourceId: offer?.sourceId, sourceUrl: offer?.operational?.sourceUrl || null })),\n    electricCount:')
+          repl(audit,
+            '  report.markets[market] = stats;\n  const min = Number(minimums?.[market] || 0);',
+            '  report.markets[market] = stats;\n  // Source provenance is a global production invariant, not a target-market-only quality gate.\n  // Any forbidden source anywhere blocks every subsequent publication.\n  if (stats.forbiddenSourceCount > 0) report.failures.push(`${market}:forbidden_source:${stats.forbiddenSourceCount}`);\n  const min = Number(minimums?.[market] || 0);')
+
+          test="tests/catalog-source-scale.test.ts"
+          repl(test,
+            'const japanOpenSources = fs.readFileSync(new URL("../apps/web/lib/catalog/japan-auction-open-sources.ts", import.meta.url), "utf8");',
+            'const japanOpenSources = fs.readFileSync(new URL("../apps/web/lib/catalog/japan-auction-open-sources.ts", import.meta.url), "utf8");\nconst postPersistAudit = fs.readFileSync(new URL("../scripts/catalog-live-postpersist-audit.mjs", import.meta.url), "utf8");')
+          repl(test,
+            '  assert.match(storage, /protectedPublicIds\\.has\\(String\\(offer\\.id\\)\\) && hasAllowedCatalogSourceProvenance\\(offer\\)/);\n});',
+            '  assert.match(storage, /protectedPublicIds\\.has\\(String\\(offer\\.id\\)\\) && hasAllowedCatalogSourceProvenance\\(offer\\)/);\n  assert.match(postPersistAudit, /forbiddenSourceRows = rows\\.filter\\(\\(offer\\) => !hasAllowedCatalogSourceProvenance\\(offer\\)\\)/);\n  assert.match(postPersistAudit, /forbidden_source/);\n  assert.match(postPersistAudit, /Source provenance is a global production invariant/);\n});')
+          PY
+      - name: Verify audit and source contracts
+        run: |
+          node --check scripts/catalog-live-postpersist-audit.mjs
+          node --import tsx --test tests/catalog-source-scale.test.ts tests/catalog-probe-source-shard.test.ts tests/catalog-production-hardening.test.ts
+      - name: Commit gate
+        shell: bash
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add scripts/catalog-live-postpersist-audit.mjs tests/catalog-source-scale.test.ts
+          if git diff --cached --quiet; then exit 0; fi
+          git commit -m "Fail every publish on forbidden catalog sources"
+          git push origin HEAD:fix/strict-market-source-whitelist-20260825-r2
