@@ -6,9 +6,12 @@ const queue = fs.readFileSync(new URL("../.github/workflows/catalog-v3-sequentia
 const removedDailyWorkingMarkets = new URL("../.github/workflows/catalog-live-daily-working-markets.yml", import.meta.url);
 const uaeKyrgyzstan = fs.readFileSync(new URL("../.github/workflows/catalog-live-recovery-uae-kyrgyzstan.yml", import.meta.url), "utf8");
 
-test("obsolete Catalog V3 automatic chain remains disabled", () => {
-  assert.match(queue, /Sequential queue \(manual only\)/);
-  assert.match(queue, /Automatic catalog chaining is disabled/);
+test("sequential queue uses only its schedule and explicit operator triggers", () => {
+  assert.match(queue, /workflow_dispatch:/);
+  assert.match(queue, /schedule:/);
+  assert.match(queue, /cron: "17 21 \* \* \*"/);
+  assert.match(queue, /push:[\s\S]*branches:[\s\S]*- main[\s\S]*paths:[\s\S]*\.github\/catalog-v3-run-all/);
+  assert.match(queue, /github\.event_name \}\}" = "push"/);
   assert.doesNotMatch(queue, /workflow_run:/);
   assert.doesNotMatch(queue, /gh workflow run/);
 });
