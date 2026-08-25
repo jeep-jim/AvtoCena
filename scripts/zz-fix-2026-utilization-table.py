@@ -1,0 +1,85 @@
+from pathlib import Path
+import re
+
+path = Path('packages/engine/src/calculation/russiaCustoms.ts')
+text = path.read_text()
+pattern = re.compile(r'// Коэффициенты 2026 года[\s\S]*?const ICE_OVER_3500_2026 = rows\(\[[\s\S]*?\]\);')
+replacement = '''// Коэффициенты календарного 2026 года из раздела I перечня к постановлению
+// Правительства РФ № 1291 в редакции постановления от 01.11.2025 № 1713.
+// В официальной таблице после пары 01.12.2025 идут пары 2026, 2027 и далее;
+// здесь зафиксирована именно пара 01.01.2026–31.12.2026. Мощность — кВт.
+const EV_2026 = rows([
+  [58.84, 40.04, 70.44], [73.55, 49.56, 82.08], [95.61, 65.88, 95.64],
+  [117.68, 78, 111.36], [139.75, 92.4, 129.72], [161.81, 109.68, 151.2],
+  [183.88, 129.96, 176.16], [205.94, 153.96, 205.2], [Infinity, 182.4, 239.04],
+]);
+
+const ICE_UP_TO_1000_2026 = rows([
+  [117.68, 14.88, 27.6], [139.75, 15.36, 28.43], [161.81, 15.84, 29.28],
+  [183.88, 16.2, 30.12], [Infinity, 17.28, 30.12],
+]);
+
+const ICE_1000_TO_2000_2026 = rows([
+  [117.68, 40.04, 70.44], [139.75, 45, 74.64], [161.81, 47.64, 79.2],
+  [183.88, 50.52, 83.88], [205.94, 57.12, 91.92], [228, 64.56, 100.56],
+  [250.07, 72.96, 110.16], [272.13, 83.16, 120.6], [294.2, 94.8, 132],
+  [316.26, 108, 144.6], [338.33, 123.24, 158.4], [367.75, 140.4, 173.4],
+  [Infinity, 160.08, 189.84],
+]);
+
+const ICE_2000_TO_3000_2026 = rows([
+  [117.68, 112.52, 170.36], [139.75, 115.34, 172.8], [161.81, 118.2, 175.08],
+  [183.88, 120.12, 177.6], [205.94, 126, 183], [228, 131.04, 188.52],
+  [250.07, 136.32, 193.68], [272.13, 141.72, 199.08], [294.2, 147.48, 204.72],
+  [316.26, 153.36, 210.48], [338.33, 159.48, 216.36], [367.75, 165.84, 222.36],
+  [Infinity, 172.44, 228.6],
+]);
+
+const ICE_3000_TO_3500_2026 = rows([
+  [73.55, 129.2, 197.81], [95.61, 129.2, 197.81], [117.68, 129.2, 197.81],
+  [139.75, 131.76, 200.04], [161.81, 134.4, 202.2], [183.88, 137.16, 204.36],
+  [205.94, 140.52, 207.24], [228, 144, 212.4], [250.07, 151.92, 217.8],
+  [272.13, 160.32, 224.28], [294.2, 169.2, 231], [316.26, 178.44, 237.96],
+  [338.33, 188.28, 245.04], [367.75, 198.6, 252.48], [Infinity, 209.52, 260.04],
+]);
+
+const ICE_OVER_3500_2026 = rows([
+  [73.55, 164.53, 216.29], [95.61, 164.53, 216.29], [117.68, 164.53, 216.29],
+  [139.75, 167.28, 219.48], [161.81, 170.16, 222.84], [183.88, 173.04, 226.2],
+  [205.94, 176.52, 231.36], [228, 180, 236.64], [250.07, 186.36, 249.6],
+  [272.13, 192.88, 263.4], [294.2, 199.68, 277.92], [316.26, 206.64, 293.16],
+  [338.33, 213.84, 309.36], [367.75, 221.28, 326.4], [Infinity, 229.08, 344.28],
+]);'''
+text, count = pattern.subn(replacement, text, count=1)
+if count != 1:
+    raise SystemExit(f'coefficient block replacement count={count}')
+path.write_text(text)
+
+test_path = Path('tests/russia-customs.test.ts')
+tests = test_path.read_text()
+replacements = {
+    'assert.equal(result.utilizationCoefficient, 82.1);': 'assert.equal(result.utilizationCoefficient, 74.64);',
+    'assert.equal(result.utilizationFeeRub, 1_642_000);': 'assert.equal(result.utilizationFeeRub, 1_492_800);',
+    'assert.equal(result.totalCustomsRub, 2_195_541);': 'assert.equal(result.totalCustomsRub, 2_046_341);',
+    'assert.equal(coefficient, 142.12);': 'assert.equal(coefficient, 129.2);',
+    '}), 32.21);': '}), 29.28);',
+    '}), 80.26);': '}), 72.96);',
+    '}), 231.53);': '}), 210.48);',
+    '}), 218.46);': '}), 198.6);',
+    '}), 378.71);': '}), 344.28);',
+    'assert.equal(result.utilizationCoefficient, 72.47);': 'assert.equal(result.utilizationCoefficient, 65.88);',
+    'assert.equal(result.utilizationFeeRub, 1_449_400);': 'assert.equal(result.utilizationFeeRub, 1_317_600);',
+    'assert.equal(result.totalCustomsRub, 2_278_311);': 'assert.equal(result.totalCustomsRub, 2_146_511);',
+    'assert.equal(ineligible.utilizationCoefficient, 77.48);': 'assert.equal(ineligible.utilizationCoefficient, 70.44);',
+    'assert.equal(ineligible.utilizationFeeRub, 1_549_600);': 'assert.equal(ineligible.utilizationFeeRub, 1_408_800);',
+}
+for old, new in replacements.items():
+    if old not in tests:
+        raise SystemExit(f'missing expected test literal: {old}')
+    tests = tests.replace(old, new, 1)
+
+anchor = 'test("uses the full 2026 coefficient above the personal power threshold", () => {'
+genesis = '''test("Genesis GV70 304 PS is converted to 223.59 kW and uses the 2026 2-3L coefficient", () => {\n  const utilizationPowerKw = utilizationPowerKwForInput({\n    customsValueRub: 2_449_066,\n    eurRateRub: 100,\n    engineCc: 2_497,\n    powerHp: 304,\n    productionDate: "2025-01",\n    fuel: "petrol",\n    importedAt,\n  });\n  assert.equal(utilizationPowerKw, 223.59);\n  const result = calculateRussiaCustomsForIndividual({\n    customsValueRub: 2_449_066,\n    eurRateRub: 100,\n    engineCc: 2_497,\n    powerHp: 304,\n    productionDate: "2025-01",\n    fuel: "petrol",\n    importedAt,\n  });\n  assert.equal(result.utilizationPowerKw, 223.59);\n  assert.equal(result.utilizationCoefficient, 131.04);\n  assert.equal(result.utilizationFeeRub, 2_620_800);\n});\n\n'''
+if anchor not in tests:
+    raise SystemExit('Genesis regression anchor missing')
+test_path.write_text(tests.replace(anchor, genesis + anchor, 1))
