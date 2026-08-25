@@ -1,0 +1,63 @@
+name: TEMP strict source compact fix
+
+on:
+  push:
+    branches:
+      - fix/strict-market-source-whitelist-20260825-r2
+
+permissions:
+  contents: write
+
+jobs:
+  patch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: fix/strict-market-source-whitelist-20260825-r2
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Keep compact projections readable while enforcing full-offer sources
+        shell: bash
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+
+          quality = Path('apps/web/lib/catalog/offer-quality.ts')
+          text = quality.read_text()
+          old = 'if (compactProjection) return offer.status === "active" && credibleCoreContent(offer, true, false);'
+          new = 'if (compactProjection) return offer.status === "active" && credibleCoreContent(offer, false, false);'
+          if old not in text:
+              raise SystemExit('compact projection policy anchor missing')
+          quality.write_text(text.replace(old, new, 1))
+
+          tests = Path('tests/catalog-image-quality.test.ts')
+          text = tests.read_text()
+          old = '{ ...rawOffer, market: "japan", sourceId: "japan_live", sourceCurrency: "JPY" },'
+          new = '{ ...rawOffer, market: "japan", sourceId: "jpauc_japan_past_open", sourceCurrency: "JPY" },'
+          if old not in text:
+              raise SystemExit('Japan live fixture anchor missing')
+          text = text.replace(old, new, 1)
+          old = '''  const olderJapan = {\n    ...rawOffer,\n    market: "japan",\n'''
+          new = '''  const olderJapan = {\n    ...rawOffer,\n    market: "japan",\n    sourceId: "jpauc_japan_past_open",\n'''
+          if old not in text:
+              raise SystemExit('older Japan fixture anchor missing')
+          tests.write_text(text.replace(old, new, 1))
+          PY
+      - name: Verify affected and source-policy suites
+        run: |
+          node --import tsx --test tests/catalog-image-quality.test.ts tests/catalog-gallery-storage-contract.test.ts tests/goonet-listing-bound-gallery.test.ts tests/carused-gallery-sanitization.test.ts
+          node --import tsx --test tests/catalog-source-scale.test.ts tests/catalog-production-hardening.test.ts
+          npm --workspace=@avtocena/web exec tsc -- --noEmit --pretty false
+      - name: Commit non-workflow changes
+        shell: bash
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add apps/web/lib/catalog/offer-quality.ts tests/catalog-image-quality.test.ts
+          git commit -m 'Preserve validated compact projections under source allowlist'
+          git push origin HEAD:fix/strict-market-source-whitelist-20260825-r2
