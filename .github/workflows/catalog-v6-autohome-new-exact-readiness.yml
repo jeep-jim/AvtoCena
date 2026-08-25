@@ -73,7 +73,7 @@ jobs:
             if (Number(list.sourcePriceCny || 0) !== Number(offer.sourcePrice || 0)) problems.push('list_price_rewritten');
             if (!offer.make || !offer.model || !offer.trim || !Number(offer.year)) problems.push('core_identity_missing');
             if (!Array.isArray(offer.images) || offer.images.length < 5) problems.push('gallery_below_5');
-            if ((offer.images || []).some((img) => !/^https:\/\/g\.autoimg\.cn\/@img\/car\d?\/cardfs\/product\/.+\.(?:jpe?g|png|webp|avif)(?:[?#].*)?$/i.test(String(img?.url || '')))) problems.push('gallery_not_exact_product');
+            if ((offer.images || []).some((img) => !/^(?:https:\/\/g\.autoimg\.cn\/@img\/car\d?\/cardfs\/product\/|https:\/\/car\d+\.autoimg\.cn\/cardfs\/product\/).+\.(?:jpe?g|png|webp|avif)(?:[?#].*)?$/i.test(String(img?.url || '')))) problems.push('gallery_not_exact_product');
             if (offer?.operational?.exactDetail !== true || offer?.operational?.photoIdentityVerified !== true || offer?.operational?.sourceOnlyFieldsPreserved !== true) problems.push('exact_flags_missing');
             if (raw.powerFieldPolicy !== 'section_bound_engine_motor_system_fields_v2') problems.push('power_field_policy_not_section_bound');
             if (clean(cfg.energy) && clean(offer.fuel) !== clean(cfg.energy)) problems.push('energy_rewritten');
