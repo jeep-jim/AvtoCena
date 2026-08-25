@@ -51,7 +51,7 @@ import { fullGallery } from "./full-gallery-wrapper";
 import { strictSourceDetail } from "./strict-source-detail-wrapper";
 import { normalizeOpenSource } from "./open-source-normalizer";
 import { regionalLiveOverrides } from "./regional-live-overrides";
-import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
+import { REQUIRED_CATALOG_SOURCES, isAllowedCatalogSourceId } from "./required-catalog-sources";
 import { withGithubYandexSourceBridge } from "./yandex-source-bridge";
 import {
   CATALOG_DAILY_TARGET_PER_MARKET,
@@ -112,12 +112,21 @@ const completeSources = [
 ];
 
 for (const replacement of completeSources) {
+  if (replacement.market === "multi" || !isAllowedCatalogSourceId(replacement.market, replacement.sourceId)) continue;
   const index = catalogImportSources.findIndex((source) => source.sourceId === replacement.sourceId);
   if (index >= 0) catalogImportSources[index] = replacement;
   else catalogImportSources.push(replacement);
 }
+
+// Hard production allowlist: dormant adapters may exist in source modules, but
+// they can never reach collection or retention unless explicitly listed in
+// REQUIRED_CATALOG_SOURCES for that market. This also removes previously added
+// expansion sources such as Goo-net, CarSwitch, KB ChaChaCha and OTOMOTO.
 for (let index = catalogImportSources.length - 1; index >= 0; index--) {
-  if (bannedGeorgiaSourceIds.has(catalogImportSources[index].sourceId)) catalogImportSources.splice(index, 1);
+  const source = catalogImportSources[index];
+  if (source.market === "multi" || !isAllowedCatalogSourceId(source.market, source.sourceId)) {
+    catalogImportSources.splice(index, 1);
+  }
 }
 
 const requiredSourceIds = new Set(

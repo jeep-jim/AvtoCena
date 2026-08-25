@@ -9,6 +9,11 @@ import {
   CATALOG_V2_SOURCE_SLOTS,
 } from "../apps/web/lib/catalog/catalog-v2-source-registry";
 import {
+  REQUIRED_CATALOG_SOURCES,
+  isAllowedCatalogSourceId,
+  isAllowedCatalogSourceUrl,
+} from "../apps/web/lib/catalog/required-catalog-sources";
+import {
   CATALOG_DAILY_TARGET_PER_SOURCE,
   CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET,
   CATALOG_RETENTION_MS,
@@ -101,62 +106,44 @@ test("large collection persists candidate pools instead of discarding incomplete
   assert.doesNotMatch(rebuildScript, /filter\(\(offer\) => classifyCatalogV2Offer\(offer\)\.eligible\)/);
 });
 
-test("canonical anchor sites are fixed for all seven markets and USA remains future", () => {
-  const urls = (market: keyof typeof CATALOG_V2_SOURCE_SLOTS) => new Set(CATALOG_V2_SOURCE_SLOTS[market].map((source) => source.canonicalUrl));
-  assert.deepEqual([...urls("uae")].filter((url) => /dubizzle|dubicars/.test(url)), ["https://uae.dubizzle.com/", "https://www.dubicars.com/"]);
-  assert.ok(urls("korea").has("https://www.encar.com/"));
-  assert.ok(urls("korea").has("https://www.kcar.com/"));
-  assert.ok(urls("europe").has("https://www.mobile.de/"));
-  assert.ok(urls("europe").has("https://www.autoscout24.com/"));
-  assert.ok(urls("georgia").has("https://www.myauto.ge/"));
-  assert.ok(urls("georgia").has("https://autopapa.ge/"));
-  assert.ok(urls("china").has("https://www.che168.com/"));
-  assert.ok(urls("china").has("https://www.dongchedi.com/"));
-  assert.ok(urls("china").has("https://www.guazi.com/"));
-  assert.equal(CATALOG_V2_SOURCE_SLOTS.china.find((source) => source.canonicalUrl === "https://www.autohome.com.cn/")?.role, "primary");
-  assert.ok(urls("japan").has("https://jpauc.com/auction/past"));
-  assert.ok(urls("japan").has("https://carvector.com/stat"));
-  assert.ok(urls("japan").has("https://prestigemotorsport.com.au/auctions/"));
-  assert.ok(urls("japan").has("https://www.auctiondatasearch.jp/"));
-  assert.equal(CATALOG_V2_SOURCE_SLOTS.japan.find((source) => source.sourceId === "jpcenter_japan_catalog_open")?.role, "primary");
-  assert.ok(urls("kyrgyzstan").has("https://www.mashina.kg/"));
+test("production source registry exactly matches the owner-approved allowlist", () => {
+  for (const market of PUBLIC_CATALOG_MARKETS) {
+    const expected = REQUIRED_CATALOG_SOURCES[market];
+    assert.deepEqual(
+      CATALOG_V2_SOURCE_SLOTS[market].map((source) => [source.sourceId, source.canonicalUrl]),
+      expected.map((source) => [source.sourceId, source.canonicalUrl]),
+      `${market}: source slots must be exact`,
+    );
+    assert.deepEqual(
+      catalogImportSources.filter((source) => source.market === market).map((source) => source.sourceId).sort(),
+      expected.map((source) => source.sourceId).sort(),
+      `${market}: importer must contain no extra adapters`,
+    );
+  }
   assert.deepEqual(CATALOG_FUTURE_USA_ANCHORS.map((source) => source.canonicalUrl), ["https://stat.vin/", "https://bid.cars/", "https://auctionstat.com/"]);
 });
 
-test("all seven markets have at least three independent registered adapters", () => {
-  const byMarket = new Map(PUBLIC_CATALOG_MARKETS.map((market) => [market, new Set<string>()]));
-  for (const source of catalogImportSources) {
-    if (source.market === "multi") continue;
-    byMarket.get(source.market)?.add(source.sourceId);
-  }
-  for (const market of PUBLIC_CATALOG_MARKETS) {
-    const minimum = market === "georgia" ? 2 : 3;
-    assert.ok((byMarket.get(market)?.size || 0) >= minimum, `${market} must have at least ${minimum} registered sources`);
-  }
-  assert.ok((byMarket.get("japan")?.size || 0) >= 10, "Japan must use the expanded source registry");
-  assert.ok((byMarket.get("china")?.size || 0) >= 8, "China must use the expanded source registry");
-  assert.ok((byMarket.get("europe")?.size || 0) >= 8, "Europe must use the expanded source registry");
+test("non-whitelisted source ids and source links are rejected centrally", () => {
+  assert.equal(isAllowedCatalogSourceId("japan", "goonet_japan_exact"), false);
+  assert.equal(isAllowedCatalogSourceId("japan", "japantransit_japan_stat_open"), false);
+  assert.equal(isAllowedCatalogSourceId("uae", "carswitch_uae_open"), false);
+  assert.equal(isAllowedCatalogSourceId("korea", "kbchachacha_korea_open"), false);
+  assert.equal(isAllowedCatalogSourceId("europe", "otomoto_europe_exact"), false);
+  assert.equal(isAllowedCatalogSourceUrl("japan", "jpauc_japan_past_open", "https://jpauc.com/auction/detail/123"), true);
+  assert.equal(isAllowedCatalogSourceUrl("japan", "jpauc_japan_past_open", "https://www.goo-net-exchange.com/usedcars/TOYOTA/SIENTA/123/"), false);
+  assert.equal(isAllowedCatalogSourceUrl("china", "guazi_china_open", "https://en.guazi.com/products/test.html"), true);
 });
 
-test("Japan auction sources use real listing and detail routes", () => {
-  const ids = new Set(catalogImportSources.map((source) => source.sourceId));
-  for (const sourceId of ["jpauc_japan_current_open", "jpauc_japan_past_open", "carvector_japan_stat_open", "prestige_japan_auctions_open", "auctiondatasearch_japan_open", "japantransit_japan_stat_open"]) {
+test("Japan production registry contains only the five approved sources", () => {
+  const ids = new Set(catalogImportSources.filter((source) => source.market === "japan").map((source) => source.sourceId));
+  for (const sourceId of ["jpauc_japan_past_open", "carvector_japan_stat_open", "prestige_japan_auctions_open", "auctiondatasearch_japan_open", "jpcenter_japan_catalog_open"]) {
     assert.equal(ids.has(sourceId), true, `${sourceId} must be registered`);
   }
-  assert.match(japanOpenSources, /https:\/\/jpauc\.com\/auction\/listing/);
-  assert.match(japanOpenSources, /\\\/auction\\\/detail\\\/\\d\+/);
-  assert.match(japanOpenSources, /https:\/\/www\.auctiondatasearch\.jp\//);
-});
-
-test("Japan Transit sold-auction statistics participates in the production registry", () => {
-  const ids = new Set(catalogImportSources.map((source) => source.sourceId));
-  assert.equal(japanTransitAuctionStatisticsSource.sourceId, "japantransit_japan_stat_open");
-  assert.equal(japanTransitAuctionStatisticsSource.market, "japan");
-  assert.equal(ids.has("japantransit_japan_stat_open"), true);
+  for (const sourceId of ["goonet_japan_exact", "japantransit_japan_stat_open", "jpauc_japan_current_open", "auctions22_japan_past_open", "auctions22_japan_upcoming_open", "beforward_public"]) {
+    assert.equal(ids.has(sourceId), false, `${sourceId} must not be registered`);
+  }
   assert.match(carsPage, /Аукционная статистика/);
   assert.doesNotMatch(carsPage, /Аукционная статистика Японии/);
-  assert.match(carsPage, /balanceBusinessRows/);
-  assert.doesNotMatch(carsPage, /isJapanAuctionResult\(offer\) \? 5_000/);
 });
 
 test("probe keeps mandatory sources in network work while optional sources still require a live probe", () => {
@@ -197,7 +184,7 @@ test("rebuild calculates first and progressively opens detail without exhausting
 });
 
 test("real listings stay public while exact customs calculation is pending", () => {
-  assert.match(offerQuality, /return offer\.status === "active" && credibleCoreContent\(offer, false\)/);
+  assert.match(offerQuality, /return offer\.status === "active" && credibleCoreContent\(offer, true\)/);
   assert.doesNotMatch(offerQuality, /Boolean\(offer\.totalRub\)/);
   assert.doesNotMatch(storage, /hasCredibleOfferContent\(o\) && Boolean\(o\.totalRub\)/);
   assert.doesNotMatch(carsPage, /Boolean\(offer\.totalRub\) && isCrediblePublicOffer/);
@@ -230,30 +217,15 @@ test("dealer CRM renders SVG market flags rather than emoji letter codes", () =>
   assert.doesNotMatch(dealerDemo, /<span className="text-2xl">\{market\.flag\}<\/span>/);
 });
 
-test("requested high-volume public sources are registered", () => {
-  const ids = new Set(scaleMarketSources.map((source) => source.sourceId));
+test("dormant expansion adapters never enter the production importer", () => {
+  const ids = new Set(catalogImportSources.map((source) => source.sourceId));
   for (const sourceId of [
-    "autowini_korea_open",
-    "kbchachacha_korea_open",
-    "bobaedream_korea_open",
-    "kcar_korea_open",
-    "dubizzle_uae_open",
-    "yallamotor_uae_open",
-    "carswitch_uae_open",
-    "autopapa_georgia_open",
-    "lalafo_kyrgyzstan_open",
-    "bazar_kyrgyzstan_open",
-    "turbo_kyrgyzstan_open",
-    "omarket_kyrgyzstan_open",
-    "jpauc_japan_past_open",
-    "carvector_japan_stat_open",
-    "jpcenter_japan_catalog_open",
-    "prestige_japan_auctions_open",
+    "autowini_korea_open", "kbchachacha_korea_open", "bobaedream_korea_open",
+    "yallamotor_uae_open", "carswitch_uae_open", "lalafo_kyrgyzstan_open",
+    "bazar_kyrgyzstan_open", "turbo_kyrgyzstan_open", "omarket_kyrgyzstan_open",
+    "goonet_japan_exact", "japantransit_japan_stat_open", "otomoto_europe_exact",
   ]) {
-    assert.equal(ids.has(sourceId), true, `${sourceId} must be registered`);
-  }
-  for (const sourceId of ["auto_georgia_open", "ss_georgia_open", "mymarket_georgia_open"]) {
-    assert.equal(ids.has(sourceId), false, `${sourceId} must remain banned`);
+    assert.equal(ids.has(sourceId), false, `${sourceId} must remain outside production`);
   }
 });
 

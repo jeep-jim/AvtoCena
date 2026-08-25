@@ -1,6 +1,6 @@
 import type { CatalogImage, VehicleOffer } from "./types";
 import { catalogImageScore, isLikelyVehicleImage } from "./image-quality";
-import { REQUIRED_CATALOG_SOURCES } from "./required-catalog-sources";
+import { REQUIRED_CATALOG_SOURCES, isAllowedCatalogSourceId, isAllowedCatalogSourceUrl } from "./required-catalog-sources";
 import { isEncarNonCashContractOffer } from "./encar-sale-contract";
 
 const GENERIC_LISTING_RE = /(?:exclusively\s+on|read\s+more|learn\s+more|breaking\s+news|latest\s+news|car\s+news|road\s+test|article|blog|magazine|toonaan|deze\s+elektr|highly\s+responsive|certified\s+pre\s+owned|\b(?:aed|usd|eur)\s*\d+\s*\/\s*month\b|\b0\s*dp\b|\b\d+\s*day\s*return\b|\breturn\s+warranty\b|^location$|^alle\s+|未上传图片|暂无图片|扫码|二维码|联系卖家|&(?:#\d+|[a-z]+);)/i;
@@ -10,7 +10,6 @@ const BAD_IMAGE_RE = /(?:no[-_ ]?photo|no[-_ ]?image|nophoto|noimage|image[-_ ]?
 const ALTERNATIVE_POWERTRAIN_RE = /(?:hybrid|phev|hev|electric|\bbev\b|\bev\b|гибрид|электро)/i;
 const INVALID_CATALOG_IDENTITY_RE = /^(?:unknown|undefined|null|none|n\/?a|not\s+(?:specified|available|known)|other(?:s)?|andere|brand|make|model|марка(?:\s+уточняется)?|модель(?:\s+уточняется)?|уточняется|не\s+указано|неизвестно|기타|미상|其他|未知|その他)$/iu;
 const REQUIRED_SOURCE_IDS = new Set(Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId));
-const GEORGIA_ALLOWED_SOURCE_IDS = new Set(["myauto_georgia_list", "myauto_georgia_exact", "autopapa_georgia_open"]);
 const BUSINESS_LIQUIDITY_RECENT_YEARS = 5;
 const BUSINESS_LIQUIDITY_OLDER_MAX_POWER_HP = 160;
 const CARUSED_IMAGE_HOST = "d1og64tg0ubvon.cloudfront.net";
@@ -20,8 +19,7 @@ export const CATALOG_NON_JAPAN_MIN_YEAR = 2020;
 export const CATALOG_JAPAN_MIN_YEAR = 2010;
 
 export function isCatalogMarketSourceAllowed(offer: Pick<VehicleOffer, "market" | "sourceId">) {
-  if (String(offer.market || "") !== "georgia") return true;
-  return GEORGIA_ALLOWED_SOURCE_IDS.has(String(offer.sourceId || ""));
+  return isAllowedCatalogSourceId(offer.market, offer.sourceId);
 }
 
 export function catalogMinYearForMarket(marketValue: unknown) {
@@ -287,12 +285,12 @@ function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true, chec
 
 export function hasCredibleOfferContent(offer: VehicleOffer) {
   return credibleCoreContent(offer)
-    && /^https?:\/\//i.test(clean(offer.operational?.sourceUrl))
+    && isAllowedCatalogSourceUrl(offer.market, offer.sourceId, offer.operational?.sourceUrl)
     && mandatorySourcePhotoIdentityVerified(offer);
 }
 
 export function isCrediblePublicOffer(offer: VehicleOffer) {
   const compactProjection = Number((offer as any).cardProjectionVersion || 0) >= 1;
-  if (compactProjection) return offer.status === "active" && credibleCoreContent(offer, false, false);
-  return offer.status === "active" && credibleCoreContent(offer, false);
+  if (compactProjection) return offer.status === "active" && credibleCoreContent(offer, true, false);
+  return offer.status === "active" && credibleCoreContent(offer, true);
 }

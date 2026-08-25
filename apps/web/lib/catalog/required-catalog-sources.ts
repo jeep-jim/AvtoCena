@@ -12,11 +12,11 @@ export type RequiredCatalogSource = {
 /**
  * Канонический обязательный набор источников каталога AvtoCena.
  *
- * Эти площадки являются несменяемым ядром каждого рынка:
- * - их нельзя заменить дополнительными источниками;
- * - каждый источник проверяется и парсится отдельно;
- * - рынок не считается готовым, пока не подтверждён каждый обязательный источник;
- * - дополнительные площадки разрешены только сверх этого набора.
+ * Это единственный разрешённый production-набор каждого рынка:
+ * - никакие дополнительные площадки не допускаются в сбор, retention или публикацию;
+ * - каждый перечисленный источник проверяется и парсится отдельно;
+ * - рынок не считается готовым, пока не подтверждён каждый источник из этого списка;
+ * - sourceId и кликабельный sourceUrl обязаны принадлежать этому allowlist.
  */
 export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCatalogSource[]> = {
   uae: [
@@ -55,6 +55,33 @@ export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCa
 
 export function requiredCatalogSourceIds(market: CatalogMarket) {
   return REQUIRED_CATALOG_SOURCES[market].map((source) => source.sourceId);
+}
+
+export function isAllowedCatalogSourceId(market: CatalogMarket, sourceId: unknown) {
+  const id = String(sourceId || "").trim();
+  return REQUIRED_CATALOG_SOURCES[market].some((source) => source.sourceId === id);
+}
+
+function registrableHost(hostname: string) {
+  const host = hostname.toLowerCase().replace(/^www\./, "");
+  const parts = host.split(".").filter(Boolean);
+  if (parts.length <= 2) return host;
+  const suffix2 = parts.slice(-2).join(".");
+  const multiLabel = new Set(["com.au", "com.cn", "co.kr", "co.jp"]);
+  return multiLabel.has(suffix2) ? parts.slice(-3).join(".") : parts.slice(-2).join(".");
+}
+
+export function isAllowedCatalogSourceUrl(market: CatalogMarket, sourceId: unknown, urlValue: unknown) {
+  const id = String(sourceId || "").trim();
+  const allowed = REQUIRED_CATALOG_SOURCES[market].find((source) => source.sourceId === id);
+  if (!allowed) return false;
+  try {
+    const actual = new URL(String(urlValue || ""));
+    const canonical = new URL(allowed.canonicalUrl);
+    return /^https?:$/.test(actual.protocol) && registrableHost(actual.hostname) === registrableHost(canonical.hostname);
+  } catch {
+    return false;
+  }
 }
 
 export function requiredCatalogSourceUrls(market: CatalogMarket) {
