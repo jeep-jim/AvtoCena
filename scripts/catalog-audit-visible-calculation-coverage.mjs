@@ -93,6 +93,7 @@ const invalidReady = [];
 const readyUnclassified = [];
 const invalidSpecifications = [];
 const unsafePendingVisiblePrices = [];
+const unpricedPublicCards = [];
 const statusCounts = new Map();
 const visibleModels = new Set();
 let readyExact = 0;
@@ -112,7 +113,7 @@ for (const offer of visible) {
   const specificationRejection = catalogRequiredSpecificationRejectionReason(offer);
   if (specificationRejection) invalidSpecifications.push({ id: offer.id, market, make: offer.make, model: offer.model, reason: specificationRejection });
 
-  const marketRow = byMarket.get(market) || { visible: 0, ready: 0, readyExact: 0, needsData: 0, preliminary: 0, auctionStart: 0, unresolvedIdentity: 0, invalidReady: 0, unsafePendingVisiblePrice: 0 };
+  const marketRow = byMarket.get(market) || { visible: 0, ready: 0, readyExact: 0, needsData: 0, preliminary: 0, auctionStart: 0, unresolvedIdentity: 0, invalidReady: 0, unsafePendingVisiblePrice: 0, unpricedPublic: 0 };
   marketRow.visible++;
 
   const identityResolved = hasCredibleCatalogIdentity(offer);
@@ -182,6 +183,17 @@ for (const offer of visible) {
   const pendingOrIncomplete = Boolean(specificationRejection)
     || ["needs_data", "needs_power_data", "preliminary_power_pending"].includes(status);
   const visibleRub = catalogOfferVisibleRub(offer);
+  if (visibleRub <= 0) {
+    marketRow.unpricedPublic++;
+    unpricedPublicCards.push({
+      id: offer.id,
+      market,
+      make: offer.make,
+      model: offer.model,
+      calculationStatus: status,
+      specificationRejection: specificationRejection || null,
+    });
+  }
   if (pendingOrIncomplete && visibleRub > 0) {
     marketRow.unsafePendingVisiblePrice++;
     unsafePendingVisiblePrices.push({
@@ -219,6 +231,7 @@ const report = {
     invalidReady: invalidReady.length,
     invalidSpecifications: invalidSpecifications.length,
     unsafePendingVisiblePrices: unsafePendingVisiblePrices.length,
+    unpricedPublicCards: unpricedPublicCards.length,
     readyWithoutConfidenceLabel: readyUnclassified.length,
   },
   statusCounts: Object.fromEntries([...statusCounts.entries()].sort((a, b) => b[1] - a[1])),
@@ -226,6 +239,7 @@ const report = {
   invalidReady: invalidReady.slice(0, SAMPLE_LIMIT),
   invalidSpecifications: invalidSpecifications.slice(0, SAMPLE_LIMIT),
   unsafePendingVisiblePrices: unsafePendingVisiblePrices.slice(0, SAMPLE_LIMIT),
+  unpricedPublicCards: unpricedPublicCards.slice(0, SAMPLE_LIMIT),
   unresolvedModels: sortedCounts(unresolvedModels),
   needsDataQueue: sortedCounts(needsDataModels),
   readyWithoutConfidenceLabel: readyUnclassified.slice(0, SAMPLE_LIMIT),
@@ -233,12 +247,17 @@ const report = {
     noInvalidReady: invalidReady.length === 0,
     allIdentitiesResolved,
     noUnsafePendingVisiblePrices: unsafePendingVisiblePrices.length === 0,
-    // Diagnostic compatibility fields: pending/spec-incomplete inventory is
-    // intentionally allowed while its delivered price remains hidden.
+    noUnpricedPublicCards: unpricedPublicCards.length === 0,
     noInvalidSpecifications: invalidSpecifications.length === 0,
     noPreliminaryPublicPrices: preliminary === 0,
     noNeedsDataPublicCards: needsData === 0,
-    pass: invalidReady.length === 0 && allIdentitiesResolved && unsafePendingVisiblePrices.length === 0,
+    pass: invalidReady.length === 0
+      && allIdentitiesResolved
+      && unsafePendingVisiblePrices.length === 0
+      && unpricedPublicCards.length === 0
+      && invalidSpecifications.length === 0
+      && preliminary === 0
+      && needsData === 0,
   },
 };
 
@@ -254,6 +273,7 @@ if (process.env.GITHUB_OUTPUT) {
   await fs.appendFile(process.env.GITHUB_OUTPUT, `invalid_ready=${report.totals.invalidReady}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `invalid_specifications=${report.totals.invalidSpecifications}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `unsafe_pending_visible_prices=${report.totals.unsafePendingVisiblePrices}\n`);
+  await fs.appendFile(process.env.GITHUB_OUTPUT, `unpriced_public_cards=${report.totals.unpricedPublicCards}\n`);
 }
 
 if (!report.releaseGate.pass) process.exitCode = 1;
