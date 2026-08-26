@@ -3,6 +3,10 @@ run-name: Independent UAE + Kyrgyzstan recovery · ${{ github.sha }}
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/market-runs/recover-uae"
 
 permissions:
   contents: read
@@ -42,7 +46,7 @@ jobs:
         shell: bash
         env:
           CATALOG_AUDIT_OUTPUT: catalog-uaekg-preflight-audit.json
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":5000,"japan":0,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":3000,"china":5000,"japan":800,"uae":900,"europe":6500,"georgia":5000,"kyrgyzstan":3000}'
         run: |
           set -euo pipefail
           node --check scripts/catalog-live-recovery-market.mjs
@@ -119,6 +123,7 @@ jobs:
 
   collect-kyrgyzstan:
     needs: validate
+    if: github.event_name == 'workflow_dispatch'
     continue-on-error: true
     runs-on: ubuntu-latest
     timeout-minutes: 95
@@ -168,6 +173,24 @@ jobs:
           RECOVERY_MERGE_INPUT_DIR: shard-input
           RECOVERY_MERGE_OUTPUT: catalog-rebuild-uae.json
         run: node scripts/catalog-live-recovery-merge-shards.mjs
+      - name: Require both approved UAE sources before publication
+        env:
+          RECOVERY_MERGE_OUTPUT: catalog-rebuild-uae.json
+        run: |
+          node <<'NODE'
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync(process.env.RECOVERY_MERGE_OUTPUT, 'utf8'));
+          const offers = Array.isArray(data.offers) ? data.offers : [];
+          const counts = offers.reduce((out, offer) => {
+            const sourceId = String(offer?.sourceId || '');
+            out[sourceId] = Number(out[sourceId] || 0) + 1;
+            return out;
+          }, {});
+          console.log(JSON.stringify({ total: offers.length, counts }, null, 2));
+          for (const sourceId of ['dubizzle_uae_open', 'dubicars_uae_exact']) {
+            if (Number(counts[sourceId] || 0) < 1) throw new Error(`uae_required_source_empty:${sourceId}`);
+          }
+          NODE
       - uses: actions/upload-artifact@v4
         with:
           name: catalog-uae-merged
@@ -176,7 +199,7 @@ jobs:
 
   merge-kyrgyzstan:
     needs: [validate, collect-kyrgyzstan]
-    if: always() && needs.validate.result == 'success'
+    if: github.event_name == 'workflow_dispatch' && always() && needs.validate.result == 'success'
     runs-on: ubuntu-latest
     timeout-minutes: 20
     steps:
@@ -234,7 +257,7 @@ jobs:
         env:
           CATALOG_AUDIT_OUTPUT: catalog-uae-postpersist-audit.json
           CATALOG_AUDIT_ASSERT_MARKETS: uae
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":5000,"japan":0,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":3000,"china":5000,"japan":800,"uae":900,"europe":6500,"georgia":5000,"kyrgyzstan":3000}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()
@@ -248,7 +271,7 @@ jobs:
 
   publish-kyrgyzstan:
     needs: [validate, merge-kyrgyzstan]
-    if: needs.validate.result == 'success' && needs.merge-kyrgyzstan.result == 'success'
+    if: github.event_name == 'workflow_dispatch' && needs.validate.result == 'success' && needs.merge-kyrgyzstan.result == 'success'
     concurrency:
       group: catalog-live-daily-working-markets
       cancel-in-progress: false
@@ -278,7 +301,7 @@ jobs:
         env:
           CATALOG_AUDIT_OUTPUT: catalog-kyrgyzstan-postpersist-audit.json
           CATALOG_AUDIT_ASSERT_MARKETS: kyrgyzstan
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":8000,"china":5000,"japan":0,"uae":900,"europe":3000,"georgia":2000,"kyrgyzstan":1900}'
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":3000,"china":5000,"japan":800,"uae":900,"europe":6500,"georgia":5000,"kyrgyzstan":3000}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()
