@@ -5,7 +5,7 @@ import { publishAiProductFeed } from "../ai-discovery";
 import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOffer, VehicleOffer } from "./types";
 import { hasAllowedCatalogSourceProvenance, hasCredibleOfferContent, isCatalogYearAllowed } from "./offer-quality";
 import { rankedCatalogImageUrls } from "./image-quality";
-import { catalogOfferVisibleRub, isJapanAuctionOffer, japanAuctionSoldIdentityVerified } from "./public-priority";
+import { catalogOfferVisibleRub, catalogRequiredSpecificationRejectionReason, isJapanAuctionOffer, japanAuctionSoldIdentityVerified } from "./public-priority";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
 import { enforceCatalogModelYearQuota, selectCatalogShowcaseDiversity } from "./inventory-quota";
@@ -147,7 +147,7 @@ export type CatalogSearchProjection = {
   trim?: string; powerKw?: number; icePowerKw?: number; powertrainKind?: string; power30MinKw?: number; power30MinKwByMotor?: number[]; utilizationPowerKw?: number;
   powerDataConfidence?: string; powerDataSource?: string;
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
-  calculationStatus?: string; calculationSnapshot?: { currencyRate?: any; pricingConfidence?: string } | null; publicVisibleRub?: number; cardImageUrl?: string; seriesId?: string; cardProjectionVersion?: 1 | 2;
+  calculationStatus?: string; calculationSnapshot?: { currencyRate?: any; pricingConfidence?: string } | null; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; cardProjectionVersion?: 1 | 2 | 3;
 };
 export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
@@ -367,12 +367,12 @@ function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchProjection
     powerDataConfidence: offer.powerDataConfidence, powerDataSource: offer.powerDataSource,
     sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, priceMode: offer.priceMode, previousTotalRub: visibleRub ? offer.previousTotalRub : null, priceDeltaRub: visibleRub ? offer.priceDeltaRub : null, priceChangedAt: offer.priceChangedAt,
     calculationStatus: offer.calculationStatus, calculationSnapshot: { currencyRate: offer.calculationSnapshot?.currencyRate, pricingConfidence: offer.calculationSnapshot?.pricingConfidence },
-    publicVisibleRub: visibleRub || undefined, cardImageUrl: rankedCatalogImageUrls(offer)[0] || undefined,
-    seriesId: String(raw?.listing?.seriesId || raw?.seriesId || (offer as any)?.seriesId || "") || undefined, cardProjectionVersion: 2,
+    publicVisibleRub: visibleRub || undefined, publicSpecificationVerified: visibleRub > 0 && !catalogRequiredSpecificationRejectionReason(offer), cardImageUrl: rankedCatalogImageUrls(offer)[0] || undefined,
+    seriesId: String(raw?.listing?.seriesId || raw?.seriesId || (offer as any)?.seriesId || "") || undefined, cardProjectionVersion: 3,
   };
 }
 function projectionCanRenderCard(row: CatalogSearchProjection) {
-  return [1, 2].includes(Number(row.cardProjectionVersion)) && Boolean(row.id && row.market && row.make && row.model && row.year);
+  return [1, 2, 3].includes(Number(row.cardProjectionVersion)) && Boolean(row.id && row.market && row.make && row.model && row.year);
 }
 function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleOffer {
   const imageUrl = String(row.cardImageUrl || "");
