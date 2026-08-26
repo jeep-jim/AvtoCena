@@ -11,9 +11,9 @@ const HONEST_HEADERS = { "user-agent": "AvtoCenaCatalog/1.0", referer: "https://
 const ENCAR_HEADERS = {
   accept: "application/json, text/plain, */*",
   "accept-language": "ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7",
-  origin: "https://m.encar.com",
-  referer: "https://m.encar.com/",
-  "user-agent": "Mozilla/5.0 (iPhone; CPU iPhone OS 17_0 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.0 Mobile/15E148 Safari/604.1",
+  origin: "https://car.encar.com",
+  referer: "https://car.encar.com/",
+  "user-agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/151.0.0.0 Safari/537.36",
 };
 const BLOCK_RE = /captcha|challenge|access denied|forbidden|cloudflare/i;
 
@@ -153,8 +153,10 @@ export class EncarDirectAdapter implements CatalogSourceAdapter {
   market: CatalogMarket = "korea";
   accessMode = "public_json" as const;
 
+  constructor(private readonly configuredPageSize?: number) {}
+
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
-    const { url, offset, pageSize } = buildEncarListUrl(cursor);
+    const { url, offset, pageSize } = buildEncarListUrl(cursor, this.configuredPageSize);
     const json = await limiter(`${this.sourceId}:list`, Number(process.env.CATALOG_ENCAR_DIRECT_LIST_RPM || 10)).run(() => fetchPublicJson(url.toString(), { headers: ENCAR_HEADERS }));
     const items = json.SearchResults || json.searchResults || json.cars || json.items || [];
     const pagingNext = text(json.paging?.next || json.Paging?.next);
