@@ -108,14 +108,16 @@ test("preliminary price is never exposed as a delivered public total", () => {
   assert.equal(catalogOfferVisibleRub(offer), 0);
 });
 
-test("public priority reports calculation-critical gaps while source-priced inventory remains eligible", async () => {
+test("public priority keeps calculation-critical gaps internal until delivered price is complete", async () => {
   const { catalogPublicPriority } = await import("../apps/web/lib/catalog/public-priority");
   const combustion = {
     ...calculatedOffer(3_200_000),
     sourcePrice: 1_500_000,
     sourceCurrency: "RUB",
   } as any;
+  assert.equal(catalogPublicPriority({ ...combustion, engineCc: undefined }).eligible, false);
   assert.equal(catalogPublicPriority({ ...combustion, engineCc: undefined }).reason, "missing_engine_cc");
+  assert.equal(catalogPublicPriority({ ...combustion, powerHp: undefined }).eligible, false);
   assert.equal(catalogPublicPriority({ ...combustion, powerHp: undefined }).reason, "missing_power_hp");
 
   const electric = {
@@ -128,11 +130,14 @@ test("public priority reports calculation-critical gaps while source-priced inve
     utilizationPowerKw: 88,
   };
   assert.equal(catalogPublicPriority(electric).eligible, true);
+  assert.equal(catalogPublicPriority({ ...electric, power30MinKw: undefined }).eligible, false);
   assert.equal(catalogPublicPriority({ ...electric, power30MinKw: undefined }).reason, "missing_certified_30min_kw");
+  assert.equal(catalogPublicPriority({ ...electric, utilizationPowerKw: undefined }).eligible, false);
   assert.equal(catalogPublicPriority({ ...electric, utilizationPowerKw: undefined }).reason, "missing_utilization_power_kw");
 
   const hybrid = { ...electric, powertrainKind: "other_hybrid", engineCc: 1_498, icePowerKw: 74 };
   assert.equal(catalogPublicPriority(hybrid).eligible, true);
+  assert.equal(catalogPublicPriority({ ...hybrid, icePowerKw: undefined }).eligible, false);
   assert.equal(catalogPublicPriority({ ...hybrid, icePowerKw: undefined }).reason, "missing_ice_power_kw");
 });
 
