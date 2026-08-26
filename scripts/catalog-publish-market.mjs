@@ -4,7 +4,7 @@ import path from "node:path";
 
 const { mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
-const { hasAllowedCatalogSourceProvenance, isCrediblePublicOffer, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { hasAllowedCatalogSourceProvenance, isCatalogMarketSourceAllowed, isCrediblePublicOffer, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { compareCatalogPublicPriority, japanAuctionSoldIdentityVerified } = await import("../apps/web/lib/catalog/public-priority.ts");
 const { classifyCatalogV2Offer, selectCatalogV2MarketOffers } = await import("../apps/web/lib/catalog/catalog-v2-policy.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
