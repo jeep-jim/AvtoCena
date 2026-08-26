@@ -18,7 +18,7 @@ import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
 import { getOfferForPage } from "@/lib/catalog/offer-page-data";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
 import { publicCatalogPowerHp } from "@/lib/catalog/power-sanity";
-import { catalogOfferVisibleRub, catalogPublicPriority } from "@/lib/catalog/public-priority";
+import { catalogOfferVisibleRub } from "@/lib/catalog/public-priority";
 import { calculateOfferWithRussiaCustoms, calculateOfferWithUserPowerScenario } from "@/lib/catalog/customs-pricing";
 import { DEFAULT_CATALOG_POWER_FALLBACK_HP, readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
@@ -244,7 +244,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // one last chance to finish an older stored row. If that still cannot produce
   // an admitted delivered price, keep the row internal instead of rendering a
   // public "price on request" page.
-  if (!catalogPublicPriority(raw).eligible || !visibleRub) notFound();
+  if (!visibleRub) notFound();
   const o = {
     ...presented,
     totalRub: visibleRub || null,
