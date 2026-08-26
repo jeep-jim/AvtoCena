@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
-import { parseDubizzleLabelBoundDetailFields } from "../apps/web/lib/catalog/dubizzle-exact-source";
+import { dubizzleListPageCandidates, parseDubizzleLabelBoundDetailFields } from "../apps/web/lib/catalog/dubizzle-exact-source";
 
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
 const cleanupWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-storage-cleanup.yml", import.meta.url), "utf8");
@@ -341,6 +341,12 @@ test("Dubizzle detail semantics are label-bound to Car Overview and ignore selle
   assert.equal(fields.engineCc, 3000);
   assert.equal(fields.powerHp, 375);
   assert.equal(fields.mileageKm, 48200);
+});
+
+test("Dubizzle probes the live English UAE listing before legacy redirect paths", () => {
+  const candidates = dubizzleListPageCandidates(7);
+  assert.equal(candidates[0], "https://uae.dubizzle.com/en/motors/used-cars/?page=7");
+  assert.equal(candidates[1], "https://uae.dubizzle.com/en/motors/used-cars/search/?page=7");
 });
 
 test("Dubizzle refuses semantic inference when Car Overview labels are absent", () => {
