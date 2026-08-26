@@ -84,7 +84,22 @@ function summedThirtyMinutePowerKw(offer: Partial<VehicleOffer> | any) {
   return motors.length ? motors.reduce((sum: number, value: number) => sum + value, 0) : 0;
 }
 
+function attestedPublicProjectionRub(offer: Partial<VehicleOffer> | any) {
+  const status = String(offer?.calculationStatus || "");
+  const pricingConfidence = String(offer?.calculationSnapshot?.pricingConfidence || "");
+  if (Number(offer?.cardProjectionVersion || 0) < 3
+    || offer?.publicSpecificationVerified !== true
+    || !["ready", "estimated", "auction_start", "calculated"].includes(status)
+    || pricingConfidence === "preliminary") return 0;
+  return Math.round(positive(offer?.publicVisibleRub, 1_000_000_000));
+}
+
 export function catalogRequiredSpecificationRejectionReason(offer: Partial<VehicleOffer> | any) {
+  // V3 compact rows carry a server-side attestation made while the complete
+  // offer (including customs-critical power fields) is still in memory. The
+  // compact public read model may omit those bulky/raw dependencies, so do not
+  // reclassify an already verified projection as incomplete in the card layer.
+  if (attestedPublicProjectionRub(offer)) return "";
   const kind = String(offer?.powertrainKind || "").toLowerCase();
   const engineCc = positive(offer?.engineCc, 10_000);
   const powerHp = positive(offer?.powerHp, 2_500);
@@ -223,6 +238,11 @@ export function catalogOfferVisibleRub(offer: Partial<VehicleOffer> | any) {
   // inventory, but they never expose a delivered price.
   const status = String(offer?.calculationStatus || "");
   const pricingConfidence = String(offer?.calculationSnapshot?.pricingConfidence || "");
+  const attestedProjectionRub = attestedPublicProjectionRub(offer);
+  if (attestedProjectionRub) {
+    const { absoluteMaximumRub } = publicPriceLimits();
+    return attestedProjectionRub <= absoluteMaximumRub ? attestedProjectionRub : 0;
+  }
   const projectionVersion = Number(offer?.cardProjectionVersion || 0);
   const validatedProjection = projectionVersion >= 2
     || (projectionVersion === 1
