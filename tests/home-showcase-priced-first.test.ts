@@ -13,7 +13,7 @@ test("homepage prefers safe delivered-price projections before pending inventory
   assert.match(storage, /const diverse = selectHomepageShowcase\(candidates, limit\)/);
 });
 
-test("pending inventory still fails closed instead of inventing a customer price", () => {
-  assert.match(card, /const visibleRub = catalogOfferVisibleRub\(offer\)/);
-  assert.match(card, /visibleRub > 0 \? formatRub\(visibleRub\) : "Цена по запросу"/);
+test("pending inventory is not rendered as a public card", () => {
+  assert.match(card, /const visibleRub = catalogOfferVisibleRub\(normalizedOffer\)/);
+  assert.match(card, /if \(!visibleRub\) return null/);
 });
