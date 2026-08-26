@@ -16,18 +16,22 @@ test("V3 keeps the two-photo general admission contract while source-specific ga
   assert.doesNotMatch(reusable, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"/);
 });
 
-test("pending source-priced inventory renders without inventing a delivered RUB total", () => {
-  assert.doesNotMatch(catalogCard, /if \(!visibleRub\) return null/);
+test("pending source-priced inventory stays internal until delivered RUB total is ready", () => {
+  assert.match(catalogCard, /if \(!visibleRub\) return null/);
   assert.match(catalogCard, /totalRub: visibleRub \|\| null/);
   assert.match(catalogCard, /<CatalogPrice offer=\{displayOffer\}/);
 });
 
-test("visible calculation release gate checks unsafe exposed price instead of deleting incomplete inventory", () => {
+test("visible calculation release gate rejects all incomplete public inventory", () => {
   assert.match(visibleAudit, /unsafePendingVisiblePrices/);
+  assert.match(visibleAudit, /unpricedPublicCards/);
   assert.match(visibleAudit, /catalogOfferVisibleRub\(offer\)/);
   assert.match(visibleAudit, /noUnsafePendingVisiblePrices/);
-  assert.match(visibleAudit, /pass: invalidReady\.length === 0 && allIdentitiesResolved && unsafePendingVisiblePrices\.length === 0/);
-  assert.doesNotMatch(visibleAudit, /pass: invalidReady\.length === 0 && invalidSpecifications\.length === 0 && preliminary === 0 && needsData === 0/);
+  assert.match(visibleAudit, /noUnpricedPublicCards/);
+  assert.match(visibleAudit, /&& unpricedPublicCards\.length === 0/);
+  assert.match(visibleAudit, /&& invalidSpecifications\.length === 0/);
+  assert.match(visibleAudit, /&& preliminary === 0/);
+  assert.match(visibleAudit, /&& needsData === 0/);
 });
 
 test("model sitemap shards stay comfortably below production gateway response limits", () => {
