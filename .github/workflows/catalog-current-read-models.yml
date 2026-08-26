@@ -10,6 +10,7 @@ on:
       - apps/web/lib/catalog/display-identity.ts
       - apps/web/lib/catalog/brands.ts
       - apps/web/lib/catalog/public-identity-policy.ts
+      - .github/market-runs/refresh-current-read-models
       # persistCatalogOffers already publishes current read models atomically.
       # Keep storage changes out of this second writer to avoid cancelling a
       # recovery publisher waiting in the shared catalog concurrency group.
