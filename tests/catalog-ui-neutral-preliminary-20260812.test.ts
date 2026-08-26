@@ -41,10 +41,9 @@ test("catalog price colors distinguish electrified, preliminary and regular calc
   assert.match(offerPage, /height:auto!important;aspect-ratio:4\/3!important/);
 });
 
-test("pending source-priced cards remain in the grid without inventing a delivered price", () => {
-  assert.doesNotMatch(catalogCard, /if \(!visibleRub\) return null/);
+test("pending source-priced cards stay out of the public grid", () => {
+  assert.match(catalogCard, /if \(!visibleRub\) return null/);
   assert.match(catalogCard, /totalRub:\s*visibleRub \|\| null/);
-  assert.match(catalogPrice, /Цена по запросу/);
 });
 
 test("Japanese auction microcards use a neutral historical price and non-navigating plain gavel", () => {
