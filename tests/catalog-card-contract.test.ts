@@ -20,8 +20,8 @@ test("catalog card never bypasses the validated public ruble price", () => {
   assert.doesNotMatch(card, /Расчёт под ключ уточняется/);
   assert.doesNotMatch(card, /Расчёт таможни/);
   assert.doesNotMatch(card, /ориентир под ключ/);
-  assert.match(offerPage, /const visibleRub = catalogOfferVisibleRub\(raw\)/);
-  assert.match(offerPage, /if \(!catalogPublicPriority\(raw\)\.eligible\) notFound\(\)/);
+  assert.match(offerPage, /const visibleRub = customerScenarioRub \|\| catalogOfferVisibleRub\(raw\)/);
+  assert.match(offerPage, /if \(!visibleRub\) notFound\(\)/);
   assert.doesNotMatch(offerPage, /exactTotalRub\s*\|\|/);
 });
 

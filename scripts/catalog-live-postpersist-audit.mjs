@@ -12,7 +12,8 @@ const maxOffersPerModelYear = Math.max(1, Number(process.env.CATALOG_AUDIT_MAX_P
 const minimumImagesPerOffer = Math.max(1, Number(process.env.CATALOG_AUDIT_MIN_IMAGES_PER_OFFER || process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
 // Legacy compatibility markers only. Superseded gates are deliberately non-operative:
 // market === "korea" no longer fails on belowFiveImagesCount; korea:below_five_images is diagnostic history only.
-// preliminary_public_price is superseded by unsafe_pending_visible_price; incomplete_specifications is diagnostics-only while pending inventory stays visible without a delivered RUB price.
+// Public rows must have a complete delivered-RUB calculation. Unfinished rows
+// stay in the internal maintenance catalog for source/CORE recovery.
 let minimums = {};
 try { minimums = JSON.parse(process.env.CATALOG_AUDIT_MIN_COUNTS_JSON || "{}"); } catch { minimums = {}; }
 const currentYear = new Date().getFullYear();
@@ -37,7 +38,7 @@ function renderedIdentityProblems(offer) {
   if (!sourceSame && makeLabel && title && normalizedIdentity(title) === normalizedIdentity(makeLabel)) problems.push("display_title_make_only");
   return { problems, makeLabel, modelLabel, title };
 }
-const report = { version: 6, checkedAt: new Date().toISOString(), markets: {}, failures: [] };
+const report = { version: 7, checkedAt: new Date().toISOString(), markets: {}, failures: [] };
 for (const market of PUBLIC_CATALOG_MARKETS) {
   let rows = [];
   try { rows = await readMarketOffers(market); } catch (error) { report.failures.push(`${market}:read:${String(error?.message || error)}`); continue; }
@@ -91,6 +92,7 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   const unsafePendingVisiblePriceCount = rows.filter((offer) =>
     (isPreliminary(offer) || Boolean(catalogRequiredSpecificationRejectionReason(offer)))
       && catalogOfferVisibleRub(offer) > 0).length;
+  const unpricedPublicCount = rows.filter((offer) => catalogOfferVisibleRub(offer) <= 0).length;
   const belowMinimumImagesCount = rows.filter((offer) => !Array.isArray(offer?.images) || offer.images.length < minimumImagesPerOffer).length;
   const stats = {
     count: rows.length,
@@ -104,6 +106,7 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
       .sort()
       .map((reason) => [reason, rows.filter((offer) => catalogRequiredSpecificationRejectionReason(offer) === reason).length])),
     unsafePendingVisiblePriceCount,
+    unpricedPublicCount,
     exactCalculatedCount: rows.filter((offer) => String(offer?.calculationSnapshot?.customs?.status || "") === "ready" && Number(offer?.totalRub || 0) > 0 && catalogOfferVisibleRub(offer) > 0).length,
     priorityAgeCount: rows.filter((offer) => Number(offer?.year || 0) >= currentYear - 6).length,
     olderThan15Count: rows.filter((offer) => Number(offer?.year || 0) < currentYear - 15).length,
@@ -143,6 +146,7 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   if (assertMarkets.has(market) && stats.nonVehicleCount > 0) report.failures.push(`${market}:non_vehicle:${stats.nonVehicleCount}`);
   if (assertMarkets.has(market) && stats.nonPositiveSourcePriceCount > 0) report.failures.push(`${market}:source_price:${stats.nonPositiveSourcePriceCount}`);
   if (assertMarkets.has(market) && stats.unsafePendingVisiblePriceCount > 0) report.failures.push(`${market}:unsafe_pending_visible_price:${stats.unsafePendingVisiblePriceCount}`);
+  if (assertMarkets.has(market) && stats.unpricedPublicCount > 0) report.failures.push(`${market}:unpriced_public:${stats.unpricedPublicCount}`);
   if (assertMarkets.has(market) && stats.belowMinimumImagesCount > 0) report.failures.push(`${market}:below_minimum_images:${stats.belowMinimumImagesCount}:min=${minimumImagesPerOffer}`);
   if (market === "japan" && assertMarkets.has(market) && stats.japanSoldIdentityFailureCount > 0) report.failures.push(`japan:sold_identity:${stats.japanSoldIdentityFailureCount}`);
 }

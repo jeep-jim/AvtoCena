@@ -104,14 +104,14 @@ test("vehicle knowledge audit protects count, retention ratio and unique ids", (
   assert.match(audit, /writeDataJson\(HEALTH_PATH, report\)/);
 });
 
-test("post-persist market audit rejects broken source identity and shallow Korea galleries", () => {
+test("post-persist market audit rejects broken identity, shallow galleries and unpriced public rows", () => {
   assert.match(postPersistAudit, /hasCredibleCatalogIdentity/);
   assert.match(postPersistAudit, /invalidIdentityCount/);
   assert.match(postPersistAudit, /invalid_identity/);
   assert.match(postPersistAudit, /market === "korea"[\s\S]*belowFiveImagesCount/);
   assert.match(postPersistAudit, /korea:below_five_images/);
-  assert.match(postPersistAudit, /preliminary_public_price/);
-  assert.match(postPersistAudit, /incomplete_specifications/);
+  assert.match(postPersistAudit, /unpricedPublicCount/);
+  assert.match(postPersistAudit, /unpriced_public/);
 });
 
 test("publisher accumulates galleries before deduplication and protects the newest generations", () => {

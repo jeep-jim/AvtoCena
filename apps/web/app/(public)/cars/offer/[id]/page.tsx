@@ -240,6 +240,11 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
       ? Math.round(Number(raw.totalRub))
       : 0;
   const visibleRub = customerScenarioRub || catalogOfferVisibleRub(raw);
+  // Give current source/CORE knowledge and an explicit customer power scenario
+  // one last chance to finish an older stored row. If that still cannot produce
+  // an admitted delivered price, keep the row internal instead of rendering a
+  // public "price on request" page.
+  if (!visibleRub) notFound();
   const o = {
     ...presented,
     totalRub: visibleRub || null,
