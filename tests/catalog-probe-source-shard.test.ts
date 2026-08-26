@@ -13,6 +13,7 @@ const requiredSources = fs.readFileSync(new URL("../apps/web/lib/catalog/require
 const importer = fs.readFileSync(new URL("../apps/web/lib/catalog/importer.ts", import.meta.url), "utf8");
 const yandexBridge = fs.readFileSync(new URL("../apps/web/lib/catalog/yandex-source-bridge.ts", import.meta.url), "utf8");
 const encarBridgeRoute = fs.readFileSync(new URL("../apps/web/app/api/internal/encar-egress-71b8e4/route.ts", import.meta.url), "utf8");
+const dubizzleBridgeRoute = fs.readFileSync(new URL("../apps/web/app/api/internal/dubizzle-egress-a4c907/route.ts", import.meta.url), "utf8");
 const encarAdapter = fs.readFileSync(new URL("../apps/web/lib/catalog/adapters.ts", import.meta.url), "utf8");
 const japanWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-japan.yml", import.meta.url), "utf8");
 const sequentialQueue = fs.readFileSync(new URL("../.github/workflows/catalog-v3-sequential-queue.yml", import.meta.url), "utf8");
@@ -69,7 +70,7 @@ test("canonical mandatory market source contract cannot silently drift", () => {
 });
 
 test("GitHub collection keeps Encar mandatory and uses the fixed production egress bridge", () => {
-  assert.match(yandexBridge, /type BridgeKind = "encar" \|/);
+  assert.match(yandexBridge, /type BridgeKind = [^;]*"encar"/);
   assert.match(yandexBridge, /\/api\/internal\/encar-egress-71b8e4\?page=\$\{page\}/);
   assert.match(importer, /withGithubYandexSourceBridge\(encarCompleteSource, "encar"\)/);
   assert.match(importer, /encarCollectionSource/);
@@ -78,6 +79,15 @@ test("GitHub collection keeps Encar mandatory and uses the fixed production egre
   assert.match(encarBridgeRoute, /new EncarCompleteAdapter\(PAGE_SIZE\)/);
   assert.match(encarBridgeRoute, /fetchImages\(offer\)/);
   assert.match(encarAdapter, /origin: "https:\/\/car\.encar\.com"/);
+});
+
+test("GitHub collection keeps Dubizzle mandatory and uses the production egress bridge", () => {
+  assert.match(yandexBridge, /type BridgeKind = "dubizzle" \|/);
+  assert.match(yandexBridge, /\/api\/internal\/dubizzle-egress-a4c907\?page=\$\{page\}/);
+  assert.match(importer, /withGithubYandexSourceBridge\(dubizzleUaeExactSource, "dubizzle"\)/);
+  assert.match(importer, /dubizzleCollectionSource/);
+  assert.match(dubizzleBridgeRoute, /sourceId: "dubizzle_uae_open"/);
+  assert.match(dubizzleBridgeRoute, /new DubizzleUaeExactAdapter\(\)/);
 });
 
 test("Japan rollout uses only the five owner-approved sources", () => {

@@ -34,6 +34,7 @@ const EXPECTED_HOSTS = {
   guazi_china_open: ["guazi.com"],
   autohome_new_china_open: ["autohome.com.cn"],
   dongchedi_china_open: ["dongchedi.com"],
+  dubizzle_uae_open: ["dubizzle.com"],
   dubicars_uae_exact: ["dubicars.com"],
   autoscout_europe_open: ["autoscout24.com", "autoscout24.de", "autoscout24.it", "autoscout24.fr", "autoscout24.nl"],
   mobile_de_open: ["mobile.de"],

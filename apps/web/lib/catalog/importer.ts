@@ -74,6 +74,10 @@ const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGal
 const myAutoCollectionSource = withGithubYandexSourceBridge(myAutoListSource, "myauto");
 const autoPapaCollectionSource = withGithubYandexSourceBridge(autoPapaGeorgiaSource, "autopapa");
 const guaziCollectionSource = withGithubYandexSourceBridge(guaziChinaExactSource, "guazi");
+// Dubizzle serves its public English listings to the production region but
+// challenges GitHub-hosted runner egress. Keep the source and canonical URLs
+// unchanged while collecting its already-normalized rows through production.
+const dubizzleCollectionSource = withGithubYandexSourceBridge(dubizzleUaeExactSource, "dubizzle");
 // GitHub-hosted runners intermittently fail before receiving any HTTP response
 // from api.encar.com. The production Yandex egress is independently probed and
 // can reach the same approved Encar list/detail APIs, so Actions consumes only
@@ -109,7 +113,7 @@ const completeSources = [
   prestigeJapanExactSource,
   autoscoutEuropeExactSource,
   mobileDeExactSource,
-  dubizzleUaeExactSource,
+  dubizzleCollectionSource,
   carswitchUaeExactSource,
   jpaucPastSource,
   encarCollectionSource,

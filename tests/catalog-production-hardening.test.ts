@@ -24,6 +24,7 @@ const storage = fs.readFileSync(new URL("../apps/web/lib/catalog/storage.ts", im
 const strictSourceDetail = fs.readFileSync(new URL("../apps/web/lib/catalog/strict-source-detail-wrapper.ts", import.meta.url), "utf8");
 const customs = fs.readFileSync(new URL("../packages/engine/src/calculation/russiaCustoms.ts", import.meta.url), "utf8");
 const controls = fs.readFileSync(new URL("../docs/catalog-production-controls.md", import.meta.url), "utf8");
+const marketRecovery = fs.readFileSync(new URL("../scripts/catalog-live-recovery-market.mjs", import.meta.url), "utf8");
 
 test("production workflow audits the existing vehicle knowledge snapshot without a two-hour rebuild gate", () => {
   const knowledgeStart = workflow.indexOf("\n  knowledge:");
@@ -47,6 +48,11 @@ test("production workflow serializes catalog builds and never cancels a running 
   assert.match(workflow, /group: catalog-v2-production\n  cancel-in-progress: false/);
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);
   assert.match(workflow, /CATALOG_MAX_IMAGES_PER_OFFER: "30"/);
+});
+
+test("UAE recovery accepts only canonical Dubizzle and DubiCars source hosts", () => {
+  assert.match(marketRecovery, /dubizzle_uae_open: \["dubizzle\.com"\]/);
+  assert.match(marketRecovery, /dubicars_uae_exact: \["dubicars\.com"\]/);
 });
 
 test("RF live proof accepts an earlier missing-power rejection without weakening pickup customs safety", () => {
