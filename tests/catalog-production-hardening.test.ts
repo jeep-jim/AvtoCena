@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import fs from "node:fs";
 import test from "node:test";
-import { dubizzleListPageCandidates, parseDubizzleLabelBoundDetailFields } from "../apps/web/lib/catalog/dubizzle-exact-source";
+import { dubizzleListPageCandidates, parseDubizzleAlgoliaHit, parseDubizzleLabelBoundDetailFields } from "../apps/web/lib/catalog/dubizzle-exact-source";
 
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
 const cleanupWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-storage-cleanup.yml", import.meta.url), "utf8");
@@ -353,6 +353,38 @@ test("Dubizzle probes the live English UAE listing before legacy redirect paths"
   const candidates = dubizzleListPageCandidates(7);
   assert.equal(candidates[0], "https://uae.dubizzle.com/en/motors/used-cars/?page=7");
   assert.equal(candidates[1], "https://uae.dubizzle.com/en/motors/used-cars/search/?page=7");
+});
+
+test("Dubizzle official search payload keeps exact identity, price and listing-bound gallery without inventing ranged power", () => {
+  const row = parseDubizzleAlgoliaHit({
+    uuid: "fb3fdca3165a4a2d9f792364984ef13b",
+    id: 16955356,
+    price: 34500,
+    name: { en: "BMW X5 MSPORTS GCC SPECS" },
+    absolute_url: { en: "https://dubai.dubizzle.com/motors/used-cars/bmw/x5/2026/8/26/bmw-x5-2-761---fb3fdca3165a4a2d9f792364984ef13b/" },
+    photo_thumbnails: Array.from({ length: 6 }, (_, index) => `https://dbz-images.dubizzle.com/images/2026/08/26/image-${index}.jpg?impolicy=lpv`),
+    category: { en: ["Used Cars", "BMW", "X5"] },
+    location_list: { en: ["UAE", "Dubai", "Al Quoz"] },
+    details: {
+      Make: { en: { value: "BMW" } },
+      Model: { en: { value: "X5" } },
+      Trim: { en: { value: "xDrive50i M Sport" } },
+      Year: { en: { value: 2014 } },
+      Kilometers: { en: { value: 141000 } },
+      "Engine Capacity (cc)": { en: { value: "4395 cc" } },
+      Horsepower: { en: { value: "400 - 499 HP" } },
+      "Fuel Type": { en: { value: "Petrol" } },
+      "Transmission Type": { en: { value: "Automatic Transmission" } },
+      "Body Type": { en: { value: "SUV" } },
+    },
+  });
+  assert.ok(row);
+  assert.equal(row.id, "fb3fdca3165a4a2d9f792364984ef13b");
+  assert.equal(row.price, 34500);
+  assert.equal(row.engineCc, 4395);
+  assert.equal(row.powerHp, undefined);
+  assert.equal(row.images.length, 6);
+  assert.equal(row.exactStructured, true);
 });
 
 test("Dubizzle refuses semantic inference when Car Overview labels are absent", () => {

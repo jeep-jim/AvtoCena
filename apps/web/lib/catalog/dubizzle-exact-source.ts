@@ -2,6 +2,11 @@ import { stableOfferId } from "./storage";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
 const BASE_URL = "https://uae.dubizzle.com";
+const ALGOLIA_APP_ID = "WD0PTZ13ZS";
+// Public search-only key shipped by Dubizzle's own listings client. It cannot
+// mutate records and is overrideable so a normal key rotation needs no parser change.
+const ALGOLIA_SEARCH_KEY = String(process.env.CATALOG_DUBIZZLE_ALGOLIA_SEARCH_KEY || "cdd839b4fdac840289e88633779e8634");
+const ALGOLIA_INDEX = "motors.com";
 const HEADERS = {
   accept: "text/html,application/xhtml+xml,application/json;q=0.9,image/avif,image/webp,*/*;q=0.8",
   "accept-language": "en-US,en;q=0.9",
@@ -41,6 +46,19 @@ export type DubizzleExactRow = {
   location?: string;
   images: string[];
   rawText: string;
+  exactStructured?: boolean;
+};
+
+type DubizzleAlgoliaHit = {
+  uuid?: unknown;
+  id?: unknown;
+  price?: unknown;
+  name?: { en?: unknown };
+  absolute_url?: { en?: unknown };
+  photo_thumbnails?: unknown[];
+  category?: { en?: unknown[] };
+  location_list?: { en?: unknown[] };
+  details?: Record<string, { en?: { value?: unknown } }>;
 };
 
 function decode(value: string) {
@@ -100,6 +118,57 @@ function money(text: string) {
 }
 function yearFrom(text: string) {
   return Number(text.match(/\b((?:19|20)\d{2})\b/)?.[1] || 0);
+}
+
+function algoliaDetail(hit: DubizzleAlgoliaHit, key: string) {
+  return hit.details?.[key]?.en?.value;
+}
+
+function exactMetric(value: unknown, unit: RegExp) {
+  const text = String(value ?? "").trim();
+  if (!text || /unknown|not specified|\d\s*[-–—]\s*\d/i.test(text)) return undefined;
+  const match = text.match(new RegExp(`^\\s*([0-9][0-9, ]{0,7})\\s*(?:${unit.source})?\\s*$`, "i"));
+  return integer(match?.[1]);
+}
+
+export function parseDubizzleAlgoliaHit(raw: unknown): DubizzleExactRow | null {
+  const hit = raw as DubizzleAlgoliaHit;
+  const id = String(hit?.uuid || "").trim();
+  const sourceUrl = absolute(String(hit?.absolute_url?.en || ""));
+  const category = Array.isArray(hit?.category?.en) ? hit.category!.en!.map((value) => String(value || "").trim()) : [];
+  const make = String(algoliaDetail(hit, "Make") || category[1] || "").trim();
+  const model = String(algoliaDetail(hit, "Model") || category[2] || "").trim();
+  const title = String(hit?.name?.en || `${make} ${model}`).trim();
+  const year = Number(algoliaDetail(hit, "Year") || 0);
+  const price = Number(hit?.price || algoliaDetail(hit, "Price") || 0);
+  const images = [...new Set((Array.isArray(hit?.photo_thumbnails) ? hit.photo_thumbnails : [])
+    .map((value) => absolute(String(value || ""), sourceUrl || BASE_URL))
+    .filter((url) => /^https:\/\/dbz-images\.dubizzle\.com\//i.test(url)))];
+  if (!/^[a-f0-9]{32}$/i.test(id) || detailId(sourceUrl) !== id || !make || !model
+    || !Number.isFinite(year) || year < 1900 || year > new Date().getUTCFullYear() + 1
+    || !Number.isFinite(price) || price <= 0 || images.length < 5) return null;
+  const locations = Array.isArray(hit?.location_list?.en) ? hit.location_list!.en!.map((value) => String(value || "").trim()).filter(Boolean) : [];
+  return {
+    id,
+    sourceUrl,
+    title,
+    make,
+    model,
+    trim: String(algoliaDetail(hit, "Trim") || "").trim() || undefined,
+    year,
+    mileageKm: exactMetric(algoliaDetail(hit, "Kilometers"), /km|kilometers?/),
+    engineCc: exactMetric(algoliaDetail(hit, "Engine Capacity (cc)"), /cc|cm3|cm³/),
+    powerHp: exactMetric(algoliaDetail(hit, "Horsepower"), /hp|ps|bhp/),
+    fuel: String(algoliaDetail(hit, "Fuel Type") || "").trim() || undefined,
+    transmission: String(algoliaDetail(hit, "Transmission Type") || "").trim() || undefined,
+    bodyType: String(algoliaDetail(hit, "Body Type") || "").trim() || undefined,
+    price,
+    currency: "AED",
+    location: locations.slice(-3).join(", ") || undefined,
+    images: images.slice(0, 30),
+    rawText: JSON.stringify(hit).slice(0, 15_000),
+    exactStructured: true,
+  };
 }
 function parseList(markup: string, pageUrl: string): DubizzleExactRow[] {
   const anchors = [...markup.matchAll(/<a\b[^>]*href\s*=\s*["']([^"']+)["'][^>]*>([\s\S]*?)<\/a>/gi)]
@@ -194,6 +263,57 @@ async function request(url: string, referer = BASE_URL) {
   } finally { clearTimeout(timer); }
 }
 
+async function requestAlgolia(page: number) {
+  const hosts = [
+    "https://algolia.dubizzle.com",
+    `https://${ALGOLIA_APP_ID}-dsn.algolia.net`,
+  ];
+  let lastError = "";
+  for (const host of hosts) {
+    const controller = new AbortController();
+    const timer = setTimeout(() => controller.abort(), Math.max(5_000, Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 30_000)));
+    try {
+      const response = await fetch(`${host}/1/indexes/${encodeURIComponent(ALGOLIA_INDEX)}/query`, {
+        method: "POST",
+        headers: {
+          accept: "application/json",
+          "content-type": "application/json",
+          "x-algolia-api-key": ALGOLIA_SEARCH_KEY,
+          "x-algolia-application-id": ALGOLIA_APP_ID,
+          "user-agent": HEADERS["user-agent"],
+        },
+        body: JSON.stringify({
+          query: "",
+          filters: '("category_v2.slug_paths":"motors/used-cars")',
+          page: Math.max(0, page - 1),
+          hitsPerPage: 25,
+          ruleContexts: ["all_user"],
+        }),
+        redirect: "follow",
+        signal: controller.signal,
+      });
+      const text = await response.text();
+      if (!response.ok) throw new Error(`dubizzle_algolia_http_${response.status}`);
+      const payload = JSON.parse(text) as { hits?: unknown[]; page?: number; nbPages?: number };
+      const rows = (Array.isArray(payload.hits) ? payload.hits : [])
+        .map(parseDubizzleAlgoliaHit)
+        .filter((row): row is DubizzleExactRow => Boolean(row));
+      if (!rows.length) throw new Error(`dubizzle_algolia_parsed_zero_page_${page}`);
+      return {
+        rows,
+        finished: Number(payload.page || 0) + 1 >= Number(payload.nbPages || 0),
+        host: new URL(host).hostname,
+        status: response.status,
+      };
+    } catch (error) {
+      lastError = String((error as Error)?.message || error);
+    } finally {
+      clearTimeout(timer);
+    }
+  }
+  throw new Error(lastError || `dubizzle_algolia_failed_page_${page}`);
+}
+
 export function dubizzleListPageCandidates(page: number) {
   return [
     `https://uae.dubizzle.com/en/motors/used-cars/?page=${page}`,
@@ -228,8 +348,26 @@ export class DubizzleUaeExactAdapter implements CatalogSourceAdapter {
         throw error;
       }
     }
-    if (/blocked/.test(lastError)) throw new Error(lastError);
-    throw new Error(`dubizzle_exact_parsed_zero_status_${lastStatus}_bytes_${lastBytes}`);
+    try {
+      const fallback = await requestAlgolia(page);
+      return {
+        items: fallback.rows,
+        nextCursor: fallback.finished ? null : String(page + 1),
+        finished: fallback.finished,
+        count: fallback.rows.length,
+        health: {
+          ok: true,
+          message: `Dubizzle official Algolia parsed ${fallback.rows.length} from ${fallback.host}`,
+          checkedAt: new Date().toISOString(),
+          httpStatus: fallback.status,
+          contentType: "application/json",
+        },
+      };
+    } catch (algoliaError) {
+      const fallbackError = String((algoliaError as Error)?.message || algoliaError);
+      if (/blocked/.test(lastError)) throw new Error(`${lastError}:${fallbackError}`);
+      throw new Error(`dubizzle_exact_parsed_zero_status_${lastStatus}_bytes_${lastBytes}:${fallbackError}`);
+    }
   }
 
   normalizeOffer(raw: unknown): VehicleOffer | null {
@@ -237,14 +375,16 @@ export class DubizzleUaeExactAdapter implements CatalogSourceAdapter {
     if (!row?.id || !row.sourceUrl || !row.make || !row.model || !row.year || !row.price) return null;
     const now = new Date().toISOString();
     const listingGalleryVerified = row.images.length >= 5;
+    const exactStructured = row.exactStructured === true;
     return {
       id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: "uae", offerType: "fixed", status: "active",
       sourceTitle: row.title, make: row.make, model: row.model, trim: row.trim, year: row.year, mileageKm: row.mileageKm,
       engineCc: row.engineCc, powerHp: row.powerHp, fuel: row.fuel, transmission: row.transmission, drive: row.drive, bodyType: row.bodyType,
       sourcePrice: row.price, sourceCurrency: row.currency, priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data", firstSeenAt: now, updatedAt: now,
-      operational: { sourceUrl: row.sourceUrl, sourceVenueName: row.location || "Dubizzle UAE", sourceTitle: row.title, exactDetail: false, exactFields: false, exactPhotos: listingGalleryVerified,
+      operational: { sourceUrl: row.sourceUrl, sourceVenueName: row.location || "Dubizzle UAE", sourceTitle: row.title, exactDetail: exactStructured, exactFields: exactStructured, exactPhotos: listingGalleryVerified,
         galleryVerified: listingGalleryVerified, galleryImageCount: row.images.length, gallerySafetyMode: "dubizzle_listing_card_uuid_v2", galleryStoredAs: "json_urls", photoIdentityVerified: listingGalleryVerified,
-        raw: { parsed: row, images: row.images, detailIdentityVerified: false, listingBoundImages: row.images.length > 0, photoIdentityVerified: listingGalleryVerified } },
+        raw: { parsed: row, images: row.images, detailIdentityVerified: exactStructured, listingBoundImages: row.images.length > 0, photoIdentityVerified: listingGalleryVerified,
+          semanticFieldPolicy: exactStructured ? "dubizzle_official_algolia_exact_fields_v1" : "dubizzle_listing_card_v2" } },
     };
   }
 
