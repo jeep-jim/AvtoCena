@@ -88,6 +88,8 @@ test("GitHub collection keeps Dubizzle mandatory and uses the production egress 
   assert.match(importer, /dubizzleCollectionSource/);
   assert.match(dubizzleBridgeRoute, /sourceId: "dubizzle_uae_open"/);
   assert.match(dubizzleBridgeRoute, /new DubizzleUaeExactAdapter\(\)/);
+  assert.match(yandexBridge, /payload\.error \|\| payload\.causeCode/);
+  assert.match(yandexBridge, /yandex_bridge_http_\$\{response\.status\}_\$\{kind\}_\$\{page\}/);
 });
 
 test("Japan rollout uses only the five owner-approved sources", () => {
