@@ -288,16 +288,15 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
   if (japanAuction && !japanAuctionSoldIdentityVerified(offer)) return { eligible: false, tier: 99, reason: "japan_auction_sold_identity_unverified", ...base };
   if (!regionalPhotoIdentityVerified(offer)) return { eligible: false, tier: 99, reason: "unverified_regional_photo_identity", ...base };
 
-  // Inventory and delivered-price readiness are separate contracts. A real,
-  // source-priced listing may stay public while the encyclopedia/CORE finishes
-  // the exact customs inputs. Such a card has visibleRub=0, therefore the UI
-  // shows "Цена по запросу"/preliminary state instead of inventing a delivered
-  // total. Exact calculated cards always rank ahead of pending inventory.
+  // The public catalog is a delivered-price product, not an internal inventory
+  // browser. Keep source-priced rows with unfinished customs inputs in internal
+  // storage so the source/CORE recovery pipeline can finish them, but never
+  // expose them as a public "price on request" card.
   if (preliminary || !calculated || specificationRejection) {
     if (!sourcePriced) return { eligible: false, tier: 99, reason: "missing_source_price", ...base };
     return {
-      eligible: true,
-      tier: preliminary ? 8 : 9,
+      eligible: false,
+      tier: 99,
       reason: preliminary ? "calculation_pending_power" : specificationRejection || "calculation_pending",
       ...base,
       visibleRub: 0,
