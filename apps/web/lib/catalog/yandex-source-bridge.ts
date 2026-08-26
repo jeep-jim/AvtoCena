@@ -13,7 +13,16 @@ type BridgePayload = {
   finished?: boolean;
   report?: Record<string, unknown>;
   offers?: unknown[];
+  error?: string;
+  causeCode?: string;
 };
+
+function bridgeErrorDetail(payload: BridgePayload) {
+  return String(payload.error || payload.causeCode || "")
+    .replace(/[^a-zA-Z0-9_.:-]+/g, "_")
+    .replace(/^_+|_+$/g, "")
+    .slice(0, 180);
+}
 
 function githubBridgeEnabled() {
   return /^(?:1|true|yes)$/i.test(String(process.env.GITHUB_ACTIONS || ""))
@@ -71,7 +80,10 @@ async function fetchPayload(kind: BridgeKind, page: number): Promise<{ response:
   let payload: BridgePayload;
   try { payload = JSON.parse(text) as BridgePayload; }
   catch { throw new Error(`yandex_bridge_non_json_${response.status}_${kind}_${page}`); }
-  if (!response.ok) throw new Error(`yandex_bridge_http_${response.status}_${kind}_${page}`);
+  if (!response.ok) {
+    const detail = bridgeErrorDetail(payload);
+    throw new Error(`yandex_bridge_http_${response.status}_${kind}_${page}${detail ? `_${detail}` : ""}`);
+  }
   return { response, payload };
 }
 
