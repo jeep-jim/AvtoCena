@@ -74,6 +74,12 @@ const prepareSource = (source: (typeof catalogImportSources)[number]) => fullGal
 const myAutoCollectionSource = withGithubYandexSourceBridge(myAutoListSource, "myauto");
 const autoPapaCollectionSource = withGithubYandexSourceBridge(autoPapaGeorgiaSource, "autopapa");
 const guaziCollectionSource = withGithubYandexSourceBridge(guaziChinaExactSource, "guazi");
+// GitHub-hosted runners intermittently fail before receiving any HTTP response
+// from api.encar.com. The production Yandex egress is independently probed and
+// can reach the same approved Encar list/detail APIs, so Actions consumes only
+// Encar-normalized offers through that fixed bridge. Local/production callers
+// continue to use the direct adapter.
+const encarCollectionSource = withGithubYandexSourceBridge(encarCompleteSource, "encar");
 // Georgia is canonical-only: MyAuto plus the dedicated AutoPapa adapter. Do not
 // let the generic scale adapter with the same sourceId replace the dedicated one.
 const allowedScaleSources = scaleMarketSources.filter((source) => source.market !== "georgia");
@@ -106,7 +112,7 @@ const completeSources = [
   dubizzleUaeExactSource,
   carswitchUaeExactSource,
   jpaucPastSource,
-  encarCompleteSource,
+  encarCollectionSource,
   kcarKoreaExactSource,
   kbChaChaChaExactSource,
 ];

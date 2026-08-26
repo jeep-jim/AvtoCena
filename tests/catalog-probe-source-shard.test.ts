@@ -10,6 +10,10 @@ const gallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-g
 const fullGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/full-gallery-wrapper.ts", import.meta.url), "utf8");
 const sourceRegistry = fs.readFileSync(new URL("../apps/web/lib/catalog/catalog-v2-source-registry.ts", import.meta.url), "utf8");
 const requiredSources = fs.readFileSync(new URL("../apps/web/lib/catalog/required-catalog-sources.ts", import.meta.url), "utf8");
+const importer = fs.readFileSync(new URL("../apps/web/lib/catalog/importer.ts", import.meta.url), "utf8");
+const yandexBridge = fs.readFileSync(new URL("../apps/web/lib/catalog/yandex-source-bridge.ts", import.meta.url), "utf8");
+const encarBridgeRoute = fs.readFileSync(new URL("../apps/web/app/api/internal/encar-egress-71b8e4/route.ts", import.meta.url), "utf8");
+const encarAdapter = fs.readFileSync(new URL("../apps/web/lib/catalog/adapters.ts", import.meta.url), "utf8");
 const japanWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-japan.yml", import.meta.url), "utf8");
 const sequentialQueue = fs.readFileSync(new URL("../.github/workflows/catalog-v3-sequential-queue.yml", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
@@ -62,6 +66,18 @@ test("canonical mandatory market source contract cannot silently drift", () => {
   }
   assert.match(sourceRegistry, /catalog_strict_source_allowlist_broken/);
   assert.match(sourceRegistry, /excluded_from_collection/);
+});
+
+test("GitHub collection keeps Encar mandatory and uses the fixed production egress bridge", () => {
+  assert.match(yandexBridge, /type BridgeKind = "encar" \|/);
+  assert.match(yandexBridge, /\/api\/internal\/encar-egress-71b8e4\?page=\$\{page\}/);
+  assert.match(importer, /withGithubYandexSourceBridge\(encarCompleteSource, "encar"\)/);
+  assert.match(importer, /encarCollectionSource/);
+  assert.match(encarBridgeRoute, /sourceId: "encar_direct"/);
+  assert.match(encarBridgeRoute, /const PAGE_SIZE = 20/);
+  assert.match(encarBridgeRoute, /new EncarCompleteAdapter\(PAGE_SIZE\)/);
+  assert.match(encarBridgeRoute, /fetchImages\(offer\)/);
+  assert.match(encarAdapter, /origin: "https:\/\/car\.encar\.com"/);
 });
 
 test("Japan rollout uses only the five owner-approved sources", () => {

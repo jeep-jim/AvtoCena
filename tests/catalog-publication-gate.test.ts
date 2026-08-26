@@ -47,6 +47,10 @@ test("Catalog V2 publishes each market independently and preserves completed mar
   assert.match(marketPublisher, /beforePublishValidate\(publishedOffers\)/);
   assert.match(marketPublisher, /catalog_public_regression_guard/);
   assert.match(marketPublisher, /catalog_v2_empty_market/);
+  assert.match(marketPublisher, /hasAllowedCatalogSourceProvenance/);
+  assert.match(marketPublisher, /purgedForbiddenPublicByMarket/);
+  assert.match(marketPublisher, /const preservedRows = rows\.filter/);
+  assert.match(marketPublisher, /preservedPublicRowsByMarket\[otherMarket\] = preservedRows/);
 });
 
 test("business audit still checks profiles, knowledge, customs and utilization power", () => {

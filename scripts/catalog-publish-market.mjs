@@ -4,7 +4,7 @@ import path from "node:path";
 
 const { mutateDataJson } = await import("../apps/web/lib/data.ts");
 const { calculateOfferWithRussiaCustoms } = await import("../apps/web/lib/catalog/customs-pricing.ts");
-const { isCrediblePublicOffer, isCatalogYearAllowed, isCatalogMarketSourceAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
+const { hasAllowedCatalogSourceProvenance, isCrediblePublicOffer, isCatalogYearAllowed } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const { compareCatalogPublicPriority, japanAuctionSoldIdentityVerified } = await import("../apps/web/lib/catalog/public-priority.ts");
 const { classifyCatalogV2Offer, selectCatalogV2MarketOffers } = await import("../apps/web/lib/catalog/catalog-v2-policy.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
@@ -367,6 +367,7 @@ const preservedPublicHashByMarket = {};
 const expectedPublishedByMarket = {};
 const expectedPublishedHashByMarket = {};
 const preservedPublicRowsByMarket = {};
+const purgedForbiddenPublicByMarket = {};
 
 // A one-market refresh must never reconstruct the other six markets from
 // retention or quality filters. Read their already-published rows and pass them
@@ -377,17 +378,23 @@ for (const otherMarket of PUBLIC_CATALOG_MARKETS) {
   try { rows = await readMarketOffers(otherMarket); } catch (error) {
     throw new Error(`catalog_preserved_public_read_failed:${otherMarket}:${String(error?.message || error)}`);
   }
-  const invalid = rows.filter((offer) => !offer?.id || !offer?.make || !offer?.model
+  // Exact preservation applies only to owner-approved provenance. Rows from a
+  // removed adapter/domain are stale public tails: quarantine them from the next
+  // generation, while keeping every still-approved row byte-stable. Structural
+  // corruption inside the approved set remains a hard stop.
+  const forbidden = rows.filter((offer) => !hasAllowedCatalogSourceProvenance(offer));
+  const preservedRows = rows.filter((offer) => hasAllowedCatalogSourceProvenance(offer));
+  const invalid = preservedRows.filter((offer) => !offer?.id || !offer?.make || !offer?.model
     || String(offer?.market || "") !== otherMarket
     || !isCatalogYearAllowed(offer?.year, otherMarket)
-    || !isCatalogMarketSourceAllowed(offer)
     || !Array.isArray(offer?.images) || offer.images.length === 0);
   if (invalid.length) throw new Error(`catalog_preserved_public_gate_failed:${otherMarket}:${invalid.length}`);
-  preservedByMarket[otherMarket] = rows.length;
-  preservedPublicHashByMarket[otherMarket] = hashRows(rows);
-  preservedPublicRowsByMarket[otherMarket] = rows;
-  expectedPublishedByMarket[otherMarket] = rows.length;
-  expectedPublishedHashByMarket[otherMarket] = hashRows(rows);
+  purgedForbiddenPublicByMarket[otherMarket] = forbidden.length;
+  preservedByMarket[otherMarket] = preservedRows.length;
+  preservedPublicHashByMarket[otherMarket] = hashRows(preservedRows);
+  preservedPublicRowsByMarket[otherMarket] = preservedRows;
+  expectedPublishedByMarket[otherMarket] = preservedRows.length;
+  expectedPublishedHashByMarket[otherMarket] = hashRows(preservedRows);
 }
 
 const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(selectedMarketOffers);
@@ -551,6 +558,7 @@ const report = {
     },
   },
   files: generation.filenames,
+  purgedForbiddenPublicByMarket,
   preservedByMarket,
   preservedPublicHashByMarket,
   expectedPublishedByMarket,
