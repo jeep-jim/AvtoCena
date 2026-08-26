@@ -1,0 +1,124 @@
+name: Catalog UAE · publish preserved source shards
+run-name: UAE preserved-source publish · ${{ github.sha }}
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - ".github/workflows/catalog-uae-publish-preserved-shards.yml"
+      - ".github/market-runs/publish-preserved-uae-shards"
+
+permissions:
+  actions: read
+  contents: read
+
+concurrency:
+  group: catalog-live-daily-working-markets
+  cancel-in-progress: false
+
+env:
+  JSON_STORAGE_DRIVER: object
+  YC_OBJECT_STORAGE_ENDPOINT: ${{ secrets.YC_OBJECT_STORAGE_ENDPOINT }}
+  YC_OBJECT_STORAGE_REGION: ${{ secrets.YC_OBJECT_STORAGE_REGION }}
+  YC_OBJECT_STORAGE_BUCKET: ${{ secrets.YC_OBJECT_STORAGE_BUCKET }}
+  YC_OBJECT_STORAGE_ACCESS_KEY_ID: ${{ secrets.YC_OBJECT_STORAGE_ACCESS_KEY_ID }}
+  YC_OBJECT_STORAGE_SECRET_ACCESS_KEY: ${{ secrets.YC_OBJECT_STORAGE_SECRET_ACCESS_KEY }}
+  YC_OBJECT_STORAGE_PREFIX: ${{ secrets.YC_OBJECT_STORAGE_PREFIX }}
+  CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
+  CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+  CATALOG_OFFER_RETENTION_MS: "259200000"
+  RECOVERY_PREFERRED_MAX_RUB: "8000000"
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 70
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Resolve the two completed source runs
+        shell: bash
+        run: |
+          set -euo pipefail
+          node <<'NODE' >> "$GITHUB_ENV"
+          const fs = require('fs');
+          const marker = JSON.parse(fs.readFileSync('.github/market-runs/publish-preserved-uae-shards', 'utf8'));
+          for (const [name, value] of [['DUBIZZLE_RUN_ID', marker.dubizzleRunId], ['DUBICARS_RUN_ID', marker.dubicarsRunId]]) {
+            if (!/^\d+$/.test(String(value || ''))) throw new Error(`invalid_${name.toLowerCase()}`);
+            console.log(`${name}=${value}`);
+          }
+          NODE
+      - name: Download only the preserved UAE source shards
+        shell: bash
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          mkdir -p shard-input .recovery-zips
+          download_named_artifact() {
+            local run_id="$1" artifact_name="$2"
+            local artifact_id
+            artifact_id="$(gh api "repos/$GITHUB_REPOSITORY/actions/runs/$run_id/artifacts?per_page=100" --paginate --jq ".artifacts[] | select(.name == \"$artifact_name\" and .expired == false) | .id" | head -n 1)"
+            test -n "$artifact_id"
+            curl --fail --silent --show-error --location \
+              -H "Authorization: Bearer $GH_TOKEN" \
+              -H "Accept: application/vnd.github+json" \
+              -H "X-GitHub-Api-Version: 2022-11-28" \
+              "https://api.github.com/repos/$GITHUB_REPOSITORY/actions/artifacts/$artifact_id/zip" \
+              --output ".recovery-zips/${artifact_id}.zip"
+            unzip -qo ".recovery-zips/${artifact_id}.zip" -d shard-input
+          }
+          download_named_artifact "$DUBIZZLE_RUN_ID" "catalog-shard-uae-dubizzle_uae_open"
+          download_named_artifact "$DUBICARS_RUN_ID" "catalog-shard-uae-dubicars_uae_exact"
+          test -s shard-input/catalog-shard-uae-dubizzle_uae_open.json
+          test -s shard-input/catalog-shard-uae-dubicars_uae_exact.json
+      - name: Merge and require both approved UAE sources
+        env:
+          RECOVERY_MERGE_MARKET: uae
+          RECOVERY_MERGE_INPUT_DIR: shard-input
+          RECOVERY_MERGE_OUTPUT: catalog-rebuild-uae.json
+        run: |
+          set -euo pipefail
+          node scripts/catalog-live-recovery-merge-shards.mjs
+          node <<'NODE'
+          const fs = require('fs');
+          const data = JSON.parse(fs.readFileSync('catalog-rebuild-uae.json', 'utf8'));
+          const counts = (data.offers || []).reduce((out, offer) => {
+            out[offer.sourceId] = Number(out[offer.sourceId] || 0) + 1;
+            return out;
+          }, {});
+          console.log(JSON.stringify({ total: data.offers?.length || 0, counts }, null, 2));
+          for (const sourceId of ['dubizzle_uae_open', 'dubicars_uae_exact']) {
+            if (Number(counts[sourceId] || 0) < 1) throw new Error(`uae_required_source_empty:${sourceId}`);
+          }
+          NODE
+      - name: Publish UAE while preserving all other markets
+        env:
+          RECOVERY_PUBLISH_MARKET: uae
+          RECOVERY_PUBLISH_INPUT: catalog-rebuild-uae.json
+          RECOVERY_PUBLISH_REPORT: catalog-live-recovery-uae-publish-report.json
+          RECOVERY_PUBLISH_MAX: "30000"
+          CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"
+        run: npx tsx scripts/catalog-live-recovery-publish.mjs
+      - name: Audit UAE and the complete seven-market baseline
+        if: always()
+        env:
+          CATALOG_AUDIT_OUTPUT: catalog-uae-postpersist-audit.json
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":3000,"china":5000,"japan":800,"uae":900,"europe":6500,"georgia":5000,"kyrgyzstan":3000}'
+        run: npx tsx scripts/catalog-live-postpersist-audit.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-preserved-uae-publish-reports
+          path: |
+            catalog-rebuild-uae.json
+            catalog-live-recovery-uae-publish-report.json
+            catalog-uae-postpersist-audit.json
+          if-no-files-found: warn
+          retention-days: 3
