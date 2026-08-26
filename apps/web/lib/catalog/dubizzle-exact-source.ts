@@ -194,6 +194,17 @@ async function request(url: string, referer = BASE_URL) {
   } finally { clearTimeout(timer); }
 }
 
+export function dubizzleListPageCandidates(page: number) {
+  return [
+    `https://uae.dubizzle.com/en/motors/used-cars/?page=${page}`,
+    `https://uae.dubizzle.com/en/motors/used-cars/search/?page=${page}`,
+    `https://uae.dubizzle.com/motors/used-cars/?page=${page}`,
+    `https://dubai.dubizzle.com/motors/used-cars/?page=${page}`,
+    `https://dubai.dubizzle.com/motors/used-cars/search/?page=${page}`,
+    `https://abudhabi.dubizzle.com/motors/used-cars/?page=${page}`,
+  ];
+}
+
 export class DubizzleUaeExactAdapter implements CatalogSourceAdapter {
   sourceId = "dubizzle_uae_open";
   market = "uae" as const;
@@ -201,16 +212,11 @@ export class DubizzleUaeExactAdapter implements CatalogSourceAdapter {
 
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const page = Math.max(1, Number(cursor || 1));
-    const candidates = [
-      `https://uae.dubizzle.com/motors/used-cars/?page=${page}`,
-      `https://dubai.dubizzle.com/motors/used-cars/?page=${page}`,
-      `https://dubai.dubizzle.com/motors/used-cars/search/?page=${page}`,
-      `https://abudhabi.dubizzle.com/motors/used-cars/?page=${page}`,
-    ];
+    const candidates = dubizzleListPageCandidates(page);
     let lastStatus = 0; let lastBytes = 0; let lastError = "";
     for (const url of candidates) {
       try {
-        const { response, markup } = await request(url, "https://uae.dubizzle.com/motors/used-cars/");
+        const { response, markup } = await request(url, "https://uae.dubizzle.com/en/motors/used-cars/");
         lastStatus = response.status; lastBytes = markup.length;
         const items = parseList(markup, response.url || url);
         if (!items.length) continue;
