@@ -408,16 +408,17 @@ const otherMarketInternal = currentInternal.filter((offer) => String(offer?.mark
 // preservation. A removed source/domain must not survive into the next
 // generation, while malformed rows from still-approved sources remain a hard
 // stop instead of being silently discarded.
-const forbiddenInternal = otherMarketInternal.filter((offer) => !isCatalogMarketSourceAllowed(offer));
-const preservedInternal = otherMarketInternal.filter((offer) => isCatalogMarketSourceAllowed(offer));
+const forbiddenInternal = otherMarketInternal.filter((offer) => !isCatalogMarketSourceAllowed(offer)
+  || !isCatalogYearAllowed(offer?.year, offer?.market));
+const preservedInternal = otherMarketInternal.filter((offer) => isCatalogMarketSourceAllowed(offer)
+  && isCatalogYearAllowed(offer?.year, offer?.market));
 const purgedForbiddenInternalByMarket = Object.fromEntries(PUBLIC_CATALOG_MARKETS.map((marketId) => [
   marketId,
   forbiddenInternal.filter((offer) => String(offer?.market || "") === marketId).length,
 ]));
 const invalidInternal = preservedInternal.filter((offer) => {
   const otherMarket = String(offer?.market || "");
-  return !offer?.id || !PUBLIC_CATALOG_MARKETS.includes(otherMarket)
-    || !isCatalogYearAllowed(offer?.year, otherMarket);
+  return !offer?.id || !PUBLIC_CATALOG_MARKETS.includes(otherMarket);
 });
 if (invalidInternal.length) throw new Error(`catalog_preserved_internal_gate_failed:${invalidInternal.length}`);
 
