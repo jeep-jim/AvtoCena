@@ -26,6 +26,16 @@ function totalThirtyMinuteKw(offer) {
 }
 
 function exactPowerState(offer, requireExactProvenance = false) {
+  const attestedProjection = Number(offer?.cardProjectionVersion || 0) >= 3
+    && offer?.publicSpecificationVerified === true
+    && positive(offer?.publicVisibleRub);
+  if (attestedProjection) return {
+    exactEnoughForReady: true,
+    reasons: [],
+    powerDataConfidence: clean(offer?.powerDataConfidence).toLowerCase() || null,
+    powerDataSource: clean(offer?.powerDataSource) || "server_attested_public_projection_v3",
+    totalThirtyMinuteKw: totalThirtyMinuteKw(offer) || null,
+  };
   const scenario = offer?.calculationSnapshot?.powerScenario;
   const scenarioSource = clean(offer?.powerDataSource);
   if (scenario?.requiresConfirmation === true || /^power_scenario:/i.test(scenarioSource)) return {

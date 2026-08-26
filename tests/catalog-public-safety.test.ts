@@ -74,6 +74,20 @@ test("compact card projections expose only already validated non-preliminary pri
   assert.equal(catalogOfferVisibleRub({ ...exactProjection, calculationStatus: "preliminary_power_pending", calculationSnapshot: { pricingConfidence: "preliminary" } }), 0);
   assert.equal(catalogOfferVisibleRub({ ...exactProjection, engineCc: undefined }), 0);
   assert.equal(catalogOfferVisibleRub({ ...exactProjection, cardProjectionVersion: 2 }), 3_200_000);
+  const attestedProjection = {
+    ...exactProjection,
+    engineCc: undefined,
+    powerHp: undefined,
+    cardProjectionVersion: 3,
+    publicSpecificationVerified: true,
+  };
+  assert.equal(catalogOfferVisibleRub(attestedProjection), 3_200_000);
+  assert.equal(catalogOfferVisibleRub({ ...attestedProjection, publicSpecificationVerified: false }), 0);
+  assert.equal(catalogOfferVisibleRub({
+    ...attestedProjection,
+    calculationStatus: "preliminary_power_pending",
+    calculationSnapshot: { pricingConfidence: "preliminary" },
+  }), 0);
 });
 
 test("public priority rejects a delivered total eight times the source car price", async () => {
