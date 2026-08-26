@@ -54,6 +54,9 @@ test("Catalog V2 publishes each market independently and preserves completed mar
   assert.match(marketPublisher, /purgedForbiddenInternalByMarket/);
   assert.match(marketPublisher, /const forbiddenInternal = otherMarketInternal\.filter/);
   assert.match(marketPublisher, /const preservedInternal = otherMarketInternal\.filter/);
+  assert.match(marketPublisher, /const forbiddenInternal = otherMarketInternal\.filter\(\(offer\) => !isCatalogMarketSourceAllowed\(offer\)[\\s\\S]*!isCatalogYearAllowed\(offer\?\.year, offer\?\.market\)/);
+  assert.match(marketPublisher, /const preservedInternal = otherMarketInternal\.filter\(\(offer\) => isCatalogMarketSourceAllowed\(offer\)[\\s\\S]*isCatalogYearAllowed\(offer\?\.year, offer\?\.market\)/);
+  assert.match(marketPublisher, /const invalidInternal = preservedInternal\.filter[\\s\\S]*return !offer\?\.id \|\| !PUBLIC_CATALOG_MARKETS\.includes\(otherMarket\)/);
   assert.match(marketPublisher, /const preservedRows = rows\.filter/);
   assert.match(marketPublisher, /preservedPublicRowsByMarket\[otherMarket\] = preservedRows/);
 });
