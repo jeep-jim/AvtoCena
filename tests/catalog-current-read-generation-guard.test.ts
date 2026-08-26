@@ -22,7 +22,8 @@ test("current search projection is trusted only for the active manifest generati
   assert.match(storage, /readCurrentSearchProjection\(currentProjectionScope\)/);
   assert.match(storage, /const \[manifest, current\] = await Promise\.all/);
   assert.ok((storage.match(/current\.generationId === manifest\.generationId/g) || []).length >= 2);
-  assert.match(storage, /cardProjectionVersion:\s*2/);
+  assert.match(storage, /publicSpecificationVerified: visibleRub > 0/);
+  assert.match(storage, /cardProjectionVersion:\s*3/);
 });
 
 test("deploy calculation audit reads the public projection and classifies current statuses", () => {
