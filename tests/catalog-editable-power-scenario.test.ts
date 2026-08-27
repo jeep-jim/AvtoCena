@@ -19,14 +19,10 @@ function base(overrides: Record<string, unknown> = {}) {
   } as any;
 }
 
-test("missing power falls back to an explicit editable 100 hp scenario", () => {
+test("missing power stays unresolved instead of becoming a public 100 hp scenario", () => {
   const scenario = resolveCatalogPowerScenario(base());
-  assert.equal(scenario?.horsepower, DEFAULT_CATALOG_POWER_FALLBACK_HP);
-  assert.equal(scenario?.source, "fallback_100");
-  const applied = applyCatalogPowerScenario(base(), scenario!);
-  assert.equal(applied.powerHp, 100);
-  assert.equal(readCatalogPowerScenario(applied)?.requiresConfirmation, true);
-  assert.equal(catalogRequiredSpecificationRejectionReason(applied), "");
+  assert.equal(scenario, null);
+  assert.equal(DEFAULT_CATALOG_POWER_FALLBACK_HP, 100);
 });
 
 test("exact combustion horsepower wins over the fallback", () => {
@@ -41,8 +37,8 @@ test("customer horsepower overrides an automatic scenario", () => {
   assert.equal(Math.round(Number(applied.utilizationPowerKw)), 96);
 });
 
-test("a complete tagged scenario may expose only its explicitly estimated calculated total", () => {
-  const scenario = applyCatalogPowerScenario(base(), resolveCatalogPowerScenario(base())!);
+test("a customer scenario never becomes a publishable catalog total", () => {
+  const scenario = applyCatalogPowerScenario(base(), resolveCatalogPowerScenario(base(), { requestedHp: 100 })!);
   const calculated = {
     ...scenario,
     totalRub: 2_500_000,
@@ -56,7 +52,24 @@ test("a complete tagged scenario may expose only its explicitly estimated calcul
       breakdown: ["car","topavto-commission","broker","svh","laboratory","sbkts","epts","rf-delivery","customs"].map((id) => ({ id, amountRub: 1000 })),
     },
   };
-  assert.equal(catalogOfferVisibleRub(calculated), 2_500_000);
+  assert.equal(catalogRequiredSpecificationRejectionReason(calculated), "unconfirmed_power_scenario");
+  assert.equal(catalogOfferVisibleRub(calculated), 0);
+});
+
+test("a sourced real 100 hp combustion value remains eligible", () => {
+  const sourced = base({ powerHp: 100, powerKw: 73.55, utilizationPowerKw: 73.55, powerDataSource: "marketplace detail:Power", powerDataConfidence: "source_exact" });
+  assert.equal(catalogRequiredSpecificationRejectionReason(sourced), "");
+});
+
+test("an exact 100 hp value without provenance is rejected as legacy fallback", () => {
+  assert.equal(catalogRequiredSpecificationRejectionReason(base({ powerHp: 100, powerKw: 73.55, utilizationPowerKw: 73.55 })), "unproven_exact_100_hp");
+});
+
+test("an electrified horsepower scenario cannot replace certified 30-minute power", () => {
+  const electric = base({ powertrainKind: "electric", engineCc: undefined, fuel: "electric" });
+  const scenario = applyCatalogPowerScenario(electric, resolveCatalogPowerScenario(electric, { requestedHp: 200 })!);
+  assert.equal(scenario.utilizationPowerKw, undefined);
+  assert.equal(catalogRequiredSpecificationRejectionReason(scenario), "unconfirmed_power_scenario");
 });
 
 test("power is the only editable offer specification on desktop and mobile", () => {

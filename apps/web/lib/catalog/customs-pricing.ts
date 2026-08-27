@@ -10,7 +10,7 @@ import { convertToRub } from "./rates";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import type { VehicleOffer } from "./types";
 import { enrichOfferWithKnowledgeCore } from "./knowledge-core";
-import { applyCatalogPowerScenario, isCatalogPowerScenario, readCatalogPowerScenario, resolveCatalogPowerScenario } from "./power-scenario";
+import { applyCatalogPowerScenario, readCatalogPowerScenario, resolveCatalogPowerScenario } from "./power-scenario";
 
 function positive(value: unknown) {
   const parsed = Number(value);
@@ -93,7 +93,6 @@ function hasTrustedUtilizationPower(offer: VehicleOffer) {
 }
 
 function exactUtilizationPowerProblem(offer: VehicleOffer) {
-  if (isCatalogPowerScenario(offer)) return null;
   const kind = String(offer.powertrainKind || "");
   if (!["electric", "series_hybrid", "other_hybrid"].includes(kind)) return null;
 
@@ -256,7 +255,11 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     icePowerKw: offer.icePowerKw,
     power30MinKw: motor30MinKnown ? offer.power30MinKw : undefined,
     power30MinKwByMotor: motor30MinKnown && Array.isArray(offer.power30MinKwByMotor) ? offer.power30MinKwByMotor : undefined,
-    utilizationPowerKw: powerScenario ? offer.utilizationPowerKw : hasTrustedUtilizationPower(offer) ? offer.utilizationPowerKw : undefined,
+    utilizationPowerKw: powerScenario && String(offer.powertrainKind || "") === "combustion"
+      ? offer.utilizationPowerKw
+      : hasTrustedUtilizationPower(offer)
+        ? offer.utilizationPowerKw
+        : undefined,
     powertrainKind: offer.powertrainKind,
     productionDate: offer.productionDate,
     year: offer.year,

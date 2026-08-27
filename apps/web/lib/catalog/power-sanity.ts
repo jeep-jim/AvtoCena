@@ -52,6 +52,20 @@ function combustionLike(offer: Partial<VehicleOffer>) {
 export function catalogPowerSanity(offer: Partial<VehicleOffer>, candidate = offer.powerHp): CatalogPowerSanity {
   const powerHp = positive(candidate);
   if (!powerHp) return { suspicious: false, reason: "missing" };
+  const source = clean((offer as any).powerDataSource);
+  const kind = clean(offer.powertrainKind);
+  if (/^power_scenario:(?:fallback_100|source_peak_estimate|customer_input)$/i.test(source)) {
+    return { powerHp, suspicious: true, reason: "unconfirmed_power_scenario" };
+  }
+  if (["electric", "series_hybrid", "other_hybrid"].includes(kind) && /^power_scenario:/i.test(source)) {
+    return { powerHp, suspicious: true, reason: "electrified_power_scenario" };
+  }
+  // Exactly 100 hp is a valid real specification, but without any provenance
+  // it is indistinguishable from the legacy catalog fallback. Keep a sourced
+  // 100 hp row; fail closed for an unattested one until source/CORE enrichment.
+  if (Math.abs(powerHp - 100) < 0.001 && !source) {
+    return { powerHp, suspicious: true, reason: "unproven_exact_100_hp" };
+  }
   if (regulatoryPowerEvidence(offer)) return { powerHp, suspicious: false, reason: "regulatory_or_official" };
 
   if (powerHp > 2_500) return { suspicious: true, reason: "absolute_power_outlier" };

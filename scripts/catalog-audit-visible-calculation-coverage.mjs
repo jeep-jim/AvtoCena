@@ -26,6 +26,15 @@ function totalThirtyMinuteKw(offer) {
 }
 
 function exactPowerState(offer, requireExactProvenance = false) {
+  const scenario = offer?.calculationSnapshot?.powerScenario;
+  const scenarioSource = clean(offer?.powerDataSource);
+  if (scenario?.requiresConfirmation === true || /^power_scenario:/i.test(scenarioSource)) return {
+    exactEnoughForReady: false,
+    reasons: ["unconfirmed_power_scenario"],
+    powerDataConfidence: "estimated",
+    powerDataSource: scenarioSource || `power_scenario:${scenario?.source || "unknown"}`,
+    totalThirtyMinuteKw: null,
+  };
   const attestedProjection = Number(offer?.cardProjectionVersion || 0) >= 3
     && offer?.publicSpecificationVerified === true
     && positive(offer?.publicVisibleRub);
@@ -35,15 +44,6 @@ function exactPowerState(offer, requireExactProvenance = false) {
     powerDataConfidence: clean(offer?.powerDataConfidence).toLowerCase() || null,
     powerDataSource: clean(offer?.powerDataSource) || "server_attested_public_projection_v3",
     totalThirtyMinuteKw: totalThirtyMinuteKw(offer) || null,
-  };
-  const scenario = offer?.calculationSnapshot?.powerScenario;
-  const scenarioSource = clean(offer?.powerDataSource);
-  if (scenario?.requiresConfirmation === true || /^power_scenario:/i.test(scenarioSource)) return {
-    exactEnoughForReady: false,
-    reasons: [],
-    powerDataConfidence: "estimated",
-    powerDataSource: scenarioSource || `power_scenario:${scenario?.source || "unknown"}`,
-    totalThirtyMinuteKw: null,
   };
   const kind = clean(offer?.powertrainKind).toLowerCase();
   const engineCc = positive(offer?.engineCc);
@@ -104,6 +104,8 @@ const readyUnclassified = [];
 const invalidSpecifications = [];
 const unsafePendingVisiblePrices = [];
 const unpricedPublicCards = [];
+const fallbackPowerCards = [];
+const unprovenExact100Cards = [];
 const statusCounts = new Map();
 const visibleModels = new Set();
 let readyExact = 0;
@@ -122,6 +124,8 @@ for (const offer of visible) {
   increment(statusCounts, status);
   const specificationRejection = catalogRequiredSpecificationRejectionReason(offer);
   if (specificationRejection) invalidSpecifications.push({ id: offer.id, market, make: offer.make, model: offer.model, reason: specificationRejection });
+  if (specificationRejection === "unconfirmed_power_scenario") fallbackPowerCards.push({ id: offer.id, market, make: offer.make, model: offer.model, powerDataSource: offer.powerDataSource || null });
+  if (specificationRejection === "unproven_exact_100_hp") unprovenExact100Cards.push({ id: offer.id, market, make: offer.make, model: offer.model });
 
   const marketRow = byMarket.get(market) || { visible: 0, ready: 0, readyExact: 0, needsData: 0, preliminary: 0, auctionStart: 0, unresolvedIdentity: 0, invalidReady: 0, unsafePendingVisiblePrice: 0, unpricedPublic: 0 };
   marketRow.visible++;
@@ -242,6 +246,8 @@ const report = {
     invalidSpecifications: invalidSpecifications.length,
     unsafePendingVisiblePrices: unsafePendingVisiblePrices.length,
     unpricedPublicCards: unpricedPublicCards.length,
+    fallback100PublicCount: fallbackPowerCards.length,
+    unprovenExact100PublicCount: unprovenExact100Cards.length,
     readyWithoutConfidenceLabel: readyUnclassified.length,
   },
   statusCounts: Object.fromEntries([...statusCounts.entries()].sort((a, b) => b[1] - a[1])),
@@ -250,6 +256,8 @@ const report = {
   invalidSpecifications: invalidSpecifications.slice(0, SAMPLE_LIMIT),
   unsafePendingVisiblePrices: unsafePendingVisiblePrices.slice(0, SAMPLE_LIMIT),
   unpricedPublicCards: unpricedPublicCards.slice(0, SAMPLE_LIMIT),
+  fallbackPowerCards: fallbackPowerCards.slice(0, SAMPLE_LIMIT),
+  unprovenExact100Cards: unprovenExact100Cards.slice(0, SAMPLE_LIMIT),
   unresolvedModels: sortedCounts(unresolvedModels),
   needsDataQueue: sortedCounts(needsDataModels),
   readyWithoutConfidenceLabel: readyUnclassified.slice(0, SAMPLE_LIMIT),
@@ -259,6 +267,8 @@ const report = {
     noUnsafePendingVisiblePrices: unsafePendingVisiblePrices.length === 0,
     noUnpricedPublicCards: unpricedPublicCards.length === 0,
     noInvalidSpecifications: invalidSpecifications.length === 0,
+    noFallback100PublicCards: fallbackPowerCards.length === 0,
+    noUnprovenExact100PublicCards: unprovenExact100Cards.length === 0,
     noPreliminaryPublicPrices: preliminary === 0,
     noNeedsDataPublicCards: needsData === 0,
     pass: invalidReady.length === 0
@@ -266,6 +276,8 @@ const report = {
       && unsafePendingVisiblePrices.length === 0
       && unpricedPublicCards.length === 0
       && invalidSpecifications.length === 0
+      && fallbackPowerCards.length === 0
+      && unprovenExact100Cards.length === 0
       && preliminary === 0
       && needsData === 0,
   },
@@ -284,6 +296,8 @@ if (process.env.GITHUB_OUTPUT) {
   await fs.appendFile(process.env.GITHUB_OUTPUT, `invalid_specifications=${report.totals.invalidSpecifications}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `unsafe_pending_visible_prices=${report.totals.unsafePendingVisiblePrices}\n`);
   await fs.appendFile(process.env.GITHUB_OUTPUT, `unpriced_public_cards=${report.totals.unpricedPublicCards}\n`);
+  await fs.appendFile(process.env.GITHUB_OUTPUT, `fallback_100_public=${report.totals.fallback100PublicCount}\n`);
+  await fs.appendFile(process.env.GITHUB_OUTPUT, `unproven_exact_100_public=${report.totals.unprovenExact100PublicCount}\n`);
 }
 
 if (!report.releaseGate.pass) process.exitCode = 1;
