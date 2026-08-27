@@ -52,7 +52,15 @@ function combustionLike(offer: Partial<VehicleOffer>) {
 export function catalogPowerSanity(offer: Partial<VehicleOffer>, candidate = offer.powerHp): CatalogPowerSanity {
   const powerHp = positive(candidate);
   if (!powerHp) return { suspicious: false, reason: "missing" };
-  const source = clean((offer as any).powerDataSource);
+  const snapshotScenario = (offer as any)?.calculationSnapshot?.powerScenario;
+  // Historical compact V3 projections can carry the calculation scenario in
+  // the attested snapshot while omitting powerDataSource. Treat that snapshot
+  // as the same provenance signal, otherwise an old fallback 100 hp scenario
+  // can pass the read gate and reappear in cards after a partial market publish.
+  const scenarioSource = snapshotScenario
+    ? `power_scenario:${clean(snapshotScenario.source) || "fallback_100"}`
+    : "";
+  const source = clean((offer as any).powerDataSource) || scenarioSource;
   const kind = clean(offer.powertrainKind);
   if (/^power_scenario:(?:fallback_100|source_peak_estimate|customer_input)$/i.test(source)) {
     return { powerHp, suspicious: true, reason: "unconfirmed_power_scenario" };
