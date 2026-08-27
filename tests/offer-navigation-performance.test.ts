@@ -29,12 +29,13 @@ test("similar offers stream after the primary offer instead of blocking it", () 
   assert.doesNotMatch(beforeReturn, /await searchOffers/);
   assert.match(page, /<Suspense fallback=\{<SimilarOffersFallback \/>\}>/);
   assert.match(page, /async function SimilarOffers/);
-  assert.match(page, /make: current\.make, model: current\.model/);
+  assert.match(page, /const familyModel/);
+  assert.match(page, /new URLSearchParams/);
   assert.match(page, /Ещё \{modelTitle\}/);
   assert.doesNotMatch(page, /const fillers = diverseSimilarOffers/);
   assert.match(page, /<CatalogMarketFlag market=\{String\(current\.market/);
   assert.match(page, /· \{marketTotal\}/);
-  assert.match(page, /new URLSearchParams\(\{ market: String\(current\.market \|\| ""\), make: String\(current\.make \|\| ""\), model: String\(current\.model \|\| ""\) \}\)/);
+  assert.match(page, /model: familyModel/);
 });
 
 test("metadata and page share one memoized offer lookup per request", () => {

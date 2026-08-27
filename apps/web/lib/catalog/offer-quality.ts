@@ -300,3 +300,18 @@ export function isCrediblePublicOffer(offer: VehicleOffer) {
   if (compactProjection) return credibleCoreContent(offer, false, false);
   return credibleCoreContent(offer, false);
 }
+
+
+/**
+ * Public search projections are attested while the complete source offer is in
+ * memory. V3 deliberately omits private provenance and raw source payloads, so
+ * public pages must validate the attestation instead of rerunning full-source
+ * quality checks against a compact card row.
+ */
+export function isRenderablePublicCatalogOffer(offer: VehicleOffer | any) {
+  if (Number(offer?.cardProjectionVersion || 0) >= 3) {
+    return offer?.publicSpecificationVerified === true
+      && Number(offer?.publicVisibleRub || 0) > 0;
+  }
+  return isCrediblePublicOffer(offer as VehicleOffer);
+}

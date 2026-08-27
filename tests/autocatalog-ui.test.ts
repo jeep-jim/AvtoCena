@@ -6,7 +6,7 @@ function source(path: string) {
   return fs.readFileSync(new URL(`../${path}`, import.meta.url), "utf8");
 }
 
-test("public vehicle knowledge is presented as Autocatalog with a legacy redirect", () => {
+test("public vehicle knowledge is presented as a live Autocatalog with a legacy redirect", () => {
   const page = source("apps/web/app/(public)/cars/autocatalog/page.tsx");
   const directory = source("apps/web/components/catalog/AutocatalogBrandDirectory.tsx");
   const legacy = source("apps/web/app/(public)/cars/encyclopedia/page.tsx");
@@ -14,8 +14,9 @@ test("public vehicle knowledge is presented as Autocatalog with a legacy redirec
 
   assert.match(page, />Автокаталог</);
   assert.match(page, /readCatalogBrandDirectory/);
-  assert.match(page, /readEncyclopediaKnowledgeModels/);
-  assert.match(directory, /Все марки по алфавиту/);
+  assert.match(page, /readCatalogBrandCounts/);
+  assert.doesNotMatch(page, /readEncyclopediaKnowledgeModels/);
+  assert.match(directory, /Марки с автомобилями/);
   assert.match(directory, /brand\.aliases/);
   assert.match(directory, /#brands-/);
   assert.match(legacy, /redirect\("\/cars\/autocatalog"\)/);

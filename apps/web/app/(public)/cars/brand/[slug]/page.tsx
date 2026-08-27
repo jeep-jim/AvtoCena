@@ -9,7 +9,7 @@ import { PublicHeader } from "@/components/layout/PublicHeader";
 import { autocatalogCoverUrl, readAutocatalogCoverIndex } from "@/lib/catalog/autocatalog-publication";
 import { catalogBrandMatches, resolveCatalogBrandBySlug } from "@/lib/catalog/catalog-brand-directory";
 import { readBrandModelDirectory } from "@/lib/catalog/model-directory";
-import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
+import { isRenderablePublicCatalogOffer } from "@/lib/catalog/offer-quality";
 import { CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 import type { CatalogMarket } from "@/lib/catalog/types";
@@ -57,7 +57,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
   const uniqueOffers = new Map<string, any>();
   for (const entry of makeResults) {
     for (const offer of (entry.result.items || []) as any[]) {
-      if (isCrediblePublicOffer(offer as any)) uniqueOffers.set(String(offer.id), offer);
+      if (isRenderablePublicCatalogOffer(offer as any)) uniqueOffers.set(String(offer.id), offer);
     }
   }
   const offers = [...uniqueOffers.values()];
@@ -76,7 +76,8 @@ export default async function BrandLandingPage({ params }: PageProps) {
     const previewUrl = String(offer.images?.[0]?.url || offer.cardImageUrl || "");
     if (modelId && previewUrl && !previewByModel.has(modelId)) previewByModel.set(modelId, previewUrl);
   }
-  const modelsWithPreviews = models.map((model) => {
+  const saleModels = models.filter((model) => model.count > 0);
+  const modelsWithPreviews = saleModels.map((model) => {
     const published = publishedCovers.get(model.id);
     return { ...model, previewUrl: (published ? autocatalogCoverUrl(published) : undefined) || previewByModel.get(model.id) };
   });
@@ -88,7 +89,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
   })).filter((group) => group.offers.length);
 
   const fallbackResult = offers.length ? null : await searchOffers({ pageSize: 16, sort: "updatedAt" });
-  const similar = (fallbackResult?.items || []).filter((offer: any) => isCrediblePublicOffer(offer)).slice(0, 12);
+  const similar = (fallbackResult?.items || []).filter((offer: any) => isRenderablePublicCatalogOffer(offer)).slice(0, 12);
   const availableMarkets = grouped.map((group) => group.market);
 
   return <main className="ac-brand-catalog-page ac-page-copy min-h-screen overflow-x-hidden bg-[#07080d] text-white">
@@ -106,10 +107,10 @@ export default async function BrandLandingPage({ params }: PageProps) {
           <div className="text-xs font-black uppercase tracking-[0.18em] text-red-500">Марка автомобиля</div>
           <h1 className="mt-2 break-words text-4xl font-black leading-[.98] tracking-[-0.045em] md:text-6xl">{brand.name}</h1>
           <p className="mt-4 max-w-4xl text-sm font-medium leading-7 text-[var(--ac-muted)] md:text-base">
-            Модели {brand.name}, их характеристики и автомобили из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана. Все варианты марки собраны на одной странице независимо от рынка.
+            Автомобили {brand.name}, которые сейчас есть в каталоге, по моделям и рынкам. Справочные записи без предложений не засоряют эту страницу.
           </p>
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-black">
-            <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{models.length} моделей</span>
+            <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{saleModels.length} моделей в продаже</span>
             {totalOffers ? <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{totalOffers.toLocaleString("ru-RU")} автомобилей</span> : null}
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{availableMarkets.length || 7} {availableMarkets.length === 1 ? "рынок" : "рынков"}</span>
           </div>

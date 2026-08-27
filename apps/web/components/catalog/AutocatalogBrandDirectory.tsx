@@ -72,8 +72,8 @@ export function AutocatalogBrandDirectory({ brands }: { brands: AutocatalogBrand
     </div>
 
     <div className="mt-7">
-      <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">База марок</div>
-      <h2 id="autocatalog-brands-title" className="mt-1 text-3xl font-black md:text-5xl">{normalizedQuery ? `Найдено: ${filtered.length}` : "Все марки по алфавиту"}</h2>
+      <div className="text-xs font-black uppercase tracking-[0.16em] text-red-500">Каталог в продаже</div>
+      <h2 id="autocatalog-brands-title" className="mt-1 text-3xl font-black md:text-5xl">{normalizedQuery ? `Найдено: ${filtered.length}` : "Марки с автомобилями"}</h2>
     </div>
 
     {grouped.length ? <div className="mt-5 space-y-9">
@@ -100,8 +100,8 @@ export function AutocatalogBrandDirectory({ brands }: { brands: AutocatalogBrand
         </div>
       </section>)}
     </div> : <div className="mt-8 py-8 text-center">
-      <div className="text-xl font-black">Марка не найдена</div>
-      <p className="mt-2 text-sm font-bold text-[var(--ac-muted)]">Попробуйте другое написание.</p>
+      <div className="text-xl font-black">Марка с автомобилями не найдена</div>
+      <p className="mt-2 text-sm font-bold text-[var(--ac-muted)]">Проверьте написание или вернитесь в общий каталог.</p>
     </div>}
   </section>;
 }
