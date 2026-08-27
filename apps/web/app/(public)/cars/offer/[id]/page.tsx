@@ -14,7 +14,7 @@ import { AFFILIATE_LINK_REL, AUTOCREDIT_AFFILIATE_URL, OSAGO_AFFILIATE_URL } fro
 import { catalogBrandSlug } from "@/lib/catalog/brands";
 import { enrichOfferForDisplay } from "@/lib/catalog/display-enrichment";
 import { rankedCatalogImageUrls } from "@/lib/catalog/image-quality";
-import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
+import { isRenderablePublicCatalogOffer } from "@/lib/catalog/offer-quality";
 import { getOfferForPage } from "@/lib/catalog/offer-page-data";
 import { catalogPowerDisplay } from "@/lib/catalog/power-display";
 import { publicCatalogPowerHp } from "@/lib/catalog/power-sanity";
@@ -23,7 +23,7 @@ import { calculateOfferWithRussiaCustoms, calculateOfferWithUserPowerScenario } 
 import { DEFAULT_CATALOG_POWER_FALLBACK_HP, readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
-import { publicOffer, searchOffers } from "@/lib/catalog/storage";
+import { publicOffer, readCatalogBrandModelCounts, searchOffers } from "@/lib/catalog/storage";
 
 type SpecIconName = "year" | "mileage" | "engine" | "fuel" | "power" | "transmission" | "drive" | "body" | "electricMotor" | "thirtyMinute";
 
@@ -97,6 +97,25 @@ function similarModelKey(offer: any) {
   return make && model ? `${make}|${model}` : `id:${String(offer?.id || "")}`;
 }
 
+function relatedModelName(value: unknown) {
+  return String(value || "")
+    .normalize("NFKC")
+    .toLocaleLowerCase("ru-RU")
+    .replace(/[^\\p{L}\\p{N}]+/gu, " ")
+    .replace(/\\s+/g, " ")
+    .trim();
+}
+
+function relatedModelFamily(rawModel: unknown, rows: Array<{ model: string; count: number }>) {
+  const current = relatedModelName(rawModel);
+  if (!current) return "";
+  const candidates = rows
+    .map((row) => ({ ...row, key: relatedModelName(row.model) }))
+    .filter((row) => row.key.length >= 4 && (current === row.key || current.startsWith(`${row.key} `)))
+    .sort((left, right) => Number(right.count || 0) - Number(left.count || 0) || right.key.length - left.key.length);
+  return String(candidates[0]?.model || rawModel || "").trim();
+}
+
 function diverseSimilarOffers(rows: any[], current: any, limit = 4, excludedIds = new Set<string>()) {
   const currentKey = similarModelKey(current);
   const seen = new Set<string>(currentKey ? [currentKey] : []);
@@ -119,13 +138,16 @@ async function SimilarOffers({ current }: { current: any }) {
   let sameModel: any[] = [];
   let otherMarketModels: any[] = [];
   let marketTotal = 0;
+  let familyModel = String(current.model || "").trim();
   try {
+    const directory = await readCatalogBrandModelCounts(String(current.make || ""));
+    familyModel = relatedModelFamily(current.model, directory.models || []) || familyModel;
     const [modelResult, marketResult] = await Promise.all([
-      searchOffers({ market: current.market, make: current.make, model: current.model, pageSize: 48, sort: "updatedAt" }),
+      searchOffers({ market: current.market, make: current.make, model: familyModel, pageSize: 48, sort: "updatedAt" }),
       searchOffers({ market: current.market, pageSize: 48, sort: "updatedAt" }),
     ]);
-    const modelRows = modelResult.items.filter((item: any) => item.id !== current.id && isCrediblePublicOffer(item));
-    const marketRows = marketResult.items.filter((item: any) => item.id !== current.id && isCrediblePublicOffer(item));
+    const modelRows = modelResult.items.filter((item: any) => item.id !== current.id && isRenderablePublicCatalogOffer(item));
+    const marketRows = marketResult.items.filter((item: any) => item.id !== current.id && isRenderablePublicCatalogOffer(item));
     marketTotal = Math.max(0, Number(marketResult.total || 0));
     sameModel = modelRows.slice(0, 4);
     const selectedIds = new Set([String(current.id), ...sameModel.map((item: any) => String(item.id))]);
@@ -135,8 +157,8 @@ async function SimilarOffers({ current }: { current: any }) {
   }
 
   const presented = presentCatalogOffer(current);
-  const modelTitle = [presented.makeLabel, presented.modelLabel].filter(Boolean).join(" ");
-  const modelParams = new URLSearchParams({ market: String(current.market || ""), make: String(current.make || ""), model: String(current.model || "") });
+  const modelTitle = [presented.makeLabel, familyModel || presented.modelLabel].filter(Boolean).join(" ");
+  const modelParams = new URLSearchParams({ market: String(current.market || ""), make: String(current.make || ""), model: familyModel || String(current.model || "") });
   const marketParams = new URLSearchParams({ market: String(current.market || "") });
   const marketLabel = String(presented.marketLabel || current.market || "рынка");
   const rail = (rows: any[]) => rows.length ? <div className="ac-result-rail ac-hide-scrollbar mt-5 md:!grid md:!grid-flow-row md:!grid-cols-2 md:!auto-cols-auto md:!overflow-visible xl:!grid-cols-4">{rows.map((item: any) => <CatalogCard key={item.id} offer={item} compact />)}</div> : <div className="mt-5 rounded-[1.7rem] bg-white/[0.04] p-6 text-white/55">Подходящие предложения появятся здесь после обновления каталога.</div>;
