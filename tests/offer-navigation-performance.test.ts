@@ -31,7 +31,7 @@ test("similar offers stream after the primary offer instead of blocking it", () 
   assert.match(page, /async function SimilarOffers/);
   assert.match(page, /readCatalogBrandModelCounts/);
   assert.match(page, /relatedModelFamily/);
-  assert.match(page, /model: familyModel/);
+  assert.match(page, /new URLSearchParams/);
   assert.match(page, /Ещё \{modelTitle\}/);
   assert.doesNotMatch(page, /const fillers = diverseSimilarOffers/);
   assert.match(page, /<CatalogMarketFlag market=\{String\(current\.market/);
