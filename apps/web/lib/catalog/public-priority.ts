@@ -240,7 +240,9 @@ export function catalogPublicEconomicRejectionReason(offer: Partial<VehicleOffer
     CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO,
     Math.max(1, Number.isFinite(requestedRatio) ? requestedRatio : CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO),
   );
-  if (carPriceRub > 0\n    && totalRub / carPriceRub >= maximumRatio\n    && !japanAuctionSoldPriceVerified(offer)) return "total_to_car_price_ratio";
+  if (carPriceRub > 0
+    && totalRub / carPriceRub >= maximumRatio
+    && !japanAuctionSoldPriceVerified(offer)) return "total_to_car_price_ratio";
   return "";
 }
 
