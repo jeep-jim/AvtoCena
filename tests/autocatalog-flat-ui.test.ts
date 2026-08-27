@@ -24,7 +24,9 @@ test("search and alphabet stay sticky while letter groups are no longer giant co
 
 test("public encyclopedia hides raw source-master brands and counts only live models", () => {
   assert.match(page, /readCatalogBrandCounts/);
-  assert.match(page, /live\.modelCounts/);
+  assert.match(page, /readBrandModelDirectory/);
+  assert.match(page, /canonicalModelCounts/);
+  assert.doesNotMatch(page, /live\.modelCounts/);
   assert.match(page, /brand\.offerCount > 0 && brand\.modelCount > 0/);
   assert.doesNotMatch(page, /readSourceBackedEncyclopediaModels/);
   assert.doesNotMatch(page, /readEncyclopediaKnowledgeModels/);

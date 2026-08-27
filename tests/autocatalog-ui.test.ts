@@ -15,6 +15,7 @@ test("public vehicle knowledge is presented as a live Autocatalog with a legacy 
   assert.match(page, />Автокаталог</);
   assert.match(page, /readCatalogBrandDirectory/);
   assert.match(page, /readCatalogBrandCounts/);
+  assert.match(page, /readBrandModelDirectory/);
   assert.doesNotMatch(page, /readEncyclopediaKnowledgeModels/);
   assert.match(directory, /Марки с автомобилями/);
   assert.match(directory, /brand\.aliases/);
@@ -63,6 +64,10 @@ test("brand and model pages use Autocatalog copy, saved previews and no aggregat
 
   assert.match(brandPage, /modelsWithPreviews/);
   assert.match(brandPage, /\/cars\/autocatalog/);
+  assert.match(brandPage, /MARKET_ORDER\.map\(async \(market\)/);
+  assert.match(brandPage, /group\.total\.toLocaleString\("ru-RU"\)/);
+  assert.doesNotMatch(brandPage, /makeResults\.reduce/);
+  assert.doesNotMatch(brandPage, /availableMarkets\.length \|\| 7/);
   assert.match(modelPage, /heroImageUrl/);
   assert.match(modelPage, /Автокаталог/);
   assert.match(modelDirectory, /model\.previewUrl/);
