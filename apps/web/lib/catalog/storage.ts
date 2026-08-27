@@ -5,7 +5,7 @@ import { publishAiProductFeed } from "../ai-discovery";
 import type { CatalogImage, CatalogMarket, CatalogSearchParams, PublicVehicleOffer, VehicleOffer } from "./types";
 import { hasAllowedCatalogSourceProvenance, hasCredibleOfferContent, isCatalogYearAllowed } from "./offer-quality";
 import { rankedCatalogImageUrls } from "./image-quality";
-import { catalogOfferVisibleRub, catalogRequiredSpecificationRejectionReason, isJapanAuctionOffer, japanAuctionSoldIdentityVerified } from "./public-priority";
+import { catalogOfferVisibleRub, catalogRequiredSpecificationRejectionReason, isJapanAuctionOffer, japanAuctionSoldIdentityVerified, japanAuctionSoldPriceVerified } from "./public-priority";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { CATALOG_CHUNK_SIZE, PUBLIC_CATALOG_MARKETS } from "./runtime-config";
 import { enforceCatalogModelYearQuota, selectCatalogShowcaseDiversity } from "./inventory-quota";
@@ -157,9 +157,12 @@ export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
   // it. Keep the normalized card, calculation and verification metadata only.
   const operational = { ...(offer.operational || {}) } as any;
   const publicJapanSoldIdentityVerified = isJapanAuctionOffer(offer) && japanAuctionSoldIdentityVerified(offer);
+  const publicJapanSoldPriceVerified = isJapanAuctionOffer(offer) && japanAuctionSoldPriceVerified(offer);
   delete operational.raw;
   delete operational.publicJapanSoldIdentityVerified;
+  delete operational.publicJapanSoldPriceVerified;
   if (publicJapanSoldIdentityVerified) operational.publicJapanSoldIdentityVerified = true;
+  if (publicJapanSoldPriceVerified) operational.publicJapanSoldPriceVerified = true;
   return { ...offer, operational };
 }
 export function stableOfferId(sourceId: string, sourceOfferId: string) { return crypto.createHash("sha256").update(`${sourceId}:${sourceOfferId}`).digest("hex").slice(0, 24); }
