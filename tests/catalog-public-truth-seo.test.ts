@@ -39,6 +39,17 @@ test("catalog power sanity distinguishes sourced 100 hp from the legacy fallback
   const fallback = catalogPowerSanity({ powerHp: 100, engineCc: 1598, powertrainKind: "combustion", powerDataSource: "power_scenario:fallback_100" } as any);
   assert.equal(fallback.suspicious, true);
   assert.equal(fallback.reason, "unconfirmed_power_scenario");
+
+  const compactFallback = catalogPowerSanity({
+    powerHp: 100,
+    engineCc: 1598,
+    powertrainKind: "combustion",
+    calculationSnapshot: {
+      powerScenario: { horsepower: 100, utilizationPowerKw: 73.55 },
+    },
+  } as any);
+  assert.equal(compactFallback.suspicious, true);
+  assert.equal(compactFallback.reason, "unconfirmed_power_scenario");
 });
 
 test("catalog power sanity allows only combustion knowledge references", () => {
@@ -51,6 +62,22 @@ test("catalog power sanity allows only combustion knowledge references", () => {
     powerDataSource: "power_scenario:knowledge_reference",
   } as any);
   assert.equal(combustionReference.suspicious, false);
+
+  const compactCombustionReference = catalogPowerSanity({
+    powerHp: 190,
+    engineCc: 1984,
+    fuel: "petrol",
+    powertrainKind: "combustion",
+    powerDataConfidence: "estimated",
+    calculationSnapshot: {
+      powerScenario: {
+        horsepower: 190,
+        utilizationPowerKw: 139.74,
+        source: "knowledge_reference",
+      },
+    },
+  } as any);
+  assert.equal(compactCombustionReference.suspicious, false);
 
   const electricReference = catalogPowerSanity({
     powerHp: 190,

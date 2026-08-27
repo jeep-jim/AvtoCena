@@ -121,6 +121,15 @@ test("legacy compact projections are revalidated against the current public powe
     ...safeProjection,
     powerHp: 100,
     powerDataSource: undefined,
+    calculationSnapshot: {
+      pricingConfidence: "estimated",
+      powerScenario: { horsepower: 100, utilizationPowerKw: 73.55 },
+    },
+  }), false);
+  assert.equal(projectionCanRenderCard({
+    ...safeProjection,
+    powerHp: 100,
+    powerDataSource: undefined,
   }), false);
   assert.equal(projectionCanRenderCard({
     ...safeProjection,
