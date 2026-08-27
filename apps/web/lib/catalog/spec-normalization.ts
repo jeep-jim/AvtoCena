@@ -1,5 +1,6 @@
 import type { PowerDataConfidence, PowertrainKind, VehicleOffer } from "./types";
 import { catalogPowerSanity } from "./power-sanity";
+import { namedElectrifiedPowertrainKind } from "./powertrain-safety";
 
 function rawText(value: unknown, depth = 0): string {
   if (value == null || depth > 10) return "";
@@ -317,7 +318,13 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   const candidatePowerHp = rejectNumericModelPower
     ? inferPowerHp(primary) || inferPowerHp(full)
     : suppliedPowerHp || structuredPowerHp(offer) || inferPowerHp(primary) || inferPowerHp(full);
-  const powerSanity = catalogPowerSanity({ ...offer, engineCc }, candidatePowerHp);
+  const namedPowertrainKind = namedElectrifiedPowertrainKind(offer);
+  const correctedFromCombustion = Boolean(namedPowertrainKind && offer.powertrainKind === "combustion");
+  const powerSanity = catalogPowerSanity({
+    ...offer,
+    engineCc,
+    powertrainKind: namedPowertrainKind || offer.powertrainKind,
+  }, candidatePowerHp);
   const powerHp = powerSanity.suspicious ? undefined : candidatePowerHp;
   // If horsepower was rejected, do not retain a previously derived kW value
   // from the same bad marketplace number. Verified V2/official knowledge may
@@ -329,7 +336,7 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   // normalized from the corresponding source field (plus engineType for fuel /
   // powertrain wording). Raw page payloads can contain filters, menus and
   // recommended vehicles and therefore are never evidence for these fields.
-  const semanticPowertrainText = [offer.fuel, offer.engineType]
+  const semanticPowertrainText = [offer.model, offer.generation, offer.trim, offer.fuel, offer.engineType]
     .filter(Boolean)
     .join(" ")
     .replace(/\s+/g, " ")
@@ -339,7 +346,7 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   const scopedPowertrainKind = fuel === "electric"
     ? "electric"
     : inferPowertrainKind(semanticPowertrainText, explicitEngineCc);
-  const powertrainKind = explicitPowertrainKind || scopedPowertrainKind;
+  const powertrainKind = namedPowertrainKind || explicitPowertrainKind || scopedPowertrainKind;
   if (powertrainKind === "electric") fuel = "electric";
   else if (["series_hybrid", "other_hybrid"].includes(powertrainKind)) fuel = "hybrid";
 
@@ -348,8 +355,8 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   const power30MinKw = power30MinKwByMotor?.length
     ? Math.round(power30MinKwByMotor.reduce((sum, value) => sum + value, 0) * 100) / 100
     : undefined;
-  const icePowerKw = exactIcePowerKw(offer, full, powertrainKind, powerKw);
-  const utilizationPowerKw = reasonable(offer.utilizationPowerKw, 1, 4_000)
+  const icePowerKw = correctedFromCombustion ? undefined : exactIcePowerKw(offer, full, powertrainKind, powerKw);
+  const utilizationPowerKw = (correctedFromCombustion ? undefined : reasonable(offer.utilizationPowerKw, 1, 4_000))
     || (powertrainKind === "electric" || powertrainKind === "series_hybrid"
       ? power30MinKw
       : powertrainKind === "other_hybrid" && icePowerKw && power30MinKw
