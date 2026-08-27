@@ -121,8 +121,6 @@ async function SimilarOffers({ current }: { current: any }) {
   let marketTotal = 0;
   const familyModel = String(current.model || "").trim();
   try {
-    const directory = await readCatalogBrandModelCounts(String(current.make || ""));
-    familyModel = relatedModelFamily(current.model, directory.models || []) || familyModel;
     const [modelResult, marketResult] = await Promise.all([
       searchOffers({ market: current.market, make: current.make, model: familyModel, pageSize: 48, sort: "updatedAt" }),
       searchOffers({ market: current.market, pageSize: 48, sort: "updatedAt" }),
