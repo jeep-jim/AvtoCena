@@ -14,4 +14,7 @@ test("collected market artifacts can be republished without another source crawl
   assert.match(workflow, /npx tsx scripts\/catalog-live-postpersist-audit\.mjs/);
   assert.doesNotMatch(workflow, /catalog-rebuild-source-shard\.mjs/);
   assert.match(workflow, /market === 'japan' \? '2592000000' : '259200000'/);
+  assert.match(workflow, /timeout-minutes: 120/);
+  assert.match(workflow, /CATALOG_PUBLISH_LOCK_TTL_MS: "1800000"/);
+  assert.match(workflow, /CATALOG_PUBLISH_LOCK_HEARTBEAT_MS: "300000"/);
 });

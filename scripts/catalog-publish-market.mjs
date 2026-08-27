@@ -49,7 +49,13 @@ const publishOperationId = `catalog_v3_publish_${market}_${crypto.randomUUID()}`
 const publishLockWaitMs = Math.max(0, Number(process.env.CATALOG_PUBLISH_LOCK_WAIT_MS || 7_200_000));
 const publishLockPollMs = Math.max(1_000, Number(process.env.CATALOG_PUBLISH_LOCK_POLL_MS || 15_000));
 const publishLockTtlMs = Math.max(30 * 60_000, Number(process.env.CATALOG_PUBLISH_LOCK_TTL_MS || 90 * 60_000));
+const publishLockHeartbeatMs = Math.max(
+  30_000,
+  Math.min(Math.floor(publishLockTtlMs / 3), Number(process.env.CATALOG_PUBLISH_LOCK_HEARTBEAT_MS || 5 * 60_000)),
+);
 let publishLockHeld = false;
+let publishLockHeartbeatTimer = null;
+let publishLockHeartbeatPromise = Promise.resolve();
 
 if (!PUBLIC_CATALOG_MARKETS.includes(market)) {
   throw new Error(`catalog_market_invalid:${market || "missing"}`);
@@ -87,6 +93,24 @@ async function acquirePublishLock() {
         };
       });
       publishLockHeld = true;
+      publishLockHeartbeatTimer = setInterval(() => {
+        publishLockHeartbeatPromise = publishLockHeartbeatPromise.then(async () => {
+          if (!publishLockHeld) return;
+          await mutateDataJson(publishLockPath, { lockedUntil: "" }, (current) => {
+            if (current?.operationId !== publishOperationId) {
+              throw new Error(`catalog_publish_lock_lost:${String(current?.operationId || "missing")}`);
+            }
+            return {
+              ...current,
+              lockedUntil: new Date(Date.now() + publishLockTtlMs).toISOString(),
+              heartbeatAt: new Date().toISOString(),
+            };
+          });
+        }).catch((error) => {
+          console.error(`[publish-lock] ${market} heartbeat failed: ${String(error?.message || error)}`);
+        });
+      }, publishLockHeartbeatMs);
+      publishLockHeartbeatTimer.unref?.();
       return;
     } catch (error) {
       lastLock = String(error?.message || error);
@@ -101,6 +125,11 @@ async function acquirePublishLock() {
 
 async function releasePublishLock() {
   if (!publishLockHeld) return;
+  if (publishLockHeartbeatTimer) {
+    clearInterval(publishLockHeartbeatTimer);
+    publishLockHeartbeatTimer = null;
+  }
+  await publishLockHeartbeatPromise;
   await mutateDataJson(publishLockPath, { lockedUntil: "" }, (current) => current?.operationId === publishOperationId
     ? { operationId: publishOperationId, operationType: `catalog_v3_publish_${market}`, lockedUntil: "", finishedAt: new Date().toISOString() }
     : current);
