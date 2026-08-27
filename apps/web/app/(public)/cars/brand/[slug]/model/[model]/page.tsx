@@ -8,7 +8,7 @@ import { PublicHeader } from "@/components/layout/PublicHeader";
 import { autocatalogCoverUrl, findAutocatalogPublishedCover } from "@/lib/catalog/autocatalog-publication";
 import { catalogBrandMatches, resolveCatalogBrandBySlug } from "@/lib/catalog/catalog-brand-directory";
 import { findBrandModelBySlug, readBrandModelDirectory } from "@/lib/catalog/model-directory";
-import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
+import { isRenderablePublicCatalogOffer } from "@/lib/catalog/offer-quality";
 import { CATALOG_MARKET_LABELS } from "@/lib/catalog/runtime-config";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 import type { CatalogMarket } from "@/lib/catalog/types";
@@ -63,7 +63,7 @@ export default async function ModelLandingPage({ params }: PageProps) {
   const uniqueOffers = new Map<string, any>();
   for (const result of results) {
     for (const offer of (result.items || []) as any[]) {
-      if (isCrediblePublicOffer(offer)) uniqueOffers.set(String(offer.id), offer);
+      if (isRenderablePublicCatalogOffer(offer)) uniqueOffers.set(String(offer.id), offer);
     }
   }
   const offers = [...uniqueOffers.values()];
@@ -72,8 +72,8 @@ export default async function ModelLandingPage({ params }: PageProps) {
     || offers.find((offer: any) => offer.cardImageUrl)?.cardImageUrl
     || "");
   const grouped = MARKET_ORDER.map((market) => ({ market, offers: offers.filter((offer: any) => offer.market === market) })).filter((group) => group.offers.length);
-  const brandFallback = offers.length ? [] : (await searchOffers({ make: rawMakes.join(","), pageSize: 16, sort: "updatedAt" })).items.filter((offer: any) => isCrediblePublicOffer(offer)).slice(0, 12);
-  const otherModels = directory.filter((item) => item.id !== model.id).slice(0, 18);
+  const brandFallback = offers.length ? [] : (await searchOffers({ make: rawMakes.join(","), pageSize: 16, sort: "updatedAt" })).items.filter((offer: any) => isRenderablePublicCatalogOffer(offer)).slice(0, 12);
+  const otherModels = directory.filter((item) => item.id !== model.id && item.count > 0).slice(0, 18);
   const canonicalUrl = `https://avtocena.com/cars/brand/${brand.slug}/model/${model.slug}`;
   const structuredData = {
     "@context": "https://schema.org",
