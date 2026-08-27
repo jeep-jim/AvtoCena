@@ -5,7 +5,7 @@ import { carusedExactListingUrls, carusedListingGalleryUrls, carusedSourceImageU
 
 const reusable = fs.readFileSync(new URL("../.github/workflows/catalog-v3-market-10k-reusable.yml", import.meta.url), "utf8");
 const visibleAudit = fs.readFileSync(new URL("../scripts/catalog-audit-visible-calculation-coverage.mjs", import.meta.url), "utf8");
-const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
+const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");\nconst catalogPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
 const sitemapIndex = fs.readFileSync(new URL("../apps/web/app/(public)/cars/models-sitemap.xml/route.ts", import.meta.url), "utf8");
 const sitemapShard = fs.readFileSync(new URL("../apps/web/app/(public)/cars/models-sitemap/[id]/route.ts", import.meta.url), "utf8");
 const fastGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
@@ -20,6 +20,14 @@ test("pending source-priced inventory stays internal until delivered RUB total i
   assert.match(catalogCard, /if \(!visibleRub\) return null/);
   assert.match(catalogCard, /totalRub: visibleRub \|\| null/);
   assert.match(catalogCard, /<CatalogPrice offer=\{displayOffer\}/);
+});
+
+test("catalog renders server-attested V3 card projections without rerunning full source provenance", () => {
+  assert.match(catalogPage, /function isCredibleCatalogPageOffer/);
+  assert.match(catalogPage, /cardProjectionVersion \|\| 0\) >= 3/);
+  assert.match(catalogPage, /publicSpecificationVerified === true/);
+  assert.match(catalogPage, /publicVisibleRub \|\| 0\) > 0/);
+  assert.match(catalogPage, /filter\(isCredibleCatalogPageOffer\)/);
 });
 
 test("visible calculation release gate rejects all incomplete public inventory", () => {
