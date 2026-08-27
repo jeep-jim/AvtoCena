@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { catalogOfferVisibleRub, findCatalogPriceOutliers } from "../apps/web/lib/catalog/public-priority";
 import { hasCredibleOfferContent } from "../apps/web/lib/catalog/offer-quality";
+import { projectionCanRenderCard } from "../apps/web/lib/catalog/storage";
 
 // Regression coverage for the exact public failures reported from production cards.
 const priceLines = ["car", "topavto-commission", "broker", "svh", "laboratory", "sbkts", "epts", "rf-delivery", "customs"]
@@ -88,6 +89,45 @@ test("compact card projections expose only already validated non-preliminary pri
     calculationStatus: "preliminary_power_pending",
     calculationSnapshot: { pricingConfidence: "preliminary" },
   }), 0);
+});
+
+test("legacy compact projections are revalidated against the current public power policy", () => {
+  const safeProjection = {
+    id: "projection-safe",
+    market: "korea",
+    make: "Audi",
+    model: "A6",
+    year: 2023,
+    engineCc: 1_984,
+    powertrainKind: "combustion",
+    powerHp: 190,
+    powerDataSource: "knowledge_core:model_variant:documented",
+    totalRub: 5_121_575,
+    publicVisibleRub: 5_121_575,
+    calculationStatus: "estimated",
+    calculationSnapshot: { pricingConfidence: "estimated" },
+    publicSpecificationVerified: true,
+    cardProjectionVersion: 3,
+    cardImageUrl: "https://example.com/audi-a6.jpg",
+  } as any;
+
+  assert.equal(projectionCanRenderCard(safeProjection), true);
+  assert.equal(projectionCanRenderCard({
+    ...safeProjection,
+    powerHp: 100,
+    powerDataSource: "power_scenario:fallback_100",
+  }), false);
+  assert.equal(projectionCanRenderCard({
+    ...safeProjection,
+    powerHp: 100,
+    powerDataSource: undefined,
+  }), false);
+  assert.equal(projectionCanRenderCard({
+    ...safeProjection,
+    powerHp: 100,
+    powerDataSource: "encar_detail:horsepower:explicit-unit",
+  }), true);
+  assert.equal(projectionCanRenderCard({ ...safeProjection, cardImageUrl: undefined }), false);
 });
 
 test("public priority rejects a delivered total eight times the source car price", async () => {

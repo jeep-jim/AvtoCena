@@ -2,6 +2,7 @@ import type { CatalogImage, VehicleOffer } from "./types";
 import { catalogImageScore, isLikelyVehicleImage } from "./image-quality";
 import { REQUIRED_CATALOG_SOURCES, isAllowedCatalogSourceId, isAllowedCatalogSourceUrl } from "./required-catalog-sources";
 import { isEncarNonCashContractOffer } from "./encar-sale-contract";
+import { catalogOfferVisibleRub, catalogRequiredSpecificationRejectionReason } from "./public-priority";
 
 const GENERIC_LISTING_RE = /(?:exclusively\s+on|read\s+more|learn\s+more|breaking\s+news|latest\s+news|car\s+news|road\s+test|article|blog|magazine|toonaan|deze\s+elektr|highly\s+responsive|certified\s+pre\s+owned|\b(?:aed|usd|eur)\s*\d+\s*\/\s*month\b|\b0\s*dp\b|\b\d+\s*day\s*return\b|\breturn\s+warranty\b|^location$|^alle\s+|未上传图片|暂无图片|扫码|二维码|联系卖家|&(?:#\d+|[a-z]+);)/i;
 const NON_VEHICLE_RE = /(?:motorcycle|motorbike|scooter|jet\s*ski|watercraft|personal\s+watercraft|super\s+jet|forklift|excavator|bulldozer|tractor|crane|generator|boat|ship|machinery|spare\s+parts?|engine\s+only|автозапчаст|мотоцикл|погрузчик|генератор)/i;
@@ -311,7 +312,8 @@ export function isCrediblePublicOffer(offer: VehicleOffer) {
 export function isRenderablePublicCatalogOffer(offer: VehicleOffer | any) {
   if (Number(offer?.cardProjectionVersion || 0) >= 3) {
     return offer?.publicSpecificationVerified === true
-      && Number(offer?.publicVisibleRub || 0) > 0;
+      && catalogOfferVisibleRub(offer) > 0
+      && !catalogRequiredSpecificationRejectionReason(offer);
   }
   return isCrediblePublicOffer(offer as VehicleOffer);
 }

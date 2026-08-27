@@ -118,10 +118,10 @@ test("catalog generation becomes public only after canonical identity and dedupl
   assert.match(storage, /current\.generationId === manifest\.generationId/);
 });
 
-test("offer detail trusts already-published compact records and falls back when a current shard misses an id", () => {
+test("offer detail revalidates current public price and power without rerunning source-only gates", () => {
   assert.match(storage, /const currentOffer = \(current\.items \|\| \[\]\)\.find\(\(item\) => item\.id === id\)/);
-  assert.match(storage, /if \(currentOffer\) return currentOffer/);
-  assert.match(storage, /return chunk\.find\(\(offer\) => offer\.id === id\) \|\| null/);
+  assert.match(storage, /currentOffer && publishedOfferCanRenderUnderCurrentPolicy\(currentOffer\)/);
+  assert.match(storage, /offer && publishedOfferCanRenderUnderCurrentPolicy\(offer\) \? offer : null/);
   assert.doesNotMatch(storage, /find\(\(item\) => item\.id === id && isPublicOffer\(item\)\)/);
   assert.doesNotMatch(storage, /find\(\(offer\) => offer\.id === id && isPublicOffer\(offer\)\)/);
 });
