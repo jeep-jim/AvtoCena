@@ -129,6 +129,17 @@ test("exact Japan sold-price evidence is not rejected only because fixed import 
   assert.equal(japanAuctionSoldPriceVerified(sold), true);
   assert.equal(catalogPublicPriority(sold).eligible, true);
 
+  const persistedProof = {
+    ...sold,
+    operational: {
+      sourceUrl: sold.operational.sourceUrl,
+      publicJapanSoldIdentityVerified: true,
+      publicJapanSoldPriceVerified: true,
+    },
+  };
+  assert.equal(japanAuctionSoldPriceVerified(persistedProof), true);
+  assert.equal(catalogPublicPriority(persistedProof).eligible, true);
+
   const mismatchedFinalPrice = {
     ...sold,
     operational: { ...sold.operational, raw: { ...sold.operational.raw, finalPriceJpy: 104_000 } },
