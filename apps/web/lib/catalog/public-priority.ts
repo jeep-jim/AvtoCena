@@ -195,7 +195,7 @@ export function japanAuctionSoldIdentityVerified(offer: Partial<VehicleOffer> | 
 }
 
 export function japanAuctionSoldPriceVerified(offer: Partial<VehicleOffer> | any) {
-  if (!japanAuctionSoldIdentityVerified(offer)) return false;
+  if (!isJapanAuctionOffer(offer) || !japanAuctionSoldIdentityVerified(offer)) return false;
   const raw = offer?.operational?.raw || {};
   const sourcePriceJpy = positive(offer?.sourcePrice, 1_000_000_000);
   const finalPriceJpy = positive(raw?.finalPriceJpy, 1_000_000_000);
