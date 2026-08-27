@@ -190,6 +190,12 @@ test("standard one-market publisher expires stale target rows, reapplies quality
   assert.match(standardMarketPublisher, /catalog\/import-lock\.json/);
   assert.match(standardMarketPublisher, /acquirePublishLock\(\)/);
   assert.match(standardMarketPublisher, /finally \{[\s\S]*releasePublishLock\(\)/);
+  assert.match(standardMarketPublisher, /CATALOG_PUBLISH_LOCK_HEARTBEAT_MS/);
+  assert.match(standardMarketPublisher, /setInterval\([\s\S]*heartbeatAt/);
+  assert.match(standardMarketPublisher, /clearInterval\(publishLockHeartbeatTimer\)/);
+  assert.match(v3MarketWorkflow, /timeout-minutes: 120/);
+  assert.match(v3MarketWorkflow, /CATALOG_PUBLISH_LOCK_TTL_MS: "1800000"/);
+  assert.match(v3MarketWorkflow, /CATALOG_PUBLISH_LOCK_HEARTBEAT_MS: "300000"/);
   assert.match(storage, /canonicalizePublicCatalogOffers\(publicOffers, exactPreserveMarkets, protectedPublicIds\)[\s\S]*beforePublishValidate\(publishedOffers\)[\s\S]*const generationId/);
   assert.match(storage, /writeCurrentCatalogReadModels\(generationId, publishedOffers, true\)/);
   assert.match(storage, /alreadyCanonical \? new Set<CatalogMarket>\(storedOffers\.map\(\(offer\) => offer\.market/);
