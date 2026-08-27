@@ -3,6 +3,7 @@ import test from "node:test";
 import { enrichOfferWithExplicitEngineDisplacement } from "../apps/web/lib/catalog/explicit-engine-displacement";
 import { canonicalizeSemanticSourceFields, preferExplicitCombustionPowertrain } from "../apps/web/lib/catalog/powertrain-safety";
 import { normalizeVehicleOfferSpecs } from "../apps/web/lib/catalog/spec-normalization";
+import { applyPrestigeJapanExactIdentityKnowledge } from "../apps/web/lib/catalog/prestige-japan-identity-knowledge";
 
 test("extracts structured peak kW without treating it as 30-minute power", () => {
   const normalized = normalizeVehicleOfferSpecs({ make: "Example", model: "EV", operational: { raw: { specification: { maxPowerKw: 150 } } } });
@@ -68,6 +69,73 @@ test("explicit petrol engine overrides unrelated hybrid text in raw listing payl
 test("explicit hybrid title is never downgraded to combustion", () => {
   const safe = preferExplicitCombustionPowertrain({ make: "Toyota", model: "RAV4", trim: "2.5 Plug-in Hybrid", fuel: "petrol", engineCc: 2500, powertrainKind: "other_hybrid" as const });
   assert.equal(safe.powertrainKind, "other_hybrid");
+});
+
+test("identity-bound Hybrid name corrects a stale combustion classification", () => {
+  const normalized = normalizeVehicleOfferSpecs({
+    make: "Honda",
+    model: "Grace Hybrid",
+    fuel: "petrol",
+    engineCc: 1496,
+    powertrainKind: "combustion" as const,
+    powerHp: 110,
+    icePowerKw: 80.9,
+    utilizationPowerKw: 80.9,
+    powerDataSource: "marketplace detail:Power",
+  });
+  assert.equal(normalized.powertrainKind, "other_hybrid");
+  assert.equal(normalized.fuel, "hybrid");
+  assert.equal(normalized.icePowerKw, undefined);
+  assert.equal(normalized.utilizationPowerKw, undefined);
+});
+
+test("identity-bound e-Power name corrects a stale combustion classification", () => {
+  const normalized = normalizeVehicleOfferSpecs({
+    make: "Nissan",
+    model: "Note e-Power",
+    fuel: "petrol",
+    engineCc: 1198,
+    powertrainKind: "combustion" as const,
+  });
+  assert.equal(normalized.powertrainKind, "series_hybrid");
+  assert.equal(normalized.fuel, "hybrid");
+});
+
+test("exact Prestige Crown chassis supplies identity and powertrain but never power", () => {
+  const enriched = applyPrestigeJapanExactIdentityKnowledge({
+    sourceId: "prestige_japan_auctions_open",
+    market: "japan",
+    make: "Toyota",
+    model: "Crown",
+    powertrainKind: "combustion" as const,
+    operational: { raw: {
+      detailIdentityVerified: true,
+      photoIdentityVerified: true,
+      listingBoundImages: true,
+      recoveryExactSourceUrl: true,
+      recoveryExactPhotoIdentity: true,
+      fields: { Make: "TOYOTA", Model: "CROWN SPORT", Chassis: "AZSH37W" },
+    } },
+  });
+  assert.equal(enriched.model, "Crown");
+  assert.equal(enriched.generation, "Crown Sport PHEV");
+  assert.equal(enriched.powertrainKind, "other_hybrid");
+  assert.equal(enriched.fuel, "hybrid");
+  assert.equal(enriched.engineCc, 2487);
+  assert.equal(enriched.powerHp, undefined);
+  assert.equal(enriched.power30MinKw, undefined);
+});
+
+test("Prestige chassis knowledge requires exact source and photo identity", () => {
+  const input = {
+    sourceId: "prestige_japan_auctions_open",
+    market: "japan",
+    make: "Toyota",
+    model: "Crown",
+    powertrainKind: "combustion" as const,
+    operational: { raw: { fields: { Make: "TOYOTA", Model: "CROWN SPORT", Chassis: "AZSH37W" } } },
+  };
+  assert.deepEqual(applyPrestigeJapanExactIdentityKnowledge(input), input);
 });
 
 test("K Car size class is dropped while exact Korean semantic fields are canonicalized", () => {
