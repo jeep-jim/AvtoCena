@@ -99,6 +99,51 @@ test("public priority rejects a delivered total eight times the source car price
   assert.equal(catalogPublicPriority(base).eligible, true);
 });
 
+test("exact Japan sold-price evidence is not rejected only because fixed import costs exceed the car-price ratio", async () => {
+  const { catalogPublicPriority, japanAuctionSoldPriceVerified } = await import("../apps/web/lib/catalog/public-priority");
+  const sold = {
+    ...calculatedOffer(1_050_000, "japan"),
+    sourceId: "prestige_japan_auctions_open",
+    sourcePrice: 103_000,
+    sourceCurrency: "JPY",
+    offerType: "auction",
+    catalogKind: "auction_result",
+    auctionResult: "sold",
+    auctionPriceKind: "published_result",
+    calculationStatus: "estimated",
+    calculationSnapshot: {
+      ...calculatedOffer(1_050_000, "japan").calculationSnapshot,
+      currencyRate: { sourcePriceRub: 100_000 },
+    },
+    operational: {
+      sourceUrl: "https://prestigemotorsport.com.au/auction-vehicle-display/?car_id=verified",
+      raw: {
+        finalPriceJpy: 103_000,
+        listingBoundImages: true,
+        photoIdentityVerified: true,
+        recoveryExactSourceUrl: true,
+        recoveryExactPhotoIdentity: true,
+      },
+    },
+  } as any;
+  assert.equal(japanAuctionSoldPriceVerified(sold), true);
+  assert.equal(catalogPublicPriority(sold).eligible, true);
+
+  const mismatchedFinalPrice = {
+    ...sold,
+    operational: { ...sold.operational, raw: { ...sold.operational.raw, finalPriceJpy: 104_000 } },
+  };
+  assert.equal(japanAuctionSoldPriceVerified(mismatchedFinalPrice), false);
+  assert.equal(catalogPublicPriority(mismatchedFinalPrice).reason, "total_to_car_price_ratio");
+
+  const unverifiedPhotos = {
+    ...sold,
+    operational: { ...sold.operational, raw: { ...sold.operational.raw, recoveryExactPhotoIdentity: false } },
+  };
+  assert.equal(japanAuctionSoldPriceVerified(unverifiedPhotos), false);
+  assert.equal(catalogPublicPriority(unverifiedPhotos).reason, "japan_auction_sold_identity_unverified");
+});
+
 test("preliminary price is never exposed as a delivered public total", () => {
   const offer = {
     market: "japan",
