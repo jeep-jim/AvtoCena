@@ -8,7 +8,7 @@ import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 import { CurrencyRatesStrip } from "@/components/catalog/CurrencyRatesStrip";
 import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
-import { isCrediblePublicOffer } from "@/lib/catalog/offer-quality";
+import { isRenderablePublicCatalogOffer } from "@/lib/catalog/offer-quality";
 import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
 
 export const dynamic = "force-dynamic";
@@ -115,17 +115,6 @@ function sortCatalogRows(rows: any[], sort: string) {
   return sorted.sort(businessOrder);
 }
 
-function isCredibleCatalogPageOffer(offer: any) {
-  // Compact V3 rows are already source- and price-attested while the complete
-  // offer is in memory. Their public projection intentionally omits sourceId
-  // and operational.sourceUrl, so rerunning the full-offer provenance check
-  // here would reject every valid card.
-  if (Number(offer?.cardProjectionVersion || 0) >= 3) {
-    return offer?.publicSpecificationVerified === true
-      && Number(offer?.publicVisibleRub || 0) > 0;
-  }
-  return isCrediblePublicOffer(offer);
-}
 
 function catalogModelGroupKey(offer: any) {
   const make = String(offer?.make || "").trim().toLocaleLowerCase("ru-RU").replace(/\s+/g, " ");
@@ -163,7 +152,7 @@ async function readDiverseDefaultMarketPage(market: string, page: number) {
   const resultPages = await Promise.all(Array.from({ length: MARKET_DIVERSITY_WINDOW_PAGES }, (_, index) =>
     searchOffers({ market, page: windowStartPage + index, pageSize: MARKET_PAGE_SIZE, sort: "updatedAt" })));
   const firstResult = resultPages[0];
-  const candidates = balanceBusinessRows(resultPages.flatMap((result) => (result.items as any[]).filter(isCredibleCatalogPageOffer)));
+  const candidates = balanceBusinessRows(resultPages.flatMap((result) => (result.items as any[]).filter(isRenderablePublicCatalogOffer)));
   return {
     items: candidates.slice(offsetWithinWindow, offsetWithinWindow + MARKET_PAGE_SIZE),
     total: firstResult?.total || 0,
@@ -199,7 +188,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     facets = overview.facets;
     groupedMarkets = await Promise.all(marketOrder.map(async (market) => {
       const snapshot = overview.markets[market.id] || { total: 0, items: [] };
-      const snapshotCandidates = balanceBusinessRows((snapshot.items as any[]).filter(isCredibleCatalogPageOffer));
+      const snapshotCandidates = balanceBusinessRows((snapshot.items as any[]).filter(isRenderablePublicCatalogOffer));
       // The overview is a replaceable speed cache. If its compact showcase was
       // produced before the active card-projection contract, keep its trustworthy
       // count/facets but recover visible cards from the current market projection.
@@ -208,7 +197,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
         : null;
       const candidates = snapshotCandidates.length
         ? snapshotCandidates
-        : balanceBusinessRows(((fallback?.items || []) as any[]).filter(isCredibleCatalogPageOffer));
+        : balanceBusinessRows(((fallback?.items || []) as any[]).filter(isRenderablePublicCatalogOffer));
       const visible = await applyActiveBusinessPricingBatch(candidates.slice(0, OVERVIEW_CARDS));
       return { ...market, items: balanceBusinessRows(visible), total: snapshot.total, page: 1, pageSize: OVERVIEW_CARDS };
     }));
@@ -227,7 +216,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
           }
           const indexedPageSize = Math.min(48, Math.max(pageSize * 4, 24));
           const indexed = await searchOffers({ market: market.id, page, pageSize: indexedPageSize, sort: "updatedAt" });
-          const candidates = balanceBusinessRows((indexed.items as any[]).filter(isCredibleCatalogPageOffer));
+          const candidates = balanceBusinessRows((indexed.items as any[]).filter(isRenderablePublicCatalogOffer));
           const visible = await applyActiveBusinessPricingBatch(candidates.slice(0, pageSize));
           return { ...market, items: balanceBusinessRows(visible), total: indexed.total, page: indexed.page, pageSize };
         }
