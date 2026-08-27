@@ -194,6 +194,17 @@ export function japanAuctionSoldIdentityVerified(offer: Partial<VehicleOffer> | 
   return structuralIdentity && (rawIdentity || persistedIdentity);
 }
 
+export function japanAuctionSoldPriceVerified(offer: Partial<VehicleOffer> | any) {
+  if (!japanAuctionSoldIdentityVerified(offer)) return false;
+  const raw = offer?.operational?.raw || {};
+  const sourcePriceJpy = positive(offer?.sourcePrice, 1_000_000_000);
+  const finalPriceJpy = positive(raw?.finalPriceJpy, 1_000_000_000);
+  return String(offer?.sourceCurrency || "").toUpperCase() === "JPY"
+    && sourcePriceJpy > 0
+    && finalPriceJpy > 0
+    && Math.abs(sourcePriceJpy - finalPriceJpy) <= 1;
+}
+
 function publicPriceLimits() {
   // The preferred limit only affects ordering. The 15M ceiling is a product
   // invariant for a displayed delivered price. Inventory with an unfinished
@@ -228,7 +239,7 @@ export function catalogPublicEconomicRejectionReason(offer: Partial<VehicleOffer
     CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO,
     Math.max(1, Number.isFinite(requestedRatio) ? requestedRatio : CATALOG_PUBLIC_MAX_TOTAL_TO_CAR_PRICE_RATIO),
   );
-  if (carPriceRub > 0 && totalRub / carPriceRub >= maximumRatio) return "total_to_car_price_ratio";
+  if (carPriceRub > 0\n    && totalRub / carPriceRub >= maximumRatio\n    && !japanAuctionSoldPriceVerified(offer)) return "total_to_car_price_ratio";
   return "";
 }
 
