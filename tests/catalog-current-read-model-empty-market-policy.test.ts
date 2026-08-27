@@ -90,7 +90,8 @@ test("editable power is structurally full-width rather than sharing a spec-grid 
   assert.doesNotMatch(offerPageSource, /spec\.label === "Мощность" \? <EditablePowerTile/);
 });
 
-test("visible calculation audit recognises compact power-scenario markers", () => {
-  assert.match(visibleAuditSource, /\^power_scenario:/);
-  assert.match(visibleAuditSource, /scenarioSource \|\| `power_scenario:/);
+test("visible calculation audit uses the current public specification contract", () => {
+  assert.match(visibleAuditSource, /specificationRejection = catalogRequiredSpecificationRejectionReason\(offer\)/);
+  assert.match(visibleAuditSource, /if \(specificationRejection\) return \{/);
+  assert.doesNotMatch(visibleAuditSource, /scenario\?\.requiresConfirmation === true \|\| \/\^power_scenario:\//);
 });

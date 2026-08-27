@@ -25,14 +25,18 @@ function totalThirtyMinuteKw(offer) {
   return motors.length ? motors.reduce((sum, value) => sum + value, 0) : undefined;
 }
 
-function exactPowerState(offer, requireExactProvenance = false) {
-  const scenario = offer?.calculationSnapshot?.powerScenario;
+function exactPowerState(offer, requireExactProvenance = false, specificationRejection = catalogRequiredSpecificationRejectionReason(offer)) {
   const scenarioSource = clean(offer?.powerDataSource);
-  if (scenario?.requiresConfirmation === true || /^power_scenario:/i.test(scenarioSource)) return {
+  // Keep the audit and the writer/read-model on one fail-closed specification
+  // contract. A combustion knowledge_reference is an explicitly estimated,
+  // model-matched input and may remain public after V3 server attestation.
+  // Unsafe fallbacks, customer input and EV/hybrid substitutions are rejected
+  // by catalogRequiredSpecificationRejectionReason before reaching this branch.
+  if (specificationRejection) return {
     exactEnoughForReady: false,
-    reasons: ["unconfirmed_power_scenario"],
-    powerDataConfidence: "estimated",
-    powerDataSource: scenarioSource || `power_scenario:${scenario?.source || "unknown"}`,
+    reasons: [specificationRejection],
+    powerDataConfidence: clean(offer?.powerDataConfidence).toLowerCase() || null,
+    powerDataSource: scenarioSource || null,
     totalThirtyMinuteKw: null,
   };
   const attestedProjection = Number(offer?.cardProjectionVersion || 0) >= 3
@@ -140,7 +144,7 @@ for (const offer of visible) {
   if (status === "ready" || status === "estimated") {
     ready++;
     marketRow.ready++;
-    const exact = exactPowerState(offer, status === "ready");
+    const exact = exactPowerState(offer, status === "ready", specificationRejection);
     const totalRub = positive(offer.totalRub);
     const hardReasons = [...exact.reasons];
     if (!identityResolved) hardReasons.push("unresolved_model_identity");
@@ -179,7 +183,7 @@ for (const offer of visible) {
       preliminary++;
       marketRow.preliminary++;
     }
-    const state = exactPowerState(offer);
+    const state = exactPowerState(offer, false, specificationRejection);
     const reasons = [...state.reasons];
     if (!identityResolved) reasons.push("unresolved_model_identity");
     if (!reasons.length) reasons.push("calculation_dependencies_pending");
