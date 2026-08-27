@@ -199,7 +199,16 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     facets = overview.facets;
     groupedMarkets = await Promise.all(marketOrder.map(async (market) => {
       const snapshot = overview.markets[market.id] || { total: 0, items: [] };
-      const candidates = balanceBusinessRows((snapshot.items as any[]).filter(isCredibleCatalogPageOffer));
+      const snapshotCandidates = balanceBusinessRows((snapshot.items as any[]).filter(isCredibleCatalogPageOffer));
+      // The overview is a replaceable speed cache. If its compact showcase was
+      // produced before the active card-projection contract, keep its trustworthy
+      // count/facets but recover visible cards from the current market projection.
+      const fallback = snapshot.total > 0 && snapshotCandidates.length === 0
+        ? await searchOffers({ market: market.id, page: 1, pageSize: 24, sort: "updatedAt" })
+        : null;
+      const candidates = snapshotCandidates.length
+        ? snapshotCandidates
+        : balanceBusinessRows(((fallback?.items || []) as any[]).filter(isCredibleCatalogPageOffer));
       const visible = await applyActiveBusinessPricingBatch(candidates.slice(0, OVERVIEW_CARDS));
       return { ...market, items: balanceBusinessRows(visible), total: snapshot.total, page: 1, pageSize: OVERVIEW_CARDS };
     }));

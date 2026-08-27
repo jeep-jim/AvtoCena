@@ -31,6 +31,12 @@ test("catalog renders server-attested V3 card projections without rerunning full
   assert.match(catalogPage, /filter\(isCredibleCatalogPageOffer\)/);
 });
 
+test("catalog overview recovers cards from the active projection when its showcase cache is empty", () => {
+  assert.match(catalogPage, /snapshot\.total > 0 && snapshotCandidates\.length === 0/);
+  assert.match(catalogPage, /await searchOffers\(\{ market: market\.id, page: 1, pageSize: 24, sort: "updatedAt" \}\)/);
+  assert.match(catalogPage, /fallback\?\.items \|\| \[\]/);
+});
+
 test("visible calculation release gate rejects all incomplete public inventory", () => {
   assert.match(visibleAudit, /unsafePendingVisiblePrices/);
   assert.match(visibleAudit, /unpricedPublicCards/);
