@@ -23,7 +23,7 @@ import { calculateOfferWithRussiaCustoms, calculateOfferWithUserPowerScenario } 
 import { DEFAULT_CATALOG_POWER_FALLBACK_HP, readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
-import { publicOffer, readCatalogBrandModelCounts, searchOffers } from "@/lib/catalog/storage";
+import { publicOffer, searchOffers } from "@/lib/catalog/storage";
 
 type SpecIconName = "year" | "mileage" | "engine" | "fuel" | "power" | "transmission" | "drive" | "body" | "electricMotor" | "thirtyMinute";
 
@@ -97,25 +97,6 @@ function similarModelKey(offer: any) {
   return make && model ? `${make}|${model}` : `id:${String(offer?.id || "")}`;
 }
 
-function relatedModelName(value: unknown) {
-  return String(value || "")
-    .normalize("NFKC")
-    .toLocaleLowerCase("ru-RU")
-    .replace(/[^\\p{L}\\p{N}]+/gu, " ")
-    .replace(/\\s+/g, " ")
-    .trim();
-}
-
-function relatedModelFamily(rawModel: unknown, rows: Array<{ model: string; count: number }>) {
-  const current = relatedModelName(rawModel);
-  if (!current) return "";
-  const candidates = rows
-    .map((row) => ({ ...row, key: relatedModelName(row.model) }))
-    .filter((row) => row.key.length >= 4 && (current === row.key || current.startsWith(`${row.key} `)))
-    .sort((left, right) => Number(right.count || 0) - Number(left.count || 0) || right.key.length - left.key.length);
-  return String(candidates[0]?.model || rawModel || "").trim();
-}
-
 function diverseSimilarOffers(rows: any[], current: any, limit = 4, excludedIds = new Set<string>()) {
   const currentKey = similarModelKey(current);
   const seen = new Set<string>(currentKey ? [currentKey] : []);
@@ -138,7 +119,7 @@ async function SimilarOffers({ current }: { current: any }) {
   let sameModel: any[] = [];
   let otherMarketModels: any[] = [];
   let marketTotal = 0;
-  let familyModel = String(current.model || "").trim();
+  const familyModel = String(current.model || "").trim();
   try {
     const directory = await readCatalogBrandModelCounts(String(current.make || ""));
     familyModel = relatedModelFamily(current.model, directory.models || []) || familyModel;
