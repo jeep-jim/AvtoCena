@@ -28,6 +28,20 @@ test("gross combustion power-density outliers fail closed for public display", (
   assert.equal(publicCatalogPowerHp(normal), 238);
 });
 
+test("a Hybrid identity can never be published with a combustion calculation", () => {
+  const result = catalogPowerSanity({
+    make: "Honda",
+    model: "Grace Hybrid",
+    fuel: "petrol",
+    engineCc: 1496,
+    powertrainKind: "combustion",
+    powerHp: 110,
+    powerDataSource: "marketplace detail:Power",
+  } as any);
+  assert.equal(result.suspicious, true);
+  assert.equal(result.reason, "powertrain_identity_conflict");
+});
+
 test("catalog power sanity distinguishes sourced 100 hp from the legacy fallback", () => {
   const unproven = catalogPowerSanity({ powerHp: 100, engineCc: 1598, powertrainKind: "combustion" } as any);
   assert.equal(unproven.suspicious, true);
