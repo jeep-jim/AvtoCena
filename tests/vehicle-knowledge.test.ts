@@ -15,6 +15,7 @@ import {
   resetVehicleKnowledgeCache,
   resolveVehicleModelQuery,
 } from "../apps/web/lib/catalog/vehicle-knowledge";
+import { readSourceBackedEncyclopediaModels } from "../apps/web/lib/catalog/knowledge-source-master";
 import type { VehicleOffer } from "../apps/web/lib/catalog/types";
 
 const modelDirectory = fs.readFileSync(new URL("../apps/web/lib/catalog/model-directory.ts", import.meta.url), "utf8");
@@ -172,6 +173,13 @@ test("model directory separates trusted V2 specifications from read-only observa
   assert.match(modelDirectory, /encyclopediaEvidenceOfficial/);
   assert.match(modelDirectory, /power30MinKw/);
   assert.match(modelDirectory, /utilizationPowerKw/);
+});
+
+test("source-backed models expose a make-free alias for live catalog identity", async () => {
+  const models = await readSourceBackedEncyclopediaModels();
+  const t01 = models.find((row) => row.make === "212" && row.model === "212 T01");
+  assert.ok(t01);
+  assert.ok(t01.aliases.includes("T01"));
 });
 
 test("public autocatalog does not expose unverified aggregate specification ranges", () => {
