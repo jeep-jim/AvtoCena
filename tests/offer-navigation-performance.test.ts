@@ -29,8 +29,7 @@ test("similar offers stream after the primary offer instead of blocking it", () 
   assert.doesNotMatch(beforeReturn, /await searchOffers/);
   assert.match(page, /<Suspense fallback=\{<SimilarOffersFallback \/>\}>/);
   assert.match(page, /async function SimilarOffers/);
-  assert.match(page, /readCatalogBrandModelCounts/);
-  assert.match(page, /relatedModelFamily/);
+  assert.match(page, /const familyModel/);
   assert.match(page, /new URLSearchParams/);
   assert.match(page, /Ещё \{modelTitle\}/);
   assert.doesNotMatch(page, /const fillers = diverseSimilarOffers/);
