@@ -7,6 +7,10 @@ const reusable = fs.readFileSync(new URL("../.github/workflows/catalog-v3-market
 const visibleAudit = fs.readFileSync(new URL("../scripts/catalog-audit-visible-calculation-coverage.mjs", import.meta.url), "utf8");
 const catalogCard = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogCard.tsx", import.meta.url), "utf8");
 const catalogPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/page.tsx", import.meta.url), "utf8");
+const offerPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");
+const brandPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/brand/[slug]/page.tsx", import.meta.url), "utf8");
+const modelPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/brand/[slug]/model/[model]/page.tsx", import.meta.url), "utf8");
+const offerQuality = fs.readFileSync(new URL("../apps/web/lib/catalog/offer-quality.ts", import.meta.url), "utf8");
 const sitemapIndex = fs.readFileSync(new URL("../apps/web/app/(public)/cars/models-sitemap.xml/route.ts", import.meta.url), "utf8");
 const sitemapShard = fs.readFileSync(new URL("../apps/web/app/(public)/cars/models-sitemap/[id]/route.ts", import.meta.url), "utf8");
 const fastGallery = fs.readFileSync(new URL("../apps/web/lib/catalog/priority-fast-gallery-wrapper.ts", import.meta.url), "utf8");
@@ -23,12 +27,17 @@ test("pending source-priced inventory stays internal until delivered RUB total i
   assert.match(catalogCard, /<CatalogPrice offer=\{displayOffer\}/);
 });
 
-test("catalog renders server-attested V3 card projections without rerunning full source provenance", () => {
-  assert.match(catalogPage, /function isCredibleCatalogPageOffer/);
-  assert.match(catalogPage, /cardProjectionVersion \|\| 0\) >= 3/);
-  assert.match(catalogPage, /publicSpecificationVerified === true/);
-  assert.match(catalogPage, /publicVisibleRub \|\| 0\) > 0/);
-  assert.match(catalogPage, /filter\(isCredibleCatalogPageOffer\)/);
+test("every public catalog surface renders server-attested V3 projections without rerunning private provenance", () => {
+  assert.match(offerQuality, /export function isRenderablePublicCatalogOffer/);
+  assert.match(offerQuality, /cardProjectionVersion \\|\\| 0\\) >= 3/);
+  assert.match(offerQuality, /publicSpecificationVerified === true/);
+  assert.match(offerQuality, /publicVisibleRub \\|\\| 0\\) > 0/);
+  for (const source of [catalogPage, offerPage, brandPage, modelPage]) {
+    assert.match(source, /isRenderablePublicCatalogOffer/);
+  }
+  assert.doesNotMatch(offerPage, /filter\\(\\(item: any\\) =>[^\\n]*isCrediblePublicOffer/);
+  assert.doesNotMatch(brandPage, /isCrediblePublicOffer/);
+  assert.doesNotMatch(modelPage, /isCrediblePublicOffer/);
 });
 
 test("catalog overview recovers cards from the active projection when its showcase cache is empty", () => {
