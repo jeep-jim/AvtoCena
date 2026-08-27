@@ -927,3 +927,22 @@ Production-результат ещё должен быть подтверждё�
 - **Что намеренно не трогалось:** парсеры, source adapters, central allowlist, cron, retention, shard count, цены/таможня, текущий writer и его артефакты.
 - **Что осталось:** дождаться terminal-результата Кыргызстана; после освобождения writer отдельным разрешённым действием перепубликовать Японию из сохранённых пяти shard-артефактов run `32917466479` на текущем `main`, не выполняя повторный парсинг; подтвердить фактический рост, новый generationId и нулевые forbidden/unpriced gates. Ремонт JP Center, Auction Data Search, CarVector или маршрута Prestige требует отдельного прямого разрешения владельца, поскольку это изменение парсеров/доступа.
 - **Следующий безопасный шаг:** не запускать конкурентный writer. Сначала получить terminal по run `33028069889`, затем выполнить одну Japan republish из сохранённых артефактов и проверить live-результат; расписание и парсеры не менять без нового указания.
+
+
+---
+
+## 21. 2026-08-27 14:05 (+07) — успешная перепубликация Японии из сохранённых артефактов
+
+- **Запрос и границы:** после terminal-успеха штатной последовательной очереди один раз перепубликовать только Японию из пяти сохранённых shard-артефактов run `32917466479`; повторный сбор, парсеры, адаптеры источников, allowlist, gates и расписания не менять.
+- **Что было:** PR #729 и #730 находились в `main`; deploy `d4abc15f31df7b6a97da78f7057be3a2e27bd3b1` и более новый deploy `90372c470d771ee5ce946229c9017fbf6cb38820` были зелёными. Штатная очередь [run 33028069889](https://github.com/jeep-jim/AvtoCena/actions/runs/33028069889) завершилась `success`; активного catalog writer после неё не осталось.
+- **Что сделано:** marker `.github/market-runs/republish-artifacts` обновлён ровно один раз для `market=japan`, `runId=32917466479`; commit `e0475a6921d432cee8648d88b12f83e07c090722`. Повторный parsing/collect не запускался.
+- **Изменённые файлы:** операционный marker `.github/market-runs/republish-artifacts`; этот накопительный блок в `roadmap.md`.
+- **PR / commit:** продуктовый код не менялся; документационный PR этого блока.
+- **CI / workflow / deploy:** [Japan republish run 33047121136](https://github.com/jeep-jim/AvtoCena/actions/runs/33047121136) завершён `success`.
+- **Production-проверка и числа:** новая generation `gen_1787813433362_1b353465`; общий public count `28 704`. Рынки: Корея `4 764`, Китай `1 875`, Япония `1 320`, ОАЭ `4 782`, Европа `5 860`, Грузия `5 501`, Кыргызстан `4 602`.
+- **Япония:** рост `964 → 1 320`, то есть `+356`; `exactCalculatedCount=1320`, `unpricedPublicCount=0`, `forbiddenSourceCount=0`, `japanSoldIdentityFailureCount=0`, `belowMarketMinYearCount=0`, `belowMinimumImagesCount=0`. Публичный источник — `prestige_japan_auctions_open`, 1 320 карточек.
+- **Сохранность остальных рынков:** publish-report сохранил counts и public hashes Кореи, Китая, ОАЭ, Европы, Грузии и Кыргызстана; повторная публикация затронула только Японию.
+- **Live UI:** `/cars?market=japan` непустой и показывает 1 320 карточек; модельная страница Toyota Crown показывает реальные карточки; карточка Toyota Crown содержит блок `Ещё Toyota Crown`; `/cars/autocatalog` скрывает сырые названия источников и пустые справочные карточки.
+- **Что намеренно не трогалось:** коллекторы, source adapters, central allowlist, cron, retention, shard count, sold-auction identity, photo, year>=2010, forbidden-source, pricing и unpriced-public gates.
+- **Что осталось:** отдельного действия по этой задаче не требуется.
+- **Следующий безопасный шаг:** оставить штатное расписание работать без ручных конкурентных writer; ремонт непродуктивных японских источников выполнять только по новому прямому запросу владельца.
