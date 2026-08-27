@@ -78,6 +78,15 @@ function unique(values: unknown[]) {
   return [...new Set(values.map(clean).filter(Boolean))];
 }
 
+function modelWithoutLeadingMake(model: unknown, make: unknown) {
+  const modelText = clean(model);
+  const makeText = clean(make);
+  if (!modelText || !makeText) return "";
+  const escapedMake = makeText.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+  const stripped = modelText.replace(new RegExp(`^${escapedMake}(?:\\s+|[-_/]+)`, "i"), "").trim();
+  return stripped && stripped !== modelText ? stripped : "";
+}
+
 function positiveYear(value: unknown) {
   const number = Number(value);
   return Number.isInteger(number) && number >= 1886 && number <= 2100 ? number : undefined;
@@ -149,6 +158,7 @@ export async function readSourceBackedEncyclopediaModels(): Promise<SourceBacked
           model,
           aliases: unique([
             ...(current?.aliases || []),
+            modelWithoutLeadingMake(row.model, make),
             clean(row.model) !== model ? row.model : "",
             ...(row.aliases || []),
             ...(row.sourceNames || []),
