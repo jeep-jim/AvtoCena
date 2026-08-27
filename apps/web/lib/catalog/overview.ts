@@ -11,6 +11,7 @@ export type CatalogOverviewMarket = {
 
 export type CatalogOverview = {
   version: 1;
+  publicPolicyVersion: 2;
   generationId: string;
   builtAt: string;
   facets: CatalogFacets;
@@ -30,6 +31,7 @@ const EMPTY_FACETS: CatalogFacets = {
 
 const EMPTY_OVERVIEW: CatalogOverview = {
   version: 1,
+  publicPolicyVersion: 2,
   generationId: "",
   builtAt: "",
   facets: EMPTY_FACETS,
@@ -40,6 +42,7 @@ export function catalogOverviewMatchesGeneration(overview: CatalogOverview | nul
   return Boolean(
     overview
       && overview.version === 1
+      && overview.publicPolicyVersion === 2
       && generationId
       && overview.generationId === generationId
       && overview.facets?.generationId === generationId,
@@ -56,6 +59,7 @@ export function buildCatalogOverviewPayload(
   }
   return {
     version: 1,
+    publicPolicyVersion: 2,
     generationId,
     builtAt: new Date().toISOString(),
     facets,

@@ -10,6 +10,7 @@ const publisher = fs.readFileSync(new URL("../scripts/catalog-publish-current-re
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-overview-read-model.yml", import.meta.url), "utf8");
 
 test("overview alias is accepted only for the active manifest generation", () => {
+  assert.match(overview, /publicPolicyVersion === 2/);
   assert.match(overview, /overview\.generationId === generationId/);
   assert.match(overview, /overview\.facets\?\.generationId === generationId/);
   assert.match(overview, /readDataJson<\{ generationId: string \}>\("catalog\/manifest\.json"/);

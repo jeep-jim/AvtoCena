@@ -31,7 +31,8 @@ test("every public catalog surface renders server-attested V3 projections withou
   assert.match(offerQuality, /export function isRenderablePublicCatalogOffer/);
   assert.match(offerQuality, /cardProjectionVersion \|\| 0\) >= 3/);
   assert.match(offerQuality, /publicSpecificationVerified === true/);
-  assert.match(offerQuality, /publicVisibleRub \|\| 0\) > 0/);
+  assert.match(offerQuality, /catalogOfferVisibleRub\(offer\) > 0/);
+  assert.match(offerQuality, /!catalogRequiredSpecificationRejectionReason\(offer\)/);
   for (const source of [catalogPage, offerPage, brandPage, modelPage]) {
     assert.match(source, /isRenderablePublicCatalogOffer/);
   }
