@@ -115,6 +115,18 @@ function sortCatalogRows(rows: any[], sort: string) {
   return sorted.sort(businessOrder);
 }
 
+function isCredibleCatalogPageOffer(offer: any) {
+  // Compact V3 rows are already source- and price-attested while the complete
+  // offer is in memory. Their public projection intentionally omits sourceId
+  // and operational.sourceUrl, so rerunning the full-offer provenance check
+  // here would reject every valid card.
+  if (Number(offer?.cardProjectionVersion || 0) >= 3) {
+    return offer?.publicSpecificationVerified === true
+      && Number(offer?.publicVisibleRub || 0) > 0;
+  }
+  return isCrediblePublicOffer(offer);
+}
+
 function catalogModelGroupKey(offer: any) {
   const make = String(offer?.make || "").trim().toLocaleLowerCase("ru-RU").replace(/\s+/g, " ");
   const model = String(offer?.model || "").trim().toLocaleLowerCase("ru-RU").replace(/\s+/g, " ");
@@ -151,7 +163,7 @@ async function readDiverseDefaultMarketPage(market: string, page: number) {
   const resultPages = await Promise.all(Array.from({ length: MARKET_DIVERSITY_WINDOW_PAGES }, (_, index) =>
     searchOffers({ market, page: windowStartPage + index, pageSize: MARKET_PAGE_SIZE, sort: "updatedAt" })));
   const firstResult = resultPages[0];
-  const candidates = balanceBusinessRows(resultPages.flatMap((result) => (result.items as any[]).filter(isCrediblePublicOffer)));
+  const candidates = balanceBusinessRows(resultPages.flatMap((result) => (result.items as any[]).filter(isCredibleCatalogPageOffer)));
   return {
     items: candidates.slice(offsetWithinWindow, offsetWithinWindow + MARKET_PAGE_SIZE),
     total: firstResult?.total || 0,
@@ -187,7 +199,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
     facets = overview.facets;
     groupedMarkets = await Promise.all(marketOrder.map(async (market) => {
       const snapshot = overview.markets[market.id] || { total: 0, items: [] };
-      const candidates = balanceBusinessRows((snapshot.items as any[]).filter(isCrediblePublicOffer));
+      const candidates = balanceBusinessRows((snapshot.items as any[]).filter(isCredibleCatalogPageOffer));
       const visible = await applyActiveBusinessPricingBatch(candidates.slice(0, OVERVIEW_CARDS));
       return { ...market, items: balanceBusinessRows(visible), total: snapshot.total, page: 1, pageSize: OVERVIEW_CARDS };
     }));
@@ -206,7 +218,7 @@ export default async function CarsPage({ searchParams }: { searchParams?: Promis
           }
           const indexedPageSize = Math.min(48, Math.max(pageSize * 4, 24));
           const indexed = await searchOffers({ market: market.id, page, pageSize: indexedPageSize, sort: "updatedAt" });
-          const candidates = balanceBusinessRows((indexed.items as any[]).filter(isCrediblePublicOffer));
+          const candidates = balanceBusinessRows((indexed.items as any[]).filter(isCredibleCatalogPageOffer));
           const visible = await applyActiveBusinessPricingBatch(candidates.slice(0, pageSize));
           return { ...market, items: balanceBusinessRows(visible), total: indexed.total, page: indexed.page, pageSize };
         }
