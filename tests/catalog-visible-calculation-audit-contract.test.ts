@@ -6,6 +6,9 @@ const audit = fs.readFileSync(new URL("../scripts/catalog-audit-visible-calculat
 const publicPriority = fs.readFileSync(new URL("../apps/web/lib/catalog/public-priority.ts", import.meta.url), "utf8");
 
 test("visible calculation audit accepts safely hidden estimated inventory without weakening price safety", () => {
+  assert.match(audit, /specificationRejection = catalogRequiredSpecificationRejectionReason\(offer\)/);
+  assert.match(audit, /if \(specificationRejection\) return \{/);
+  assert.doesNotMatch(audit, /scenario\?\.requiresConfirmation === true \|\| \/\^power_scenario:\//);
   assert.match(audit, /catalogOfferVisibleRub\(offer\)/);
   assert.match(audit, /const safelyHiddenEstimated = status === "estimated" && visibleRub === 0 && identityResolved;/);
   assert.match(audit, /if \(safelyHiddenEstimated\) \{[\s\S]*increment\(needsDataModels/);

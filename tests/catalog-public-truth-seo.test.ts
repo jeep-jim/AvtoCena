@@ -41,6 +41,29 @@ test("catalog power sanity distinguishes sourced 100 hp from the legacy fallback
   assert.equal(fallback.reason, "unconfirmed_power_scenario");
 });
 
+test("catalog power sanity allows only combustion knowledge references", () => {
+  const combustionReference = catalogPowerSanity({
+    powerHp: 190,
+    engineCc: 1984,
+    fuel: "petrol",
+    powertrainKind: "combustion",
+    powerDataConfidence: "estimated",
+    powerDataSource: "power_scenario:knowledge_reference",
+  } as any);
+  assert.equal(combustionReference.suspicious, false);
+
+  const electricReference = catalogPowerSanity({
+    powerHp: 190,
+    powerKw: 140,
+    fuel: "electric",
+    powertrainKind: "electric",
+    powerDataConfidence: "estimated",
+    powerDataSource: "power_scenario:knowledge_reference",
+  } as any);
+  assert.equal(electricReference.suspicious, true);
+  assert.equal(electricReference.reason, "electrified_power_scenario");
+});
+
 test("normalization removes legacy 100 hp placeholders but preserves sourced 100 hp", () => {
   const fallback = normalizeVehicleOfferSpecs({
     market: "korea", make: "Audi", model: "A6", year: 2023,
