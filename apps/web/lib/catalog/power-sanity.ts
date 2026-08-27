@@ -1,4 +1,5 @@
 import type { VehicleOffer } from "./types";
+import { namedElectrifiedPowertrainKind } from "./powertrain-safety";
 
 export type CatalogPowerSanity = {
   powerHp?: number;
@@ -62,6 +63,10 @@ export function catalogPowerSanity(offer: Partial<VehicleOffer>, candidate = off
   const scenarioProvenance = [explicitSource, scenarioSource].filter(Boolean);
   const powerHp = positive(candidate);
   const kind = clean(offer.powertrainKind);
+  const namedKind = namedElectrifiedPowertrainKind(offer);
+  if (namedKind && kind === "combustion") {
+    return { powerHp: powerHp || undefined, suspicious: true, reason: "powertrain_identity_conflict" };
+  }
   // Reject an unsafe scenario even when the compact row omitted powerHp. The
   // card renderer can still read snapshot.horsepower, so returning "missing"
   // before checking provenance would expose the exact fallback we must hide.
