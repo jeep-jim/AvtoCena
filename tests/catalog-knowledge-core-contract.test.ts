@@ -28,6 +28,7 @@ test("Knowledge CORE is the catalog enrichment entrypoint", () => {
   assert.match(sourceRebuild, /enrichOfferWithKnowledgeCore/);
   assert.doesNotMatch(sourceRebuild, /enrichOfferWithVehicleKnowledge/);
   assert.match(identityMaster, /enrichOfferWithKnowledgeCore/);
+  assert.match(identityMaster, /applyPrestigeJapanExactIdentityKnowledge/);
 });
 
 test("Knowledge CORE coverage follows market year contract", () => {

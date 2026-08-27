@@ -6,6 +6,7 @@ const { readEncyclopediaIdentityDataset, readEncyclopediaIdentityResolver } = aw
 const { applyEncyclopediaIdentityMaster } = await import("../apps/web/lib/catalog/encyclopedia-identity-master.ts");
 const { enrichOfferWithKnowledgeCore } = await import("../apps/web/lib/catalog/knowledge-core.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
+const { applyPrestigeJapanExactIdentityKnowledge } = await import("../apps/web/lib/catalog/prestige-japan-identity-knowledge.ts");
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-v3-input";
 const concurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_IDENTITY_PREPARE_CONCURRENCY || 24)));
@@ -44,7 +45,7 @@ async function pool(rows, limit, worker) {
 async function applyOffer(rawOffer) {
   const sourceMake = clean(rawOffer?.make);
   const sourceModel = clean(rawOffer?.model);
-  let offer = normalizeVehicleOfferSpecs(rawOffer);
+  let offer = normalizeVehicleOfferSpecs(applyPrestigeJapanExactIdentityKnowledge(rawOffer));
   offer = normalizeVehicleOfferSpecs(applyEncyclopediaIdentityMaster(resolver, offer));
   const identity = identityMeta(offer);
   const canonicalMake = clean(offer.make);

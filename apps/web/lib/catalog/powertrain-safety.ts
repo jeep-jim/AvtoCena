@@ -1,6 +1,8 @@
 import type { VehicleOffer } from "./types";
 
-const HYBRID_PRIMARY_RE = /series[ -]?hybrid|range[ -]?extender|\b(?:reev|erev|phev|hev|mhev)\b|plug[ -]?in|parallel[ -]?hybrid|power[ -]?split|mixed[ -]?hybrid|гибрид|混合动力|增程|하이브리드/i;
+const HYBRID_PRIMARY_RE = /series[ -]?hybrid|range[ -]?extender|\b(?:hybrid|reev|erev|phev|hev|mhev)\b|plug[ -]?in|parallel[ -]?hybrid|power[ -]?split|mixed[ -]?hybrid|гибрид|混合动力|增程|하이브리드/i;
+const SERIES_HYBRID_PRIMARY_RE = /series[ -]?hybrid|range[ -]?extender|\b(?:reev|erev)\b|\be[ -]?power\b|последовательн\w*\s+гибрид|增程/i;
+const ELECTRIC_PRIMARY_RE = /battery[ -]?electric|pure[ -]?electric|\b(?:bev|ev)\b|электромоб|электро(?:кар|мобиль)|纯电|전기차|일렉트릭/i;
 const COMBUSTION_FUELS = new Set(["petrol", "diesel", "lpg", "gasoline", "benzin"]);
 
 function positive(value: unknown) {
@@ -51,15 +53,41 @@ export function canonicalizeSemanticSourceFields<T extends Partial<VehicleOffer>
   return {...input, fuel:fuel(input.fuel), transmission:transmission(input.transmission), drive:drive(input.drive), bodyType:body(input.bodyType)} as T;
 }
 
+/**
+ * Resolve an explicitly named electrified powertrain only from identity-bound
+ * top-level fields. Raw marketplace payloads are deliberately excluded: they
+ * frequently contain menus and recommendations for unrelated vehicles.
+ */
+export function namedElectrifiedPowertrainKind(input: Partial<VehicleOffer>) {
+  const primary=[input.make,input.model,input.generation,input.trim,input.engineType,input.fuel].filter(Boolean).join(" ");
+  if (SERIES_HYBRID_PRIMARY_RE.test(primary)) return "series_hybrid" as const;
+  if (HYBRID_PRIMARY_RE.test(primary)) return "other_hybrid" as const;
+  if (ELECTRIC_PRIMARY_RE.test(primary)) return "electric" as const;
+  return undefined;
+}
+
 export function preferExplicitCombustionPowertrain<T extends Partial<VehicleOffer>>(input: T): T {
   const canonical=canonicalizeSemanticSourceFields(input);
+  const namedKind=namedElectrifiedPowertrainKind(canonical);
+  if (namedKind) {
+    const correctedFromCombustion=canonical.powertrainKind === "combustion";
+    const raw=typeof canonical.operational?.raw === "object" && canonical.operational.raw ? canonical.operational.raw as object : {};
+    return {
+      ...canonical,
+      fuel:namedKind === "electric" ? "electric" : "hybrid",
+      powertrainKind:namedKind,
+      engineCc:namedKind === "electric" ? undefined : canonical.engineCc,
+      icePowerKw:correctedFromCombustion || namedKind === "electric" ? undefined : canonical.icePowerKw,
+      utilizationPowerKw:correctedFromCombustion ? undefined : canonical.utilizationPowerKw,
+      operational:{...canonical.operational,raw:{...raw,powertrainSafety:{correctedTo:namedKind,reason:"identity_bound_electrified_name"}}},
+    } as T;
+  }
   const canonicalFuel=String(canonical.fuel||"");
   const engineCc=positive(canonical.engineCc);
   if ((canonical.powertrainKind === "electric" || canonicalFuel === "electric") && engineCc) {
     return {...canonical,engineCc:undefined,icePowerKw:undefined,operational:{...canonical.operational,raw:{...(typeof canonical.operational?.raw === "object" && canonical.operational.raw ? canonical.operational.raw as object : {}),powertrainSafety:{correctedTo:"electric",reason:"electric_powertrain_cannot_have_engine_displacement",removedEngineCc:engineCc}}}} as T;
   }
-  const primary=[canonical.make,canonical.model,canonical.generation,canonical.trim,canonical.engineType,canonical.fuel].filter(Boolean).join(" ");
-  if (!engineCc || !COMBUSTION_FUELS.has(canonicalFuel) || HYBRID_PRIMARY_RE.test(primary)) return canonical;
+  if (!engineCc || !COMBUSTION_FUELS.has(canonicalFuel)) return canonical;
   const powerKw=positive(canonical.icePowerKw)||positive(canonical.powerKw)||(positive(canonical.powerHp)?Math.round((Number(canonical.powerHp)/1.35962)*100)/100:undefined);
   return {...canonical,powertrainKind:"combustion",icePowerKw:positive(canonical.icePowerKw)||powerKw,power30MinKw:undefined,power30MinKwByMotor:undefined,utilizationPowerKw:powerKw,operational:{...canonical.operational,raw:{...(typeof canonical.operational?.raw === "object" && canonical.operational.raw ? canonical.operational.raw as object : {}),powertrainSafety:{correctedTo:"combustion",reason:"explicit_combustion_fuel_and_engine"}}}} as T;
 }
