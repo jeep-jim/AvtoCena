@@ -1,5 +1,6 @@
 import type { VehicleOffer } from "./types";
 import { isCatalogPowerScenario } from "./power-scenario";
+import { catalogPowerSanity } from "./power-sanity";
 
 export type CatalogPublicPriority = {
   eligible: boolean;
@@ -95,6 +96,8 @@ function attestedPublicProjectionRub(offer: Partial<VehicleOffer> | any) {
 }
 
 export function catalogRequiredSpecificationRejectionReason(offer: Partial<VehicleOffer> | any) {
+  const powerSanity = catalogPowerSanity(offer);
+  if (powerSanity.suspicious) return powerSanity.reason;
   // V3 compact rows carry a server-side attestation made while the complete
   // offer (including customs-critical power fields) is still in memory. The
   // compact public read model may omit those bulky/raw dependencies, so do not

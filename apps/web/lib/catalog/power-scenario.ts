@@ -88,12 +88,13 @@ export function resolveCatalogPowerScenario(
   if (alreadySufficient) return null;
 
   const representative = positive(options.representativeHp);
-  const horsepower = peakHp || representative || DEFAULT_CATALOG_POWER_FALLBACK_HP;
-  const source: CatalogPowerScenarioSource = peakHp
-    ? "source_peak_estimate"
-    : representative
-      ? "knowledge_reference"
-      : "fallback_100";
+  // A missing specification must never turn into a made-up public customs
+  // input. The 100 hp value is still available as an explicit UI starting
+  // point, but only a customer choice or a matched knowledge reference may
+  // create a scenario. Peak EV/hybrid power is not utilization power either.
+  if (!representative) return null;
+  const horsepower = representative;
+  const source: CatalogPowerScenarioSource = "knowledge_reference";
   return {
     horsepower,
     utilizationPowerKw: Math.round(horsepower * 0.73549875 * 100) / 100,
@@ -107,11 +108,15 @@ export function applyCatalogPowerScenario<T extends VehicleOffer>(offer: T, scen
   const customerOverride = scenario.source === "customer_input";
   const horsepower = scenario.horsepower;
   const powerKw = Math.round(horsepower * 0.73549875 * 100) / 100;
+  const kind = powertrainKind(offer);
+  const combustionUtilizationPowerKw = kind === "combustion"
+    ? scenario.utilizationPowerKw
+    : offer.utilizationPowerKw;
   return {
     ...offer,
     powerHp: customerOverride || !Number(offer.powerHp || 0) ? horsepower : offer.powerHp,
     powerKw: customerOverride || !Number(offer.powerKw || 0) ? powerKw : offer.powerKw,
-    utilizationPowerKw: scenario.utilizationPowerKw,
+    utilizationPowerKw: combustionUtilizationPowerKw,
     powerDataConfidence: "estimated",
     powerDataSource: `${CATALOG_POWER_SCENARIO_PREFIX}${scenario.source}`,
     calculationSnapshot: {

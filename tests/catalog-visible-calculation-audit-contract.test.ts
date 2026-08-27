@@ -9,6 +9,9 @@ test("visible calculation audit accepts safely hidden estimated inventory withou
   assert.match(audit, /catalogOfferVisibleRub\(offer\)/);
   assert.match(audit, /const safelyHiddenEstimated = status === "estimated" && visibleRub === 0 && identityResolved;/);
   assert.match(audit, /if \(safelyHiddenEstimated\) \{[\s\S]*increment\(needsDataModels/);
-  assert.match(audit, /pass: invalidReady\.length === 0 && allIdentitiesResolved && unsafePendingVisiblePrices\.length === 0/);
+  assert.match(audit, /pass: invalidReady\.length === 0[\s\S]*allIdentitiesResolved[\s\S]*unsafePendingVisiblePrices\.length === 0/);
+  assert.match(audit, /fallback100PublicCount/);
+  assert.match(audit, /unprovenExact100PublicCount/);
+  assert.match(audit, /noFallback100PublicCards/);
   assert.match(publicPriority, /if \(catalogRequiredSpecificationRejectionReason\(offer\)\) return 0;/);
 });

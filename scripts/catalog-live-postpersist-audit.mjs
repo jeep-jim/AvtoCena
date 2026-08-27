@@ -93,6 +93,8 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
     (isPreliminary(offer) || Boolean(catalogRequiredSpecificationRejectionReason(offer)))
       && catalogOfferVisibleRub(offer) > 0).length;
   const unpricedPublicCount = rows.filter((offer) => catalogOfferVisibleRub(offer) <= 0).length;
+  const fallback100PublicCount = rows.filter((offer) => catalogRequiredSpecificationRejectionReason(offer) === "unconfirmed_power_scenario").length;
+  const unprovenExact100PublicCount = rows.filter((offer) => catalogRequiredSpecificationRejectionReason(offer) === "unproven_exact_100_hp").length;
   const belowMinimumImagesCount = rows.filter((offer) => !Array.isArray(offer?.images) || offer.images.length < minimumImagesPerOffer).length;
   const stats = {
     count: rows.length,
@@ -107,6 +109,8 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
       .map((reason) => [reason, rows.filter((offer) => catalogRequiredSpecificationRejectionReason(offer) === reason).length])),
     unsafePendingVisiblePriceCount,
     unpricedPublicCount,
+    fallback100PublicCount,
+    unprovenExact100PublicCount,
     exactCalculatedCount: rows.filter((offer) => String(offer?.calculationSnapshot?.customs?.status || "") === "ready" && Number(offer?.totalRub || 0) > 0 && catalogOfferVisibleRub(offer) > 0).length,
     priorityAgeCount: rows.filter((offer) => Number(offer?.year || 0) >= currentYear - 6).length,
     olderThan15Count: rows.filter((offer) => Number(offer?.year || 0) < currentYear - 15).length,
@@ -147,6 +151,8 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
   if (assertMarkets.has(market) && stats.nonPositiveSourcePriceCount > 0) report.failures.push(`${market}:source_price:${stats.nonPositiveSourcePriceCount}`);
   if (assertMarkets.has(market) && stats.unsafePendingVisiblePriceCount > 0) report.failures.push(`${market}:unsafe_pending_visible_price:${stats.unsafePendingVisiblePriceCount}`);
   if (assertMarkets.has(market) && stats.unpricedPublicCount > 0) report.failures.push(`${market}:unpriced_public:${stats.unpricedPublicCount}`);
+  if (assertMarkets.has(market) && stats.fallback100PublicCount > 0) report.failures.push(`${market}:fallback_100_public:${stats.fallback100PublicCount}`);
+  if (assertMarkets.has(market) && stats.unprovenExact100PublicCount > 0) report.failures.push(`${market}:unproven_exact_100_public:${stats.unprovenExact100PublicCount}`);
   if (assertMarkets.has(market) && stats.belowMinimumImagesCount > 0) report.failures.push(`${market}:below_minimum_images:${stats.belowMinimumImagesCount}:min=${minimumImagesPerOffer}`);
   if (market === "japan" && assertMarkets.has(market) && stats.japanSoldIdentityFailureCount > 0) report.failures.push(`japan:sold_identity:${stats.japanSoldIdentityFailureCount}`);
 }

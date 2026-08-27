@@ -147,7 +147,7 @@ export type CatalogSearchProjection = {
   trim?: string; powerKw?: number; icePowerKw?: number; powertrainKind?: string; power30MinKw?: number; power30MinKwByMotor?: number[]; utilizationPowerKw?: number;
   powerDataConfidence?: string; powerDataSource?: string;
   sourcePrice?: number | null; sourceCurrency?: string | null; priceMode?: string; previousTotalRub?: number | null; priceDeltaRub?: number | null; priceChangedAt?: string;
-  calculationStatus?: string; calculationSnapshot?: { currencyRate?: any; pricingConfidence?: string } | null; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; cardProjectionVersion?: 1 | 2 | 3;
+  calculationStatus?: string; calculationSnapshot?: { currencyRate?: any; pricingConfidence?: string; powerScenario?: any; powerRequiresConfirmation?: boolean; customs?: { utilizationPowerKw?: number } } | null; publicVisibleRub?: number; publicSpecificationVerified?: boolean; cardImageUrl?: string; seriesId?: string; cardProjectionVersion?: 1 | 2 | 3;
 };
 export function publicOffer(offer: VehicleOffer): PublicVehicleOffer { const { operational, vin, frameNumber, sourceId, ...dto } = offer as any; return { ...dto, images: offer.images.map((img) => ({ id: img.id, url: img.url, width: img.width, height: img.height, size: img.size, mimeType: img.mimeType })) } as any; }
 export function compactPublicStorageOffer(offer: VehicleOffer): VehicleOffer {
@@ -369,7 +369,15 @@ function searchProjectionFromOffer(offer: VehicleOffer): CatalogSearchProjection
     trim: cleanFacet(offer.trim), powerKw: offer.powerKw, icePowerKw: offer.icePowerKw, powertrainKind: offer.powertrainKind, power30MinKw: offer.power30MinKw, power30MinKwByMotor: offer.power30MinKwByMotor, utilizationPowerKw: offer.utilizationPowerKw,
     powerDataConfidence: offer.powerDataConfidence, powerDataSource: offer.powerDataSource,
     sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, priceMode: offer.priceMode, previousTotalRub: visibleRub ? offer.previousTotalRub : null, priceDeltaRub: visibleRub ? offer.priceDeltaRub : null, priceChangedAt: offer.priceChangedAt,
-    calculationStatus: offer.calculationStatus, calculationSnapshot: { currencyRate: offer.calculationSnapshot?.currencyRate, pricingConfidence: offer.calculationSnapshot?.pricingConfidence },
+    calculationStatus: offer.calculationStatus, calculationSnapshot: {
+      currencyRate: offer.calculationSnapshot?.currencyRate,
+      pricingConfidence: offer.calculationSnapshot?.pricingConfidence,
+      powerScenario: offer.calculationSnapshot?.powerScenario,
+      powerRequiresConfirmation: offer.calculationSnapshot?.powerRequiresConfirmation,
+      customs: offer.calculationSnapshot?.customs?.utilizationPowerKw
+        ? { utilizationPowerKw: offer.calculationSnapshot.customs.utilizationPowerKw }
+        : undefined,
+    },
     publicVisibleRub: visibleRub || undefined, publicSpecificationVerified: visibleRub > 0 && !catalogRequiredSpecificationRejectionReason(offer), cardImageUrl: rankedCatalogImageUrls(offer)[0] || undefined,
     seriesId: String(raw?.listing?.seriesId || raw?.seriesId || (offer as any)?.seriesId || "") || undefined, cardProjectionVersion: 3,
   };

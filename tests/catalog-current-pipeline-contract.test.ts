@@ -52,6 +52,8 @@ test("visible calculation release gate rejects all incomplete public inventory",
   assert.match(visibleAudit, /catalogOfferVisibleRub\(offer\)/);
   assert.match(visibleAudit, /noUnsafePendingVisiblePrices/);
   assert.match(visibleAudit, /noUnpricedPublicCards/);
+  assert.match(visibleAudit, /noFallback100PublicCards/);
+  assert.match(visibleAudit, /noUnprovenExact100PublicCards/);
   assert.match(visibleAudit, /&& unpricedPublicCards\.length === 0/);
   assert.match(visibleAudit, /&& invalidSpecifications\.length === 0/);
   assert.match(visibleAudit, /&& preliminary === 0/);

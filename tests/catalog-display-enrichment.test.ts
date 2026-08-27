@@ -1,6 +1,13 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { enrichOfferForDisplay } from "../apps/web/lib/catalog/display-enrichment";
+import { catalogPricingSpecificationsChanged, enrichOfferForDisplay } from "../apps/web/lib/catalog/display-enrichment";
+
+test("a knowledge power correction invalidates the stored customs price", () => {
+  const stored = { powerHp: 100, powerKw: 73.55, powerDataSource: "power_scenario:fallback_100", powertrainKind: "combustion", engineCc: 1984 } as any;
+  const enriched = { ...stored, powerHp: 190, powerKw: 139.74, utilizationPowerKw: 139.74, powerDataSource: "encyclopedia_v2:audi-a6-45-tfsi" } as any;
+  assert.equal(catalogPricingSpecificationsChanged(stored, enriched), true);
+  assert.equal(catalogPricingSpecificationsChanged(enriched, { ...enriched }), false);
+});
 
 test("fills known BMW i3 eDrive display fields instead of showing unresolved placeholders", async () => {
   const offer = {

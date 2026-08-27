@@ -1,5 +1,6 @@
 import { applyEncyclopediaDisplayIdentity } from "./display-identity";
 import { applyActiveBusinessPricing } from "./live-business-pricing";
+import { calculateOfferWithRussiaCustoms } from "./customs-pricing";
 import type { VehicleOffer } from "./types";
 import {
   findVehicleModel,
@@ -52,6 +53,24 @@ function inferDrive(text: string) {
   if (/\b(?:rwd|задний привод)\b/i.test(text)) return "rwd";
   if (/\bbmw\s+i3\s+edrive\s*40l\b/i.test(text)) return "rwd";
   return undefined;
+}
+
+function pricingSpecificationSignature(offer: Partial<VehicleOffer>) {
+  return JSON.stringify({
+    engineCc: positive(offer.engineCc),
+    powerHp: positive(offer.powerHp),
+    powerKw: positive(offer.powerKw),
+    icePowerKw: positive(offer.icePowerKw),
+    power30MinKw: positive(offer.power30MinKw),
+    power30MinKwByMotor: Array.isArray(offer.power30MinKwByMotor) ? offer.power30MinKwByMotor.map(Number) : [],
+    utilizationPowerKw: positive(offer.utilizationPowerKw),
+    powertrainKind: meaningful(offer.powertrainKind),
+    powerDataSource: meaningful(offer.powerDataSource),
+  });
+}
+
+export function catalogPricingSpecificationsChanged(before: Partial<VehicleOffer>, after: Partial<VehicleOffer>) {
+  return pricingSpecificationSignature(before) !== pricingSpecificationSignature(after);
 }
 
 export async function enrichOfferForDisplay<T extends VehicleOffer>(input: T): Promise<T> {
@@ -112,6 +131,9 @@ export async function enrichOfferForDisplay<T extends VehicleOffer>(input: T): P
   // Saved market pricing still wins at render time. Canonical public identity is
   // applied last so offer pages use exactly the same make/model labels as cards,
   // facets and SEO read models without touching source/raw identity or pricing.
-  const priced = applyActiveBusinessPricing(displayEnriched);
+  const pricingSpecificationsChanged = catalogPricingSpecificationsChanged(input, displayEnriched);
+  const priced = pricingSpecificationsChanged && String(displayEnriched.market || "") !== "japan"
+    ? await calculateOfferWithRussiaCustoms(displayEnriched)
+    : await applyActiveBusinessPricing(displayEnriched);
   return await applyEncyclopediaDisplayIdentity(priced) as T;
 }

@@ -81,7 +81,7 @@ jobs:
       - name: Open source model normalization tests
         run: node --import tsx --test tests/open-source-normalizer.test.ts
       - name: Power normalization and public truth tests
-        run: node --import tsx --test tests/catalog-power-normalization.test.ts tests/catalog-knowledge-power-conflict.test.ts tests/catalog-public-truth-seo.test.ts tests/catalog-power-authority-contract.test.ts tests/catalog-public-safety.test.ts
+        run: node --import tsx --test tests/catalog-power-normalization.test.ts tests/catalog-knowledge-power-conflict.test.ts tests/catalog-public-truth-seo.test.ts tests/catalog-power-authority-contract.test.ts tests/catalog-public-safety.test.ts tests/catalog-editable-power-scenario.test.ts
       - name: Public 30-minute power display tests
         run: node --import tsx --test tests/catalog-power-display.test.ts
       - name: Estimated EV publication tests
@@ -91,7 +91,7 @@ jobs:
       - name: Live offer display enrichment tests
         run: node --import tsx --test tests/catalog-display-enrichment.test.ts tests/catalog-display-identity.test.ts tests/catalog-public-offer-deduplication.test.ts tests/catalog-brand-routing.test.ts tests/autocatalog-ui.test.ts tests/autocatalog-flat-ui.test.ts tests/catalog-safe-model-label.test.ts
       - name: Current read-model and AI product feed tests
-        run: node --import tsx --test tests/offer-navigation-performance.test.ts tests/catalog-filter-search.test.ts tests/catalog-current-read-model-empty-market-policy.test.ts tests/ai-product-feed.test.ts
+        run: node --import tsx --test tests/offer-navigation-performance.test.ts tests/catalog-filter-search.test.ts tests/catalog-current-read-model-empty-market-policy.test.ts tests/catalog-visible-calculation-audit-contract.test.ts tests/ai-product-feed.test.ts
       - name: Drom generation and horsepower parser tests
         run: node --import tsx --test tests/drom-vehicle-knowledge.test.ts
       - name: Single active catalog pipeline tests

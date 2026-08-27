@@ -28,6 +28,36 @@ test("gross combustion power-density outliers fail closed for public display", (
   assert.equal(publicCatalogPowerHp(normal), 238);
 });
 
+test("catalog power sanity distinguishes sourced 100 hp from the legacy fallback", () => {
+  const unproven = catalogPowerSanity({ powerHp: 100, engineCc: 1598, powertrainKind: "combustion" } as any);
+  assert.equal(unproven.suspicious, true);
+  assert.equal(unproven.reason, "unproven_exact_100_hp");
+
+  const sourced = catalogPowerSanity({ powerHp: 100, engineCc: 1598, powertrainKind: "combustion", powerDataSource: "Mashina detail:1:explicit-unit" } as any);
+  assert.equal(sourced.suspicious, false);
+
+  const fallback = catalogPowerSanity({ powerHp: 100, engineCc: 1598, powertrainKind: "combustion", powerDataSource: "power_scenario:fallback_100" } as any);
+  assert.equal(fallback.suspicious, true);
+  assert.equal(fallback.reason, "unconfirmed_power_scenario");
+});
+
+test("normalization removes legacy 100 hp placeholders but preserves sourced 100 hp", () => {
+  const fallback = normalizeVehicleOfferSpecs({
+    market: "korea", make: "Audi", model: "A6", year: 2023,
+    engineCc: 1984, powertrainKind: "combustion", powerHp: 100, powerKw: 73.55,
+    powerDataSource: "power_scenario:fallback_100",
+  } as any);
+  assert.equal(fallback.powerHp, undefined);
+  assert.equal(fallback.powerKw, undefined);
+
+  const sourced = normalizeVehicleOfferSpecs({
+    market: "kyrgyzstan", make: "Example", model: "Real 100", year: 2023,
+    engineCc: 1298, powertrainKind: "combustion", powerHp: 100, powerKw: 73.55,
+    powerDataSource: "Mashina detail:1:explicit-unit",
+  } as any);
+  assert.equal(sourced.powerHp, 100);
+});
+
 test("normalization removes a historical 997 hp marketplace typo and its derived kW", () => {
   const normalized = normalizeVehicleOfferSpecs({
     sourceId: "dubicars_uae_exact",
