@@ -4,6 +4,7 @@ import { AutocatalogBrandDirectory, type AutocatalogBrandItem } from "@/componen
 import { PublicHeader } from "@/components/layout/PublicHeader";
 import { readCatalogBrandDirectory } from "@/lib/catalog/catalog-brand-directory";
 import { canonicalCatalogBrand } from "@/lib/catalog/brands";
+import { readBrandModelDirectory } from "@/lib/catalog/model-directory";
 import { readCatalogBrandCounts } from "@/lib/catalog/storage";
 
 export const dynamic = "force-dynamic";
@@ -35,21 +36,26 @@ export default async function AutocatalogPage() {
   ]);
 
   const liveCounts = new Map<string, number>();
-  const liveModelCounts = new Map<string, number>();
   for (const [rawMake, rawCount] of Object.entries(live.counts || {})) {
     const make = canonicalCatalogBrand(rawMake);
     liveCounts.set(make, (liveCounts.get(make) || 0) + Number(rawCount || 0));
   }
-  for (const [rawMake, rawCount] of Object.entries(live.modelCounts || {})) {
-    const make = canonicalCatalogBrand(rawMake);
-    liveModelCounts.set(make, (liveModelCounts.get(make) || 0) + Number(rawCount || 0));
-  }
 
-  const directory: AutocatalogBrandItem[] = brands.map((brand) => ({
+  // Raw marketplace model strings are useful search facets, but they are not
+  // encyclopedia entities. Count only canonical models that the brand page can
+  // actually render; this keeps the headline and every brand tile in parity
+  // with the following page instead of advertising hundreds of trim strings.
+  const liveBrands = brands.filter((brand) => (liveCounts.get(brand.name) || 0) > 0);
+  const canonicalModelCounts = new Map(await Promise.all(liveBrands.map(async (brand) => [
+    brand.name,
+    (await readBrandModelDirectory(brand.name)).filter((model) => model.count > 0).length,
+  ] as const)));
+
+  const directory: AutocatalogBrandItem[] = liveBrands.map((brand) => ({
     name: brand.name,
     slug: brand.slug,
     aliases: [...new Set((brand.aliases || []).map(clean).filter(Boolean))],
-    modelCount: liveModelCounts.get(brand.name) || 0,
+    modelCount: canonicalModelCounts.get(brand.name) || 0,
     offerCount: liveCounts.get(brand.name) || 0,
   }))
     .filter((brand) => brand.offerCount > 0 && brand.modelCount > 0)

@@ -50,8 +50,6 @@ function combustionLike(offer: Partial<VehicleOffer>) {
  * public site is better off showing no horsepower than a confidently false one.
  */
 export function catalogPowerSanity(offer: Partial<VehicleOffer>, candidate = offer.powerHp): CatalogPowerSanity {
-  const powerHp = positive(candidate);
-  if (!powerHp) return { suspicious: false, reason: "missing" };
   const snapshotScenario = (offer as any)?.calculationSnapshot?.powerScenario;
   // Historical compact V3 projections can carry the calculation scenario in
   // the attested snapshot while omitting powerDataSource. Treat that snapshot
@@ -60,14 +58,21 @@ export function catalogPowerSanity(offer: Partial<VehicleOffer>, candidate = off
   const scenarioSource = snapshotScenario
     ? `power_scenario:${clean(snapshotScenario.source) || "fallback_100"}`
     : "";
-  const source = clean((offer as any).powerDataSource) || scenarioSource;
+  const explicitSource = clean((offer as any).powerDataSource);
+  const scenarioProvenance = [explicitSource, scenarioSource].filter(Boolean);
+  const powerHp = positive(candidate);
   const kind = clean(offer.powertrainKind);
-  if (/^power_scenario:(?:fallback_100|source_peak_estimate|customer_input)$/i.test(source)) {
-    return { powerHp, suspicious: true, reason: "unconfirmed_power_scenario" };
+  // Reject an unsafe scenario even when the compact row omitted powerHp. The
+  // card renderer can still read snapshot.horsepower, so returning "missing"
+  // before checking provenance would expose the exact fallback we must hide.
+  if (scenarioProvenance.some((source) => /^power_scenario:(?:fallback_100|source_peak_estimate|customer_input)$/i.test(source))) {
+    return { powerHp: powerHp || undefined, suspicious: true, reason: "unconfirmed_power_scenario" };
   }
-  if (["electric", "series_hybrid", "other_hybrid"].includes(kind) && /^power_scenario:/i.test(source)) {
-    return { powerHp, suspicious: true, reason: "electrified_power_scenario" };
+  if (["electric", "series_hybrid", "other_hybrid"].includes(kind) && scenarioProvenance.some((source) => /^power_scenario:/i.test(source))) {
+    return { powerHp: powerHp || undefined, suspicious: true, reason: "electrified_power_scenario" };
   }
+  if (!powerHp) return { suspicious: false, reason: "missing" };
+  const source = explicitSource || scenarioSource;
   // Exactly 100 hp is a valid real specification, but without any provenance
   // it is indistinguishable from the legacy catalog fallback. Keep a sourced
   // 100 hp row; fail closed for an unattested one until source/CORE enrichment.

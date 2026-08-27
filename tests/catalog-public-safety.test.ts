@@ -119,7 +119,7 @@ test("legacy compact projections are revalidated against the current public powe
   }), false);
   assert.equal(projectionCanRenderCard({
     ...safeProjection,
-    powerHp: 100,
+    powerHp: undefined,
     powerDataSource: undefined,
     calculationSnapshot: {
       pricingConfidence: "estimated",

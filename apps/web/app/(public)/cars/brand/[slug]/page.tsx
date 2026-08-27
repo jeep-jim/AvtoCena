@@ -50,15 +50,30 @@ export default async function BrandLandingPage({ params }: PageProps) {
     brand.name,
     ...(facets.makes || []).filter((make) => catalogBrandMatches(brand, make)),
   ])];
-  const makeResults = await Promise.all(rawMakes.map(async (make) => ({
-    make,
-    result: await searchOffers({ make, pageSize: 48, sort: "updatedAt" }),
-  })));
-  const uniqueOffers = new Map<string, any>();
-  for (const entry of makeResults) {
-    for (const offer of (entry.result.items || []) as any[]) {
-      if (isRenderablePublicCatalogOffer(offer as any)) uniqueOffers.set(String(offer.id), offer);
+  // One global first page made the brand page look as if a brand existed only
+  // on the freshest one or two markets. Read a bounded preview and an exact
+  // total for every market so the market badges, section counts and cards all
+  // describe the same inventory.
+  const marketResults = await Promise.all(MARKET_ORDER.map(async (market) => {
+    const parts = await Promise.all(rawMakes.map(async (make) => ({
+      make,
+      result: await searchOffers({ market, make, pageSize: 12, sort: "updatedAt" }),
+    })));
+    const marketOffers = new Map<string, any>();
+    for (const part of parts) {
+      for (const offer of (part.result.items || []) as any[]) {
+        if (isRenderablePublicCatalogOffer(offer as any)) marketOffers.set(String(offer.id), offer);
+      }
     }
+    return {
+      market,
+      total: parts.reduce((sum, part) => sum + Number(part.result.total || 0), 0),
+      offers: [...marketOffers.values()].slice(0, 12),
+    };
+  }));
+  const uniqueOffers = new Map<string, any>();
+  for (const group of marketResults) {
+    for (const offer of group.offers) uniqueOffers.set(String(offer.id), offer);
   }
   const offers = [...uniqueOffers.values()];
   const modelByAlias = new Map<string, string | null>();
@@ -82,11 +97,8 @@ export default async function BrandLandingPage({ params }: PageProps) {
     return { ...model, previewUrl: (published ? autocatalogCoverUrl(published) : undefined) || previewByModel.get(model.id) };
   });
   const catalogMakes = rawMakes.join(",");
-  const totalOffers = makeResults.reduce((sum, entry) => sum + Number(entry.result.total || 0), 0);
-  const grouped = MARKET_ORDER.map((market) => ({
-    market,
-    offers: offers.filter((offer: any) => offer.market === market),
-  })).filter((group) => group.offers.length);
+  const totalOffers = marketResults.reduce((sum, group) => sum + group.total, 0);
+  const grouped = marketResults.filter((group) => group.total > 0 && group.offers.length > 0);
 
   const fallbackResult = offers.length ? null : await searchOffers({ pageSize: 16, sort: "updatedAt" });
   const similar = (fallbackResult?.items || []).filter((offer: any) => isRenderablePublicCatalogOffer(offer)).slice(0, 12);
@@ -112,7 +124,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
           <div className="mt-5 flex flex-wrap gap-2 text-xs font-black">
             <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{saleModels.length} моделей в продаже</span>
             {totalOffers ? <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{totalOffers.toLocaleString("ru-RU")} автомобилей</span> : null}
-            <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{availableMarkets.length || 7} {availableMarkets.length === 1 ? "рынок" : "рынков"}</span>
+            <span className="rounded-full bg-[var(--ac-surface-2)] px-3 py-2">{availableMarkets.length} {availableMarkets.length === 1 ? "рынок" : "рынков"}</span>
           </div>
           {availableMarkets.length ? <div className="mt-3 flex flex-wrap gap-2">{availableMarkets.map((market) => <span key={market} className="inline-flex items-center gap-2 rounded-full bg-[var(--ac-surface-2)] px-3 py-2 text-xs font-black"><CatalogMarketFlag market={market} className="h-4 w-6" />{CATALOG_MARKET_LABELS[market]}</span>)}</div> : null}
         </div>
@@ -125,7 +137,7 @@ export default async function BrandLandingPage({ params }: PageProps) {
           const label = CATALOG_MARKET_LABELS[group.market];
           return <section key={group.market}>
             <div className="flex items-end justify-between gap-3">
-              <h2 className="flex items-center gap-2 text-3xl font-black md:text-4xl"><CatalogMarketFlag market={group.market} className="h-5 w-7 md:h-6 md:w-9" /><span>{label}</span><span className="text-base text-[var(--ac-muted)]">· {group.offers.length}</span></h2>
+              <h2 className="flex items-center gap-2 text-3xl font-black md:text-4xl"><CatalogMarketFlag market={group.market} className="h-5 w-7 md:h-6 md:w-9" /><span>{label}</span><span className="text-base text-[var(--ac-muted)]">· {group.total.toLocaleString("ru-RU")}</span></h2>
               <Link href={`/cars?market=${group.market}&make=${encodeURIComponent(catalogMakes)}`} className="ac-market-all-link shrink-0 text-sm font-black">Все →</Link>
             </div>
             <div className="mt-5 grid grid-cols-2 gap-2.5 sm:gap-3 md:grid-cols-3 xl:grid-cols-4">
