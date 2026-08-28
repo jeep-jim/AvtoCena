@@ -46,7 +46,10 @@ export type BusinessCalculationInput = {
   marketConfig: MarketBusinessConfig;
   sourcePriceRub?: number;
   carPriceRub?: number;
+  /** Customs clearance, import duty, excise and VAT, without utilization fee. */
   customsRub?: number;
+  /** Utilization fee is a separate statutory payment and public price line. */
+  utilizationFeeRub?: number;
   cityDeliveryRub?: number;
   deliveryCity?: string;
   manualAdjustmentRub?: number;

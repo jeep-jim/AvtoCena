@@ -33,6 +33,10 @@ on:
         required: false
         type: boolean
         default: false
+      page_partition_count:
+        required: false
+        type: string
+        default: "3"
     secrets:
       YC_OBJECT_STORAGE_ENDPOINT:
         required: false
@@ -80,7 +84,7 @@ env:
   CATALOG_MAX_IMAGES_PER_OFFER: "30"
   CATALOG_COLLECTION_IMAGE_LIMIT: "30"
   CATALOG_IMAGE_STORAGE_MODE: "source_urls_only"
-  CATALOG_REBUILD_PAGE_PARTITION_COUNT: "3"
+  CATALOG_REBUILD_PAGE_PARTITION_COUNT: ${{ inputs.page_partition_count }}
 
 jobs:
   validate:

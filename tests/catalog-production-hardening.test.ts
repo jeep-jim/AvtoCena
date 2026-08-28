@@ -169,7 +169,8 @@ test("standard one-market publisher expires stale target rows, reapplies quality
   assert.match(standardMarketPublisher, /catalog_prewrite_preservation_gate_failed/);
   assert.match(standardMarketPublisher, /catalog_public_regression_guard/);
   assert.match(standardMarketPublisher, /previousPublicCount = currentMarketRows\.length/);
-  assert.match(standardMarketPublisher, /currentRetainedRows[\s\S]*goonet_japan_exact/);
+  assert.match(standardMarketPublisher, /for \(const offer of currentRetainedRows\.sort/);
+  assert.doesNotMatch(standardMarketPublisher, /market === "japan" && String\(offer\?\.sourceId \|\| ""\) === "goonet_japan_exact"/);
   assert.match(standardMarketPublisher, /if \(!japanAuctionSoldIdentityVerified\(offer\)\) return \{ offer: null, reason: "japan_auction_sold_identity_unverified" \}/);
   assert.match(standardMarketPublisher, /selectCatalogV2MarketOffers\(selected\.sort\(qualityOrder\), v2Policy\)/);
   assert.match(standardMarketPublisher, /lowPowerMinShare/);

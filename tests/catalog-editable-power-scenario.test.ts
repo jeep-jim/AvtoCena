@@ -76,8 +76,13 @@ test("power is the only editable offer specification on desktop and mobile", () 
   assert.match(offerPage, /EditablePowerTile/);
   assert.match(offerPage, /calculateOfferWithUserPowerScenario/);
   assert.match(offerPage, /searchParams\?: Promise<\{ powerHp\?: string \}>/);
-  assert.match(editableTile, /Выбрать мощность в лошадиных силах/);
-  assert.match(editableTile, /Ввести мощность вручную/);
+  assert.match(editableTile, /Выбрать или ввести мощность в лошадиных силах/);
+  assert.match(editableTile, /setTimeout\(\(\) => commitManual\(value\), 500\)/);
+  assert.doesNotMatch(editableTile, /type="submit"|Пересчитать по введённой мощности/);
+  assert.doesNotMatch(editableTile, /status:\s*`(?:Расчёт по|Вы выбрали).*л\.с\./);
+  assert.match(editableTile, /ac-filter-control ac-editable-power__control/);
+  assert.match(editableTile, /ac-filter-option flex min-h-10/);
+  assert.match(editableTile, /pointerdown/);
   assert.match(editableTile, /DEFAULT|100|fallback_100/);
   assert.match(catalogCard, /л\.с\. · уточнить/);
   assert.match(customsPricing, /powerRequiresConfirmation/);

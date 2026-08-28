@@ -121,7 +121,8 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
         marketId: marketId as any,
         marketConfig: resolved.config,
         sourcePriceRub: Number(sourceRate?.sourcePriceRub || 0),
-        customsRub: Number(customs.totalCustomsRub),
+        customsRub: Number(customs.knownCustomsRub),
+        utilizationFeeRub: Number(customs.utilizationFeeRub),
       })
     : null;
 
@@ -195,16 +196,21 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
         <button className="rounded-xl bg-red-600 px-5 py-3.5 text-sm font-black text-white md:col-span-2 xl:col-span-4">Пересчитать тем же движком, что и сайт</button>
       </form>
 
-      <div className="grid gap-3 p-5 md:grid-cols-2 md:p-6 xl:grid-cols-4">
+      <div className="grid gap-3 p-5 md:grid-cols-2 md:p-6 xl:grid-cols-5">
         <div className="rounded-2xl bg-white/[.055] p-4">
           <div className="text-[11px] font-black uppercase tracking-[.08em] text-white/38">цена после курса</div>
           <div className="mt-2 text-2xl font-black">{sourceRate ? rub(sourceRate.sourcePriceRub) : "нет курса"}</div>
           <div className="mt-1 text-xs font-bold text-white/42">{rateSourceLabel(sourceRate?.rateSource)} · {sourceRate?.rateDate || "—"}</div>
         </div>
         <div className="rounded-2xl bg-white/[.055] p-4">
-          <div className="text-[11px] font-black uppercase tracking-[.08em] text-white/38">таможня + утиль</div>
-          <div className="mt-2 text-2xl font-black">{customs?.status === "ready" ? rub(customs.totalCustomsRub) : "нужны данные"}</div>
+          <div className="text-[11px] font-black uppercase tracking-[.08em] text-white/38">таможенная пошлина</div>
+          <div className="mt-2 text-2xl font-black">{customs ? rub(customs.knownCustomsRub) : "нужны данные"}</div>
           <div className="mt-1 text-xs font-bold text-white/42">{customs?.ruleVersion || "расчёт заблокирован"}</div>
+        </div>
+        <div className="rounded-2xl bg-white/[.055] p-4">
+          <div className="text-[11px] font-black uppercase tracking-[.08em] text-white/38">утилизационный сбор</div>
+          <div className="mt-2 text-2xl font-black">{customs?.utilizationFeeRub !== undefined ? rub(customs.utilizationFeeRub) : "нужны данные"}</div>
+          <div className="mt-1 text-xs font-bold text-white/42">коэффициент {customs?.utilizationCoefficient !== undefined ? number(customs.utilizationCoefficient, 4) : "—"}</div>
         </div>
         <div className="rounded-2xl bg-white/[.055] p-4">
           <div className="text-[11px] font-black uppercase tracking-[.08em] text-white/38">расходы рынка + резерв</div>
@@ -267,9 +273,9 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
               </tr>
               <tr>
                 <td className="px-4 py-3 font-black">5. Таможня</td>
-                <td className="px-4 py-3 text-white/62">Считает оформление, пошлину, акциз/НДС где применимо и добавляет утильсбор.</td>
+                <td className="px-4 py-3 text-white/62">Считает оформление, ввозную пошлину, акциз и НДС, где они применимы. Утильсбор остаётся отдельной строкой.</td>
                 <td className="px-4 py-3 text-white/45">EUR {eurRate ? number(eurRate.effectiveRate, 4) : "—"} ₽ · {rateSourceLabel(eurRate?.rateSource)}</td>
-                <td className="px-4 py-3 text-right font-black">{customs?.status === "ready" ? rub(customs.totalCustomsRub) : rub(customs?.knownCustomsRub)}</td>
+                <td className="px-4 py-3 text-right font-black">{customs ? rub(customs.knownCustomsRub) : "—"}</td>
               </tr>
               <tr>
                 <td className="px-4 py-3 font-black">6. Коммерческие расходы</td>
@@ -279,7 +285,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
               </tr>
               <tr className="bg-red-500/[.07]">
                 <td className="px-4 py-4 text-base font-black">7. Итог</td>
-                <td className="px-4 py-4 text-white/70">Цена карточки = автомобиль + подтверждённая таможня/утиль + расходы рынка.</td>
+                <td className="px-4 py-4 text-white/70">Цена карточки = автомобиль + таможенная пошлина + утильсбор + расходы рынка.</td>
                 <td className="px-4 py-4 text-white/50">без двойного учёта обеспечительного платежа</td>
                 <td className="px-4 py-4 text-right text-lg font-black">{business ? rub(business.totalRub) : "расчёт заблокирован"}</td>
               </tr>
@@ -289,7 +295,7 @@ export async function CalculationEnginePreview({ markets, query }: Props) {
 
         {customs?.breakdown?.length ? (
           <details className="mt-4 rounded-2xl bg-white/[.035]">
-            <summary className="cursor-pointer list-none px-4 py-3 text-sm font-black [&::-webkit-details-marker]:hidden">Развернуть таможенные платежи</summary>
+            <summary className="cursor-pointer list-none px-4 py-3 text-sm font-black [&::-webkit-details-marker]:hidden">Развернуть пошлину и утилизационный сбор</summary>
             <div className="border-t border-white/7 px-4 py-2">
               {customs.breakdown.map((line: any) => (
                 <div key={line.id} className="flex items-start justify-between gap-4 border-b border-white/6 py-2.5 last:border-0">

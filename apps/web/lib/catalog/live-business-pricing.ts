@@ -16,8 +16,13 @@ function snapshotSourcePriceRub(offer: Partial<VehicleOffer>) {
     || positive(offer.calculationSnapshot?.customsValue?.vehiclePriceRub);
 }
 
-function snapshotCustomsRub(offer: Partial<VehicleOffer>) {
-  return positive(offer.calculationSnapshot?.customs?.totalCustomsRub);
+function snapshotCustomsParts(offer: Partial<VehicleOffer>) {
+  const customs = offer.calculationSnapshot?.customs;
+  const total = positive(customs?.totalCustomsRub);
+  const utilizationFeeRub = positive(customs?.utilizationFeeRub);
+  const customsRub = positive(customs?.knownCustomsRub)
+    || Math.max(0, total - utilizationFeeRub);
+  return { customsRub, utilizationFeeRub, total: customsRub + utilizationFeeRub || total };
 }
 
 function uniqueText(values: unknown[]) {
@@ -58,15 +63,16 @@ export function repriceOfferWithBusinessConfig<T extends Partial<VehicleOffer>>(
     priceChangedAt: undefined,
   } as T;
   const sourcePriceRub = snapshotSourcePriceRub(offer);
-  const customsRub = snapshotCustomsRub(offer);
-  if (!sourcePriceRub || !customsRub) return offer;
+  const customs = snapshotCustomsParts(offer);
+  if (!sourcePriceRub || !customs.total) return offer;
 
   const resolved = resolveCatalogMarketConfig(market, configured);
   const calculation = calculateAvtocenaFromBusinessConfig({
     marketId: market,
     marketConfig: resolved.config,
     sourcePriceRub,
-    customsRub,
+    customsRub: customs.customsRub,
+    utilizationFeeRub: customs.utilizationFeeRub,
   });
   const previousTotal = positive(offer.totalRub);
   const changed = previousTotal > 0 && previousTotal !== calculation.totalRub;

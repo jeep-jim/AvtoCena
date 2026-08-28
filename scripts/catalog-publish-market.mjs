@@ -333,9 +333,7 @@ const authoritativeExpiredCount = [...retentionDecisions.values()].filter((decis
 const outageGraceExpiredCount = [...retentionDecisions.values()].filter((decision) => decision.reason === "outage_grace_expired").length;
 
 const candidatesById = new Map();
-for (const offer of currentRetainedRows
-  .filter((offer) => !(market === "japan" && String(offer?.sourceId || "") === "goonet_japan_exact"))
-  .sort((left, right) => freshness(left) - freshness(right))) {
+for (const offer of currentRetainedRows.sort((left, right) => freshness(left) - freshness(right))) {
   candidatesById.set(offer.id, mergeOfferVersions({ ...offer, status: "active" }, candidatesById.get(offer.id)));
 }
 for (const offer of generation.offers.sort((left, right) => freshness(left) - freshness(right))) {

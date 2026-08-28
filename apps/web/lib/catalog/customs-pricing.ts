@@ -350,7 +350,8 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     marketId: offer.market,
     marketConfig: market.config,
     sourcePriceRub: rate.sourcePriceRub,
-    customsRub: customs.totalCustomsRub,
+    customsRub: customs.knownCustomsRub,
+    utilizationFeeRub: customs.utilizationFeeRub,
   });
 
   const powerEstimated = Boolean(powerScenario) || ["reference", "estimated"].includes(String(offer.powerDataConfidence || ""));
