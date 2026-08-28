@@ -83,6 +83,7 @@ test("power is the only editable offer specification on desktop and mobile", () 
   assert.match(editableTile, /ac-filter-control ac-editable-power__control/);
   assert.match(editableTile, /ac-filter-option flex min-h-10/);
   assert.match(editableTile, /pointerdown/);
+  assert.match(editableTile, /Boolean\(search\.get\("powerHp"\)\) && value === parsedManual\(\)/);
   assert.match(editableTile, /DEFAULT|100|fallback_100/);
   assert.match(catalogCard, /л\.с\. · уточнить/);
   assert.match(customsPricing, /powerRequiresConfirmation/);
