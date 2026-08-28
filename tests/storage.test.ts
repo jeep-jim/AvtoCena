@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import os from 'node:os';
 import path from 'node:path';
-import { appendChunkedDataJson, generateId, LocalJsonStorage, objectStorageRequestTimeoutMs, resetJsonStorageForTests, writeDataJson, readDataJson } from '../apps/web/lib/data.ts';
+import { appendChunkedDataJson, generateId, LocalJsonStorage, objectStorageRequestTimeoutMs, readObjectStorageResponseBody, resetJsonStorageForTests, writeDataJson, readDataJson } from '../apps/web/lib/data.ts';
 
 
 test('Object Storage gives large uploads enough time without unbounded waits', () => {
@@ -19,6 +19,16 @@ test('Object Storage gives large uploads enough time without unbounded waits', (
     if (previous === undefined) delete process.env.YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS;
     else process.env.YC_OBJECT_STORAGE_REQUEST_TIMEOUT_MS = previous;
   }
+});
+
+test('Object Storage bounds a response body that stalls after headers', async () => {
+  const response = new Response(new ReadableStream({
+    start() {
+      // Reproduces Object Storage returning headers and then never completing
+      // the JSON body. The production reader must not wait indefinitely.
+    },
+  }));
+  await assert.rejects(() => readObjectStorageResponseBody(response, 20), /object_storage_response_timeout/);
 });
 
 test('LocalJsonStorage reads and writes JSON', async () => {
