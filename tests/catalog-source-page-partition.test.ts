@@ -7,12 +7,11 @@ import {
   catalogPartitionNextCursor,
   catalogPartitionStorageSuffix,
   catalogRetainedOfferBelongsToPartition,
-  catalogSourceAssignedToShard,
   catalogSourcePagePartition,
 } from "../apps/web/lib/catalog/source-page-partition";
 
 test("numeric source pages are split across three independent workers", () => {
-  const partitions = [0, 1, 2].map((index) => catalogSourcePagePartition("dubicars_uae_exact", index, 5));
+  const partitions = [0, 1, 2].map((index) => catalogSourcePagePartition("dubicars_uae_exact", index, 5, 3));
   assert.deepEqual(partitions.map(catalogPartitionInitialCursor), ["1", "2", "3"]);
   assert.deepEqual(partitions.map((partition, index) => catalogPartitionNextCursor(String(index + 1), String(index + 2), partition)), ["4", "5", "6"]);
   assert.deepEqual(partitions.map(catalogPartitionStorageSuffix), [
@@ -20,12 +19,12 @@ test("numeric source pages are split across three independent workers", () => {
     "/page-shard-1-of-3",
     "/page-shard-2-of-3",
   ]);
-  assert.equal(catalogSourceAssignedToShard("dubicars_uae_exact", 3, 5), false);
-  assert.equal(catalogSourceAssignedToShard("dubicars_uae_exact", 4, 5), false);
+  assert.equal(catalogSourcePagePartition("dubicars_uae_exact", 3, 5, 3), null);
+  assert.equal(catalogSourcePagePartition("dubicars_uae_exact", 4, 5, 3), null);
 });
 
 test("mobile.de workers advance through disjoint search shards", () => {
-  const partition = catalogSourcePagePartition("mobile_de_open", 1, 5);
+  const partition = catalogSourcePagePartition("mobile_de_open", 1, 5, 3);
   assert.equal(catalogPartitionInitialCursor(partition), JSON.stringify({ shard: 1, page: 1 }));
   assert.equal(
     catalogPartitionNextCursor(JSON.stringify({ shard: 1, page: 25 }), JSON.stringify({ shard: 2, page: 1 }), partition),
