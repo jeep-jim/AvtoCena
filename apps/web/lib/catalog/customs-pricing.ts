@@ -17,6 +17,26 @@ function positive(value: unknown) {
   return Number.isFinite(parsed) && parsed > 0 ? parsed : 0;
 }
 
+/**
+ * Preserve the source-bound vehicle identity for risk-sensitive customs
+ * classification. Knowledge enrichment may intentionally canonicalize a
+ * marketplace model (for example `Rexton Sports Khan` -> `Rexton`), but that
+ * must never erase evidence that the original vehicle is a pickup/commercial
+ * derivative before the M1/N1 gate runs.
+ */
+export function customsVehicleIdentityEvidence(input: Partial<VehicleOffer>, normalized: Partial<VehicleOffer>) {
+  return [
+    normalized.sourceTitle,
+    input.sourceTitle,
+    input.make,
+    input.model,
+    input.bodyType,
+  ]
+    .map((value) => String(value || "").replace(/\s+/g, " ").trim())
+    .filter(Boolean)
+    .join(" · ");
+}
+
 export function discardRepresentativeModelPowerForCustoms<T extends VehicleOffer>(offer: T): T {
   if (!String(offer.powerDataSource || "").startsWith("vehicle-model-representative:")) return offer;
   return {
@@ -270,7 +290,7 @@ async function calculateOfferWithRussiaCustomsInternal(input: VehicleOffer, allo
     bodyType: offer.bodyType,
     make: offer.make,
     model: offer.model,
-    sourceTitle: offer.sourceTitle,
+    sourceTitle: customsVehicleIdentityEvidence(input, offer),
     personalUseEligible: offer.personalUseEligible,
   });
 
