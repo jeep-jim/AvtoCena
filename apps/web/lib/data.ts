@@ -105,6 +105,53 @@ export function objectStorageRequestTimeoutMs(bodyBytes: number) {
   return Math.max(configured, uploadAllowance);
 }
 
+const objectStorageResponseBodies = new WeakMap<Response, Buffer>();
+
+export async function readObjectStorageResponseBody(
+  response: Response,
+  timeoutMs: number,
+  controller = new AbortController(),
+) {
+  if (!response.body) return Buffer.alloc(0);
+  const reader = response.body.getReader();
+  let timeout: ReturnType<typeof setTimeout> | undefined;
+  let timedOut = false;
+  const deadline = new Promise<never>((_resolve, reject) => {
+    timeout = setTimeout(() => {
+      timedOut = true;
+      reject(new Error("object_storage_response_timeout"));
+      controller.abort();
+      void reader.cancel("object_storage_response_timeout").catch(() => undefined);
+    }, Math.max(1, timeoutMs));
+  });
+  try {
+    const chunks: Uint8Array[] = [];
+    let total = 0;
+    while (true) {
+      const { done, value } = await Promise.race([reader.read(), deadline]);
+      if (done) {
+        if (timedOut) throw new Error("object_storage_response_timeout");
+        break;
+      }
+      if (!value?.byteLength) continue;
+      chunks.push(value);
+      total += value.byteLength;
+    }
+    return Buffer.concat(chunks, total);
+  } finally {
+    if (timeout) clearTimeout(timeout);
+    reader.releaseLock();
+  }
+}
+
+function objectStorageResponseBody(response: Response) {
+  return objectStorageResponseBodies.get(response) ?? Buffer.alloc(0);
+}
+
+function objectStorageResponseText(response: Response) {
+  return objectStorageResponseBody(response).toString("utf8");
+}
+
 export class ObjectJsonStorage implements JsonStorage {
   driver: JsonStorageDriver = "object";
   private key(relativePath: string) { const cfg = objectConfig(); return [cfg.prefix, normalizeStorageKey(relativePath)].filter(Boolean).join("/"); }
@@ -127,14 +174,21 @@ export class ObjectJsonStorage implements JsonStorage {
       const signingKey = hmac(hmac(hmac(hmac(`AWS4${cfg.secretAccessKey}`, date), cfg.region), "s3"), "aws4_request");
       headers.authorization = `AWS4-HMAC-SHA256 Credential=${cfg.accessKeyId}/${scope}, SignedHeaders=${signedHeaders}, Signature=${crypto.createHmac("sha256", signingKey).update(stringToSign).digest("hex")}`;
       const controller = new AbortController();
-      const timeout = setTimeout(() => controller.abort(), timeoutMs);
+      const headerTimeout = setTimeout(() => controller.abort(), timeoutMs);
       let response: Response;
-      try { response = await fetch(url, { method, headers, body: body as any, signal: controller.signal }); }
+      try {
+        response = await fetch(url, { method, headers, body: body as any, signal: controller.signal });
+        clearTimeout(headerTimeout);
+        if (response.body && method !== "HEAD") {
+          const responseBytes = await readObjectStorageResponseBody(response, timeoutMs, controller);
+          objectStorageResponseBodies.set(response, responseBytes);
+        }
+      }
       catch (error) { lastError = error; if (attempt + 1 >= attempts) break; await sleep(Math.min(5_000, 250 * 2 ** attempt)); continue; }
-      finally { clearTimeout(timeout); }
+      finally { clearTimeout(headerTimeout); }
       if (response.ok || response.status === 404 || response.status === 412 || response.status === 409) return response;
       if (!TRANSIENT_STATUS.has(response.status)) {
-      const responseText = await response.text().catch(() => "");
+      const responseText = objectStorageResponseText(response);
       const code = responseText.match(/<Code>([^<]+)<\/Code>/)?.[1] || "unknown";
       const message = responseText.match(/<Message>([^<]+)<\/Message>/)?.[1] || "";
       throw new Error(`object_storage_${method}_${response.status}:${code}:${message}`.replace(/[\r\n]+/g, " ").slice(0, 500));
@@ -159,13 +213,13 @@ export class ObjectJsonStorage implements JsonStorage {
 }
   private async signedBucketRequest(method: string, params: Record<string, string>, body?: string | Buffer, extraHeaders: Record<string, string> = {}) { const cfg = objectConfig(); const query = canonicalQuery(params); const url = new URL(`${cfg.endpoint}/${cfg.bucket}`); url.search = query; return this.signedRequest(method, url, body, extraHeaders, query); }
   private async bucketRequest(params: Record<string, string>) { return this.signedBucketRequest("GET", params); }
-  async readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>> { const res = await this.request("GET", relativePath); if (res.status === 404) return { value: fallback, found: false }; if (!res.ok) throw new Error(`object_storage_read_${res.status}`); return { value: await res.json() as T, etag: cleanEtag(res.headers.get("etag")), found: true }; }
+  async readJsonWithMeta<T>(relativePath: string, fallback: T): Promise<JsonReadResult<T>> { const res = await this.request("GET", relativePath); if (res.status === 404) return { value: fallback, found: false }; if (!res.ok) throw new Error(`object_storage_read_${res.status}`); return { value: JSON.parse(objectStorageResponseText(res)) as T, etag: cleanEtag(res.headers.get("etag")), found: true }; }
   async readJson<T>(relativePath: string, fallback: T): Promise<T> { return (await this.readJsonWithMeta(relativePath, fallback)).value; }
   async writeJson(relativePath: string, value: unknown, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": "application/json; charset=utf-8" }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, JSON.stringify(value, null, 2), headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_write_${res.status}`); }
   async head(relativePath: string) { const res = await this.request("HEAD", relativePath); if (res.status === 404) return false; if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_head_${res.status}`); return true; }
   async deleteJson(relativePath: string) { await this.request("DELETE", relativePath); }
   async putBinary(relativePath: string, data: Buffer, contentType: string, condition?: JsonWriteCondition) { const headers: Record<string,string> = { "content-type": contentType }; if (condition?.ifMatch) headers["if-match"] = condition.ifMatch; if (condition?.ifNoneMatch) headers["if-none-match"] = condition.ifNoneMatch; const res = await this.request("PUT", relativePath, data, headers); if (res.status === 409 || res.status === 412) throw new StorageConflictError(); if (!res.ok) throw new Error(`object_storage_binary_write_${res.status}`); return { objectKey: normalizeStorageKey(relativePath), mimeType: contentType, size: data.length, checksum: sha256(data) }; }
-  async getBinary(relativePath: string) { const res = await this.request("GET", relativePath); if (!res.ok) throw new Error(`object_storage_binary_read_${res.status}`); const data = Buffer.from(await res.arrayBuffer()); return { data, mimeType: res.headers.get("content-type") || undefined, size: data.length, checksum: sha256(data) }; }
+  async getBinary(relativePath: string) { const res = await this.request("GET", relativePath); if (!res.ok) throw new Error(`object_storage_binary_read_${res.status}`); const data = objectStorageResponseBody(res); return { data, mimeType: res.headers.get("content-type") || undefined, size: data.length, checksum: sha256(data) }; }
   async createBinaryDownloadUrl(relativePath: string, expiresSeconds = 900) {
     const cfg = objectConfig();
     const normalizedPath = normalizeStorageKey(relativePath);
@@ -201,7 +255,7 @@ export class ObjectJsonStorage implements JsonStorage {
       if (continuationToken) params["continuation-token"] = continuationToken;
       const response = await this.bucketRequest(params);
       if (!response.ok) throw new Error(`object_storage_list_${response.status}`);
-      const xml = await response.text();
+      const xml = objectStorageResponseText(response);
       for (const block of xml.match(/<Contents>[\s\S]*?<\/Contents>/g) || []) {
         const rawKey = block.match(/<Key>([\s\S]*?)<\/Key>/)?.[1] || "";
         const key = decodeXml(rawKey);
@@ -234,7 +288,7 @@ export class ObjectJsonStorage implements JsonStorage {
       if (versionIdMarker) params["version-id-marker"] = versionIdMarker;
       const response = await this.bucketRequest(params);
       if (!response.ok) throw new Error(`object_storage_list_versions_${response.status}`);
-      const xml = await response.text();
+      const xml = objectStorageResponseText(response);
       for (const block of xml.match(/<(Version|DeleteMarker)>[\s\S]*?<\/\1>/g) || []) {
         const deleteMarker = block.startsWith("<DeleteMarker>");
         const key = decodeXml(block.match(/<Key>([\s\S]*?)<\/Key>/)?.[1] || "");
@@ -262,7 +316,7 @@ export class ObjectJsonStorage implements JsonStorage {
       url.search = query;
       const response = await this.signedRequest("GET", url, undefined, {}, query);
       if (!response.ok) throw new Error(`object_storage_list_parts_${response.status}`);
-      const xml = await response.text();
+      const xml = objectStorageResponseText(response);
       for (const block of xml.match(/<Part>[\s\S]*?<\/Part>/g) || []) {
         parts += 1;
         bytes += Number(block.match(/<Size>([\s\S]*?)<\/Size>/)?.[1] || 0);
@@ -282,7 +336,7 @@ export class ObjectJsonStorage implements JsonStorage {
       if (uploadIdMarker) params["upload-id-marker"] = uploadIdMarker;
       const response = await this.bucketRequest(params);
       if (!response.ok) throw new Error(`object_storage_list_uploads_${response.status}`);
-      const xml = await response.text();
+      const xml = objectStorageResponseText(response);
       for (const block of xml.match(/<Upload>[\s\S]*?<\/Upload>/g) || []) {
         const key = decodeXml(block.match(/<Key>([\s\S]*?)<\/Key>/)?.[1] || "");
         const uploadId = decodeXml(block.match(/<UploadId>([\s\S]*?)<\/UploadId>/)?.[1] || "");
@@ -308,7 +362,7 @@ export class ObjectJsonStorage implements JsonStorage {
       "content-length": String(Buffer.byteLength(body)),
     });
     if (!response.ok) throw new Error(`object_storage_batch_delete_${response.status}`);
-    const result = await response.text();
+    const result = objectStorageResponseText(response);
     const failures = result.match(/<Error>[\s\S]*?<\/Error>/g) || [];
     if (failures.length) throw new Error(`object_storage_batch_delete_partial_${failures.length}`);
     return relative.length;
