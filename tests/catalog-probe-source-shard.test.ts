@@ -112,7 +112,8 @@ test("Japan rollout includes exact Goo-net inventory plus the five auction/catal
   assert.match(yandexBridge, /\/api\/internal\/goonet-egress-f7c2a9\?page=\$\{page\}/);
   assert.match(importer, /withGithubYandexSourceBridge\(goonetJapanExactSource, "goonet"\)/);
   assert.match(goonetBridgeRoute, /sourceId: "goonet_japan_exact"/);
-  assert.match(goonetBridgeRoute, /source\.fetchImages\(offer\)/);
+  assert.match(goonetBridgeRoute, /coherentGoonetImages\(/);
+  assert.match(goonetBridgeRoute, /goonet_exact_page_bound_j_source_urls_v3/);
   assert.match(japanWorkflow, /workflow_dispatch:/);
   assert.doesNotMatch(japanWorkflow, /^\s+schedule:/m);
   assert.match(japanWorkflow, /retention_ms: "2592000000"/);

@@ -24,8 +24,10 @@ test("GitHub collectors use bounded Yandex egress for source sites that block Gi
 test("Goo-net Yandex endpoint is fixed-source and verifies listing-bound galleries", () => {
   assert.match(goonetRoute, /new GoonetExactAdapter\(\)/);
   assert.match(goonetRoute, /source\.fetchPage\(String\(page\)\)/);
-  assert.match(goonetRoute, /source\.fetchImages\(offer\)/);
-  assert.match(goonetRoute, /images\.length < 2/);
+  assert.match(goonetRoute, /coherentGoonetImages\(/);
+  assert.match(goonetRoute, /galleryStoredAs = "json_urls"/);
+  assert.doesNotMatch(goonetRoute, /source\.fetchImages\(offer\)/);
+  assert.match(goonetRoute, /urls\.length < 2/);
   assert.doesNotMatch(goonetRoute, /searchParams\.get\(["']url["']\)/);
 });
 
