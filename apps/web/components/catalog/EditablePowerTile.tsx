@@ -164,7 +164,10 @@ export function EditablePowerTile({
         {open ? <div id="offer-power-options" role="listbox" className="ac-filter-dropdown ac-editable-power__options absolute left-0 right-0 top-[calc(100%+7px)] max-h-56 overflow-y-auto rounded-2xl p-2">
           <button type="button" role="option" aria-selected={!search.get("powerHp")} onMouseDown={(event) => event.preventDefault()} onClick={() => { setManual(String(current)); apply(null); setOpen(false); }} className={`ac-filter-option flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-bold ${!search.get("powerHp") ? "is-active" : ""}`}><span>По данным автомобиля</span>{!search.get("powerHp") ? <span>✓</span> : null}</button>
           {options.map((value) => {
-            const active = value === parsedManual();
+            // The source value may equal a common preset (for example 150 hp).
+            // Until the user explicitly overrides it, only the source row is
+            // selected so the list never presents two simultaneous choices.
+            const active = Boolean(search.get("powerHp")) && value === parsedManual();
             return <button key={value} type="button" role="option" aria-selected={active} onMouseDown={(event) => event.preventDefault()} onClick={() => { setManual(String(value)); apply(value); setOpen(false); }} className={`ac-filter-option flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-bold ${active ? "is-active" : ""}`}><span>{value} л.с.</span>{active ? <span>✓</span> : null}</button>;
           })}
         </div> : null}
