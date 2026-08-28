@@ -39,7 +39,7 @@ jobs:
       - name: Catalog source-scale tests
         run: node --import tsx --test tests/catalog-source-scale.test.ts
       - name: Catalog production hardening tests
-        run: node --import tsx --test tests/catalog-production-hardening.test.ts tests/catalog-v2-market-recovery.test.ts tests/catalog-v6-shared-publish-lock.test.ts tests/catalog-operations.test.ts tests/catalog-source-retention.test.ts tests/catalog-current-pipeline-contract.test.ts
+        run: node --import tsx --test tests/storage.test.ts tests/catalog-production-hardening.test.ts tests/catalog-v2-market-recovery.test.ts tests/catalog-v6-shared-publish-lock.test.ts tests/catalog-operations.test.ts tests/catalog-source-retention.test.ts tests/catalog-current-pipeline-contract.test.ts
       - name: Catalog market preflight parity tests
         run: |
           node --import tsx --test \
