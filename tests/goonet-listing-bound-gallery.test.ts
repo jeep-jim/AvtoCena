@@ -6,6 +6,7 @@ import {
   explicitGoonetPower,
   GoonetExactAdapter,
   goonetListingId,
+  goonetPathIdentity,
   goonetPrimaryImageUrl,
   isGoonetListingFrame,
   isGoonetPageBoundJFrame,
@@ -41,6 +42,14 @@ test("Goo-net accepts only explicitly unit-labelled source power", () => {
   assert.deepEqual(explicitGoonetPower({ value: 110, unitText: "kW" }), { kw: 110, hp: 149.6 });
   assert.deepEqual(explicitGoonetPower({ value: 150 }), {});
   assert.deepEqual(explicitGoonetPower("1500 cc"), {});
+});
+
+test("Goo-net detail URL supplies stable make/model identity without grade text", () => {
+  assert.deepEqual(goonetPathIdentity(page), { make: "TOYOTA", model: "PRIUS" });
+  assert.deepEqual(
+    goonetPathIdentity("https://www.goo-net-exchange.com/usedcars/TOYOTA/LAND_CRUISER_PRADO/700000000000000000001/"),
+    { make: "TOYOTA", model: "LAND CRUISER PRADO" },
+  );
 });
 
 test("Goo-net normalized offers retain exact marketplace power provenance", () => {

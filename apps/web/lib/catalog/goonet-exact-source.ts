@@ -202,6 +202,17 @@ export function goonetListingId(pageUrl: string) {
   return pageUrl.match(/\/([0-9]{21})\/?(?:[?#]|$)/)?.[1] || "";
 }
 
+export function goonetPathIdentity(pageUrl: string) {
+  try {
+    const match = decodeURIComponent(new URL(pageUrl).pathname).match(/^\/usedcars\/([^/]+)\/([^/]+)\/[0-9]{12,}\/?$/i);
+    return match
+      ? { make: clean(match[1]).replace(/_/g, " "), model: clean(match[2]).replace(/_/g, " ") }
+      : { make: "", model: "" };
+  } catch {
+    return { make: "", model: "" };
+  }
+}
+
 export function isGoonetListingFrame(value: string, listingId: string) {
   if (!listingId) return false;
   try {
@@ -289,12 +300,16 @@ function parse(markup: string, url: string): Row | null {
   const plain = clean(markup);
   const structured = jsonLd(markup);
   const vehicle = structured.find((item) => /vehicle|car|product/i.test(Array.isArray(item?.["@type"]) ? item["@type"].join(" ") : String(item?.["@type"] || ""))) || {};
-  const rawTitle = clean(vehicle.name || markup.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || markup.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)/i)?.[1]);
+  const pathIdentity = goonetPathIdentity(url);
+  const rawTitle = clean(vehicle.name || markup.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || markup.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)/i)?.[1] || `${pathIdentity.make} ${pathIdentity.model}`);
   const title = rawTitle.replace(/^NEW\s+/i, "").replace(/^USED\s+/i, "").trim();
   const upper = title.toUpperCase();
-  const makeRaw = clean(vehicle.brand?.name || vehicle.brand) || MAKES.find((make) => upper === make || upper.startsWith(`${make} `)) || "";
+  const makeRaw = clean(vehicle.brand?.name || (typeof vehicle.brand === "string" ? vehicle.brand : ""))
+    || MAKES.find((make) => upper === make || upper.startsWith(`${make} `))
+    || pathIdentity.make;
   const make = makeRaw === "MERCEDES_BENZ" ? "MERCEDES-BENZ" : makeRaw;
-  const model = clean(vehicle.model || title.slice(makeRaw.length)).replace(/^[-–—| ]+/, "").split(/\s+/).slice(0, 8).join(" ");
+  const structuredModel = clean(typeof vehicle.model === "object" ? vehicle.model?.name : vehicle.model);
+  const model = clean(structuredModel || pathIdentity.model || title.slice(makeRaw.length)).replace(/^[-–—| ]+/, "").split(/\s+/).slice(0, 8).join(" ");
   const year = Number(String(vehicle.vehicleModelDate || vehicle.modelDate || `${title} ${plain}`).match(/(?:19|20)\d{2}/)?.[0]);
   if (!make || !model || !year) return null;
 
