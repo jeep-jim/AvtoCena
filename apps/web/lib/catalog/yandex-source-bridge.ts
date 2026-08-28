@@ -2,7 +2,7 @@ import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, SourceRunH
 
 const DEFAULT_ORIGIN = "https://avtocena.com";
 
-type BridgeKind = "dubizzle" | "encar" | "guazi" | "myauto" | "autopapa";
+type BridgeKind = "dubizzle" | "encar" | "goonet" | "guazi" | "myauto" | "autopapa";
 
 type BridgePayload = {
   sourceId?: string;
@@ -49,6 +49,7 @@ function bridgeUrl(kind: BridgeKind, page: number) {
   const origin = bridgeOrigin();
   if (kind === "dubizzle") return `${origin}/api/internal/dubizzle-egress-a4c907?page=${page}`;
   if (kind === "encar") return `${origin}/api/internal/encar-egress-71b8e4?page=${page}`;
+  if (kind === "goonet") return `${origin}/api/internal/goonet-egress-f7c2a9?page=${page}`;
   if (kind === "guazi") return `${origin}/api/internal/guazi-egress-b8c4d1?page=${page}`;
   return `${origin}/api/internal/georgia-recovery-e2f913?source=${kind}&pages=1&startPage=${page}`;
 }

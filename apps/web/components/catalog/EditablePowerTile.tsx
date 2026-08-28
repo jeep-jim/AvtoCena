@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 const COMMON_HP = [50, 75, 90, 100, 110, 120, 130, 140, 150, 160, 180, 200, 220, 250, 300, 350, 400, 500, 600];
@@ -20,11 +20,14 @@ export function EditablePowerTile({
   const search = useSearchParams();
   const current = Math.max(20, Math.min(2500, Math.round(Number(currentHp || 100))));
   const [manual, setManual] = useState(String(current));
-  const commonValue = COMMON_HP.includes(current) ? String(current) : "custom";
+  const [open, setOpen] = useState(false);
+  const root = useRef<HTMLDivElement>(null);
+  const debounce = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const lastAppliedQuery = useRef(search.toString());
 
   const copy = scenarioSource === "fallback_100"
     ? {
-      status: `Расчёт по ${current} л.с.`,
+      status: "Нужно уточнить",
       hint: "Мощность не нашли. Выберите точное значение, если знаете его — цена пересчитается.",
     }
     : scenarioSource === "knowledge_reference"
@@ -39,7 +42,7 @@ export function EditablePowerTile({
         }
         : scenarioSource === "customer_input"
           ? {
-            status: `Вы выбрали ${current} л.с.`,
+            status: "Выбрано вручную",
             hint: "Цена пересчитана по выбранной мощности. Перед покупкой значение нужно подтвердить по документам.",
           }
           : {
@@ -54,15 +57,41 @@ export function EditablePowerTile({
     if (value && Number.isFinite(value) && value >= 20 && value <= 2500) params.set("powerHp", String(Math.round(value)));
     else params.delete("powerHp");
     const query = params.toString();
+    if (query === lastAppliedQuery.current) return;
+    lastAppliedQuery.current = query;
     router.replace(query ? `${pathname}?${query}` : pathname, { scroll: false });
   };
 
   const options = useMemo(() => COMMON_HP, []);
-  const submit = (event: FormEvent) => {
-    event.preventDefault();
-    const value = Number(manual);
-    if (Number.isFinite(value) && value >= 20 && value <= 2500) apply(value);
+  const parsedManual = (value = manual) => {
+    const parsed = Number(String(value).replace(",", ".").replace(/[^0-9.]/g, ""));
+    return Number.isFinite(parsed) && parsed >= 20 && parsed <= 2500 ? Math.round(parsed) : 0;
   };
+  const commitManual = (value = manual) => {
+    if (debounce.current) {
+      clearTimeout(debounce.current);
+      debounce.current = null;
+    }
+    const parsed = parsedManual(value);
+    if (!parsed) return;
+    setManual(String(parsed));
+    apply(parsed);
+  };
+
+  useEffect(() => setManual(String(current)), [current]);
+  useEffect(() => { lastAppliedQuery.current = search.toString(); }, [search]);
+  useEffect(() => () => {
+    if (debounce.current) clearTimeout(debounce.current);
+  }, []);
+  useEffect(() => {
+    const outside = (event: PointerEvent) => {
+      if (root.current?.contains(event.target as Node)) return;
+      if (open) commitManual();
+      setOpen(false);
+    };
+    document.addEventListener("pointerdown", outside);
+    return () => document.removeEventListener("pointerdown", outside);
+  });
 
   return <>
     <div
@@ -81,41 +110,64 @@ export function EditablePowerTile({
         </div>
       </div>
 
-      <div className="mt-3 grid grid-cols-[minmax(0,1fr)_minmax(132px,.48fr)] gap-2">
-        <div className="relative min-w-0">
-          <select
-            aria-label="Выбрать мощность в лошадиных силах"
-            value={commonValue}
-            onChange={(event) => {
-              if (event.target.value === "auto") return apply(null);
-              if (event.target.value === "custom") return;
-              const value = Number(event.target.value);
-              setManual(event.target.value);
-              apply(value);
-            }}
-            className="ac-editable-power__control h-11 w-full min-w-0 appearance-none rounded-xl px-3 pr-11 text-[13px] font-black outline-none"
-          >
-            <option value="auto">Авто</option>
-            {options.map((value) => <option key={value} value={value}>{value} л.с.</option>)}
-            {!COMMON_HP.includes(current) ? <option value="custom">{current} л.с.</option> : <option value="custom">Другая…</option>}
-          </select>
-          <svg viewBox="0 0 20 20" className="pointer-events-none absolute right-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-[var(--ac-muted)]" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
-        </div>
-
-        <form onSubmit={submit} className="ac-editable-power__manual flex h-11 min-w-0 items-center overflow-hidden rounded-xl">
+      <div ref={root} className={`relative mt-3 min-w-0 ${open ? "z-[80]" : "z-0"}`}>
+        <div
+          className="ac-filter-control ac-editable-power__control flex h-13 min-w-0 items-center overflow-hidden rounded-[15px]"
+          onMouseDown={(event) => {
+            if ((event.target as HTMLElement).tagName === "INPUT") return;
+            event.preventDefault();
+            root.current?.querySelector("input")?.focus();
+            setOpen(true);
+          }}
+        >
           <input
-            type="number"
-            min={20}
-            max={2500}
-            step={1}
+            type="text"
             inputMode="numeric"
             value={manual}
-            onChange={(event) => setManual(event.target.value)}
-            aria-label="Ввести мощность вручную"
-            className="h-full min-w-0 flex-1 bg-transparent px-2.5 text-center text-[13px] font-black outline-none"
+            onFocus={() => setOpen(true)}
+            onClick={() => setOpen(true)}
+            onChange={(event) => {
+              const value = event.target.value.replace(/[^0-9]/g, "").slice(0, 4);
+              setManual(value);
+              setOpen(true);
+              if (debounce.current) clearTimeout(debounce.current);
+              const parsed = parsedManual(value);
+              if (parsed) debounce.current = setTimeout(() => commitManual(value), 500);
+            }}
+            onBlur={(event) => {
+              if (root.current?.contains(event.relatedTarget as Node)) return;
+              commitManual();
+              setOpen(false);
+            }}
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                event.preventDefault();
+                commitManual();
+                setOpen(false);
+                event.currentTarget.blur();
+              }
+              if (event.key === "Escape") {
+                setManual(String(current));
+                setOpen(false);
+                event.currentTarget.blur();
+              }
+            }}
+            aria-label="Выбрать или ввести мощность в лошадиных силах"
+            aria-expanded={open}
+            aria-controls="offer-power-options"
+            role="combobox"
+            className="h-full min-w-0 flex-1 bg-transparent px-3 text-[13px] font-black outline-none"
           />
-          <button type="submit" className="ac-editable-power__apply h-full shrink-0 px-2.5 text-[11px] font-black" aria-label="Пересчитать по введённой мощности">л.с. ↻</button>
-        </form>
+          <span className="pointer-events-none shrink-0 pr-3 text-[12px] font-black text-[var(--ac-muted)]">л.с.</span>
+          <svg viewBox="0 0 20 20" className={`pointer-events-none mr-3 h-4 w-4 shrink-0 text-[var(--ac-muted)] transition-transform ${open ? "rotate-180" : ""}`} fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true"><path d="m6 8 4 4 4-4" /></svg>
+        </div>
+        {open ? <div id="offer-power-options" role="listbox" className="ac-filter-dropdown ac-editable-power__options absolute left-0 right-0 top-[calc(100%+7px)] max-h-56 overflow-y-auto rounded-2xl p-2">
+          <button type="button" role="option" aria-selected={!search.get("powerHp")} onMouseDown={(event) => event.preventDefault()} onClick={() => { setManual(String(current)); apply(null); setOpen(false); }} className={`ac-filter-option flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-bold ${!search.get("powerHp") ? "is-active" : ""}`}><span>По данным автомобиля</span>{!search.get("powerHp") ? <span>✓</span> : null}</button>
+          {options.map((value) => {
+            const active = value === parsedManual();
+            return <button key={value} type="button" role="option" aria-selected={active} onMouseDown={(event) => event.preventDefault()} onClick={() => { setManual(String(value)); apply(value); setOpen(false); }} className={`ac-filter-option flex min-h-10 w-full items-center justify-between rounded-xl px-3 py-2 text-left text-sm font-bold ${active ? "is-active" : ""}`}><span>{value} л.с.</span>{active ? <span>✓</span> : null}</button>;
+          })}
+        </div> : null}
       </div>
     </div>
     <style>{`
@@ -134,24 +186,23 @@ export function EditablePowerTile({
         background: var(--ac-surface-3, #313d4f);
         color: var(--ac-text);
       }
-      .ac-editable-power__control,
-      .ac-editable-power__manual {
+      .ac-editable-power__control {
         border: 1px solid color-mix(in srgb, var(--ac-text) 12%, transparent);
         background: var(--ac-surface-3, #313d4f);
         color: var(--ac-text);
       }
       .ac-editable-power__control:focus,
-      .ac-editable-power__manual:focus-within {
+      .ac-editable-power__control:focus-within {
         border-color: color-mix(in srgb, var(--ac-text) 28%, transparent);
       }
-      .ac-editable-power__manual input {
+      .ac-editable-power__control input {
         color: var(--ac-text) !important;
         -webkit-text-fill-color: var(--ac-text) !important;
       }
-      .ac-editable-power__apply {
-        border-left: 1px solid color-mix(in srgb, var(--ac-text) 10%, transparent);
-        color: var(--ac-text);
-        background: color-mix(in srgb, var(--ac-text) 6%, transparent);
+      .ac-editable-power__options {
+        border: 1px solid color-mix(in srgb, var(--ac-text) 12%, transparent);
+        background: var(--ac-surface-2, #202a39);
+        box-shadow: 0 18px 40px rgba(0,0,0,.28);
       }
       html[data-theme="light"] .ac-editable-power__status {
         background: #dfe5ed;
@@ -164,38 +215,24 @@ export function EditablePowerTile({
         color: #4b5667;
         opacity: .85;
       }
-      html[data-theme="light"] .ac-editable-power__control,
-      html[data-theme="light"] .ac-editable-power__manual {
+      html[data-theme="light"] .ac-editable-power__control {
         border-color: #cbd3de;
         background: #ffffff;
         color: #171b23;
       }
       html[data-theme="light"] .ac-editable-power__control,
-      html[data-theme="light"] .ac-editable-power__manual input,
-      html[data-theme="light"] .ac-editable-power__apply {
+      html[data-theme="light"] .ac-editable-power__control input {
         color: #171b23 !important;
         -webkit-text-fill-color: #171b23 !important;
       }
-      html[data-theme="light"] .ac-editable-power__apply {
-        border-left-color: #d7dde5;
-        background: #eef1f5;
-      }
-      html[data-theme="light"] .ac-editable-power__control option {
-        color: #171b23;
+      html[data-theme="light"] .ac-editable-power__options {
         background: #ffffff;
+        border-color: #cbd3de;
       }
       @media (max-width: 420px) {
         .ac-editable-power {
           padding-left: .75rem !important;
           padding-right: .75rem !important;
-        }
-        .ac-editable-power > div:last-of-type {
-          grid-template-columns: minmax(0,1fr) minmax(124px,.48fr) !important;
-          gap: .45rem !important;
-        }
-        .ac-editable-power__apply {
-          padding-left: .45rem !important;
-          padding-right: .45rem !important;
         }
       }
     `}</style>

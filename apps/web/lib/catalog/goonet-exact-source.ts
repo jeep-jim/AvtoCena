@@ -13,12 +13,15 @@ type Row = {
   currency?: string;
   mileageKm?: number;
   engineCc?: number;
+  powerHp?: number;
+  powerKw?: number;
   fuel?: string;
   transmission?: string;
   drive?: string;
   bodyType?: string;
   color?: string;
   images: string[];
+  detailFetchedAt?: number;
 };
 
 const H = {
@@ -34,12 +37,13 @@ const MAKES = [
   "MINI", "JEEP", "JAGUAR", "FORD", "CHEVROLET", "TESLA", "HYUNDAI", "KIA",
 ].sort((a, b) => b.length - a.length);
 
-const MODEL_PAGES = [
-  "TOYOTA/ALPHARD", "TOYOTA/RAV4", "TOYOTA/PRIUS", "TOYOTA/VOXY", "TOYOTA/NOAH", "TOYOTA/LAND_CRUISER_PRADO",
-  "TOYOTA/COROLLA_CROSS", "TOYOTA/HARRIER", "TOYOTA/SIENTA", "TOYOTA/YARIS_CROSS", "NISSAN/SERENA", "NISSAN/NOTE",
-  "NISSAN/X_TRAIL", "NISSAN/ROOX", "NISSAN/LEAF", "HONDA/FREED", "HONDA/FIT", "HONDA/VEZEL", "HONDA/N_BOX",
-  "MAZDA/CX-5", "MAZDA/CX-30", "MITSUBISHI/DELICA_D5", "MITSUBISHI/OUTLANDER_PHEV", "SUBARU/FORESTER",
-  "SUBARU/LEVORG", "SUZUKI/JIMNY", "SUZUKI/SOLIO", "LEXUS/RX", "LEXUS/NX", "BMW/3_SERIES",
+// Brand catalog pages cover the full Japanese dealer inventory instead of a
+// hand-picked list of 30 popular models. Numeric cursor partitioning lets the
+// five collectors walk independent brand/page bands without duplicate work.
+const CATALOG_PAGES = [
+  "TOYOTA", "NISSAN", "HONDA", "MAZDA", "MITSUBISHI", "SUBARU", "SUZUKI", "DAIHATSU", "ISUZU", "LEXUS",
+  "MERCEDES-BENZ", "BMW", "AUDI", "VOLKSWAGEN", "PORSCHE", "VOLVO", "MINI", "LAND_ROVER", "JEEP", "JAGUAR",
+  "FORD", "CHEVROLET", "TESLA", "HYUNDAI", "KIA", "FIAT", "PEUGEOT", "RENAULT", "ABARTH", "BENTLEY",
 ];
 
 function clean(value: unknown) {
@@ -71,6 +75,43 @@ function abs(value: string, base: string) {
 function num(value: unknown) {
   const result = Number(String(value || "").replace(/[^0-9]/g, ""));
   return Number.isFinite(result) && result > 0 ? result : undefined;
+}
+
+function decimal(value: unknown) {
+  const result = Number(String(value || "").replace(/,/g, ".").replace(/[^0-9.]/g, ""));
+  return Number.isFinite(result) && result > 0 ? result : undefined;
+}
+
+type ExplicitPower = { hp?: number; kw?: number };
+
+/**
+ * Accept power only when Goo-net supplies an explicit HP/PS/BHP or kW unit.
+ * A bare JSON number is not enough evidence because schema fields and dealer
+ * tables can contain displacement, grade codes and other unrelated values.
+ */
+export function explicitGoonetPower(value: unknown): ExplicitPower {
+  const text = typeof value === "string"
+    ? value
+    : value && typeof value === "object"
+      ? [
+        (value as any).value,
+        (value as any).maxValue,
+        (value as any).unitText,
+        (value as any).unitCode,
+        (value as any).name,
+      ].filter((item) => item !== undefined && item !== null).join(" ")
+      : "";
+  const hpMatch = text.match(/(?:^|[^0-9])([0-9]{2,4}(?:[.,][0-9]+)?)\s*(?:hp|ps|bhp|horsepower)\b/i);
+  if (hpMatch) {
+    const hp = decimal(hpMatch[1]);
+    if (hp && hp >= 20 && hp <= 2_500) return { hp };
+  }
+  const kwMatch = text.match(/(?:^|[^0-9])([0-9]{1,4}(?:[.,][0-9]+)?)\s*(?:kw|kilowatt)\b/i);
+  if (kwMatch) {
+    const kw = decimal(kwMatch[1]);
+    if (kw && kw >= 10 && kw <= 2_000) return { kw, hp: Math.round(kw * 1.3596216173 * 10) / 10 };
+  }
+  return {};
 }
 
 async function html(url: string) {
@@ -161,6 +202,17 @@ export function goonetListingId(pageUrl: string) {
   return pageUrl.match(/\/([0-9]{21})\/?(?:[?#]|$)/)?.[1] || "";
 }
 
+export function goonetPathIdentity(pageUrl: string) {
+  try {
+    const match = decodeURIComponent(new URL(pageUrl).pathname).match(/^\/usedcars\/([^/]+)\/([^/]+)\/[0-9]{12,}\/?$/i);
+    return match
+      ? { make: clean(match[1]).replace(/_/g, " "), model: clean(match[2]).replace(/_/g, " ") }
+      : { make: "", model: "" };
+  } catch {
+    return { make: "", model: "" };
+  }
+}
+
 export function isGoonetListingFrame(value: string, listingId: string) {
   if (!listingId) return false;
   try {
@@ -248,12 +300,16 @@ function parse(markup: string, url: string): Row | null {
   const plain = clean(markup);
   const structured = jsonLd(markup);
   const vehicle = structured.find((item) => /vehicle|car|product/i.test(Array.isArray(item?.["@type"]) ? item["@type"].join(" ") : String(item?.["@type"] || ""))) || {};
-  const rawTitle = clean(vehicle.name || markup.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || markup.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)/i)?.[1]);
+  const pathIdentity = goonetPathIdentity(url);
+  const rawTitle = clean(vehicle.name || markup.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] || markup.match(/<meta[^>]+property=["']og:title["'][^>]+content=["']([^"']+)/i)?.[1] || `${pathIdentity.make} ${pathIdentity.model}`);
   const title = rawTitle.replace(/^NEW\s+/i, "").replace(/^USED\s+/i, "").trim();
   const upper = title.toUpperCase();
-  const makeRaw = clean(vehicle.brand?.name || vehicle.brand) || MAKES.find((make) => upper === make || upper.startsWith(`${make} `)) || "";
+  const makeRaw = clean(vehicle.brand?.name || (typeof vehicle.brand === "string" ? vehicle.brand : ""))
+    || MAKES.find((make) => upper === make || upper.startsWith(`${make} `))
+    || pathIdentity.make;
   const make = makeRaw === "MERCEDES_BENZ" ? "MERCEDES-BENZ" : makeRaw;
-  const model = clean(vehicle.model || title.slice(makeRaw.length)).replace(/^[-–—| ]+/, "").split(/\s+/).slice(0, 8).join(" ");
+  const structuredModel = clean(typeof vehicle.model === "object" ? vehicle.model?.name : vehicle.model);
+  const model = clean(structuredModel || pathIdentity.model || title.slice(makeRaw.length)).replace(/^[-–—| ]+/, "").split(/\s+/).slice(0, 8).join(" ");
   const year = Number(String(vehicle.vehicleModelDate || vehicle.modelDate || `${title} ${plain}`).match(/(?:19|20)\d{2}/)?.[0]);
   if (!make || !model || !year) return null;
 
@@ -264,6 +320,12 @@ function parse(markup: string, url: string): Row | null {
   const currency = currencyText || (pagePrice?.[1] === "¥" ? "JPY" : pagePrice?.[1] === "$" ? "USD" : undefined);
   const mileageKm = num(String(vehicle.mileageFromOdometer?.value || vehicle.mileageFromOdometer || plain.match(/([0-9][0-9, ]+)\s*km/i)?.[1] || ""));
   const engineCc = num(String(vehicle.vehicleEngine?.engineDisplacement || plain.match(/([0-9][0-9, ]+)\s*cc/i)?.[1] || ""));
+  const structuredPower = explicitGoonetPower(vehicle.vehicleEngine?.enginePower || vehicle.enginePower);
+  const labelledPower = explicitGoonetPower(
+    plain.match(/(?:Maximum\s+Power|Max\.?\s*Power|Engine\s+Power|Horsepower|Power)\s*[:：]?\s*([0-9]{1,4}(?:[.,][0-9]+)?\s*(?:HP|PS|BHP|kW|horsepower|kilowatt))/i)?.[1]
+      || plain.match(/([0-9]{1,4}(?:[.,][0-9]+)?\s*(?:HP|PS|BHP|kW|horsepower|kilowatt))\s*(?:Maximum\s+Power|Max\.?\s*Power|Engine\s+Power|Horsepower|Power)/i)?.[1],
+  );
+  const power = structuredPower.hp || structuredPower.kw ? structuredPower : labelledPower;
   const maxImages = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 120));
   const collectedImages = collectPageImages(markup, url, structured);
   const primaryImage = goonetPrimaryImageUrl(url);
@@ -281,13 +343,29 @@ function parse(markup: string, url: string): Row | null {
     currency,
     mileageKm,
     engineCc,
+    powerHp: power.hp,
+    powerKw: power.kw,
     fuel: clean(vehicle.fuelType || plain.match(/Fuel\s*[:：]?\s*([^|•]{1,30})/i)?.[1]),
     transmission: clean(vehicle.vehicleTransmission || plain.match(/Transmission\s*[:：]?\s*([^|•]{1,30})/i)?.[1]),
     drive: clean(vehicle.driveWheelConfiguration || plain.match(/Drive\s*[:：]?\s*([^|•]{1,30})/i)?.[1]),
     bodyType: clean(vehicle.bodyType || vehicle.vehicleConfiguration),
     color: clean(vehicle.color),
     images,
+    detailFetchedAt: Date.now(),
   };
+}
+
+async function pool<T, R>(rows: T[], limit: number, worker: (row: T) => Promise<R>) {
+  const output = new Array<R>(rows.length);
+  let cursor = 0;
+  await Promise.all(Array.from({ length: Math.min(limit, rows.length) }, async () => {
+    while (true) {
+      const index = cursor++;
+      if (index >= rows.length) return;
+      output[index] = await worker(rows[index]);
+    }
+  }));
+  return output;
 }
 
 export class GoonetExactAdapter implements CatalogSourceAdapter {
@@ -297,26 +375,34 @@ export class GoonetExactAdapter implements CatalogSourceAdapter {
 
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const cursorPage = Math.max(1, Number(cursor || 1));
-    const modelPath = MODEL_PAGES[(cursorPage - 1) % MODEL_PAGES.length];
-    const modelPage = Math.floor((cursorPage - 1) / MODEL_PAGES.length) + 1;
-    const base = `https://www.goo-net-exchange.com/usedcars/${modelPath}/`;
-    const listUrls = modelPage === 1 ? [base] : [`${base}index-${modelPage}.html`, `${base}?page=${modelPage}`];
+    const catalogPath = CATALOG_PAGES[(cursorPage - 1) % CATALOG_PAGES.length];
+    const catalogPage = Math.floor((cursorPage - 1) / CATALOG_PAGES.length) + 1;
+    const base = `https://www.goo-net-exchange.com/usedcars/${catalogPath}/`;
+    const listUrls = catalogPage === 1 ? [base] : [`${base}index-${catalogPage}.html`, `${base}?page=${catalogPage}`];
 
     for (const listUrl of listUrls) {
       const list = await html(listUrl).catch(() => null);
       if (!list?.response.ok) continue;
       const links = [...new Set([...list.markup.matchAll(/href=["']([^"']*\/usedcars\/[A-Z0-9_-]+\/[A-Z0-9_-]+\/[0-9]{12,}\/?)["']/gi)].map((match) => abs(match[1], listUrl)))].slice(0, 30);
-      const rows: Row[] = [];
-      for (let index = 0; index < links.length; index += 4) {
-        const batch = await Promise.all(links.slice(index, index + 4).map(async (detailUrl) => {
-          const detail = await html(detailUrl).catch(() => null);
-          return detail?.response.ok ? parse(detail.markup, detailUrl) : null;
-        }));
-        rows.push(...batch.filter(Boolean) as Row[]);
-      }
+      const detailConcurrency = Math.max(1, Math.min(20, Number(process.env.CATALOG_GOONET_DETAIL_CONCURRENCY || 12)));
+      const parsed = await pool(links, detailConcurrency, async (detailUrl) => {
+        const detail = await html(detailUrl).catch(() => null);
+        return detail?.response.ok ? parse(detail.markup, detailUrl) : null;
+      });
+      const rows = parsed.filter((row): row is Row => Boolean(row));
       if (rows.length) return { items: rows, nextCursor: String(cursorPage + 1), finished: false, count: rows.length };
     }
-    throw new Error(`goonet_exact_zero_${modelPath}_${modelPage}`);
+    return {
+      items: [],
+      nextCursor: String(cursorPage + 1),
+      finished: false,
+      count: 0,
+      health: {
+        ok: true,
+        message: `goonet_exact_empty_${catalogPath}_${catalogPage}`,
+        checkedAt: new Date().toISOString(),
+      },
+    };
   }
 
   mapStatus(): OfferStatus { return "active"; }
@@ -325,14 +411,20 @@ export class GoonetExactAdapter implements CatalogSourceAdapter {
     const row = raw as Row;
     if (!row.id || !row.images.length || !isSourcePrimaryImage(row.images[0], row.id)) return null;
     const now = new Date().toISOString();
-    return normalizeVehicleOfferSpecs({
+    const offer = normalizeVehicleOfferSpecs({
       id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: "japan", offerType: "fixed", status: "active",
       make: row.make, model: row.model, trim: row.title, year: row.year, mileageKm: row.mileageKm, engineCc: row.engineCc, fuel: row.fuel,
+      powerHp: row.powerHp, powerKw: row.powerKw,
       transmission: row.transmission, drive: row.drive, bodyType: row.bodyType, color: row.color,
       sourcePrice: row.price || null, sourceCurrency: row.price ? (row.currency || "JPY") : null, priceMode: row.price ? "fixed" : "estimated",
       images: [], totalRub: null, calculationStatus: row.price ? "ready" : "needs_data", firstSeenAt: now, updatedAt: now,
       operational: { sourceUrl: row.url, sourceVenueName: "Goo-net Exchange", raw: row },
     } as VehicleOffer);
+    if (offer && (row.powerHp || row.powerKw)) {
+      offer.powerDataConfidence = "source_exact";
+      offer.powerDataSource = `Goo-net Exchange detail:${row.id}:explicit-unit-power`;
+    }
+    return offer;
   }
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
@@ -340,7 +432,8 @@ export class GoonetExactAdapter implements CatalogSourceAdapter {
     const minimum = Math.max(2, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 2));
     const sourceUrl = String(offer.operational?.sourceUrl || "");
     let row = offer.operational.raw as Row;
-    if (sourceUrl) {
+    const recentlyFetched = Number(row?.detailFetchedAt || 0) > Date.now() - 120_000;
+    if (sourceUrl && !recentlyFetched) {
       const detail = await html(sourceUrl).catch(() => null);
       if (detail?.response.ok) {
         const reparsed = parse(detail.markup, sourceUrl);

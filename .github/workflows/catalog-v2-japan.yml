@@ -30,4 +30,5 @@ jobs:
       target_per_market: "30000"
       maximum_per_market: "30000"
       priority_target: "24000"
+      page_partition_count: "5"
     secrets: inherit

@@ -43,6 +43,27 @@ test("Japan first payment keeps 31k deposit plus 39k commission without double c
   );
 });
 
+test("customs duty and utilization fee are separate lines without changing the total", () => {
+  const result = calculateAvtocenaFromBusinessConfig({
+    marketId: "korea",
+    sourcePriceRub: 1_000_000,
+    customsRub: 420_000,
+    utilizationFeeRub: 131_040,
+    marketConfig: { id: "korea-split-customs" },
+  });
+
+  assert.equal(result.totalRub, 1_551_040);
+  assert.deepEqual(
+    result.breakdown
+      .filter((line) => line.id === "customs" || line.id === "utilization-fee")
+      .map((line) => [line.id, line.title, line.amountRub]),
+    [
+      ["customs", "Таможенная пошлина", 420_000],
+      ["utilization-fee", "Утилизационный сбор", 131_040],
+    ],
+  );
+});
+
 test("pure EV is incomplete when only peak power is known", () => {
   const result = calculateRussiaCustomsForIndividual({
     customsValueRub: 2_000_000,

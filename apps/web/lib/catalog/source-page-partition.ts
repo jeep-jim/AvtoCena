@@ -10,6 +10,7 @@ const NUMERIC_PAGE_SOURCES = new Set([
   "kcar_korea_open",
   "kbchachacha_korea_open",
   "dubicars_uae_exact",
+  "goonet_japan_exact",
   "otomoto_europe_exact",
 ]);
 

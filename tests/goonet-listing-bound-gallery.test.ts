@@ -3,7 +3,10 @@ import test from "node:test";
 import { credibleCatalogImages } from "../apps/web/lib/catalog/offer-quality";
 import {
   coherentGoonetImages,
+  explicitGoonetPower,
+  GoonetExactAdapter,
   goonetListingId,
+  goonetPathIdentity,
   goonetPrimaryImageUrl,
   isGoonetListingFrame,
   isGoonetPageBoundJFrame,
@@ -33,6 +36,42 @@ function image(url: string) {
 const liveListingId = "402026080500704382002";
 const livePage = `https://www.goo-net-exchange.com/usedcars/HONDA/FIT/${liveListingId}/`;
 const livePrimary = goonetPrimaryImageUrl(livePage);
+
+test("Goo-net accepts only explicitly unit-labelled source power", () => {
+  assert.deepEqual(explicitGoonetPower("Maximum Power: 150 PS"), { hp: 150 });
+  assert.deepEqual(explicitGoonetPower({ value: 110, unitText: "kW" }), { kw: 110, hp: 149.6 });
+  assert.deepEqual(explicitGoonetPower({ value: 150 }), {});
+  assert.deepEqual(explicitGoonetPower("1500 cc"), {});
+});
+
+test("Goo-net detail URL supplies stable make/model identity without grade text", () => {
+  assert.deepEqual(goonetPathIdentity(page), { make: "TOYOTA", model: "PRIUS" });
+  assert.deepEqual(
+    goonetPathIdentity("https://www.goo-net-exchange.com/usedcars/TOYOTA/LAND_CRUISER_PRADO/700000000000000000001/"),
+    { make: "TOYOTA", model: "LAND CRUISER PRADO" },
+  );
+});
+
+test("Goo-net normalized offers retain exact marketplace power provenance", () => {
+  const adapter = new GoonetExactAdapter();
+  const offer = adapter.normalizeOffer({
+    id: listingId,
+    url: page,
+    title: "TOYOTA PRIUS 2022",
+    make: "TOYOTA",
+    model: "PRIUS",
+    year: 2022,
+    price: 2_200_000,
+    currency: "JPY",
+    engineCc: 1_800,
+    powerHp: 122,
+    fuel: "Petrol",
+    images: [primary],
+  });
+  assert.equal(offer?.powerHp, 122);
+  assert.equal(offer?.powerDataConfidence, "source_exact");
+  assert.match(String(offer?.powerDataSource), /Goo-net Exchange detail:.*explicit-unit-power/);
+});
 function liveFrame(index: number, family = "0704382A20260804G002") {
   return `https://picture1.goo-net.com/070/0704382/J/${family}${String(index).padStart(2, "0")}.jpg`;
 }

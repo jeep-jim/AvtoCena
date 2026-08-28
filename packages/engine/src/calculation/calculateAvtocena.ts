@@ -73,7 +73,23 @@ export function calculateAvtocenaFromBusinessConfig(input: BusinessCalculationIn
   addLine(lines, { id: "sbkts", title: "СБКТС", amountRub: numberOrZero(config.sbktsRub), kind: "service", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "epts", title: "ЭПТС", amountRub: numberOrZero(config.eptsRub), kind: "service", amountType: "fixed", source: "market_config" });
   addLine(lines, { id: "rf-delivery", title: input.deliveryCity ? `Доставка по РФ: ${input.deliveryCity}` : "Доставка по РФ", amountRub: numberOrZero(input.cityDeliveryRub ?? config.rfDeliveryRub), kind: "logistics", amountType: "fixed", source: input.cityDeliveryRub ? "manager" : "market_config" });
-  addLine(lines, { id: "customs", title: "Таможенные платежи", amountRub: numberOrZero(input.customsRub), kind: "customs", amountType: "calculated", source: "calculated" });
+  addLine(lines, {
+    id: "customs",
+    title: "Таможенная пошлина",
+    amountRub: numberOrZero(input.customsRub),
+    kind: "customs",
+    amountType: "calculated",
+    source: "calculated",
+    note: "Включая таможенное оформление, акциз и НДС, если они применимы",
+  });
+  addLine(lines, {
+    id: "utilization-fee",
+    title: "Утилизационный сбор",
+    amountRub: numberOrZero(input.utilizationFeeRub),
+    kind: "customs",
+    amountType: "calculated",
+    source: "calculated",
+  });
   addLine(lines, { id: "other-fixed", title: "Другие фиксированные расходы", amountRub: numberOrZero(config.otherFixedExpensesRub), kind: "other", amountType: "fixed", source: "market_config" });
 
   const subtotalBeforePercent = lines.reduce((sum, line) => sum + line.amountRub, 0);

@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import { readFileSync } from "node:fs";
 import test from "node:test";
 
 import {
@@ -42,4 +43,19 @@ test("retained offers have exactly one page-partition owner", () => {
     catalogSourcePagePartition("kcar_korea_open", index, 5),
   ));
   assert.equal(owners.length, 1);
+});
+
+test("Goo-net Japan inventory is split across numeric page workers", () => {
+  const partitions = [0, 1, 2, 3, 4].map((index) => catalogSourcePagePartition("goonet_japan_exact", index, 5, 5));
+  assert.deepEqual(partitions.map(catalogPartitionInitialCursor), ["1", "2", "3", "4", "5"]);
+  assert.deepEqual(partitions.map((partition, index) => catalogPartitionNextCursor(String(index + 1), String(index + 2), partition)), ["6", "7", "8", "9", "10"]);
+});
+
+test("Japan workflows give all five collectors independent Goo-net page bands", () => {
+  const reusable = readFileSync(new URL("../.github/workflows/catalog-v3-market-10k-reusable.yml", import.meta.url), "utf8");
+  const japan = readFileSync(new URL("../.github/workflows/catalog-v2-japan.yml", import.meta.url), "utf8");
+  const sequential = readFileSync(new URL("../.github/workflows/catalog-v3-sequential-queue.yml", import.meta.url), "utf8");
+  assert.match(reusable, /CATALOG_REBUILD_PAGE_PARTITION_COUNT: \$\{\{ inputs\.page_partition_count \}\}/);
+  assert.match(japan, /page_partition_count: "5"/);
+  assert.match(sequential, /market: japan[\s\S]*page_partition_count: "5"/);
 });

@@ -155,6 +155,8 @@ function SimilarOffersFallback() {
 type BreakdownLine = { id?: string; title: string; amountRub: number };
 function customerBreakdownTitle(id: string, title: string) {
   if (id === "topavto-commission" || /комиссия\s+topavto/i.test(title)) return "Комиссия Автодилера";
+  if (id === "customs") return "Таможенная пошлина";
+  if (id === "utilization-fee") return "Утилизационный сбор";
   return title;
 }
 
@@ -168,7 +170,26 @@ function priceBreakdown(offer: any): BreakdownLine[] {
       })
       .filter((line: BreakdownLine) => line.amountRub !== 0)
     : [];
-  if (actual.length) return actual;
+  if (actual.length) {
+    const customs = offer?.calculationSnapshot?.customs || {};
+    const knownCustomsRub = Number(customs?.knownCustomsRub || 0);
+    const utilizationFeeRub = Number(customs?.utilizationFeeRub || 0);
+    const alreadySplit = actual.some((line: BreakdownLine) => line.id === "utilization-fee");
+    if (!alreadySplit && knownCustomsRub > 0 && utilizationFeeRub > 0) {
+      const combinedIndex = actual.findIndex((line: BreakdownLine) => line.id === "customs");
+      const combined = actual[combinedIndex];
+      const expectedCombined = knownCustomsRub + utilizationFeeRub;
+      if (combined && Math.abs(combined.amountRub - expectedCombined) <= 2) {
+        actual.splice(
+          combinedIndex,
+          1,
+          { id: "customs", title: "Таможенная пошлина", amountRub: knownCustomsRub },
+          { id: "utilization-fee", title: "Утилизационный сбор", amountRub: utilizationFeeRub },
+        );
+      }
+    }
+    return actual;
+  }
   const total = Number(offer?.totalRub || 0);
   return total ? [{ id: "total", title: "Стоимость автомобиля", amountRub: total }] : [];
 }

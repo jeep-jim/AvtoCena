@@ -34,6 +34,7 @@ const APPROVED_SOURCE_URLS: Record<CatalogMarket, readonly string[]> = {
     "https://www.autohome.com.cn/",
   ],
   japan: [
+    "https://www.goo-net-exchange.com/usedcars/",
     "https://jpauc.com/auction/past",
     "https://carvector.com/stat",
     "https://prestigemotorsport.com.au/auctions/",
@@ -45,9 +46,9 @@ const APPROVED_SOURCE_URLS: Record<CatalogMarket, readonly string[]> = {
   ],
 };
 
-test("the 18 owner-approved catalog sources are permanently encoded", () => {
+test("the 19 owner-approved catalog sources are permanently encoded", () => {
   const total = Object.values(REQUIRED_CATALOG_SOURCES).reduce((sum, sources) => sum + sources.length, 0);
-  assert.equal(total, 18);
+  assert.equal(total, 19);
 
   for (const [marketName, expectedUrls] of Object.entries(APPROVED_SOURCE_URLS)) {
     const market = marketName as CatalogMarket;
