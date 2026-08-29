@@ -7,6 +7,7 @@ import {
 } from "../apps/web/lib/catalog/jpauc-past-source.ts";
 import { compatibleCarvectorModel, normalizeCarvectorChassis } from "./prestige-japan-carvector-power-enrich.mjs";
 import { toJapanAuctionDate } from "./lib/japan-auction-date.mjs";
+import { extractCarvectorOffersFromNgState } from "./lib/carvector-ng-state.mjs";
 
 const CARVECTOR = "https://carvector.com";
 const JPAUC = "https://jpauc.com";
@@ -27,9 +28,13 @@ const maxFallbackPages = Math.max(0, Number(process.env.JAPAN_EXACT_MAX_FALLBACK
 const maxDates = Math.max(0, Number(process.env.JAPAN_EXACT_MAX_DATES || 0));
 const maxGroupsPerDate = Math.max(0, Number(process.env.JAPAN_EXACT_MAX_GROUPS_PER_DATE || 0));
 const carvectorOnly = process.env.JAPAN_EXACT_CARVECTOR_ONLY === "1";
+const carvectorTransport = String(process.env.JAPAN_EXACT_CARVECTOR_TRANSPORT || "graphql").trim().toLowerCase();
 const carvectorMaxPages = Math.max(0, Number(process.env.JAPAN_EXACT_CARVECTOR_MAX_PAGES || 0));
 const carvectorConcurrency = Math.max(1, Math.min(4, Number(process.env.JAPAN_EXACT_CARVECTOR_CONCURRENCY || 2)));
 const carvectorPageDelayMs = Math.max(0, Number(process.env.JAPAN_EXACT_CARVECTOR_PAGE_DELAY_MS || 750));
+const carvectorPageSize = Math.max(1, Math.min(100, Number(process.env.JAPAN_EXACT_CARVECTOR_PAGE_SIZE || 100)));
+const carvectorServerMinPrice = Math.max(0, Number(process.env.JAPAN_EXACT_CARVECTOR_SERVER_MIN_PRICE || 0));
+const carvectorServerMinEngineCc = Math.max(0, Number(process.env.JAPAN_EXACT_CARVECTOR_SERVER_MIN_ENGINE_CC || 0));
 const ELECTRIFIED = /(?:\bhybrid\b|plug[ -]?in|phev|electric|\bev\b|e[ -]?power|fuel[ -]?cell|fcev|ハイブリッド|電気)/i;
 
 if (!recentLimit && !/^20\d{2}-(?:0[1-9]|1[0-2])$/.test(month)) throw new Error(`invalid_japan_exact_month:${month}`);
@@ -112,7 +117,26 @@ function extractCarvectorResult(payload) {
   return found.sort((a, b) => Number(b?.offers?.length || 0) - Number(a?.offers?.length || 0))[0] || { total: 0, offers: [] };
 }
 
-async function carvectorPage(offset) {
+function carvectorStatUrl(offset) {
+  const url = new URL(`${CARVECTOR}/stat`);
+  url.searchParams.set("minYear", String(minYear));
+  url.searchParams.set("pageSize", String(carvectorPageSize));
+  url.searchParams.set("sortBy", "AUCTION_AT_DESC");
+  url.searchParams.set("page", String(Math.floor(offset / carvectorPageSize) + 1));
+  if (carvectorServerMinPrice) url.searchParams.set("minPrice", String(carvectorServerMinPrice));
+  if (carvectorServerMinEngineCc) url.searchParams.set("minEngineVolume", String(carvectorServerMinEngineCc));
+  if (exactDate) url.searchParams.append("auctionDate", `${exactDate}T00:00:00Z`);
+  else if (!recentLimit) url.searchParams.append("auctionDate", month);
+  return url.toString();
+}
+
+async function carvectorSsrPage(offset) {
+  const url = carvectorStatUrl(offset);
+  const response = await fetchWithRetry(url, { headers: { ...browserHeaders, referer: `${CARVECTOR}/stat` } });
+  return extractCarvectorOffersFromNgState(await response.text());
+}
+
+async function carvectorGraphqlPage(offset) {
   const operation = `JapanExact_${scope.replace(/-/g, "_")}_${offset}`;
   const query = `query ${operation}($input: FindOffersAuctionsInput!) {
     findOffersAuctionsStats(input: $input) {
@@ -125,28 +149,32 @@ async function carvectorPage(offset) {
         model { title slug }
         chassis { title }
         modification { title }
-        auction { title }
+        auction { title slug }
         finishPrice { JPY }
         startPrice { JPY }
         transmission { title }
         transmissionType { title }
         color { title slug }
-        fuel { title }
+        fuel { title slug }
         gear { title }
         rate { title }
       }
       }
     }
   }`;
-  const filterInput = recentLimit ? {} : exactDate ? { auctionDateAnyOf: [`${exactDate}T00:00:00.000Z`] } : { auctionMonthAnyOf: [month] };
+  const filterInput = {
+    ...(carvectorServerMinPrice ? { minPrice: carvectorServerMinPrice, currency: "JPY" } : {}),
+    ...(carvectorServerMinEngineCc ? { minEngineVolume: carvectorServerMinEngineCc } : {}),
+    ...(recentLimit ? {} : exactDate ? { auctionDateAnyOf: [`${exactDate}T00:00:00.000Z`] } : { auctionMonthAnyOf: [month] }),
+  };
   const body = JSON.stringify({ operationName: operation, query, variables: { input: {
-    statusAnyOf: ["PUBLISHED"], ...filterInput, minYear, limit: 100, offset, countTotal: true,
+    statusAnyOf: ["PUBLISHED"], ...filterInput, minYear, limit: carvectorPageSize, offset, countTotal: true,
   } } });
   const pageUrl = recentLimit
-    ? `${CARVECTOR}/stat?minYear=${minYear}&pageSize=100`
+    ? `${CARVECTOR}/stat?minYear=${minYear}&pageSize=${carvectorPageSize}`
     : exactDate
-    ? `${CARVECTOR}/stat?auctionDateAnyOf=${encodeURIComponent(exactDate)}&minYear=${minYear}&pageSize=100`
-    : `${CARVECTOR}/stat?auctionMonthAnyOf=${encodeURIComponent(month)}&minYear=${minYear}&pageSize=100`;
+    ? `${CARVECTOR}/stat?auctionDateAnyOf=${encodeURIComponent(exactDate)}&minYear=${minYear}&pageSize=${carvectorPageSize}`
+    : `${CARVECTOR}/stat?auctionMonthAnyOf=${encodeURIComponent(month)}&minYear=${minYear}&pageSize=${carvectorPageSize}`;
   const response = await fetchWithRetry(`${CARVECTOR}/graphql`, {
     method: "POST",
     headers: {
@@ -161,16 +189,22 @@ async function carvectorPage(offset) {
   return extractCarvectorResult(payload);
 }
 
+async function carvectorPage(offset) {
+  if (carvectorTransport === "ssr") return carvectorSsrPage(offset);
+  if (carvectorTransport !== "graphql") throw new Error(`invalid_carvector_transport:${carvectorTransport}`);
+  return carvectorGraphqlPage(offset);
+}
+
 function normalizeCarvectorRow(row) {
   const sourceUrl = row?.urlPage?.fullUrl ? new URL(row.urlPage.fullUrl, CARVECTOR).toString() : "";
   return {
     id: clean(row?.id), date: toJapanAuctionDate(row?.auctionAt), auctionAt: clean(row?.auctionAt), lot: clean(row?.lot),
     make: clean(row?.make?.title), model: clean(row?.model?.title), chassis: normalizeCarvectorChassis(row?.chassis?.title),
-    modification: clean(row?.modification?.title), auction: clean(row?.auction?.title), year: positive(row?.year),
+    modification: clean(row?.modification?.title), auction: clean(row?.auction?.title), auctionSlug: clean(row?.auction?.slug), year: positive(row?.year),
     powerHp: positive(row?.power), engineCc: positive(row?.engineVolume), mileageKm: positive(row?.mileage),
     finalPriceJpy: positive(row?.finishPrice?.JPY), startPriceJpy: positive(row?.startPrice?.JPY),
     transmission: clean(row?.transmission?.title || row?.transmissionType?.title), color: clean(row?.color?.title),
-    fuel: clean(row?.fuel?.title), gear: clean(row?.gear?.title), auctionGrade: clean(row?.rate?.title), sourceUrl,
+    fuel: clean(row?.fuel?.title), fuelSlug: clean(row?.fuel?.slug), gear: clean(row?.gear?.title), auctionGrade: clean(row?.rate?.title), sourceUrl,
   };
 }
 
@@ -196,7 +230,7 @@ async function collectCarvector() {
   const first = await carvectorPage(startOffset);
   const total = Math.max(0, Number(first.total || 0));
   const collectionLimit = recentLimit || Math.max(0, total - startOffset);
-  const pageCount = Math.min(Math.ceil(Math.max(0, total - startOffset) / 100), Math.ceil(collectionLimit / 100), carvectorMaxPages || Number.MAX_SAFE_INTEGER);
+  const pageCount = Math.min(Math.ceil(Math.max(0, total - startOffset) / carvectorPageSize), Math.ceil(collectionLimit / carvectorPageSize), carvectorMaxPages || Number.MAX_SAFE_INTEGER);
   if (!pageCount) return { total, rows: [] };
   const pages = new Array(pageCount);
   pages[0] = first;
@@ -206,13 +240,13 @@ async function collectCarvector() {
       const index = cursor++;
       if (index >= pageCount) return;
       if (carvectorPageDelayMs) await sleep(carvectorPageDelayMs + Math.floor(Math.random() * 250));
-      pages[index] = await carvectorPage(startOffset + index * 100);
+      pages[index] = await carvectorPage(startOffset + index * carvectorPageSize);
     }
   }));
   const byId = new Map();
   for (const [index, page] of pages.entries()) {
-    const remaining = Math.max(0, Math.min(Math.max(0, total - startOffset), collectionLimit) - index * 100);
-    for (const raw of (page?.offers || []).slice(0, Math.min(100, remaining))) {
+    const remaining = Math.max(0, Math.min(Math.max(0, total - startOffset), collectionLimit) - index * carvectorPageSize);
+    for (const raw of (page?.offers || []).slice(0, Math.min(carvectorPageSize, remaining))) {
       const row = normalizeCarvectorRow(raw);
       if (!row.id || byId.has(row.id)) continue;
       byId.set(row.id, row);
@@ -350,12 +384,14 @@ const offers = [];
 const scans = [];
 const failures = [];
 const unmappedVenues = new Map();
+const jpaucAuctionOptions = new Map();
 const dateEntries = [...evidenceByDate.entries()].sort();
 for (const [date, dateEvidence] of (maxDates ? dateEntries.slice(0, maxDates) : dateEntries)) {
   console.log(`[jpauc] date=${date} evidence=${dateEvidence.length} session=start`);
   let session;
   try { session = await createJpaucSession(date); }
   catch (error) { failures.push({ date, error: clean(error?.message || error) }); continue; }
+  jpaucAuctionOptions.set(date, session.auctionOptions.map((option) => option.label));
   const grouped = new Map();
   for (const evidence of dateEvidence) {
     const key = `${token(evidence.make)}|${venueCore(evidence.auction)}`;
@@ -414,6 +450,7 @@ const report = {
     const split = key.indexOf("|");
     return { date: key.slice(0, split), venue: key.slice(split + 1), count };
   }).sort((a, b) => b.count - a.count || a.venue.localeCompare(b.venue)),
+  jpaucAuctionOptions: Object.fromEntries(jpaucAuctionOptions),
   approvedSourceIds: [SOURCE_ID, EVIDENCE_SOURCE_ID], forbiddenSourceCount: 0,
 };
 await fs.writeFile(output, JSON.stringify({ offers: uniqueOffers, report }, null, 2));
