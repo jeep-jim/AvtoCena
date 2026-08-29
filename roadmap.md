@@ -1198,3 +1198,46 @@ Production-результат ещё должен быть подтверждё�
 - **Точный сбой:** из 97 проверок прошли 95; упали только `numeric source pages are split across three independent workers` и `mobile.de workers advance through disjoint search shards`. Японский reusable workflow штатно задаёт `CATALOG_REBUILD_PAGE_PARTITION_COUNT=5`, а эти два теста не передавали ожидаемое значение `3` явно и поэтому проверяли фактические пять partition против ожиданий для трёх.
 - **Исправление:** тесты DubiCars и mobile.de теперь явно создают по три partition; отдельные Goo-net проверки по-прежнему явно требуют пять. Production-код, парсеры, source adapters, allowlist, расписания, курсоры и правила публикации не менялись.
 - **Следующий шаг:** отдельный PR, полный зелёный CI и merge; после освобождённого writer-lock — один повтор накопительного Japan 30k run с сохранёнными курсорами и обязательной проверкой generation, source counts, Crown/Grace, центральных specification gates и живых list/detail/related.
+
+## 38. 2026-08-29 — восстановлен точный владелецкий allowlist источников и очищена Япония
+
+### 38.1. Доказанная причина появления Goo-net
+
+- Goo-net не был автоматически выбран сайтом: `goonet_japan_exact` ошибочно находился прямо в каноническом `REQUIRED_CATALOG_SOURCES.japan`, active importer, exact/scoped/reliable registries, page partition и Yandex egress bridge.
+- Прежний тест «owner-approved allowlist» был круговым: production registry сравнивался с тем же изменяемым объектом и поэтому не мог обнаружить ошибочное расширение списка.
+- Исправление выполнено в [PR #750](https://github.com/jeep-jim/AvtoCena/pull/750), merge `7a9febceae39cb6b87348f6c8822ce224ad070a4`. Production deploy [run 33232162059](https://github.com/jeep-jim/AvtoCena/actions/runs/33232162059) завершился `success`.
+- Goo-net удалён из всех активных путей collection и partition, из GitHub/Yandex bridge и из default source plans. Старый внутренний endpoint оставлен только как fail-closed tombstone: HTTP `410 catalog_source_not_approved`, без обращения к источнику.
+- Новый независимый regression-контракт фиксирует ровно 18 разрешённых пар `market + sourceId + canonical domain` для семи рынков. Неизвестный `sourceId`, несовпадающий домен и Goo-net отвергаются централизованно до retention/publication.
+- Расписания рынков не менялись.
+
+### 38.2. Канонический набор после исправления
+
+- ОАЭ: `dubizzle_uae_open` → `uae.dubizzle.com`; `dubicars_uae_exact` → `dubicars.com`.
+- Корея: `encar_direct` → `encar.com`; `kcar_korea_open` → `kcar.com`.
+- Европа: `mobile_de_open` → `mobile.de`; `autoscout_europe_open` → `autoscout24.com`.
+- Грузия: `myauto_georgia_list` → `myauto.ge`; `autopapa_georgia_open` → `autopapa.ge`.
+- Китай: `autohome_used_china_open` → `che168.com`; `dongchedi_china_open` → `dongchedi.com`; `guazi_china_open` → `guazi.com`; `autohome_new_china_open` → `autohome.com.cn`.
+- Япония: `jpauc_japan_past_open` → `jpauc.com/auction/past`; `carvector_japan_stat_open` → `carvector.com/stat`; `prestige_japan_auctions_open` → `prestigemotorsport.com.au/auctions`; `auctiondatasearch_japan_open` → `auctiondatasearch.jp`; `jpcenter_japan_catalog_open` → `jp.center`.
+- Кыргызстан: `mashina_kyrgyzstan_exact` → `mashina.kg`.
+
+### 38.3. Контрольная перепубликация Японии только из пяти разрешённых источников
+
+- Операционный marker commit: `334506a857e02a0132ad62c4171321c48e7fe47a`.
+- [Japan run 33232591187](https://github.com/jeep-jim/AvtoCena/actions/runs/33232591187) завершён `success`; пять collector-shards и единый publish завершены успешно.
+- Новый generation: `gen_1787976782995_78b7deb5`.
+- Валидация попыталась обратиться ко всем пяти обязательным японским адаптерам; missing adapters и unattempted required sources: `0`.
+- Собранные candidate pools: JPAuc — `2316`, Prestige — `1392`; CarVector прошёл 25 страниц без новых пригодных кандидатов; Auction Data Search и JP Center завершились source errors без сохранённых строк.
+- В validation: `306` допустимых строк (`189` fresh + `117` restored), productive sources — `2`.
+- В public опубликовано `87` карточек, все из `prestige_japan_auctions_open`. Старые `131` Goo-net карточка отсутствуют в новом generation.
+- JPAuc: `2279` строк отклонены как `japan_auction_sold_identity_unverified`; эти строки сохранены в candidate pool, но не выданы пользователю. Дополнительно отклонены `35` commercial/identity и `2` calculation rows.
+- Safety gates Японии: `forbiddenSourceCount=0`, `unpricedPublicCount=0`, `fallback100PublicCount=0`, `unprovenExact100PublicCount=0`, `incompleteSpecificationCount=0`, `suspiciousPowerCount=0`, `japanSoldIdentityFailureCount=0`.
+- Crown: `0` публичных карточек; шасси и мощность не выдумывались. Grace: `23` публичных доказанных карточки.
+- Detail parity: пять из пяти sampled cards разрешились из public projection; три дополнительно проверенные страницы offer вернули HTTP `200`, related rails присутствуют и не содержат Goo-net.
+- Live: `/cars`, `/cars/japan`, `/cars/autocatalog` возвращают HTTP `200`; market/search generation совпадает с `gen_1787976782995_78b7deb5`.
+
+### 38.4. Сохранность остальных рынков
+
+- Корея — `2183`, Китай — `2872`, ОАЭ — `4613`, Европа — `5259`, Грузия — `639`, Кыргызстан — `1007`.
+- Publish report подтвердил совпадение ожидаемых и фактических SHA-256 public projections для всех шести нетронутых рынков.
+- Общий post-persist audit не содержит failures; forbidden/unpriced/fallback-100/unproven-100 и specification gates равны нулю на всех семи рынках.
+
