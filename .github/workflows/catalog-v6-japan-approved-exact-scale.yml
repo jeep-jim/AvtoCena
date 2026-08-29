@@ -22,9 +22,15 @@ jobs:
       fail-fast: false
       max-parallel: 1
       matrix:
-        scope: ["recent-30000"]
+        include:
+          - { scope: "recent-00000-07500", start_offset: 0 }
+          - { scope: "recent-07500-15000", start_offset: 7500 }
+          - { scope: "recent-15000-22500", start_offset: 15000 }
+          - { scope: "recent-22500-30000", start_offset: 22500 }
     env:
-      JAPAN_EXACT_RECENT_LIMIT: "30000"
+      JAPAN_EXACT_SCOPE: ${{ matrix.scope }}
+      JAPAN_EXACT_START_OFFSET: ${{ matrix.start_offset }}
+      JAPAN_EXACT_RECENT_LIMIT: "7500"
       JAPAN_EXACT_CHUNK_OUTPUT: japan-exact-${{ matrix.scope }}.json
       JAPAN_EXACT_MIN_YEAR: "2010"
       JAPAN_EXACT_JPAUC_CONCURRENCY: "10"
@@ -58,7 +64,7 @@ jobs:
     env:
       JAPAN_EXACT_MERGE_INPUT_DIR: japan-exact-chunks
       JAPAN_EXACT_MERGE_OUTPUT: japan-carvector-jpauc-exact.json
-      JAPAN_EXACT_EXPECTED_SCOPES: recent-30000
+      JAPAN_EXACT_EXPECTED_SCOPES: recent-00000-07500,recent-07500-15000,recent-15000-22500,recent-22500-30000
       JAPAN_EXACT_MIN_CHUNK_COVERAGE: "1"
     steps:
       - uses: actions/checkout@v4
