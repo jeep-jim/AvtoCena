@@ -25,6 +25,7 @@ const configuredMinPreviousRatio = Number(process.env.RECOVERY_PUBLISH_MIN_PREVI
 const minPreviousRatio = Number.isFinite(configuredMinPreviousRatio)
   ? Math.max(0, Math.min(1, configuredMinPreviousRatio))
   : 0;
+const minimumPublishCount = Math.max(0, Math.floor(Number(process.env.RECOVERY_PUBLISH_MIN_COUNT || 0)));
 const minYear = catalogMinYearForMarket(market);
 const publishLockPath = "catalog/import-lock.json";
 const publishOperationId = `catalog_recovery_publish_${market}_${crypto.randomUUID()}`;
@@ -327,6 +328,9 @@ for (const other of PUBLIC_CATALOG_MARKETS) {
 }
 
 const canonicalTargetPreview = await previewCanonicalPublicCatalogOffers(marketRows);
+if (canonicalTargetPreview.offers.length < minimumPublishCount) {
+  throw new Error(`recovery_canonical_preview_count_gate_failed:${market}:${canonicalTargetPreview.offers.length}:${minimumPublishCount}`);
+}
 expectedPublishedByMarket[market] = canonicalTargetPreview.offers.length;
 expectedPublishedHashByMarket[market] = hashRows(canonicalTargetPreview.offers);
 
@@ -361,7 +365,8 @@ try {
       for (const currentMarket of PUBLIC_CATALOG_MARKETS) {
         const rows = publishedOffers.filter((offer) => String(offer?.market || "") === currentMarket);
         if (currentMarket === market) {
-          if (rows.length < minPreviousCount || !rows.length) failures.push(`${currentMarket}:count:${rows.length}:${Math.max(1, minPreviousCount)}`);
+          const requiredCount = Math.max(1, minPreviousCount, minimumPublishCount);
+          if (rows.length < requiredCount) failures.push(`${currentMarket}:count:${rows.length}:${requiredCount}`);
           expectedPublishedByMarket[currentMarket] = rows.length;
           expectedPublishedHashByMarket[currentMarket] = hashRows(rows);
           continue;
@@ -421,6 +426,7 @@ const report = {
   retentionMs,
   minPreviousRatio,
   minPreviousCount,
+  minimumPublishCount,
   previousCount: previousMarket.length,
   previousRetainedCount: retainedPreviousMarket.length,
   rateRepriced,
