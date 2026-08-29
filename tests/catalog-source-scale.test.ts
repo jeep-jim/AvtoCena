@@ -125,7 +125,7 @@ test("production source registry exactly matches the owner-approved allowlist", 
 });
 
 test("non-whitelisted source ids and source links are rejected centrally", () => {
-  assert.equal(isAllowedCatalogSourceId("japan", "goonet_japan_exact"), true);
+  assert.equal(isAllowedCatalogSourceId("japan", "goonet_japan_exact"), false);
   assert.equal(isAllowedCatalogSourceId("japan", "japantransit_japan_stat_open"), false);
   assert.equal(isAllowedCatalogSourceId("uae", "carswitch_uae_open"), false);
   assert.equal(isAllowedCatalogSourceId("korea", "kbchachacha_korea_open"), false);
@@ -143,12 +143,12 @@ test("non-whitelisted source ids and source links are rejected centrally", () =>
   assert.match(postPersistAudit, /Source provenance is a global production invariant/);
 });
 
-test("Japan production registry contains the approved auction anchors and exact Goo-net inventory", () => {
+test("Japan production registry contains only the five owner-approved sources", () => {
   const ids = new Set(catalogImportSources.filter((source) => source.market === "japan").map((source) => source.sourceId));
-  for (const sourceId of ["goonet_japan_exact", "jpauc_japan_past_open", "carvector_japan_stat_open", "prestige_japan_auctions_open", "auctiondatasearch_japan_open", "jpcenter_japan_catalog_open"]) {
+  for (const sourceId of ["jpauc_japan_past_open", "carvector_japan_stat_open", "prestige_japan_auctions_open", "auctiondatasearch_japan_open", "jpcenter_japan_catalog_open"]) {
     assert.equal(ids.has(sourceId), true, `${sourceId} must be registered`);
   }
-  for (const sourceId of ["japantransit_japan_stat_open", "jpauc_japan_current_open", "auctions22_japan_past_open", "auctions22_japan_upcoming_open", "beforward_public"]) {
+  for (const sourceId of ["goonet_japan_exact", "goonet_japan", "japantransit_japan_stat_open", "jpauc_japan_current_open", "auctions22_japan_past_open", "auctions22_japan_upcoming_open", "beforward_public"]) {
     assert.equal(ids.has(sourceId), false, `${sourceId} must not be registered`);
   }
   assert.match(carsPage, /Аукционная статистика/);
