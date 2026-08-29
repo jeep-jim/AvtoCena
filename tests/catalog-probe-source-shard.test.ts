@@ -14,7 +14,7 @@ const importer = fs.readFileSync(new URL("../apps/web/lib/catalog/importer.ts", 
 const yandexBridge = fs.readFileSync(new URL("../apps/web/lib/catalog/yandex-source-bridge.ts", import.meta.url), "utf8");
 const encarBridgeRoute = fs.readFileSync(new URL("../apps/web/app/api/internal/encar-egress-71b8e4/route.ts", import.meta.url), "utf8");
 const dubizzleBridgeRoute = fs.readFileSync(new URL("../apps/web/app/api/internal/dubizzle-egress-a4c907/route.ts", import.meta.url), "utf8");
-const goonetBridgeRoute = fs.readFileSync(new URL("../apps/web/app/api/internal/goonet-egress-f7c2a9/route.ts", import.meta.url), "utf8");
+const removedSourceBridgeRoute = fs.readFileSync(new URL("../apps/web/app/api/internal/goonet-egress-f7c2a9/route.ts", import.meta.url), "utf8");
 const encarAdapter = fs.readFileSync(new URL("../apps/web/lib/catalog/adapters.ts", import.meta.url), "utf8");
 const japanWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-japan.yml", import.meta.url), "utf8");
 const sequentialQueue = fs.readFileSync(new URL("../.github/workflows/catalog-v3-sequential-queue.yml", import.meta.url), "utf8");
@@ -55,7 +55,6 @@ test("canonical mandatory market source contract cannot silently drift", () => {
     ["dongchedi_china_open", "https://www.dongchedi.com/"],
     ["guazi_china_open", "https://www.guazi.com/"],
     ["autohome_new_china_open", "https://www.autohome.com.cn/"],
-    ["goonet_japan_exact", "https://www.goo-net-exchange.com/usedcars/"],
     ["jpauc_japan_past_open", "https://jpauc.com/auction/past"],
     ["carvector_japan_stat_open", "https://carvector.com/stat"],
     ["prestige_japan_auctions_open", "https://prestigemotorsport.com.au/auctions/"],
@@ -94,9 +93,8 @@ test("GitHub collection keeps Dubizzle mandatory and uses the production egress 
   assert.match(yandexBridge, /yandex_bridge_http_\$\{response\.status\}_\$\{kind\}_\$\{page\}/);
 });
 
-test("Japan rollout includes exact Goo-net inventory plus the five auction/catalog anchors", () => {
+test("Japan rollout includes only the five approved auction/catalog sources", () => {
   for (const sourceId of [
-    "goonet_japan_exact",
     "jpauc_japan_past_open",
     "carvector_japan_stat_open",
     "prestige_japan_auctions_open",
@@ -109,11 +107,11 @@ test("Japan rollout includes exact Goo-net inventory plus the five auction/catal
   assert.match(probe, /configuredApproved = configured\.filter\(\(sourceId\) => requiredSourceIds\.includes\(sourceId\)\)/);
   assert.match(probe, /plannedAll = configuredApproved\.length && allowRequiredSubset[\s\S]*: \[\.\.\.requiredSourceIds\]/);
   assert.match(sourceRegistry, /japan: \[\.\.\.REQUIRED_CATALOG_SOURCES\.japan\]/);
-  assert.match(yandexBridge, /\/api\/internal\/goonet-egress-f7c2a9\?page=\$\{page\}/);
-  assert.match(importer, /withGithubYandexSourceBridge\(goonetJapanExactSource, "goonet"\)/);
-  assert.match(goonetBridgeRoute, /sourceId: "goonet_japan_exact"/);
-  assert.match(goonetBridgeRoute, /coherentGoonetImages\(/);
-  assert.match(goonetBridgeRoute, /goonet_exact_page_bound_j_source_urls_v3/);
+  assert.doesNotMatch(requiredSources, /goonet_japan_exact|goo-net-exchange\.com/i);
+  assert.doesNotMatch(yandexBridge, /goonet|goo-net/i);
+  assert.doesNotMatch(importer, /goonetJapanExactSource|goonetCollectionSource/);
+  assert.match(removedSourceBridgeRoute, /catalog_source_not_approved/);
+  assert.doesNotMatch(removedSourceBridgeRoute, /fetchPage|GoonetExactAdapter/);
   assert.match(japanWorkflow, /workflow_dispatch:/);
   assert.doesNotMatch(japanWorkflow, /^\s+schedule:/m);
   assert.match(japanWorkflow, /retention_ms: "2592000000"/);
