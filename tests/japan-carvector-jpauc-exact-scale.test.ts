@@ -73,7 +73,8 @@ test("Japan scale workflow is approved-source-only and cannot publish below 8700
   assert.match(workflow, /recent-00000-05000/);
   assert.match(workflow, /recent-25000-30000/);
   assert.match(workflow, /JAPAN_EXACT_CARVECTOR_CONCURRENCY: "1"/);
-  assert.match(workflow, /JAPAN_EXACT_CARVECTOR_PAGE_DELAY_MS: "5000"/);
+  assert.match(workflow, /JAPAN_EXACT_CARVECTOR_PAGE_DELAY_MS: "12000"/);
+  assert.match(workflow, /Cool down the shared CarVector rate window/);
   assert.match(workflow, /JAPAN_EXACT_MAX_FALLBACK_PAGES: "0"/);
   assert.match(collector, /"auctionDate", "auctionVenue", "lotNumber", "make", "model", "chassis", "year", "engineCc"/);
   assert.match(recovery, /raw\?\.exactJoinVersion === 1/);
