@@ -1,6 +1,6 @@
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, SourceRunHealth, VehicleOffer } from "./types";
 
-type JpaucRawRow = {
+export type JpaucRawRow = {
   dataId: string;
   r: string;
   rtotal: string;
@@ -49,7 +49,7 @@ function lines(html: string) {
 function cellText(html: string) { return clean(html.replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, " ")); }
 function money(value: unknown) { const parsed = Number(String(value ?? "").replace(/[^0-9]/g, "")); return Number.isFinite(parsed) && parsed > 0 ? parsed : 0; }
 function numeric(value: unknown) { const parsed = Number(String(value ?? "").replace(/[^0-9.]/g, "")); return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined; }
-function checkboxValues(html: string, name: string) {
+export function jpaucCheckboxValues(html: string, name: string) {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   return [...html.matchAll(new RegExp(`name=["']${escaped}["'][^>]*value=["']([^"']+)["']`, "gi"))].map((match) => match[1]);
 }
@@ -77,7 +77,7 @@ function isSameLotImageHost(value: string, listingImage: string, baseUrl: string
     return host === expectedHost ? candidate : "";
   } catch { return ""; }
 }
-function photoVariants(value: string) {
+export function jpaucPhotoVariants(value: string) {
   if (!value) return [];
   try {
     const base = new URL(value, BASE);
@@ -95,7 +95,7 @@ function photoVariants(value: string) {
   } catch { return []; }
 }
 
-function parseListingRows(html: string): JpaucRawRow[] {
+export function parseJpaucListingRows(html: string): JpaucRawRow[] {
   const rows: JpaucRawRow[] = [];
   for (const match of html.matchAll(/<tr\b([^>]*)data-id=["'](\d+)["']([^>]*)>([\s\S]*?)<\/tr>/gi)) {
     const attrs = `${match[1]} data-id="${match[2]}" ${match[3]}`;
@@ -131,7 +131,7 @@ function parseListingRows(html: string): JpaucRawRow[] {
   }
   return rows;
 }
-function listingTotal(html: string, fallback = 0) { return Number(html.match(/\d+\s*-\s*\d+\s+of\s+([0-9,]+)/i)?.[1]?.replace(/,/g, "") || fallback); }
+export function jpaucListingTotal(html: string, fallback = 0) { return Number(html.match(/\d+\s*-\s*\d+\s+of\s+([0-9,]+)/i)?.[1]?.replace(/,/g, "") || fallback); }
 
 export class JpaucPastAdapter implements CatalogSourceAdapter {
   sourceId = "jpauc_japan_past_open";
@@ -158,24 +158,24 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
   private async ensureReady() {
     if (this.ready) return;
     const initial = await this.request(PAST, { referer: `${BASE}/auction` });
-    const dates = [...new Set(checkboxValues(initial.html, "checkdate[]"))];
+    const dates = [...new Set(jpaucCheckboxValues(initial.html, "checkdate[]"))];
     this.selectedDates = dates.slice(0, Math.max(1, Number(process.env.CATALOG_JAPAN_AUCTION_DATES_PER_RUN || 31)));
     if (!this.selectedDates.length) throw new Error("jpauc_no_past_date");
     const dateBody = new URLSearchParams();
     for (const date of this.selectedDates) dateBody.append("checkdate[]", date);
     dateBody.append("submit", "submitauction");
     const maker = await this.request(PAST, { method: "POST", body: dateBody.toString(), referer: PAST });
-    const makers = checkboxValues(maker.html, "mk[]");
+    const makers = jpaucCheckboxValues(maker.html, "mk[]");
     if (!makers.length) throw new Error("jpauc_no_makers");
     const makerBody = new URLSearchParams(); makers.forEach((value) => makerBody.append("mk[]", value));
     const model = await this.request(maker.response.url, { method: "POST", body: makerBody.toString(), referer: maker.response.url });
-    const models = checkboxValues(model.html, "md[]");
+    const models = jpaucCheckboxValues(model.html, "md[]");
     if (!models.length) throw new Error("jpauc_no_models");
     const modelBody = new URLSearchParams(); models.forEach((value) => modelBody.append("md[]", value));
     const listing = await this.request(model.response.url, { method: "POST", body: modelBody.toString(), referer: model.response.url });
     this.listingUrl = listing.response.url;
     this.firstListingHtml = listing.html;
-    this.totalCount = listingTotal(listing.html, parseListingRows(listing.html).length);
+    this.totalCount = jpaucListingTotal(listing.html, parseJpaucListingRows(listing.html).length);
     this.ready = true;
   }
 
@@ -193,8 +193,8 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
     filteredUrl.searchParams.set("ob", "y_l");
     const filtered = await this.request(filteredUrl.toString(), { referer: this.listingUrl });
     let html = filtered.html;
-    let items = parseListingRows(html);
-    let total = listingTotal(html, items.length);
+    let items = parseJpaucListingRows(html);
+    let total = jpaucListingTotal(html, items.length);
     let httpStatus = filtered.response.status;
     let mode = "month_2010_plus";
     if (!items.length && total > 0) {
@@ -205,8 +205,8 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
         const fallback = await this.request(fallbackUrl.toString(), { referer: this.listingUrl });
         html = fallback.html; httpStatus = fallback.response.status;
       }
-      items = parseListingRows(html);
-      total = listingTotal(html, this.totalCount || items.length);
+      items = parseJpaucListingRows(html);
+      total = jpaucListingTotal(html, this.totalCount || items.length);
     }
     if (total > 0) this.totalCount = total;
     const pageSize = 10;
@@ -223,7 +223,7 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
       id: `${this.sourceId}:${row.dataId}`, sourceId: this.sourceId, sourceOfferId: row.dataId, market: "japan", offerType: "auction", status: "active", catalogKind: "auction_result", sourceTitle,
       make: row.maker, model: row.model, trim: row.grade || undefined, year: row.year, mileageKm: row.mileageKm, engineCc: row.engineCc, transmission: row.shift || undefined, color: row.color || undefined,
       auctionName: row.location || undefined, auctionDate: row.date || undefined, lotNumber: row.lot || undefined, auctionGrade: row.auctionGrade || undefined,
-      sourcePrice: row.startPrice, sourceCurrency: "JPY", priceMode: "auction_start", images: row.listingImage ? photoVariants(row.listingImage).map(remoteImage) : [], calculationStatus: "auction_start", firstSeenAt: now, updatedAt: now,
+      sourcePrice: row.startPrice, sourceCurrency: "JPY", priceMode: "auction_start", images: row.listingImage ? jpaucPhotoVariants(row.listingImage).map(remoteImage) : [], calculationStatus: "auction_start", firstSeenAt: now, updatedAt: now,
       operational: { sourceUrl: row.detailUrl, sourceVenueName: row.location || "JPAuc", sourcePublishedAt: row.date || undefined, sourceTitle, raw: row, sourceStatus: row.sourceStatus, modelCode: row.modelCode, galleryStoredAs: "json_urls", minimumImages: 2, historicalAuction: true },
     };
   }
@@ -232,7 +232,7 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
     const raw = offer.operational?.raw as JpaucRawRow | undefined;
     const max = Math.min(30, Math.max(2, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));
     const listingImage = raw?.listingImage || "";
-    const urls = new Set(photoVariants(listingImage).map((url) => safeImageUrl(url)).filter(Boolean));
+    const urls = new Set(jpaucPhotoVariants(listingImage).map((url) => safeImageUrl(url)).filter(Boolean));
     const sourceUrl = String(raw?.detailUrl || offer.operational?.sourceUrl || "");
     if (sourceUrl && urls.size < max) {
       try {
