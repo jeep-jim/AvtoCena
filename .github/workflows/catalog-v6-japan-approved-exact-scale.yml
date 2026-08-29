@@ -35,9 +35,12 @@ jobs:
       JAPAN_EXACT_RECENT_LIMIT: "5000"
       JAPAN_EXACT_CHUNK_OUTPUT: japan-evidence-${{ matrix.scope }}.json
       JAPAN_EXACT_CARVECTOR_ONLY: "1"
+      JAPAN_EXACT_CARVECTOR_TRANSPORT: ssr
+      JAPAN_EXACT_CARVECTOR_SERVER_MIN_PRICE: "1"
+      JAPAN_EXACT_CARVECTOR_SERVER_MIN_ENGINE_CC: "400"
       JAPAN_EXACT_MIN_YEAR: "2010"
       JAPAN_EXACT_CARVECTOR_CONCURRENCY: "1"
-      JAPAN_EXACT_CARVECTOR_PAGE_DELAY_MS: "12000"
+      JAPAN_EXACT_CARVECTOR_PAGE_DELAY_MS: "5000"
       JAPAN_EXACT_REQUEST_TIMEOUT_MS: "45000"
       CATALOG_KNOWLEDGE_DISABLED: "1"
     steps:
@@ -47,8 +50,6 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Cool down the shared CarVector rate window
-        run: sleep 900
       - name: Collect strict CarVector evidence checkpoint
         run: npx tsx scripts/japan-carvector-jpauc-exact-chunk.mjs
       - uses: actions/upload-artifact@v4

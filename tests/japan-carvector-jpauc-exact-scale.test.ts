@@ -5,12 +5,20 @@ import os from "node:os";
 import path from "node:path";
 import test from "node:test";
 import { jpaucPhotoVariants, parseJpaucListingRows } from "../apps/web/lib/catalog/jpauc-past-source";
+import { extractCarvectorOffersFromNgState } from "../scripts/lib/carvector-ng-state.mjs";
 import { toJapanAuctionDate } from "../scripts/lib/japan-auction-date.mjs";
 
 test("CarVector UTC timestamps are joined on the Japan auction calendar date", () => {
   assert.equal(toJapanAuctionDate("2026-08-25T23:09:00Z"), "2026-08-26");
   assert.equal(toJapanAuctionDate("2026-08-26T04:00:00Z"), "2026-08-26");
   assert.equal(toJapanAuctionDate("2026-08-26"), "2026-08-26");
+});
+
+test("CarVector public SSR ng-state yields the exact offers payload", () => {
+  const payload = { total: 2, offers: [{ id: "one", lot: "7" }, { id: "two", lot: "8" }] };
+  const html = `<html><script id="ng-state" type="application/json">${JSON.stringify({ hash: { b: { data: { result: payload } } } })}</script></html>`;
+  assert.deepEqual(extractCarvectorOffersFromNgState(html), payload);
+  assert.throws(() => extractCarvectorOffersFromNgState("<html></html>"), /carvector_ng_state_missing/);
 });
 
 test("CarVector evidence merge requires every checkpoint and deduplicates ids", () => {
@@ -73,9 +81,11 @@ test("Japan scale workflow is approved-source-only and cannot publish below 8700
   assert.match(workflow, /recent-00000-05000/);
   assert.match(workflow, /recent-25000-30000/);
   assert.match(workflow, /JAPAN_EXACT_CARVECTOR_CONCURRENCY: "1"/);
-  assert.match(workflow, /JAPAN_EXACT_CARVECTOR_PAGE_DELAY_MS: "12000"/);
-  assert.match(workflow, /Cool down the shared CarVector rate window/);
-  assert.doesNotMatch(workflow, /if: matrix\.start_offset == 0/);
+  assert.match(workflow, /JAPAN_EXACT_CARVECTOR_TRANSPORT: ssr/);
+  assert.match(workflow, /JAPAN_EXACT_CARVECTOR_SERVER_MIN_PRICE: "1"/);
+  assert.match(workflow, /JAPAN_EXACT_CARVECTOR_SERVER_MIN_ENGINE_CC: "400"/);
+  assert.match(workflow, /JAPAN_EXACT_CARVECTOR_PAGE_DELAY_MS: "5000"/);
+  assert.doesNotMatch(workflow, /Cool down the shared CarVector rate window/);
   assert.match(workflow, /JAPAN_EXACT_MAX_FALLBACK_PAGES: "0"/);
   assert.match(collector, /"auctionDate", "auctionVenue", "lotNumber", "make", "model", "chassis", "year", "engineCc"/);
   assert.match(recovery, /raw\?\.exactJoinVersion === 1/);
