@@ -1,22 +1,10 @@
 import fs from "node:fs/promises";
 
 const { importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
+const { REQUIRED_CATALOG_SOURCES } = await import("../apps/web/lib/catalog/required-catalog-sources.ts");
 const { CATALOG_DAILY_TARGET_PER_MARKET, CATALOG_DAILY_TARGET_TOTAL } = await import("../apps/web/lib/catalog/runtime-config.ts");
 
-const SOURCE_IDS = [
-  "encar_direct",
-  "guazi_china_export",
-  "che168_china_exact",
-  "goonet_japan_exact",
-  "beforward_japan",
-  "dubicars_uae_exact",
-  "beforward_uae",
-  "otomoto_europe_exact",
-  "beforward_uk",
-  "beforward_belgium",
-  "myauto_georgia_exact",
-  "mashina_kyrgyzstan_exact",
-];
+const SOURCE_IDS = Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId);
 const targetPerMarket = Math.max(1, Number(process.env.CATALOG_TARGET_PER_MARKET || CATALOG_DAILY_TARGET_PER_MARKET));
 const maxImagesPerOffer = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30));
 const reportFile = process.env.CATALOG_DAILY_LOCAL_REPORT || "catalog-daily-report.json";
