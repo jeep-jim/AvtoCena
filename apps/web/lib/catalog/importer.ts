@@ -41,7 +41,6 @@ import { carswitchUaeExactSource } from "./carswitch-exact-source";
 import { kcarKoreaExactSource } from "./kcar-exact-source";
 import { kbChaChaChaExactSource } from "./kbchachacha-exact-source";
 import { carvectorJapanCurrentSource } from "./carvector-current-source";
-import { goonetJapanExactSource } from "./goonet-exact-source";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { guaziRuSource } from "./guazi-ru-source";
 import { myAutoListSource } from "./myauto-list-source";
@@ -85,10 +84,6 @@ const dubizzleCollectionSource = withGithubYandexSourceBridge(dubizzleUaeExactSo
 // Encar-normalized offers through that fixed bridge. Local/production callers
 // continue to use the direct adapter.
 const encarCollectionSource = withGithubYandexSourceBridge(encarCompleteSource, "encar");
-// Goo-net rate-limits GitHub-hosted runner egress. Production can read the
-// same public fixed-price pages and returns only normalized, listing-bound
-// offers through the fixed bridge; source identity and URLs stay Goo-net.
-const goonetCollectionSource = withGithubYandexSourceBridge(goonetJapanExactSource, "goonet");
 // Georgia is canonical-only: MyAuto plus the dedicated AutoPapa adapter. Do not
 // let the generic scale adapter with the same sourceId replace the dedicated one.
 const allowedScaleSources = scaleMarketSources.filter((source) => source.market !== "georgia");
@@ -121,7 +116,6 @@ const completeSources = [
   dubizzleCollectionSource,
   carswitchUaeExactSource,
   jpaucPastSource,
-  goonetCollectionSource,
   encarCollectionSource,
   kcarKoreaExactSource,
   kbChaChaChaExactSource,
@@ -156,7 +150,6 @@ const requiredSourceIds = new Set(
 const dedicatedDetailSourceIds = new Set([
   "encar_direct",
   "jpauc_japan_past_open",
-  "goonet_japan_exact",
   "prestige_japan_auctions_open",
   "guazi_china_open",
   "autohome_used_china_open",
