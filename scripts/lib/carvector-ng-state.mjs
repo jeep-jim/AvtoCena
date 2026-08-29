@@ -7,6 +7,9 @@ export function extractCarvectorOffersFromNgState(markup) {
     .map((value) => value?.b?.data?.result)
     .filter((value) => Array.isArray(value?.offers) && Number.isFinite(Number(value?.total)));
   const result = candidates.sort((left, right) => Number(right.offers.length) - Number(left.offers.length))[0];
-  if (!result) throw new Error("carvector_ng_state_offers_missing");
+  if (!result) {
+    const context = state?.INIT_STATE_PROJECT_CONTEXT || {};
+    throw new Error(`carvector_ng_state_offers_missing:rateLimited=${context.rateLimited === true}:retryAfter=${Number(context.retryAfterSeconds || 0)}`);
+  }
   return { total: Number(result.total || 0), offers: result.offers };
 }

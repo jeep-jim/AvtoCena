@@ -131,9 +131,21 @@ function carvectorStatUrl(offset) {
 }
 
 async function carvectorSsrPage(offset) {
-  const url = carvectorStatUrl(offset);
-  const response = await fetchWithRetry(url, { headers: { ...browserHeaders, referer: `${CARVECTOR}/stat` } });
-  return extractCarvectorOffersFromNgState(await response.text());
+  const baseUrl = carvectorStatUrl(offset);
+  let lastError;
+  for (let attempt = 1; attempt <= 7; attempt++) {
+    const url = new URL(baseUrl);
+    if (attempt > 1) url.searchParams.set("cv_retry", `${Date.now()}-${attempt}`);
+    try {
+      const response = await fetchWithRetry(url.toString(), { headers: { ...browserHeaders, referer: `${CARVECTOR}/stat` } });
+      return extractCarvectorOffersFromNgState(await response.text());
+    } catch (error) {
+      lastError = error;
+      if (attempt === 7) break;
+      await sleep(Math.min(60_000, 2_000 * (2 ** (attempt - 1))) + Math.floor(Math.random() * 750));
+    }
+  }
+  throw new Error(`${clean(lastError?.message || lastError)}:offset=${offset}:url=${baseUrl}`);
 }
 
 async function carvectorGraphqlPage(offset) {
@@ -241,6 +253,7 @@ async function collectCarvector() {
       if (index >= pageCount) return;
       if (carvectorPageDelayMs) await sleep(carvectorPageDelayMs + Math.floor(Math.random() * 250));
       pages[index] = await carvectorPage(startOffset + index * carvectorPageSize);
+      if ((index + 1) % 10 === 0 || index + 1 === pageCount) console.log(`[carvector-page] scope=${scope} completed=${index + 1}/${pageCount}`);
     }
   }));
   const byId = new Map();
