@@ -38,9 +38,9 @@ test("Japan scale workflow is approved-source-only and cannot publish below 8700
   assert.match(collector, /const SOURCE_ID = "jpauc_japan_past_open"/);
   assert.match(collector, /const EVIDENCE_SOURCE_ID = "carvector_japan_stat_open"/);
   assert.match(collector, /JAPAN_EXACT_RECENT_LIMIT/);
-  assert.match(workflow, /JAPAN_EXACT_RECENT_LIMIT: "7500"/);
-  assert.match(workflow, /recent-00000-07500/);
-  assert.match(workflow, /recent-22500-30000/);
+  assert.match(workflow, /JAPAN_EXACT_RECENT_LIMIT: "5000"/);
+  assert.match(workflow, /recent-00000-05000/);
+  assert.match(workflow, /recent-25000-30000/);
   assert.match(workflow, /JAPAN_EXACT_CARVECTOR_CONCURRENCY: "1"/);
   assert.match(workflow, /JAPAN_EXACT_CARVECTOR_PAGE_DELAY_MS: "5000"/);
   assert.match(collector, /"auctionDate", "auctionVenue", "lotNumber", "make", "model", "chassis", "year", "engineCc"/);
