@@ -193,13 +193,28 @@ function parseCursor(cursor?: string | null) {
   return { makeIndex: Number(legacy?.[1] || 0), modelIndex: 0, offset: Number(legacy?.[2] || 0) };
 }
 function encodeCursor(makeIndex: number, modelIndex: number, offset: number) { return `${Math.max(0, makeIndex)}:${Math.max(0, modelIndex)}:${Math.max(0, offset)}`; }
+export function prestigeJapanGithubEgressRequest(url: string, init?: RequestInit) {
+  const enabled = /^(?:1|true|yes)$/i.test(String(process.env.GITHUB_ACTIONS || ""))
+    && !/^(?:1|true|yes)$/i.test(String(process.env.PRESTIGE_JAPAN_DISABLE_EGRESS || ""));
+  if (!enabled) return { url, init };
+  const configured = String(process.env.CATALOG_YANDEX_SOURCE_BRIDGE_ORIGIN || "https://avtocena.com").trim();
+  let origin = "https://avtocena.com";
+  try { const parsed = new URL(configured); if (parsed.protocol === "https:") origin = parsed.origin; } catch { /* fixed safe default */ }
+  const endpoint = `${origin}/api/internal/prestige-egress-c1e8b2`;
+  if (url === LANDING) return { url: `${endpoint}?kind=landing`, init: { ...init, method: "GET" } };
+  if (url === AJAX && String(init?.method || "GET").toUpperCase() === "POST") return { url: `${endpoint}?kind=ajax`, init };
+  const carId = url.match(DETAIL_RE)?.[1];
+  if (carId) return { url: `${endpoint}?kind=detail&carId=${encodeURIComponent(carId)}`, init: { ...init, method: "GET" } };
+  return { url, init };
+}
 async function request(url: string, init?: RequestInit) {
   const timeout = Math.max(8_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000));
   const attempts = Math.max(1, Math.min(5, Number(process.env.PRESTIGE_JAPAN_REQUEST_ATTEMPTS || 3)));
   let lastError: unknown;
   for (let attempt = 1; attempt <= attempts; attempt++) {
     try {
-      const response = await fetch(url, { ...init, headers: { ...HEADERS, ...(init?.headers || {}) }, redirect: "follow", signal: AbortSignal.timeout(timeout) });
+      const routed = prestigeJapanGithubEgressRequest(url, init);
+      const response = await fetch(routed.url, { ...routed.init, headers: { ...HEADERS, ...(routed.init?.headers || {}) }, redirect: "follow", signal: AbortSignal.timeout(timeout) });
       const body = await response.text();
       if (!response.ok) throw new Error(`prestige_japan_exact_http_${response.status}:${url}`);
       return { response, body };
