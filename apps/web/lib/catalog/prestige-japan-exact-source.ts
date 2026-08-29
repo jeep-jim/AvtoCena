@@ -195,10 +195,22 @@ function parseCursor(cursor?: string | null) {
 function encodeCursor(makeIndex: number, modelIndex: number, offset: number) { return `${Math.max(0, makeIndex)}:${Math.max(0, modelIndex)}:${Math.max(0, offset)}`; }
 async function request(url: string, init?: RequestInit) {
   const timeout = Math.max(8_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000));
-  const response = await fetch(url, { ...init, headers: { ...HEADERS, ...(init?.headers || {}) }, redirect: "follow", signal: AbortSignal.timeout(timeout) });
-  const body = await response.text();
-  if (!response.ok) throw new Error(`prestige_japan_exact_http_${response.status}:${url}`);
-  return { response, body };
+  const attempts = Math.max(1, Math.min(5, Number(process.env.PRESTIGE_JAPAN_REQUEST_ATTEMPTS || 3)));
+  let lastError: unknown;
+  for (let attempt = 1; attempt <= attempts; attempt++) {
+    try {
+      const response = await fetch(url, { ...init, headers: { ...HEADERS, ...(init?.headers || {}) }, redirect: "follow", signal: AbortSignal.timeout(timeout) });
+      const body = await response.text();
+      if (!response.ok) throw new Error(`prestige_japan_exact_http_${response.status}:${url}`);
+      return { response, body };
+    } catch (error) {
+      lastError = error;
+      const retryable = /fetch failed|socket|timeout|ECONN|EAI_AGAIN|prestige_japan_exact_http_(?:403|408|425|429|500|502|503|504)/i.test(String((error as Error)?.message || error));
+      if (!retryable || attempt >= attempts) break;
+      await new Promise((resolve) => setTimeout(resolve, Math.min(10_000, 750 * (2 ** (attempt - 1)))));
+    }
+  }
+  throw lastError;
 }
 async function poolMap<T, R>(rows: T[], limit: number, worker: (row: T) => Promise<R | null>) {
   const result: R[] = [];
