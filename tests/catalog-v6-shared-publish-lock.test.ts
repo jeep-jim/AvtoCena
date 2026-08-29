@@ -14,21 +14,21 @@ const strictLadder = fs.readFileSync(".github/workflows/catalog-v6-prestige-stri
 
 test("V6 production publish waits on the shared catalog writer and audits all seven markets", () => {
   assert.match(workflow, /publish:[\s\S]*concurrency:[\s\S]*group: catalog-live-daily-working-markets[\s\S]*cancel-in-progress: false/);
-  assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
+  assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "100"/);
   assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
-  assert.match(workflow, /CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"/);
+  assert.match(workflow, /CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "100"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "2592000000"/);
   assert.match(workflow, /CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"/);
   assert.match(workflow, /Verify the catalog is readable before replacing Japan[\s\S]*"japan":0/);
-  assert.match(workflow, /Verify the published generation and every market year gate[\s\S]*"japan":1/);
+  assert.match(workflow, /Verify the published generation and every market year gate[\s\S]*"japan":8700/);
   assert.match(workflow, /CATALOG_PUBLIC_ABSOLUTE_MAX_TOTAL_RUB: "15000000"/);
 });
 
-test("Prestige manual recovery tolerates isolated shard transport failures without weakening row quality", () => {
+test("Prestige marker-triggered recovery tolerates isolated shard transport failures without weakening row quality", () => {
   assert.doesNotMatch(workflow, /^\s*schedule:/m);
-  assert.doesNotMatch(workflow, /^\s*push:/m);
-  assert.match(workflow, /PRESTIGE_PLAN_MAX_PARTITIONS: "90"/);
-  assert.match(workflow, /PRESTIGE_PLAN_RAW_BUDGET: "18000"/);
+  assert.match(workflow, /^\s*push:/m);
+  assert.match(workflow, /PRESTIGE_PLAN_MAX_PARTITIONS: "225"/);
+  assert.match(workflow, /PRESTIGE_PLAN_RAW_BUDGET: "45000"/);
   assert.match(workflow, /half_day=\$\(\(10#\$hour_utc \/ 12\)\)/);
   assert.match(workflow, /slot=\$\(\( \(10#\$day_of_year \* 2 \+ half_day\) % 40 \)\)/);
   assert.match(workflow, /start_model_index=\$\(\( \(slot \* 21\) % 120 \)\)/);
@@ -39,6 +39,16 @@ test("Prestige manual recovery tolerates isolated shard transport failures witho
   assert.match(merge, /minimumChunkCoverage/);
   assert.match(merge, /inputCoverage/);
   assert.match(merge, /chunk_coverage_/);
+});
+
+test("Prestige scale recovery uses CarVector only for exact combustion power and blocks a short write", () => {
+  assert.match(workflow, /prestige-japan-carvector-power-enrich\.mjs/);
+  assert.match(workflow, /PRESTIGE_CARVECTOR_INPUT/);
+  assert.match(workflow, /Require at least 8700 exact calculated Japan cards before any write/);
+  assert.match(workflow, /nonExact/);
+  assert.match(workflow, /untrustedCombustionPower/);
+  assert.match(workflow, /invalidSource/);
+  assert.match(workflow, /forbiddenEvidence/);
 });
 
 test("Prestige strict chunk, merge and salvage require the current content-verified gallery contract", () => {

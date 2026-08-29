@@ -34,11 +34,14 @@ test("Japan scale collection goes deeper and publishes through the durable objec
   assert.match(workflow, /PRESTIGE_PLAN_RAW_PER_MODEL: "200"/);
   assert.match(workflow, /max-parallel: 6/);
   assert.match(workflow, /group: catalog-live-daily-working-markets/);
-  assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
+  assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "100"/);
   assert.doesNotMatch(workflow, /^\s*schedule:/m);
-  assert.doesNotMatch(workflow, /^\s*push:/m);
+  assert.match(workflow, /^\s*push:/m);
+  assert.match(workflow, /\.github\/market-runs\/japan-prestige-30k/);
   assert.match(workflow, /cancel-in-progress: true/);
   assert.match(workflow, /RECOVERY_PUBLISH_MAX: "30000"/);
+  assert.match(workflow, /japan_scale_prewrite_gate_failed/);
+  assert.match(workflow, /"japan":8700/);
 
   const prestigeSource = fs.readFileSync("apps/web/lib/catalog/prestige-japan-exact-source.ts", "utf8");
   assert.match(prestigeSource, /JAPAN_MIN_MODEL_YEAR = 2010/);
