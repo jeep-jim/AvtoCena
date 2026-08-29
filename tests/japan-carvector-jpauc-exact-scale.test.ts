@@ -97,3 +97,17 @@ test("Japan scale workflow is approved-source-only and cannot publish below 8700
   assert.match(publisher, /recovery_canonical_preview_count_gate_failed/);
   assert.doesNotMatch(`${workflow}\n${collector}\n${recovery}`, /goo-?net_exchange|goonet-exact-source/i);
 });
+
+
+test("Japan exact resume partitions JPAuc deterministically and reuses complete evidence", () => {
+  const workflow = fs.readFileSync(".github/workflows/catalog-v6-japan-approved-exact-resume.yml", "utf8");
+  const collector = fs.readFileSync("scripts/japan-carvector-jpauc-exact-chunk.mjs", "utf8");
+  const merge = fs.readFileSync("scripts/japan-jpauc-exact-parts-merge.mjs", "utf8");
+  assert.match(workflow, /run-id: "33264014581"/);
+  assert.match(workflow, /max-parallel: 1/);
+  assert.match(workflow, /JAPAN_EXACT_GROUP_PART_COUNT: "4"/);
+  assert.match(workflow, /JAPAN_EXACT_EXPECTED_PARTS: "0,1,2,3"/);
+  assert.match(workflow, /offers\.length < 8700/);
+  assert.match(collector, /index % groupPartCount === groupPartIndex/);
+  assert.match(merge, /japan_exact_part_coverage_failed/);
+});
