@@ -12,11 +12,11 @@ const errors = [];
 for (const name of files) {
   try {
     const payload = JSON.parse(await fs.readFile(path.join(inputDir, name), "utf8"));
-    if (!Array.isArray(payload?.offers) || !payload?.report?.month) throw new Error("chunk_shape_invalid");
+    if (!Array.isArray(payload?.offers) || !(payload?.report?.scope || payload?.report?.exactDate || payload?.report?.month)) throw new Error("chunk_shape_invalid");
     payloads.push({ name, payload });
   } catch (error) { errors.push({ name, error: String(error?.message || error) }); }
 }
-const receivedScopes = [...new Set(payloads.map(({ payload }) => String(payload.report.exactDate || payload.report.month)))].sort();
+const receivedScopes = [...new Set(payloads.map(({ payload }) => String(payload.report.scope || payload.report.exactDate || payload.report.month)))].sort();
 const missingScopes = expectedScopes.filter((scope) => !receivedScopes.includes(scope));
 const coverage = expectedScopes.length ? receivedScopes.filter((scope) => expectedScopes.includes(scope)).length / expectedScopes.length : 0;
 if (!payloads.length || coverage < minimumChunkCoverage) {
@@ -30,5 +30,5 @@ const report = {
   count: offers.length, errors, chunkReports: payloads.map(({ name, payload }) => ({ name, ...payload.report, scans: undefined })),
 };
 await fs.writeFile(output, JSON.stringify({ offers, report }, null, 2));
-console.log(JSON.stringify({ ...report, chunkReports: report.chunkReports.map((row) => ({ scope: row.exactDate || row.month, exactJoined: row.exactJoined, failureCount: row.failureCount })), output }, null, 2));
+console.log(JSON.stringify({ ...report, chunkReports: report.chunkReports.map((row) => ({ scope: row.scope || row.exactDate || row.month, exactJoined: row.exactJoined, failureCount: row.failureCount })), output }, null, 2));
 if (!offers.length) process.exitCode = 1;
