@@ -2,23 +2,13 @@ import fs from "node:fs/promises";
 
 const { getJsonStorage, readDataJson, writeDataJson } = await import("../apps/web/lib/data.ts");
 const { importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
+const { REQUIRED_CATALOG_SOURCES } = await import("../apps/web/lib/catalog/required-catalog-sources.ts");
 const { offerPath, persistCatalogOffers, readAllOffersForMaintenance } = await import("../apps/web/lib/catalog/storage.ts");
 
 const HISTORY_PATH = "catalog/history/daily-generations.json";
 const RETENTION_MS = Math.max(86_400_000, Number(process.env.CATALOG_GENERATION_RETENTION_MS || 3 * 86_400_000));
 const REPORT_FILE = process.env.CATALOG_DAILY_LOCAL_REPORT || "catalog-daily-report.json";
-const DEFAULT_SOURCE_IDS = [
-  "encar_direct",
-  "guazi_china_export",
-  "che168_china_exact",
-  "goonet_japan_exact",
-  "beforward_japan",
-  "dubicars_uae_exact",
-  "beforward_uae",
-  "otomoto_europe_exact",
-  "beforward_uk",
-  "beforward_belgium",
-];
+const DEFAULT_SOURCE_IDS = Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId);
 const requestedSourceIds = String(process.env.CATALOG_DAILY_SOURCE_IDS || "")
   .split(",")
   .map((value) => value.trim())

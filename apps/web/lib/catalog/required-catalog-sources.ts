@@ -42,7 +42,6 @@ export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCa
     { sourceId: "autohome_new_china_open", label: "Autohome new cars", canonicalUrl: "https://www.autohome.com.cn/", role: "primary", required: true, anchor: true },
   ],
   japan: [
-    { sourceId: "goonet_japan_exact", label: "Goo-net Exchange", canonicalUrl: "https://www.goo-net-exchange.com/usedcars/", role: "primary", required: true, anchor: true },
     { sourceId: "jpauc_japan_past_open", label: "JPAuc completed auctions", canonicalUrl: "https://jpauc.com/auction/past", role: "auction_history", required: true, anchor: true },
     { sourceId: "carvector_japan_stat_open", label: "CarVector auction statistics", canonicalUrl: "https://carvector.com/stat", role: "auction_history", required: true, anchor: true },
     { sourceId: "prestige_japan_auctions_open", label: "Prestige Japan auctions", canonicalUrl: "https://prestigemotorsport.com.au/auctions/", role: "auction_history", required: true, anchor: true },

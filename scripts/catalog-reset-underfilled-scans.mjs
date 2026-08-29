@@ -1,18 +1,7 @@
 const { getJsonStorage } = await import("../apps/web/lib/data.ts");
+const { REQUIRED_CATALOG_SOURCES } = await import("../apps/web/lib/catalog/required-catalog-sources.ts");
 
-const defaults = [
-  "encar_direct",
-  "che168_dealer_exact",
-  "che168_china_exact",
-  "che168_global",
-  "jpauc_japan",
-  "goonet_japan_exact",
-  "dubicars_uae_exact",
-  "dubicars_uae",
-  "otomoto_europe_exact",
-  "autoscout_europe",
-  "autouncle_europe",
-];
+const defaults = Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId);
 const sourceIds = String(process.env.CATALOG_IMPORT_SOURCES || defaults.join(","))
   .split(",")
   .map((value) => value.trim())

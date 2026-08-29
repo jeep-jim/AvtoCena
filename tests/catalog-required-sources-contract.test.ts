@@ -10,52 +10,51 @@ import {
 import { REQUIRED_CATALOG_SOURCES } from "../apps/web/lib/catalog/required-catalog-sources";
 import type { CatalogMarket } from "../apps/web/lib/catalog/types";
 
-const APPROVED_SOURCE_URLS: Record<CatalogMarket, readonly string[]> = {
+const APPROVED_SOURCES: Record<CatalogMarket, readonly (readonly [string, string])[]> = {
   uae: [
-    "https://uae.dubizzle.com/",
-    "https://www.dubicars.com/",
+    ["dubizzle_uae_open", "https://uae.dubizzle.com/"],
+    ["dubicars_uae_exact", "https://www.dubicars.com/"],
   ],
   korea: [
-    "https://www.encar.com/",
-    "https://www.kcar.com/",
+    ["encar_direct", "https://www.encar.com/"],
+    ["kcar_korea_open", "https://www.kcar.com/"],
   ],
   europe: [
-    "https://www.mobile.de/",
-    "https://www.autoscout24.com/",
+    ["mobile_de_open", "https://www.mobile.de/"],
+    ["autoscout_europe_open", "https://www.autoscout24.com/"],
   ],
   georgia: [
-    "https://www.myauto.ge/",
-    "https://autopapa.ge/",
+    ["myauto_georgia_list", "https://www.myauto.ge/"],
+    ["autopapa_georgia_open", "https://autopapa.ge/"],
   ],
   china: [
-    "https://www.che168.com/",
-    "https://www.dongchedi.com/",
-    "https://www.guazi.com/",
-    "https://www.autohome.com.cn/",
+    ["autohome_used_china_open", "https://www.che168.com/"],
+    ["dongchedi_china_open", "https://www.dongchedi.com/"],
+    ["guazi_china_open", "https://www.guazi.com/"],
+    ["autohome_new_china_open", "https://www.autohome.com.cn/"],
   ],
   japan: [
-    "https://www.goo-net-exchange.com/usedcars/",
-    "https://jpauc.com/auction/past",
-    "https://carvector.com/stat",
-    "https://prestigemotorsport.com.au/auctions/",
-    "https://www.auctiondatasearch.jp/",
-    "https://jp.center/",
+    ["jpauc_japan_past_open", "https://jpauc.com/auction/past"],
+    ["carvector_japan_stat_open", "https://carvector.com/stat"],
+    ["prestige_japan_auctions_open", "https://prestigemotorsport.com.au/auctions/"],
+    ["auctiondatasearch_japan_open", "https://www.auctiondatasearch.jp/"],
+    ["jpcenter_japan_catalog_open", "https://jp.center/"],
   ],
   kyrgyzstan: [
-    "https://www.mashina.kg/",
+    ["mashina_kyrgyzstan_exact", "https://www.mashina.kg/"],
   ],
 };
 
-test("the 19 owner-approved catalog sources are permanently encoded", () => {
+test("the 18 owner-approved catalog source ids and domains are permanently encoded", () => {
   const total = Object.values(REQUIRED_CATALOG_SOURCES).reduce((sum, sources) => sum + sources.length, 0);
-  assert.equal(total, 19);
+  assert.equal(total, 18);
 
-  for (const [marketName, expectedUrls] of Object.entries(APPROVED_SOURCE_URLS)) {
+  for (const [marketName, expectedSources] of Object.entries(APPROVED_SOURCES)) {
     const market = marketName as CatalogMarket;
     assert.deepEqual(
-      REQUIRED_CATALOG_SOURCES[market].map((source) => source.canonicalUrl),
-      expectedUrls,
-      `${market} mandatory URLs changed`,
+      REQUIRED_CATALOG_SOURCES[market].map((source) => [source.sourceId, source.canonicalUrl]),
+      expectedSources,
+      `${market} mandatory source ids or URLs changed`,
     );
   }
 });
@@ -63,7 +62,7 @@ test("the 19 owner-approved catalog sources are permanently encoded", () => {
 test("every approved source is required, anchored and included in collection", () => {
   assert.equal(assertCatalogV2SourceRegistry(), true);
 
-  for (const marketName of Object.keys(APPROVED_SOURCE_URLS)) {
+  for (const marketName of Object.keys(APPROVED_SOURCES)) {
     const market = marketName as CatalogMarket;
     const requiredIds = catalogV2RequiredSourceIds(market);
     const collectibleIds = new Set(catalogV2SourceIds(market));

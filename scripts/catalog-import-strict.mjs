@@ -1,16 +1,31 @@
 process.env.CATALOG_MAX_IMAGES_PER_OFFER ||= "10";
 process.env.CATALOG_IMPORT_SOURCES = [
   "encar_direct",
-  "jpauc_japan",
-  "dubicars_clean",
-  "dubicars_uae",
-  "sbt_uae",
+  "kcar_korea_open",
+  "autohome_used_china_open",
+  "dongchedi_china_open",
+  "guazi_china_open",
+  "autohome_new_china_open",
+  "jpauc_japan_past_open",
+  "carvector_japan_stat_open",
+  "prestige_japan_auctions_open",
+  "auctiondatasearch_japan_open",
+  "jpcenter_japan_catalog_open",
+  "dubizzle_uae_open",
+  "dubicars_uae_exact",
+  "mobile_de_open",
+  "autoscout_europe_open",
+  "myauto_georgia_list",
+  "autopapa_georgia_open",
+  "mashina_kyrgyzstan_exact",
 ].join(",");
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");
 const { reliableMarketSources } = await import("../apps/web/lib/catalog/reliable-market-sources.ts");
 const { alternateMarketSources } = await import("../apps/web/lib/catalog/alternate-market-sources.ts");
 const { publicFallbackSources } = await import("../apps/web/lib/catalog/public-fallback-sources.ts");
+const { isAllowedCatalogSourceId } = await import("../apps/web/lib/catalog/required-catalog-sources.ts");
+const { hasAllowedCatalogSourceProvenance } = await import("../apps/web/lib/catalog/offer-quality.ts");
 const {
   cacheImageFromUrl,
   persistCatalogOffers,
@@ -19,7 +34,6 @@ const {
 } = await import("../apps/web/lib/catalog/storage.ts");
 
 const BAD_SOURCE_IDS = new Set([
-  "goonet_japan",
   "japantransit_japan",
   "sbt_japan",
   "beforward_japan",
@@ -110,7 +124,8 @@ function isNonVehicleOffer(offer) {
 
 function removeBadSources(list) {
   for (let index = list.length - 1; index >= 0; index--) {
-    if (BAD_SOURCE_IDS.has(list[index]?.sourceId)) list.splice(index, 1);
+    const source = list[index];
+    if (BAD_SOURCE_IDS.has(source?.sourceId) || source?.market === "multi" || !isAllowedCatalogSourceId(source?.market, source?.sourceId)) list.splice(index, 1);
   }
 }
 
@@ -408,12 +423,10 @@ const jpaucJapanSource = {
   },
 };
 
-catalogImportSources.push(jpaucJapanSource);
-
 const storedOffers = await readAllOffersForMaintenance().catch(() => []);
 if (storedOffers.length) {
   const filtered = storedOffers.filter((offer) => {
-    if (BAD_SOURCE_IDS.has(text(offer?.sourceId))) return false;
+    if (BAD_SOURCE_IDS.has(text(offer?.sourceId)) || !hasAllowedCatalogSourceProvenance(offer)) return false;
     if (isNonVehicleOffer(offer)) return false;
     if (["dubicars_clean", "dubicars_uae"].includes(text(offer?.sourceId)) && (offer?.images || []).length < 2) return false;
     return true;

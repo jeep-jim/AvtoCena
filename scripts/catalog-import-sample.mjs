@@ -11,35 +11,16 @@ process.env.CATALOG_SOURCE_BUDGET_MS ||= String(30 * 60 * 1000);
 process.env.CATALOG_RESTART_UNDERFILLED_SCANS ||= "true";
 process.env.CATALOG_PRESERVE_PREVIOUS_ON_FAILURE ||= "true";
 
-const { alternateMarketSources } = await import("../apps/web/lib/catalog/alternate-market-sources.ts");
-const { publicFallbackSources } = await import("../apps/web/lib/catalog/public-fallback-sources.ts");
-const { reliableMarketSources } = await import("../apps/web/lib/catalog/reliable-market-sources.ts");
-const { exactMarketSources, EXACT_MARKET_SOURCE_IDS } = await import("../apps/web/lib/catalog/exact-market-sources.ts");
-const { jpaucJapanSource } = await import("../apps/web/lib/catalog/jpauc-source.ts");
 const { catalogImportSources, importCatalog } = await import("../apps/web/lib/catalog/importer.ts");
+const { REQUIRED_CATALOG_SOURCES } = await import("../apps/web/lib/catalog/required-catalog-sources.ts");
 const { mutateSourcePolicy } = await import("../apps/web/lib/catalog/policy.ts");
 const { refreshLiveExchangeRates } = await import("../apps/web/lib/catalog/live-rates.ts");
 
-const QUARANTINED_SOURCE_IDS = new Set(["japantransit_japan", "dubicars_uae", "autouncle_europe"]);
-for (const source of [jpaucJapanSource, ...exactMarketSources, ...reliableMarketSources, ...alternateMarketSources, ...publicFallbackSources]) {
-  if (QUARANTINED_SOURCE_IDS.has(source.sourceId)) continue;
-  if (!catalogImportSources.some((candidate) => candidate.sourceId === source.sourceId)) catalogImportSources.push(source);
-}
-
-const preferred = [
-  "encar_direct",
-  "che168_dealer_exact",
-  "goonet_japan_exact",
-  "dubicars_uae_exact",
-  "otomoto_europe_exact",
-  "che168_china_exact",
-  "che168_global",
-  "jpauc_japan",
-  "autoscout_europe",
-];
+const preferred = Object.values(REQUIRED_CATALOG_SOURCES).flat().map((source) => source.sourceId);
 const configured = String(process.env.CATALOG_IMPORT_SOURCES || "").split(",").map((value) => value.trim()).filter(Boolean);
 const available = new Set(catalogImportSources.map((source) => source.sourceId));
-const sources = [...new Set((configured.length ? configured : preferred).filter((sourceId) => available.has(sourceId) && !QUARANTINED_SOURCE_IDS.has(sourceId)))];
+const approved = new Set(preferred);
+const sources = [...new Set((configured.length ? configured : preferred).filter((sourceId) => available.has(sourceId) && approved.has(sourceId)))];
 const sourcePriority = new Map(sources.map((sourceId, index) => [sourceId, index]));
 catalogImportSources.sort((left, right) => (sourcePriority.get(left.sourceId) ?? Number.MAX_SAFE_INTEGER) - (sourcePriority.get(right.sourceId) ?? Number.MAX_SAFE_INTEGER));
 
@@ -75,7 +56,7 @@ for (const source of catalogImportSources.filter((candidate) => (smokeMode ? smo
 const startedAt = Date.now();
 const exchangeRates = await refreshLiveExchangeRates().catch((error) => ({ updatedAt: new Date().toISOString(), rates: [], errors: [`refresh:${error?.message || "failed"}`] }));
 console.log(`[catalog] verified source pool: ${sources.join(", ")}`);
-console.log(`[catalog] exact adapters: ${EXACT_MARKET_SOURCE_IDS.join(", ")}`);
+console.log(`[catalog] approved adapters: ${preferred.join(", ")}`);
 console.log(`[catalog] exchange rates refreshed: ${exchangeRates.rates?.length || 0}; errors=${exchangeRates.errors?.length || 0}`);
 
 const report = await importCatalog({

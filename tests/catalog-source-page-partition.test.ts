@@ -44,13 +44,11 @@ test("retained offers have exactly one page-partition owner", () => {
   assert.equal(owners.length, 1);
 });
 
-test("Goo-net Japan inventory is split across numeric page workers", () => {
-  const partitions = [0, 1, 2, 3, 4].map((index) => catalogSourcePagePartition("goonet_japan_exact", index, 5, 5));
-  assert.deepEqual(partitions.map(catalogPartitionInitialCursor), ["1", "2", "3", "4", "5"]);
-  assert.deepEqual(partitions.map((partition, index) => catalogPartitionNextCursor(String(index + 1), String(index + 2), partition)), ["6", "7", "8", "9", "10"]);
+test("forbidden Japanese sources cannot obtain page partitions", () => {
+  assert.equal(catalogSourcePagePartition("goonet_japan_exact", 0, 5, 5), null);
 });
 
-test("Japan workflows give all five collectors independent Goo-net page bands", () => {
+test("Japan workflows keep five collectors without binding them to a forbidden source", () => {
   const reusable = readFileSync(new URL("../.github/workflows/catalog-v3-market-10k-reusable.yml", import.meta.url), "utf8");
   const japan = readFileSync(new URL("../.github/workflows/catalog-v2-japan.yml", import.meta.url), "utf8");
   const sequential = readFileSync(new URL("../.github/workflows/catalog-v3-sequential-queue.yml", import.meta.url), "utf8");

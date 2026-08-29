@@ -14,7 +14,7 @@ function japanOffer(id: string, overrides: Record<string, unknown> = {}) {
   return {
     id,
     market: "japan",
-    sourceId: "goonet_japan_exact",
+    sourceId: "jpcenter_japan_catalog_open",
     sourceOfferId: id,
     make: "Toyota",
     model: "Corolla",
