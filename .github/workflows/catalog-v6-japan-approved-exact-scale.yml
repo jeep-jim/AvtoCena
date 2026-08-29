@@ -20,12 +20,12 @@ jobs:
     timeout-minutes: 180
     strategy:
       fail-fast: false
-      max-parallel: 2
+      max-parallel: 1
       matrix:
-        month: ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08"]
+        scope: ["recent-30000"]
     env:
-      JAPAN_EXACT_MONTH: ${{ matrix.month }}
-      JAPAN_EXACT_CHUNK_OUTPUT: japan-exact-${{ matrix.month }}.json
+      JAPAN_EXACT_RECENT_LIMIT: "30000"
+      JAPAN_EXACT_CHUNK_OUTPUT: japan-exact-${{ matrix.scope }}.json
       JAPAN_EXACT_MIN_YEAR: "2010"
       JAPAN_EXACT_JPAUC_CONCURRENCY: "10"
       JAPAN_EXACT_CARVECTOR_CONCURRENCY: "2"
@@ -45,8 +45,8 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: japan-approved-exact-${{ matrix.month }}
-          path: japan-exact-${{ matrix.month }}.json
+          name: japan-approved-exact-${{ matrix.scope }}
+          path: japan-exact-${{ matrix.scope }}.json
           if-no-files-found: warn
           retention-days: 5
 
@@ -58,7 +58,7 @@ jobs:
     env:
       JAPAN_EXACT_MERGE_INPUT_DIR: japan-exact-chunks
       JAPAN_EXACT_MERGE_OUTPUT: japan-carvector-jpauc-exact.json
-      JAPAN_EXACT_EXPECTED_SCOPES: 2026-01,2026-02,2026-03,2026-04,2026-05,2026-06,2026-07,2026-08
+      JAPAN_EXACT_EXPECTED_SCOPES: recent-30000
       JAPAN_EXACT_MIN_CHUNK_COVERAGE: "1"
     steps:
       - uses: actions/checkout@v4
@@ -72,7 +72,7 @@ jobs:
           pattern: japan-approved-exact-*
           path: japan-exact-chunks
           merge-multiple: true
-      - name: Require every trading date and merge exact joined lots
+      - name: Require the complete bounded recent window and merge exact joined lots
         run: node scripts/japan-carvector-jpauc-exact-merge.mjs
       - uses: actions/upload-artifact@v4
         if: always()
