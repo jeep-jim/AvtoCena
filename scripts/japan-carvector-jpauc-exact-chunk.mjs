@@ -27,6 +27,9 @@ const requestTimeoutMs = Math.max(10_000, Number(process.env.JAPAN_EXACT_REQUEST
 const maxFallbackPages = Math.max(0, Number(process.env.JAPAN_EXACT_MAX_FALLBACK_PAGES || 500));
 const maxDates = Math.max(0, Number(process.env.JAPAN_EXACT_MAX_DATES || 0));
 const maxGroupsPerDate = Math.max(0, Number(process.env.JAPAN_EXACT_MAX_GROUPS_PER_DATE || 0));
+const groupPartCount = Math.max(1, Math.floor(Number(process.env.JAPAN_EXACT_GROUP_PART_COUNT || 1)));
+const groupPartIndex = Math.max(0, Math.floor(Number(process.env.JAPAN_EXACT_GROUP_PART_INDEX || 0)));
+if (groupPartIndex >= groupPartCount) throw new Error(`invalid_japan_exact_group_part:${groupPartIndex}/${groupPartCount}`);
 const carvectorOnly = process.env.JAPAN_EXACT_CARVECTOR_ONLY === "1";
 const carvectorTransport = String(process.env.JAPAN_EXACT_CARVECTOR_TRANSPORT || "graphql").trim().toLowerCase();
 const carvectorMaxPages = Math.max(0, Number(process.env.JAPAN_EXACT_CARVECTOR_MAX_PAGES || 0));
@@ -413,8 +416,10 @@ for (const [date, dateEvidence] of (maxDates ? dateEntries.slice(0, maxDates) : 
   }
   const tasks = [];
   const fallbackKeys = new Set();
-  const groupValues = [...grouped.values()];
-  for (const group of (maxGroupsPerDate ? groupValues.slice(0, maxGroupsPerDate) : groupValues)) {
+  const allGroupValues = [...grouped.values()];
+  const boundedGroupValues = maxGroupsPerDate ? allGroupValues.slice(0, maxGroupsPerDate) : allGroupValues;
+  const groupValues = boundedGroupValues.filter((_, index) => index % groupPartCount === groupPartIndex);
+  for (const group of groupValues) {
     const makerOption = optionForMake(session.makerOptions, group.make);
     if (!makerOption) { failures.push({ date, make: group.make, venue: group.venue, error: "jpauc_maker_mapping_missing" }); continue; }
     const venueOptions = optionsForVenue(session.auctionOptions, group.venue);
@@ -455,7 +460,7 @@ for (const [date, dateEvidence] of (maxDates ? dateEntries.slice(0, maxDates) : 
 
 const uniqueOffers = [...new Map(offers.filter((offer) => offer.images.length >= 3).map((offer) => [offer.id, offer])).values()];
 const report = {
-  version: 1, mode: "jpauc_exact_lot_gallery_plus_carvector_exact_sold_price_power", scope, month: month || null, exactDate: exactDate || null, recentLimit: recentLimit || null, startOffset,
+  version: 1, mode: "jpauc_exact_lot_gallery_plus_carvector_exact_sold_price_power", scope, month: month || null, exactDate: exactDate || null, recentLimit: recentLimit || null, startOffset, groupPartIndex, groupPartCount,
   carvectorTotal: carvector.total, carvectorEligible: carvector.rows.length, dates: evidenceByDate.size,
   scanCount: scans.length, jpaucRowsScanned: scans.reduce((sum, row) => sum + Number(row.rows || 0), 0),
   exactJoined: uniqueOffers.length, failureCount: failures.length, failures: failures.slice(0, 100), scans,
