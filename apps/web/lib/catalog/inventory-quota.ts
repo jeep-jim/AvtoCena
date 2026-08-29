@@ -1,6 +1,9 @@
 import type { VehicleOffer } from "./types";
 
-export const CATALOG_MAX_OFFERS_PER_MODEL_YEAR = 20;
+const configuredMaxOffersPerModelYear = Number(process.env.CATALOG_MAX_OFFERS_PER_MODEL_YEAR || 20);
+export const CATALOG_MAX_OFFERS_PER_MODEL_YEAR = Number.isFinite(configuredMaxOffersPerModelYear)
+  ? Math.max(1, Math.min(100, Math.floor(configuredMaxOffersPerModelYear)))
+  : 20;
 export const CATALOG_SHOWCASE_MAX_POWER_HP = 160;
 export const CATALOG_SHOWCASE_LOW_POWER_MIN_SHARE = 0.8;
 
