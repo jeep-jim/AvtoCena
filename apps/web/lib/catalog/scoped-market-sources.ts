@@ -1,26 +1,7 @@
 import { ScopedSourceAdapter } from "./scoped-source-core";
 import type { CatalogSourceAdapter } from "./types";
 
-const gooMakes = ["TOYOTA", "NISSAN", "HONDA", "MAZDA", "MITSUBISHI", "SUBARU", "SUZUKI", "DAIHATSU", "LEXUS", "BMW", "MERCEDES_BENZ", "VOLKSWAGEN"];
-
 export const scopedMarketSources: CatalogSourceAdapter[] = [
-  new ScopedSourceAdapter({
-    sourceId: "goonet_japan",
-    market: "japan",
-    label: "Goo-net Exchange Japan",
-    baseUrl: "https://www.goo-net-exchange.com",
-    currency: "USD",
-    detailPattern: /\/usedcars\/(?:detail\/|[^?#]*\d{6,})/i,
-    referer: "https://www.goo-net-exchange.com/usedcars/",
-    listUrls: (page) => {
-      const make = gooMakes[(page - 1) % gooMakes.length];
-      const makePage = Math.floor((page - 1) / gooMakes.length) + 1;
-      return [
-        `https://www.goo-net-exchange.com/usedcars/${make}/index-${makePage}.html`,
-        `https://www.goo-net-exchange.com/usedcars/${make}/?page=${makePage}`,
-      ];
-    },
-  }),
   new ScopedSourceAdapter({
     sourceId: "che168_clean",
     market: "china",
