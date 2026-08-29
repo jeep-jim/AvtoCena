@@ -22,10 +22,10 @@ jobs:
       fail-fast: false
       max-parallel: 2
       matrix:
-        date: ["2026-02-27", "2026-03-30", "2026-04-29", "2026-04-30", "2026-06-30", "2026-07-31", "2026-08-10", "2026-08-25", "2026-08-26"]
+        month: ["2026-01", "2026-02", "2026-03", "2026-04", "2026-05", "2026-06", "2026-07", "2026-08"]
     env:
-      JAPAN_EXACT_DATE: ${{ matrix.date }}
-      JAPAN_EXACT_CHUNK_OUTPUT: japan-exact-${{ matrix.date }}.json
+      JAPAN_EXACT_MONTH: ${{ matrix.month }}
+      JAPAN_EXACT_CHUNK_OUTPUT: japan-exact-${{ matrix.month }}.json
       JAPAN_EXACT_MIN_YEAR: "2010"
       JAPAN_EXACT_JPAUC_CONCURRENCY: "10"
       JAPAN_EXACT_CARVECTOR_CONCURRENCY: "2"
@@ -45,8 +45,8 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: japan-approved-exact-${{ matrix.date }}
-          path: japan-exact-${{ matrix.date }}.json
+          name: japan-approved-exact-${{ matrix.month }}
+          path: japan-exact-${{ matrix.month }}.json
           if-no-files-found: warn
           retention-days: 5
 
@@ -58,7 +58,7 @@ jobs:
     env:
       JAPAN_EXACT_MERGE_INPUT_DIR: japan-exact-chunks
       JAPAN_EXACT_MERGE_OUTPUT: japan-carvector-jpauc-exact.json
-      JAPAN_EXACT_EXPECTED_SCOPES: 2026-02-27,2026-03-30,2026-04-29,2026-04-30,2026-06-30,2026-07-31,2026-08-10,2026-08-25,2026-08-26
+      JAPAN_EXACT_EXPECTED_SCOPES: 2026-01,2026-02,2026-03,2026-04,2026-05,2026-06,2026-07,2026-08
       JAPAN_EXACT_MIN_CHUNK_COVERAGE: "1"
     steps:
       - uses: actions/checkout@v4
