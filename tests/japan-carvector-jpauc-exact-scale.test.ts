@@ -1,7 +1,35 @@
 import assert from "node:assert/strict";
+import { spawnSync } from "node:child_process";
 import fs from "node:fs";
+import os from "node:os";
+import path from "node:path";
 import test from "node:test";
 import { jpaucPhotoVariants, parseJpaucListingRows } from "../apps/web/lib/catalog/jpauc-past-source";
+import { toJapanAuctionDate } from "../scripts/lib/japan-auction-date.mjs";
+
+test("CarVector UTC timestamps are joined on the Japan auction calendar date", () => {
+  assert.equal(toJapanAuctionDate("2026-08-25T23:09:00Z"), "2026-08-26");
+  assert.equal(toJapanAuctionDate("2026-08-26T04:00:00Z"), "2026-08-26");
+  assert.equal(toJapanAuctionDate("2026-08-26"), "2026-08-26");
+});
+
+test("CarVector evidence merge requires every checkpoint and deduplicates ids", () => {
+  const root = fs.mkdtempSync(path.join(os.tmpdir(), "japan-evidence-"));
+  const input = path.join(root, "chunks");
+  const output = path.join(root, "merged.json");
+  fs.mkdirSync(input);
+  fs.writeFileSync(path.join(input, "a.json"), JSON.stringify({ evidence: [{ id: "a" }, { id: "shared" }], report: { scope: "a", carvectorTotal: 10 } }));
+  fs.writeFileSync(path.join(input, "b.json"), JSON.stringify({ evidence: [{ id: "b" }, { id: "shared" }], report: { scope: "b", carvectorTotal: 10 } }));
+  const result = spawnSync(process.execPath, ["scripts/japan-carvector-evidence-merge.mjs"], {
+    cwd: process.cwd(), encoding: "utf8",
+    env: { ...process.env, JAPAN_EVIDENCE_MERGE_INPUT_DIR: input, JAPAN_EVIDENCE_MERGE_OUTPUT: output, JAPAN_EVIDENCE_EXPECTED_SCOPES: "a,b" },
+  });
+  assert.equal(result.status, 0, result.stderr);
+  const payload = JSON.parse(fs.readFileSync(output, "utf8"));
+  assert.equal(payload.evidence.length, 3);
+  assert.equal(payload.report.carvectorEligible, 3);
+  fs.rmSync(root, { recursive: true, force: true });
+});
 
 test("JPAuc exports exact lot identity and three same-lot Aleado image variants", () => {
   const html = `<table><tr data-id="344621799" data-r="1" data-r-total="43">
@@ -39,6 +67,9 @@ test("Japan scale workflow is approved-source-only and cannot publish below 8700
   assert.match(collector, /const EVIDENCE_SOURCE_ID = "carvector_japan_stat_open"/);
   assert.match(collector, /JAPAN_EXACT_RECENT_LIMIT/);
   assert.match(workflow, /JAPAN_EXACT_RECENT_LIMIT: "5000"/);
+  assert.match(workflow, /JAPAN_EXACT_CARVECTOR_ONLY: "1"/);
+  assert.match(workflow, /JAPAN_EXACT_CARVECTOR_INPUT: japan-evidence-input\/japan-carvector-evidence\.json/);
+  assert.match(workflow, /Join JPAuc once against all exact CarVector evidence/);
   assert.match(workflow, /recent-00000-05000/);
   assert.match(workflow, /recent-25000-30000/);
   assert.match(workflow, /JAPAN_EXACT_CARVECTOR_CONCURRENCY: "1"/);

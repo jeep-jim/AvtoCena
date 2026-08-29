@@ -33,12 +33,11 @@ jobs:
       JAPAN_EXACT_SCOPE: ${{ matrix.scope }}
       JAPAN_EXACT_START_OFFSET: ${{ matrix.start_offset }}
       JAPAN_EXACT_RECENT_LIMIT: "5000"
-      JAPAN_EXACT_CHUNK_OUTPUT: japan-exact-${{ matrix.scope }}.json
+      JAPAN_EXACT_CHUNK_OUTPUT: japan-evidence-${{ matrix.scope }}.json
+      JAPAN_EXACT_CARVECTOR_ONLY: "1"
       JAPAN_EXACT_MIN_YEAR: "2010"
-      JAPAN_EXACT_JPAUC_CONCURRENCY: "10"
       JAPAN_EXACT_CARVECTOR_CONCURRENCY: "1"
       JAPAN_EXACT_CARVECTOR_PAGE_DELAY_MS: "5000"
-      JAPAN_EXACT_MAX_FALLBACK_PAGES: "0"
       JAPAN_EXACT_REQUEST_TIMEOUT_MS: "45000"
       CATALOG_KNOWLEDGE_DISABLED: "1"
     steps:
@@ -48,26 +47,25 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Join exact JPAuc sold lots to exact CarVector results
+      - name: Collect strict CarVector evidence checkpoint
         run: npx tsx scripts/japan-carvector-jpauc-exact-chunk.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: japan-approved-exact-${{ matrix.scope }}
-          path: japan-exact-${{ matrix.scope }}.json
+          name: japan-carvector-evidence-${{ matrix.scope }}
+          path: japan-evidence-${{ matrix.scope }}.json
           if-no-files-found: warn
           retention-days: 5
 
-  aggregate:
+  aggregate_evidence:
     needs: chunks
     if: ${{ always() }}
     runs-on: ubuntu-latest
     timeout-minutes: 30
     env:
-      JAPAN_EXACT_MERGE_INPUT_DIR: japan-exact-chunks
-      JAPAN_EXACT_MERGE_OUTPUT: japan-carvector-jpauc-exact.json
-      JAPAN_EXACT_EXPECTED_SCOPES: recent-00000-05000,recent-05000-10000,recent-10000-15000,recent-15000-20000,recent-20000-25000,recent-25000-30000
-      JAPAN_EXACT_MIN_CHUNK_COVERAGE: "1"
+      JAPAN_EVIDENCE_MERGE_INPUT_DIR: japan-evidence-chunks
+      JAPAN_EVIDENCE_MERGE_OUTPUT: japan-carvector-evidence.json
+      JAPAN_EVIDENCE_EXPECTED_SCOPES: recent-00000-05000,recent-05000-10000,recent-10000-15000,recent-15000-20000,recent-20000-25000,recent-25000-30000
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
@@ -77,11 +75,47 @@ jobs:
       - run: npm ci
       - uses: actions/download-artifact@v4
         with:
-          pattern: japan-approved-exact-*
-          path: japan-exact-chunks
+          pattern: japan-carvector-evidence-*
+          path: japan-evidence-chunks
           merge-multiple: true
-      - name: Require the complete bounded recent window and merge exact joined lots
-        run: node scripts/japan-carvector-jpauc-exact-merge.mjs
+      - name: Require the complete bounded recent window and merge evidence
+        run: node scripts/japan-carvector-evidence-merge.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: japan-carvector-evidence
+          path: japan-carvector-evidence.json
+          if-no-files-found: warn
+          retention-days: 5
+
+  exact_join:
+    needs: aggregate_evidence
+    if: needs.aggregate_evidence.result == 'success'
+    runs-on: ubuntu-latest
+    timeout-minutes: 180
+    env:
+      JAPAN_EXACT_SCOPE: recent-00000-30000
+      JAPAN_EXACT_RECENT_LIMIT: "30000"
+      JAPAN_EXACT_CARVECTOR_INPUT: japan-evidence-input/japan-carvector-evidence.json
+      JAPAN_EXACT_CHUNK_OUTPUT: japan-carvector-jpauc-exact.json
+      JAPAN_EXACT_MIN_YEAR: "2010"
+      JAPAN_EXACT_JPAUC_CONCURRENCY: "4"
+      JAPAN_EXACT_MAX_FALLBACK_PAGES: "0"
+      JAPAN_EXACT_REQUEST_TIMEOUT_MS: "90000"
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - uses: actions/download-artifact@v4
+        with:
+          name: japan-carvector-evidence
+          path: japan-evidence-input
+      - name: Join JPAuc once against all exact CarVector evidence
+        run: npx tsx scripts/japan-carvector-jpauc-exact-chunk.mjs
       - uses: actions/upload-artifact@v4
         if: always()
         with:
@@ -91,8 +125,8 @@ jobs:
           retention-days: 5
 
   publish:
-    needs: aggregate
-    if: needs.aggregate.result == 'success'
+    needs: exact_join
+    if: needs.exact_join.result == 'success'
     concurrency:
       group: catalog-live-daily-working-markets
       cancel-in-progress: false

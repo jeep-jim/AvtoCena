@@ -6,6 +6,7 @@ import {
   parseJpaucListingRows,
 } from "../apps/web/lib/catalog/jpauc-past-source.ts";
 import { compatibleCarvectorModel, normalizeCarvectorChassis } from "./prestige-japan-carvector-power-enrich.mjs";
+import { toJapanAuctionDate } from "./lib/japan-auction-date.mjs";
 
 const CARVECTOR = "https://carvector.com";
 const JPAUC = "https://jpauc.com";
@@ -18,6 +19,7 @@ const recentLimit = Math.max(0, Math.min(100_000, Number(process.env.JAPAN_EXACT
 const startOffset = Math.max(0, Math.floor(Number(process.env.JAPAN_EXACT_START_OFFSET || 0)));
 const scope = String(process.env.JAPAN_EXACT_SCOPE || (recentLimit ? `recent-${startOffset}-${startOffset + recentLimit}` : (exactDate || month))).trim();
 const output = process.env.JAPAN_EXACT_CHUNK_OUTPUT || `japan-exact-${month}.json`;
+const carvectorInput = String(process.env.JAPAN_EXACT_CARVECTOR_INPUT || "").trim();
 const minYear = Math.max(2010, Number(process.env.JAPAN_EXACT_MIN_YEAR || 2010));
 const concurrency = Math.max(1, Math.min(16, Number(process.env.JAPAN_EXACT_JPAUC_CONCURRENCY || 8)));
 const requestTimeoutMs = Math.max(10_000, Number(process.env.JAPAN_EXACT_REQUEST_TIMEOUT_MS || 45_000));
@@ -162,7 +164,7 @@ async function carvectorPage(offset) {
 function normalizeCarvectorRow(row) {
   const sourceUrl = row?.urlPage?.fullUrl ? new URL(row.urlPage.fullUrl, CARVECTOR).toString() : "";
   return {
-    id: clean(row?.id), date: dateOnly(row?.auctionAt), auctionAt: clean(row?.auctionAt), lot: clean(row?.lot),
+    id: clean(row?.id), date: toJapanAuctionDate(row?.auctionAt), auctionAt: clean(row?.auctionAt), lot: clean(row?.lot),
     make: clean(row?.make?.title), model: clean(row?.model?.title), chassis: normalizeCarvectorChassis(row?.chassis?.title),
     modification: clean(row?.modification?.title), auction: clean(row?.auction?.title), year: positive(row?.year),
     powerHp: positive(row?.power), engineCc: positive(row?.engineVolume), mileageKm: positive(row?.mileage),
@@ -172,7 +174,25 @@ function normalizeCarvectorRow(row) {
   };
 }
 
+function eligibleCarvectorRow(row) {
+  return (recentLimit ? true : exactDate ? row.date === exactDate : row.date.startsWith(month))
+    && row.date && row.lot && row.make && row.model && row.chassis && row.auction && row.year >= minYear
+    && row.engineCc >= 400 && row.powerHp >= 30 && row.powerHp <= 1_500 && row.finalPriceJpy > 0
+    && /^https:\/\/carvector\.com\/stat\//.test(row.sourceUrl)
+    && !ELECTRIFIED.test(`${row.model} ${row.modification} ${row.fuel}`);
+}
+
 async function collectCarvector() {
+  if (carvectorInput) {
+    const payload = JSON.parse(await fs.readFile(carvectorInput, "utf8"));
+    if (!Array.isArray(payload?.evidence)) throw new Error(`carvector_evidence_shape_invalid:${carvectorInput}`);
+    const byId = new Map();
+    for (const raw of payload.evidence) {
+      const row = { ...raw, date: toJapanAuctionDate(raw?.auctionAt || raw?.date) };
+      if (row.id && !byId.has(row.id) && eligibleCarvectorRow(row)) byId.set(row.id, row);
+    }
+    return { total: Math.max(0, Number(payload?.report?.carvectorTotal || byId.size)), rows: [...byId.values()] };
+  }
   const first = await carvectorPage(startOffset);
   const total = Math.max(0, Number(first.total || 0));
   const collectionLimit = recentLimit || Math.max(0, total - startOffset);
@@ -198,11 +218,7 @@ async function collectCarvector() {
       byId.set(row.id, row);
     }
   }
-  const rows = [...byId.values()].filter((row) => (recentLimit ? true : exactDate ? row.date === exactDate : row.date.startsWith(month))
-    && row.date && row.lot && row.make && row.model && row.chassis && row.auction && row.year >= minYear
-    && row.engineCc >= 400 && row.powerHp >= 30 && row.powerHp <= 1_500 && row.finalPriceJpy > 0
-    && /^https:\/\/carvector\.com\/stat\//.test(row.sourceUrl)
-    && !ELECTRIFIED.test(`${row.model} ${row.modification} ${row.fuel}`));
+  const rows = [...byId.values()].filter(eligibleCarvectorRow);
   return { total, rows };
 }
 
@@ -322,7 +338,7 @@ async function pool(items, limit, worker) {
 const carvector = await collectCarvector();
 console.log(`[carvector] scope=${scope} total=${carvector.total} eligible=${carvector.rows.length}`);
 if (carvectorOnly) {
-  await fs.writeFile(output, JSON.stringify({ offers: [], report: { version: 1, mode: "carvector_probe", scope, month: month || null, exactDate: exactDate || null, recentLimit: recentLimit || null, startOffset, carvectorTotal: carvector.total, carvectorEligible: carvector.rows.length, dates: [...new Set(carvector.rows.map((row) => row.date))], auctionAts: [...new Set(carvector.rows.map((row) => row.auctionAt))].slice(0, 20) } }, null, 2));
+  await fs.writeFile(output, JSON.stringify({ evidence: carvector.rows, offers: [], report: { version: 1, mode: "carvector_evidence", scope, month: month || null, exactDate: exactDate || null, recentLimit: recentLimit || null, startOffset, carvectorTotal: carvector.total, carvectorEligible: carvector.rows.length, dates: [...new Set(carvector.rows.map((row) => row.date))], auctionAts: [...new Set(carvector.rows.map((row) => row.auctionAt))].slice(0, 20) } }, null, 2));
   process.exit(0);
 }
 const evidenceByDate = new Map();
@@ -333,6 +349,7 @@ for (const row of carvector.rows) {
 const offers = [];
 const scans = [];
 const failures = [];
+const unmappedVenues = new Map();
 const dateEntries = [...evidenceByDate.entries()].sort();
 for (const [date, dateEvidence] of (maxDates ? dateEntries.slice(0, maxDates) : dateEntries)) {
   console.log(`[jpauc] date=${date} evidence=${dateEvidence.length} session=start`);
@@ -355,6 +372,9 @@ for (const [date, dateEvidence] of (maxDates ? dateEntries.slice(0, maxDates) : 
     if (venueOptions.length) {
       venueOptions.forEach((auctionOption) => tasks.push({ group, makerOption, auctionOption }));
     } else {
+      const unmappedKey = `${date}|${group.venue}`;
+      unmappedVenues.set(unmappedKey, (unmappedVenues.get(unmappedKey) || 0) + group.evidence.length);
+      if (maxFallbackPages === 0) continue;
       const fallbackKey = makerOption.value;
       if (!fallbackKeys.has(fallbackKey)) {
         fallbackKeys.add(fallbackKey);
@@ -390,6 +410,10 @@ const report = {
   carvectorTotal: carvector.total, carvectorEligible: carvector.rows.length, dates: evidenceByDate.size,
   scanCount: scans.length, jpaucRowsScanned: scans.reduce((sum, row) => sum + Number(row.rows || 0), 0),
   exactJoined: uniqueOffers.length, failureCount: failures.length, failures: failures.slice(0, 100), scans,
+  unmappedVenues: [...unmappedVenues.entries()].map(([key, count]) => {
+    const split = key.indexOf("|");
+    return { date: key.slice(0, split), venue: key.slice(split + 1), count };
+  }).sort((a, b) => b.count - a.count || a.venue.localeCompare(b.venue)),
   approvedSourceIds: [SOURCE_ID, EVIDENCE_SOURCE_ID], forbiddenSourceCount: 0,
 };
 await fs.writeFile(output, JSON.stringify({ offers: uniqueOffers, report }, null, 2));
