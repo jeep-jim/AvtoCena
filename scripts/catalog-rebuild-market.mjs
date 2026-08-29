@@ -6,6 +6,7 @@ const { credibleCatalogImages, isCrediblePublicOffer } = await import("../apps/w
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
 const { readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
 const { CATALOG_DAILY_TARGET_PER_MARKET } = await import("../apps/web/lib/catalog/runtime-config.ts");
+const { REQUIRED_CATALOG_SOURCES } = await import("../apps/web/lib/catalog/required-catalog-sources.ts");
 
 const market = String(process.env.CATALOG_REBUILD_MARKET || "").trim();
 const target = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET || CATALOG_DAILY_TARGET_PER_MARKET));
@@ -25,15 +26,9 @@ const outputFile = process.env.CATALOG_REBUILD_OUTPUT || `catalog-rebuild-${mark
 const startedAtMs = Date.now();
 const deadlineAtMs = startedAtMs + timeLimitMs;
 
-const sourcePlan = {
-  korea: ["encar_direct"],
-  china: ["che168_china_exact", "guazi_china_export"],
-  japan: ["goonet_japan_exact", "beforward_japan", "beforward_public"],
-  uae: ["dubicars_uae_exact", "beforward_uae"],
-  europe: ["otomoto_europe_exact", "beforward_uk", "beforward_belgium"],
-  georgia: ["myauto_georgia_exact"],
-  kyrgyzstan: ["mashina_kyrgyzstan_exact"],
-};
+const sourcePlan = Object.fromEntries(
+  Object.entries(REQUIRED_CATALOG_SOURCES).map(([marketName, sources]) => [marketName, sources.map((source) => source.sourceId)]),
+);
 
 if (!Object.prototype.hasOwnProperty.call(sourcePlan, market)) throw new Error(`unsupported_rebuild_market_${market || "missing"}`);
 const configuredSources = String(process.env.CATALOG_REBUILD_SOURCE_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);
