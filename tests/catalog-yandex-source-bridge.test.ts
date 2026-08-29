@@ -6,7 +6,7 @@ const bridge = fs.readFileSync(new URL("../apps/web/lib/catalog/yandex-source-br
 const importer = fs.readFileSync(new URL("../apps/web/lib/catalog/importer.ts", import.meta.url), "utf8");
 const guaziRoute = fs.readFileSync(new URL("../apps/web/app/api/internal/guazi-egress-b8c4d1/route.ts", import.meta.url), "utf8");
 const georgiaRoute = fs.readFileSync(new URL("../apps/web/app/api/internal/georgia-recovery-e2f913/route.ts", import.meta.url), "utf8");
-const goonetRoute = fs.readFileSync(new URL("../apps/web/app/api/internal/goonet-egress-f7c2a9/route.ts", import.meta.url), "utf8");
+const removedSourceRoute = fs.readFileSync(new URL("../apps/web/app/api/internal/goonet-egress-f7c2a9/route.ts", import.meta.url), "utf8");
 
 test("GitHub collectors use bounded Yandex egress for source sites that block GitHub IPs", () => {
   assert.match(bridge, /process\.env\.GITHUB_ACTIONS/);
@@ -18,17 +18,14 @@ test("GitHub collectors use bounded Yandex egress for source sites that block Gi
   assert.match(importer, /withGithubYandexSourceBridge\(myAutoListSource, "myauto"\)/);
   assert.match(importer, /withGithubYandexSourceBridge\(autoPapaGeorgiaSource, "autopapa"\)/);
   assert.match(importer, /withGithubYandexSourceBridge\(guaziChinaExactSource, "guazi"\)/);
-  assert.match(importer, /withGithubYandexSourceBridge\(goonetJapanExactSource, "goonet"\)/);
+  assert.doesNotMatch(importer, /goonetJapanExactSource|goonetCollectionSource/);
+  assert.doesNotMatch(bridge, /goonet|goo-net/i);
 });
 
-test("Goo-net Yandex endpoint is fixed-source and verifies listing-bound galleries", () => {
-  assert.match(goonetRoute, /new GoonetExactAdapter\(\)/);
-  assert.match(goonetRoute, /source\.fetchPage\(String\(page\)\)/);
-  assert.match(goonetRoute, /coherentGoonetImages\(/);
-  assert.match(goonetRoute, /galleryStoredAs = "json_urls"/);
-  assert.doesNotMatch(goonetRoute, /source\.fetchImages\(offer\)/);
-  assert.match(goonetRoute, /urls\.length < 2/);
-  assert.doesNotMatch(goonetRoute, /searchParams\.get\(["']url["']\)/);
+test("removed source endpoint is permanently inert", () => {
+  assert.match(removedSourceRoute, /catalog_source_not_approved/);
+  assert.match(removedSourceRoute, /status: 410/);
+  assert.doesNotMatch(removedSourceRoute, /fetch\(|fetchPage|GoonetExactAdapter/);
 });
 
 test("Guazi Yandex endpoint is fixed-source only and preserves exact listing gallery verification", () => {
