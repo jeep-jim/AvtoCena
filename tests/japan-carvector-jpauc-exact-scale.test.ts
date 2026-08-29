@@ -19,6 +19,8 @@ test("CarVector public SSR ng-state yields the exact offers payload", () => {
   const html = `<html><script id="ng-state" type="application/json">${JSON.stringify({ hash: { b: { data: { result: payload } } } })}</script></html>`;
   assert.deepEqual(extractCarvectorOffersFromNgState(html), payload);
   assert.throws(() => extractCarvectorOffersFromNgState("<html></html>"), /carvector_ng_state_missing/);
+  const limited = `<script id="ng-state" type="application/json">${JSON.stringify({ INIT_STATE_PROJECT_CONTEXT: { rateLimited: true, retryAfterSeconds: 30 } })}</script>`;
+  assert.throws(() => extractCarvectorOffersFromNgState(limited), /rateLimited=true:retryAfter=30/);
 });
 
 test("CarVector evidence merge requires every checkpoint and deduplicates ids", () => {
