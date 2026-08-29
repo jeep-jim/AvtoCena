@@ -15,7 +15,8 @@ const EVIDENCE_SOURCE_ID = "carvector_japan_stat_open";
 const exactDate = String(process.env.JAPAN_EXACT_DATE || "").trim();
 const month = String(process.env.JAPAN_EXACT_MONTH || exactDate.slice(0, 7)).trim();
 const recentLimit = Math.max(0, Math.min(100_000, Number(process.env.JAPAN_EXACT_RECENT_LIMIT || 0)));
-const scope = recentLimit ? `recent-${recentLimit}` : (exactDate || month);
+const startOffset = Math.max(0, Math.floor(Number(process.env.JAPAN_EXACT_START_OFFSET || 0)));
+const scope = String(process.env.JAPAN_EXACT_SCOPE || (recentLimit ? `recent-${startOffset}-${startOffset + recentLimit}` : (exactDate || month))).trim();
 const output = process.env.JAPAN_EXACT_CHUNK_OUTPUT || `japan-exact-${month}.json`;
 const minYear = Math.max(2010, Number(process.env.JAPAN_EXACT_MIN_YEAR || 2010));
 const concurrency = Math.max(1, Math.min(16, Number(process.env.JAPAN_EXACT_JPAUC_CONCURRENCY || 8)));
@@ -172,10 +173,11 @@ function normalizeCarvectorRow(row) {
 }
 
 async function collectCarvector() {
-  const first = await carvectorPage(0);
+  const first = await carvectorPage(startOffset);
   const total = Math.max(0, Number(first.total || 0));
-  const collectionLimit = recentLimit || total;
-  const pageCount = Math.min(Math.ceil(total / 100), Math.ceil(collectionLimit / 100), carvectorMaxPages || Number.MAX_SAFE_INTEGER);
+  const collectionLimit = recentLimit || Math.max(0, total - startOffset);
+  const pageCount = Math.min(Math.ceil(Math.max(0, total - startOffset) / 100), Math.ceil(collectionLimit / 100), carvectorMaxPages || Number.MAX_SAFE_INTEGER);
+  if (!pageCount) return { total, rows: [] };
   const pages = new Array(pageCount);
   pages[0] = first;
   let cursor = 1;
@@ -184,12 +186,12 @@ async function collectCarvector() {
       const index = cursor++;
       if (index >= pageCount) return;
       if (carvectorPageDelayMs) await sleep(carvectorPageDelayMs + Math.floor(Math.random() * 250));
-      pages[index] = await carvectorPage(index * 100);
+      pages[index] = await carvectorPage(startOffset + index * 100);
     }
   }));
   const byId = new Map();
   for (const [index, page] of pages.entries()) {
-    const remaining = Math.max(0, Math.min(total, collectionLimit) - index * 100);
+    const remaining = Math.max(0, Math.min(Math.max(0, total - startOffset), collectionLimit) - index * 100);
     for (const raw of (page?.offers || []).slice(0, Math.min(100, remaining))) {
       const row = normalizeCarvectorRow(raw);
       if (!row.id || byId.has(row.id)) continue;
@@ -320,7 +322,7 @@ async function pool(items, limit, worker) {
 const carvector = await collectCarvector();
 console.log(`[carvector] scope=${scope} total=${carvector.total} eligible=${carvector.rows.length}`);
 if (carvectorOnly) {
-  await fs.writeFile(output, JSON.stringify({ offers: [], report: { version: 1, mode: "carvector_probe", scope, month: month || null, exactDate: exactDate || null, recentLimit: recentLimit || null, carvectorTotal: carvector.total, carvectorEligible: carvector.rows.length, dates: [...new Set(carvector.rows.map((row) => row.date))], auctionAts: [...new Set(carvector.rows.map((row) => row.auctionAt))].slice(0, 20) } }, null, 2));
+  await fs.writeFile(output, JSON.stringify({ offers: [], report: { version: 1, mode: "carvector_probe", scope, month: month || null, exactDate: exactDate || null, recentLimit: recentLimit || null, startOffset, carvectorTotal: carvector.total, carvectorEligible: carvector.rows.length, dates: [...new Set(carvector.rows.map((row) => row.date))], auctionAts: [...new Set(carvector.rows.map((row) => row.auctionAt))].slice(0, 20) } }, null, 2));
   process.exit(0);
 }
 const evidenceByDate = new Map();
@@ -384,7 +386,7 @@ for (const [date, dateEvidence] of (maxDates ? dateEntries.slice(0, maxDates) : 
 
 const uniqueOffers = [...new Map(offers.filter((offer) => offer.images.length >= 3).map((offer) => [offer.id, offer])).values()];
 const report = {
-  version: 1, mode: "jpauc_exact_lot_gallery_plus_carvector_exact_sold_price_power", scope, month: month || null, exactDate: exactDate || null, recentLimit: recentLimit || null,
+  version: 1, mode: "jpauc_exact_lot_gallery_plus_carvector_exact_sold_price_power", scope, month: month || null, exactDate: exactDate || null, recentLimit: recentLimit || null, startOffset,
   carvectorTotal: carvector.total, carvectorEligible: carvector.rows.length, dates: evidenceByDate.size,
   scanCount: scans.length, jpaucRowsScanned: scans.reduce((sum, row) => sum + Number(row.rows || 0), 0),
   exactJoined: uniqueOffers.length, failureCount: failures.length, failures: failures.slice(0, 100), scans,
