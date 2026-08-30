@@ -19,11 +19,17 @@ const maxOffersPerModelYear = Math.max(20, Math.min(100, Number(process.env.CATA
 const minYear = catalogMinYearForMarket("japan");
 const ELECTRIFIED = /(?:\bhybrid\b|plug[ -]?in|phev|electric|\bev\b|e[ -]?power|fuel[ -]?cell|fcev|ハイブリッド|電気)/i;
 
-function exactCalculation(offer) {
+function safeCalculation(offer) {
   const total = Number(offer?.totalRub || 0);
-  const customs = offer?.calculationSnapshot?.customs;
-  const breakdown = offer?.calculationSnapshot?.breakdown;
-  return total > 0 && offer?.calculationStatus === "ready" && offer?.calculationSnapshot?.pricingConfidence === "exact"
+  const snapshot = offer?.calculationSnapshot || {};
+  const customs = snapshot?.customs;
+  const breakdown = snapshot?.breakdown;
+  const exact = offer?.calculationStatus === "ready" && snapshot?.pricingConfidence === "exact";
+  const controlledScenario = offer?.calculationStatus === "estimated" && snapshot?.pricingConfidence === "estimated"
+    && customs?.vehicleCategory === "M1" && customs?.vehicleCategoryAssumed === true && customs?.personalUseAssumed === true
+    && customs?.ageEstimated === false && !snapshot?.powerScenario && snapshot?.powerRequiresConfirmation !== true
+    && (!Array.isArray(snapshot?.estimatedMarketFields) || snapshot.estimatedMarketFields.length === 0);
+  return total > 0 && (exact || controlledScenario)
     && customs?.status === "ready" && Number.isFinite(Number(customs?.totalCustomsRub))
     && Array.isArray(breakdown) && breakdown.some((line) => line?.id === "car") && breakdown.some((line) => line?.id === "customs")
     && offer?.powertrainKind === "combustion" && Number(offer?.engineCc || 0) > 0 && Number(offer?.powerHp || 0) > 0;
@@ -80,10 +86,10 @@ const calculated = await pool(inputOffers, concurrency, async (raw) => {
   if (!(Number(offer.engineCc || 0) >= 400) || !(Number(offer.powerHp || 0) >= 30) || offer.powerDataConfidence !== "source_exact") return reject("power_or_engine");
   try { offer = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer)); }
   catch { return reject("calculation_exception"); }
-  if (!exactCalculation(offer)) return reject("calculation");
+  if (!safeCalculation(offer)) return reject("calculation");
   offer.status = "active";
   offer.operational = { ...(offer.operational || {}), publicJapanSoldIdentityVerified: true, publicJapanSoldPriceVerified: true, photoIdentityVerified: true,
-    raw: { ...(offer.operational?.raw || {}), recoveryCalculatedRub: true, recoveryBodySourceOnly: true, listingBoundImages: true, photoIdentityVerified: true } };
+    raw: { ...(offer.operational?.raw || {}), recoveryCalculatedRub: true, recoveryCalculationScenario: offer.calculationStatus === "estimated" ? "m1_personal_use_assumption_only" : "exact", recoveryBodySourceOnly: true, listingBoundImages: true, photoIdentityVerified: true } };
   if (!japanAuctionSoldIdentityVerified(offer) || !japanAuctionSoldPriceVerified(offer)) return reject("sold_gate");
   if (!isCatalogMarketSourceAllowed(offer) || !isCrediblePublicOffer(offer)) return reject("quality");
   return offer;
