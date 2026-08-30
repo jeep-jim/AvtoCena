@@ -111,3 +111,16 @@ test("Japan exact resume partitions JPAuc deterministically and reuses complete 
   assert.match(collector, /index % groupPartCount === groupPartIndex/);
   assert.match(merge, /japan_exact_part_coverage_failed/);
 });
+
+
+test("Japan safe-price resume permits only the transparent M1 personal-use scenario", () => {
+  const workflow = fs.readFileSync(".github/workflows/catalog-v6-japan-approved-safe-price-resume.yml", "utf8");
+  const recovery = fs.readFileSync("scripts/catalog-live-recovery-japan-jpauc-carvector.mjs", "utf8");
+  assert.match(workflow, /run-id: "33281414642"/);
+  assert.match(workflow, /m1_personal_use_assumption_only/);
+  assert.match(workflow, /customs\?\.ageEstimated === false/);
+  assert.match(workflow, /offers\.length < 8700/);
+  assert.match(recovery, /customs\?\.vehicleCategoryAssumed === true/);
+  assert.match(recovery, /snapshot\.estimatedMarketFields\.length === 0/);
+  assert.match(recovery, /recoveryCalculationScenario/);
+});
