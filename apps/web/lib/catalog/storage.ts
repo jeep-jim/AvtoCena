@@ -1166,7 +1166,7 @@ export async function getOffer(id: string) {
     // Kyrgyzstan cards navigate to a soft 404. If a shard is incomplete, fall
     // through to the immutable generation index instead of returning early.
     const currentOffer = (current.items || []).find((item) => item.id === id);
-    if (currentOffer && publishedOfferCanRenderUnderCurrentPolicy(currentOffer)) return currentOffer;
+    if (currentOffer) return currentOffer;
   }
   if (offerLookupCacheGeneration !== manifest.generationId) {
     offerLookupCacheGeneration = manifest.generationId;
@@ -1192,7 +1192,7 @@ export async function getOffer(id: string) {
   const chunk = await chunkPromise;
   // Generation chunks are also immutable, already-filtered public storage.
   const offer = chunk.find((candidate) => candidate.id === id);
-  return offer && publishedOfferCanRenderUnderCurrentPolicy(offer) ? offer : null;
+  return offer || null;
 }
 export async function searchOffers(params: CatalogSearchParams) {
   const page = Math.max(1, Number(params.page || 1));

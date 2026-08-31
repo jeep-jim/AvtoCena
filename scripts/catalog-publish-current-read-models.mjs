@@ -37,3 +37,8 @@ console.log(JSON.stringify({
   event: "catalog_overview_refreshed_with_current_read_models",
   generationId: result.generationId,
 }));
+
+// A projection is not healthy when its cards cannot resolve to full offer
+// records. Verify detail reads in this production storage context so a refresh
+// cannot report success while /cars/offer/:id is unavailable.
+await import("./catalog-verify-current-offers.mjs");

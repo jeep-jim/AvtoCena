@@ -53,6 +53,9 @@ jobs:
             jq -e '.total > 0 and (.items | length) > 0' <<<"$catalog_json" >/dev/null
             offer_id="$(jq -r '.items[0].id // empty' <<<"$catalog_json")"
             test -n "$offer_id"
+            encoded_offer_id="$(jq -rn --arg value "$offer_id" '$value|@uri')"
+            offer_html="$("${CURL[@]}" "https://avtocena.com/cars/offer/$encoded_offer_id")"
+            grep -F 'ac-offer-page' <<<"$offer_html" >/dev/null
             "${CURL[@]}" -o /dev/null "https://avtocena.com/cars?market=$market"
           done
 
