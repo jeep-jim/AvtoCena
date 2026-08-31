@@ -33,5 +33,5 @@ test("Yandex Metrika records client-side Next.js route changes without duplicati
 
 
 test("Metrika noscript isolates browser parsing from React hydration", () => {
-  assert.match(publicLayout, /<noscript\s+suppressHydrationWarning/);
+  assert.doesNotMatch(publicLayout, /<noscript/);
 });
