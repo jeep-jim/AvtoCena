@@ -433,6 +433,9 @@ function offerProjectionScopeFromId(id: string) {
   ].includes(sourceId)) return "japan";
   return CURRENT_ALL_MARKETS_PROJECTION;
 }
+export function isJapanCatalogOfferId(id: string) {
+  return offerProjectionScopeFromId(id) === "japan";
+}
 export async function getOfferFromCurrentProjection(id: string) {
   const manifest = await readManifest();
   const projectionScope = offerProjectionScopeFromId(id);

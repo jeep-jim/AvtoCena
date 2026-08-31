@@ -24,7 +24,7 @@ import { calculateOfferWithRussiaCustoms, calculateOfferWithUserPowerScenario } 
 import { DEFAULT_CATALOG_POWER_FALLBACK_HP, readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
-import { getOfferFromCurrentProjection, publicOffer, searchOffers } from "@/lib/catalog/storage";
+import { getOfferFromCurrentProjection, isJapanCatalogOfferId, publicOffer, searchOffers } from "@/lib/catalog/storage";
 
 // Offer inventory changes independently from web deploys. Never persist a
 // not-found render for an ID that can become available in a later generation.
@@ -241,7 +241,14 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const query = searchParams ? await searchParams : {};
   const requestedPowerHp = Number(query?.powerHp || 0);
   const safeRequestedPowerHp = Number.isFinite(requestedPowerHp) && requestedPowerHp >= 20 && requestedPowerHp <= 2500 ? Math.round(requestedPowerHp) : 0;
-  const offer = await getOfferForPage(id) || await getOfferFromCurrentProjection(id);
+  // Japan currently has a complete compact projection (10k+ rows), while some
+  // older immutable detail indexes can miss and consume most of the request
+  // budget before the projection fallback runs. Resolve approved Japan IDs from
+  // their bounded market projection first; keep the existing fast shard order
+  // for every other market.
+  const offer = isJapanCatalogOfferId(id)
+    ? await getOfferFromCurrentProjection(id) || await getOfferForPage(id)
+    : await getOfferForPage(id) || await getOfferFromCurrentProjection(id);
   // getOfferForPage reads only immutable records that already passed the
   // publication gate. Re-validating their compact representation here can no
   // longer see source-only evidence removed from operational.raw and used to
