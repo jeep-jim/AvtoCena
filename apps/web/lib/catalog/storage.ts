@@ -433,6 +433,17 @@ function offerProjectionScopeFromId(id: string) {
   ].includes(sourceId)) return "japan";
   return CURRENT_ALL_MARKETS_PROJECTION;
 }
+export async function getOfferFromCurrentProjection(id: string) {
+  const manifest = await readManifest();
+  const projectionScope = offerProjectionScopeFromId(id);
+  const projection = await readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(
+    currentProjectionPath(projectionScope),
+    { generationId: "", items: [] },
+  );
+  if (projection.generationId !== manifest.generationId) return null;
+  const row = (projection.items || []).find((item) => item.id === id);
+  return row ? offerDetailFromProjection(row) : null;
+}
 const SEARCH_PROJECTION_CACHE_MAX = Math.max(1, Math.min(14, Number(process.env.CATALOG_SEARCH_PROJECTION_CACHE_MAX || 8)));
 const searchProjectionCache = new Map<string, Promise<{ generationId: string; items: CatalogSearchProjection[] }>>();
 const CURRENT_READ_MODEL_CACHE_MS = Math.max(1_000, Number(process.env.CATALOG_CURRENT_READ_MODEL_CACHE_MS || 60_000));
@@ -1185,19 +1196,7 @@ export async function publishCurrentCatalogReadModels() {
 }
 export async function getOffer(id: string) {
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
-  const readProjectionFallback = async () => {
-    // Avoid loading the much larger all-market object for source-native Japan
-    // IDs. The market projection is the same admitted generation and is already
-    // the fast path used by /api/catalog/search?market=japan.
-    const projectionScope = offerProjectionScopeFromId(id);
-    const projection = await readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(
-      currentProjectionPath(projectionScope),
-      { generationId: "", items: [] },
-    );
-    if (projection.generationId !== manifest.generationId) return null;
-    const row = (projection.items || []).find((item) => item.id === id);
-    return row ? offerDetailFromProjection(row) : null;
-  };
+  const readProjectionFallback = () => getOfferFromCurrentProjection(id);
   if (current.generationId === manifest.generationId) {
     // Current offer shards contain only records that were already admitted by
     // persistCatalogOffers. Do not re-run source validation after compact public

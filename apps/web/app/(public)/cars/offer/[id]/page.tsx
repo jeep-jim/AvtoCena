@@ -24,7 +24,7 @@ import { calculateOfferWithRussiaCustoms, calculateOfferWithUserPowerScenario } 
 import { DEFAULT_CATALOG_POWER_FALLBACK_HP, readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
-import { publicOffer, searchOffers } from "@/lib/catalog/storage";
+import { getOfferFromCurrentProjection, publicOffer, searchOffers } from "@/lib/catalog/storage";
 
 // Offer inventory changes independently from web deploys. Never persist a
 // not-found render for an ID that can become available in a later generation.
@@ -235,11 +235,13 @@ function OfferPriceBreakdown({ offer }: { offer: any }) {
 }
 
 export default async function OfferPage({ params, searchParams }: { params: Promise<{ id: string }>; searchParams?: Promise<{ powerHp?: string }> }) {
-  const { id } = await params;
+  const { id: routeId } = await params;
+  let id = routeId;
+  try { id = decodeURIComponent(routeId); } catch { /* Keep the route value. */ }
   const query = searchParams ? await searchParams : {};
   const requestedPowerHp = Number(query?.powerHp || 0);
   const safeRequestedPowerHp = Number.isFinite(requestedPowerHp) && requestedPowerHp >= 20 && requestedPowerHp <= 2500 ? Math.round(requestedPowerHp) : 0;
-  const offer = await getOfferForPage(id);
+  const offer = await getOfferForPage(id) || await getOfferFromCurrentProjection(id);
   // getOfferForPage reads only immutable records that already passed the
   // publication gate. Re-validating their compact representation here can no
   // longer see source-only evidence removed from operational.raw and used to
