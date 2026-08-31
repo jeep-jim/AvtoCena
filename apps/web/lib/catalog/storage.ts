@@ -422,6 +422,17 @@ function offerDetailFromProjection(row: CatalogSearchProjection): VehicleOffer {
     operational: { publicProjectionDetailFallback: true },
   } as VehicleOffer;
 }
+function offerProjectionScopeFromId(id: string) {
+  const sourceId = String(id || "").split(":", 1)[0];
+  if ([
+    "jpauc_japan_past_open",
+    "carvector_japan_stat_open",
+    "prestige_japan_auctions_open",
+    "auctiondatasearch_japan_open",
+    "jpcenter_japan_catalog_open",
+  ].includes(sourceId)) return "japan";
+  return CURRENT_ALL_MARKETS_PROJECTION;
+}
 const SEARCH_PROJECTION_CACHE_MAX = Math.max(1, Math.min(14, Number(process.env.CATALOG_SEARCH_PROJECTION_CACHE_MAX || 8)));
 const searchProjectionCache = new Map<string, Promise<{ generationId: string; items: CatalogSearchProjection[] }>>();
 const CURRENT_READ_MODEL_CACHE_MS = Math.max(1_000, Number(process.env.CATALOG_CURRENT_READ_MODEL_CACHE_MS || 60_000));
@@ -1175,7 +1186,10 @@ export async function publishCurrentCatalogReadModels() {
 export async function getOffer(id: string) {
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
   const readProjectionFallback = async () => {
-    const projection = await readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION);
+    // Avoid loading the much larger all-market object for source-native Japan
+    // IDs. The market projection is the same admitted generation and is already
+    // the fast path used by /api/catalog/search?market=japan.
+    const projection = await readCurrentSearchProjection(offerProjectionScopeFromId(id));
     if (projection.generationId !== manifest.generationId) return null;
     const row = (projection.items || []).find((item) => item.id === id);
     return row ? offerDetailFromProjection(row) : null;
