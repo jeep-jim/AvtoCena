@@ -2,6 +2,7 @@ import "../flat-ui.css";
 import "../public-regression-fixes.css";
 import "../public-price-sheet-fix.css";
 import "../catalog-filter-compact.css";
+import Script from "next/script";
 import { CatalogFilterUiEnhancer } from "@/components/catalog/CatalogFilterUiEnhancer";
 import { YandexMetrikaRouteTracker } from "@/components/analytics/YandexMetrikaRouteTracker";
 
@@ -299,7 +300,12 @@ html[data-theme="light"] .ac-public-footer-dealers:focus-visible {
 export default function PublicLayout({ children }: { children: React.ReactNode }) {
   return (
     <>
-      <script data-yandex-metrika="112098062" dangerouslySetInnerHTML={{ __html: yandexMetrikaCounter }} />
+      <Script
+        id="yandex-metrika-112098062"
+        strategy="afterInteractive"
+        data-yandex-metrika="112098062"
+        dangerouslySetInnerHTML={{ __html: yandexMetrikaCounter }}
+      />
       <noscript>
         <div>
           <img src="https://mc.yandex.ru/watch/112098062" style={{ position: "absolute", left: -9999 }} alt="" />
