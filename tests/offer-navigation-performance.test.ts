@@ -40,7 +40,7 @@ test("similar offers stream after the primary offer instead of blocking it", () 
 
 test("metadata and page share one memoized offer lookup per request", () => {
   assert.match(data, /unstable_cache\(/);
-  assert.match(data, /catalog-offer-page-v1/);
+  assert.match(data, /catalog-offer-page-v2/);
   assert.match(data, /revalidate: 60/);
   assert.match(data, /async function resilientOfferLookup/);
   assert.match(data, /return getOffer\(id\)/);
