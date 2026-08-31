@@ -18,6 +18,8 @@ test("Yandex Metrika counter 112098062 is installed on every public page with th
   assert.match(publicLayout, /mc\.yandex\.ru\/watch\/112098062/);
   assert.match(publicLayout, /id="yandex-metrika-112098062"/);
   assert.match(publicLayout, /strategy="afterInteractive"/);
+  assert.match(publicLayout, /<noscript[\s\S]+dangerouslySetInnerHTML/);
+  assert.doesNotMatch(publicLayout, /<noscript>\s*<div>/);
   assert.doesNotMatch(rootLayout, /112098062/);
 });
 
