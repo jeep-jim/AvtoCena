@@ -1,9 +1,6 @@
-import { OfferContactActions } from "@/components/catalog/OfferContactActions";
-
 export default function CarsLayout({ children }: { children: React.ReactNode }) {
   return <>
     {children}
-    <OfferContactActions />
     <style>{`
       html:not([data-theme="light"]) .ac-catalog-page.ac-page-copy {
         background: #07090f !important;

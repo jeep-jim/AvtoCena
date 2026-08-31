@@ -120,12 +120,23 @@ test("catalog generation becomes public only after canonical identity and dedupl
   assert.match(storage, /current\.generationId === manifest\.generationId/);
 });
 
-test("offer detail revalidates current public price and power without rerunning source-only gates", () => {
+test("offer detail trusts records admitted into the active immutable generation", () => {
   assert.match(storage, /const currentOffer = \(current\.items \|\| \[\]\)\.find\(\(item\) => item\.id === id\)/);
-  assert.match(storage, /currentOffer && publishedOfferCanRenderUnderCurrentPolicy\(currentOffer\)/);
-  assert.match(storage, /offer && publishedOfferCanRenderUnderCurrentPolicy\(offer\) \? offer : null/);
+  assert.match(storage, /if \(currentOffer\) return currentOffer/);
+  assert.match(storage, /return offer \|\| null/);
+  assert.doesNotMatch(storage, /currentOffer && publishedOfferCanRenderUnderCurrentPolicy\(currentOffer\)/);
   assert.doesNotMatch(storage, /find\(\(item\) => item\.id === id && isPublicOffer\(item\)\)/);
   assert.doesNotMatch(storage, /find\(\(offer\) => offer\.id === id && isPublicOffer\(offer\)\)/);
+});
+
+test("offer actions render in stable page slots without hydration portals", () => {
+  const actions = fs.readFileSync(new URL("../apps/web/components/catalog/OfferContactActions.tsx", import.meta.url), "utf8");
+  const carsLayout = fs.readFileSync(new URL("../apps/web/app/(public)/cars/layout.tsx", import.meta.url), "utf8");
+  assert.match(page, /<OfferDesktopActions \/>/);
+  assert.match(page, /<OfferMobileActions \/>/);
+  assert.match(page, /<OfferCreditCalculator \/>/);
+  assert.doesNotMatch(actions, /createPortal|document\.createElement|getBoundingClientRect|requestAnimationFrame/);
+  assert.doesNotMatch(carsLayout, /OfferContactActions/);
 });
 
 test("offer page does not re-run source-only publication gates on compact public records", () => {

@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import { money } from "@/lib/avtocena";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { EditablePowerTile } from "@/components/catalog/EditablePowerTile";
+import { OfferContactActionsStyles, OfferCreditCalculator, OfferDesktopActions, OfferMobileActions } from "@/components/catalog/OfferContactActions";
 import { CatalogMarketFlag } from "@/components/catalog/CatalogMarketFlag";
 import { FavoriteToggle } from "@/components/catalog/FavoriteToggle";
 import { PreliminaryPrice } from "@/components/catalog/PreliminaryPrice";
@@ -353,6 +354,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
             <div className="relative mt-2 min-w-0"><FavoriteToggle offerId={o.id} snapshot={snapshot} inline className="absolute left-0 top-0 h-10 w-10 bg-transparent text-red-500 hover:bg-transparent focus:outline-none focus-visible:outline-none md:-top-1 md:h-12 md:w-12 [&>svg]:h-8 [&>svg]:w-8 md:[&>svg]:h-10 md:[&>svg]:w-10" /><h1 className="min-w-0 break-words indent-[2.7rem] text-3xl font-black leading-[1.02] tracking-[-0.04em] md:indent-[3.35rem] md:text-5xl">{o.title}</h1></div>
           </header>
           <div className="mt-5 min-w-0 overflow-hidden"><VehicleGallery images={o.images} title={o.title} /></div>
+          <OfferCreditCalculator />
         </div>
 
         <div className="min-w-0 xl:sticky xl:top-[92px] xl:self-start">
@@ -378,13 +380,16 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
                 <span className="mt-1 block xl:whitespace-nowrap">Возможность покупки и финальную стоимость подтвердит менеджер.</span>
               </p>}
             </div>
-            <div data-offer-desktop-actions-slot className="hidden xl:block" />
+            <OfferDesktopActions />
           </aside>
         </div>
       </div>
 
+      <OfferMobileActions />
+
       <Suspense fallback={<SimilarOffersFallback />}><SimilarOffers current={raw} /></Suspense>
     </section>
+    <OfferContactActionsStyles />
     <style dangerouslySetInnerHTML={{ __html: `
       html:not([data-theme="light"]) .ac-offer-page .ac-offer-spec-tile{background:#11141c!important}
       html[data-theme="light"] .ac-offer-page .ac-offer-spec-tile{background:#e3e7ed!important}
