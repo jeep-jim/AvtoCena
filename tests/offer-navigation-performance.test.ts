@@ -64,6 +64,8 @@ test("offer navigation stays visibly pending and warms only the intended offer",
   assert.match(storage, /catalog\/public\/offers/);
   assert.match(storage, /offerLookupCacheGeneration !== manifest\.generationId/);
   assert.match(storage, /CATALOG_MANIFEST_CACHE_MS \|\| 60_000/);
+  assert.match(page, /export const dynamic = "force-dynamic"/);
+  assert.match(page, /export const revalidate = 0/);
 });
 
 test("production keeps one warm container and serves navigation bursts in-process", () => {
