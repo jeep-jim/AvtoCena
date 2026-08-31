@@ -97,6 +97,8 @@ test("mobile offer controls remain tappable", () => {
   assert.match(preliminaryPrice, /<button[\s\S]+aria-label="Почему цена предварительная"/);
   assert.doesNotMatch(preliminaryPrice, /aria-label="Почему цена предварительная"[\s\S]+onPointerDown=\{\(event\) => \{ event\.preventDefault\(\); event\.stopPropagation\(\); \}\}/);
   assert.match(priceTrend, /aria-label=\{panel && canShowRate \? `Показать курс \$\{currency\} и полный расчёт`/);
+  assert.match(preliminaryPrice, /const \[lightTheme, setLightTheme\] = useState\(false\)/);
+  assert.match(priceTrend, /const \[lightTheme, setLightTheme\] = useState\(false\)/);
 });
 
 test("catalog route loader follows active light or dark theme variables", () => {

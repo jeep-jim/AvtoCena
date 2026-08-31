@@ -544,7 +544,9 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
   const [popoverOpen, setPopoverOpen] = useState(false);
   const [sheetOpen, setSheetOpen] = useState(false);
   const [desktopHover, setDesktopHover] = useState(false);
-  const [lightTheme, setLightTheme] = useState(() => typeof document !== "undefined" && document.documentElement.dataset.theme === "light");
+  // Keep the first client render identical to SSR; the effect below applies
+  // the persisted theme immediately after hydration without replacing DOM.
+  const [lightTheme, setLightTheme] = useState(false);
   const trendRoot = useRef<HTMLSpanElement>(null);
   const panelRoot = useRef<HTMLDivElement>(null);
 
