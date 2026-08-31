@@ -307,6 +307,7 @@ export default function PublicLayout({ children }: { children: React.ReactNode }
         dangerouslySetInnerHTML={{ __html: yandexMetrikaCounter }}
       />
       <noscript
+        suppressHydrationWarning
         dangerouslySetInnerHTML={{
           __html: '<div><img src="https://mc.yandex.ru/watch/112098062" style="position:absolute;left:-9999px" alt="" /></div>',
         }}
