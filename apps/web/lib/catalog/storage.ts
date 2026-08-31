@@ -407,6 +407,21 @@ function publicOfferFromProjection(row: CatalogSearchProjection): PublicVehicleO
     firstSeenAt: row.firstSeenAt || row.updatedAt || "", updatedAt: row.updatedAt || row.firstSeenAt || "",
   } as any;
 }
+function offerDetailFromProjection(row: CatalogSearchProjection): VehicleOffer {
+  const id = String(row.id || "");
+  const separator = id.indexOf(":");
+  const sourceId = separator > 0 ? id.slice(0, separator) : "public_projection";
+  const sourceOfferId = separator > 0 ? id.slice(separator + 1) : id;
+  const japanAuction = row.market === "japan" && /(?:auction|auc|jpauc|carvector|prestige|jpcenter)/i.test(sourceId);
+  return {
+    ...(publicOfferFromProjection(row) as any),
+    sourceId,
+    sourceOfferId,
+    offerType: japanAuction ? "auction" : "fixed",
+    catalogKind: japanAuction ? "auction_result" : "listing",
+    operational: { publicProjectionDetailFallback: true },
+  } as VehicleOffer;
+}
 const SEARCH_PROJECTION_CACHE_MAX = Math.max(1, Math.min(14, Number(process.env.CATALOG_SEARCH_PROJECTION_CACHE_MAX || 8)));
 const searchProjectionCache = new Map<string, Promise<{ generationId: string; items: CatalogSearchProjection[] }>>();
 const CURRENT_READ_MODEL_CACHE_MS = Math.max(1_000, Number(process.env.CATALOG_CURRENT_READ_MODEL_CACHE_MS || 60_000));
@@ -1159,6 +1174,12 @@ export async function publishCurrentCatalogReadModels() {
 }
 export async function getOffer(id: string) {
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
+  const readProjectionFallback = async () => {
+    const projection = await readCurrentSearchProjection(CURRENT_ALL_MARKETS_PROJECTION);
+    if (projection.generationId !== manifest.generationId) return null;
+    const row = (projection.items || []).find((item) => item.id === id);
+    return row ? offerDetailFromProjection(row) : null;
+  };
   if (current.generationId === manifest.generationId) {
     // Current offer shards contain only records that were already admitted by
     // persistCatalogOffers. Do not re-run source validation after compact public
@@ -1177,7 +1198,7 @@ export async function getOffer(id: string) {
     .catch((error) => { offerLocationIndexCache = null; throw error; });
   const byId = await offerLocationIndexCache;
   const loc = byId.byId[id];
-  if (!loc) return null;
+  if (!loc) return readProjectionFallback();
   const path = storedOfferChunkPath(manifest.generationId, loc.market, loc.chunk);
   let chunkPromise = offerChunkCache.get(path);
   if (!chunkPromise) {
@@ -1192,7 +1213,7 @@ export async function getOffer(id: string) {
   const chunk = await chunkPromise;
   // Generation chunks are also immutable, already-filtered public storage.
   const offer = chunk.find((candidate) => candidate.id === id);
-  return offer || null;
+  return offer || readProjectionFallback();
 }
 export async function searchOffers(params: CatalogSearchParams) {
   const page = Math.max(1, Number(params.page || 1));

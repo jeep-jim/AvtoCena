@@ -123,10 +123,19 @@ test("catalog generation becomes public only after canonical identity and dedupl
 test("offer detail trusts records admitted into the active immutable generation", () => {
   assert.match(storage, /const currentOffer = \(current\.items \|\| \[\]\)\.find\(\(item\) => item\.id === id\)/);
   assert.match(storage, /if \(currentOffer\) return currentOffer/);
-  assert.match(storage, /return offer \|\| null/);
+  assert.match(storage, /return offer \|\| readProjectionFallback\(\)/);
   assert.doesNotMatch(storage, /currentOffer && publishedOfferCanRenderUnderCurrentPolicy\(currentOffer\)/);
   assert.doesNotMatch(storage, /find\(\(item\) => item\.id === id && isPublicOffer\(item\)\)/);
   assert.doesNotMatch(storage, /find\(\(offer\) => offer\.id === id && isPublicOffer\(offer\)\)/);
+});
+
+test("offer detail falls back to its active admitted projection instead of 404", () => {
+  assert.match(storage, /function offerDetailFromProjection/);
+  assert.match(storage, /projection\.generationId !== manifest\.generationId/);
+  assert.match(storage, /return row \? offerDetailFromProjection\(row\) : null/);
+  assert.match(storage, /if \(!loc\) return readProjectionFallback\(\)/);
+  assert.match(storage, /return offer \|\| readProjectionFallback\(\)/);
+  assert.match(page, /<main data-offer-id=\{o\.id\}/);
 });
 
 test("offer actions render in stable page slots without hydration portals", () => {
