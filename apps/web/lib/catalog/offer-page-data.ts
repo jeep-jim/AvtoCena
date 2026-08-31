@@ -10,7 +10,7 @@ import { getOffer } from "./storage";
 // manifest + location-index + offer-chunk reads.
 const getOfferAcrossRequests = unstable_cache(
   async (id: string) => getOffer(id),
-  ["catalog-offer-page-v1"],
+  ["catalog-offer-page-v2"],
   { revalidate: 60 },
 );
 

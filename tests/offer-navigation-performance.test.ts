@@ -40,7 +40,7 @@ test("similar offers stream after the primary offer instead of blocking it", () 
 
 test("metadata and page share one memoized offer lookup per request", () => {
   assert.match(data, /unstable_cache\(/);
-  assert.match(data, /catalog-offer-page-v1/);
+  assert.match(data, /catalog-offer-page-v2/);
   assert.match(data, /revalidate: 60/);
   assert.match(data, /async function resilientOfferLookup/);
   assert.match(data, /return getOffer\(id\)/);
@@ -133,6 +133,7 @@ test("offer detail falls back to its active admitted projection instead of 404",
   assert.match(storage, /function offerDetailFromProjection/);
   assert.match(storage, /function offerProjectionScopeFromId/);
   assert.match(storage, /"jpauc_japan_past_open"/);
+  assert.match(storage, /export async function getOfferFromCurrentProjection/);
   assert.match(storage, /const projectionScope = offerProjectionScopeFromId\(id\)/);
   assert.match(storage, /currentProjectionPath\(projectionScope\)/);
   assert.match(storage, /projection\.generationId !== manifest\.generationId/);
@@ -140,6 +141,9 @@ test("offer detail falls back to its active admitted projection instead of 404",
   assert.match(storage, /if \(!loc\) return readProjectionFallback\(\)/);
   assert.match(storage, /return offer \|\| readProjectionFallback\(\)/);
   assert.match(page, /<main data-offer-id=\{o\.id\}/);
+  assert.match(page, /decodeURIComponent\(routeId\)/);
+  assert.match(page, /getOfferForPage\(id\) \|\| await getOfferFromCurrentProjection\(id\)/);
+  assert.match(data, /catalog-offer-page-v2/);
 });
 
 test("offer actions render in stable page slots without hydration portals", () => {
