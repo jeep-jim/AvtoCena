@@ -236,20 +236,6 @@ html body main.ac-page-copy.ac-home-page section.ac-brand-rail[aria-label="Ма�
   right: 0 !important;
 }
 
-/* Price helper icons are desktop-only interactions. On touch/mobile they are
-   purely informational graphics and must never open a sheet/popover. */
-@media (max-width: 1023px) {
-  .ac-price-trend-arrow,
-  .ac-auction-gavel,
-  button[aria-label="Что означает завершённый аукционный лот"] {
-    pointer-events: none !important;
-  }
-
-  .ac-price-trend-panel {
-    pointer-events: none !important;
-  }
-}
-
 /* Card hover should never introduce a square/rectangular backing, border or
    shadow around the rounded catalog card. */
 .ac-catalog-card:hover,

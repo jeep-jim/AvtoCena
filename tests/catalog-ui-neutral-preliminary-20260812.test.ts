@@ -98,6 +98,7 @@ test("mobile offer controls remain tappable", () => {
   assert.match(preliminaryPrice, /<button[\s\S]+aria-label="Почему цена предварительная"/);
   assert.doesNotMatch(preliminaryPrice, /aria-label="Почему цена предварительная"[\s\S]+onPointerDown=\{\(event\) => \{ event\.preventDefault\(\); event\.stopPropagation\(\); \}\}/);
   assert.match(priceTrend, /aria-label=\{panel && canShowRate \? `Показать курс \$\{currency\} и полный расчёт`/);
+  assert.doesNotMatch(priceSheetCss, /@media \(max-width: 1023px\)[\\s\\S]+\\.ac-price-trend-panel\s*\{[\\s\\S]+pointer-events:\s*none !important/);
   assert.match(preliminaryPrice, /const \[lightTheme, setLightTheme\] = useState\(false\)/);
   assert.match(priceTrend, /const \[lightTheme, setLightTheme\] = useState\(false\)/);
 });
