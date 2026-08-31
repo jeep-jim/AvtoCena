@@ -61,7 +61,7 @@ test("JPAuc exports exact lot identity and three same-lot Aleado image variants"
   const images = jpaucPhotoVariants(rows[0].listingImage);
   assert.equal(images.length, 3);
   assert.ok(images.every((url) => new URL(url).hostname.endsWith("aleado.com")));
-  assert.deepEqual(images.map((url) => new URL(url).searchParams.get("number")), ["0", "1", "2"]);
+  assert.deepEqual(images.map((url) => new URL(url).searchParams.get("number")), ["1", "2", "0"]);
 });
 
 test("Japan scale workflow is approved-source-only and cannot publish below 8700", () => {

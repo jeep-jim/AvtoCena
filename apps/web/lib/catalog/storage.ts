@@ -287,7 +287,13 @@ function currentBrandProjectionPath(make: string) {
   return `catalog/public/projection-brand/${label}-${digest}.json`;
 }
 const CURRENT_ALL_MARKETS_PROJECTION = "all";
-function currentOfferShardName(id: string) { return String(id || "").toLowerCase().replace(/[^a-f0-9]/g, "").slice(0, 2) || "unknown"; }
+// Source-native IDs often start with a non-hex source name. Stripping that name
+// made every JPAuc offer collapse into the same `ac` object (10k+ full records),
+// which timed out detail reads and surfaced as a 404. Hash the complete stable ID
+// so every source is distributed uniformly across the 256 bounded read shards.
+export function currentOfferShardName(id: string) {
+  return crypto.createHash("sha256").update(String(id || "unknown")).digest("hex").slice(0, 2);
+}
 function currentOfferShardPath(id: string) { return `catalog/public/offers/${currentOfferShardName(id)}.json`; }
 const CURRENT_FACETS_PATH = "catalog/public/facets.json";
 const CURRENT_BRAND_SUMMARY_PATH = "catalog/public/brand-summary.json";

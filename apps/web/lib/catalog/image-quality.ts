@@ -53,9 +53,20 @@ function canonicalUrl(value: unknown) {
   try {
     const url = new URL(source, "https://catalog.local");
     url.hash = "";
-    url.search = "";
     const hostname = url.hostname.toLowerCase();
     let pathname = decodeURIComponent(url.pathname).replace(/\/{2,}/g, "/");
+    // Aleado serves the inspection sheet and each same-lot vehicle photo from
+    // one `/pic/` path. Their identity lives in the query, so stripping every
+    // parameter collapsed number=0/1/2 into one image and preserved the sheet.
+    if (/(?:^|\.)aleado\.com$/i.test(hostname)) {
+      const identity = new URLSearchParams();
+      for (const key of ["system", "sys", "date", "auct", "bid", "id", "number"]) {
+        const value = url.searchParams.get(key);
+        if (value !== null) identity.set(key, value);
+      }
+      return `${hostname}${pathname}?${identity.toString()}`;
+    }
+    url.search = "";
     // Mashina.kg exposes one exact source photo through multiple delivery sizes.
     // Collapse only the known size suffix, never the source-photo hash itself.
     if (hostname === "storage.mashina.kg") {
@@ -206,7 +217,18 @@ export function rankedCatalogImageUrls(offer: any) {
 
   const seenUrls = new Set<string>();
   const result: string[] = [];
-  for (const group of [...groups.values()].sort((a, b) => a.firstIndex - b.firstIndex)) {
+  const isAleadoAuctionSheet = (group: { best: typeof usable[number] }) => {
+    try {
+      const url = new URL(group.best.sourceUrl || group.best.url);
+      return /(?:^|\.)aleado\.com$/i.test(url.hostname)
+        && url.searchParams.get("number") === "0";
+    } catch {
+      return false;
+    }
+  };
+  for (const group of [...groups.values()].sort((a, b) =>
+    Number(isAleadoAuctionSheet(a)) - Number(isAleadoAuctionSheet(b))
+      || a.firstIndex - b.firstIndex)) {
     const renderedUrl = canonicalUrl(group.best.url);
     if (renderedUrl && seenUrls.has(renderedUrl)) continue;
     if (renderedUrl) seenUrls.add(renderedUrl);

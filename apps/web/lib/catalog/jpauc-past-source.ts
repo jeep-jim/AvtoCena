@@ -84,7 +84,10 @@ export function jpaucPhotoVariants(value: string) {
     if (!/(?:^|\.)aleado\.com$/i.test(base.hostname)) return [base.toString()];
     base.protocol = "https:";
     const result: string[] = [];
-    for (const number of [0, 1, 2]) {
+    // Aleado number=0 is the auction inspection sheet, while 1 and 2 are the
+    // listing-bound vehicle photos. Keep the sheet as supporting evidence, but
+    // never make it the customer-facing cover.
+    for (const number of [1, 2, 0]) {
       const image = new URL(base.toString());
       image.searchParams.set("number", String(number));
       if (number > 0) image.searchParams.set("h", "1280");

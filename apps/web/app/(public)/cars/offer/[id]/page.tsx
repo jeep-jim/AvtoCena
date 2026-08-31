@@ -25,6 +25,11 @@ import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { publicOffer, searchOffers } from "@/lib/catalog/storage";
 
+// Offer inventory changes independently from web deploys. Never persist a
+// not-found render for an ID that can become available in a later generation.
+export const dynamic = "force-dynamic";
+export const revalidate = 0;
+
 type SpecIconName = "year" | "mileage" | "engine" | "fuel" | "power" | "transmission" | "drive" | "body" | "electricMotor" | "thirtyMinute";
 
 type SpecItem = { label: string; value: string; icon: SpecIconName; info?: string };
