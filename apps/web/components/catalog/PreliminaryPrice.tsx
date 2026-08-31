@@ -119,8 +119,8 @@ export function PreliminaryPrice({
       </div>
 
       {panel ? <>
-        <span
-          role="button"
+        <button
+          type="button"
           tabIndex={0}
           aria-label="Почему цена предварительная"
           aria-expanded={open}
@@ -128,7 +128,6 @@ export function PreliminaryPrice({
           style={{ background: "var(--ac-surface-3)", border: "1px solid rgba(103,113,130,.45)", color: "var(--ac-text)" }}
           onMouseEnter={() => { if (desktopHover) setOpen(true); }}
           onMouseLeave={() => { if (desktopHover) setOpen(false); }}
-          onPointerDown={(event) => { event.preventDefault(); event.stopPropagation(); }}
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();
@@ -143,7 +142,7 @@ export function PreliminaryPrice({
           }}
         >
           ?
-        </span>
+        </button>
         {open ? (
           <div
             className={`ac-preliminary-price-popover absolute left-0 right-0 top-[calc(100%+10px)] z-[400] w-full rounded-2xl border p-4 text-left text-xs font-bold leading-5 sm:left-auto sm:right-0 sm:top-[calc(100%+12px)] sm:w-[min(430px,calc(100vw-48px))] ${popoverClass}`}

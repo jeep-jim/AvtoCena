@@ -607,7 +607,10 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
   const currencyImpactRub = currencyDelta(pricedOffer) || undefined;
   const trendTitle = trend ? trendUsesCurrency ? "Цена изменилась из-за обновления курса. Нажмите, чтобы увидеть расчёт" : "Изменение полного расчёта. Нажмите, чтобы увидеть курс валюты" : "Ожидается следующий снимок валютного курса";
   const sheetRate: PublicCurrencyRate | null = currency && pricedOffer.calculationSnapshot?.currencyRate?.effectiveRate ? { currency, ...(pricedOffer.calculationSnapshot.currencyRate as PublicCurrencyRate) } : liveRate;
-  const canShowRate = Boolean(sheetRate && trend);
+  // A saved/live exchange rate is useful even when the total price has not
+  // changed yet. Keeping this tied to `trend` made the offer price inert on
+  // mobile until a second price snapshot existed.
+  const canShowRate = Boolean(sheetRate);
   const openSheet = () => { if (canShowRate) { setPopoverOpen(false); setSheetOpen(true); } };
   const priceColor = highlightElectrified ? (lightTheme ? "#c58a00" : "#ffd21f") : undefined;
 
@@ -616,6 +619,7 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
     className={`relative ${panel ? `ac-price-trend-panel rounded-[1.35rem] p-4 shadow-[0_14px_38px_rgba(0,0,0,.14)] ${canShowRate ? "cursor-pointer" : ""}` : ""} ${stateClass} ${className}`}
     role={panel && canShowRate ? "button" : undefined}
     tabIndex={panel && canShowRate ? 0 : undefined}
+    aria-label={panel && canShowRate ? `Показать курс ${currency} и полный расчёт` : undefined}
     onClick={panel ? (event) => { if (!desktopHover) { event.preventDefault(); event.stopPropagation(); openSheet(); } } : undefined}
     onKeyDown={panel ? (event) => { if ((event.key === "Enter" || event.key === " ") && !desktopHover) { event.preventDefault(); openSheet(); } } : undefined}
   >
@@ -654,6 +658,6 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
         }}
       ><TrendArrow direction={trend.direction} className={dense ? "h-5 w-7 sm:h-6 sm:w-8" : "h-6 w-8 md:h-7 md:w-10"} />{canShowRate && desktopHover && popoverOpen ? <TrendPopover offer={pricedOffer} currency={currency || "валюты"} panel={panel} light={lightTheme} currencyDriven={trendUsesCurrency} currencyImpactRub={currencyImpactRub} /> : null}</span> : null}
     </div>
-    {sheetRate && trend ? <CurrencyRatesSheet open={sheetOpen} onClose={() => setSheetOpen(false)} rates={[sheetRate]} initialCurrency={currency} impactRub={currencyImpactRub} priceRub={Number(pricedOffer.totalRub || 0)} statusLabel={trendUsesCurrency ? "Пересчитали по актуальному курсу" : "Курс валюты в расчёте автомобиля"} /> : null}
+    {sheetRate ? <CurrencyRatesSheet open={sheetOpen} onClose={() => setSheetOpen(false)} rates={[sheetRate]} initialCurrency={currency} impactRub={currencyImpactRub} priceRub={Number(pricedOffer.totalRub || 0)} statusLabel={trendUsesCurrency ? "Пересчитали по актуальному курсу" : "Курс валюты в расчёте автомобиля"} /> : null}
   </div>;
 }

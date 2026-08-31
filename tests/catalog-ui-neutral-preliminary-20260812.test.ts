@@ -12,6 +12,7 @@ const carsLayout = fs.readFileSync(new URL("../apps/web/app/(public)/cars/layout
 const catalogFilters = fs.readFileSync(new URL("../apps/web/components/catalog/CatalogFilters.tsx", import.meta.url), "utf8");
 const offerPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");
 const priceSheetCss = fs.readFileSync(new URL("../apps/web/app/public-price-sheet-fix.css", import.meta.url), "utf8");
+const editablePower = fs.readFileSync(new URL("../apps/web/components/catalog/EditablePowerTile.tsx", import.meta.url), "utf8");
 
 test("catalog price colors distinguish electrified, preliminary and regular calculations", () => {
   assert.match(catalogPrice, /highlightElectrified/);
@@ -84,10 +85,18 @@ test("catalog helper popovers preserve card rounding and currency opens only on 
 test("saved total changes are not mislabeled as currency impact", () => {
   assert.match(priceTrend, /trendUsesCurrency/);
   assert.match(priceTrend, /const currencyImpactRub = currencyDelta\(pricedOffer\) \|\| undefined/);
-  assert.match(priceTrend, /const canShowRate = Boolean\(sheetRate && trend\)/);
+  assert.match(priceTrend, /const canShowRate = Boolean\(sheetRate\)/);
+  assert.match(priceTrend, /\{sheetRate \? <CurrencyRatesSheet/);
   assert.match(priceTrend, /trendUsesCurrency \? "Показать влияние курса валюты" : "Показать курс валюты и полный расчёт"/);
   assert.match(priceTrend, /impactRub=\{currencyImpactRub\}/);
   assert.match(priceTrend, /Стрелка показывает изменение полного сохранённого расчёта\. Влияние курса указано отдельно\./);
+});
+
+test("mobile offer controls remain tappable", () => {
+  assert.doesNotMatch(editablePower, /onBlur=/);
+  assert.match(preliminaryPrice, /<button[\s\S]+aria-label="Почему цена предварительная"/);
+  assert.doesNotMatch(preliminaryPrice, /aria-label="Почему цена предварительная"[\s\S]+onPointerDown=\{\(event\) => \{ event\.preventDefault\(\); event\.stopPropagation\(\); \}\}/);
+  assert.match(priceTrend, /aria-label=\{panel && canShowRate \? `Показать курс \$\{currency\} и полный расчёт`/);
 });
 
 test("catalog route loader follows active light or dark theme variables", () => {

@@ -134,11 +134,6 @@ export function EditablePowerTile({
               const parsed = parsedManual(value);
               if (parsed) debounce.current = setTimeout(() => commitManual(value), 500);
             }}
-            onBlur={(event) => {
-              if (root.current?.contains(event.relatedTarget as Node)) return;
-              commitManual();
-              setOpen(false);
-            }}
             onKeyDown={(event) => {
               if (event.key === "Enter") {
                 event.preventDefault();
