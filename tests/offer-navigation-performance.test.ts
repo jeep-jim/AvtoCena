@@ -131,6 +131,9 @@ test("offer detail trusts records admitted into the active immutable generation"
 
 test("offer detail falls back to its active admitted projection instead of 404", () => {
   assert.match(storage, /function offerDetailFromProjection/);
+  assert.match(storage, /function offerProjectionScopeFromId/);
+  assert.match(storage, /"jpauc_japan_past_open"/);
+  assert.match(storage, /readCurrentSearchProjection\(offerProjectionScopeFromId\(id\)\)/);
   assert.match(storage, /projection\.generationId !== manifest\.generationId/);
   assert.match(storage, /return row \? offerDetailFromProjection\(row\) : null/);
   assert.match(storage, /if \(!loc\) return readProjectionFallback\(\)/);
