@@ -59,7 +59,7 @@ jobs:
               offer_html="$("${CURL[@]}" "https://avtocena.com/cars/offer/$encoded_offer_id")"
               grep -F 'data-offer-id=' <<<"$offer_html" >/dev/null
               grep -F 'data-offer-action=' <<<"$offer_html" >/dev/null
-              if grep -F '<template data-dgst="NEXT_NOT_FOUND">' <<<"$offer_html" >/dev/null; then
+              if grep -F 'NEXT_NOT_FOUND' <<<"$offer_html" >/dev/null; then
                 exit 1
               fi
             done < <(jq -r '.items[].id // empty' <<<"$catalog_json")
