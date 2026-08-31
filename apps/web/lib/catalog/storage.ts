@@ -1189,7 +1189,11 @@ export async function getOffer(id: string) {
     // Avoid loading the much larger all-market object for source-native Japan
     // IDs. The market projection is the same admitted generation and is already
     // the fast path used by /api/catalog/search?market=japan.
-    const projection = await readCurrentSearchProjection(offerProjectionScopeFromId(id));
+    const projectionScope = offerProjectionScopeFromId(id);
+    const projection = await readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(
+      currentProjectionPath(projectionScope),
+      { generationId: "", items: [] },
+    );
     if (projection.generationId !== manifest.generationId) return null;
     const row = (projection.items || []).find((item) => item.id === id);
     return row ? offerDetailFromProjection(row) : null;
