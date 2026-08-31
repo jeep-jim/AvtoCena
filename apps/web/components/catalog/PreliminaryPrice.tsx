@@ -27,7 +27,10 @@ export function PreliminaryPrice({
 }) {
   const [open, setOpen] = useState(false);
   const [desktopHover, setDesktopHover] = useState(false);
-  const [lightTheme, setLightTheme] = useState(() => typeof document !== "undefined" && document.documentElement.dataset.theme === "light");
+  // Match the server on the first client render. Reading `document` here used
+  // to change inline colors before hydration and forced React to rebuild the
+  // offer panel, which made mobile controls appear late or jump.
+  const [lightTheme, setLightTheme] = useState(false);
   const rootRef = useRef<HTMLDivElement>(null);
   const totalRub = Number(offer?.totalRub || 0);
 
