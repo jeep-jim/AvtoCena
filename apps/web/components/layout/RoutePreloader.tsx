@@ -275,7 +275,7 @@ export function startRoutePreloader(){if(typeof window!=="undefined")window.disp
 function sameDocumentHashNavigation(anchor:HTMLAnchorElement,url:URL){return url.pathname===window.location.pathname&&url.search===window.location.search&&Boolean(url.hash)}
 
 function RoutePreloaderInner(){
- const pathname=usePathname();const searchParams=useSearchParams();const router=useRouter();const [visible,setVisible]=useState(false);
+ const pathname=usePathname();const searchParams=useSearchParams();const router=useRouter();const [visible,setVisible]=useState(false);const [mounted,setMounted]=useState(false);
  const startedAtRef=useRef(0);const routeKey=`${pathname}?${searchParams.toString()}`;const previousRouteKeyRef=useRef(routeKey);const warmedRoutesRef=useRef(new Set<string>());const revealTimerRef=useRef<number|null>(null);const hideTimerRef=useRef<number|null>(null);const safetyTimerRef=useRef<number|null>(null);
  const clearTimers=()=>{if(revealTimerRef.current!==null)window.clearTimeout(revealTimerRef.current);if(hideTimerRef.current!==null)window.clearTimeout(hideTimerRef.current);if(safetyTimerRef.current!==null)window.clearTimeout(safetyTimerRef.current);revealTimerRef.current=null;hideTimerRef.current=null;safetyTimerRef.current=null};
  const hide=()=>{clearTimers();setVisible(false)};
@@ -299,7 +299,9 @@ function RoutePreloaderInner(){
   window.addEventListener(START_EVENT,handleStart);document.addEventListener("click",handleClick,true);document.addEventListener("submit",handleSubmit,true);document.addEventListener("pointerover",warm,true);document.addEventListener("focusin",warm,true);
   return()=>{window.removeEventListener(START_EVENT,handleStart);document.removeEventListener("click",handleClick,true);document.removeEventListener("submit",handleSubmit,true);document.removeEventListener("pointerover",warm,true);document.removeEventListener("focusin",warm,true);clearTimers()};
  },[router]);
+ useEffect(()=>setMounted(true),[]);
  useLayoutEffect(()=>{if(previousRouteKeyRef.current===routeKey)return;previousRouteKeyRef.current=routeKey;hide()},[routeKey]);
+ if(!mounted)return null;
  return <div className={`ac-route-loader pointer-events-none fixed left-0 right-0 top-0 z-[2147483646] transition-opacity duration-75 ${visible?"opacity-100":"opacity-0"}`} aria-hidden={!visible} aria-live="polite" role="status"><div className="ac-route-loader__candy" aria-hidden="true"/><div className="ac-route-loader__label">Загружаем страницу</div><span className="sr-only">Загружаем страницу</span></div>;
 }
 
