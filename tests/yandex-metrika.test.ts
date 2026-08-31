@@ -15,11 +15,8 @@ test("Yandex Metrika counter 112098062 is installed on every public page with th
   assert.match(publicLayout, /ecommerce:"dataLayer"/);
   assert.match(publicLayout, /accurateTrackBounce:true/);
   assert.match(publicLayout, /trackLinks:true/);
-  assert.match(publicLayout, /mc\.yandex\.ru\/watch\/112098062/);
   assert.match(publicLayout, /id="yandex-metrika-112098062"/);
   assert.match(publicLayout, /strategy="afterInteractive"/);
-  assert.match(publicLayout, /<noscript[\s\S]+dangerouslySetInnerHTML/);
-  assert.doesNotMatch(publicLayout, /<noscript>\s*<div>/);
   assert.doesNotMatch(rootLayout, /112098062/);
 });
 
@@ -32,6 +29,6 @@ test("Yandex Metrika records client-side Next.js route changes without duplicati
 });
 
 
-test("Metrika noscript isolates browser parsing from React hydration", () => {
+test("Metrika avoids a browser-parsed noscript hydration boundary", () => {
   assert.doesNotMatch(publicLayout, /<noscript/);
 });
