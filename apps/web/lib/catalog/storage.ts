@@ -436,10 +436,15 @@ function offerProjectionScopeFromId(id: string) {
 export async function getOfferFromCurrentProjection(id: string) {
   const manifest = await readManifest();
   const projectionScope = offerProjectionScopeFromId(id);
-  const projection = await readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(
-    currentProjectionPath(projectionScope),
-    { generationId: "", items: [] },
-  );
+  // Share the bounded market projection read across simultaneous card opens.
+  // At a generation cutover, bypass a stale in-process entry exactly once.
+  let projection = await readCurrentSearchProjection(projectionScope);
+  if (projection.generationId !== manifest.generationId) {
+    projection = await readDataJson<{ generationId: string; items: CatalogSearchProjection[] }>(
+      currentProjectionPath(projectionScope),
+      { generationId: "", items: [] },
+    );
+  }
   if (projection.generationId !== manifest.generationId) return null;
   const row = (projection.items || []).find((item) => item.id === id);
   return row ? offerDetailFromProjection(row) : null;

@@ -135,6 +135,8 @@ test("offer detail falls back to its active admitted projection instead of 404",
   assert.match(storage, /"jpauc_japan_past_open"/);
   assert.match(storage, /export async function getOfferFromCurrentProjection/);
   assert.match(storage, /const projectionScope = offerProjectionScopeFromId\(id\)/);
+  assert.match(storage, /let projection = await readCurrentSearchProjection\(projectionScope\)/);
+  assert.match(storage, /if \(projection\.generationId !== manifest\.generationId\)/);
   assert.match(storage, /currentProjectionPath\(projectionScope\)/);
   assert.match(storage, /projection\.generationId !== manifest\.generationId/);
   assert.match(storage, /return row \? offerDetailFromProjection\(row\) : null/);

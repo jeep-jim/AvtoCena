@@ -49,17 +49,20 @@ jobs:
           set -euo pipefail
           CURL=(curl -L --max-redirs 3 --retry 4 --retry-delay 4 --retry-all-errors --max-time 30 -fsS)
           for market in korea china japan uae europe georgia kyrgyzstan; do
-            catalog_json="$("${CURL[@]}" "https://avtocena.com/api/catalog/search?market=$market&pageSize=1")"
+            sample_size=1
+            if [[ "$market" == japan ]]; then sample_size=5; fi
+            catalog_json="$("${CURL[@]}" "https://avtocena.com/api/catalog/search?market=$market&pageSize=$sample_size")"
             jq -e '.total > 0 and (.items | length) > 0' <<<"$catalog_json" >/dev/null
-            offer_id="$(jq -r '.items[0].id // empty' <<<"$catalog_json")"
-            test -n "$offer_id"
-            encoded_offer_id="$(jq -rn --arg value "$offer_id" '$value|@uri')"
-            offer_html="$("${CURL[@]}" "https://avtocena.com/cars/offer/$encoded_offer_id")"
-            grep -F 'data-offer-id=' <<<"$offer_html" >/dev/null
-            grep -F 'data-offer-action=' <<<"$offer_html" >/dev/null
-            if grep -F '<template data-dgst="NEXT_NOT_FOUND">' <<<"$offer_html" >/dev/null; then
-              exit 1
-            fi
+            while IFS= read -r offer_id; do
+              test -n "$offer_id"
+              encoded_offer_id="$(jq -rn --arg value "$offer_id" '$value|@uri')"
+              offer_html="$("${CURL[@]}" "https://avtocena.com/cars/offer/$encoded_offer_id")"
+              grep -F 'data-offer-id=' <<<"$offer_html" >/dev/null
+              grep -F 'data-offer-action=' <<<"$offer_html" >/dev/null
+              if grep -F '<template data-dgst="NEXT_NOT_FOUND">' <<<"$offer_html" >/dev/null; then
+                exit 1
+              fi
+            done < <(jq -r '.items[].id // empty' <<<"$catalog_json")
             "${CURL[@]}" -o /dev/null "https://avtocena.com/cars?market=$market"
           done
 
