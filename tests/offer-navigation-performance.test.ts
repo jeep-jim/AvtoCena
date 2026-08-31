@@ -51,6 +51,7 @@ test("metadata and page share one memoized offer lookup per request", () => {
 
 test("offer navigation stays visibly pending and warms only the intended offer", () => {
   assert.match(preloader, /MAX_VISIBLE_MS = 15000/);
+  assert.match(preloader, /if\(!mounted\)return null/);
   assert.match(card, /<IntentPrefetchLink href=\{href\}/);
   assert.match(intentLink, /prefetch=\{false\}/);
   assert.match(intentLink, /router\.prefetch\(href\)/);
