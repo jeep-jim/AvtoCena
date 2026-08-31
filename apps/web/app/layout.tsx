@@ -48,14 +48,6 @@ const themeBootstrap = `
       ? stored
       : (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark');
     document.documentElement.dataset.theme = theme;
-    var link = document.querySelector('link[data-avtocena-theme-icon]');
-    if (!link) {
-      link = document.createElement('link');
-      link.rel = 'icon';
-      link.setAttribute('data-avtocena-theme-icon', 'true');
-      document.head.appendChild(link);
-    }
-    link.href = theme === 'light' ? '/favicon-dark.svg' : '/favicon-light.svg';
   } catch (_) {}
 })();
 `;

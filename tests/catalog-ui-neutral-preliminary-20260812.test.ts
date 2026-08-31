@@ -13,6 +13,7 @@ const catalogFilters = fs.readFileSync(new URL("../apps/web/components/catalog/C
 const offerPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[id]/page.tsx", import.meta.url), "utf8");
 const priceSheetCss = fs.readFileSync(new URL("../apps/web/app/public-price-sheet-fix.css", import.meta.url), "utf8");
 const editablePower = fs.readFileSync(new URL("../apps/web/components/catalog/EditablePowerTile.tsx", import.meta.url), "utf8");
+const rootLayout = fs.readFileSync(new URL("../apps/web/app/layout.tsx", import.meta.url), "utf8");
 
 test("catalog price colors distinguish electrified, preliminary and regular calculations", () => {
   assert.match(catalogPrice, /highlightElectrified/);
@@ -99,6 +100,12 @@ test("mobile offer controls remain tappable", () => {
   assert.match(priceTrend, /aria-label=\{panel && canShowRate \? `Показать курс \$\{currency\} и полный расчёт`/);
   assert.match(preliminaryPrice, /const \[lightTheme, setLightTheme\] = useState\(false\)/);
   assert.match(priceTrend, /const \[lightTheme, setLightTheme\] = useState\(false\)/);
+});
+
+test("theme bootstrap does not mutate managed head before hydration", () => {
+  assert.match(rootLayout, /document\.documentElement\.dataset\.theme = theme/);
+  assert.doesNotMatch(rootLayout, /document\.head\.appendChild\(link\)/);
+  assert.doesNotMatch(rootLayout, /link\.href = theme ===/);
 });
 
 test("catalog route loader follows active light or dark theme variables", () => {
