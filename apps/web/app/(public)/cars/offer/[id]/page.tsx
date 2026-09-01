@@ -24,7 +24,7 @@ import { calculateOfferWithRussiaCustoms, calculateOfferWithUserPowerScenario } 
 import { DEFAULT_CATALOG_POWER_FALLBACK_HP, readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
-import { getOfferFromCurrentProjection, getOfferFromCurrentShard, publicOffer, searchOffers } from "@/lib/catalog/storage";
+import { getOfferFromCurrentProjection, getOfferFromCurrentShard, isJapanCatalogOfferId, publicOffer, searchOffers } from "@/lib/catalog/storage";
 
 // Offer inventory changes independently from web deploys. Never persist a
 // not-found render for an ID that can become available in a later generation.
@@ -245,9 +245,14 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // a search projection it contains the complete gallery, price breakdown and
   // source URL. A projection remains the fast publication-cutover fallback so a
   // live card never becomes a 404 while the immutable indexes catch up.
-  const offer = await getOfferFromCurrentShard(id)
-    || await getOfferFromCurrentProjection(id)
-    || await getOfferForPage(id);
+  // Japan must prefer the current full shard because its compact projection
+  // intentionally has one card image and no calculation/source details. Other
+  // markets keep the immutable detail record first because it retains exact
+  // identity evidence (for example Encar's resolver-backed Lexus UX250h model)
+  // which can be absent from a compact current shard.
+  const offer = isJapanCatalogOfferId(id)
+    ? await getOfferFromCurrentShard(id) || await getOfferForPage(id) || await getOfferFromCurrentProjection(id)
+    : await getOfferForPage(id) || await getOfferFromCurrentShard(id) || await getOfferFromCurrentProjection(id);
   // getOfferForPage reads only immutable records that already passed the
   // publication gate. Re-validating their compact representation here can no
   // longer see source-only evidence removed from operational.raw and used to

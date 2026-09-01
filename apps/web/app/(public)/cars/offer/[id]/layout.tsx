@@ -6,6 +6,7 @@ import { absoluteAvtocenaUrl, catalogOfferUrl } from "@/lib/ai-discovery";
 import { getOfferForPage } from "@/lib/catalog/offer-page-data";
 import { publicCatalogPowerHp } from "@/lib/catalog/power-sanity";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
+import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
 import { catalogMarketLabel } from "@/lib/catalog/runtime-config";
 
 function clean(value: unknown) {
@@ -72,7 +73,8 @@ function safeJsonLd(value: unknown) {
 
 export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
   const { id } = await params;
-  const offer = await getOfferForPage(id);
+  const storedOffer = await getOfferForPage(id);
+  const offer = storedOffer ? normalizeVehicleOfferSpecs(storedOffer) : null;
   if (!offer) {
     return {
       title: "Автомобиль под заказ — АвтоЦена",
@@ -110,7 +112,8 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
 
 export default async function OfferLayout({ children, params }: { children: ReactNode; params: Promise<{ id: string }> }) {
   const { id } = await params;
-  const offer = await getOfferForPage(id);
+  const storedOffer = await getOfferForPage(id);
+  const offer = storedOffer ? normalizeVehicleOfferSpecs(storedOffer) : null;
   const structuredData = offer ? offerStructuredData(id, offer) : null;
 
   return <>

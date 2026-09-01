@@ -89,11 +89,10 @@ test("identity-bound Hybrid name corrects a stale combustion classification", ()
   assert.equal(normalized.utilizationPowerKw, undefined);
 });
 
-test("exact Lexus UX250h source title cannot be published as combustion", () => {
+test("stored exact Lexus UX250h resolver identity cannot be published as combustion", () => {
   const normalized = normalizeVehicleOfferSpecs({
     make: "Lexus",
     model: "UX 2.0 2WD",
-    sourceTitle: "Lexus UX250h 2.0 2WD",
     fuel: "petrol",
     engineCc: 1987,
     powertrainKind: "combustion" as const,
@@ -101,7 +100,12 @@ test("exact Lexus UX250h source title cannot be published as combustion", () => 
     powerKw: 112,
     icePowerKw: 112,
     utilizationPowerKw: 112,
-    operational: { sourceTitle: "Lexus UX250h 2.0 2WD" },
+    operational: {
+      encyclopediaIdentity: {
+        rawModel: "UX250h",
+        modelSource: "presentation:safe_alias",
+      },
+    } as any,
   });
   assert.equal(normalized.powertrainKind, "other_hybrid");
   assert.equal(normalized.fuel, "hybrid");
