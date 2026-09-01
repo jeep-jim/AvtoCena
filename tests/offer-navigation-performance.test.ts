@@ -143,8 +143,10 @@ test("offer detail falls back to its active admitted projection instead of 404",
   assert.match(storage, /projection\.generationId !== manifest\.generationId/);
   assert.match(storage, /return row \? offerDetailFromProjection\(row\) : null/);
   assert.match(storage, /export function isJapanCatalogOfferId/);
-  assert.match(page, /getOfferFromCurrentShard\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)[\s\S]*getOfferForPage\(id\)/);
-  assert.doesNotMatch(page, /isJapanCatalogOfferId/);
+  assert.match(page, /isJapanCatalogOfferId\(id\)/);
+  assert.match(page, /getOfferFromCurrentShard\(id\)[\s\S]*getOfferForPage\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
+  assert.match(page, /getOfferForPage\(id\)[\s\S]*getOfferFromCurrentShard\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
+  assert.match(layout, /normalizeVehicleOfferSpecs\(storedOffer\)/);
   assert.match(storage, /if \(!loc\) return readProjectionFallback\(\)/);
   assert.match(storage, /return offer \|\| readProjectionFallback\(\)/);
   assert.match(page, /<main data-offer-id=\{o\.id\}/);

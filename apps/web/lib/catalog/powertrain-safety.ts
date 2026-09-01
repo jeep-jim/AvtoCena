@@ -63,7 +63,23 @@ export function canonicalizeSemanticSourceFields<T extends Partial<VehicleOffer>
  * frequently contain menus and recommendations for unrelated vehicles.
  */
 export function namedElectrifiedPowertrainKind(input: Partial<VehicleOffer>) {
-  const primary=[input.make,input.model,input.generation,input.trim,input.engineType,input.fuel,input.sourceTitle,input.operational?.sourceTitle].filter(Boolean).join(" ");
+  const operational = input.operational as any;
+  // Published detail records can intentionally omit the raw source title while
+  // retaining the identity resolver's exact marketplace model. That field is
+  // identity-bound and uniqueness-checked, so it is safe evidence (unlike an
+  // arbitrary raw response containing menus or recommended vehicles).
+  const primary=[
+    input.make,
+    input.model,
+    input.generation,
+    input.trim,
+    input.engineType,
+    input.fuel,
+    input.sourceTitle,
+    operational?.sourceTitle,
+    operational?.encyclopediaIdentity?.rawModel,
+    operational?.encyclopediaIdentity?.rawTrim,
+  ].filter(Boolean).join(" ");
   if (SERIES_HYBRID_PRIMARY_RE.test(primary)) return "series_hybrid" as const;
   if (HYBRID_PRIMARY_RE.test(primary) || LEXUS_HYBRID_BADGE_RE.test(primary)) return "other_hybrid" as const;
   if (ELECTRIC_PRIMARY_RE.test(primary)) return "electric" as const;
