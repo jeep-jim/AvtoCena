@@ -108,6 +108,13 @@ test("mobile offer controls remain tappable", () => {
   assert.match(citySelector, /onTouchEnd=\{\(event\) => \{ event\.preventDefault\(\); event\.stopPropagation\(\); choose\(city\); \}\}/);
 });
 
+test("mobile currency sheet closes without bubbling back to the price opener", () => {
+  assert.match(priceTrend, /const dismiss = \(event: SyntheticEvent\) => \{[\s\S]+event\.preventDefault\(\);[\s\S]+event\.stopPropagation\(\);[\s\S]+closeRef\.current\(\);[\s\S]+\};/);
+  assert.match(priceTrend, /onTouchEnd=\{dismissBackdrop\} onClick=\{dismissBackdrop\}/);
+  assert.match(priceTrend, /onTouchEnd=\{stopSheetEvent\} onClick=\{stopSheetEvent\}/);
+  assert.match(priceTrend, /<button type="button" onTouchEnd=\{dismiss\} onClick=\{dismiss\}[^>]+aria-label="Закрыть">×<\/button>/);
+});
+
 test("theme bootstrap does not mutate managed head before hydration", () => {
   assert.match(rootLayout, /document\.documentElement\.dataset\.theme = theme/);
   assert.doesNotMatch(rootLayout, /document\.head\.appendChild\(link\)/);

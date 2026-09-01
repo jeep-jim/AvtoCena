@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent, type WheelEvent as ReactWheelEvent } from "react";
+import { useEffect, useMemo, useRef, useState, type PointerEvent as ReactPointerEvent, type SyntheticEvent, type WheelEvent as ReactWheelEvent } from "react";
 import { createPortal } from "react-dom";
 import { Gavel } from "lucide-react";
 
@@ -427,6 +427,18 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
     node.scrollLeft += delta;
     event.preventDefault();
   };
+  const dismiss = (event: SyntheticEvent) => {
+    event.preventDefault();
+    event.stopPropagation();
+    closeRef.current();
+  };
+  const dismissBackdrop = (event: SyntheticEvent<HTMLDivElement>) => {
+    if (event.target !== event.currentTarget) return;
+    dismiss(event);
+  };
+  const stopSheetEvent = (event: SyntheticEvent) => {
+    event.stopPropagation();
+  };
 
   if (!open || typeof document === "undefined") return null;
   const activeRate = orderedRates.find((rate) => String(rate.currency).toUpperCase() === activeCurrency) || orderedRates[0];
@@ -438,12 +450,12 @@ export function CurrencyRatesSheet({ open, onClose, rates, initialCurrency, impa
   const handleClass = dark ? "bg-white/60" : "bg-white/85";
   const closeClass = dark ? "bg-white/[0.07] text-white" : "bg-[#edf0f4] text-[#202630]";
 
-  return createPortal(<div className="fixed inset-0 z-[14000] flex items-end justify-center overflow-hidden bg-black/65 backdrop-blur-md md:items-center md:p-6" onClick={(event) => { event.preventDefault(); event.stopPropagation(); closeRef.current(); }}>
-    <div className={`relative w-full md:max-w-[570px] ${dragState.current ? "" : "transition-transform duration-200 ease-out"}`} style={{ transform: dragY ? `translateY(${dragY}px)` : undefined }} onClick={(event) => { event.preventDefault(); event.stopPropagation(); }}>
+  return createPortal(<div className="fixed inset-0 z-[14000] flex items-end justify-center overflow-hidden bg-black/65 backdrop-blur-md md:items-center md:p-6" onTouchEnd={dismissBackdrop} onClick={dismissBackdrop}>
+    <div className={`relative w-full md:max-w-[570px] ${dragState.current ? "" : "transition-transform duration-200 ease-out"}`} style={{ transform: dragY ? `translateY(${dragY}px)` : undefined }} onTouchEnd={stopSheetEvent} onClick={stopSheetEvent}>
       <div className="absolute -top-8 left-1/2 z-20 flex h-8 w-24 -translate-x-1/2 touch-none cursor-grab items-center justify-center active:cursor-grabbing md:hidden" onPointerDown={startDrag} onPointerMove={moveDrag} onPointerUp={finishDrag} onPointerCancel={finishDrag} aria-label="Потяните вниз, чтобы закрыть"><span className={`block h-1.5 w-12 rounded-full shadow-[0_1px_5px_rgba(0,0,0,.28)] ${handleClass}`} /></div>
       <section className={`ac-rate-sheet ac-hide-scrollbar relative max-h-[92dvh] w-full overflow-y-auto overscroll-contain rounded-t-[30px] shadow-[0_-24px_80px_rgba(0,0,0,.38)] md:rounded-[30px] ${sheetClass}`} role="dialog" aria-modal="true" aria-label="Курсы валют">
         <div className={`sticky top-0 z-10 border-b px-5 pb-4 pt-5 backdrop-blur-xl md:rounded-t-[30px] ${headerClass}`}>
-          <div className="flex items-center justify-between gap-3"><div><div className="text-[13px] font-bold leading-none text-[#ef3340]">{activeCountry}</div><h2 className="mt-1.5 text-xl font-black">{orderedRates.length > 1 ? "Курсы валют" : `Курс ${activeCurrencyCode}`}</h2></div><button type="button" onClick={() => closeRef.current()} className={`flex h-11 w-11 items-center justify-center rounded-full text-2xl font-medium ${closeClass}`} aria-label="Закрыть">×</button></div>
+          <div className="flex items-center justify-between gap-3"><div><div className="text-[13px] font-bold leading-none text-[#ef3340]">{activeCountry}</div><h2 className="mt-1.5 text-xl font-black">{orderedRates.length > 1 ? "Курсы валют" : `Курс ${activeCurrencyCode}`}</h2></div><button type="button" onTouchEnd={dismiss} onClick={dismiss} className={`flex h-11 w-11 items-center justify-center rounded-full text-2xl font-medium ${closeClass}`} aria-label="Закрыть">×</button></div>
           {orderedRates.length > 1 ? <div className="ac-hide-scrollbar -mx-1 mt-4 flex touch-pan-x snap-x snap-proximity gap-2 overflow-x-auto overscroll-x-contain px-1 pb-1" style={{ WebkitOverflowScrolling: "touch" }} onWheel={scrollRateTabs}>{orderedRates.map((rate) => {
             const currency = String(rate.currency).toUpperCase();
             const active = currency === activeCurrencyCode;
