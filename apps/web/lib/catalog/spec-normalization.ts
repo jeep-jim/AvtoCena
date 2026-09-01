@@ -164,16 +164,6 @@ function inferPowerHp(text: string) {
   return kw ? reasonable(Number(kw[1]) * 1.35962, 20, 2_500) : undefined;
 }
 
-function suspiciousMashinaNumericModelPower(offer: Partial<VehicleOffer>, powerHp?: number) {
-  if (String(offer.sourceId || "") !== "mashina_kyrgyzstan_exact" || !powerHp) return false;
-  const numericModelTokens = String(offer.model || "").match(/\b\d{2,4}\b/g) || [];
-  if (!numericModelTokens.some((token) => Number(token) === Math.round(powerHp))) return false;
-  const raw = rawText(offer.operational?.raw);
-  const rawExplicitPower = inferPowerHp(raw);
-  const confidence = String(offer.powerDataConfidence || "");
-  return rawExplicitPower === undefined && !["documented", "source_exact"].includes(confidence);
-}
-
 function structuredPowerHp(offer: Partial<VehicleOffer>) {
   const raw = offer.operational?.raw;
   const hp = findStructuredNumber(raw, [
@@ -314,10 +304,7 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
     || inferEngineCc(primary)
     || inferEngineCc(full);
   const suppliedPowerHp = reasonable(offer.powerHp, 20, 2_500);
-  const rejectNumericModelPower = suspiciousMashinaNumericModelPower(offer, suppliedPowerHp);
-  const candidatePowerHp = rejectNumericModelPower
-    ? inferPowerHp(primary) || inferPowerHp(full)
-    : suppliedPowerHp || structuredPowerHp(offer) || inferPowerHp(primary) || inferPowerHp(full);
+  const candidatePowerHp = suppliedPowerHp || structuredPowerHp(offer) || inferPowerHp(primary) || inferPowerHp(full);
   const namedPowertrainKind = namedElectrifiedPowertrainKind(offer);
   const correctedFromCombustion = Boolean(namedPowertrainKind && offer.powertrainKind === "combustion");
   // Keep the supplied classification visible to the safety check. Replacing it
@@ -328,7 +315,7 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   // If horsepower was rejected, do not retain a previously derived kW value
   // from the same bad marketplace number. Verified V2/official knowledge may
   // repopulate both fields after this normalization pass.
-  const explicitPowerKw = rejectNumericModelPower || powerSanity.suspicious ? undefined : reasonable(offer.powerKw, 10, 2_000);
+  const explicitPowerKw = powerSanity.suspicious ? undefined : reasonable(offer.powerKw, 10, 2_000);
   const powerKw = explicitPowerKw || (powerHp ? Math.round((powerHp / 1.35962) * 100) / 100 : undefined);
 
   // Semantic vehicle attributes are provenance-sensitive. They may only be

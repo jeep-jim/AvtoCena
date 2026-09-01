@@ -11,7 +11,7 @@ on:
         description: Market to publish
         required: true
         type: choice
-        options: [korea, china, japan, uae, europe, georgia, kyrgyzstan]
+        options: [korea, china, japan, uae, europe, georgia]
       source_run_id:
         description: Completed Catalog V3 run containing five shard artifacts
         required: true
@@ -61,7 +61,7 @@ jobs:
         run: |
           node <<'NODE'
           const fs = require('fs');
-          const allowed = new Set(['korea','china','japan','uae','europe','georgia','kyrgyzstan']);
+          const allowed = new Set(['korea','china','japan','uae','europe','georgia']);
           let market = String(process.env.DISPATCH_MARKET || '').trim();
           let runId = String(process.env.DISPATCH_RUN_ID || '').trim();
           if (!market || !runId) {

@@ -37,7 +37,6 @@ This document is the operating contract for the 18 required catalog sources. It 
 | Japan | Prestige Japan auctions | `prestige_japan_auctions_open` | PASS 10 EXACT SOLD / 100 RUNNING | Dedicated adapter uses the verified `Past` + `Non-USS only` search contract, exact `car_id` detail pages and only accepts `Current Status = Sold` with a positive published `Final Price`. Exact AJES lot photos are bound to the detail. Strict 10 passed with 10 unique exact sold results, zero core/image rejects and no gate problems. | Continue strict ladder at 100, then 1000 and up to 30K only after each successful report. |
 | Japan | Auction Data Search | `auctiondatasearch_japan_open` | LOGIN / STRUCTURE BLOCKER | Public landing is reachable but actual auction/stat data appears behind login/free registration; no unauthenticated exact result contract verified. | Determine permitted authenticated data path; never infer result records from landing/search snippets. |
 | Japan | JP Center | `jpcenter_japan_catalog_open` | STRUCTURE DRIFT | HTTP 200 (~55.5 KB), generic parser finds zero cards. | Inspect current frontend/API/listing link structure and build dedicated adapter only after exact binding is understood. |
-| Kyrgyzstan | Mashina.kg | `mashina_kyrgyzstan_exact` | PASS | Current required-source readiness passes. | Scale incrementally with exact listing/detail identity. |
 
 ## Source-specific notes
 

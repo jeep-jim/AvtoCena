@@ -15,7 +15,6 @@ const marketLinks = [
   { href: "/cars?market=uae", label: "Автомобили из ОАЭ" },
   { href: "/cars?market=europe", label: "Автомобили из Европы" },
   { href: "/cars?market=georgia", label: "Автомобили из Грузии" },
-  { href: "/cars?market=kyrgyzstan", label: "Автомобили из Кыргызстана" },
 ];
 
 const budgetLinks = [
@@ -95,7 +94,7 @@ export function PublicLegalFooter() {
         <div className="ac-public-footer-navigation grid gap-8 py-7 sm:grid-cols-2 lg:grid-cols-[minmax(290px,1.25fr)_1fr_1fr_1fr] lg:gap-10 lg:py-9">
           <div className="max-w-md">
             <Link href="/" className="inline-flex items-baseline text-xl font-black tracking-[-0.03em]"><span className="text-red-500">Авто</span><span className="text-[var(--ac-text)]">Цена</span></Link>
-            <p className="mt-3 text-sm font-medium leading-6">Подбор и расчёт автомобилей под ключ из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана.</p>
+            <p className="mt-3 text-sm font-medium leading-6">Подбор и расчёт автомобилей под ключ из Японии, Китая, Кореи, ОАЭ, Европы и Грузии.</p>
 
             <div className="mt-4 grid gap-2">
               <a

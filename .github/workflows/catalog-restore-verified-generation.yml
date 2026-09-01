@@ -26,7 +26,7 @@ env:
   CATALOG_IMAGE_CDN_URL: ${{ secrets.CATALOG_IMAGE_CDN_URL }}
   CATALOG_RESTORE_GENERATION: gen_1787240511367_a8c268d3
   CATALOG_RESTORE_EXPECTED_TOTAL: "28354"
-  CATALOG_RESTORE_EXPECTED_COUNTS_JSON: '{"korea":7553,"china":5673,"japan":1478,"uae":3171,"europe":5744,"georgia":2605,"kyrgyzstan":2130}'
+  CATALOG_RESTORE_EXPECTED_COUNTS_JSON: '{"korea":7553,"china":5673,"japan":1478,"uae":3171,"europe":5744,"georgia":2605}'
   CATALOG_RESTORE_REPORT: catalog-restore-verified-generation-report.json
 
 jobs:

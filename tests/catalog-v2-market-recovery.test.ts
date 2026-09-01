@@ -8,11 +8,11 @@ const capacityWorkflow = fs.readFileSync(new URL("../.github/workflows/catalog-e
 const market10kReusable = fs.readFileSync(new URL("../.github/workflows/catalog-v3-market-10k-reusable.yml", import.meta.url), "utf8");
 const sequentialQueue = fs.readFileSync(new URL("../.github/workflows/catalog-v3-sequential-queue.yml", import.meta.url), "utf8");
 const removedCombinedWriter = new URL("../.github/workflows/catalog-live-daily-working-markets.yml", import.meta.url);
+const removedKyrgyzstanWriter = new URL("../.github/workflows/catalog-live-recovery-uae-kyrgyzstan.yml", import.meta.url);
 const retiredScheduledWriters = [
-  "catalog-live-recovery-uae-kyrgyzstan.yml",
   "catalog-live-recovery-georgia-yandex-v2.yml",
 ].map((file) => ({ file, content: fs.readFileSync(new URL(`../.github/workflows/${file}`, import.meta.url), "utf8") }));
-const marketFiles = ["korea", "japan", "china", "uae", "europe", "georgia", "kyrgyzstan"].map((market) => ({
+const marketFiles = ["korea", "japan", "china", "uae", "europe", "georgia"].map((market) => ({
   market,
   content: fs.readFileSync(new URL(`../.github/workflows/catalog-v2-${market}.yml`, import.meta.url), "utf8"),
 }));
@@ -65,8 +65,8 @@ test("independent market collection keeps the full production crawl budget", () 
   assert.match(workflow, /timeout --signal=TERM --kill-after=120s 6600s/);
 });
 
-test("automatic catalog runs use one sequential queue and Japan runs four times monthly", () => {
-  assert.equal(marketFiles.length, 7);
+test("automatic catalog runs use one six-market sequential queue and Japan runs four times monthly", () => {
+  assert.equal(marketFiles.length, 6);
   for (const { market, content } of marketFiles) {
     assert.match(content, /workflow_dispatch:/, `${market} must support manual dispatch`);
     assert.doesNotMatch(content, /^\s+schedule:/m, `${market} must not have a competing automatic schedule`);
@@ -81,12 +81,12 @@ test("automatic catalog runs use one sequential queue and Japan runs four times 
   assert.match(sequentialQueue, /needs: china/);
   assert.match(sequentialQueue, /needs: uae/);
   assert.match(sequentialQueue, /needs: europe/);
-  assert.match(sequentialQueue, /needs: georgia/);
+  assert.match(sequentialQueue, /georgia:[\s\S]*needs: europe/);
   assert.match(sequentialQueue, /if: always\(\)/);
   assert.match(sequentialQueue, /retention_ms: "2592000000"/);
   assert.match(sequentialQueue, /target_per_market: "30000"/);
   assert.match(sequentialQueue, /market: japan[\s\S]*priority_target: "24000"/);
-  assert.equal((sequentialQueue.match(/priority_target: "8000"/g) || []).length, 6);
+  assert.equal((sequentialQueue.match(/priority_target: "8000"/g) || []).length, 5);
   assert.match(market10kReusable, /CATALOG_V2_PRIORITY_TARGET: \$\{\{ inputs\.priority_target \}\}/);
   assert.match(market10kReusable, /CATALOG_V2_LOW_POWER_MIN_SHARE: "0\.8"/);
   assert.match(market10kReusable, /CATALOG_PRIORITY_MAX_TOTAL_RUB: "6000000"/);
@@ -100,6 +100,7 @@ test("automatic catalog runs use one sequential queue and Japan runs four times 
 
 test("retired combined writers cannot collide with the sequential schedule", () => {
   assert.equal(fs.existsSync(removedCombinedWriter), false);
+  assert.equal(fs.existsSync(removedKyrgyzstanWriter), false);
   for (const { file, content } of retiredScheduledWriters) {
     assert.match(content, /workflow_dispatch:/, `${file} must remain manually recoverable`);
     assert.doesNotMatch(content, /^\s+schedule:/m, `${file} must not retain a duplicate schedule`);

@@ -1,4 +1,4 @@
-name: Catalog calculated · 7 markets · up to 30k each
+name: Catalog calculated · 6 markets · up to 30k each
 run-name: Catalog calculated sequential recovery · ${{ github.sha }}
 
 on:
@@ -114,18 +114,6 @@ jobs:
     with:
       market: georgia
       display_name: Грузия
-      target_per_source: "30000"
-      target_per_market: "30000"
-      maximum_per_market: "30000"
-    secrets: inherit
-
-  kyrgyzstan:
-    needs: georgia
-    if: ${{ always() && !cancelled() }}
-    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
-    with:
-      market: kyrgyzstan
-      display_name: Кыргызстан
       target_per_source: "30000"
       target_per_market: "30000"
       maximum_per_market: "30000"

@@ -26,7 +26,6 @@ const publishScript = fs.readFileSync(new URL("../scripts/catalog-publish-source
 const validationScript = fs.readFileSync(new URL("../scripts/catalog-validate-source-scale.mjs", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
 const reliableSources = fs.readFileSync(new URL("../apps/web/lib/catalog/reliable-bootstrap-sources.ts", import.meta.url), "utf8");
-const regionalOverrides = fs.readFileSync(new URL("../apps/web/lib/catalog/regional-live-overrides.ts", import.meta.url), "utf8");
 const livePricing = fs.readFileSync(new URL("../apps/web/lib/catalog/live-business-pricing.ts", import.meta.url), "utf8");
 const imageQuality = fs.readFileSync(new URL("../apps/web/lib/catalog/image-quality.ts", import.meta.url), "utf8");
 const brandRail = fs.readFileSync(new URL("../apps/web/components/catalog/BrandLogoRail.tsx", import.meta.url), "utf8");
@@ -66,7 +65,7 @@ test("Catalog V2 runs all 35 market shards in one wave", () => {
 });
 
 test("Catalog V2 uses canonical sources, 100000 capacity and progressive galleries", () => {
-  assert.match(workflow, /market: \[korea, china, japan, uae, europe, georgia, kyrgyzstan\]/);
+  assert.match(workflow, /market: \[korea, china, japan, uae, europe, georgia\]/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_MARKET: "100000"/);
   assert.match(workflow, /CATALOG_PUBLISH_TARGET_PER_MARKET: "100000"/);
@@ -223,7 +222,8 @@ test("public cards use the stable same-origin image proxy", () => {
 
 test("dealer CRM renders SVG market flags rather than emoji letter codes", () => {
   assert.match(dealerDemo, /function MarketFlag/);
-  assert.match(dealerDemo, /Флаг Кыргызстана/);
+  assert.match(dealerDemo, /Флаг Грузии/);
+  assert.doesNotMatch(dealerDemo, /Кыргызстан|kyrgyzstan/);
   assert.doesNotMatch(dealerDemo, /<span className="text-2xl">\{market\.flag\}<\/span>/);
 });
 
@@ -231,8 +231,7 @@ test("dormant expansion adapters never enter the production importer", () => {
   const ids = new Set(catalogImportSources.map((source) => source.sourceId));
   for (const sourceId of [
     "autowini_korea_open", "kbchachacha_korea_open", "bobaedream_korea_open",
-    "yallamotor_uae_open", "carswitch_uae_open", "lalafo_kyrgyzstan_open",
-    "bazar_kyrgyzstan_open", "turbo_kyrgyzstan_open", "omarket_kyrgyzstan_open",
+    "yallamotor_uae_open", "carswitch_uae_open",
     "japantransit_japan_stat_open", "otomoto_europe_exact",
   ]) {
     assert.equal(ids.has(sourceId), false, `${sourceId} must remain outside production`);
@@ -242,11 +241,7 @@ test("dormant expansion adapters never enter the production importer", () => {
 test("bootstrap replacements follow current regional public routes", () => {
   assert.match(reliableSources, /https:\/\/en\.guazi\.com\/\$\{path\}/);
   assert.match(reliableSources, /https:\/\/ru\.guazi\.com\/\$\{path\}/);
-  assert.doesNotMatch(regionalOverrides, /auto_georgia_open|www\.auto\.ge/);
-  assert.match(regionalOverrides, /https:\/\/www\.mashina\.kg\/search\/all\//);
-  assert.match(regionalOverrides, /sourceId: "mashina_kyrgyzstan_exact"/);
-  assert.match(regionalOverrides, /sourceId: "turbo_kyrgyzstan_open"/);
-  assert.match(regionalOverrides, /\\\/cars\\\/[A-Za-z0-9_\-\[\]\+]+/);
+  assert.doesNotMatch(reliableSources, /kyrgyzstan|mashina\.kg|turbo\.kg/i);
 });
 
 test("brand rail opens existing brand and model SEO pages", () => {

@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { redirect } from "next/navigation";
 import { readCatalogFacets, searchOffers } from "@/lib/catalog/storage";
 import { readCatalogOverview } from "@/lib/catalog/overview";
 import { PublicHeader } from "@/components/layout/PublicHeader";
@@ -9,7 +10,8 @@ import { CatalogFilters } from "@/components/catalog/CatalogFilters";
 import { CurrencyRatesStrip } from "@/components/catalog/CurrencyRatesStrip";
 import { applyActiveBusinessPricingBatch } from "@/lib/catalog/live-business-pricing";
 import { isRenderablePublicCatalogOffer } from "@/lib/catalog/offer-quality";
-import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS } from "@/lib/catalog/runtime-config";
+import { CATALOG_MARKET_LABELS, PUBLIC_CATALOG_MARKETS, PUBLIC_CATALOG_MARKET_SET } from "@/lib/catalog/runtime-config";
+import type { CatalogMarket } from "@/lib/catalog/types";
 
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
@@ -163,7 +165,9 @@ async function readDiverseDefaultMarketPage(market: string, page: number) {
 
 export default async function CarsPage({ searchParams }: { searchParams?: Promise<Record<string, string | string[] | undefined>> }) {
   const params = (await searchParams) || {};
-  const selectedMarket = first(params.market);
+  const requestedMarket = first(params.market).toLowerCase();
+  if (requestedMarket && !PUBLIC_CATALOG_MARKET_SET.has(requestedMarket as CatalogMarket)) redirect("/cars");
+  const selectedMarket = requestedMarket;
   const selectedSort = requestedSort(params.sort);
   const customSort = selectedSort !== "updatedAt";
   const requestedPage = Math.max(1, Number(first(params.page)) || 1);

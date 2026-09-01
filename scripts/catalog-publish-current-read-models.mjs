@@ -1,7 +1,7 @@
 import { publishCurrentCatalogReadModels } from "../apps/web/lib/catalog/storage.ts";
 
 const result = await publishCurrentCatalogReadModels();
-const requiredMarkets = ["korea", "china", "japan", "uae", "europe", "georgia", "kyrgyzstan"];
+const requiredMarkets = ["korea", "china", "japan", "uae", "europe", "georgia"];
 const allowedEmptyMarkets = new Set(
   String(process.env.CATALOG_ALLOW_EMPTY_MARKETS || "")
     .split(",")

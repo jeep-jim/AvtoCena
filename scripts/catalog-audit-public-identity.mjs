@@ -7,7 +7,7 @@ const { catalogBrandSlug } = await import("../apps/web/lib/catalog/brands.ts");
 const { resolveCatalogBrandBySlug } = await import("../apps/web/lib/catalog/catalog-brand-directory.ts");
 
 const OUTPUT = process.env.CATALOG_PUBLIC_IDENTITY_AUDIT_OUTPUT || "catalog-public-identity-audit.json";
-const MARKETS = ["korea", "china", "japan", "uae", "europe", "georgia", "kyrgyzstan"];
+const MARKETS = ["korea", "china", "japan", "uae", "europe", "georgia"];
 const asianScript = /[\u1100-\u11ff\u3040-\u30ff\u3130-\u318f\u3400-\u4dbf\u4e00-\u9fff\uac00-\ud7af\uf900-\ufaff]/u;
 
 function clean(value) {

@@ -14,8 +14,8 @@ const { PUBLIC_CATALOG_MARKETS } = await import("../apps/web/lib/catalog/runtime
 const sourceGeneration = String(process.env.CATALOG_RESTORE_GENERATION || "gen_1787240511367_a8c268d3").trim();
 const reportFile = String(process.env.CATALOG_RESTORE_REPORT || "catalog-restore-verified-generation-report.json").trim();
 const expectedCounts = JSON.parse(process.env.CATALOG_RESTORE_EXPECTED_COUNTS_JSON
-  || '{"korea":7553,"china":5673,"japan":1478,"uae":3171,"europe":5744,"georgia":2605,"kyrgyzstan":2130}');
-const expectedTotal = Number(process.env.CATALOG_RESTORE_EXPECTED_TOTAL || 28_354);
+  || '{"korea":7553,"china":5673,"japan":1478,"uae":3171,"europe":5744,"georgia":2605}');
+const expectedTotal = Number(process.env.CATALOG_RESTORE_EXPECTED_TOTAL || 26_224);
 const forbiddenMakes = new Set([
   "Lada", "Huakai", "닷지", "람보르기니", "로터스", "롤스로이스", "맥라렌", "벤틀리",
   "시트로엥", "신위안", "지리", "페라리", "폴스타", "기아", "현대", "벤츠",

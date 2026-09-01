@@ -25,7 +25,7 @@ export const catalogImportSources = [
   ...publicMarketSources,
 ];
 
-const PUBLIC_MARKETS: CatalogMarket[] = ["korea", "china", "japan", "uae", "europe", "georgia", "kyrgyzstan"];
+const PUBLIC_MARKETS: CatalogMarket[] = ["korea", "china", "japan", "uae", "europe", "georgia"];
 
 function assertProductionStorage() {
   if (process.env.JSON_STORAGE_DRIVER !== "object") throw new Error("production_import_requires_object_storage");

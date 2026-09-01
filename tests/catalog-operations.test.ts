@@ -7,7 +7,7 @@ test("production year gates keep Japan at 2010+ and every other market at 2020+"
   assert.equal(catalogMinYearForMarket("japan"), 2010);
   assert.equal(isCatalogYearAllowed(2009, "japan"), false);
   assert.equal(isCatalogYearAllowed(2010, "japan"), true);
-  for (const market of ["korea", "china", "uae", "europe", "georgia", "kyrgyzstan"]) {
+  for (const market of ["korea", "china", "uae", "europe", "georgia"]) {
     assert.equal(catalogMinYearForMarket(market), 2020, market);
     assert.equal(isCatalogYearAllowed(2019, market), false, market);
     assert.equal(isCatalogYearAllowed(2020, market), true, market);
@@ -26,7 +26,7 @@ test("legacy combined market writer is deleted and gallery repair remains manual
   const repairWorkflow = fs.readFileSync(".github/workflows/catalog-kcar-exterior-gallery-repair.yml", "utf8");
   assert.match(repairWorkflow, /group: catalog-live-daily-working-markets/);
   assert.match(repairWorkflow, /CATALOG_GALLERY_CONCURRENCY: "8"/);
-  assert.match(repairWorkflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
+  assert.match(repairWorkflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia/);
 });
 
 test("Japan scale collection goes deeper and publishes through the durable object lock", () => {
@@ -104,18 +104,14 @@ test("certified 30-minute power applies only on reviewed changes or manual dispa
   assert.doesNotMatch(strictWorkflow, /SOURCE_RUN_ID: "\d+"/);
 });
 
-test("emergency Japan recovery and retired regional writer stay manual-only", () => {
+test("emergency Japan recovery stays manual-only and the removed market writer is absent", () => {
   const recovery = fs.readFileSync(".github/workflows/catalog-emergency-restore-japan.yml", "utf8");
   assert.match(recovery, /CATALOG_RECOVERY_GENERATIONS: "gen_1786426826475_e390aa80"/);
-  assert.match(recovery, /CATALOG_RECOVERY_MARKETS: "korea,china,japan,uae,europe,georgia,kyrgyzstan"/);
+  assert.match(recovery, /CATALOG_RECOVERY_MARKETS: "korea,china,japan,uae,europe,georgia"/);
   assert.match(recovery, /group: catalog-live-daily-working-markets/);
   assert.match(recovery, /CATALOG_AUDIT_ASSERT_MARKETS: japan/);
 
-  const markets = fs.readFileSync(".github/workflows/catalog-live-recovery-uae-kyrgyzstan.yml", "utf8");
-  assert.match(markets, /workflow_dispatch:/);
-  assert.doesNotMatch(markets, /^\s+schedule:/m);
-  assert.doesNotMatch(markets, /^\s+workflow_run:/m);
-  assert.match(markets, /group: catalog-live-daily-working-markets/);
+  assert.equal(fs.existsSync(".github/workflows/catalog-live-recovery-uae-kyrgyzstan.yml"), false);
 
   const script = fs.readFileSync("scripts/catalog-recover-generations.mjs", "utf8");
   assert.match(script, /catalog_recovery_preflight_below_min/);

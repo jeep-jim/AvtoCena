@@ -2,7 +2,7 @@ import { getMarketsSettings, selectActiveMarketVersion } from "./business-settin
 import { CATALOG_MARKET_DEFAULTS } from "./catalog/estimated-market-config";
 import { MARKET_IDS, type MarketId } from "./settings-validation";
 
-// Production trigger 2026-07-27 17:23 +07 for Catalog stable 7 × 250.
+// Production trigger 2026-07-27 17:23 +07 for the catalog market settings.
 const MARKET_NAMES: Record<MarketId, string> = {
   japan: "Япония",
   china: "Китай",
@@ -10,7 +10,6 @@ const MARKET_NAMES: Record<MarketId, string> = {
   uae: "ОАЭ",
   europe: "Европа",
   georgia: "Грузия",
-  kyrgyzstan: "Кыргызстан",
 };
 
 // A catalog page can price cards from every market. Reading the same remote
@@ -48,7 +47,6 @@ function configuredValue(current: any, field: string, fallback: number) {
 function defaultInitialPayment(marketId: MarketId, deposit: number, commission: number) {
   if (marketId === "japan") return 70_000;
   if (marketId === "china") return 250_000;
-  if (marketId === "kyrgyzstan") return 150_000;
   return Math.max(200_000, deposit + commission);
 }
 

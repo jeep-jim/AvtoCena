@@ -40,14 +40,12 @@ const APPROVED_SOURCES: Record<CatalogMarket, readonly (readonly [string, string
     ["auctiondatasearch_japan_open", "https://www.auctiondatasearch.jp/"],
     ["jpcenter_japan_catalog_open", "https://jp.center/"],
   ],
-  kyrgyzstan: [
-    ["mashina_kyrgyzstan_exact", "https://www.mashina.kg/"],
-  ],
 };
 
-test("the 18 owner-approved catalog source ids and domains are permanently encoded", () => {
+test("the 17 owner-approved catalog source ids and domains are permanently encoded for six markets", () => {
   const total = Object.values(REQUIRED_CATALOG_SOURCES).reduce((sum, sources) => sum + sources.length, 0);
-  assert.equal(total, 18);
+  assert.equal(total, 17);
+  assert.deepEqual(Object.keys(REQUIRED_CATALOG_SOURCES).sort(), ["china", "europe", "georgia", "japan", "korea", "uae"]);
 
   for (const [marketName, expectedSources] of Object.entries(APPROVED_SOURCES)) {
     const market = marketName as CatalogMarket;

@@ -23,7 +23,7 @@ export async function generateMetadata({ searchParams }: { searchParams?: Promis
   const city = cleanCity(first(params.city));
   const title = city ? `Цена на авто под заказ в ${city} — АвтоЦена` : "АвтоЦена — авто под ваш бюджет за 30 секунд";
   const description = city
-    ? `Автомобили под заказ с расчётом стоимости и доставкой в ${city}. Предложения из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана.`
+    ? `Автомобили под заказ с расчётом стоимости и доставкой в ${city}. Предложения из Японии, Китая, Кореи, ОАЭ, Европы и Грузии.`
     : "Узнайте, какой автомобиль можно привезти под ваш бюджет и сколько он будет стоить под ключ в России.";
   const canonical = city ? `/?city=${encodeURIComponent(city)}` : "/";
   const openGraphUrl = city ? `https://avtocena.com/?city=${encodeURIComponent(city)}` : "https://avtocena.com";

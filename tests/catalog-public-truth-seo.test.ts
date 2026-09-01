@@ -126,9 +126,9 @@ test("normalization removes legacy 100 hp placeholders but preserves sourced 100
   assert.equal(fallback.powerKw, undefined);
 
   const sourced = normalizeVehicleOfferSpecs({
-    market: "kyrgyzstan", make: "Example", model: "Real 100", year: 2023,
+    market: "georgia", make: "Example", model: "Real 100", year: 2023,
     engineCc: 1298, powertrainKind: "combustion", powerHp: 100, powerKw: 73.55,
-    powerDataSource: "Mashina detail:1:explicit-unit",
+    powerDataSource: "MyAuto detail:1:explicit-unit",
   } as any);
   assert.equal(sourced.powerHp, 100);
 });

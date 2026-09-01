@@ -16,7 +16,7 @@ import type { CatalogMarket } from "@/lib/catalog/types";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const MARKET_ORDER: CatalogMarket[] = ["japan", "china", "korea", "uae", "europe", "georgia", "kyrgyzstan"];
+const MARKET_ORDER: CatalogMarket[] = ["japan", "china", "korea", "uae", "europe", "georgia"];
 type PageProps = { params: Promise<{ slug: string; model: string }> };
 
 function yearRange(from?: number, to?: number) {

@@ -48,9 +48,6 @@ export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCa
     { sourceId: "auctiondatasearch_japan_open", label: "Auction Data Search", canonicalUrl: "https://www.auctiondatasearch.jp/", role: "auction_history", required: true, anchor: true },
     { sourceId: "jpcenter_japan_catalog_open", label: "JP Center", canonicalUrl: "https://jp.center/", role: "primary", required: true, anchor: true },
   ],
-  kyrgyzstan: [
-    { sourceId: "mashina_kyrgyzstan_exact", label: "Mashina.kg", canonicalUrl: "https://www.mashina.kg/", role: "primary", required: true, anchor: true },
-  ],
 };
 
 export function requiredCatalogSourceIds(market: CatalogMarket) {

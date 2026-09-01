@@ -48,7 +48,7 @@ test("active V3 pipeline owns approved market rules", () => {
   assert.match(queue, /uae/);
   assert.match(queue, /europe/);
   assert.match(queue, /georgia/);
-  assert.match(queue, /kyrgyzstan/);
+  assert.doesNotMatch(queue, /kyrgyzstan|Кыргызстан/);
   assert.match(queue, /japan/);
   assert.match(reusable, /CATALOG_V2_LOW_POWER_MIN_SHARE: "0\.8"/);
   assert.match(reusable, /CATALOG_PRIORITY_MAX_POWER_HP: "160"/);

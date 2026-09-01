@@ -26,7 +26,7 @@ jobs:
         run: node --import tsx --test tests/market-defaults-and-live-pricing.test.ts
       - name: CRM market settings save tests
         run: node --import tsx --test tests/business-settings.test.ts tests/crm-market-settings-route.test.ts
-      - name: Full seven-market pricing tests
+      - name: Full six-market pricing tests
         run: node --import tsx --test tests/catalog-full-market-pricing.test.ts
       - name: Price trend direction tests
         run: node --import tsx --test tests/price-trend-direction.test.ts

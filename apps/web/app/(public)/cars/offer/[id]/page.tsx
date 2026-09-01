@@ -256,7 +256,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // getOfferForPage reads only immutable records that already passed the
   // publication gate. Re-validating their compact representation here can no
   // longer see source-only evidence removed from operational.raw and used to
-  // turn valid Georgia/Kyrgyzstan cards into a soft 404.
+  // turn valid Georgia cards into a soft 404.
   if (!offer) redirect("/cars");
 
   const enrichedOffer = await enrichOfferForDisplay(offer);

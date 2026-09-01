@@ -17,7 +17,6 @@ process.env.CATALOG_IMPORT_SOURCES = [
   "autoscout_europe_open",
   "myauto_georgia_list",
   "autopapa_georgia_open",
-  "mashina_kyrgyzstan_exact",
 ].join(",");
 
 const { catalogImportSources } = await import("../apps/web/lib/catalog/importer.ts");

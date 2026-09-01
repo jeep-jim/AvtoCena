@@ -165,10 +165,10 @@ jobs:
         with:
           name: japan-carvector-jpauc-exact
           path: japan-live-input
-      - name: Verify all seven markets are readable before replacement
+      - name: Verify all six markets are readable before replacement
         env:
           CATALOG_AUDIT_OUTPUT: catalog-japan-approved-preflight.json
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1,"china":1,"japan":0,"uae":1,"europe":1,"georgia":1,"kyrgyzstan":1}'
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1,"china":1,"japan":0,"uae":1,"europe":1,"georgia":1}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Calculate exact Russia-delivered prices
         env:
@@ -212,9 +212,9 @@ jobs:
       - name: Audit the new generation
         env:
           CATALOG_AUDIT_OUTPUT: catalog-japan-approved-postaudit.json
-          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia
           CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "100"
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1,"china":1,"japan":8700,"uae":1,"europe":1,"georgia":1,"kyrgyzstan":1}'
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1,"china":1,"japan":8700,"uae":1,"europe":1,"georgia":1}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()

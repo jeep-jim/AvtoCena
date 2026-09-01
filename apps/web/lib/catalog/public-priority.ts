@@ -165,7 +165,7 @@ function preliminaryPowerPendingCalculation(offer: Partial<VehicleOffer> | any) 
 
 function regionalPhotoIdentityVerified(offer: Partial<VehicleOffer> | any) {
   const market = String(offer?.market || "").toLowerCase();
-  if (!["georgia", "kyrgyzstan"].includes(market)) return true;
+  if (market !== "georgia") return true;
   const raw = offer?.operational?.raw || {};
   return raw?.listingBoundImages === true
     || raw?.photoIdentityVerified === true

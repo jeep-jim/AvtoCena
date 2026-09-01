@@ -17,7 +17,6 @@ on:
   workflow_run:
     workflows:
       - "Catalog V3 · Sequential production queue"
-      - "Catalog live recovery · UAE + Kyrgyzstan"
       - "Catalog UAE · publish preserved source shards"
       - "Catalog live · daily working markets"
       - "Catalog Japan · publish verified Prestige aggregate"

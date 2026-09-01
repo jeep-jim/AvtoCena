@@ -31,7 +31,6 @@ export const CATALOG_MARKET_DEFAULTS: Record<CatalogMarket, MarketDefaults> = {
   uae: { currency: "AED", securityDepositRub: 110_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 120_000, logisticsRub: 450_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "30-45" },
   europe: { currency: "EUR", securityDepositRub: 110_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 100_000, logisticsRub: 350_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "30-60" },
   georgia: { currency: "GEL", securityDepositRub: 110_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 50_000, logisticsRub: 180_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "20-40" },
-  kyrgyzstan: { currency: "KGS", securityDepositRub: 60_000, topAvtoCommissionRub: 90_000, exportExpensesRub: 30_000, logisticsRub: 100_000, brokerRub: 35_000, svhRub: 35_000, laboratoryRub: 15_000, sbktsRub: 35_000, eptsRub: 35_000, rfDeliveryRub: 120_000, otherFixedExpensesRub: 0, exchangeRateReservePercent: 2, deliveryDays: "15-30" },
 };
 
 function envAmount(market: CatalogMarket, field: string, fallback: number) {

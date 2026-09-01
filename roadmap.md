@@ -1241,3 +1241,14 @@ Production-результат ещё должен быть подтверждё�
 - Publish report подтвердил совпадение ожидаемых и фактических SHA-256 public projections для всех шести нетронутых рынков.
 - Общий post-persist audit не содержит failures; forbidden/unpriced/fallback-100/unproven-100 и specification gates равны нулю на всех семи рынках.
 
+---
+
+## 39. 2026-09-01 — вывод Кыргызстана и переход на шесть рынков
+
+- **Новый владелецкий контракт:** активными остаются ровно шесть рынков — Корея, Китай, Япония, ОАЭ, Европа и Грузия. Кыргызстан больше не является рынком АвтоЦены.
+- **Удалённый сбор:** удалены тип рынка, настройки, registry/source slot, адаптер Mashina, regional overrides, recovery scripts, market marker и все workflow/job/cron-пути Кыргызстана. Канонический allowlist теперь содержит 17 источников шести рынков.
+- **Интерфейс и публичные входы:** рынок удалён из главной, каталога, фильтров, флагов, дилерского интерфейса, CRM, Telegram и юридического footer. Старый параметр/маршрут выведенного рынка перенаправляется в `/cars`; поиск, facets и offer lookup fail-closed не читают его даже из прежнего generation.
+- **Защита от возврата:** единый runtime market set используется publisher/read-model; старые строки выведенного рынка не проходят `isPublicOffer`, а current read-model republisher читает только шесть активных market keys. Отдельный regression-контракт проверяет runtime, business settings, source registry, очередь и отсутствие седьмого job.
+- **Безопасная очистка production:** добавлена ручная сериализованная операция `Catalog maintenance · republish active markets`. Под общим writer-lock она сохраняет публичные строки всех шести рынков byte-stable, проверяет counts и SHA-256 до и после записи и атомарно переключает manifest без retired market keys. Парсеры при этой операции не запускаются.
+- **Проверки до PR:** профильный набор — `57/57`, новый six-market контракт — `7/7`, web/engine typecheck — success, production build — success, 29 изменённых workflow YAML — валидны, `git diff --check` — success. Полный набор имеет те же 25 известных падений, что неизменённый базовый `main`; новых падений — `0`.
+- **До production-подтверждения:** PR/CI/merge/deploy и атомарная live-очистка ещё не объявлены завершёнными. Финальный результат фиксируется только после manifest с шестью ключами, hash-сохранности шести рынков и live-проверки интерфейса/API.

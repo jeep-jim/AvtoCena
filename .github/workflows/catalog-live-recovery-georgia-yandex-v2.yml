@@ -72,7 +72,7 @@ jobs:
       - name: Require a clean six-market baseline before Georgia collection
         env:
           CATALOG_AUDIT_OUTPUT: catalog-georgia-yandex-v2-preflight.json
-          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,kyrgyzstan
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()
@@ -248,9 +248,9 @@ jobs:
       - name: Snapshot the six populated markets immediately before dry-run
         env:
           CATALOG_AUDIT_OUTPUT: catalog-georgia-yandex-v2-before.json
-          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,kyrgyzstan
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
-      - name: Dry-run Georgia replacement inside the full seven-market state
+      - name: Dry-run Georgia replacement inside the full six-market state
         env:
           RECOVERY_BATCH_MARKETS: georgia
           RECOVERY_BATCH_INPUT_DIR: recovery-input
@@ -275,7 +275,7 @@ jobs:
           for (const source of ['myauto_georgia_list','autopapa_georgia_open']) {
             if (!(Number(georgia.sourceCounts?.[source] || 0) > 0)) throw new Error(`georgia_yandex_v2_missing_source:${source}`);
           }
-          for (const market of ['korea','china','japan','uae','europe','kyrgyzstan']) {
+          for (const market of ['korea','china','japan','uae','europe']) {
             const expected = Number(before.markets?.[market]?.count || 0);
             const planned = Number(dry.preservedByMarket?.[market] || 0);
             if (planned !== expected) throw new Error(`georgia_yandex_v2_preservation_count:${market}:${planned}:${expected}`);
@@ -322,7 +322,7 @@ jobs:
       - name: Recheck strict six-market baseline immediately before persistence
         env:
           CATALOG_AUDIT_OUTPUT: catalog-georgia-yandex-v2-publish-before.json
-          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,kyrgyzstan
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Publish Georgia while preserving the other six public snapshots exactly
         env:
@@ -331,10 +331,10 @@ jobs:
           RECOVERY_BATCH_REPORT: catalog-georgia-yandex-v2-publish.json
           RECOVERY_BATCH_DRY_RUN: "false"
         run: npx tsx scripts/catalog-live-recovery-publish-batch.mjs
-      - name: Strict post-persist seven-market audit
+      - name: Strict post-persist six-market audit
         env:
           CATALOG_AUDIT_OUTPUT: catalog-georgia-yandex-v2-publish-after.json
-          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Assert Georgia quality and untouched-market counts
         run: |
@@ -345,7 +345,7 @@ jobs:
           const publish = JSON.parse(fs.readFileSync('catalog-georgia-yandex-v2-publish.json','utf8'));
           if (publish.published !== true || !publish.generationId) throw new Error('georgia_yandex_v2_publish_missing_generation');
           if (Number(publish.byMarket?.georgia?.imageStats?.belowMinimum || 0) !== 0) throw new Error('georgia_yandex_v2_publish_sparse_images');
-          for (const market of ['korea','china','japan','uae','europe','kyrgyzstan']) {
+          for (const market of ['korea','china','japan','uae','europe']) {
             const expected = Number(before.markets?.[market]?.count || 0);
             const actual = Number(after.markets?.[market]?.count || 0);
             if (actual !== expected) throw new Error(`georgia_yandex_v2_post_count:${market}:${actual}:${expected}`);

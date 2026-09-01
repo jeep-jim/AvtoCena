@@ -40,8 +40,8 @@ jobs:
     steps:
       - name: Explain rollout mode
         run: |
-          echo "The combined seven-market production workflow is disabled."
-          echo "Run Catalog V2 · Korea, Japan, China, UAE, Europe, Georgia or Kyrgyzstan independently."
+          echo "The combined six-market production workflow is disabled."
+          echo "Run Catalog V2 · Korea, Japan, China, UAE, Europe, Georgia independently."
           echo "Each successful market publication preserves every previously published market."
 
   validate:
@@ -72,7 +72,7 @@ jobs:
       fail-fast: false
       max-parallel: 20
       matrix:
-        market: [korea, china, japan, uae, europe, georgia, kyrgyzstan]
+        market: [korea, china, japan, uae, europe, georgia]
         shard: [0, 1, 2, 3, 4]
     env:
       CATALOG_REBUILD_SHARD_COUNT: "5"
@@ -105,12 +105,12 @@ jobs:
         run: echo "Disabled combined download"
       - name: Validate collected calculations and galleries
         run: echo "Disabled combined validation"
-      - name: Publish only a complete seven-market generation
+      - name: Publish only a complete six-market generation
         run: echo "Disabled combined publication"
       - name: Enforce Catalog V2 gates
         run: |
           node <<'NODE'
-          const markets = ['korea','china','japan','uae','europe','georgia','kyrgyzstan'];
+          const markets = ['korea','china','japan','uae','europe','georgia'];
           const report = { byMarket: {}, marketQuality: {} };
           const missing = markets.filter((market) => Number(report.byMarket?.[market] || 0) <= 0);
           const badFallback = markets.filter((market) => report.marketQuality?.[market]?.fallbackUnlocked === false);

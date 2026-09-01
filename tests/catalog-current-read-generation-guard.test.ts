@@ -8,8 +8,8 @@ const deployAudit = fs.readFileSync(new URL("../scripts/catalog-audit-visible-ca
 test("current offer shard is trusted only for the active manifest generation", () => {
   assert.match(storage, /Promise\.all\(\[readManifest\(\), readCurrentOfferShard\(id\)\]\)/);
   assert.match(storage, /current\.generationId === manifest\.generationId/);
-  assert.match(storage, /if \(currentOffer\) return currentOffer/);
-  assert.match(storage, /return offer \|\| readProjectionFallback\(\)/);
+  assert.match(storage, /currentOffer && isActivePublicCatalogMarket\(currentOffer\.market\)/);
+  assert.match(storage, /candidate\.id === id && isActivePublicCatalogMarket\(candidate\.market\)/);
 });
 
 test("public read models require a valid engine price and reject peer-median outliers", () => {

@@ -55,12 +55,6 @@ Mandatory Japan rule:
 - current auctions, upcoming auctions, start prices, current bids, expected prices and unsold lots are forbidden;
 - the stored `sourcePrice` must represent the final sale price and the price type must be `auction_final`.
 
-## Kyrgyzstan
-
-- Mashina.kg — https://www.mashina.kg/
-
-Price rule: use the positive listing price and source currency.
-
 ## Common publication contract
 
 A listing may be published when it has a real source ID, real source URL, make, model, year 2011 or newer, positive source price, source currency and at least one real photo. Store up to 30 source photos.

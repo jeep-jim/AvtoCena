@@ -6,7 +6,7 @@ import { useEffect, useMemo, useState, type ReactNode } from "react";
 const navItems = ["Обзор", "Заявки", "Клиенты", "Команда", "Рынки", "Компания"] as const;
 type NavItem = (typeof navItems)[number];
 type LeadTone = "new" | "work" | "ready" | "deal" | "late";
-type DemoMarketId = "japan" | "china" | "korea" | "uae" | "europe" | "georgia" | "kyrgyzstan";
+type DemoMarketId = "japan" | "china" | "korea" | "uae" | "europe" | "georgia";
 
 const leadPool = [
   { id: 1, city: "Новокузнецк", client: "Алексей", car: "Кроссовер до 2 млн ₽", source: "Сайт", status: "Новая", tone: "new", time: "1 мин" },
@@ -32,7 +32,6 @@ const markets = [
   { id: "uae", flag: "🇦🇪", name: "ОАЭ", leads: "11 заявок" },
   { id: "europe", flag: "🇪🇺", name: "Европа", leads: "17 заявок" },
   { id: "georgia", flag: "🇬🇪", name: "Грузия", leads: "5 заявок" },
-  { id: "kyrgyzstan", flag: "🇰🇬", name: "Кыргызстан", leads: "3 заявки" },
 ] as const satisfies ReadonlyArray<{ id: DemoMarketId; flag: string; name: string; leads: string }>;
 
 const clients = [
@@ -79,8 +78,7 @@ function MarketFlag({ market }: { market: DemoMarketId }) {
   if (market === "korea") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Южной Кореи"><rect width="28" height="20" fill="#fff" /><circle cx="14" cy="10" r="4.2" fill="#cd2e3a" /><path d="M9.8 10a4.2 4.2 0 0 0 8.4 0c-2.1-1.9-4.2 1.9-6.3 0-1.05-.95-1.4-.95-2.1 0Z" fill="#0047a0" /></svg>;
   if (market === "uae") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг ОАЭ"><rect width="28" height="20" fill="#fff" /><rect width="28" height="6.67" fill="#00732f" /><rect y="13.33" width="28" height="6.67" fill="#000" /><rect width="7" height="20" fill="#ff0000" /></svg>;
   if (market === "europe") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Европейского союза"><rect width="28" height="20" fill="#003399" />{Array.from({ length: 12 }, (_, index) => { const angle = index * Math.PI / 6 - Math.PI / 2; return <circle key={index} cx={14 + Math.cos(angle) * 5.2} cy={10 + Math.sin(angle) * 5.2} r=".7" fill="#ffcc00" />; })}</svg>;
-  if (market === "georgia") return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Грузии"><rect width="28" height="20" fill="#fff" /><rect x="12" width="4" height="20" fill="#ff0000" /><rect y="8" width="28" height="4" fill="#ff0000" /></svg>;
-  return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Кыргызстана"><rect width="28" height="20" fill="#e8112d" /><circle cx="14" cy="10" r="5.2" fill="#ffef00" /><circle cx="14" cy="10" r="2.6" fill="#e8112d" /></svg>;
+  return <svg viewBox="0 0 28 20" className={common} role="img" aria-label="Флаг Грузии"><rect width="28" height="20" fill="#fff" /><rect x="12" width="4" height="20" fill="#ff0000" /><rect y="8" width="28" height="4" fill="#ff0000" /></svg>;
 }
 
 function VerifiedIcon({ className = "", positive = false }: { className?: string; positive?: boolean }) {
@@ -237,7 +235,7 @@ export function DealerDemoDashboard() {
               <div className="mt-5 grid grid-cols-3 gap-2">{[["4,9", "рейтинг"], ["128", "выдач"], ["8 мин", "ответ"]].map(([value, label]) => <div key={label} className="rounded-xl bg-[var(--demo-panel)] p-3 text-center"><div className="text-xl font-black">{value}</div><div className="text-[10px] font-bold text-[var(--demo-muted)]">{label}</div></div>)}</div>
               <a href="https://avtocena.com/topavto" className="mt-4 flex items-center justify-between border-t border-black/10 pt-4 text-sm font-bold text-[var(--demo-muted)]"><span>🌐 avtocena.com/topavto</span><span aria-hidden="true">↗</span></a>
             </article>
-            <article className="rounded-2xl bg-[var(--demo-soft)] p-5"><div className="text-sm font-black">Подключённые возможности</div><div className="mt-4 grid gap-2">{["Telegram-лента", "Отзывы после сделки", "Распределение заявок", "7 рынков", "Шапка и логотип"].map((item) => <div key={item} className="flex items-center gap-2 rounded-xl bg-[var(--demo-panel)] px-3 py-2 text-sm font-bold"><VerifiedIcon positive className="h-5 w-5 shrink-0" />{item}</div>)}</div></article>
+            <article className="rounded-2xl bg-[var(--demo-soft)] p-5"><div className="text-sm font-black">Подключённые возможности</div><div className="mt-4 grid gap-2">{["Telegram-лента", "Отзывы после сделки", "Распределение заявок", "6 рынков", "Шапка и логотип"].map((item) => <div key={item} className="flex items-center gap-2 rounded-xl bg-[var(--demo-panel)] px-3 py-2 text-sm font-bold"><VerifiedIcon positive className="h-5 w-5 shrink-0" />{item}</div>)}</div></article>
           </div>
         </Panel>
       );
@@ -252,7 +250,7 @@ export function DealerDemoDashboard() {
 
       <section className="dealer-demo-window overflow-hidden rounded-[2rem] bg-[var(--demo-panel)]">
         <header className="flex flex-wrap items-center justify-between gap-3 border-b border-white/7 px-4 py-4 md:px-6">
-          <div className="flex items-center gap-3"><TopAvtoLogo compact /><div><div className="font-black">TopAvto · демо</div><div className="text-xs font-bold text-[var(--demo-muted)]">Новокузнецк · 7 рынков{publishedMarketTotal > 0 ? ` · ${countFormatter.format(publishedMarketTotal)} авто` : ""}</div></div></div>
+          <div className="flex items-center gap-3"><TopAvtoLogo compact /><div><div className="font-black">TopAvto · демо</div><div className="text-xs font-bold text-[var(--demo-muted)]">Новокузнецк · 6 рынков{publishedMarketTotal > 0 ? ` · ${countFormatter.format(publishedMarketTotal)} авто` : ""}</div></div></div>
           <div className="flex items-center gap-3"><span className="demo-online-chip hidden rounded-full px-3 py-2 text-xs font-black sm:inline-flex">● Система работает</span><div className="flex items-center gap-2"><DemoAvatar /><span className="hidden text-sm font-black sm:inline">Демо</span></div></div>
         </header>
 

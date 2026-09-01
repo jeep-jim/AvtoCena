@@ -10,7 +10,7 @@ const maxImagesPerOffer = Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_
 const reportFile = process.env.CATALOG_DAILY_LOCAL_REPORT || "catalog-daily-report.json";
 const retentionReportFile = "catalog-daily-retention-report.json";
 
-console.log(`[daily-full] seven markets, target ${targetPerMarket} fresh offers per market`);
+console.log(`[daily-full] six markets, target ${targetPerMarket} fresh offers per market`);
 const importReport = await importCatalog({
   sourceIds: SOURCE_IDS,
   maxOffers: targetPerMarket,
@@ -38,7 +38,7 @@ try {
 const retentionReport = JSON.parse(await fs.readFile(retentionReportFile, "utf8").catch(() => "{}"));
 const finalReport = {
   ok: true,
-  mode: "seven-markets-1000-daily",
+  mode: "six-markets-1000-daily",
   startedAt: importReport.startedAt,
   finishedAt: new Date().toISOString(),
   targetPerMarket,

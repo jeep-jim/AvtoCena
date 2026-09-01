@@ -190,28 +190,12 @@ test("exact Kia K9 3342 cc and Korean AWD are preserved correctly", () => {
   assert.equal(safe.powertrainKind, "combustion");
 });
 
-test("Mashina numeric model code cannot become estimated horsepower", () => {
-  const normalized = normalizeVehicleOfferSpecs({
-    sourceId: "mashina_kyrgyzstan_exact",
-    make: "Dongfeng",
-    model: "DFSK 500",
-    trim: "Dongfeng DFSK 500",
-    transmission: "CVT",
-    powerHp: 500,
-    powerKw: 367.75,
-    powerDataConfidence: "estimated" as const,
-    operational: { raw: { parsed: { title: "Dongfeng DFSK 500", engineCc: 1500 } } },
-  });
-  assert.equal(normalized.powerHp, undefined);
-  assert.equal(normalized.powerKw, undefined);
-});
-
 test("engine model code T5L does not become five-litre displacement", () => {
   const normalized = enrichOfferWithExplicitEngineDisplacement({
     id: "dongfeng-t5l",
-    sourceId: "mashina_kyrgyzstan_exact",
+    sourceId: "autohome_used_china_open",
     sourceOfferId: "dongfeng-t5l",
-    market: "kyrgyzstan",
+    market: "china",
     offerType: "fixed",
     status: "active",
     make: "Dongfeng",
@@ -219,14 +203,14 @@ test("engine model code T5L does not become five-litre displacement", () => {
     trim: "1.6 AMT",
     year: 2026,
     sourcePrice: 13_500,
-    sourceCurrency: "USD",
+    sourceCurrency: "CNY",
     priceMode: "fixed",
     images: [],
     totalRub: null,
     calculationStatus: "needs_data",
     firstSeenAt: new Date().toISOString(),
     updatedAt: new Date().toISOString(),
-    operational: { sourceUrl: "https://mashina.kg/details/dongfeng-t5l", sourceVenueName: "Mashina" },
+    operational: { sourceUrl: "https://www.che168.com/dealer/dongfeng-t5l", sourceVenueName: "Che168" },
   } as any);
   assert.equal(normalized.engineCc, 1600);
 });

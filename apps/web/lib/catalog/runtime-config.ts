@@ -7,7 +7,6 @@ export const PUBLIC_CATALOG_MARKETS: CatalogMarket[] = [
   "uae",
   "europe",
   "georgia",
-  "kyrgyzstan",
 ];
 
 export const PUBLIC_CATALOG_MARKET_SET = new Set<CatalogMarket>(PUBLIC_CATALOG_MARKETS);
@@ -19,7 +18,6 @@ export const CATALOG_MARKET_LABELS: Record<CatalogMarket, string> = {
   uae: "ОАЭ",
   europe: "Европа",
   georgia: "Грузия",
-  kyrgyzstan: "Кыргызстан",
 };
 
 export const CATALOG_MARKET_FLAGS: Record<CatalogMarket, string> = {
@@ -29,7 +27,6 @@ export const CATALOG_MARKET_FLAGS: Record<CatalogMarket, string> = {
   uae: "🇦🇪",
   europe: "🇪🇺",
   georgia: "🇬🇪",
-  kyrgyzstan: "🇰🇬",
 };
 
 // JSON каталога хранится небольшими независимыми чанками. 500 записей —

@@ -18,12 +18,12 @@ test("Georgia Yandex recovery stays manual, serialized and fail-closed before wr
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"/);
   assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
   assert.match(workflow, /GEORGIA_YANDEX_MIN_FRESH: "1000"/);
-  assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
+  assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia/);
   assert.match(workflow, /RECOVERY_BATCH_MARKETS: georgia/);
   assert.match(workflow, /RECOVERY_BATCH_DRY_RUN: "true"/);
   assert.match(workflow, /if: inputs\.apply == true/);
   assert.match(workflow, /Recheck strict all-seven baseline immediately before persistence/);
-  assert.match(workflow, /Strict post-persist seven-market audit/);
+  assert.match(workflow, /Strict post-persist six-market audit/);
 });
 
 test("Georgia source collection through Yandex never receives catalog storage credentials", () => {
