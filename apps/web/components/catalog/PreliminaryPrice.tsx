@@ -131,6 +131,11 @@ export function PreliminaryPrice({
           style={{ background: "var(--ac-surface-3)", border: "1px solid rgba(103,113,130,.45)", color: "var(--ac-text)" }}
           onMouseEnter={() => { if (desktopHover) setOpen(true); }}
           onMouseLeave={() => { if (desktopHover) setOpen(false); }}
+          onTouchEnd={(event) => {
+            event.preventDefault();
+            event.stopPropagation();
+            setOpen((current) => !current);
+          }}
           onClick={(event) => {
             event.preventDefault();
             event.stopPropagation();

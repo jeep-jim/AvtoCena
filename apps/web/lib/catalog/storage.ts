@@ -539,6 +539,11 @@ async function readCurrentOfferShard(id: string) {
   }
   return promise;
 }
+export async function getOfferFromCurrentShard(id: string) {
+  const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
+  if (current.generationId !== manifest.generationId) return null;
+  return (current.items || []).find((item) => item.id === id) || null;
+}
 async function readSearchProjection(generationId: string, market: string) {
   if (projectionCacheGeneration && projectionCacheGeneration !== generationId) searchProjectionCache.clear();
   projectionCacheGeneration = generationId;

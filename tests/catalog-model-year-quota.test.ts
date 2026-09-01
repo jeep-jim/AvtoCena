@@ -3,6 +3,7 @@ import fs from "node:fs";
 import test from "node:test";
 import {
   CATALOG_MAX_OFFERS_PER_MODEL_YEAR,
+  CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR,
   catalogExactModelKey,
   catalogModelYearQuotaKey,
   enforceCatalogModelYearQuota,
@@ -17,6 +18,7 @@ function offer(market: string, make: string, model: string, year: number) {
 
 test("inventory quota is twenty per market + exact model + year", () => {
   assert.equal(CATALOG_MAX_OFFERS_PER_MODEL_YEAR, 20);
+  assert.equal(CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR, 100);
   assert.equal(catalogModelYearQuotaKey(offer("korea", "Hyundai", "Casper", 2022)), "korea|hyundai|casper|2022");
   assert.equal(catalogModelYearQuotaKey(offer("korea", "Hyundai", "Casper", 2025)), "korea|hyundai|casper|2025");
   assert.notEqual(
@@ -28,6 +30,16 @@ test("inventory quota is twenty per market + exact model + year", () => {
     catalogModelYearQuotaKey(offer("europe", "Hyundai", "Casper", 2022)),
   );
   assert.equal(catalogExactModelKey(offer("korea", "Hyundai", "Casper", 2022)), "korea|hyundai|casper");
+});
+
+test("Japanese sold-auction inventory keeps up to one hundred unique lots per model-year", () => {
+  const rows = Array.from({ length: 115 }, (_, index) => ({
+    ...offer("japan", "Toyota", "Aqua", 2024),
+    id: `aqua-${index}`,
+  }));
+  const result = enforceCatalogModelYearQuota(rows);
+  assert.equal(result.rows.length, 100);
+  assert.equal(result.removed.length, 15);
 });
 
 test("homepage showcase prefers different makes and exact models without losing freshness order", () => {

@@ -320,11 +320,10 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
     : suppliedPowerHp || structuredPowerHp(offer) || inferPowerHp(primary) || inferPowerHp(full);
   const namedPowertrainKind = namedElectrifiedPowertrainKind(offer);
   const correctedFromCombustion = Boolean(namedPowertrainKind && offer.powertrainKind === "combustion");
-  const powerSanity = catalogPowerSanity({
-    ...offer,
-    engineCc,
-    powertrainKind: namedPowertrainKind || offer.powertrainKind,
-  }, candidatePowerHp);
+  // Keep the supplied classification visible to the safety check. Replacing it
+  // with the identity-derived kind here used to hide the very conflict we were
+  // trying to detect (for example an Encar UX250h stored as combustion).
+  const powerSanity = catalogPowerSanity({ ...offer, engineCc }, candidatePowerHp);
   const powerHp = powerSanity.suspicious ? undefined : candidatePowerHp;
   // If horsepower was rejected, do not retain a previously derived kW value
   // from the same bad marketplace number. Verified V2/official knowledge may

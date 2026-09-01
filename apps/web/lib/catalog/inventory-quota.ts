@@ -4,6 +4,10 @@ const configuredMaxOffersPerModelYear = Number(process.env.CATALOG_MAX_OFFERS_PE
 export const CATALOG_MAX_OFFERS_PER_MODEL_YEAR = Number.isFinite(configuredMaxOffersPerModelYear)
   ? Math.max(1, Math.min(100, Math.floor(configuredMaxOffersPerModelYear)))
   : 20;
+const configuredJapanMaxOffersPerModelYear = Number(process.env.CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR || 100);
+export const CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR = Number.isFinite(configuredJapanMaxOffersPerModelYear)
+  ? Math.max(CATALOG_MAX_OFFERS_PER_MODEL_YEAR, Math.min(100, Math.floor(configuredJapanMaxOffersPerModelYear)))
+  : 100;
 export const CATALOG_SHOWCASE_MAX_POWER_HP = 160;
 export const CATALOG_SHOWCASE_LOW_POWER_MIN_SHARE = 0.8;
 
@@ -64,13 +68,20 @@ export function enforceCatalogModelYearQuota<T extends Partial<VehicleOffer>>(
   for (const row of rows) {
     const key = catalogModelYearQuotaKey(row);
     const count = key ? Number(counts.get(key) || 0) : 0;
+    // Historical auction lots are individually sold vehicles, not duplicated
+    // dealer stock. A global 20-card showcase cap silently removed thousands of
+    // valid JPAuc lots on every weekly Japan refresh. Keep a bounded 100-card
+    // Japan bucket while the normal six-market diversity cap remains at 20.
+    const limit = key.startsWith("japan|")
+      ? CATALOG_JAPAN_MAX_OFFERS_PER_MODEL_YEAR
+      : CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
     const protectedRow = options.protectedIds?.has(String(row?.id || "")) === true;
     if (protectedRow) {
       if (key) counts.set(key, count + 1);
       kept.push(row);
       continue;
     }
-    if (!key || count >= CATALOG_MAX_OFFERS_PER_MODEL_YEAR) {
+    if (!key || count >= limit) {
       removed.push(row);
       continue;
     }

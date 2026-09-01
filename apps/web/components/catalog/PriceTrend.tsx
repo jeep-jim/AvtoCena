@@ -622,6 +622,7 @@ export function PriceTrend({ offer, label = "Ориентир", priceClassName =
     role={panel && canShowRate ? "button" : undefined}
     tabIndex={panel && canShowRate ? 0 : undefined}
     aria-label={panel && canShowRate ? `Показать курс ${currency} и полный расчёт` : undefined}
+    onTouchEnd={panel ? (event) => { if (canShowRate) { event.preventDefault(); event.stopPropagation(); openSheet(); } } : undefined}
     onClick={panel ? (event) => { if (!desktopHover) { event.preventDefault(); event.stopPropagation(); openSheet(); } } : undefined}
     onKeyDown={panel ? (event) => { if ((event.key === "Enter" || event.key === " ") && !desktopHover) { event.preventDefault(); openSheet(); } } : undefined}
   >
