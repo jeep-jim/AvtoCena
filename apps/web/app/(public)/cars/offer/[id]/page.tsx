@@ -260,13 +260,18 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   if (!offer) redirect("/cars");
 
   const enrichedOffer = await enrichOfferForDisplay(offer);
-  const initialPublic: any = normalizeVehicleOfferSpecs(publicOffer(enrichedOffer));
+  // Normalize while the trusted immutable identity evidence is still present.
+  // publicOffer deliberately removes operational fields; running it first used
+  // to erase resolver-backed variants such as UX250h before powertrain safety
+  // could correct the stale combustion classification.
+  const normalizedEnrichedOffer: any = normalizeVehicleOfferSpecs(enrichedOffer);
+  const initialPublic: any = publicOffer(normalizedEnrichedOffer);
   const initialVisibleRub = catalogOfferVisibleRub(initialPublic);
   const pricedOffer = safeRequestedPowerHp
-    ? await calculateOfferWithUserPowerScenario(enrichedOffer as any, safeRequestedPowerHp)
+    ? await calculateOfferWithUserPowerScenario(normalizedEnrichedOffer as any, safeRequestedPowerHp)
     : initialVisibleRub > 0
-      ? enrichedOffer
-      : await calculateOfferWithRussiaCustoms(enrichedOffer as any);
+      ? normalizedEnrichedOffer
+      : await calculateOfferWithRussiaCustoms(normalizedEnrichedOffer as any);
   const sourceUrl = safeExternalUrl((enrichedOffer as any)?.operational?.sourceUrl);
   const raw: any = normalizeVehicleOfferSpecs(publicOffer(pricedOffer));
   const presented = presentCatalogOffer(raw);

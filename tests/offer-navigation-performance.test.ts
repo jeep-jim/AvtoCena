@@ -147,6 +147,8 @@ test("offer detail falls back to its active admitted projection instead of 404",
   assert.match(page, /getOfferFromCurrentShard\(id\)[\s\S]*getOfferForPage\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
   assert.match(page, /getOfferForPage\(id\)[\s\S]*getOfferFromCurrentShard\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)/);
   assert.match(layout, /normalizeVehicleOfferSpecs\(storedOffer\)/);
+  assert.match(page, /normalizeVehicleOfferSpecs\(enrichedOffer\)[\s\S]*publicOffer\(normalizedEnrichedOffer\)/);
+  assert.doesNotMatch(page, /normalizeVehicleOfferSpecs\(publicOffer\(enrichedOffer\)\)/);
   assert.match(storage, /if \(!loc\) return readProjectionFallback\(\)/);
   assert.match(storage, /return offer \|\| readProjectionFallback\(\)/);
   assert.match(page, /<main data-offer-id=\{o\.id\}/);
