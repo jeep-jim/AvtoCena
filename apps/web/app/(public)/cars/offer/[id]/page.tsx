@@ -1,6 +1,6 @@
 import { Suspense, type ReactNode } from "react";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { redirect } from "next/navigation";
 import { money } from "@/lib/avtocena";
 import { CatalogCard } from "@/components/catalog/CatalogCard";
 import { EditablePowerTile } from "@/components/catalog/EditablePowerTile";
@@ -24,7 +24,7 @@ import { calculateOfferWithRussiaCustoms, calculateOfferWithUserPowerScenario } 
 import { DEFAULT_CATALOG_POWER_FALLBACK_HP, readCatalogPowerScenario } from "@/lib/catalog/power-scenario";
 import { presentCatalogOffer } from "@/lib/catalog/presentation";
 import { normalizeVehicleOfferSpecs } from "@/lib/catalog/spec-normalization";
-import { getOfferFromCurrentProjection, isJapanCatalogOfferId, publicOffer, searchOffers } from "@/lib/catalog/storage";
+import { getOfferFromCurrentProjection, getOfferFromCurrentShard, publicOffer, searchOffers } from "@/lib/catalog/storage";
 
 // Offer inventory changes independently from web deploys. Never persist a
 // not-found render for an ID that can become available in a later generation.
@@ -241,19 +241,18 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   const query = searchParams ? await searchParams : {};
   const requestedPowerHp = Number(query?.powerHp || 0);
   const safeRequestedPowerHp = Number.isFinite(requestedPowerHp) && requestedPowerHp >= 20 && requestedPowerHp <= 2500 ? Math.round(requestedPowerHp) : 0;
-  // Japan currently has a complete compact projection (10k+ rows), while some
-  // older immutable detail indexes can miss and consume most of the request
-  // budget before the projection fallback runs. Resolve approved Japan IDs from
-  // their bounded market projection first; keep the existing fast shard order
-  // for every other market.
-  const offer = isJapanCatalogOfferId(id)
-    ? await getOfferFromCurrentProjection(id) || await getOfferForPage(id)
-    : await getOfferForPage(id) || await getOfferFromCurrentProjection(id);
+  // The hashed current shard is the bounded authoritative detail record: unlike
+  // a search projection it contains the complete gallery, price breakdown and
+  // source URL. A projection remains the fast publication-cutover fallback so a
+  // live card never becomes a 404 while the immutable indexes catch up.
+  const offer = await getOfferFromCurrentShard(id)
+    || await getOfferFromCurrentProjection(id)
+    || await getOfferForPage(id);
   // getOfferForPage reads only immutable records that already passed the
   // publication gate. Re-validating their compact representation here can no
   // longer see source-only evidence removed from operational.raw and used to
   // turn valid Georgia/Kyrgyzstan cards into a soft 404.
-  if (!offer) notFound();
+  if (!offer) redirect("/cars");
 
   const enrichedOffer = await enrichOfferForDisplay(offer);
   const initialPublic: any = normalizeVehicleOfferSpecs(publicOffer(enrichedOffer));
@@ -281,7 +280,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
   // one last chance to finish an older stored row. If that still cannot produce
   // an admitted delivered price, keep the row internal instead of rendering a
   // public "price on request" page.
-  if (!visibleRub) notFound();
+  if (!visibleRub) redirect("/cars");
   const o = {
     ...presented,
     totalRub: visibleRub || null,

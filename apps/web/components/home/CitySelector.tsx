@@ -108,6 +108,7 @@ export function CitySelector({ value, onChange }: Props) {
     <span className="ac-city-selector mt-2 flex w-fit max-w-full items-center text-[.74em] leading-none lg:mt-0 lg:inline-flex">
       <button
         type="button"
+        onTouchEnd={(event) => { event.preventDefault(); event.stopPropagation(); setQuery(value || ""); setOpen(true); }}
         onClick={() => { setQuery(value || ""); setOpen(true); }}
         className="inline-flex min-w-0 max-w-full items-center gap-[.13em] border-b-[.045em] border-dotted border-current px-[.08em] py-[.04em] text-left font-black text-[var(--ac-muted)] transition hover:text-[var(--ac-text)]"
         aria-label={`Выбрать город. Сейчас: ${label}`}
@@ -123,10 +124,10 @@ export function CitySelector({ value, onChange }: Props) {
         <div className="relative mt-5"><LocationIcon className="pointer-events-none absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-[var(--ac-muted)]" /><input value={query} onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => { if (event.key === "Enter") choose(suggestions[0]?.city || query); }} autoFocus placeholder="Начните вводить город" className="h-14 w-full rounded-2xl bg-[var(--ac-surface-2)] pl-12 pr-4 text-base font-bold text-[var(--ac-text)] outline-none placeholder:text-[var(--ac-muted)]" /></div>
         <div className="ac-hide-scrollbar mt-3 max-h-[45vh] overflow-y-auto">
           {loading ? <div className="px-3 py-4 text-sm font-bold text-[var(--ac-muted)]">Ищем город…</div> : null}
-          {suggestions.map((item) => <button key={`${item.city}-${item.region || ""}`} type="button" onClick={() => choose(item.city)} className="flex w-full items-center justify-between gap-3 rounded-xl px-3 py-3 text-left transition hover:bg-[var(--ac-surface-2)]"><span className="font-black">{item.city}</span><span className="truncate text-xs font-bold text-[var(--ac-muted)]">{item.region}</span></button>)}
-          {!suggestions.length && !loading ? <div className="grid grid-cols-2 gap-2 pt-1">{filteredPopular.map((city) => <button key={city} type="button" onClick={() => choose(city)} className="rounded-xl bg-[var(--ac-surface-2)] px-3 py-3 text-left text-sm font-black">{city}</button>)}</div> : null}
+          {suggestions.map((item) => <button key={`${item.city}-${item.region || ""}`} type="button" onTouchEnd={(event) => { event.preventDefault(); event.stopPropagation(); choose(item.city); }} onClick={() => choose(item.city)} className="flex w-full items-center justify-between gap-3 rounded-xl px-3 py-3 text-left transition hover:bg-[var(--ac-surface-2)]"><span className="font-black">{item.city}</span><span className="truncate text-xs font-bold text-[var(--ac-muted)]">{item.region}</span></button>)}
+          {!suggestions.length && !loading ? <div className="grid grid-cols-2 gap-2 pt-1">{filteredPopular.map((city) => <button key={city} type="button" onTouchEnd={(event) => { event.preventDefault(); event.stopPropagation(); choose(city); }} onClick={() => choose(city)} className="rounded-xl bg-[var(--ac-surface-2)] px-3 py-3 text-left text-sm font-black">{city}</button>)}</div> : null}
         </div>
-        <button type="button" onClick={() => choose(query)} disabled={!query.trim()} className="avto-button mt-4 flex h-14 w-full items-center justify-center rounded-2xl text-base font-black disabled:cursor-not-allowed disabled:opacity-45">Выбрать город</button>
+        <button type="button" onTouchEnd={(event) => { event.preventDefault(); event.stopPropagation(); choose(query); }} onClick={() => choose(query)} disabled={!query.trim()} className="avto-button mt-4 flex h-14 w-full items-center justify-center rounded-2xl text-base font-black disabled:cursor-not-allowed disabled:opacity-45">Выбрать город</button>
       </section>
     </div>, document.body) : null}
   </>;

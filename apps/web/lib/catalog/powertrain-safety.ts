@@ -3,6 +3,10 @@ import type { VehicleOffer } from "./types";
 const HYBRID_PRIMARY_RE = /series[ -]?hybrid|range[ -]?extender|\b(?:hybrid|reev|erev|phev|hev|mhev)\b|plug[ -]?in|parallel[ -]?hybrid|power[ -]?split|mixed[ -]?hybrid|гибрид|混合动力|增程|하이브리드/i;
 const SERIES_HYBRID_PRIMARY_RE = /series[ -]?hybrid|range[ -]?extender|\b(?:reev|erev)\b|\be[ -]?power\b|последовательн\w*\s+гибрид|增程/i;
 const ELECTRIC_PRIMARY_RE = /battery[ -]?electric|pure[ -]?electric|\b(?:bev|ev)\b|электромоб|электро(?:кар|мобиль)|纯电|전기차|일렉트릭/i;
+// Lexus uses the numeric `h` badge as an identity-bound hybrid designation
+// (UX250h, NX350h, RX450h, ES300h, and so on). These badges occur in exact
+// marketplace titles even when a generic model field only says "UX".
+const LEXUS_HYBRID_BADGE_RE = /\b(?:ct|ux|nx|rx|es|gs|ls|lc)\s*\d{3}h(?:\+)?\b/i;
 const COMBUSTION_FUELS = new Set(["petrol", "diesel", "lpg", "gasoline", "benzin"]);
 
 function positive(value: unknown) {
@@ -59,9 +63,9 @@ export function canonicalizeSemanticSourceFields<T extends Partial<VehicleOffer>
  * frequently contain menus and recommendations for unrelated vehicles.
  */
 export function namedElectrifiedPowertrainKind(input: Partial<VehicleOffer>) {
-  const primary=[input.make,input.model,input.generation,input.trim,input.engineType,input.fuel].filter(Boolean).join(" ");
+  const primary=[input.make,input.model,input.generation,input.trim,input.engineType,input.fuel,input.sourceTitle,input.operational?.sourceTitle].filter(Boolean).join(" ");
   if (SERIES_HYBRID_PRIMARY_RE.test(primary)) return "series_hybrid" as const;
-  if (HYBRID_PRIMARY_RE.test(primary)) return "other_hybrid" as const;
+  if (HYBRID_PRIMARY_RE.test(primary) || LEXUS_HYBRID_BADGE_RE.test(primary)) return "other_hybrid" as const;
   if (ELECTRIC_PRIMARY_RE.test(primary)) return "electric" as const;
   return undefined;
 }

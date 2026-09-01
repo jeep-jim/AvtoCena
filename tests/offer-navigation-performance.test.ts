@@ -135,6 +135,7 @@ test("offer detail falls back to its active admitted projection instead of 404",
   assert.match(storage, /function offerProjectionScopeFromId/);
   assert.match(storage, /"jpauc_japan_past_open"/);
   assert.match(storage, /export async function getOfferFromCurrentProjection/);
+  assert.match(storage, /export async function getOfferFromCurrentShard/);
   assert.match(storage, /const projectionScope = offerProjectionScopeFromId\(id\)/);
   assert.match(storage, /let projection = await readCurrentSearchProjection\(projectionScope\)/);
   assert.match(storage, /if \(projection\.generationId !== manifest\.generationId\)/);
@@ -142,12 +143,12 @@ test("offer detail falls back to its active admitted projection instead of 404",
   assert.match(storage, /projection\.generationId !== manifest\.generationId/);
   assert.match(storage, /return row \? offerDetailFromProjection\(row\) : null/);
   assert.match(storage, /export function isJapanCatalogOfferId/);
-  assert.match(page, /isJapanCatalogOfferId\(id\)[\s\S]*getOfferFromCurrentProjection\(id\) \|\| await getOfferForPage\(id\)/);
+  assert.match(page, /getOfferFromCurrentShard\(id\)[\s\S]*getOfferFromCurrentProjection\(id\)[\s\S]*getOfferForPage\(id\)/);
+  assert.doesNotMatch(page, /isJapanCatalogOfferId/);
   assert.match(storage, /if \(!loc\) return readProjectionFallback\(\)/);
   assert.match(storage, /return offer \|\| readProjectionFallback\(\)/);
   assert.match(page, /<main data-offer-id=\{o\.id\}/);
   assert.match(page, /decodeURIComponent\(routeId\)/);
-  assert.match(page, /getOfferForPage\(id\) \|\| await getOfferFromCurrentProjection\(id\)/);
   assert.match(data, /catalog-offer-page-v2/);
 });
 
@@ -162,7 +163,9 @@ test("offer actions render in stable page slots without hydration portals", () =
 });
 
 test("offer page does not re-run source-only publication gates on compact public records", () => {
-  assert.match(page, /if \(!offer\) notFound\(\)/);
+  assert.match(page, /if \(!offer\) redirect\("\/cars"\)/);
+  assert.match(page, /if \(!visibleRub\) redirect\("\/cars"\)/);
+  assert.doesNotMatch(page, /notFound\(\)/);
   assert.doesNotMatch(page, /!offer \|\| !isCrediblePublicOffer\(offer\)/);
   assert.doesNotMatch(page, /!catalogPublicPriority\(raw\)\.eligible/);
 });

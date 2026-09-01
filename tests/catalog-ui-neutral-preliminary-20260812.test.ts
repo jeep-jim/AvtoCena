@@ -14,6 +14,7 @@ const offerPage = fs.readFileSync(new URL("../apps/web/app/(public)/cars/offer/[
 const priceSheetCss = fs.readFileSync(new URL("../apps/web/app/public-price-sheet-fix.css", import.meta.url), "utf8");
 const editablePower = fs.readFileSync(new URL("../apps/web/components/catalog/EditablePowerTile.tsx", import.meta.url), "utf8");
 const rootLayout = fs.readFileSync(new URL("../apps/web/app/layout.tsx", import.meta.url), "utf8");
+const citySelector = fs.readFileSync(new URL("../apps/web/components/home/CitySelector.tsx", import.meta.url), "utf8");
 
 test("catalog price colors distinguish electrified, preliminary and regular calculations", () => {
   assert.match(catalogPrice, /highlightElectrified/);
@@ -101,6 +102,10 @@ test("mobile offer controls remain tappable", () => {
   assert.doesNotMatch(priceSheetCss, /@media \(max-width: 1023px\)[\\s\\S]+\\.ac-price-trend-panel\s*\{[\\s\\S]+pointer-events:\s*none !important/);
   assert.match(preliminaryPrice, /const \[lightTheme, setLightTheme\] = useState\(false\)/);
   assert.match(priceTrend, /const \[lightTheme, setLightTheme\] = useState\(false\)/);
+  assert.match(preliminaryPrice, /onTouchEnd=\{\(event\) => \{/);
+  assert.match(priceTrend, /onTouchEnd=\{panel \? \(event\) =>/);
+  assert.match(citySelector, /onTouchEnd=\{\(event\) => \{ event\.preventDefault\(\); event\.stopPropagation\(\); choose\(item\.city\); \}\}/);
+  assert.match(citySelector, /onTouchEnd=\{\(event\) => \{ event\.preventDefault\(\); event\.stopPropagation\(\); choose\(city\); \}\}/);
 });
 
 test("theme bootstrap does not mutate managed head before hydration", () => {
