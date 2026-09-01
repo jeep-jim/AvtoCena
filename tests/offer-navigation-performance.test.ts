@@ -98,7 +98,7 @@ test("catalog reads a current one-hop projection before generation indexes", () 
   assert.match(storage, /writeJsonAtomic\(currentProjectionPath\(market\), \{ generationId, items: projectionsByMarket\.get\(market\) \|\| \[\] \}, false\)/);
   assert.match(storage, /export async function publishCurrentCatalogReadModels/);
   assert.match(readModelsScript, /publishCurrentCatalogReadModels/);
-  assert.match(readModelsWorkflow, /Catalog live recovery · UAE \+ Kyrgyzstan/);
+  assert.doesNotMatch(readModelsWorkflow, /Kyrgyzstan|Кыргызстан/);
   assert.match(readModelsWorkflow, /Catalog live · daily working markets/);
   assert.match(readModelsWorkflow, /Catalog Japan · publish verified Prestige aggregate/);
   assert.match(readModelsWorkflow, /Catalog · apply certified 30-minute power/);
@@ -123,8 +123,8 @@ test("catalog generation becomes public only after canonical identity and dedupl
 
 test("offer detail trusts records admitted into the active immutable generation", () => {
   assert.match(storage, /const currentOffer = \(current\.items \|\| \[\]\)\.find\(\(item\) => item\.id === id\)/);
-  assert.match(storage, /if \(currentOffer\) return currentOffer/);
-  assert.match(storage, /return offer \|\| readProjectionFallback\(\)/);
+  assert.match(storage, /currentOffer && isActivePublicCatalogMarket\(currentOffer\.market\)/);
+  assert.match(storage, /candidate\.id === id && isActivePublicCatalogMarket\(candidate\.market\)/);
   assert.doesNotMatch(storage, /currentOffer && publishedOfferCanRenderUnderCurrentPolicy\(currentOffer\)/);
   assert.doesNotMatch(storage, /find\(\(item\) => item\.id === id && isPublicOffer\(item\)\)/);
   assert.doesNotMatch(storage, /find\(\(offer\) => offer\.id === id && isPublicOffer\(offer\)\)/);

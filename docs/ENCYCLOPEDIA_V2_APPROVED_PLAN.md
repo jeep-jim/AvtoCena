@@ -445,7 +445,7 @@ Encyclopedia enrichment:
 
 До старта V2 завершается certification/autonomous daily loop семи рынков.
 
-После PASS рынка Японии и итогового all-7 production audit команда пользователя **«Энциклопедия»** означает начать реализацию в таком порядке:
+После PASS рынка Японии и итогового all-6 production audit команда пользователя **«Энциклопедия»** означает начать реализацию в таком порядке:
 
 1. финальный schema/contract V2 на базе этого документа;
 2. ingestion foundation;

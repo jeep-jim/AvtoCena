@@ -99,8 +99,8 @@ test("canonical publication caps normalized model-year buckets and preserves qua
 });
 
 test("an untouched market keeps every hash-protected row while newcomers respect its occupied quota", () => {
-  const protectedRows = Array.from({ length: 22 }, (_, index) => ({ ...offer("kyrgyzstan", "Toyota", "Corolla", 2025), id: `live-${index}` }));
-  const newcomers = Array.from({ length: 3 }, (_, index) => ({ ...offer("kyrgyzstan", "Toyota", "Corolla", 2025), id: `new-${index}` }));
+  const protectedRows = Array.from({ length: 22 }, (_, index) => ({ ...offer("georgia", "Toyota", "Corolla", 2025), id: `live-${index}` }));
+  const newcomers = Array.from({ length: 3 }, (_, index) => ({ ...offer("georgia", "Toyota", "Corolla", 2025), id: `new-${index}` }));
   const protectedIds = new Set(protectedRows.map((row) => row.id));
   const result = enforceCatalogModelYearQuota([...protectedRows, ...newcomers], { protectedIds });
   assert.deepEqual(result.rows.map((row: any) => row.id), protectedRows.map((row) => row.id));

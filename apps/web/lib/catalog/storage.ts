@@ -17,6 +17,9 @@ import { deduplicatePublicCatalogOffers } from "./public-offer-deduplication";
 import { isSupportedPublicCatalogIdentity, publicCatalogIdentityRejectionReason } from "./public-identity-policy";
 
 const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
+function isActivePublicCatalogMarket(value: unknown): value is CatalogMarket {
+  return MARKETS.includes(String(value || "").toLowerCase() as CatalogMarket);
+}
 const IMAGE_MAX_BYTES = Number(process.env.CATALOG_IMAGE_MAX_BYTES || 8_000_000);
 const IMAGE_MAX_WIDTH = Math.max(640, Number(process.env.CATALOG_IMAGE_MAX_WIDTH || 1600));
 const IMAGE_MAX_HEIGHT = Math.max(480, Number(process.env.CATALOG_IMAGE_MAX_HEIGHT || 1200));
@@ -93,12 +96,6 @@ const ALLOWED_IMAGE_HOSTS = [
   /^(.+\.)?auto\.ge$/i,
   /^(.+\.)?ss\.ge$/i,
   /^(.+\.)?mymarket\.ge$/i,
-  /^(.+\.)?mashina\.kg$/i,
-  /^(.+\.)?elcat\.kg$/i,
-  /^(.+\.)?lalafo\.kg$/i,
-  /^(.+\.)?bazar\.kg$/i,
-  /^(.+\.)?turbo\.kg$/i,
-  /^(.+\.)?o\.kg$/i,
   /^(.+\.)?autouncle\.(?:de|com|dk|se|no|fr|it|es|nl|be|at|ch)$/i,
   /^(.+\.)?autoscout24\.(?:com|de|fr|it|nl|be|at|ch|es|pl)$/i,
   /^(.+\.)?mobile\.de$/i,
@@ -449,7 +446,7 @@ export async function getOfferFromCurrentProjection(id: string) {
     );
   }
   if (projection.generationId !== manifest.generationId) return null;
-  const row = (projection.items || []).find((item) => item.id === id);
+  const row = (projection.items || []).find((item) => item.id === id && isActivePublicCatalogMarket(item.market));
   return row ? offerDetailFromProjection(row) : null;
 }
 const SEARCH_PROJECTION_CACHE_MAX = Math.max(1, Math.min(14, Number(process.env.CATALOG_SEARCH_PROJECTION_CACHE_MAX || 8)));
@@ -542,7 +539,7 @@ async function readCurrentOfferShard(id: string) {
 export async function getOfferFromCurrentShard(id: string) {
   const [manifest, current] = await Promise.all([readManifest(), readCurrentOfferShard(id)]);
   if (current.generationId !== manifest.generationId) return null;
-  return (current.items || []).find((item) => item.id === id) || null;
+  return (current.items || []).find((item) => item.id === id && isActivePublicCatalogMarket(item.market)) || null;
 }
 async function readSearchProjection(generationId: string, market: string) {
   if (projectionCacheGeneration && projectionCacheGeneration !== generationId) searchProjectionCache.clear();
@@ -763,6 +760,10 @@ async function facetsFromProjection(generationId: string, rows: CatalogSearchPro
   };
 }
 export async function readCatalogFacets(params: CatalogSearchParams = {}): Promise<CatalogFacets> {
+  if (params.market && params.market !== "any" && !isActivePublicCatalogMarket(params.market)) {
+    const manifest = await readManifest();
+    return { generationId: manifest.generationId, makes: [], models: [], markets: [...PUBLIC_CATALOG_MARKETS], bodyTypes: [], fuels: [], transmissions: [], drives: [] };
+  }
   const hasFilters = Boolean(params.make || params.model || params.hasPrice
     || params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo
     || params.mileageFrom || params.mileageTo || params.engineFrom || params.engineTo
@@ -827,7 +828,8 @@ async function persistJapanAuctionHistory(storage: ReturnType<typeof getJsonStor
   return manifest;
 }
 export function isPublicOffer(o: VehicleOffer) {
-  return o.status === "active"
+  return isActivePublicCatalogMarket(o.market)
+    && o.status === "active"
     && isCatalogYearAllowed(o.year, o.market)
     && hasCredibleOfferContent(o)
     && catalogPublicPriority(o).eligible;
@@ -1185,7 +1187,7 @@ async function writeCurrentCatalogReadModels(generationId: string, storedOffers:
 
 export async function publishCurrentCatalogReadModels() {
   const manifest = await readManifest();
-  const marketIds = Object.keys(manifest.markets || {}).filter((market) => Number(manifest.markets[market]?.count || 0) > 0);
+  const marketIds = MARKETS.filter((market) => Number(manifest.markets?.[market]?.count || 0) > 0);
   // Rows in the immutable public generation were already admitted by the
   // strict source/publication gates. Re-running isPublicOffer here would
   // apply source-gallery checks to compact storage rows whose raw
@@ -1214,10 +1216,10 @@ export async function getOffer(id: string) {
     // Current offer shards contain only records that were already admitted by
     // persistCatalogOffers. Do not re-run source validation after compact public
     // storage intentionally removed operational.raw; that made valid Georgia and
-    // Kyrgyzstan cards navigate to a soft 404. If a shard is incomplete, fall
+    // Regional cards navigate to a soft 404. If a shard is incomplete, fall
     // through to the immutable generation index instead of returning early.
     const currentOffer = (current.items || []).find((item) => item.id === id);
-    if (currentOffer) return currentOffer;
+    if (currentOffer && isActivePublicCatalogMarket(currentOffer.market)) return currentOffer;
   }
   if (offerLookupCacheGeneration !== manifest.generationId) {
     offerLookupCacheGeneration = manifest.generationId;
@@ -1242,12 +1244,16 @@ export async function getOffer(id: string) {
   }
   const chunk = await chunkPromise;
   // Generation chunks are also immutable, already-filtered public storage.
-  const offer = chunk.find((candidate) => candidate.id === id);
+  const offer = chunk.find((candidate) => candidate.id === id && isActivePublicCatalogMarket(candidate.market));
   return offer || readProjectionFallback();
 }
 export async function searchOffers(params: CatalogSearchParams) {
   const page = Math.max(1, Number(params.page || 1));
   const pageSize = Math.min(48, Math.max(1, Number(params.pageSize || 24)));
+  if (params.market && params.market !== "any" && !isActivePublicCatalogMarket(params.market)) {
+    const manifest = await readManifest();
+    return { generationId: manifest.generationId, total: 0, page, pageSize, items: [], usedIndexShards: [] };
+  }
   const needsProjection = Boolean((params.market && params.market !== "any") || params.make || params.model || params.hasPrice
     || params.budgetFrom || params.budgetTo || params.yearFrom || params.yearTo || params.mileageFrom || params.mileageTo
     || params.engineFrom || params.engineTo || params.powerFrom || params.powerTo || params.auctionGrade || params.auctionDateFrom || params.auctionDateTo
@@ -1437,7 +1443,7 @@ export async function readHomeCatalogSnapshot(perMarket = 6) {
 
   const marketCounts: Record<string, number> = {};
   // Homepage cards only need the compact card projection. Reading full offer chunks
-  // for ~6 cards x 7 markets turned a simple initial render into dozens of object-store
+  // for ~6 cards x 6 markets turned a simple initial render into dozens of object-store
   // reads. Prefer the per-market projection shards and fall back to full chunks only for
   // IDs from an older generation that cannot render a card from projection.
   const projectionShards = await mapWithConcurrency(MARKETS, MARKETS.length, async (market) => ({

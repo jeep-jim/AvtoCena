@@ -36,7 +36,7 @@ Run the V2 resolver alongside the current production resolver without changing c
 - aliases causing more than one candidate;
 - price-input deltas with the customer-visible result disabled.
 
-The shadow pass must cover all seven markets and preserve the Japan baseline. Any collision or unexplained price-input delta blocks promotion.
+The shadow pass must cover all six markets and preserve the Japan baseline. Any collision or unexplained price-input delta blocks promotion.
 
 ## 4. Controlled rollout
 
@@ -66,5 +66,5 @@ Brand pages require an approved identity and both logo themes. Model pages requi
 - approved logo pair for every published brand;
 - approved canonical cover for every published model;
 - full regression tests for current listing names, especially localized China/Korea/Japan aliases;
-- all-seven-market shadow audit and calculator comparison;
+- all-six-market shadow audit and calculator comparison;
 - reviewed migration diff, rollback snapshot and explicit user authorization for production deployment.

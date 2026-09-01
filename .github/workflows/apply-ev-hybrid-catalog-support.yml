@@ -95,7 +95,7 @@ jobs:
           const thirtyMinute = exactThirtyMinutePowers(offer, full);''',
           )
 
-          # Generic Korea/China/Georgia/Kyrgyzstan path: source-exact 30-minute
+          # Generic Korea/China/Georgia path: source-exact 30-minute
           # values are already parsed by normalization; certified reference is a
           # second strict route before customs calculation.
           generic = 'scripts/catalog-live-recovery-market.mjs'

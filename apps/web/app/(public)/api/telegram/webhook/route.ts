@@ -20,7 +20,7 @@ const pilotDealer = {
   city: "Новокузнецк",
   status: "verified",
   pilot: true,
-  markets: ["Япония", "Китай", "Корея", "ОАЭ", "Европа", "Грузия", "Кыргызстан"],
+  markets: ["Япония", "Китай", "Корея", "ОАЭ", "Европа", "Грузия"],
   telegramChannel: "",
   telegramConnected: false,
   logoUrl: "",

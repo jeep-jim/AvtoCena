@@ -67,13 +67,6 @@ function canonicalUrl(value: unknown) {
       return `${hostname}${pathname}?${identity.toString()}`;
     }
     url.search = "";
-    // Mashina.kg exposes one exact source photo through multiple delivery sizes.
-    // Collapse only the known size suffix, never the source-photo hash itself.
-    if (hostname === "storage.mashina.kg") {
-      pathname = pathname.replace(/_(?:small|medium|large)(?=\.(?:jpe?g|png|webp|avif)$)/i, "");
-    } else if (hostname === "im.mashina.kg") {
-      pathname = pathname.replace(/_\d{2,5}x\d{2,5}(?=\.(?:jpe?g|png|webp|avif)$)/i, "");
-    }
     return `${hostname}${pathname}`;
   } catch {
     return source.replace(/[?#].*$/, "").replace(/\/{2,}/g, "/").toLowerCase();
@@ -97,12 +90,6 @@ function catalogImageDedupKey(image: CatalogImageLike) {
   const sourceUrl = text(image.url);
   const autohomeIdentity = autoHomePhotoIdentity(sourceUrl);
   if (autohomeIdentity) return autohomeIdentity;
-  // Source-URL identity must win for Mashina because source_urls_only stores
-  // different delivery renditions as separate image records/checksums.
-  if (/^https?:\/\/(?:storage|im)\.mashina\.kg\//i.test(sourceUrl)) {
-    const canonical = canonicalUrl(sourceUrl);
-    if (canonical) return `mashina:${canonical}`;
-  }
   const checksum = text(image.checksum).toLowerCase();
   if (checksum) return `checksum:${checksum}`;
   const objectKey = canonicalUrl(image.objectKey);
@@ -131,7 +118,6 @@ function hasImageEvidence(image: CatalogImageLike) {
   // ordinary file extension. Arbitrary website/root/listing URLs are not images.
   if (/^https?:\/\/[^/]*apollo\.olxcdn\.com\/v1\/files\/[^/]+\/image(?:[;/?#]|$)/i.test(url)) return true;
   if (/^https?:\/\/prod\.pictures\.autoscout24\.net\/listing-images\/[^/?#]+\/\d{2,5}x\d{2,5}\.(?:jpe?g|webp|avif|png)(?:[?#]|$)/i.test(url)) return true;
-  if (/^https?:\/\/(?:storage|im)\.mashina\.kg\//i.test(url)) return true;
   if (/^https?:\/\/(?:car\d+|g)\.autoimg\.cn\//i.test(url)) return true;
 
   return false;
@@ -152,14 +138,6 @@ export function catalogImageScore(image: CatalogImageLike) {
   if (/image\/(?:svg|gif)/.test(mime) || /\.(?:svg|gif)(?:\?|$)/i.test(url)) score -= 20;
   if (/image\/png/.test(mime) || /\.png(?:\?|$)/i.test(url)) score -= 7;
   if (/image\/(?:jpe?g|webp|avif)/.test(mime) || /\.(?:jpe?g|webp|avif)(?:\?|$)/i.test(url)) score += 3;
-
-  // Prefer the largest known rendition before canonical identity collapses the
-  // delivery-size variants into one gallery frame.
-  if (/^https?:\/\/storage\.mashina\.kg\/.*_large\.(?:jpe?g|png|webp|avif)(?:\?|$)/i.test(url)) score += 4;
-  else if (/^https?:\/\/storage\.mashina\.kg\/.*_medium\.(?:jpe?g|png|webp|avif)(?:\?|$)/i.test(url)) score += 2;
-  else if (/^https?:\/\/storage\.mashina\.kg\/.*_small\.(?:jpe?g|png|webp|avif)(?:\?|$)/i.test(url)) score -= 2;
-  const legacySize = url.match(/^https?:\/\/im\.mashina\.kg\/.*_(\d{2,5})x(\d{2,5})\.(?:jpe?g|png|webp|avif)(?:\?|$)/i);
-  if (legacySize) score += Math.min(4, Math.max(0, Math.log2((Number(legacySize[1]) * Number(legacySize[2])) / (640 * 480))));
 
   if (width && height) {
     if (width >= 640 && height >= 400) score += 3;

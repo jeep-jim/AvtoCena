@@ -60,7 +60,6 @@ test("canonical mandatory market source contract cannot silently drift", () => {
     ["prestige_japan_auctions_open", "https://prestigemotorsport.com.au/auctions/"],
     ["auctiondatasearch_japan_open", "https://www.auctiondatasearch.jp/"],
     ["jpcenter_japan_catalog_open", "https://jp.center/"],
-    ["mashina_kyrgyzstan_exact", "https://www.mashina.kg/"],
   ];
   for (const [sourceId, canonicalUrl] of required) {
     assert.match(requiredSources, new RegExp(sourceId));
@@ -216,7 +215,7 @@ test("Catalog V2 caps every production stage and preserves the 100000-offer targ
   assert.match(collectBlock, /timeout-minutes: 45/);
   assert.match(collectBlock, /CATALOG_REBUILD_TIME_LIMIT_MS: "6300000"/);
   assert.match(publishBlock, /timeout-minutes: 25/);
-  assert.match(workflow, /Publish only a complete seven-market generation/);
+  assert.match(workflow, /Publish only a complete six-market generation/);
   assert.match(workflow, /missing = markets\.filter/);
   assert.match(workflow, /badFallback/);
   assert.match(workflow, /cancel-in-progress: false/);

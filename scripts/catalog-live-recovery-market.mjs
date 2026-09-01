@@ -41,7 +41,6 @@ const EXPECTED_HOSTS = {
   auto_georgia_open: ["auto.ge"],
   myauto_georgia_list: ["myauto.ge"],
   autopapa_georgia_open: ["autopapa.ge"],
-  mashina_kyrgyzstan_exact: ["mashina.kg"],
 };
 
 const COMMERCIAL_RE = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tractor|forklift|excavator|machinery|canter|fighter|dutro|forward|giga|elf|profia)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;

@@ -40,7 +40,6 @@ jobs:
           - { market: japan, source_id: prestige_japan_auctions_open }
           - { market: japan, source_id: auctiondatasearch_japan_open }
           - { market: japan, source_id: jpcenter_japan_catalog_open }
-          - { market: kyrgyzstan, source_id: mashina_kyrgyzstan_exact }
     env:
       CATALOG_REBUILD_MARKET: ${{ matrix.market }}
       CATALOG_REBUILD_SOURCE_IDS: ${{ matrix.source_id }}

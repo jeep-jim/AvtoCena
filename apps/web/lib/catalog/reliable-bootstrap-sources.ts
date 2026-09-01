@@ -1,5 +1,4 @@
 import { GuaziRuAdapter, parseGuaziRuMarkup } from "./guazi-ru-source";
-import { OpenMarketAdapter } from "./open-market-sources";
 import type { CatalogFetchResult, CatalogSourceAdapter } from "./types";
 
 const GUAZI_HEADERS = {
@@ -64,21 +63,6 @@ class GuaziGlobalAdapter extends GuaziRuAdapter {
   }
 }
 
-const turboKyrgyzstanReliableSource = new OpenMarketAdapter({
-  sourceId: "turbo_kyrgyzstan_open",
-  market: "kyrgyzstan",
-  label: "Turbo.kg Cars",
-  baseUrl: "https://turbo.kg",
-  currency: "KGS",
-  detailPattern: /\/cars\/[A-Za-z0-9_-]+(?:[/?#]|$)|\/(?:car|auto|offer|listing)\/[^?#]+/i,
-  listUrls: (page) => {
-    const url = new URL("https://turbo.kg/");
-    url.searchParams.set("page", String(page));
-    return [url.toString()];
-  },
-});
-
 export const reliableBootstrapSources: CatalogSourceAdapter[] = [
   new GuaziGlobalAdapter(),
-  turboKyrgyzstanReliableSource,
 ];

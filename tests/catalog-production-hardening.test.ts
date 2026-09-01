@@ -72,7 +72,7 @@ test("catalog reindex reruns whenever the production customs calculation changes
 
 test("each market has an isolated operator trigger in addition to its schedule", () => {
   assert.match(v3MarketWorkflow, /group: catalog-v3-\$\{\{ inputs\.market \}\}/);
-  for (const market of ["korea", "china", "japan", "uae", "europe", "georgia", "kyrgyzstan"]) {
+  for (const market of ["korea", "china", "japan", "uae", "europe", "georgia"]) {
     const marketWorkflow = fs.readFileSync(new URL(`../.github/workflows/catalog-v2-${market}.yml`, import.meta.url), "utf8");
     assert.match(marketWorkflow, new RegExp(`\\.github/market-runs/${market}`));
     assert.match(marketWorkflow, new RegExp(`market: ${market}`));
@@ -203,11 +203,11 @@ test("standard one-market publisher expires stale target rows, reapplies quality
   assert.match(storage, /canonicalizePublicCatalogOffers\(storedOffers, exactMarkets, protectedIds\)/);
 });
 
-test("seven-market recovery is calculated, failure-tolerant and collapse-protected", () => {
+test("six-market recovery is calculated, failure-tolerant and collapse-protected", () => {
   assert.doesNotMatch(sevenMarketWorkflow, /uses: \.\/\.github\/workflows\/catalog-v4-market-30k-reusable\.yml/);
-  assert.equal((sevenMarketWorkflow.match(/uses: \.\/\.github\/workflows\/catalog-v3-market-10k-reusable\.yml/g) || []).length, 7);
-  assert.equal((sevenMarketWorkflow.match(/if: \$\{\{ always\(\) && !cancelled\(\) \}\}/g) || []).length, 7);
-  assert.equal((sevenMarketWorkflow.match(/target_per_market: "30000"/g) || []).length, 7);
+  assert.equal((sevenMarketWorkflow.match(/uses: \.\/\.github\/workflows\/catalog-v3-market-10k-reusable\.yml/g) || []).length, 6);
+  assert.equal((sevenMarketWorkflow.match(/if: \$\{\{ always\(\) && !cancelled\(\) \}\}/g) || []).length, 6);
+  assert.equal((sevenMarketWorkflow.match(/target_per_market: "30000"/g) || []).length, 6);
   assert.match(sevenMarketWorkflow, /market: japan[\s\S]*retention_ms: "2592000000"/);
   assert.match(v3MarketWorkflow, /CATALOG_PUBLISH_MAX_PER_MARKET: \$\{\{ inputs\.maximum_per_market \}\}/);
   assert.match(standardMarketPublisher, /CATALOG_MIN_PUBLIC_RETENTION_RATIO \|\| 0\.10/);

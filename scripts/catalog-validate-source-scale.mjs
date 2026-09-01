@@ -4,7 +4,7 @@ import path from "node:path";
 const { catalogRequiredSpecificationRejectionReason } = await import("../apps/web/lib/catalog/public-priority.ts");
 
 const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-rebuild";
-const markets = String(process.env.CATALOG_REBUILD_MARKETS || "korea,china,japan,uae,europe,georgia,kyrgyzstan")
+const markets = String(process.env.CATALOG_REBUILD_MARKETS || "korea,china,japan,uae,europe,georgia")
   .split(",")
   .map((value) => value.trim())
   .filter(Boolean);
@@ -19,7 +19,6 @@ const defaultMinimumProductiveSources = {
   uae: 2,
   europe: 2,
   georgia: 2,
-  kyrgyzstan: 1,
 };
 
 const defaultMinimumFresh = {
@@ -29,7 +28,6 @@ const defaultMinimumFresh = {
   uae: 50,
   europe: 100,
   georgia: 20,
-  kyrgyzstan: 20,
 };
 
 function parseMinimumFresh() {
@@ -242,8 +240,8 @@ const blockingMarkets = markets.filter((market) => {
   // adapter must be registered and attempted. A temporary external 403/429 or
   // zero-fresh result is degraded telemetry, not a reason to throw away a
   // multi-source run that still contains valid verified inventory. We still
-  // require multiple productive independent sources (one for Kyrgyzstan) and at
-  // least one productive canonical source before a new generation may publish.
+  // require multiple productive independent sources and at least one productive
+  // canonical source before a new generation may publish.
   return !row
     || row.artifacts === 0
     || row.sourceProbeArtifacts === 0

@@ -27,7 +27,6 @@ export const CATALOG_V2_SOURCE_SLOTS: Record<CatalogMarket, readonly CatalogV2So
   uae: [...REQUIRED_CATALOG_SOURCES.uae],
   europe: [...REQUIRED_CATALOG_SOURCES.europe],
   georgia: [...REQUIRED_CATALOG_SOURCES.georgia],
-  kyrgyzstan: [...REQUIRED_CATALOG_SOURCES.kyrgyzstan],
 };
 
 /** USA is future-only metadata and is not part of PUBLIC_CATALOG_MARKETS or collection. */

@@ -247,7 +247,7 @@ jobs:
       - name: Publish market
         env:
           # Europe currently peaks above Node's ~3.5 GB default old-space limit
-          # while atomically rebuilding all seven market indexes. Keep the
+          # while atomically rebuilding all six market indexes. Keep the
           # higher heap scoped to publish only; collection and validation stay unchanged.
           NODE_OPTIONS: "--max-old-space-size=6144"
           # Publication reads all existing market chunks before the atomic swap.

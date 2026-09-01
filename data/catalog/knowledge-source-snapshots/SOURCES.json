@@ -33,10 +33,6 @@
     "georgia": {
       "fromYear": 2020,
       "toYear": 2026
-    },
-    "kyrgyzstan": {
-      "fromYear": 2020,
-      "toYear": 2026
     }
   },
   "rules": {
@@ -345,8 +341,7 @@
         "korea",
         "uae",
         "europe",
-        "georgia",
-        "kyrgyzstan"
+        "georgia"
       ],
       "status": "runtime_input",
       "fields": [

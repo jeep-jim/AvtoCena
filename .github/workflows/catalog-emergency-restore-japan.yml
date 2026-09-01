@@ -43,17 +43,17 @@ jobs:
       - name: Recover Japan and retain every currently valid market card
         env:
           CATALOG_RECOVERY_GENERATIONS: "gen_1786426826475_e390aa80"
-          CATALOG_RECOVERY_MARKETS: "korea,china,japan,uae,europe,georgia,kyrgyzstan"
+          CATALOG_RECOVERY_MARKETS: "korea,china,japan,uae,europe,georgia"
           CATALOG_RECOVERY_MAX_CHUNKS: "50"
           CATALOG_RECOVERY_FORCE: "true"
-          CATALOG_RECOVERY_MIN_COUNTS_JSON: '{"korea":1890,"china":2914,"japan":193,"uae":173,"europe":2623,"georgia":4,"kyrgyzstan":1873}'
+          CATALOG_RECOVERY_MIN_COUNTS_JSON: '{"korea":1890,"china":2914,"japan":193,"uae":173,"europe":2623,"georgia":4}'
           CATALOG_GROW_ONLY_MARKETS: ""
         run: npx tsx scripts/catalog-recover-generations.mjs | tee catalog-emergency-japan-restore.log
       - name: Verify Japan and all six preserved markets
         env:
           CATALOG_AUDIT_OUTPUT: catalog-emergency-japan-restore-audit.json
           CATALOG_AUDIT_ASSERT_MARKETS: japan
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1890,"china":2914,"japan":193,"uae":173,"europe":2623,"georgia":4,"kyrgyzstan":1873}'
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1890,"china":2914,"japan":193,"uae":173,"europe":2623,"georgia":4}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()

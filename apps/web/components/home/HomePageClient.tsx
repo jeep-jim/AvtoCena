@@ -58,7 +58,7 @@ const markets: Option[] = [{ value: "", label: "Страна" }, ...marketIds.ma
 const buyers = Array.from({ length: 24 }, (_, index) => `/buyers/${index + 1}.jpg`);
 const benefits = [
   { icon: "approved", title: "Без регистрации", text: "Сразу получите первую выдачу по вашему бюджету." },
-  { icon: "markets", title: "7 рынков", text: "Япония, Китай, Корея, ОАЭ, Европа, Грузия и Кыргызстан в одном подборе." },
+  { icon: "markets", title: "6 рынков", text: "Япония, Китай, Корея, ОАЭ, Европа и Грузия в одном подборе." },
   { icon: "delivery", title: "Под ключ", text: "Доставка, таможня и оформление входят в структуру расчёта." },
 ];
 

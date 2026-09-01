@@ -105,12 +105,12 @@ jobs:
           RECOVERY_PUBLISH_MAX: "30000"
           CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"
         run: npx tsx scripts/catalog-live-recovery-publish.mjs
-      - name: Audit UAE and the complete seven-market baseline
+      - name: Audit UAE and the complete six-market baseline
         if: always()
         env:
           CATALOG_AUDIT_OUTPUT: catalog-uae-postpersist-audit.json
-          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":3000,"china":5000,"japan":800,"uae":900,"europe":6500,"georgia":5000,"kyrgyzstan":3000}'
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":3000,"china":5000,"japan":800,"uae":900,"europe":6500,"georgia":5000}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4
         if: always()

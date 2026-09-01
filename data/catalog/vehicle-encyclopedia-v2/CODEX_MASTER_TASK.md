@@ -14,7 +14,7 @@ The previous pilot-first research plan is retired. Validation checkpoints remain
 ## Mandatory coverage windows
 
 - **Japan:** every source-backed passenger/light-passenger make, model and applicable variant from **2010-present**.
-- **China, Korea, UAE, Europe, Georgia, Kyrgyzstan:** every source-backed passenger/light-passenger make, model and applicable variant from **2020-present**.
+- **China, Korea, UAE, Europe, Georgia:** every source-backed passenger/light-passenger make, model and applicable variant from **2020-present**.
 - Include ICE, MHEV, HEV, PHEV, EREV, BEV and FCEV vehicles inside those windows.
 
 These are minimum CORE windows, not priority hints.

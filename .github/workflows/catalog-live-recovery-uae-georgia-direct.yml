@@ -136,9 +136,9 @@ jobs:
           pattern: catalog-direct-recovery-*
           path: recovery-input
           merge-multiple: true
-      - name: Snapshot all seven markets before batch write
+      - name: Snapshot all six markets before batch write
         env:
-          CATALOG_AUDIT_OUTPUT: catalog-direct-before-all7.json
+          CATALOG_AUDIT_OUTPUT: catalog-direct-before-all6.json
           CATALOG_AUDIT_ASSERT_MARKETS: ""
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Publish UAE and Georgia in one atomic generation
@@ -149,9 +149,9 @@ jobs:
           RECOVERY_PUBLISH_MAX: "5000"
           CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"
         run: npx tsx scripts/catalog-live-recovery-publish-batch.mjs
-      - name: Audit all seven markets after batch write
+      - name: Audit all six markets after batch write
         env:
-          CATALOG_AUDIT_OUTPUT: catalog-direct-after-all7.json
+          CATALOG_AUDIT_OUTPUT: catalog-direct-after-all6.json
           CATALOG_AUDIT_ASSERT_MARKETS: uae,georgia
           CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
@@ -159,10 +159,10 @@ jobs:
         run: |
           node - <<'NODE'
           const fs = require('node:fs');
-          const before = JSON.parse(fs.readFileSync('catalog-direct-before-all7.json', 'utf8'));
-          const after = JSON.parse(fs.readFileSync('catalog-direct-after-all7.json', 'utf8'));
+          const before = JSON.parse(fs.readFileSync('catalog-direct-before-all6.json', 'utf8'));
+          const after = JSON.parse(fs.readFileSync('catalog-direct-after-all6.json', 'utf8'));
           const publish = JSON.parse(fs.readFileSync('catalog-direct-recovery-batch-publish-report.json', 'utf8'));
-          const preserved = ['korea','china','japan','europe','kyrgyzstan'];
+          const preserved = ['korea','china','japan','europe'];
           for (const market of preserved) {
             const expectedAfter = Number(publish.preservedByMarket?.[market] ?? publish.manifestCounts?.[market] ?? 0);
             const actualAfter = Number(after.markets?.[market]?.count || 0);
@@ -187,8 +187,8 @@ jobs:
           name: catalog-direct-recovery-publish-reports
           path: |
             catalog-direct-recovery-batch-publish-report.json
-            catalog-direct-before-all7.json
-            catalog-direct-after-all7.json
+            catalog-direct-before-all6.json
+            catalog-direct-after-all6.json
             recovery-input/catalog-georgia-source-selection.json
           if-no-files-found: warn
           retention-days: 3

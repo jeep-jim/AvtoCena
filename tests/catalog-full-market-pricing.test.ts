@@ -6,7 +6,7 @@ import { resolveCatalogMarketConfig } from "../apps/web/lib/catalog/estimated-ma
 import { catalogPowerDisplay } from "../apps/web/lib/catalog/power-display";
 import type { CatalogMarket } from "../apps/web/lib/catalog/types";
 
-const markets: CatalogMarket[] = ["japan", "china", "korea", "uae", "europe", "georgia", "kyrgyzstan"];
+const markets: CatalogMarket[] = ["japan", "china", "korea", "uae", "europe", "georgia"];
 const requiredCosts = ["brokerRub", "svhRub", "laboratoryRub", "sbktsRub", "eptsRub", "rfDeliveryRub"];
 const requiredLines = ["car", "topavto-commission", "broker", "svh", "laboratory", "sbkts", "epts", "rf-delivery", "customs"];
 const customsPricing = fs.readFileSync(new URL("../apps/web/lib/catalog/customs-pricing.ts", import.meta.url), "utf8");

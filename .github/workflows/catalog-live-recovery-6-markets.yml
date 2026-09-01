@@ -1,5 +1,5 @@
-name: Catalog live recovery · 6 markets (legacy manual)
-run-name: Legacy live recovery 6 markets · ${{ github.sha }}
+name: Catalog live recovery · 5 non-Japan markets (legacy manual)
+run-name: Legacy live recovery 5 non-Japan markets · ${{ github.sha }}
 
 on:
   workflow_dispatch:
@@ -56,7 +56,7 @@ jobs:
     timeout-minutes: 60
     strategy:
       fail-fast: false
-      max-parallel: 6
+      max-parallel: 5
       matrix:
         include:
           - market: korea
@@ -69,8 +69,6 @@ jobs:
             sources: "autoscout_europe_open"
           - market: georgia
             sources: "myauto_georgia_list,autopapa_georgia_open"
-          - market: kyrgyzstan
-            sources: "mashina_kyrgyzstan_exact"
     env:
       RECOVERY_MARKET: ${{ matrix.market }}
       RECOVERY_SOURCE_IDS: ${{ matrix.sources }}
@@ -114,7 +112,7 @@ jobs:
         run: |
           set +e
           failed=""
-          for market in korea china uae europe georgia kyrgyzstan; do
+          for market in korea china uae europe georgia; do
             input="recovery-input/catalog-rebuild-${market}.json"
             if [ ! -s "$input" ]; then
               failed="$failed $market(no-artifact)"

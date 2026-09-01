@@ -16,7 +16,7 @@ type Props = {
   query: SearchParams;
 };
 
-const MARKET_ORDER = ["japan", "china", "korea", "uae", "europe", "georgia", "kyrgyzstan"];
+const MARKET_ORDER = ["japan", "china", "korea", "uae", "europe", "georgia"];
 const POWERTRAINS: Array<{ value: RussiaPowertrainKind; label: string }> = [
   { value: "combustion", label: "Бензин / дизель" },
   { value: "electric", label: "Электромобиль" },

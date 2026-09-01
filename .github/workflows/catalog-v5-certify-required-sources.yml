@@ -56,8 +56,6 @@ jobs:
             source_id: auctiondatasearch_japan_open
           - market: japan
             source_id: jpcenter_japan_catalog_open
-          - market: kyrgyzstan
-            source_id: mashina_kyrgyzstan_exact
     env:
       CATALOG_CERTIFY_MARKET: ${{ matrix.market }}
       CATALOG_CERTIFY_SOURCE_ID: ${{ matrix.source_id }}

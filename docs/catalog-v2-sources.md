@@ -8,6 +8,5 @@
 - UAE: DubiCars, Dubizzle, CarSwitch, YallaMotor, BE FORWARD UAE.
 - Europe: mobile.de, AutoScout24, OTOMOTO, AutoTrader UK, дополнительный европейский marketplace.
 - Georgia: MyAuto, Auto.ge, AutoPapa, MyMarket, SS.ge.
-- Kyrgyzstan: Mashina.kg, Bazar.kg, Lalafo, Turbo.kg, дополнительный локальный marketplace.
 
 Probe используется только как диагностика. Одна неудачная стартовая страница не отключает адаптер. Реальный fetch выполняется по каждому source slot с контролем курсора, повторов, количества нормализованных предложений и привязки фотографий.

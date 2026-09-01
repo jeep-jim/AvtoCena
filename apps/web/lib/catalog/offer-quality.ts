@@ -60,27 +60,8 @@ function meaningfulTitle(value: unknown) {
 export function isNonPassengerCatalogBodyType(value: unknown) {
   return NON_PASSENGER_BODY_RE.test(clean(value));
 }
-function mashinaSourcePhotoIdentity(value: unknown) {
-  const source = String(value || "").trim();
-  if (!source) return "";
-  try {
-    const url = new URL(source);
-    const host = url.hostname.toLowerCase();
-    let pathname = decodeURIComponent(url.pathname).replace(/\/{2,}/g, "/");
-    if (host === "storage.mashina.kg") {
-      pathname = pathname.replace(/_(?:small|medium|large)(?=\.(?:jpe?g|png|webp|avif)$)/i, "");
-      return `mashina:${host}${pathname}`;
-    }
-    if (host === "im.mashina.kg") {
-      pathname = pathname.replace(/_\d{2,5}x\d{2,5}(?=\.(?:jpe?g|png|webp|avif)$)/i, "");
-      return `mashina:${host}${pathname}`;
-    }
-  } catch { /* fall through to stored identity */ }
-  return "";
-}
 function imageIdentity(image: CatalogImage) {
-  return mashinaSourcePhotoIdentity(image.url)
-    || String(image.checksum || image.id || image.objectKey || image.url || "");
+  return String(image.checksum || image.id || image.objectKey || image.url || "");
 }
 
 function coherentCarusedImages(input: CatalogImage[]) {

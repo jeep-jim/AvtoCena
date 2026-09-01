@@ -145,7 +145,7 @@ if (projectedPublicCounts.georgia !== selectedGeorgia.length) throw new Error("g
 
 const reportBase = {
   version: 2,
-  mode: "full-seven-market-georgia-replacement",
+  mode: "full-six-market-georgia-replacement",
   dryRun,
   beforeCounts,
   projectedPublicCounts,

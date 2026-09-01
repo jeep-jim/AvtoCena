@@ -52,15 +52,16 @@ test("current read-model republisher preserves every immutable public row", () =
   assert.match(implementation, /writeCurrentCatalogReadModels\(manifest\.generationId, storedOffers, true\)/);
 });
 
-test("post-deploy gate checks all seven live markets instead of treating Korea as the catalog smoke test", () => {
+test("post-deploy gate checks all six live markets instead of treating Korea as the catalog smoke test", () => {
   assert.match(postDeployWorkflow, /workflows:\s*\n\s*- "Deploy to Yandex Cloud"/);
-  assert.match(postDeployWorkflow, /for market in korea china japan uae europe georgia kyrgyzstan/);
+  assert.match(postDeployWorkflow, /for market in korea china japan uae europe georgia/);
+  assert.doesNotMatch(postDeployWorkflow, /kyrgyzstan/);
   assert.match(postDeployWorkflow, /api\/catalog\/search\?market=\$market&pageSize=\$sample_size/);
   assert.match(postDeployWorkflow, /if \[\[ "\$market" == japan \]\]; then sample_size=5; fi/);
   assert.match(postDeployWorkflow, /jq -e '\.total > 0 and \(\.items \| length\) > 0'/);
   assert.match(postDeployWorkflow, /cars\?market=\$market/);
   assert.match(postDeployWorkflow, /context:\"deploy\/yandex\"/);
-  assert.match(postDeployWorkflow, /seven-market catalog parity failed/);
+  assert.match(postDeployWorkflow, /six-market catalog parity failed/);
 });
 
 test("post-deploy gate fails when one-hop read models diverge from the immutable manifest", () => {

@@ -78,7 +78,7 @@ Public read models включают market projections, brand projections, offer
 
 ---
 
-## 4. Семь рынков
+## 4. Шесть рынков
 
 | ID | Рынок |
 |---|---|
@@ -88,7 +88,6 @@ Public read models включают market projections, brand projections, offer
 | `uae` | ОАЭ |
 | `europe` | Европа |
 | `georgia` | Грузия |
-| `kyrgyzstan` | Кыргызстан |
 
 ---
 
@@ -148,12 +147,6 @@ Public read models включают market projections, brand projections, offer
 - AUTO.GE
 - SS.GE
 - MyMarket
-
-### Кыргызстан
-
-- Mashina.kg — `mashina_kyrgyzstan_exact`
-
----
 
 ## 6. Source Truth Contract
 
@@ -557,7 +550,7 @@ atomic generation publish
   ↓
 facets / projections / indexes
   ↓
-post-publish all-7 audit
+post-publish all-6 audit
 ```
 
 ---
@@ -577,7 +570,7 @@ post-publish all-7 audit
 7. dry-run;
 8. сверить counts и quality;
 9. atomic publish;
-10. post-publish all-7 audit.
+10. post-publish all-6 audit.
 
 Нельзя передавать Georgia-only/Korea-only массив как whole generation, если publisher строит общий каталог. Правильный путь — заменить target market внутри полного all-market массива.
 
@@ -611,7 +604,7 @@ Issue #241 сейчас использует временные recovery/proof/a
 
 Каждый рынок:
 
-`collect → validate → dry-run → shared writer → all-7 audit`.
+`collect → validate → dry-run → shared writer → all-6 audit`.
 
 Накопление — максимум 3 суток. Затем automatic offer retention + physical old-generation GC.
 
@@ -702,7 +695,7 @@ JSON-first контур также включает clients, leads, feed, deals,
 
 ## 27. Definition of production-ready parser machine
 
-Парсерная часть считается законченной после полного fresh certification cycle по всем 7 рынкам.
+Парсерная часть считается законченной после полного fresh certification cycle по всем 6 рынкам.
 
 Для каждого рынка:
 
@@ -775,13 +768,6 @@ JSON-first контур также включает clients, leads, feed, deals,
 - no CJK leakage;
 - correct price/mileage.
 
-### Phase F — Kyrgyzstan
-
-- Mashina exact listing gallery;
-- >=5 photos;
-- semantic source truth;
-- >=2020.
-
 ### Phase G — Japan
 
 - sold/completed only;
@@ -792,7 +778,7 @@ JSON-first контур также включает clients, leads, feed, deals,
 - scale to thousands;
 - no loss between source → calculation → publish.
 
-### Phase H — all-7 certification
+### Phase H — all-6 certification
 
 Один полный fresh cycle.
 

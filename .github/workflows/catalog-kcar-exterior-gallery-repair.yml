@@ -50,11 +50,11 @@ jobs:
           CATALOG_GROW_ONLY_MARKETS: ""
           CATALOG_GALLERY_REPORT_FILE: catalog-kcar-exterior-gallery-refresh.json
         run: npx tsx scripts/catalog-refresh-galleries.mjs
-      - name: Audit all seven markets after gallery repair
+      - name: Audit all six markets after gallery repair
         if: always()
         env:
           CATALOG_AUDIT_OUTPUT: catalog-kcar-exterior-postpersist-audit.json
-          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan
+          CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia
           CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "20"
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - uses: actions/upload-artifact@v4

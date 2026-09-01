@@ -91,54 +91,6 @@ const configs: OpenMarketSourceConfig[] = [
   // Georgia is intentionally restricted to the dedicated company anchor adapters:
   // MyAuto and AutoPapa. AUTO.GE, SS.GE and MyMarket are banned.
 
-  // Kyrgyzstan: Mashina has a dedicated adapter; the public alternatives below
-  // are probed independently and accumulated for three days.
-  {
-    sourceId: "lalafo_kyrgyzstan_open",
-    market: "kyrgyzstan",
-    label: "Lalafo Kyrgyzstan Cars",
-    baseUrl: "https://lalafo.kg",
-    currency: "KGS",
-    detailPattern: /\/(?:[^/]+\/)?ads\/[^?#]+(?:-id-)?\d{5,}/i,
-    listUrls: (page) => [
-      pageQuery("https://lalafo.kg/kyrgyzstan/avtomobili-s-probegom", page),
-      pageQuery("https://lalafo.kg/bishkek/avtomobili-s-probegom", page),
-    ],
-  },
-  {
-    sourceId: "bazar_kyrgyzstan_open",
-    market: "kyrgyzstan",
-    label: "Bazar.kg Cars",
-    baseUrl: "https://www.bazar.kg",
-    currency: "KGS",
-    detailPattern: /\/kyrgyzstan\/transport\/legkovye-avtomobili\/(?!$)[^?#]{4,}/i,
-    listUrls: (page) => [
-      pageQuery("https://www.bazar.kg/en/kyrgyzstan/transport/legkovye-avtomobili", page),
-      pageQuery("https://www.bazar.kg/kyrgyzstan/transport/legkovye-avtomobili", page),
-    ],
-  },
-  {
-    sourceId: "turbo_kyrgyzstan_open",
-    market: "kyrgyzstan",
-    label: "Turbo.kg Cars",
-    baseUrl: "https://turbo.kg",
-    currency: "KGS",
-    detailPattern: /\/(?:car|auto|offer|listing)\/[^?#]+|\/[a-z0-9-]+\/\d{4,}/i,
-    listUrls: (page) => [pageQuery("https://turbo.kg/", page)],
-  },
-  {
-    sourceId: "omarket_kyrgyzstan_open",
-    market: "kyrgyzstan",
-    label: "O!Market Kyrgyzstan Cars",
-    baseUrl: "https://market.o.kg",
-    currency: "KGS",
-    detailPattern: /\/(?:en|ru|ky)\/avtomobili\/[^?#]{5,}/i,
-    listUrls: (page) => [
-      pageQuery("https://market.o.kg/en/avtomobili", page),
-      pageQuery("https://market.o.kg/ru/avtomobili", page),
-    ],
-  },
-
   // Additional Korea and Japan sources used for deep daily accumulation.
   {
     sourceId: "kcar_korea_open",

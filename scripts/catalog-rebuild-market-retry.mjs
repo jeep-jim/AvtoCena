@@ -1,7 +1,7 @@
 import fs from "node:fs/promises";
 import { spawn } from "node:child_process";
 
-// Production trigger: rerun the seven-market accumulating collector after the retry fix.
+// Production trigger: rerun the six-market accumulating collector after the retry fix.
 const market = String(process.env.CATALOG_REBUILD_MARKET || "").trim();
 const target = Math.max(1, Number(process.env.CATALOG_REBUILD_TARGET || 250));
 const outputFile = process.env.CATALOG_REBUILD_OUTPUT || `catalog-rebuild-${market}.json`;

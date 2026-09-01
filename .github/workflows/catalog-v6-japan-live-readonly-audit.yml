@@ -34,7 +34,7 @@ jobs:
           CATALOG_AUDIT_OUTPUT: catalog-japan-live-readonly-audit.json
           CATALOG_AUDIT_ASSERT_MARKETS: japan
           CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "100"
-          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1,"china":1,"japan":8700,"uae":1,"europe":1,"georgia":1,"kyrgyzstan":1}'
+          CATALOG_AUDIT_MIN_COUNTS_JSON: '{"korea":1,"china":1,"japan":8700,"uae":1,"europe":1,"georgia":1}'
         run: npx tsx scripts/catalog-live-postpersist-audit.mjs
       - name: Smoke public Japan list and offer routes
         shell: bash

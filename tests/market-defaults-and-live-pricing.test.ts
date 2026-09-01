@@ -5,14 +5,14 @@ import { resolveEffectiveMarketVersion } from "../apps/web/lib/effective-market-
 import { applyActiveBusinessPricing, repriceOfferWithBusinessConfig } from "../apps/web/lib/catalog/live-business-pricing";
 
 const markets = JSON.parse(fs.readFileSync(new URL("../data/markets/markets.json", import.meta.url), "utf8"));
-const expectedMarkets = ["japan", "china", "korea", "uae", "europe", "georgia", "kyrgyzstan"];
+const expectedMarkets = ["japan", "china", "korea", "uae", "europe", "georgia"];
 const requiredAmounts = [
   "securityDepositRub", "topAvtoCommissionRub", "contractInitialPaymentRub",
   "exportExpensesRub", "logisticsRub", "brokerRub", "svhRub", "laboratoryRub",
   "sbktsRub", "eptsRub", "rfDeliveryRub", "otherFixedExpensesRub", "exchangeRateReservePercent",
 ];
 
-test("all seven markets have an active filled default profile in CRM data", () => {
+test("all six markets have an active filled default profile in CRM data", () => {
   assert.deepEqual(markets.map((market: any) => market.id).sort(), [...expectedMarkets].sort());
   for (const market of markets) {
     const version = market.versions.find((row: any) => row.id === market.activeVersionId);

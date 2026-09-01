@@ -16,7 +16,7 @@ const allowRequiredSubset = /^(?:1|true|yes)$/i.test(String(process.env.CATALOG_
 // Production probing is exclusive: only the owner-approved sources from
 // required-catalog-sources.ts may be contacted. No accelerator/fallback site can
 // be added here or injected through CATALOG_PROBE_SOURCE_IDS.
-const supportedMarkets = new Set(["korea", "china", "japan", "uae", "europe", "georgia", "kyrgyzstan"]);
+const supportedMarkets = new Set(["korea", "china", "japan", "uae", "europe", "georgia"]);
 if (!supportedMarkets.has(market)) throw new Error(`unsupported_probe_market_${market || "missing"}`);
 
 function withTimeout(promise, sourceId) {

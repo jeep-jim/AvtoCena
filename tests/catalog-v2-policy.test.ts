@@ -60,7 +60,7 @@ function policy(overrides: Partial<typeof CATALOG_V2_DEFAULT_POLICY> = {}) {
 
 test("Catalog V2 source registry keeps every configured adapter valid", () => {
   assert.equal(assertCatalogV2SourceRegistry(), true);
-  assert.equal(Object.keys(CATALOG_V2_SOURCE_SLOTS).length, 7);
+  assert.equal(Object.keys(CATALOG_V2_SOURCE_SLOTS).length, 6);
   const adapters = new Map(catalogImportSources.map((source) => [source.sourceId, source]));
   const failures: string[] = [];
   for (const [market, slots] of Object.entries(CATALOG_V2_SOURCE_SLOTS)) {

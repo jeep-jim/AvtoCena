@@ -18,7 +18,7 @@ import { vehicleKnowledgeCompact } from "@/lib/catalog/vehicle-knowledge";
 export const dynamic = "force-dynamic";
 export const revalidate = 0;
 
-const MARKET_ORDER: CatalogMarket[] = ["japan", "china", "korea", "uae", "europe", "georgia", "kyrgyzstan"];
+const MARKET_ORDER: CatalogMarket[] = ["japan", "china", "korea", "uae", "europe", "georgia"];
 
 type PageProps = { params: Promise<{ slug: string }> };
 
@@ -27,7 +27,7 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
   const brand = await resolveCatalogBrandBySlug(slug);
   if (!brand) return {};
   const title = `${brand.name} — модели, характеристики и цены | Автокаталог`;
-  const description = `Автокаталог ${brand.name}: модели, характеристики, мощность и актуальные предложения из Японии, Китая, Кореи, ОАЭ, Европы, Грузии и Кыргызстана.`;
+  const description = `Автокаталог ${brand.name}: модели, характеристики, мощность и актуальные предложения из Японии, Китая, Кореи, ОАЭ, Европы и Грузии.`;
   return {
     title,
     description,

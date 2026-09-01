@@ -7,7 +7,7 @@ const { calculateRussiaCustomsForIndividual } = await import("../packages/engine
 
 const outputFile = process.env.CATALOG_BUSINESS_AUDIT_REPORT || "catalog-business-audit-report.json";
 const minimumKnowledgeRecords = Math.max(1, Number(process.env.CATALOG_MIN_KNOWLEDGE_RECORDS || 6_800));
-const requiredMarkets = ["japan", "china", "korea", "uae", "europe", "georgia", "kyrgyzstan"];
+const requiredMarkets = ["japan", "china", "korea", "uae", "europe", "georgia"];
 const requiredAmounts = [
   "securityDepositRub", "topAvtoCommissionRub", "contractInitialPaymentRub",
   "exportExpensesRub", "logisticsRub", "brokerRub", "svhRub", "laboratoryRub",

@@ -153,7 +153,7 @@ test("commercial vehicles are excluded from priority passenger-car sources", () 
 test("Catalog V2 probes every configured slot but always crawls mandatory sources", () => {
   assert.match(workflow, /Catalog V2 production/);
   assert.match(workflow, /max-parallel: 20/);
-  assert.match(workflow, /market: \[korea, china, japan, uae, europe, georgia, kyrgyzstan\]/);
+  assert.match(workflow, /market: \[korea, china, japan, uae, europe, georgia\]/);
   assert.match(workflow, /npx tsx scripts\/catalog-probe-source-shard\.mjs/);
   assert.match(workflow, /npx tsx scripts\/catalog-rebuild-source-shard\.mjs/);
   assert.match(workflow, /CATALOG_REBUILD_TARGET_PER_SOURCE: "100000"/);
@@ -189,7 +189,7 @@ test("priority galleries preserve listing photos and enrich detail progressively
   assert.match(importer, /myAutoListSource/);
   assert.doesNotMatch(importer, /import \{ autoGeorgiaStrictSource \}/);
   assert.match(importer, /bannedGeorgiaSourceIds/);
-  assert.match(importer, /mashinaKyrgyzstanListSource/);
+  assert.doesNotMatch(importer, /mashinaKyrgyzstanListSource|mashina_kyrgyzstan_exact/);
   assert.match(importer, /reliableBootstrapSources/);
   assert.match(workflow, /CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "1"/);
   assert.match(workflow, /CATALOG_REBUILD_PREFERRED_IMAGES_PER_OFFER: "30"/);

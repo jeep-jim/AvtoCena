@@ -10,7 +10,6 @@ const MARKET_CURRENCY: Record<CatalogMarket, string> = {
   uae: "AED",
   europe: "EUR",
   georgia: "GEL",
-  kyrgyzstan: "KGS",
 };
 
 export function CatalogMarketFlag({ market, className = "h-4 w-6" }: { market: CatalogMarket | string; className?: string }) {

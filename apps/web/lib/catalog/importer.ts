@@ -21,7 +21,6 @@ import {
 import { catalogSources } from "./adapters";
 import { scopedMarketSources } from "./scoped-market-sources";
 import { exactMarketSources } from "./exact-market-sources";
-import { currentRegionalMarketSources } from "./current-regional-market-sources";
 import { publicMarketSources } from "./public-market-sources";
 import { scaleMarketSources } from "./scale-market-sources";
 import { priorityMarketSources } from "./priority-market-sources";
@@ -45,12 +44,10 @@ import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { guaziRuSource } from "./guazi-ru-source";
 import { myAutoListSource } from "./myauto-list-source";
 import { autoPapaGeorgiaSource } from "./autopapa-georgia-source";
-import { mashinaKyrgyzstanListSource } from "./mashina-kyrgyzstan-list-source";
 import { encarCompleteSource } from "./encar-complete-source";
 import { fullGallery } from "./full-gallery-wrapper";
 import { strictSourceDetail } from "./strict-source-detail-wrapper";
 import { normalizeOpenSource } from "./open-source-normalizer";
-import { regionalLiveOverrides } from "./regional-live-overrides";
 import { REQUIRED_CATALOG_SOURCES, isAllowedCatalogSourceId } from "./required-catalog-sources";
 import { withGithubYandexSourceBridge } from "./yandex-source-bridge";
 import {
@@ -93,19 +90,16 @@ const completeSources = [
   prepareSource(guaziRuSource),
   prepareSource(myAutoCollectionSource),
   prepareSource(autoPapaCollectionSource),
-  ...regionalLiveOverrides.map(prepareSource),
   ...scopedMarketSources.map(prepareSource),
   ...exactMarketSources.map(prepareSource),
   ...publicMarketSources.map(prepareSource),
   ...allowedScaleSources.map(prepareSource),
-  ...currentRegionalMarketSources.map(prepareSource),
   ...additionalJapanAuctionStatisticsSources.map(prepareSource),
   ...japanAuctionStatisticsSources.map(prepareSource),
   ...japanAuctionOpenSources.map(prepareSource),
   ...priorityMarketSources.map((source) => prepareSource(priorityFastGallery(source))),
   ...reliableBootstrapSources.map(prepareSource),
   ...(beforwardPublicSource ? [prepareSource(beforwardPublicSource)] : []),
-  prepareSource(mashinaKyrgyzstanListSource),
   prepareSource(carvectorJapanCurrentSource),
   guaziCollectionSource,
   che168GlobalExactSource,
@@ -163,7 +157,6 @@ const dedicatedDetailSourceIds = new Set([
   "kbchachacha_korea_open",
   "myauto_georgia_list",
   "autopapa_georgia_open",
-  "mashina_kyrgyzstan_exact",
 ]);
 for (let index = 0; index < catalogImportSources.length; index++) {
   const source = catalogImportSources[index];

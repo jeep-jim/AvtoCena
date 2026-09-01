@@ -12,10 +12,10 @@ const repairMerge = fs.readFileSync("scripts/prestige-japan-repair-merge.mjs", "
 const readiness = fs.readFileSync(".github/workflows/catalog-v6-prestige-exact-readiness.yml", "utf8");
 const strictLadder = fs.readFileSync(".github/workflows/catalog-v6-prestige-strict-ladder.yml", "utf8");
 
-test("V6 production publish waits on the shared catalog writer and audits all seven markets", () => {
+test("V6 production publish waits on the shared catalog writer and audits all six markets", () => {
   assert.match(workflow, /publish:[\s\S]*concurrency:[\s\S]*group: catalog-live-daily-working-markets[\s\S]*cancel-in-progress: false/);
   assert.match(workflow, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "100"/);
-  assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
+  assert.match(workflow, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia/);
   assert.match(workflow, /CATALOG_AUDIT_MAX_PER_MODEL_YEAR: "100"/);
   assert.match(workflow, /CATALOG_OFFER_RETENTION_MS: "2592000000"/);
   assert.match(workflow, /CATALOG_PUBLISH_LOCK_WAIT_MS: "7200000"/);
@@ -81,7 +81,7 @@ test("verified Japan publish reuses the completed 9292-card run with production 
   assert.match(verifiedPublish, /PRESTIGE_MIN_CHUNK_COVERAGE: "0\.95"/);
   assert.match(verifiedPublish, /CATALOG_MAX_OFFERS_PER_MODEL_YEAR: "20"/);
   assert.match(verifiedPublish, /publish:[\s\S]*group: catalog-live-daily-working-markets/);
-  assert.match(verifiedPublish, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia,kyrgyzstan/);
+  assert.match(verifiedPublish, /CATALOG_AUDIT_ASSERT_MARKETS: korea,china,japan,uae,europe,georgia/);
   assert.doesNotMatch(verifiedPublish, /CATALOG_MAX_OFFERS_PER_MODEL: "500"/);
   assert.doesNotMatch(verifiedPublish, /CATALOG_AUDIT_MAX_PER_MODEL: "500"/);
 });
