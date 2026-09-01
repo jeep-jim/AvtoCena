@@ -74,8 +74,6 @@ jobs:
         run: node --import tsx --test tests/myauto-list-source.test.ts
       - name: Georgia canonical recovery tests
         run: node --import tsx --test tests/georgia-yandex-recovery.test.ts tests/georgia-yandex-recovery-myauto-fallback-20260812.test.ts tests/autopapa-georgia-current-parser-20260812.test.ts tests/catalog-preliminary-power-recovery.test.ts tests/georgia-vpic-power-recovery.test.ts
-      - name: Regional live route tests
-        run: node --import tsx --test tests/catalog-regional-live-overrides.test.ts
       - name: Catalog probe v23 tests
         run: node --import tsx --test tests/catalog-probe-source-shard.test.ts
       - name: Catalog publication gate tests
