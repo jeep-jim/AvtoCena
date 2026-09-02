@@ -252,6 +252,7 @@ function mandatorySourcePhotoIdentityVerified(offer: VehicleOffer) {
 function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true, checkGalleryCoherence = true) {
   const year = Number(offer.year || 0);
   const title = listingTitle(offer);
+  if (catalogSemanticEvidenceRejectionReason(offer)) return false;
   if (checkSourcePolicy && !isCatalogMarketSourceAllowed(offer)) return false;
   if (!hasCredibleCatalogIdentity(offer)) return false;
   if (isEncarNonCashContractOffer(offer)) return false;
@@ -268,6 +269,16 @@ function credibleCoreContent(offer: VehicleOffer, checkSourcePolicy = true, chec
     });
   }
   return credibleCatalogImages(offer.images || []).length >= minimumImageCount(offer);
+}
+
+export function catalogSemanticEvidenceRejectionReason(offer: Partial<VehicleOffer> | any) {
+  const evidence = offer?.operational?.semanticEvidence;
+  if (!evidence || typeof evidence !== "object") return "";
+  for (const [field, value] of Object.entries(evidence as Record<string, any>)) {
+    const status = clean(value?.status).toLowerCase();
+    if (status === "conflict" || status === "ambiguous") return `semantic_${field}_${status}`;
+  }
+  return "";
 }
 
 export function hasCredibleOfferContent(offer: VehicleOffer) {

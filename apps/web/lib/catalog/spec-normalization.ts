@@ -1,6 +1,6 @@
 import type { PowerDataConfidence, PowertrainKind, VehicleOffer } from "./types";
 import { catalogPowerSanity } from "./power-sanity";
-import { namedElectrifiedPowertrainKind } from "./powertrain-safety";
+import { canonicalSourceFuel, namedElectrifiedPowertrainKind } from "./powertrain-safety";
 
 function rawText(value: unknown, depth = 0): string {
   if (value == null || depth > 10) return "";
@@ -298,6 +298,7 @@ function normalizedCurrency(offer: Partial<VehicleOffer>) {
 export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offer: T): T {
   const primary = primaryText(offer);
   const full = allText(offer);
+  const canonicalFuel = canonicalSourceFuel(offer.fuel) || offer.fuel;
   const explicitEngineCc = reasonable(offer.engineCc, 300, 10_000);
   const engineCc = explicitEngineCc
     || structuredEngineCc(offer)
@@ -322,12 +323,12 @@ export function normalizeVehicleOfferSpecs<T extends Partial<VehicleOffer>>(offe
   // normalized from the corresponding source field (plus engineType for fuel /
   // powertrain wording). Raw page payloads can contain filters, menus and
   // recommended vehicles and therefore are never evidence for these fields.
-  const semanticPowertrainText = [offer.model, offer.generation, offer.trim, offer.fuel, offer.engineType]
+  const semanticPowertrainText = [offer.model, offer.generation, offer.trim, canonicalFuel, offer.engineType]
     .filter(Boolean)
     .join(" ")
     .replace(/\s+/g, " ")
     .toLowerCase();
-  let fuel = inferFuel(semanticPowertrainText) || offer.fuel;
+  let fuel = inferFuel(semanticPowertrainText) || canonicalFuel;
   const explicitPowertrainKind = offer.powertrainKind && offer.powertrainKind !== "unknown" ? offer.powertrainKind : undefined;
   const scopedPowertrainKind = fuel === "electric"
     ? "electric"

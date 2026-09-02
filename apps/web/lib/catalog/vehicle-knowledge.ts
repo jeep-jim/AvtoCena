@@ -137,13 +137,9 @@ export function resolveKnowledgePower(args: {
       usedVariant: true,
       usedRepresentative: false,
     };
-    if (representative) return {
-      powerHp: representative,
-      confidence: "estimated",
-      source: `vehicle-model-representative:${args.modelId}`,
-      usedVariant: false,
-      usedRepresentative: true,
-    };
+    // One model can contain ICE, HEV, PHEV and EV versions with materially
+    // different customs power. A model-wide average is useful for search and
+    // plausibility diagnostics, never as a specification of this exact car.
     return { usedVariant: false, usedRepresentative: false };
   }
 
