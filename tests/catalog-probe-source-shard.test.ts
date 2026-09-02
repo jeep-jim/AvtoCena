@@ -116,8 +116,9 @@ test("Japan rollout includes only the five approved auction/catalog sources", ()
   assert.match(japanWorkflow, /retention_ms: "2592000000"/);
   assert.match(japanWorkflow, /catalog-v3-market-10k-reusable\.yml/);
   assert.doesNotMatch(japanWorkflow, /\bneeds:/);
-  assert.match(sequentialQueue, /schedule:/);
-  assert.match(sequentialQueue, /cron: "17 21 \* \* \*"/);
+  assert.doesNotMatch(sequentialQueue, /^\s*schedule:\s*$/m);
+  assert.doesNotMatch(sequentialQueue, /cron: "17 21 \* \* \*"/);
+  assert.match(sequentialQueue, /Production collection is intentionally paused/);
   assert.match(sequentialQueue, /01\|08\|15\|22/);
   assert.match(sequentialQueue, /target_per_market: "30000"/);
   assert.match(sequentialQueue, /retention_ms: "2592000000"/);

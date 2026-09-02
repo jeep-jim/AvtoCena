@@ -7,9 +7,10 @@ on:
       - main
     paths:
       - ".github/catalog-v3-run-all"
-  schedule:
-    # 04:17 in the product timezone (+07). Japan joins on local days 1/8/15/22.
-    - cron: "17 21 * * *"
+  # Production collection is intentionally paused while the six-market
+  # identity/specification pipeline is being repaired. Re-enabling automation
+  # requires a separate reviewed change; workflow_dispatch remains available
+  # for non-publishing diagnostics only while the central writer freeze is on.
 
 permissions:
   contents: read
@@ -61,7 +62,7 @@ jobs:
     with:
       market: korea
       display_name: Корея
-      retention_ms: "259200000"
+      retention_ms: "1209600000"
       target_per_source: "10000"
       target_per_market: "10000"
       maximum_per_market: "10000"
@@ -76,7 +77,7 @@ jobs:
     with:
       market: china
       display_name: Китай
-      retention_ms: "259200000"
+      retention_ms: "1209600000"
       target_per_source: "10000"
       target_per_market: "10000"
       maximum_per_market: "10000"
@@ -91,7 +92,7 @@ jobs:
     with:
       market: uae
       display_name: ОАЭ
-      retention_ms: "259200000"
+      retention_ms: "1209600000"
       target_per_source: "10000"
       target_per_market: "10000"
       maximum_per_market: "10000"
@@ -106,7 +107,7 @@ jobs:
     with:
       market: europe
       display_name: Европа
-      retention_ms: "259200000"
+      retention_ms: "1209600000"
       target_per_source: "10000"
       target_per_market: "10000"
       maximum_per_market: "10000"
@@ -121,7 +122,7 @@ jobs:
     with:
       market: georgia
       display_name: Грузия
-      retention_ms: "259200000"
+      retention_ms: "1209600000"
       target_per_source: "10000"
       target_per_market: "10000"
       maximum_per_market: "10000"

@@ -17,7 +17,7 @@ function writesCatalogMarkets(source: string) {
   return /catalog-v3-market-10k-reusable\.yml|catalog-publish-(?:market|source-scale|fresh)\.mjs|catalog-rebuild-source-shard\.mjs/.test(source);
 }
 
-test("Catalog V3 sequential queue is the only automatically scheduled catalog market writer", () => {
+test("catalog market writers and cleanup have no automatic schedules during the emergency pause", () => {
   const scheduledWriters = fs.readdirSync(root)
     .filter((name) => /^catalog.*\.ya?ml$/i.test(name))
     .filter((name) => {
@@ -25,12 +25,12 @@ test("Catalog V3 sequential queue is the only automatically scheduled catalog ma
       return hasSchedule(source) && writesCatalogMarkets(source);
     })
     .sort();
-  assert.deepEqual(scheduledWriters, ["catalog-v3-sequential-queue.yml"]);
+  assert.deepEqual(scheduledWriters, []);
 
-  // Object-storage cleanup may remain scheduled because it only removes expired
-  // generations/orphans behind its grace window and never publishes a market.
+  // Cleanup is paused too, so the frozen catalog cannot lose generations while
+  // the new two-week retention contract is being repaired and verified.
   const cleanup = text("catalog-storage-cleanup.yml");
-  assert.equal(hasSchedule(cleanup), true);
+  assert.equal(hasSchedule(cleanup), false);
   assert.equal(writesCatalogMarkets(cleanup), false);
 });
 
