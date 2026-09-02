@@ -10,6 +10,7 @@ test("catalog production collection, cleanup and publication remain paused durin
 
   assert.doesNotMatch(queue, /^\s*schedule:\s*$/m);
   assert.doesNotMatch(cleanup, /^\s*schedule:\s*$/m);
+  assert.doesNotMatch(cleanup, /^\s*push:\s*$/m);
   assert.match(storage, /export const CATALOG_PRODUCTION_WRITES_PAUSED = true/);
   assert.match(storage, /CATALOG_PRODUCTION_WRITES_PAUSED && process\.env\.JSON_STORAGE_DRIVER === "object"/);
   assert.match(storage, /catalog_production_writes_paused/);

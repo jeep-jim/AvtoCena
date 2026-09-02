@@ -3,12 +3,6 @@ run-name: Catalog storage cleanup · ${{ github.sha }}
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - ".github/workflows/catalog-storage-cleanup.yml"
-      - "scripts/catalog-clean-object-storage.mjs"
-      - "apps/web/lib/data.ts"
   # Automatic deletion is paused together with catalog collection/publication.
   # Cleanup may be restored only after the new two-week retention contract and
   # the rebuilt six-market generations have been verified in production.
