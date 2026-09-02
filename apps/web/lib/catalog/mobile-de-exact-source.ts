@@ -1,5 +1,6 @@
 import { canonicalSourceModelIdentity } from "./open-source-normalizer";
 import { hasCredibleCatalogIdentity, isCatalogYearAllowed } from "./offer-quality";
+import { canonicalSourceFuel } from "./powertrain-safety";
 import { stableOfferId } from "./storage";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, SourceRunHealth, VehicleOffer } from "./types";
 
@@ -65,6 +66,62 @@ function parsePower(value: unknown) {
   return {
     powerKw: Number.isFinite(kw) && kw > 0 ? Math.round(kw * 10) / 10 : undefined,
     powerHp: Number.isFinite(hp) && hp > 0 ? Math.round(hp * 10) / 10 : Number.isFinite(kw) && kw > 0 ? Math.round(kw * 1.3596216173 * 10) / 10 : undefined,
+  };
+}
+
+type MobileDeEvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
+
+type MobileDeMetricEvidence = {
+  value?: number;
+  rawValues: number[];
+  status: MobileDeEvidenceStatus;
+};
+
+type MobileDeFuelEvidence = {
+  value?: string;
+  rawValues: string[];
+  status: MobileDeEvidenceStatus;
+};
+
+function metricEvidence(listing: unknown, detail: unknown, minimum: number, maximum: number, tolerance = 0): MobileDeMetricEvidence {
+  const rawValues = [listing, detail]
+    .filter((value) => value !== undefined && value !== null && String(value).trim() !== "")
+    .map(Number);
+  if (!rawValues.length) return { rawValues, status: "missing" };
+  if (rawValues.some((value) => !Number.isFinite(value) || value < minimum || value > maximum)) return { rawValues, status: "ambiguous" };
+  if (Math.max(...rawValues) - Math.min(...rawValues) > tolerance) return { rawValues, status: "conflict" };
+  return { value: detail ? Number(detail) : Number(listing), rawValues, status: "exact" };
+}
+
+function fuelEvidence(listing: unknown, detail: unknown): MobileDeFuelEvidence {
+  const rawValues = [...new Set([listing, detail].map(clean).filter(Boolean))];
+  if (!rawValues.length) return { rawValues, status: "missing" };
+  const values = rawValues.map(canonicalSourceFuel);
+  if (values.some((value) => !value)) return { rawValues, status: "ambiguous" };
+  const canonical = [...new Set(values as string[])];
+  if (canonical.length !== 1) return { rawValues, status: "conflict" };
+  return { value: canonical[0], rawValues, status: "exact" };
+}
+
+function powertrainKindForFuel(fuel: string | undefined) {
+  if (fuel === "electric") return "electric" as const;
+  if (fuel === "hybrid") return "other_hybrid" as const;
+  if (fuel) return "combustion" as const;
+  return "unknown" as const;
+}
+
+export function mobileDeSpecificationEvidence(args: {
+  listingEngineCc?: number;
+  detailEngineCc?: number;
+  listingPowerHp?: number;
+  detailPowerHp?: number;
+  listingFuel?: string;
+  detailFuel?: string;
+}) {
+  return {
+    fuel: fuelEvidence(args.listingFuel, args.detailFuel),
+    engineCc: metricEvidence(args.listingEngineCc, args.detailEngineCc, 300, 10_000),
+    powerHp: metricEvidence(args.listingPowerHp, args.detailPowerHp, 20, 2_500, 1),
   };
 }
 function parseRegistration(value: unknown) {
@@ -227,19 +284,34 @@ export class MobileDeExactAdapter implements CatalogSourceAdapter {
     if (!row?.id || !row.make || !row.model || !row.year || !row.price || !row.sourceUrl) return null;
     if (!isCatalogYearAllowed(row.year, "europe") || !hasCredibleCatalogIdentity(row)) return null;
     const now = new Date().toISOString();
+    const evidence = mobileDeSpecificationEvidence({
+      listingEngineCc: row.engineCc,
+      listingPowerHp: row.powerHp,
+      listingFuel: row.fuel,
+    });
+    const exactFuel = evidence.fuel.status === "exact" ? evidence.fuel.value : undefined;
+    const exactEngineCc = evidence.engineCc.status === "exact" ? evidence.engineCc.value : undefined;
+    const exactPowerHp = evidence.powerHp.status === "exact" ? evidence.powerHp.value : undefined;
     return {
       id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: "europe", offerType: "fixed", status: "active",
       sourceTitle: row.title, make: row.make, model: row.model, trim: row.trim, year: row.year, productionDate: row.productionDate,
-      mileageKm: row.mileageKm, engineCc: row.engineCc, powerKw: row.powerKw, powerHp: row.powerHp, fuel: row.fuel,
+      mileageKm: row.mileageKm, engineCc: exactFuel === "electric" ? undefined : exactEngineCc,
+      powerKw: exactPowerHp ? row.powerKw : undefined, powerHp: exactPowerHp, fuel: exactFuel,
+      powertrainKind: powertrainKindForFuel(exactFuel),
       transmission: row.transmission, bodyType: row.bodyType,
-      powerDataConfidence: row.powerKw || row.powerHp ? "source_exact" : undefined,
-      powerDataSource: row.powerKw || row.powerHp ? "mobile.de consumer SRP" : undefined,
+      powerDataConfidence: exactPowerHp ? "source_exact" : undefined,
+      powerDataSource: exactPowerHp ? "mobile.de consumer SRP" : undefined,
       sourcePrice: row.price, sourceCurrency: row.currency, priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data",
       firstSeenAt: now, updatedAt: now,
       operational: {
         sourceUrl: row.sourceUrl, sourceVenueName: row.location || "mobile.de Europe", sourceTitle: row.title,
         exactFields: true, exactDetail: false, exactPhotos: false, galleryVerified: false, galleryImageCount: 0,
         gallerySafetyMode: "mobile_consumer_bff_pending_detail_v1", galleryStoredAs: "json_urls",
+        semanticEvidence: {
+          fuel: { source: "mobile.de consumer SRP attributes", ...evidence.fuel },
+          engineCc: { source: "mobile.de consumer SRP attributes", ...evidence.engineCc },
+          powerHp: { source: "mobile.de consumer SRP attributes", ...evidence.powerHp },
+        },
         raw: { parsed: row, srp: row.raw },
       },
     } as VehicleOffer;
@@ -254,6 +326,29 @@ export class MobileDeExactAdapter implements CatalogSourceAdapter {
     if (positive(ad?.price?.grossAmount) !== positive(offer.sourcePrice)) throw new Error(`mobile_de_vip_price_mismatch:${offer.sourceOfferId}`);
     const attrs = attributeMap(ad);
     const power = parsePower(attrs.get("power"));
+    const previousRaw = (offer.operational?.raw && typeof offer.operational.raw === "object"
+      ? offer.operational.raw
+      : {}) as Record<string, any>;
+    const parsedListing = previousRaw.parsed as MobileDeExactRow | undefined;
+    const previousEvidence = (offer.operational as any)?.semanticEvidence || {};
+    const listingEngineCc = parsedListing?.engineCc
+      ?? (previousEvidence?.engineCc?.status === "exact" ? offer.engineCc : undefined);
+    const listingPowerHp = parsedListing?.powerHp
+      ?? (previousEvidence?.powerHp?.status === "exact" ? offer.powerHp : undefined);
+    const listingPowerKw = parsedListing?.powerKw
+      ?? (previousEvidence?.powerHp?.status === "exact" ? offer.powerKw : undefined);
+    const listingFuel = parsedListing?.fuel
+      ?? (previousEvidence?.fuel?.status === "exact" ? offer.fuel : undefined);
+    const detailEngineCc = integer(attrs.get("cubicCapacity"));
+    const detailFuel = clean(attrs.get("fuel")) || undefined;
+    const evidence = mobileDeSpecificationEvidence({
+      listingEngineCc,
+      detailEngineCc,
+      listingPowerHp,
+      detailPowerHp: power.powerHp,
+      listingFuel,
+      detailFuel,
+    });
     const registration = parseRegistration(attrs.get("firstRegistration"));
     const detailMake = clean(ad?.makeKey) || offer.make;
     const detailTitle = clean(ad?.title) || offer.sourceTitle;
@@ -271,25 +366,37 @@ export class MobileDeExactAdapter implements CatalogSourceAdapter {
     offer.year = registration.year || offer.year;
     offer.productionDate = registration.productionDate || offer.productionDate;
     offer.mileageKm = integer(attrs.get("mileage")) || offer.mileageKm;
-    offer.engineCc = integer(attrs.get("cubicCapacity")) || offer.engineCc;
-    offer.powerKw = power.powerKw || offer.powerKw;
-    offer.powerHp = power.powerHp || offer.powerHp;
-    offer.fuel = clean(attrs.get("fuel")) || offer.fuel;
+    offer.fuel = evidence.fuel.status === "exact" ? evidence.fuel.value : undefined;
+    offer.powertrainKind = powertrainKindForFuel(offer.fuel);
+    offer.engineCc = offer.fuel === "electric"
+      ? undefined
+      : evidence.engineCc.status === "exact" ? evidence.engineCc.value : undefined;
+    offer.powerHp = evidence.powerHp.status === "exact" ? evidence.powerHp.value : undefined;
+    offer.powerKw = evidence.powerHp.status === "exact" ? power.powerKw || listingPowerKw : undefined;
     offer.transmission = clean(attrs.get("transmission")) || offer.transmission;
     offer.bodyType = clean(attrs.get("category") || ad?.category) || offer.bodyType;
-    if (offer.powerKw || offer.powerHp) {
+    if (evidence.powerHp.status === "exact" && (offer.powerKw || offer.powerHp)) {
       offer.powerDataConfidence = "source_exact";
       offer.powerDataSource = "mobile.de consumer VIP attributes";
+    } else {
+      offer.powerDataConfidence = undefined;
+      offer.powerDataSource = undefined;
+    }
+    if ([evidence.fuel.status, evidence.engineCc.status, evidence.powerHp.status].some((status) => status === "ambiguous" || status === "conflict")) {
+      offer.calculationStatus = "needs_data";
     }
     const urls = [...new Set((Array.isArray(ad?.galleryImages) ? ad.galleryImages : []).map(largestGalleryUrl).filter(Boolean))]
       .slice(0, Math.min(30, Math.max(5, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30))));
     const verified = urls.length >= Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
-    const previousRaw = (offer.operational?.raw && typeof offer.operational.raw === "object"
-      ? offer.operational.raw
-      : {}) as Record<string, unknown>;
     offer.operational = {
       ...(offer.operational || {}), exactDetail: true, exactFields: true, exactPhotos: verified, photoIdentityVerified: verified,
       galleryVerified: verified, galleryImageCount: urls.length, gallerySafetyMode: "mobile_consumer_bff_exact_v1", galleryStoredAs: "json_urls",
+      semanticEvidence: {
+        ...previousEvidence,
+        fuel: { source: "mobile.de consumer SRP/VIP attributes", ...evidence.fuel },
+        engineCc: { source: "mobile.de consumer SRP/VIP attributes", ...evidence.engineCc },
+        powerHp: { source: "mobile.de consumer SRP/VIP attributes", ...evidence.powerHp },
+      },
       raw: {
         ...previousRaw, vip: ad, images: urls, listingBoundImages: verified, photoIdentityVerified: verified,
         detailIdentityVerified: true,
