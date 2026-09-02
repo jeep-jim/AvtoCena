@@ -83,6 +83,12 @@ jobs:
             if ((offer.images || []).some((img) => !/^https:\/\/(?:\d+\.)?ajes\.com\/imgs\/[A-Za-z0-9_-]+$/i.test(String(img?.url || '')))) problems.push('gallery_not_exact_ajes_detail');
             if (op.photoIdentityVerified !== true || op.gallerySafetyMode !== 'prestige_ajes_exact_detail_v2_cover_content_verified') problems.push('gallery_identity_flags_missing');
             if (offer.powerHp || offer.powerKw || offer.power30MinKw || offer.drive || offer.fuel) problems.push('unsupported_fields_filled');
+            const evidence = op.semanticEvidence || {};
+            if (evidence.year?.status !== 'exact' || Number(evidence.year?.value || 0) !== Number(offer.year || 0)) problems.push('year_evidence_invalid');
+            if (offer.engineCc) {
+              if (evidence.engineCc?.status !== 'exact' || Number(evidence.engineCc?.value || 0) !== Number(offer.engineCc)) problems.push('engine_evidence_invalid');
+            } else if (evidence.engineCc?.status === 'exact') problems.push('exact_engine_not_promoted');
+            if (evidence.fuel?.status !== 'missing' || evidence.powerHp?.status !== 'missing' || evidence.powerKw?.status !== 'missing') problems.push('unsupported_evidence_promoted');
           }
           console.log(JSON.stringify({ count: offers.length, unique: ids.size, source, problems: [...new Set(problems)], sample: offers.map(o => ({ id:o.sourceOfferId,title:o.sourceTitle,make:o.make,model:o.model,trim:o.trim,year:o.year,mileageKm:o.mileageKm,engineCc:o.engineCc,transmission:o.transmission,auctionName:o.auctionName,auctionDate:o.auctionDate,lotNumber:o.lotNumber,grade:o.auctionGrade,price:o.sourcePrice,currency:o.sourceCurrency,images:o.images?.length,url:o.operational?.sourceUrl })) }, null, 2));
           if (problems.length) process.exit(1);

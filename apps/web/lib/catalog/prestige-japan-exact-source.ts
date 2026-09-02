@@ -52,6 +52,18 @@ export type PrestigeJapanExactRow = {
   images: string[];
   coverContentVerified?: boolean;
   rawFields: Record<string, string>;
+  semanticEvidence: PrestigeJapanSpecificationEvidence;
+};
+
+type PrestigeJapanEvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
+type PrestigeJapanMetricEvidence = { value?: number; rawValues: string[]; status: PrestigeJapanEvidenceStatus };
+type PrestigeJapanMissingEvidence = { rawValues: string[]; status: "missing" };
+export type PrestigeJapanSpecificationEvidence = {
+  year: PrestigeJapanMetricEvidence;
+  fuel: PrestigeJapanMissingEvidence;
+  engineCc: PrestigeJapanMetricEvidence;
+  powerHp: PrestigeJapanMissingEvidence;
+  powerKw: PrestigeJapanMissingEvidence;
 };
 
 function clean(value: unknown) {
@@ -75,6 +87,53 @@ function escaped(value: string) { return value.replace(/[.*+?^${}()|[\]\\]/g, "\
 function positiveInteger(value: unknown) {
   const n = Number(String(value ?? "").replace(/[^0-9]/g, ""));
   return Number.isFinite(n) && n > 0 ? n : undefined;
+}
+
+function prestigeJapanYearEvidence(value: unknown): PrestigeJapanMetricEvidence {
+  const raw = clean(value);
+  const rawValues = raw ? [raw] : [];
+  const maximum = new Date().getUTCFullYear() + 1;
+  const years = [...raw.matchAll(/\b((?:19|20)\d{2})\b/g)]
+    .map((match) => Number(match[1]))
+    .filter((year) => year >= JAPAN_MIN_MODEL_YEAR && year <= maximum);
+  const unique = [...new Set(years)];
+  if (!unique.length) return { rawValues, status: "missing" };
+  if (unique.length !== 1) return { rawValues, status: "conflict" };
+  return { value: unique[0], rawValues, status: "exact" };
+}
+
+function prestigeJapanEngineCcEvidence(value: unknown): PrestigeJapanMetricEvidence {
+  const raw = clean(value);
+  const rawValues = raw ? [raw] : [];
+  if (!raw) return { rawValues, status: "missing" };
+  const unit = "(?:cc|cm3|cm³)";
+  if (new RegExp(`(?:\\d[\\d,]*)\\s*${unit}?\\s*(?:-|–|—|~|～|to|至|到)\\s*(?:\\d[\\d,]*)\\s*${unit}?`, "i").test(raw)) {
+    return { rawValues, status: "ambiguous" };
+  }
+  const tokens = [...raw.matchAll(/\b(\d[\d,]*)\s*(?:cc|cm3|cm³)\b/gi)].map((match) => match[1]);
+  if (!tokens.length) {
+    const keyedNumber = raw.match(/^(\d[\d,]*)$/)?.[1];
+    if (keyedNumber) tokens.push(keyedNumber);
+  }
+  if (!tokens.length) return { rawValues, status: "missing" };
+  const values = tokens.map((token) => Number(token.replace(/,/g, "")));
+  if (values.some((engineCc) => !Number.isInteger(engineCc) || engineCc < 300 || engineCc > 10_000)) {
+    return { rawValues, status: "ambiguous" };
+  }
+  const unique = [...new Set(values)];
+  if (unique.length !== 1) return { rawValues, status: "conflict" };
+  return { value: unique[0], rawValues, status: "exact" };
+}
+
+export function prestigeJapanSpecificationEvidence(input: { year?: unknown; capacity?: unknown }): PrestigeJapanSpecificationEvidence {
+  const missing = (): PrestigeJapanMissingEvidence => ({ rawValues: [], status: "missing" });
+  return {
+    year: prestigeJapanYearEvidence(input.year),
+    fuel: missing(),
+    engineCc: prestigeJapanEngineCcEvidence(input.capacity),
+    powerHp: missing(),
+    powerKw: missing(),
+  };
 }
 function yen(value: unknown) {
   const match = clean(value).match(/([0-9][0-9,]*)\s*(?:YEN|JPY)\b/i);
@@ -207,6 +266,9 @@ export function prestigeJapanGithubEgressRequest(url: string, init?: RequestInit
   if (carId) return { url: `${endpoint}?kind=detail&carId=${encodeURIComponent(carId)}`, init: { ...init, method: "GET" } };
   return { url, init };
 }
+export function isPrestigeJapanSourceBlockedError(error: unknown) {
+  return /cf-turnstile|bot check failed|cloudflare widget/i.test(String((error as Error)?.message || error));
+}
 async function request(url: string, init?: RequestInit) {
   const timeout = Math.max(8_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000));
   const attempts = Math.max(1, Math.min(5, Number(process.env.PRESTIGE_JAPAN_REQUEST_ATTEMPTS || 3)));
@@ -216,7 +278,7 @@ async function request(url: string, init?: RequestInit) {
       const routed = prestigeJapanGithubEgressRequest(url, init);
       const response = await fetch(routed.url, { ...routed.init, headers: { ...HEADERS, ...(routed.init?.headers || {}) }, redirect: "follow", signal: AbortSignal.timeout(timeout) });
       const body = await response.text();
-      if (!response.ok) throw new Error(`prestige_japan_exact_http_${response.status}:${url}`);
+      if (!response.ok) throw new Error(`prestige_japan_exact_http_${response.status}:${url}:${clean(body).slice(0, 240)}`);
       return { response, body };
     } catch (error) {
       lastError = error;
@@ -247,7 +309,8 @@ export function parsePrestigeJapanExactDetail(markup: string, url: string): Pres
   for (const label of ["Year", "Make", "Model", "Trans", "Kms", "Capacity", "Colour", "Extras", "Grade", "Chassis", "Auction Date", "Auction Time", "Number", "Location", "Start Price", "Final Price", "Current Status"]) rawFields[label] = tableValue(markup, label);
   const finalPrice = yen(rawFields["Final Price"]);
   if (rawFields["Current Status"] !== "Sold" || !(finalPrice > 0)) return null;
-  const year = Number(rawFields.Year.match(/\b((?:19|20)\d{2})\b/)?.[1] || 0);
+  const semanticEvidence = prestigeJapanSpecificationEvidence({ year: rawFields.Year, capacity: rawFields.Capacity });
+  const year = semanticEvidence.year.status === "exact" ? semanticEvidence.year.value || 0 : 0;
   const sourceMake = clean(rawFields.Make);
   const sourceModel = clean(rawFields.Model);
   const canonicalIdentity = canonicalPrestigeJapanIdentity(sourceMake, sourceModel);
@@ -258,10 +321,10 @@ export function parsePrestigeJapanExactDetail(markup: string, url: string): Pres
   const sourceTitle = plainVehicleTitle(markup, year) || `${year} ${sourceMake} ${sourceModel}`;
   return {
     carId: identity, sourceUrl: url, sourceTitle, make, model, trim: trimFromTitle(sourceTitle, year, sourceMake, sourceModel), year,
-    mileageKm: positiveInteger(rawFields.Kms), engineCc: positiveInteger(rawFields.Capacity), transmission: rawFields.Trans || undefined,
+    mileageKm: positiveInteger(rawFields.Kms), engineCc: semanticEvidence.engineCc.status === "exact" ? semanticEvidence.engineCc.value : undefined, transmission: rawFields.Trans || undefined,
     color: rawFields.Colour || undefined, frameNumber: rawFields.Chassis || undefined, auctionDate: isoDate(rawFields["Auction Date"]),
     lotNumber: rawFields.Number || undefined, auctionName: rawFields.Location || undefined, auctionGrade: exactAuctionGrade(rawFields.Grade),
-    startPrice: yen(rawFields["Start Price"]) || undefined, finalPrice, currentStatus: "Sold", images, rawFields,
+    startPrice: yen(rawFields["Start Price"]) || undefined, finalPrice, currentStatus: "Sold", images, rawFields, semanticEvidence,
   };
 }
 
@@ -361,15 +424,23 @@ export class PrestigeJapanExactSource implements CatalogSourceAdapter {
     const row = raw as PrestigeJapanExactRow;
     if (!row?.carId || !row.sourceUrl || row.currentStatus !== "Sold" || !(row.finalPrice > 0) || !row.make || !row.model || row.year < JAPAN_MIN_MODEL_YEAR) return null;
     const now = new Date().toISOString();
+    const semanticEvidence = row.semanticEvidence || prestigeJapanSpecificationEvidence({ year: row.year, capacity: row.engineCc });
     return {
       id: stableOfferId(this.sourceId, row.carId), sourceId: this.sourceId, sourceOfferId: row.carId, market: "japan", offerType: "auction", status: "active",
       catalogKind: "auction_result", auctionResult: "sold", auctionPriceKind: "published_result", sourceTitle: row.sourceTitle, make: row.make, model: row.model, trim: row.trim,
-      year: row.year, mileageKm: row.mileageKm, engineCc: row.engineCc, transmission: row.transmission, color: row.color, frameNumber: row.frameNumber,
+      year: row.year, mileageKm: row.mileageKm, engineCc: semanticEvidence.engineCc.status === "exact" ? semanticEvidence.engineCc.value : undefined, transmission: row.transmission, color: row.color, frameNumber: row.frameNumber,
       auctionName: row.auctionName, auctionDate: row.auctionDate, lotNumber: row.lotNumber, auctionGrade: row.auctionGrade,
       sourcePrice: row.finalPrice, sourceCurrency: "JPY", priceMode: "fixed", images: row.images.map(image), calculationStatus: "needs_data", firstSeenAt: now, updatedAt: now,
       operational: {
         sourceUrl: row.sourceUrl, sourceVenueName: row.auctionName || "Prestige Motorsport Japan Auctions", exactDetail: true, photoIdentityVerified: true,
         sourceOnlyFieldsPreserved: true, auctionResultPriceVerified: true, resultPriceVerified: true, galleryVerified: row.coverContentVerified === true && row.images.length >= 5, gallerySafetyMode: "prestige_ajes_exact_detail_v2_cover_content_verified",
+        semanticEvidence: {
+          year: { source: "prestige_exact_detail_year", ...semanticEvidence.year },
+          fuel: { source: "prestige_source_missing", ...semanticEvidence.fuel },
+          engineCc: { source: "prestige_exact_detail_capacity", ...semanticEvidence.engineCc },
+          powerHp: { source: "prestige_source_missing", ...semanticEvidence.powerHp },
+          powerKw: { source: "prestige_source_missing", ...semanticEvidence.powerKw },
+        },
         raw: { detailIdentityVerified: true, photoIdentityVerified: true, listingBoundImages: true, coverContentVerified: row.coverContentVerified === true, carId: row.carId, currentStatus: row.currentStatus, finalPriceJpy: row.finalPrice, startPriceJpy: row.startPrice, fields: row.rawFields, images: row.images },
       },
     };
@@ -406,7 +477,10 @@ export class PrestigeJapanExactSource implements CatalogSourceAdapter {
   mapStatus(): OfferStatus { return "active"; }
   async healthCheck(): Promise<SourceRunHealth> {
     try { const page = await this.fetchPage(null); return page.health || { ok: true, message: `Prestige exact sold=${page.items.length}`, checkedAt: new Date().toISOString() }; }
-    catch (error) { return { ok: false, message: String((error as Error)?.message || error), checkedAt: new Date().toISOString() }; }
+    catch (error) {
+      const message = String((error as Error)?.message || error);
+      return { ok: false, blocked: isPrestigeJapanSourceBlockedError(error), message, checkedAt: new Date().toISOString() };
+    }
   }
 }
 
