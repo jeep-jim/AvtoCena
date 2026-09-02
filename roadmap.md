@@ -1337,4 +1337,10 @@ Production-результат ещё должен быть подтверждё�
 - **Изменённые файлы:** `apps/web/lib/catalog/che168-global-exact-source.ts`, `tests/catalog-che168-specification-evidence.test.ts`, `.github/workflows/ci.yml`, `roadmap.md`.
 - **Проверки:** новый regression-набор `5/5`, расширенный профильный набор `35/35`, web/engine typecheck и production build — success; полный локальный набор остаётся на зафиксированном baseline `838` тестов: `813 pass`, те же `25 fail`, новых падений нет; `git diff --check` чистый.
 - **Production-граница:** collection, publication, cleanup и Object Storage writers не запускались. Действующий каталог и индексируемые URL не изменялись.
-- **Что осталось:** PR, полный GitHub CI, merge и deploy кода адаптера. Даже после deploy сохранённый китайский pool не изменится до будущего полного dry-run и согласованной пересборки поверх текущего каталога.
+- **Доставка:** PR `#806` слит в `main`, merge SHA `d876ffd600e2e8d531b8fc00172dd8fa88e2d5e8`; полный PR CI run `33634668218` завершён `success`. Даже после deploy сохранённый китайский pool не изменится до будущего полного dry-run и согласованной пересборки поверх текущего каталога.
+
+### 40.9. Che168 readiness следует каноническому provenance
+
+- **Post-merge source-only run:** readiness run `33634893459` не писал в Object Storage и не публиковал каталог. Сборщик успешно получил `3` identity-bound карточки Che168 Global с точными detail и галереями; gate упал только на устаревшем сравнении исходной строки `fuelname` с каноническим значением `petrol/hybrid`.
+- **Исправление контракта:** readiness и будущий strict source-exhaustion workflow теперь проверяют exact semantic evidence, привязку raw fuel/engine к тому же carinfo detail и отсутствие числовых engine/power значений при non-exact evidence. Канонизация разрешённого source fuel больше не считается переписыванием данных.
+- **Production-граница:** workflow остаётся source-only, создаёт только временный Actions artifact и не содержит production credentials или writers. Cleanup, publication и пересборка этим исправлением не запускаются.
