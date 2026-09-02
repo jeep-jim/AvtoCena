@@ -17,6 +17,13 @@ import { deduplicatePublicCatalogOffers } from "./public-offer-deduplication";
 import { isSupportedPublicCatalogIdentity, publicCatalogIdentityRejectionReason } from "./public-identity-policy";
 
 const MARKETS: CatalogMarket[] = [...PUBLIC_CATALOG_MARKETS];
+// Owner-requested emergency freeze. Production catalog generations must remain
+// immutable while source extraction, identity matching and specification
+// confidence are repaired across all six markets. This is deliberately a code
+// constant (not an environment toggle), so an old or manually-dispatched
+// workflow cannot bypass the freeze with repository secrets. A reviewed code
+// change is required to resume Object Storage writes.
+export const CATALOG_PRODUCTION_WRITES_PAUSED = true;
 function isActivePublicCatalogMarket(value: unknown): value is CatalogMarket {
   return MARKETS.includes(String(value || "").toLowerCase() as CatalogMarket);
 }
@@ -900,6 +907,9 @@ export type PersistCatalogOptions = {
   appendPublicOffersByMarket?: Partial<Record<CatalogMarket, VehicleOffer[]>>;
 };
 export async function persistCatalogOffers(nextOffers: VehicleOffer[], options: PersistCatalogOptions = {}) {
+  if (CATALOG_PRODUCTION_WRITES_PAUSED && process.env.JSON_STORAGE_DRIVER === "object") {
+    throw new Error("catalog_production_writes_paused");
+  }
   const storage = getJsonStorage();
   const growOnlyMarkets = new Set(String(process.env.CATALOG_GROW_ONLY_MARKETS ?? "korea").split(",").map((value) => value.trim()).filter(Boolean));
   const preservedPublicOffersByMarket = options.preservePublicOffersByMarket || {};

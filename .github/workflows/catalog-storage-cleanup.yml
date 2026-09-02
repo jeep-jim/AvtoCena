@@ -9,8 +9,9 @@ on:
       - ".github/workflows/catalog-storage-cleanup.yml"
       - "scripts/catalog-clean-object-storage.mjs"
       - "apps/web/lib/data.ts"
-  schedule:
-    - cron: "40 2 * * *"
+  # Automatic deletion is paused together with catalog collection/publication.
+  # Cleanup may be restored only after the new two-week retention contract and
+  # the rebuilt six-market generations have been verified in production.
 
 permissions:
   actions: write
