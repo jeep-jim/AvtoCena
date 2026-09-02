@@ -8,7 +8,7 @@ const ELECTRIC_PRIMARY_RE = /battery[ -]?electric|pure[ -]?electric|\b(?:bev|ev)
 // marketplace titles even when a generic model field only says "UX".
 const LEXUS_HYBRID_BADGE_RE = /\b(?:ct|ux|nx|rx|es|gs|ls|lc)\s*\d{3}h(?:\+)?\b/i;
 const COMBUSTION_FUELS = new Set(["petrol", "diesel", "lpg", "gasoline", "benzin"]);
-const HYBRID_FUEL_RE = /\b(?:hybrid|reev|erev|phev|hev|mhev)\b|plug[ -]?in|гибрид|混合动力|油电混合|插电混动|하이브리드|ハイブリッド/i;
+const HYBRID_FUEL_RE = /\b(?:hybrid|reev|erev|phev|hev|mhev)\b|plug[ -]?in|range[ -]?(?:extender|extended)|extended[ -]?range|гибрид|混合动力|油电混合|插电混动|增程|하이브리드|ハイブリッド/i;
 const ELECTRIC_FUEL_RE = /electric(?:ity)?|\belektro\b|\b(?:bev|ev)\b|электро|电动|電気|전기|일렉트릭|ელექტრო/i;
 const PETROL_FUEL_RE = /petrol|gasoline|benzin|essence|бензин|汽油|ガソリン|가솔린|휘발유|ბენზინ/i;
 const DIESEL_FUEL_RE = /diesel|дизел|柴油|軽油|디젤|경유|დიზელ/i;
