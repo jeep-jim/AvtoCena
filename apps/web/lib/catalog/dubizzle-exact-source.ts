@@ -132,6 +132,76 @@ function rangedMetric(value: unknown) {
     || /\d\s*\+\s*(?:cc|cm3|cm³|hp|ps|bhp)?\s*$/i.test(text);
 }
 
+function rangeUpperBound(value: unknown) {
+  if (!rangedMetric(value)) return undefined;
+  const numbers = [...String(value ?? "").matchAll(/[0-9][0-9, .]*/g)]
+    .map((match) => integer(match[0]))
+    .filter((item): item is number => Boolean(item));
+  return numbers.at(-1);
+}
+
+function storedAlgoliaDetail(offer: Partial<VehicleOffer>, key: string) {
+  const rawText = String((offer.operational as any)?.raw?.parsed?.rawText || "");
+  if (!rawText) return undefined;
+  try {
+    return algoliaDetail(JSON.parse(rawText) as DubizzleAlgoliaHit, key);
+  } catch {
+    const start = rawText.indexOf(JSON.stringify(key));
+    if (start < 0) return undefined;
+    const encoded = rawText.slice(start, start + 500).match(/"value"\s*:\s*"((?:\\.|[^"\\])*)"/)?.[1];
+    if (!encoded) return undefined;
+    try { return JSON.parse(`"${encoded}"`); } catch { return encoded; }
+  }
+}
+
+/**
+ * Older frozen generations contain the right edge of an Algolia filter bucket
+ * as though it were an exact vehicle specification. Keep the listing readable,
+ * but remove the stored metric only when its own retained source payload proves
+ * that the value came from that range. A coincidentally genuine 1,499 cc or
+ * 99 hp value without range evidence is deliberately left untouched.
+ */
+export function sanitizeDubizzleStoredRangeMetrics<T extends VehicleOffer>(offer: T): T {
+  if (offer.sourceId !== "dubizzle_uae_open") return offer;
+  const engineRaw = storedAlgoliaDetail(offer, "Engine Capacity (cc)");
+  const powerRaw = storedAlgoliaDetail(offer, "Horsepower");
+  const evidence = (offer.operational as any)?.semanticEvidence || {};
+  const retainedAmbiguous = (field: string) => evidence?.[field]?.source === "dubizzle_retained_algolia"
+    && evidence?.[field]?.status === "ambiguous";
+  const dropEngine = retainedAmbiguous("engineCc") || rangeUpperBound(engineRaw) === Number(offer.engineCc || 0);
+  const dropPower = retainedAmbiguous("powerHp") || rangeUpperBound(powerRaw) === Number(offer.powerHp || 0);
+  if (!dropEngine && !dropPower) return offer;
+  const retainedRaw = typeof offer.operational?.raw === "object" && offer.operational.raw
+    ? offer.operational.raw as Record<string, any>
+    : {};
+  const retainedParsed = typeof retainedRaw.parsed === "object" && retainedRaw.parsed
+    ? retainedRaw.parsed as Record<string, any>
+    : {};
+  return {
+    ...offer,
+    engineCc: dropEngine ? undefined : offer.engineCc,
+    powerHp: dropPower ? undefined : offer.powerHp,
+    powerDataConfidence: dropPower ? undefined : offer.powerDataConfidence,
+    powerDataSource: dropPower ? undefined : offer.powerDataSource,
+    calculationStatus: "needs_data",
+    operational: {
+      ...(offer.operational || {}),
+      // Downstream normalization must not rediscover a substring such as
+      // `499 cc` from the already-proven `0 - 1,499 cc` range. The exact range
+      // remains preserved below as semantic evidence for audit/debugging.
+      raw: {
+        ...retainedRaw,
+        parsed: { ...retainedParsed, rawText: undefined },
+      },
+      semanticEvidence: {
+        ...((offer.operational as any)?.semanticEvidence || {}),
+        ...(dropEngine ? { engineCc: { source: "dubizzle_retained_algolia", status: "ambiguous", rawValue: engineRaw } } : {}),
+        ...(dropPower ? { powerHp: { source: "dubizzle_retained_algolia", status: "ambiguous", rawValue: powerRaw } } : {}),
+      },
+    },
+  } as T;
+}
+
 function exactMetric(value: unknown, unit: RegExp) {
   const text = String(value ?? "").trim();
   if (!text || /unknown|not specified/i.test(text) || rangedMetric(text)) return undefined;

@@ -107,3 +107,52 @@ test("display enrichment does not invent Toyota Raize pricing specs from model-w
   assert.equal(enriched.powerHp, undefined);
   assert.notEqual(enriched.calculationStatus, "ready");
 });
+
+test("frozen Dubizzle bucket boundaries are removed only with retained range evidence", async () => {
+  const hit = {
+    details: {
+      "Engine Capacity (cc)": { en: { value: "0 - 1,499 cc" } },
+      Horsepower: { en: { value: "50 - 99 HP" } },
+    },
+  };
+  const offer = {
+    id: "dubizzle-stored-raize",
+    sourceId: "dubizzle_uae_open",
+    sourceOfferId: "stored-range",
+    market: "uae",
+    offerType: "fixed",
+    status: "active",
+    make: "Toyota",
+    model: "Raize",
+    trim: "TURBO G",
+    year: 2023,
+    mileageKm: 77_000,
+    engineCc: 1499,
+    powerHp: 99,
+    powerDataConfidence: "source_exact",
+    powerDataSource: "Dubizzle Algolia",
+    sourcePrice: 32_000,
+    sourceCurrency: "AED",
+    images: [],
+    totalRub: 2_138_248,
+    calculationStatus: "ready",
+    firstSeenAt: "2026-09-01T00:00:00.000Z",
+    updatedAt: "2026-09-01T00:00:00.000Z",
+    operational: { raw: { parsed: { rawText: JSON.stringify(hit) } } },
+  } as any;
+
+  const enriched = await enrichOfferForDisplay(offer);
+  assert.equal(enriched.engineCc, undefined);
+  assert.equal(enriched.powerHp, undefined);
+  assert.equal(enriched.powerDataConfidence, undefined);
+  assert.equal(enriched.powerDataSource, undefined);
+  assert.notEqual(enriched.calculationStatus, "ready");
+
+  const exactCoincidence = await enrichOfferForDisplay({
+    ...offer,
+    id: "dubizzle-exact-coincidence",
+    operational: { raw: { parsed: { rawText: JSON.stringify({ details: {} }) } } },
+  });
+  assert.equal(exactCoincidence.engineCc, 1499);
+  assert.equal(exactCoincidence.powerHp, 99);
+});

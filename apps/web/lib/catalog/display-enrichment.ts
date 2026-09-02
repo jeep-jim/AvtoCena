@@ -4,6 +4,7 @@ import { calculateOfferWithRussiaCustoms } from "./customs-pricing";
 import type { VehicleOffer } from "./types";
 import { vehicleKnowledgeToken } from "./vehicle-knowledge";
 import { enrichOfferWithKnowledgeCore } from "./knowledge-core";
+import { sanitizeDubizzleStoredRangeMetrics } from "./dubizzle-exact-source";
 
 function meaningful(value: unknown) {
   const text = String(value || "").trim();
@@ -58,7 +59,11 @@ export function catalogPricingSpecificationsChanged(before: Partial<VehicleOffer
 }
 
 export async function enrichOfferForDisplay<T extends VehicleOffer>(input: T): Promise<T> {
-  const enriched = await enrichOfferWithKnowledgeCore(input);
+  // Repair only retained, source-proven bucket boundaries before any variant
+  // matching or customs calculation. This makes the frozen public generation
+  // safe immediately, without mutating Object Storage while parsers are paused.
+  const sourceSanitized = sanitizeDubizzleStoredRangeMetrics(input);
+  const enriched = sanitizeDubizzleStoredRangeMetrics(await enrichOfferWithKnowledgeCore(sourceSanitized));
   const text = vehicleKnowledgeToken([
     enriched.make,
     enriched.model,
