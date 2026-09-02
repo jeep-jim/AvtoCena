@@ -16,11 +16,6 @@ function text(value: unknown) {
   return value == null ? "" : String(value).trim().replace(/\\\//g, "/");
 }
 
-function number(value: unknown) {
-  const result = Number(String(value ?? "").replace(/[^0-9.]/g, ""));
-  return Number.isFinite(result) && result > 0 ? result : undefined;
-}
-
 function deepFind(value: unknown, keys: string[], depth = 0): unknown {
   if (value == null || depth > 10 || typeof value !== "object") return undefined;
   if (Array.isArray(value)) {
@@ -54,6 +49,103 @@ function deepFindAll(value: unknown, keys: string[], depth = 0, output: unknown[
   }
   for (const child of Object.values(row)) deepFindAll(child, keys, depth + 1, output);
   return output;
+}
+
+function deepFindEntries(value: unknown, keys: string[], depth = 0, output: Array<{ key: string; value: unknown }> = []) {
+  if (value == null || depth > 10 || typeof value !== "object") return output;
+  if (Array.isArray(value)) {
+    for (const item of value) deepFindEntries(item, keys, depth + 1, output);
+    return output;
+  }
+  const row = value as Record<string, unknown>;
+  for (const key of keys) {
+    const candidate = row[key];
+    if (candidate !== undefined && candidate !== null && text(candidate)) output.push({ key, value: candidate });
+  }
+  for (const child of Object.values(row)) deepFindEntries(child, keys, depth + 1, output);
+  return output;
+}
+
+type EncarMetricEvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
+
+type EncarMetricEvidence = {
+  value?: number;
+  rawValues: string[];
+  status: EncarMetricEvidenceStatus;
+};
+
+function exactMetricText(value: unknown) {
+  return text(value).replace(/\u00a0|\u202f/g, " ").replace(/\s+/g, " ").trim();
+}
+
+function metricNumber(value: string) {
+  const compact = value.replace(/\s/g, "");
+  if (/^\d{1,3}(?:,\d{3})+$/.test(compact)) return Number(compact.replace(/,/g, ""));
+  if (/^\d{1,3}(?:\.\d{3})+$/.test(compact)) return Number(compact.replace(/\./g, ""));
+  if (/^\d+(?:[.,]\d+)?$/.test(compact)) return Number(compact.replace(",", "."));
+  return undefined;
+}
+
+function rangedMetric(value: string) {
+  return /(?:\d\s*(?:-|–|—|~|〜|～)\s*\d)|(?:from|to|up\s+to|under|over|less\s+than|more\s+than|이하|이상|미만|초과)|[<>≤≥]/i.test(value);
+}
+
+function engineCcValue(value: unknown, key = "") {
+  const raw = exactMetricText(value);
+  if (!raw || rangedMetric(raw)) return undefined;
+  const match = raw.match(/^([0-9][0-9 ,.]{0,8})\s*(cc|cm3|cm³|시시|씨씨|l|liter|litre|리터)?$/i);
+  const unit = String(match?.[2] || "").toLowerCase();
+  const liters = /^(?:l|liter|litre|리터)$/.test(unit) || /liters|volume/i.test(key);
+  const parsed = liters
+    ? Number(String(match?.[1] || "").replace(/\s/g, "").replace(",", "."))
+    : metricNumber(match?.[1] || "");
+  if (!parsed) return undefined;
+  const cc = liters ? parsed * 1_000 : parsed;
+  return cc >= 300 && cc <= 10_000 ? Math.round(cc) : undefined;
+}
+
+function powerHpValue(value: unknown, key = "") {
+  const raw = exactMetricText(value);
+  if (!raw || rangedMetric(raw)) return undefined;
+  const match = raw.match(/^([0-9][0-9 ,.]{0,8})\s*(hp|ps|bhp|마력|kw|킬로와트)?$/i);
+  const parsed = metricNumber(match?.[1] || "");
+  if (!parsed) return undefined;
+  const unit = String(match?.[2] || "").toLowerCase();
+  const kilowatts = /^(?:kw|킬로와트)$/.test(unit) || /kw$/i.test(key);
+  const hp = kilowatts ? parsed * 1.3596216173 : parsed;
+  return hp >= 20 && hp <= 2_500 ? Math.round(hp * 10) / 10 : undefined;
+}
+
+function exactMetricEvidence(
+  value: unknown,
+  keys: string[],
+  parser: (raw: unknown, key: string) => number | undefined,
+  tolerance = 0,
+): EncarMetricEvidence {
+  const entries = deepFindEntries(value, keys);
+  const rawValues = [...new Set(entries.map((entry) => exactMetricText(entry.value)).filter(Boolean))];
+  if (!entries.length) return { rawValues, status: "missing" };
+  const parsed = entries.map((entry) => parser(entry.value, entry.key));
+  if (parsed.some((item) => item === undefined)) return { rawValues, status: "ambiguous" };
+  const values = [...new Set(parsed as number[])];
+  if (Math.max(...values) - Math.min(...values) > tolerance) return { rawValues, status: "conflict" };
+  return { value: values[0], rawValues, status: "exact" };
+}
+
+export function extractEncarExactEngineCc(vehicle: unknown): EncarMetricEvidence {
+  return exactMetricEvidence(vehicle, [
+    "displacement", "Displacement", "EngineDisplacement", "engineDisplacement", "engineCc", "engine_cc",
+    "engine_displacement", "engineCapacity", "engine_capacity", "cc", "engineLiters", "engine_liters",
+    "engineVolume", "engine_volume", "volumeLiters",
+  ], engineCcValue);
+}
+
+export function extractEncarExactPowerHp(vehicle: unknown): EncarMetricEvidence {
+  return exactMetricEvidence(vehicle, [
+    "power", "Power", "enginePower", "maxPower", "horsePower", "horsepower", "powerHp", "power_hp",
+    "horse_power", "enginePowerHp", "maxPowerHp", "hp", "ps", "cv", "powerKw", "power_kw",
+    "enginePowerKw", "engine_power_kw", "motorPowerKw", "maxPowerKw", "kw",
+  ], powerHpValue, 1);
 }
 
 export function extractEncarExactFuel(vehicle: unknown) {
@@ -188,11 +280,21 @@ export function extractEncarExactBodyType(vehicle: unknown) {
   return text(deepFind(vehicle, ["bodyType", "BodyType"]));
 }
 
-function mergeDetail(offer: VehicleOffer, detail: any) {
+export function mergeEncarCompleteDetail(offer: VehicleOffer, detail: any) {
   const vehicle = detail?.vehicle || detail?.Vehicle || detail;
-  const exactEngineCc = number(deepFind(vehicle, ["displacement", "Displacement", "EngineDisplacement", "engineDisplacement", "cc"]));
-  const exactPowerHp = number(deepFind(vehicle, ["power", "Power", "horsePower", "horsepower", "ps"]));
-  const exactFuelEvidence = extractEncarExactFuel(vehicle);
+  const sourcePayload = { listing: offer.operational?.raw, detail: vehicle };
+  const extractedEngineEvidence = extractEncarExactEngineCc(sourcePayload);
+  const extractedPowerEvidence = extractEncarExactPowerHp(sourcePayload);
+  const extractedFuelEvidence = extractEncarExactFuel(sourcePayload);
+  const exactEngineEvidence = extractedEngineEvidence.status === "missing" && offer.engineCc
+    ? { ...extractedEngineEvidence, status: "ambiguous" as const, rawValues: [String(offer.engineCc)] }
+    : extractedEngineEvidence;
+  const exactPowerEvidence = extractedPowerEvidence.status === "missing" && (offer.powerHp || offer.powerKw)
+    ? { ...extractedPowerEvidence, status: "ambiguous" as const, rawValues: [String(offer.powerHp || offer.powerKw)] }
+    : extractedPowerEvidence;
+  const exactFuelEvidence = extractedFuelEvidence.status === "missing" && (offer.fuel || offer.powertrainKind)
+    ? { ...extractedFuelEvidence, status: "ambiguous" as const, rawValues: [String(offer.fuel || offer.powertrainKind)] }
+    : extractedFuelEvidence;
   const exactTransmission = text(deepFind(vehicle, ["transmission", "Transmission", "gearbox", "Gearbox"]));
   const exactDrive = text(deepFind(vehicle, ["drive", "Drive", "driveType", "DriveType", "drivetrain"]));
   // Encar list Category and generic carType are not trusted as body-shape fields.
@@ -200,34 +302,56 @@ function mergeDetail(offer: VehicleOffer, detail: any) {
   const exactBodyType = extractEncarExactBodyType(vehicle);
   const exactColor = text(deepFind(vehicle, ["color", "Color", "exteriorColor"]));
   const exactProductionDate = text(deepFind(vehicle, ["registrationDate", "RegistrationDate", "formYear", "productionDate"]));
-  const fuelConflict = exactFuelEvidence.status === "conflict";
+  const fuelUnsafe = exactFuelEvidence.status !== "exact";
+  const engineUnsafe = exactEngineEvidence.status !== "exact" && exactFuelEvidence.fuel !== "electric";
+  const powerUnsafe = exactPowerEvidence.status !== "exact";
 
   const merged = normalizeVehicleOfferSpecs({
     ...offer,
-    engineCc: exactEngineCc || offer.engineCc,
-    fuel: fuelConflict ? undefined : exactFuelEvidence.fuel || offer.fuel,
-    powertrainKind: fuelConflict ? "unknown" : offer.powertrainKind,
-    powerHp: fuelConflict ? undefined : exactPowerHp || offer.powerHp,
-    powerKw: fuelConflict ? undefined : offer.powerKw,
-    icePowerKw: fuelConflict ? undefined : offer.icePowerKw,
-    utilizationPowerKw: fuelConflict ? undefined : offer.utilizationPowerKw,
+    engineCc: exactEngineEvidence.status === "exact" ? exactEngineEvidence.value : engineUnsafe ? undefined : offer.engineCc,
+    fuel: fuelUnsafe ? undefined : exactFuelEvidence.fuel || offer.fuel,
+    powertrainKind: fuelUnsafe ? "unknown" : offer.powertrainKind,
+    powerHp: fuelUnsafe || powerUnsafe ? undefined : exactPowerEvidence.status === "exact" ? exactPowerEvidence.value : offer.powerHp,
+    powerKw: fuelUnsafe || powerUnsafe ? undefined : offer.powerKw,
+    icePowerKw: fuelUnsafe || powerUnsafe ? undefined : offer.icePowerKw,
+    utilizationPowerKw: fuelUnsafe || powerUnsafe ? undefined : offer.utilizationPowerKw,
     transmission: exactTransmission || offer.transmission,
     drive: exactDrive || offer.drive,
     bodyType: exactBodyType || undefined,
     color: exactColor || offer.color,
     productionDate: exactProductionDate || offer.productionDate,
-    calculationStatus: fuelConflict ? "needs_data" : offer.calculationStatus,
+    powerDataConfidence: exactPowerEvidence.status === "exact" ? "source_exact" : powerUnsafe ? undefined : offer.powerDataConfidence,
+    powerDataSource: exactPowerEvidence.status === "exact" ? "encar_listing_and_exact_detail:power" : powerUnsafe ? undefined : offer.powerDataSource,
+    calculationStatus: fuelUnsafe || engineUnsafe || powerUnsafe ? "needs_data" : offer.calculationStatus,
     operational: {
       ...(offer.operational || {}),
       raw: { offer: offer.operational?.raw, detail },
       semanticEvidence: {
         ...((offer.operational as any)?.semanticEvidence || {}),
         fuel: { source: "encar_exact_detail", ...exactFuelEvidence },
+        engineCc: { source: "encar_listing_and_exact_detail", ...exactEngineEvidence },
+        powerHp: { source: "encar_listing_and_exact_detail", ...exactPowerEvidence },
       },
       vin: text(deepFind(vehicle, ["vin", "VIN"])),
       frameNumber: text(deepFind(vehicle, ["frameNo", "FrameNo", "frameNumber"])),
     },
   } as VehicleOffer);
+  // Normalization intentionally scans retained raw payloads for legacy sources.
+  // Once Encar's own keyed evidence proves ambiguity or conflict, do not let
+  // that generic fallback rediscover the first number and undo fail-closed.
+  if (exactEngineEvidence.status !== "exact") merged.engineCc = undefined;
+  if (fuelUnsafe) {
+    merged.fuel = undefined;
+    merged.powertrainKind = "unknown";
+  }
+  if (fuelUnsafe || powerUnsafe) {
+    merged.powerHp = undefined;
+    merged.powerKw = undefined;
+    merged.icePowerKw = undefined;
+    merged.utilizationPowerKw = undefined;
+    merged.powerDataConfidence = undefined;
+    merged.powerDataSource = undefined;
+  }
   Object.assign(offer, merged);
 }
 
@@ -282,7 +406,7 @@ export class EncarCompleteAdapter extends EncarDirectAdapter {
       } as any;
       return [];
     }
-    mergeDetail(offer, detail);
+    mergeEncarCompleteDetail(offer, detail);
     const detailUrls = uniqueUrls(extractEncarImageUrls(offer, detail), limit * 2);
     const gallery = detailUrls.slice(0, limit).map(urlImage);
     const verified = gallery.length >= minimum;

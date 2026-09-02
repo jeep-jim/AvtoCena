@@ -12,6 +12,9 @@ test("source specification audit is read-only and covers the canonical 17 source
   assert.match(script, /REQUIRED_CATALOG_SOURCES/);
   assert.match(script, /PUBLIC_CATALOG_MARKETS/);
   assert.match(script, /storage\.listObjects\(CANDIDATE_PREFIX\)/);
+  assert.match(script, /sourcesWithCandidateRows/);
+  assert.match(script, /zeroRowSources/);
+  assert.match(script, /coverageGate/);
   assert.match(script, /writes: false/);
   assert.doesNotMatch(script, /writeDataJson|replaceChunkedDataJson|persistCatalogOffers/);
 });
