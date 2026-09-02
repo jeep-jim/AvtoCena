@@ -1,5 +1,7 @@
 import crypto from "node:crypto";
 import { stableOfferId } from "./storage";
+import { normalizeVehicleOfferSpecs } from "./spec-normalization";
+import { canonicalSourceFuel } from "./powertrain-safety";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, SourceRunHealth, VehicleOffer } from "./types";
 
 const API_BASE = "https://globalapi.che168.com";
@@ -103,14 +105,101 @@ function modelOf(make: string, series: string) {
   const escaped = make.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   return normalized.replace(new RegExp(`^${escaped}\\s+`, "i"), "").trim() || normalized;
 }
-function engineFields(engine: unknown) {
-  const value = text(engine);
-  const liter = value.match(/\b(\d+(?:\.\d+)?)\s*[LT]\b/i) || value.match(/\b(\d+(?:\.\d+)?)\s*(?:T|L)\s+/i);
-  const cc = value.match(/\b(\d{3,5})\s*(?:cc|cm3|cm³)\b/i);
-  const hp = value.match(/\b(\d{2,4})\s*(?:hp|ps|bhp)\b/i);
+type Che168EvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
+
+type Che168MetricEvidence = {
+  value?: number;
+  rawValues: string[];
+  status: Che168EvidenceStatus;
+};
+
+type Che168FuelEvidence = {
+  value?: string;
+  rawValues: string[];
+  status: Che168EvidenceStatus;
+};
+
+function rounded(value: number) {
+  return Math.round(value * 10) / 10;
+}
+
+function explicitRange(value: string) {
+  return /\d\s*(?:-|–|—|~|～|至|到)\s*\d/.test(value);
+}
+
+function metricEvidence(rawValue: unknown, field: "engineCc" | "powerHp"): Che168MetricEvidence {
+  const raw = text(rawValue);
+  const rawValues = raw ? [raw] : [];
+  if (!raw) return { rawValues, status: "missing" };
+  if (explicitRange(raw)) return { rawValues, status: "ambiguous" };
+
+  const values: number[] = [];
+  if (field === "engineCc") {
+    for (const match of raw.matchAll(/\b(\d{3,5})\s*(?:cc|cm3|cm³)\b/gi)) {
+      const value = integer(match[1]);
+      if (value && value >= 300 && value <= 10_000) values.push(value);
+    }
+    for (const match of raw.matchAll(/\b(\d+(?:[.,]\d+)?)\s*[LT]\b/gi)) {
+      const value = Number(match[1].replace(",", "."));
+      if (Number.isFinite(value) && value >= 0.3 && value <= 10) values.push(Math.round(value * 1_000));
+    }
+  } else {
+    for (const match of raw.matchAll(/\b(\d{2,4}(?:[.,]\d+)?)\s*(?:hp|ps|bhp)\b/gi)) {
+      const value = Number(match[1].replace(",", "."));
+      if (Number.isFinite(value) && value >= 20 && value <= 2_500) values.push(rounded(value));
+    }
+    for (const match of raw.matchAll(/\b(\d{2,4}(?:[.,]\d+)?)\s*kW\b/gi)) {
+      const value = Number(match[1].replace(",", "."));
+      if (Number.isFinite(value) && value >= 10 && value <= 2_000) values.push(rounded(value * 1.3596216173));
+    }
+  }
+
+  const unique = [...new Set(values)];
+  if (!unique.length) return { rawValues, status: "missing" };
+  if (Math.max(...unique) - Math.min(...unique) > (field === "powerHp" ? 1 : 0)) {
+    return { rawValues, status: "conflict" };
+  }
+  return { value: unique[0], rawValues, status: "exact" };
+}
+
+function fuelEvidence(...raw: unknown[]): Che168FuelEvidence {
+  const rawValues = [...new Set(raw.map(text).filter(Boolean))];
+  if (!rawValues.length) return { rawValues, status: "missing" };
+  const canonical = rawValues.map(canonicalSourceFuel);
+  if (canonical.some((value) => !value)) return { rawValues, status: "ambiguous" };
+  const unique = [...new Set(canonical as string[])];
+  if (unique.length !== 1) return { rawValues, status: "conflict" };
+  return { value: unique[0], rawValues, status: "exact" };
+}
+
+function yearEvidence(...raw: unknown[]): Che168MetricEvidence {
+  const values = raw.map(Number).filter((value) => Number.isInteger(value) && value >= 1980 && value <= new Date().getUTCFullYear() + 1);
+  const rawValues = values.map(String);
+  if (!values.length) return { rawValues, status: "missing" };
+  const unique = [...new Set(values)];
+  if (unique.length !== 1) return { rawValues, status: "conflict" };
+  return { value: unique[0], rawValues, status: "exact" };
+}
+
+function powertrainKindForFuel(fuel: string | undefined) {
+  if (fuel === "electric") return "electric" as const;
+  if (fuel === "hybrid") return "other_hybrid" as const;
+  if (fuel) return "combustion" as const;
+  return "unknown" as const;
+}
+
+export function che168GlobalSpecificationEvidence(args: {
+  listingYear?: unknown;
+  detailYear?: unknown;
+  listingFuel?: unknown;
+  detailFuel?: unknown;
+  detailEngine?: unknown;
+}) {
   return {
-    engineCc: cc ? integer(cc[1]) : liter ? Math.round(Number(liter[1]) * 1_000) : undefined,
-    powerHp: integer(hp?.[1]),
+    year: yearEvidence(args.listingYear, args.detailYear),
+    fuel: fuelEvidence(args.listingFuel, args.detailFuel),
+    engineCc: metricEvidence(args.detailEngine, "engineCc"),
+    powerHp: metricEvidence(args.detailEngine, "powerHp"),
   };
 }
 function sourceUrl(id: string | number) {
@@ -196,7 +285,8 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
     const price = positiveNumber(row?.price);
     if (!id || !make || !model || !title || !year || !price) return null;
     const now = new Date().toISOString();
-    return {
+    const evidence = che168GlobalSpecificationEvidence({ listingYear: year, listingFuel: row?.fuelname });
+    const offer = normalizeVehicleOfferSpecs({
       id: stableOfferId(this.sourceId, id),
       sourceId: this.sourceId,
       sourceOfferId: id,
@@ -210,7 +300,8 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       trim: text(row?.specname) || undefined,
       year,
       mileageKm: integer(row?.mileage),
-      fuel: text(row?.fuelname) || undefined,
+      fuel: evidence.fuel.status === "exact" ? evidence.fuel.value : undefined,
+      powertrainKind: powertrainKindForFuel(evidence.fuel.status === "exact" ? evidence.fuel.value : undefined),
       sourcePrice: price,
       sourceCurrency: "USD",
       priceMode: "fixed",
@@ -231,9 +322,26 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
         galleryImageCount: 0,
         gallerySafetyMode: "che168_global_carinfo_catepiclist_v1",
         galleryStoredAs: "json_urls",
+        semanticEvidence: {
+          year: { source: "che168_global_listing", ...evidence.year },
+          fuel: { source: "che168_global_listing", ...evidence.fuel },
+          engineCc: { source: "che168_global_carinfo", ...evidence.engineCc },
+          powerHp: { source: "che168_global_carinfo", ...evidence.powerHp },
+        },
         raw: { listing: row, detailIdentityVerified: false, photoIdentityVerified: false },
       },
-    };
+    } as VehicleOffer);
+    // Listing titles and trims can contain model-family displacement tokens.
+    // Che168's exact engine/power contract begins only at the identity-bound
+    // carinfo response, so generic normalization must not promote them early.
+    offer.engineCc = undefined;
+    offer.powerHp = undefined;
+    offer.powerKw = undefined;
+    offer.icePowerKw = undefined;
+    offer.utilizationPowerKw = undefined;
+    offer.powerDataConfidence = undefined;
+    offer.powerDataSource = undefined;
+    return offer;
   }
 
   private async fetchDetail(offer: VehicleOffer) {
@@ -254,7 +362,13 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
     const title = text(detail.carname) || offer.sourceTitle;
     const detailYear = yearOf(detail);
     const price = positiveNumber(detail.price);
-    const engine = engineFields(detail.engine);
+    const evidence = che168GlobalSpecificationEvidence({
+      listingYear: offer.year,
+      detailYear,
+      listingFuel: ((offer.operational?.raw as any)?.listing as Che168GlobalListRow | undefined)?.fuelname,
+      detailFuel: detail.fuelname,
+      detailEngine: detail.engine,
+    });
     const gallery = exactGallery(detail);
     const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
     const verifiedGallery = gallery.length >= minimum;
@@ -263,22 +377,30 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
     offer.model = model;
     offer.sourceTitle = title;
     offer.trim = text(detail.specname) || offer.trim;
-    if (detailYear) offer.year = detailYear;
+    if (evidence.year.status === "exact" && evidence.year.value) offer.year = evidence.year.value;
     offer.productionDate = text(detail.manufacturedate || detail.producedate) || offer.productionDate;
     offer.mileageKm = integer(detail.mileage) || offer.mileageKm;
-    offer.fuel = text(detail.fuelname) || offer.fuel;
+    offer.fuel = evidence.fuel.status === "exact" ? evidence.fuel.value : undefined;
+    offer.powertrainKind = powertrainKindForFuel(offer.fuel);
     offer.engineType = text(detail.engine) || offer.engineType;
-    offer.engineCc = engine.engineCc || offer.engineCc;
+    offer.engineCc = evidence.engineCc.status === "exact" ? evidence.engineCc.value : undefined;
     offer.transmission = text(detail.gearbox) || offer.transmission;
     offer.drive = text(detail.drivingmode) || offer.drive;
     offer.bodyType = text(detail.structure) || offer.bodyType;
     offer.color = text(detail.color) || offer.color;
     offer.vin = text(detail.vincode) || offer.vin;
-    if (engine.powerHp) {
-      offer.powerHp = engine.powerHp;
-      offer.powerKw = Math.round((engine.powerHp * 0.73549875) * 10) / 10;
+    if (evidence.powerHp.status === "exact" && evidence.powerHp.value) {
+      offer.powerHp = evidence.powerHp.value;
+      offer.powerKw = Math.round((evidence.powerHp.value * 0.73549875) * 10) / 10;
       offer.powerDataConfidence = "source_exact";
       offer.powerDataSource = "Che168 Global carinfo API";
+    } else {
+      offer.powerHp = undefined;
+      offer.powerKw = undefined;
+      offer.icePowerKw = undefined;
+      offer.utilizationPowerKw = undefined;
+      offer.powerDataConfidence = undefined;
+      offer.powerDataSource = undefined;
     }
     if (price) offer.sourcePrice = price;
     offer.sourceCurrency = "USD";
@@ -296,8 +418,19 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       photoIdentityVerified: verifiedGallery,
       gallerySafetyMode: "che168_global_carinfo_catepiclist_v1",
       galleryStoredAs: "json_urls",
+      semanticEvidence: {
+        ...((offer.operational as any)?.semanticEvidence || {}),
+        year: { source: "che168_global_listing_and_carinfo", ...evidence.year },
+        fuel: { source: "che168_global_listing_and_carinfo", ...evidence.fuel },
+        engineCc: { source: "che168_global_carinfo", ...evidence.engineCc },
+        powerHp: { source: "che168_global_carinfo", ...evidence.powerHp },
+      },
       raw: { listing: (offer.operational?.raw as any)?.listing, detail, detailIdentityVerified: true, photoIdentityVerified: verifiedGallery },
     };
+    const engineEvidenceReady = offer.powertrainKind === "electric" || evidence.engineCc.status === "exact";
+    if (evidence.year.status !== "exact" || evidence.fuel.status !== "exact" || !engineEvidenceReady || evidence.powerHp.status !== "exact") {
+      offer.calculationStatus = "needs_data";
+    }
     return gallery.map(remoteImage);
   }
 
