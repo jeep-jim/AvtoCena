@@ -317,6 +317,18 @@ function variantScore(variant: VehicleKnowledgeVariant, offer: Partial<VehicleOf
   let score = 20;
   if (variant.yearFrom || variant.yearTo) score += 10;
 
+  const candidateGeneration = vehicleKnowledgeCompact(variant.generation);
+  const offerGeneration = vehicleKnowledgeCompact(offer.generation);
+  if (candidateGeneration) {
+    // Legacy Drom rows often have no production years and contain hundreds of
+    // mutually incompatible generations under one model. They may participate
+    // only when the offer proves the generation (or has an explicit trim rule),
+    // never merely because make/model/engine happen to overlap.
+    if (!offerGeneration && !variant.trimContains?.length) return -1;
+    if (offerGeneration && offerGeneration !== candidateGeneration) return -1;
+    if (offerGeneration) score += 20;
+  }
+
   const engine = positive(offer.engineCc, 10_000);
   if (variant.engineCc) {
     if (!engine) return -1;

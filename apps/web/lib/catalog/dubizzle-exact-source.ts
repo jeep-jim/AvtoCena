@@ -124,9 +124,17 @@ function algoliaDetail(hit: DubizzleAlgoliaHit, key: string) {
   return hit.details?.[key]?.en?.value;
 }
 
+function rangedMetric(value: unknown) {
+  const text = String(value ?? "").trim();
+  return /\d[\d, .]*\s*(?:-|–|—|to)\s*\d/i.test(text)
+    || /(?:up\s+to|under|below|less\s+than|over|above|more\s+than|from)\s*\d/i.test(text)
+    || /(?:^|\s)[<>≤≥]\s*\d/.test(text)
+    || /\d\s*\+\s*(?:cc|cm3|cm³|hp|ps|bhp)?\s*$/i.test(text);
+}
+
 function exactMetric(value: unknown, unit: RegExp) {
   const text = String(value ?? "").trim();
-  if (!text || /unknown|not specified|\d\s*[-–—]\s*\d/i.test(text)) return undefined;
+  if (!text || /unknown|not specified/i.test(text) || rangedMetric(text)) return undefined;
   const match = text.match(new RegExp(`^\\s*([0-9][0-9, ]{0,7})\\s*(?:${unit.source})?\\s*$`, "i"));
   return integer(match?.[1]);
 }
@@ -237,11 +245,11 @@ export function parseDubizzleLabelBoundDetailFields(markup: string) {
   const engineText = firstLabelValue(section, ["Engine Capacity", "Engine Size"]);
   const powerText = firstLabelValue(section, ["Horsepower", "Power"]);
   const mileageText = firstLabelValue(section, ["Mileage", "Kilometers"]);
-  const liters = engineText.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*L\b/i);
-  const cc = engineText.match(/\b([0-9][0-9, ]{2,5})\s*(?:cc|cm3|cm³)\b/i);
+  const liters = !rangedMetric(engineText) ? engineText.match(/^\s*([0-9]+(?:[.,][0-9]+)?)\s*L\s*$/i) : null;
   return {
-    engineCc: cc ? integer(cc[1]) : liters ? Math.round(Number(liters[1].replace(",", ".")) * 1_000) : undefined,
-    powerHp: integer(powerText.match(/\b([0-9]{2,4})\s*(?:HP|PS|bhp)\b/i)?.[1]),
+    engineCc: exactMetric(engineText, /cc|cm3|cm³/)
+      || (liters ? Math.round(Number(liters[1].replace(",", ".")) * 1_000) : undefined),
+    powerHp: exactMetric(powerText, /hp|ps|bhp/),
     mileageKm: integer(mileageText.match(/([0-9][0-9, ]{1,8})\s*km\b/i)?.[1]),
     fuel: firstLabelValue(section, ["Fuel Type"]) || undefined,
     transmission: firstLabelValue(section, ["Transmission Type"]) || undefined,

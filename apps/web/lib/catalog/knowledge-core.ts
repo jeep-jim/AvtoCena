@@ -137,6 +137,10 @@ function marketTokens(market: unknown) {
   }
 }
 function fieldTrusted(variant: KnowledgeCoreVariant, field: string) {
+  // Review records are research material, not runtime facts. Some V2 rows even
+  // state explicitly that they cannot auto-resolve pricing until identity is
+  // approved, so evidence confidence must never bypass the review status.
+  if (variant.status === "review") return false;
   if (variant.status === "verified") return true;
   return (variant.evidence || []).some((item) => item?.status === "verified"
     && ["official", "high"].includes(String(item?.confidence || ""))
@@ -233,13 +237,17 @@ export async function readKnowledgeCoreIndex() {
 }
 
 function variantScore(variant: KnowledgeCoreVariant, offer: VehicleOffer) {
+  if (variant.status === "review") return -1000;
   const year = Number(offer.year || 0);
   if (!yearMatches(variant, year)) return -1000;
   let score = 2;
   let discriminators = 0;
   const tokens = marketTokens(offer.market);
   const market = compact(variant.market);
-  if (tokens.length && tokens.some((token) => market.includes(compact(token)))) score += 2;
+  if (tokens.length && market) {
+    if (!tokens.some((token) => market.includes(compact(token)))) return -1000;
+    score += 2;
+  }
 
   const engine = positive(offer.engineCc);
   const candidateEngine = positive(variant.engineCc);

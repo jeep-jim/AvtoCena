@@ -358,6 +358,21 @@ test("Dubizzle detail semantics are label-bound to Car Overview and ignore selle
   assert.equal(fields.mileageKm, 48200);
 });
 
+test("Dubizzle category ranges never become exact engine displacement or horsepower", () => {
+  const markup = `
+    <section><h2>Car Overview</h2>
+      <div>Body Type</div><div>Crossover</div>
+      <div>Fuel Type</div><div>Petrol</div>
+      <div>Engine Capacity</div><div>0 - 1,499 cc</div>
+      <div>Horsepower</div><div>50 - 99 HP</div>
+      <div>Mileage</div><div>77,000 km</div>
+    </section><h2>Description</h2>`;
+  const fields = parseDubizzleLabelBoundDetailFields(markup);
+  assert.equal(fields.engineCc, undefined);
+  assert.equal(fields.powerHp, undefined);
+  assert.equal(fields.mileageKm, 77000);
+});
+
 test("Dubizzle probes the live English UAE listing before legacy redirect paths", () => {
   const candidates = dubizzleListPageCandidates(7);
   assert.equal(candidates[0], "https://uae.dubizzle.com/en/motors/used-cars/?page=7");
