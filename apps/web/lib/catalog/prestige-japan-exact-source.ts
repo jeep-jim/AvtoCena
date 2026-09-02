@@ -275,7 +275,7 @@ async function request(url: string, init?: RequestInit) {
       const routed = prestigeJapanGithubEgressRequest(url, init);
       const response = await fetch(routed.url, { ...routed.init, headers: { ...HEADERS, ...(routed.init?.headers || {}) }, redirect: "follow", signal: AbortSignal.timeout(timeout) });
       const body = await response.text();
-      if (!response.ok) throw new Error(`prestige_japan_exact_http_${response.status}:${url}`);
+      if (!response.ok) throw new Error(`prestige_japan_exact_http_${response.status}:${url}:${clean(body).slice(0, 240)}`);
       return { response, body };
     } catch (error) {
       lastError = error;
