@@ -65,7 +65,7 @@ test("independent market collection keeps the full production crawl budget", () 
   assert.match(workflow, /timeout --signal=TERM --kill-after=120s 6600s/);
 });
 
-test("automatic catalog runs use one six-market sequential queue and Japan runs four times monthly", () => {
+test("six-market sequential queue remains explicit but automatic runs stay paused during specification repair", () => {
   assert.equal(marketFiles.length, 6);
   for (const { market, content } of marketFiles) {
     assert.match(content, /workflow_dispatch:/, `${market} must support manual dispatch`);
@@ -73,8 +73,9 @@ test("automatic catalog runs use one six-market sequential queue and Japan runs 
     assert.match(content, new RegExp(`market: ${market}`));
     assert.match(content, /catalog-v3-market-10k-reusable\.yml/);
   }
-  assert.match(sequentialQueue, /schedule:/);
-  assert.match(sequentialQueue, /cron: "17 21 \* \* \*"/);
+  assert.doesNotMatch(sequentialQueue, /^\s*schedule:\s*$/m);
+  assert.doesNotMatch(sequentialQueue, /cron: "17 21 \* \* \*"/);
+  assert.match(sequentialQueue, /Production collection is intentionally paused/);
   assert.match(sequentialQueue, /01\|08\|15\|22/);
   assert.match(sequentialQueue, /needs: \[plan, japan\]/);
   assert.match(sequentialQueue, /needs: korea/);
@@ -84,6 +85,7 @@ test("automatic catalog runs use one six-market sequential queue and Japan runs 
   assert.match(sequentialQueue, /georgia:[\s\S]*needs: europe/);
   assert.match(sequentialQueue, /if: always\(\)/);
   assert.match(sequentialQueue, /retention_ms: "2592000000"/);
+  assert.equal((sequentialQueue.match(/retention_ms: "1209600000"/g) || []).length, 5);
   assert.match(sequentialQueue, /target_per_market: "30000"/);
   assert.match(sequentialQueue, /market: japan[\s\S]*priority_target: "24000"/);
   assert.equal((sequentialQueue.match(/priority_target: "8000"/g) || []).length, 5);
