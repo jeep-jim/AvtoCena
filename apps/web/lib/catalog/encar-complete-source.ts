@@ -1,6 +1,7 @@
 import { EncarDirectAdapter, buildEncarImageUrl, extractEncarImageUrls } from "./adapters";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { encarNonCashContractReason } from "./encar-sale-contract";
+import { canonicalSourceFuel } from "./powertrain-safety";
 import type { CatalogFetchResult, CatalogImage, VehicleOffer } from "./types";
 
 const ENCAR_HEADERS = {
@@ -38,6 +39,38 @@ function deepFind(value: unknown, keys: string[], depth = 0): unknown {
     if (found !== undefined && found !== null && text(found)) return found;
   }
   return undefined;
+}
+
+function deepFindAll(value: unknown, keys: string[], depth = 0, output: unknown[] = []): unknown[] {
+  if (value == null || depth > 10 || typeof value !== "object") return output;
+  if (Array.isArray(value)) {
+    for (const item of value) deepFindAll(item, keys, depth + 1, output);
+    return output;
+  }
+  const row = value as Record<string, unknown>;
+  for (const key of keys) {
+    const candidate = row[key];
+    if (candidate !== undefined && candidate !== null && text(candidate)) output.push(candidate);
+  }
+  for (const child of Object.values(row)) deepFindAll(child, keys, depth + 1, output);
+  return output;
+}
+
+export function extractEncarExactFuel(vehicle: unknown) {
+  const rawValues = [...new Set(deepFindAll(vehicle, ["fuelTypeName", "FuelTypeName", "fuelTypeNm", "fuelName", "fuelType", "FuelType", "fuel", "Fuel"])
+    .map(text)
+    .filter((value) => value && !/^\d+$/.test(value)))];
+  const normalized = rawValues.map((value) => canonicalSourceFuel(value)).filter(Boolean);
+  const kinds = new Set(normalized);
+  // Some Encar payloads expose gasoline and electricity in separate exact
+  // fields. Together they identify one hybrid vehicle; choosing the first
+  // recursive key used to downgrade it to ordinary petrol.
+  const fuel = kinds.has("hybrid") || (kinds.has("electric") && (kinds.has("petrol") || kinds.has("diesel") || kinds.has("lpg")))
+    ? "hybrid"
+    : kinds.size === 1
+      ? [...kinds][0]
+      : undefined;
+  return { fuel, rawValues, status: fuel ? "exact" as const : rawValues.length ? "conflict" as const : "missing" as const };
 }
 
 function imageLike(value: string) {
@@ -159,7 +192,7 @@ function mergeDetail(offer: VehicleOffer, detail: any) {
   const vehicle = detail?.vehicle || detail?.Vehicle || detail;
   const exactEngineCc = number(deepFind(vehicle, ["displacement", "Displacement", "EngineDisplacement", "engineDisplacement", "cc"]));
   const exactPowerHp = number(deepFind(vehicle, ["power", "Power", "horsePower", "horsepower", "ps"]));
-  const exactFuel = text(deepFind(vehicle, ["fuelType", "FuelType", "fuel", "Fuel"]));
+  const exactFuelEvidence = extractEncarExactFuel(vehicle);
   const exactTransmission = text(deepFind(vehicle, ["transmission", "Transmission", "gearbox", "Gearbox"]));
   const exactDrive = text(deepFind(vehicle, ["drive", "Drive", "driveType", "DriveType", "drivetrain"]));
   // Encar list Category and generic carType are not trusted as body-shape fields.
@@ -167,20 +200,30 @@ function mergeDetail(offer: VehicleOffer, detail: any) {
   const exactBodyType = extractEncarExactBodyType(vehicle);
   const exactColor = text(deepFind(vehicle, ["color", "Color", "exteriorColor"]));
   const exactProductionDate = text(deepFind(vehicle, ["registrationDate", "RegistrationDate", "formYear", "productionDate"]));
+  const fuelConflict = exactFuelEvidence.status === "conflict";
 
   const merged = normalizeVehicleOfferSpecs({
     ...offer,
     engineCc: exactEngineCc || offer.engineCc,
-    powerHp: exactPowerHp || offer.powerHp,
-    fuel: exactFuel || offer.fuel,
+    fuel: fuelConflict ? undefined : exactFuelEvidence.fuel || offer.fuel,
+    powertrainKind: fuelConflict ? "unknown" : offer.powertrainKind,
+    powerHp: fuelConflict ? undefined : exactPowerHp || offer.powerHp,
+    powerKw: fuelConflict ? undefined : offer.powerKw,
+    icePowerKw: fuelConflict ? undefined : offer.icePowerKw,
+    utilizationPowerKw: fuelConflict ? undefined : offer.utilizationPowerKw,
     transmission: exactTransmission || offer.transmission,
     drive: exactDrive || offer.drive,
     bodyType: exactBodyType || undefined,
     color: exactColor || offer.color,
     productionDate: exactProductionDate || offer.productionDate,
+    calculationStatus: fuelConflict ? "needs_data" : offer.calculationStatus,
     operational: {
       ...(offer.operational || {}),
       raw: { offer: offer.operational?.raw, detail },
+      semanticEvidence: {
+        ...((offer.operational as any)?.semanticEvidence || {}),
+        fuel: { source: "encar_exact_detail", ...exactFuelEvidence },
+      },
       vin: text(deepFind(vehicle, ["vin", "VIN"])),
       frameNumber: text(deepFind(vehicle, ["frameNo", "FrameNo", "frameNumber"])),
     },

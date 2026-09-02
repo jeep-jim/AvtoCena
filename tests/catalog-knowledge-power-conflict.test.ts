@@ -60,3 +60,14 @@ test("wild untrusted model-wide conflict fails closed when no unique variant exi
   assert.equal(result.conflict?.kind, "unresolved_model_conflict");
   assert.equal(result.usedRepresentative, false);
 });
+
+test("missing exact-vehicle power is never filled from a model-wide representative", () => {
+  const result = resolveKnowledgePower({
+    representativePowerHp: 105,
+    modelId: "kia/niro",
+  });
+  assert.equal(result.powerHp, undefined);
+  assert.equal(result.source, undefined);
+  assert.equal(result.usedVariant, false);
+  assert.equal(result.usedRepresentative, false);
+});

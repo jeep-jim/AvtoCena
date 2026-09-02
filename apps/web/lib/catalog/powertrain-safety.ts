@@ -8,19 +8,31 @@ const ELECTRIC_PRIMARY_RE = /battery[ -]?electric|pure[ -]?electric|\b(?:bev|ev)
 // marketplace titles even when a generic model field only says "UX".
 const LEXUS_HYBRID_BADGE_RE = /\b(?:ct|ux|nx|rx|es|gs|ls|lc)\s*\d{3}h(?:\+)?\b/i;
 const COMBUSTION_FUELS = new Set(["petrol", "diesel", "lpg", "gasoline", "benzin"]);
+const HYBRID_FUEL_RE = /\b(?:hybrid|reev|erev|phev|hev|mhev)\b|plug[ -]?in|гибрид|混合动力|油电混合|插电混动|하이브리드|ハイブリッド/i;
+const ELECTRIC_FUEL_RE = /electric(?:ity)?|\belektro\b|\b(?:bev|ev)\b|электро|电动|電気|전기|일렉트릭|ელექტრო/i;
+const PETROL_FUEL_RE = /petrol|gasoline|benzin|essence|бензин|汽油|ガソリン|가솔린|휘발유|ბენზინ/i;
+const DIESEL_FUEL_RE = /diesel|дизел|柴油|軽油|디젤|경유|დიზელ/i;
+const GAS_FUEL_RE = /\b(?:lpg|lpi|cng|gpl)\b|газ/i;
 
 function positive(value: unknown) {
   const parsed = Number(value);
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
 }
 function text(value: unknown) { return String(value || "").trim().toLocaleLowerCase("en-US"); }
-function fuel(value: unknown) {
+export function canonicalSourceFuel(value: unknown) {
   const v=text(value); if(!v) return undefined;
-  if (/\b(?:phev|hev|mhev|reev|erev)\b|plug[ -]?in|hybrid|гибрид|混合动力|增程|하이브리드/.test(v)) return "hybrid";
-  if (/diesel|дизел|柴油|디젤|경유/.test(v)) return "diesel";
-  if (/\b(?:lpg|lpi|cng|gpl)\b|газ/.test(v)) return "lpg";
-  if (/petrol|gasoline|benzin|essence|бензин|汽油|가솔린|휘발유/.test(v)) return "petrol";
-  if (/electric|\bbev\b|\bev\b|электро|纯电|전기|일렉트릭/.test(v)) return "electric";
+  const electric = ELECTRIC_FUEL_RE.test(v);
+  const petrol = PETROL_FUEL_RE.test(v);
+  const diesel = DIESEL_FUEL_RE.test(v);
+  const gas = GAS_FUEL_RE.test(v);
+  // Marketplaces often spell a hybrid as two energy carriers instead of the
+  // word "hybrid" (for example Encar: "Gasoline + Electricity"). The
+  // combination is stronger evidence than either individual token.
+  if (HYBRID_FUEL_RE.test(v) || (electric && (petrol || diesel || gas))) return "hybrid";
+  if (diesel) return "diesel";
+  if (gas) return "lpg";
+  if (petrol) return "petrol";
+  if (electric) return "electric";
   return undefined;
 }
 function transmission(value: unknown) {
@@ -54,7 +66,7 @@ function body(value: unknown) {
 }
 
 export function canonicalizeSemanticSourceFields<T extends Partial<VehicleOffer>>(input:T):T {
-  return {...input, fuel:fuel(input.fuel), transmission:transmission(input.transmission), drive:drive(input.drive), bodyType:body(input.bodyType)} as T;
+  return {...input, fuel:canonicalSourceFuel(input.fuel), transmission:transmission(input.transmission), drive:drive(input.drive), bodyType:body(input.bodyType)} as T;
 }
 
 /**
