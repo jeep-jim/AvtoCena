@@ -53,6 +53,8 @@ jobs:
           const source = data.report?.sources?.find((row) => row.sourceId === 'autohome_used_china_open');
           const problems = [];
           const clean = (v) => String(v ?? '').replace(/\s+/g, ' ').trim();
+          const hasRaw = (evidence, value) => (evidence?.rawValues || []).some((raw) => clean(raw) === clean(value));
+          const canonicalFuels = new Set(['petrol', 'diesel', 'lpg', 'electric', 'hybrid']);
           // The live Che168 Global search currently reports only ~4k vehicles. This
           // stage intentionally asks for 30k so success is defined by verified source
           // exhaustion, not by inventing or repeating rows to reach an impossible target.
@@ -79,7 +81,15 @@ jobs:
             if (clean(detail.gearbox) && clean(offer.transmission) !== clean(detail.gearbox)) problems.push('transmission_rewritten');
             if (clean(detail.drivingmode) && clean(offer.drive) !== clean(detail.drivingmode)) problems.push('drive_rewritten');
             if (clean(detail.structure) && clean(offer.bodyType) !== clean(detail.structure)) problems.push('body_rewritten');
-            if (clean(detail.fuelname) && clean(offer.fuel) !== clean(detail.fuelname)) problems.push('fuel_rewritten');
+            const evidence = offer?.operational?.semanticEvidence || {};
+            if (evidence?.year?.status !== 'exact' || Number(evidence?.year?.value) !== Number(offer.year)) problems.push('year_evidence_not_exact');
+            if (evidence?.fuel?.status !== 'exact' || !canonicalFuels.has(clean(offer.fuel))) problems.push('fuel_evidence_not_exact');
+            if (clean(detail.fuelname) && !hasRaw(evidence?.fuel, detail.fuelname)) problems.push('fuel_not_bound_to_carinfo');
+            if (clean(detail.engine) && (!hasRaw(evidence?.engineCc, detail.engine) || !hasRaw(evidence?.powerHp, detail.engine))) problems.push('metrics_not_bound_to_carinfo');
+            if (offer.engineCc != null && (evidence?.engineCc?.status !== 'exact' || Number(evidence?.engineCc?.value) !== Number(offer.engineCc))) problems.push('engine_evidence_not_exact');
+            if (evidence?.engineCc?.status !== 'exact' && offer.engineCc != null) problems.push('unsafe_engine_promoted');
+            if (offer.powerHp != null && (evidence?.powerHp?.status !== 'exact' || Math.abs(Number(evidence?.powerHp?.value) - Number(offer.powerHp)) > 1)) problems.push('power_evidence_not_exact');
+            if (evidence?.powerHp?.status !== 'exact' && offer.powerHp != null) problems.push('unsafe_power_promoted');
             const hp = Number(clean(detail.engine).match(/\b(\d{2,4})\s*(?:hp|ps|bhp)\b/i)?.[1] || 0);
             if (hp && (Number(offer.powerHp) !== hp || offer.powerDataConfidence !== 'source_exact')) problems.push('power_not_exact');
           }
