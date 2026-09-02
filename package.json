@@ -29,6 +29,7 @@
     "catalog:build-vehicle-variants": "tsx scripts/catalog-build-vehicle-variants.mjs",
     "catalog:audit-vehicle-knowledge": "tsx scripts/catalog-audit-vehicle-knowledge.mjs",
     "catalog:audit-encyclopedia-identity": "tsx scripts/catalog-audit-encyclopedia-identity.mjs",
+    "catalog:audit-source-specifications": "tsx scripts/catalog-audit-source-specifications.mjs",
     "catalog:compile-knowledge-core": "node scripts/catalog-compile-knowledge-core.mjs",
     "catalog:cleanup-storage": "tsx scripts/catalog-clean-object-storage.mjs",
     "catalog:reindex-vehicle-knowledge": "tsx scripts/catalog-reindex-vehicle-knowledge.mjs",
