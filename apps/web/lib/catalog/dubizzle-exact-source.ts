@@ -1,4 +1,5 @@
 import { stableOfferId } from "./storage";
+import { canonicalSourceFuel } from "./powertrain-safety";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
 const BASE_URL = "https://uae.dubizzle.com";
@@ -47,6 +48,17 @@ export type DubizzleExactRow = {
   images: string[];
   rawText: string;
   exactStructured?: boolean;
+  semanticEvidence?: DubizzleSpecificationEvidence;
+};
+
+type DubizzleEvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
+type DubizzleEvidence<T> = { value?: T; rawValues: string[]; status: DubizzleEvidenceStatus };
+export type DubizzleSpecificationEvidence = {
+  year: DubizzleEvidence<number>;
+  fuel: DubizzleEvidence<string>;
+  engineCc: DubizzleEvidence<number>;
+  powerHp: DubizzleEvidence<number>;
+  powerKw: DubizzleEvidence<number>;
 };
 
 type DubizzleAlgoliaHit = {
@@ -202,11 +214,72 @@ export function sanitizeDubizzleStoredRangeMetrics<T extends VehicleOffer>(offer
   } as T;
 }
 
-function exactMetric(value: unknown, unit: RegExp) {
+function metricEvidence(value: unknown, unit: RegExp, minimum: number, maximum: number): DubizzleEvidence<number> {
   const text = String(value ?? "").trim();
-  if (!text || /unknown|not specified/i.test(text) || rangedMetric(text)) return undefined;
+  const rawValues = text ? [text] : [];
+  if (!text || /unknown|not specified/i.test(text)) return { rawValues, status: "missing" };
+  if (rangedMetric(text)) return { rawValues, status: "ambiguous" };
   const match = text.match(new RegExp(`^\\s*([0-9][0-9, ]{0,7})\\s*(?:${unit.source})?\\s*$`, "i"));
-  return integer(match?.[1]);
+  if (!match) return { rawValues, status: "ambiguous" };
+  const parsed = integer(match[1]);
+  return parsed && parsed >= minimum && parsed <= maximum
+    ? { value: parsed, rawValues, status: "exact" }
+    : { rawValues, status: "ambiguous" };
+}
+
+function fuelEvidence(value: unknown): DubizzleEvidence<string> {
+  const raw = String(value ?? "").trim();
+  const rawValues = raw ? [raw] : [];
+  if (!raw) return { rawValues, status: "missing" };
+  const canonical = canonicalSourceFuel(raw);
+  return canonical ? { value: canonical, rawValues, status: "exact" } : { rawValues, status: "ambiguous" };
+}
+
+function yearEvidence(value: unknown): DubizzleEvidence<number> {
+  const raw = String(value ?? "").trim();
+  const rawValues = raw ? [raw] : [];
+  if (!raw) return { rawValues, status: "missing" };
+  const year = Number(raw);
+  return Number.isInteger(year) && year >= 1900 && year <= new Date().getUTCFullYear() + 1
+    ? { value: year, rawValues, status: "exact" }
+    : { rawValues, status: "ambiguous" };
+}
+
+export function dubizzleSpecificationEvidence(input: { year?: unknown; fuel?: unknown; engineCc?: unknown; powerHp?: unknown }): DubizzleSpecificationEvidence {
+  const fuel = fuelEvidence(input.fuel);
+  let engineCc = metricEvidence(input.engineCc, /cc|cm3|cm³/, 300, 10_000);
+  if (fuel.status === "exact" && fuel.value === "electric" && engineCc.status === "exact") {
+    engineCc = { rawValues: engineCc.rawValues, status: "conflict" };
+  }
+  return {
+    year: yearEvidence(input.year),
+    fuel,
+    engineCc,
+    powerHp: metricEvidence(input.powerHp, /hp|ps|bhp/, 20, 2_500),
+    powerKw: { rawValues: [], status: "missing" },
+  };
+}
+
+function exactMetric(value: unknown, unit: RegExp, minimum = 1, maximum = Number.MAX_SAFE_INTEGER) {
+  const evidence = metricEvidence(value, unit, minimum, maximum);
+  return evidence.status === "exact" ? evidence.value : undefined;
+}
+
+function powertrainKindForFuel(fuel: string | undefined) {
+  if (fuel === "electric") return "electric" as const;
+  if (fuel === "hybrid") return "other_hybrid" as const;
+  if (fuel) return "combustion" as const;
+  return "unknown" as const;
+}
+
+function combineEvidence<T>(left: DubizzleEvidence<T> | undefined, right: DubizzleEvidence<T> | undefined): DubizzleEvidence<T> {
+  const rawValues = [...new Set([...(left?.rawValues || []), ...(right?.rawValues || [])])];
+  if (left?.status === "conflict" || right?.status === "conflict") return { rawValues, status: "conflict" };
+  if (left?.status === "exact" && right?.status === "exact" && left.value !== right.value) return { rawValues, status: "conflict" };
+  if (left?.status === "ambiguous" || right?.status === "ambiguous") return { rawValues, status: "ambiguous" };
+  if (right?.status === "exact") return { value: right.value, rawValues, status: "exact" };
+  if (left?.status === "exact") return { value: left.value, rawValues, status: "exact" };
+  return { rawValues, status: "missing" };
 }
 
 export function parseDubizzleAlgoliaHit(raw: unknown): DubizzleExactRow | null {
@@ -226,6 +299,10 @@ export function parseDubizzleAlgoliaHit(raw: unknown): DubizzleExactRow | null {
     || !Number.isFinite(year) || year < 1900 || year > new Date().getUTCFullYear() + 1
     || !Number.isFinite(price) || price <= 0 || images.length < 5) return null;
   const locations = Array.isArray(hit?.location_list?.en) ? hit.location_list!.en!.map((value) => String(value || "").trim()).filter(Boolean) : [];
+  const rawEngine = algoliaDetail(hit, "Engine Capacity (cc)");
+  const rawPower = algoliaDetail(hit, "Horsepower");
+  const rawFuel = algoliaDetail(hit, "Fuel Type");
+  const semanticEvidence = dubizzleSpecificationEvidence({ year, engineCc: rawEngine, powerHp: rawPower, fuel: rawFuel });
   return {
     id,
     sourceUrl,
@@ -235,9 +312,9 @@ export function parseDubizzleAlgoliaHit(raw: unknown): DubizzleExactRow | null {
     trim: String(algoliaDetail(hit, "Trim") || "").trim() || undefined,
     year,
     mileageKm: exactMetric(algoliaDetail(hit, "Kilometers"), /km|kilometers?/),
-    engineCc: exactMetric(algoliaDetail(hit, "Engine Capacity (cc)"), /cc|cm3|cm³/),
-    powerHp: exactMetric(algoliaDetail(hit, "Horsepower"), /hp|ps|bhp/),
-    fuel: String(algoliaDetail(hit, "Fuel Type") || "").trim() || undefined,
+    engineCc: semanticEvidence.engineCc.status === "exact" ? semanticEvidence.engineCc.value : undefined,
+    powerHp: semanticEvidence.powerHp.status === "exact" ? semanticEvidence.powerHp.value : undefined,
+    fuel: semanticEvidence.fuel.status === "exact" ? semanticEvidence.fuel.value : undefined,
     transmission: String(algoliaDetail(hit, "Transmission Type") || "").trim() || undefined,
     bodyType: String(algoliaDetail(hit, "Body Type") || "").trim() || undefined,
     price,
@@ -246,6 +323,7 @@ export function parseDubizzleAlgoliaHit(raw: unknown): DubizzleExactRow | null {
     images: images.slice(0, 30),
     rawText: JSON.stringify(hit).slice(0, 15_000),
     exactStructured: true,
+    semanticEvidence,
   };
 }
 function parseList(markup: string, pageUrl: string): DubizzleExactRow[] {
@@ -279,6 +357,7 @@ function parseList(markup: string, pageUrl: string): DubizzleExactRow[] {
       price, currency: "AED",
       location: cardText.match(/\b([A-Za-z][A-Za-z .'-]{2,45}),\s*(Dubai|Abu Dhabi|Sharjah|Ajman|Umm Al Quwain|Ras Al Khaimah|Fujairah)\b/i)?.[0],
       images: collectImages(card, anchor.href).slice(0, 30), rawText: cardText.slice(0, 15_000),
+      semanticEvidence: dubizzleSpecificationEvidence({ year }),
     });
   });
   return rows;
@@ -316,15 +395,18 @@ export function parseDubizzleLabelBoundDetailFields(markup: string) {
   const powerText = firstLabelValue(section, ["Horsepower", "Power"]);
   const mileageText = firstLabelValue(section, ["Mileage", "Kilometers"]);
   const liters = !rangedMetric(engineText) ? engineText.match(/^\s*([0-9]+(?:[.,][0-9]+)?)\s*L\s*$/i) : null;
+  const normalizedEngineText = liters ? `${Math.round(Number(liters[1].replace(",", ".")) * 1_000)} cc` : engineText;
+  const fuel = firstLabelValue(section, ["Fuel Type"]);
+  const semanticEvidence = dubizzleSpecificationEvidence({ engineCc: normalizedEngineText, powerHp: powerText, fuel });
   return {
-    engineCc: exactMetric(engineText, /cc|cm3|cm³/)
-      || (liters ? Math.round(Number(liters[1].replace(",", ".")) * 1_000) : undefined),
-    powerHp: exactMetric(powerText, /hp|ps|bhp/),
+    engineCc: semanticEvidence.engineCc.status === "exact" ? semanticEvidence.engineCc.value : undefined,
+    powerHp: semanticEvidence.powerHp.status === "exact" ? semanticEvidence.powerHp.value : undefined,
     mileageKm: integer(mileageText.match(/([0-9][0-9, ]{1,8})\s*km\b/i)?.[1]),
-    fuel: firstLabelValue(section, ["Fuel Type"]) || undefined,
+    fuel: fuel || undefined,
     transmission: firstLabelValue(section, ["Transmission Type"]) || undefined,
     drive: firstLabelValue(section, ["Drive Type", "Drive"]) || undefined,
     bodyType: firstLabelValue(section, ["Body Type"]) || undefined,
+    semanticEvidence,
   };
 }
 async function request(url: string, referer = BASE_URL) {
@@ -454,13 +536,27 @@ export class DubizzleUaeExactAdapter implements CatalogSourceAdapter {
     const now = new Date().toISOString();
     const listingGalleryVerified = row.images.length >= 5;
     const exactStructured = row.exactStructured === true;
+    const semanticEvidence = row.semanticEvidence || dubizzleSpecificationEvidence({ year: row.year, engineCc: row.engineCc, powerHp: row.powerHp, fuel: row.fuel });
+    const exactFuel = semanticEvidence.fuel.status === "exact" ? semanticEvidence.fuel.value : undefined;
+    const exactPowerHp = semanticEvidence.powerHp.status === "exact" ? semanticEvidence.powerHp.value : undefined;
     return {
       id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: "uae", offerType: "fixed", status: "active",
       sourceTitle: row.title, make: row.make, model: row.model, trim: row.trim, year: row.year, mileageKm: row.mileageKm,
-      engineCc: row.engineCc, powerHp: row.powerHp, fuel: row.fuel, transmission: row.transmission, drive: row.drive, bodyType: row.bodyType,
+      engineCc: semanticEvidence.engineCc.status === "exact" ? semanticEvidence.engineCc.value : undefined,
+      powerHp: exactPowerHp,
+      fuel: exactFuel, powertrainKind: powertrainKindForFuel(exactFuel), transmission: row.transmission, drive: row.drive, bodyType: row.bodyType,
+      powerDataConfidence: exactPowerHp ? "source_exact" : undefined,
+      powerDataSource: exactPowerHp && exactStructured ? `Dubizzle official Algolia:${row.id}:Horsepower` : undefined,
       sourcePrice: row.price, sourceCurrency: row.currency, priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data", firstSeenAt: now, updatedAt: now,
       operational: { sourceUrl: row.sourceUrl, sourceVenueName: row.location || "Dubizzle UAE", sourceTitle: row.title, exactDetail: exactStructured, exactFields: exactStructured, exactPhotos: listingGalleryVerified,
         galleryVerified: listingGalleryVerified, galleryImageCount: row.images.length, gallerySafetyMode: "dubizzle_listing_card_uuid_v2", galleryStoredAs: "json_urls", photoIdentityVerified: listingGalleryVerified,
+        semanticEvidence: {
+          year: { source: exactStructured ? "dubizzle_official_algolia_year" : "dubizzle_listing_card_year", ...semanticEvidence.year },
+          fuel: { source: exactStructured ? "dubizzle_official_algolia_fuel" : "dubizzle_listing_missing", ...semanticEvidence.fuel },
+          engineCc: { source: exactStructured ? "dubizzle_official_algolia_engine" : "dubizzle_listing_missing", ...semanticEvidence.engineCc },
+          powerHp: { source: exactStructured ? "dubizzle_official_algolia_power" : "dubizzle_listing_missing", ...semanticEvidence.powerHp },
+          powerKw: { source: "dubizzle_source_missing", ...semanticEvidence.powerKw },
+        },
         raw: { parsed: row, images: row.images, detailIdentityVerified: exactStructured, listingBoundImages: row.images.length > 0, photoIdentityVerified: listingGalleryVerified,
           semanticFieldPolicy: exactStructured ? "dubizzle_official_algolia_exact_fields_v1" : "dubizzle_listing_card_v2" } },
     };
@@ -476,20 +572,44 @@ export class DubizzleUaeExactAdapter implements CatalogSourceAdapter {
       const responseUrl = response.url || row.sourceUrl;
       if (detailId(responseUrl) !== String(offer.sourceOfferId || "")) throw new Error(`dubizzle_exact_detail_identity_${offer.sourceOfferId}`);
       const fields = parseDubizzleLabelBoundDetailFields(markup);
-      offer.engineCc = fields.engineCc || offer.engineCc;
-      offer.powerHp = fields.powerHp || offer.powerHp;
+      const previousEvidence = ((offer.operational as any)?.semanticEvidence || {}) as Record<string, DubizzleEvidence<any>>;
+      const detailEvidence = fields.semanticEvidence || dubizzleSpecificationEvidence({});
+      let engineCc = combineEvidence(previousEvidence.engineCc, detailEvidence.engineCc);
+      const powerHp = combineEvidence(previousEvidence.powerHp, detailEvidence.powerHp);
+      const fuel = combineEvidence(previousEvidence.fuel, detailEvidence.fuel);
+      if (fuel.status === "exact" && fuel.value === "electric" && engineCc.status === "exact") {
+        engineCc = { rawValues: engineCc.rawValues, status: "conflict" };
+      }
+      offer.engineCc = engineCc.status === "exact" ? engineCc.value : undefined;
+      offer.powerHp = powerHp.status === "exact" ? powerHp.value : undefined;
       offer.mileageKm = fields.mileageKm || offer.mileageKm;
-      offer.fuel = fields.fuel || offer.fuel;
+      offer.fuel = fuel.status === "exact" ? fuel.value : undefined;
+      offer.powertrainKind = powertrainKindForFuel(offer.fuel);
       offer.transmission = fields.transmission || offer.transmission;
       offer.drive = fields.drive || offer.drive;
       offer.bodyType = fields.bodyType || offer.bodyType;
-      if (fields.powerHp) { offer.powerDataConfidence = "source_exact"; offer.powerDataSource = `Dubizzle Car Overview:${offer.sourceOfferId}:Power`; }
+      if (offer.powerHp) {
+        offer.powerDataConfidence = "source_exact";
+        if (detailEvidence.powerHp.status === "exact") {
+          offer.powerDataSource = previousEvidence.powerHp?.status === "exact"
+            ? `Dubizzle official Algolia + Car Overview:${offer.sourceOfferId}:Horsepower`
+            : `Dubizzle Car Overview:${offer.sourceOfferId}:Horsepower`;
+        }
+      }
+      else { offer.powerDataConfidence = undefined; offer.powerDataSource = undefined; offer.powerKw = undefined; }
       const op = offer.operational as any;
       op.exactDetail = true;
       op.exactFields = true;
       op.galleryVerified = urls.length >= 5;
       op.galleryImageCount = urls.length;
       op.photoIdentityVerified = urls.length >= 5;
+      op.semanticEvidence = {
+        ...previousEvidence,
+        fuel: { source: "dubizzle_algolia_and_identity_bound_detail", ...fuel },
+        engineCc: { source: "dubizzle_algolia_and_identity_bound_detail", ...engineCc },
+        powerHp: { source: "dubizzle_algolia_and_identity_bound_detail", ...powerHp },
+        powerKw: previousEvidence.powerKw || { source: "dubizzle_source_missing", rawValues: [], status: "missing" },
+      };
       op.raw = { ...(op.raw || {}), images: urls, detailIdentityVerified: true, listingBoundImages: true, photoIdentityVerified: urls.length >= 5, semanticFieldPolicy: "car_overview_label_bound_v1" };
     } catch {
       // Keep only listing-card-bound source URLs and never infer semantics from page-wide text.
