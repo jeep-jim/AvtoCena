@@ -6,10 +6,11 @@ const queue = fs.readFileSync(new URL("../.github/workflows/catalog-v3-sequentia
 const removedDailyWorkingMarkets = new URL("../.github/workflows/catalog-live-daily-working-markets.yml", import.meta.url);
 const removedKyrgyzstanRecovery = new URL("../.github/workflows/catalog-live-recovery-uae-kyrgyzstan.yml", import.meta.url);
 
-test("sequential queue uses only its schedule and explicit operator triggers", () => {
+test("sequential queue keeps explicit operator triggers while automatic scheduling is paused", () => {
   assert.match(queue, /workflow_dispatch:/);
-  assert.match(queue, /schedule:/);
-  assert.match(queue, /cron: "17 21 \* \* \*"/);
+  assert.doesNotMatch(queue, /^\s*schedule:\s*$/m);
+  assert.doesNotMatch(queue, /cron: "17 21 \* \* \*"/);
+  assert.match(queue, /Production collection is intentionally paused/);
   assert.match(queue, /push:[\s\S]*branches:[\s\S]*- main[\s\S]*paths:[\s\S]*\.github\/catalog-v3-run-all/);
   assert.match(queue, /github\.event_name \}\}" = "push"/);
   assert.doesNotMatch(queue, /workflow_run:/);
