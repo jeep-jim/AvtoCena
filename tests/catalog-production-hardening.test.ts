@@ -283,7 +283,9 @@ test("daily cleanup keeps a bounded six-hour grace while preserving both live ma
   assert.match(cleanup, /objectPrefixSummary\(catalogObjects\)/);
   assert.match(cleanup, /objectPrefixSummary\(namespaceObjects\)/);
   assert.match(cleanup, /plannedDeletes > MAX_DELETES/);
-  assert.match(cleanupWorkflow, /cron: "40 2 \* \* \*"/);
+  assert.doesNotMatch(cleanupWorkflow, /^\s*schedule:\s*$/m);
+  assert.doesNotMatch(cleanupWorkflow, /cron: "40 2 \* \* \*"/);
+  assert.match(cleanupWorkflow, /Automatic deletion is paused/);
   assert.match(cleanupWorkflow, /apps\/web\/lib\/data\.ts/);
   assert.match(cleanup, /version: 5/);
   assert.match(cleanupWorkflow, /CATALOG_STORAGE_CLEANUP_DRY_RUN: "false"/);
