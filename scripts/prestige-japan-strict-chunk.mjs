@@ -106,6 +106,12 @@ function strictCheck(offer) {
     || raw.coverContentVerified !== true
   ) problems.push("galleryFlags");
   if (offer?.powerHp || offer?.powerKw || offer?.power30MinKw || offer?.drive || offer?.fuel) problems.push("unsupportedFields");
+  const evidence = op.semanticEvidence || {};
+  if (evidence.year?.status !== "exact" || Number(evidence.year?.value || 0) !== Number(offer?.year || 0)) problems.push("yearEvidence");
+  if (offer?.engineCc) {
+    if (evidence.engineCc?.status !== "exact" || Number(evidence.engineCc?.value || 0) !== Number(offer.engineCc)) problems.push("engineEvidence");
+  } else if (evidence.engineCc?.status === "exact") problems.push("engineEvidencePromotedMissing");
+  if (evidence.fuel?.status !== "missing" || evidence.powerHp?.status !== "missing" || evidence.powerKw?.status !== "missing") problems.push("unsupportedEvidence");
   return problems;
 }
 
