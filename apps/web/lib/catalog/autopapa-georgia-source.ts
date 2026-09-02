@@ -1,5 +1,6 @@
 import { cacheImageFromUrl, stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
+import { canonicalSourceFuel } from "./powertrain-safety";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
 const BASE_URL = "https://autopapa.ge";
@@ -35,6 +36,17 @@ export type AutoPapaGeorgiaRow = {
   bodyType?: string;
   location?: string;
   images: string[];
+  semanticEvidence?: AutoPapaSpecificationEvidence;
+};
+
+type AutoPapaEvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
+type AutoPapaEvidence<T> = { value?: T; rawValues: string[]; status: AutoPapaEvidenceStatus };
+export type AutoPapaSpecificationEvidence = {
+  year: AutoPapaEvidence<number>;
+  fuel: AutoPapaEvidence<string>;
+  engineCc: AutoPapaEvidence<number>;
+  powerHp: AutoPapaEvidence<number>;
+  powerKw: AutoPapaEvidence<number>;
 };
 
 function decode(value: string) {
@@ -56,6 +68,51 @@ function absolute(value: string, base: string) {
 function integer(value: string | undefined) {
   const parsed = Number(String(value || "").replace(/[^0-9]/g, ""));
   return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined;
+}
+
+function exactValuesEvidence<T>(rawValues: string[], values: Array<T | undefined>): AutoPapaEvidence<T> {
+  if (!rawValues.length) return { rawValues, status: "missing" };
+  if (values.some((value) => value === undefined)) return { rawValues, status: "ambiguous" };
+  const unique = [...new Set(values as T[])];
+  return unique.length === 1 ? { value: unique[0], rawValues, status: "exact" } : { rawValues, status: "conflict" };
+}
+
+export function autoPapaSpecificationEvidence(input: {
+  years?: string[];
+  fuels?: string[];
+  engines?: string[];
+  power?: string[];
+}): AutoPapaSpecificationEvidence {
+  const years = [...new Set((input.years || []).map((value) => plain(value)).filter(Boolean))];
+  const fuels = [...new Set((input.fuels || []).map((value) => plain(value)).filter(Boolean))];
+  const engines = [...new Set((input.engines || []).map((value) => plain(value)).filter(Boolean))];
+  const powers = [...new Set((input.power || []).map((value) => plain(value)).filter(Boolean))];
+  const year = exactValuesEvidence(years, years.map((raw) => {
+    const value = Number(raw);
+    return Number.isInteger(value) && value >= 1900 && value <= new Date().getUTCFullYear() + 1 ? value : undefined;
+  }));
+  const fuel = exactValuesEvidence(fuels, fuels.map(canonicalSourceFuel));
+  let engineCc = exactValuesEvidence(engines, engines.map((raw) => {
+    if (/(?:\d)\s*(?:-|–|—|to)\s*(?:\d)/i.test(raw)) return undefined;
+    const match = raw.match(/^([0-9]+(?:[.,][0-9]+)?)\s*l$/i);
+    const value = match ? Math.round(Number(match[1].replace(",", ".")) * 1_000) : undefined;
+    return value && value >= 300 && value <= 10_000 ? value : undefined;
+  }));
+  if (fuel.status === "exact" && fuel.value === "electric" && engineCc.status === "exact") engineCc = { rawValues: engineCc.rawValues, status: "conflict" };
+  const powerHp = exactValuesEvidence(powers, powers.map((raw) => {
+    if (/(?:\d)\s*(?:-|–|—|to)\s*(?:\d)/i.test(raw)) return undefined;
+    const match = raw.match(/^([0-9]{1,4}(?:[.,][0-9]+)?)\s*(?:hp|horsepower)$/i);
+    const value = match ? Number(match[1].replace(",", ".")) : undefined;
+    return value && value >= 20 && value <= 2_500 ? value : undefined;
+  }));
+  return { year, fuel, engineCc, powerHp, powerKw: { rawValues: [], status: "missing" } };
+}
+
+function autoPapaPowertrainKind(fuel: string | undefined, identity = "") {
+  if (fuel === "electric") return "electric" as const;
+  if (fuel === "hybrid") return /series[ -]?hybrid|range[ -]?extender|\b(?:erev|reev)\b|\be[ -]?power\b/i.test(identity) ? "series_hybrid" as const : "other_hybrid" as const;
+  if (fuel) return "combustion" as const;
+  return "unknown" as const;
 }
 
 function autopapaMileage(token: string | undefined, thousandsMarker: boolean) {
@@ -230,6 +287,12 @@ export function enrichAutoPapaOfferFromExactDetail(offer: VehicleOffer, markup: 
     offer.powerKw = Math.round((facts.powerHp / 1.3596216173) * 100) / 100;
     offer.powerDataConfidence = "source_exact";
     offer.powerDataSource = `autopapa-detail:${facts.sourceOfferId}:Power`;
+    const semanticEvidence = (offer.operational as any).semanticEvidence || {};
+    (offer.operational as any).semanticEvidence = {
+      ...semanticEvidence,
+      powerHp: { source: "autopapa_identity_bound_detail_power", value: facts.powerHp, rawValues: [`${facts.powerHp} hp`], status: "exact" },
+      powerKw: semanticEvidence.powerKw || { source: "autopapa_source_missing", rawValues: [], status: "missing" },
+    };
   }
   return facts;
 }
@@ -259,15 +322,17 @@ export function parseAutoPapaGeorgiaListing(markup: string, pageUrl = `${BASE_UR
     const cardText = plain(card);
     const title = [...entry.titles].sort((left, right) => right.length - left.length)[0] || "";
     const identity = titleIdentity(title);
-    const year = Number(cardText.match(/\b(19\d{2}|20\d{2})\s*year\b/i)?.[1] || 0);
+    const yearTokens = [...cardText.matchAll(/\b(19\d{2}|20\d{2})\s*year\b/gi)].map((match) => match[1]);
     const priceText = cardText.match(/(?:USD|US\$|\$)\s*([^$]{1,32}?)\s+(?:19|20)\d{2}\s*year\b/i)?.[1];
     const price = integer(priceText);
+    const engineTokens = [...cardText.matchAll(/\b([0-9]+(?:[.,][0-9]+)?\s*l)\b/gi)].map((match) => match[1]);
+    const fuelTokens = [...cardText.matchAll(/\b(petrol\/gas|petrol|gasoline|diesel|hybrid|plug[- ]?in hybrid|phev|electric|ev|lpg)\b/gi)].map((match) => match[1]);
+    const semanticEvidence = autoPapaSpecificationEvidence({ years: yearTokens, fuels: fuelTokens, engines: engineTokens });
+    const year = semanticEvidence.year.status === "exact" ? semanticEvidence.year.value || 0 : 0;
     if (!identity.make || !identity.model || year < 2020 || !price || price < 500 || price > 5_000_000 || NON_CAR_RE.test(`${identity.title} ${cardText}`)) continue;
 
     const kMileage = cardText.match(/\b([0-9]{1,3}(?:[\s,.'][0-9]{3})*|[0-9]{1,7})\s*K\.\s*km\b/i)?.[1];
     const regularMileage = cardText.match(/\b([0-9]{1,3}(?:[\s,.'][0-9]{3})*|[0-9]{1,7})\s*km\b/i)?.[1];
-    const liters = cardText.match(/\b([0-9]+(?:[.,][0-9]+)?)\s*l\b/i)?.[1];
-    const fuel = cardText.match(/\b(petrol\/gas|petrol|gasoline|diesel|hybrid|plug[- ]?in hybrid|phev|electric|ev|lpg)\b/i)?.[1];
     const transmission = cardText.match(/\b(automatic|manual|cvt|dct|at|mt)\b/i)?.[1];
     const bodyType = cardText.match(/\b(suv|crossover|minivan|sedan|hatchback|coupe|wagon|estate|mpv|convertible|cabrio)\b/i)?.[1];
     const location = cardText.match(/\b(Tbilisi|Batumi|Rustavi|Kutaisi|Poti|Gori|Kobuleti|Telavi)\b/i)?.[1];
@@ -275,8 +340,9 @@ export function parseAutoPapaGeorgiaListing(markup: string, pageUrl = `${BASE_UR
     rows.push({
       id, detailUrl: entry.href, title: identity.title, make: identity.make, model: identity.model, year, price, currency: "USD",
       mileageKm: autopapaMileage(kMileage || regularMileage, Boolean(kMileage)),
-      engineCc: liters ? Math.round(Number(liters.replace(",", ".")) * 1_000) : undefined,
-      fuel, transmission, bodyType, location, images: listingPhotoUrls(card, pageUrl),
+      engineCc: semanticEvidence.engineCc.status === "exact" ? semanticEvidence.engineCc.value : undefined,
+      fuel: semanticEvidence.fuel.status === "exact" ? semanticEvidence.fuel.value : undefined,
+      transmission, bodyType, location, images: listingPhotoUrls(card, pageUrl), semanticEvidence,
     });
   }
   return rows;
@@ -318,15 +384,36 @@ export class AutoPapaGeorgiaAdapter implements CatalogSourceAdapter {
   normalizeOffer(raw: AutoPapaGeorgiaRow): VehicleOffer | null {
     if (!raw?.id || !raw.make || !raw.model || raw.year < 2020 || !raw.price || !raw.detailUrl) return null;
     const now = new Date().toISOString();
-    return normalizeVehicleOfferSpecs({
+    const semanticEvidence = raw.semanticEvidence || autoPapaSpecificationEvidence({ years: [String(raw.year)], fuels: raw.fuel ? [raw.fuel] : [], engines: raw.engineCc ? [`${raw.engineCc / 1_000} l`] : [] });
+    const fuel = semanticEvidence.fuel.status === "exact" ? semanticEvidence.fuel.value : undefined;
+    const engineCc = semanticEvidence.engineCc.status === "exact" ? semanticEvidence.engineCc.value : undefined;
+    const powertrainKind = autoPapaPowertrainKind(fuel, `${raw.make} ${raw.model} ${raw.title}`);
+    const normalized = normalizeVehicleOfferSpecs({
       id: stableOfferId(this.sourceId, raw.id), sourceId: this.sourceId, sourceOfferId: raw.id, market: "georgia",
       offerType: "fixed", status: "active", make: raw.make, model: raw.model, trim: raw.title, year: raw.year,
-      mileageKm: raw.mileageKm, engineCc: raw.engineCc, fuel: raw.fuel, transmission: raw.transmission, bodyType: raw.bodyType,
+      mileageKm: raw.mileageKm, engineCc, fuel, powertrainKind, transmission: raw.transmission, bodyType: raw.bodyType,
       sourcePrice: raw.price, sourceCurrency: raw.currency, priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data",
       firstSeenAt: now, updatedAt: now,
       operational: { sourceUrl: raw.detailUrl, sourceVenueName: raw.location || "AutoPapa Georgia", sourcePublishedAt: now,
+        semanticEvidence: {
+          year: { source: "autopapa_listing_card_year", ...semanticEvidence.year },
+          fuel: { source: "autopapa_listing_card_fuel", ...semanticEvidence.fuel },
+          engineCc: { source: "autopapa_listing_card_engine", ...semanticEvidence.engineCc },
+          powerHp: { source: "autopapa_listing_power_missing", ...semanticEvidence.powerHp },
+          powerKw: { source: "autopapa_source_missing", ...semanticEvidence.powerKw },
+        },
         raw: { images: raw.images, parsed: raw, listingBoundImages: true } },
     } as VehicleOffer) as VehicleOffer;
+    normalized.fuel = fuel;
+    normalized.powertrainKind = powertrainKind;
+    normalized.engineCc = engineCc;
+    normalized.powerHp = undefined;
+    normalized.powerKw = undefined;
+    normalized.icePowerKw = undefined;
+    normalized.utilizationPowerKw = undefined;
+    normalized.powerDataConfidence = undefined;
+    normalized.powerDataSource = undefined;
+    return normalized;
   }
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
