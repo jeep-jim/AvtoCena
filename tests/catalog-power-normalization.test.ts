@@ -1,9 +1,11 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { enrichOfferWithExplicitEngineDisplacement } from "../apps/web/lib/catalog/explicit-engine-displacement";
+import { kcarKoreaExactSource, kcarSpecificationEvidence } from "../apps/web/lib/catalog/kcar-exact-source";
 import { canonicalizeSemanticSourceFields, preferExplicitCombustionPowertrain } from "../apps/web/lib/catalog/powertrain-safety";
 import { normalizeVehicleOfferSpecs } from "../apps/web/lib/catalog/spec-normalization";
 import { applyPrestigeJapanExactIdentityKnowledge } from "../apps/web/lib/catalog/prestige-japan-identity-knowledge";
+import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specification-evidence-audit";
 
 test("extracts structured peak kW without treating it as 30-minute power", () => {
   const normalized = normalizeVehicleOfferSpecs({ make: "Example", model: "EV", operational: { raw: { specification: { maxPowerKw: 150 } } } });
@@ -174,6 +176,89 @@ test("K Car size class is dropped while exact Korean semantic fields are canonic
 
 test("K Car SUV category remains a canonical SUV", () => {
   assert.equal(canonicalizeSemanticSourceFields({ bodyType: "SUV" }).bodyType, "suv");
+});
+
+test("K Car exact detail classifies fuel, displacement and horsepower provenance", () => {
+  const evidence = kcarSpecificationEvidence({
+    regModelYear: "2024",
+    manufactureDate: "20240115",
+    fuelName: "가솔린",
+    rawFuelType: "001",
+    engineDisplacement: "1,998",
+    horsepower: "245",
+  });
+  assert.equal(evidence.year.status, "exact");
+  assert.equal(evidence.fuel.value, "petrol");
+  assert.equal(evidence.engineCc.value, 1998);
+  assert.equal(evidence.powerHp.value, 245);
+  assert.equal(evidence.powerKw.status, "missing");
+});
+
+test("K Car rejects conflicting years, ambiguous metrics and mismatched EV power units", () => {
+  const evidence = kcarSpecificationEvidence({
+    regModelYear: "2024",
+    manufactureDate: "20230115",
+    fuelName: "전기",
+    rawFuelType: "001",
+    engineDisplacement: "2.0",
+    horsepower: "150-200",
+  });
+  assert.equal(evidence.year.status, "conflict");
+  assert.equal(evidence.engineCc.status, "ambiguous");
+  assert.equal(evidence.powerHp.status, "conflict");
+  assert.equal(evidence.powerKw.status, "conflict");
+});
+
+test("K Car pure EV keeps kW as peak power and flags nonzero displacement", () => {
+  const evidence = kcarSpecificationEvidence({
+    regModelYear: 2025,
+    manufactureDate: "20250101",
+    fuelName: "전기",
+    rawFuelType: "009",
+    engineDisplacement: 1998,
+    horsepower: 150,
+  });
+  assert.equal(evidence.fuel.value, "electric");
+  assert.equal(evidence.engineCc.status, "conflict");
+  assert.equal(evidence.powerHp.status, "missing");
+  assert.equal(evidence.powerKw.status, "exact");
+  assert.equal(evidence.powerKw.value, 150);
+});
+
+test("K Car normalized offer exposes exact source evidence to the shared audit", () => {
+  const evidence = kcarSpecificationEvidence({
+    regModelYear: 2024,
+    manufactureDate: "20240115",
+    fuelName: "가솔린",
+    rawFuelType: "001",
+    engineDisplacement: 1998,
+    horsepower: 245,
+  });
+  const offer = kcarKoreaExactSource.normalizeOffer({
+    id: "EC12345678",
+    url: "https://www.kcar.com/bc/detail/carInfoDtl?i_sCarCd=EC12345678",
+    title: "기아 K5 노블레스",
+    make: "기아",
+    model: "K5",
+    trim: "노블레스",
+    year: 2024,
+    engineCc: 1998,
+    powerHp: 245,
+    fuel: "petrol",
+    transmission: "자동",
+    drive: "2WD",
+    bodyType: "세단",
+    sourcePrice: 30_000_000,
+    sourceCurrency: "KRW",
+    images: Array.from({ length: 5 }, (_, index) => `https://img.kcar.com/3dcarpicture/2026/01/001/12345678_1/main/${index}.jpg`),
+    rawFuelType: "001",
+    rawStatus: "판매중",
+    semanticEvidence: evidence,
+  });
+  assert.ok(offer);
+  assert.equal(classifySpecificationEvidence(offer!, "fuelPowertrain").state, "exact");
+  assert.equal(classifySpecificationEvidence(offer!, "engineCc").state, "exact");
+  assert.equal(classifySpecificationEvidence(offer!, "powerHp").state, "exact");
 });
 
 test("pure EV cannot retain a leaked combustion displacement", () => {
