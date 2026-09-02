@@ -115,3 +115,31 @@ test("Compiled source corpus is connected to the production Knowledge CORE", asy
   assert.equal(enriched.powerKw, 128);
   assert.equal(enriched.power30MinKw, undefined);
 });
+
+test("review-only and cross-market variants cannot price a specific offer", async () => {
+  const { enrichOfferWithKnowledgeCore, resetKnowledgeCoreForTests } = await import("../apps/web/lib/catalog/knowledge-core");
+  resetKnowledgeCoreForTests();
+  const enriched = await enrichOfferWithKnowledgeCore({
+    id: "uae-accord-review-guard",
+    sourceId: "runtime-test",
+    sourceOfferId: "uae-accord-review-guard",
+    market: "uae",
+    offerType: "fixed",
+    status: "active",
+    make: "Honda",
+    model: "Accord",
+    year: 2022,
+    engineCc: 1500,
+    fuel: "Petrol",
+    sourcePrice: 1,
+    sourceCurrency: "AED",
+    images: [],
+    calculationStatus: "needs_data",
+    firstSeenAt: "2026-09-02T00:00:00.000Z",
+    updatedAt: "2026-09-02T00:00:00.000Z",
+    operational: {},
+  } as any);
+  assert.equal(enriched.powerHp, undefined);
+  assert.equal(enriched.powerKw, undefined);
+  assert.equal((enriched.operational as any).knowledgeCore.variantId, null);
+});

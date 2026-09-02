@@ -2,11 +2,7 @@ import { applyEncyclopediaDisplayIdentity } from "./display-identity";
 import { applyActiveBusinessPricing } from "./live-business-pricing";
 import { calculateOfferWithRussiaCustoms } from "./customs-pricing";
 import type { VehicleOffer } from "./types";
-import {
-  findVehicleModel,
-  readVehicleKnowledgeVariants,
-  vehicleKnowledgeToken,
-} from "./vehicle-knowledge";
+import { vehicleKnowledgeToken } from "./vehicle-knowledge";
 import { enrichOfferWithKnowledgeCore } from "./knowledge-core";
 
 function meaningful(value: unknown) {
@@ -17,18 +13,6 @@ function meaningful(value: unknown) {
 function positive(value: unknown, max = 10_000) {
   const parsed = Number(value);
   return Number.isFinite(parsed) && parsed > 0 && parsed <= max ? parsed : undefined;
-}
-
-function consensus<T>(values: T[]) {
-  const unique = [...new Set(values.filter((value) => value !== undefined && value !== null && value !== ""))];
-  return unique.length === 1 ? unique[0] : undefined;
-}
-
-function activeForYear(variant: any, year: number) {
-  if (variant.active === false) return false;
-  if (variant.yearFrom && year && year < variant.yearFrom) return false;
-  if (variant.yearTo && year && year > variant.yearTo) return false;
-  return true;
 }
 
 function inferPowertrain(text: string) {
@@ -75,11 +59,6 @@ export function catalogPricingSpecificationsChanged(before: Partial<VehicleOffer
 
 export async function enrichOfferForDisplay<T extends VehicleOffer>(input: T): Promise<T> {
   const enriched = await enrichOfferWithKnowledgeCore(input);
-  const match = await findVehicleModel(enriched);
-  const year = Number(enriched.year || 0);
-  const variants = match
-    ? (await readVehicleKnowledgeVariants()).filter((variant) => variant.modelId === match.model.id && activeForYear(variant, year))
-    : [];
   const text = vehicleKnowledgeToken([
     enriched.make,
     enriched.model,
@@ -90,26 +69,23 @@ export async function enrichOfferForDisplay<T extends VehicleOffer>(input: T): P
     (enriched.operational as any)?.raw?.name,
   ].filter(Boolean).join(" "));
 
-  const consensusPowertrain = consensus(variants.map((variant) => variant.powertrainKind));
   const powertrainKind = enriched.powertrainKind && enriched.powertrainKind !== "unknown"
     ? enriched.powertrainKind
-    : consensusPowertrain || inferPowertrain(text) || enriched.powertrainKind;
+    : inferPowertrain(text) || enriched.powertrainKind;
   const electric = powertrainKind === "electric";
 
-  const engineCc = positive(enriched.engineCc)
-    || positive(consensus(variants.map((variant) => variant.engineCc)));
+  // Display rendering must not manufacture pricing inputs from a model-wide
+  // consensus. One model/year can still contain multiple engines and
+  // powertrains; only source evidence or an exact Knowledge CORE variant may
+  // supply engine displacement and fuel for customs calculation.
+  const engineCc = positive(enriched.engineCc);
   const fuel = meaningful(enriched.fuel)
-    || meaningful(consensus(variants.map((variant) => variant.fuel)))
     || (electric ? "electric" : powertrainKind && powertrainKind !== "combustion" ? "hybrid" : undefined);
   const transmission = meaningful(enriched.transmission)
-    || meaningful(consensus(variants.map((variant) => variant.transmission)))
     || inferTransmission(text, electric);
   const drive = meaningful(enriched.drive)
-    || meaningful(consensus(variants.map((variant) => variant.drive)))
     || inferDrive(text);
-  const bodyType = meaningful(enriched.bodyType)
-    || meaningful(consensus(variants.map((variant) => variant.bodyType)))
-    || match?.model.bodyTypes?.[0];
+  const bodyType = meaningful(enriched.bodyType);
 
   const displayEnriched = {
     ...enriched,

@@ -78,3 +78,32 @@ test("offer detail enrichment uses the same canonical China identity as catalog 
   assert.equal(enriched.totalRub, offer.totalRub);
   assert.equal(enriched.powerHp, offer.powerHp);
 });
+
+test("display enrichment does not invent Toyota Raize pricing specs from model-wide data", async () => {
+  const offer = {
+    id: "dubizzle-raize-range",
+    sourceId: "dubizzle_uae_open",
+    sourceOfferId: "range-only",
+    market: "uae",
+    offerType: "fixed",
+    status: "active",
+    make: "Toyota",
+    model: "Raize",
+    trim: "TURBO G",
+    year: 2023,
+    mileageKm: 77_000,
+    sourcePrice: 32_000,
+    sourceCurrency: "AED",
+    images: [],
+    totalRub: null,
+    calculationStatus: "needs_data",
+    firstSeenAt: "2026-09-01T00:00:00.000Z",
+    updatedAt: "2026-09-01T00:00:00.000Z",
+    operational: { sourceUrl: "https://dubai.dubizzle.com/example" },
+  } as any;
+
+  const enriched = await enrichOfferForDisplay(offer);
+  assert.equal(enriched.engineCc, undefined);
+  assert.equal(enriched.powerHp, undefined);
+  assert.notEqual(enriched.calculationStatus, "ready");
+});
