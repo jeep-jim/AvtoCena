@@ -78,10 +78,12 @@ if (!storage.listObjects) throw new Error("source_specification_audit_requires_o
 const objects = await storage.listObjects(CANDIDATE_PREFIX);
 const sources = {};
 const failures = [];
+const zeroRowSources = [];
 const totals = {
   requiredMarkets: PUBLIC_CATALOG_MARKETS.length,
   requiredSources: Object.values(REQUIRED_CATALOG_SOURCES).flat().length,
   sourcesWithCandidatePools: 0,
+  sourcesWithCandidateRows: 0,
   candidateRows: 0,
   distinctCandidateRows: 0,
   electrifiedRows: 0,
@@ -111,6 +113,8 @@ for (const market of PUBLIC_CATALOG_MARKETS) {
     if (readErrors.length) failures.push(`${key}:candidate_pool_read_errors:${readErrors.length}`);
     totals.distinctCandidateRows += rows.length;
     const summary = summarizeRows(rows);
+    if (rows.length) totals.sourcesWithCandidateRows++;
+    else zeroRowSources.push(key);
     totals.electrifiedRows += summary.electrified;
     sources[key] = {
       market,
@@ -146,6 +150,11 @@ const report = {
     everySourceHasCandidatePool: totals.sourcesWithCandidatePools === totals.requiredSources,
     noReadErrors: failures.every((failure) => !failure.includes("read_errors")),
     pass: failures.length === 0,
+  },
+  coverageGate: {
+    everySourceHasCandidateRows: totals.sourcesWithCandidateRows === totals.requiredSources,
+    zeroRowSources,
+    pass: zeroRowSources.length === 0,
   },
   releaseGate: {
     pass: false,
