@@ -1,4 +1,5 @@
 import assert from "node:assert/strict";
+import fs from "node:fs";
 import test from "node:test";
 import {
   Che168GlobalExactAdapter,
@@ -8,6 +9,11 @@ import { catalogSemanticEvidenceRejectionReason } from "../apps/web/lib/catalog/
 import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specification-evidence-audit";
 
 const source = new Che168GlobalExactAdapter();
+
+const che168WorkflowPaths = [
+  ".github/workflows/catalog-v6-che168-exact-readiness.yml",
+  ".github/workflows/catalog-v6-che168-strict-ladder.yml",
+];
 
 function listing(overrides: Record<string, unknown> = {}) {
   return {
@@ -119,5 +125,16 @@ test("Che168 conflicting carinfo clears calculation fields and fails closed", as
     assert.equal(catalogSemanticEvidenceRejectionReason(offer!), "semantic_fuel_conflict");
   } finally {
     global.fetch = originalFetch;
+  }
+});
+
+test("Che168 workflows validate canonical provenance instead of raw fuel spelling", () => {
+  for (const path of che168WorkflowPaths) {
+    const workflow = fs.readFileSync(path, "utf8");
+    assert.doesNotMatch(workflow, /clean\(offer\.fuel\)\s*!==\s*clean\(detail\.fuelname\)/);
+    assert.match(workflow, /fuel_evidence_not_exact/);
+    assert.match(workflow, /fuel_not_bound_to_carinfo/);
+    assert.match(workflow, /unsafe_engine_promoted/);
+    assert.match(workflow, /unsafe_power_promoted/);
   }
 });
