@@ -1,5 +1,6 @@
 import { cacheImageFromUrl, stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
+import { canonicalSourceFuel } from "./powertrain-safety";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
 const HEADERS = {
@@ -48,7 +49,53 @@ export type MyAutoProductSnapshot = {
   galleryUrls: string[];
   engineCc?: number;
   powerHp?: number;
+  semanticEvidence: {
+    engineCc: MyAutoMetricEvidence;
+    powerHp: MyAutoMetricEvidence;
+  };
 };
+
+type MyAutoEvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
+type MyAutoMetricEvidence = { value?: number; rawValues: string[]; status: MyAutoEvidenceStatus };
+type MyAutoFuelEvidence = { value?: string; rawValues: string[]; status: MyAutoEvidenceStatus };
+
+function exactMetricEvidence(values: unknown[], minimum: number, maximum: number): MyAutoMetricEvidence {
+  const rawValues = [...new Set(values.map((value) => String(value ?? "").trim()).filter(Boolean))];
+  if (!rawValues.length) return { rawValues, status: "missing" };
+  const parsed = rawValues.map(Number);
+  if (parsed.some((value) => !Number.isInteger(value) || value < minimum || value > maximum)) {
+    return { rawValues, status: "ambiguous" };
+  }
+  const exact = [...new Set(parsed)];
+  if (exact.length !== 1) return { rawValues, status: "conflict" };
+  return { value: exact[0], rawValues, status: "exact" };
+}
+
+function myAutoFuelEvidence(value: unknown): MyAutoFuelEvidence {
+  const raw = String(value ?? "").trim();
+  const rawValues = raw ? [raw] : [];
+  if (!raw) return { rawValues, status: "missing" };
+  const canonical = canonicalSourceFuel(raw);
+  return canonical
+    ? { value: canonical, rawValues, status: "exact" }
+    : { rawValues, status: "ambiguous" };
+}
+
+function powertrainKindForFuel(fuel: string | undefined) {
+  if (fuel === "electric") return "electric" as const;
+  if (fuel === "hybrid") return "other_hybrid" as const;
+  if (fuel) return "combustion" as const;
+  return "unknown" as const;
+}
+
+export function myAutoListingSpecificationEvidence(row: Pick<MyAutoListRow, "year" | "fuel">) {
+  return {
+    year: exactMetricEvidence([row.year], 1900, new Date().getUTCFullYear() + 1),
+    fuel: myAutoFuelEvidence(row.fuel),
+    engineCc: exactMetricEvidence([], 300, 10_000),
+    powerHp: exactMetricEvidence([], 20, 2_500),
+  };
+}
 
 export function parseMyAutoListingImageUrl(value: string, expectedId: string): MyAutoListingImageIdentity | null {
   try {
@@ -79,11 +126,6 @@ export function buildMyAutoLargePhotoUrls(input: { id: unknown; photo: unknown; 
     `https://static.tnet.ge/myauto/photos/${photo}/large/${id}_${offset + 1}.jpg?v=${version}`);
 }
 
-function boundedExactInteger(value: unknown, minimum: number, maximum: number) {
-  const parsed = Number(value);
-  return Number.isFinite(parsed) && Number.isInteger(parsed) && parsed >= minimum && parsed <= maximum ? parsed : undefined;
-}
-
 export function myAutoProductSnapshotFromInfo(info: Record<string, unknown>, expectedId: string, expectedPhoto?: string): MyAutoProductSnapshot | null {
   const id = String(info?.car_id ?? "");
   const photo = String(info?.photo ?? "");
@@ -91,10 +133,13 @@ export function myAutoProductSnapshotFromInfo(info: Record<string, unknown>, exp
   if (expectedPhoto && photo !== expectedPhoto) return null;
   const galleryUrls = buildMyAutoLargePhotoUrls({ id, photo, count: info.pic_number, version: info.photo_ver });
   if (!galleryUrls.length) return null;
+  const engineCc = exactMetricEvidence([info.engine_volume, info.engine_cc], 300, 10_000);
+  const powerHp = exactMetricEvidence([info.power_hp, info.horsepower], 20, 2_500);
   return {
     galleryUrls,
-    engineCc: boundedExactInteger(info.engine_volume ?? info.engine_cc, 300, 10_000),
-    powerHp: boundedExactInteger(info.power_hp ?? info.horsepower, 20, 2_500),
+    engineCc: engineCc.status === "exact" ? engineCc.value : undefined,
+    powerHp: powerHp.status === "exact" ? powerHp.value : undefined,
+    semanticEvidence: { engineCc, powerHp },
   };
 }
 
@@ -269,7 +314,9 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
   normalizeOffer(raw: MyAutoListRow): VehicleOffer | null {
     if (!raw?.id || !raw.make || !raw.model || !raw.year || raw.year < 2020 || !raw.price || !raw.detailUrl) return null;
     const now = new Date().toISOString();
-    return normalizeVehicleOfferSpecs({
+    const evidence = myAutoListingSpecificationEvidence(raw);
+    const exactFuel = evidence.fuel.status === "exact" ? evidence.fuel.value : undefined;
+    const offer = normalizeVehicleOfferSpecs({
       id: stableOfferId(this.sourceId, raw.id),
       sourceId: this.sourceId,
       sourceOfferId: raw.id,
@@ -280,7 +327,8 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
       model: raw.model,
       trim: raw.title,
       year: raw.year,
-      fuel: raw.fuel,
+      fuel: exactFuel,
+      powertrainKind: powertrainKindForFuel(exactFuel),
       bodyType: raw.bodyType,
       sourcePrice: raw.price,
       sourceCurrency: raw.currency,
@@ -294,9 +342,27 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
         sourceUrl: raw.detailUrl,
         sourceVenueName: raw.location || "Georgia",
         sourcePublishedAt: now,
+        semanticEvidence: {
+          year: { source: "myauto_listing", ...evidence.year },
+          fuel: { source: "myauto_listing", ...evidence.fuel },
+          engineCc: { source: "myauto_product_api", ...evidence.engineCc },
+          powerHp: { source: "myauto_product_api", ...evidence.powerHp },
+        },
         raw: { images: raw.images, parsed: raw, listingBoundImages: true },
       },
     } as VehicleOffer) as VehicleOffer;
+    // Model names such as BMW 330 are not displacement evidence. MyAuto's
+    // engine and power contract starts only at the identity-bound product API.
+    offer.fuel = exactFuel;
+    offer.powertrainKind = powertrainKindForFuel(exactFuel);
+    offer.engineCc = undefined;
+    offer.powerHp = undefined;
+    offer.powerKw = undefined;
+    offer.icePowerKw = undefined;
+    offer.utilizationPowerKw = undefined;
+    offer.powerDataConfidence = undefined;
+    offer.powerDataSource = undefined;
+    return offer;
   }
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
@@ -306,8 +372,39 @@ export class MyAutoListAdapter implements CatalogSourceAdapter {
       .filter((url) => Boolean(parseMyAutoListingImageUrl(url, sourceId)));
     const listingIdentity = listingUrls.map((url) => parseMyAutoListingImageUrl(url, sourceId)).find(Boolean);
     const snapshot = await fetchMyAutoProductSnapshot(sourceId, listingIdentity?.photo).catch(() => null);
-    if (snapshot?.engineCc && !offer.engineCc) offer.engineCc = snapshot.engineCc;
-    if (snapshot?.powerHp && !offer.powerHp) offer.powerHp = snapshot.powerHp;
+    const productEvidence = snapshot?.semanticEvidence || {
+      engineCc: exactMetricEvidence([], 300, 10_000),
+      powerHp: exactMetricEvidence([], 20, 2_500),
+    };
+    const engineEvidence = offer.powertrainKind === "electric" && productEvidence.engineCc.status === "exact"
+      ? { ...productEvidence.engineCc, value: undefined, status: "conflict" as const }
+      : productEvidence.engineCc;
+    offer.engineCc = engineEvidence.status === "exact" ? engineEvidence.value : undefined;
+    if (productEvidence.powerHp.status === "exact" && productEvidence.powerHp.value) {
+      offer.powerHp = productEvidence.powerHp.value;
+      offer.powerKw = Math.round(productEvidence.powerHp.value * 0.73549875 * 10) / 10;
+      offer.powerDataConfidence = "source_exact";
+      offer.powerDataSource = "MyAuto product API";
+    } else {
+      offer.powerHp = undefined;
+      offer.powerKw = undefined;
+      offer.icePowerKw = undefined;
+      offer.utilizationPowerKw = undefined;
+      offer.powerDataConfidence = undefined;
+      offer.powerDataSource = undefined;
+    }
+    offer.operational = {
+      ...(offer.operational || {}),
+      semanticEvidence: {
+        ...((offer.operational as any)?.semanticEvidence || {}),
+        engineCc: { source: "myauto_product_api", ...engineEvidence },
+        powerHp: { source: "myauto_product_api", ...productEvidence.powerHp },
+      },
+      raw: {
+        ...((offer.operational?.raw as Record<string, unknown> | undefined) || {}),
+        productSnapshotIdentityVerified: Boolean(snapshot),
+      },
+    };
     const exactGallery = snapshot?.galleryUrls || [];
     const urls = exactGallery.length ? exactGallery : listingUrls;
     const limit = Math.min(30, Math.max(1, Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30)));

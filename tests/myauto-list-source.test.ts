@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { buildMyAutoLargePhotoUrls, buildMyAutoListUrls, MyAutoListAdapter, parseMyAutoListingImageUrl, parseMyAutoListingMarkup } from "../apps/web/lib/catalog/myauto-list-source";
+import { buildMyAutoLargePhotoUrls, buildMyAutoListUrls, MyAutoListAdapter, myAutoListingSpecificationEvidence, parseMyAutoListingImageUrl, parseMyAutoListingMarkup } from "../apps/web/lib/catalog/myauto-list-source";
+import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specification-evidence-audit";
 
 const markup = `
 <section>
@@ -54,6 +55,34 @@ test("MyAuto normalized offer is 2020+ and ready for knowledge enrichment and ex
   assert.equal(offer?.model, "Camry");
   assert.equal(offer?.year, 2021);
   assert.equal(offer?.operational?.sourceUrl, "https://www.myauto.ge/en/pr/122433509/toyota-camry");
+  assert.equal(offer?.fuel, "hybrid");
+  assert.equal(offer?.powertrainKind, "other_hybrid");
+  assert.equal(classifySpecificationEvidence(offer!, "fuelPowertrain").state, "exact");
+  assert.equal(classifySpecificationEvidence(offer!, "engineCc").state, "missing");
+  assert.equal(classifySpecificationEvidence(offer!, "powerHp").state, "missing");
+});
+
+test("MyAuto listing evidence rejects unknown fuel and never treats model numbers as engine size", () => {
+  const adapter = new MyAutoListAdapter();
+  const offer = adapter.normalizeOffer({
+    id: "122999998",
+    detailUrl: "https://www.myauto.ge/en/pr/122999998/bmw-330",
+    title: "BMW 330",
+    make: "BMW",
+    model: "330",
+    year: 2024,
+    price: 50_000,
+    currency: "GEL",
+    fuel: "Other",
+    images: [],
+  });
+  assert.ok(offer);
+  assert.equal(offer!.fuel, undefined);
+  assert.equal(offer!.engineCc, undefined);
+  assert.equal(offer!.powerHp, undefined);
+  assert.equal((offer!.operational as any).semanticEvidence.fuel.status, "ambiguous");
+  assert.equal(classifySpecificationEvidence(offer!, "fuelPowertrain").state, "ambiguous");
+  assert.equal(myAutoListingSpecificationEvidence({ year: 2024, fuel: "Petrol" }).fuel.value, "petrol");
 });
 
 test("MyAuto normalization rejects a pre-2020 row even if it bypasses the list parser", () => {
@@ -101,4 +130,3 @@ test("MyAuto full gallery uses the official id/photo/count/version large-image f
   assert.equal(buildMyAutoLargePhotoUrls({ id: "other", photo: "5/1/8/2/9", count: 3, version: 1 }).length, 0);
   assert.equal(buildMyAutoLargePhotoUrls({ id: "122928158", photo: "5/1/8/2/9", count: 99, version: 1 }).length, 30);
 });
-
