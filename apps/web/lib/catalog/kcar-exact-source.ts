@@ -1,4 +1,5 @@
 import crypto from "node:crypto";
+import { canonicalSourceFuel } from "./powertrain-safety";
 import { stableOfferId } from "./storage";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
@@ -41,7 +42,12 @@ type Row = {
   images: string[];
   rawFuelType: string;
   rawStatus: string;
+  semanticEvidence: ReturnType<typeof kcarSpecificationEvidence>;
 };
+
+type KCarEvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
+type KCarMetricEvidence = { value?: number; rawValues: string[]; status: KCarEvidenceStatus };
+type KCarFuelEvidence = { value?: string; rawValues: string[]; status: KCarEvidenceStatus };
 
 const API_BASE = "https://api.kcar.com";
 const WEB_BASE = "https://www.kcar.com";
@@ -62,6 +68,66 @@ function clean(value: unknown) {
 function positiveInt(value: unknown) {
   const parsed = Number(String(value ?? "").replace(/[^0-9.]/g, ""));
   return Number.isFinite(parsed) && parsed > 0 ? Math.round(parsed) : undefined;
+}
+
+function structuredIntegerEvidence(values: unknown[], minimum: number, maximum: number): KCarMetricEvidence {
+  const rawValues = [...new Set(values.map(clean).filter(Boolean))];
+  if (!rawValues.length) return { rawValues, status: "missing" };
+  if (rawValues.some((value) => !/^(?:\d+|\d{1,3}(?:,\d{3})+)$/.test(value))) {
+    return { rawValues, status: "ambiguous" };
+  }
+  const parsed = rawValues.map((value) => Number(value.replace(/,/g, "")));
+  if (parsed.some((value) => !Number.isInteger(value) || value < minimum || value > maximum)) {
+    return { rawValues, status: "ambiguous" };
+  }
+  const exact = [...new Set(parsed)];
+  if (exact.length !== 1) return { rawValues, status: "conflict" };
+  return { value: exact[0], rawValues, status: "exact" };
+}
+
+function kcarFuelEvidence(value: unknown): KCarFuelEvidence {
+  const raw = clean(value);
+  const rawValues = raw ? [raw] : [];
+  if (!raw) return { rawValues, status: "missing" };
+  const canonical = canonicalSourceFuel(raw);
+  return canonical
+    ? { value: canonical, rawValues, status: "exact" }
+    : { rawValues, status: "ambiguous" };
+}
+
+export function kcarSpecificationEvidence(input: {
+  regModelYear?: unknown;
+  manufactureDate?: unknown;
+  fuelName?: unknown;
+  rawFuelType?: unknown;
+  engineDisplacement?: unknown;
+  horsepower?: unknown;
+}) {
+  const manufactureYear = clean(input.manufactureDate).match(/^(19\d{2}|20\d{2})/)?.[1];
+  const year = structuredIntegerEvidence([input.regModelYear, manufactureYear], 1900, new Date().getUTCFullYear() + 1);
+  const fuel = kcarFuelEvidence(input.fuelName);
+  const rawFuelType = clean(input.rawFuelType);
+  const electricPowerUnit = rawFuelType === "009" || rawFuelType === "013";
+  const unitMatchesFuel = fuel.status === "exact" && electricPowerUnit === (fuel.value === "electric");
+  let engineCc = structuredIntegerEvidence([input.engineDisplacement], 300, 10_000);
+  if (fuel.value === "electric" && engineCc.status === "exact") {
+    engineCc = { ...engineCc, value: undefined, status: "conflict" };
+  }
+  const peakPower = structuredIntegerEvidence([input.horsepower], 10, 2_000);
+  const powerHp = !electricPowerUnit && unitMatchesFuel
+    ? peakPower
+    : { rawValues: peakPower.rawValues, status: unitMatchesFuel ? "missing" : "conflict" as KCarEvidenceStatus };
+  const powerKw = electricPowerUnit && unitMatchesFuel
+    ? peakPower
+    : { rawValues: peakPower.rawValues, status: unitMatchesFuel ? "missing" : "conflict" as KCarEvidenceStatus };
+  return { year, fuel, engineCc, powerHp, powerKw };
+}
+
+function powertrainKindForFuel(fuel: string | undefined) {
+  if (fuel === "electric") return "electric" as const;
+  if (fuel === "hybrid") return "other_hybrid" as const;
+  if (fuel) return "combustion" as const;
+  return "unknown" as const;
 }
 
 function sleep(ms: number) {
@@ -200,12 +266,21 @@ function parseExactDetail(meta: KCarListRow, data: KCarDetailData): Row | null {
   const make = clean(rvo.mnuftrNm);
   const model = clean(rvo.modelNm);
   const trim = clean(rvo.grdFullNm || [rvo.grdNm, rvo.grdDtlNm].filter(Boolean).join(" "));
-  const year = Number(rvo.regModelyr || String(rvo.mfgDt || "").slice(0, 4) || 0);
+  const evidence = kcarSpecificationEvidence({
+    regModelYear: rvo.regModelyr,
+    manufactureDate: rvo.mfgDt,
+    fuelName: rvo.fuelTypecdNm,
+    rawFuelType: rvo.fuelType,
+    engineDisplacement: rvo.engdispmnt,
+    horsepower: rvo.hrspow,
+  });
+  const year = evidence.year.status === "exact" ? Number(evidence.year.value) : 0;
   const productionDate = clean(rvo.mfgDt) || undefined;
   const mileageKm = positiveInt(rvo.milg);
-  const engineCc = positiveInt(rvo.engdispmnt);
-  const hrspow = positiveInt(rvo.hrspow);
-  const fuel = clean(rvo.fuelTypecdNm);
+  const engineCc = evidence.engineCc.status === "exact" ? evidence.engineCc.value : undefined;
+  const powerHp = evidence.powerHp.status === "exact" ? evidence.powerHp.value : undefined;
+  const powerKw = evidence.powerKw.status === "exact" ? evidence.powerKw.value : undefined;
+  const fuel = evidence.fuel.status === "exact" ? clean(evidence.fuel.value) : "";
   const rawFuelType = clean(rvo.fuelType);
   const transmission = clean(rvo.trnsmsncdNm);
   const drive = clean(rvo.drvgYnNm);
@@ -214,7 +289,7 @@ function parseExactDetail(meta: KCarListRow, data: KCarDetailData): Row | null {
   const sourcePrice = Number.isFinite(sourcePriceManwon) && sourcePriceManwon > 0 ? Math.round(sourcePriceManwon * 10_000) : 0;
   const images = exactVehicleGallery(data, id);
 
-  if (!make || !model || !trim || !year || !fuel || !transmission || !drive || !bodyType || !sourcePrice || !hrspow || images.length < 5) return null;
+  if (!make || !model || !trim || !year || !fuel || !transmission || !drive || !bodyType || !sourcePrice || (!powerHp && !powerKw) || images.length < 5) return null;
   if (clean(meta.mnuftrNm) && clean(meta.mnuftrNm) !== make) return null;
   if (clean(meta.modelNm) && clean(meta.modelNm) !== model) return null;
   const listPrice = positiveInt(meta.prc);
@@ -222,7 +297,6 @@ function parseExactDetail(meta: KCarListRow, data: KCarDetailData): Row | null {
   const listMileage = positiveInt(meta.milg);
   if (listMileage && mileageKm && listMileage !== mileageKm) return null;
 
-  const electricPowerUnit = rawFuelType === "009" || rawFuelType === "013";
   return {
     id,
     url: detailUrl(id),
@@ -234,7 +308,8 @@ function parseExactDetail(meta: KCarListRow, data: KCarDetailData): Row | null {
     productionDate,
     mileageKm,
     engineCc,
-    ...(electricPowerUnit ? { powerKw: hrspow } : { powerHp: hrspow }),
+    powerHp,
+    powerKw,
     fuel,
     transmission,
     drive,
@@ -246,6 +321,7 @@ function parseExactDetail(meta: KCarListRow, data: KCarDetailData): Row | null {
     images,
     rawFuelType,
     rawStatus: clean(rvo.statCdNm || rvo.statCd),
+    semanticEvidence: evidence,
   };
 }
 
@@ -347,8 +423,9 @@ class KCarExactSource implements CatalogSourceAdapter {
       powerHp: row.powerHp,
       powerKw: row.powerKw,
       powerDataConfidence: "source_exact",
-      powerDataSource: "kcar_exact_detail_rvo_hrspow",
+      powerDataSource: row.powerKw ? "kcar_exact_detail_rvo_hrspow_kw" : "kcar_exact_detail_rvo_hrspow_hp",
       fuel: row.fuel,
+      powertrainKind: powertrainKindForFuel(row.fuel),
       transmission: row.transmission,
       drive: row.drive,
       bodyType: row.bodyType,
@@ -371,6 +448,13 @@ class KCarExactSource implements CatalogSourceAdapter {
         vehiclePhotoVerified: true,
         sourceExactFields: fields,
         vin: row.vin,
+        semanticEvidence: {
+          year: { source: "kcar_exact_detail_rvo", ...row.semanticEvidence.year },
+          fuel: { source: "kcar_exact_detail_rvo", ...row.semanticEvidence.fuel },
+          engineCc: { source: "kcar_exact_detail_rvo_engdispmnt", ...row.semanticEvidence.engineCc },
+          powerHp: { source: "kcar_exact_detail_rvo_hrspow", ...row.semanticEvidence.powerHp },
+          powerKw: { source: "kcar_exact_detail_rvo_hrspow", ...row.semanticEvidence.powerKw },
+        },
         raw: {
           sourceExactFields: fields,
           sourceApi: `${API_BASE}/bc/car-info-detail-of-ng`,
