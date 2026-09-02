@@ -3,6 +3,7 @@ import test from "node:test";
 import {
   parsePrestigeJapanExactDetail,
   PrestigeJapanExactSource,
+  isPrestigeJapanSourceBlockedError,
   prestigeJapanSpecificationEvidence,
 } from "../apps/web/lib/catalog/prestige-japan-exact-source";
 import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specification-evidence-audit";
@@ -68,4 +69,9 @@ test("Prestige offer exposes exact source provenance without inventing fuel or p
 test("Prestige rejects conflicting model years instead of selecting the first", () => {
   assert.equal(prestigeJapanSpecificationEvidence({ year: "2021 / 2022" }).year.status, "conflict");
   assert.equal(parsePrestigeJapanExactDetail(soldDetail("1998 CC", "2021 / 2022"), url), null);
+});
+
+test("Prestige reports the live Turnstile response as a source block", () => {
+  assert.equal(isPrestigeJapanSourceBlockedError(new Error('{"cf-turnstile":"failure","error":"Bot check failed. Please check the Cloudflare widget"}')), true);
+  assert.equal(isPrestigeJapanSourceBlockedError(new Error("network timeout")), false);
 });
