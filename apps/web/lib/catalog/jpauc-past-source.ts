@@ -21,6 +21,18 @@ export type JpaucRawRow = {
   startPrice: number;
   listingImage: string;
   detailUrl: string;
+  semanticEvidence: JpaucSpecificationEvidence;
+};
+
+type JpaucEvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
+type JpaucMetricEvidence = { value?: number; rawValues: string[]; status: JpaucEvidenceStatus };
+type JpaucMissingEvidence = { rawValues: string[]; status: "missing" };
+export type JpaucSpecificationEvidence = {
+  year: JpaucMetricEvidence;
+  fuel: JpaucMissingEvidence;
+  engineCc: JpaucMetricEvidence;
+  powerHp: JpaucMissingEvidence;
+  powerKw: JpaucMissingEvidence;
 };
 
 const BASE = "https://jpauc.com";
@@ -49,6 +61,48 @@ function lines(html: string) {
 function cellText(html: string) { return clean(html.replace(/<br\s*\/?>/gi, " ").replace(/<[^>]+>/g, " ")); }
 function money(value: unknown) { const parsed = Number(String(value ?? "").replace(/[^0-9]/g, "")); return Number.isFinite(parsed) && parsed > 0 ? parsed : 0; }
 function numeric(value: unknown) { const parsed = Number(String(value ?? "").replace(/[^0-9.]/g, "")); return Number.isFinite(parsed) && parsed > 0 ? parsed : undefined; }
+
+function jpaucYearEvidence(value: unknown): JpaucMetricEvidence {
+  const raw = clean(value);
+  const rawValues = raw ? [raw] : [];
+  const maximum = new Date().getUTCFullYear() + 1;
+  const years = [...raw.matchAll(/\b((?:19|20)\d{2})\b/g)]
+    .map((match) => Number(match[1]))
+    .filter((year) => year >= 1900 && year <= maximum);
+  const unique = [...new Set(years)];
+  if (!unique.length) return { rawValues, status: "missing" };
+  if (unique.length !== 1) return { rawValues, status: "conflict" };
+  return { value: unique[0], rawValues, status: "exact" };
+}
+
+function jpaucEngineCcEvidence(value: unknown): JpaucMetricEvidence {
+  const raw = clean(value);
+  const rawValues = raw ? [raw] : [];
+  if (!raw) return { rawValues, status: "missing" };
+  if (/(?:\d[\d,]*)\s*(?:-|–|—|~|～|to|至|到)\s*(?:\d[\d,]*)\s*cc\b/i.test(raw)) {
+    return { rawValues, status: "ambiguous" };
+  }
+  const tokens = [...raw.matchAll(/\b(\d[\d,]*)\s*cc\b/gi)].map((match) => match[1]);
+  if (!tokens.length) return { rawValues, status: "missing" };
+  const values = tokens.map((token) => Number(token.replace(/,/g, "")));
+  if (values.some((engineCc) => !Number.isInteger(engineCc) || engineCc < 300 || engineCc > 10_000)) {
+    return { rawValues, status: "ambiguous" };
+  }
+  const unique = [...new Set(values)];
+  if (unique.length !== 1) return { rawValues, status: "conflict" };
+  return { value: unique[0], rawValues, status: "exact" };
+}
+
+export function jpaucSpecificationEvidence(input: { yearText?: unknown; engineText?: unknown }): JpaucSpecificationEvidence {
+  const missing = (): JpaucMissingEvidence => ({ rawValues: [], status: "missing" });
+  return {
+    year: jpaucYearEvidence(input.yearText),
+    fuel: missing(),
+    engineCc: jpaucEngineCcEvidence(input.engineText),
+    powerHp: missing(),
+    powerKw: missing(),
+  };
+}
 export function jpaucCheckboxValues(html: string, name: string) {
   const escaped = name.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
   return [...html.matchAll(new RegExp(`name=["']${escaped}["'][^>]*value=["']([^"']+)["']`, "gi"))].map((match) => match[1]);
@@ -113,9 +167,10 @@ export function parseJpaucListingRows(html: string): JpaucRawRow[] {
     const colorText = cellText(cells[8]);
     const statusText = cellText(cells[9]);
     const [location = "", lot = ""] = locationText.split("|").map(clean);
-    const year = Number(yearText.match(/(?:19|20)\d{2}/)?.[0] || 0);
+    const semanticEvidence = jpaucSpecificationEvidence({ yearText, engineText: ccText });
+    const year = semanticEvidence.year.status === "exact" ? semanticEvidence.year.value || 0 : 0;
     const grade = clean(yearText.replace(/^.*?Year:\s*(?:19|20)\d{2}\s*/i, ""));
-    const engineCc = numeric(ccText.match(/([0-9,]+)\s*cc/i)?.[1]);
+    const engineCc = semanticEvidence.engineCc.status === "exact" ? semanticEvidence.engineCc.value : undefined;
     const modelCode = clean(ccText.split("|").slice(1).join("|"));
     const shift = clean(shiftText.split("|")[0]);
     const mileageKm = numeric(shiftText.match(/([0-9,]+)\s*KM/i)?.[1]);
@@ -130,7 +185,7 @@ export function parseJpaucListingRows(html: string): JpaucRawRow[] {
     const rtotal = attrs.match(/data-r-total=["']([^"']+)["']/i)?.[1] || "1";
     const detailUrl = `${PAST}/detail/${encodeURIComponent(dataId)}?&ys=2010&ye=2100&mm=0&mx=9999&p=1&ob=none&r=0&r=${encodeURIComponent(r)}&rtotal=${encodeURIComponent(rtotal)}`;
     if (!dataId || !makerModel[0] || !makerModel[1] || !year) continue;
-    rows.push({ dataId, r, rtotal, date: cellText(cells[2]), location, lot, maker: clean(makerModel[0]), model: clean(makerModel[1]), year, grade, engineCc, modelCode, shift, mileageKm, color, auctionGrade, sourceStatus, startPrice, listingImage, detailUrl });
+    rows.push({ dataId, r, rtotal, date: cellText(cells[2]), location, lot, maker: clean(makerModel[0]), model: clean(makerModel[1]), year, grade, engineCc, modelCode, shift, mileageKm, color, auctionGrade, sourceStatus, startPrice, listingImage, detailUrl, semanticEvidence });
   }
   return rows;
 }
@@ -222,12 +277,25 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
     if (!row?.dataId || !row.maker || !row.model || !row.year || !row.startPrice) return null;
     const now = new Date().toISOString();
     const sourceTitle = [row.maker, row.model, row.grade].filter(Boolean).join(" ");
+    const semanticEvidence = row.semanticEvidence || jpaucSpecificationEvidence({
+      yearText: row.year,
+      engineText: row.engineCc ? `${row.engineCc} cc` : undefined,
+    });
     return {
       id: `${this.sourceId}:${row.dataId}`, sourceId: this.sourceId, sourceOfferId: row.dataId, market: "japan", offerType: "auction", status: "active", catalogKind: "auction_result", sourceTitle,
-      make: row.maker, model: row.model, trim: row.grade || undefined, year: row.year, mileageKm: row.mileageKm, engineCc: row.engineCc, transmission: row.shift || undefined, color: row.color || undefined,
+      make: row.maker, model: row.model, trim: row.grade || undefined, year: row.year, mileageKm: row.mileageKm, engineCc: semanticEvidence.engineCc.status === "exact" ? semanticEvidence.engineCc.value : undefined, transmission: row.shift || undefined, color: row.color || undefined,
       auctionName: row.location || undefined, auctionDate: row.date || undefined, lotNumber: row.lot || undefined, auctionGrade: row.auctionGrade || undefined,
       sourcePrice: row.startPrice, sourceCurrency: "JPY", priceMode: "auction_start", images: row.listingImage ? jpaucPhotoVariants(row.listingImage).map(remoteImage) : [], calculationStatus: "auction_start", firstSeenAt: now, updatedAt: now,
-      operational: { sourceUrl: row.detailUrl, sourceVenueName: row.location || "JPAuc", sourcePublishedAt: row.date || undefined, sourceTitle, raw: row, sourceStatus: row.sourceStatus, modelCode: row.modelCode, galleryStoredAs: "json_urls", minimumImages: 2, historicalAuction: true },
+      operational: {
+        sourceUrl: row.detailUrl, sourceVenueName: row.location || "JPAuc", sourcePublishedAt: row.date || undefined, sourceTitle, raw: row, sourceStatus: row.sourceStatus, modelCode: row.modelCode, galleryStoredAs: "json_urls", minimumImages: 2, historicalAuction: true,
+        semanticEvidence: {
+          year: { source: "jpauc_past_listing_year", ...semanticEvidence.year },
+          fuel: { source: "jpauc_source_missing", ...semanticEvidence.fuel },
+          engineCc: { source: "jpauc_past_listing_cc", ...semanticEvidence.engineCc },
+          powerHp: { source: "jpauc_source_missing", ...semanticEvidence.powerHp },
+          powerKw: { source: "jpauc_source_missing", ...semanticEvidence.powerKw },
+        },
+      },
     };
   }
 
