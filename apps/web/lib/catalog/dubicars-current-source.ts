@@ -3,9 +3,20 @@ import { cacheImageFromUrl, stableOfferId } from "./storage";
 import { normalizeVehicleOfferSpecs } from "./spec-normalization";
 import { parseCatalogHorsepowerToken } from "./power-sanity";
 import { isCatalogYearAllowed } from "./offer-quality";
+import { canonicalSourceFuel } from "./powertrain-safety";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, VehicleOffer } from "./types";
 
-type Row = {
+type DubicarsEvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
+type DubicarsEvidence<T> = { value?: T; rawValues: string[]; status: DubicarsEvidenceStatus };
+export type DubicarsSpecificationEvidence = {
+  year: DubicarsEvidence<number>;
+  fuel: DubicarsEvidence<string>;
+  engineCc: DubicarsEvidence<number>;
+  powerHp: DubicarsEvidence<number>;
+  powerKw: DubicarsEvidence<number>;
+};
+
+export type DubicarsCurrentRow = {
   id: string;
   url: string;
   title: string;
@@ -24,6 +35,7 @@ type Row = {
   bodyType?: string;
   color?: string;
   images: string[];
+  semanticEvidence?: DubicarsSpecificationEvidence;
 };
 
 const HEADERS = {
@@ -40,7 +52,7 @@ const MAKE_LABELS = [...new Map(CATALOG_BRANDS.flatMap((brand) => [
 ].map((label) => [label.toLocaleLowerCase("en-US"), { label, make: brand.name }]))).values()]
   .sort((left, right) => right.label.length - left.label.length);
 
-const BAD_IMAGE = /logo|icon|avatar|qrcode|qr-code|placeholder|banner|related|similar|people-also-viewed|dealer|tracking|pixel|calendar|calender|kilometers|share|email|heart|settings|feature_groups|social|homepage|mobile-mockup/i;
+const BAD_IMAGE = /logo|icon|avatar|qrcode|qr-code|placeholder|banner|related|similar|people-also-viewed|tracking|pixel|calendar|calender|kilometers|share|email|heart|settings|feature_groups|social|homepage|mobile-mockup/i;
 
 function clean(value: unknown) {
   return String(value || "")
@@ -64,11 +76,6 @@ function absoluteUrl(value: string, base: string) {
 
 function integer(value: unknown) {
   const result = Number(String(value || "").replace(/[^0-9]/g, ""));
-  return Number.isFinite(result) && result > 0 ? result : undefined;
-}
-
-function decimal(value: unknown) {
-  const result = Number(String(value || "").replace(",", ".").replace(/[^0-9.]/g, ""));
   return Number.isFinite(result) && result > 0 ? result : undefined;
 }
 
@@ -125,21 +132,15 @@ function listingExplicitlyHasNoPrice(markup: string) {
   return Number(decoded.replace(/[^0-9]/g, "")) === 0;
 }
 
-function labelValue(plain: string, labels: string[], stops: string[]) {
+function labelValues(plain: string, labels: string[], stops: string[]) {
   const labelPattern = labels.map((item) => item.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
   const stopPattern = stops.map((item) => item.replace(/[.*+?^${}()|[\]\\]/g, "\\$&")).join("|");
   const pattern = new RegExp(`(?:^|\\s)(?:${labelPattern})\\s*[:：]?\\s*(.{1,80}?)(?=\\s+(?:${stopPattern})\\s*[:：]?|$)`, "gi");
-  const matches = [...plain.matchAll(pattern)];
-  return clean(matches.at(-1)?.[1]);
+  return [...new Set([...plain.matchAll(pattern)].map((match) => clean(match[1])).filter(Boolean))];
 }
 
-function normalizeFuel(value: string) {
-  if (/electric|bev|ev\b/i.test(value)) return "electric";
-  if (/plug.?in|phev/i.test(value)) return "phev";
-  if (/hybrid|hev/i.test(value)) return "hybrid";
-  if (/diesel/i.test(value)) return "diesel";
-  if (/petrol|gasoline|gas\b/i.test(value)) return "petrol";
-  return clean(value);
+function labelValue(plain: string, labels: string[], stops: string[]) {
+  return labelValues(plain, labels, stops).at(-1) || "";
 }
 
 function normalizeTransmission(value: string) {
@@ -198,7 +199,96 @@ function yearFromUrl(url: string) {
   }
 }
 
-export function parseDubicarsCurrentListing(markup: string, url: string): Row | null {
+function specificationText(plain: string) {
+  const start = plain.search(/(?:^|\s)(?:Model year|Year)\s*[:：]?\s*(?:19|20)\d{2}\b/i);
+  if (start < 0) return "";
+  const candidate = plain.slice(start, Math.min(plain.length, start + 3_000));
+  const end = candidate.slice(20).search(/\b(?:Description|Seller description|Similar cars|People also viewed|Recommended cars|Location map)\b/i);
+  return end >= 0 ? candidate.slice(0, end + 20) : candidate;
+}
+
+function exactYearEvidence(pageYear: number, urlYear: number): DubicarsEvidence<number> {
+  const rawValues = [pageYear, urlYear].filter(Boolean).map(String);
+  const values = [...new Set([pageYear, urlYear].filter((value) => Number.isInteger(value) && value >= 1900 && value <= new Date().getUTCFullYear() + 1))];
+  if (values.length > 1) return { rawValues, status: "conflict" };
+  if (values.length === 1) return { value: values[0], rawValues, status: "exact" };
+  return { rawValues, status: rawValues.length ? "ambiguous" : "missing" };
+}
+
+function evidenceRawValues(rawValue: string | string[] | undefined) {
+  return [...new Set((Array.isArray(rawValue) ? rawValue : [rawValue]).map(clean).filter(Boolean))];
+}
+
+function engineEvidence(rawValue: string | string[] | undefined): DubicarsEvidence<number> {
+  const rawValues = evidenceRawValues(rawValue);
+  if (!rawValues.length) return { rawValues, status: "missing" };
+  const values: number[] = [];
+  for (const raw of rawValues) {
+    if (/(?:\d)\s*(?:-|–|—|to)\s*(?:\d)/i.test(raw)) return { rawValues, status: "ambiguous" };
+    const liters = raw.match(/^([0-9]+(?:[.,][0-9]+)?)\s*l(?:itre|iter)?s?$/i);
+    const cc = raw.match(/^([0-9][0-9, ]{2,7})\s*(?:cc|cm3|cm³)$/i);
+    const value = liters ? Math.round(Number(liters[1].replace(",", ".")) * 1_000) : integer(cc?.[1]);
+    if (!value || value < 300 || value > 10_000) return { rawValues, status: "ambiguous" };
+    values.push(value);
+  }
+  const unique = [...new Set(values)];
+  return unique.length === 1 ? { value: unique[0], rawValues, status: "exact" } : { rawValues, status: "conflict" };
+}
+
+function powerEvidence(rawValue: string | string[] | undefined): DubicarsEvidence<number> {
+  const rawValues = evidenceRawValues(rawValue);
+  if (!rawValues.length) return { rawValues, status: "missing" };
+  const values: number[] = [];
+  for (const raw of rawValues) {
+    if (/(?:\d)\s*(?:-|–|—|to)\s*(?:\d)/i.test(raw)) return { rawValues, status: "ambiguous" };
+    const value = /^[0-9][0-9, .]*\s*(?:hp|ps|bhp)$/i.test(raw) ? parseCatalogHorsepowerToken(raw) : undefined;
+    if (!value || value < 20 || value > 1_500) return { rawValues, status: "ambiguous" };
+    values.push(value);
+  }
+  const unique = [...new Set(values)];
+  return unique.length === 1 ? { value: unique[0], rawValues, status: "exact" } : { rawValues, status: "conflict" };
+}
+
+function fuelEvidence(rawValue: string | string[] | undefined): DubicarsEvidence<string> {
+  const rawValues = evidenceRawValues(rawValue);
+  if (!rawValues.length) return { rawValues, status: "missing" };
+  const values = rawValues.map(canonicalSourceFuel);
+  if (values.some((value) => !value)) return { rawValues, status: "ambiguous" };
+  const unique = [...new Set(values as string[])];
+  return unique.length === 1 ? { value: unique[0], rawValues, status: "exact" } : { rawValues, status: "conflict" };
+}
+
+export function dubicarsSpecificationEvidence(input: {
+  pageYear?: number;
+  urlYear?: number;
+  fuel?: string | string[];
+  engine?: string | string[];
+  power?: string | string[];
+}): DubicarsSpecificationEvidence {
+  const fuel = fuelEvidence(input.fuel);
+  let engineCc = engineEvidence(input.engine);
+  if (fuel.status === "exact" && fuel.value === "electric" && engineCc.status === "exact") {
+    engineCc = { rawValues: engineCc.rawValues, status: "conflict" };
+  }
+  return {
+    year: exactYearEvidence(Number(input.pageYear || 0), Number(input.urlYear || 0)),
+    fuel,
+    engineCc,
+    powerHp: powerEvidence(input.power),
+    powerKw: { rawValues: [], status: "missing" },
+  };
+}
+
+function powertrainKindForFuel(fuel: string | undefined, identity = "") {
+  if (fuel === "electric") return "electric" as const;
+  if (fuel === "hybrid") return /series[ -]?hybrid|range[ -]?extender|\b(?:erev|reev)\b|\be[ -]?power\b/i.test(identity)
+    ? "series_hybrid" as const
+    : "other_hybrid" as const;
+  if (fuel) return "combustion" as const;
+  return "unknown" as const;
+}
+
+export function parseDubicarsCurrentListing(markup: string, url: string): DubicarsCurrentRow | null {
   const fullPlain = clean(markup);
   const rawTitle = clean(
     markup.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1]
@@ -206,16 +296,18 @@ export function parseDubicarsCurrentListing(markup: string, url: string): Row | 
   );
   const title = rawTitle.replace(/\s+(?:19|20)\d{2}\s+for sale.*$/i, "").trim();
   const parsedName = makeModel(title);
-  const pageYear = Number(fullPlain.match(/(?:^|\s)(?:Model year|Year)\s*[:：]?\s*((?:19|20)\d{2})\b/i)?.[1] || 0);
+  const specsPlain = specificationText(fullPlain);
+  const pageYear = Number(specsPlain.match(/(?:^|\s)(?:Model year|Year)\s*[:：]?\s*((?:19|20)\d{2})\b/i)?.[1] || 0);
   const urlYear = yearFromUrl(url);
-  if (pageYear && urlYear && pageYear !== urlYear) return null;
-  const year = pageYear || urlYear;
+  const yearEvidence = exactYearEvidence(pageYear, urlYear);
+  if (yearEvidence.status !== "exact") return null;
+  const year = yearEvidence.value || 0;
   if (!isCatalogYearAllowed(year, "uae")) return null;
 
   const stops = ["Transmission", "Export status", "Interior color", "Steering side", "Horsepower", "Updated on", "Make", "Model", "Trim", "Color", "Engine capacity", "Cylinders", "Drive type", "Vehicle type", "Number of doors", "Seating capacity", "Wheel size", "Fuel Type", "Service history", "Location", "Specs"];
-  const exactMakeRaw = labelValue(fullPlain, ["Make"], stops);
-  const exactModelRaw = labelValue(fullPlain, ["Model"], stops);
-  const exactTrim = labelValue(fullPlain, ["Trim"], stops);
+  const exactMakeRaw = labelValue(specsPlain, ["Make"], stops);
+  const exactModelRaw = labelValue(specsPlain, ["Model"], stops);
+  const exactTrim = labelValue(specsPlain, ["Trim"], stops);
   const exactIdentity = exactMakeRaw && exactModelRaw ? makeModel(`${exactMakeRaw} ${exactModelRaw}`) : { make: "", model: "" };
   const make = exactIdentity.make || parsedName.make;
   const model = exactIdentity.model || clean(exactModelRaw) || parsedName.model;
@@ -227,29 +319,15 @@ export function parseDubicarsCurrentListing(markup: string, url: string): Row | 
   const parsedPrice = listingExplicitlyHasNoPrice(markup)
     ? { price: undefined, currency: undefined }
     : price(fullPlain);
-  const mileageKm = integer(
-    fullPlain.match(/(?:Kilometers?|Mileage)\s*[:：]?\s*([0-9][0-9, ]+)\s*Km\b/i)?.[1]
-    || fullPlain.match(/([0-9][0-9, ]+)\s*Km\b/i)?.[1],
-  );
-  const liters = decimal(
-    fullPlain.match(/Engine capacity\s*[:：]?\s*([0-9]+(?:\.[0-9]+)?)\s*L\b/i)?.[1]
-    || fullPlain.match(/\b([0-9]+(?:\.[0-9]+)?)L\b/i)?.[1],
-  );
-  const engineCc = liters ? Math.round(liters * 1_000) : integer(fullPlain.match(/([0-9][0-9, ]+)\s*cc\b/i)?.[1]);
-  const sourcePowerText = labelValue(fullPlain, ["Horsepower"], stops)
-    || fullPlain.match(/Horsepower\s*[:：]?\s*[0-9][0-9, .]*\s*(?:HP|PS|BHP)\b/i)?.[0]
-    || title.match(/\b[0-9][0-9, .]*\s*(?:HP|PS|BHP)\b/i)?.[0]
-    || "";
-  const parsedPowerHp = parseCatalogHorsepowerToken(sourcePowerText);
-  // A marketplace can contain a typo such as 1,997 HP. Preserve the source
-  // page as provenance, but never publish an extreme unverified label as fact.
-  const powerHp = parsedPowerHp && parsedPowerHp <= 1_500 ? parsedPowerHp : undefined;
-
-  const fuelRaw = labelValue(fullPlain, ["Fuel Type", "Fuel"], stops) || fullPlain.match(/\bFuel\s*:\s*([A-Za-z -]{3,24})/i)?.[1] || "";
-  const transmissionRaw = labelValue(fullPlain, ["Transmission"], stops);
-  const driveRaw = labelValue(fullPlain, ["Drive type", "Drive Train"], stops);
-  const bodyRaw = labelValue(fullPlain, ["Vehicle type", "Body Style"], stops);
-  const color = labelValue(fullPlain, ["Color", "Exterior color"], stops);
+  const mileageKm = integer(specsPlain.match(/(?:Kilometers?|Mileage)\s*[:：]?\s*([0-9][0-9, ]+)\s*Km\b/i)?.[1]);
+  const engineRaw = labelValues(specsPlain, ["Engine capacity"], stops);
+  const powerRaw = labelValues(specsPlain, ["Horsepower"], stops);
+  const fuelRaw = labelValues(specsPlain, ["Fuel Type", "Fuel"], stops);
+  const semanticEvidence = dubicarsSpecificationEvidence({ pageYear, urlYear, fuel: fuelRaw, engine: engineRaw, power: powerRaw });
+  const transmissionRaw = labelValue(specsPlain, ["Transmission"], stops);
+  const driveRaw = labelValue(specsPlain, ["Drive type", "Drive Train"], stops);
+  const bodyRaw = labelValue(specsPlain, ["Vehicle type", "Body Style"], stops);
+  const color = labelValue(specsPlain, ["Color", "Exterior color"], stops);
   const photos = images(markup, url);
   if (!photos.length) return null;
 
@@ -264,14 +342,15 @@ export function parseDubicarsCurrentListing(markup: string, url: string): Row | 
     price: parsedPrice.price,
     currency: parsedPrice.currency,
     mileageKm,
-    engineCc,
-    powerHp,
-    fuel: normalizeFuel(fuelRaw),
+    engineCc: semanticEvidence.engineCc.status === "exact" ? semanticEvidence.engineCc.value : undefined,
+    powerHp: semanticEvidence.powerHp.status === "exact" ? semanticEvidence.powerHp.value : undefined,
+    fuel: semanticEvidence.fuel.status === "exact" ? semanticEvidence.fuel.value : undefined,
     transmission: normalizeTransmission(transmissionRaw),
     drive: normalizeDrive(driveRaw),
     bodyType: normalizeBody(bodyRaw),
     color,
     images: photos,
+    semanticEvidence,
   };
 }
 
@@ -286,13 +365,13 @@ export class DubicarsCurrentAdapter implements CatalogSourceAdapter {
     const listing = await request(listUrl);
     if (!listing.response.ok) throw new Error(`dubicars_current_http_${listing.response.status}`);
     const links = [...new Set([...listing.markup.matchAll(/href=["']([^"']+-\d{5,}\.html)["']/gi)].map((match) => absoluteUrl(match[1], listUrl)))].slice(0, 40);
-    const rows: Row[] = [];
+    const rows: DubicarsCurrentRow[] = [];
     for (let index = 0; index < links.length; index += 4) {
       const batch = await Promise.all(links.slice(index, index + 4).map(async (detailUrl) => {
         const detail = await request(detailUrl, listUrl).catch(() => null);
         return detail?.response.ok ? parseDubicarsCurrentListing(detail.markup, detailUrl) : null;
       }));
-      rows.push(...batch.filter(Boolean) as Row[]);
+      rows.push(...batch.filter(Boolean) as DubicarsCurrentRow[]);
       if (index + 4 < links.length) await new Promise((resolve) => setTimeout(resolve, 160));
     }
     if (!rows.length) throw new Error("dubicars_current_zero");
@@ -314,21 +393,52 @@ export class DubicarsCurrentAdapter implements CatalogSourceAdapter {
   mapStatus(): OfferStatus { return "active"; }
 
   normalizeOffer(raw: unknown): VehicleOffer | null {
-    const row = raw as Row;
+    const row = raw as DubicarsCurrentRow;
     if (!row.id || !row.make || !row.model || !isCatalogYearAllowed(row.year, "uae") || !row.images.length) return null;
     const now = new Date().toISOString();
-    return normalizeVehicleOfferSpecs({
+    const semanticEvidence = row.semanticEvidence || dubicarsSpecificationEvidence({ urlYear: row.year, fuel: row.fuel, engine: row.engineCc ? `${row.engineCc} cc` : "", power: row.powerHp ? `${row.powerHp} hp` : "" });
+    const fuel = semanticEvidence.fuel.status === "exact" ? semanticEvidence.fuel.value : undefined;
+    const engineCc = semanticEvidence.engineCc.status === "exact" ? semanticEvidence.engineCc.value : undefined;
+    const powerHp = semanticEvidence.powerHp.status === "exact" ? semanticEvidence.powerHp.value : undefined;
+    const identity = [row.make, row.model, row.trim, row.title].filter(Boolean).join(" ");
+    const powertrainKind = powertrainKindForFuel(fuel, identity);
+    const normalized = normalizeVehicleOfferSpecs({
       id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: "uae", offerType: "fixed", status: "active",
-      make: row.make, model: row.model, trim: row.trim || row.title, year: row.year, mileageKm: row.mileageKm, engineCc: row.engineCc, powerHp: row.powerHp,
-      fuel: row.fuel, transmission: row.transmission, drive: row.drive, bodyType: row.bodyType, color: row.color,
+      make: row.make, model: row.model, trim: row.trim || row.title, year: row.year, mileageKm: row.mileageKm, engineCc, powerHp,
+      fuel, powertrainKind, transmission: row.transmission, drive: row.drive, bodyType: row.bodyType, color: row.color,
+      powerDataConfidence: powerHp ? "source_exact" : undefined,
+      powerDataSource: powerHp ? `DubiCars exact detail:${row.id}:Horsepower` : undefined,
       sourcePrice: row.price || null, sourceCurrency: row.price ? (row.currency || "AED") : null, priceMode: row.price ? "fixed" : "estimated",
-      images: [], totalRub: null, calculationStatus: row.price ? "ready" : "needs_data", firstSeenAt: now, updatedAt: now,
-      operational: { sourceUrl: row.url, sourceVenueName: "DubiCars UAE", raw: row },
+      images: [], totalRub: null, calculationStatus: "needs_data", firstSeenAt: now, updatedAt: now,
+      operational: {
+        sourceUrl: row.url,
+        sourceVenueName: "DubiCars UAE",
+        semanticEvidence: {
+          year: { source: "dubicars_detail_and_url_year", ...semanticEvidence.year },
+          fuel: { source: "dubicars_detail_fuel_type", ...semanticEvidence.fuel },
+          engineCc: { source: "dubicars_detail_engine_capacity", ...semanticEvidence.engineCc },
+          powerHp: { source: "dubicars_detail_horsepower", ...semanticEvidence.powerHp },
+          powerKw: { source: "dubicars_source_missing", ...semanticEvidence.powerKw },
+        },
+        raw: row,
+      },
     } as VehicleOffer);
+    normalized.fuel = fuel;
+    normalized.powertrainKind = powertrainKind;
+    normalized.engineCc = engineCc;
+    normalized.powerHp = powerHp;
+    normalized.powerKw = powerHp ? Math.round((powerHp / 1.35962) * 100) / 100 : undefined;
+    normalized.powerDataConfidence = powerHp ? "source_exact" : undefined;
+    normalized.powerDataSource = powerHp ? `DubiCars exact detail:${row.id}:Horsepower` : undefined;
+    if (!powerHp) {
+      normalized.icePowerKw = undefined;
+      normalized.utilizationPowerKw = undefined;
+    }
+    return normalized;
   }
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
-    const row = offer.operational.raw as Row;
+    const row = offer.operational.raw as DubicarsCurrentRow;
     const requested = Number(process.env.CATALOG_MAX_IMAGES_PER_OFFER || 30);
     const limit = Math.min(30, Math.max(4, Number.isFinite(requested) ? requested : 30));
     const cached: CatalogImage[] = [];
