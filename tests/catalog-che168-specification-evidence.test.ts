@@ -70,6 +70,31 @@ test("Che168 never promotes a range or conflicting carinfo values", () => {
   assert.equal(che168GlobalSpecificationEvidence({ listingYear: 2024, detailYear: 2023 }).year.status, "conflict");
 });
 
+test("Che168 treats an explicit range extender as hybrid source evidence", () => {
+  const evidence = che168GlobalSpecificationEvidence({
+    listingYear: 2025,
+    detailYear: 2025,
+    listingFuel: "Range Extender",
+    detailFuel: "Range Extender",
+    detailEngine: "1.5T 152HP L4",
+  });
+  assert.equal(evidence.fuel.status, "exact");
+  assert.equal(evidence.fuel.value, "hybrid");
+
+  const offer = source.normalizeOffer(listing({ fuelname: "Range Extender" }));
+  assert.ok(offer);
+  assert.equal(offer!.fuel, "hybrid");
+  assert.equal(offer!.powertrainKind, "series_hybrid");
+});
+
+test("Che168 unknown fuel marker stays empty and fail-closed", () => {
+  const offer = source.normalizeOffer(listing({ fuelname: "--" }));
+  assert.ok(offer);
+  assert.equal(offer!.fuel, undefined);
+  assert.equal(offer!.powertrainKind, "unknown");
+  assert.equal((offer!.operational as any).semanticEvidence.fuel.status, "ambiguous");
+});
+
 test("Che168 listing stores classified fuel provenance without inventing detail metrics", () => {
   const offer = source.normalizeOffer(listing());
   assert.ok(offer);
@@ -137,4 +162,7 @@ test("Che168 workflows validate canonical provenance instead of raw fuel spellin
     assert.match(workflow, /unsafe_engine_promoted/);
     assert.match(workflow, /unsafe_power_promoted/);
   }
+  const strictWorkflow = fs.readFileSync(".github/workflows/catalog-v6-che168-strict-ladder.yml", "utf8");
+  assert.match(strictWorkflow, /unsafe_fuel_promoted/);
+  assert.match(strictWorkflow, /push:\n\s+branches: \[main\]/);
 });
