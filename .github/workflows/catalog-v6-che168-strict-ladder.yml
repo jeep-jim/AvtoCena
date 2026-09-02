@@ -3,6 +3,7 @@ name: Catalog V6 · Che168 strict ladder
 on:
   workflow_dispatch:
   push:
+    branches: [main]
     paths:
       - ".github/workflows/catalog-v6-che168-strict-ladder.yml"
 
@@ -83,7 +84,11 @@ jobs:
             if (clean(detail.structure) && clean(offer.bodyType) !== clean(detail.structure)) problems.push('body_rewritten');
             const evidence = offer?.operational?.semanticEvidence || {};
             if (evidence?.year?.status !== 'exact' || Number(evidence?.year?.value) !== Number(offer.year)) problems.push('year_evidence_not_exact');
-            if (evidence?.fuel?.status !== 'exact' || !canonicalFuels.has(clean(offer.fuel))) problems.push('fuel_evidence_not_exact');
+            if (evidence?.fuel?.status === 'exact') {
+              if (!canonicalFuels.has(clean(offer.fuel))) problems.push('fuel_evidence_not_exact');
+            } else if (offer.fuel != null || !['', 'unknown'].includes(clean(offer.powertrainKind))) {
+              problems.push('unsafe_fuel_promoted');
+            }
             if (clean(detail.fuelname) && !hasRaw(evidence?.fuel, detail.fuelname)) problems.push('fuel_not_bound_to_carinfo');
             if (clean(detail.engine) && (!hasRaw(evidence?.engineCc, detail.engine) || !hasRaw(evidence?.powerHp, detail.engine))) problems.push('metrics_not_bound_to_carinfo');
             if (offer.engineCc != null && (evidence?.engineCc?.status !== 'exact' || Number(evidence?.engineCc?.value) !== Number(offer.engineCc))) problems.push('engine_evidence_not_exact');

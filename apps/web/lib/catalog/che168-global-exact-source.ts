@@ -181,8 +181,9 @@ function yearEvidence(...raw: unknown[]): Che168MetricEvidence {
   return { value: unique[0], rawValues, status: "exact" };
 }
 
-function powertrainKindForFuel(fuel: string | undefined) {
+function powertrainKindForFuel(fuel: string | undefined, ...rawValues: unknown[]) {
   if (fuel === "electric") return "electric" as const;
+  if (fuel === "hybrid" && /range[ -]?(?:extender|extended)|extended[ -]?range|增程/i.test(rawValues.map(text).join(" "))) return "series_hybrid" as const;
   if (fuel === "hybrid") return "other_hybrid" as const;
   if (fuel) return "combustion" as const;
   return "unknown" as const;
@@ -301,7 +302,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       year,
       mileageKm: integer(row?.mileage),
       fuel: evidence.fuel.status === "exact" ? evidence.fuel.value : undefined,
-      powertrainKind: powertrainKindForFuel(evidence.fuel.status === "exact" ? evidence.fuel.value : undefined),
+      powertrainKind: powertrainKindForFuel(evidence.fuel.status === "exact" ? evidence.fuel.value : undefined, row?.fuelname),
       sourcePrice: price,
       sourceCurrency: "USD",
       priceMode: "fixed",
@@ -334,6 +335,8 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
     // Listing titles and trims can contain model-family displacement tokens.
     // Che168's exact engine/power contract begins only at the identity-bound
     // carinfo response, so generic normalization must not promote them early.
+    offer.fuel = evidence.fuel.status === "exact" ? evidence.fuel.value : undefined;
+    offer.powertrainKind = powertrainKindForFuel(offer.fuel, row?.fuelname);
     offer.engineCc = undefined;
     offer.powerHp = undefined;
     offer.powerKw = undefined;
@@ -381,7 +384,7 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
     offer.productionDate = text(detail.manufacturedate || detail.producedate) || offer.productionDate;
     offer.mileageKm = integer(detail.mileage) || offer.mileageKm;
     offer.fuel = evidence.fuel.status === "exact" ? evidence.fuel.value : undefined;
-    offer.powertrainKind = powertrainKindForFuel(offer.fuel);
+    offer.powertrainKind = powertrainKindForFuel(offer.fuel, ...evidence.fuel.rawValues);
     offer.engineType = text(detail.engine) || offer.engineType;
     offer.engineCc = evidence.engineCc.status === "exact" ? evidence.engineCc.value : undefined;
     offer.transmission = text(detail.gearbox) || offer.transmission;
