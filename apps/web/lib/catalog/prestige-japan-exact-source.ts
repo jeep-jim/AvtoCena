@@ -266,6 +266,9 @@ export function prestigeJapanGithubEgressRequest(url: string, init?: RequestInit
   if (carId) return { url: `${endpoint}?kind=detail&carId=${encodeURIComponent(carId)}`, init: { ...init, method: "GET" } };
   return { url, init };
 }
+export function isPrestigeJapanSourceBlockedError(error: unknown) {
+  return /cf-turnstile|bot check failed|cloudflare widget/i.test(String((error as Error)?.message || error));
+}
 async function request(url: string, init?: RequestInit) {
   const timeout = Math.max(8_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000));
   const attempts = Math.max(1, Math.min(5, Number(process.env.PRESTIGE_JAPAN_REQUEST_ATTEMPTS || 3)));
@@ -474,7 +477,10 @@ export class PrestigeJapanExactSource implements CatalogSourceAdapter {
   mapStatus(): OfferStatus { return "active"; }
   async healthCheck(): Promise<SourceRunHealth> {
     try { const page = await this.fetchPage(null); return page.health || { ok: true, message: `Prestige exact sold=${page.items.length}`, checkedAt: new Date().toISOString() }; }
-    catch (error) { return { ok: false, message: String((error as Error)?.message || error), checkedAt: new Date().toISOString() }; }
+    catch (error) {
+      const message = String((error as Error)?.message || error);
+      return { ok: false, blocked: isPrestigeJapanSourceBlockedError(error), message, checkedAt: new Date().toISOString() };
+    }
   }
 }
 
