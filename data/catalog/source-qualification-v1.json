@@ -1,0 +1,33 @@
+{
+  "version": 1,
+  "updatedAt": "2026-09-03",
+  "mode": "six_market_source_discovery_no_write",
+  "productionWrites": false,
+  "markets": ["korea", "china", "japan", "uae", "europe", "georgia"],
+  "allowedClasses": ["research_pending", "exact_catalog", "lead_only", "rejected"],
+  "candidates": [
+    { "market": "korea", "sourceId": "encar_direct", "label": "Encar", "url": "https://www.encar.com/", "class": "research_pending", "publishAllowed": false, "evidence": "four-market strict baseline still running" },
+    { "market": "korea", "sourceId": "kcar_korea_open", "label": "K Car", "url": "https://www.kcar.com/", "class": "research_pending", "publishAllowed": false, "evidence": "four-market strict baseline still running" },
+
+    { "market": "china", "sourceId": "autohome_used_china_open", "label": "Che168", "url": "https://www.che168.com/", "class": "research_pending", "publishAllowed": false, "evidence": "requires requalification under the new contract" },
+    { "market": "china", "sourceId": "dongchedi_china_open", "label": "Dongchedi", "url": "https://www.dongchedi.com/", "class": "research_pending", "publishAllowed": false, "evidence": "current public used-car route redirects to login-required" },
+    { "market": "china", "sourceId": "guazi_china_open", "label": "Guazi", "url": "https://www.guazi.com/", "class": "research_pending", "publishAllowed": false, "evidence": "current public route returns a Tencent EdgeOne JavaScript challenge" },
+    { "market": "china", "sourceId": "autohome_new_china_open", "label": "Autohome new cars", "url": "https://www.autohome.com.cn/", "class": "research_pending", "publishAllowed": false, "evidence": "requires requalification under the new contract" },
+
+    { "market": "japan", "sourceId": "jpauc_japan_past_open", "label": "JPAuc completed auctions", "url": "https://jpauc.com/auction/past", "class": "research_pending", "publishAllowed": false, "evidence": "guest rows expose identity/gallery but not a proven positive final price" },
+    { "market": "japan", "sourceId": "carvector_japan_stat_open", "label": "CarVector auction statistics", "url": "https://carvector.com/stat", "class": "research_pending", "publishAllowed": false, "evidence": "auction-history evidence only; standalone public card is forbidden" },
+    { "market": "japan", "sourceId": "prestige_japan_auctions_open", "label": "Prestige Japan auctions", "url": "https://prestigemotorsport.com.au/auctions/", "class": "research_pending", "publishAllowed": false, "evidence": "current detail route is robots-disallowed and the public flow is challenge-protected" },
+    { "market": "japan", "sourceId": "auctiondatasearch_japan_open", "label": "Auction Data Search", "url": "https://www.auctiondatasearch.jp/", "class": "research_pending", "publishAllowed": false, "evidence": "current search/statistics routes redirect to login" },
+    { "market": "japan", "sourceId": "jpcenter_japan_catalog_open", "label": "JP Center", "url": "https://jp.center/", "class": "research_pending", "publishAllowed": false, "evidence": "guest loader lacks identity-bound final price and complete photo access" },
+
+    { "market": "uae", "sourceId": "dubizzle_uae_open", "label": "Dubizzle", "url": "https://uae.dubizzle.com/", "class": "research_pending", "publishAllowed": false, "evidence": "baseline scanned 9883 rows; strict exact result was zero because engine/power are commonly ranges or incomplete" },
+    { "market": "uae", "sourceId": "dubicars_uae_exact", "label": "DubiCars", "url": "https://www.dubicars.com/", "class": "research_pending", "publishAllowed": false, "evidence": "baseline scanned 270 rows; adapter did not attest listing-bound photo identity" },
+
+    { "market": "europe", "sourceId": "mobile_de_open", "label": "mobile.de", "url": "https://www.mobile.de/", "class": "research_pending", "publishAllowed": false, "evidence": "baseline exposed Limousine-to-sedan false positive; fixed locally and awaiting rerun" },
+    { "market": "europe", "sourceId": "autoscout_europe_open", "label": "AutoScout24", "url": "https://www.autoscout24.com/", "class": "research_pending", "publishAllowed": false, "evidence": "baseline produced formal exact rows; manual semantic qualification is still required" },
+
+    { "market": "georgia", "sourceId": "myauto_georgia_list", "label": "MyAuto", "url": "https://www.myauto.ge/", "class": "research_pending", "publishAllowed": false, "evidence": "four-market strict baseline still running" },
+    { "market": "georgia", "sourceId": "autopapa_georgia_open", "label": "AutoPapa", "url": "https://autopapa.ge/", "class": "research_pending", "publishAllowed": false, "evidence": "four-market strict baseline still running" }
+  ],
+  "next": "discover additional candidate sources for every market, then attach read-only probe evidence before classification"
+}

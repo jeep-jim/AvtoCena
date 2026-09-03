@@ -1,6 +1,10 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { MobileDeExactAdapter, mobileDeSpecificationEvidence } from "../apps/web/lib/catalog/mobile-de-exact-source";
+import {
+  MobileDeExactAdapter,
+  mobileDeBodyEvidence,
+  mobileDeSpecificationEvidence,
+} from "../apps/web/lib/catalog/mobile-de-exact-source";
 import { catalogSemanticEvidenceRejectionReason } from "../apps/web/lib/catalog/offer-quality";
 import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specification-evidence-audit";
 
@@ -26,20 +30,73 @@ test("Mobile.de accepts a current listing with explicit make and model identity"
 });
 
 test("Mobile.de SRP preserves exact fuel, engine and power provenance", () => {
-  const offer = source.normalizeOffer({ ...base, engineCc: 999, powerKw: 110, powerHp: 150, fuel: "Benzin" });
+  const offer = source.normalizeOffer({
+    ...base,
+    engineCc: 999,
+    powerKw: 110,
+    powerHp: 150,
+    fuel: "Benzin",
+  });
   assert.ok(offer);
   assert.equal(offer!.fuel, "petrol");
   assert.equal(offer!.powertrainKind, "combustion");
-  assert.equal(classifySpecificationEvidence(offer!, "fuelPowertrain").state, "exact");
-  assert.equal(classifySpecificationEvidence(offer!, "engineCc").state, "exact");
+  assert.equal(
+    classifySpecificationEvidence(offer!, "fuelPowertrain").state,
+    "exact",
+  );
+  assert.equal(
+    classifySpecificationEvidence(offer!, "engineCc").state,
+    "exact",
+  );
   assert.equal(classifySpecificationEvidence(offer!, "powerHp").state, "exact");
 });
 
 test("Mobile.de evidence tolerates only equivalent PS and kW rounding", () => {
-  assert.equal(mobileDeSpecificationEvidence({ listingPowerHp: 150, detailPowerHp: 149.6 }).powerHp.status, "exact");
-  assert.equal(mobileDeSpecificationEvidence({ listingPowerHp: 150, detailPowerHp: 180 }).powerHp.status, "conflict");
-  assert.equal(mobileDeSpecificationEvidence({ listingEngineCc: 999, detailEngineCc: 1498 }).engineCc.status, "conflict");
-  assert.equal(mobileDeSpecificationEvidence({ listingFuel: "Benzin", detailFuel: "Diesel" }).fuel.status, "conflict");
+  assert.equal(
+    mobileDeSpecificationEvidence({ listingPowerHp: 150, detailPowerHp: 149.6 })
+      .powerHp.status,
+    "exact",
+  );
+  assert.equal(
+    mobileDeSpecificationEvidence({ listingPowerHp: 150, detailPowerHp: 180 })
+      .powerHp.status,
+    "conflict",
+  );
+  assert.equal(
+    mobileDeSpecificationEvidence({
+      listingEngineCc: 999,
+      detailEngineCc: 1498,
+    }).engineCc.status,
+    "conflict",
+  );
+  assert.equal(
+    mobileDeSpecificationEvidence({
+      listingFuel: "Benzin",
+      detailFuel: "Diesel",
+    }).fuel.status,
+    "conflict",
+  );
+});
+
+test("Mobile.de never treats the ambiguous Limousine bucket as an exact sedan body", () => {
+  assert.deepEqual(mobileDeBodyEvidence(["Limousine"]), {
+    rawValues: ["Limousine"],
+    status: "ambiguous",
+  });
+  assert.equal(mobileDeBodyEvidence(["Cabrio", "Cabrio"]).value, "convertible");
+  assert.equal(mobileDeBodyEvidence(["SUV", "Coupé"]).status, "conflict");
+
+  const offer = source.normalizeOffer({
+    ...base,
+    bodyType: "Limousine",
+    bodyEvidence: mobileDeBodyEvidence(["Limousine"]),
+  });
+  assert.ok(offer);
+  assert.equal(offer!.bodyType, undefined);
+  assert.equal(
+    (offer!.operational as any).semanticEvidence.bodyType.status,
+    "ambiguous",
+  );
 });
 
 function vipAd(overrides: Record<string, unknown> = {}) {
@@ -66,17 +123,29 @@ function vipAd(overrides: Record<string, unknown> = {}) {
 }
 
 test("Mobile.de VIP keeps agreeing listing-bound specification evidence", async () => {
-  const offer = source.normalizeOffer({ ...base, engineCc: 999, powerKw: 110, powerHp: 150, fuel: "Benzin" });
+  const offer = source.normalizeOffer({
+    ...base,
+    engineCc: 999,
+    powerKw: 110,
+    powerHp: 150,
+    fuel: "Benzin",
+  });
   assert.ok(offer);
   const originalFetch = global.fetch;
-  global.fetch = async () => new Response(JSON.stringify({ ad: vipAd() }), { headers: { "content-type": "application/json" } });
+  global.fetch = async () =>
+    new Response(JSON.stringify({ ad: vipAd() }), {
+      headers: { "content-type": "application/json" },
+    });
   try {
     const images = await source.fetchImages(offer!);
     assert.equal(images.length, 5);
     assert.equal(offer!.engineCc, 999);
     assert.equal(offer!.powerHp, 150);
     assert.equal(offer!.fuel, "petrol");
-    assert.equal((offer!.operational as any).semanticEvidence.engineCc.status, "exact");
+    assert.equal(
+      (offer!.operational as any).semanticEvidence.engineCc.status,
+      "exact",
+    );
     assert.equal(catalogSemanticEvidenceRejectionReason(offer!), "");
   } finally {
     global.fetch = originalFetch;
@@ -84,7 +153,13 @@ test("Mobile.de VIP keeps agreeing listing-bound specification evidence", async 
 });
 
 test("Mobile.de VIP conflicts clear calculation fields and fail closed", async () => {
-  const offer = source.normalizeOffer({ ...base, engineCc: 999, powerKw: 110, powerHp: 150, fuel: "Benzin" });
+  const offer = source.normalizeOffer({
+    ...base,
+    engineCc: 999,
+    powerKw: 110,
+    powerHp: 150,
+    fuel: "Benzin",
+  });
   assert.ok(offer);
   const conflicting = vipAd({
     attributes: [
@@ -95,7 +170,10 @@ test("Mobile.de VIP conflicts clear calculation fields and fail closed", async (
     ],
   });
   const originalFetch = global.fetch;
-  global.fetch = async () => new Response(JSON.stringify({ ad: conflicting }), { headers: { "content-type": "application/json" } });
+  global.fetch = async () =>
+    new Response(JSON.stringify({ ad: conflicting }), {
+      headers: { "content-type": "application/json" },
+    });
   try {
     await source.fetchImages(offer!);
     assert.equal(offer!.engineCc, undefined);
@@ -104,10 +182,22 @@ test("Mobile.de VIP conflicts clear calculation fields and fail closed", async (
     assert.equal(offer!.fuel, undefined);
     assert.equal(offer!.powertrainKind, "unknown");
     assert.equal(offer!.calculationStatus, "needs_data");
-    assert.equal((offer!.operational as any).semanticEvidence.fuel.status, "conflict");
-    assert.equal((offer!.operational as any).semanticEvidence.engineCc.status, "conflict");
-    assert.equal((offer!.operational as any).semanticEvidence.powerHp.status, "conflict");
-    assert.equal(catalogSemanticEvidenceRejectionReason(offer!), "semantic_fuel_conflict");
+    assert.equal(
+      (offer!.operational as any).semanticEvidence.fuel.status,
+      "conflict",
+    );
+    assert.equal(
+      (offer!.operational as any).semanticEvidence.engineCc.status,
+      "conflict",
+    );
+    assert.equal(
+      (offer!.operational as any).semanticEvidence.powerHp.status,
+      "conflict",
+    );
+    assert.equal(
+      catalogSemanticEvidenceRejectionReason(offer!),
+      "semantic_fuel_conflict",
+    );
   } finally {
     global.fetch = originalFetch;
   }
@@ -115,7 +205,10 @@ test("Mobile.de VIP conflicts clear calculation fields and fail closed", async (
 
 test("Mobile.de rejects source placeholder identity instead of inferring a model from the title", () => {
   assert.equal(source.normalizeOffer({ ...base, model: "Andere" }), null);
-  assert.equal(source.normalizeOffer({ ...base, make: "Andere", model: "L5E" }), null);
+  assert.equal(
+    source.normalizeOffer({ ...base, make: "Andere", model: "L5E" }),
+    null,
+  );
 });
 
 test("Mobile.de enforces the non-Japan 2020 minimum at collector normalization", () => {
