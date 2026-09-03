@@ -8,7 +8,7 @@ const LIST_URL = `${BASE_URL}/Home/CarsList`;
 const SEARCH_URL = `${BASE_URL}/Car/SearchCarList`;
 const OUTPUT_PATH = process.env.CATALOG_SOURCE_CHNGOODCAR_PAGE_PROBE_OUTPUT || 'catalog-source-chngoodcar-carslist-page-probe-v1.json';
 const TIMEOUT_MS = Math.max(3000, Math.min(45000, Number(process.env.CATALOG_SOURCE_CHNGOODCAR_PAGE_PROBE_TIMEOUT_MS || 15000)));
-const USER_AGENT = 'AvtoCenaGoodCarCarsListPageProbe/1.0 (+read-only public search pagination)';
+const USER_AGENT = 'AvtoCenaGoodCarCarsListPageProbe/1.1 (+read-only public search pagination)';
 const BASE_HEADERS = {
   accept: 'text/html,application/xhtml+xml,application/json,text/javascript;q=0.9,*/*;q=0.5',
   'accept-language': 'zh-CN,zh;q=0.9,en;q=0.6',
@@ -44,9 +44,6 @@ function cookieHeader(response) {
 }
 
 export function defaultGoodCarSearchBody(pageindex) {
-  // Source-declared no-filter call:
-  // pager(false, 1, 0, 0, 0, [], [], [], [], [], [], [], [], [], [], [], r_page)
-  // jQuery omits empty arrays from application/x-www-form-urlencoded serialization.
   const body = new URLSearchParams();
   body.set('Hot', 'false');
   body.set('DefaultSort', '1');
@@ -69,19 +66,33 @@ function scalar(value) {
   return null;
 }
 
+function summarizeArray(value) {
+  if (!Array.isArray(value)) return null;
+  const scalarSample = value.slice(0, 4).map((item) => scalar(item)).filter((item) => item != null);
+  return { count: value.length, scalarSample };
+}
+
 function summarizeRow(row) {
   const keys = Object.keys(row || {}).sort();
   const interesting = {};
   const preferred = [
-    'Id','id','Name','Title','CarName','ModelName','BrandName','Price','Year','Mileage','MileageKm',
-    'FactoryTime','ProductionDate','Fuel','Gearbox','Shape','VehicleType','EngineModel','Img','Image','ImageUrl',
+    'Id','Brand','Manufacturer','Category','CategoryName','CategoryDefaultName','Price','Currency','ProductionDate','Mileage',
+    'Displacement','Power','Horsepower','MaximumHorsepower','FuelType','FuelTypeName','Gearbox','GearboxName','GearboxType',
+    'Shape','ShapeName','VehicleType','VehicleTypeName','EngineModel','EngineModelName','EngineType','Drive','DrivingName','Steering','SteeringName',
+    'Vin','Door','SeatNum','Color','Quantity','IsSale','IsEnable','IsVerify','VerifyStatus','SaleTip','Url','CreateTime','ModifyTime',
   ];
   for (const key of preferred) {
     if (!(key in (row || {}))) continue;
     const value = scalar(row[key]);
-    if (value != null) interesting[key] = typeof value === 'string' ? value.slice(0, 240) : value;
+    if (value != null) interesting[key] = typeof value === 'string' ? value.slice(0, 300) : value;
   }
-  return { id: rowId(row), keys, fields: interesting };
+  const arrays = {};
+  for (const key of ['ImageAry','upload_cache_list']) {
+    if (!(key in (row || {}))) continue;
+    const summary = summarizeArray(row[key]);
+    if (summary) arrays[key] = summary;
+  }
+  return { id: rowId(row), keys, fields: interesting, arrays };
 }
 
 export function summarizeGoodCarSearchPayload(payload) {
