@@ -50,8 +50,7 @@ PR #826 (`3826f80b04371ba8c4c0b8a3321292fa93bf5db2`) влит в `main`. Read-on
    - обе detail-страницы доступны;
    - найден offer-bound блок `gallery-data` с `16–17` уникальными image identities рядом с конкретным offer ID — это сильное доказательство, что предыдущий deficit `gallery` можно закрыть после консервативной нормализации series/thumbnail variants;
    - для обоих offers найден официальный same-origin spec route вида `/dealguide/carinfo.php?cat=spec&maker_no=...&model_no=...&level_no=...&class_no=...&year_no=2016`;
-   - body contexts текущей detail-страницы содержат в основном навигационные/общие слова и сами по себе **не доказывают canonical body**;
-   - следующий точечный шаг: read-only probe двух найденных spec routes с robots check и проверкой привязки `class_no/year_no` к offer.
+   - body contexts текущей detail-страницы содержат в основном навигационные/общие слова и сами по себе **не доказывают canonical body**.
 
 2. **CarSwitch**
    - обе detail-страницы byte-stable между двумя запросами;
@@ -73,19 +72,49 @@ PR #826 (`3826f80b04371ba8c4c0b8a3321292fa93bf5db2`) влит в `main`. Read-on
    - ICE sample по-прежнему не даёт доказанных listing-bound `engineCc/powerHp`;
    - EV sample по-прежнему не даёт требуемую certified/utilization/30-minute power.
 
+### Run 33745638721 — зелёный probe только найденных Bobaedream spec routes
+
+- status: `success`;
+- artifact: `9889505193`;
+- digest: `sha256:5ec558b74397826ba513f1798e0a078615f97fc9ec4f8fe1da3e0056a7ea50d5`;
+- `guessedRoutes=false`: проверялись только два same-origin route, реально найденные предыдущим run;
+- оба маршрута повторно дали HTTP 200 с одинаковыми body hash и evidence fingerprint.
+
+Результат:
+
+- для `2260063` spec page title точно соответствует `Kia All New K7 2.4 GDi Prestige`, то есть route/trim binding сильный;
+- для `2262188` route также стабилен, но title менее информативен;
+- ни один из двух spec routes не содержит отдельного offer-bound canonical body field;
+- `차체(길이x너비x높이mm)` означает габариты кузова, а не тип кузова;
+- `차종국가 한국` означает страну/категорию происхождения, а не sedan;
+- слова `승용`, `SUV`, `쿠페` в найденных contexts относятся к общей навигации/спискам моделей и не могут быть повышены до offer-bound body evidence.
+
+**Вывод:** Bobaedream gallery выглядит технически закрываемой после нормализации image series, но `body` остаётся настоящим source deficit. Никакого `sedan` из собственной энциклопедии или знания модели не подставляем.
+
+## Дополнительная публичная разведка, не являющаяся классификацией
+
+Публичные страницы самих источников показали важное направление для следующей машинной проверки:
+
+- CarSwitch на exact used offer подписывает двигатель прямо в названии (`1.5L I4`, `5.7L V8`), а его 2025 Captiva model page показывает `144 BHP` и `1498 cc` и одновременно выводит audited 2025 Premier Turbo listing. Это сильный кандидат на источник связанного specification evidence, но year/variant binding должен быть доказан машинно; текущие 2026 страницы нельзя автоматически переносить на старые предложения.
+- CARS24 exact offer page визуально показывает `Engine 1.8L` и `AED 64,999`; следовательно часть дефицита — недостаток нашего extraction, а не отсутствие данных на странице. Но `powerHp` и exact cc всё ещё не доказаны.
+
+Эти находки не меняют class и `publishAllowed` сами по себе.
+
 ## Граница безопасности
 
 - `productionWrites=false`;
 - `classificationMutations=false`;
 - `publishAllowedMutations=false`;
 - `rawBodiesStored=false`;
-- в run `33744960785` `alternateRouteRequestsPerformed=false`;
+- run `33744960785`: `alternateRouteRequestsPerformed=false`;
+- run `33745638721`: только обнаруженные routes, `guessedRoutes=false`;
 - production generation, manifest, Object Storage, cleanup и публикация не затрагиваются.
 
-## Следующая точка продолжения
+## Текущая следующая точка
 
-1. Консервативно нормализовать gallery evidence Bobaedream/DubiCars и закрывать gallery deficit только при >=5 устойчивых listing-bound underlying images.
-2. Выполнить robots-aware read-only probe только двух **уже обнаруженных** Bobaedream spec routes; никаких guessed API URLs.
-3. На исходных detail HTML отдельно проверить явные unit-bearing patterns (`1.5L`, `5.7L`, `1.8L`, `cc`) и offer-hero price contexts для CarSwitch/CARS24, не повышая общие модельные страницы или диапазоны до exact.
-4. Если source-bound `powerHp` для CarSwitch/CARS24 и ICE DubiCars отсутствует, не подменять его собственной энциклопедией: кандидат остаётся `research_pending` до итогового решения `lead_only/rejected` либо до нахождения разрешённого точного source route.
-5. После завершения этого блока записать checkpoint в `roadmap.md` и только затем готовить PR.
+1. Запущен отдельный conservative `deficit resolution` pass: он повторно проверяет explicit unit-bearing text, exact CARS24 offer price и underlying gallery identities на тех же 8 detail URLs; никаких classification mutations.
+2. Для Bobaedream закрывать gallery deficit только при >=5 устойчивых индексов одной offer-bound image series на обоих повторах. Body пока остаётся unresolved.
+3. Для DubiCars дедуплицировать render variants по terminal image UUID и сравнивать с offer-bound gallery/image_count.
+4. Для CarSwitch/CARS24 отличать доказанное `1.5L/1.8L/5.7L` от exact `engineCc`: маркетинговый литраж сам по себе не превращаем в 1498/1500/5700 cc без точного source field.
+5. Если source-bound `powerHp` или exact cc после разрешённых source routes отсутствует, не лечить источник бесконечно: фиксировать `lead_only` либо продолжать только при наличии конкретного доказанного public route.
+6. После этого checkpoint обязательно переносится в `roadmap.md`, затем PR и только после зелёного CI — merge.
