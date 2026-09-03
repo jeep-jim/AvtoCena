@@ -1453,3 +1453,12 @@ Production-результат ещё должен быть подтверждё�
 - **Fail-closed исправление:** Guazi adapter распознаёт доказанные маркеры challenge и возвращает typed blocked error `guazi_source_blocked_bot_challenge`; health, фиксированный production bridge и GitHub/Yandex wrapper сохраняют `blocked=true`. HTTP `200` challenge больше не может выглядеть как успешно прочитанная пустая выдача.
 - **Граница доступа:** challenge не обходится. Для live-ready статуса Guazi нужен разрешённый публичный endpoint либо официальный partner feed; до этого источник остаётся внешне заблокированным и не даёт новых карточек.
 - **Production-граница:** текущий public generation, предыдущие generations, кандидаты, изображения, sitemap и индексируемые URL остаются на месте. Этот пакет меняет только диагностику будущего no-write сбора; collection, publication и cleanup не запускаются.
+
+
+### 40.23. Явные access-контракты Dongchedi, Auction Data Search и JP Center
+
+- **Dongchedi:** read-only запрос `https://www.dongchedi.com/usedcar` завершился HTTP `200` на `https://www.dongchedi.com/login-required?redirect=%2Fusedcar`. Страница входа не является пустой товарной выдачей и не может считаться успешным source scan.
+- **Auction Data Search:** `/search/` и `/statistics/` отвечают redirect на `/accounts/login/?next=...`; публичный endpoint количества по производителям не содержит identity-bound vehicle, price и gallery. Источник требует разрешённого входа или официального partner feed.
+- **JP Center:** публичный loader доказан и для Toyota Alphard вернул `450` строк с lot/auction/date/year/chassis/engine. Однако `b.o` в шаблоне является модельной average statistics, а индивидуальные `b.s/b.t` (start/finish price) для гостя пусты или нулевые. Public detail даёт только ограниченный набор изображений, а `price-*`/`photo-*` прямо требуют login и платный запрос. Среднее запрещено выдавать за цену конкретной машины.
+- **Fail-closed исправление:** три обязательных sourceId остаются в owner-approved allowlist и collection registry, но generic HTML adapters заменены typed `partner_feed` adapters. Они возвращают `blocked=true` с точной причиной вместо `ok + 0`, не создают кандидаты из login/public shell и не генерируют карточки из средней цены.
+- **Production-граница:** существующий public generation, предыдущие generations, кандидаты, изображения, sitemap и индексируемые URL не меняются. Для разблокировки нужны разрешённые публичные vehicle endpoints либо официальные partner feeds; collection, publication и cleanup этим пакетом не запускаются.
