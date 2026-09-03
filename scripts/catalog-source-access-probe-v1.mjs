@@ -19,7 +19,9 @@ const BASE_HEADERS = {
 };
 
 const CHALLENGE_RE = /captcha|cloudflare|verify (?:that )?you are human|access denied|request blocked|robot check|security check|incapsula|imperva|edgeone|cf-chl|challenge-platform/i;
+const CHALLENGE_TITLE_RE = /just a moment|access denied|zugriff verweigert|pardon our interruption|verify (?:that )?you are human|request blocked|robot check|security check/i;
 const LOGIN_URL_RE = /(?:\/|^)(?:login|log-in|signin|sign-in|member\/login|auth\/login)(?:\/|\?|$)/i;
+const LOGIN_TITLE_RE = /^(?:login|log in|sign in|member login|로그인|登录|ログイン)(?:\b|\s|[-|])/i;
 const LOGIN_WALL_RE = /(?:login required|sign in to continue|please (?:log in|login|sign in)|authentication required|members? only|must be logged in|로그인이 필요|로그인 후|请登录|登录后|ログインしてください|会員ログイン)/i;
 const YEAR_RE = /\b(?:19|20)\d{2}\b/;
 const CURRENCY_RE = /(?:AED|د\.\s*إ|د\.إ|EUR|€|GEL|₾|KRW|₩|원|JPY|円|万円|CNY|RMB|人民币|万元|元|USD|US\$|\$|£|GBP)/i;
@@ -29,7 +31,6 @@ const FUEL_RE = /(?:fuel|petrol|gasoline|diesel|hybrid|electric|phev|hev|ev\b|б
 const ENGINE_RE = /(?:engine|displacement|engine size|cubic capacity|\bcc\b|cm³|cm3|объ[её]м|двигател|배기량|엔진|排量|发动机|排気量|エンジン|cylindr(?:ée|ee)|hubraum|ძრავ)/i;
 const POWER_RE = /(?:power|horsepower|\bhp\b|\bps\b|\bkw\b|л\.?\s*с\.?|мощност|마력|출력|功率|马力|馬力|puissance|leistung|სიმძლავრ)/i;
 const BODY_RE = /(?:body type|body style|sedan|saloon|suv|crossover|hatchback|wagon|estate|coupe|convertible|cabriolet|minivan|van|pickup|truck|limousine|кузов|седан|хэтчбек|универсал|кроссовер|внедорож|미니밴|세단|해치백|왜건|쿠페|차종|轿车|SUV|两厢|三厢|旅行车|跑车|ボディ|セダン|ハッチバック|ワゴン|クーペ|carrosserie|karosserie|ძარის)/i;
-const DETAIL_HINT_RE = /(?:detail|vehicle|vehicles|usedcar|used-car|used_cars?|cars?|stock|listing|inventory|offer|product|auction|auto|motors)/i;
 const DETAIL_EXCLUDE_RE = /(?:login|signin|register|privacy|terms|cookie|contact|about|news|blog|faq|search(?:[\/?#]|$)|filter|sort|compare|favorite|wishlist|javascript:|mailto:|tel:)/i;
 
 function clean(value) {
@@ -124,6 +125,49 @@ function absoluteUrl(value, base) {
   }
 }
 
+function identityScore(url) {
+  const parsed = url instanceof URL ? url : new URL(url);
+  const path = parsed.pathname;
+  const key = `${path}${parsed.search}`;
+  if (/career|jobs?|imglist|image-list|counts?|allmakeslist|sitemap|search|filter|sort|compare|favorite|wishlist|budget|under[-_]|over[-_]|between[-_]|price[-_]|(?:^|\/)models?(?:\/|$)|(?:^|\/)makes?(?:\/|$)|(?:^|\/)brands?(?:\/|$)/i.test(key)) return 0;
+  let score = 0;
+  for (const [name, value] of parsed.searchParams) {
+    if (/^(?:id|no|stock|stockid|stock_id|offer|offerid|listing|listingid|vehicle|vehicleid|car|carid|car_id|ad|adid|lot|lotid)$/i.test(name) && /^[A-Za-z0-9_-]{3,}$/.test(value)) score = Math.max(score, 8);
+  }
+  if (/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i.test(path)) score = Math.max(score, 8);
+  if (/\d{5,}(?:\.html?)?\/?$/i.test(path)) score = Math.max(score, 6);
+  if (/[-_/][A-Za-z0-9_-]{8,}(?:\.html?)?\/?$/i.test(path) && /\d/.test(path.split('/').pop() || '')) score = Math.max(score, 4);
+  return score;
+}
+
+export function extractCatalogCandidates(html, baseUrl, limit = 3) {
+  if (limit <= 0) return [];
+  const base = new URL(baseUrl);
+  const candidates = new Map();
+  for (const match of String(html || '').matchAll(/<a\b[^>]*\bhref\s*=\s*["']([^"']+)["'][^>]*>/gi)) {
+    const url = absoluteUrl(match[1], baseUrl);
+    if (!url) continue;
+    const parsed = new URL(url);
+    if (parsed.origin !== base.origin) continue;
+    const key = `${parsed.pathname}${parsed.search}`;
+    if (key === `${base.pathname}${base.search}` || key === '/') continue;
+    if (DETAIL_EXCLUDE_RE.test(key)) continue;
+    if (identityScore(parsed) > 0) continue;
+    let score = 0;
+    if (/(?:^|\/)(?:used(?:-cars?|_cars?)?|preowned|pre-owned|inventory|stocklist|stock-list|search|lst|list|listings?|vehicles?|cars?)(?:\/|[-_?=&]|$)/i.test(key)) score += 7;
+    if (/(?:^|\/)(?:auction|auctions|past|stat|stats|estimates-data|allmakeslist)(?:\/|[-_?=&]|$)/i.test(key)) score += 5;
+    if (/\bused\b|second[-_ ]?hand|pre[-_ ]?owned/i.test(key)) score += 2;
+    if (/career|jobs?|dealer|sell|finance|insurance|review|news|blog|about|contact|privacy|terms|compare|new-cars?/i.test(key)) score -= 8;
+    if (score < 5) continue;
+    const previous = candidates.get(url);
+    if (!previous || previous.score < score) candidates.set(url, { url, score });
+  }
+  return [...candidates.values()]
+    .sort((a, b) => b.score - a.score || a.url.localeCompare(b.url))
+    .slice(0, limit)
+    .map((row) => row.url);
+}
+
 export function extractDetailCandidates(html, baseUrl, limit = MAX_DETAIL_SAMPLES) {
   if (limit <= 0) return [];
   const base = new URL(baseUrl);
@@ -136,12 +180,11 @@ export function extractDetailCandidates(html, baseUrl, limit = MAX_DETAIL_SAMPLE
     const key = `${parsed.pathname}${parsed.search}`;
     if (key === `${base.pathname}${base.search}` || key === '/') continue;
     if (DETAIL_EXCLUDE_RE.test(key)) continue;
-    let score = 0;
-    if (DETAIL_HINT_RE.test(parsed.pathname)) score += 4;
-    if (/\d{3,}/.test(key)) score += 3;
+    const identity = identityScore(parsed);
+    if (identity <= 0) continue;
+    let score = identity;
+    if (/(?:^|\/)(?:detail|vehicle|vehicles|usedcar|used-car|used_cars?|car|cars|stock|listing|offer|offers|auction|auto|motors)(?:\/|[-_?=&]|$)/i.test(key)) score += 4;
     if (/\.(?:html?|aspx?|php)(?:$|\?)/i.test(key)) score += 1;
-    if (/\/(?:detail|vehicle|car|cars|usedcar|stock|listing|offer|auction)\//i.test(parsed.pathname)) score += 3;
-    if (score < 4) continue;
     const previous = candidates.get(url);
     if (!previous || previous.score < score) candidates.set(url, { url, score });
   }
@@ -191,10 +234,13 @@ function jsonLdSummary(html) {
 }
 
 export function summarizeBody(html, baseUrl) {
-  const text = clean(html).slice(0, 750_000);
-  const jsonLd = jsonLdSummary(html);
+  const raw = String(html || '');
+  const text = clean(raw).slice(0, 750_000);
+  const jsonLd = jsonLdSummary(raw);
+  const title = titleOf(raw);
+  const bodyBytes = Buffer.byteLength(raw);
   return {
-    title: titleOf(html),
+    title,
     markers: {
       year: YEAR_RE.test(text),
       price: PRICE_RE.test(text),
@@ -205,10 +251,10 @@ export function summarizeBody(html, baseUrl) {
       power: POWER_RE.test(text),
       body: BODY_RE.test(text),
     },
-    imageCount: imageCount(html, baseUrl),
+    imageCount: imageCount(raw, baseUrl),
     jsonLd,
-    challenge: CHALLENGE_RE.test(text.slice(0, 80_000)),
-    loginWall: LOGIN_WALL_RE.test(text.slice(0, 80_000)),
+    challenge: CHALLENGE_TITLE_RE.test(title) || (bodyBytes < 120_000 && CHALLENGE_RE.test(text.slice(0, 80_000))),
+    loginWall: LOGIN_TITLE_RE.test(title) || (bodyBytes < 80_000 && LOGIN_WALL_RE.test(text.slice(0, 80_000))),
   };
 }
 
@@ -378,11 +424,25 @@ function accessStatus(listPage, detailPages) {
 }
 
 async function probeCandidate(candidate) {
-  const listPage = await fetchPageRespectingRobots(candidate.url);
+  const entryPage = await fetchPageRespectingRobots(candidate.url);
+  let listPage = entryPage;
+  let listSource = 'entry';
+  let catalogCandidates = [];
+
+  if (entryPage.kind === 'response' && entryPage.ok && entryPage.summary && !entryPage.summary.challenge && !entryPage.summary.loginWall) {
+    const entryUrl = new URL(entryPage.finalUrl || candidate.url);
+    catalogCandidates = extractCatalogCandidates(entryPage.body, entryPage.finalUrl, 5);
+    if ((entryUrl.pathname === '/' || entryUrl.pathname === '') && catalogCandidates.length) {
+      listPage = await fetchPageRespectingRobots(catalogCandidates[0]);
+      listSource = 'discovered_catalog_route';
+    }
+  }
+
   const detailPages = [];
+  let detailCandidates = [];
   if (listPage.kind === 'response' && listPage.ok && listPage.summary && !listPage.summary.challenge && !listPage.summary.loginWall) {
-    const detailUrls = extractDetailCandidates(listPage.body, listPage.finalUrl, MAX_DETAIL_SAMPLES);
-    for (const detailUrl of detailUrls) {
+    detailCandidates = extractDetailCandidates(listPage.body, listPage.finalUrl, Math.max(MAX_DETAIL_SAMPLES, 5));
+    for (const detailUrl of detailCandidates.slice(0, MAX_DETAIL_SAMPLES)) {
       detailPages.push(await fetchPageRespectingRobots(detailUrl));
     }
   }
@@ -394,7 +454,11 @@ async function probeCandidate(candidate) {
     classBefore: candidate.class,
     publishAllowedBefore: candidate.publishAllowed,
     accessStatus: accessStatus(listPage, detailPages),
+    entry: publicPageSnapshot(entryPage),
+    listSource,
+    catalogCandidates,
     list: publicPageSnapshot(listPage),
+    detailCandidates,
     details: detailPages.map(publicPageSnapshot),
     classificationMutation: false,
   };
@@ -419,7 +483,11 @@ async function runWithConcurrency(items, limit, worker) {
           classBefore: candidate.class,
           publishAllowedBefore: candidate.publishAllowed,
           accessStatus: 'probe_error',
+          entry: null,
+          listSource: 'entry',
+          catalogCandidates: [],
           list: null,
+          detailCandidates: [],
           details: [],
           classificationMutation: false,
           error: String(error?.stack || error?.message || error),
