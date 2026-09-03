@@ -80,6 +80,10 @@ jobs:
           if (!Array.isArray(pages.failures) || pages.failures.length !== 0) throw new Error(`page failures ${pages.failures}`);
           if (!(pages.page1a?.summary?.rowCount > 0) || !(pages.page2?.summary?.rowCount > 0)) throw new Error('page rows');
           if (!(pages.page1a?.summary?.total > 15)) throw new Error(`total ${pages.page1a?.summary?.total}`);
+          const firstKeys = new Set(pages.page1a?.summary?.rows?.[0]?.keys || []);
+          for (const field of ['Id','Brand','CategoryName','Currency','Displacement','Power','FuelTypeName','ShapeName','VehicleTypeName','ProductionDate','Mileage','Price','ImageAry']) {
+            if (!firstKeys.has(field)) throw new Error(`source list field missing: ${field}`);
+          }
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
