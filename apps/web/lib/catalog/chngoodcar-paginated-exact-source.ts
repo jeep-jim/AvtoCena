@@ -12,7 +12,7 @@ import {
 import { namedElectrifiedPowertrainKind } from "./powertrain-safety";
 
 const BASE_URL = "https://www.chngoodcar.com";
-const USER_AGENT = "AvtoCenaGoodCarPaginatedExact/1.1 (+read-only until source promotion)";
+const USER_AGENT = "AvtoCenaGoodCarPaginatedExact/1.2 (+read-only until source promotion)";
 const HEADERS = {
   accept: "text/html,application/xhtml+xml,text/plain;q=0.8,*/*;q=0.5",
   "accept-language": "zh-CN,zh;q=0.9,en;q=0.6",
@@ -43,6 +43,30 @@ function sameNumber(a: unknown, b: unknown) {
   const left = Number(a);
   const right = Number(b);
   return Number.isFinite(left) && Number.isFinite(right) && Math.abs(left - right) < 1e-9;
+}
+
+function decodeVisible(html: string) {
+  return String(html || "")
+    .replace(/&nbsp;|&#160;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/<script\b[\s\S]*?<\/script>/gi, " ")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, " ")
+    .replace(/<[^>]+>/g, " ")
+    .replace(/[\u0000-\u001f]+/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
+}
+
+export function parseGoodCarPaginatedDetailMileageKm(html: string) {
+  const value = decodeVisible(html).match(/里程\s*\(km\)\s*([0-9]+(?:\.[0-9]+)?)/i)?.[1];
+  const number = value == null ? NaN : Number(value);
+  return Number.isFinite(number) && number >= 0 ? number : undefined;
+}
+
+export function cleanGoodCarPaginatedModelIdentity(model: unknown) {
+  const value = String(model || "").replace(/\s+/g, " ").trim();
+  const cleaned = value.replace(/\s+(?:19|20)\d{2}\s*款[\s\S]*$/i, "").trim();
+  return cleaned || value;
 }
 
 async function fetchDetail(url: string) {
@@ -106,6 +130,10 @@ export class ChnGoodCarPaginatedExactAdapter extends ChnGoodCarExactAdapter {
       try {
         const detail = await fetchDetail(row.detailUrl);
         const parsed = parseGoodCarDetailHtml(detail.html, detail.response.url || row.detailUrl);
+        if (parsed) {
+          const exactMileage = parseGoodCarPaginatedDetailMileageKm(detail.html);
+          if (exactMileage !== undefined) parsed.mileageKm = exactMileage;
+        }
         const joined = joinGoodCarCarsListAndDetail(row, parsed, list.currencyLabelVerified);
         if (!joined) {
           detailUnparsed += 1;
@@ -137,24 +165,30 @@ export class ChnGoodCarPaginatedExactAdapter extends ChnGoodCarExactAdapter {
     const row = raw as GoodCarPaginatedExactRawOffer;
     if (row?.discoverySource !== "CarsList/SearchCarList") return null;
     if (row.listCurrencyVerified !== true || row.listDetailProductionDateParity !== true || row.listDetailMileageParity !== true) return null;
-    // Identity-bound electrified markers have priority over a contradictory
-    // source fuel label. Example proven in Good Car: `双擎` in the exact title
-    // while the same detail labels `燃料种类 汽油`. Such a row is internally
-    // contradictory and must not be promoted as combustion.
     if (goodCarIdentityNamedElectrifiedKind(row.sourceTitle)) return null;
     const offer = super.normalizeOffer(row);
     if (!offer) return null;
+    // The source title is still the identity truth, but model-year/trim suffixes
+    // are not part of the model entity. Handle the source's `2022 款` spacing
+    // variant deterministically without guessing a different model.
+    offer.model = cleanGoodCarPaginatedModelIdentity(offer.model);
+    // Good Car currently repeats the same VIN across unrelated audited models.
+    // Source offer id + exact list/detail title remain the proven identity; VIN
+    // is deliberately excluded from normalized identity/dedupe until uniqueness
+    // is independently proven.
+    offer.vin = undefined;
     offer.operational = {
       ...(offer.operational || {}),
+      vin: undefined,
       exactScope: "ICE_passenger_only_CarsList_paginated_no_publish_v2",
       carsListPaginationVerified: true,
       carsListPageSize: GOOD_CAR_CARSLIST_PAGE_SIZE,
       semanticEvidence: {
         ...(offer.operational?.semanticEvidence as Record<string, unknown> || {}),
         priceCurrency: "CarsList visible 价格(US $) + SearchCarList row Currency=usd + exact list/detail price parity",
-        identity: "SearchCarList Id/title joined to same /Home/Cars?id=<Id> detail title",
+        identity: "SearchCarList Id/title joined to same /Home/Cars?id=<Id> detail title; source VIN excluded because duplicates occur across unrelated offers",
         productionDate: "exact SearchCarList ProductionDate == offer-bound detail 出厂年份",
-        mileageKm: "exact SearchCarList Mileage == offer-bound detail 里程 (km)",
+        mileageKm: "exact SearchCarList Mileage == offer-bound detail 里程 (km), including decimal values without unit inference",
         powertrainIdentity: "identity-bound title electrified markers override contradictory combustion detail labels and fail closed",
         listFieldBoundary: "SearchCarList fuel/body/power fields are discovery evidence only and never replace offer-bound detail exact fields",
       },
