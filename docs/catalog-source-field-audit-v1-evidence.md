@@ -6,13 +6,14 @@
 
 ## Проверенный запуск
 
-- Workflow run: `33731051049` — `success`.
-- Head SHA: `52a1c6de4526e43a66b28dab1ab61cc0c020d3be`.
-- Artifact: `9883930890`.
-- Digest: `sha256:cc13432a39e5eaf3904fe5acc61ca8d7d27e3f8009b005beb4057c58750e8ecd`.
-- Generated: `2026-09-03T08:03:21.843Z`.
+- Workflow run: `33731675254` — `success`.
+- Head SHA: `286af00b134c3d2c51da039d7ca2286757bb104f`.
+- Artifact: `9884112823`.
+- Digest: `sha256:4dc1b6fa50e7607676d5723b9465dc75cb98f5be6f4c345ad56bd980bd7358f8`.
+- Generated: `2026-09-03T08:08:41.845Z`.
 - Объём: `4` источника, `8` detail samples, каждый URL запрошен дважды.
-- Все этапы workflow прошли успешно: contract tests, source-bound audit, conservative postprocess, no-write envelope, artifact upload.
+- Все этапы workflow прошли успешно: qualification/field-audit tests, source-bound audit, conservative postprocess, no-write envelope, artifact upload.
+- Матрица недостающих полей совпала с предыдущим зелёным run `33731051049`; между ними изменились только счётчики просмотров на двух Bobaedream pages, не source-bound значения автомобиля.
 - Во всём контуре: `productionWrites=false`, `classificationMutations=false`, `publishAllowedMutations=false`, `rawBodiesStored=false`.
 
 ## Итог
