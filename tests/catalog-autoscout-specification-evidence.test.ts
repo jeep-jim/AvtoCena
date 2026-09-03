@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   AutoScoutEuropeExactAdapter,
+  AutoScoutCurrentAdapter,
   autoScoutSpecificationEvidence,
   autoscoutEuropeExactSource,
   parseAutoScoutNextData,
@@ -16,7 +17,7 @@ function listing(overrides: Record<string, unknown> = {}) {
     id,
     url: `/offers/volvo-xc60-petrol-${id}`,
     vehicle: { make: "Volvo", model: "XC60", engineDisplacementInCCM: "1,969", fuel: "Gasoline" },
-    tracking: { firstRegistration: "06/2024", mileage: "12,000 km" },
+    tracking: { firstRegistration: "06-2024", mileage: "12,000 km" },
     price: { priceRaw: 45_000, currency: "EUR" },
     vehicleDetails: [
       { ariaLabel: "First registration", data: "06/2024" },
@@ -101,6 +102,33 @@ test("AutoScout marks distinct repeated named values as conflicts", () => {
   assert.equal(evidence.engineCc.status, "conflict");
   assert.equal(evidence.powerKw.status, "conflict");
   assert.equal(evidence.powerHp.status, "conflict");
+});
+
+test("AutoScout accepts only a valid source registration format, not a year range", () => {
+  const exact = autoScoutSpecificationEvidence({ firstRegistrations: ["10-2025", "10/2025"] });
+  const range = autoScoutSpecificationEvidence({ firstRegistrations: ["2024-2025"] });
+  assert.equal(exact.year.status, "exact");
+  assert.equal(exact.year.value, 2025);
+  assert.equal(range.year.status, "ambiguous");
+  assert.equal(range.year.value, undefined);
+});
+
+test("AutoScout current collection requests the source-side 2020 age boundary", async () => {
+  const originalFetch = global.fetch;
+  let requestedUrl = "";
+  global.fetch = async (input) => {
+    requestedUrl = String(input);
+    return new Response(page(listing()), { status: 200, headers: { "content-type": "text/html" } });
+  };
+  try {
+    const result = await new AutoScoutCurrentAdapter().fetchPage("2");
+    const url = new URL(requestedUrl);
+    assert.equal(url.searchParams.get("page"), "2");
+    assert.equal(url.searchParams.get("fregfrom"), "2020");
+    assert.equal(result.items.length, 1);
+  } finally {
+    global.fetch = originalFetch;
+  }
 });
 
 test("AutoScout keeps unknown named fuel non-exact", () => {
