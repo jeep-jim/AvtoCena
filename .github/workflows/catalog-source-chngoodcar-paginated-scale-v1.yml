@@ -10,6 +10,7 @@ on:
       - "apps/web/lib/catalog/chngoodcar-carslist.ts"
       - "apps/web/lib/catalog/chngoodcar-paginated-exact-source.ts"
       - "apps/web/lib/catalog/chngoodcar-exact-source.ts"
+      - "apps/web/lib/catalog/powertrain-safety.ts"
       - "tests/catalog-source-chngoodcar-carslist-client-v1.test.ts"
       - "tests/catalog-source-chngoodcar-paginated-exact-v2.test.ts"
       - "tests/catalog-source-chngoodcar-exact-adapter-v1.test.ts"
@@ -60,7 +61,8 @@ jobs:
           if (p.requestedPages !== 5) throw new Error(`requestedPages ${p.requestedPages}`);
           if (!Array.isArray(p.sourceTotals) || p.sourceTotals.length !== 5 || !p.sourceTotals.every((x) => x === p.sourceTotals[0])) throw new Error(`unstable totals ${p.sourceTotals}`);
           if (!(p.sourceTotals[0] >= 1000)) throw new Error(`source total ${p.sourceTotals[0]}`);
-          if (!(p.uniqueListIds >= 75)) throw new Error(`uniqueListIds ${p.uniqueListIds}`);
+          if (!(p.uniqueRawListIds >= 75)) throw new Error(`uniqueRawListIds ${p.uniqueRawListIds}`);
+          if (!(p.coverage?.blockedIdentityElectrifiedCount > 0)) throw new Error(`blockedIdentityElectrifiedCount ${p.coverage?.blockedIdentityElectrifiedCount}`);
           if (!Array.isArray(p.failures) || p.failures.length !== 0) throw new Error(`failures ${p.failures}`);
           NODE
       - uses: actions/upload-artifact@v4
