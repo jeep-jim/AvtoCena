@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
-import { extractLabelPairs, sourceOfferIdFromUrl } from '../scripts/catalog-source-field-audit-v1.mjs';
+import { extractLabelPairs, extractVisibleNamedFields, sourceOfferIdFromUrl } from '../scripts/catalog-source-field-audit-v1.mjs';
 
 test('sourceOfferIdFromUrl extracts query and terminal listing ids', () => {
   assert.equal(sourceOfferIdFromUrl('https://www.bobaedream.co.kr/mycar/mycar_view.php?no=2262188&gubun=K'), '2262188');
@@ -17,6 +17,24 @@ test('label pair extraction preserves named source-bound values', () => {
     { label: 'Fuel Type', value: 'Electric', source: 'table' },
     { label: 'Model year', value: '2023', source: 'dl' },
   ]);
+});
+
+test('visible named extraction binds DubiCars-style specs instead of loose page words', () => {
+  const html = '<div>Make</div><div>BMW</div><div>Model</div><div>iX1</div><div>Horsepower</div><div>313 HP</div><div>Vehicle type</div><div>SUV/Crossover</div><div>Fuel Type</div><div>Electric</div>';
+  const hits = extractVisibleNamedFields(html);
+  assert.ok(hits.make.some((row) => row.value === 'BMW'));
+  assert.ok(hits.model.some((row) => row.value === 'iX1'));
+  assert.ok(hits.power.some((row) => row.value === '313 HP'));
+  assert.ok(hits.body.some((row) => row.value === 'SUV/Crossover'));
+  assert.ok(hits.fuel.some((row) => row.value === 'Electric'));
+});
+
+test('visible compound extraction recovers Bobaedream displacement and horsepower', () => {
+  const html = '<table><tr><th>연식</th><td>2016.04 배기량 3,342 cc (282마력)</td></tr><tr><th>연료</th><td>가솔린</td></tr></table>';
+  const hits = extractVisibleNamedFields(html);
+  assert.ok(hits.year.some((row) => row.value === '2016'));
+  assert.ok(hits.engine.some((row) => row.value === '3,342 cc'));
+  assert.ok(hits.power.some((row) => row.value === '282 마력'));
 });
 
 test('field audit is isolated from production writers and mutations', () => {
