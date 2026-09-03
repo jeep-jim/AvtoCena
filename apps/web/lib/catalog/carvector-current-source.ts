@@ -77,8 +77,23 @@ export function carvectorSpecificationEvidence(
   const currentYear = new Date().getUTCFullYear();
   const yearValue = positiveInteger(row?.year, 1980, currentYear + 1);
   const rawFuel = clean(row?.fuel?.title);
-  const fuelValue = canonicalSourceFuel(rawFuel);
-  const powertrainValue = powertrainFromFuel(fuelValue);
+  const identityTitle = clean(
+    `${row?.make?.title || ""} ${row?.model?.title || ""} ${row?.modification?.title || ""}`,
+  );
+  const namedElectrified = rawFuel
+    ? ""
+    : identityTitle.match(
+        /\b(?:hybrid|phev|plug[ -]?in|e[ -]?power|electric|bev|ev|range[ -]?extender)\b/i,
+      )?.[0] || "";
+  const rawFuelEvidence = rawFuel || namedElectrified;
+  const fuelValue = /e[ -]?power|range[ -]?extender/i.test(namedElectrified)
+    ? "hybrid"
+    : canonicalSourceFuel(rawFuelEvidence);
+  const powertrainValue = /e[ -]?power|range[ -]?extender/i.test(
+    namedElectrified,
+  )
+    ? "series_hybrid"
+    : powertrainFromFuel(fuelValue);
   let engineCc = evidence(
     row?.engineVolume,
     positiveInteger(row?.engineVolume, 300, 10_000),
@@ -92,7 +107,7 @@ export function carvectorSpecificationEvidence(
           status: "exact",
         }
       : { rawValues: powerHp.rawValues, status: powerHp.status };
-  if (powertrainValue && powertrainValue !== "combustion") {
+  if (powertrainValue !== "combustion") {
     // CarVector calls this field simply `power`; for electrified cars it does
     // not identify ICE power or certified 30-minute motor power. Preserve the
     // raw value, but never promote it into customs calculation fields.
@@ -104,8 +119,8 @@ export function carvectorSpecificationEvidence(
   }
   return {
     year: evidence(row?.year, yearValue),
-    fuel: evidence(rawFuel, fuelValue),
-    powertrainKind: evidence(rawFuel, powertrainValue),
+    fuel: evidence(rawFuelEvidence, fuelValue),
+    powertrainKind: evidence(rawFuelEvidence, powertrainValue),
     engineCc,
     powerHp,
     powerKw,
@@ -155,7 +170,11 @@ export function parseCarvectorNgState(markup: string): CarvectorResult {
 }
 
 function pageUrl(page: number) {
-  const url = new URL(`${BASE}/stat`);
+  const configuredPath = clean(process.env.CATALOG_CARVECTOR_PATH);
+  const pathname = /^\/stat\/[a-z0-9/-]+$/i.test(configuredPath)
+    ? configuredPath
+    : "/stat/toyota/corolla";
+  const url = new URL(pathname, BASE);
   const query = clean(process.env.CATALOG_CARVECTOR_QUERY);
   if (query) url.searchParams.set("query", query);
   url.searchParams.set("minYear", "2010");
@@ -254,9 +273,10 @@ export class CarvectorJapanExactAdapter implements CatalogSourceAdapter {
       1_000_000_000,
     );
     const semanticEvidence = carvectorSpecificationEvidence(row);
-    // This adapter is auction-history evidence. Keep only completed combustion
-    // records with a fully specified identity and power; JPAuc remains the
-    // listing/gallery owner when the two sources are joined for public cards.
+    // This adapter is auction-history evidence. A completed row may remain
+    // useful when CarVector omits fuel; that row must keep powertrain/power out
+    // of calculation fields. JPAuc remains the listing/gallery owner after the
+    // exact identity join used for public cards.
     if (
       !sourceOfferId ||
       !sourceUrl ||
@@ -271,13 +291,13 @@ export class CarvectorJapanExactAdapter implements CatalogSourceAdapter {
       return null;
     if (
       semanticEvidence.year.status !== "exact" ||
-      semanticEvidence.fuel.status !== "exact" ||
-      semanticEvidence.powertrainKind.value !== "combustion" ||
-      semanticEvidence.engineCc.status !== "exact" ||
-      semanticEvidence.powerHp.status !== "exact" ||
-      semanticEvidence.powerKw.status !== "exact"
+      semanticEvidence.engineCc.status !== "exact"
     )
       return null;
+    const exactCombustionPower =
+      semanticEvidence.powertrainKind.value === "combustion" &&
+      semanticEvidence.powerHp.status === "exact" &&
+      semanticEvidence.powerKw.status === "exact";
     const now = new Date().toISOString();
     const modification = clean(row?.modification?.title);
     const title = [make, model, modification].filter(Boolean).join(" ");
@@ -300,18 +320,32 @@ export class CarvectorJapanExactAdapter implements CatalogSourceAdapter {
       mileageKm: positiveInteger(row?.mileage, 1, 5_000_000),
       engineCc: Number(semanticEvidence.engineCc.value),
       engineType: clean(row?.fuel?.title) || undefined,
-      fuel: semanticEvidence.fuel.value,
-      powertrainKind: "combustion",
+      fuel:
+        semanticEvidence.fuel.status === "exact"
+          ? semanticEvidence.fuel.value
+          : undefined,
+      powertrainKind:
+        semanticEvidence.powertrainKind.status === "exact"
+          ? semanticEvidence.powertrainKind.value
+          : "unknown",
       transmission:
         clean(row?.transmission?.title || row?.transmissionType?.title) ||
         undefined,
       color: clean(row?.color?.title) || undefined,
-      powerHp: Number(semanticEvidence.powerHp.value),
-      powerKw: Number(semanticEvidence.powerKw.value),
-      icePowerKw: Number(semanticEvidence.powerKw.value),
-      utilizationPowerKw: Number(semanticEvidence.powerKw.value),
-      powerDataConfidence: "source_exact",
-      powerDataSource: sourceUrl,
+      powerHp: exactCombustionPower
+        ? Number(semanticEvidence.powerHp.value)
+        : undefined,
+      powerKw: exactCombustionPower
+        ? Number(semanticEvidence.powerKw.value)
+        : undefined,
+      icePowerKw: exactCombustionPower
+        ? Number(semanticEvidence.powerKw.value)
+        : undefined,
+      utilizationPowerKw: exactCombustionPower
+        ? Number(semanticEvidence.powerKw.value)
+        : undefined,
+      powerDataConfidence: exactCombustionPower ? "source_exact" : undefined,
+      powerDataSource: exactCombustionPower ? sourceUrl : undefined,
       auctionName,
       auctionDate,
       lotNumber,
@@ -338,7 +372,8 @@ export class CarvectorJapanExactAdapter implements CatalogSourceAdapter {
           carvectorEvidenceOnly: true,
           galleryOwner: "jpauc_japan_past_open_after_exact_identity_join",
           imagePolicy: "no_standalone_public_gallery_from_auction_statistics",
-          powerFieldPolicy: "carvector_named_fuel_combustion_power_only_v1",
+          powerFieldPolicy:
+            "carvector_power_only_with_named_combustion_fuel_v2",
         },
       },
     };
