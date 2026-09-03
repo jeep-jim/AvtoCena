@@ -237,14 +237,26 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
   private ready = false;
 
   private async request(url: string, options: { method?: string; body?: string; referer?: string } = {}) {
-    const response = await fetch(url, {
-      method: options.method || "GET", body: options.body, redirect: "follow",
-      headers: { ...REQUEST_HEADERS, ...(this.cookie ? { cookie: this.cookie } : {}), ...(options.referer ? { referer: options.referer } : {}), ...(options.method === "POST" ? { "content-type": "application/x-www-form-urlencoded", origin: BASE } : {}) },
-      signal: AbortSignal.timeout(Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000))),
-    });
-    if (!response.ok) throw new Error(`jpauc_http_${response.status}:${url}`);
-    if (!this.cookie) this.cookie = String(response.headers.get("set-cookie") || "").split(";")[0];
-    return { response, html: await response.text() };
+    let lastError: unknown;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const response = await fetch(url, {
+          method: options.method || "GET", body: options.body, redirect: "follow",
+          headers: { ...REQUEST_HEADERS, ...(this.cookie ? { cookie: this.cookie } : {}), ...(options.referer ? { referer: options.referer } : {}), ...(options.method === "POST" ? { "content-type": "application/x-www-form-urlencoded", origin: BASE } : {}) },
+          signal: AbortSignal.timeout(Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000))),
+        });
+        if (!response.ok) throw new Error(`jpauc_http_${response.status}:${url}`);
+        if (!this.cookie) this.cookie = String(response.headers.get("set-cookie") || "").split(";")[0];
+        return { response, html: await response.text() };
+      } catch (error) {
+        lastError = error;
+        const message = String((error as Error)?.message || error);
+        const transient = /timeout|aborted|fetch failed|jpauc_http_(?:429|5\d\d)/i.test(message);
+        if (!transient || attempt === 2) throw error;
+        await new Promise((resolve) => setTimeout(resolve, 500));
+      }
+    }
+    throw lastError;
   }
 
   private async ensureReady() {
