@@ -117,6 +117,11 @@ test("source-only readiness gives the multi-request JPAuc bootstrap its own boun
   assert.match(simpleSourceReadiness, /pageTimeoutForSource\(source\)/);
 });
 
+test("source-only readiness accepts JPAuc only as identity and gallery evidence before exact price join", () => {
+  assert.match(simpleSourceReadiness, /validateReadinessEvidence/);
+  assert.match(simpleSourceReadiness, /evidenceAccepted/);
+});
+
 test("production source registry exactly matches the owner-approved allowlist", () => {
   for (const market of PUBLIC_CATALOG_MARKETS) {
     const expected = REQUIRED_CATALOG_SOURCES[market];
