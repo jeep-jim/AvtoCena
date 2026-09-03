@@ -174,7 +174,8 @@ test("generic recovery retains source-bound combustion offers as explicit prelim
   assert.match(source, /calculateOfferWithPreliminaryPowerPricing/);
   assert.match(source, /isPreliminaryPowerPendingCalculation/);
   assert.doesNotMatch(source, /isPreliminaryElectrifiedCalculation/);
-  assert.match(source, /recoveryPreliminaryPowerPending:\s*isPreliminaryPowerPendingCalculation/);
+  assert.match(source, /recoveryPreliminaryPowerPending:\s*(?:isPreliminaryPowerPendingCalculation|preliminaryCalculation)/);
+  assert.match(source, /preliminaryCalculation \|\| strictPublicReady/);
   assert.match(source, /preliminaryCount:\s*offers\.filter\(isPreliminaryPowerPendingCalculation\)/);
 });
 
