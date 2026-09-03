@@ -113,7 +113,7 @@ test("source-only readiness keeps CarVector evidence separate from public galler
 });
 
 test("source-only readiness gives the multi-request JPAuc bootstrap its own bounded timeout", () => {
-  assert.match(simpleSourceReadiness, /CATALOG_JPAUC_PAGE_TIMEOUT_MS \|\| 120_000/);
+  assert.match(simpleSourceReadiness, /CATALOG_JPAUC_PAGE_TIMEOUT_MS \|\| 180_000/);
   assert.match(simpleSourceReadiness, /pageTimeoutForSource\(source\)/);
 });
 
