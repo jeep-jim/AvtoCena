@@ -18,6 +18,13 @@ const fieldAuditEvidence = fs.readFileSync(
   new URL("docs/catalog-source-field-audit-v1-evidence.md", root),
   "utf8",
 );
+const gapReconSummary = JSON.parse(
+  fs.readFileSync(new URL("data/catalog/source-gap-recon-v1-summary.json", root), "utf8"),
+);
+const gapReconEvidence = fs.readFileSync(
+  new URL("docs/catalog-source-gap-recon-v1-evidence.md", root),
+  "utf8",
+);
 
 const markets = ["korea", "china", "japan", "uae", "europe", "georgia"];
 const classes = new Set(["research_pending", "exact_catalog", "lead_only", "rejected"]);
@@ -54,7 +61,7 @@ test("qualification contract requires both source-level and offer-level proof", 
   assert.match(roadmap, /Не продолжать бесконечное точечное лечение прежних площадок/);
 });
 
-test("field-audit checkpoint remains no-write and does not silently promote candidates", () => {
+test("field-audit checkpoint remains preserved as an immutable no-write evidence layer", () => {
   assert.equal(fieldAuditSummary.productionWrites, false);
   assert.equal(fieldAuditSummary.classificationMutations, false);
   assert.equal(fieldAuditSummary.publishAllowedMutations, false);
@@ -63,18 +70,38 @@ test("field-audit checkpoint remains no-write and does not silently promote cand
   assert.equal(fieldAuditSummary.sampleCount, 8);
   assert.equal(fieldAuditSummary.allClassificationsDeferred, true);
   assert.equal(fieldAuditSummary.allPublishAllowedRemainFalse, true);
+  assert.match(fieldAuditEvidence, /classificationDecision=deferred/);
+});
+
+test("targeted gap checkpoint closes only source-bound evidence and still cannot promote candidates", () => {
+  assert.equal(gapReconSummary.productionWrites, false);
+  assert.equal(gapReconSummary.classificationMutations, false);
+  assert.equal(gapReconSummary.publishAllowedMutations, false);
+  assert.equal(gapReconSummary.rawBodiesStored, false);
+  assert.equal(gapReconSummary.requestMethod, "GET_only");
+  assert.equal(gapReconSummary.challengeBypass, false);
+  assert.equal(gapReconSummary.robotsBypass, false);
+  assert.equal(gapReconSummary.sampleCount, 8);
+  assert.equal(gapReconSummary.allClassificationsDeferred, true);
+  assert.equal(gapReconSummary.allPublishAllowedRemainFalse, true);
+
+  const sourceMap = new Map(gapReconSummary.sources.map((row: any) => [row.sourceId, row]));
+  assert.deepEqual(sourceMap.get("bobaedream_korea_candidate")?.remainingDeficitCounts, { body: 2 });
+  assert.deepEqual(sourceMap.get("carswitch_uae_candidate")?.remainingDeficitCounts, { powerHp: 2 });
+  assert.deepEqual(sourceMap.get("cars24_uae_candidate")?.remainingDeficitCounts, { powerHp: 2 });
+  assert.deepEqual(sourceMap.get("dubicars_uae_exact")?.remainingDeficitCounts, { powerHp: 1, certifiedPower: 1 });
 
   for (const sourceId of auditedSourceIds) {
     const candidate = ledger.candidates.find((row: any) => row.sourceId === sourceId);
     assert.ok(candidate, `missing candidate ${sourceId}`);
     assert.equal(candidate.class, "research_pending");
     assert.equal(candidate.publishAllowed, false);
-    assert.match(candidate.evidence, /field audit run 33731051049/);
+    assert.match(candidate.evidence, /gap recon run 33733192143/);
   }
 
-  assert.match(fieldAuditEvidence, /classificationDecision=deferred/);
-  assert.match(fieldAuditEvidence, /Bobaedream/);
-  assert.match(fieldAuditEvidence, /CarSwitch/);
-  assert.match(fieldAuditEvidence, /CARS24 UAE/);
-  assert.match(fieldAuditEvidence, /DubiCars/);
+  assert.match(gapReconEvidence, /Ни один источник ещё не получает `exact_catalog`/);
+  assert.match(gapReconEvidence, /Bobaedream/);
+  assert.match(gapReconEvidence, /CarSwitch/);
+  assert.match(gapReconEvidence, /CARS24 UAE/);
+  assert.match(gapReconEvidence, /DubiCars/);
 });
