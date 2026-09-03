@@ -9,6 +9,8 @@ on:
       - ".github/workflows/catalog-source-chngoodcar-carslist-route-probe-v1.yml"
       - "scripts/catalog-source-chngoodcar-carslist-route-probe-v1.mjs"
       - "tests/catalog-source-chngoodcar-carslist-route-probe-v1.test.ts"
+      - "scripts/catalog-source-chngoodcar-carslist-search-contract-v1.mjs"
+      - "tests/catalog-source-chngoodcar-carslist-search-contract-v1.test.ts"
       - "scripts/catalog-source-access-probe-v1.mjs"
 
 permissions:
@@ -36,22 +38,37 @@ jobs:
           CATALOG_SOURCE_CHNGOODCAR_CARSLIST_ROUTE_TIMEOUT_MS: "15000"
           CATALOG_SOURCE_CHNGOODCAR_CARSLIST_ROUTE_MAX_BODY_BYTES: "1300000"
         run: node scripts/catalog-source-chngoodcar-carslist-route-probe-v1.mjs
+      - name: Verify source-declared search contract parser
+        run: node --import tsx --test tests/catalog-source-chngoodcar-carslist-search-contract-v1.test.ts
+      - name: Prove exact CarsList pager endpoint, method and initial arguments
+        env:
+          CATALOG_SOURCE_CHNGOODCAR_SEARCH_CONTRACT_TIMEOUT_MS: "15000"
+        run: node scripts/catalog-source-chngoodcar-carslist-search-contract-v1.mjs
       - name: Verify no-write evidence envelope
         run: |
           node - <<'NODE'
           const fs = require('fs');
-          const p = JSON.parse(fs.readFileSync('catalog-source-chngoodcar-carslist-route-probe-v1.json','utf8'));
-          for (const key of ['productionWrites','classificationMutations','publishAllowedMutations','objectStorageWrites','catalogGenerationWrites','rawBodiesStored','guessedRoutes']) {
-            if (p[key] !== false) throw new Error(`${key} must be false`);
+          for (const file of ['catalog-source-chngoodcar-carslist-route-probe-v1.json','catalog-source-chngoodcar-carslist-search-contract-v1.json']) {
+            const p = JSON.parse(fs.readFileSync(file,'utf8'));
+            for (const key of ['productionWrites','classificationMutations','publishAllowedMutations','objectStorageWrites','catalogGenerationWrites','rawBodiesStored','guessedRoutes']) {
+              if (p[key] !== false) throw new Error(`${file}:${key} must be false`);
+            }
           }
-          if (p.listFetch?.status !== 200) throw new Error(`CarsList status ${p.listFetch?.status}`);
-          if (p.listFetch?.explicitUsdLabel !== true) throw new Error('explicit USD label missing');
-          if (!Array.isArray(p.routeCandidates)) throw new Error('routeCandidates');
+          const routes = JSON.parse(fs.readFileSync('catalog-source-chngoodcar-carslist-route-probe-v1.json','utf8'));
+          if (routes.listFetch?.status !== 200) throw new Error(`CarsList status ${routes.listFetch?.status}`);
+          if (routes.listFetch?.explicitUsdLabel !== true) throw new Error('explicit USD label missing');
+          const contract = JSON.parse(fs.readFileSync('catalog-source-chngoodcar-carslist-search-contract-v1.json','utf8'));
+          if (contract.contract?.endpoint !== 'https://www.chngoodcar.com/Car/SearchCarList') throw new Error(`endpoint ${contract.contract?.endpoint}`);
+          if (contract.contract?.method !== 'POST') throw new Error(`method ${contract.contract?.method}`);
+          if (contract.contract?.pagesize !== 15) throw new Error(`pagesize ${contract.contract?.pagesize}`);
+          if (contract.verificationToken?.present !== true || contract.verificationToken?.valuePresent !== true) throw new Error('verification token contract');
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
         with:
           name: catalog-source-chngoodcar-carslist-route-probe-v1
-          path: catalog-source-chngoodcar-carslist-route-probe-v1.json
+          path: |
+            catalog-source-chngoodcar-carslist-route-probe-v1.json
+            catalog-source-chngoodcar-carslist-search-contract-v1.json
           if-no-files-found: error
           retention-days: 7
