@@ -1,0 +1,71 @@
+name: Catalog source qualification · append roadmap checkpoint
+
+on:
+  push:
+    branches:
+      - chore/source-gap-probe-v1-20260903
+    paths:
+      - ".github/workflows/catalog-source-gap-roadmap-checkpoint.yml"
+
+permissions:
+  contents: write
+
+jobs:
+  append:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: chore/source-gap-probe-v1-20260903
+          fetch-depth: 1
+      - name: Append 40.25 source-gap checkpoint once
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          path = Path('roadmap.md')
+          text = path.read_text(encoding='utf-8')
+          marker = '<!-- checkpoint-40.25-source-gap-recon-20260903 -->'
+          if marker in text:
+              print('checkpoint already present')
+              raise SystemExit(0)
+          block = r'''
+
+---
+
+<!-- checkpoint-40.25-source-gap-recon-20260903 -->
+### 40.25.1. Checkpoint source-bound gap recon — 2026-09-03
+
+Продолжен новый курс квалификации источников без перезапуска и без записи в production.
+
+Подтверждённый no-write запуск `33733192143` завершён `success`; artifact `9884697956`, digest `sha256:b5e1269987af32693d7f16a2008dd52789dfeaeacb69f2a20afeb2b8be48e681`. Проверены 8 фиксированных detail samples четырёх сильнейших кандидатов. Контур сохраняет `productionWrites=false`, `classificationMutations=false`, `publishAllowedMutations=false`, `rawBodiesStored=false`, использует только GET и не обходит robots/login/challenge.
+
+Новые доказательства:
+
+- **Bobaedream** — listing-bound gallery доказана на обоих samples: structural gallery до 40 изображений, 40 source tags `차량 썸네일 사진`, 20-image same-prefix sequence. Остался только canonical `body`; `carshape=대형차` не переводить в sedan.
+- **CarSwitch** — единица двигателя доказана source-bound visible detail: Captiva `1.5L I4` → `1500 cc`, Durango `5.7L V8` → `5700 cc`. Остался только `powerHp` на 2/2 samples.
+- **CARS24 UAE** — цена привязана к current offer через совпадение visible detail и offer-local `cars24Price/price`; Groove `31 499 AED`, Territory `64 999 AED`. Engine unit также доказан current-offer highlights `1.5 L`/`1.8 L` → `1500/1800 cc`. Остался только `powerHp` на 2/2 samples.
+- **DubiCars** — listing-bound gallery доказана на обоих samples; Veloster detail содержит `2.0L MPI` → `2000 cc`. У ICE sample остался `powerHp`; у electric iX1 остался required certified/utilization/30-minute power. Peak `313 HP` не подменяет certified power.
+
+Все четыре кандидата остаются `research_pending`, `publishAllowed=false`; ни один не повышен до `exact_catalog`. Production generation/manifest/Object Storage не трогались.
+
+Артефакты доказательств в репозитории:
+
+- `docs/catalog-source-gap-recon-v1-evidence.md`;
+- `data/catalog/source-gap-recon-v1-summary.json`;
+- обновлён `data/catalog/source-qualification-v1.json`.
+
+Следующая точка: bounded read-only alternate-route/source-state probes только по оставшимся полям — Bobaedream canonical body; CarSwitch/CARS24 source-bound `powerHp`; DubiCars ICE `powerHp` и EV certified/utilization/30-minute power. Если разрешённое source-bound представление поля не найдено, фиксировать limitation и только затем принимать решение `lead_only`/`rejected` либо ограниченный `exact_catalog` для реально проходящих offer classes.
+'''
+          path.write_text(text.rstrip() + block + '\n', encoding='utf-8')
+          PY
+      - name: Commit checkpoint to branch
+        run: |
+          if git diff --quiet -- roadmap.md; then
+            echo "No roadmap change"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add roadmap.md
+          git commit -m "Record source-gap qualification checkpoint in roadmap"
+          git push origin HEAD:chore/source-gap-probe-v1-20260903
