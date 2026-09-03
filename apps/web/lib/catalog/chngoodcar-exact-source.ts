@@ -12,9 +12,12 @@ const HEADERS = {
   pragma: "no-cache",
   "user-agent": USER_AGENT,
 };
-const BAD_IMAGE = /logo|icon|avatar|qrcode|qr-code|banner|sprite|tracking|pixel|favicon|appstore|googleplay|placeholder|default|dealer|seller|brand|wechat|weixin|badge|flag/i;
+const BAD_IMAGE = /logo|icon|avatar|qrcode|qr-code|banner|sprite|tracking|pixel|favicon|appstore|googleplay|placeholder|default|dealer|seller|brand|wechat|weixin|badge|flag|douyin|whatsapp|telegram|facebook|twitter|social|\/vk[./_\-]/i;
 const IMAGE_EXTENSION = /\.(?:jpe?g|png|webp|avif)(?:[?#]|$)/i;
 const ICE_FUELS = new Set(["汽油", "柴油", "液化天然气", "液化石油气", "天然气"]);
+const PASSENGER_BODY_TYPES = new Set(["轿车", "SUV", "MPV", "两厢车", "三厢车", "旅行车", "跑车"]);
+const TRANSMISSION_VALUES = new Set(["手动", "自动", "手自一体", "CVT", "E-CVT", "双离合", "AMT", "DCT", "无级变速"]);
+const DRIVE_VALUES = new Set(["前置前驱", "前置后驱", "后置后驱", "中置后驱", "前轮驱动", "后轮驱动", "全时四驱", "适时四驱", "分时四驱", "四轮驱动", "四驱"]);
 const METRIC_HP_KW = 0.73549875;
 const BRAND_PREFIXES = [
   "FAW Toyota", "现代汽车", "梅赛德斯-奔驰", "马自达", "比亚迪", "奔驰", "宝马", "奥迪", "丰田", "本田", "大众", "日产", "起亚", "现代", "标致", "吉利", "福田", "金龙", "中通", "开瑞", "极氪", "长安", "众泰", "知豆", "MG",
@@ -157,6 +160,11 @@ function positiveNumber(value: unknown) {
   return Number.isFinite(n) && n > 0 ? n : undefined;
 }
 
+function exactEnum(value: unknown, values: Set<string>) {
+  const normalized = clean(value, 80);
+  return values.has(normalized) ? normalized : undefined;
+}
+
 function detailId(url: string) {
   return url.match(DETAIL_RE)?.[1] || "";
 }
@@ -177,6 +185,10 @@ export function goodCarKwToProjectHp(powerKw: number) {
 
 export function isGoodCarIceFuel(fuel: unknown) {
   return ICE_FUELS.has(clean(fuel, 40));
+}
+
+export function isGoodCarPassengerBodyType(bodyType: unknown) {
+  return PASSENGER_BODY_TYPES.has(clean(bodyType, 40));
 }
 
 export function splitGoodCarMakeModel(sourceTitle: string) {
@@ -220,10 +232,10 @@ export function parseGoodCarDetailHtml(html: string, detailUrl: string) {
     engineCc,
     powerKw,
     fuel,
-    transmission: firstMatch(coreText, /变速箱\s+([^\s]{1,24})/),
+    transmission: exactEnum(firstMatch(coreText, /变速箱\s+([^\s]{1,24})/), TRANSMISSION_VALUES),
     bodyType: firstMatch(coreText, /车型\s+(轿车|SUV|MPV|两厢车|三厢车|旅行车|跑车|皮卡|面包车|客车|货车)/i),
     vehicleType: firstMatch(coreText, /车辆类型\s+([^\s]{1,24})/),
-    drive: firstMatch(coreText, /驱动形式\s+([^\s]{1,24})/),
+    drive: exactEnum(firstMatch(coreText, /驱动形式\s+([^\s]{1,24})/), DRIVE_VALUES),
     color: firstMatch(coreText, /车身颜色\s+([^\s]{1,24})/),
     vin: firstMatch(coreText, /VIN码\s+([A-HJ-NPR-Z0-9]{11,17})/i),
     doors: firstMatch(coreText, /门数\s+(\d+)/, (m) => Number(m[1])),
@@ -310,7 +322,7 @@ export class ChnGoodCarExactAdapter implements CatalogSourceAdapter {
     const row = raw as GoodCarExactRawOffer;
     if (!row?.sourceOfferId || !row.detailUrl || !row.sourceTitle || !row.productionDate || !row.sourcePrice) return null;
     if (row.currency !== "USD" || row.currencyLabelVerified !== true || row.listDetailPriceParity !== true || row.listDetailTitleParity !== true) return null;
-    if (!isGoodCarIceFuel(row.fuel) || !(row.engineCc > 0) || !(row.powerKw > 0) || row.imageUrls.length < 5) return null;
+    if (!isGoodCarIceFuel(row.fuel) || !isGoodCarPassengerBodyType(row.bodyType) || !(row.engineCc > 0) || !(row.powerKw > 0) || row.imageUrls.length < 5) return null;
     const identity = splitGoodCarMakeModel(row.sourceTitle);
     if (!identity) return null;
     const powerHp = goodCarKwToProjectHp(row.powerKw);
@@ -356,7 +368,7 @@ export class ChnGoodCarExactAdapter implements CatalogSourceAdapter {
         sourceTitle: row.sourceTitle,
         vin: row.vin,
         galleryStoredAs: "json_urls",
-        exactScope: "ICE_only_no_publish_canary_v1",
+        exactScope: "ICE_passenger_only_no_publish_canary_v1",
         semanticEvidence: {
           priceCurrency: "detail numeric price + public CarsList 价格(US $) + homepage list/detail price parity",
           year: "offer-bound 出厂年份",
@@ -364,7 +376,8 @@ export class ChnGoodCarExactAdapter implements CatalogSourceAdapter {
           engineCc: "offer-bound 排量 (ml)",
           powerKw: "offer-bound 功率 (kw)",
           powerHp: { method: "metric_horsepower_from_kW", kwPerHp: METRIC_HP_KW, rounded: "nearest_integer" },
-          gallery: "detail core before 猜你喜欢; >=5 source-hosted images",
+          bodyType: "offer-bound 车型; v1 exact gate allows passenger body types only",
+          gallery: "detail core before 猜你喜欢; social assets rejected; >=5 source-hosted listing images",
           identity: "detail <title> + explicit supported make prefix",
         },
         raw: row,
@@ -381,7 +394,7 @@ export class ChnGoodCarExactAdapter implements CatalogSourceAdapter {
       photoIdentityVerified: verified,
       galleryVerified: verified,
       galleryImageCount: urls.length,
-      gallerySafetyMode: "chngoodcar_exact_detail_core_before_recommendations",
+      gallerySafetyMode: "chngoodcar_exact_detail_core_before_recommendations_social_assets_rejected",
       galleryStoredAs: "json_urls",
     };
     return verified ? urls.map(remoteImage) : [];
