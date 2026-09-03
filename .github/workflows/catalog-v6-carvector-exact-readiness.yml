@@ -1,0 +1,75 @@
+name: Catalog V6 · CarVector exact evidence readiness
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - ".github/workflows/catalog-v6-carvector-exact-readiness.yml"
+      - "apps/web/lib/catalog/carvector-current-source.ts"
+      - "apps/web/lib/catalog/importer.ts"
+      - "scripts/carvector-exact-readiness.ts"
+      - "tests/catalog-carvector-exact-evidence.test.ts"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-carvector-exact-readiness
+  cancel-in-progress: true
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CATALOG_CARVECTOR_QUERY: Toyota Corolla
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "40000"
+      CARVECTOR_EXACT_READINESS_MAX_PAGES: "8"
+      CARVECTOR_EXACT_READINESS_MIN_ROWS: "3"
+      CARVECTOR_EXACT_READINESS_OUTPUT: carvector-exact-readiness.json
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Verify exact CarVector evidence semantics
+        run: node --import tsx --test tests/catalog-carvector-exact-evidence.test.ts
+      - name: Collect exact CarVector auction evidence without publishing
+        run: npx tsx scripts/carvector-exact-readiness.ts
+      - name: Enforce evidence-only source contract
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const data = JSON.parse(fs.readFileSync(process.env.CARVECTOR_EXACT_READINESS_OUTPUT, 'utf8'));
+          const offers = Array.isArray(data.offers) ? data.offers : [];
+          const problems = [];
+          if (offers.length < 3) problems.push(`rows_${offers.length}`);
+          for (const offer of offers) {
+            const raw = offer?.operational?.raw || {};
+            const evidence = offer?.operational?.semanticEvidence || {};
+            if (offer.sourceId !== 'carvector_japan_stat_open' || offer.market !== 'japan') problems.push('source_identity');
+            if (offer.status !== 'sold' || offer.catalogKind !== 'auction_result' || offer.auctionResult !== 'sold') problems.push('result_semantics');
+            if (offer.auctionPriceKind !== 'published_result' || offer.operational?.auctionResultPriceVerified !== true) problems.push('price_not_verified');
+            if (!(Number(offer.sourcePrice) > 0) || offer.sourceCurrency !== 'JPY') problems.push('price_currency');
+            if (!offer.make || !offer.model || !offer.generation || !offer.auctionName || !offer.auctionDate || !offer.lotNumber) problems.push('identity_incomplete');
+            if (!/^https:\/\/carvector\.com\/stat\/.+\/[a-f0-9-]{36}$/.test(String(offer.operational?.sourceUrl || ''))) problems.push('source_url');
+            if (offer.fuel !== 'petrol' && offer.fuel !== 'diesel' && offer.fuel !== 'lpg') problems.push('non_combustion');
+            if (offer.powertrainKind !== 'combustion' || !(Number(offer.engineCc) >= 300) || !(Number(offer.powerHp) >= 20)) problems.push('specification');
+            if (evidence?.year?.status !== 'exact' || evidence?.fuel?.status !== 'exact' || evidence?.engineCc?.status !== 'exact' || evidence?.powerHp?.status !== 'exact') problems.push('evidence_not_exact');
+            if (Array.isArray(offer.images) && offer.images.length) problems.push('standalone_gallery_promoted');
+            if (raw.carvectorEvidenceOnly !== true || raw.galleryOwner !== 'jpauc_japan_past_open_after_exact_identity_join') problems.push('evidence_role');
+            if (offer.calculationStatus !== 'needs_data') problems.push('standalone_marked_ready');
+          }
+          console.log(JSON.stringify({ count: offers.length, problems: [...new Set(problems)] }, null, 2));
+          if (problems.length) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: readiness-carvector-exact-evidence
+          path: carvector-exact-readiness.json
+          if-no-files-found: warn
+          retention-days: 3
