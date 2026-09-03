@@ -18,10 +18,42 @@ test('Good Car exact 2016 Prado 3.5 TX diesel label is a verified external-refer
   assert.equal(conflict.referenceUrl, 'https://www.autohome.com.cn/spec/23948/');
 });
 
+test('Good Car exact 2018 Song MAX flagship 6-seat SUV label conflicts with the exact MPV reference', () => {
+  const conflict = goodCarVerifiedReferenceConflict({
+    sourceTitle: '比亚迪 宋MAX 2018款 1.5T 自动智联旗舰型 6座',
+    engineCc: 1500,
+    powerKw: 113,
+    fuel: '汽油',
+    bodyType: 'SUV',
+  });
+  assert.ok(conflict);
+  assert.equal(conflict.field, 'bodyType');
+  assert.equal(conflict.sourceValue, 'SUV');
+  assert.equal(conflict.verifiedValue, 'MPV');
+  assert.equal(conflict.referenceSource, 'Autohome exact spec 33704');
+});
+
+test('Good Car exact 2012 Camry Zunrui 2.5HG petrol label conflicts with the exact hybrid reference', () => {
+  const conflict = goodCarVerifiedReferenceConflict({
+    sourceTitle: '丰田 凯美瑞 2012款 尊瑞 2.5HG 豪华版',
+    engineCc: 2500,
+    powerKw: 118,
+    fuel: '汽油',
+    bodyType: '轿车',
+  });
+  assert.ok(conflict);
+  assert.equal(conflict.field, 'fuel');
+  assert.equal(conflict.sourceValue, '汽油');
+  assert.equal(conflict.verifiedValue, '油电混合');
+  assert.equal(conflict.referenceSource, 'Autohome exact spec 12931');
+});
+
 test('Good Car reference conflict gate is narrow and never rewrites ordinary rows', () => {
-  assert.equal(goodCarVerifiedReferenceConflict({ sourceTitle: '丰田普拉多 2016款 3.5L 自动TX', engineCc: 3500, powerKw: 206, fuel: '汽油' }), null);
+  assert.equal(goodCarVerifiedReferenceConflict({ sourceTitle: '丰田普拉多 2016款 3.5L 自动TX', engineCc: 3500, powerKw: 206, fuel: '汽油', bodyType: 'SUV' }), null);
+  assert.equal(goodCarVerifiedReferenceConflict({ sourceTitle: '比亚迪 宋MAX 2018款 1.5T 自动智联旗舰型 6座', engineCc: 1500, powerKw: 113, fuel: '汽油', bodyType: 'MPV' }), null);
+  assert.equal(goodCarVerifiedReferenceConflict({ sourceTitle: '丰田 凯美瑞 2012款 尊瑞 2.5HG 豪华版', engineCc: 2500, powerKw: 118, fuel: '油电混合', bodyType: '轿车' }), null);
   assert.equal(goodCarVerifiedReferenceConflict({ sourceTitle: '丰田普拉多 2016款 2.7L 自动标准版', engineCc: 2700, powerKw: 120, fuel: '汽油' }), null);
-  assert.equal(goodCarVerifiedReferenceConflict({ sourceTitle: '马自达CX-50行也 2023款 2.0L 领行版', engineCc: 2000, powerKw: 114, fuel: '汽油' }), null);
+  assert.equal(goodCarVerifiedReferenceConflict({ sourceTitle: '马自达CX-50行也 2023款 2.0L 领行版', engineCc: 2000, powerKw: 114, fuel: '汽油', bodyType: 'SUV' }), null);
 });
 
 test('paginated Good Car adapter fails closed on a verified exact-version source conflict', () => {
