@@ -7,6 +7,18 @@ const HEADERS = {
 };
 const BAD_IMAGE = /logo|icon|avatar|qrcode|qr-code|banner|sprite|tracking|pixel|favicon|appstore|googleplay|placeholder|default|dealer|seller|brand|wechat|weixin|badge|flag/i;
 const IMAGE_EXTENSION = /\.(?:jpe?g|png|webp|avif)(?:[?#]|$)/i;
+const GUAZI_BOT_CHALLENGE = /EO-Bot-Js-Token|solveChallenge|TencentEdgeOne/i;
+
+export function isGuaziSourceBotChallenge(markup: unknown) {
+  return GUAZI_BOT_CHALLENGE.test(String(markup ?? ""));
+}
+
+function blockedSourceError(message: string, status?: number) {
+  const error = new Error(message) as Error & { blocked?: boolean; status?: number };
+  error.blocked = true;
+  error.status = status;
+  return error;
+}
 
 function clean(value: unknown) {
   return String(value ?? "")
@@ -246,10 +258,13 @@ abstract class ExactChinaAdapter implements CatalogSourceAdapter {
     return parseChineseCards(html, pageUrl, this.detailPattern, (value) => this.detailId(value));
   }
 
+  protected validateListResponse(_html: string, _response: Response) {}
+
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const page = Math.max(1, Number(cursor || 1));
     const url = this.listUrl(page);
     const { response, html } = await getHtml(url, this.baseUrl);
+    this.validateListResponse(html, response);
     const items = this.parseList(html, response.url || url);
     return { items, nextCursor: items.length ? String(page + 1) : null, finished: !items.length, count: items.length,
       health: { ok: items.length > 0, message: `${this.label}:exact_list:${items.length}`, checkedAt: new Date().toISOString(), httpStatus: response.status, contentType: response.headers.get("content-type") || "" } };
@@ -308,6 +323,25 @@ class GuaziChinaExactAdapter extends ExactChinaAdapter {
   listUrl(page: number) { return page <= 1 ? `${this.baseUrl}/used-cars/` : `${this.baseUrl}/used-cars/page${page}/`; }
   detailId(url: string) { return url.match(this.detailPattern)?.[1] || ""; }
   parseList(html: string, pageUrl: string) { return parseGuaziGlobalCards(html, pageUrl); }
+  protected validateListResponse(html: string, response: Response) {
+    if (isGuaziSourceBotChallenge(html)) throw blockedSourceError("guazi_source_blocked_bot_challenge", response.status);
+  }
+
+  async healthCheck(): Promise<SourceRunHealth> {
+    try {
+      const page = await this.fetchPage("1");
+      return page.health || { ok: false, message: "Guazi exact source health unavailable", checkedAt: new Date().toISOString() };
+    } catch (error) {
+      const sourceError = error as Error & { blocked?: boolean; status?: number };
+      return {
+        ok: false,
+        blocked: sourceError.blocked === true,
+        message: String(sourceError.message || error),
+        checkedAt: new Date().toISOString(),
+        httpStatus: sourceError.status,
+      };
+    }
+  }
 
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as ChinaRow;

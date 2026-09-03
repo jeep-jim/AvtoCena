@@ -15,6 +15,7 @@ type BridgePayload = {
   offers?: unknown[];
   error?: string;
   causeCode?: string;
+  blocked?: boolean;
 };
 
 function bridgeErrorDetail(payload: BridgePayload) {
@@ -82,7 +83,10 @@ async function fetchPayload(kind: BridgeKind, page: number): Promise<{ response:
   catch { throw new Error(`yandex_bridge_non_json_${response.status}_${kind}_${page}`); }
   if (!response.ok) {
     const detail = bridgeErrorDetail(payload);
-    throw new Error(`yandex_bridge_http_${response.status}_${kind}_${page}${detail ? `_${detail}` : ""}`);
+    const error = new Error(`yandex_bridge_http_${response.status}_${kind}_${page}${detail ? `_${detail}` : ""}`) as Error & { blocked?: boolean; status?: number };
+    error.blocked = payload.blocked === true || /(?:^|_)blocked(?:_|$)/i.test(detail);
+    error.status = response.status;
+    throw error;
   }
   return { response, payload };
 }

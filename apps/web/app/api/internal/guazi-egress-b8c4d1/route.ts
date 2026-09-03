@@ -59,6 +59,9 @@ export async function GET(request: Request) {
       durationMs: Date.now() - startedAt,
     }, { headers: { "cache-control": "no-store" } });
   } catch (error) {
+    const sourceError = error as Error & { blocked?: boolean };
+    const message = String(sourceError?.message || error).slice(0, 300);
+    const blocked = sourceError.blocked === true || /guazi_source_blocked_bot_challenge/i.test(message);
     return NextResponse.json({
       mode: "yandex_fixed_guazi_source_bridge",
       sourceId: "guazi_china_open",
@@ -66,8 +69,10 @@ export async function GET(request: Request) {
       page,
       count: 0,
       offers: [],
-      error: String((error as Error)?.message || error).slice(0, 300),
+      error: message,
+      causeCode: blocked ? "guazi_source_blocked_bot_challenge" : "guazi_source_fetch_failed",
+      blocked,
       durationMs: Date.now() - startedAt,
-    }, { status: 502, headers: { "cache-control": "no-store" } });
+    }, { status: blocked ? 503 : 502, headers: { "cache-control": "no-store" } });
   }
 }

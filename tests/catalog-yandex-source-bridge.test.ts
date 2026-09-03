@@ -33,6 +33,9 @@ test("Guazi Yandex endpoint is fixed-source only and preserves exact listing gal
   assert.match(guaziRoute, /guaziChinaExactSource\.normalizeOffer\(raw\)/);
   assert.match(guaziRoute, /guaziChinaExactSource\.fetchImages\(offer\)/);
   assert.match(guaziRoute, /Math\.min\(10_000, page\)/);
+  assert.match(guaziRoute, /guazi_source_blocked_bot_challenge/);
+  assert.match(guaziRoute, /status: blocked \? 503 : 502/);
+  assert.match(bridge, /payload\.blocked === true/);
   assert.doesNotMatch(guaziRoute, /searchParams\.get\(["']url["']\)/);
   assert.doesNotMatch(guaziRoute, /YC_OBJECT_STORAGE|JSON_STORAGE_DRIVER|SECRET_ACCESS_KEY/);
 });
