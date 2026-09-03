@@ -62,6 +62,12 @@ export type CarSwitchExactRow = {
   currency: "AED";
   images: string[];
   vin?: string;
+  engineCc?: number;
+  fuel?: string;
+  transmission?: string;
+  drive?: string;
+  bodyType?: string;
+  color?: string;
 };
 
 function clean(value: unknown) {
@@ -159,6 +165,61 @@ function entityMileage(entity: Record<string, unknown>) {
   return /SMI|MILE/.test(unit) ? Math.round(value * 1.609344) : value;
 }
 
+function entityEngineCc(entity: Record<string, unknown>) {
+  const engine = entity.vehicleEngine;
+  if (!engine || typeof engine !== "object") return undefined;
+  const raw = clean((engine as any).engineDisplacement).replace(",", ".");
+  const match = raw.match(/([0-9]+(?:\.[0-9]+)?)/);
+  if (!match) return undefined;
+  const value = Number(match[1]);
+  if (!Number.isFinite(value) || value <= 0) return undefined;
+  if (value >= 0.3 && value <= 10) return Math.round(value * 1_000);
+  if (value >= 300 && value <= 10_000) return Math.round(value);
+  return undefined;
+}
+
+function entityFuel(entity: Record<string, unknown>) {
+  const engine = entity.vehicleEngine;
+  const raw = clean((engine && typeof engine === "object" ? (engine as any).fuelType : undefined) || entity.fuelType).toLowerCase();
+  if (/hybrid|phev|hev|mhev/.test(raw)) return "hybrid";
+  if (/diesel/.test(raw)) return "diesel";
+  if (/petrol|gasoline/.test(raw)) return "petrol";
+  if (/electric|battery/.test(raw)) return "electric";
+  if (/lpg|cng/.test(raw)) return "lpg";
+  return undefined;
+}
+
+function entityTransmission(entity: Record<string, unknown>) {
+  const raw = clean(entity.vehicleTransmission).toLowerCase();
+  if (/cvt/.test(raw)) return "cvt";
+  if (/dct|dual clutch/.test(raw)) return "dct";
+  if (/manual/.test(raw)) return "manual";
+  if (/automatic|auto/.test(raw)) return "automatic";
+  return undefined;
+}
+
+function entityDrive(entity: Record<string, unknown>) {
+  const raw = clean(entity.driveWheelConfiguration).toLowerCase();
+  if (/4wd|awd|4x4|all[- ]?wheel|four[- ]?wheel/.test(raw)) return "awd";
+  if (/fwd|front[- ]?wheel|2wd/.test(raw)) return "fwd";
+  if (/rwd|rear[- ]?wheel/.test(raw)) return "rwd";
+  return undefined;
+}
+
+function entityBodyType(entity: Record<string, unknown>) {
+  const raw = clean(entity.bodyType).toLowerCase();
+  if (/pickup|pick-up/.test(raw)) return "pickup";
+  if (/minivan|mpv/.test(raw)) return "minivan";
+  if (/van/.test(raw)) return "van";
+  if (/suv|crossover/.test(raw)) return "suv";
+  if (/sedan|saloon/.test(raw)) return "sedan";
+  if (/hatch/.test(raw)) return "hatchback";
+  if (/wagon|estate/.test(raw)) return "wagon";
+  if (/coupe|coupé/.test(raw)) return "coupe";
+  if (/convertible|cabrio|roadster/.test(raw)) return "convertible";
+  return undefined;
+}
+
 function entityPrice(entity: Record<string, unknown>) {
   const offers = entity.offers;
   const list = Array.isArray(offers) ? offers : offers ? [offers] : [];
@@ -192,6 +253,12 @@ function rowFromEntity(entity: Record<string, unknown>, identity: NonNullable<Re
     currency: "AED",
     images,
     vin: clean(entity.vehicleIdentificationNumber) || undefined,
+    engineCc: entityEngineCc(entity),
+    fuel: entityFuel(entity),
+    transmission: entityTransmission(entity),
+    drive: entityDrive(entity),
+    bodyType: entityBodyType(entity),
+    color: clean(entity.color) || undefined,
   };
 }
 
@@ -300,7 +367,8 @@ export class CarSwitchUaeExactAdapter implements CatalogSourceAdapter {
     return {
       id: stableOfferId(this.sourceId, row.id), sourceId: this.sourceId, sourceOfferId: row.id, market: "uae", offerType: "fixed", status: "active",
       sourceTitle: `${row.year} ${row.make} ${row.model}${row.trim ? ` ${row.trim}` : ""}`.trim(), make: row.make, model: row.model, trim: row.trim, year: row.year,
-      mileageKm: row.mileageKm, sourcePrice: row.price, sourceCurrency: "AED", priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data",
+      mileageKm: row.mileageKm, engineCc: row.engineCc, fuel: row.fuel, transmission: row.transmission, drive: row.drive, bodyType: row.bodyType, color: row.color,
+      sourcePrice: row.price, sourceCurrency: "AED", priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data",
       firstSeenAt: now, updatedAt: now,
       operational: {
         sourceUrl: row.sourceUrl, sourceVenueName: "CarSwitch UAE", exactDetail: false, exactFields: true, exactPhotos: galleryVerified,
@@ -324,6 +392,12 @@ export class CarSwitchUaeExactAdapter implements CatalogSourceAdapter {
     offer.sourceCurrency = "AED";
     offer.mileageKm = detail.mileageKm || offer.mileageKm;
     offer.trim = detail.trim || offer.trim;
+    offer.engineCc = detail.engineCc || offer.engineCc;
+    offer.fuel = detail.fuel || offer.fuel;
+    offer.transmission = detail.transmission || offer.transmission;
+    offer.drive = detail.drive || offer.drive;
+    offer.bodyType = detail.bodyType || offer.bodyType;
+    offer.color = detail.color || offer.color;
     const op = offer.operational as any;
     op.exactDetail = true;
     op.exactFields = true;
