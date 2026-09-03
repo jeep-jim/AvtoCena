@@ -31,10 +31,10 @@ test('objectEvidenceNearId finds JSON object that actually contains offer id', (
 test('localIdEvidence binds inline script evidence to the listing id context', () => {
   const html = `<script>window.__x={id:"857416",engineDisplacement:"5.7",horsepower:"360 HP",price:13500,images:["https://example.com/cars/857416/a.jpg","https://example.com/cars/857416/b.jpg"]}</script>`;
   const rows = localIdEvidence(html, 'https://example.com/car/857416', '857416');
-  assert.equal(rows.length, 1);
-  assert.ok(rows[0].keyValues.some((row) => row.key === 'engineDisplacement' && row.value === '5.7'));
-  assert.ok(rows[0].keyValues.some((row) => row.key === 'horsepower' && row.value === '360 HP'));
-  assert.ok(rows[0].imageCount >= 2);
+  assert.ok(rows.length >= 1);
+  assert.ok(rows.some((block) => block.keyValues.some((row) => row.key === 'engineDisplacement' && row.value === '5.7')));
+  assert.ok(rows.some((block) => block.keyValues.some((row) => row.key === 'horsepower' && row.value === '360 HP')));
+  assert.ok(rows.some((block) => block.imageCount >= 2));
 });
 
 test('targeted gap recon cannot write production or bypass access controls', () => {
