@@ -27,7 +27,8 @@ const HEADERS = {
   'user-agent': USER_AGENT,
 };
 
-const SECRETISH_RE = /(?:authorization|cookie|set-cookie|csrf|xsrf|bearer|access[_-]?token|refresh[_-]?token|session[_-]?id|password|passwd|secret|api[_-]?key)\s*[:=]\s*[^\s,;]+/gi;
+const SECRETISH_RE = /(?:["']?(?:authorization|cookie|set-cookie|csrf|xsrf|access[_-]?token|refresh[_-]?token|session[_-]?id|password|passwd|secret|api[_-]?key)["']?\s*[:=]\s*)(?:["'][^"']*["']|[^\s,;}]+)/gi;
+const BEARER_RE = /\bBearer\s+[A-Za-z0-9._~+\/=-]+/gi;
 const ROUTE_HINT_RE = /(?:api|ajax|photo|image|gallery|spec|detail|vehicle|car|stock|offer|listing|inventory|graphql|json)/i;
 const KEY_HINT_RE = /(?:price|amount|currency|engine|displacement|capacity|cc|liter|litre|horse|power|kw|body|type|photo|image|gallery|media|certif|rated|continuous|30.?minute)/i;
 const IMAGE_EXT_RE = /\.(?:jpe?g|png|webp|avif)(?:\?|$)/i;
@@ -49,6 +50,7 @@ function clean(value, limit = 700) {
     .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
     .replace(/<[^>]+>/g, ' ')
     .replace(SECRETISH_RE, '[redacted]')
+    .replace(BEARER_RE, 'Bearer [redacted]')
     .replace(/[\u0000-\u001f]+/g, ' ')
     .replace(/\s+/g, ' ')
     .trim()
@@ -58,6 +60,7 @@ function clean(value, limit = 700) {
 function rawSnippet(value, limit = 700) {
   return decodeHtml(String(value ?? ''))
     .replace(SECRETISH_RE, '[redacted]')
+    .replace(BEARER_RE, 'Bearer [redacted]')
     .replace(/[\u0000-\u0008\u000b\u000c\u000e-\u001f]+/g, ' ')
     .replace(/\s+/g, ' ')
     .trim()
