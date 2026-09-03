@@ -262,6 +262,8 @@ async function collectSource(source) {
   let sourceSeen = 0;
   let sourceNormalized = 0;
   let sourceSaved = 0;
+  let sourceEvidenceSeen = 0;
+  let sourceEvidenceAccepted = 0;
   let noProgressPages = 0;
   let stopReason = "finished";
   const seenCursors = new Set();
@@ -276,6 +278,14 @@ async function collectSource(source) {
       sourceSeen += rawRows.length; seen += rawRows.length;
       const bases = [];
       for (const raw of rawRows) {
+        if (typeof source.validateReadinessEvidence === "function") {
+          sourceEvidenceSeen++;
+          try {
+            if (source.validateReadinessEvidence(raw) === true) sourceEvidenceAccepted++;
+          } catch (error) {
+            errors.push({ sourceId: source.sourceId, stage: "readiness_evidence", error: String(error?.message || error) });
+          }
+        }
         let base = null;
         try { base = source.normalizeOffer(raw); } catch (error) {
           errors.push({ sourceId: source.sourceId, stage: "normalize", error: String(error?.message || error) });
@@ -322,6 +332,10 @@ async function collectSource(source) {
     seen: sourceSeen,
     normalized: sourceNormalized,
     saved: sourceSaved,
+    readinessRole: String(source.readinessRole || ""),
+    evidenceSeen: sourceEvidenceSeen,
+    evidenceAccepted: sourceEvidenceAccepted,
+    evidenceRejected: sourceEvidenceSeen - sourceEvidenceAccepted,
     stopReason,
   });
   await checkpoint("source_complete");
