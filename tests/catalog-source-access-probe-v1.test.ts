@@ -1,0 +1,58 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import test from 'node:test';
+import { evaluateRobots, extractDetailCandidates, summarizeBody } from '../scripts/catalog-source-access-probe-v1.mjs';
+
+test('robots parser blocks explicit disallow and accepts longer allow', () => {
+  const robots = `
+User-agent: *
+Disallow: /private/
+Allow: /private/public/
+`;
+  assert.equal(evaluateRobots(robots, 'https://example.com/private/lot/123').allowed, false);
+  assert.equal(evaluateRobots(robots, 'https://example.com/private/public/123').allowed, true);
+});
+
+test('detail candidate extraction is same-origin and conservative', () => {
+  const html = `
+<a href="/used-cars/vehicle/123456">car</a>
+<a href="https://other.example/car/999999">foreign</a>
+<a href="/search?car=123456">search</a>
+<a href="/about">about</a>`;
+  assert.deepEqual(
+    extractDetailCandidates(html, 'https://example.com/used-cars', 2),
+    ['https://example.com/used-cars/vehicle/123456'],
+  );
+});
+
+test('page summary only records evidence signals', () => {
+  const html = `<!doctype html><html><head><title>2023 Example Sedan - AED 75,000</title>
+<meta property="og:image" content="/media/car-1.jpg">
+<script type="application/ld+json">{"@type":"Vehicle","name":"Example","mileageFromOdometer":{"value":42000,"unitCode":"KMT"}}</script>
+</head><body>
+2023 sedan. Price AED 75,000. Mileage 42,000 km. Petrol. Engine 1998 cc. Power 150 hp.
+<img src="/media/car-2.jpg"><img src="/logo.svg">
+</body></html>`;
+  const summary = summarizeBody(html, 'https://example.com/car/123');
+  assert.deepEqual(summary.markers, {
+    year: true,
+    price: true,
+    currency: true,
+    mileage: true,
+    fuel: true,
+    engine: true,
+    power: true,
+    body: true,
+  });
+  assert.equal(summary.imageCount, 2);
+  assert.equal(summary.jsonLd.parsedCount, 1);
+  assert.ok(summary.jsonLd.types.includes('Vehicle'));
+});
+
+test('qualification probe is isolated from production writers', () => {
+  const source = fs.readFileSync('scripts/catalog-source-access-probe-v1.mjs', 'utf8');
+  assert.doesNotMatch(source, /catalog-probe-source-shard|publish-autocatalog|S3_BUCKET|YC_SERVICE_ACCOUNT|DATABASE_URL|POSTGRES_URL/i);
+  assert.match(source, /productionWrites:\s*false/);
+  assert.match(source, /classificationMutations:\s*false/);
+  assert.match(source, /rawBodiesStored:\s*false/);
+});
