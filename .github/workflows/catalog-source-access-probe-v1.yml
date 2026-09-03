@@ -1,0 +1,59 @@
+name: Catalog source qualification · access/detail probe v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - chore/source-access-probe-v1-20260903
+    paths:
+      - ".github/workflows/catalog-source-access-probe-v1.yml"
+      - "scripts/catalog-source-access-probe-v1.mjs"
+      - "tests/catalog-source-access-probe-v1.test.ts"
+      - "tests/catalog-source-qualification-contract.test.ts"
+      - "data/catalog/source-qualification-v1.json"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-source-access-probe-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify qualification probe contract
+        run: node --import tsx --test tests/catalog-source-qualification-contract.test.ts tests/catalog-source-access-probe-v1.test.ts
+      - name: Probe all registry candidates without publishing
+        env:
+          CATALOG_SOURCE_ACCESS_PROBE_CONCURRENCY: "4"
+          CATALOG_SOURCE_ACCESS_PROBE_TIMEOUT_MS: "15000"
+          CATALOG_SOURCE_ACCESS_PROBE_DETAIL_SAMPLES: "1"
+          CATALOG_SOURCE_ACCESS_PROBE_MAX_BODY_BYTES: "1000000"
+        run: node scripts/catalog-source-access-probe-v1.mjs
+      - name: Verify no-write evidence envelope
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('catalog-source-access-probe-v1.json', 'utf8'));
+          if (p.productionWrites !== false) throw new Error('productionWrites');
+          if (p.classificationMutations !== false) throw new Error('classificationMutations');
+          if (p.publishAllowedMutations !== false) throw new Error('publishAllowedMutations');
+          if (p.candidateCount !== 33) throw new Error(`candidateCount=${p.candidateCount}`);
+          if (!Array.isArray(p.results) || p.results.length !== 33) throw new Error('results');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-source-access-probe-v1
+          path: catalog-source-access-probe-v1.json
+          if-no-files-found: error
+          retention-days: 7
