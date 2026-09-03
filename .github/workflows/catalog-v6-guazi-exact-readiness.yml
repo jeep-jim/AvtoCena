@@ -1,0 +1,107 @@
+name: Catalog V6 · Guazi exact readiness
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/catalog-v6-guazi-exact-readiness.yml"
+      - "apps/web/lib/catalog/china-exact-sources.ts"
+      - "apps/web/lib/catalog/yandex-source-bridge.ts"
+      - "apps/web/app/api/internal/guazi-egress-b8c4d1/route.ts"
+      - "apps/web/lib/catalog/importer.ts"
+      - "scripts/catalog-simple-source-market.mjs"
+      - "tests/china-exact-sources.test.ts"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-v6-guazi-exact-readiness
+  cancel-in-progress: true
+
+jobs:
+  readiness:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CATALOG_REBUILD_MARKET: china
+      CATALOG_REBUILD_SOURCE_IDS: guazi_china_open
+      CATALOG_REBUILD_OUTPUT: readiness-china-guazi_china_open.json
+      CATALOG_REBUILD_TARGET_PER_MARKET: "3"
+      CATALOG_REBUILD_MAX_PAGES_PER_SOURCE: "3"
+      CATALOG_REBUILD_MAX_EMPTY_PAGES: "2"
+      CATALOG_REBUILD_SOURCE_CONCURRENCY: "1"
+      CATALOG_IMAGE_FETCH_CONCURRENCY: "2"
+      CATALOG_REBUILD_TIME_LIMIT_MS: "900000"
+      CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "35000"
+      CATALOG_GALLERY_TIMEOUT_MS: "30000"
+      CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
+      CATALOG_MAX_IMAGES_PER_OFFER: "30"
+      CATALOG_COLLECTION_IMAGE_LIMIT: "30"
+      CATALOG_IMAGE_STORAGE_MODE: source_urls_only
+      CATALOG_KNOWLEDGE_DISABLED: "1"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - run: npm run typecheck
+      - name: Verify Guazi semantic evidence
+        run: node --import tsx --test tests/china-exact-sources.test.ts
+      - name: Wait for the matching production bridge release
+        run: |
+          set -euo pipefail
+          for attempt in $(seq 1 48); do
+            health="$(curl -L --max-redirs 3 --max-time 20 -fsS https://avtocena.com/api/health || true)"
+            live_sha="$(jq -r '.releaseSha // empty' <<<"$health" 2>/dev/null || true)"
+            if [ "$live_sha" = "$GITHUB_SHA" ]; then
+              echo "matching production release ready: $live_sha"
+              exit 0
+            fi
+            echo "waiting for production release $GITHUB_SHA; live=${live_sha:-unknown}; attempt=$attempt/48"
+            sleep 10
+          done
+          exit 1
+      - name: Collect exact Guazi cards through fixed production bridge without publishing
+        run: npx tsx scripts/catalog-simple-source-market.mjs
+      - name: Enforce exact Guazi source contract
+        run: |
+          node --input-type=module <<'NODE'
+          import fs from 'node:fs';
+          const data = JSON.parse(fs.readFileSync(process.env.CATALOG_REBUILD_OUTPUT, 'utf8'));
+          const offers = Array.isArray(data.offers) ? data.offers : [];
+          const source = data.report?.sources?.find((row) => row.sourceId === 'guazi_china_open');
+          const problems = [];
+          if (offers.length < 3) problems.push(`cards_${offers.length}`);
+          if (!source || Number(source.saved || 0) < 3) problems.push(`saved_${source?.saved || 0}`);
+          if (data?.report?.fieldPolicy !== 'preserve_adapter_source_fields_no_generic_spec_normalization') problems.push('field_policy_not_source_only');
+          for (const offer of offers) {
+            const evidence = offer?.operational?.semanticEvidence || {};
+            const raw = offer?.operational?.raw || {};
+            if (offer.sourceId !== 'guazi_china_open') problems.push('source_identity_mismatch');
+            if (!/^https:\/\/en\.guazi\.com\/products\/[a-z0-9-]+\.html/i.test(String(offer?.operational?.sourceUrl || ''))) problems.push('source_url_invalid');
+            if (!(Number(offer.sourcePrice) > 0) || offer.sourceCurrency !== 'USD') problems.push('price_currency_invalid');
+            if (!offer.make || !offer.model || !offer.year) problems.push('core_identity_missing');
+            if (!Array.isArray(offer.images) || offer.images.length < 5) problems.push('gallery_below_5');
+            if ((offer.images || []).some((image) => !/guazistatic(?:-global)?\.com/i.test(String(image?.url || '')))) problems.push('gallery_host_invalid');
+            if (offer?.operational?.photoIdentityVerified !== true || offer?.operational?.galleryVerified !== true || offer?.operational?.sourceOnlyFieldsPreserved !== true) problems.push('exact_flags_missing');
+            if (raw?.fieldPolicy !== 'guazi_identity_bound_year_engine_only_v2') problems.push('field_policy_invalid');
+            if (evidence?.year?.status !== 'exact' || Number(evidence?.year?.value) !== Number(offer.year)) problems.push('year_evidence_invalid');
+            if (offer.engineCc && (evidence?.engineCc?.status !== 'exact' || Number(evidence?.engineCc?.value) !== Number(offer.engineCc))) problems.push('engine_evidence_invalid');
+            if (offer.fuel || offer.powertrainKind !== 'unknown' || offer.powerHp || offer.powerKw || offer.power30MinKw) problems.push('unsupported_spec_promoted');
+            if (evidence?.fuel?.status !== 'missing' || evidence?.powerHp?.status !== 'missing' || evidence?.powerKw?.status !== 'missing') problems.push('unsupported_evidence_invalid');
+          }
+          console.log(JSON.stringify({ count: offers.length, source, problems: [...new Set(problems)], sample: offers.slice(0, 3).map((offer) => ({ id: offer.sourceOfferId, title: offer.sourceTitle, make: offer.make, model: offer.model, year: offer.year, engineCc: offer.engineCc, price: offer.sourcePrice, currency: offer.sourceCurrency, images: offer.images?.length, url: offer.operational?.sourceUrl, evidence: offer.operational?.semanticEvidence })) }, null, 2));
+          if (problems.length) process.exit(1);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: readiness-guazi-exact
+          path: readiness-china-guazi_china_open.json
+          if-no-files-found: warn
+          retention-days: 3
