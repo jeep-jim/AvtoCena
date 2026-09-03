@@ -39,6 +39,75 @@ function integer(value: unknown) {
   return Number.isFinite(n) && n > 0 ? n : undefined;
 }
 
+type GuaziEvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
+type GuaziEvidence<T> = { value?: T; rawValues: string[]; status: GuaziEvidenceStatus };
+export type GuaziSpecificationEvidence = {
+  year: GuaziEvidence<number>;
+  fuel: GuaziEvidence<string>;
+  powertrainKind: GuaziEvidence<string>;
+  engineCc: GuaziEvidence<number>;
+  powerHp: GuaziEvidence<number>;
+  powerKw: GuaziEvidence<number>;
+};
+
+function unique(values: unknown[]) {
+  return [...new Set(values.map((value) => clean(value)).filter(Boolean))];
+}
+function exactEvidence<T>(rawValues: string[], parsedValues: Array<T | undefined>): GuaziEvidence<T> {
+  if (!rawValues.length) return { rawValues, status: "missing" };
+  const usable = parsedValues.filter((value): value is T => value !== undefined);
+  const distinct = [...new Set(usable)];
+  if (distinct.length > 1) return { rawValues, status: "conflict" };
+  if (parsedValues.some((value) => value === undefined) || distinct.length !== 1) return { rawValues, status: "ambiguous" };
+  return { value: distinct[0], rawValues, status: "exact" };
+}
+function exactYear(value: string) {
+  if (!/^(?:19|20)\d{2}$/.test(value)) return undefined;
+  const year = Number(value);
+  return year >= 2011 && year <= new Date().getUTCFullYear() + 1 ? year : undefined;
+}
+function identityYears(value: unknown) {
+  return [...String(value ?? "").matchAll(/(?:^|[^0-9])((?:19|20)\d{2})(?=[^0-9]|$)/g)].map((match) => match[1]);
+}
+function titleEngineTokens(value: unknown) {
+  const text = decodeAttribute(value);
+  const range = text.match(/\d(?:[.,]\d+)?\s*(?:-|–|—|to)\s*\d(?:[.,]\d+)?\s*[LT]\b/i);
+  if (range) return [range[0]];
+  return [...text.matchAll(/(?:^|[^0-9])(\d(?:[.,]\d+)?)\s*[LT]\b/gi)].map((match) => `${match[1]}L`);
+}
+function urlEngineTokens(value: unknown) {
+  try {
+    const pathname = new URL(String(value ?? "")).pathname;
+    return [...pathname.matchAll(/(?:^|[-_])(\d)(\d)[lt](?=[-_.\/]|$)/gi)].map((match) => `${match[1]}.${match[2]}L`);
+  } catch {
+    return [];
+  }
+}
+function exactEngine(value: string) {
+  if (/\d\s*(?:-|–|—|to)\s*\d/i.test(value)) return undefined;
+  const match = value.match(/^(\d(?:[.,]\d+)?)L$/i);
+  const liters = match ? Number(match[1].replace(",", ".")) : 0;
+  return liters >= 0.6 && liters <= 8 ? Math.round(liters * 1_000) : undefined;
+}
+
+export function guaziSpecificationEvidence(input: {
+  listingYear?: unknown;
+  title?: unknown;
+  detailUrl?: unknown;
+}): GuaziSpecificationEvidence {
+  const years = unique([input.listingYear, ...identityYears(input.title), ...identityYears(input.detailUrl)]);
+  const engines = unique([...titleEngineTokens(input.title), ...urlEngineTokens(input.detailUrl)]);
+  const missing = <T>(): GuaziEvidence<T> => ({ rawValues: [], status: "missing" });
+  return {
+    year: exactEvidence(years, years.map(exactYear)),
+    fuel: missing<string>(),
+    powertrainKind: missing<string>(),
+    engineCc: exactEvidence(engines, engines.map(exactEngine)),
+    powerHp: missing<number>(),
+    powerKw: missing<number>(),
+  };
+}
+
 export function listingEngineCc(value: unknown) {
   const identity = decodeAttribute(value).toLowerCase();
   const decimalLiters = Number(identity.match(/(?:^|[^0-9])([0-9](?:[.,][0-9]))\s*l(?:[^a-z]|$)/i)?.[1]?.replace(",", ".") || 0);
@@ -239,6 +308,34 @@ class GuaziChinaExactAdapter extends ExactChinaAdapter {
   listUrl(page: number) { return page <= 1 ? `${this.baseUrl}/used-cars/` : `${this.baseUrl}/used-cars/page${page}/`; }
   detailId(url: string) { return url.match(this.detailPattern)?.[1] || ""; }
   parseList(html: string, pageUrl: string) { return parseGuaziGlobalCards(html, pageUrl); }
+
+  normalizeOffer(raw: unknown): VehicleOffer | null {
+    const row = raw as ChinaRow;
+    if (!row?.id || !row.detailUrl || !row.title || !row.year || !row.price) return null;
+    const evidence = guaziSpecificationEvidence({ listingYear: row.year, title: row.title, detailUrl: row.detailUrl });
+    if (evidence.year.status !== "exact") return null;
+    const now = new Date().toISOString();
+    const derived = splitMakeModel(row.title);
+    return {
+      id: `${this.sourceId}:${row.id}`, sourceId: this.sourceId, sourceOfferId: row.id, market: "china", offerType: "fixed", status: "active",
+      sourceTitle: row.title, make: clean(row.make) || derived.make, model: clean(row.model) || derived.model, trim: clean(row.trim) || undefined,
+      year: evidence.year.value!, mileageKm: row.mileageKm, engineCc: evidence.engineCc.status === "exact" ? evidence.engineCc.value : undefined,
+      fuel: undefined, powertrainKind: "unknown", powerHp: undefined, powerKw: undefined,
+      sourcePrice: row.price, sourceCurrency: row.currency, priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data", firstSeenAt: now, updatedAt: now,
+      operational: {
+        sourceUrl: row.detailUrl, sourceVenueName: this.label, sourceTitle: row.title, galleryStoredAs: "json_urls",
+        semanticEvidence: {
+          year: { source: "guazi_listing_title_and_product_url", ...evidence.year },
+          fuel: { source: "guazi_named_fuel_not_available", ...evidence.fuel },
+          powertrainKind: { source: "guazi_named_powertrain_not_available", ...evidence.powertrainKind },
+          engineCc: { source: "guazi_listing_title_and_product_url", ...evidence.engineCc },
+          powerHp: { source: "guazi_named_power_not_available", ...evidence.powerHp },
+          powerKw: { source: "guazi_named_power_not_available", ...evidence.powerKw },
+        },
+        raw: { listing: row, fieldPolicy: "guazi_identity_bound_year_engine_only_v2" },
+      },
+    };
+  }
 }
 
 class Che168ExactAdapter extends ExactChinaAdapter {
