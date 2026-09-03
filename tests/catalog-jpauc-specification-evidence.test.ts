@@ -49,6 +49,7 @@ test("JPAuc offer carries source evidence and never invents fuel or power", () =
   assert.equal(offer.fuel, undefined);
   assert.equal(offer.powerHp, undefined);
   assert.equal(offer.powerKw, undefined);
+  assert.equal((offer.operational as any).minimumImages, 3);
   assert.equal((offer.operational as any).semanticEvidence.year.status, "exact");
   assert.equal((offer.operational as any).semanticEvidence.engineCc.status, "exact");
   assert.equal((offer.operational as any).semanticEvidence.fuel.status, "missing");
