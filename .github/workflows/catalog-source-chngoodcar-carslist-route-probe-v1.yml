@@ -11,6 +11,8 @@ on:
       - "tests/catalog-source-chngoodcar-carslist-route-probe-v1.test.ts"
       - "scripts/catalog-source-chngoodcar-carslist-search-contract-v1.mjs"
       - "tests/catalog-source-chngoodcar-carslist-search-contract-v1.test.ts"
+      - "scripts/catalog-source-chngoodcar-carslist-page-probe-v1.mjs"
+      - "tests/catalog-source-chngoodcar-carslist-page-probe-v1.test.ts"
       - "scripts/catalog-source-access-probe-v1.mjs"
 
 permissions:
@@ -44,24 +46,40 @@ jobs:
         env:
           CATALOG_SOURCE_CHNGOODCAR_SEARCH_CONTRACT_TIMEOUT_MS: "15000"
         run: node scripts/catalog-source-chngoodcar-carslist-search-contract-v1.mjs
+      - name: Verify page-probe request and sanitization contract
+        run: node --import tsx --test tests/catalog-source-chngoodcar-carslist-page-probe-v1.test.ts
+      - name: Prove public CarsList pages 1 and 2 without writes
+        env:
+          CATALOG_SOURCE_CHNGOODCAR_PAGE_PROBE_TIMEOUT_MS: "15000"
+        run: node scripts/catalog-source-chngoodcar-carslist-page-probe-v1.mjs
       - name: Verify no-write evidence envelope
         run: |
           node - <<'NODE'
           const fs = require('fs');
-          for (const file of ['catalog-source-chngoodcar-carslist-route-probe-v1.json','catalog-source-chngoodcar-carslist-search-contract-v1.json']) {
+          const files = [
+            'catalog-source-chngoodcar-carslist-route-probe-v1.json',
+            'catalog-source-chngoodcar-carslist-search-contract-v1.json',
+            'catalog-source-chngoodcar-carslist-page-probe-v1.json',
+          ];
+          for (const file of files) {
             const p = JSON.parse(fs.readFileSync(file,'utf8'));
             for (const key of ['productionWrites','classificationMutations','publishAllowedMutations','objectStorageWrites','catalogGenerationWrites','rawBodiesStored','guessedRoutes']) {
               if (p[key] !== false) throw new Error(`${file}:${key} must be false`);
             }
           }
-          const routes = JSON.parse(fs.readFileSync('catalog-source-chngoodcar-carslist-route-probe-v1.json','utf8'));
+          const routes = JSON.parse(fs.readFileSync(files[0],'utf8'));
           if (routes.listFetch?.status !== 200) throw new Error(`CarsList status ${routes.listFetch?.status}`);
           if (routes.listFetch?.explicitUsdLabel !== true) throw new Error('explicit USD label missing');
-          const contract = JSON.parse(fs.readFileSync('catalog-source-chngoodcar-carslist-search-contract-v1.json','utf8'));
+          const contract = JSON.parse(fs.readFileSync(files[1],'utf8'));
           if (contract.contract?.endpoint !== 'https://www.chngoodcar.com/Car/SearchCarList') throw new Error(`endpoint ${contract.contract?.endpoint}`);
           if (contract.contract?.method !== 'POST') throw new Error(`method ${contract.contract?.method}`);
           if (contract.contract?.pagesize !== 15) throw new Error(`pagesize ${contract.contract?.pagesize}`);
           if (contract.verificationToken?.present !== true || contract.verificationToken?.valuePresent !== true) throw new Error('verification token contract');
+          const pages = JSON.parse(fs.readFileSync(files[2],'utf8'));
+          if (pages.analyticsWrites !== false || pages.tokensStored !== false || pages.cookiesStored !== false) throw new Error('page probe safety envelope');
+          if (!Array.isArray(pages.failures) || pages.failures.length !== 0) throw new Error(`page failures ${pages.failures}`);
+          if (!(pages.page1a?.summary?.rowCount > 0) || !(pages.page2?.summary?.rowCount > 0)) throw new Error('page rows');
+          if (!(pages.page1a?.summary?.total > 15)) throw new Error(`total ${pages.page1a?.summary?.total}`);
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
@@ -70,5 +88,6 @@ jobs:
           path: |
             catalog-source-chngoodcar-carslist-route-probe-v1.json
             catalog-source-chngoodcar-carslist-search-contract-v1.json
+            catalog-source-chngoodcar-carslist-page-probe-v1.json
           if-no-files-found: error
           retention-days: 7
