@@ -9,9 +9,10 @@ import {
   GoodCarCarsListClient,
   type GoodCarCarsListIdentityRow,
 } from "./chngoodcar-carslist";
+import { namedElectrifiedPowertrainKind } from "./powertrain-safety";
 
 const BASE_URL = "https://www.chngoodcar.com";
-const USER_AGENT = "AvtoCenaGoodCarPaginatedExact/1.0 (+read-only until source promotion)";
+const USER_AGENT = "AvtoCenaGoodCarPaginatedExact/1.1 (+read-only until source promotion)";
 const HEADERS = {
   accept: "text/html,application/xhtml+xml,text/plain;q=0.8,*/*;q=0.5",
   "accept-language": "zh-CN,zh;q=0.9,en;q=0.6",
@@ -53,6 +54,10 @@ async function fetchDetail(url: string) {
   const html = await response.text();
   if (!response.ok) throw new Error(`chngoodcar_detail_http_${response.status}:${url}`);
   return { response, html };
+}
+
+export function goodCarIdentityNamedElectrifiedKind(sourceTitle: unknown) {
+  return namedElectrifiedPowertrainKind({ sourceTitle: String(sourceTitle || "") });
 }
 
 export function joinGoodCarCarsListAndDetail(
@@ -112,15 +117,15 @@ export class ChnGoodCarPaginatedExactAdapter extends ChnGoodCarExactAdapter {
       }
     }
 
-    const finished = list.items.length === 0 || page * GOOD_CAR_CARSLIST_PAGE_SIZE >= list.total;
+    const finished = list.rawRowCount === 0 || page * GOOD_CAR_CARSLIST_PAGE_SIZE >= list.total;
     return {
       items,
       nextCursor: finished ? null : String(page + 1),
       finished,
       count: list.total,
       health: {
-        ok: list.items.length > 0 && detailFetchErrors === 0,
-        message: `Good Car CarsList exact:page_${page}:list_${list.items.length}:detail_${items.length}:unparsed_${detailUnparsed}:errors_${detailFetchErrors}:total_${list.total}`,
+        ok: list.rawRowCount > 0 && detailFetchErrors === 0,
+        message: `Good Car CarsList exact:page_${page}:raw_${list.rawRowCount}:identity_${list.items.length}:identityRejected_${list.rejectedIdentityRowCount}:detail_${items.length}:unparsed_${detailUnparsed}:errors_${detailFetchErrors}:total_${list.total}`,
         checkedAt: new Date().toISOString(),
         httpStatus: 200,
         contentType: "application/json",
@@ -132,6 +137,11 @@ export class ChnGoodCarPaginatedExactAdapter extends ChnGoodCarExactAdapter {
     const row = raw as GoodCarPaginatedExactRawOffer;
     if (row?.discoverySource !== "CarsList/SearchCarList") return null;
     if (row.listCurrencyVerified !== true || row.listDetailProductionDateParity !== true || row.listDetailMileageParity !== true) return null;
+    // Identity-bound electrified markers have priority over a contradictory
+    // source fuel label. Example proven in Good Car: `双擎` in the exact title
+    // while the same detail labels `燃料种类 汽油`. Such a row is internally
+    // contradictory and must not be promoted as combustion.
+    if (goodCarIdentityNamedElectrifiedKind(row.sourceTitle)) return null;
     const offer = super.normalizeOffer(row);
     if (!offer) return null;
     offer.operational = {
@@ -145,6 +155,7 @@ export class ChnGoodCarPaginatedExactAdapter extends ChnGoodCarExactAdapter {
         identity: "SearchCarList Id/title joined to same /Home/Cars?id=<Id> detail title",
         productionDate: "exact SearchCarList ProductionDate == offer-bound detail 出厂年份",
         mileageKm: "exact SearchCarList Mileage == offer-bound detail 里程 (km)",
+        powertrainIdentity: "identity-bound title electrified markers override contradictory combustion detail labels and fail closed",
         listFieldBoundary: "SearchCarList fuel/body/power fields are discovery evidence only and never replace offer-bound detail exact fields",
       },
     };
