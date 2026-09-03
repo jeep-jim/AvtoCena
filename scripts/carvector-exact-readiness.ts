@@ -42,7 +42,7 @@ async function main() {
     version: 1,
     mode: "carvector_auction_history_no_write_readiness",
     sourceId: source.sourceId,
-    query: process.env.CATALOG_CARVECTOR_QUERY || "",
+    path: process.env.CATALOG_CARVECTOR_PATH || "",
     pages,
     pagesRead: pages.length,
     seen: pages.reduce((sum, page) => sum + page.seen, 0),
