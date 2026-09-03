@@ -1,6 +1,6 @@
 import assert from "node:assert/strict";
 import test from "node:test";
-import { guaziChinaExactSource, guaziSpecificationEvidence, listingEngineCc } from "../apps/web/lib/catalog/china-exact-sources";
+import { guaziChinaExactSource, guaziSpecificationEvidence, isGuaziSourceBotChallenge, listingEngineCc } from "../apps/web/lib/catalog/china-exact-sources";
 import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specification-evidence-audit";
 
 test("Guazi listing identity recovers compact and decimal engine displacement", () => {
@@ -68,4 +68,33 @@ test("Guazi rejects conflicting listing, title and URL years", () => {
   });
   assert.equal(evidence.year.status, "conflict");
   assert.equal(evidence.year.value, undefined);
+});
+
+
+test("Guazi identifies the successful-HTTP Tencent EdgeOne challenge as blocked", async () => {
+  const challenge = `<!doctype html><script>window["EO-Bot-Js-Token"]="token";solveChallenge();</script><div>TencentEdgeOne</div>`;
+  assert.equal(isGuaziSourceBotChallenge(challenge), true);
+  assert.equal(isGuaziSourceBotChallenge("<a href='/products/toyota-corolla-2024.html'>Used Toyota Corolla 2024</a>"), false);
+
+  const originalFetch = globalThis.fetch;
+  globalThis.fetch = async () => new Response(challenge, { status: 200, headers: { "content-type": "text/html" } });
+  try {
+    await assert.rejects(
+      () => guaziChinaExactSource.fetchPage("1"),
+      (error: unknown) => {
+        const sourceError = error as Error & { blocked?: boolean; status?: number };
+        assert.equal(sourceError.message, "guazi_source_blocked_bot_challenge");
+        assert.equal(sourceError.blocked, true);
+        assert.equal(sourceError.status, 200);
+        return true;
+      },
+    );
+    const health = await guaziChinaExactSource.healthCheck();
+    assert.equal(health.ok, false);
+    assert.equal(health.blocked, true);
+    assert.equal(health.message, "guazi_source_blocked_bot_challenge");
+    assert.equal(health.httpStatus, 200);
+  } finally {
+    globalThis.fetch = originalFetch;
+  }
 });
