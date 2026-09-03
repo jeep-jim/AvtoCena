@@ -1445,3 +1445,11 @@ Production-результат ещё должен быть подтверждё�
 - **Power safety:** CarVector `power` становится exact hp/kW только при именованном combustion fuel. Если fuel отсутствует, powertrain остаётся `unknown`, а power хранится только в raw evidence и не попадает в расчёт. Для hybrid/EV source power также не доказывает ICE или сертифицированную 30-минутную мощность; EV с ненулевым displacement получает conflict.
 - **Защита публикации:** standalone CarVector adapter намеренно возвращает пустую gallery и `needs_data`. Отдельный no-write readiness проверяет evidence rows, но не публикует их как карточки; существующий JPAuc exact-join остаётся единственным путём к публичной японской карточке.
 - **Production-граница:** текущий public generation, candidate objects, предыдущие generations, изображения, sitemap и индексируемые URL не удаляются и не переписываются. Writers, cleanup и publication не запускаются этим пакетом.
+
+
+### 40.22. Явная внешняя блокировка Guazi China
+
+- **Live-факт:** production bridge получил от `https://en.guazi.com/used-cars/` HTTP `200`, но тело страницы содержало только JavaScript challenge Tencent EdgeOne (`EO-Bot-Js-Token`, `solveChallenge`) и не содержало товарных ссылок. Поэтому прежнее состояние `exact_list:0` было ложным описанием доступности источника.
+- **Fail-closed исправление:** Guazi adapter распознаёт доказанные маркеры challenge и возвращает typed blocked error `guazi_source_blocked_bot_challenge`; health, фиксированный production bridge и GitHub/Yandex wrapper сохраняют `blocked=true`. HTTP `200` challenge больше не может выглядеть как успешно прочитанная пустая выдача.
+- **Граница доступа:** challenge не обходится. Для live-ready статуса Guazi нужен разрешённый публичный endpoint либо официальный partner feed; до этого источник остаётся внешне заблокированным и не даёт новых карточек.
+- **Production-граница:** текущий public generation, предыдущие generations, кандидаты, изображения, sitemap и индексируемые URL остаются на месте. Этот пакет меняет только диагностику будущего no-write сбора; collection, publication и cleanup не запускаются.
