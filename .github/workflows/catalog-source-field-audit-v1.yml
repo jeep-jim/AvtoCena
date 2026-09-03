@@ -1,0 +1,67 @@
+name: Catalog source qualification · field audit v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - chore/source-field-audit-v1-20260903
+    paths:
+      - ".github/workflows/catalog-source-field-audit-v1.yml"
+      - "scripts/catalog-source-field-audit-v1.mjs"
+      - "scripts/catalog-source-field-audit-v1-postprocess.mjs"
+      - "tests/catalog-source-field-audit-v1.test.ts"
+      - "tests/catalog-source-field-audit-v1-postprocess.test.ts"
+      - "tests/catalog-source-qualification-contract.test.ts"
+      - "scripts/catalog-source-access-probe-v1.mjs"
+      - "data/catalog/source-qualification-v1.json"
+      - "data/catalog/source-field-audit-v1-summary.json"
+      - "docs/catalog-source-field-audit-v1-evidence.md"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-source-field-audit-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify field audit contract
+        run: node --import tsx --test tests/catalog-source-qualification-contract.test.ts tests/catalog-source-field-audit-v1.test.ts tests/catalog-source-field-audit-v1-postprocess.test.ts
+      - name: Run source-bound field audit
+        env:
+          CATALOG_SOURCE_FIELD_AUDIT_TIMEOUT_MS: "15000"
+          CATALOG_SOURCE_FIELD_AUDIT_MAX_BODY_BYTES: "1200000"
+        run: node scripts/catalog-source-field-audit-v1.mjs
+      - name: Normalize field evidence matrix conservatively
+        run: node scripts/catalog-source-field-audit-v1-postprocess.mjs
+      - name: Verify no-write evidence envelope
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('catalog-source-field-audit-v1.json', 'utf8'));
+          if (p.productionWrites !== false) throw new Error('productionWrites');
+          if (p.classificationMutations !== false) throw new Error('classificationMutations');
+          if (p.publishAllowedMutations !== false) throw new Error('publishAllowedMutations');
+          if (p.rawBodiesStored !== false) throw new Error('rawBodiesStored');
+          if (p.postprocessed !== true || Number(p.version || 0) < 3) throw new Error('postprocess');
+          if (p.sourceCount !== 4) throw new Error(`sourceCount=${p.sourceCount}`);
+          if (p.sampleCount !== 8) throw new Error(`sampleCount=${p.sampleCount}`);
+          if (!Array.isArray(p.results) || p.results.length !== 4) throw new Error('results');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-source-field-audit-v1
+          path: catalog-source-field-audit-v1.json
+          if-no-files-found: error
+          retention-days: 7
