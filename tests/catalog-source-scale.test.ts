@@ -22,6 +22,7 @@ import {
 
 const probeScript = fs.readFileSync(new URL("../scripts/catalog-probe-source-shard.mjs", import.meta.url), "utf8");
 const rebuildScript = fs.readFileSync(new URL("../scripts/catalog-rebuild-source-shard.mjs", import.meta.url), "utf8");
+const simpleSourceReadiness = fs.readFileSync(new URL("../scripts/catalog-simple-source-market.mjs", import.meta.url), "utf8");
 const publishScript = fs.readFileSync(new URL("../scripts/catalog-publish-source-scale.mjs", import.meta.url), "utf8");
 const validationScript = fs.readFileSync(new URL("../scripts/catalog-validate-source-scale.mjs", import.meta.url), "utf8");
 const workflow = fs.readFileSync(new URL("../.github/workflows/catalog-v2-production.yml", import.meta.url), "utf8");
@@ -104,6 +105,11 @@ test("large collection persists candidate pools instead of discarding incomplete
   assert.match(rebuildScript, /candidatePoolsLoaded/);
   assert.match(rebuildScript, /candidatePoolsPersisted/);
   assert.doesNotMatch(rebuildScript, /filter\(\(offer\) => classifyCatalogV2Offer\(offer\)\.eligible\)/);
+});
+
+test("source-only readiness keeps CarVector evidence separate from public gallery requirements", () => {
+  assert.match(simpleSourceReadiness, /evidenceOnlySourceIds = new Set\(\["carvector_japan_stat_open"\]\)/);
+  assert.match(simpleSourceReadiness, /if \(evidenceOnlySourceIds\.has\(source\?\.sourceId\)\) return 0/);
 });
 
 test("production source registry exactly matches the owner-approved allowlist", () => {
