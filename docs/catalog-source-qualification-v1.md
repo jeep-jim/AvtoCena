@@ -70,14 +70,24 @@
 - Китай и Япония на текущем этапе могут исследоваться, но не публикуются.
 - Подключение платного API допускается только после проверки, что API отдаёт source-bound факты; API поиска или сопоставления не имеет права изобретать отсутствующие характеристики.
 
-## Текущий baseline
+## Диагностический baseline
 
 - Workflow `33717909118` — диагностический четырёхрыночный exact dry-run.
 - Europe: формальный результат `1500`, но найден semantic false positive Mobile.de `Limousine → sedan`; результат не готов к публикации.
 - UAE: `0` прошедших карточек; DubiCars — `270` просмотренных, Dubizzle — `9 883` просмотренных. Требуется повторная квалификация, а не ослабление exact gate.
 - Mobile.de fix: commit `66e236c7`, неоднозначный `Limousine` больше не публикуется как седан.
-- Korea и Georgia в указанном baseline на момент записи ещё выполняются.
+
+## Candidate ledger и access/detail checkpoint
+
+- Реестр `data/catalog/source-qualification-v1.json`: `33` кандидата на шести рынках — `17` прежних и `16` новых.
+- Все кандидаты остаются `research_pending`; у всех `publishAllowed=false`.
+- Read-only probe реализован в `scripts/catalog-source-access-probe-v1.mjs`, workflow `.github/workflows/catalog-source-access-probe-v1.yml`.
+- Два повторных зелёных запуска: `33726664183` и `33727078764`, оба обработали `33/33` кандидата без production writes и без mutation классов/флагов.
+- Последний run `33727078764`: `challenge=10`, `reachable_no_detail=12`, `network_error=2`, `robots_disallowed=1`, `reachable_detail_sample=8`.
+- Подробные доказательства: `docs/catalog-source-access-probe-v1-evidence.md`; компактная машиночитаемая сводка: `data/catalog/source-access-probe-v1-summary.json`.
+- Четыре strongest detail-signal кандидата для следующего этапа: `bobaedream_korea_candidate`, `dubicars_uae_exact`, `carswitch_uae_candidate`, `cars24_uae_candidate`.
+- Эти четыре источника **ещё не** считаются `exact_catalog`: текущий probe доказывает доступность и наличие грубых сигналов, но не source-bound semantics каждого обязательного поля.
 
 ## Следующее действие
 
-Создать candidate ledger по всем шести рынкам. Для каждого кандидата указать URL, происхождение цены, доступность обязательных полей, доступ/лицензионные ограничения, класс и проверяемые причины решения. Сначала исследовать площадки; код адаптера писать только после прохождения source-level probe.
+Выполнить source-bound field audit четырёх strongest detail-signal кандидатов: извлечь реальный `sourceOfferId`, direct URL, make/model/year, price/currency, body, fuel/powertrain, engineCc или EV `not_applicable`, peak power, required certified power, mileage и listing-bound gallery; доказать list/detail identity и повторяемость. Только после этого присваивать `exact_catalog`, `lead_only` или `rejected`. Затем тем же контрактом пройти partial-signal кандидатов. Production writes, cleanup и автоматический `publishAllowed=true` запрещены.
