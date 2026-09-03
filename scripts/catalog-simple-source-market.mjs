@@ -22,6 +22,7 @@ const sourceConcurrency = Math.max(1, Math.min(8, Number(process.env.CATALOG_REB
 const detailConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_IMAGE_FETCH_CONCURRENCY || 16)));
 const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 10_800_000));
 const requestTimeoutMs = Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000));
+const jpaucPageTimeoutMs = Math.max(requestTimeoutMs, Number(process.env.CATALOG_JPAUC_PAGE_TIMEOUT_MS || 120_000));
 const galleryTimeoutMs = Math.max(5_000, Number(process.env.CATALOG_GALLERY_TIMEOUT_MS || 30_000));
 const minimumImages = Math.max(5, Math.min(30, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
 const isolatedSourceIds = String(process.env.CATALOG_REBUILD_SOURCE_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);
@@ -120,6 +121,9 @@ function minimumImagesForOffer(offer, source) {
   const declared = Number(offer?.operational?.minimumImages || 0);
   if (source?.sourceId === "jpauc_japan_past_open" && declared === 3) return 3;
   return minimumImages;
+}
+function pageTimeoutForSource(source) {
+  return source?.sourceId === "jpauc_japan_past_open" ? jpaucPageTimeoutMs : requestTimeoutMs;
 }
 function imageId(url) { return crypto.createHash("sha256").update(url).digest("hex").slice(0, 24); }
 function normalizeImages(rows) {
@@ -266,7 +270,7 @@ async function collectSource(source) {
       const cursorKey = JSON.stringify(cursor ?? "first");
       if (seenCursors.has(cursorKey)) { stopReason = "cursor_loop"; break; }
       seenCursors.add(cursorKey);
-      const page = await withTimeout(Promise.resolve(source.fetchPage(cursor)), requestTimeoutMs, "page_timeout");
+      const page = await withTimeout(Promise.resolve(source.fetchPage(cursor)), pageTimeoutForSource(source), "page_timeout");
       sourcePages++; pages++;
       const rawRows = Array.isArray(page?.items) ? page.items : [];
       sourceSeen += rawRows.length; seen += rawRows.length;
