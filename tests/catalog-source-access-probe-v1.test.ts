@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import test from 'node:test';
-import { evaluateRobots, extractDetailCandidates, summarizeBody } from '../scripts/catalog-source-access-probe-v1.mjs';
+import { evaluateRobots, extractCatalogCandidates, extractDetailCandidates, summarizeBody } from '../scripts/catalog-source-access-probe-v1.mjs';
 
 test('robots parser blocks explicit disallow and accepts longer allow', () => {
   const robots = `
@@ -47,6 +47,27 @@ test('page summary only records evidence signals', () => {
   assert.equal(summary.imageCount, 2);
   assert.equal(summary.jsonLd.parsedCount, 1);
   assert.ok(summary.jsonLd.types.includes('Vehicle'));
+});
+
+test('catalog route discovery prefers marketplace routes and rejects careers', () => {
+  const html = '<a href="/as24-career-pages/">career</a><a href="/lst">cars</a><a href="/about">about</a>';
+  assert.deepEqual(
+    extractCatalogCandidates(html, 'https://www.autoscout24.com/', 3),
+    ['https://www.autoscout24.com/lst'],
+  );
+});
+
+test('detail extraction requires a listing identity and rejects numeric filters', () => {
+  const html = '<a href="/buy-used-cars-under-100000-aed-dubai/">budget</a><a href="/2024-lamborghini-urus-981780.html">listing</a><a href="/cars/imglist-x-x-110-x.html">images</a>';
+  assert.deepEqual(
+    extractDetailCandidates(html, 'https://www.dubicars.com/uae/used', 5),
+    ['https://www.dubicars.com/2024-lamborghini-urus-981780.html'],
+  );
+});
+
+test('long marketplace page with incidental captcha text is not a challenge wall', () => {
+  const html = `<html><head><title>Cars for sale</title></head><body>2024 AED 100000 10 km petrol engine 2000 cc 150 hp sedan captcha ${'x'.repeat(150000)}</body></html>`;
+  assert.equal(summarizeBody(html, 'https://example.com').challenge, false);
 });
 
 test('qualification probe is isolated from production writers', () => {
