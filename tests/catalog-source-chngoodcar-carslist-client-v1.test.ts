@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
+  goodCarCarsListIdentityRejectionReason,
   goodCarCarsListSearchBody,
   hasGoodCarCarsListUsdLabel,
   parseGoodCarCarsListIdentityRow,
@@ -48,12 +49,16 @@ test('Good Car CarsList client maps only exact identity/price/date/mileage/curre
   assert.equal('bodyType' in row, false);
 });
 
-test('Good Car CarsList client fails closed on malformed identity, non-USD, date and mileage', () => {
+test('Good Car CarsList client records exact rejection causes instead of calling a short page broken', () => {
   const base = { Id: '1', Brand: 'MG5', Price: '8500', Currency: 'usd', ProductionDate: '2026-02', Mileage: '0' };
-  assert.equal(parseGoodCarCarsListIdentityRow({ ...base, Id: 'abc' }), null);
+  assert.equal(goodCarCarsListIdentityRejectionReason(base), null);
+  assert.equal(goodCarCarsListIdentityRejectionReason({ ...base, Id: 'abc' }), 'invalid_id');
+  assert.equal(goodCarCarsListIdentityRejectionReason({ ...base, Brand: '' }), 'missing_title');
+  assert.equal(goodCarCarsListIdentityRejectionReason({ ...base, Price: '0' }), 'invalid_price');
+  assert.equal(goodCarCarsListIdentityRejectionReason({ ...base, Currency: 'cny' }), 'non_usd_currency');
+  assert.equal(goodCarCarsListIdentityRejectionReason({ ...base, ProductionDate: '2026-13' }), 'invalid_production_date');
+  assert.equal(goodCarCarsListIdentityRejectionReason({ ...base, Mileage: '-1' }), 'invalid_mileage');
   assert.equal(parseGoodCarCarsListIdentityRow({ ...base, Currency: 'cny' }), null);
-  assert.equal(parseGoodCarCarsListIdentityRow({ ...base, ProductionDate: '2026-13' }), null);
-  assert.equal(parseGoodCarCarsListIdentityRow({ ...base, Mileage: '-1' }), null);
 });
 
 test('Good Car CarsList client reproduces the source-declared no-filter POST without invented filter params', () => {
