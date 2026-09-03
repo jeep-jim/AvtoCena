@@ -9,6 +9,7 @@ on:
       - "apps/web/lib/catalog/importer.ts"
       - "scripts/catalog-simple-source-market.mjs"
       - "scripts/autohome-new-exact-power-canary.ts"
+      - "tests/catalog-autohome-new-specification-evidence.test.ts"
 
 permissions:
   contents: read
@@ -48,6 +49,8 @@ jobs:
       - run: npm run typecheck
       - name: Verify section-bound Autohome power fields
         run: npx tsx scripts/autohome-new-exact-power-canary.ts
+      - name: Verify semantic Autohome specification evidence
+        run: node --import tsx --test tests/catalog-autohome-new-specification-evidence.test.ts
       - name: Collect exact Autohome new cards without publishing
         run: npx tsx scripts/catalog-simple-source-market.mjs
       - name: Enforce exact Autohome new source contract
@@ -59,6 +62,15 @@ jobs:
           const source = data.report?.sources?.find((row) => row.sourceId === 'autohome_new_china_open');
           const problems = [];
           const clean = (v) => String(v ?? '').replace(/\s+/g, ' ').trim();
+          const energyIdentity = (v) => {
+            const value = clean(v);
+            if (/增程/.test(value)) return { fuel: 'hybrid', kind: 'series_hybrid' };
+            if (/轻混|混合|插电|油电/.test(value)) return { fuel: 'hybrid', kind: 'other_hybrid' };
+            if (/纯电|电动/.test(value)) return { fuel: 'electric', kind: 'electric' };
+            if (/柴油/.test(value)) return { fuel: 'diesel', kind: 'combustion' };
+            if (/汽油/.test(value)) return { fuel: 'petrol', kind: 'combustion' };
+            return null;
+          };
           if (offers.length < 3) problems.push(`cards_${offers.length}`);
           if (!source || Number(source.saved || 0) < 3) problems.push(`saved_${source?.saved || 0}`);
           if (data?.report?.fieldPolicy !== 'preserve_adapter_source_fields_no_generic_spec_normalization') problems.push('field_policy_not_source_only');
@@ -75,12 +87,16 @@ jobs:
             if (!Array.isArray(offer.images) || offer.images.length < 5) problems.push('gallery_below_5');
             if ((offer.images || []).some((img) => !/^(?:https:\/\/g\.autoimg\.cn\/@img\/car\d?\/cardfs\/product\/|https:\/\/car\d+\.autoimg\.cn\/cardfs\/product\/).+\.(?:jpe?g|png|webp|avif)(?:[?#].*)?$/i.test(String(img?.url || '')))) problems.push('gallery_not_exact_product');
             if (offer?.operational?.exactDetail !== true || offer?.operational?.photoIdentityVerified !== true || offer?.operational?.sourceOnlyFieldsPreserved !== true) problems.push('exact_flags_missing');
-            if (raw.powerFieldPolicy !== 'section_bound_engine_motor_system_fields_v2') problems.push('power_field_policy_not_section_bound');
-            if (clean(cfg.energy) && clean(offer.fuel) !== clean(cfg.energy)) problems.push('energy_rewritten');
+            if (raw.powerFieldPolicy !== 'section_bound_engine_motor_system_fields_v3_semantic_evidence') problems.push('power_field_policy_not_semantic');
+            const identity = energyIdentity(cfg.energy);
+            const evidence = offer?.operational?.semanticEvidence || {};
+            if (identity && (offer.fuel !== identity.fuel || offer.powertrainKind !== identity.kind)) problems.push('energy_identity_not_canonical');
+            if (identity && (evidence?.fuel?.status !== 'exact' || evidence?.powertrainKind?.status !== 'exact')) problems.push('energy_evidence_not_exact');
+            if (!identity && (offer.fuel || offer.powertrainKind !== 'unknown')) problems.push('unknown_energy_promoted');
             if (clean(cfg.engine) && clean(offer.engineType) !== clean(cfg.engine)) problems.push('engine_rewritten');
             if (clean(cfg.transmission) && clean(offer.transmission) !== clean(cfg.transmission)) problems.push('transmission_rewritten');
             if (clean(cfg.body) && clean(offer.bodyType) !== clean(cfg.body)) problems.push('body_rewritten');
-            if (/插电|增程|电动|纯电|混合动力/.test(clean(cfg.energy)) && offer.powerHp) problems.push('electrified_max_power_mapped_to_customs_power');
+            if (/轻混|插电|增程|电动|纯电|混合/.test(clean(cfg.energy)) && (offer.powerHp || offer.powerKw || offer.power30MinKw)) problems.push('electrified_max_power_mapped_to_customs_power');
           }
           console.log(JSON.stringify({ count: offers.length, source, problems: [...new Set(problems)], sample: offers.slice(0,3).map(o => ({ id:o.sourceOfferId, title:o.sourceTitle, make:o.make, model:o.model, trim:o.trim, year:o.year, price:o.sourcePrice, currency:o.sourceCurrency, fuel:o.fuel, engine:o.engineType, powerHp:o.powerHp, transmission:o.transmission, body:o.bodyType, images:o.images?.length, url:o.operational?.sourceUrl, rawConfig:o.operational?.raw?.configFields })) }, null, 2));
           if (problems.length) process.exit(1);

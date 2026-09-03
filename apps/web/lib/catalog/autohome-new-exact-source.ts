@@ -1,4 +1,5 @@
 import { stableOfferId } from "./storage";
+import { canonicalSourceFuel } from "./powertrain-safety";
 import type { CatalogFetchResult, CatalogImage, CatalogSourceAdapter, OfferStatus, SourceRunHealth, VehicleOffer } from "./types";
 
 const LIST_TEMPLATE = "https://car.autohome.com.cn/price/list-0-0-0-0-0-0-0-0-0-0-0-0-0-0-0-{page}.html";
@@ -45,6 +46,17 @@ export type ExactConfigFields = {
   marketDate?: string;
 };
 
+type AutohomeEvidenceStatus = "exact" | "ambiguous" | "conflict" | "missing";
+type AutohomeEvidence<T> = { value?: T; rawValues: string[]; status: AutohomeEvidenceStatus };
+export type AutohomeNewSpecificationEvidence = {
+  year: AutohomeEvidence<number>;
+  fuel: AutohomeEvidence<string>;
+  powertrainKind: AutohomeEvidence<"combustion" | "electric" | "series_hybrid" | "other_hybrid">;
+  engineCc: AutohomeEvidence<number>;
+  powerHp: AutohomeEvidence<number>;
+  powerKw: AutohomeEvidence<number>;
+};
+
 function clean(value: unknown) {
   return String(value ?? "")
     .replace(/&nbsp;|&#160;/gi, " ")
@@ -59,9 +71,108 @@ function absolute(value: string, base: string) {
   try { return new URL(String(value || "").replace(/&amp;/g, "&"), base).toString(); }
   catch { return ""; }
 }
-function positive(value: unknown) {
-  const n = Number(String(value ?? "").replace(/,/g, "").trim());
-  return Number.isFinite(n) && n > 0 ? n : undefined;
+function uniqueRaw(values: unknown[]) {
+  return [...new Set(values.map(clean).filter(Boolean))];
+}
+function exactEvidence<T>(rawValues: string[], parsedValues: Array<T | undefined>): AutohomeEvidence<T> {
+  if (!rawValues.length) return { rawValues, status: "missing" };
+  const usable = parsedValues.filter((value): value is T => value !== undefined);
+  const unique = [...new Set(usable)];
+  if (unique.length > 1) return { rawValues, status: "conflict" };
+  if (parsedValues.some((value) => value === undefined) || unique.length !== 1) return { rawValues, status: "ambiguous" };
+  return { value: unique[0], rawValues, status: "exact" };
+}
+function exactYear(value: string) {
+  if (!/^(?:19|20)\d{2}$/.test(value)) return undefined;
+  const year = Number(value);
+  return year >= 1980 && year <= new Date().getUTCFullYear() + 1 ? year : undefined;
+}
+function energyIdentity(value: string) {
+  const normalized = clean(value);
+  if (!normalized) return undefined;
+  if (/增程/.test(normalized)) return { fuel: "hybrid", powertrainKind: "series_hybrid" } as const;
+  if (/轻混|混合|插电|油电/.test(normalized)) return { fuel: "hybrid", powertrainKind: "other_hybrid" } as const;
+  const fuel = canonicalSourceFuel(normalized);
+  if (fuel === "electric") return { fuel, powertrainKind: "electric" } as const;
+  if (fuel === "hybrid") return { fuel, powertrainKind: "other_hybrid" } as const;
+  if (fuel) return { fuel, powertrainKind: "combustion" } as const;
+  return undefined;
+}
+function hasRange(value: string) {
+  return /\d\s*(?:-|–|—|至|到|~|～)\s*\d/.test(value);
+}
+function exactEngineCc(value: string) {
+  if (!value || hasRange(value)) return undefined;
+  const matches = [
+    ...[...value.matchAll(/(\d{3,5})\s*(?:cc|cm3|cm³)\b/gi)].map((match) => Number(match[1])),
+    ...[...value.matchAll(/(\d+(?:\.\d+)?)\s*[LT]\b/gi)].map((match) => Math.round(Number(match[1]) * 1_000)),
+  ].filter((number) => Number.isFinite(number) && number >= 300 && number <= 10_000);
+  const unique = [...new Set(matches)];
+  return unique.length === 1 ? unique[0] : undefined;
+}
+function exactPower(value: string, unit: "hp" | "kw") {
+  if (!value || hasRange(value)) return undefined;
+  const normalized = value.replace(/,/g, "").trim();
+  const match = normalized.match(unit === "hp"
+    ? /^(\d{1,4}(?:\.\d+)?)\s*(?:Ps|hp|马力)?$/i
+    : /^(\d{1,4}(?:\.\d+)?)\s*(?:kW)?$/i);
+  const parsed = match ? Number(match[1]) : undefined;
+  const maximum = unit === "hp" ? 2_500 : 2_000;
+  return parsed !== undefined && parsed >= (unit === "hp" ? 20 : 10) && parsed <= maximum
+    ? Math.round(parsed * 10) / 10
+    : undefined;
+}
+function derivedPowerEvidence(rawValues: string[], value: number): AutohomeEvidence<number> {
+  return { value: Math.round(value * 10) / 10, rawValues, status: "exact" };
+}
+
+export function autohomeNewSpecificationEvidence(input: {
+  listingYear?: unknown;
+  detailYear?: unknown;
+  energy?: unknown;
+  engine?: unknown;
+  engineMaxHp?: unknown;
+  engineMaxKw?: unknown;
+}): AutohomeNewSpecificationEvidence {
+  const years = uniqueRaw([input.listingYear, input.detailYear]);
+  const energy = uniqueRaw([input.energy]);
+  const engines = uniqueRaw([input.engine]);
+  const hpValues = uniqueRaw([input.engineMaxHp]);
+  const kwValues = uniqueRaw([input.engineMaxKw]);
+  const year = exactEvidence(years, years.map(exactYear));
+  const identities = energy.map(energyIdentity);
+  const fuel = exactEvidence(energy, identities.map((value) => value?.fuel));
+  const powertrainKind = exactEvidence(energy, identities.map((value) => value?.powertrainKind));
+  let engineCc = exactEvidence(engines, engines.map(exactEngineCc));
+
+  let powerHp: AutohomeEvidence<number> = { rawValues: hpValues, status: hpValues.length ? "ambiguous" : "missing" };
+  let powerKw: AutohomeEvidence<number> = { rawValues: kwValues, status: kwValues.length ? "ambiguous" : "missing" };
+  if (powertrainKind.status === "exact" && powertrainKind.value === "combustion") {
+    powerHp = exactEvidence(hpValues, hpValues.map((value) => exactPower(value, "hp")));
+    powerKw = exactEvidence(kwValues, kwValues.map((value) => exactPower(value, "kw")));
+    if (powerHp.status === "exact" && powerKw.status === "exact") {
+      const convertedHp = Number(powerKw.value) * 1.3596216173;
+      const toleranceHp = Math.max(2, convertedHp * 0.015);
+      if (Math.abs(convertedHp - Number(powerHp.value)) > toleranceHp) {
+        const rawValues = [...hpValues, ...kwValues];
+        powerHp = { rawValues, status: "conflict" };
+        powerKw = { rawValues, status: "conflict" };
+      }
+    } else if (powerHp.status === "exact" && powerKw.status === "missing") {
+      powerKw = derivedPowerEvidence(hpValues, Number(powerHp.value) * 0.73549875);
+    } else if (powerKw.status === "exact" && powerHp.status === "missing") {
+      powerHp = derivedPowerEvidence(kwValues, Number(powerKw.value) * 1.3596216173);
+    }
+  } else if (powertrainKind.status === "exact") {
+    // Autohome's electrified engine/motor/system fields are peak maxima, not
+    // certified 30-minute power. Keep them raw and out of calculation fields.
+    powerHp = { rawValues: hpValues, status: "missing" };
+    powerKw = { rawValues: kwValues, status: "missing" };
+  }
+  if (powertrainKind.status === "exact" && powertrainKind.value === "electric" && engineCc.status === "exact") {
+    engineCc = { rawValues: engines, status: "conflict" };
+  }
+  return { year, fuel, powertrainKind, engineCc, powerHp, powerKw };
 }
 function yearFrom(value: unknown) {
   const year = Number(clean(value).match(/\b((?:19|20)\d{2})款?\b/)?.[1] || 0);
@@ -232,15 +343,6 @@ export function exactAutohomeSpecGalleryImages(markup: string, specId: string) {
   }
   return [...new Set(values)].slice(0, 30);
 }
-function engineCc(engine: string | undefined) {
-  const value = clean(engine), liters = value.match(/\b(\d+(?:\.\d+)?)\s*L\b/i), cc = value.match(/\b(\d{3,5})\s*(?:cc|cm3|cm³)\b/i);
-  return cc ? Math.round(Number(cc[1])) : liters ? Math.round(Number(liters[1]) * 1_000) : undefined;
-}
-function isCombustionOnly(energy: string | undefined) {
-  const value = clean(energy);
-  return /汽油|柴油|天然气|汽油\+\d+V轻混|柴油\+\d+V轻混/i.test(value) && !/混合动力|插电|增程|电动|纯电/i.test(value);
-}
-
 export class AutohomeNewExactAdapter implements CatalogSourceAdapter {
   sourceId = "autohome_new_china_open";
   market = "china" as const;
@@ -258,8 +360,17 @@ export class AutohomeNewExactAdapter implements CatalogSourceAdapter {
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as AutohomeNewListRow;
     if (!row?.specId || !row.trimTitle || !row.year || !(row.sourcePriceCny > 0) || !row.sourceUrl) return null;
+    const semanticEvidence = autohomeNewSpecificationEvidence({ listingYear: row.year });
+    if (semanticEvidence.year.status !== "exact") return null;
     const now = new Date().toISOString();
-    return { id: stableOfferId(this.sourceId, row.specId), sourceId: this.sourceId, sourceOfferId: row.specId, market: "china", offerType: "fixed", status: "active", catalogKind: "listing", sourceTitle: row.trimTitle, make: "", model: "", trim: row.trimTitle, year: row.year, sourcePrice: row.sourcePriceCny, sourceCurrency: "CNY", priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data", firstSeenAt: now, updatedAt: now, operational: { sourceUrl: row.sourceUrl, sourceVenueName: "汽车之家 / Autohome", sourceTitle: row.trimTitle, exactDetail: false, exactFields: true, exactPhotos: false, galleryVerified: false, galleryImageCount: 0, gallerySafetyMode: "autohome_exact_spec_next_data_picpath_v2", galleryStoredAs: "json_urls", raw: { listing: row, priceUnit: "CNY_wan_x10000", detailIdentityVerified: false, photoIdentityVerified: false } } };
+    return { id: stableOfferId(this.sourceId, row.specId), sourceId: this.sourceId, sourceOfferId: row.specId, market: "china", offerType: "fixed", status: "active", catalogKind: "listing", sourceTitle: row.trimTitle, make: "", model: "", trim: row.trimTitle, year: semanticEvidence.year.value!, sourcePrice: row.sourcePriceCny, sourceCurrency: "CNY", priceMode: "fixed", images: [], totalRub: null, calculationStatus: "needs_data", firstSeenAt: now, updatedAt: now, operational: { sourceUrl: row.sourceUrl, sourceVenueName: "汽车之家 / Autohome", sourceTitle: row.trimTitle, exactDetail: false, exactFields: true, exactPhotos: false, galleryVerified: false, galleryImageCount: 0, gallerySafetyMode: "autohome_exact_spec_next_data_picpath_v2", galleryStoredAs: "json_urls", semanticEvidence: {
+      year: { source: "autohome_listing_trim_year", ...semanticEvidence.year },
+      fuel: { source: "autohome_named_energy_type", ...semanticEvidence.fuel },
+      powertrainKind: { source: "autohome_named_energy_type", ...semanticEvidence.powertrainKind },
+      engineCc: { source: "autohome_named_engine", ...semanticEvidence.engineCc },
+      powerHp: { source: "autohome_engine_section_max_power", ...semanticEvidence.powerHp },
+      powerKw: { source: "autohome_engine_section_max_power", ...semanticEvidence.powerKw },
+    }, raw: { listing: row, priceUnit: "CNY_wan_x10000", detailIdentityVerified: false, photoIdentityVerified: false } } };
   }
 
   async fetchImages(offer: VehicleOffer): Promise<CatalogImage[]> {
@@ -283,13 +394,33 @@ export class AutohomeNewExactAdapter implements CatalogSourceAdapter {
       ? exactGallery
       : [...new Set([...exactGallery, ...fallbackGallery])]).slice(0, 30);
     const verifiedGallery = gallery.length >= minimum && (exactGallery.length >= minimum || gallery.every((url) => PRODUCT_IMAGE_RE.test(url)));
+    const semanticEvidence = autohomeNewSpecificationEvidence({
+      listingYear: offer.year,
+      detailYear: yearFrom(identity.trim),
+      energy: fields.energy,
+      engine: fields.engine,
+      engineMaxHp: fields.engineMaxHp,
+      engineMaxKw: fields.engineMaxKw,
+    });
     offer.make = identity.make; offer.model = identity.model; offer.trim = identity.trim || offer.trim; offer.sourceTitle = `${identity.model} ${identity.trim}`.trim();
-    offer.fuel = fields.energy || offer.fuel; offer.engineType = fields.engine || offer.engineType; offer.engineCc = engineCc(fields.engine) || offer.engineCc; offer.transmission = fields.transmission || offer.transmission; offer.bodyType = fields.body || offer.bodyType;
-    if (isCombustionOnly(fields.energy)) {
-      const hp = positive(fields.engineMaxHp), kw = positive(fields.engineMaxKw);
-      if (hp || kw) { offer.powerHp = hp || (kw ? Math.round(kw * 1.3596216173 * 10) / 10 : undefined); offer.powerKw = kw || (hp ? Math.round(hp * 0.73549875 * 10) / 10 : undefined); offer.powerDataConfidence = "source_exact"; offer.powerDataSource = "Autohome exact config: engine-section maximum power"; }
-    }
-    offer.operational = { ...(offer.operational || {}), sourceUrl: specUrl(specId), sourceVenueName: "汽车之家 / Autohome", sourceTitle: offer.sourceTitle, exactDetail: true, exactFields: true, exactPhotos: verifiedGallery, galleryVerified: verifiedGallery, galleryImageCount: gallery.length, photoIdentityVerified: verifiedGallery, gallerySafetyMode: "autohome_exact_spec_next_data_picpath_v2", galleryStoredAs: "json_urls", raw: { listing, configFields: fields, configSpecId: specId, specPageTitle: identity.pageTitle, galleryUrl: exactGalleryUrl || listing?.galleryUrl, legacyGalleryUrl: listing?.galleryUrl, exactProductImages: gallery, exactGalleryImageCount: exactGallery.length, detailIdentityVerified: true, photoIdentityVerified: verifiedGallery, powerFieldPolicy: "section_bound_engine_motor_system_fields_v2", electrifiedPowerPolicy: "maximum_motor_system_power_kept_raw_not_used_as_customs_30min_power" } };
+    offer.fuel = semanticEvidence.fuel.status === "exact" ? semanticEvidence.fuel.value : undefined;
+    offer.powertrainKind = semanticEvidence.powertrainKind.status === "exact" ? semanticEvidence.powertrainKind.value : "unknown";
+    offer.engineType = fields.engine || undefined;
+    offer.engineCc = semanticEvidence.engineCc.status === "exact" ? semanticEvidence.engineCc.value : undefined;
+    offer.transmission = fields.transmission || offer.transmission; offer.bodyType = fields.body || offer.bodyType;
+    offer.powerHp = semanticEvidence.powerHp.status === "exact" ? semanticEvidence.powerHp.value : undefined;
+    offer.powerKw = semanticEvidence.powerKw.status === "exact" ? semanticEvidence.powerKw.value : undefined;
+    const hasExactPower = Boolean(offer.powerHp || offer.powerKw);
+    offer.powerDataConfidence = hasExactPower ? "source_exact" : undefined;
+    offer.powerDataSource = hasExactPower ? "Autohome exact config: engine-section maximum power" : undefined;
+    offer.operational = { ...(offer.operational || {}), sourceUrl: specUrl(specId), sourceVenueName: "汽车之家 / Autohome", sourceTitle: offer.sourceTitle, exactDetail: true, exactFields: true, exactPhotos: verifiedGallery, galleryVerified: verifiedGallery, galleryImageCount: gallery.length, photoIdentityVerified: verifiedGallery, gallerySafetyMode: "autohome_exact_spec_next_data_picpath_v2", galleryStoredAs: "json_urls", semanticEvidence: {
+      year: { source: "autohome_listing_and_detail_year", ...semanticEvidence.year },
+      fuel: { source: "autohome_named_energy_type", ...semanticEvidence.fuel },
+      powertrainKind: { source: "autohome_named_energy_type", ...semanticEvidence.powertrainKind },
+      engineCc: { source: "autohome_named_engine", ...semanticEvidence.engineCc },
+      powerHp: { source: "autohome_engine_section_max_power", ...semanticEvidence.powerHp },
+      powerKw: { source: "autohome_engine_section_max_power", ...semanticEvidence.powerKw },
+    }, raw: { listing, configFields: fields, configSpecId: specId, specPageTitle: identity.pageTitle, galleryUrl: exactGalleryUrl || listing?.galleryUrl, legacyGalleryUrl: listing?.galleryUrl, exactProductImages: gallery, exactGalleryImageCount: exactGallery.length, detailIdentityVerified: true, photoIdentityVerified: verifiedGallery, powerFieldPolicy: "section_bound_engine_motor_system_fields_v3_semantic_evidence", electrifiedPowerPolicy: "maximum_motor_system_power_kept_raw_not_used_as_customs_30min_power" } };
     return gallery.map(image);
   }
 
