@@ -9,10 +9,12 @@ on:
       - ".github/workflows/catalog-source-chngoodcar-paginated-scale-v1.yml"
       - "apps/web/lib/catalog/chngoodcar-carslist.ts"
       - "apps/web/lib/catalog/chngoodcar-paginated-exact-source.ts"
+      - "apps/web/lib/catalog/chngoodcar-reference-conflicts.ts"
       - "apps/web/lib/catalog/chngoodcar-exact-source.ts"
       - "apps/web/lib/catalog/powertrain-safety.ts"
       - "tests/catalog-source-chngoodcar-carslist-client-v1.test.ts"
       - "tests/catalog-source-chngoodcar-paginated-exact-v2.test.ts"
+      - "tests/catalog-source-chngoodcar-reference-conflicts-v1.test.ts"
       - "tests/catalog-source-chngoodcar-exact-adapter-v1.test.ts"
       - "scripts/catalog-source-chngoodcar-paginated-scale-v1.ts"
       - "data/catalog/source-partial-classification-v1.json"
@@ -41,6 +43,7 @@ jobs:
           node --import tsx --test tests/catalog-source-chngoodcar-exact-adapter-v1.test.ts
           node --import tsx --test tests/catalog-source-chngoodcar-carslist-client-v1.test.ts
           node --import tsx --test tests/catalog-source-chngoodcar-paginated-exact-v2.test.ts
+          node --import tsx --test tests/catalog-source-chngoodcar-reference-conflicts-v1.test.ts
       - name: Type-check paginated adapter integration
         run: npm run typecheck
       - name: Run five-page Good Car exact scale without production writes
@@ -63,6 +66,7 @@ jobs:
           if (!(p.sourceTotals[0] >= 1000)) throw new Error(`source total ${p.sourceTotals[0]}`);
           if (!(p.uniqueRawListIds >= 75)) throw new Error(`uniqueRawListIds ${p.uniqueRawListIds}`);
           if (!(p.coverage?.blockedIdentityElectrifiedCount > 0)) throw new Error(`blockedIdentityElectrifiedCount ${p.coverage?.blockedIdentityElectrifiedCount}`);
+          if (!(p.coverage?.blockedReferenceConflictCount > 0)) throw new Error(`blockedReferenceConflictCount ${p.coverage?.blockedReferenceConflictCount}`);
           if (!Array.isArray(p.failures) || p.failures.length !== 0) throw new Error(`failures ${p.failures}`);
           NODE
       - uses: actions/upload-artifact@v4
