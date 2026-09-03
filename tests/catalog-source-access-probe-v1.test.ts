@@ -70,6 +70,22 @@ test('long marketplace page with incidental captcha text is not a challenge wall
   assert.equal(summarizeBody(html, 'https://example.com').challenge, false);
 });
 
+test('catalog route discovery rejects community, loan and hot-rank false positives', () => {
+  const html = '<a href="/car_fans_community">fans</a><a href="/car-loan/">loan</a><a href="/cars/hotrank/1">rank</a><a href="/dubai/used">used</a>';
+  assert.deepEqual(
+    extractCatalogCandidates(html, 'https://example.com/', 5),
+    ['https://example.com/dubai/used'],
+  );
+});
+
+test('detail extraction rejects calculator, dealer-info and backorder pseudo identities', () => {
+  const html = '<a href="/calcos-1">calculator</a><a href="/dealerinfo/vendor-7772-tt-2">dealer</a><a href="/backorder2?utm_medium=menu">backorder</a><a href="/vehicle/123456">listing</a>';
+  assert.deepEqual(
+    extractDetailCandidates(html, 'https://example.com/list', 5),
+    ['https://example.com/vehicle/123456'],
+  );
+});
+
 test('qualification probe is isolated from production writers', () => {
   const source = fs.readFileSync('scripts/catalog-source-access-probe-v1.mjs', 'utf8');
   assert.doesNotMatch(source, /catalog-probe-source-shard|publish-autocatalog|S3_BUCKET|YC_SERVICE_ACCOUNT|DATABASE_URL|POSTGRES_URL/i);
