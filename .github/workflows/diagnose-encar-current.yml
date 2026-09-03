@@ -1,0 +1,46 @@
+name: Diagnose current Encar endpoints
+
+on:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Probe API and current HTML listing
+        shell: bash
+        run: |
+          node --input-type=module <<'NODE'
+          const headers = {
+            'accept-language':'ko-KR,ko;q=0.9,en-US;q=0.8,en;q=0.7',
+            'user-agent':'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 Chrome/151 Safari/537.36'
+          };
+          const urls = [
+            'https://api.encar.com/search/car/list/mobile?count=true&q=%28And.Hidden.N._.CarType.A.%29&sr=%7CMobileModifiedDate%7C0%7C20&inav=%7CMetadata%7CSort',
+            'https://car.encar.com/list/car?page=1&search=%7B%22type%22%3A%22car%22%2C%22action%22%3A%22%28And.Hidden.N._.MultiView2Hidden.N._.MultiViewHidden.N._.CarType.A.%29%22%2C%22toggle%22%3A%7B%7D%2C%22layer%22%3A%22%22%2C%22sort%22%3A%22MobileModifiedDate%22%7D'
+          ];
+          for (const url of urls) {
+            console.log('\nURL',url);
+            try {
+              const r=await fetch(url,{headers,redirect:'follow',signal:AbortSignal.timeout(20000)});
+              const body=await r.text();
+              console.log(JSON.stringify({status:r.status,finalUrl:r.url,type:r.headers.get('content-type'),bytes:body.length},null,2));
+              const hints={
+                nextData:body.includes('__NEXT_DATA__'),
+                searchResults:body.includes('SearchResults'),
+                carIds:[...body.matchAll(/(?:carId|CarId|vehicleId|vehicleNo)["'=:>\s]+([0-9]{5,})/g)].slice(0,10).map(x=>x[1]),
+                detailLinks:[...body.matchAll(/href=["']([^"']*(?:detail|cars\/)[^"']*)["']/gi)].slice(0,10).map(x=>x[1]),
+                scriptJson:[...body.matchAll(/<script[^>]+type=["']application\/json["'][^>]*>([\s\S]*?)<\/script>/gi)].slice(0,3).map(x=>x[1].slice(0,1000)),
+              };
+              console.log(JSON.stringify(hints,null,2));
+              console.log('preview',body.replace(/\s+/g,' ').slice(0,2000));
+            } catch(e) { console.log('ERROR',e?.name,e?.message,e?.cause?.code,e?.cause?.message); }
+          }
+          NODE
