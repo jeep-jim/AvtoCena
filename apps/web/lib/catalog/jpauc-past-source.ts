@@ -152,6 +152,33 @@ export function jpaucPhotoVariants(value: string) {
   } catch { return []; }
 }
 
+export function jpaucIdentityGalleryEvidence(raw: JpaucRawRow) {
+  const dataId = clean(raw?.dataId);
+  const detailUrl = clean(raw?.detailUrl);
+  const images = jpaucPhotoVariants(clean(raw?.listingImage));
+  const imageIdentityMatches = images.length === 3 && images.every((value) => {
+    try {
+      const url = new URL(value);
+      return /(?:^|\.)aleado\.com$/i.test(url.hostname) && url.searchParams.get("id") === dataId;
+    } catch {
+      return false;
+    }
+  });
+  const ok = Boolean(
+    /^\d+$/.test(dataId)
+      && /^\d{4}-\d{2}-\d{2}$/.test(clean(raw?.date))
+      && clean(raw?.location)
+      && clean(raw?.lot)
+      && clean(raw?.maker)
+      && clean(raw?.model)
+      && Number(raw?.year || 0) >= 2011
+      && Number(raw?.year || 0) <= new Date().getUTCFullYear() + 1
+      && detailUrl.startsWith(`${PAST}/detail/${encodeURIComponent(dataId)}`)
+      && imageIdentityMatches,
+  );
+  return { ok, imageCount: images.length, priceAvailable: Number(raw?.startPrice || 0) > 0 };
+}
+
 export function parseJpaucListingRows(html: string): JpaucRawRow[] {
   const rows: JpaucRawRow[] = [];
   for (const match of html.matchAll(/<tr\b([^>]*)data-id=["'](\d+)["']([^>]*)>([\s\S]*?)<\/tr>/gi)) {
@@ -195,6 +222,7 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
   sourceId = "jpauc_japan_past_open";
   market = "japan" as const;
   accessMode = "public_html" as const;
+  readinessRole = "identity_gallery_after_exact_price_join";
   private cookie = "";
   private selectedDates: string[] = [];
   private listingUrl = `${PAST}/listing-2`;
@@ -270,6 +298,10 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
     const pageSize = 10;
     const finished = items.length === 0 || page * pageSize >= total;
     return { items, count: total, finished, nextCursor: finished ? null : String(page + 1), health: { ok: items.length > 0 || finished, message: `jpauc_past:${mode}:${items.length}/${total}:dates=${this.selectedDates.length}`, checkedAt: new Date().toISOString(), httpStatus } };
+  }
+
+  validateReadinessEvidence(raw: unknown) {
+    return jpaucIdentityGalleryEvidence(raw as JpaucRawRow).ok;
   }
 
   normalizeOffer(raw: unknown): VehicleOffer | null {
