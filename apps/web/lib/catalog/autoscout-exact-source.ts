@@ -1,5 +1,5 @@
-export { AutoScoutEuropeExactAdapter, parseAutoScoutNextData } from "./autoscout-exact-source-base";
-export type { AutoScoutExactRow } from "./autoscout-exact-source-base";
+export { AutoScoutEuropeExactAdapter, autoScoutSpecificationEvidence, parseAutoScoutNextData } from "./autoscout-exact-source-base";
+export type { AutoScoutExactRow, AutoScoutSpecificationEvidence } from "./autoscout-exact-source-base";
 export { AutoScoutHqAdapter, parseAutoScoutDetailGallery } from "./autoscout-hq-source";
 export { AutoScoutCurrentAdapter } from "./autoscout-current-source";
 
