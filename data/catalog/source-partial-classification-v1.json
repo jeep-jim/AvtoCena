@@ -1,0 +1,64 @@
+{
+  "version": 1,
+  "decidedAt": "2026-09-03",
+  "mode": "manual_source_classification_after_read_only_evidence",
+  "productionWrites": false,
+  "publishAllowedMutations": false,
+  "evidenceRuns": [
+    33747985524,
+    33748366958,
+    33748644632,
+    33749118028
+  ],
+  "decisions": [
+    {
+      "market": "china",
+      "sourceId": "chngoodcar_china_candidate",
+      "class": "exact_catalog",
+      "publishAllowed": false,
+      "exactScope": "ICE offers that independently pass the offer-level exact gate; electrified offers remain blocked until required certified/utilization/30-minute power is source-bound",
+      "evidence": {
+        "access": "repeated public detail fetches are stable at the extracted contract level",
+        "identity": "direct Home/Cars?id=<sourceOfferId> URLs, stable VIN and repeated offer contract",
+        "priceCurrency": "detail price matches public homepage/list price; public CarsList explicitly labels the price dimension as 价格(US $)",
+        "body": "offer-bound 车型 field, including 轿车 and SUV across audited samples",
+        "fuel": "offer-bound 燃料种类 field",
+        "engine": "offer-bound 排量 (ml); for ICE, mL is an exact volumetric unit equivalent to cm3/cc",
+        "power": "offer-bound 功率 (kw); adapter must preserve raw kW and perform only documented deterministic unit conversion to project powerHp",
+        "gallery": "10-20 images are isolated inside the offer core before recommendation cards on audited ICE offers",
+        "listDetailParity": "homepage name+numeric price matches detail on audited offers; public list currency contract is USD"
+      },
+      "blockersBeforePublication": [
+        "write and test a dedicated Good Car adapter",
+        "document and regression-test deterministic kW -> project powerHp conversion while retaining raw kW provenance",
+        "full no-write offer-level exact dry-run across diverse ICE offers",
+        "manual spot-check of normalized cards and listing-bound images",
+        "China remains non-published at the current project stage"
+      ]
+    },
+    {
+      "market": "china",
+      "sourceId": "iautos_china_candidate",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "public lead/search only; no automatic full calculation",
+      "evidence": "Public detail exposes identity/year/price/body and 2.0L, but source-bound fuel/power and listing gallery were not proven; the discovered same-offer configuration route redirects to login."
+    },
+    {
+      "market": "japan",
+      "sourceId": "carvector_japan_stat_open",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "auction-history/reference support only; never a standalone public catalog card under the current route",
+      "evidence": "The audited public sample is a Statistics page for Hitachi EX55UR-3 heavy machinery, exposes incomplete offer fields and <=2 image identities, and fails the standalone exact-card contract."
+    },
+    {
+      "market": "japan",
+      "sourceId": "exportcar_japan_candidate",
+      "class": "rejected",
+      "publishAllowed": false,
+      "evidence": "The known vehicle-like public URL repeatedly returns a generic Auto Auctions shell with no bound vehicle fields or listing gallery; no usable exact or lead identity is proven on this route."
+    }
+  ],
+  "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs."
+}
