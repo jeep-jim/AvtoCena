@@ -59,6 +59,12 @@ function boundedNumber(value: unknown, minimum: number, maximum: number) {
   const parsed = numericToken(clean(value));
   return parsed !== undefined && parsed >= minimum && parsed <= maximum ? parsed : undefined;
 }
+function registrationYear(value: string) {
+  const match = value.match(/^(?:(0?[1-9]|1[0-2])[-/.])?((?:19|20)\d{2})$/);
+  if (!match) return undefined;
+  const year = Number(match[2]);
+  return year >= 1900 && year <= new Date().getUTCFullYear() + 1 ? year : undefined;
+}
 function powerEvidence(rawValues: string[], unit: "kw" | "hp"): AutoScoutEvidence<number> {
   if (!rawValues.length) return { rawValues, status: "missing" };
   if (rawValues.some(hasNumericRange)) return { rawValues, status: "ambiguous" };
@@ -86,12 +92,7 @@ export function autoScoutSpecificationEvidence(input: {
   const fuels = uniqueRaw(input.fuels || []);
   const engines = uniqueRaw(input.engineDisplacementsCcm || []);
   const powers = uniqueRaw(input.power || []);
-  const year = evidence(firstRegistrations, firstRegistrations.map((raw) => {
-    if (hasNumericRange(raw)) return undefined;
-    const values = [...raw.matchAll(/\b((?:19|20)\d{2})\b/g)].map((match) => Number(match[1]));
-    const unique = [...new Set(values)].filter((value) => value >= 1900 && value <= new Date().getUTCFullYear() + 1);
-    return unique.length === 1 ? unique[0] : undefined;
-  }));
+  const year = evidence(firstRegistrations, firstRegistrations.map(registrationYear));
   const sourceUrl = absoluteUrl(input.sourceUrl);
   const sourcePureElectric = /-electric-/i.test(sourceUrl) && !/-(?:gasoline|petrol|diesel)-|hybrid|phev|hev/i.test(sourceUrl);
   const fuelRawValues = fuels.length ? fuels : sourcePureElectric ? [sourceUrl] : [];
@@ -170,10 +171,12 @@ export class AutoScoutEuropeExactAdapter implements CatalogSourceAdapter {
   sourceId = "autoscout_europe_open";
   market = "europe" as const;
   accessMode = "public_html" as const;
+  protected minimumRegistrationYear?: number;
 
   async fetchPage(cursor?: string | null): Promise<CatalogFetchResult> {
     const page = Math.max(1, Number(cursor || 1));
     const url = new URL("/lst", BASE_URL); url.searchParams.set("atype", "C"); url.searchParams.set("ustate", "N,U"); url.searchParams.set("page", String(page));
+    if (this.minimumRegistrationYear) url.searchParams.set("fregfrom", String(this.minimumRegistrationYear));
     const response = await fetch(url, { headers: HEADERS, redirect: "follow", signal: AbortSignal.timeout(Math.max(5_000, Number(process.env.CATALOG_SOURCE_TIMEOUT_MS || 30_000))) });
     const markup = await response.text();
     if (!response.ok) throw new Error(`autoscout_exact_http_${response.status}`);
