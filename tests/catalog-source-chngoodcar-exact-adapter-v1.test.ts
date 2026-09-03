@@ -5,6 +5,7 @@ import {
   goodCarKwToProjectHp,
   hasGoodCarUsdPriceContract,
   isGoodCarIceFuel,
+  isGoodCarPassengerBodyType,
   parseGoodCarDetailHtml,
   splitGoodCarMakeModel,
   type GoodCarExactRawOffer,
@@ -14,6 +15,7 @@ import { isAllowedCatalogSourceId } from '../apps/web/lib/catalog/required-catal
 const DETAIL_URL = 'https://www.chngoodcar.com/Home/Cars?id=2049753443165270016';
 const DETAIL_HTML = `<!doctype html><html><head><title>马自达CX-50行也 2023款 2.0L 领行版_广东好车_打造二手车出口新渠道</title></head><body>
 <section class="gallery">
+<img src="https://image.ucoc.net/web_en/images/index/douyin.png">
 <img src="https://image.cn.ucoc.net/Picture/Automobile/LargeThumbnail/1.jpg">
 <img src="https://image.cn.ucoc.net/Picture/Automobile/LargeThumbnail/2.jpg">
 <img src="https://image.cn.ucoc.net/Picture/Automobile/LargeThumbnail/3.jpg">
@@ -49,7 +51,7 @@ test('Good Car USD contract is explicit and never inferred from a numeric value'
   assert.equal(hasGoodCarUsdPriceContract('<div>价格</div><div>23600</div>'), false);
 });
 
-test('Good Car detail parser keeps offer-bound ICE fields and cuts recommendation images', () => {
+test('Good Car detail parser keeps offer-bound ICE fields and cuts recommendation/social images', () => {
   const row = parseGoodCarDetailHtml(DETAIL_HTML, DETAIL_URL);
   assert.ok(row);
   assert.equal(row.sourceOfferId, '2049753443165270016');
@@ -62,9 +64,11 @@ test('Good Car detail parser keeps offer-bound ICE fields and cuts recommendatio
   assert.equal(row.powerKw, 114);
   assert.equal(row.fuel, '汽油');
   assert.equal(row.bodyType, 'SUV');
+  assert.equal(row.transmission, '手自一体');
+  assert.equal(row.drive, '前置前驱');
   assert.equal(row.vin, 'LSGZG5397KS093671');
   assert.equal(row.imageUrls.length, 6);
-  assert.equal(row.imageUrls.some((url) => url.includes('recommendation')), false);
+  assert.equal(row.imageUrls.some((url) => /recommendation|douyin/i.test(url)), false);
 });
 
 test('kW conversion uses the documented metric-horsepower relation and retains raw kW', () => {
@@ -86,7 +90,15 @@ test('ICE gate accepts source-bound combustion fuels and blocks electrified valu
   assert.equal(isGoodCarIceFuel('新能源'), false);
 });
 
-test('adapter normalizes an exact ICE offer with source-exact power provenance', async () => {
+test('v1 exact gate is limited to confirmed passenger body types', () => {
+  assert.equal(isGoodCarPassengerBodyType('轿车'), true);
+  assert.equal(isGoodCarPassengerBodyType('SUV'), true);
+  assert.equal(isGoodCarPassengerBodyType('MPV'), true);
+  assert.equal(isGoodCarPassengerBodyType('客车'), false);
+  assert.equal(isGoodCarPassengerBodyType('货车'), false);
+});
+
+test('adapter normalizes an exact ICE passenger offer with source-exact power provenance', async () => {
   const adapter = new ChnGoodCarExactAdapter();
   const offer = adapter.normalizeOffer(exactRaw());
   assert.ok(offer);
@@ -103,10 +115,11 @@ test('adapter normalizes an exact ICE offer with source-exact power provenance',
   assert.equal(offer.operational.galleryVerified, true);
 });
 
-test('adapter fails closed on EV/hybrid, missing USD proof, parity mismatch and insufficient gallery', () => {
+test('adapter fails closed on EV/hybrid, non-passenger, missing USD proof, parity mismatch and insufficient gallery', () => {
   const adapter = new ChnGoodCarExactAdapter();
   assert.equal(adapter.normalizeOffer(exactRaw({ fuel: '纯电动' })), null);
   assert.equal(adapter.normalizeOffer(exactRaw({ fuel: '油电混合' })), null);
+  assert.equal(adapter.normalizeOffer(exactRaw({ bodyType: '客车' })), null);
   assert.equal(adapter.normalizeOffer(exactRaw({ currencyLabelVerified: false })), null);
   assert.equal(adapter.normalizeOffer(exactRaw({ listDetailPriceParity: false })), null);
   assert.equal(adapter.normalizeOffer(exactRaw({ imageUrls: exactRaw().imageUrls.slice(0, 4) })), null);
