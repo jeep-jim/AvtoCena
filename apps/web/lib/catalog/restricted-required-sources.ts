@@ -72,8 +72,16 @@ export const jpCenterRestrictedSource = new RestrictedRequiredSourceAdapter({
   observedHttpStatus: 200,
 });
 
+export const prestigeJapanRestrictedSource = new RestrictedRequiredSourceAdapter({
+  sourceId: "prestige_japan_auctions_open",
+  market: "japan",
+  reason: "prestige_exact_auction_details_are_robots_disallowed_and_turnstile_blocked_partner_feed_required",
+  observedHttpStatus: 403,
+});
+
 export const restrictedRequiredSources: CatalogSourceAdapter[] = [
   dongchediRestrictedSource,
   auctionDataSearchRestrictedSource,
   jpCenterRestrictedSource,
+  prestigeJapanRestrictedSource,
 ];
