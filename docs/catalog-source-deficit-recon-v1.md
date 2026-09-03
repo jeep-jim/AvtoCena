@@ -118,3 +118,25 @@ PR #826 (`3826f80b04371ba8c4c0b8a3321292fa93bf5db2`) влит в `main`. Read-on
 4. Для CarSwitch/CARS24 отличать доказанное `1.5L/1.8L/5.7L` от exact `engineCc`: маркетинговый литраж сам по себе не превращаем в 1498/1500/5700 cc без точного source field.
 5. Если source-bound `powerHp` или exact cc после разрешённых source routes отсутствует, не лечить источник бесконечно: фиксировать `lead_only` либо продолжать только при наличии конкретного доказанного public route.
 6. После этого checkpoint обязательно переносится в `roadmap.md`, затем PR и только после зелёного CI — merge.
+
+### Run 33746766296 — regression postprocess, исправлен
+
+Postprocess test остановился до live probe: regex для корейской мощности не распознавал `190마력` / `282마력` из уже сохранённого offer-bound контекста. Live source requests не выполнялись, artifact не создавался, production не затрагивался. Исправлен только нормализатор evidence; regression test сохранён.
+
+### Run 33746996319 — финальный зелёный deficit resolution checkpoint
+
+- status: `success`;
+- head: `e3dd6e1c68363f9bb8fca445cfb2ae6aafb14d16`;
+- artifact: `9890047197`;
+- digest: `sha256:63a090905f0b55585a2683e16c8c08ffeb45ab53f93ddb20904c65c23211be17`;
+- contract tests, 8-offer live evidence pass, conservative postprocess, no-write envelope и artifact upload — `success`;
+- итоговая машиночитаемая сводка: `data/catalog/source-deficit-resolution-v1-summary.json`.
+
+Финальный результат этого блока:
+
+- **Bobaedream:** собственные detail pages повторно доказывают `2,359 cc / 190마력` и `3,342 cc / 282마력`; offer-bound gallery series устойчивы и содержат больше пяти изображений. Но найденные same-origin spec routes не дают отдельного canonical body field. Поэтому источник не повышается до `exact_catalog`: unresolved остаётся `canonicalBody`.
+- **CarSwitch:** exact offer pages устойчиво содержат `1.5L` и `5.7L`, цену, валюту, body/fuel и галерею. Но exact `engineCc` и offer-bound `powerHp` на этих двух предложениях не доказаны. Литры не конвертируются в cc по предположению.
+- **CARS24 UAE:** оба offer pages устойчиво связывают hero price с embedded offer state (`31,499 AED` и `64,999 AED`) и явно показывают `1.5L / 1.8L`. Таким образом прежний price deficit закрыт на evidence-level. Exact cc и source-bound power остаются отсутствующими.
+- **DubiCars:** iX1 стабильно показывает peak `313 HP`, но EV certified/utilization/30-minute power не найден. Для gallery DOM-window содержит 17 UUID при source `image_count=11/14`, поэтому окно признано contaminated и не принимается за точную listing gallery. ICE exact cc/power также не доказаны.
+
+**Классификационное решение:** ни один из четырёх источников этим этапом не переводится в `exact_catalog`; все остаются `research_pending`, `publishAllowed=false`. Бесконечное лечение без конкретного source-bound route запрещено: следующий основной этап переходит к partial-signal группе, а к этим четырём возвращаемся только при появлении конкретного разрешённого доказательства.
