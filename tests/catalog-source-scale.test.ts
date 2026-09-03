@@ -112,6 +112,11 @@ test("source-only readiness keeps CarVector evidence separate from public galler
   assert.match(simpleSourceReadiness, /if \(evidenceOnlySourceIds\.has\(source\?\.sourceId\)\) return 0/);
 });
 
+test("source-only readiness gives the multi-request JPAuc bootstrap its own bounded timeout", () => {
+  assert.match(simpleSourceReadiness, /CATALOG_JPAUC_PAGE_TIMEOUT_MS \|\| 120_000/);
+  assert.match(simpleSourceReadiness, /pageTimeoutForSource\(source\)/);
+});
+
 test("production source registry exactly matches the owner-approved allowlist", () => {
   for (const market of PUBLIC_CATALOG_MARKETS) {
     const expected = REQUIRED_CATALOG_SOURCES[market];
