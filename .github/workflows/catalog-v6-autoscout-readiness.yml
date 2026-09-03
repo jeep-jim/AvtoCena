@@ -50,7 +50,7 @@ jobs:
       - name: Typecheck
         run: npm run typecheck
       - name: AutoScout HQ regression tests
-        run: node --import tsx --test tests/catalog-autoscout-hq-gallery.test.ts
+        run: node --import tsx --test tests/catalog-autoscout-hq-gallery.test.ts tests/catalog-autoscout-specification-evidence.test.ts
       - name: Collect exact AutoScout cards without publishing
         run: npx tsx scripts/catalog-simple-source-market.mjs
       - name: Enforce exact AutoScout source identity, age and HQ gallery
