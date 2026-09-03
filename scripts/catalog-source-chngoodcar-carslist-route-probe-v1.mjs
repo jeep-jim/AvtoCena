@@ -8,7 +8,7 @@ const LIST_URL = `${BASE_URL}/Home/CarsList`;
 const OUTPUT_PATH = process.env.CATALOG_SOURCE_CHNGOODCAR_CARSLIST_ROUTE_OUTPUT || 'catalog-source-chngoodcar-carslist-route-probe-v1.json';
 const TIMEOUT_MS = Math.max(3000, Math.min(45000, Number(process.env.CATALOG_SOURCE_CHNGOODCAR_CARSLIST_ROUTE_TIMEOUT_MS || 15000)));
 const MAX_BODY_BYTES = Math.max(200000, Math.min(1800000, Number(process.env.CATALOG_SOURCE_CHNGOODCAR_CARSLIST_ROUTE_MAX_BODY_BYTES || 1300000)));
-const USER_AGENT = 'AvtoCenaGoodCarCarsListRouteProbe/1.0 (+read-only route discovery)';
+const USER_AGENT = 'AvtoCenaGoodCarCarsListRouteProbe/1.1 (+read-only route discovery)';
 const HEADERS = {
   accept: 'text/html,application/xhtml+xml,application/javascript,text/javascript;q=0.9,text/plain;q=0.8,*/*;q=0.5',
   'accept-language': 'zh-CN,zh;q=0.9,en;q=0.6',
@@ -16,6 +16,7 @@ const HEADERS = {
   pragma: 'no-cache',
   'user-agent': USER_AGENT,
 };
+const SOURCE_DECLARED_SCRIPT_HOSTS = new Set(['www.chngoodcar.com', 'chngoodcar.com', 'image.ucoc.net']);
 
 function decodeHtml(value) {
   return String(value ?? '')
@@ -39,6 +40,17 @@ function clean(value, limit = 1800) {
     .slice(0, limit);
 }
 
+function visibleText(value, limit = 260000) {
+  return decodeHtml(String(value ?? ''))
+    .replace(/<script\b[\s\S]*?<\/script>/gi, ' ')
+    .replace(/<style\b[\s\S]*?<\/style>/gi, ' ')
+    .replace(/<[^>]+>/g, ' ')
+    .replace(/[\u0000-\u001f]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim()
+    .slice(0, limit);
+}
+
 function safeUrl(value, base = LIST_URL) {
   try {
     const url = new URL(decodeHtml(String(value || '')), base);
@@ -52,6 +64,15 @@ function safeUrl(value, base = LIST_URL) {
 
 function sameOrigin(url) {
   try { return new URL(url).origin === BASE_URL; } catch { return false; }
+}
+
+function sourceDeclaredScriptUrl(url) {
+  try {
+    const parsed = new URL(url);
+    return /^https?:$/.test(parsed.protocol) && SOURCE_DECLARED_SCRIPT_HOSTS.has(parsed.hostname.toLowerCase()) && /\.js(?:[?#]|$)/i.test(parsed.toString());
+  } catch {
+    return false;
+  }
 }
 
 function uniq(values, limit = 100) {
@@ -100,12 +121,23 @@ function quotedStrings(code) {
   return out;
 }
 
+function sourceRouteUrl(value, codeBase = LIST_URL) {
+  const decoded = decodeHtml(String(value || '')).replace(/\\\//g, '/').trim();
+  if (!decoded) return null;
+  if (/^\/?Home\//i.test(decoded)) return safeUrl(decoded.startsWith('/') ? decoded : `/${decoded}`, BASE_URL);
+  if (/^https?:\/\//i.test(decoded)) {
+    const absoluteUrl = safeUrl(decoded, codeBase);
+    return absoluteUrl && sameOrigin(absoluteUrl) ? absoluteUrl : null;
+  }
+  return null;
+}
+
 export function extractGoodCarRouteCandidates(code, baseUrl = LIST_URL) {
   const candidates = [];
   for (const raw of quotedStrings(code)) {
     const value = decodeHtml(raw).replace(/\\\//g, '/').trim();
-    if (!value || (!/[\/]Home\//i.test(value) && !/(?:Cars|Vehicle|Auto|List|Search|Page|Ajax|Get)/i.test(value))) continue;
-    const url = safeUrl(value, baseUrl);
+    if (!value || (!/\/?Home\//i.test(value) && !/^https?:\/\/(?:www\.)?chngoodcar\.com/i.test(value))) continue;
+    const url = sourceRouteUrl(value, baseUrl);
     if (!url || !sameOrigin(url)) continue;
     candidates.push(url);
   }
@@ -119,10 +151,10 @@ export function extractGoodCarPaginationEvidence(code) {
   const re = /ajax|\$\.get|\$\.post|fetch\s*\(|CarsList|pagination|laypage|pageIndex|PageIndex|pageSize|PageSize|currentPage|totalPage/gi;
   for (const match of text.matchAll(re)) {
     const idx = match.index ?? 0;
-    markers.push(clean(text.slice(Math.max(0, idx - 260), Math.min(text.length, idx + 620)), 900));
-    if (markers.length >= 30) break;
+    markers.push(clean(text.slice(Math.max(0, idx - 320), Math.min(text.length, idx + 760)), 1080));
+    if (markers.length >= 40) break;
   }
-  return { parameterNames: names, snippets: uniq(markers, 30) };
+  return { parameterNames: names, snippets: uniq(markers, 40) };
 }
 
 function inlineScripts(html) {
@@ -156,21 +188,26 @@ async function readLimited(response) {
   return { body: Buffer.concat(chunks).toString('utf8'), truncated };
 }
 
-let robotsCache = null;
-async function robots() {
-  if (robotsCache) return robotsCache;
+const robotsCache = new Map();
+async function robotsFor(url) {
+  const origin = new URL(url).origin;
+  const robotsUrl = `${origin}/robots.txt`;
+  if (robotsCache.has(robotsUrl)) return robotsCache.get(robotsUrl);
   try {
-    const response = await fetchTimed(`${BASE_URL}/robots.txt`, { headers: HEADERS, redirect: 'manual' });
+    const response = await fetchTimed(robotsUrl, { headers: HEADERS, redirect: 'manual' });
     const text = response.ok ? (await readLimited(response)).body : '';
-    robotsCache = { status: response.status, text };
+    const value = { status: response.status, text };
+    robotsCache.set(robotsUrl, value);
+    return value;
   } catch (error) {
-    robotsCache = { status: null, text: '', error: String(error?.message || error) };
+    const value = { status: null, text: '', error: String(error?.message || error) };
+    robotsCache.set(robotsUrl, value);
+    return value;
   }
-  return robotsCache;
 }
 
 async function fetchAllowed(url, referer = LIST_URL) {
-  const rob = await robots();
+  const rob = await robotsFor(url);
   const policy = evaluateRobots(rob.text, url, USER_AGENT);
   if (!policy.allowed) return { kind: 'robots_disallowed', robotsStatus: rob.status, matchedRule: policy.matchedRule };
   try {
@@ -206,21 +243,23 @@ export async function runGoodCarCarsListRouteProbe() {
   const inline = inlineScripts(listRaw.body).map((code, index) => ({ index, ...summarizeCode(code, LIST_URL) }));
   const external = [];
 
-  for (const scriptUrl of scriptSources.filter(sameOrigin).slice(0, 24)) {
+  for (const scriptUrl of scriptSources.filter(sourceDeclaredScriptUrl).slice(0, 24)) {
     const raw = await fetchAllowed(scriptUrl, LIST_URL);
     if (!raw.body) {
-      external.push({ scriptUrl, kind: raw.kind, status: raw.status ?? null, error: raw.error || null });
+      external.push({ scriptUrl, sourceDeclared: true, kind: raw.kind, status: raw.status ?? null, robotsStatus: raw.robotsStatus ?? null, error: raw.error || null });
       continue;
     }
     external.push({
       scriptUrl,
+      sourceDeclared: true,
       kind: raw.kind,
       status: raw.status,
+      robotsStatus: raw.robotsStatus ?? null,
       contentType: raw.contentType,
       truncated: raw.truncated,
       bodyHashSha256: raw.bodyHashSha256,
       byteLength: Buffer.byteLength(raw.body),
-      ...summarizeCode(raw.body, scriptUrl),
+      ...summarizeCode(raw.body, LIST_URL),
     });
   }
 
@@ -255,7 +294,7 @@ export async function runGoodCarCarsListRouteProbe() {
       truncated: listRaw.truncated,
       bodyHashSha256: listRaw.bodyHashSha256,
       byteLength: Buffer.byteLength(listRaw.body),
-      explicitUsdLabel: /价格\s*\(\s*US\s*\$\s*\)/i.test(clean(listRaw.body)),
+      explicitUsdLabel: /价格\s*\(\s*US\s*\$\s*\)/i.test(visibleText(listRaw.body)),
       directDetailLinks: [...listRaw.body.matchAll(/\/Home\/Cars\?id=(\d+)/gi)].map((m) => m[1]).length,
     },
     forms,
@@ -264,16 +303,17 @@ export async function runGoodCarCarsListRouteProbe() {
     externalScripts: external,
     routeCandidates,
     paginationParameterNames,
-    next: 'Only follow routes/methods/parameters explicitly evidenced by this artifact. Do not guess page query names or API endpoints.',
+    next: 'Only follow routes/methods/parameters explicitly evidenced by source-declared CarsList scripts/forms. Do not guess page query names or API endpoints.',
   };
 
   await fs.writeFile(OUTPUT_PATH, JSON.stringify(payload, null, 2));
   console.log(JSON.stringify({
     output: OUTPUT_PATH,
     listStatus: payload.listFetch.status,
+    explicitUsdLabel: payload.listFetch.explicitUsdLabel,
     listBytes: payload.listFetch.byteLength,
     scriptSources: payload.scriptSources.length,
-    sameOriginScriptsAudited: payload.externalScripts.length,
+    declaredScriptsAudited: payload.externalScripts.length,
     formCount: payload.forms.length,
     routeCandidates: payload.routeCandidates,
     paginationParameterNames: payload.paginationParameterNames,
