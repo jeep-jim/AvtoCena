@@ -8,7 +8,7 @@ on:
       - ".github/workflows/catalog-v6-required-source-production-readiness.yml"
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: catalog-v6-required-source-production-readiness
@@ -95,28 +95,3 @@ jobs:
           path: readiness-${{ matrix.market }}-${{ matrix.source_id }}.json
           if-no-files-found: warn
           retention-days: 3
-
-  record-run:
-    name: Record readiness run id
-    needs: readiness
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Persist run identity for connector inspection
-        env:
-          READINESS_RESULT: ${{ needs.readiness.result }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
-          mkdir -p scripts/probe-results
-          cat > scripts/probe-results/latest-required-readiness-run.txt <<EOF
-          run_id=$GITHUB_RUN_ID
-          head_sha=$GITHUB_SHA
-          result=$READINESS_RESULT
-          EOF
-          git add scripts/probe-results/latest-required-readiness-run.txt
-          git diff --cached --quiet && exit 0
-          git commit -m "Store required readiness run $GITHUB_RUN_ID"
-          git push origin HEAD:main
