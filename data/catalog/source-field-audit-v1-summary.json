@@ -1,0 +1,126 @@
+{
+  "version": 1,
+  "generatedAt": "2026-09-03T08:03:21.843Z",
+  "mode": "source_bound_field_audit_summary_no_write",
+  "productionWrites": false,
+  "classificationMutations": false,
+  "publishAllowedMutations": false,
+  "rawBodiesStored": false,
+  "run": {
+    "runId": 33731051049,
+    "headSha": "52a1c6de4526e43a66b28dab1ab61cc0c020d3be",
+    "artifactId": 9883930890,
+    "artifactDigest": "sha256:cc13432a39e5eaf3904fe5acc61ca8d7d27e3f8009b005beb4057c58750e8ecd"
+  },
+  "sourceCount": 4,
+  "sampleCount": 8,
+  "allClassificationsDeferred": true,
+  "allPublishAllowedRemainFalse": true,
+  "sources": [
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "stableReachable": true,
+      "exactReady": false,
+      "deficitCounts": { "engineCc": 1, "powerHp": 1, "gallery": 2, "certifiedPower": 1 },
+      "samples": [
+        {
+          "sourceOfferId": "740206",
+          "url": "https://www.dubicars.com/2019-hyundai-veloster-740206.html",
+          "deficits": ["engineCc", "powerHp", "gallery"]
+        },
+        {
+          "sourceOfferId": "979972",
+          "url": "https://www.dubicars.com/2023-bmw-ix1-979972.html",
+          "deficits": ["certifiedPower", "gallery"]
+        }
+      ]
+    },
+    {
+      "market": "korea",
+      "sourceId": "bobaedream_korea_candidate",
+      "stableReachable": true,
+      "exactReady": false,
+      "deficitCounts": { "body": 2, "gallery": 2 },
+      "samples": [
+        {
+          "sourceOfferId": "2260063",
+          "url": "https://www.bobaedream.co.kr/mycar/mycar_view.php?no=2260063&gubun=K",
+          "proven": {
+            "make": "기아",
+            "model": "올 뉴 K7 2.4 프레스티지",
+            "year": 2016,
+            "price": 12000000,
+            "currency": "KRW",
+            "fuel": "petrol",
+            "engineCc": 2359,
+            "powerHp": 190
+          },
+          "deficits": ["body", "gallery"]
+        },
+        {
+          "sourceOfferId": "2262188",
+          "url": "https://www.bobaedream.co.kr/mycar/mycar_view.php?no=2262188&gubun=K",
+          "proven": {
+            "make": "현대",
+            "model": "제네시스 DH G330 AWD 프리미엄",
+            "year": 2016,
+            "price": 14800000,
+            "currency": "KRW",
+            "fuel": "petrol",
+            "engineCc": 3342,
+            "powerHp": 282
+          },
+          "deficits": ["body", "gallery"]
+        }
+      ]
+    },
+    {
+      "market": "uae",
+      "sourceId": "carswitch_uae_candidate",
+      "stableReachable": true,
+      "exactReady": false,
+      "deficitCounts": { "engineCc": 2, "powerHp": 2 },
+      "samples": [
+        {
+          "sourceOfferId": "864601",
+          "url": "https://carswitch.com/abudhabi/used-car/chevrolet/captiva/2025/864601",
+          "proven": { "price": 49650, "currency": "AED", "body": "SUV", "fuel": "petrol", "galleryImages": 10 },
+          "ambiguous": { "engineDisplacement": "1.5" },
+          "deficits": ["engineCc", "powerHp"]
+        },
+        {
+          "sourceOfferId": "857416",
+          "url": "https://carswitch.com/abudhabi/used-car/dodge/durango/2013/857416",
+          "proven": { "price": 13500, "currency": "AED", "body": "SUV", "fuel": "petrol", "galleryImages": 10 },
+          "ambiguous": { "engineDisplacement": "5.7" },
+          "deficits": ["engineCc", "powerHp"]
+        }
+      ]
+    },
+    {
+      "market": "uae",
+      "sourceId": "cars24_uae_candidate",
+      "stableReachable": true,
+      "exactReady": false,
+      "deficitCounts": { "price": 2, "engineCc": 2, "powerHp": 2 },
+      "samples": [
+        {
+          "sourceOfferId": "9714841569",
+          "url": "https://www.cars24.ae/buy-used-chevrolet-groove-2023-cars-dubai-9714841569/",
+          "proven": { "make": "CHEVROLET", "model": "GROOVE", "year": 2023, "body": "SUV", "fuel": "petrol", "galleryImages": 15, "currency": "AED" },
+          "diagnosticOnly": { "visiblePrice": 31499, "engineDisplacement": "1.5" },
+          "deficits": ["price", "engineCc", "powerHp"]
+        },
+        {
+          "sourceOfferId": "9714841918",
+          "url": "https://www.cars24.ae/buy-used-ford-territory-2024-cars-dubai-9714841918/",
+          "proven": { "make": "FORD", "model": "TERRITORY", "year": 2024, "body": "SUV", "fuel": "petrol", "galleryImages": 15, "currency": "AED" },
+          "diagnosticOnly": { "visiblePrice": 64999, "engineDisplacement": "1.8" },
+          "deficits": ["price", "engineCc", "powerHp"]
+        }
+      ]
+    }
+  ],
+  "next": "probe permitted public source-bound routes or embedded data for Bobaedream body/gallery, CarSwitch engine unit/power, CARS24 offer-bound price/engine unit/power, and DubiCars engine/power/gallery/certified EV power; keep all candidates research_pending until evidence is complete"
+}
