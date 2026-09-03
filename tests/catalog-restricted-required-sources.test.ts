@@ -5,12 +5,14 @@ import {
   auctionDataSearchRestrictedSource,
   dongchediRestrictedSource,
   jpCenterRestrictedSource,
+  prestigeJapanRestrictedSource,
 } from "../apps/web/lib/catalog/restricted-required-sources";
 
 const expected = [
   [dongchediRestrictedSource, "dongchedi_public_inventory_requires_login_or_permitted_partner_feed"],
   [auctionDataSearchRestrictedSource, "auctiondatasearch_search_and_statistics_require_login_or_permitted_partner_feed"],
   [jpCenterRestrictedSource, "jpcenter_exact_vehicle_price_and_full_gallery_require_login_or_permitted_partner_feed"],
+  [prestigeJapanRestrictedSource, "prestige_exact_auction_details_are_robots_disallowed_and_turnstile_blocked_partner_feed_required"],
 ] as const;
 
 test("access-constrained required sources fail closed instead of reporting a successful empty page", async () => {
@@ -29,7 +31,7 @@ test("access-constrained required sources fail closed instead of reporting a suc
         const blocked = error as Error & { blocked?: boolean; status?: number };
         assert.equal(blocked.message, reason);
         assert.equal(blocked.blocked, true);
-        assert.equal(blocked.status, 200);
+        assert.equal(blocked.status, source === prestigeJapanRestrictedSource ? 403 : 200);
         return true;
       },
     );
