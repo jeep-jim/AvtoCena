@@ -97,6 +97,32 @@ function extractHrefs(markup, base) {
 function extractScripts(markup, base) {
   return uniq([...markup.matchAll(/<script\b[^>]*\bsrc\s*=\s*["']([^"']+)["']/gi)].map((m) => absolute(m[1], base)), 60);
 }
+function jsonShapePaths(value) {
+  const rows = [];
+  const seen = new Set();
+  let visited = 0;
+  const interesting = /(?:listing|offer|vehicle|search|result|inventory|pageProps)/i;
+  const visit = (node, path, depth) => {
+    if (!node || typeof node !== 'object' || seen.has(node) || depth > 9 || visited++ > 25_000 || rows.length >= 240) return;
+    seen.add(node);
+    if (Array.isArray(node)) {
+      const sample = node.find((item) => item && typeof item === 'object' && !Array.isArray(item));
+      const keys = sample ? Object.keys(sample).slice(0, 40) : [];
+      if (node.length && (interesting.test(path) || keys.some((key) => /^(?:id|url|vehicle|price|images?|title|make|model)$/i.test(key)))) {
+        rows.push({ path, type: 'array', length: node.length, itemKeys: keys });
+      }
+      node.slice(0, 3).forEach((item, index) => visit(item, `${path}[${index}]`, depth + 1));
+      return;
+    }
+    const keys = Object.keys(node);
+    if (interesting.test(path) || keys.some((key) => /^(?:listings?|offers?|vehicles?|searchResults?|inventory)$/i.test(key))) {
+      rows.push({ path, type: 'object', keys: keys.slice(0, 60) });
+    }
+    for (const [key, child] of Object.entries(node)) visit(child, path ? `${path}.${key}` : key, depth + 1);
+  };
+  visit(value, '$', 0);
+  return rows;
+}
 function extractJsonScripts(markup) {
   const rows = [];
   for (const match of markup.matchAll(/<script\b([^>]*)>([\s\S]*?)<\/script>/gi)) {
@@ -108,11 +134,13 @@ function extractJsonScripts(markup) {
     const type = clean(attrs.match(/\btype\s*=\s*["']([^"']+)/i)?.[1] || '');
     let parsed = null;
     let topKeys = [];
+    let shapePaths = [];
     try {
       parsed = JSON.parse(body);
       topKeys = parsed && typeof parsed === 'object' && !Array.isArray(parsed) ? Object.keys(parsed).slice(0, 80) : [];
+      shapePaths = jsonShapePaths(parsed);
     } catch {}
-    rows.push({ id, type, bytes: Buffer.byteLength(body), parsed: Boolean(parsed), topKeys, sample: clean(body.slice(0, 1200)) });
+    rows.push({ id, type, bytes: Buffer.byteLength(body), parsed: Boolean(parsed), topKeys, shapePaths, sample: clean(body.slice(0, 1200)) });
     if (rows.length >= 20) break;
   }
   return rows;
@@ -223,6 +251,7 @@ console.log(JSON.stringify({
     scriptCount: row.scriptCount,
     candidates: (row.candidates || []).slice(0, 30),
     scriptCandidates: (row.scriptReports || []).flatMap((script) => script.candidates || []).slice(0, 50),
+    jsonScripts: row.jsonScripts,
     prefix: row.prefix,
     error: row.error,
   })),
