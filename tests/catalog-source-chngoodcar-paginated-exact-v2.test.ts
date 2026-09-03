@@ -5,6 +5,7 @@ import {
   cleanGoodCarPaginatedModelIdentity,
   goodCarIdentityNamedElectrifiedKind,
   joinGoodCarCarsListAndDetail,
+  normalizeGoodCarBrandModelIdentity,
   parseGoodCarPaginatedDetailMileageKm,
   type GoodCarPaginatedExactRawOffer,
 } from '../apps/web/lib/catalog/chngoodcar-paginated-exact-source';
@@ -67,9 +68,12 @@ test('paginated Good Car detail mileage preserves source decimals instead of tru
   assert.equal(parseGoodCarPaginatedDetailMileageKm('<div>里程 (km) --</div>'), undefined);
 });
 
-test('paginated Good Car model identity removes only the explicit model-year trim suffix', () => {
+test('paginated Good Car identity cleanup is deterministic for year suffixes and source brand spelling', () => {
   assert.equal(cleanGoodCarPaginatedModelIdentity('CX-30 2022 款 2.0L 自动雅悦型'), 'CX-30');
   assert.equal(cleanGoodCarPaginatedModelIdentity('CX-50行也'), 'CX-50行也');
+  assert.deepEqual(normalizeGoodCarBrandModelIdentity('现代汽车', '伊兰特'), { make: '现代', model: '伊兰特' });
+  assert.deepEqual(normalizeGoodCarBrandModelIdentity('大众', '汽车T-ROC探歌'), { make: '大众', model: 'T-ROC探歌' });
+  assert.deepEqual(normalizeGoodCarBrandModelIdentity('MG', '5'), { make: 'MG', model: 'MG5' });
 });
 
 test('paginated Good Car v2 records list fuel as advisory and never replaces exact detail fuel', () => {
