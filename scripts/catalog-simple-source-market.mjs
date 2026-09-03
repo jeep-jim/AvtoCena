@@ -22,7 +22,7 @@ const sourceConcurrency = Math.max(1, Math.min(8, Number(process.env.CATALOG_REB
 const detailConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_IMAGE_FETCH_CONCURRENCY || 16)));
 const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 10_800_000));
 const requestTimeoutMs = Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000));
-const jpaucPageTimeoutMs = Math.max(requestTimeoutMs, Number(process.env.CATALOG_JPAUC_PAGE_TIMEOUT_MS || 120_000));
+const jpaucPageTimeoutMs = Math.max(requestTimeoutMs, Number(process.env.CATALOG_JPAUC_PAGE_TIMEOUT_MS || 180_000));
 const galleryTimeoutMs = Math.max(5_000, Number(process.env.CATALOG_GALLERY_TIMEOUT_MS || 30_000));
 const minimumImages = Math.max(5, Math.min(30, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
 const isolatedSourceIds = String(process.env.CATALOG_REBUILD_SOURCE_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);
