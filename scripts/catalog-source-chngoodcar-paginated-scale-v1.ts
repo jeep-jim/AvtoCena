@@ -5,6 +5,7 @@ import {
   type GoodCarPaginatedExactRawOffer,
 } from '../apps/web/lib/catalog/chngoodcar-paginated-exact-source';
 import { GoodCarCarsListClient } from '../apps/web/lib/catalog/chngoodcar-carslist';
+import { goodCarVerifiedReferenceConflict } from '../apps/web/lib/catalog/chngoodcar-reference-conflicts';
 import { isGoodCarIceFuel, isGoodCarPassengerBodyType } from '../apps/web/lib/catalog/chngoodcar-exact-source';
 import { isAllowedCatalogSourceId } from '../apps/web/lib/catalog/required-catalog-sources';
 
@@ -25,6 +26,7 @@ function rejectionReasons(row: GoodCarPaginatedExactRawOffer) {
   if (row.listDetailProductionDateParity !== true) reasons.push('production_date_parity');
   if (row.listDetailMileageParity !== true) reasons.push('mileage_parity');
   if (goodCarIdentityNamedElectrifiedKind(row.sourceTitle)) reasons.push('identity_named_electrified');
+  if (goodCarVerifiedReferenceConflict(row)) reasons.push('verified_reference_conflict');
   if (!isGoodCarIceFuel(row.fuel)) reasons.push('electrified_or_non_ice');
   if (!isGoodCarPassengerBodyType(row.bodyType)) reasons.push('non_passenger_or_missing_body');
   if (!(row.engineCc > 0)) reasons.push('engine_cc');
@@ -74,6 +76,7 @@ export async function runGoodCarPaginatedScale() {
   const accepted: any[] = [];
   const rejected: any[] = [];
   const blockedIdentityElectrified: any[] = [];
+  const blockedReferenceConflicts: any[] = [];
   const blockedElectrified: string[] = [];
   const blockedNonPassenger: string[] = [];
   const listFuelDisagreements: any[] = [];
@@ -103,10 +106,16 @@ export async function runGoodCarPaginatedScale() {
         listFuelDisagreements.push({ sourceOfferId: row.sourceOfferId, listFuelName: row.listFuelName, detailFuel: row.fuel, sourceTitle: row.sourceTitle });
       }
       const namedElectrified = goodCarIdentityNamedElectrifiedKind(row.sourceTitle);
+      const referenceConflict = goodCarVerifiedReferenceConflict(row);
       const offer = adapter.normalizeOffer(row);
       if (namedElectrified) {
         if (offer) throw new Error(`identity_electrified_offer_must_fail_closed:${row.sourceOfferId}:${namedElectrified}`);
         blockedIdentityElectrified.push({ sourceOfferId: row.sourceOfferId, sourceTitle: row.sourceTitle, namedKind: namedElectrified, detailFuel: row.fuel, listFuelName: row.listFuelName || null });
+        continue;
+      }
+      if (referenceConflict) {
+        if (offer) throw new Error(`reference_conflict_offer_must_fail_closed:${row.sourceOfferId}:${referenceConflict.reason}`);
+        blockedReferenceConflicts.push({ sourceOfferId: row.sourceOfferId, sourceTitle: row.sourceTitle, engineCc: row.engineCc, powerKw: row.powerKw, fuel: row.fuel, ...referenceConflict });
         continue;
       }
       if (!isGoodCarIceFuel(row.fuel)) {
@@ -161,7 +170,7 @@ export async function runGoodCarPaginatedScale() {
   const noJoinedDuplicates = pageReports.every((row) => row.joinedDuplicateIdsFromPriorPages.length === 0);
   const noDetailNetworkErrors = pageReports.every((row) => row.health?.ok === true);
   const allAcceptedParity = accepted.every((row) => row.listDetailTitleParity && row.listDetailPriceParity && row.listDetailProductionDateParity && row.listDetailMileageParity);
-  const allAcceptedExact = accepted.every((row) => row.sourceCurrency === 'USD' && row.engineCc > 0 && row.powerKw > 0 && row.powerHp > 0 && isGoodCarIceFuel(row.fuel) && isGoodCarPassengerBodyType(row.bodyType) && row.imageCount >= 5 && !goodCarIdentityNamedElectrifiedKind(row.sourceTitle));
+  const allAcceptedExact = accepted.every((row) => row.sourceCurrency === 'USD' && row.engineCc > 0 && row.powerKw > 0 && row.powerHp > 0 && isGoodCarIceFuel(row.fuel) && isGoodCarPassengerBodyType(row.bodyType) && row.imageCount >= 5 && !goodCarIdentityNamedElectrifiedKind(row.sourceTitle) && !goodCarVerifiedReferenceConflict(row));
   const makes = [...new Set(accepted.map((row) => row.make))];
   const checks = {
     classificationExactCatalog: decision?.class === 'exact_catalog',
@@ -182,10 +191,11 @@ export async function runGoodCarPaginatedScale() {
     allAcceptedExactPassengerIce: allAcceptedExact,
     electrifiedRowsObservedAndBlocked: blockedElectrified.length + blockedIdentityElectrified.length > 0,
     identityElectrifiedConflictObservedAndBlocked: blockedIdentityElectrified.length > 0,
+    verifiedReferenceConflictObservedAndBlocked: blockedReferenceConflicts.length > 0,
   };
   const failures = Object.entries(checks).filter(([, ok]) => ok !== true).map(([name]) => name);
   const payload = {
-    version: 2,
+    version: 3,
     generatedAt: new Date().toISOString(),
     mode: 'chngoodcar_paginated_exact_bounded_scale_no_write',
     productionWrites: false,
@@ -208,6 +218,7 @@ export async function runGoodCarPaginatedScale() {
       acceptedCount: accepted.length,
       rejectedPassengerIceCount: rejected.length,
       blockedIdentityElectrifiedCount: blockedIdentityElectrified.length,
+      blockedReferenceConflictCount: blockedReferenceConflicts.length,
       blockedElectrifiedCount: blockedElectrified.length,
       blockedNonPassengerCount: blockedNonPassenger.length,
       listFuelDisagreementCount: listFuelDisagreements.length,
@@ -219,13 +230,14 @@ export async function runGoodCarPaginatedScale() {
     acceptedSamples: accepted.slice(0, 20),
     rejectedSamples: rejected.slice(0, 30),
     blockedIdentityElectrified: blockedIdentityElectrified.slice(0, 30),
+    blockedReferenceConflicts: blockedReferenceConflicts.slice(0, 30),
     blockedElectrified: blockedElectrified.slice(0, 30),
     blockedNonPassenger: blockedNonPassenger.slice(0, 30),
     listFuelDisagreements: listFuelDisagreements.slice(0, 30),
     lowPriceManualReview: lowPriceManualReview.slice(0, 20),
     next: failures.length
       ? 'repair the paginated exact adapter from this no-write evidence before increasing scale'
-      : 'manually spot-check accepted, identity-conflict and low-price samples; keep publishAllowed=false and production registry unchanged',
+      : 'manual sample review passed far enough for source qualification; keep publishAllowed=false and production registry unchanged until a separate production-promotion decision',
   };
   await fs.writeFile(OUTPUT_PATH, JSON.stringify(payload, null, 2));
   console.log(JSON.stringify({
@@ -239,6 +251,7 @@ export async function runGoodCarPaginatedScale() {
     accepted: accepted.length,
     rejectedPassengerIce: rejected.length,
     blockedIdentityElectrified: blockedIdentityElectrified.length,
+    blockedReferenceConflicts: blockedReferenceConflicts.length,
     blockedElectrified: blockedElectrified.length,
     blockedNonPassenger: blockedNonPassenger.length,
     lowPriceManualReview: lowPriceManualReview.length,
