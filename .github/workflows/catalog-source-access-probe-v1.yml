@@ -36,7 +36,7 @@ jobs:
         env:
           CATALOG_SOURCE_ACCESS_PROBE_CONCURRENCY: "4"
           CATALOG_SOURCE_ACCESS_PROBE_TIMEOUT_MS: "15000"
-          CATALOG_SOURCE_ACCESS_PROBE_DETAIL_SAMPLES: "1"
+          CATALOG_SOURCE_ACCESS_PROBE_DETAIL_SAMPLES: "2"
           CATALOG_SOURCE_ACCESS_PROBE_MAX_BODY_BYTES: "1000000"
         run: node scripts/catalog-source-access-probe-v1.mjs
       - name: Verify no-write evidence envelope
@@ -49,6 +49,8 @@ jobs:
           if (p.publishAllowedMutations !== false) throw new Error('publishAllowedMutations');
           if (p.candidateCount !== 33) throw new Error(`candidateCount=${p.candidateCount}`);
           if (!Array.isArray(p.results) || p.results.length !== 33) throw new Error('results');
+          if (p.results.some((row) => row.classificationMutation !== false)) throw new Error('classificationMutation');
+          if (p.results.some((row) => !Object.prototype.hasOwnProperty.call(row, 'entry') || !Object.prototype.hasOwnProperty.call(row, 'listSource') || !Array.isArray(row.detailCandidates))) throw new Error('evidenceShape');
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
