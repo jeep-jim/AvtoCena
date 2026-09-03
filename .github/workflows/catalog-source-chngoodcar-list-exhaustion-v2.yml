@@ -9,6 +9,7 @@ on:
       - ".github/workflows/catalog-source-chngoodcar-list-exhaustion-v2.yml"
       - "scripts/catalog-source-chngoodcar-list-exhaustion-v2.ts"
       - "tests/catalog-source-chngoodcar-price-review-v1.test.ts"
+      - "tests/catalog-source-chngoodcar-identity-normalization-v1.test.ts"
       - "apps/web/lib/catalog/chngoodcar-price-review.ts"
       - "apps/web/lib/catalog/chngoodcar-reviewed-exact-source.ts"
       - "apps/web/lib/catalog/chngoodcar-carslist.ts"
@@ -36,6 +37,8 @@ jobs:
       - run: npm ci
       - name: Verify Good Car reviewed-price gate
         run: node --import tsx --test tests/catalog-source-chngoodcar-price-review-v1.test.ts
+      - name: Verify Good Car identity normalization
+        run: node --import tsx --test tests/catalog-source-chngoodcar-identity-normalization-v1.test.ts
       - name: Verify existing Good Car exact and pagination contracts
         run: |
           node --import tsx --test tests/catalog-source-chngoodcar-list-exhaustion-v1.test.ts
