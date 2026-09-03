@@ -75,7 +75,7 @@ export function normalizeGoodCarBrandModelIdentity(makeValue: unknown, modelValu
   let model = cleanGoodCarPaginatedModelIdentity(modelValue);
   if (make === "现代汽车") make = "现代";
   if (make === "大众汽车") make = "大众";
-  if (make === "大众" && model.startsWith("汽车") && model.length > 2) model = model.slice(2).trim();
+  if ((make === "大众" || make === "吉利") && model.startsWith("汽车") && model.length > 2) model = model.slice(2).trim();
   if (make === "MG" && /^\d/.test(model)) model = `MG${model}`;
   return { make, model };
 }
