@@ -129,7 +129,7 @@ function identityScore(url) {
   const parsed = url instanceof URL ? url : new URL(url);
   const path = parsed.pathname;
   const key = `${path}${parsed.search}`;
-  if (/career|jobs?|imglist|image-list|counts?|allmakeslist|sitemap|search|filter|sort|compare|favorite|wishlist|budget|under[-_]|over[-_]|between[-_]|price[-_]|hotrank|(?:^|\/)(?:series|library-brand|topic|article|cms)(?:\/|[-_]|$)|(?:^|\/)models?(?:\/|$)|(?:^|\/)makes?(?:\/|$)|(?:^|\/)brands?(?:\/|$)/i.test(key)) return 0;
+  if (/career|jobs?|imglist|image-list|counts?|allmakeslist|sitemap|search|filter|sort|compare|favorite|wishlist|budget|under[-_]|over[-_]|between[-_]|price[-_]|hotrank|community|(?:^|\/)(?:series|library-brand|topic|article|cms)(?:\/|[-_]|$)|(?:^|\/)models?(?:\/|$)|(?:^|\/)makes?(?:\/|$)|(?:^|\/)brands?(?:\/|$)/i.test(key)) return 0;
   let score = 0;
   for (const [name, value] of parsed.searchParams) {
     if (/^(?:id|no|stock|stockid|stock_id|offer|offerid|listing|listingid|vehicle|vehicleid|car|carid|car_id|ad|adid|lot|lotid)$/i.test(name) && /^[A-Za-z0-9_-]{3,}$/.test(value)) score = Math.max(score, 8);
