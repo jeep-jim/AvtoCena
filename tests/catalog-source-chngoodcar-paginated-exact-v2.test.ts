@@ -2,6 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
   ChnGoodCarPaginatedExactAdapter,
+  goodCarIdentityNamedElectrifiedKind,
   joinGoodCarCarsListAndDetail,
   type GoodCarPaginatedExactRawOffer,
 } from '../apps/web/lib/catalog/chngoodcar-paginated-exact-source';
@@ -66,6 +67,27 @@ test('paginated Good Car v2 records list fuel as advisory and never replaces exa
   assert.ok(offer);
   assert.equal(offer.fuel, '汽油');
   assert.match(String((offer.operational.semanticEvidence as any)?.listFieldBoundary), /never replace/i);
+});
+
+test('Chinese identity-bound electrified markers are detected before combustion normalization', () => {
+  assert.equal(goodCarIdentityNamedElectrifiedKind('丰田卡罗拉锐放 2023款 双擎 2.0L 先锋版'), 'other_hybrid');
+  assert.equal(goodCarIdentityNamedElectrifiedKind('某车型 2025款 插混 1.5T'), 'other_hybrid');
+  assert.equal(goodCarIdentityNamedElectrifiedKind('某车型 2025款 增程版'), 'series_hybrid');
+  assert.equal(goodCarIdentityNamedElectrifiedKind('马自达CX-50行也 2023款 2.0L 领行版'), undefined);
+});
+
+test('paginated Good Car v2 blocks exact-title hybrid conflict even when list and detail both say petrol', () => {
+  const adapter = new ChnGoodCarPaginatedExactAdapter();
+  const exact = joined();
+  const conflict = {
+    ...exact,
+    sourceTitle: '丰田卡罗拉锐放 2023款 双擎 2.0L 先锋版',
+    listTitle: '丰田卡罗拉锐放 2023款 双擎 2.0L 先锋版',
+    fuel: '汽油',
+    listFuelName: '汽油',
+    listDetailTitleParity: true,
+  } as GoodCarPaginatedExactRawOffer;
+  assert.equal(adapter.normalizeOffer(conflict), null);
 });
 
 test('paginated Good Car v2 fails closed on any independent list/detail parity break', () => {
