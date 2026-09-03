@@ -159,7 +159,13 @@ export function jpaucIdentityGalleryEvidence(raw: JpaucRawRow) {
   const imageIdentityMatches = images.length === 3 && images.every((value) => {
     try {
       const url = new URL(value);
-      return /(?:^|\.)aleado\.com$/i.test(url.hostname) && url.searchParams.get("id") === dataId;
+      const bid = clean(url.searchParams.get("bid")).replace(/^0+/, "") || "0";
+      const lot = clean(raw?.lot).replace(/^0+/, "") || "0";
+      return /(?:^|\.)aleado\.com$/i.test(url.hostname)
+        && url.searchParams.get("system") === "auto"
+        && url.searchParams.get("date") === clean(raw?.date)
+        && Boolean(url.searchParams.get("auct"))
+        && bid === lot;
     } catch {
       return false;
     }
