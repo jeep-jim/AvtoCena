@@ -2,8 +2,10 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
   ChnGoodCarPaginatedExactAdapter,
+  cleanGoodCarPaginatedModelIdentity,
   goodCarIdentityNamedElectrifiedKind,
   joinGoodCarCarsListAndDetail,
+  parseGoodCarPaginatedDetailMileageKm,
   type GoodCarPaginatedExactRawOffer,
 } from '../apps/web/lib/catalog/chngoodcar-paginated-exact-source';
 import { parseGoodCarDetailHtml } from '../apps/web/lib/catalog/chngoodcar-exact-source';
@@ -18,7 +20,7 @@ const DETAIL_HTML = `<!doctype html><html><head><title>马自达CX-50行也 2023
 <img src="https://image.cn.ucoc.net/Picture/Automobile/LargeThumbnail/4.jpg">
 <img src="https://image.cn.ucoc.net/Picture/Automobile/LargeThumbnail/5.jpg">
 <img src="https://image.cn.ucoc.net/Picture/Automobile/LargeThumbnail/6.jpg">
-<div>23600</div><div>库存：1 辆</div><div>车型 SUV</div><div>车辆类型 紧凑型</div>
+<div>23600</div><div>库存：1 辆</div><div>车型 SUV</div><div>车辆类型 紧凑型</div><div>VIN码 LSGZG5397KS093671</div>
 <div>出厂年份 2023-10</div><div>里程 (km) 15000</div><div>排量 (ml) 2000</div><div>功率 (kw) 114</div>
 <div>变速箱 手自一体</div><div>燃料种类 汽油</div><div>驱动形式 前置前驱</div><div>猜你喜欢</div>
 </body></html>`;
@@ -59,6 +61,17 @@ test('paginated Good Car v2 requires exact CarsList/detail title, price, date an
   assert.equal(row.listDetailMileageParity, true);
 });
 
+test('paginated Good Car detail mileage preserves source decimals instead of truncating them', () => {
+  assert.equal(parseGoodCarPaginatedDetailMileageKm('<div>里程 (km)</div><b>4.9</b>'), 4.9);
+  assert.equal(parseGoodCarPaginatedDetailMileageKm('<div>里程 (km) 42000</div>'), 42000);
+  assert.equal(parseGoodCarPaginatedDetailMileageKm('<div>里程 (km) --</div>'), undefined);
+});
+
+test('paginated Good Car model identity removes only the explicit model-year trim suffix', () => {
+  assert.equal(cleanGoodCarPaginatedModelIdentity('CX-30 2022 款 2.0L 自动雅悦型'), 'CX-30');
+  assert.equal(cleanGoodCarPaginatedModelIdentity('CX-50行也'), 'CX-50行也');
+});
+
 test('paginated Good Car v2 records list fuel as advisory and never replaces exact detail fuel', () => {
   const row = joined({ FuelTypeName: '纯电动' });
   assert.equal(row.listFuelName, '纯电动');
@@ -88,6 +101,14 @@ test('paginated Good Car v2 blocks exact-title hybrid conflict even when list an
     listDetailTitleParity: true,
   } as GoodCarPaginatedExactRawOffer;
   assert.equal(adapter.normalizeOffer(conflict), null);
+});
+
+test('paginated Good Car v2 drops repeated source VIN from normalized identity', () => {
+  const offer = new ChnGoodCarPaginatedExactAdapter().normalizeOffer(joined());
+  assert.ok(offer);
+  assert.equal(offer.vin, undefined);
+  assert.equal(offer.operational.vin, undefined);
+  assert.match(String((offer.operational.semanticEvidence as any)?.identity), /VIN excluded/i);
 });
 
 test('paginated Good Car v2 fails closed on any independent list/detail parity break', () => {
