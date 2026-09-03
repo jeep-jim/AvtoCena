@@ -63,6 +63,7 @@ jobs:
           if (p.sourcePublishAllowed !== false) throw new Error('sourcePublishAllowed');
           if (p.requestedPageCount !== p.expectedPageCount) throw new Error(`not exhausted ${p.requestedPageCount}/${p.expectedPageCount}`);
           if (!(p.coverage?.blockedManualPriceReviewCount > 0)) throw new Error('manual price review not observed');
+          if (!(p.coverage?.blockedReferenceConflictCount > 0)) throw new Error('verified reference conflict not observed');
           if (!Array.isArray(p.failures) || p.failures.length !== 0) throw new Error(`failures ${p.failures}`);
           NODE
       - uses: actions/upload-artifact@v4
