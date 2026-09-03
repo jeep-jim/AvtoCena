@@ -64,6 +64,12 @@ test("JPAuc exports exact lot identity and three same-lot Aleado image variants"
   assert.deepEqual(images.map((url) => new URL(url).searchParams.get("number")), ["1", "2", "0"]);
 });
 
+test("JPAuc result-contract diagnostics cannot write to main", () => {
+  const workflow = fs.readFileSync(".github/workflows/catalog-v6-jpauc-result-contract-probe.yml", "utf8");
+  assert.match(workflow, /permissions:\s*\n\s*contents: read/);
+  assert.doesNotMatch(workflow, /git push|contents: write|Persist probe result/);
+});
+
 test("Japan scale workflow is approved-source-only and cannot publish below 8700", () => {
   const workflow = fs.readFileSync(".github/workflows/catalog-v6-japan-approved-exact-scale.yml", "utf8");
   const collector = fs.readFileSync("scripts/japan-carvector-jpauc-exact-chunk.mjs", "utf8");
