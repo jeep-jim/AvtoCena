@@ -95,10 +95,33 @@ test("CarVector rejects non-results, zero final prices and incomplete identity",
     ),
     null,
   );
-  assert.equal(
-    source.normalizeOffer(row({ fuel: { title: "Unknown" } })),
-    null,
+});
+
+test("CarVector keeps a sold row with missing fuel but does not promote its power", () => {
+  const offer = new CarvectorJapanExactAdapter().normalizeOffer(
+    row({ fuel: { title: "" } }),
   );
+  assert.ok(offer);
+  assert.equal(offer.fuel, undefined);
+  assert.equal(offer.powertrainKind, "unknown");
+  assert.equal(offer.powerHp, undefined);
+  assert.equal(offer.powerKw, undefined);
+  assert.equal(offer.powerDataConfidence, undefined);
+  assert.equal(offer.calculationStatus, "needs_data");
+});
+
+test("CarVector classifies an identity-bound Hybrid name without using peak power", () => {
+  const offer = new CarvectorJapanExactAdapter().normalizeOffer(
+    row({
+      model: { title: "COROLLA HYBRID" },
+      fuel: { title: "" },
+    }),
+  );
+  assert.ok(offer);
+  assert.equal(offer.fuel, "hybrid");
+  assert.equal(offer.powertrainKind, "other_hybrid");
+  assert.equal(offer.powerHp, undefined);
+  assert.equal(offer.powerKw, undefined);
 });
 
 test("CarVector keeps electrified peak power out of customs power fields", () => {
