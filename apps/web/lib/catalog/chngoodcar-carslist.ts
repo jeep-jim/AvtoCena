@@ -2,7 +2,7 @@ const BASE_URL = "https://www.chngoodcar.com";
 const LIST_URL = `${BASE_URL}/Home/CarsList`;
 const SEARCH_URL = `${BASE_URL}/Car/SearchCarList`;
 const PAGE_SIZE = 15;
-const USER_AGENT = "AvtoCenaGoodCarCarsList/1.0 (+read-only until source promotion)";
+const USER_AGENT = "AvtoCenaGoodCarCarsList/1.1 (+read-only until source promotion)";
 const HEADERS = {
   accept: "text/html,application/xhtml+xml,application/json,text/javascript;q=0.9,*/*;q=0.5",
   "accept-language": "zh-CN,zh;q=0.9,en;q=0.6",
@@ -31,6 +31,11 @@ export type GoodCarCarsListPage = {
   pageSize: number;
   total: number;
   currencyLabelVerified: boolean;
+  rawRowCount: number;
+  rawNumericIds: string[];
+  rejectedIdentityRowCount: number;
+  rejectedIdentityReasons: Record<string, number>;
+  rejectedIdentityIds: string[];
   items: GoodCarCarsListIdentityRow[];
 };
 
@@ -59,6 +64,26 @@ function productionDate(value: unknown) {
   const raw = clean(value, 20);
   const match = raw.match(/^((?:19|20)\d{2})-(0[1-9]|1[0-2])$/);
   return match ? `${match[1]}-${match[2]}` : undefined;
+}
+
+function rawRowId(raw: unknown) {
+  const row = raw as Record<string, unknown> | null;
+  if (!row || typeof row !== "object") return "";
+  const id = clean(row.Id, 40);
+  return /^\d+$/.test(id) ? id : "";
+}
+
+export function goodCarCarsListIdentityRejectionReason(raw: unknown) {
+  const row = raw as Record<string, unknown> | null;
+  if (!row || typeof row !== "object") return "invalid_row";
+  const sourceOfferId = clean(row.Id, 40);
+  if (!/^\d+$/.test(sourceOfferId)) return "invalid_id";
+  if (!clean(row.Brand, 400)) return "missing_title";
+  if (!positiveNumber(row.Price)) return "invalid_price";
+  if (clean(row.Currency, 20).toUpperCase() !== "USD") return "non_usd_currency";
+  if (!productionDate(row.ProductionDate)) return "invalid_production_date";
+  if (nonNegativeNumber(row.Mileage) === undefined) return "invalid_mileage";
+  return null;
 }
 
 function extractVerificationToken(html: string) {
@@ -104,16 +129,13 @@ export function goodCarCarsListSearchBody(page: number) {
 }
 
 export function parseGoodCarCarsListIdentityRow(raw: unknown): GoodCarCarsListIdentityRow | null {
-  const row = raw as Record<string, unknown> | null;
-  if (!row || typeof row !== "object") return null;
+  if (goodCarCarsListIdentityRejectionReason(raw)) return null;
+  const row = raw as Record<string, unknown>;
   const sourceOfferId = clean(row.Id, 40);
-  if (!/^\d+$/.test(sourceOfferId)) return null;
   const sourceTitle = clean(row.Brand, 400);
-  const listPrice = positiveNumber(row.Price);
-  const currencyRaw = clean(row.Currency, 20).toUpperCase();
-  const listProductionDate = productionDate(row.ProductionDate);
-  const listMileageKm = nonNegativeNumber(row.Mileage);
-  if (!sourceTitle || !listPrice || currencyRaw !== "USD" || !listProductionDate || listMileageKm === undefined) return null;
+  const listPrice = positiveNumber(row.Price)!;
+  const listProductionDate = productionDate(row.ProductionDate)!;
+  const listMileageKm = nonNegativeNumber(row.Mileage)!;
   const listImageFile = clean(row.Url, 300);
   const listImageUrl = /^[a-zA-Z0-9._-]+\.(?:jpe?g|png|webp|avif)$/i.test(listImageFile)
     ? `https://image.cn.ucoc.net/Picture/Automobile/LargeThumbnail/${listImageFile}`
@@ -189,12 +211,32 @@ export class GoodCarCarsListClient {
     try { payload = JSON.parse(text); } catch { throw new Error(`chngoodcar_carslist_non_json_${response.status}`); }
     const total = Number(payload?.total);
     if (!Number.isInteger(total) || total < 0 || !Array.isArray(payload?.rows)) throw new Error("chngoodcar_carslist_invalid_payload");
-    const items = payload.rows.map(parseGoodCarCarsListIdentityRow).filter((row: GoodCarCarsListIdentityRow | null): row is GoodCarCarsListIdentityRow => Boolean(row));
+    const rawRows = payload.rows as unknown[];
+    const rawNumericIds = rawRows.map(rawRowId).filter(Boolean);
+    const rejectedIdentityReasons: Record<string, number> = {};
+    const rejectedIdentityIds: string[] = [];
+    const items: GoodCarCarsListIdentityRow[] = [];
+    for (const raw of rawRows) {
+      const reason = goodCarCarsListIdentityRejectionReason(raw);
+      if (reason) {
+        rejectedIdentityReasons[reason] = (rejectedIdentityReasons[reason] || 0) + 1;
+        const id = rawRowId(raw);
+        if (id) rejectedIdentityIds.push(id);
+        continue;
+      }
+      const parsed = parseGoodCarCarsListIdentityRow(raw);
+      if (parsed) items.push(parsed);
+    }
     return {
       page,
       pageSize: PAGE_SIZE,
       total,
       currencyLabelVerified: session.currencyLabelVerified,
+      rawRowCount: rawRows.length,
+      rawNumericIds,
+      rejectedIdentityRowCount: rawRows.length - items.length,
+      rejectedIdentityReasons,
+      rejectedIdentityIds,
       items,
     };
   }
