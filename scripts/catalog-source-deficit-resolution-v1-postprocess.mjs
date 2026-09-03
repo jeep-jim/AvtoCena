@@ -12,7 +12,7 @@ export function normalizeUnitContexts(summary){
   const cc=[]; const hp=[];
   for(const text of contexts){
     for(const m of text.matchAll(/\b(\d{1,2}(?:,\d{3})+|\d{3,5})\s*(cc|cm3|cm³)\b/gi)) cc.push({value:Number(m[1].replace(/,/g,'')),unit:m[2],context:text.slice(0,500)});
-    for(const m of text.matchAll(/\b(\d{2,4})\s*(?:마력|BHP|HP|PS)\b/gi)) hp.push({value:Number(m[1]),unit:m[2]||'마력',context:text.slice(0,500)});
+    for(const m of text.matchAll(/(\d{2,4})\s*(마력|BHP|HP|PS)(?=\s|[),.;:/]|$)/gi)) hp.push({value:Number(m[1]),unit:m[2],context:text.slice(0,500)});
   }
   return {ccEvidence:uniqRows(cc).slice(0,20),powerEvidence:uniqRows(hp).slice(0,20)};
 }
