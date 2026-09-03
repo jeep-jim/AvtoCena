@@ -157,6 +157,7 @@ const dedicatedDetailSourceIds = new Set([
   "kbchachacha_korea_open",
   "myauto_georgia_list",
   "autopapa_georgia_open",
+  "carvector_japan_stat_open",
 ]);
 for (let index = 0; index < catalogImportSources.length; index++) {
   const source = catalogImportSources[index];
