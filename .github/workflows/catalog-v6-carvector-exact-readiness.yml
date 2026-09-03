@@ -22,7 +22,7 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 20
     env:
-      CATALOG_CARVECTOR_QUERY: Toyota Corolla
+      CATALOG_CARVECTOR_PATH: /stat/toyota/corolla
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "40000"
       CARVECTOR_EXACT_READINESS_MAX_PAGES: "8"
       CARVECTOR_EXACT_READINESS_MIN_ROWS: "3"
@@ -56,9 +56,11 @@ jobs:
             if (!(Number(offer.sourcePrice) > 0) || offer.sourceCurrency !== 'JPY') problems.push('price_currency');
             if (!offer.make || !offer.model || !offer.generation || !offer.auctionName || !offer.auctionDate || !offer.lotNumber) problems.push('identity_incomplete');
             if (!/^https:\/\/carvector\.com\/stat\/.+\/[a-f0-9-]{36}$/.test(String(offer.operational?.sourceUrl || ''))) problems.push('source_url');
-            if (offer.fuel !== 'petrol' && offer.fuel !== 'diesel' && offer.fuel !== 'lpg') problems.push('non_combustion');
-            if (offer.powertrainKind !== 'combustion' || !(Number(offer.engineCc) >= 300) || !(Number(offer.powerHp) >= 20)) problems.push('specification');
-            if (evidence?.year?.status !== 'exact' || evidence?.fuel?.status !== 'exact' || evidence?.engineCc?.status !== 'exact' || evidence?.powerHp?.status !== 'exact') problems.push('evidence_not_exact');
+            if (!(Number(offer.engineCc) >= 300)) problems.push('engine_missing');
+            if (evidence?.year?.status !== 'exact' || evidence?.engineCc?.status !== 'exact') problems.push('identity_evidence_not_exact');
+            if (evidence?.fuel?.status !== 'exact' && (offer.fuel || offer.powertrainKind !== 'unknown')) problems.push('unknown_fuel_promoted');
+            if (offer.powertrainKind !== 'combustion' && (offer.powerHp || offer.powerKw || offer.icePowerKw || offer.utilizationPowerKw)) problems.push('unclassified_power_promoted');
+            if (offer.powertrainKind === 'combustion' && (evidence?.powerHp?.status !== 'exact' || !(Number(offer.powerHp) >= 20))) problems.push('combustion_power_not_exact');
             if (Array.isArray(offer.images) && offer.images.length) problems.push('standalone_gallery_promoted');
             if (raw.carvectorEvidenceOnly !== true || raw.galleryOwner !== 'jpauc_japan_past_open_after_exact_identity_join') problems.push('evidence_role');
             if (offer.calculationStatus !== 'needs_data') problems.push('standalone_marked_ready');
