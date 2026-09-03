@@ -1,0 +1,59 @@
+name: Catalog source qualification · targeted gap recon v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - chore/source-gap-probe-v1-20260903
+    paths:
+      - ".github/workflows/catalog-source-gap-recon-v1.yml"
+      - "scripts/catalog-source-gap-recon-v1.mjs"
+      - "tests/catalog-source-gap-recon-v1.test.ts"
+      - "scripts/catalog-source-access-probe-v1.mjs"
+      - "scripts/catalog-source-field-audit-v1.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-source-gap-recon-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  recon:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify targeted recon contract
+        run: node --import tsx --test tests/catalog-source-gap-recon-v1.test.ts tests/catalog-source-qualification-contract.test.ts
+      - name: Inspect missing source-bound fields without publishing
+        env:
+          CATALOG_SOURCE_GAP_RECON_TIMEOUT_MS: "15000"
+          CATALOG_SOURCE_GAP_RECON_MAX_BODY_BYTES: "1500000"
+        run: node scripts/catalog-source-gap-recon-v1.mjs
+      - name: Verify no-write evidence envelope
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('catalog-source-gap-recon-v1.json', 'utf8'));
+          if (p.productionWrites !== false) throw new Error('productionWrites');
+          if (p.classificationMutations !== false) throw new Error('classificationMutations');
+          if (p.publishAllowedMutations !== false) throw new Error('publishAllowedMutations');
+          if (p.rawBodiesStored !== false) throw new Error('rawBodiesStored');
+          if (p.requestMethod !== 'GET_only') throw new Error('requestMethod');
+          if (p.challengeBypass !== false || p.robotsBypass !== false) throw new Error('accessBypass');
+          if (p.sampleCount !== 8 || !Array.isArray(p.results) || p.results.length !== 8) throw new Error('sampleCount');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-source-gap-recon-v1
+          path: catalog-source-gap-recon-v1.json
+          if-no-files-found: error
+          retention-days: 7
