@@ -9,10 +9,11 @@ import {
   GoodCarCarsListClient,
   type GoodCarCarsListIdentityRow,
 } from "./chngoodcar-carslist";
+import { goodCarVerifiedReferenceConflict } from "./chngoodcar-reference-conflicts";
 import { namedElectrifiedPowertrainKind } from "./powertrain-safety";
 
 const BASE_URL = "https://www.chngoodcar.com";
-const USER_AGENT = "AvtoCenaGoodCarPaginatedExact/1.2 (+read-only until source promotion)";
+const USER_AGENT = "AvtoCenaGoodCarPaginatedExact/1.3 (+read-only until source promotion)";
 const HEADERS = {
   accept: "text/html,application/xhtml+xml,text/plain;q=0.8,*/*;q=0.5",
   "accept-language": "zh-CN,zh;q=0.9,en;q=0.6",
@@ -67,6 +68,16 @@ export function cleanGoodCarPaginatedModelIdentity(model: unknown) {
   const value = String(model || "").replace(/\s+/g, " ").trim();
   const cleaned = value.replace(/\s+(?:19|20)\d{2}\s*款[\s\S]*$/i, "").trim();
   return cleaned || value;
+}
+
+export function normalizeGoodCarBrandModelIdentity(makeValue: unknown, modelValue: unknown) {
+  let make = String(makeValue || "").replace(/\s+/g, " ").trim();
+  let model = cleanGoodCarPaginatedModelIdentity(modelValue);
+  if (make === "现代汽车") make = "现代";
+  if (make === "大众汽车") make = "大众";
+  if (make === "大众" && model.startsWith("汽车") && model.length > 2) model = model.slice(2).trim();
+  if (make === "MG" && /^\d/.test(model)) model = `MG${model}`;
+  return { make, model };
 }
 
 async function fetchDetail(url: string) {
@@ -166,16 +177,12 @@ export class ChnGoodCarPaginatedExactAdapter extends ChnGoodCarExactAdapter {
     if (row?.discoverySource !== "CarsList/SearchCarList") return null;
     if (row.listCurrencyVerified !== true || row.listDetailProductionDateParity !== true || row.listDetailMileageParity !== true) return null;
     if (goodCarIdentityNamedElectrifiedKind(row.sourceTitle)) return null;
+    if (goodCarVerifiedReferenceConflict(row)) return null;
     const offer = super.normalizeOffer(row);
     if (!offer) return null;
-    // The source title is still the identity truth, but model-year/trim suffixes
-    // are not part of the model entity. Handle the source's `2022 款` spacing
-    // variant deterministically without guessing a different model.
-    offer.model = cleanGoodCarPaginatedModelIdentity(offer.model);
-    // Good Car currently repeats the same VIN across unrelated audited models.
-    // Source offer id + exact list/detail title remain the proven identity; VIN
-    // is deliberately excluded from normalized identity/dedupe until uniqueness
-    // is independently proven.
+    const identity = normalizeGoodCarBrandModelIdentity(offer.make, offer.model);
+    offer.make = identity.make;
+    offer.model = identity.model;
     offer.vin = undefined;
     offer.operational = {
       ...(offer.operational || {}),
@@ -190,6 +197,7 @@ export class ChnGoodCarPaginatedExactAdapter extends ChnGoodCarExactAdapter {
         productionDate: "exact SearchCarList ProductionDate == offer-bound detail 出厂年份",
         mileageKm: "exact SearchCarList Mileage == offer-bound detail 里程 (km), including decimal values without unit inference",
         powertrainIdentity: "identity-bound title electrified markers override contradictory combustion detail labels and fail closed",
+        referenceConflictBoundary: "independently verified exact-version conflicts reject the row; reference values never overwrite source fields",
         listFieldBoundary: "SearchCarList fuel/body/power fields are discovery evidence only and never replace offer-bound detail exact fields",
       },
     };
