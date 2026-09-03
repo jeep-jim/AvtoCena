@@ -20,7 +20,7 @@ const BASE_HEADERS = {
 
 const CHALLENGE_RE = /captcha|cloudflare|verify (?:that )?you are human|access denied|request blocked|robot check|security check|incapsula|imperva|edgeone|cf-chl|challenge-platform/i;
 const CHALLENGE_TITLE_RE = /just a moment|access denied|zugriff verweigert|pardon our interruption|verify (?:that )?you are human|request blocked|robot check|security check/i;
-const LOGIN_URL_RE = /(?:\/|^)(?:login|log-in|signin|sign-in|member\/login|auth\/login)(?:\/|\?|$)/i;
+const LOGIN_URL_RE = /(?:\/|^)(?:login(?:-required)?|log-in|signin|sign-in|member\/login|auth\/login)(?:\/|\?|$)/i;
 const LOGIN_TITLE_RE = /^(?:login|log in|sign in|member login|로그인|登录|ログイン)(?:\b|\s|[-|])/i;
 const LOGIN_WALL_RE = /(?:login required|sign in to continue|please (?:log in|login|sign in)|authentication required|members? only|must be logged in|로그인이 필요|로그인 후|请登录|登录后|ログインしてください|会員ログイン)/i;
 const YEAR_RE = /\b(?:19|20)\d{2}\b/;
@@ -129,7 +129,7 @@ function identityScore(url) {
   const parsed = url instanceof URL ? url : new URL(url);
   const path = parsed.pathname;
   const key = `${path}${parsed.search}`;
-  if (/career|jobs?|imglist|image-list|counts?|allmakeslist|sitemap|search|filter|sort|compare|favorite|wishlist|budget|under[-_]|over[-_]|between[-_]|price[-_]|(?:^|\/)models?(?:\/|$)|(?:^|\/)makes?(?:\/|$)|(?:^|\/)brands?(?:\/|$)/i.test(key)) return 0;
+  if (/career|jobs?|imglist|image-list|counts?|allmakeslist|sitemap|search|filter|sort|compare|favorite|wishlist|budget|under[-_]|over[-_]|between[-_]|price[-_]|hotrank|(?:^|\/)(?:series|library-brand|topic|article|cms)(?:\/|[-_]|$)|(?:^|\/)models?(?:\/|$)|(?:^|\/)makes?(?:\/|$)|(?:^|\/)brands?(?:\/|$)/i.test(key)) return 0;
   let score = 0;
   for (const [name, value] of parsed.searchParams) {
     if (/^(?:id|no|stock|stockid|stock_id|offer|offerid|listing|listingid|vehicle|vehicleid|car|carid|car_id|ad|adid|lot|lotid)$/i.test(name) && /^[A-Za-z0-9_-]{3,}$/.test(value)) score = Math.max(score, 8);
@@ -418,7 +418,7 @@ function accessStatus(listPage, detailPages) {
   if (listPage.summary?.loginWall || LOGIN_URL_RE.test(new URL(listPage.finalUrl || listPage.requestUrl).pathname)) return 'login_wall';
   if (!listPage.ok) return 'http_error';
   if (!listPage.summary) return 'non_html';
-  if (detailPages.some((page) => page?.kind === 'response' && page.ok && page.summary && !page.summary.challenge && !page.summary.loginWall)) return 'reachable_detail_sample';
+  if (detailPages.some((page) => page?.kind === 'response' && page.ok && page.summary && !page.summary.challenge && !page.summary.loginWall && !LOGIN_URL_RE.test(new URL(page.finalUrl || page.requestUrl).pathname))) return 'reachable_detail_sample';
   return 'reachable_no_detail';
 }
 
