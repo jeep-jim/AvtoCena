@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import {
   ChnGoodCarPaginatedExactAdapter,
+  goodCarIdentityNamedElectrifiedKind,
   type GoodCarPaginatedExactRawOffer,
 } from '../apps/web/lib/catalog/chngoodcar-paginated-exact-source';
 import { GoodCarCarsListClient } from '../apps/web/lib/catalog/chngoodcar-carslist';
@@ -23,6 +24,7 @@ function rejectionReasons(row: GoodCarPaginatedExactRawOffer) {
   if (row.listDetailPriceParity !== true) reasons.push('price_parity');
   if (row.listDetailProductionDateParity !== true) reasons.push('production_date_parity');
   if (row.listDetailMileageParity !== true) reasons.push('mileage_parity');
+  if (goodCarIdentityNamedElectrifiedKind(row.sourceTitle)) reasons.push('identity_named_electrified');
   if (!isGoodCarIceFuel(row.fuel)) reasons.push('electrified_or_non_ice');
   if (!isGoodCarPassengerBodyType(row.bodyType)) reasons.push('non_passenger_or_missing_body');
   if (!(row.engineCc > 0)) reasons.push('engine_cc');
@@ -64,22 +66,31 @@ export async function runGoodCarPaginatedScale() {
   const decision = await classificationDecision();
   const listClient = new GoodCarCarsListClient();
   const adapter = new ChnGoodCarPaginatedExactAdapter();
+  const rawListIds = new Set<string>();
   const listIds = new Set<string>();
   const joinedIds = new Set<string>();
   const totals: number[] = [];
   const pageReports: any[] = [];
   const accepted: any[] = [];
   const rejected: any[] = [];
+  const blockedIdentityElectrified: any[] = [];
   const blockedElectrified: string[] = [];
   const blockedNonPassenger: string[] = [];
   const listFuelDisagreements: any[] = [];
+  const lowPriceManualReview: any[] = [];
+  const identityRejectionReasons: Record<string, number> = {};
 
   for (let page = 1; page <= MAX_PAGES; page += 1) {
     const listPage = await listClient.fetchPage(page);
     totals.push(listPage.total);
+    const rawDuplicateIds = listPage.rawNumericIds.filter((id) => rawListIds.has(id));
+    listPage.rawNumericIds.forEach((id) => rawListIds.add(id));
     const pageListIds = listPage.items.map((row) => row.sourceOfferId);
     const duplicatesBefore = pageListIds.filter((id) => listIds.has(id));
     pageListIds.forEach((id) => listIds.add(id));
+    for (const [reason, count] of Object.entries(listPage.rejectedIdentityReasons)) {
+      identityRejectionReasons[reason] = (identityRejectionReasons[reason] || 0) + Number(count || 0);
+    }
 
     const result = await adapter.fetchPage(String(page));
     const rawRows = result.items as GoodCarPaginatedExactRawOffer[];
@@ -91,7 +102,13 @@ export async function runGoodCarPaginatedScale() {
       if (row.listFuelName && row.listFuelName !== row.fuel) {
         listFuelDisagreements.push({ sourceOfferId: row.sourceOfferId, listFuelName: row.listFuelName, detailFuel: row.fuel, sourceTitle: row.sourceTitle });
       }
+      const namedElectrified = goodCarIdentityNamedElectrifiedKind(row.sourceTitle);
       const offer = adapter.normalizeOffer(row);
+      if (namedElectrified) {
+        if (offer) throw new Error(`identity_electrified_offer_must_fail_closed:${row.sourceOfferId}:${namedElectrified}`);
+        blockedIdentityElectrified.push({ sourceOfferId: row.sourceOfferId, sourceTitle: row.sourceTitle, namedKind: namedElectrified, detailFuel: row.fuel, listFuelName: row.listFuelName || null });
+        continue;
+      }
       if (!isGoodCarIceFuel(row.fuel)) {
         if (offer) throw new Error(`electrified_offer_must_fail_closed:${row.sourceOfferId}:${row.fuel}`);
         blockedElectrified.push(row.sourceOfferId);
@@ -108,13 +125,23 @@ export async function runGoodCarPaginatedScale() {
       }
       const images = await adapter.fetchImages(offer);
       if (images.length < 5) throw new Error(`accepted_gallery_underflow:${offer.sourceOfferId}:${images.length}`);
-      accepted.push(safeAccepted(offer, images, row));
+      const safe = safeAccepted(offer, images, row);
+      accepted.push(safe);
+      if (Number(offer.sourcePrice) < 2000) {
+        lowPriceManualReview.push({ sourceOfferId: offer.sourceOfferId, sourceTitle: offer.sourceTitle, sourcePrice: offer.sourcePrice, sourceCurrency: offer.sourceCurrency, parity: { title: row.listDetailTitleParity, price: row.listDetailPriceParity, date: row.listDetailProductionDateParity, mileage: row.listDetailMileageParity } });
+      }
     }
 
     pageReports.push({
       page,
       sourceTotal: listPage.total,
-      listRows: listPage.items.length,
+      rawRows: listPage.rawRowCount,
+      rawNumericIds: listPage.rawNumericIds,
+      rawDuplicateIdsFromPriorPages: rawDuplicateIds,
+      identityRows: listPage.items.length,
+      rejectedIdentityRows: listPage.rejectedIdentityRowCount,
+      rejectedIdentityReasons: listPage.rejectedIdentityReasons,
+      rejectedIdentityIds: listPage.rejectedIdentityIds,
       listIds: pageListIds,
       listDuplicateIdsFromPriorPages: duplicatesBefore,
       joinedDetailRows: rawRows.length,
@@ -127,12 +154,14 @@ export async function runGoodCarPaginatedScale() {
   }
 
   const stableTotal = totals.length === MAX_PAGES && totals.every((value) => value === totals[0]);
-  const allListPagesFull = pageReports.every((row) => row.listRows === 15);
+  const allSourcePagesRawFull = pageReports.every((row) => row.rawRows === 15);
+  const identityAccountingExact = pageReports.every((row) => row.identityRows + row.rejectedIdentityRows === row.rawRows);
+  const noRawListDuplicates = pageReports.every((row) => row.rawDuplicateIdsFromPriorPages.length === 0);
   const noListDuplicates = pageReports.every((row) => row.listDuplicateIdsFromPriorPages.length === 0);
   const noJoinedDuplicates = pageReports.every((row) => row.joinedDuplicateIdsFromPriorPages.length === 0);
   const noDetailNetworkErrors = pageReports.every((row) => row.health?.ok === true);
   const allAcceptedParity = accepted.every((row) => row.listDetailTitleParity && row.listDetailPriceParity && row.listDetailProductionDateParity && row.listDetailMileageParity);
-  const allAcceptedExact = accepted.every((row) => row.sourceCurrency === 'USD' && row.engineCc > 0 && row.powerKw > 0 && row.powerHp > 0 && isGoodCarIceFuel(row.fuel) && isGoodCarPassengerBodyType(row.bodyType) && row.imageCount >= 5);
+  const allAcceptedExact = accepted.every((row) => row.sourceCurrency === 'USD' && row.engineCc > 0 && row.powerKw > 0 && row.powerHp > 0 && isGoodCarIceFuel(row.fuel) && isGoodCarPassengerBodyType(row.bodyType) && row.imageCount >= 5 && !goodCarIdentityNamedElectrifiedKind(row.sourceTitle));
   const makes = [...new Set(accepted.map((row) => row.make))];
   const checks = {
     classificationExactCatalog: decision?.class === 'exact_catalog',
@@ -141,7 +170,9 @@ export async function runGoodCarPaginatedScale() {
     stableSourceTotal: stableTotal,
     sourceTotalAtLeastOneThousand: Number(totals[0] || 0) >= 1000,
     scannedAtLeastFourPages: MAX_PAGES >= 4,
-    allListPagesFull,
+    allSourcePagesRawFull,
+    identityRejectsAccountedFailClosed: identityAccountingExact,
+    noRawListDuplicatesAcrossPages: noRawListDuplicates,
     noListDuplicatesAcrossPages: noListDuplicates,
     noJoinedDuplicatesAcrossPages: noJoinedDuplicates,
     noDetailNetworkErrors,
@@ -149,11 +180,12 @@ export async function runGoodCarPaginatedScale() {
     acceptedAtLeastThreeMakes: makes.length >= 3,
     allAcceptedListDetailParity: allAcceptedParity,
     allAcceptedExactPassengerIce: allAcceptedExact,
-    electrifiedRowsObservedAndBlocked: blockedElectrified.length > 0,
+    electrifiedRowsObservedAndBlocked: blockedElectrified.length + blockedIdentityElectrified.length > 0,
+    identityElectrifiedConflictObservedAndBlocked: blockedIdentityElectrified.length > 0,
   };
   const failures = Object.entries(checks).filter(([, ok]) => ok !== true).map(([name]) => name);
   const payload = {
-    version: 1,
+    version: 2,
     generatedAt: new Date().toISOString(),
     mode: 'chngoodcar_paginated_exact_bounded_scale_no_write',
     productionWrites: false,
@@ -167,40 +199,49 @@ export async function runGoodCarPaginatedScale() {
     sourcePublishAllowed: decision?.publishAllowed ?? null,
     requestedPages: MAX_PAGES,
     sourceTotals: totals,
-    uniqueListIds: listIds.size,
+    uniqueRawListIds: rawListIds.size,
+    uniqueIdentityListIds: listIds.size,
     uniqueJoinedDetailIds: joinedIds.size,
+    identityRejectionReasons,
     pageReports,
     coverage: {
       acceptedCount: accepted.length,
       rejectedPassengerIceCount: rejected.length,
+      blockedIdentityElectrifiedCount: blockedIdentityElectrified.length,
       blockedElectrifiedCount: blockedElectrified.length,
       blockedNonPassengerCount: blockedNonPassenger.length,
       listFuelDisagreementCount: listFuelDisagreements.length,
+      lowPriceManualReviewCount: lowPriceManualReview.length,
       distinctAcceptedMakes: makes,
     },
     checks,
     failures,
     acceptedSamples: accepted.slice(0, 20),
     rejectedSamples: rejected.slice(0, 30),
+    blockedIdentityElectrified: blockedIdentityElectrified.slice(0, 30),
     blockedElectrified: blockedElectrified.slice(0, 30),
     blockedNonPassenger: blockedNonPassenger.slice(0, 30),
     listFuelDisagreements: listFuelDisagreements.slice(0, 30),
+    lowPriceManualReview: lowPriceManualReview.slice(0, 20),
     next: failures.length
       ? 'repair the paginated exact adapter from this no-write evidence before increasing scale'
-      : 'manually spot-check accepted and disagreement samples, then increase read-only CarsList coverage without changing publishAllowed or production registry',
+      : 'manually spot-check accepted, identity-conflict and low-price samples; keep publishAllowed=false and production registry unchanged',
   };
   await fs.writeFile(OUTPUT_PATH, JSON.stringify(payload, null, 2));
   console.log(JSON.stringify({
     output: OUTPUT_PATH,
     pages: MAX_PAGES,
     sourceTotal: totals[0] ?? null,
-    uniqueListIds: listIds.size,
+    uniqueRawListIds: rawListIds.size,
+    uniqueIdentityListIds: listIds.size,
     joinedDetails: joinedIds.size,
+    identityRejectionReasons,
     accepted: accepted.length,
     rejectedPassengerIce: rejected.length,
+    blockedIdentityElectrified: blockedIdentityElectrified.length,
     blockedElectrified: blockedElectrified.length,
     blockedNonPassenger: blockedNonPassenger.length,
-    listFuelDisagreements: listFuelDisagreements.length,
+    lowPriceManualReview: lowPriceManualReview.length,
     makes,
     failures,
   }, null, 2));
