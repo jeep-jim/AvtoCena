@@ -11,6 +11,8 @@ const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spe
 const { CATALOG_MAX_OFFERS_PER_MODEL_YEAR, catalogModelYearQuotaKey, selectCatalogModelYearCoverageFirst } = await import("../apps/web/lib/catalog/inventory-quota.ts");
 const { enrichOfferWithCertifiedPower } = await import("../apps/web/lib/catalog/power-reference.ts");
 const { findVehicleModel, findVehicleVariant } = await import("../apps/web/lib/catalog/vehicle-knowledge.ts");
+const { catalogPublicPriority, catalogRequiredSpecificationRejectionReason } = await import("../apps/web/lib/catalog/public-priority.ts");
+const { SPECIFICATION_AUDIT_FIELDS, classifySpecificationEvidence } = await import("../apps/web/lib/catalog/specification-evidence-audit.ts");
 
 const market = String(process.env.RECOVERY_MARKET || "").trim();
 const requestedSourceIds = String(process.env.RECOVERY_SOURCE_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);
@@ -25,6 +27,7 @@ const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
 const minYear = catalogMinYearForMarket(market);
 const output = process.env.RECOVERY_OUTPUT || `catalog-rebuild-${market}.json`;
 const deadline = Date.now() + timeLimitMs;
+const strictPublicReady = /^(?:1|true|yes)$/i.test(String(process.env.RECOVERY_STRICT_PUBLIC_READY || ""));
 
 const EXPECTED_HOSTS = {
   encar_direct: ["encar.com"],
@@ -128,7 +131,21 @@ function exactCalculation(offer) {
 function saneBody(offer) {
   const body = String(offer?.bodyType || "").trim().toLowerCase();
   if (!body) return true;
-  return BODY_VALUES.has(body) || body.length <= 24;
+  return BODY_VALUES.has(body);
+}
+function strictSpecificationRejectionReason(offer) {
+  const body = String(offer?.bodyType || "").trim().toLowerCase();
+  if (!body) return "strict_body_missing";
+  if (!BODY_VALUES.has(body)) return "strict_body_noncanonical";
+  for (const field of SPECIFICATION_AUDIT_FIELDS) {
+    const result = classifySpecificationEvidence(offer, field);
+    const accepted = result.state === "exact"
+      || (result.state === "not_applicable" && ["engineCc", "certifiedPower"].includes(field));
+    if (!accepted) return `strict_${field}_${result.state}_${result.reason}`;
+  }
+  const requiredSpecification = catalogRequiredSpecificationRejectionReason(offer);
+  if (requiredSpecification) return `strict_${requiredSpecification}`;
+  return "";
 }
 async function safeVariantEnrich(offer) {
   // Never infer body shape here. The source page remains authoritative for the
@@ -408,13 +425,23 @@ await Promise.all(sources.map(async (source) => {
       let calculated;
       try { calculated = normalizeVehicleOfferSpecs(await calculateOfferWithPreliminaryPowerPricing(offer)); }
       catch (error) { errors.push({ stage: "calculation", sourceOfferId: offer.sourceOfferId, error: errorText(error).slice(0, 500) }); reject(rejections, "calculation_exception"); return null; }
-      if (!exactCalculation(calculated) && !isPreliminaryPowerPendingCalculation(calculated)) {
+      const calculatedExactly = exactCalculation(calculated);
+      const preliminaryCalculation = isPreliminaryPowerPendingCalculation(calculated);
+      if (!calculatedExactly) {
         const diagnostic = calculationPendingDiagnostic(calculated);
         const diagnosticKey = `${diagnostic.make}|${diagnostic.model}|${diagnostic.trim}|${diagnostic.year}|${diagnostic.powertrainKind}|${diagnostic.reason}`.toLocaleLowerCase("en-US");
         const targetDiagnostics = ["electric", "series_hybrid", "other_hybrid"].includes(diagnostic.powertrainKind) ? pendingElectrifiedModels : pendingCombustionModels;
         if (targetDiagnostics.size < 500 && !targetDiagnostics.has(diagnosticKey)) targetDiagnostics.set(diagnosticKey, diagnostic);
-        reject(rejections, "calculation_pending");
-        return null;
+        if (!preliminaryCalculation || strictPublicReady) {
+          reject(rejections, preliminaryCalculation ? "strict_preliminary_calculation" : "calculation_pending");
+          return null;
+        }
+      }
+      if (strictPublicReady) {
+        const specificationRejection = strictSpecificationRejectionReason(calculated);
+        if (specificationRejection) { reject(rejections, specificationRejection); return null; }
+        const publicPriority = catalogPublicPriority(calculated);
+        if (!publicPriority.eligible) { reject(rejections, `strict_public_${publicPriority.reason}`); return null; }
       }
       calculated.status = "active";
       calculated.operational = {
@@ -424,8 +451,9 @@ await Promise.all(sources.map(async (source) => {
           recoveryExactSourceUrl: true,
           recoveryExactPhotoIdentity: true,
           recoveryCalculatedRub: true,
-          recoveryPreliminaryPowerPending: isPreliminaryPowerPendingCalculation(calculated),
+          recoveryPreliminaryPowerPending: preliminaryCalculation,
           recoveryBodySourceOnly: true,
+          recoveryStrictPublicReady: strictPublicReady,
         },
       };
       return calculated;
@@ -459,8 +487,10 @@ const discoveredOffers = [...globalOffers.values()];
 const offers = selectCatalogModelYearCoverageFirst(discoveredOffers, target, qualityOrder);
 const preferredCount = offers.filter((offer) => Number(offer.totalRub || 0) <= maxPreferredRub).length;
 const report = {
-  version: 2,
-  mode: "live_market_exact_calculated_recovery",
+  version: 3,
+  mode: strictPublicReady ? "live_market_strict_public_ready_dry_run" : "live_market_exact_calculated_recovery",
+  writes: false,
+  strictPublicReady,
   market,
   sourceIds: sources.map((source) => source.sourceId),
   target,
