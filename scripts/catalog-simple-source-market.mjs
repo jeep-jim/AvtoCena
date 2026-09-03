@@ -29,6 +29,7 @@ const currentYear = new Date().getFullYear();
 const priorityYear = currentYear - 6;
 const deadline = Date.now() + timeLimitMs;
 const commercial = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tractor|forklift|excavator|machinery)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
+const evidenceOnlySourceIds = new Set(["carvector_japan_stat_open"]);
 
 if (!market) throw new Error("catalog_market_missing");
 
@@ -115,6 +116,7 @@ function validCore(offer) {
   );
 }
 function minimumImagesForOffer(offer, source) {
+  if (evidenceOnlySourceIds.has(source?.sourceId)) return 0;
   const declared = Number(offer?.operational?.minimumImages || 0);
   if (source?.sourceId === "jpauc_japan_past_open" && declared === 3) return 3;
   return minimumImages;
