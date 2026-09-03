@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   JpaucPastAdapter,
+  jpaucIdentityGalleryEvidence,
   jpaucSpecificationEvidence,
   parseJpaucListingRows,
 } from "../apps/web/lib/catalog/jpauc-past-source";
@@ -12,7 +13,7 @@ function rowHtml(engineText: string, yearText = "Year: 2022 FX") {
     <td></td><td></td><td>2026-08-26</td><td>Atsugi | 89</td>
     <td>BMW<br>330i 258</td><td>${yearText}</td><td>${engineText}</td>
     <td>AT | 12,345 KM</td><td>Color: WHITE Auc.Grade: 4</td><td>Status: Sold | Start: ¥ 200,000</td>
-    <td><img data-original="https://auctions.aleado.com/pic?sys=1&id=344621799&number=0"></td>
+    <td><img data-original="https://p3.aleado.com/pic/?system=auto&date=2026-08-26&auct=37&bid=89&number=0"></td>
   </tr></table>`;
 }
 
@@ -49,6 +50,7 @@ test("JPAuc offer carries source evidence and never invents fuel or power", () =
   assert.equal(offer.fuel, undefined);
   assert.equal(offer.powerHp, undefined);
   assert.equal(offer.powerKw, undefined);
+  assert.equal((offer.operational as any).minimumImages, 3);
   assert.equal((offer.operational as any).semanticEvidence.year.status, "exact");
   assert.equal((offer.operational as any).semanticEvidence.engineCc.status, "exact");
   assert.equal((offer.operational as any).semanticEvidence.fuel.status, "missing");
@@ -57,4 +59,12 @@ test("JPAuc offer carries source evidence and never invents fuel or power", () =
   assert.equal(classifySpecificationEvidence(offer, "engineCc").state, "exact");
   assert.equal(classifySpecificationEvidence(offer, "fuelPowertrain").state, "missing");
   assert.equal(classifySpecificationEvidence(offer, "powerHp").state, "missing");
+});
+
+test("JPAuc identity and gallery evidence remains non-public without an exact joined price", () => {
+  const row = parseJpaucListingRows(rowHtml("1,998 cc | 3BA-5R20"))[0];
+  const withheld = { ...row, startPrice: 0, sourceStatus: "available" };
+  assert.deepEqual(jpaucIdentityGalleryEvidence(withheld), { ok: true, imageCount: 3, priceAvailable: false });
+  assert.equal(new JpaucPastAdapter().normalizeOffer(withheld), null);
+  assert.equal(jpaucIdentityGalleryEvidence({ ...withheld, listingImage: withheld.listingImage.replace("bid=89", "bid=999") }).ok, false);
 });

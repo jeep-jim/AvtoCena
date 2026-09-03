@@ -22,6 +22,7 @@ const sourceConcurrency = Math.max(1, Math.min(8, Number(process.env.CATALOG_REB
 const detailConcurrency = Math.max(1, Math.min(32, Number(process.env.CATALOG_IMAGE_FETCH_CONCURRENCY || 16)));
 const timeLimitMs = Math.max(60_000, Number(process.env.CATALOG_REBUILD_TIME_LIMIT_MS || 10_800_000));
 const requestTimeoutMs = Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000));
+const jpaucPageTimeoutMs = Math.max(requestTimeoutMs, Number(process.env.CATALOG_JPAUC_PAGE_TIMEOUT_MS || 180_000));
 const galleryTimeoutMs = Math.max(5_000, Number(process.env.CATALOG_GALLERY_TIMEOUT_MS || 30_000));
 const minimumImages = Math.max(5, Math.min(30, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
 const isolatedSourceIds = String(process.env.CATALOG_REBUILD_SOURCE_IDS || "").split(",").map((value) => value.trim()).filter(Boolean);
@@ -29,6 +30,7 @@ const currentYear = new Date().getFullYear();
 const priorityYear = currentYear - 6;
 const deadline = Date.now() + timeLimitMs;
 const commercial = /\b(?:truck|dump|tipper|bus|minibus|commercial|cargo|lorry|tractor|forklift|excavator|machinery)\b|(?:货车|卡车|客车|巴士|工程机械|商用车)/i;
+const evidenceOnlySourceIds = new Set(["carvector_japan_stat_open"]);
 
 if (!market) throw new Error("catalog_market_missing");
 
@@ -115,9 +117,13 @@ function validCore(offer) {
   );
 }
 function minimumImagesForOffer(offer, source) {
+  if (evidenceOnlySourceIds.has(source?.sourceId)) return 0;
   const declared = Number(offer?.operational?.minimumImages || 0);
   if (source?.sourceId === "jpauc_japan_past_open" && declared === 3) return 3;
   return minimumImages;
+}
+function pageTimeoutForSource(source) {
+  return source?.sourceId === "jpauc_japan_past_open" ? jpaucPageTimeoutMs : requestTimeoutMs;
 }
 function imageId(url) { return crypto.createHash("sha256").update(url).digest("hex").slice(0, 24); }
 function normalizeImages(rows) {
@@ -256,6 +262,8 @@ async function collectSource(source) {
   let sourceSeen = 0;
   let sourceNormalized = 0;
   let sourceSaved = 0;
+  let sourceEvidenceSeen = 0;
+  let sourceEvidenceAccepted = 0;
   let noProgressPages = 0;
   let stopReason = "finished";
   const seenCursors = new Set();
@@ -264,12 +272,20 @@ async function collectSource(source) {
       const cursorKey = JSON.stringify(cursor ?? "first");
       if (seenCursors.has(cursorKey)) { stopReason = "cursor_loop"; break; }
       seenCursors.add(cursorKey);
-      const page = await withTimeout(Promise.resolve(source.fetchPage(cursor)), requestTimeoutMs, "page_timeout");
+      const page = await withTimeout(Promise.resolve(source.fetchPage(cursor)), pageTimeoutForSource(source), "page_timeout");
       sourcePages++; pages++;
       const rawRows = Array.isArray(page?.items) ? page.items : [];
       sourceSeen += rawRows.length; seen += rawRows.length;
       const bases = [];
       for (const raw of rawRows) {
+        if (typeof source.validateReadinessEvidence === "function") {
+          sourceEvidenceSeen++;
+          try {
+            if (source.validateReadinessEvidence(raw) === true) sourceEvidenceAccepted++;
+          } catch (error) {
+            errors.push({ sourceId: source.sourceId, stage: "readiness_evidence", error: String(error?.message || error) });
+          }
+        }
         let base = null;
         try { base = source.normalizeOffer(raw); } catch (error) {
           errors.push({ sourceId: source.sourceId, stage: "normalize", error: String(error?.message || error) });
@@ -316,6 +332,10 @@ async function collectSource(source) {
     seen: sourceSeen,
     normalized: sourceNormalized,
     saved: sourceSaved,
+    readinessRole: String(source.readinessRole || ""),
+    evidenceSeen: sourceEvidenceSeen,
+    evidenceAccepted: sourceEvidenceAccepted,
+    evidenceRejected: sourceEvidenceSeen - sourceEvidenceAccepted,
     stopReason,
   });
   await checkpoint("source_complete");

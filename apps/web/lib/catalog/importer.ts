@@ -40,6 +40,7 @@ import { carswitchUaeExactSource } from "./carswitch-exact-source";
 import { kcarKoreaExactSource } from "./kcar-exact-source";
 import { kbChaChaChaExactSource } from "./kbchachacha-exact-source";
 import { carvectorJapanCurrentSource } from "./carvector-current-source";
+import { restrictedRequiredSources } from "./restricted-required-sources";
 import { priorityFastGallery } from "./priority-fast-gallery-wrapper";
 import { guaziRuSource } from "./guazi-ru-source";
 import { myAutoListSource } from "./myauto-list-source";
@@ -113,6 +114,7 @@ const completeSources = [
   encarCollectionSource,
   kcarKoreaExactSource,
   kbChaChaChaExactSource,
+  ...restrictedRequiredSources,
 ];
 
 for (const replacement of completeSources) {
@@ -158,6 +160,9 @@ const dedicatedDetailSourceIds = new Set([
   "myauto_georgia_list",
   "autopapa_georgia_open",
   "carvector_japan_stat_open",
+  "dongchedi_china_open",
+  "auctiondatasearch_japan_open",
+  "jpcenter_japan_catalog_open",
 ]);
 for (let index = 0; index < catalogImportSources.length; index++) {
   const source = catalogImportSources[index];

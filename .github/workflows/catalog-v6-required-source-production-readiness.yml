@@ -1,4 +1,4 @@
-# Non-publishing readiness rerun marker: 2026-08-08T04:58Z
+# Non-publishing readiness rerun marker: 2026-09-03T02:03Z
 name: Catalog V6 · required source production readiness
 
 on:
@@ -8,7 +8,7 @@ on:
       - ".github/workflows/catalog-v6-required-source-production-readiness.yml"
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: catalog-v6-required-source-production-readiness
@@ -51,6 +51,8 @@ jobs:
       CATALOG_IMAGE_FETCH_CONCURRENCY: "4"
       CATALOG_REBUILD_TIME_LIMIT_MS: "600000"
       CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+      CATALOG_JPAUC_PAGE_TIMEOUT_MS: "180000"
+      CATALOG_JAPAN_AUCTION_DATES_PER_RUN: "1"
       CATALOG_GALLERY_TIMEOUT_MS: "30000"
       CATALOG_REBUILD_MIN_IMAGES_PER_OFFER: "5"
       CATALOG_MAX_IMAGES_PER_OFFER: "30"
@@ -76,15 +78,34 @@ jobs:
           const offers = Array.isArray(data.offers) ? data.offers : [];
           const report = data.report || {};
           const source = (report.sources || []).find((row) => row.sourceId === expected);
+          const evidenceOnly = expected === 'carvector_japan_stat_open';
+          const identityGallery = expected === 'jpauc_japan_past_open';
           const problems = [];
           if (!source) problems.push('source_report_missing');
-          if (!offers.length) problems.push('zero_production_cards');
-          if (source && Number(source.saved || 0) < 1) problems.push(`saved_${source.saved || 0}`);
+          if (!offers.length && !identityGallery) problems.push('zero_production_cards');
+          if (source && Number(source.saved || 0) < 1 && !identityGallery) problems.push(`saved_${source.saved || 0}`);
           if (offers.some((offer) => offer.sourceId !== expected)) problems.push('source_identity_mismatch');
           if (offers.some((offer) => !/^https?:\/\//i.test(String(offer?.operational?.sourceUrl || '')))) problems.push('source_url_missing');
           if (offers.some((offer) => Number(offer?.sourcePrice || 0) <= 0 || !offer?.sourceCurrency)) problems.push('source_price_missing');
           const normalMinimum = expected === 'jpauc_japan_past_open' ? 3 : 5;
-          if (offers.some((offer) => !Array.isArray(offer.images) || offer.images.length < normalMinimum)) problems.push('gallery_below_minimum');
+          if (!evidenceOnly && offers.some((offer) => !Array.isArray(offer.images) || offer.images.length < normalMinimum)) problems.push('gallery_below_minimum');
+          if (evidenceOnly && offers.some((offer) =>
+            offer.status !== 'sold'
+              || offer.catalogKind !== 'auction_result'
+              || offer.auctionResult !== 'sold'
+              || offer.auctionPriceKind !== 'published_result'
+              || offer.calculationStatus !== 'needs_data'
+              || !Array.isArray(offer.images)
+              || offer.images.length !== 0
+              || offer?.operational?.raw?.carvectorEvidenceOnly !== true
+              || offer?.operational?.raw?.galleryOwner !== 'jpauc_japan_past_open_after_exact_identity_join'
+          )) problems.push('carvector_evidence_contract_invalid');
+          if (identityGallery && (
+            source?.readinessRole !== 'identity_gallery_after_exact_price_join'
+              || Number(source?.evidenceAccepted || 0) < 3
+              || Number(source?.evidenceRejected || 0) !== 0
+              || (report.errors || []).some((row) => row.sourceId === expected)
+          )) problems.push('jpauc_identity_gallery_contract_invalid');
           console.log(JSON.stringify({ expected, count: offers.length, source, problems, errors: report.errors || [] }, null, 2));
           if (problems.length) process.exit(1);
           NODE
@@ -95,28 +116,3 @@ jobs:
           path: readiness-${{ matrix.market }}-${{ matrix.source_id }}.json
           if-no-files-found: warn
           retention-days: 3
-
-  record-run:
-    name: Record readiness run id
-    needs: readiness
-    if: always()
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - name: Persist run identity for connector inspection
-        env:
-          READINESS_RESULT: ${{ needs.readiness.result }}
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git pull --rebase origin main
-          mkdir -p scripts/probe-results
-          cat > scripts/probe-results/latest-required-readiness-run.txt <<EOF
-          run_id=$GITHUB_RUN_ID
-          head_sha=$GITHUB_SHA
-          result=$READINESS_RESULT
-          EOF
-          git add scripts/probe-results/latest-required-readiness-run.txt
-          git diff --cached --quiet && exit 0
-          git commit -m "Store required readiness run $GITHUB_RUN_ID"
-          git push origin HEAD:main

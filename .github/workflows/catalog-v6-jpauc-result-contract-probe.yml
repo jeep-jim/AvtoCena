@@ -8,7 +8,7 @@ on:
       - "scripts/jpauc-result-contract-probe.mjs"
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
   group: catalog-v6-jpauc-result-contract-probe
@@ -32,15 +32,3 @@ jobs:
           path: jpauc-result-contract-probe.json
           if-no-files-found: warn
           retention-days: 3
-      - name: Persist probe result for connector inspection
-        if: always()
-        run: |
-          test -f jpauc-result-contract-probe.json || exit 0
-          mkdir -p scripts/probe-results
-          cp jpauc-result-contract-probe.json scripts/probe-results/jpauc-result-contract-probe.json
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add scripts/probe-results/jpauc-result-contract-probe.json
-          git diff --cached --quiet && exit 0
-          git commit -m "Store JPAuc result probe (run $GITHUB_RUN_ID)"
-          git push origin HEAD:main

@@ -152,6 +152,39 @@ export function jpaucPhotoVariants(value: string) {
   } catch { return []; }
 }
 
+export function jpaucIdentityGalleryEvidence(raw: JpaucRawRow) {
+  const dataId = clean(raw?.dataId);
+  const detailUrl = clean(raw?.detailUrl);
+  const images = jpaucPhotoVariants(clean(raw?.listingImage));
+  const imageIdentityMatches = images.length === 3 && images.every((value) => {
+    try {
+      const url = new URL(value);
+      const bid = clean(url.searchParams.get("bid")).replace(/^0+/, "") || "0";
+      const lot = clean(raw?.lot).replace(/^0+/, "") || "0";
+      return /(?:^|\.)aleado\.com$/i.test(url.hostname)
+        && url.searchParams.get("system") === "auto"
+        && url.searchParams.get("date") === clean(raw?.date)
+        && Boolean(url.searchParams.get("auct"))
+        && bid === lot;
+    } catch {
+      return false;
+    }
+  });
+  const ok = Boolean(
+    /^\d+$/.test(dataId)
+      && /^\d{4}-\d{2}-\d{2}$/.test(clean(raw?.date))
+      && clean(raw?.location)
+      && clean(raw?.lot)
+      && clean(raw?.maker)
+      && clean(raw?.model)
+      && Number(raw?.year || 0) >= 2011
+      && Number(raw?.year || 0) <= new Date().getUTCFullYear() + 1
+      && detailUrl.startsWith(`${PAST}/detail/${encodeURIComponent(dataId)}`)
+      && imageIdentityMatches,
+  );
+  return { ok, imageCount: images.length, priceAvailable: Number(raw?.startPrice || 0) > 0 };
+}
+
 export function parseJpaucListingRows(html: string): JpaucRawRow[] {
   const rows: JpaucRawRow[] = [];
   for (const match of html.matchAll(/<tr\b([^>]*)data-id=["'](\d+)["']([^>]*)>([\s\S]*?)<\/tr>/gi)) {
@@ -195,6 +228,7 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
   sourceId = "jpauc_japan_past_open";
   market = "japan" as const;
   accessMode = "public_html" as const;
+  readinessRole = "identity_gallery_after_exact_price_join";
   private cookie = "";
   private selectedDates: string[] = [];
   private listingUrl = `${PAST}/listing-2`;
@@ -203,14 +237,26 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
   private ready = false;
 
   private async request(url: string, options: { method?: string; body?: string; referer?: string } = {}) {
-    const response = await fetch(url, {
-      method: options.method || "GET", body: options.body, redirect: "follow",
-      headers: { ...REQUEST_HEADERS, ...(this.cookie ? { cookie: this.cookie } : {}), ...(options.referer ? { referer: options.referer } : {}), ...(options.method === "POST" ? { "content-type": "application/x-www-form-urlencoded", origin: BASE } : {}) },
-      signal: AbortSignal.timeout(Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000))),
-    });
-    if (!response.ok) throw new Error(`jpauc_http_${response.status}:${url}`);
-    if (!this.cookie) this.cookie = String(response.headers.get("set-cookie") || "").split(";")[0];
-    return { response, html: await response.text() };
+    let lastError: unknown;
+    for (let attempt = 1; attempt <= 2; attempt++) {
+      try {
+        const response = await fetch(url, {
+          method: options.method || "GET", body: options.body, redirect: "follow",
+          headers: { ...REQUEST_HEADERS, ...(this.cookie ? { cookie: this.cookie } : {}), ...(options.referer ? { referer: options.referer } : {}), ...(options.method === "POST" ? { "content-type": "application/x-www-form-urlencoded", origin: BASE } : {}) },
+          signal: AbortSignal.timeout(Math.max(5_000, Number(process.env.CATALOG_SOURCE_REQUEST_TIMEOUT_MS || 30_000))),
+        });
+        if (!response.ok) throw new Error(`jpauc_http_${response.status}:${url}`);
+        if (!this.cookie) this.cookie = String(response.headers.get("set-cookie") || "").split(";")[0];
+        return { response, html: await response.text() };
+      } catch (error) {
+        lastError = error;
+        const message = String((error as Error)?.message || error);
+        const transient = /timeout|aborted|fetch failed|jpauc_http_(?:429|5\d\d)/i.test(message);
+        if (!transient || attempt === 2) throw error;
+        await new Promise((resolve) => setTimeout(resolve, 500));
+      }
+    }
+    throw lastError;
   }
 
   private async ensureReady() {
@@ -272,6 +318,10 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
     return { items, count: total, finished, nextCursor: finished ? null : String(page + 1), health: { ok: items.length > 0 || finished, message: `jpauc_past:${mode}:${items.length}/${total}:dates=${this.selectedDates.length}`, checkedAt: new Date().toISOString(), httpStatus } };
   }
 
+  validateReadinessEvidence(raw: unknown) {
+    return jpaucIdentityGalleryEvidence(raw as JpaucRawRow).ok;
+  }
+
   normalizeOffer(raw: unknown): VehicleOffer | null {
     const row = raw as JpaucRawRow;
     if (!row?.dataId || !row.maker || !row.model || !row.year || !row.startPrice) return null;
@@ -287,7 +337,7 @@ export class JpaucPastAdapter implements CatalogSourceAdapter {
       auctionName: row.location || undefined, auctionDate: row.date || undefined, lotNumber: row.lot || undefined, auctionGrade: row.auctionGrade || undefined,
       sourcePrice: row.startPrice, sourceCurrency: "JPY", priceMode: "auction_start", images: row.listingImage ? jpaucPhotoVariants(row.listingImage).map(remoteImage) : [], calculationStatus: "auction_start", firstSeenAt: now, updatedAt: now,
       operational: {
-        sourceUrl: row.detailUrl, sourceVenueName: row.location || "JPAuc", sourcePublishedAt: row.date || undefined, sourceTitle, raw: row, sourceStatus: row.sourceStatus, modelCode: row.modelCode, galleryStoredAs: "json_urls", minimumImages: 2, historicalAuction: true,
+        sourceUrl: row.detailUrl, sourceVenueName: row.location || "JPAuc", sourcePublishedAt: row.date || undefined, sourceTitle, raw: row, sourceStatus: row.sourceStatus, modelCode: row.modelCode, galleryStoredAs: "json_urls", minimumImages: 3, historicalAuction: true,
         semanticEvidence: {
           year: { source: "jpauc_past_listing_year", ...semanticEvidence.year },
           fuel: { source: "jpauc_source_missing", ...semanticEvidence.fuel },
