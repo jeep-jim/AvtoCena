@@ -13,7 +13,7 @@ function rowHtml(engineText: string, yearText = "Year: 2022 FX") {
     <td></td><td></td><td>2026-08-26</td><td>Atsugi | 89</td>
     <td>BMW<br>330i 258</td><td>${yearText}</td><td>${engineText}</td>
     <td>AT | 12,345 KM</td><td>Color: WHITE Auc.Grade: 4</td><td>Status: Sold | Start: ¥ 200,000</td>
-    <td><img data-original="https://auctions.aleado.com/pic?sys=1&id=344621799&number=0"></td>
+    <td><img data-original="https://p3.aleado.com/pic/?system=auto&date=2026-08-26&auct=37&bid=89&number=0"></td>
   </tr></table>`;
 }
 
@@ -66,5 +66,5 @@ test("JPAuc identity and gallery evidence remains non-public without an exact jo
   const withheld = { ...row, startPrice: 0, sourceStatus: "available" };
   assert.deepEqual(jpaucIdentityGalleryEvidence(withheld), { ok: true, imageCount: 3, priceAvailable: false });
   assert.equal(new JpaucPastAdapter().normalizeOffer(withheld), null);
-  assert.equal(jpaucIdentityGalleryEvidence({ ...withheld, listingImage: withheld.listingImage.replace(withheld.dataId, "999") }).ok, false);
+  assert.equal(jpaucIdentityGalleryEvidence({ ...withheld, listingImage: withheld.listingImage.replace("bid=89", "bid=999") }).ok, false);
 });
