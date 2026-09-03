@@ -1,13 +1,16 @@
 import fs from 'node:fs/promises';
+import { pathToFileURL } from 'node:url';
 import {
   ChnGoodCarExactAdapter,
   isGoodCarIceFuel,
+  isGoodCarPassengerBodyType,
   type GoodCarExactRawOffer,
 } from '../apps/web/lib/catalog/chngoodcar-exact-source';
 import { isAllowedCatalogSourceId } from '../apps/web/lib/catalog/required-catalog-sources';
 
 const OUTPUT_PATH = process.env.CATALOG_SOURCE_CHNGOODCAR_EXACT_DRY_RUN_OUTPUT || 'catalog-source-chngoodcar-exact-dry-run-v1.json';
 const SOURCE_ID = 'chngoodcar_china_candidate';
+const SOCIAL_IMAGE_RE = /douyin|whatsapp|telegram|facebook|twitter|wechat|weixin|qrcode|qr-code|social|\/vk[./_\-]/i;
 
 async function classificationDecision() {
   const payload = JSON.parse(await fs.readFile('data/catalog/source-partial-classification-v1.json', 'utf8'));
@@ -50,13 +53,19 @@ export async function runGoodCarExactDryRun() {
   const rawRows = page.items as GoodCarExactRawOffer[];
   const normalized = [] as Array<{ offer: any; images: any[] }>;
   const blockedElectrified: string[] = [];
-  const rejectedIce: Array<{ sourceOfferId: string; sourceTitle: string; fuel: string; reasons: string[] }> = [];
+  const blockedNonPassenger: string[] = [];
+  const rejectedPassengerIce: Array<{ sourceOfferId: string; sourceTitle: string; fuel: string; bodyType?: string; reasons: string[] }> = [];
 
   for (const row of rawRows) {
     const offer = adapter.normalizeOffer(row);
     if (!isGoodCarIceFuel(row.fuel)) {
       if (offer) throw new Error(`electrified_offer_must_fail_closed:${row.sourceOfferId}:${row.fuel}`);
       blockedElectrified.push(row.sourceOfferId);
+      continue;
+    }
+    if (!isGoodCarPassengerBodyType(row.bodyType)) {
+      if (offer) throw new Error(`non_passenger_offer_must_fail_closed:${row.sourceOfferId}:${row.bodyType}`);
+      blockedNonPassenger.push(row.sourceOfferId);
       continue;
     }
     if (!offer) {
@@ -68,7 +77,7 @@ export async function runGoodCarExactDryRun() {
       if (!(row.powerKw > 0)) reasons.push('power_kw');
       if ((row.imageUrls?.length || 0) < 5) reasons.push('gallery');
       if (!reasons.length) reasons.push('identity_make_model_gate');
-      rejectedIce.push({ sourceOfferId: row.sourceOfferId, sourceTitle: row.sourceTitle, fuel: row.fuel, reasons });
+      rejectedPassengerIce.push({ sourceOfferId: row.sourceOfferId, sourceTitle: row.sourceTitle, fuel: row.fuel, bodyType: row.bodyType, reasons });
       continue;
     }
     const images = await adapter.fetchImages(offer);
@@ -85,15 +94,18 @@ export async function runGoodCarExactDryRun() {
     productionAllowlistStillBlocksCandidate: isAllowedCatalogSourceId('china', SOURCE_ID) === false,
     noProductionWrites: true,
     parsedAtLeastFourOffers: rawRows.length >= 4,
-    normalizedAtLeastTwoIceOffers: normalized.length >= 2,
+    normalizedAtLeastTwoPassengerIceOffers: normalized.length >= 2,
     atLeastTwoMakes: makes.length >= 2,
     allNormalizedUsd: normalized.every(({ offer }) => offer.sourceCurrency === 'USD'),
     allNormalizedCombustion: normalized.every(({ offer }) => offer.powertrainKind === 'combustion'),
+    allNormalizedPassengerBody: normalized.every(({ offer }) => isGoodCarPassengerBodyType(offer.bodyType)),
     allNormalizedExactPower: normalized.every(({ offer }) => offer.powerDataConfidence === 'source_exact' && Number(offer.powerKw) > 0 && Number(offer.powerHp) > 0),
     allNormalizedHaveExactEngine: normalized.every(({ offer }) => Number(offer.engineCc) > 0),
     allNormalizedHaveGallery: normalized.every(({ images }) => images.length >= 5),
+    allNormalizedGalleryRejectsSocialAssets: normalized.every(({ images }) => images.every((image) => !SOCIAL_IMAGE_RE.test(String(image.url || '')))),
     allNormalizedHaveListDetailParity: normalized.every(({ offer }) => offer.operational?.raw?.listDetailPriceParity === true && offer.operational?.raw?.listDetailTitleParity === true),
     allElectrifiedFailClosed: rawRows.filter((row) => !isGoodCarIceFuel(row.fuel)).every((row) => adapter.normalizeOffer(row) === null),
+    allNonPassengerFailClosed: rawRows.filter((row) => isGoodCarIceFuel(row.fuel) && !isGoodCarPassengerBodyType(row.bodyType)).every((row) => adapter.normalizeOffer(row) === null),
   };
   const failures = Object.entries(checks).filter(([, ok]) => ok !== true).map(([name]) => name);
   const payload = {
@@ -116,9 +128,10 @@ export async function runGoodCarExactDryRun() {
       note: 'v1 canary discovers current public offer links from the Good Car homepage; CarsList is used as the explicit USD currency contract. Full CarsList pagination is not promoted by this dry-run.',
     },
     coverage: {
-      normalizedIceCount: normalized.length,
+      normalizedPassengerIceCount: normalized.length,
       blockedElectrifiedCount: blockedElectrified.length,
-      rejectedIceCount: rejectedIce.length,
+      blockedNonPassengerCount: blockedNonPassenger.length,
+      rejectedPassengerIceCount: rejectedPassengerIce.length,
       distinctMakes: makes,
       distinctFuels: fuels,
     },
@@ -127,19 +140,21 @@ export async function runGoodCarExactDryRun() {
     powerPairs,
     normalizedSamples: normalized.slice(0, 10).map(({ offer, images }) => safeOfferSample(offer, images)),
     blockedElectrified,
-    rejectedIce: rejectedIce.slice(0, 20),
+    blockedNonPassenger,
+    rejectedPassengerIce: rejectedPassengerIce.slice(0, 20),
     next: failures.length
       ? 'repair adapter/dry-run evidence before any source promotion'
-      : 'manual source-page spot-check of normalized samples; keep publishAllowed=false until that checkpoint and full discovery/pagination readiness are recorded',
+      : 'manual source-page spot-check of normalized passenger samples; keep publishAllowed=false until that checkpoint and full CarsList discovery/pagination readiness are recorded',
   };
 
   await fs.writeFile(OUTPUT_PATH, JSON.stringify(payload, null, 2));
-  console.log(JSON.stringify({ output: OUTPUT_PATH, parsed: rawRows.length, normalizedIce: normalized.length, blockedElectrified: blockedElectrified.length, failures }, null, 2));
+  console.log(JSON.stringify({ output: OUTPUT_PATH, parsed: rawRows.length, normalizedPassengerIce: normalized.length, blockedElectrified: blockedElectrified.length, blockedNonPassenger: blockedNonPassenger.length, failures }, null, 2));
   if (failures.length) throw new Error(`chngoodcar_exact_dry_run_failed:${failures.join(',')}`);
   return payload;
 }
 
-if (import.meta.url === new URL(process.argv[1], 'file:').href) {
+const entryUrl = process.argv[1] ? pathToFileURL(process.argv[1]).href : '';
+if (entryUrl === import.meta.url) {
   runGoodCarExactDryRun().catch((error) => {
     console.error(error);
     process.exitCode = 1;
