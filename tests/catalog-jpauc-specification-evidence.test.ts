@@ -2,6 +2,7 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import {
   JpaucPastAdapter,
+  jpaucIdentityGalleryEvidence,
   jpaucSpecificationEvidence,
   parseJpaucListingRows,
 } from "../apps/web/lib/catalog/jpauc-past-source";
@@ -58,4 +59,12 @@ test("JPAuc offer carries source evidence and never invents fuel or power", () =
   assert.equal(classifySpecificationEvidence(offer, "engineCc").state, "exact");
   assert.equal(classifySpecificationEvidence(offer, "fuelPowertrain").state, "missing");
   assert.equal(classifySpecificationEvidence(offer, "powerHp").state, "missing");
+});
+
+test("JPAuc identity and gallery evidence remains non-public without an exact joined price", () => {
+  const row = parseJpaucListingRows(rowHtml("1,998 cc | 3BA-5R20"))[0];
+  const withheld = { ...row, startPrice: 0, sourceStatus: "available" };
+  assert.deepEqual(jpaucIdentityGalleryEvidence(withheld), { ok: true, imageCount: 3, priceAvailable: false });
+  assert.equal(new JpaucPastAdapter().normalizeOffer(withheld), null);
+  assert.equal(jpaucIdentityGalleryEvidence({ ...withheld, listingImage: withheld.listingImage.replace(withheld.dataId, "999") }).ok, false);
 });
