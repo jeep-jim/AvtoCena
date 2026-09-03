@@ -32,7 +32,7 @@ test('body term evidence records direct body words but does not map categories',
 });
 
 test('wide offer context retains explicit engine highlight and price keys near listing id', () => {
-  const html = '<script>window.x={id:"9714841569",engineSize:1.5,highlightName:"1.5 L, 4 Cyl Engine",sellingPrice:31499}</script>';
+  const html = '<script>window.x={"id":"9714841569","engineSize":1.5,"highlightName":"1.5 L, 4 Cyl Engine","sellingPrice":31499}</script>';
   const rows = wideOfferContextEvidence(html, '9714841569', 'https://example.com/car/9714841569');
   assert.ok(rows.length >= 1);
   assert.ok(rows.some((row) => row.keyValues.some((item) => item.key === 'highlightName' && /1.5 L/.test(item.value))));
