@@ -468,5 +468,8 @@ export async function runProbe() {
 
 const entryUrl = process.argv[1] ? pathToFileURL(process.argv[1]).href : '';
 if (entryUrl === import.meta.url) {
-  await runProbe();
+  runProbe().catch((error) => {
+    console.error(error?.stack || error?.message || error);
+    process.exitCode = 1;
+  });
 }
