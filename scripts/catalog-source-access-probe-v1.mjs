@@ -136,7 +136,6 @@ function identityScore(url) {
   }
   if (/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i.test(path)) score = Math.max(score, 8);
   if (/\d{5,}(?:\.html?)?\/?$/i.test(path)) score = Math.max(score, 6);
-  if (/[-_/][A-Za-z0-9_-]{8,}(?:\.html?)?\/?$/i.test(path) && /\d/.test(path.split('/').pop() || '')) score = Math.max(score, 4);
   return score;
 }
 
@@ -154,10 +153,10 @@ export function extractCatalogCandidates(html, baseUrl, limit = 3) {
     if (DETAIL_EXCLUDE_RE.test(key)) continue;
     if (identityScore(parsed) > 0) continue;
     let score = 0;
-    if (/(?:^|\/)(?:used(?:-cars?|_cars?)?|preowned|pre-owned|inventory|stocklist|stock-list|search|lst|list|listings?|vehicles?|cars?)(?:\/|[-_?=&]|$)/i.test(key)) score += 7;
+    if (/(?:^|\/)(?:buy-used-cars|used(?:-cars?|_cars?)?|preowned|pre-owned|inventory|stocklist|stock-list|search|lst|list|listings?|vehicles?|cars)(?:\/|[-_?=&]|$)/i.test(key)) score += 7;
     if (/(?:^|\/)(?:auction|auctions|past|stat|stats|estimates-data|allmakeslist)(?:\/|[-_?=&]|$)/i.test(key)) score += 5;
     if (/\bused\b|second[-_ ]?hand|pre[-_ ]?owned/i.test(key)) score += 2;
-    if (/career|jobs?|dealer|sell|finance|insurance|review|news|blog|about|contact|privacy|terms|compare|new-cars?/i.test(key)) score -= 8;
+    if (/career|jobs?|dealer|shop|sell|finance|insurance|loan|servic|review|news|blog|about|contact|privacy|terms|compare|new-cars?|community|fans|magazine|tutorial|hotrank|imglist|gallery|photo/i.test(key)) score -= 10;
     if (score < 5) continue;
     const previous = candidates.get(url);
     if (!previous || previous.score < score) candidates.set(url, { url, score });
