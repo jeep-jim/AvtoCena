@@ -86,8 +86,8 @@ test('detail extraction rejects calculator, dealer-info and backorder pseudo ide
   );
 });
 
-test('detail extraction rejects model-series and editorial hot-rank pages', () => {
-  const html = '<a href="/auto/series/20041">series</a><a href="/cars/hotrank/detail/cms_f05c2798fa218c6b87829ff1d4440263">editorial</a><a href="/vehicle/654321">listing</a>';
+test('detail extraction rejects model, community and editorial pages', () => {
+  const html = '<a href="/auto/series/20041">series</a><a href="/community/160258950000000">community</a><a href="/cars/hotrank/detail/cms_f05c2798fa218c6b87829ff1d4440263">editorial</a><a href="/vehicle/654321">listing</a>';
   assert.deepEqual(
     extractDetailCandidates(html, 'https://example.com/', 5),
     ['https://example.com/vehicle/654321'],
