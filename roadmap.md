@@ -1593,3 +1593,22 @@ Production-результат ещё должен быть подтверждё�
 ### Следующее действие после 40.31
 
 Продолжать только non-Japan `research_pending` источники, строго permission-first/no-write. Приоритет — кандидат, который по уже собранным данным ближе всего к exact contract; не расширять WorldAuto и не возвращаться к Japan до снятия указанных блокеров.
+
+## 40.32 — AutoScout24 Europe: official terms block automated query and commercial database reuse
+
+Дата: 2026-09-04.
+
+Ветка: `chore/autoscout24-access-field-audit-v1-20260904`.
+
+- Следующий non-Japan candidate после WorldAuto проверен **сначала по source permission**, до технического crawl.
+- Consumer GTC AutoScout24 (effective 01.04.2024), section 8.2: automated queries via scripts/search software or similar bypass of the provided online search masks are not permitted.
+- Section 8.3: queried data may not be used to build a separate database, for commercial data exploitation/provision, or linked/integrated with other databases/meta-databases.
+- Dealer/company GTC (effective 01.04.2025) likewise prohibits automated database querying by software and copying database contents to other websites/media unless it is the dealer's own content.
+- Поэтому ранее полученные formal/exact-looking baseline rows не дают права строить automated adapter: `autoscout_europe_open -> lead_only`, `publishAllowed=false`.
+- Scope сейчас: только manual public reference/link-out. Повторная qualification возможна только через официальный API/feed/agreement или письменное разрешение, которое явно покрывает automated query + commercial database reuse/republication.
+- После проверки условий **не запускались** AutoScout24 list/detail/API crawler probes; обходов ограничений не делалось. Production/Object Storage/catalog writes отсутствуют.
+- Japan остаётся на паузе по указанию владельца; Japan branches не возобновлять и не вливать.
+
+### Следующее действие после 40.32
+
+Продолжить следующий non-Japan `research_pending` source в том же порядке: сначала официальные access/reuse terms; только если они не блокируют автоматизацию — bounded no-write technical field qualification.

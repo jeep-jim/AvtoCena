@@ -151,9 +151,11 @@
       "sourceId": "autoscout_europe_open",
       "label": "AutoScout24",
       "url": "https://www.autoscout24.com/",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "baseline produced formal exact rows; manual semantic qualification is still required"
+      "evidence": "Official AutoScout24 Consumer GTC sections 8.2/8.3 prohibit automated queries and building/commercially exploiting or integrating queried data as another database; Dealer GTC also prohibits automated database querying and republication of other dealers content.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#autoscout_europe_open",
+      "useScope": "manual public reference/link-out only; no automated inventory ingestion, database building, commercial data exploitation or republication without an explicitly permitted AutoScout24 API/feed/agreement or written authorization"
     },
     {
       "market": "georgia",
@@ -334,5 +336,5 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification with source-permission-first no-write probes; Japan is paused by owner direction; do not revisit WorldAuto automation without an explicitly permitted data route"
+  "next": "continue non-Japan research_pending qualification source-permission-first; Japan remains paused; do not automate AutoScout24 without an explicitly permitted route"
 }
