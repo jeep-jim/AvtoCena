@@ -51,3 +51,34 @@ test('Good Car reviewed v3 adapter blocks the exact-parity 2022 Mazda 100 USD ro
   assert.equal(normal.sourcePrice, 23600);
   assert.match(String((normal.operational.semanticEvidence as any)?.priceReviewBoundary), /never replaced/i);
 });
+
+test('Good Car verified exact-version Mazda3 93,900 USD outlier is held for manual review without replacing source price', () => {
+  const sourceOfferId = '1432600975113187328';
+  const sourceTitle = '马自达 昂克赛拉 2017款 三厢 1.5L 自动舒适型 国V';
+  assert.equal(
+    goodCarManualPriceReviewReason({ sourceOfferId, sourceTitle, year: 2018, sourcePrice: 93900 }),
+    'verified_exact_version_extreme_price_outlier_manual_review',
+  );
+  assert.equal(goodCarManualPriceReviewReason({ sourceOfferId, sourceTitle, year: 2018, sourcePrice: 5000 }), null);
+
+  const adapter = new ChnGoodCarReviewedPaginatedExactAdapter();
+  const row = exactRow({
+    sourceOfferId,
+    detailUrl: `https://www.chngoodcar.com/Home/Cars?id=${sourceOfferId}`,
+    sourceTitle,
+    listTitle: sourceTitle,
+    sourcePrice: 93900,
+    listPrice: 93900,
+    productionDate: '2018-03',
+    listProductionDate: '2018-03',
+    year: 2018,
+    mileageKm: 66000,
+    listMileageKm: 66000,
+    engineCc: 1498,
+    powerKw: 86,
+    bodyType: '三厢车',
+  });
+  assert.equal(adapter.normalizeOffer(row), null);
+  assert.equal(row.sourcePrice, 93900);
+  assert.equal(row.listPrice, 93900);
+});
