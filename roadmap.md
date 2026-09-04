@@ -1786,3 +1786,16 @@ Production-результат ещё должен быть подтверждё�
 - Решение: `encar_direct` остаётся `research_pending`, `publishAllowed=false`. Public scraping не начинать; правильный путь — официальный data-partnership/API/feed agreement. После получения доступа повторно квалифицировать exact offer identity, price, body, fuel, engineCc, powerHp, mileage, gallery и list/detail parity через разрешённый канал.
 - Production catalog, Object Storage, generation, manifest и cleanup не менялись.
 - Следующий non-Japan source: K Car Korea access-policy.
+
+## 40.43 — K Car Korea: official business-partnership route exists; public automation permission is not proven
+
+Дата: 2026-09-04.
+
+- Japan не трогался и остаётся machine-readable paused.
+- K Car проверен только permission-first. Run `33867611733` — success, artifact `9934584165`, digest `sha256:395ab9f4b88a317624e2c1acd0095c7508babfe8aeb98a267f314d8174c3293d`.
+- Action сделал ровно 2 запроса: `https://www.kcar.com/robots.txt` и homepage. Robots вернул `200` и явный `Allow: /`; homepage — `200`. Capture был ограничен 1.8 MB и обрезан до footer, поэтому probe не стал угадывать Terms route и не сделал terms/detail/API/pagination запросов.
+- Отдельной ручной проверкой текущей официальной K Car страницы подтвержден source-declared footer link `이용약관` -> `https://www.kcar.com/ci/atcl/ftAtcl`, а также официальный `사업제휴문의(partnership@kcar.com)`.
+- Crawlable static shell страницы Terms подтверждает, что это официальная поверхность K Car terms/privacy, но не отдаёт достаточно clause text, чтобы честно доказать разрешение public automated commercial ingestion/reuse. Отсутствие видимого запрета не считается разрешением.
+- Решение: `kcar_korea_open` остаётся `research_pending`, `publishAllowed=false`. Preferred permitted route — официальный business partnership `partnership@kcar.com`; после письменного agreement/API/feed заново квалифицировать identity, price, body, fuel, engineCc, powerHp, mileage, gallery и list/detail parity через разрешённый канал.
+- Production catalog, Object Storage, generation, manifest и cleanup не менялись.
+- Следующий non-Japan source: DubiCars UAE access-policy.

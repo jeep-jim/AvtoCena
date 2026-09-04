@@ -38,7 +38,11 @@
       "url": "https://www.kcar.com/",
       "class": "research_pending",
       "publishAllowed": false,
-      "evidence": "four-market strict baseline still running"
+      "evidence": "Run 33867611733 kept the public probe bounded (robots + home only). Current official K Car pages expose the terms surface and 사업제휴문의(partnership@kcar.com), but no positive automated commercial reuse permission is proven. Public crawling stays blocked; official partnership/feed is the preferred permitted route.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#kcar_korea_open",
+      "useScope": "do not automate public inventory crawling while automated commercial reuse permission is unproven; prioritize K Car official business-partnership route for a permitted feed/API/data agreement",
+      "permittedRouteCandidate": "official_business_partnership_partnership@kcar.com",
+      "qualificationBlocker": "public_automation_permission_unproven_use_official_business_partnership_route"
     },
     {
       "market": "china",
@@ -380,7 +384,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; next inspect K Car Korea access policy; for Encar prefer official price/data partnership rather than public crawling",
+  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; next inspect DubiCars UAE access policy before any new field crawl; for K Car prefer official business partnership rather than public crawling",
   "pausedMarkets": [
     "japan"
   ],

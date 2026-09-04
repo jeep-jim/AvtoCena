@@ -23,7 +23,8 @@
     33866428112,
     33866663248,
     33866935666,
-    33867243950
+    33867243950,
+    33867611733
   ],
   "decisions": [
     {
@@ -320,6 +321,33 @@
         "scopeText": "중고차 시세 및 각종 거래데이터 서비스 제휴"
       },
       "blockerBeforeAutomatedUse": "obtain an Encar data-partnership/API/feed agreement that explicitly covers AvtoCena automated commercial use, then requalify exact offer fields through that permitted route instead of public scraping"
+    },
+    {
+      "market": "korea",
+      "sourceId": "kcar_korea_open",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "useScope": "do not automate public inventory crawling while automated commercial reuse permission is unproven; prioritize K Car official business-partnership route for a permitted feed/API/data agreement",
+      "evidence": {
+        "probeRun": 33867611733,
+        "artifactId": 9934584165,
+        "artifactDigest": "sha256:395ab9f4b88a317624e2c1acd0095c7508babfe8aeb98a267f314d8174c3293d",
+        "robots": "https://www.kcar.com/robots.txt returned 200 and explicitly allowed / for the qualification user agent",
+        "probeHome": "https://www.kcar.com/ returned 200; the bounded 1.8 MB raw capture was truncated before source-declared footer links, so the Action probe intentionally did not guess a terms route and made no terms/detail/API requests",
+        "officialPublicVerification": {
+          "homepage": "https://www.kcar.com/",
+          "termsUrl": "https://www.kcar.com/ci/atcl/ftAtcl",
+          "partnership": "current official K Car footer exposes 사업제휴문의(partnership@kcar.com)",
+          "termsSurface": "current official terms page is labeled 케이카 약관 및 개인정보 보호, but its crawlable static page shell does not expose enough clause text to prove permission for automated commercial catalog ingestion/reuse"
+        },
+        "boundary": "GitHub Action used exactly 2 requests: robots + home; zero terms/detail/pagination/API requests; raw bodies not stored"
+      },
+      "permittedRouteCandidate": {
+        "type": "official_business_partnership",
+        "label": "사업제휴문의",
+        "email": "partnership@kcar.com"
+      },
+      "blockerBeforeAutomatedUse": "obtain a K Car partnership/API/feed agreement explicitly covering AvtoCena automated commercial data use, then requalify exact offer fields through that permitted route rather than public scraping"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",
