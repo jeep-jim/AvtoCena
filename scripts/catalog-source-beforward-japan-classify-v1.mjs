@@ -46,7 +46,7 @@ export function appendRoadmapCheckpoint(roadmap) {
   const source = String(roadmap || '');
   if (source.includes('### 40.30. BE FORWARD Japan:')) return source;
   if (!source.includes('### 40.29.')) throw new Error('roadmap 40.29 prerequisite missing');
-  return `${source.replace(/\s*$/, '')}${checkpoint40_30}\n`;
+  return `${source.replace(/\s*$/, '')}\n\n${checkpoint40_30.trim()}\n`;
 }
 
 export async function applyClassification() {
