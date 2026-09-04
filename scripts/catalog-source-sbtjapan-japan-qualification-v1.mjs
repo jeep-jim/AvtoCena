@@ -4,7 +4,7 @@ import { pathToFileURL } from 'node:url';
 import { evaluateRobots } from './catalog-source-access-probe-v1.mjs';
 
 const BASE_URL = 'https://www.sbtjapan.com';
-const LIST_URL = `${BASE_URL}/used-cars`;
+const LIST_URL = `${BASE_URL}/used-cars/search`;
 const OUTPUT_PATH = process.env.CATALOG_SOURCE_SBTJAPAN_JAPAN_OUTPUT || 'catalog-source-sbtjapan-japan-qualification-v1.json';
 const TIMEOUT_MS = Math.max(3000, Math.min(45000, Number(process.env.CATALOG_SOURCE_SBTJAPAN_JAPAN_TIMEOUT_MS || 20000)));
 const MAX_BODY_BYTES = Math.max(250000, Math.min(2400000, Number(process.env.CATALOG_SOURCE_SBTJAPAN_JAPAN_MAX_BODY_BYTES || 1800000)));
