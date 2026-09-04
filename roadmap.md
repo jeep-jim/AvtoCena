@@ -1759,3 +1759,17 @@ Production-результат ещё должен быть подтверждё�
 - Решение: `myauto_georgia_list` остаётся `research_pending`, `publishAllowed=false`, с blocker `automation_access_and_reuse_permission_unproven_rules_routes_challenged`. Новые MyAuto inventory/detail probes не запускать, пока не найден явно разрешённый API/partner feed/written authorization либо source-declared route, доступный без обхода challenge и разрешающий нужное использование.
 - Production catalog, Object Storage, generation, manifest и cleanup не менялись.
 - Следующий non-Japan source: AutoPapa Georgia, снова начиная с access-policy.
+
+## 40.41 — AutoPapa Georgia: public entry challenges automation; permission remains unproven
+
+Дата: 2026-09-04.
+
+- Japan не трогался и остаётся machine-readable paused.
+- После MyAuto без повторных циклов переключились на AutoPapa Georgia.
+- Permission-first run `33866935666`: `https://autopapa.ge/robots.txt` вернул `200 text/plain`, для qualification UA сработал явный `Allow: /`.
+- Следующий и последний запрос в этом probe — public entry `https://autopapa.ge/`; он вернул `403` и title `Just a moment...`. До policy/detail/pagination/API запросов probe не дошёл.
+- Artifact `9934322100`, digest `sha256:8c69679f74afa7b7ad248c630ec89d0d876ad2d6c8f2415a764fe046aaf089a9`. Request envelope: ровно 2 запроса; raw bodies не сохранялись.
+- Robots allowance не трактуется как разрешение на коммерческое автоматизированное использование данных. Поскольку source-declared policy route не удалось даже извлечь до challenge, positive permission не доказан.
+- Решение: `autopapa_georgia_open` остаётся `research_pending`, `publishAllowed=false`, blocker `automation_entry_challenged_403_and_permission_unproven`. Не обходить challenge и не запускать detail crawl до явно разрешённого API/partner feed/written authorization либо source-declared accessible route с подходящими условиями.
+- Production catalog, Object Storage, generation, manifest и cleanup не менялись.
+- Следующий non-Japan source: Encar Korea — сначала access-policy.

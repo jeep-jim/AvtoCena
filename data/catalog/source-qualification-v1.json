@@ -188,7 +188,10 @@
       "url": "https://autopapa.ge/",
       "class": "research_pending",
       "publishAllowed": false,
-      "evidence": "four-market strict baseline still running"
+      "evidence": "Permission-first run 33866935666: robots.txt explicitly allowed /, but the public AutoPapa entry returned HTTP 403 Just a moment challenge to GitHub Actions before any policy/detail request. No positive automated commercial ingestion/reuse permission is proven.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#autopapa_georgia_open",
+      "useScope": "manual public reference only while automated access/reuse permission remains unproven; do not crawl inventory/detail pages from the challenged public route",
+      "qualificationBlocker": "automation_entry_challenged_403_and_permission_unproven"
     },
     {
       "market": "korea",
@@ -373,7 +376,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; next inspect AutoPapa Georgia access policy before any new detail crawl; do not retry MyAuto public automation until a permitted route is identified",
+  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; next inspect Encar Korea access policy before any new detail crawl; do not retry AutoPapa public automation until a permitted route is identified",
   "pausedMarkets": [
     "japan"
   ],

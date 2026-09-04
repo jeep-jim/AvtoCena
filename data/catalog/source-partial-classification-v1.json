@@ -21,7 +21,8 @@
     33865783957,
     33866026252,
     33866428112,
-    33866663248
+    33866663248,
+    33866935666
   ],
   "decisions": [
     {
@@ -278,6 +279,23 @@
         "permissionStatus": "no positive automated commercial ingestion/reuse permission has been proven from an accessible source-declared route"
       },
       "blockerBeforeAutomatedUse": "obtain an explicitly permitted API/partner feed/written authorization or a source-declared rules/data route that can be read without bypassing the challenge and clearly permits the intended automated commercial use; then requalify fields"
+    },
+    {
+      "market": "georgia",
+      "sourceId": "autopapa_georgia_open",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "useScope": "manual public reference only while automated access/reuse permission remains unproven; do not crawl inventory/detail pages from the challenged public route",
+      "evidence": {
+        "probeRun": 33866935666,
+        "artifactId": 9934322100,
+        "artifactDigest": "sha256:8c69679f74afa7b7ad248c630ec89d0d876ad2d6c8f2415a764fe046aaf089a9",
+        "robots": "https://autopapa.ge/robots.txt returned 200 text/plain and explicitly allowed / for the qualification user agent",
+        "entry": "https://autopapa.ge/ returned HTTP 403 Cloudflare-style Just a moment challenge to the GitHub Actions qualification runner",
+        "boundary": "exactly 2 requests: robots + public entry; zero policy/detail/pagination/API requests; raw bodies not stored",
+        "permissionStatus": "no readable source-declared policy route and no positive permission for automated commercial ingestion/reuse were proven before the challenge boundary"
+      },
+      "blockerBeforeAutomatedUse": "identify an explicitly permitted API/partner feed/written authorization or a source-declared public route that is accessible without bypassing the challenge and clearly permits the intended automated commercial use; then requalify fields"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",
