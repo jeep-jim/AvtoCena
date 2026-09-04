@@ -1,0 +1,54 @@
+name: Catalog source qualification · WorldAuto route callsite probe fast v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - chore/worldauto-detail-route-probe-v1-20260904
+    paths:
+      - ".github/workflows/catalog-source-worldauto-route-callsite-probe-fast-v1.yml"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-source-worldauto-route-callsite-probe-fast-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Verify source-declared callsite extraction without dependency install
+        run: node --test tests/catalog-source-worldauto-route-callsite-probe-v1.test.ts tests/catalog-source-worldauto-access-route-probe-v1.test.ts
+      - name: Inspect only source-declared WorldAuto main asset callsites
+        env:
+          CATALOG_SOURCE_WORLDAUTO_CALLSITE_TIMEOUT_MS: "15000"
+          CATALOG_SOURCE_WORLDAUTO_CALLSITE_MAX_BODY_BYTES: "900000"
+          CATALOG_SOURCE_WORLDAUTO_CALLSITE_MAX_SCRIPTS: "7"
+        run: node scripts/catalog-source-worldauto-route-callsite-probe-v1.mjs
+      - name: Verify bounded no-write callsite envelope
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('catalog-source-worldauto-route-callsite-probe-v1.json','utf8'));
+          for (const key of ['productionWrites','classificationMutations','publishAllowedMutations','objectStorageWrites','catalogGenerationWrites','rawBodiesStored','guessedRoutes']) {
+            if (p[key] !== false) throw new Error(`${key} must be false`);
+          }
+          if (p.sourceId !== 'worldauto_georgia_candidate') throw new Error(`sourceId ${p.sourceId}`);
+          if (p.detailRequests !== 0 || p.paginationRequests !== 0 || p.apiRequests !== 0) throw new Error('probe escaped callsite envelope');
+          if ((p.scriptRequests || 0) > 7) throw new Error(`scriptRequests ${p.scriptRequests}`);
+          if ((p.requestCount || 0) > 9) throw new Error(`requestCount ${p.requestCount}`);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-source-worldauto-route-callsite-probe-fast-v1
+          path: catalog-source-worldauto-route-callsite-probe-v1.json
+          if-no-files-found: error
+          retention-days: 7
