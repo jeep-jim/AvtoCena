@@ -203,9 +203,11 @@
       "sourceId": "bobaedream_korea_candidate",
       "label": "Bobaedream",
       "url": "https://www.bobaedream.co.kr/mycar/mycar_list.php",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "field audit run 33731051049: stable details on 2/2; identity, make/model/year, listing price in KRW, fuel, exact engineCc and powerHp proven; canonical body type and listing-bound gallery>=5 remain unproven"
+      "evidence": "Official Bobaedream Terms Article 11 requires prior company consent for commercial activity using the service and for copying/using/providing information obtained through the service; public automated commercial ingestion is therefore blocked.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#bobaedream_korea_candidate",
+      "useScope": "manual public reference only; no automated commercial ingestion/republication from the public site without prior Bobaedream consent or an explicitly permitted API/partner feed"
     },
     {
       "market": "china",
@@ -364,7 +366,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification source-permission-first; Japan is machine-paused and must be skipped by new qualification probes until the owner explicitly resumes it after a completed/played-auction exact-contract candidate is proven",
+  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; do not automate Bobaedream without prior consent or an explicitly permitted data route",
   "pausedMarkets": [
     "japan"
   ],

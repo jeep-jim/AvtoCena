@@ -193,6 +193,19 @@
         "probeBoundary": "source-permission-first stop: no YallaMotor public inventory list/detail/API automated probe was started after reading the official terms"
       },
       "blockerBeforeAutomatedUse": "obtain an official YallaMotor API/feed/partner agreement or written authorization explicitly permitting AvtoCena automated collection, retention and republication, then requalify technically only through that permitted route"
+    },
+    {
+      "market": "korea",
+      "sourceId": "bobaedream_korea_candidate",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; no automated commercial ingestion/republication from the public site without prior Bobaedream consent or an explicitly permitted API/partner feed",
+      "evidence": {
+        "officialTermsUrl": "https://www.bobaedream.co.kr/company/service.php",
+        "termsArticle11": "official terms state that users may not conduct commercial activity using the service without prior company approval and may not copy, reproduce, modify, translate, publish, broadcast, otherwise use, or provide to others information obtained through the service without prior approval",
+        "fieldStatusBeforePolicyCheck": "previous read-only field audit proved identity, make/model/year, listing price KRW, fuel, exact engineCc and powerHp on sampled details; canonical body type and listing-bound gallery>=5 were still unproven"
+      },
+      "blockerBeforeAutomatedUse": "obtain prior written consent or an explicitly permitted API/partner feed covering AvtoCena automated commercial ingestion/republication; then requalify body/gallery/list-detail parity on that permitted route"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",

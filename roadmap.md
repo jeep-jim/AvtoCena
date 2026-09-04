@@ -1705,3 +1705,16 @@ Production-результат ещё должен быть подтверждё�
 ### Следующее действие после 40.37
 
 Продолжать только non-Japan source qualification.
+
+## 40.37 — Bobaedream Korea: commercial reuse requires prior consent
+
+Дата: 2026-09-04.
+
+- После закрепления machine-readable паузы Japan продолжена только non-Japan qualification.
+- Следующий приоритетный кандидат — Bobaedream Korea, потому что предыдущий read-only field audit уже доказал identity, make/model/year, KRW price, fuel, exact engineCc и powerHp; оставались body и listing-bound gallery.
+- До нового crawl проверены официальные Terms of Service Bobaedream: Article 11 запрещает без предварительного согласия компании использовать service для коммерческой деятельности и отдельно запрещает без предварительного согласия копировать/воспроизводить/изменять/переводить/публиковать/иным способом использовать или передавать третьим лицам информацию, полученную через service.
+- Поэтому дальнейший автоматический detail/gallery crawl из public route остановлен до появления явно разрешённого канала данных.
+- Решение: `bobaedream_korea_candidate -> lead_only`, `publishAllowed=false`.
+- Requalification возможна только после письменного разрешения либо official API/partner feed, который явно покрывает automated commercial ingestion/republication; после этого отдельно доказать canonical body, gallery>=5 и list/detail parity.
+- Japan остаётся на паузе; все Japan candidates имеют `qualificationPaused=true`.
+- Safety: production catalog, Object Storage, generation, manifest и cleanup не менялись.
