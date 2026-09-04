@@ -36,7 +36,7 @@ jobs:
       - name: Qualify SBT Japan without production writes
         env:
           CATALOG_SOURCE_SBTJAPAN_JAPAN_TIMEOUT_MS: "20000"
-          CATALOG_SOURCE_SBTJAPAN_JAPAN_MAX_BODY_BYTES: "1800000"
+          CATALOG_SOURCE_SBTJAPAN_JAPAN_MAX_BODY_BYTES: "6000000"
           CATALOG_SOURCE_SBTJAPAN_JAPAN_SAMPLE_COUNT: "4"
         run: node scripts/catalog-source-sbtjapan-japan-qualification-v1.mjs
       - name: Verify no-write evidence envelope
