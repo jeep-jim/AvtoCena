@@ -88,5 +88,41 @@ export function goodCarVerifiedReferenceConflict(input: GoodCarReferenceCandidat
     };
   }
 
+  // Good Car sampled the exact 2019 Geely Xingyue 300T Explorer as gasoline,
+  // with the matching 1477 cc / 130 kW identity. Autohome exact spec 39287
+  // identifies this trim as gasoline + 48V mild hybrid. Reject only; do not
+  // rewrite the source powertrain.
+  if (/^吉利(?:汽车)?\s*星越\s+2019款\s+300T\s+探星者(?:\s|$)/i.test(title)
+    && near(input.engineCc, 1477, 100)
+    && near(input.powerKw, 130, 2)
+    && fuel === "汽油") {
+    return {
+      field: "fuel",
+      sourceValue: fuel,
+      verifiedValue: "汽油+48V轻混系统",
+      reason: "goodcar_named_fuel_conflicts_with_exact_2019_geely_xingyue_300t_reference",
+      referenceSource: "Autohome exact spec 39287",
+      referenceUrl: "https://www.autohome.com.cn/spec/39287/",
+    };
+  }
+
+  // Good Car sampled the exact 2017 Volkswagen Langxing 180TSI DSG Comfort as
+  // a sedan while exposing the matching 1.2T / 81 kW identity. Autohome exact
+  // spec 29388 identifies the trim body as a five-door hatchback. Reject the
+  // conflicting source body; never rewrite it automatically.
+  if (/^大众(?:汽车)?\s*朗行\s+2017款\s+180TSI\s+DSG舒适版(?:\s|$)/i.test(title)
+    && near(input.engineCc, 1197, 100)
+    && near(input.powerKw, 81, 2)
+    && bodyType === "轿车") {
+    return {
+      field: "bodyType",
+      sourceValue: bodyType,
+      verifiedValue: "两厢车",
+      reason: "goodcar_named_body_conflicts_with_exact_2017_vw_langxing_180tsi_dsg_comfort_reference",
+      referenceSource: "Autohome exact spec 29388",
+      referenceUrl: "https://car.autohome.com.cn/config/spec/29388.html",
+    };
+  }
+
   return null;
 }
