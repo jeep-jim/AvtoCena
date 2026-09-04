@@ -348,6 +348,30 @@
         "email": "partnership@kcar.com"
       },
       "blockerBeforeAutomatedUse": "obtain a K Car partnership/API/feed agreement explicitly covering AvtoCena automated commercial data use, then requalify exact offer fields through that permitted route rather than public scraping"
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; no automated public-site extraction, scraping, mass copying or commercial reuse without express written consent. Requalify only through a DubiCars-contracted feed/API/integration whose agreement explicitly covers AvtoCena use.",
+      "evidence": {
+        "officialTermsUrl": "https://www.dubicars.com/copyright.html",
+        "publicUseRestrictions": [
+          "Terms prohibit modifying/copying materials and using them for commercial purpose or public display under the general site material license.",
+          "Buyer/seller conduct section prohibits commercial/non-personal exploitation or copying of Website Content without express written consent.",
+          "The same section prohibits accessing/downloading/monitoring/copying site information through scraper, robot, spider or other automatic device/process.",
+          "No-resale section prohibits reproducing/duplicating/copying/selling/reselling/exploiting the Service for commercial purposes and expressly prohibits data scraping, mass copying and spidering."
+        ],
+        "dealerContractSignal": "Dealer Terms define a subscription Service that may, depending on membership package, include link integration with automatic feed from DubiCars website to the dealer website. This is a contractual product signal, not blanket permission to scrape or republish the public site.",
+        "fieldStatusBeforePolicyDecision": "prior read-only audit proved stable details on 2/2 and source-bound identity/year/price/body/fuel, while exact engineCc/powerHp and listing-bound gallery>=5 remained incomplete on the audited samples"
+      },
+      "permittedRouteCandidate": {
+        "type": "contracted_dealer_feed_or_integration",
+        "termsSignal": "link integration with automatic feed from our web site to your web site",
+        "prerequisite": "signed DubiCars agreement/package and explicit written scope allowing AvtoCena commercial data use/republication"
+      },
+      "blockerBeforeAutomatedUse": "obtain express written consent or a contracted DubiCars feed/API/integration explicitly permitting AvtoCena use; then requalify exact engineCc, powerHp, gallery identity and list/detail parity through that permitted route"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",

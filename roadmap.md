@@ -1799,3 +1799,17 @@ Production-результат ещё должен быть подтверждё�
 - Решение: `kcar_korea_open` остаётся `research_pending`, `publishAllowed=false`. Preferred permitted route — официальный business partnership `partnership@kcar.com`; после письменного agreement/API/feed заново квалифицировать identity, price, body, fuel, engineCc, powerHp, mileage, gallery и list/detail parity через разрешённый канал.
 - Production catalog, Object Storage, generation, manifest и cleanup не менялись.
 - Следующий non-Japan source: DubiCars UAE access-policy.
+
+## 40.44 — DubiCars UAE: public scraping/reuse blocked; contracted automatic-feed option exists
+
+Дата: 2026-09-04.
+
+- Japan не трогался и остаётся machine-readable paused.
+- После K Car перешли к следующему non-Japan кандидату — DubiCars UAE — и сначала проверили текущие официальные Terms, без нового listing/detail crawl.
+- Official Terms & Conditions: `https://www.dubicars.com/copyright.html`. В public-use условиях прямо запрещено без express written consent использовать Website/Content для commercial/non-personal purpose, копировать/эксплуатировать Content; отдельно запрещены automated access/download/monitor/copy через scraper/robot/spider и аналогичные процессы. Раздел No Resale отдельно запрещает commercial exploitation и data scraping/mass copying/spidering.
+- Поэтому публичный DubiCars route нельзя использовать как автоматический ingestion source для AvtoCena.
+- В тех же Dealer Terms есть важный легальный путь: в составе подписки Service, в зависимости от package, может присутствовать `link integration with automatic feed from our web site to your web site`. Это не разрешение на scraping; это потенциальный contractual feed/integration, который надо отдельно согласовать под AvtoCena.
+- Предыдущий read-only field audit остаётся технической историей: stable details на 2/2, identity/year/price/body/fuel доказаны; engineCc/powerHp и listing-bound gallery>=5 на sample оставались незакрыты.
+- Решение: `dubicars_uae_exact -> lead_only`, `publishAllowed=false`. Requalification только через express written consent либо signed DubiCars feed/API/integration agreement, после чего заново доказать engineCc, powerHp, gallery и list/detail parity на разрешённом маршруте.
+- Production catalog, Object Storage, generation, manifest и cleanup не менялись.
+- Следующий non-Japan source: AutoMarket UAE access-policy.

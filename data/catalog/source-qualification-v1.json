@@ -151,9 +151,13 @@
       "sourceId": "dubicars_uae_exact",
       "label": "DubiCars",
       "url": "https://www.dubicars.com/",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "field audit run 33731051049: stable details on 2/2; identity/year/price/body/fuel proven, but ICE sample lacks exact engineCc/powerHp, EV sample lacks required certified power, and gallery>=5 is not listing-bound on either sample"
+      "evidence": "Current official DubiCars Terms prohibit public-site commercial reuse, scraping/robots, mass copying and spidering without express consent. Dealer Terms separately advertise a contractual automatic-feed integration as a possible package feature; only such an explicitly permitted agreement/feed can be requalified for AvtoCena.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#dubicars_uae_exact",
+      "useScope": "manual public reference only; no automated public-site extraction, scraping, mass copying or commercial reuse without express written consent. Requalify only through a DubiCars-contracted feed/API/integration whose agreement explicitly covers AvtoCena use.",
+      "permittedRouteCandidate": "contracted_dubicars_automatic_feed_or_api_subject_to_explicit_agreement",
+      "qualificationBlocker": "public_scraping_and_commercial_reuse_prohibited_contractual_feed_requires_explicit_scope"
     },
     {
       "market": "europe",
@@ -384,7 +388,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; next inspect DubiCars UAE access policy before any new field crawl; for K Car prefer official business partnership rather than public crawling",
+  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; next inspect AutoMarket UAE access policy before any field crawl; do not automate DubiCars public pages without express written consent",
   "pausedMarkets": [
     "japan"
   ],
