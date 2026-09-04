@@ -1,0 +1,64 @@
+name: Catalog source strict review · TCV Japan v1
+
+on:
+  push:
+    branches:
+      - feat/tcv-japan-anatomy-v1-20260904
+    paths:
+      - .github/workflows/catalog-source-tcv-japan-strict-review-v1.yml
+      - scripts/catalog-source-tcv-japan-qualification-v1.mjs
+      - scripts/catalog-source-tcv-japan-strict-review-v1.mjs
+      - tests/catalog-source-tcv-japan-qualification-v1.test.mjs
+      - tests/catalog-source-tcv-japan-strict-review-v1.test.mjs
+
+permissions:
+  contents: read
+
+jobs:
+  review:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify parser and strict provenance contracts
+        run: |
+          node --test tests/catalog-source-tcv-japan-qualification-v1.test.mjs
+          node --test tests/catalog-source-tcv-japan-strict-review-v1.test.mjs
+      - name: Re-run read-only TCV qualification input
+        env:
+          CATALOG_SOURCE_TCV_JAPAN_TIMEOUT_MS: '20000'
+          CATALOG_SOURCE_TCV_JAPAN_SAMPLE_COUNT: '4'
+        run: node scripts/catalog-source-tcv-japan-qualification-v1.mjs
+      - name: Apply strict power-provenance review
+        run: node scripts/catalog-source-tcv-japan-strict-review-v1.mjs
+      - name: Verify strict fail-closed result
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const row = JSON.parse(fs.readFileSync('catalog-source-tcv-japan-strict-review-v1.json', 'utf8'));
+          for (const key of [
+            'productionWrites',
+            'classificationMutations',
+            'publishAllowedMutations',
+            'objectStorageWrites',
+            'catalogGenerationWrites',
+            'rawBodiesStored',
+            'guessedRoutes',
+            'sourcePublishAllowed',
+          ]) {
+            if (row[key] !== false) throw new Error(`${key} must be false`);
+          }
+          if (row.sourceId !== 'tcv_japan_candidate') throw new Error('unexpected sourceId');
+          if (row.summary.exactReady !== 0) throw new Error(`strict exactReady must be 0, got ${row.summary.exactReady}`);
+          if (row.summary.powerMissing !== row.summary.stableReachable) throw new Error('every stable sample must remain power-missing without structured label provenance');
+          if (row.sourceVerdict !== 'lead_only_signal') throw new Error(`unexpected strict verdict: ${row.sourceVerdict}`);
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: catalog-source-tcv-japan-strict-review-v1
+          path: |
+            catalog-source-tcv-japan-qualification-v1.json
+            catalog-source-tcv-japan-strict-review-v1.json
+          if-no-files-found: error
+          retention-days: 7
