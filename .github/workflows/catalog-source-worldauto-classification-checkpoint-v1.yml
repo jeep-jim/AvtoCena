@@ -29,6 +29,14 @@ jobs:
           node-version: 24
       - name: Apply WorldAuto lead-only decision and Japan pause
         run: node scripts/catalog-source-worldauto-classification-checkpoint-v1.mjs
+      - name: Normalize roadmap EOF
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = 'roadmap.md';
+          const text = fs.readFileSync(path, 'utf8').replace(/\s*$/, '');
+          fs.writeFileSync(path, `${text}\n`);
+          NODE
       - name: Verify classification safety
         run: |
           node - <<'NODE'
