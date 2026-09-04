@@ -1,0 +1,49 @@
+name: Catalog source qualification · MyAuto access-policy probe v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - chore/myauto-access-policy-v1-20260904
+    paths:
+      - ".github/workflows/catalog-source-myauto-access-policy-probe-v1.yml"
+      - "scripts/catalog-source-myauto-access-policy-probe-v1.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-source-myauto-access-policy-probe-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Read only MyAuto robots and official rules
+        run: node scripts/catalog-source-myauto-access-policy-probe-v1.mjs
+      - name: Verify permission-first no-write envelope
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('catalog-source-myauto-access-policy-probe-v1.json','utf8'));
+          for (const key of ['productionWrites','classificationMutations','publishAllowedMutations','objectStorageWrites','catalogGenerationWrites','rawBodiesStored','guessedRoutes']) {
+            if (p[key] !== false) throw new Error(`${key} must be false`);
+          }
+          if (p.sourceId !== 'myauto_georgia_list') throw new Error(`sourceId ${p.sourceId}`);
+          if ((p.requestCount || 0) > 2 || (p.robotsRequests || 0) > 1 || (p.rulesRequests || 0) > 1) throw new Error('request envelope exceeded');
+          if (p.detailRequests !== 0 || p.paginationRequests !== 0 || p.apiRequests !== 0) throw new Error('probe escaped access-policy boundary');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-source-myauto-access-policy-probe-v1
+          path: catalog-source-myauto-access-policy-probe-v1.json
+          if-no-files-found: error
+          retention-days: 7
