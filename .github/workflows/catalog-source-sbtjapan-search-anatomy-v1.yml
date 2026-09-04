@@ -1,0 +1,50 @@
+name: Catalog source anatomy · SBT search v1
+
+on:
+  push:
+    branches:
+      - feat/sbtjapan-japan-qualification-v1-20260904
+    paths:
+      - ".github/workflows/catalog-source-sbtjapan-search-anatomy-v1.yml"
+
+permissions:
+  contents: read
+
+jobs:
+  anatomy:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Inspect source-declared search HTML without writes
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const crypto = require('crypto');
+          const url = 'https://www.sbtjapan.com/used-cars/search';
+          const res = await fetch(url, {headers:{'user-agent':'AvtoCenaSbtSearchAnatomy/1.0 (+read-only source qualification)','accept-language':'en-US,en;q=0.9'}});
+          const html = await res.text();
+          const hrefs = [...html.matchAll(/href\s*=\s*["']([^"']+)["']/gi)].map(m=>m[1]);
+          const stockHrefs = [...new Set(hrefs.filter(h=>/\/used-cars\/[A-Z0-9]{5,16}(?:[?#"']|$)/i.test(h)).slice(0,40))];
+          const stockIds = [...new Set([...html.matchAll(/Stock\s*Id\s*:?\s*([A-Z0-9]{5,16})/gi)].map(m=>m[1].toUpperCase()).slice(0,40))];
+          const vehiclePriceHits = (html.match(/Vehicle Price/gi)||[]).length;
+          const out = {
+            url, status:res.status, ok:res.ok, finalUrl:res.url,
+            bytes:Buffer.byteLength(html), chars:html.length,
+            sha256:crypto.createHash('sha256').update(html).digest('hex'),
+            hrefCount:hrefs.length, stockHrefCount:stockHrefs.length, stockHrefSample:stockHrefs.slice(0,12),
+            stockIdCount:stockIds.length, stockIdSample:stockIds.slice(0,12), vehiclePriceHits,
+            productionWrites:false, rawBodiesStored:false, guessedRoutes:false
+          };
+          fs.writeFileSync('catalog-source-sbtjapan-search-anatomy-v1.json', JSON.stringify(out,null,2)+'\n');
+          console.log(JSON.stringify(out,null,2));
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: catalog-source-sbtjapan-search-anatomy-v1
+          path: catalog-source-sbtjapan-search-anatomy-v1.json
+          if-no-files-found: error
+          retention-days: 7
