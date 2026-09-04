@@ -1,6 +1,7 @@
 {
   "version": 1,
   "decidedAt": "2026-09-03",
+  "updatedAt": "2026-09-04",
   "mode": "manual_source_classification_after_read_only_evidence",
   "productionWrites": false,
   "publishAllowedMutations": false,
@@ -8,7 +9,8 @@
     33747985524,
     33748366958,
     33748644632,
-    33749118028
+    33749118028,
+    33826631629
   ],
   "decisions": [
     {
@@ -58,6 +60,23 @@
       "class": "rejected",
       "publishAllowed": false,
       "evidence": "The known vehicle-like public URL repeatedly returns a generic Auto Auctions shell with no bound vehicle fields or listing gallery; no usable exact or lead identity is proven on this route."
+    },
+    {
+      "market": "korea",
+      "sourceId": "kbchachacha_korea_candidate",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public search/reference only; no automated ingestion, pagination or detail crawling without an explicitly permitted API, partner feed or written authorization",
+      "evidence": {
+        "runId": 33826631629,
+        "artifactId": 9920244140,
+        "artifactDigest": "sha256:4f4c66bb38a28870c4b8fce53e5cc9313397f148f4a2a52d81574d7254fa265f",
+        "robots": "registry search route is robots-allowed in the observed robots.txt",
+        "publicPage": "registry-declared public search page returned HTTP 200",
+        "accessPolicy": "the visible official public page explicitly prohibits unauthorized scraping/automation",
+        "probeBoundary": "exactly two HTTP requests: robots.txt + registry-declared search page; no detail, pagination or external-script requests; raw bodies not stored"
+      },
+      "blockerBeforeAutomatedUse": "obtain an explicitly permitted API, partner feed or written authorization; then requalify access and offer-level exact fields from that permitted route"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs."
