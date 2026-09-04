@@ -1,0 +1,78 @@
+name: Catalog source qualification · Good Car paginated exact scale v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/chngoodcar-carslist-pagination-v1-20260903
+    paths:
+      - ".github/workflows/catalog-source-chngoodcar-paginated-scale-v1.yml"
+      - "apps/web/lib/catalog/chngoodcar-carslist.ts"
+      - "apps/web/lib/catalog/chngoodcar-paginated-exact-source.ts"
+      - "apps/web/lib/catalog/chngoodcar-reference-conflicts.ts"
+      - "apps/web/lib/catalog/chngoodcar-exact-source.ts"
+      - "apps/web/lib/catalog/powertrain-safety.ts"
+      - "tests/catalog-source-chngoodcar-carslist-client-v1.test.ts"
+      - "tests/catalog-source-chngoodcar-paginated-exact-v2.test.ts"
+      - "tests/catalog-source-chngoodcar-reference-conflicts-v1.test.ts"
+      - "tests/catalog-source-chngoodcar-exact-adapter-v1.test.ts"
+      - "scripts/catalog-source-chngoodcar-paginated-scale-v1.ts"
+      - "data/catalog/source-partial-classification-v1.json"
+      - "apps/web/lib/catalog/required-catalog-sources.ts"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-source-chngoodcar-paginated-scale-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  scale:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify Good Car exact and CarsList pagination contracts
+        run: |
+          node --import tsx --test tests/catalog-source-chngoodcar-exact-adapter-v1.test.ts
+          node --import tsx --test tests/catalog-source-chngoodcar-carslist-client-v1.test.ts
+          node --import tsx --test tests/catalog-source-chngoodcar-paginated-exact-v2.test.ts
+          node --import tsx --test tests/catalog-source-chngoodcar-reference-conflicts-v1.test.ts
+      - name: Type-check paginated adapter integration
+        run: npm run typecheck
+      - name: Run five-page Good Car exact scale without production writes
+        env:
+          CATALOG_SOURCE_REQUEST_TIMEOUT_MS: "30000"
+          CATALOG_CHNGOODCAR_SCALE_MAX_PAGES: "5"
+        run: node --import tsx -e "import('./scripts/catalog-source-chngoodcar-paginated-scale-v1.ts').then((m) => m.runGoodCarPaginatedScale())"
+      - name: Verify scale no-write envelope
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('catalog-source-chngoodcar-paginated-scale-v1.json','utf8'));
+          for (const key of ['productionWrites','classificationMutations','publishAllowedMutations','objectStorageWrites','catalogGenerationWrites','productionAllowlisted']) {
+            if (p[key] !== false) throw new Error(`${key} must be false`);
+          }
+          if (p.sourceClass !== 'exact_catalog') throw new Error(`sourceClass ${p.sourceClass}`);
+          if (p.sourcePublishAllowed !== false) throw new Error('sourcePublishAllowed');
+          if (p.requestedPages !== 5) throw new Error(`requestedPages ${p.requestedPages}`);
+          if (!Array.isArray(p.sourceTotals) || p.sourceTotals.length !== 5 || !p.sourceTotals.every((x) => x === p.sourceTotals[0])) throw new Error(`unstable totals ${p.sourceTotals}`);
+          if (!(p.sourceTotals[0] >= 1000)) throw new Error(`source total ${p.sourceTotals[0]}`);
+          if (!(p.uniqueRawListIds >= 75)) throw new Error(`uniqueRawListIds ${p.uniqueRawListIds}`);
+          if (!(p.coverage?.blockedIdentityElectrifiedCount > 0)) throw new Error(`blockedIdentityElectrifiedCount ${p.coverage?.blockedIdentityElectrifiedCount}`);
+          if (!(p.coverage?.blockedReferenceConflictCount > 0)) throw new Error(`blockedReferenceConflictCount ${p.coverage?.blockedReferenceConflictCount}`);
+          if (!Array.isArray(p.failures) || p.failures.length !== 0) throw new Error(`failures ${p.failures}`);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-source-chngoodcar-paginated-scale-v1
+          path: catalog-source-chngoodcar-paginated-scale-v1.json
+          if-no-files-found: warn
+          retention-days: 7
