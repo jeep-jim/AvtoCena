@@ -144,6 +144,23 @@
         "probeBoundary": "source-permission-first stop: no mobile.de inventory list/detail/API scraping probe started after reading the official terms"
       },
       "blockerBeforeAutomatedUse": "obtain an official mobile.de Search-API/partner agreement or written permission explicitly covering AvtoCena automated commercial use, storage/retention and republication, then requalify technically only through that permitted route"
+    },
+    {
+      "market": "europe",
+      "sourceId": "lacentrale_europe_candidate",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; do not automate extraction/reuse or republish La Centrale public database contents without prior written authorization or an official permitted data/API/partner feed",
+      "evidence": {
+        "officialTermsUrl": "https://www.lacentrale.fr/informations/mentions-legales",
+        "article": "Article 5 - Propriété Intellectuelle",
+        "personalUse": "La Centrale states that use of the site grants no rights in site/content and only strictly personal use is authorized.",
+        "reproductionRestriction": "Reproduction, representation or diffusion of site/content is prohibited without prior written and express authorization.",
+        "databaseRestriction": "Extraction/reuse of all or a substantial part of protected database data is subject to prior written approval.",
+        "pureConsultation": "Database data is made available to the public only for pure consultation; extraction/reuse beyond what is exclusively and strictly necessary for pure consultation without prior written approval exceeds normal-use conditions.",
+        "probeBoundary": "source-permission-first stop: no La Centrale inventory list/detail/API automated probe was started after reading the official terms"
+      },
+      "blockerBeforeAutomatedUse": "obtain prior written authorization from Groupe La Centrale or an official data/API/partner feed explicitly permitting AvtoCena automated commercial use, retention and republication; then requalify technically only through that permitted route"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs."

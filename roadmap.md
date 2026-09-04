@@ -1631,3 +1631,21 @@ Production-результат ещё должен быть подтверждё�
 ### Следующее действие после 40.33
 
 Продолжить следующий non-Japan `research_pending` source: сначала official access/reuse terms, затем bounded no-write technical qualification только если terms допускают автоматизацию.
+
+## 40.34 — La Centrale Europe: public database is consultation-only; automated reuse blocked
+
+Дата: 2026-09-04.
+
+Ветка: `chore/lacentrale-access-policy-v1-20260904`.
+
+- Следующий non-Japan candidate проверен source-permission-first до нового technical crawl.
+- Official La Centrale CGU, Article 5: site/content разрешены только для strictly personal use; reproduction/representation/diffusion требуют prior written and express authorization.
+- Database data предоставляются публике только для pure consultation. Extraction/reuse, выходящие за то, что исключительно и строго необходимо для pure consultation, без prior written approval выходят за normal-use conditions.
+- Поэтому `lacentrale_europe_candidate -> lead_only`, `publishAllowed=false`. Public list/detail/API crawler qualification не запускать, AvtoCena catalog не строить/обновлять из публичной La Centrale database.
+- Повторно открывать exact technical qualification только после письменного разрешения Groupe La Centrale либо official data/API/partner feed, который явно покрывает automated commercial use, retention и republication.
+- После permission check автоматические inventory requests к La Centrale не запускались; production/Object Storage/catalog writes отсутствуют.
+- Japan остаётся на паузе по указанию владельца; Japan branches не возобновлять и не вливать.
+
+### Следующее действие после 40.34
+
+Продолжить следующий non-Japan `research_pending` source в том же порядке: сначала official access/reuse conditions; только если они не блокируют автоматизацию — bounded no-write technical field qualification.

@@ -313,9 +313,11 @@
       "sourceId": "lacentrale_europe_candidate",
       "label": "La Centrale",
       "url": "https://www.lacentrale.fr/",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "official marketplace exposes verified listings, price, fuel and canonical body categories; detail-level engine and power proof still require probe"
+      "evidence": "Official La Centrale CGU Article 5 says site/database data is for strictly personal/pure consultation use; extraction/reuse and reproduction beyond that require prior written authorization.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#lacentrale_europe_candidate",
+      "useScope": "manual public reference only; do not automate extraction/reuse or republish La Centrale public database contents without prior written authorization or an official permitted data/API/partner feed"
     },
     {
       "market": "europe",
@@ -338,5 +340,5 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification source-permission-first; Japan remains paused; mobile.de requires official partner/API permission before technical requalification"
+  "next": "continue non-Japan research_pending qualification source-permission-first; Japan remains paused; do not automate La Centrale without prior written authorization or an explicitly permitted data route"
 }
