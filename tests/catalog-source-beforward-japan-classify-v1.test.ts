@@ -39,11 +39,13 @@ test('BE FORWARD classifier refuses any open publication state', () => {
   assert.throws(() => classifyRegistry({ candidates: [{ sourceId: 'beforward_japan_candidate', class: 'research_pending', publishAllowed: true }] }), /publishAllowed must remain false/);
 });
 
-test('roadmap checkpoint is append-only and idempotent', () => {
+test('roadmap checkpoint is append-only, idempotent and leaves exactly one EOF newline', () => {
   const before = '# Roadmap\n\n### 40.29. Previous\n- preserved\n';
   const after = appendRoadmapCheckpoint(before);
   assert.ok(after.startsWith(before.trimEnd()));
   assert.match(after, /### 40\.30\. BE FORWARD Japan:/);
   assert.match(after, /33834734630/);
+  assert.equal(after.endsWith('\n'), true);
+  assert.equal(after.endsWith('\n\n'), false);
   assert.equal(appendRoadmapCheckpoint(after), after);
 });
