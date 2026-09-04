@@ -1,0 +1,49 @@
+name: Catalog source qualification · CarSwitch same-offer power scan v3
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - chore/carswitch-field-gap-v1-20260904
+    paths:
+      - ".github/workflows/catalog-source-carswitch-same-offer-power-scan-v3.yml"
+      - "scripts/catalog-source-carswitch-same-offer-power-scan-v3.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-source-carswitch-same-offer-power-scan-v3-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Scan the exact source-declared live CarSwitch offer for power evidence
+        run: node scripts/catalog-source-carswitch-same-offer-power-scan-v3.mjs
+      - name: Verify no-write two-request envelope
+        if: always()
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('catalog-source-carswitch-same-offer-power-scan-v3.json','utf8'));
+          for (const key of ['productionWrites','classificationMutations','publishAllowedMutations','objectStorageWrites','catalogGenerationWrites','rawBodiesStored','guessedRoutes']) {
+            if (p[key] !== false) throw new Error(`${key} must be false`);
+          }
+          if (p.sourceId !== 'carswitch_uae_candidate') throw new Error(`sourceId ${p.sourceId}`);
+          if ((p.requestCount || 0) > 2 || (p.robotsRequests || 0) > 1 || (p.detailRequests || 0) > 1) throw new Error('request envelope exceeded');
+          if (p.paginationRequests !== 0 || p.apiRequests !== 0) throw new Error('unexpected pagination/api request');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-source-carswitch-same-offer-power-scan-v3
+          path: catalog-source-carswitch-same-offer-power-scan-v3.json
+          if-no-files-found: error
+          retention-days: 7
