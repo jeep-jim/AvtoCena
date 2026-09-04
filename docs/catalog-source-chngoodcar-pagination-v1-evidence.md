@@ -162,4 +162,4 @@ Run `33824474523` на head с финальными reference tests заверш
 
 Good Car доказан как источник с реальной server-side pagination и полным 1434-row public CarsList inventory на момент run, а не как homepage canary. Это усиливает source-level `exact_catalog` qualification, но не означает, что все 1434 rows готовы к публикации: offer-level exact gate остаётся обязательным.
 
-Следующий безопасный шаг после merge этого research-пакета — оставить Good Car вне production allowlist и продолжить квалификацию остальных источников/рынков. Production promotion Good Car должен быть отдельным решением после общего six-market no-write readiness, а не следствием этого source-only run.
+После merge этого research-пакета Good Car остаётся вне production allowlist и с `publishAllowed=false`. Следующий source-qualification этап — продолжить остальные рынки/источники. Production promotion Good Car — отдельное решение только после общего six-market no-write readiness.
