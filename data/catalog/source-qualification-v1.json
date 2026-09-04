@@ -327,10 +327,12 @@
       "sourceId": "worldauto_georgia_candidate",
       "label": "WorldAuto",
       "url": "https://worldauto.ge/en/search/car",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "public Georgia inventory states that listings contain year, mileage, engine size, power, drive and price; detail and gallery identity still require probe"
+      "evidence": "Technical offer-bound core fields are strong on the source-declared search API, but official WorldAuto public pages prohibit non-seller commercial reuse of page content; automated AvtoCena publication is blocked.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#worldauto_georgia_candidate",
+      "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue qualification of remaining research_pending candidates with source-permission-first no-write probes; do not revisit KB ChaChaCha automation without a permitted data route"
+  "next": "continue non-Japan research_pending qualification with source-permission-first no-write probes; Japan is paused by owner direction; do not revisit WorldAuto automation without an explicitly permitted data route"
 }

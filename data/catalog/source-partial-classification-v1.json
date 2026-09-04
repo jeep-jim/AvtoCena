@@ -10,7 +10,14 @@
     33748366958,
     33748644632,
     33749118028,
-    33826631629
+    33826631629,
+    33854811320,
+    33855034005,
+    33855980435,
+    33856160338,
+    33856330429,
+    33856502011,
+    33856667630
   ],
   "decisions": [
     {
@@ -77,6 +84,30 @@
         "probeBoundary": "exactly two HTTP requests: robots.txt + registry-declared search page; no detail, pagination or external-script requests; raw bodies not stored"
       },
       "blockerBeforeAutomatedUse": "obtain an explicitly permitted API, partner feed or written authorization; then requalify access and offer-level exact fields from that permitted route"
+    },
+    {
+      "market": "georgia",
+      "sourceId": "worldauto_georgia_candidate",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization",
+      "evidence": {
+        "accessRuns": [
+          33854811320,
+          33855034005,
+          33855980435,
+          33856160338,
+          33856330429,
+          33856502011,
+          33856667630
+        ],
+        "robots": "observed public source and backend robots allow the exact bounded routes probed",
+        "sourceDeclaredTransport": "frontend bundle declares GET /search/sell/car/get and baseUrl https://worldauto-backend-production.up.railway.app",
+        "offerFields": "bounded first public result proves offer-bound id, 10 images, make/model, year, price, engine/fuel, engineVolume, power, transmission and drive",
+        "priceCurrency": "official WorldAuto UI labels sale prices in dollars and shows the same Toyota Land Cruiser Prado 2021 sample at 45000$",
+        "rightsBlocker": "official WorldAuto public pages state that page content including images, vehicle descriptions and details is property of worldauto.ge and may not be reused for profit by persons other than the seller; a link is required when using materials"
+      },
+      "blockerBeforeAutomatedUse": "obtain an explicitly permitted API/partner feed or written authorization covering commercial data reuse/republication, then requalify only from that permitted route"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs."

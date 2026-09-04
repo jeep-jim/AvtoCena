@@ -1563,3 +1563,33 @@ Production-результат ещё должен быть подтверждё�
 - **Safety:** `productionWrites=false`, `publishAllowedMutations=false`, `objectStorageWrites=false`, `catalogGenerationWrites=false`, production catalog/generation/manifest/cleanup не менялись.
 - **Evidence:** `docs/catalog-source-kbchachacha-access-policy-v1-evidence.md` и `data/catalog/source-partial-classification-v1.json`.
 - **Следующий шаг:** не тратить запросы на KB без разрешённого data route; продолжить квалификацию следующего `research_pending` source, сохраняя тот же no-write/source-permission-first порядок.
+
+## 40.31 — WorldAuto Georgia: technical field contract proven, commercial reuse blocked; Japan paused
+
+Дата: 2026-09-04.
+
+Ветка исследования: `chore/worldauto-detail-route-probe-v1-20260904`. Production/publication writes не выполнялись.
+
+Что подтверждено по WorldAuto Georgia:
+
+- permission-first/no-write цепочка завершена успешными runs: `33854811320`, `33855034005`, `33855980435`, `33856160338`, `33856330429`, `33856502011`, `33856667630`;
+- frontend самого WorldAuto объявляет `GET /search/sell/car/get` и backend base URL `https://worldauto-backend-production.up.railway.app`; скрытые endpoint'ы не угадывались;
+- один bounded no-param GET к source-declared search endpoint вернул `200 application/json`; пагинация и detail crawl не запускались;
+- из первого сбалансированного offer-object доказаны id, 10 фото, Toyota Land Cruiser Prado, 2021, price 45000, Diesel, 2.8, 204, Automatic, AWD, mileage 0, Batumi;
+- официальный UI WorldAuto показывает тот же образец как `45000$` и маркирует цены продажи в долларах;
+- технически источник близок к exact contract, но это **не даёт права публикации**.
+
+Решающая причина остановки WorldAuto:
+
+- официальный public footer WorldAuto указывает, что content страницы, включая images, vehicle descriptions/details, является собственностью `worldauto.ge`; коммерческое reuse лицами, отличными от seller, запрещено, при использовании материалов требуется ссылка;
+- поэтому для коммерческого каталога AvtoCena WorldAuto переводится в `lead_only`, `publishAllowed=false`; автоматический reuse/republication прекращён;
+- все одноразовые WorldAuto qualification workflows после снятия доказательств удалены, чтобы обычные push не запускали новые запросы;
+- повторно открывать автоматизацию WorldAuto можно только после явно разрешённого API/partner feed либо письменного разрешения на commercial data reuse/republication.
+
+### Japan — пауза по указанию владельца
+
+Япония сейчас **не входит в активную очередь qualification**. Старые Japan ledger entries остаются только историей исследования. Экспериментальные Japan branches не вливать в активный source path и новые Japan probes не запускать. Возвращаться к Японии только после нахождения кандидата, который реально отдаёт уже завершённые/отыгранные аукционные лоты под требуемый exact contract, и после явного возобновления рынка владельцем. На текущем подтверждённом состоянии такого источника в проекте нет; fixed-price/export-stock SBT/TCV/BE FORWARD не доказывают completed-auction coverage.
+
+### Следующее действие после 40.31
+
+Продолжать только non-Japan `research_pending` источники, строго permission-first/no-write. Приоритет — кандидат, который по уже собранным данным ближе всего к exact contract; не расширять WorldAuto и не возвращаться к Japan до снятия указанных блокеров.
