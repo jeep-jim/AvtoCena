@@ -1649,3 +1649,21 @@ Production-результат ещё должен быть подтверждё�
 ### Следующее действие после 40.34
 
 Продолжить следующий non-Japan `research_pending` source в том же порядке: сначала official access/reuse conditions; только если они не блокируют автоматизацию — bounded no-write technical field qualification.
+
+## 40.35 — AutoUncle Europe: public scraping requires permission; official B2B API is the candidate path
+
+Дата: 2026-09-04.
+
+Ветка: `chore/autouncle-access-policy-v1-20260904`.
+
+- Source-permission-first проверка выполнена до нового public inventory crawl.
+- Official AutoUncle Terms of Service, last updated 27 November 2024, section 4: users agree not to scrape or collect data without permission.
+- Поэтому `autouncle_europe_candidate -> lead_only`, `publishAllowed=false`; public-site list/detail crawler не запускать без разрешения.
+- Положительный путь найден: AutoUncle официально предлагает B2B Automotive API для enterprise integrations с API key, market valuation, deal rating, sales-time forecast и live comparables. Это кандидат на разрешённую интеграцию, но не public-site permission.
+- Exact technical qualification AutoUncle возобновлять только через API/enterprise agreement либо письменное разрешение, которое явно покрывает AvtoCena use case, нужные поля, retention и republication.
+- После terms check public inventory requests не запускались; production/Object Storage/catalog writes отсутствуют.
+- Japan остаётся на паузе по указанию владельца; Japan branches не возобновлять и не вливать.
+
+### Следующее действие после 40.35
+
+Продолжить следующий non-Japan `research_pending` source: official access/reuse conditions first; если permission path не закрыт — bounded no-write technical qualification.

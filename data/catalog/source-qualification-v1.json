@@ -324,9 +324,11 @@
       "sourceId": "autouncle_europe_candidate",
       "label": "AutoUncle",
       "url": "https://www.autouncle.co.uk/en-gb/used-cars",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "public aggregator exposes live listing prices and identifies engine capacity/power as comparison attributes; original-offer identity and duplication risk require probe"
+      "evidence": "Official AutoUncle Terms of Service section 4 prohibits scraping or collecting data without permission; AutoUncle separately offers an official B2B automotive API for authorized enterprise integrations.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#autouncle_europe_candidate",
+      "useScope": "manual public reference only; no public-site scraping or data collection without permission; requalify only through an AutoUncle-authorized API/enterprise agreement or written permission covering the AvtoCena use case"
     },
     {
       "market": "georgia",
@@ -340,5 +342,5 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification source-permission-first; Japan remains paused; do not automate La Centrale without prior written authorization or an explicitly permitted data route"
+  "next": "continue non-Japan research_pending qualification source-permission-first; Japan remains paused; AutoUncle public scraping is blocked without permission and its official B2B API is the only current requalification path"
 }

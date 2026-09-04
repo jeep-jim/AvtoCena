@@ -161,6 +161,22 @@
         "probeBoundary": "source-permission-first stop: no La Centrale inventory list/detail/API automated probe was started after reading the official terms"
       },
       "blockerBeforeAutomatedUse": "obtain prior written authorization from Groupe La Centrale or an official data/API/partner feed explicitly permitting AvtoCena automated commercial use, retention and republication; then requalify technically only through that permitted route"
+    },
+    {
+      "market": "europe",
+      "sourceId": "autouncle_europe_candidate",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; no public-site scraping or data collection without permission; requalify only through an AutoUncle-authorized API/enterprise agreement or written permission covering the AvtoCena use case",
+      "evidence": {
+        "officialTermsUrl": "https://www.autouncle.com/en-GB/terms-of-service",
+        "termsUpdated": "27 November 2024",
+        "userConduct": "Section 4 states that users agree not to scrape or collect data without permission.",
+        "officialApiUrl": "https://b2b.autouncle.com/en-gb/automotive-api",
+        "officialApiMeaning": "AutoUncle advertises an authenticated B2B automotive API for enterprise integrations, using an API key and returning market valuation plus live-comparable signals.",
+        "probeBoundary": "source-permission-first stop: no AutoUncle public inventory list/detail automated probe was started after reading the official terms"
+      },
+      "blockerBeforeAutomatedUse": "obtain an AutoUncle API/enterprise agreement or written permission whose scope explicitly permits AvtoCena automated use, required fields, retention and any republication; then perform exact technical qualification only through that authorized route"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs."
