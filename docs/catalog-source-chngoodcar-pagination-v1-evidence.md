@@ -49,7 +49,7 @@ List fuel/body/power hints не заменяют detail evidence. External refer
 
 ## Full CarsList exhaustion
 
-Финальный run: `33824559065`.
+Исторический checkpoint 40.28: run `33824559065`.
 
 - head: `e817b82a4bd7f94596ebb0adcdb492ffb52c2590`;
 - conclusion: `success`;
@@ -81,7 +81,7 @@ List fuel/body/power hints не заменяют detail evidence. External refer
 
 После этого добавлен отдельный gate: современный offer (2020+) с положительной source USD price ниже `2000 USD` сохраняет исходную цену как evidence, но не допускается автоматически и уходит в manual review.
 
-В финальном run заблокирована одна такая строка:
+В историческом checkpoint 40.28 была заблокирована одна такая строка:
 
 - Mazda CX-5, sourceOfferId `2049030561644670976`;
 - source year `2023`;
@@ -130,13 +130,7 @@ Run `33824474523` на head с финальными reference tests заверш
 - source `publishAllowed=false`;
 - public China generation, manifest, stored production catalog, cleanup и publication не менялись.
 
-## Вердикт и следующая точка
-
-Good Car теперь доказан как источник с реальной server-side pagination и полным 1434-row public CarsList inventory на момент run, а не как homepage canary. Это усиливает source-level `exact_catalog` qualification, но не означает, что все 1434 rows готовы к публикации: offer-level exact gate остаётся обязательным.
-
-Следующий безопасный шаг после merge этого research-пакета — оставить Good Car вне production allowlist и продолжить квалификацию остальных источников/рынков. Production promotion Good Car должен быть отдельным решением после общего six-market no-write readiness, а не следствием этого source-only run.
-
-## Post-40.28 price refinement
+## Post-40.28 price refinement / roadmap 40.29
 
 После записи основного checkpoint 40.28 ручной просмотр accepted sample обнаружил ещё одну ценовую аномалию, которую нельзя исправлять inference: Good Car offer `1432600975113187328`, `马自达 昂克赛拉 2017款 三厢 1.5L 自动舒适型 国V`, сохраняет exact list/detail source price `93900 USD`. Независимая exact-version проверка использована только как основание отправить эту конкретную source price в manual review; исходное значение `93900` не заменяется и не пересчитывается.
 
@@ -160,6 +154,12 @@ Good Car теперь доказан как источник с реальной
 - blocked manual-price-review: `2`;
 - price-review rows: Mazda CX-5 `2049030561644670976` / `100 USD` и Mazda3/Axela `1432600975113187328` / `93900 USD`;
 - `failures=[]`;
-- price-review regression, identity normalization, CarsList/paginated exact tests, typecheck, full exhaustion и no-write envelope — green.
+- high-price regression, low-price regression, identity normalization, CarsList/paginated exact tests, typecheck, full exhaustion и no-write envelope — green.
 
-Этот post-checkpoint не переписывает исторический run `33824559065` с `24/1`: он фиксирует следующий, более строгий gate. Safety boundary не менялся, production promotion по-прежнему запрещён.
+Этот post-checkpoint не переписывает исторический run `33824559065` с `24/1`: он фиксирует следующий, более строгий gate. Он также записан append-only в `roadmap.md` как раздел **40.29**.
+
+## Вердикт и следующая точка
+
+Good Car доказан как источник с реальной server-side pagination и полным 1434-row public CarsList inventory на момент run, а не как homepage canary. Это усиливает source-level `exact_catalog` qualification, но не означает, что все 1434 rows готовы к публикации: offer-level exact gate остаётся обязательным.
+
+Следующий безопасный шаг после merge этого research-пакета — оставить Good Car вне production allowlist и продолжить квалификацию остальных источников/рынков. Production promotion Good Car должен быть отдельным решением после общего six-market no-write readiness, а не следствием этого source-only run.
