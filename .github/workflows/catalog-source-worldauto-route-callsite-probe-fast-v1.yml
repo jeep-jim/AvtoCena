@@ -7,6 +7,12 @@ on:
       - chore/worldauto-detail-route-probe-v1-20260904
     paths:
       - ".github/workflows/catalog-source-worldauto-route-callsite-probe-fast-v1.yml"
+      - "scripts/catalog-source-worldauto-route-callsite-probe-v1.mjs"
+      - "tests/catalog-source-worldauto-route-callsite-probe-v1.test.ts"
+      - "scripts/catalog-source-worldauto-access-route-probe-v1.mjs"
+      - "tests/catalog-source-worldauto-access-route-probe-v1.test.ts"
+      - "scripts/catalog-source-access-probe-v1.mjs"
+      - "data/catalog/source-qualification-v1.json"
 
 permissions:
   contents: read
