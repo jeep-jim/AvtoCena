@@ -103,9 +103,11 @@ export function parseSbtDetailUrl(url) {
     if (parsed.origin !== BASE_URL) return null;
     const match = parsed.pathname.match(/^\/used-cars\/([a-z0-9]{5,16})\/?$/i);
     if (!match) return null;
+    const stockId = match[1].toUpperCase();
+    if (!/\d/.test(stockId)) return null;
     return {
-      stockId: match[1].toUpperCase(),
-      url: `${BASE_URL}/used-cars/${match[1].toUpperCase()}`,
+      stockId,
+      url: `${BASE_URL}/used-cars/${stockId}`,
     };
   } catch {
     return null;
