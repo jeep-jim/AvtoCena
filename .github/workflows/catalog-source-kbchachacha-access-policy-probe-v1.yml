@@ -1,0 +1,58 @@
+name: Catalog source qualification · KB ChaChaCha access policy probe v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - chore/kbchachacha-route-field-audit-v1-20260904
+    paths:
+      - ".github/workflows/catalog-source-kbchachacha-access-policy-probe-v1.yml"
+      - "scripts/catalog-source-kbchachacha-access-policy-probe-v1.mjs"
+      - "tests/catalog-source-kbchachacha-access-policy-probe-v1.test.ts"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: kbchachacha-access-policy-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Test bounded policy extraction
+        run: node --import tsx --test tests/catalog-source-kbchachacha-access-policy-probe-v1.test.ts
+      - name: Run two-request read-only access policy probe
+        env:
+          CATALOG_SOURCE_KBCHACHACHA_TIMEOUT_MS: 15000
+          CATALOG_SOURCE_KBCHACHACHA_MAX_BODY_BYTES: 700000
+        run: node scripts/catalog-source-kbchachacha-access-policy-probe-v1.mjs
+      - name: Verify no-write and request-count envelope
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('catalog-source-kbchachacha-access-policy-probe-v1.json', 'utf8'));
+          for (const key of ['productionWrites','classificationMutations','publishAllowedMutations','objectStorageWrites','catalogGenerationWrites','rawBodiesStored']) {
+            if (p[key] !== false) throw new Error(`${key} must be false`);
+          }
+          if (!(p.requestCount >= 1 && p.requestCount <= 2)) throw new Error(`requestCount ${p.requestCount}`);
+          if (p.detailRequests !== 0) throw new Error(`detailRequests ${p.detailRequests}`);
+          if (p.paginationRequests !== 0) throw new Error(`paginationRequests ${p.paginationRequests}`);
+          if ((p.externalScriptRequests || 0) !== 0) throw new Error(`externalScriptRequests ${p.externalScriptRequests}`);
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-source-kbchachacha-access-policy-probe-v1
+          path: catalog-source-kbchachacha-access-policy-probe-v1.json
+          if-no-files-found: warn
+          retention-days: 7
