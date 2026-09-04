@@ -8,7 +8,12 @@ on:
     paths:
       - ".github/workflows/catalog-source-beforward-japan-qualification-v1.yml"
       - "scripts/catalog-source-beforward-japan-qualification-v1.mjs"
+      - "scripts/catalog-source-beforward-japan-classify-v1.mjs"
       - "tests/catalog-source-beforward-japan-qualification-v1.test.ts"
+      - "tests/catalog-source-beforward-japan-classify-v1.test.ts"
+      - "docs/catalog-source-beforward-japan-qualification-v1.md"
+      - "data/catalog/source-qualification-v1.json"
+      - "roadmap.md"
       - "scripts/catalog-source-access-probe-v1.mjs"
       - "scripts/catalog-source-field-audit-v1.mjs"
 
@@ -30,10 +35,26 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
-      - name: Verify BE FORWARD qualification contract
-        run: node --import tsx --test tests/catalog-source-beforward-japan-qualification-v1.test.ts
+      - name: Verify BE FORWARD qualification and classification contracts
+        run: |
+          node --import tsx --test tests/catalog-source-beforward-japan-qualification-v1.test.ts
+          node --import tsx --test tests/catalog-source-beforward-japan-classify-v1.test.ts
       - name: Type-check project
         run: npm run typecheck
+      - name: Verify durable BE FORWARD ledger and roadmap checkpoint
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const p=JSON.parse(fs.readFileSync('data/catalog/source-qualification-v1.json','utf8'));
+          const row=p.candidates.find(x=>x.sourceId==='beforward_japan_candidate');
+          if(!row) throw new Error('BE FORWARD missing');
+          if(row.class!=='lead_only') throw new Error(`class=${row.class}`);
+          if(row.publishAllowed!==false) throw new Error('publishAllowed must remain false');
+          const roadmap=fs.readFileSync('roadmap.md','utf8');
+          if((roadmap.match(/### 40\.30\. BE FORWARD Japan:/g)||[]).length!==1) throw new Error('40.30 missing/duplicated');
+          if(!roadmap.includes('33834993597') || !roadmap.includes('33835096407')) throw new Error('writer chronology missing');
+          if(roadmap.endsWith('\n\n')) throw new Error('extra blank line at EOF');
+          NODE
       - name: Qualify BE FORWARD Japan without production writes
         env:
           CATALOG_SOURCE_BEFORWARD_JAPAN_TIMEOUT_MS: "20000"
