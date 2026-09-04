@@ -39,6 +39,7 @@ jobs:
           const count=(roadmap.match(/### 40\.30\. BE FORWARD Japan:/g)||[]).length;
           if(count!==1) throw new Error(`40.30 count=${count}`);
           if(!roadmap.includes('33834734630')) throw new Error('detail run missing');
+          if(!roadmap.includes('33834993597') || !roadmap.includes('33835096407')) throw new Error('writer chronology missing');
           if(roadmap.endsWith('\n\n')) throw new Error('extra blank line at EOF');
           NODE
       - name: Commit durable ledger and roadmap checkpoint
@@ -51,5 +52,5 @@ jobs:
             echo "Checkpoint already persisted"
             exit 0
           fi
-          git commit -m "docs(catalog): record BE FORWARD lead-only qualification"
+          git commit -m "docs(catalog): record BE FORWARD writer chronology"
           git push origin HEAD:feat/beforward-japan-qualification-v1-20260904
