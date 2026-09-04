@@ -1,0 +1,52 @@
+name: Catalog source qualification · BE FORWARD Japan detail audit v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/beforward-japan-qualification-v1-20260904
+    paths:
+      - ".github/workflows/catalog-source-beforward-japan-detail-audit-v1.yml"
+      - "scripts/catalog-source-beforward-japan-detail-audit-v1.mjs"
+      - "scripts/catalog-source-access-probe-v1.mjs"
+permissions:
+  contents: read
+concurrency:
+  group: catalog-source-beforward-japan-detail-v1-${{ github.ref }}
+  cancel-in-progress: true
+jobs:
+  audit:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Smoke fixed sample contract
+        run: |
+          node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          import { SAMPLES, parseDetailEvidence } from './scripts/catalog-source-beforward-japan-detail-audit-v1.mjs';
+          assert.equal(SAMPLES.length, 4);
+          const e=parseDetailEvidence('Ref No. CE621935 Price $2,120 Mileage 81,267 km Year 2017/7 Engine 1,190cc Fuel Petrol Seats 5');
+          assert.equal(e.refNo,'CE621935'); assert.equal(e.priceUsd,2120); assert.equal(e.engineCc,1190); assert.equal(e.fuel,'Petrol');
+          NODE
+      - name: Audit four source-declared detail URLs read-only
+        env:
+          CATALOG_SOURCE_BEFORWARD_DETAIL_TIMEOUT_MS: "15000"
+        run: node scripts/catalog-source-beforward-japan-detail-audit-v1.mjs
+      - name: Verify no-write envelope
+        run: |
+          node - <<'NODE'
+          const p=require('./catalog-source-beforward-japan-detail-audit-v1.json');
+          for(const k of ['productionWrites','classificationMutations','publishAllowedMutations','objectStorageWrites','catalogGenerationWrites','rawBodiesStored','guessedRoutes']) if(p[k]!==false) throw new Error(k);
+          if(p.sourcePublishAllowed!==false) throw new Error('sourcePublishAllowed');
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-source-beforward-japan-detail-audit-v1
+          path: catalog-source-beforward-japan-detail-audit-v1.json
+          if-no-files-found: error
+          retention-days: 7
