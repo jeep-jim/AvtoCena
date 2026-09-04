@@ -1,0 +1,68 @@
+name: Catalog source qualification · CarSwitch classification checkpoint v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - chore/carswitch-field-gap-v1-20260904
+    paths:
+      - ".github/workflows/catalog-source-carswitch-classification-checkpoint-v1.yml"
+      - "scripts/catalog-source-carswitch-classification-checkpoint-v1.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalog-source-carswitch-classification-checkpoint-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checkpoint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Apply CarSwitch lead-only decision
+        run: node scripts/catalog-source-carswitch-classification-checkpoint-v1.mjs
+      - name: Normalize roadmap EOF
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p='roadmap.md';
+          fs.writeFileSync(p, `${fs.readFileSync(p,'utf8').replace(/\s*$/,'')}\n`);
+          NODE
+      - name: Verify classification safety and Japan pause
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const registry = JSON.parse(fs.readFileSync('data/catalog/source-qualification-v1.json','utf8'));
+          const ledger = JSON.parse(fs.readFileSync('data/catalog/source-partial-classification-v1.json','utf8'));
+          const roadmap = fs.readFileSync('roadmap.md','utf8');
+          const row = registry.candidates.find(x => x.sourceId === 'carswitch_uae_candidate');
+          const decision = ledger.decisions.find(x => x.sourceId === 'carswitch_uae_candidate');
+          if (!row || row.class !== 'lead_only' || row.publishAllowed !== false) throw new Error('CarSwitch registry decision invalid');
+          if (!decision || decision.class !== 'lead_only' || decision.publishAllowed !== false) throw new Error('CarSwitch ledger decision invalid');
+          const japan = registry.candidates.filter(x => x.market === 'japan');
+          if (!japan.length || japan.some(x => x.qualificationPaused !== true)) throw new Error('Japan pause guard missing');
+          if (!/MyAuto Georgia/i.test(registry.next || '')) throw new Error('next step missing');
+          if (!roadmap.includes('## 40.39 — CarSwitch UAE: listing contract is strong, but offer-bound power is absent')) throw new Error('roadmap 40.39 missing');
+          if (registry.candidates.some(x => x.publishAllowed === true)) throw new Error('unexpected publishAllowed=true');
+          if (registry.productionWrites !== false || ledger.productionWrites !== false || ledger.publishAllowedMutations !== false) throw new Error('safety flag changed');
+          NODE
+      - name: Check diff
+        run: |
+          git diff --check
+          git status --short
+      - name: Commit checkpoint
+        run: |
+          if git diff --quiet; then echo "Checkpoint already applied"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/catalog/source-qualification-v1.json data/catalog/source-partial-classification-v1.json roadmap.md
+          git commit -m "Classify CarSwitch lead-only on power gap"
+          git push origin HEAD:chore/carswitch-field-gap-v1-20260904
