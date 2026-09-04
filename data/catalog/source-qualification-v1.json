@@ -254,10 +254,12 @@
       "market": "japan",
       "sourceId": "sbtjapan_japan_candidate",
       "label": "SBT Japan",
-      "url": "https://www.sbtjapan.com/used-cars",
-      "class": "research_pending",
+      "url": "https://www.sbtjapan.com/used-cars/search",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "public fixed-price inventory exposes stock, body, year and price filters; exact detail fields and gallery identity still require probe"
+      "evidence": "Run 33838661415 (artifact 9924186893, digest sha256:deb5411bb3f8e8344c88cc3cf469a3e753dea0830f59ae1fc11ed9394ea650ce) proved 49 source-declared search candidates and 4/4 repeatably reachable sampled detail offers with exact identity/year/price/currency/mileage/engineCc/fuel/body parity. exactReady=0/4 because source-bound power is missing/ambiguous on 4/4; listing-bound gallery>=5 is proven on only 1/4, and the hybrid sample also lacks required certified power.",
+      "qualificationDecision": "docs/catalog-source-sbtjapan-japan-qualification-v2.md",
+      "useScope": "public lead/search evidence only; no automatic full calculation or publication until source-bound power/certified-power and listing-bound gallery pass the exact gate"
     },
     {
       "market": "japan",
@@ -332,5 +334,5 @@
       "evidence": "public Georgia inventory states that listings contain year, mileage, engine size, power, drive and price; detail and gallery identity still require probe"
     }
   ],
-  "next": "qualify sbtjapan_japan_candidate next under the same read-only source-bound contract; continue remaining research_pending candidates; no publishAllowed=true until explicit publication gate"
+  "next": "continue remaining research_pending source candidates under the same read-only source-bound contract; no publishAllowed=true until explicit publication gate"
 }
