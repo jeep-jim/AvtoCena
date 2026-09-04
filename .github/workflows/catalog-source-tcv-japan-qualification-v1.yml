@@ -1,0 +1,54 @@
+name: Catalog source qualification · TCV Japan v1
+
+on:
+  push:
+    branches:
+      - feat/tcv-japan-anatomy-v1-20260904
+    paths:
+      - .github/workflows/catalog-source-tcv-japan-qualification-v1.yml
+      - scripts/catalog-source-tcv-japan-qualification-v1.mjs
+      - tests/catalog-source-tcv-japan-qualification-v1.test.mjs
+
+permissions:
+  contents: read
+
+jobs:
+  qualify:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - name: Verify TCV Japan source-bound parser contract
+        run: node --test tests/catalog-source-tcv-japan-qualification-v1.test.mjs
+      - name: Qualify TCV Japan without production writes
+        env:
+          CATALOG_SOURCE_TCV_JAPAN_TIMEOUT_MS: '20000'
+          CATALOG_SOURCE_TCV_JAPAN_SAMPLE_COUNT: '4'
+        run: node scripts/catalog-source-tcv-japan-qualification-v1.mjs
+      - name: Verify fail-closed evidence envelope
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const row = JSON.parse(fs.readFileSync('catalog-source-tcv-japan-qualification-v1.json', 'utf8'));
+          for (const key of [
+            'productionWrites',
+            'classificationMutations',
+            'publishAllowedMutations',
+            'objectStorageWrites',
+            'catalogGenerationWrites',
+            'rawBodiesStored',
+            'guessedRoutes',
+            'sourcePublishAllowed',
+          ]) {
+            if (row[key] !== false) throw new Error(`${key} must be false`);
+          }
+          if (row.sourceId !== 'tcv_japan_candidate') throw new Error('unexpected sourceId');
+          if (!row.summary || typeof row.sourceVerdict !== 'string') throw new Error('qualification result missing');
+          NODE
+      - uses: actions/upload-artifact@v4
+        with:
+          name: catalog-source-tcv-japan-qualification-v1
+          path: catalog-source-tcv-japan-qualification-v1.json
+          if-no-files-found: error
+          retention-days: 7
