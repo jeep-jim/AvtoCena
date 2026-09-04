@@ -1731,3 +1731,18 @@ Production-результат ещё должен быть подтверждё�
 - Предыдущий field audit остаётся полезным только как историческая техническая evidence: offer-local identity/year/body/fuel и 15 listing-id-bound images были видны, но price binding, engine units и power оставались незакрыты.
 - Requalification — только через prior written authorization либо явно разрешённый API/feed; затем заново доказать price, engine units, power и list/detail parity.
 - Japan по-прежнему paused machine-readable; production/Object Storage/generation/manifest/cleanup не менялись.
+
+## 40.39 — CarSwitch UAE: listing contract is strong, but offer-bound power is absent
+
+Дата: 2026-09-04.
+
+- Japan не трогался: machine-readable pause остаётся на всех Japan candidates.
+- CarSwitch проверен не через догадки маршрутов, а через текущий `robots.txt` и объявленный им `/sitemap/detail_pages.xml`. В sitemap найдено 4770 detail URL; после одного stale 404 второй source-declared URL оказался живым.
+- Успешный live-detail run: `33865783957`, artifact `9933926874`, digest `sha256:43d5a97a9d9c905ecf5f014af56edd0c0708590897ce8f8d3917dafce402d6e3`. Образец: Peugeot 3008 ACTIVE 2024, listing `661285`, AED 64,900, 16,428 km.
+- Listing-bound JSON-LD на этом detail содержит: make/model/year, `bodyType=SUV`, `fuelType=Petrol`, `engineDisplacement=1.6`, `driveWheelConfiguration=2WD`, `vehicleTransmission=Automatic`, mileage, listing VIN-like identity, AED offer price и 10 изображений. В публичной карточке тот же двигатель подписан как 1.6L.
+- Чтобы не спутать общий SEO/editorial content с полями конкретной машины, выполнен отдельный same-offer scan: run `33866026252`, artifact `9934001368`, digest `sha256:c5fcf1aef30ef1774e2920fa0a99ce2387977d783dbc7ee6ad5de11dd5d82c09`.
+- Результат power scan: в listing-bound Car/Product JSON-LD нет поля мощности; в пяти контекстах примерно по 24 KB вокруг id `661285` — `0` power keys и `0` числовых HP/BHP/PS/kW; в visible detail — также `0` числовых power values. В полном captured HTML есть generic HP/BHP упоминания, но это статьи/новые модели и другие машины, не текущий offer, поэтому использовать их нельзя.
+- Предыдущий audit `33731051049` уже показывал ту же системную проблему: хорошие identity/price/body/fuel/gallery, но нет source-bound powerHp.
+- Решение: `carswitch_uae_candidate -> lead_only`, `publishAllowed=false`. CarSwitch нельзя использовать как самостоятельный exact source для полного расчёта, пока мощность не появится на том же offer/listing в разрешённом source-declared route. Model-page/external power inference запрещён.
+- Safety: production catalog, Object Storage, generation, manifest и cleanup не менялись.
+- Следующий non-Japan шаг: MyAuto Georgia — сначала access-policy, только потом detail/field probe.

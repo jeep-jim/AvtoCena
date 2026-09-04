@@ -17,7 +17,9 @@
     33856160338,
     33856330429,
     33856502011,
-    33856667630
+    33856667630,
+    33865783957,
+    33866026252
   ],
   "decisions": [
     {
@@ -221,6 +223,39 @@
         "fieldStatusBeforePolicyCheck": "previous read-only field audit proved offer-local make/model/year/body/fuel and 15 listing-id-bound images on sampled details; visible AED price was not yet bound to the offer object, engine displacement was unitless and powerHp missing"
       },
       "blockerBeforeAutomatedUse": "obtain prior written authorization or an explicitly permitted CARS24 API/feed covering AvtoCena automated commercial use; then requalify price binding, engine units and power on that permitted route"
+    },
+    {
+      "market": "uae",
+      "sourceId": "carswitch_uae_candidate",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "public reference/search support only; do not publish a fully calculated AvtoCena card from CarSwitch alone because exact source-bound offer power is not proven",
+      "evidence": {
+        "priorFieldAuditRun": 33731051049,
+        "liveDetailRecoveryRun": 33865783957,
+        "liveDetailRecoveryArtifact": 9933926874,
+        "liveDetailRecoveryDigest": "sha256:43d5a97a9d9c905ecf5f014af56edd0c0708590897ce8f8d3917dafce402d6e3",
+        "sameOfferPowerScanRun": 33866026252,
+        "sameOfferPowerScanArtifact": 9934001368,
+        "sameOfferPowerScanDigest": "sha256:c5fcf1aef30ef1774e2920fa0a99ce2387977d783dbc7ee6ad5de11dd5d82c09",
+        "routeProvenance": "live detail URL was selected only from the exact detail_pages.xml sitemap declared by current CarSwitch robots.txt; no guessed API/detail routes",
+        "sample": {
+          "sourceUrl": "https://carswitch.com/dubai/used-car/peugeot/3008/2024/661285",
+          "identity": "Peugeot 3008 ACTIVE 2024 listing 661285",
+          "priceCurrency": "AED 64,900",
+          "mileage": "16,428 km",
+          "bodyType": "SUV",
+          "fuel": "Petrol",
+          "engineDisplacement": "1.6 in listing-bound JSON-LD and 1.6L in the same public detail presentation",
+          "drive": "2WD",
+          "transmission": "Automatic",
+          "gallery": "10 listing-bound JSON-LD images",
+          "vinLikeIdentity": "BUYFROMCS00661285"
+        },
+        "powerGap": "the listing-bound Car/Product JSON-LD has no power field; five ~24 KB contexts around listing id 661285 each contain zero power keys and zero numeric HP/BHP/PS/kW values; visible listing detail also contains zero numeric power values. Generic power mentions elsewhere in the multi-megabyte page belong unrelated editorial/new-car content and are not offer-bound.",
+        "previousSamples": "earlier read-only audit also found source-bound price/body/fuel/gallery on sampled details but no source-bound powerHp"
+      },
+      "blockerBeforeExactCatalog": "prove exact power from the same offer/listing through a source-declared permitted CarSwitch route; do not infer power from generic model pages, editorial specs or external knowledge"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",

@@ -299,9 +299,11 @@
       "sourceId": "carswitch_uae_candidate",
       "label": "CarSwitch",
       "url": "https://carswitch.com/uae/used-cars/search",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "field audit run 33731051049: stable details on 2/2; identity/model/year/price AED/body/fuel and 10-image JSON-LD gallery proven; engine displacement is source-bound but unitless (1.5/5.7), and source-bound powerHp is missing"
+      "evidence": "Runs 33865783957 and 33866026252 prove a strong source-bound CarSwitch detail contract (identity/year/AED price/body/fuel/1.6L engine/drive/transmission/10 images), but the same offer has no source-bound power field; unrelated generic HP mentions elsewhere on the page cannot satisfy the exact-card contract.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#carswitch_uae_candidate",
+      "useScope": "public reference/search support only; do not publish a fully calculated AvtoCena card from CarSwitch alone because exact source-bound offer power is not proven"
     },
     {
       "market": "uae",
@@ -368,7 +370,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; do not automate CARS24 UAE without prior written authorization or an explicitly permitted data route",
+  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; next inspect MyAuto Georgia access policy before any new detail crawl; do not promote CarSwitch unless same-offer power becomes source-bound",
   "pausedMarkets": [
     "japan"
   ],
