@@ -176,7 +176,10 @@
       "url": "https://www.myauto.ge/",
       "class": "research_pending",
       "publishAllowed": false,
-      "evidence": "four-market strict baseline still running"
+      "evidence": "Permission-first probes 33866428112 and 33866663248: robots did not disallow the official rules routes, but /en/rules, /ka/rules and /ru/rules all returned 403 challenge pages to GitHub Actions. No positive automated commercial ingestion/reuse permission is proven, so inventory crawling remains blocked.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#myauto_georgia_list",
+      "useScope": "manual public reference only while automated access/reuse permission remains unproven; do not start inventory/detail crawling from the challenged public route",
+      "qualificationBlocker": "automation_access_and_reuse_permission_unproven_rules_routes_challenged"
     },
     {
       "market": "georgia",
@@ -370,7 +373,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; next inspect MyAuto Georgia access policy before any new detail crawl; do not promote CarSwitch unless same-offer power becomes source-bound",
+  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; next inspect AutoPapa Georgia access policy before any new detail crawl; do not retry MyAuto public automation until a permitted route is identified",
   "pausedMarkets": [
     "japan"
   ],

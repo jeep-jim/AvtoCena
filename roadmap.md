@@ -1746,3 +1746,16 @@ Production-результат ещё должен быть подтверждё�
 - Решение: `carswitch_uae_candidate -> lead_only`, `publishAllowed=false`. CarSwitch нельзя использовать как самостоятельный exact source для полного расчёта, пока мощность не появится на том же offer/listing в разрешённом source-declared route. Model-page/external power inference запрещён.
 - Safety: production catalog, Object Storage, generation, manifest и cleanup не менялись.
 - Следующий non-Japan шаг: MyAuto Georgia — сначала access-policy, только потом detail/field probe.
+
+## 40.40 — MyAuto Georgia: rules routes challenge automation; permission remains unproven
+
+Дата: 2026-09-04.
+
+- Japan не трогался и остаётся machine-readable paused.
+- По MyAuto Georgia сначала проверен только access-policy, без inventory/detail crawl.
+- Run `33866428112`: `robots.txt=200`; `/en/rules` robots не запрещён, но GitHub Actions получил `403` challenge. Artifact `9934139585`, digest `sha256:fd0c546bda1c42feff9c0fe537f20bb50d6ae1e38cbc5f43eb0e3994ed9e6040`. Ровно 2 запроса, detail/API/pagination = 0.
+- Чтобы не застревать на одной локали, bounded v2 проверил только два уже известные официальные rules routes: `/ka/rules` и `/ru/rules`. Run `33866663248` завершился success; оба маршрута robots-allowed, но оба дали `403 Just a moment...`. Artifact `9934222620`, digest `sha256:4c8c8755e0980e7648ace22195442b65ffd118e2083889eb47cd2971cacd6c80`. Ровно 3 запроса: robots + две rules pages; detail/API/pagination = 0.
+- Это не доказывает запрет MyAuto на данные и не доказывает разрешение. Точный вывод: текущий automation runner не может прочитать official rules без challenge, а positive permission на automated commercial ingestion/reuse не доказан.
+- Решение: `myauto_georgia_list` остаётся `research_pending`, `publishAllowed=false`, с blocker `automation_access_and_reuse_permission_unproven_rules_routes_challenged`. Новые MyAuto inventory/detail probes не запускать, пока не найден явно разрешённый API/partner feed/written authorization либо source-declared route, доступный без обхода challenge и разрешающий нужное использование.
+- Production catalog, Object Storage, generation, manifest и cleanup не менялись.
+- Следующий non-Japan source: AutoPapa Georgia, снова начиная с access-policy.

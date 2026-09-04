@@ -19,7 +19,9 @@
     33856502011,
     33856667630,
     33865783957,
-    33866026252
+    33866026252,
+    33866428112,
+    33866663248
   ],
   "decisions": [
     {
@@ -256,6 +258,26 @@
         "previousSamples": "earlier read-only audit also found source-bound price/body/fuel/gallery on sampled details but no source-bound powerHp"
       },
       "blockerBeforeExactCatalog": "prove exact power from the same offer/listing through a source-declared permitted CarSwitch route; do not infer power from generic model pages, editorial specs or external knowledge"
+    },
+    {
+      "market": "georgia",
+      "sourceId": "myauto_georgia_list",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "useScope": "manual public reference only while automated access/reuse permission remains unproven; do not start inventory/detail crawling from the challenged public route",
+      "evidence": {
+        "probeRunV1": 33866428112,
+        "probeArtifactV1": 9934139585,
+        "probeDigestV1": "sha256:fd0c546bda1c42feff9c0fe537f20bb50d6ae1e38cbc5f43eb0e3994ed9e6040",
+        "probeRunV2": 33866663248,
+        "probeArtifactV2": 9934222620,
+        "probeDigestV2": "sha256:4c8c8755e0980e7648ace22195442b65ffd118e2083889eb47cd2971cacd6c80",
+        "robots": "robots.txt returned 200 and did not explicitly disallow the tested rules routes for the qualification user agent",
+        "rulesRoutes": "official /en/rules, /ka/rules and /ru/rules routes all returned HTTP 403 challenge pages to the GitHub Actions qualification runner; alternate probes were bounded to rules only",
+        "requestBoundary": "v1 used exactly 2 requests; v2 used exactly 3 requests; zero detail, pagination or API requests; raw bodies not stored",
+        "permissionStatus": "no positive automated commercial ingestion/reuse permission has been proven from an accessible source-declared route"
+      },
+      "blockerBeforeAutomatedUse": "obtain an explicitly permitted API/partner feed/written authorization or a source-declared rules/data route that can be read without bypassing the challenge and clearly permits the intended automated commercial use; then requalify fields"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",
