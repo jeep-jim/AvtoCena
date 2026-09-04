@@ -94,13 +94,16 @@ function parseRobots(text) {
 }
 
 function pathAllowed(url, robots) {
-  const path = `${new URL(url).pathname}${new URL(url).search}`;
+  const parsed = new URL(url);
+  const path = `${parsed.pathname}${parsed.search}`;
   const matches = robots.rules
     .filter((rule) => {
-      const escaped = rule.value
+      const anchored = rule.value.endsWith('$');
+      const raw = anchored ? rule.value.slice(0, -1) : rule.value;
+      const escaped = raw
         .replace(/[.+?^${}()|[\]\\]/g, '\\$&')
         .replace(/\*/g, '.*');
-      try { return new RegExp(`^${escaped}`).test(path); } catch { return false; }
+      try { return new RegExp(`^${escaped}${anchored ? '$' : ''}`).test(path); } catch { return false; }
     })
     .sort((a, b) => b.value.length - a.value.length || (a.type === 'allow' ? -1 : 1));
   return !matches[0] || matches[0].type === 'allow';
@@ -110,6 +113,22 @@ function locs(xml) {
   return [...String(xml || '').matchAll(/<loc>\s*([^<]+?)\s*<\/loc>/gi)]
     .map((m) => m[1].replace(/&amp;/g, '&').trim())
     .filter(Boolean);
+}
+
+function isSameOriginAllowed(url, robots) {
+  try {
+    return new URL(url).origin === ORIGIN && pathAllowed(url, robots);
+  } catch {
+    return false;
+  }
+}
+
+function isXmlUrl(url) {
+  try {
+    return /\.xml(?:\.gz)?$/i.test(new URL(url).pathname);
+  } catch {
+    return false;
+  }
 }
 
 function clean(text) {
@@ -164,7 +183,7 @@ function boundedMatches(text, regex, limit = 8) {
 }
 
 const result = {
-  version: 1,
+  version: 2,
   generatedAt: new Date().toISOString(),
   sourceId: 'carswitch_uae_candidate',
   mode: 'permission_first_single_detail_field_gap_no_write',
@@ -206,6 +225,7 @@ try {
   const sitemapResp = await get(DETAIL_SITEMAP, 'application/xml,text/xml,*/*;q=0.5');
   result.requestCount += 1;
   result.sitemapRequests = 1;
+  const rootLocs = locs(sitemapResp.body);
   result.sitemap = {
     status: sitemapResp.status,
     finalUrl: sitemapResp.finalUrl,
@@ -213,20 +233,45 @@ try {
     capturedBytes: sitemapResp.capturedBytes,
     truncated: sitemapResp.truncated,
     hashSha256: sitemapResp.hashSha256,
+    rawLocCount: rootLocs.length,
+    firstRawLocs: rootLocs.slice(0, 20),
   };
   if (!sitemapResp.ok) throw new Error(`sitemap_http_${sitemapResp.status}`);
 
-  const urls = locs(sitemapResp.body)
-    .filter((url) => {
-      try {
-        const u = new URL(url);
-        return u.origin === ORIGIN && /\/uae\/used-cars\//i.test(u.pathname) && pathAllowed(url, robots);
-      } catch { return false; }
-    });
-  result.sitemap.candidateUrlCountInCapturedPrefix = urls.length;
-  result.sitemap.firstCandidateUrls = urls.slice(0, 3);
-  const detailUrl = urls[0];
-  if (!detailUrl) throw new Error('no_allowed_uae_detail_url_in_sitemap_prefix');
+  let detailCandidates = rootLocs.filter((url) => isSameOriginAllowed(url, robots) && !isXmlUrl(url));
+  let selectedFrom = 'robots_declared_detail_sitemap';
+
+  if (!detailCandidates.length) {
+    const childSitemaps = rootLocs.filter((url) => isSameOriginAllowed(url, robots) && isXmlUrl(url));
+    result.sitemap.childSitemapCandidates = childSitemaps.slice(0, 10);
+    if (childSitemaps.length) {
+      await sleep(delayMs);
+      const childUrl = childSitemaps[0];
+      const childResp = await get(childUrl, 'application/xml,text/xml,*/*;q=0.5');
+      result.requestCount += 1;
+      result.sitemapRequests += 1;
+      const childLocs = locs(childResp.body);
+      result.childSitemap = {
+        url: childUrl,
+        status: childResp.status,
+        finalUrl: childResp.finalUrl,
+        contentType: childResp.contentType,
+        capturedBytes: childResp.capturedBytes,
+        truncated: childResp.truncated,
+        hashSha256: childResp.hashSha256,
+        rawLocCount: childLocs.length,
+        firstRawLocs: childLocs.slice(0, 20),
+      };
+      if (!childResp.ok) throw new Error(`child_sitemap_http_${childResp.status}`);
+      detailCandidates = childLocs.filter((url) => isSameOriginAllowed(url, robots) && !isXmlUrl(url));
+      selectedFrom = 'source_declared_child_sitemap';
+    }
+  }
+
+  result.sitemap.detailCandidateCount = detailCandidates.length;
+  result.sitemap.firstDetailCandidates = detailCandidates.slice(0, 5);
+  const detailUrl = detailCandidates[0];
+  if (!detailUrl) throw new Error('no_allowed_detail_url_in_source_declared_sitemap');
 
   await sleep(delayMs);
   const detailResp = await get(detailUrl);
@@ -236,6 +281,7 @@ try {
   const jsonLd = findJsonLd(detailResp.body);
   const keys = [...flattenKeys(jsonLd)].sort();
   result.detail = {
+    selectedFrom,
     url: detailUrl,
     status: detailResp.status,
     finalUrl: detailResp.finalUrl,
@@ -256,6 +302,7 @@ try {
       drive: boundedMatches(visible, /\b(?:AWD|4WD|FWD|RWD|all[- ]wheel|front[- ]wheel|rear[- ]wheel)\b/gi),
     },
   };
+  if (!detailResp.ok) throw new Error(`detail_http_${detailResp.status}`);
   result.completed = true;
 } catch (error) {
   result.completed = false;
@@ -263,5 +310,5 @@ try {
 }
 
 await fs.writeFile(OUT, `${JSON.stringify(result, null, 2)}\n`);
-console.log(JSON.stringify({ output: OUT, completed: result.completed, requestCount: result.requestCount, detailUrl: result.detail?.url || null, error: result.error || null }, null, 2));
+console.log(JSON.stringify({ output: OUT, completed: result.completed, requestCount: result.requestCount, sitemapRequests: result.sitemapRequests, detailUrl: result.detail?.url || null, error: result.error || null }, null, 2));
 if (!result.completed) process.exitCode = 1;
