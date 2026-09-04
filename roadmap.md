@@ -1773,3 +1773,16 @@ Production-результат ещё должен быть подтверждё�
 - Решение: `autopapa_georgia_open` остаётся `research_pending`, `publishAllowed=false`, blocker `automation_entry_challenged_403_and_permission_unproven`. Не обходить challenge и не запускать detail crawl до явно разрешённого API/partner feed/written authorization либо source-declared accessible route с подходящими условиями.
 - Production catalog, Object Storage, generation, manifest и cleanup не менялись.
 - Следующий non-Japan source: Encar Korea — сначала access-policy.
+
+## 40.42 — Encar Korea: official data-partnership path exists; public automation permission is not proven
+
+Дата: 2026-09-04.
+
+- Japan не трогался и остаётся machine-readable paused.
+- Encar проверен строго до listing/detail crawl. Run `33867243950` — success, artifact `9934443189`, digest `sha256:b33301b1a78bd2059b5221afa4228f880ce52ba27250ebb06e29be7baa30a628`.
+- Ровно 3 запроса: `fem.encar.com/robots.txt`, официальный `/policy/terms`, официальный `/company/contact-us`. Listing/detail/pagination/API = 0, raw bodies не сохранялись.
+- `robots.txt` вернул 200 и разрешил оба проверяемых official pages. Terms page тоже 200, но статический HTML — в основном shell (видимый текст всего 212 символов), поэтому из него нельзя честно вывести разрешение или запрет automated commercial reuse. Отсутствие запрета в этом shell не считается разрешением.
+- Ключевой результат — официальный Encar Contact Us прямо содержит `시세 / 데이터 제휴`: партнёрство по ценам/данным для сервиса цен на б/у авто и различных transaction-data services; указан отдельный контакт `price@encar.com`. Это реальный permitted-route candidate, а не догадка.
+- Решение: `encar_direct` остаётся `research_pending`, `publishAllowed=false`. Public scraping не начинать; правильный путь — официальный data-partnership/API/feed agreement. После получения доступа повторно квалифицировать exact offer identity, price, body, fuel, engineCc, powerHp, mileage, gallery и list/detail parity через разрешённый канал.
+- Production catalog, Object Storage, generation, manifest и cleanup не менялись.
+- Следующий non-Japan source: K Car Korea access-policy.

@@ -25,7 +25,11 @@
       "url": "https://www.encar.com/",
       "class": "research_pending",
       "publishAllowed": false,
-      "evidence": "four-market strict baseline still running"
+      "evidence": "Run 33867243950 proved an official Encar price/data partnership route (시세 / 데이터 제휴; price@encar.com) while the public terms shell did not prove automated commercial reuse permission. Public crawling remains blocked; official partnership/feed is the preferred permitted path.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#encar_direct",
+      "useScope": "do not automate public inventory crawling until permission is explicit; prioritize Encar official price/data partnership route for a permitted feed/API contract",
+      "permittedRouteCandidate": "official_price_data_partnership_price@encar.com",
+      "qualificationBlocker": "public_automation_permission_unproven_use_official_data_partnership_route"
     },
     {
       "market": "korea",
@@ -376,7 +380,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; next inspect Encar Korea access policy before any new detail crawl; do not retry AutoPapa public automation until a permitted route is identified",
+  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; next inspect K Car Korea access policy; for Encar prefer official price/data partnership rather than public crawling",
   "pausedMarkets": [
     "japan"
   ],

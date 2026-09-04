@@ -22,7 +22,8 @@
     33866026252,
     33866428112,
     33866663248,
-    33866935666
+    33866935666,
+    33867243950
   ],
   "decisions": [
     {
@@ -296,6 +297,29 @@
         "permissionStatus": "no readable source-declared policy route and no positive permission for automated commercial ingestion/reuse were proven before the challenge boundary"
       },
       "blockerBeforeAutomatedUse": "identify an explicitly permitted API/partner feed/written authorization or a source-declared public route that is accessible without bypassing the challenge and clearly permits the intended automated commercial use; then requalify fields"
+    },
+    {
+      "market": "korea",
+      "sourceId": "encar_direct",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "useScope": "do not automate public inventory crawling until permission is explicit; prioritize Encar official price/data partnership route for a permitted feed/API contract",
+      "evidence": {
+        "probeRun": 33867243950,
+        "artifactId": 9934443189,
+        "artifactDigest": "sha256:b33301b1a78bd2059b5221afa4228f880ce52ba27250ebb06e29be7baa30a628",
+        "robots": "https://fem.encar.com/robots.txt returned 200 and allowed /policy/terms plus /company/contact-us for the qualification user agent",
+        "terms": "official terms page returned 200 but the static HTML visible shell contained only 212 characters and did not expose enough terms text to prove or disprove automated commercial reuse permission",
+        "partnership": "official Encar Contact Us page returned 200 and explicitly advertises 시세 / 데이터 제휴 (price/data partnership) for used-car price and transaction-data services, with price@encar.com and a dedicated contact number",
+        "boundary": "exactly 3 requests: fem robots, official terms, official company contact; zero listing/detail/pagination/API requests; raw bodies not stored"
+      },
+      "permittedRouteCandidate": {
+        "type": "official_data_partnership",
+        "label": "시세 / 데이터 제휴",
+        "email": "price@encar.com",
+        "scopeText": "중고차 시세 및 각종 거래데이터 서비스 제휴"
+      },
+      "blockerBeforeAutomatedUse": "obtain an Encar data-partnership/API/feed agreement that explicitly covers AvtoCena automated commercial use, then requalify exact offer fields through that permitted route instead of public scraping"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",
