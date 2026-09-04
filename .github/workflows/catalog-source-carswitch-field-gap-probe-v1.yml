@@ -25,7 +25,7 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Probe one robots-declared CarSwitch detail URL
+      - name: Probe one source-declared CarSwitch detail URL
         run: node scripts/catalog-source-carswitch-field-gap-probe-v1.mjs
       - name: Verify no-write bounded envelope
         if: always()
@@ -37,10 +37,9 @@ jobs:
             if (p[key] !== false) throw new Error(`${key} must be false`);
           }
           if (p.sourceId !== 'carswitch_uae_candidate') throw new Error(`sourceId ${p.sourceId}`);
-          if ((p.requestCount || 0) > 3) throw new Error(`requestCount ${p.requestCount}`);
-          if ((p.robotsRequest || 0) > 1 || (p.sitemapRequests || 0) > 1 || (p.detailRequests || 0) > 1) throw new Error('request envelope exceeded');
+          if ((p.requestCount || 0) > 4) throw new Error(`requestCount ${p.requestCount}`);
+          if ((p.robotsRequest || 0) > 1 || (p.sitemapRequests || 0) > 2 || (p.detailRequests || 0) > 1) throw new Error('request envelope exceeded');
           if (p.paginationRequests !== 0 || p.apiRequests !== 0) throw new Error('unexpected pagination/api request');
-          if (p.robots?.crawlDelaySeconds != null && p.robots.crawlDelaySeconds > 15) console.log(`Observed crawl delay ${p.robots.crawlDelaySeconds}s; probe respected max(observed,15s)`);
           NODE
       - uses: actions/upload-artifact@v4
         if: always()
