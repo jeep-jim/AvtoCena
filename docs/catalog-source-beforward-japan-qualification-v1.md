@@ -78,6 +78,16 @@ Digest: `sha256:b50578ec98544fabe17f10539b11a67e9ee54b20bea34ae0ddc3991a234d4bfe
 
 Этот workflow прошёл `npm ci`, BE FORWARD regression contract, project typecheck, no-write qualification и no-write envelope. Его generic stocklist discovery также не доказал detail inventory из-за HTTP `202` shell; поэтому green CI не повышает источник до `exact_catalog`.
 
+## Checkpoint writer failure
+
+Первый durable-writer run `33834993597`, head `49bd380a73b832631079536b340a20f6307db051`, job `persist`, дошёл до шага `Commit durable ledger and roadmap checkpoint` и упал на `git diff --cached --check`: `roadmap.md:1564: new blank line at EOF`.
+
+Причина — генератор `40.30` добавлял лишний newline поверх уже завершённого newline в checkpoint text. Source probes, классификация и mutation-boundary проверки в этом run были `success`; push не выполнялся.
+
+Исправление: `appendRoadmapCheckpoint` теперь оставляет ровно один EOF newline; regression-test явно запрещает `\n\n` на EOF. Исправляющие коммиты: `489dc1c55da08db48b08019f420de456ef90c5c2` и `97b12e90bc28e98202361a88124cf86ff7ab7203`.
+
+Retry run `33835096407`, head `15b2844a4ab6d2e1638a2a56662acfe660989db1` — `success`; generated ledger + roadmap checkpoint закоммичены bot-коммитом `7ebc5a280252f1941e580f13d154bdf60e634ff3`.
+
 ## Классификационное решение
 
 `lead_only` — потому что источник публично и offer-bound показывает полезный list-side stock contract, но полный exact-card contract через разрешённый server-side маршрут не доказан.
