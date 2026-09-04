@@ -19,7 +19,7 @@ const HEADERS = {
   'user-agent': USER_AGENT,
 };
 
-const CHALLENGE_RE = /captcha|verify (?:that )?you are human|access denied|request blocked|robot check|cf-chl|challenge-platform|turnstile/i;
+const CHALLENGE_RE = /verify (?:that )?you are human|checking your browser before accessing|complete (?:the )?(?:security verification|challenge) to continue|access denied(?:\s*[|:-]|$)|request blocked(?:\s*[|:-]|$)|cf-chl-/i;
 const COMMERCIAL_RE = /\b(?:TRUCK|BUS|DUMP|CRANE|TRACTOR|FORKLIFT|EXCAVATOR)\b/i;
 const PASSENGER_BODY_RE = /\b(?:sedan|saloon|hatchback|suv|crossover|wagon|estate|coupe|convertible|cabriolet|minivan|mpv|van|pickup)\b/i;
 
