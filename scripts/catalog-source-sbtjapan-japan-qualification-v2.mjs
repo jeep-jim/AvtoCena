@@ -42,6 +42,15 @@ function cleanVisible(html, limit = 100000) {
     .slice(0, limit);
 }
 
+function exactFuelLabel(value) {
+  const text = cleanVisible(value, 120000);
+  const labeled = text.match(/\bFuel\s*:?\s*(HYBRID\s*\([^)]*\)|PETROL|GASOLINE|DIESEL|ELECTRIC|LPG|CNG|HYBRID)(?=\s|<|$)/i)?.[1];
+  const composite = text.match(/\b(HYBRID\s*\([^)]*\))/i)?.[1];
+  const simple = text.match(/\b(PETROL|GASOLINE|DIESEL|ELECTRIC|LPG|CNG|HYBRID)\b/i)?.[1];
+  const fuel = labeled || composite || simple || null;
+  return fuel ? fuel.replace(/\s+/g, '').replace(/^GASOLINE$/i, 'GASOLINE').toUpperCase() : null;
+}
+
 function uniqueByStock(rows, limit = 50) {
   const out = [];
   const seen = new Set();
@@ -74,7 +83,8 @@ export function extractSbtCardCandidates(html, limit = 50) {
     if (!identity) continue;
     const cardText = cleanVisible(match[2], 16000);
     if (!/\bVehicle Price\b/i.test(cardText) || !/\bStock\s+Id\b/i.test(cardText)) continue;
-    const list = parseSbtListContext(cardText);
+    const parsedList = parseSbtListContext(cardText);
+    const list = { ...parsedList, fuel: exactFuelLabel(cardText) || parsedList.fuel };
     if (!list.stockId || list.stockId.toUpperCase() !== identity.stockId) continue;
     if (!list.yearMonth || !Number.isFinite(list.priceUsd) || !list.currency) continue;
     rows.push({ ...identity, list });
@@ -222,7 +232,8 @@ async function run() {
     for (let i = 0; i < 2; i += 1) {
       try {
         const result = await fetchTimed(candidate.url);
-        const parsed = result.ok && !result.challenge ? parseSbtDetail(result.body, candidate.url) : null;
+        const baseParsed = result.ok && !result.challenge ? parseSbtDetail(result.body, candidate.url) : null;
+        const parsed = baseParsed ? { ...baseParsed, fuel: exactFuelLabel(result.body) || baseParsed.fuel } : null;
         attempts.push(publicAttempt(result, parsed));
       } catch (error) {
         attempts.push({ ok: false, challenge: false, error: String(error?.message || error), parsed: null });
