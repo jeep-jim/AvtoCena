@@ -25,6 +25,8 @@ export const checkpoint40_30 = `
 - **Следующий безопасный шаг:** не лечить BE FORWARD обходом защиты. Перейти к \`sbtjapan_japan_candidate\` и проверить его fixed-price inventory/detail тем же read-only contract. К BE FORWARD возвращаться только при разрешённом public/partner detail route.
 `;
 
+export const checkpointWriterFailureNote = '- **Checkpoint-writer:** run `33834993597`, head `49bd380a73b832631079536b340a20f6307db051`, job `persist`, step `Commit durable ledger and roadmap checkpoint` упал на `git diff --cached --check`: `roadmap.md:1564: new blank line at EOF`. Причина — лишний EOF newline в генераторе, а не source/test failure. Исправление `489dc1c55da08db48b08019f420de456ef90c5c2` + regression `97b12e90bc28e98202361a88124cf86ff7ab7203`; retry `33835096407` — `success`, durable commit `7ebc5a280252f1941e580f13d154bdf60e634ff3`.';
+
 export function classifyRegistry(registry) {
   if (!registry || !Array.isArray(registry.candidates)) throw new Error('invalid source qualification registry');
   const candidate = registry.candidates.find((row) => row?.sourceId === SOURCE_ID);
@@ -44,9 +46,15 @@ export function classifyRegistry(registry) {
 
 export function appendRoadmapCheckpoint(roadmap) {
   const source = String(roadmap || '');
-  if (source.includes('### 40.30. BE FORWARD Japan:')) return source;
   if (!source.includes('### 40.29.')) throw new Error('roadmap 40.29 prerequisite missing');
-  return `${source.replace(/\s*$/, '')}\n\n${checkpoint40_30.trim()}\n`;
+  let next = source;
+  if (!next.includes('### 40.30. BE FORWARD Japan:')) {
+    next = `${next.replace(/\s*$/, '')}\n\n${checkpoint40_30.trim()}\n`;
+  }
+  if (!next.includes('33834993597')) {
+    next = `${next.replace(/\s*$/, '')}\n${checkpointWriterFailureNote}\n`;
+  }
+  return next;
 }
 
 export async function applyClassification() {
