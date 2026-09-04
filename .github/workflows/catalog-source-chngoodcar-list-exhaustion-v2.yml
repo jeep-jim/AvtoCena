@@ -10,6 +10,7 @@ on:
       - "scripts/catalog-source-chngoodcar-list-exhaustion-v2.ts"
       - "tests/catalog-source-chngoodcar-price-review-v1.test.ts"
       - "tests/catalog-source-chngoodcar-identity-normalization-v1.test.ts"
+      - "tests/catalog-source-chngoodcar-reference-conflicts-v1.test.ts"
       - "apps/web/lib/catalog/chngoodcar-price-review.ts"
       - "apps/web/lib/catalog/chngoodcar-reviewed-exact-source.ts"
       - "apps/web/lib/catalog/chngoodcar-carslist.ts"
