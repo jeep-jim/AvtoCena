@@ -1612,3 +1612,22 @@ Production-результат ещё должен быть подтверждё�
 ### Следующее действие после 40.32
 
 Продолжить следующий non-Japan `research_pending` source в том же порядке: сначала официальные access/reuse terms; только если они не блокируют автоматизацию — bounded no-write technical field qualification.
+
+## 40.33 — mobile.de Europe: public scraping blocked; official partner Search-API is the permitted path
+
+Дата: 2026-09-04.
+
+Ветка: `chore/mobilede-access-policy-v1-20260904`.
+
+- Source-permission-first проверка выполнена до нового technical crawl.
+- Current Professional Domain GTC mobile.de (valid from 01.04.2026), Article 11: vehicle search должен идти через предоставленные search screens; unauthorized search tools, extraction/reuse, data mining, robots, grabbing, scraping и аналогичные технологии запрещены.
+- Public-domain GTC содержит тот же core restriction для public marketplace.
+- Поэтому `mobile_de_open -> lead_only`, `publishAllowed=false`; public-page crawler/list/detail qualification не запускать.
+- Важный положительный сигнал: mobile.de публикует официальные Search-API GTC. Это не public permission: Search-API предназначен для API PARTNER и работает в рамках API Partner Agreement/Partner Application.
+- Значит правильный следующий путь для mobile.de — официальный partner/API agreement, а не scraping. После получения разрешённого API scope можно заново делать exact field qualification именно на API.
+- После чтения terms automated mobile.de inventory requests не запускались; production/Object Storage/catalog writes отсутствуют.
+- Japan остаётся на паузе.
+
+### Следующее действие после 40.33
+
+Продолжить следующий non-Japan `research_pending` source: сначала official access/reuse terms, затем bounded no-write technical qualification только если terms допускают автоматизацию.

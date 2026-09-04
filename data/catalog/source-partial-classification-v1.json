@@ -126,6 +126,24 @@
         "probeBoundary": "source-permission-first stop: no AutoScout24 list/detail/API automated inventory probe was started after reading the official terms"
       },
       "blockerBeforeAutomatedUse": "obtain an official API/data feed, partner/dealer agreement or written AutoScout24 authorization explicitly permitting automated querying plus AvtoCena commercial database use/republication; then requalify technically from that permitted route"
+    },
+    {
+      "market": "europe",
+      "sourceId": "mobile_de_open",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference/link-out only; no public-page automated extraction/reuse; requalify only through an official mobile.de Search-API/partner agreement or written permission that explicitly covers AvtoCena use",
+      "evidence": {
+        "termsIndex": "https://www.mobile.de/en/service/agbIndex/",
+        "professionalGtc": "https://www.mobile.de/en/service/agbProfessional",
+        "professionalGtcEffective": "01.04.2026",
+        "scrapingRestriction": "Article 11 restricts vehicle search to the provided search screens and prohibits unauthorized search tools, extraction/reuse, data mining, robots, grabbing, scraping and similar collection/extraction technologies.",
+        "publicDomainRestriction": "mobile.de public-domain GTC publishes the same core search-mask and scraping/extraction restriction.",
+        "officialSearchApiTerms": "https://www.mobile.de/service/pdfs/agb_search_api_2016_en.pdf",
+        "officialApiMeaning": "Search-API access is for an API PARTNER under an API Partner Agreement and within the agreed Partner Application/scope.",
+        "probeBoundary": "source-permission-first stop: no mobile.de inventory list/detail/API scraping probe started after reading the official terms"
+      },
+      "blockerBeforeAutomatedUse": "obtain an official mobile.de Search-API/partner agreement or written permission explicitly covering AvtoCena automated commercial use, storage/retention and republication, then requalify technically only through that permitted route"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs."

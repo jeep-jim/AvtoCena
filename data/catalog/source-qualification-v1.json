@@ -142,9 +142,11 @@
       "sourceId": "mobile_de_open",
       "label": "mobile.de",
       "url": "https://www.mobile.de/",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "baseline exposed Limousine-to-sedan false positive; fixed locally and awaiting rerun"
+      "evidence": "Current official mobile.de GTC prohibit unauthorized automated search tools, extraction/reuse, data mining, robots, grabbing and scraping on the public marketplace; official Search-API access exists only for API partners under an API Partner Agreement.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#mobile_de_open",
+      "useScope": "manual public reference/link-out only; no public-page automated extraction/reuse; requalify only through an official mobile.de Search-API/partner agreement or written permission that explicitly covers AvtoCena use"
     },
     {
       "market": "europe",
@@ -336,5 +338,5 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification source-permission-first; Japan remains paused; do not automate AutoScout24 without an explicitly permitted route"
+  "next": "continue non-Japan research_pending qualification source-permission-first; Japan remains paused; mobile.de requires official partner/API permission before technical requalification"
 }
