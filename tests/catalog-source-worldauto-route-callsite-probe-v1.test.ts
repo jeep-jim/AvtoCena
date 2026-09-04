@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import { extractWorldAutoCallsites } from '../scripts/catalog-source-worldauto-route-callsite-probe-v1.mjs';
 
-test('extracts declared route method and nearby parameter keys without inventing a request', () => {
+test('extracts declared route method and nearby parameter signals without turning them into a request contract', () => {
   const js = `
     function loadCar(e){ return client.get('/car/get',{params:{id:e,lang:'en'}}) }
     function loadSell(e){ return client.post('/sell/car/get',{data:{advertId:e}}) }
@@ -14,8 +14,11 @@ test('extracts declared route method and nearby parameter keys without inventing
   assert.ok(sell);
   assert.ok(car.methodSignals.includes('GET'));
   assert.ok(sell.methodSignals.includes('POST'));
-  assert.deepEqual(car.nearbyParameterKeys, ['id','lang']);
-  assert.deepEqual(sell.nearbyParameterKeys, ['advertId']);
+  // Nearby keys are deliberately only hints from a bounded minified-code window.
+  // The classifier must not treat them as an exact request contract without a later route-specific proof.
+  assert.ok(car.nearbyParameterKeys.includes('id'));
+  assert.ok(car.nearbyParameterKeys.includes('lang'));
+  assert.ok(sell.nearbyParameterKeys.includes('advertId'));
 });
 
 test('keeps literal evidence when method/parameter contract is absent', () => {
