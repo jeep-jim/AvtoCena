@@ -195,5 +195,18 @@
       "blockerBeforeAutomatedUse": "obtain an official YallaMotor API/feed/partner agreement or written authorization explicitly permitting AvtoCena automated collection, retention and republication, then requalify technically only through that permitted route"
     }
   ],
-  "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs."
+  "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",
+  "pausedMarkets": [
+    "japan"
+  ],
+  "marketControls": {
+    "japan": {
+      "status": "paused_by_owner",
+      "since": "2026-09-04",
+      "automatedQualificationAllowed": false,
+      "productionPublicationAllowedByThisResearchTrack": false,
+      "resumeCondition": "only after an owner-approved candidate proves completed/played auction lots under the exact data contract, followed by explicit owner instruction to resume Japan qualification",
+      "note": "Fixed-price/export-stock candidates do not satisfy the completed-auction-lot requirement."
+    }
+  }
 }

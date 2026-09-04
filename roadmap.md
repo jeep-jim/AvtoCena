@@ -1685,3 +1685,23 @@ Production-результат ещё должен быть подтверждё�
 ### Следующее действие после 40.36
 
 Продолжить следующий non-Japan `research_pending` source с official access/reuse check до технических запросов.
+
+## 40.37 — Japan qualification pause is machine-readable and must be honored by every new source probe
+
+Дата: 2026-09-04.
+
+Чтобы пауза Японии больше не зависела только от текста/контекста чата, она закреплена в qualification registry и decision ledger:
+
+- `pausedMarkets` содержит `japan`;
+- `marketControls.japan.status = paused_by_owner`;
+- `automatedQualificationAllowed=false`;
+- каждая Japan candidate row помечена `qualificationPaused=true`;
+- новые source-qualification probes обязаны исключать рынки из `pausedMarkets`;
+- resume condition: сначала найден и доказан кандидат с **completed/played auction lots** под exact contract, затем отдельное явное указание владельца возобновить Japan qualification;
+- fixed-price/export-stock источники не считаются выполнением этого условия.
+
+Это не меняет production catalog и не запускает/останавливает production parser само по себе; это guard именно текущего research/qualification трека.
+
+### Следующее действие после 40.37
+
+Продолжать только non-Japan source qualification.

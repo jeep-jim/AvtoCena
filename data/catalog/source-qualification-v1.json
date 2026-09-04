@@ -79,7 +79,9 @@
       "url": "https://jpauc.com/auction/past",
       "class": "research_pending",
       "publishAllowed": false,
-      "evidence": "guest rows expose identity/gallery but not a proven positive final price"
+      "evidence": "guest rows expose identity/gallery but not a proven positive final price",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
     },
     {
       "market": "japan",
@@ -90,7 +92,9 @@
       "publishAllowed": false,
       "evidence": "The audited public sample is a Statistics page for Hitachi EX55UR-3 heavy machinery, exposes incomplete offer fields and <=2 image identities, and fails the standalone exact-card contract.",
       "qualificationDecision": "data/catalog/source-partial-classification-v1.json#carvector_japan_stat_open",
-      "useScope": "auction-history/reference support only; never a standalone public catalog card under the current route"
+      "useScope": "auction-history/reference support only; never a standalone public catalog card under the current route",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
     },
     {
       "market": "japan",
@@ -99,7 +103,9 @@
       "url": "https://prestigemotorsport.com.au/auctions/",
       "class": "research_pending",
       "publishAllowed": false,
-      "evidence": "current detail route is robots-disallowed and the public flow is challenge-protected"
+      "evidence": "current detail route is robots-disallowed and the public flow is challenge-protected",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
     },
     {
       "market": "japan",
@@ -108,7 +114,9 @@
       "url": "https://www.auctiondatasearch.jp/",
       "class": "research_pending",
       "publishAllowed": false,
-      "evidence": "current search/statistics routes redirect to login"
+      "evidence": "current search/statistics routes redirect to login",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
     },
     {
       "market": "japan",
@@ -117,7 +125,9 @@
       "url": "https://jp.center/",
       "class": "research_pending",
       "publishAllowed": false,
-      "evidence": "guest loader lacks identity-bound final price and complete photo access"
+      "evidence": "guest loader lacks identity-bound final price and complete photo access",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
     },
     {
       "market": "uae",
@@ -233,7 +243,9 @@
       "url": "https://www.beforward.jp/",
       "class": "research_pending",
       "publishAllowed": false,
-      "evidence": "public fixed-price export stock advertises multiple photos; exact specification completeness and stable detail access still require probe"
+      "evidence": "public fixed-price export stock advertises multiple photos; exact specification completeness and stable detail access still require probe",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
     },
     {
       "market": "japan",
@@ -243,7 +255,9 @@
       "class": "rejected",
       "publishAllowed": false,
       "evidence": "The known vehicle-like public URL repeatedly returns a generic Auto Auctions shell with no bound vehicle fields or listing gallery; no usable exact or lead identity is proven on this route.",
-      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#exportcar_japan_candidate"
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#exportcar_japan_candidate",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
     },
     {
       "market": "japan",
@@ -252,7 +266,9 @@
       "url": "https://japaneseusedcars.com/estimates-data/",
       "class": "research_pending",
       "publishAllowed": false,
-      "evidence": "public site exposes auctions, fixed-price cars, price data and car specs sections; vehicle-level access still requires probe"
+      "evidence": "public site exposes auctions, fixed-price cars, price data and car specs sections; vehicle-level access still requires probe",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
     },
     {
       "market": "japan",
@@ -261,7 +277,9 @@
       "url": "https://www.sbtjapan.com/used-cars",
       "class": "research_pending",
       "publishAllowed": false,
-      "evidence": "public fixed-price inventory exposes stock, body, year and price filters; exact detail fields and gallery identity still require probe"
+      "evidence": "public fixed-price inventory exposes stock, body, year and price filters; exact detail fields and gallery identity still require probe",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
     },
     {
       "market": "japan",
@@ -270,7 +288,9 @@
       "url": "https://www.tc-v.com/allmakeslist/",
       "class": "research_pending",
       "publishAllowed": false,
-      "evidence": "public Japanese used-car marketplace exists; source-bound price/specification/gallery completeness still requires probe"
+      "evidence": "public Japanese used-car marketplace exists; source-bound price/specification/gallery completeness still requires probe",
+      "qualificationPaused": true,
+      "qualificationPauseReason": "owner_direction_2026-09-04_completed_auction_source_not_yet_proven"
     },
     {
       "market": "uae",
@@ -344,5 +364,18 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification source-permission-first; Japan remains paused; do not automate YallaMotor without an explicitly permitted API/feed/agreement"
+  "next": "continue non-Japan research_pending qualification source-permission-first; Japan is machine-paused and must be skipped by new qualification probes until the owner explicitly resumes it after a completed/played-auction exact-contract candidate is proven",
+  "pausedMarkets": [
+    "japan"
+  ],
+  "marketControls": {
+    "japan": {
+      "status": "paused_by_owner",
+      "since": "2026-09-04",
+      "automatedQualificationAllowed": false,
+      "productionPublicationAllowedByThisResearchTrack": false,
+      "resumeCondition": "only after an owner-approved candidate proves completed/played auction lots under the exact data contract, followed by explicit owner instruction to resume Japan qualification",
+      "note": "Fixed-price/export-stock candidates do not satisfy the completed-auction-lot requirement."
+    }
+  }
 }
