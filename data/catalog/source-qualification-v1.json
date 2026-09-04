@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-03",
+  "updatedAt": "2026-09-04",
   "mode": "six_market_source_discovery_no_write",
   "productionWrites": false,
   "markets": [
@@ -225,9 +225,11 @@
       "sourceId": "beforward_japan_candidate",
       "label": "BE FORWARD",
       "url": "https://www.beforward.jp/",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "public fixed-price export stock advertises multiple photos; exact specification completeness and stable detail access still require probe"
+      "evidence": "Public BE FORWARD stocklist exposes source-bound Ref No., USD price, year/month, mileage, exact engine cc, fuel, transmission and Japan location, but four source-declared detail URLs returned an HTTP 202 JavaScript robot-verification shell twice on the GitHub runner. Body, power, listing-bound gallery and repeatable detail parity cannot be proven through the permitted read-only route; the challenge was not bypassed.",
+      "qualificationDecision": "docs/catalog-source-beforward-japan-qualification-v1.md",
+      "useScope": "public lead/search evidence only; no automatic full calculation or publication under the current detail-access route"
     },
     {
       "market": "japan",
@@ -330,5 +332,5 @@
       "evidence": "public Georgia inventory states that listings contain year, mileage, engine size, power, drive and price; detail and gallery identity still require probe"
     }
   ],
-  "next": "build and no-write test a dedicated adapter for chngoodcar_china_candidate; continue source qualification on the remaining research_pending candidates; no publishAllowed=true until explicit publication gate"
+  "next": "qualify sbtjapan_japan_candidate next under the same read-only source-bound contract; continue remaining research_pending candidates; no publishAllowed=true until explicit publication gate"
 }
