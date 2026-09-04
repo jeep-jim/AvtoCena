@@ -1718,3 +1718,16 @@ Production-результат ещё должен быть подтверждё�
 - Requalification возможна только после письменного разрешения либо official API/partner feed, который явно покрывает automated commercial ingestion/republication; после этого отдельно доказать canonical body, gallery>=5 и list/detail parity.
 - Japan остаётся на паузе; все Japan candidates имеют `qualificationPaused=true`.
 - Safety: production catalog, Object Storage, generation, manifest и cleanup не менялись.
+
+## 40.38 — CARS24 UAE: current Terms explicitly block scraping and commercial reuse
+
+Дата: 2026-09-04.
+
+- После Bobaedream продолжена только non-Japan permission-first qualification.
+- По CARS24 UAE новый crawl не запускался: сначала проверены актуальные официальные Terms of Use, обновлённые 21.05.2026.
+- Terms прямо запрещают без prior written authorization копировать, воспроизводить, распространять, mirror/scrape/exploit/republish/license/commercially use vehicle listings, pricing data и другой Website content; также отдельно запрещены bots/crawlers/spiders/scrapers/automated tools без authorization.
+- Поэтому public-site automated ingestion для AvtoCena остановлен до разрешённого data route.
+- Решение: `cars24_uae_candidate -> lead_only`, `publishAllowed=false`.
+- Предыдущий field audit остаётся полезным только как историческая техническая evidence: offer-local identity/year/body/fuel и 15 listing-id-bound images были видны, но price binding, engine units и power оставались незакрыты.
+- Requalification — только через prior written authorization либо явно разрешённый API/feed; затем заново доказать price, engine units, power и list/detail parity.
+- Japan по-прежнему paused machine-readable; production/Object Storage/generation/manifest/cleanup не менялись.

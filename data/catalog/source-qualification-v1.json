@@ -328,9 +328,11 @@
       "sourceId": "cars24_uae_candidate",
       "label": "CARS24 UAE",
       "url": "https://www.cars24.ae/",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "field audit run 33731051049: stable details on 2/2; offer-local make/model/year/body/fuel and 15 listing-id-bound images proven; visible AED price is not yet bound to the offer object, engine displacement is unitless (1.5/1.8), and powerHp is missing"
+      "evidence": "Current official CARS24 UAE Terms explicitly prohibit scraping/automated tools and commercial reuse/republication of listings, pricing data and site content without prior written authorization.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#cars24_uae_candidate",
+      "useScope": "manual public reference only; no automated public-site extraction, scraping, listing/pricing reuse or republication without prior written CARS24 authorization or an explicitly permitted data feed/API"
     },
     {
       "market": "europe",
@@ -366,7 +368,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; do not automate Bobaedream without prior consent or an explicitly permitted data route",
+  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; do not automate CARS24 UAE without prior written authorization or an explicitly permitted data route",
   "pausedMarkets": [
     "japan"
   ],

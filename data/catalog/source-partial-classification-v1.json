@@ -206,6 +206,21 @@
         "fieldStatusBeforePolicyCheck": "previous read-only field audit proved identity, make/model/year, listing price KRW, fuel, exact engineCc and powerHp on sampled details; canonical body type and listing-bound gallery>=5 were still unproven"
       },
       "blockerBeforeAutomatedUse": "obtain prior written consent or an explicitly permitted API/partner feed covering AvtoCena automated commercial ingestion/republication; then requalify body/gallery/list-detail parity on that permitted route"
+    },
+    {
+      "market": "uae",
+      "sourceId": "cars24_uae_candidate",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; no automated public-site extraction, scraping, listing/pricing reuse or republication without prior written CARS24 authorization or an explicitly permitted data feed/API",
+      "evidence": {
+        "officialTermsUrl": "https://www.cars24.ae/terms-of-use/",
+        "termsUpdated": "2026-05-21",
+        "accountPolicy": "current official Terms state users shall not copy, reproduce, distribute, modify, mirror, scrape, exploit, republish, license or commercially use vehicle listings, pricing data or other Website/Services content without prior written authorization, and shall not use bots/crawlers/spiders/scrapers/automated tools without authorization",
+        "prohibitedConduct": "current Terms separately prohibit scraping data and use of bots without authorization",
+        "fieldStatusBeforePolicyCheck": "previous read-only field audit proved offer-local make/model/year/body/fuel and 15 listing-id-bound images on sampled details; visible AED price was not yet bound to the offer object, engine displacement was unitless and powerHp missing"
+      },
+      "blockerBeforeAutomatedUse": "obtain prior written authorization or an explicitly permitted CARS24 API/feed covering AvtoCena automated commercial use; then requalify price binding, engine units and power on that permitted route"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",
