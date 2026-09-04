@@ -135,3 +135,31 @@ Run `33824474523` на head с финальными reference tests заверш
 Good Car теперь доказан как источник с реальной server-side pagination и полным 1434-row public CarsList inventory на момент run, а не как homepage canary. Это усиливает source-level `exact_catalog` qualification, но не означает, что все 1434 rows готовы к публикации: offer-level exact gate остаётся обязательным.
 
 Следующий безопасный шаг после merge этого research-пакета — оставить Good Car вне production allowlist и продолжить квалификацию остальных источников/рынков. Production promotion Good Car должен быть отдельным решением после общего six-market no-write readiness, а не следствием этого source-only run.
+
+## Post-40.28 price refinement
+
+После записи основного checkpoint 40.28 ручной просмотр accepted sample обнаружил ещё одну ценовую аномалию, которую нельзя исправлять inference: Good Car offer `1432600975113187328`, `马自达 昂克赛拉 2017款 三厢 1.5L 自动舒适型 国V`, сохраняет exact list/detail source price `93900 USD`. Независимая exact-version проверка использована только как основание отправить эту конкретную source price в manual review; исходное значение `93900` не заменяется и не пересчитывается.
+
+Добавлен narrow reason `verified_exact_version_extreme_price_outlier_manual_review` и отдельный regression, который проверяет одновременно reason, fail-closed `normalizeOffer=null` и сохранность source/list price `93900` без подмены.
+
+Повторный полный run после фиксации regression: `33825326173`.
+
+- head: `04b292fc5ebb45038fbeb1bbf77ada52c2f9d38a`;
+- conclusion: `success`;
+- artifact: `9919781133`;
+- digest: `sha256:0c84dc88d9fb0363dd8b027a38d243f1be44ccb607b463407a83f527be6d1610`;
+- `initialTotal=1434`;
+- `expectedPageCount=96`, `requestedPageCount=96`;
+- `uniqueRawIds=1434`, `uniqueIdentityIds=1426`;
+- source total оставался стабильным на всех страницах, duplicate raw/identity IDs отсутствовали;
+- stratified detail pages остались `1,20,39,58,77,96`;
+- accepted exact passenger ICE: `23`;
+- rejected passenger ICE: `32`;
+- blocked non-passenger: `1`;
+- blocked verified reference conflicts: `4`;
+- blocked manual-price-review: `2`;
+- price-review rows: Mazda CX-5 `2049030561644670976` / `100 USD` и Mazda3/Axela `1432600975113187328` / `93900 USD`;
+- `failures=[]`;
+- price-review regression, identity normalization, CarsList/paginated exact tests, typecheck, full exhaustion и no-write envelope — green.
+
+Этот post-checkpoint не переписывает исторический run `33824559065` с `24/1`: он фиксирует следующий, более строгий gate. Safety boundary не менялся, production promotion по-прежнему запрещён.
