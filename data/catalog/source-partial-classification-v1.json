@@ -177,6 +177,22 @@
         "probeBoundary": "source-permission-first stop: no AutoUncle public inventory list/detail automated probe was started after reading the official terms"
       },
       "blockerBeforeAutomatedUse": "obtain an AutoUncle API/enterprise agreement or written permission whose scope explicitly permits AvtoCena automated use, required fields, retention and any republication; then perform exact technical qualification only through that authorized route"
+    },
+    {
+      "market": "uae",
+      "sourceId": "yallamotor_uae_candidate",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; no automated public-site collection/republication; YallaMotor terms also limit hyperlink permission to non-commercial use unless separately authorized",
+      "evidence": {
+        "officialTermsUrl": "https://www.yallamotor.com/terms-of-service",
+        "accessClause": "Clause 7 - Access and Linking to the platform",
+        "automationRestriction": "YallaMotor states that users may not use any robot, spider, scraper or other automated means to access the platform and collect content for any purpose or otherwise copy/download content.",
+        "exceptionBoundary": "The limited exception is for search engines and non-commercial public archives, not websites that include classified listings.",
+        "contentRestriction": "The terms prohibit copying, distributing, reproducing, selling, leasing, assigning, renting or sublicensing platform/content.",
+        "probeBoundary": "source-permission-first stop: no YallaMotor public inventory list/detail/API automated probe was started after reading the official terms"
+      },
+      "blockerBeforeAutomatedUse": "obtain an official YallaMotor API/feed/partner agreement or written authorization explicitly permitting AvtoCena automated collection, retention and republication, then requalify technically only through that permitted route"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs."

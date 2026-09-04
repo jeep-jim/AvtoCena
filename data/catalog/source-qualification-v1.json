@@ -286,9 +286,11 @@
       "sourceId": "yallamotor_uae_candidate",
       "label": "YallaMotor",
       "url": "https://uae.yallamotor.com/used-cars",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "public inventory exposes AED price and some exact engine/power descriptions; structured detail consistency still requires probe"
+      "evidence": "Official YallaMotor Terms clause 7 expressly prohibits robot/spider/scraper/other automated access and content collection for any purpose; limited exceptions do not cover classified-listing websites.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#yallamotor_uae_candidate",
+      "useScope": "manual public reference only; no automated public-site collection/republication; YallaMotor terms also limit hyperlink permission to non-commercial use unless separately authorized"
     },
     {
       "market": "uae",
@@ -342,5 +344,5 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification source-permission-first; Japan remains paused; AutoUncle public scraping is blocked without permission and its official B2B API is the only current requalification path"
+  "next": "continue non-Japan research_pending qualification source-permission-first; Japan remains paused; do not automate YallaMotor without an explicitly permitted API/feed/agreement"
 }

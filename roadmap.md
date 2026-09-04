@@ -1667,3 +1667,21 @@ Production-результат ещё должен быть подтверждё�
 ### Следующее действие после 40.35
 
 Продолжить следующий non-Japan `research_pending` source: official access/reuse conditions first; если permission path не закрыт — bounded no-write technical qualification.
+
+## 40.36 — YallaMotor UAE: public automated collection expressly prohibited
+
+Дата: 2026-09-04.
+
+Ветка: `chore/yallamotor-access-policy-v1-20260904`.
+
+- Source-permission-first проверка выполнена до нового technical crawl.
+- Official YallaMotor Terms of Service, clause 7: запрещены robot/spider/scraper/other automated means для доступа к YallaMotor и collection content **for any purpose**, а также copy/download content. Ограниченное исключение дано search engines и non-commercial public archives, но не сайтам с classified listings.
+- Terms также запрещают copy/distribute/reproduce/sell/lease/assign/rent/sublicense platform/content; hyperlink permission описана только для non-commercial use.
+- Поэтому `yallamotor_uae_candidate -> lead_only`, `publishAllowed=false`; public list/detail/API crawler не запускать и listing content не переиспользовать в коммерческом AvtoCena catalog по текущему public route.
+- Возобновлять exact technical qualification только после official API/feed/partner agreement либо written authorization, которое явно покрывает automated collection, retention и republication.
+- После terms check YallaMotor inventory requests не запускались; production/Object Storage/catalog writes отсутствуют.
+- Japan остаётся на паузе по указанию владельца.
+
+### Следующее действие после 40.36
+
+Продолжить следующий non-Japan `research_pending` source с official access/reuse check до технических запросов.
