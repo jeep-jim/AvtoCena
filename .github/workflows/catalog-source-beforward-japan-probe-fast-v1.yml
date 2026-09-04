@@ -1,0 +1,63 @@
+name: Catalog source qualification · BE FORWARD Japan fast probe v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - feat/beforward-japan-qualification-v1-20260904
+    paths:
+      - ".github/workflows/catalog-source-beforward-japan-probe-fast-v1.yml"
+      - "scripts/catalog-source-beforward-japan-qualification-v1.mjs"
+      - "scripts/catalog-source-access-probe-v1.mjs"
+      - "scripts/catalog-source-field-audit-v1.mjs"
+
+permissions:
+  contents: read
+
+concurrency:
+  group: catalog-source-beforward-japan-fast-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  probe:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Smoke source-declared detail parser without dependencies
+        run: |
+          node --input-type=module - <<'NODE'
+          import assert from 'node:assert/strict';
+          import { parseBeforwardDetailUrl, parseBeforwardListContext } from './scripts/catalog-source-beforward-japan-qualification-v1.mjs';
+          const id = parseBeforwardDetailUrl('https://www.beforward.jp/nissan/march/ce621935/id/16508049/');
+          assert.equal(id?.refNo, 'CE621935');
+          const row = parseBeforwardListContext('Ref No. CE621935 2017 NISSAN MARCH Mileage 81,267 km Year 2017/7 Engine 1,190cc Trans. AT Location Nagoya Model code DBA-K13 Steering Right Fuel Petrol Seats 5 Engine code HR12 Color Green Drive 2WD Doors 5 Price $2,120');
+          assert.equal(row.priceUsd, 2120);
+          assert.equal(row.engineCc, 1190);
+          assert.equal(row.fuel, 'Petrol');
+          NODE
+      - name: Probe BE FORWARD Japan public stock and detail pages without writes
+        env:
+          CATALOG_SOURCE_BEFORWARD_JAPAN_TIMEOUT_MS: "20000"
+          CATALOG_SOURCE_BEFORWARD_JAPAN_MAX_BODY_BYTES: "1600000"
+          CATALOG_SOURCE_BEFORWARD_JAPAN_SAMPLE_COUNT: "4"
+        run: node scripts/catalog-source-beforward-japan-qualification-v1.mjs
+      - name: Verify strict no-write envelope
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = JSON.parse(fs.readFileSync('catalog-source-beforward-japan-qualification-v1.json','utf8'));
+          for (const k of ['productionWrites','classificationMutations','publishAllowedMutations','objectStorageWrites','catalogGenerationWrites','rawBodiesStored','guessedRoutes']) {
+            if (p[k] !== false) throw new Error(`${k} must be false`);
+          }
+          NODE
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: catalog-source-beforward-japan-fast-probe-v1
+          path: catalog-source-beforward-japan-qualification-v1.json
+          if-no-files-found: error
+          retention-days: 7
