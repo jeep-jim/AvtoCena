@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-03",
+  "updatedAt": "2026-09-04",
   "mode": "six_market_source_discovery_no_write",
   "productionWrites": false,
   "markets": [
@@ -178,9 +178,11 @@
       "sourceId": "kbchachacha_korea_candidate",
       "label": "KB ChaChaCha",
       "url": "https://www.kbchachacha.com/public/search/main.kbc",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "official marketplace and indexed detail example expose year, mileage, fuel, body and exact displacement; live access and price/detail identity still require probe"
+      "evidence": "Run 33826631629: robots allows registry search route and public page returns 200, but the visible official public HTML explicitly prohibits unauthorized scraping/automation; probe stopped after exactly robots.txt + registry page with zero detail/pagination/script requests.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#kbchachacha_korea_candidate",
+      "useScope": "manual public search/reference only; no automated ingestion until an explicitly permitted API, partner feed or written authorization is available"
     },
     {
       "market": "korea",
@@ -330,5 +332,5 @@
       "evidence": "public Georgia inventory states that listings contain year, mileage, engine size, power, drive and price; detail and gallery identity still require probe"
     }
   ],
-  "next": "build and no-write test a dedicated adapter for chngoodcar_china_candidate; continue source qualification on the remaining research_pending candidates; no publishAllowed=true until explicit publication gate"
+  "next": "continue qualification of remaining research_pending candidates with source-permission-first no-write probes; do not revisit KB ChaChaCha automation without a permitted data route"
 }
