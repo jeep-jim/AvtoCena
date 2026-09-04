@@ -1,0 +1,66 @@
+name: Catalog source qualification · La Centrale access-policy checkpoint v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - chore/lacentrale-access-policy-v1-20260904
+    paths:
+      - ".github/workflows/catalog-source-lacentrale-access-policy-checkpoint-v1.yml"
+      - "scripts/catalog-source-lacentrale-access-policy-checkpoint-v1.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalog-source-lacentrale-access-policy-checkpoint-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checkpoint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Apply La Centrale lead-only access-policy decision
+        run: node scripts/catalog-source-lacentrale-access-policy-checkpoint-v1.mjs
+      - name: Normalize roadmap EOF
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const p = 'roadmap.md';
+          fs.writeFileSync(p, `${fs.readFileSync(p, 'utf8').replace(/\s*$/, '')}\n`);
+          NODE
+      - name: Verify safety and Japan pause
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const registry = JSON.parse(fs.readFileSync('data/catalog/source-qualification-v1.json', 'utf8'));
+          const ledger = JSON.parse(fs.readFileSync('data/catalog/source-partial-classification-v1.json', 'utf8'));
+          const roadmap = fs.readFileSync('roadmap.md', 'utf8');
+          const row = registry.candidates.find((candidate) => candidate.sourceId === 'lacentrale_europe_candidate');
+          const decision = ledger.decisions.find((candidate) => candidate.sourceId === 'lacentrale_europe_candidate');
+          if (!row || row.class !== 'lead_only' || row.publishAllowed !== false) throw new Error('La Centrale registry decision invalid');
+          if (!decision || decision.class !== 'lead_only' || decision.publishAllowed !== false) throw new Error('La Centrale ledger decision invalid');
+          if (!/Japan remains paused/i.test(registry.next || '')) throw new Error('Japan pause missing');
+          if (!roadmap.includes('## 40.34 — La Centrale Europe: public database is consultation-only; automated reuse blocked')) throw new Error('roadmap 40.34 missing');
+          if ((registry.candidates || []).some((candidate) => candidate.publishAllowed === true)) throw new Error('unexpected publishAllowed=true');
+          if (registry.productionWrites !== false || ledger.productionWrites !== false || ledger.publishAllowedMutations !== false) throw new Error('safety flag changed');
+          NODE
+      - name: Check diff
+        run: |
+          git diff --check
+          git status --short
+      - name: Commit checkpoint
+        run: |
+          if git diff --quiet; then echo "Checkpoint already applied"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/catalog/source-qualification-v1.json data/catalog/source-partial-classification-v1.json roadmap.md
+          git commit -m "Classify La Centrale lead-only by access policy"
+          git push origin HEAD:chore/lacentrale-access-policy-v1-20260904
