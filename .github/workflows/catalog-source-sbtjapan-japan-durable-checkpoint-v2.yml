@@ -1,0 +1,47 @@
+name: Catalog source checkpoint · SBT Japan v2
+
+on:
+  push:
+    branches:
+      - feat/sbtjapan-japan-qualification-v1-20260904
+    paths:
+      - .github/workflows/catalog-source-sbtjapan-japan-durable-checkpoint-v2.yml
+      - scripts/catalog-source-sbtjapan-japan-durable-checkpoint-v2.mjs
+
+permissions:
+  contents: write
+
+jobs:
+  persist:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+      - name: Persist SBT Japan lead-only checkpoint
+        run: node scripts/catalog-source-sbtjapan-japan-durable-checkpoint-v2.mjs
+      - name: Verify durable classification
+        shell: bash
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const ledger = JSON.parse(fs.readFileSync('data/catalog/source-qualification-v1.json', 'utf8'));
+          const row = ledger.candidates.find((x) => x.sourceId === 'sbtjapan_japan_candidate');
+          if (!row) throw new Error('SBT row missing');
+          if (row.class !== 'lead_only') throw new Error(`unexpected class: ${row.class}`);
+          if (row.publishAllowed !== false) throw new Error('publishAllowed must remain false');
+          const roadmap = fs.readFileSync('roadmap.md', 'utf8');
+          if (!roadmap.includes('### 40.31. SBT Japan: repeatable offer identity/price доказаны, source остаётся lead-only из-за power/gallery deficits')) throw new Error('roadmap checkpoint missing');
+          NODE
+      - name: Commit durable checkpoint
+        shell: bash
+        run: |
+          if git diff --quiet -- data/catalog/source-qualification-v1.json roadmap.md; then
+            echo 'Checkpoint already persisted; nothing to commit.'
+            exit 0
+          fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add data/catalog/source-qualification-v1.json roadmap.md
+          git commit -m 'docs(catalog): persist SBT Japan lead-only checkpoint'
+          git push
