@@ -29,6 +29,14 @@ jobs:
           node-version: 24
       - name: Apply AutoScout24 lead-only access-policy decision
         run: node scripts/catalog-source-autoscout24-access-policy-checkpoint-v1.mjs
+      - name: Normalize roadmap EOF
+        run: |
+          node - <<'NODE'
+          const fs = require('fs');
+          const path = 'roadmap.md';
+          const text = fs.readFileSync(path, 'utf8').replace(/\s*$/, '');
+          fs.writeFileSync(path, `${text}\n`);
+          NODE
       - name: Verify safety and Japan pause
         run: |
           node - <<'NODE'
