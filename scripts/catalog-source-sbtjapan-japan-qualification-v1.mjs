@@ -7,7 +7,7 @@ const BASE_URL = 'https://www.sbtjapan.com';
 const LIST_URL = `${BASE_URL}/used-cars/search`;
 const OUTPUT_PATH = process.env.CATALOG_SOURCE_SBTJAPAN_JAPAN_OUTPUT || 'catalog-source-sbtjapan-japan-qualification-v1.json';
 const TIMEOUT_MS = Math.max(3000, Math.min(45000, Number(process.env.CATALOG_SOURCE_SBTJAPAN_JAPAN_TIMEOUT_MS || 20000)));
-const MAX_BODY_BYTES = Math.max(250000, Math.min(2400000, Number(process.env.CATALOG_SOURCE_SBTJAPAN_JAPAN_MAX_BODY_BYTES || 1800000)));
+const MAX_BODY_BYTES = Math.max(250000, Math.min(8000000, Number(process.env.CATALOG_SOURCE_SBTJAPAN_JAPAN_MAX_BODY_BYTES || 6000000)));
 const SAMPLE_COUNT = Math.max(2, Math.min(6, Number(process.env.CATALOG_SOURCE_SBTJAPAN_JAPAN_SAMPLE_COUNT || 4)));
 const USER_AGENT = 'AvtoCenaSbtJapanQualification/1.0 (+read-only source qualification)';
 
