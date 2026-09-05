@@ -27,7 +27,8 @@
     33867611733,
     33937794266,
     33938070816,
-    33938264745
+    33938264745,
+    33938425009
   ],
   "decisions": [
     {
@@ -447,6 +448,22 @@
         "contact": "official Enterprise Open Platform privacy policy publishes open.dongchedi@bytedance.com as a contact address"
       },
       "blockerBeforeAutomatedUse": "obtain a Dongchedi agreement or authorized data/feed/API route that explicitly permits AvtoCena automated commercial vehicle-data collection, retention and republication; then requalify exact fields only within that authorized scope"
+    },
+    {
+      "market": "china",
+      "sourceId": "guazi_china_open",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; no automated public-site scraping/copying/republication without explicit special written Guazi permission; any future exact-field qualification must use an authorized API/feed/partner route",
+      "evidence": {
+        "runId": 33938425009,
+        "publicProbe": "robots.txt HTTP 200; public home HTTP 200 after redirect to en.guazi.com; exactly two requests; no listing/detail/pagination/API requests; no raw body storage",
+        "officialTermsUrl": "https://www.guazi.com/shiyongxieyi.html",
+        "coveredService": "the Guazi User Usage Agreement defines Guazi as guazi.com plus its mobile sites/apps and applies to registered and non-registered users using Guazi services/site materials",
+        "explicitRestriction": "agreement section 6 states that without Guazi explicit special written permission no entity/person may copy, disseminate, display, mirror, upload/download, reprint, quote, link, scrape or otherwise use site information content",
+        "permissionDecision": "public automated commercial catalog collection/republication is blocked on the current official terms"
+      },
+      "blockerBeforeAutomatedUse": "obtain explicit special written Guazi authorization or an authorized API/feed/partner agreement covering AvtoCena automated collection, storage/retention and republication; then requalify exact fields only within that scope"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",

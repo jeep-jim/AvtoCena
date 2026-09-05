@@ -1859,3 +1859,14 @@ Production-результат ещё должен быть подтверждё�
 - Официальный contact этой business platform: `open.dongchedi@bytedance.com`.
 - Решение: `dongchedi_china_open` остаётся `research_pending`, `publishAllowed=false`. Не запускать public listing/detail/API crawl. Возвращаться к технической exact-field qualification только после явно разрешённого Dongchedi agreement/feed/API/data route с правами на AvtoCena collection, retention и republication.
 - Следующий China кандидат: Guazi — permission-first/no-write.
+
+## 40.49 — Guazi China: official user agreement expressly blocks scraping/content reuse without written permission
+
+Дата: 2026-09-05.
+
+- Japan не трогался и остаётся machine-readable paused.
+- После Dongchedi проверен Guazi строго permission-first/no-write. Run 33938425009 сделал только два запроса: `robots.txt` (HTTP 200) и публичную главную; главная отдала HTTP 200 после redirect на `en.guazi.com`. Listing/detail/pagination/API запросов не было, production/Object Storage/generation не менялись.
+- В ограниченном HTML redirect-страницы legal link не обнаружен, поэтому никакой inventory crawl автоматически не продолжался.
+- Отдельно проверен текущий официальный `瓜子二手车用户使用协议` на `guazi.com/shiyongxieyi.html`. Agreement охватывает сайт Guazi и его mobile sites/apps и прямо говорит: без явного специального письменного разрешения Guazi нельзя полностью или частично копировать, распространять, показывать, зеркалировать, загружать/скачивать, перепечатывать, цитировать, линковать, `抓取` (scrape) или иным способом использовать информационный контент сайта.
+- Решение: `guazi_china_open` -> `lead_only`, `publishAllowed=false`. Публичный Guazi не используется для автоматического коммерческого каталога. Возврат к технической qualification — только после explicit written permission либо authorized API/feed/partner agreement с правами на AvtoCena collection, retention и republication.
+- Следующий China шаг: Autohome new cars — применить и проверить тот же current Autohome legal/service contract отдельно к `autohome_new_china_open`, без публичного crawl.

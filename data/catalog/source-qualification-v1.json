@@ -74,9 +74,12 @@
       "sourceId": "guazi_china_open",
       "label": "Guazi",
       "url": "https://www.guazi.com/",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "current public route returns a Tencent EdgeOne JavaScript challenge"
+      "evidence": "Permission-first run 33938425009 made only robots.txt + public Guazi home requests; robots returned HTTP 200 and the home resolved HTTP 200 to en.guazi.com, with zero listing/detail/pagination/API requests. Separately, the current official Guazi Used Car User Usage Agreement defines the covered Guazi web/mobile services and states that without explicit special written permission no entity or person may copy, disseminate, display, mirror, upload/download, reprint, quote, link, scrape or otherwise use site information content.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#guazi_china_open",
+      "useScope": "manual public reference only; no automated public-site collection, scraping, copying or republication. Requalify only through explicit Guazi written permission or an authorized API/feed/partner agreement whose scope covers AvtoCena.",
+      "qualificationBlocker": "official_guazi_user_agreement_requires_explicit_special_written_permission_for_scraping_copying_linking_and_other_content_use"
     },
     {
       "market": "china",
@@ -401,7 +404,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan China qualification permission-first/no-write; Japan remains paused; next inspect Guazi China access policy before any listing/detail/API crawl",
+  "next": "continue non-Japan China qualification permission-first/no-write; Japan remains paused; next classify Autohome new-cars public route under the current Autohome legal/service terms before any catalog crawl",
   "pausedMarkets": [
     "japan"
   ],
