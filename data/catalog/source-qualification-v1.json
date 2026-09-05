@@ -142,9 +142,12 @@
       "sourceId": "dubizzle_uae_open",
       "label": "Dubizzle",
       "url": "https://uae.dubizzle.com/",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "baseline scanned 9883 rows; strict exact result was zero because engine/power are commonly ranges or incomplete"
+      "evidence": "Official Dubizzle Platform Terms of Use (effective 2024-11-01) prohibit commercial exploitation of Platform/Content and prohibit manual/software/script/robot/spider/crawler scraping or compiling a collection/database/directory from Platform Content. Independently, the previous strict baseline scanned 9,883 rows and produced zero exact cards because engine/power are commonly ranges or incomplete.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#dubizzle_uae_open",
+      "useScope": "manual public reference only; no automated public-site scraping, database compilation, commercial exploitation or republication. Requalify only through an explicitly permitted Dubizzle API/feed/partner agreement or written authorization, then re-test exact offer fields.",
+      "qualificationBlocker": "public_scraping_database_compilation_and_commercial_exploitation_prohibited_plus_exact_engine_power_contract_failed"
     },
     {
       "market": "uae",
@@ -391,7 +394,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; next inspect Dubizzle UAE access policy and exact-field contract before any new crawl; do not automate AutoMarket public inventory while commercial automation/reuse permission is unproven",
+  "next": "continue non-Japan qualification permission-first/no-write; Japan remains paused; next requalify Che168 China under the new exact-card contract before any production adapter work",
   "pausedMarkets": [
     "japan"
   ],

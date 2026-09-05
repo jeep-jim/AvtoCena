@@ -389,6 +389,22 @@
         "probeBoundary": "exactly two HTTP requests: robots.txt + home; no listing/detail/pagination/API requests; raw bodies not stored"
       },
       "blockerBeforeAutomatedUse": "obtain an AutoMarket API/feed/partner agreement or written authorization explicitly permitting AvtoCena automated commercial collection, retention and republication; then requalify exact offer fields only through that permitted route"
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubizzle_uae_open",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; no automated public-site scraping, database compilation, commercial exploitation or republication without explicit Dubizzle authorization; any future technical requalification must use an authorized API/feed/agreement",
+      "evidence": {
+        "officialTermsUrl": "https://www.dubizzle.com/legalhub/terms/",
+        "termsEffective": "2024-11-01",
+        "commercialRestriction": "official Terms prohibit reproducing/duplicating/copying/selling/trading/reselling or exploiting Platform/Content for commercial purposes",
+        "automationRestriction": "official Terms prohibit manual/software/device/script/robot/spider/bot/crawler scraping and compiling a collection, database or directory from Platform/Content, including bypassing robot-exclusion headers",
+        "previousFieldBaseline": "9,883 rows scanned; strict exact result zero because engine and power are commonly ranges or incomplete",
+        "policyDecision": "public automated commercial ingestion is blocked even before the existing exact-field gap is considered"
+      },
+      "blockerBeforeAutomatedUse": "obtain an explicitly permitted Dubizzle API/feed/partner agreement or written authorization covering AvtoCena automated commercial collection, retention and republication; then requalify exact engineCc/powerHp and full card contract from that permitted route"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",

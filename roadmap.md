@@ -1824,3 +1824,15 @@ Production-результат ещё должен быть подтверждё�
 - В ограниченном HTML главной страницы не найдено ни одной source-declared ссылки Terms / Privacy / Legal / Policy. Это не является разрешением на автоматический коммерческий сбор или повторное использование данных.
 - Решение: `automarket_uae_candidate` остаётся `research_pending`, `publishAllowed=false`. Автоматический inventory/detail/API crawl запрещён, пока нет явно разрешённого API/feed/partner agreement или письменного разрешения AutoMarket для AvtoCena.
 - Следующий non-Japan кандидат: Dubizzle UAE — сначала access-policy, затем только при разрешённом маршруте проверка exact-field contract.
+
+## 40.46 — Dubizzle UAE: official Terms block scraping/database reuse; strict exact contract already failed
+
+Дата: 2026-09-05.
+
+- Japan не трогался и остаётся machine-readable paused.
+- После AutoMarket перешли к Dubizzle UAE. Нового inventory/detail crawl не запускали: сначала перечитаны текущие официальные Dubizzle Platform Terms of Use.
+- Terms (effective 2024-11-01) запрещают коммерческую эксплуатацию Platform/Content и отдельно запрещают manual/software/script/robot/spider/bot/crawler scraping, создание collection/database/directory из контента и обход robot-exclusion headers.
+- Технический exact-контракт Dubizzle уже был слабым независимо от правового барьера: предыдущий strict baseline просмотрел 9,883 rows и получил 0 exact cards, потому что engine/power часто приходят диапазонами или неполными значениями.
+- Решение: `dubizzle_uae_open` -> `lead_only`, `publishAllowed=false`. Public-site automated ingestion/republication запрещён; повторная техническая квалификация возможна только через явно разрешённый Dubizzle API/feed/partner agreement или письменное разрешение.
+- Production catalog, Object Storage, generation/manifest и пользовательский сайт не менялись.
+- Следующий шаг: Che168 China — заново квалифицировать под текущий strict exact-card contract, начиная с access-policy/permission-first и без production writes.
