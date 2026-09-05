@@ -1,0 +1,64 @@
+name: Catalog source qualification · Autohome new-cars access-policy checkpoint v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - chore/autohome-new-access-policy-v1-20260905
+    paths:
+      - ".github/workflows/catalog-source-autohome-new-access-policy-checkpoint-v1.yml"
+      - "scripts/catalog-source-autohome-new-access-policy-checkpoint-v1.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalog-source-autohome-new-access-policy-checkpoint-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checkpoint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Apply Autohome new-cars lead-only decision
+        run: node scripts/catalog-source-autohome-new-access-policy-checkpoint-v1.mjs
+      - name: Verify safety, roadmap and Good Car next step
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const r=JSON.parse(fs.readFileSync('data/catalog/source-qualification-v1.json','utf8'));
+          const l=JSON.parse(fs.readFileSync('data/catalog/source-partial-classification-v1.json','utf8'));
+          const m=fs.readFileSync('roadmap.md','utf8');
+          const row=r.candidates.find(x=>x.sourceId==='autohome_new_china_open');
+          const d=l.decisions.find(x=>x.sourceId==='autohome_new_china_open');
+          if(!row||row.class!=='lead_only'||row.publishAllowed!==false)throw new Error('Autohome new registry invalid');
+          if(row.qualificationBlocker!=='current_autohome_terms_require_written_authorization_for_commercial_use_and_prohibit_unauthorized_robot_spider_content_operations')throw new Error('Autohome new blocker missing');
+          if(!d||d.class!=='lead_only'||d.publishAllowed!==false)throw new Error('Autohome new ledger invalid');
+          const japan=r.candidates.filter(x=>x.market==='japan');
+          if(!japan.length||japan.some(x=>x.qualificationPaused!==true))throw new Error('Japan pause missing');
+          const good=r.candidates.find(x=>x.sourceId==='chngoodcar_china_candidate');
+          if(!good||good.class!=='exact_catalog'||good.publishAllowed!==false)throw new Error('Good Car exact candidate missing');
+          if(!/Good Car China exact_catalog blockers/i.test(r.next||''))throw new Error('Good Car next missing');
+          if(!m.includes('## 40.50 — Autohome new cars China: current official terms require written authorization for commercial/automated reuse'))throw new Error('roadmap 40.50 missing');
+          if(r.candidates.some(x=>x.publishAllowed===true))throw new Error('unexpected publishAllowed=true');
+          if(r.productionWrites!==false||l.productionWrites!==false||l.publishAllowedMutations!==false)throw new Error('safety changed');
+          NODE
+      - name: Check diff
+        run: |
+          git diff --check
+          git status --short
+      - name: Commit checkpoint
+        run: |
+          if git diff --quiet; then echo "Checkpoint already applied"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/catalog/source-qualification-v1.json data/catalog/source-partial-classification-v1.json roadmap.md
+          git commit -m "Classify Autohome new-cars public route lead-only"
+          git push origin HEAD:chore/autohome-new-access-policy-v1-20260905
