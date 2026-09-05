@@ -1,0 +1,62 @@
+name: Catalog source qualification · Che168 access-policy checkpoint v1
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - chore/che168-access-policy-v1-20260905
+    paths:
+      - ".github/workflows/catalog-source-che168-access-policy-checkpoint-v1.yml"
+      - "scripts/catalog-source-che168-access-policy-checkpoint-v1.mjs"
+
+permissions:
+  contents: write
+
+concurrency:
+  group: catalog-source-che168-access-policy-checkpoint-v1-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  checkpoint:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Apply Che168 lead-only access-policy decision
+        run: node scripts/catalog-source-che168-access-policy-checkpoint-v1.mjs
+      - name: Verify safety, roadmap and next step
+        run: |
+          node - <<'NODE'
+          const fs=require('fs');
+          const r=JSON.parse(fs.readFileSync('data/catalog/source-qualification-v1.json','utf8'));
+          const l=JSON.parse(fs.readFileSync('data/catalog/source-partial-classification-v1.json','utf8'));
+          const m=fs.readFileSync('roadmap.md','utf8');
+          const row=r.candidates.find(x=>x.sourceId==='autohome_used_china_open');
+          const d=l.decisions.find(x=>x.sourceId==='autohome_used_china_open');
+          if(!row||row.class!=='lead_only'||row.publishAllowed!==false)throw new Error('Che168 registry invalid');
+          if(row.qualificationBlocker!=='commercial_copy_resale_exploitation_and_unlicensed_content_reuse_prohibited_by_source_declared_autohome_terms')throw new Error('Che168 blocker missing');
+          if(!d||d.class!=='lead_only'||d.publishAllowed!==false||d.evidence?.runId!==33938070816)throw new Error('Che168 ledger invalid');
+          const japan=r.candidates.filter(x=>x.market==='japan');
+          if(!japan.length||japan.some(x=>x.qualificationPaused!==true))throw new Error('Japan pause missing');
+          if(!/Dongchedi China/i.test(r.next||''))throw new Error('Dongchedi next missing');
+          if(!m.includes('## 40.47 — Che168 China: source-declared Autohome terms block commercial reuse of public content'))throw new Error('roadmap 40.47 missing');
+          if(r.candidates.some(x=>x.publishAllowed===true))throw new Error('unexpected publishAllowed=true');
+          if(r.productionWrites!==false||l.productionWrites!==false||l.publishAllowedMutations!==false)throw new Error('safety changed');
+          NODE
+      - name: Check diff
+        run: |
+          git diff --check
+          git status --short
+      - name: Commit checkpoint
+        run: |
+          if git diff --quiet; then echo "Checkpoint already applied"; exit 0; fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/catalog/source-qualification-v1.json data/catalog/source-partial-classification-v1.json roadmap.md
+          git commit -m "Classify Che168 public route lead-only"
+          git push origin HEAD:chore/che168-access-policy-v1-20260905
