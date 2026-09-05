@@ -1870,3 +1870,14 @@ Production-результат ещё должен быть подтверждё�
 - Отдельно проверен текущий официальный `瓜子二手车用户使用协议` на `guazi.com/shiyongxieyi.html`. Agreement охватывает сайт Guazi и его mobile sites/apps и прямо говорит: без явного специального письменного разрешения Guazi нельзя полностью или частично копировать, распространять, показывать, зеркалировать, загружать/скачивать, перепечатывать, цитировать, линковать, `抓取` (scrape) или иным способом использовать информационный контент сайта.
 - Решение: `guazi_china_open` -> `lead_only`, `publishAllowed=false`. Публичный Guazi не используется для автоматического коммерческого каталога. Возврат к технической qualification — только после explicit written permission либо authorized API/feed/partner agreement с правами на AvtoCena collection, retention и republication.
 - Следующий China шаг: Autohome new cars — применить и проверить тот же current Autohome legal/service contract отдельно к `autohome_new_china_open`, без публичного crawl.
+
+## 40.50 — Autohome new cars China: current official terms require written authorization for commercial/automated reuse
+
+Дата: 2026-09-05.
+
+- Japan не трогался и остаётся machine-readable paused.
+- После Guazi отдельно закрыт `autohome_new_china_open`. Новый public crawl не запускался: для `autohome.com.cn` уже есть прямой актуальный официальный legal/service contract, поэтому лишние listing/detail запросы не нужны.
+- Текущий официальный Autohome Legal Statement распространяется на online services/содержимое Autohome. В нём указано, что работы/контент сайтов Autohome нельзя без письменной авторизации копировать, линковать, незаконно использовать, перепубликовывать или зеркалировать; service terms также запрещают для коммерческих целей копировать, продавать, перепродавать или эксплуатировать любую часть/использование/доступ к сервису.
+- Текущий официальный Autohome User Service Agreement дополнительно говорит, что commercial use требует предварительного письменного разрешения, а неавторизованное использование контента/сервиса включает операции через robot/spider и аналогичные программы/устройства.
+- Решение: `autohome_new_china_open` -> `lead_only`, `publishAllowed=false`. Public Autohome new-car pages не используются как автоматический коммерческий источник.
+- После этой записи non-Japan registry policy-triage доведён до текущих кандидатов. Следующий практический этап — единственный уже доказанный `exact_catalog` кандидат `chngoodcar_china_candidate`: dedicated adapter + deterministic kW→powerHp provenance/test + полный no-write ICE dry-run + ручной spot-check карточек и listing-bound gallery. Публикация по-прежнему запрещена до прохождения всех блокеров.

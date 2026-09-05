@@ -464,6 +464,22 @@
         "permissionDecision": "public automated commercial catalog collection/republication is blocked on the current official terms"
       },
       "blockerBeforeAutomatedUse": "obtain explicit special written Guazi authorization or an authorized API/feed/partner agreement covering AvtoCena automated collection, storage/retention and republication; then requalify exact fields only within that scope"
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_new_china_open",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; no automated public-site commercial ingestion/republication without written Autohome authorization; exact-field requalification requires an authorized API/feed/data-partnership route",
+      "evidence": {
+        "checkedAt": "2026-09-05",
+        "officialLegalStatementUrl": "https://www.autohome.com.cn/about/falv.html?child=index",
+        "officialUserAgreementUrl": "https://mobile.app.autohome.com.cn/usereg_v7.4.0/static/register_protocol.html",
+        "commercialRestriction": "Autohome service terms prohibit copying, selling, reselling or exploiting any part/use/access of the service for commercial purposes; current user agreement says commercial use requires prior written authorization",
+        "contentRestriction": "Autohome rights statement says site works may not be copied, linked, illegally used, republished or mirrored without written authorization",
+        "automationRestriction": "current user agreement states Autohome content/services may not be used without authorization including operations through robots/spiders and similar programs/devices"
+      },
+      "blockerBeforeAutomatedUse": "obtain written Autohome authorization or an explicitly permitted API/feed/data-partnership agreement covering AvtoCena automated collection, storage/retention and republication"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",

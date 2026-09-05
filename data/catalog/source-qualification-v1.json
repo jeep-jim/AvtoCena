@@ -86,9 +86,12 @@
       "sourceId": "autohome_new_china_open",
       "label": "Autohome new cars",
       "url": "https://www.autohome.com.cn/",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "requires requalification under the new contract"
+      "evidence": "Current official Autohome Legal Statement and User Service Agreement apply to Autohome online services and content. The Legal Statement says Autohome site works may not be copied, linked, illegally used, republished or mirrored without written authorization and its service terms prohibit copying/selling/reselling/exploiting any part/use/access of the service for commercial purposes. The current User Service Agreement additionally states commercial use requires prior written authorization and forbids unauthorized use including robot/spider operations on Autohome content/services.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#autohome_new_china_open",
+      "useScope": "manual public reference only; no automated commercial ingestion/republication from public Autohome new-car pages. Requalify only through written Autohome authorization or an explicitly permitted API/feed/data-partnership route covering AvtoCena.",
+      "qualificationBlocker": "current_autohome_terms_require_written_authorization_for_commercial_use_and_prohibit_unauthorized_robot_spider_content_operations"
     },
     {
       "market": "japan",
@@ -404,7 +407,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan China qualification permission-first/no-write; Japan remains paused; next classify Autohome new-cars public route under the current Autohome legal/service terms before any catalog crawl",
+  "next": "non-Japan source qualification inventory is now policy-triaged; Japan remains paused. Next execute the existing Good Car China exact_catalog blockers: dedicated adapter, deterministic kW-to-powerHp provenance tests, full no-write ICE dry-run, and manual normalized-card/gallery spot-check before any publication.",
   "pausedMarkets": [
     "japan"
   ],
