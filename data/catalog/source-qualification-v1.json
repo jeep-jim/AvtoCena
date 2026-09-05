@@ -63,7 +63,11 @@
       "url": "https://www.dongchedi.com/",
       "class": "research_pending",
       "publishAllowed": false,
-      "evidence": "current public used-car route redirects to login-required"
+      "evidence": "Permission-first run 33938264745: robots.txt and public Dongchedi home returned HTTP 200; exactly two requests were made and no source-declared legal link was exposed in the bounded home HTML, so public automated commercial reuse permission remains unproven. A separate official Dongchedi Enterprise Open Platform exists for business users, but its own service agreement expressly prohibits robot/spider/crawler/other automated access and unauthorized robot/spider monitoring, copying, dissemination, display or mirroring of service content.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#dongchedi_china_open",
+      "useScope": "manual public reference only while permission for public automated commercial inventory reuse is unproven; do not crawl public listing/detail/API routes. Any future automated use must come from an explicit Dongchedi agreement/authorized business data route that specifically covers AvtoCena.",
+      "permittedRouteCandidate": "official_dongchedi_enterprise_open_platform_contact_open.dongchedi@bytedance.com",
+      "qualificationBlocker": "public_automation_permission_unproven_and_official_enterprise_platform_terms_prohibit_robots_without_operator_permission"
     },
     {
       "market": "china",
@@ -397,7 +401,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan China qualification permission-first/no-write; Japan remains paused; next inspect Dongchedi China access policy before any listing/detail/API crawl",
+  "next": "continue non-Japan China qualification permission-first/no-write; Japan remains paused; next inspect Guazi China access policy before any listing/detail/API crawl",
   "pausedMarkets": [
     "japan"
   ],

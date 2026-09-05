@@ -26,7 +26,8 @@
     33867243950,
     33867611733,
     33937794266,
-    33938070816
+    33938070816,
+    33938264745
   ],
   "decisions": [
     {
@@ -423,6 +424,29 @@
         "permissionDecision": "public automated commercial catalog reuse is not permitted on the current source-declared terms surface"
       },
       "blockerBeforeAutomatedUse": "obtain an explicitly authorized Autohome/Che168 API/feed/data partnership or written permission covering AvtoCena automated commercial collection, storage/retention and republication; then requalify the exact-card field contract only through that permitted route"
+    },
+    {
+      "market": "china",
+      "sourceId": "dongchedi_china_open",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; no public inventory automation while commercial reuse permission is unproven; requalify only through an explicitly authorized Dongchedi business/data agreement whose scope covers AvtoCena automated collection, retention and republication",
+      "permittedRouteCandidate": {
+        "type": "official_enterprise_open_platform_contact",
+        "url": "https://open.dongchedi.com",
+        "email": "open.dongchedi@bytedance.com"
+      },
+      "evidence": {
+        "runId": 33938264745,
+        "publicProbe": "robots.txt HTTP 200 + home HTTP 200; exactly two requests; zero detail/pagination/API requests; raw bodies not stored",
+        "publicLegalSurface": "bounded public home exposed no source-declared user-agreement/privacy/legal link, so public automated commercial reuse permission is not proven",
+        "officialEnterpriseTermsUrl": "https://open.dongchedi.com/draft/ies-hotsoon-draft/dcar_open_platform/e2fd2cfd-cf01-4ebc-a483-79fd1024c3c4.html",
+        "enterpriseScope": "official agreement states the Enterprise Open Platform is for business users and currently operated by Beijing Space Transformation Technology Co., Ltd.",
+        "enterpriseAutomationRestriction": "the official Enterprise Open Platform agreement prohibits robot/spider/crawler/other automated access or login",
+        "enterpriseContentRestriction": "the same agreement states service content may not be monitored, copied, disseminated, displayed or mirrored by robots/spiders or similar programs/devices without operator permission",
+        "contact": "official Enterprise Open Platform privacy policy publishes open.dongchedi@bytedance.com as a contact address"
+      },
+      "blockerBeforeAutomatedUse": "obtain a Dongchedi agreement or authorized data/feed/API route that explicitly permits AvtoCena automated commercial vehicle-data collection, retention and republication; then requalify exact fields only within that authorized scope"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",

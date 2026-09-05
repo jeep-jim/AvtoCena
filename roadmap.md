@@ -1847,3 +1847,15 @@ Production-результат ещё должен быть подтверждё�
 - Официальные Autohome service terms запрещают для коммерческих целей копировать, продавать, перепродавать или использовать любую часть сервиса/доступа к нему; rights statement также запрещает без письменного разрешения копирование, linking/illegal use и republication произведений/контента Autohome.
 - Решение: `autohome_used_china_open` (Che168) -> `lead_only`, `publishAllowed=false`. Публичный Che168 нельзя использовать как автоматический коммерческий источник каталога. Повторная exact-field qualification допустима только через явно разрешённый Autohome/Che168 API/feed/data-partnership или письменное разрешение.
 - Следующий China кандидат: Dongchedi — сначала access-policy/permission-first, без listing/detail/API crawl до доказанного разрешённого маршрута.
+
+## 40.48 — Dongchedi China: public permission is unproven; official business platform also blocks unauthorized robots
+
+Дата: 2026-09-05.
+
+- Japan не трогался и остаётся machine-readable paused.
+- После Che168 проверен Dongchedi строго permission-first/no-write. Run 33938264745 сделал только два запроса: `robots.txt` и публичную главную `dongchedi.com`; оба HTTP 200. Detail/pagination/API запросов не было, production/Object Storage/generation не менялись.
+- В ограниченном HTML публичной главной source-declared legal/privacy/user-agreement link не обнаружен. Поэтому отсутствие запрета не трактуется как разрешение: автоматический коммерческий сбор публичного каталога остаётся недоказанным и не запускается.
+- Отдельно подтверждена официальная `懂车帝企业开放平台` (Dongchedi Enterprise Open Platform) для business users. Это потенциальный договорной контактный путь, но не готовое разрешение на наш use case: её официальный service agreement прямо запрещает robot/spider/crawler/other automated access/login и без разрешения оператора запрещает robot/spider monitoring/copying/dissemination/display/mirroring содержимого сервиса.
+- Официальный contact этой business platform: `open.dongchedi@bytedance.com`.
+- Решение: `dongchedi_china_open` остаётся `research_pending`, `publishAllowed=false`. Не запускать public listing/detail/API crawl. Возвращаться к технической exact-field qualification только после явно разрешённого Dongchedi agreement/feed/API/data route с правами на AvtoCena collection, retention и republication.
+- Следующий China кандидат: Guazi — permission-first/no-write.
