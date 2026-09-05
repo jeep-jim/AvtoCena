@@ -49,9 +49,12 @@
       "sourceId": "autohome_used_china_open",
       "label": "Che168",
       "url": "https://www.che168.com/",
-      "class": "research_pending",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "requires requalification under the new contract"
+      "evidence": "Permission-first run 33938070816 kept Che168 to robots.txt + public home only (both HTTP 200; zero detail/API requests). Current public Che168 mobile listing pages identify the service as an Autohome used-car trading platform and expose the official Autohome Legal Statement. That source-declared statement forbids copying/selling/reselling/exploiting any part of the service for commercial purposes and forbids unauthorized copying/linking/illegal use/republication of Autohome site works.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#autohome_used_china_open",
+      "useScope": "manual public reference only; no automated commercial inventory ingestion/republication from public Che168/Autohome pages. Requalify only through an explicitly authorized Autohome/Che168 API, data feed, partner agreement or written permission covering AvtoCena use.",
+      "qualificationBlocker": "commercial_copy_resale_exploitation_and_unlicensed_content_reuse_prohibited_by_source_declared_autohome_terms"
     },
     {
       "market": "china",
@@ -394,7 +397,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan qualification permission-first/no-write; Japan remains paused; next requalify Che168 China under the new exact-card contract before any production adapter work",
+  "next": "continue non-Japan China qualification permission-first/no-write; Japan remains paused; next inspect Dongchedi China access policy before any listing/detail/API crawl",
   "pausedMarkets": [
     "japan"
   ],

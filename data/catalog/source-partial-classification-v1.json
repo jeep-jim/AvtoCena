@@ -25,7 +25,8 @@
     33866935666,
     33867243950,
     33867611733,
-    33937794266
+    33937794266,
+    33938070816
   ],
   "decisions": [
     {
@@ -405,6 +406,23 @@
         "policyDecision": "public automated commercial ingestion is blocked even before the existing exact-field gap is considered"
       },
       "blockerBeforeAutomatedUse": "obtain an explicitly permitted Dubizzle API/feed/partner agreement or written authorization covering AvtoCena automated commercial collection, retention and republication; then requalify exact engineCc/powerHp and full card contract from that permitted route"
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "class": "lead_only",
+      "publishAllowed": false,
+      "useScope": "manual public reference only; no automated commercial ingestion/republication from public Che168/Autohome pages without explicit authorization; any exact-field requalification must use an authorized API/feed/partner route",
+      "evidence": {
+        "runId": 33938070816,
+        "robotsAndHome": "run 33938070816: robots.txt HTTP 200, home HTTP 200, exactly two requests, no detail/pagination/API requests and no raw body storage",
+        "sourceRelationship": "current Che168 mobile used-car listing footer identifies the service as an Autohome used-car trading platform and exposes the official Autohome Legal Statement",
+        "officialLegalUrl": "https://www.autohome.com.cn/about/falv.html?child=index",
+        "commercialRestriction": "Autohome service terms prohibit copying, selling, reselling or exploiting any part/use/access of the service for commercial purposes",
+        "contentRightsRestriction": "Autohome rights statement says site works may not be copied, linked, illegally used or republished without written authorization",
+        "permissionDecision": "public automated commercial catalog reuse is not permitted on the current source-declared terms surface"
+      },
+      "blockerBeforeAutomatedUse": "obtain an explicitly authorized Autohome/Che168 API/feed/data partnership or written permission covering AvtoCena automated commercial collection, storage/retention and republication; then requalify the exact-card field contract only through that permitted route"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",

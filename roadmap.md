@@ -1836,3 +1836,14 @@ Production-результат ещё должен быть подтверждё�
 - Решение: `dubizzle_uae_open` -> `lead_only`, `publishAllowed=false`. Public-site automated ingestion/republication запрещён; повторная техническая квалификация возможна только через явно разрешённый Dubizzle API/feed/partner agreement или письменное разрешение.
 - Production catalog, Object Storage, generation/manifest и пользовательский сайт не менялись.
 - Следующий шаг: Che168 China — заново квалифицировать под текущий strict exact-card contract, начиная с access-policy/permission-first и без production writes.
+
+## 40.47 — Che168 China: source-declared Autohome terms block commercial reuse of public content
+
+Дата: 2026-09-05.
+
+- Japan не трогался и остаётся machine-readable paused.
+- После Dubizzle начата China requalification с Che168 строго permission-first/no-write. Run 33938070816 запросил только `robots.txt` и публичную главную Che168: оба HTTP 200; detail/pagination/API запросов не было, production/Object Storage/generation не менялись.
+- В коротком HTML главной source-declared legal link не отдался, поэтому никакой detail crawl автоматически не продолжался. Отдельно проверена текущая публичная Che168 mobile listing surface: footer прямо обозначает Che168 как used-car trading platform Autohome и содержит ссылку `法律声明` на официальный Autohome Legal Statement.
+- Официальные Autohome service terms запрещают для коммерческих целей копировать, продавать, перепродавать или использовать любую часть сервиса/доступа к нему; rights statement также запрещает без письменного разрешения копирование, linking/illegal use и republication произведений/контента Autohome.
+- Решение: `autohome_used_china_open` (Che168) -> `lead_only`, `publishAllowed=false`. Публичный Che168 нельзя использовать как автоматический коммерческий источник каталога. Повторная exact-field qualification допустима только через явно разрешённый Autohome/Che168 API/feed/data-partnership или письменное разрешение.
+- Следующий China кандидат: Dongchedi — сначала access-policy/permission-first, без listing/detail/API crawl до доказанного разрешённого маршрута.
