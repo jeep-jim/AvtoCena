@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-04",
+  "updatedAt": "2026-09-05",
   "mode": "six_market_source_discovery_no_write",
   "productionWrites": false,
   "markets": [
@@ -341,7 +341,10 @@
       "url": "https://www.automarket.ae/uae/cars/used",
       "class": "research_pending",
       "publishAllowed": false,
-      "evidence": "public used-car inventory exposes price and engine-capacity facets; offer-level exact fields still require probe"
+      "evidence": "Permission-first run 33937794266: robots.txt and the public AutoMarket UAE home page both returned HTTP 200; the bounded home HTML exposed no source-declared Terms/Privacy/Legal/Policy link. No positive automated commercial ingestion/reuse permission is proven, so inventory/detail/API crawling remains blocked.",
+      "qualificationDecision": "data/catalog/source-partial-classification-v1.json#automarket_uae_candidate",
+      "useScope": "manual public reference only while automated commercial access/reuse permission remains unproven; do not crawl listing/detail/API routes until AutoMarket supplies an explicitly permitted API/feed/partner agreement or written authorization",
+      "qualificationBlocker": "automation_and_commercial_reuse_permission_unproven_no_source_declared_legal_link_on_home"
     },
     {
       "market": "uae",
@@ -388,7 +391,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; next inspect AutoMarket UAE access policy before any field crawl; do not automate DubiCars public pages without express written consent",
+  "next": "continue non-Japan research_pending qualification permission-first/no-write; Japan remains paused; next inspect Dubizzle UAE access policy and exact-field contract before any new crawl; do not automate AutoMarket public inventory while commercial automation/reuse permission is unproven",
   "pausedMarkets": [
     "japan"
   ],

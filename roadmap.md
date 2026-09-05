@@ -1813,3 +1813,14 @@ Production-результат ещё должен быть подтверждё�
 - Решение: `dubicars_uae_exact -> lead_only`, `publishAllowed=false`. Requalification только через express written consent либо signed DubiCars feed/API/integration agreement, после чего заново доказать engineCc, powerHp, gallery и list/detail parity на разрешённом маршруте.
 - Production catalog, Object Storage, generation, manifest и cleanup не менялись.
 - Следующий non-Japan source: AutoMarket UAE access-policy.
+
+## 40.45 — AutoMarket UAE: public home is reachable, but automation/reuse permission is not proven
+
+Дата: 2026-09-05.
+
+- Japan не трогался и остаётся machine-readable paused по решению владельца.
+- После DubiCars перешли к AutoMarket UAE строго permission-first/no-write: run 33937794266.
+- Probe сделал только два запроса: официальный robots.txt и публичную главную страницу AutoMarket. Оба ответа — HTTP 200; listing/detail/pagination/API запросов не было, production/Object Storage/catalog generation не менялись.
+- В ограниченном HTML главной страницы не найдено ни одной source-declared ссылки Terms / Privacy / Legal / Policy. Это не является разрешением на автоматический коммерческий сбор или повторное использование данных.
+- Решение: `automarket_uae_candidate` остаётся `research_pending`, `publishAllowed=false`. Автоматический inventory/detail/API crawl запрещён, пока нет явно разрешённого API/feed/partner agreement или письменного разрешения AutoMarket для AvtoCena.
+- Следующий non-Japan кандидат: Dubizzle UAE — сначала access-policy, затем только при разрешённом маршруте проверка exact-field contract.

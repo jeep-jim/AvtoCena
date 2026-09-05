@@ -1,7 +1,7 @@
 {
   "version": 1,
   "decidedAt": "2026-09-03",
-  "updatedAt": "2026-09-04",
+  "updatedAt": "2026-09-05",
   "mode": "manual_source_classification_after_read_only_evidence",
   "productionWrites": false,
   "publishAllowedMutations": false,
@@ -24,7 +24,8 @@
     33866663248,
     33866935666,
     33867243950,
-    33867611733
+    33867611733,
+    33937794266
   ],
   "decisions": [
     {
@@ -372,6 +373,22 @@
         "prerequisite": "signed DubiCars agreement/package and explicit written scope allowing AvtoCena commercial data use/republication"
       },
       "blockerBeforeAutomatedUse": "obtain express written consent or a contracted DubiCars feed/API/integration explicitly permitting AvtoCena use; then requalify exact engineCc, powerHp, gallery identity and list/detail parity through that permitted route"
+    },
+    {
+      "market": "uae",
+      "sourceId": "automarket_uae_candidate",
+      "class": "research_pending",
+      "publishAllowed": false,
+      "useScope": "manual public reference only while automated commercial access/reuse permission remains unproven; no listing/detail/API crawl until an explicitly permitted AutoMarket API/feed/partner agreement or written authorization exists",
+      "evidence": {
+        "runId": 33937794266,
+        "robots": "HTTP 200 at https://www.automarket.ae/robots.txt",
+        "home": "HTTP 200 at https://www.automarket.ae/; captured bounded HTML only",
+        "sourceDeclaredLegalLinks": 0,
+        "permissionConclusion": "no_source_declared_legal_link_detected_on_home_permission_unproven",
+        "probeBoundary": "exactly two HTTP requests: robots.txt + home; no listing/detail/pagination/API requests; raw bodies not stored"
+      },
+      "blockerBeforeAutomatedUse": "obtain an AutoMarket API/feed/partner agreement or written authorization explicitly permitting AvtoCena automated commercial collection, retention and republication; then requalify exact offer fields only through that permitted route"
     }
   ],
   "safety": "Class assignment is a research ledger decision only. No source receives publishAllowed=true and no production catalog, generation, manifest, cleanup or Object Storage write occurs.",
