@@ -1,6 +1,6 @@
 {
   "version": 1,
-  "updatedAt": "2026-09-05",
+  "updatedAt": "2026-09-06",
   "mode": "six_market_source_discovery_no_write",
   "productionWrites": false,
   "markets": [
@@ -248,18 +248,42 @@
       "sourceId": "chngoodcar_china_candidate",
       "label": "Guangdong Good Car",
       "url": "https://www.chngoodcar.com/",
-      "class": "exact_catalog",
+      "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "manual qualification after runs 33747985524, 33748366958, 33748644632, 33749118028; see data/catalog/source-partial-classification-v1.json",
+      "evidence": "Permission-first discovery run 34018339034 and same-policy confirmation run 34018481311 prove source-declared Good Car Registration Agreement section VII 1.4 requires prior written approval for commercial copying/use of displayed information. Historical ICE exact-field and pagination proofs remain recorded in roadmap 40.27-40.29; they do not authorize AvtoCena commercial reuse.",
       "qualificationDecision": "data/catalog/source-partial-classification-v1.json#chngoodcar_china_candidate",
       "exactScope": "ICE offers that independently pass the offer-level exact gate; electrified offers remain blocked until required certified/utilization/30-minute power is source-bound",
       "blockersBeforePublication": [
-        "write and test a dedicated Good Car adapter",
-        "document and regression-test deterministic kW -> project powerHp conversion while retaining raw kW provenance",
-        "full no-write offer-level exact dry-run across diverse ICE offers",
-        "manual spot-check of normalized cards and listing-bound images",
-        "China remains non-published at the current project stage"
-      ]
+        "obtain prior written Good Car approval explicitly covering AvtoCena automated commercial collection, retention, photos and republication",
+        "after permission is obtained, revalidate the existing adapter through the expressly permitted route and run the offer-level ICE exact gates",
+        "retain source-bound values and reject electrified offers without required certified power, identity conflicts and unreviewed price outliers",
+        "publication requires a separate owner decision; productionWrites and publishAllowed remain false"
+      ],
+      "technicalQualification": {
+        "class": "exact_catalog",
+        "scope": "ICE offers that independently pass the offer-level exact gate; electrified offers remain blocked until required certified/utilization/30-minute power is source-bound",
+        "evidenceRuns": [
+          33757087189,
+          33825326173
+        ],
+        "evidenceSections": [
+          "40.27",
+          "40.28",
+          "40.29"
+        ],
+        "note": "Historical technical capability only. The dedicated adapter, deterministic kW-to-hp tests and pagination proof already exist; do not rebuild them from scratch. Current commercial reuse remains blocked."
+      },
+      "useScope": "manual public reference only; no new automated commercial inventory/detail/API collection or republication until prior written Good Car approval or an expressly authorized data agreement covers AvtoCena",
+      "qualificationBlocker": "source_declared_registration_agreement_7_1_4_requires_prior_written_approval_for_commercial_information_copying",
+      "accessPolicy": {
+        "status": "prior_written_approval_required",
+        "officialTermsUrl": "https://www.chngoodcar.com/Home/Qualification?id=4",
+        "section": "VII / 1.4",
+        "permissionProven": false,
+        "probeRun": 34018339034,
+        "confirmationRun": 34018481311,
+        "evidenceFile": "data/catalog/source-access-policy-evidence/chngoodcar-20260906-confirmation.json"
+      }
     },
     {
       "market": "china",
@@ -360,7 +384,16 @@
       "evidence": "Permission-first run 33937794266: robots.txt and the public AutoMarket UAE home page both returned HTTP 200; the bounded home HTML exposed no source-declared Terms/Privacy/Legal/Policy link. No positive automated commercial ingestion/reuse permission is proven, so inventory/detail/API crawling remains blocked.",
       "qualificationDecision": "data/catalog/source-partial-classification-v1.json#automarket_uae_candidate",
       "useScope": "manual public reference only while automated commercial access/reuse permission remains unproven; do not crawl listing/detail/API routes until AutoMarket supplies an explicitly permitted API/feed/partner agreement or written authorization",
-      "qualificationBlocker": "automation_and_commercial_reuse_permission_unproven_no_source_declared_legal_link_on_home"
+      "qualificationBlocker": "automation_and_commercial_reuse_permission_unproven_no_source_declared_legal_link_on_home",
+      "accessPolicyEvidence": {
+        "probeRun": 33937794266,
+        "checkpointRun": 33937903549,
+        "artifactId": 9960753326,
+        "artifactDigest": "sha256:0c7906119350fdfbf619d6e3fe45e81d80cdd1ec0f1c6240e451ea81e9910516",
+        "artifactVerifiedInRun": 34018339034,
+        "evidenceFile": "data/catalog/source-access-policy-evidence/automarket-20260905.json",
+        "newAutoMarketRequests": 0
+      }
     },
     {
       "market": "uae",
@@ -407,7 +440,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "non-Japan source qualification inventory is now policy-triaged; Japan remains paused. Next execute the existing Good Car China exact_catalog blockers: dedicated adapter, deterministic kW-to-powerHp provenance tests, full no-write ICE dry-run, and manual normalized-card/gallery spot-check before any publication.",
+  "next": "continue non-Japan permission-first/no-write research; next inspect iAutos China access policy, whose historical lead_only decision was field-based; keep Good Car commercial crawling blocked until prior written approval. Do not rebuild the existing Good Car adapter/pagination work from roadmap 40.27-40.29. Japan remains paused.",
   "pausedMarkets": [
     "japan"
   ],
@@ -420,5 +453,6 @@
       "resumeCondition": "only after an owner-approved candidate proves completed/played auction lots under the exact data contract, followed by explicit owner instruction to resume Japan qualification",
       "note": "Fixed-price/export-stock candidates do not satisfy the completed-auction-lot requirement."
     }
-  }
+  },
+  "publishAllowedMutations": false
 }

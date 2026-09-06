@@ -1,7 +1,7 @@
 {
   "version": 1,
   "decidedAt": "2026-09-03",
-  "updatedAt": "2026-09-05",
+  "updatedAt": "2026-09-06",
   "mode": "manual_source_classification_after_read_only_evidence",
   "productionWrites": false,
   "publishAllowedMutations": false,
@@ -28,13 +28,15 @@
     33937794266,
     33938070816,
     33938264745,
-    33938425009
+    33938425009,
+    34018339034,
+    34018481311
   ],
   "decisions": [
     {
       "market": "china",
       "sourceId": "chngoodcar_china_candidate",
-      "class": "exact_catalog",
+      "class": "lead_only",
       "publishAllowed": false,
       "exactScope": "ICE offers that independently pass the offer-level exact gate; electrified offers remain blocked until required certified/utilization/30-minute power is source-bound",
       "evidence": {
@@ -46,15 +48,46 @@
         "engine": "offer-bound 排量 (ml); for ICE, mL is an exact volumetric unit equivalent to cm3/cc",
         "power": "offer-bound 功率 (kw); adapter must preserve raw kW and perform only documented deterministic unit conversion to project powerHp",
         "gallery": "10-20 images are isolated inside the offer core before recommendation cards on audited ICE offers",
-        "listDetailParity": "homepage name+numeric price matches detail on audited offers; public list currency contract is USD"
+        "listDetailParity": "homepage name+numeric price matches detail on audited offers; public list currency contract is USD",
+        "accessPolicy": {
+          "officialTermsUrl": "https://www.chngoodcar.com/Home/Qualification?id=4",
+          "section": "VII / 1.4",
+          "meaning": "Commercial use of information, including copying displayed information for commercial purposes without prior written Good Car approval, is prohibited.",
+          "probeRun": 34018339034,
+          "confirmRun": 34018481311,
+          "probeArtifact": 9984636447,
+          "confirmArtifact": 9984681878,
+          "probeDigest": "sha256:20aede5df0c68c6fbfeff428891b228aec8f440b3a07c75910689b505496cecd",
+          "confirmDigest": "sha256:89e34f6e57bbb378bf235503421ae97f8cbd3a38c966ebdae480f5cad12632c7",
+          "routeProvenance": "Registration Agreement and Privacy Policy anchors were extracted from the homepage in run 34018339034. Confirmation opened only that same declared agreement route.",
+          "boundary": "Discovery: 3 GET requests (robots/home/one policy). Confirmation: 2 GET requests (robots/same policy). No listing/detail/API/pagination/redirect-following/Japan requests.",
+          "robots": "robots.txt returned 404; absence of robots is not a commercial reuse license.",
+          "captureLimitation": "Initial snippets overlapped the privacy introduction. A separate two-request confirmation preserved the exact section VII 1.4; the original report remains unchanged.",
+          "evidenceFile": "data/catalog/source-access-policy-evidence/chngoodcar-20260906-confirmation.json"
+        }
       },
       "blockersBeforePublication": [
-        "write and test a dedicated Good Car adapter",
-        "document and regression-test deterministic kW -> project powerHp conversion while retaining raw kW provenance",
-        "full no-write offer-level exact dry-run across diverse ICE offers",
-        "manual spot-check of normalized cards and listing-bound images",
-        "China remains non-published at the current project stage"
-      ]
+        "obtain prior written Good Car approval explicitly covering AvtoCena automated commercial collection, retention, photos and republication",
+        "after permission is obtained, revalidate the existing adapter through the expressly permitted route and run the offer-level ICE exact gates",
+        "retain source-bound values and reject electrified offers without required certified power, identity conflicts and unreviewed price outliers",
+        "publication requires a separate owner decision; productionWrites and publishAllowed remain false"
+      ],
+      "useScope": "manual public reference only; no new automated commercial inventory/detail/API collection or republication until prior written Good Car approval or an expressly authorized data agreement covers AvtoCena",
+      "technicalQualification": {
+        "class": "exact_catalog",
+        "scope": "ICE offers that independently pass the offer-level exact gate; electrified offers remain blocked until required certified/utilization/30-minute power is source-bound",
+        "evidenceRuns": [
+          33757087189,
+          33825326173
+        ],
+        "evidenceSections": [
+          "40.27",
+          "40.28",
+          "40.29"
+        ],
+        "note": "Historical technical capability only. The dedicated adapter, deterministic kW-to-hp tests and pagination proof already exist; do not rebuild them from scratch. Current commercial reuse remains blocked."
+      },
+      "blockerBeforeAutomatedUse": "source_declared_registration_agreement_7_1_4_requires_prior_written_approval_for_commercial_information_copying"
     },
     {
       "market": "china",
@@ -389,7 +422,17 @@
         "home": "HTTP 200 at https://www.automarket.ae/; captured bounded HTML only",
         "sourceDeclaredLegalLinks": 0,
         "permissionConclusion": "no_source_declared_legal_link_detected_on_home_permission_unproven",
-        "probeBoundary": "exactly two HTTP requests: robots.txt + home; no listing/detail/pagination/API requests; raw bodies not stored"
+        "probeBoundary": "exactly two HTTP requests: robots.txt + home; no listing/detail/pagination/API requests; raw bodies not stored",
+        "probeRun": 33937794266,
+        "checkpointRun": 33937903549,
+        "artifactId": 9960753326,
+        "artifactDigest": "sha256:0c7906119350fdfbf619d6e3fe45e81d80cdd1ec0f1c6240e451ea81e9910516",
+        "artifactVerifiedInRun": 34018339034,
+        "evidenceFile": "data/catalog/source-access-policy-evidence/automarket-20260905.json",
+        "newAutoMarketRequests": 0,
+        "homeCapturedBytes": 83462,
+        "homeBodyHashSha256": "6b629a2cb3f80a0a77293075b0a345712b5214e5dbbb3e04081407ceafbcbd93",
+        "legacyArtifactLimitations": "The original artifact omits robots content type/size and home truncation state; these are not retroactively invented. Verification re-read the existing artifact, not the source."
       },
       "blockerBeforeAutomatedUse": "obtain an AutoMarket API/feed/partner agreement or written authorization explicitly permitting AvtoCena automated commercial collection, retention and republication; then requalify exact offer fields only through that permitted route"
     },

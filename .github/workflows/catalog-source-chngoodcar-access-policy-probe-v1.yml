@@ -1,18 +1,17 @@
-name: Research Good Car access policy 20260906
+name: Research Good Car access policy checkpoint 20260906
 on:
   push:
     branches: [chore/chngoodcar-access-policy-v1-20260906]
     paths:
       - .github/workflows/catalog-source-chngoodcar-access-policy-probe-v1.yml
-      - scripts/catalog-source-chngoodcar-access-policy-probe-v1.mjs
+      - scripts/catalog-source-chngoodcar-access-policy-checkpoint-v1.mjs
 permissions:
   contents: read
-  actions: read
 concurrency:
   group: research-goodcar-access-policy-20260906
   cancel-in-progress: false
 jobs:
-  probe:
+  checkpoint:
     if: github.ref == 'refs/heads/chore/chngoodcar-access-policy-v1-20260906'
     runs-on: ubuntu-latest
     timeout-minutes: 5
@@ -20,44 +19,29 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+          fetch-depth: 4
           sparse-checkout: |
             scripts/catalog-source-chngoodcar-access-policy-probe-v1.mjs
+            scripts/catalog-source-chngoodcar-access-policy-checkpoint-v1.mjs
             data/catalog/source-qualification-v1.json
+            data/catalog/source-partial-classification-v1.json
+            data/catalog/source-access-policy-evidence/
+            roadmap.md
           sparse-checkout-cone-mode: false
       - uses: actions/setup-node@v4
         with:
           node-version: 24
-      - name: Validate request envelope without network
+      - name: Offline safety regression
         run: node scripts/catalog-source-chngoodcar-access-policy-probe-v1.mjs --self-test
-      - name: Read source-declared policy route from the completed probe
-        uses: actions/download-artifact@v4
-        with:
-          github-token: ${{ github.token }}
-          run-id: 34018339034
-          name: research-goodcar-access-policy-20260906
-          path: evidence/previous
-      - name: Confirm the same policy clause in two requests
-        run: node scripts/catalog-source-chngoodcar-access-policy-probe-v1.mjs --confirm-policy
-      - name: Verify the observed envelope and unchanged tracked files
+      - name: Validate manual decisions and unchanged production files
+        run: node scripts/catalog-source-chngoodcar-access-policy-checkpoint-v1.mjs
+      - name: Verify no tracked mutations
         run: |
-          node --input-type=module - <<'NODE'
-          import fs from 'node:fs';
-          import assert from 'node:assert/strict';
-          const p = JSON.parse(fs.readFileSync('catalog-source-chngoodcar-access-policy-probe-v1.json', 'utf8'));
-          assert.equal(p.completed, true);
-          assert.equal(p.requestCount, p.requests.length);
-          assert(p.requestCount <= p.maxRequests && p.maxRequests <= 4);
-          assert(p.requests.filter(r => r.kind === 'policy').length <= 1);
-          if (p.maxRequests === 4) assert.notEqual(new URL(p.selectedPolicyLink.url).origin, 'https://www.chngoodcar.com');
-          for (const k of ['productionWrites','publishAllowedMutations','objectStorageWrites','catalogGenerationWrites','manifestWrites','cleanupStarted','rawBodiesStored','redirectsFollowed','guessedRoutes']) assert.equal(p[k], false);
-          for (const k of ['listingRequests','detailRequests','apiRequests','paginationRequests','japanRequests']) assert.equal(p[k], 0);
-          NODE
+          git diff --check
           git diff --exit-code
       - uses: actions/upload-artifact@v4
-        if: always()
         with:
-          name: research-goodcar-policy-clause-confirmation-20260906
-          path: |
-            catalog-source-chngoodcar-access-policy-probe-v1.json
-          if-no-files-found: error
+          name: research-goodcar-access-policy-checkpoint-20260906
+          path: catalog-source-chngoodcar-access-policy-checkpoint-v1.json
           retention-days: 30
+          if-no-files-found: error
