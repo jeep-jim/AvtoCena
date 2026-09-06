@@ -135,14 +135,13 @@ function metricEvidence(rawValue: unknown, field: "engineCc" | "powerHp"): Che16
 
   const values: number[] = [];
   if (field === "engineCc") {
-    for (const match of raw.matchAll(/\b(\d{3,5})\s*(?:cc|cm3|cm³)\b/gi)) {
+    for (const match of raw.matchAll(/\b(\d{3,5})\s*(?:cc|cm3|cm³|mL)(?![a-z0-9³])/gi)) {
       const value = integer(match[1]);
       if (value && value >= 300 && value <= 10_000) values.push(value);
     }
-    for (const match of raw.matchAll(/\b(\d+(?:[.,]\d+)?)\s*[LT]\b/gi)) {
-      const value = Number(match[1].replace(",", "."));
-      if (Number.isFinite(value) && value >= 0.3 && value <= 10) values.push(Math.round(value * 1_000));
-    }
+    // Litres can reveal conflicting labels, but never attest exact cc.
+    const litreLabels = [...raw.matchAll(/\b(\d+(?:[.,]\d+)?)\s*[LT]\b/gi)].map(match => Number(match[1].replace(",", ".")));
+    if (new Set(litreLabels).size > 1) return { rawValues, status: "conflict" };
   } else {
     for (const match of raw.matchAll(/\b(\d{2,4}(?:[.,]\d+)?)\s*(?:hp|ps|bhp)\b/gi)) {
       const value = Number(match[1].replace(",", "."));
