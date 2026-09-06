@@ -1,0 +1,79 @@
+{
+  "version": 1,
+  "checkedAt": "2026-09-06T14:49:35.089Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": false,
+  "pricesCalculated": false,
+  "maxRequestsPerSource": 1,
+  "markets": [
+    {
+      "market": "europe",
+      "requests": [
+        {
+          "origin": "https://www.mobile.de",
+          "path": "/consumer/api/search/srp",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json; charset=utf-8"
+        }
+      ],
+      "sourceId": "mobile_de_open",
+      "listingRows": 21,
+      "normalizedRows": 20,
+      "status": "listing_received"
+    },
+    {
+      "market": "china",
+      "requests": [
+        {
+          "origin": "https://globalapi.che168.com",
+          "path": "/api/v1/search",
+          "method": "GET",
+          "status": 200,
+          "contentType": "application/json; charset=utf-8"
+        }
+      ],
+      "sourceId": "autohome_used_china_open",
+      "listingRows": 24,
+      "normalizedRows": 20,
+      "status": "listing_received"
+    },
+    {
+      "market": "uae",
+      "requests": [
+        {
+          "origin": "https://uae.dubizzle.com",
+          "path": "/en/motors/used-cars/",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        }
+      ],
+      "sourceId": "dubizzle_uae_open",
+      "status": "blocked_or_failed",
+      "error": "pilot_request_outside_envelope"
+    },
+    {
+      "market": "georgia",
+      "requests": [
+        {
+          "origin": "https://autopapa.ge",
+          "path": "/en/usd/search",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=utf-8"
+        }
+      ],
+      "sourceId": "autopapa_georgia_open",
+      "status": "blocked_or_failed",
+      "error": "pilot_challenge_stop"
+    },
+    {
+      "market": "korea",
+      "status": "not_attempted",
+      "reason": "Existing KCar listing adapter uses POST; this pilot is GET-only. No inference about source availability."
+    }
+  ],
+  "limitation": "First listing response only, not a complete collection or calculation acceptance test. Network/proxy errors do not prove source unavailability."
+}

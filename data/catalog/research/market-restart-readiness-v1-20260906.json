@@ -15,6 +15,14 @@
     {
       "path": "data/catalog/research/non-japan-recovery-batch-v1-20260906.json",
       "sha256": "4f2c3bb47bca04511d70ceae72a9c2f37f84db78bbe908834e60cd19f1b90026"
+    },
+    {
+      "path": "data/catalog/research/public-listing-pilot-v1-20260906.json",
+      "sha256": "85a47b38083d224dc6b599f257ff51f303b4a84ddb774165701ba5391cbaec16"
+    },
+    {
+      "path": "data/catalog/research/public-listing-spec-pilot-v1-20260906.json",
+      "sha256": "1bf284d8547f1608554359d7d66b79da99fd831207a709c19cb2ca6a28e13b07"
     }
   ],
   "auditCheckedAt": "2026-09-06T12:59:54.341Z",
@@ -35,6 +43,744 @@
   "markets": [
     {
       "market": "europe",
+      "publicProbe": {
+        "market": "europe",
+        "requests": [
+          {
+            "origin": "https://www.mobile.de",
+            "path": "/consumer/api/search/srp",
+            "method": "GET",
+            "status": 200,
+            "contentType": "application/json; charset=utf-8"
+          }
+        ],
+        "sourceId": "mobile_de_open",
+        "listingRows": 21,
+        "normalizedRows": 20,
+        "samples": [
+          {
+            "sourceOfferId": "447928424",
+            "make": "Volkswagen",
+            "model": "T-Cross",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "459064079",
+            "make": "Volkswagen",
+            "model": "T-Cross",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "458664790",
+            "make": "Volkswagen",
+            "model": "Polo",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 95,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "457257304",
+            "make": "Volkswagen",
+            "model": "T-Cross",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "43069464351904",
+            "make": "Volkswagen",
+            "model": "T-Cross",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "446564888",
+            "make": "Volkswagen",
+            "model": "Taigo",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 95,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "455124671",
+            "make": "Volkswagen",
+            "model": "Taigo",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 95,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "460632484",
+            "make": "Volkswagen",
+            "model": "T-Cross",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "459258316",
+            "make": "Volkswagen",
+            "model": "T-Roc",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "41955792087008",
+            "make": "Volkswagen",
+            "model": "T-Cross",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "443578799",
+            "make": "Volkswagen",
+            "model": "T-Cross",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "38449215943136",
+            "make": "Volkswagen",
+            "model": "Golf",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "462266636",
+            "make": "Volkswagen",
+            "model": "Golf",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "43606400937312",
+            "make": "Volkswagen",
+            "model": "Golf",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "43791727900896",
+            "make": "Volkswagen",
+            "model": "Polo",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 80,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "42371257278336",
+            "make": "Volkswagen",
+            "model": "Golf",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "43127038801440",
+            "make": "Volkswagen",
+            "model": "Polo",
+            "year": 2026,
+            "engineCc": 999,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "451170199",
+            "make": "Volkswagen",
+            "model": "Caddy",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "43234575008704",
+            "make": "Volkswagen",
+            "model": "Golf",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "43234552630208",
+            "make": "Volkswagen",
+            "model": "Golf",
+            "year": 2026,
+            "engineCc": 1498,
+            "powerHp": 116,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "exact",
+                "reason": "usable_engine_cc",
+                "provenance": "source_evidence"
+              },
+              "powerHp": {
+                "state": "exact",
+                "reason": "usable_peak_power",
+                "provenance": "source_evidence"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          }
+        ],
+        "status": "listing_received"
+      },
       "savedInput": 5259,
       "savedAutomatic": 4808,
       "savedRecoveryShare": 0.914242251378589,
@@ -64,7 +810,7 @@
       "controlledPilot": {
         "status": "not_ready",
         "remaining": [
-          "Confirm source-specific automated collection permission and working access for this project.",
+          "Verify a working public route without login, challenge bypass or blocked-request retries; official API partnership is not a prerequisite under the owner decision of 2026-09-06.",
           "Verify the corrected adapter is the actual code used by the isolated market runner.",
           "Define bounded collection without catalog publication; preserve the production pause."
         ]
@@ -75,7 +821,7 @@
           "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
           "Verify independent calculation examples and browser list/detail/selection behavior.",
           "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
-          "Confirm publication permission and production deployment; retain rollback generation."
+          "Confirm production deployment and explicit publication decision after the pilot; retain rollback generation."
         ]
       },
       "specificationBlockers": {
@@ -89,6 +835,21 @@
     },
     {
       "market": "korea",
+      "publicProbe": {
+        "market": "korea",
+        "requests": [
+          {
+            "origin": "https://api.encar.com",
+            "path": "/search/car/list/mobile",
+            "method": "GET",
+            "status": 404,
+            "contentType": "text/html"
+          }
+        ],
+        "sourceId": "encar_direct",
+        "status": "blocked_or_failed",
+        "error": "non_json_response status=404 content-type=text/html url=[url] bodyPreview=<!DOCTYPE html> <html> <head> <meta http-equiv=\"refresh\" content=\"0; url=[url] /> </head> <body></body> </html> "
+      },
       "savedInput": 2840,
       "savedAutomatic": 1511,
       "savedRecoveryShare": 0.5320422535211268,
@@ -118,7 +879,7 @@
       "controlledPilot": {
         "status": "not_ready",
         "remaining": [
-          "Confirm source-specific automated collection permission and working access for this project.",
+          "Verify a working public route without login, challenge bypass or blocked-request retries; official API partnership is not a prerequisite under the owner decision of 2026-09-06.",
           "Verify the corrected adapter is the actual code used by the isolated market runner.",
           "Define bounded collection without catalog publication; preserve the production pause."
         ]
@@ -129,7 +890,7 @@
           "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
           "Verify independent calculation examples and browser list/detail/selection behavior.",
           "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
-          "Confirm publication permission and production deployment; retain rollback generation."
+          "Confirm production deployment and explicit publication decision after the pilot; retain rollback generation."
         ]
       },
       "specificationBlockers": {
@@ -143,6 +904,704 @@
     },
     {
       "market": "china",
+      "publicProbe": {
+        "market": "china",
+        "requests": [
+          {
+            "origin": "https://globalapi.che168.com",
+            "path": "/api/v1/search",
+            "method": "GET",
+            "status": 200,
+            "contentType": "application/json; charset=utf-8"
+          }
+        ],
+        "sourceId": "autohome_used_china_open",
+        "listingRows": 24,
+        "normalizedRows": 20,
+        "samples": [
+          {
+            "sourceOfferId": "59754526",
+            "make": "Lexus",
+            "model": "RC",
+            "year": 2019,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59769656",
+            "make": "BMW",
+            "model": "7 Series",
+            "year": 2026,
+            "fuel": "hybrid",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "missing",
+                "reason": "certified_30min_power_missing",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59282752",
+            "make": "Acura",
+            "model": "TLX-L",
+            "year": 2018,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59822381",
+            "make": "Lexus",
+            "model": "RX",
+            "year": 2020,
+            "fuel": "hybrid",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "missing",
+                "reason": "certified_30min_power_missing",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59818392",
+            "make": "Land Rover",
+            "model": "Range Rover",
+            "year": 2022,
+            "fuel": "hybrid",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "missing",
+                "reason": "certified_30min_power_missing",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59748754",
+            "make": "Mercedes-Benz",
+            "model": "GLC AMG",
+            "year": 2022,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59129957",
+            "make": "Infiniti",
+            "model": "Q60",
+            "year": 2019,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "58626842",
+            "make": "Mercedes-Benz",
+            "model": "E-Class (Import)",
+            "year": 2021,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59817902",
+            "make": "BMW",
+            "model": "X5",
+            "year": 2022,
+            "fuel": "hybrid",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "missing",
+                "reason": "certified_30min_power_missing",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59442681",
+            "make": "Audi",
+            "model": "S4",
+            "year": 2023,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59737522",
+            "make": "Rolls-Royce",
+            "model": "Ghost",
+            "year": 2024,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59627482",
+            "make": "Audi",
+            "model": "Q8",
+            "year": 2019,
+            "fuel": "hybrid",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "missing",
+                "reason": "certified_30min_power_missing",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59654620",
+            "make": "Audi",
+            "model": "A6 (Import)",
+            "year": 2020,
+            "fuel": "hybrid",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "missing",
+                "reason": "certified_30min_power_missing",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59722906",
+            "make": "Jaguar",
+            "model": "XJ",
+            "year": 2018,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59747871",
+            "make": "Peugeot",
+            "model": "308S",
+            "year": 2015,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59203886",
+            "make": "MINI",
+            "model": "JCW",
+            "year": 2015,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59681818",
+            "make": "Lexus",
+            "model": "GX",
+            "year": 2024,
+            "fuel": "hybrid",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "missing",
+                "reason": "certified_30min_power_missing",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59691786",
+            "make": "Peugeot",
+            "model": "508",
+            "year": 2019,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59211013",
+            "make": "Volkswagen",
+            "model": "Beetle",
+            "year": 2019,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          },
+          {
+            "sourceOfferId": "59574597",
+            "make": "Jaguar",
+            "model": "F-PACE",
+            "year": 2021,
+            "fuel": "petrol",
+            "fields": {
+              "year": {
+                "state": "exact",
+                "reason": "valid_source_year",
+                "provenance": "source_evidence"
+              },
+              "fuelPowertrain": {
+                "state": "exact",
+                "reason": "usable_fuel_powertrain",
+                "provenance": "source_evidence"
+              },
+              "engineCc": {
+                "state": "missing",
+                "reason": "engine_cc_missing",
+                "provenance": "none"
+              },
+              "powerHp": {
+                "state": "missing",
+                "reason": "peak_power_missing",
+                "provenance": "none"
+              },
+              "certifiedPower": {
+                "state": "not_applicable",
+                "reason": "combustion_vehicle",
+                "provenance": "none"
+              }
+            }
+          }
+        ],
+        "status": "listing_received"
+      },
       "savedInput": 3092,
       "savedAutomatic": 0,
       "savedRecoveryShare": 0,
@@ -182,7 +1641,7 @@
       "controlledPilot": {
         "status": "not_ready",
         "remaining": [
-          "Confirm source-specific automated collection permission and working access for this project.",
+          "Verify a working public route without login, challenge bypass or blocked-request retries; official API partnership is not a prerequisite under the owner decision of 2026-09-06.",
           "Verify the corrected adapter is the actual code used by the isolated market runner.",
           "Define bounded collection without catalog publication; preserve the production pause."
         ]
@@ -193,7 +1652,7 @@
           "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
           "Verify independent calculation examples and browser list/detail/selection behavior.",
           "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
-          "Confirm publication permission and production deployment; retain rollback generation."
+          "Confirm production deployment and explicit publication decision after the pilot; retain rollback generation."
         ]
       },
       "specificationBlockers": {
@@ -209,6 +1668,21 @@
     },
     {
       "market": "uae",
+      "publicProbe": {
+        "market": "uae",
+        "requests": [
+          {
+            "origin": "https://uae.dubizzle.com",
+            "path": "/en/motors/used-cars/",
+            "method": "GET",
+            "status": 200,
+            "contentType": "text/html; charset=UTF-8"
+          }
+        ],
+        "sourceId": "dubizzle_uae_open",
+        "status": "blocked_or_failed",
+        "error": "pilot_request_outside_envelope"
+      },
       "savedInput": 4647,
       "savedAutomatic": 0,
       "savedRecoveryShare": 0,
@@ -248,7 +1722,7 @@
       "controlledPilot": {
         "status": "not_ready",
         "remaining": [
-          "Confirm source-specific automated collection permission and working access for this project.",
+          "Verify a working public route without login, challenge bypass or blocked-request retries; official API partnership is not a prerequisite under the owner decision of 2026-09-06.",
           "Verify the corrected adapter is the actual code used by the isolated market runner.",
           "Define bounded collection without catalog publication; preserve the production pause."
         ]
@@ -259,7 +1733,7 @@
           "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
           "Verify independent calculation examples and browser list/detail/selection behavior.",
           "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
-          "Confirm publication permission and production deployment; retain rollback generation."
+          "Confirm production deployment and explicit publication decision after the pilot; retain rollback generation."
         ]
       },
       "specificationBlockers": {
@@ -272,6 +1746,21 @@
     },
     {
       "market": "georgia",
+      "publicProbe": {
+        "market": "georgia",
+        "requests": [
+          {
+            "origin": "https://autopapa.ge",
+            "path": "/en/usd/search",
+            "method": "GET",
+            "status": 200,
+            "contentType": "text/html; charset=utf-8"
+          }
+        ],
+        "sourceId": "autopapa_georgia_open",
+        "status": "blocked_or_failed",
+        "error": "pilot_challenge_stop"
+      },
       "savedInput": 216,
       "savedAutomatic": 0,
       "savedRecoveryShare": 0,
@@ -296,7 +1785,7 @@
       "controlledPilot": {
         "status": "not_ready",
         "remaining": [
-          "Confirm source-specific automated collection permission and working access for this project.",
+          "Verify a working public route without login, challenge bypass or blocked-request retries; official API partnership is not a prerequisite under the owner decision of 2026-09-06.",
           "Verify the corrected adapter is the actual code used by the isolated market runner.",
           "Define bounded collection without catalog publication; preserve the production pause."
         ]
@@ -307,7 +1796,7 @@
           "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
           "Verify independent calculation examples and browser list/detail/selection behavior.",
           "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
-          "Confirm publication permission and production deployment; retain rollback generation."
+          "Confirm production deployment and explicit publication decision after the pilot; retain rollback generation."
         ]
       },
       "specificationBlockers": {

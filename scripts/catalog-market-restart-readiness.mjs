@@ -14,6 +14,9 @@ async function read(path) {
 const registry = await read(registryPath);
 const audit = await read(auditPath);
 const batch = await read(ciPath);
+const pilot = await read('data/catalog/research/public-listing-pilot-v1-20260906.json');
+const specPilot = await read('data/catalog/research/public-listing-spec-pilot-v1-20260906.json');
+const probes = new Map([...pilot.markets, ...specPilot.markets].map(row => [row.market, row]));
 const markets = ['europe', 'korea', 'china', 'uae', 'georgia'];
 const report = {
   version: 1, advisoryOnly: true, productionWrites: false, workflowDispatches: 0,
@@ -25,6 +28,7 @@ const report = {
     const sources = registry.candidates.filter(source => source.market === market);
     return {
       market,
+      publicProbe: probes.get(market) || null,
       savedInput: saved.matchedSavedRows,
       savedAutomatic: saved.automaticAccepted,
       savedRecoveryShare: saved.matchedSavedRows ? saved.automaticAccepted / saved.matchedSavedRows : null,
@@ -32,7 +36,7 @@ const report = {
       publicationQualifiedSources: sources.filter(source => source.class === 'exact_catalog' && source.publishAllowed === true).map(source => source.sourceId),
       sourceDecisions: sources.map(source => ({ sourceId: source.sourceId, class: source.class, publishAllowed: source.publishAllowed })),
       controlledPilot: { status: 'not_ready', remaining: [
-        'Confirm source-specific automated collection permission and working access for this project.',
+        'Verify a working public route without login, challenge bypass or blocked-request retries; official API partnership is not a prerequisite under the owner decision of 2026-09-06.',
         'Verify the corrected adapter is the actual code used by the isolated market runner.',
         'Define bounded collection without catalog publication; preserve the production pause.',
       ] },
@@ -40,7 +44,7 @@ const report = {
         'Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.',
         'Verify independent calculation examples and browser list/detail/selection behavior.',
         'Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.',
-        'Confirm publication permission and production deployment; retain rollback generation.',
+        'Confirm production deployment and explicit publication decision after the pilot; retain rollback generation.',
       ] },
       specificationBlockers: saved.blockers,
     };
