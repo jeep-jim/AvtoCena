@@ -1,0 +1,77 @@
+name: Research Good Car access policy 20260906
+on:
+  push:
+    branches: [chore/chngoodcar-access-policy-v1-20260906]
+    paths:
+      - .github/workflows/catalog-source-chngoodcar-access-policy-probe-v1.yml
+      - scripts/catalog-source-chngoodcar-access-policy-probe-v1.mjs
+permissions:
+  contents: read
+  actions: read
+concurrency:
+  group: research-goodcar-access-policy-20260906
+  cancel-in-progress: false
+jobs:
+  probe:
+    if: github.ref == 'refs/heads/chore/chngoodcar-access-policy-v1-20260906'
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+          sparse-checkout: |
+            scripts/catalog-source-chngoodcar-access-policy-probe-v1.mjs
+            data/catalog/source-qualification-v1.json
+          sparse-checkout-cone-mode: false
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+      - name: Validate request envelope without network
+        run: node scripts/catalog-source-chngoodcar-access-policy-probe-v1.mjs --self-test
+      - name: Read existing AutoMarket evidence without probing the source
+        uses: actions/download-artifact@v4
+        with:
+          github-token: ${{ github.token }}
+          run-id: 33937794266
+          name: catalog-source-automarket-access-policy-probe-v1
+          path: evidence/automarket
+      - name: Verify and print the original AutoMarket report
+        run: |
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const p = JSON.parse(fs.readFileSync('evidence/automarket/catalog-source-automarket-access-policy-probe-v1.json', 'utf8'));
+          assert.equal(p.sourceId, 'automarket_uae_candidate');
+          assert.equal(p.completed, true);
+          for (const k of ['productionWrites', 'publishAllowedMutations', 'objectStorageWrites', 'catalogGenerationWrites', 'rawBodiesStored']) assert.equal(p[k], false);
+          assert.equal(p.requestCount, 2);
+          for (const k of ['detailRequests', 'paginationRequests', 'apiRequests']) assert.equal(p[k], 0);
+          console.log(JSON.stringify(p, null, 2));
+          NODE
+      - name: Bounded Good Car permission-first probe
+        run: node scripts/catalog-source-chngoodcar-access-policy-probe-v1.mjs
+      - name: Verify the observed envelope and unchanged tracked files
+        run: |
+          node --input-type=module - <<'NODE'
+          import fs from 'node:fs';
+          import assert from 'node:assert/strict';
+          const p = JSON.parse(fs.readFileSync('catalog-source-chngoodcar-access-policy-probe-v1.json', 'utf8'));
+          assert.equal(p.completed, true);
+          assert.equal(p.requestCount, p.requests.length);
+          assert(p.requestCount <= p.maxRequests && p.maxRequests <= 4);
+          assert(p.requests.filter(r => r.kind === 'policy').length <= 1);
+          if (p.maxRequests === 4) assert.notEqual(new URL(p.selectedPolicyLink.url).origin, 'https://www.chngoodcar.com');
+          for (const k of ['productionWrites','publishAllowedMutations','objectStorageWrites','catalogGenerationWrites','manifestWrites','cleanupStarted','rawBodiesStored','redirectsFollowed','guessedRoutes']) assert.equal(p[k], false);
+          for (const k of ['listingRequests','detailRequests','apiRequests','paginationRequests','japanRequests']) assert.equal(p[k], 0);
+          NODE
+          git diff --exit-code
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: research-goodcar-access-policy-20260906
+          path: |
+            catalog-source-chngoodcar-access-policy-probe-v1.json
+            evidence/automarket/*.json
+          if-no-files-found: error
+          retention-days: 30
