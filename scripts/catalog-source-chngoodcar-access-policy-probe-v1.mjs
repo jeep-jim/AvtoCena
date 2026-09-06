@@ -75,15 +75,19 @@ export function robotsAllows(text, url) {
   const rule = matches[0];
   return { allowed: !rule || rule.kind === 'allow', reason: rule ? 'matched_rule' : 'no_disallow_match', matchedRule: rule ? { kind: rule.kind, path: rule.path.slice(0, 250) } : null };
 }
-function policySnippets(html) {
-  const text = visible(html), out = []; let used = 0;
+export function policySnippets(html) {
+  const text = visible(html), out = [], ranges = []; let used = 0;
   // Store bounded excerpts only; never retain the complete policy text.
   const budget = Math.min(1500, Math.floor(text.length / 3));
-  for (const m of text.matchAll(TOPIC)) {
+  const important = /commercial|scrap|robot|spider|automat|permission|consent|republish|商业性利用|商业用途|事先书面批准|爬虫|抓取|复制|转载|授权/i;
+  const matches = [...text.matchAll(TOPIC)].sort((a, b) => Number(important.test(text.slice(Math.max(0, b.index - 40), b.index + 100))) - Number(important.test(text.slice(Math.max(0, a.index - 40), a.index + 100))));
+  for (const m of matches) {
     if (out.length >= 6 || used >= budget) break;
     const start = Math.max(0, m.index - 60);
-    const snippet = text.slice(start, Math.min(text.length, start + Math.min(280, budget - used)));
-    if (snippet && !out.some(s => s.includes(m[0]) && s === snippet)) { out.push(snippet); used += snippet.length; }
+    const end = Math.min(text.length, start + Math.min(280, budget - used));
+    if (ranges.some(([a, b]) => start < b && end > a)) continue;
+    const snippet = text.slice(start, end);
+    if (snippet) { out.push(snippet); ranges.push([start, end]); used += snippet.length; }
   }
   return { visibleCharacters: text.length, snippets: out, storedSnippetCharacters: used };
 }
@@ -102,7 +106,7 @@ async function readBounded(response, max) {
   const buffer = Buffer.concat(chunks);
   return { text: buffer.toString('utf8'), capturedBytes: bytes, truncated, bodyHashSha256: crypto.createHash('sha256').update(buffer).digest('hex'), hashScope: truncated ? 'captured_prefix' : 'complete_response_body' };
 }
-export async function runProbe({ registry, fetchImpl = fetch } = {}) {
+export async function runProbe({ registry, fetchImpl = fetch, policyEvidence = null } = {}) {
   assert.equal(registry.productionWrites, false);
   assert(registry.candidates.every(c => c.publishAllowed === false));
   assert(registry.pausedMarkets.includes('japan'));
@@ -142,6 +146,30 @@ export async function runProbe({ registry, fetchImpl = fetch } = {}) {
   }
   const stop = reason => { report.decisionSignal = reason; report.completed = true; return report; };
   try {
+    if (policyEvidence) {
+      assert.equal(policyEvidence.sourceId, SOURCE_ID);
+      assert.equal(policyEvidence.rawBodiesStored, false);
+      const url = policyEvidence.selectedPolicyLink?.url;
+      // Only the exact legal route already declared by the previous live homepage is eligible.
+      assert.equal(url, ORIGIN + '/Home/Qualification?id=4');
+      assert(policyEvidence.sourceDeclaredLegalLinks.some(l => l.url === url));
+      report.mode = 'same_declared_policy_clause_confirmation_no_write';
+      report.maxRequests = 2;
+      report.sourceDeclaredLegalLinks = policyEvidence.sourceDeclaredLegalLinks;
+      report.selectedPolicyLink = policyEvidence.selectedPolicyLink;
+      report.routeProvenanceRun = 34018339034;
+      const robots = await get(ORIGIN + '/robots.txt', 'robots');
+      report.policyRobotsDecision = allowed(robots, url);
+      if (!report.policyRobotsDecision.allowed) return stop('policy_robots_access_unproven_or_disallowed');
+      const policy = await get(url, 'policy');
+      if (!policy.ok || !/html/i.test(policy.row.contentType)) return stop('policy_unreadable_permission_unproven');
+      report.policy = { url, ...policySnippets(policy.text) };
+      const text = visible(policy.text);
+      const clause = text.match(/1\.4\s*您同意，您不会对任何资料作商业性利用[^。]{0,250}。/);
+      report.policy.commercialUseClause = clause ? { section: '七 / 1.4', text: clause[0] } : null;
+      report.policy.explicitPriorWrittenApprovalClauseObserved = Boolean(clause && /事先书面批准/.test(clause[0]));
+      return stop(clause ? 'commercial_reuse_prior_written_approval_clause_observed' : 'clause_not_confirmed_permission_unproven');
+    }
     const robots = await get(ORIGIN + '/robots.txt', 'robots');
     report.homeRobotsDecision = allowed(robots, ORIGIN + '/');
     if (!report.homeRobotsDecision.allowed) return stop('home_robots_access_unproven_or_disallowed');
@@ -194,13 +222,19 @@ async function selfTest() {
   assert.equal(r.requestCount, 1); assert.equal(r.requests[0].status, null);
   assert.equal(legalLinks('<script><a href="/terms">Terms</a></script><a href="https://127.0.0.1/legal">Legal</a><a href="/Home/Cars?id=1">Legal</a>', ORIGIN).detectedCount, 0);
   await assert.rejects(runProbe({ registry: { ...registry, productionWrites: true }, fetchImpl: async () => { throw new Error('must_not_fetch'); } }));
-  console.log('Access-policy safety self-test: 11 checks passed; live requests: 0');
+  const sample = '隐私政策 注册协议 法律声明 '.repeat(50) + '1.4您同意，您不会对任何资料作商业性利用，包括但不限于在未经广东好车事先书面批准的情况下，复制在广东好车网站上展示的任何资料并用于商业用途。' + ' 普通其他内容。'.repeat(100);
+  r = await runProbe({ registry, policyEvidence: { sourceId: SOURCE_ID, rawBodiesStored: false, selectedPolicyLink: { url: ORIGIN + '/Home/Qualification?id=4' }, sourceDeclaredLegalLinks: [{ url: ORIGIN + '/Home/Qualification?id=4' }] },
+    fetchImpl: fake([[ORIGIN + '/robots.txt', 404], [ORIGIN + '/Home/Qualification?id=4', 200, sample]]) });
+  assert.equal(r.requestCount, 2); assert.equal(r.policy.explicitPriorWrittenApprovalClauseObserved, true);
+  assert(policySnippets(sample).snippets.some(s => s.includes('商业性利用')));
+  console.log('Access-policy safety self-test: 13 checks passed; live requests: 0');
 }
 if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) {
   if (process.argv.includes('--self-test')) await selfTest();
   else {
     const registry = JSON.parse(await fs.readFile('data/catalog/source-qualification-v1.json', 'utf8'));
-    const result = await runProbe({ registry });
+    const policyEvidence = process.argv.includes('--confirm-policy') ? JSON.parse(await fs.readFile('evidence/previous/catalog-source-chngoodcar-access-policy-probe-v1.json', 'utf8')) : null;
+    const result = await runProbe({ registry, policyEvidence });
     await fs.writeFile(OUT, JSON.stringify(result, null, 2) + '\n');
     console.log(JSON.stringify(result, null, 2));
   }

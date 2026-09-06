@@ -29,28 +29,15 @@ jobs:
           node-version: 24
       - name: Validate request envelope without network
         run: node scripts/catalog-source-chngoodcar-access-policy-probe-v1.mjs --self-test
-      - name: Read existing AutoMarket evidence without probing the source
+      - name: Read source-declared policy route from the completed probe
         uses: actions/download-artifact@v4
         with:
           github-token: ${{ github.token }}
-          run-id: 33937794266
-          name: catalog-source-automarket-access-policy-probe-v1
-          path: evidence/automarket
-      - name: Verify and print the original AutoMarket report
-        run: |
-          node --input-type=module - <<'NODE'
-          import fs from 'node:fs';
-          import assert from 'node:assert/strict';
-          const p = JSON.parse(fs.readFileSync('evidence/automarket/catalog-source-automarket-access-policy-probe-v1.json', 'utf8'));
-          assert.equal(p.sourceId, 'automarket_uae_candidate');
-          assert.equal(p.completed, true);
-          for (const k of ['productionWrites', 'publishAllowedMutations', 'objectStorageWrites', 'catalogGenerationWrites', 'rawBodiesStored']) assert.equal(p[k], false);
-          assert.equal(p.requestCount, 2);
-          for (const k of ['detailRequests', 'paginationRequests', 'apiRequests']) assert.equal(p[k], 0);
-          console.log(JSON.stringify(p, null, 2));
-          NODE
-      - name: Bounded Good Car permission-first probe
-        run: node scripts/catalog-source-chngoodcar-access-policy-probe-v1.mjs
+          run-id: 34018339034
+          name: research-goodcar-access-policy-20260906
+          path: evidence/previous
+      - name: Confirm the same policy clause in two requests
+        run: node scripts/catalog-source-chngoodcar-access-policy-probe-v1.mjs --confirm-policy
       - name: Verify the observed envelope and unchanged tracked files
         run: |
           node --input-type=module - <<'NODE'
@@ -69,9 +56,8 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: research-goodcar-access-policy-20260906
+          name: research-goodcar-policy-clause-confirmation-20260906
           path: |
             catalog-source-chngoodcar-access-policy-probe-v1.json
-            evidence/automarket/*.json
           if-no-files-found: error
           retention-days: 30
