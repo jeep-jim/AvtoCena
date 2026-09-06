@@ -14,7 +14,7 @@
     "build": "npm --workspace=@avtocena/web run build",
     "clean:web": "node -e \"require('fs').rmSync('apps/web/.next',{recursive:true,force:true})\"",
     "dev:fresh": "npm run clean:web && npm run dev",
-    "test": "node --import tsx --test --test-concurrency=1 tests/*.test.ts",
+    "test": "node --import tsx --import ./tests/helpers/offline-fetch.mjs --test --test-concurrency=1 tests/*.test.ts",
     "typecheck": "npm --workspace=@avtocena/web exec tsc -- --noEmit && npm --workspace=@avtocena/engine exec tsc -- --noEmit",
     "storage:migrate-to-object": "tsx scripts/storage-migrate-to-object.mjs",
     "catalog:import": "tsx scripts/catalog-import.mjs",

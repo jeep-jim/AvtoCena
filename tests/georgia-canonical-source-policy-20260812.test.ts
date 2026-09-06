@@ -21,11 +21,19 @@ test("Georgia importer cannot expose banned fallback adapters", () => {
   }
 });
 
-test("Georgia production importer uses the dedicated AutoPapa adapter", async () => {
+test("Georgia importer uses dedicated AutoPapa normalization without a live health probe", (t) => {
+  const network = t.mock.method(globalThis, "fetch", async () => { throw new Error("unexpected_live_source_request"); });
   const source = catalogImportSources.find((candidate) => candidate.sourceId === "autopapa_georgia_open");
   assert.ok(source, "dedicated AutoPapa source must be registered");
-  const health = await source.healthCheck();
-  assert.match(String(health.message || ""), /AutoPapa canonical Yandex parser/i);
+  const row = source.normalizeOffer({ id: "932906", make: "Chevrolet", model: "Captiva", title: "Chevrolet Captiva",
+    year: 2023, price: 13000, currency: "USD", fuel: "petrol", engineCc: 1500, images: [],
+    detailUrl: "https://autopapa.ge/en/usd/chevrolet/captiva/932906" });
+  assert.ok(row);
+  assert.equal(row.sourceId, "autopapa_georgia_open");
+  assert.equal(row.sourceOfferId, "932906");
+  assert.equal(row.operational.semanticEvidence?.year?.source, "autopapa_listing_card_year");
+  assert.equal(row.powerHp, undefined);
+  assert.equal(network.mock.callCount(), 0);
 });
 
 test("Georgia scale source definitions contain AutoPapa but no banned fallback sources", () => {
