@@ -453,7 +453,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan permission-first research on documented official partner/API/feed routes; next inspect the published scope of Encar price/data partnership (price@encar.com): inventory fields, image rights, retention and republication must be explicit before any dataset request. Existing blocked public routes stay closed. Do not send contacts or sign agreements from this registry instruction. Japan remains paused; productionWrites=false and all publishAllowed=false.",
+  "next": "owner_direction_2026-09-06: repair saved non-Japan catalog, implement linked verified modification selection with separate customer scenarios, and measure >=80% automatically calculated share after admission and deduplication. Preserve useful existing adapters. New sources require permission and calculation-capable fields; no bulk unpriced expansion. No production writes, publishing, cleanup or Japan work.",
   "pausedMarkets": [
     "japan"
   ],
@@ -467,5 +467,23 @@
       "note": "Fixed-price/export-stock candidates do not satisfy the completed-auction-lot requirement."
     }
   },
-  "publishAllowedMutations": false
+  "publishAllowedMutations": false,
+  "recoveryProgram": {
+    "version": 1,
+    "ownerDecisionDate": "2026-09-06",
+    "mode": "saved_catalog_repair_no_write",
+    "markets": [
+      "korea",
+      "china",
+      "uae",
+      "europe",
+      "georgia"
+    ],
+    "minimumAutomaticCalculatedShare": 0.8,
+    "manualScenarioCountsAsAutomatic": false,
+    "databasePurchaseRequired": false,
+    "contract": "docs/catalog-modification-recovery-v1.md",
+    "productionWrites": false,
+    "publishAllowedMutations": false
+  }
 }
