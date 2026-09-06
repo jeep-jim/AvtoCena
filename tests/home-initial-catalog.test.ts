@@ -6,10 +6,13 @@ const page = fs.readFileSync("apps/web/app/(public)/page.tsx", "utf8");
 const client = fs.readFileSync("apps/web/components/home/HomePageClient.tsx", "utf8");
 const homeRoute = fs.readFileSync("apps/web/app/api/catalog/home/route.ts", "utf8");
 
-test("home page does not block its first render on catalog storage", () => {
-  assert.doesNotMatch(page, /readHomeCatalogSnapshot/);
-  assert.doesNotMatch(page, /loadInitialCatalog/);
-  assert.match(page, /<HomePageClient initialCity=\{fromQuery \|\| fromCookie\} \/>/);
+test("home page supplies a bounded server snapshot and recovers from storage errors", () => {
+  assert.match(page, /readHomeCatalogSnapshot\(6\)\.catch/);
+  assert.match(page, /return \{ items: \[\], marketCounts: \{\}, total: 0 \}/);
+  assert.match(page, /initialCity=\{fromQuery \|\| fromCookie\}/);
+  assert.match(page, /initialOffers=\{catalog.items\}/);
+  assert.match(page, /initialMarketCounts=\{catalog.marketCounts\}/);
+  assert.match(page, /initialCount=\{catalog.total\}/);
 });
 
 test("home API reads shared indexes once instead of seven complete searches", () => {

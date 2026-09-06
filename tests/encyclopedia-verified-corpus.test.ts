@@ -39,9 +39,12 @@ test("full verified corpus remains read-only and cannot expand calculator runtim
   assert.ok(!runtimeModels.some((row) => row.id === "toyota/premio"));
   assert.ok(!runtimeVariants.some((row) => row.id === "toyota/premio/second-generation/f-2016"));
 
-  assert.ok(publicModels.length > runtimeModels.length);
+  // V2 replaces legacy families for covered brands; raw counts need not grow.
+  assert.equal(new Set(publicModels.map((row) => row.id)).size, publicModels.length);
   assert.ok(publicVariants.length > runtimeVariants.length);
   assert.ok(publicModels.some((row) => row.id === "toyota/premio"));
   assert.ok(publicModels.some((row) => row.id === "toyota/regiusace"));
   assert.ok(publicVariants.some((row) => row.id === "toyota/premio/second-generation/f-2016"));
+  assert.deepEqual(await readVehicleKnowledgeModels(), runtimeModels);
+  assert.deepEqual(await readVehicleKnowledgeVariants(), runtimeVariants);
 });

@@ -20,7 +20,7 @@ function offer(overrides: Record<string, unknown> = {}) {
   } as any;
 }
 
-test("source price, year and power qualify a recent <=160 hp offer before knowledge enrichment", () => {
+test("source price and low power allow inventory admission but cannot prove affordable delivered price", () => {
   const result = classifyCatalogV2Offer(offer(), {
     priorityTarget: 5_001,
     maximumPerMarket: 10_000,
@@ -31,11 +31,11 @@ test("source price, year and power qualify a recent <=160 hp offer before knowle
     hardMaxTotalRub: 100_000_000,
   });
   assert.equal(result.eligible, true);
-  assert.equal(result.tier, "priority");
+  assert.equal(result.tier, "recent");
 });
 
-test("Smoke10 publishes collected real offers without the full-market priority gate", () => {
-  const offers = Array.from({ length: 10 }, (_, index) => offer({ id: `korea-${index}`, year: 2015, powerHp: 200 }));
+test("small inventory selection admits recent high-power offers but preserves the minimum model year", () => {
+  const offers = Array.from({ length: 10 }, (_, index) => offer({ id: `korea-${index}`, year: 2020, powerHp: 200 }));
   const result = selectCatalogV2MarketOffers(offers, {
     priorityTarget: 1_000,
     maximumPerMarket: 10,
@@ -47,4 +47,5 @@ test("Smoke10 publishes collected real offers without the full-market priority g
   });
   assert.equal(result.fallbackUnlocked, true);
   assert.equal(result.selected.length, 10);
+  assert.equal(classifyCatalogV2Offer(offer({ year: 2015 })).reason, "year");
 });

@@ -2,9 +2,11 @@ import assert from "node:assert/strict";
 import test from "node:test";
 import { isCrediblePublicOffer } from "../apps/web/lib/catalog/offer-quality";
 
-const compactGoonetCard = {
-  id: "goonet-card-1",
-  market: "japan",
+const compactSourceCard = {
+  id: "mobile-card-1",
+  sourceId: "mobile_de_open",
+  sourceOfferId: "card-1",
+  market: "europe",
   status: "active",
   make: "Toyota",
   model: "Corolla",
@@ -12,22 +14,25 @@ const compactGoonetCard = {
   sourceTitle: "Toyota Corolla 2024",
   year: 2024,
   mileageKm: 12_000,
-  sourcePrice: 1_900_000,
-  sourceCurrency: "JPY",
+  sourcePrice: 19_000,
+  sourceCurrency: "EUR",
+  operational: { sourceUrl: "https://suchen.mobile.de/fahrzeuge/details.html?id=1" },
   cardProjectionVersion: 2,
   images: [{
     id: "",
-    url: "https://catalogphoto.goo-net.com/car/2024/toyota-corolla.jpg",
+    url: "https://prod.pictures.autoscout24.net/listing-images/card-1.jpg",
     size: 0,
     mimeType: "image/jpeg",
   }],
 } as any;
 
 test("compact public projection cards do not rerun source-gallery coherence", () => {
-  assert.equal(isCrediblePublicOffer(compactGoonetCard), true);
+  assert.equal(isCrediblePublicOffer(compactSourceCard), true);
+  assert.equal(isCrediblePublicOffer({ ...compactSourceCard, sourceId: "goonet_japan_exact", market: "japan" }), false);
+  assert.equal(isCrediblePublicOffer({ ...compactSourceCard, operational: {} }), false);
 });
 
 test("full source offers still require coherent source galleries", () => {
-  const fullSourceOffer = { ...compactGoonetCard, cardProjectionVersion: undefined };
+  const fullSourceOffer = { ...compactSourceCard, cardProjectionVersion: undefined };
   assert.equal(isCrediblePublicOffer(fullSourceOffer), false);
 });

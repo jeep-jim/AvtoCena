@@ -1,0 +1,117 @@
+{
+  "date": "2026-09-06",
+  "baseLocalCommit": "5f7001e6",
+  "baseRemoteCommit": "9eab72acd6aed2afbc7aca9b5b2033e03443995e",
+  "scope": "Root npm test: tests/*.test.ts, sequential process execution; nested mjs suites are not included by this command.",
+  "previous": {
+    "tests": 1039,
+    "pass": 1012,
+    "fail": 27
+  },
+  "current": {
+    "tests": 1040,
+    "pass": 1040,
+    "fail": 0,
+    "cancelled": 0,
+    "skipped": 0,
+    "durationMs": 90658.169211,
+    "logSha256": "3e418c63702cee27ad3bc9b91f56de7a9dc43dd98b7e4f539dd5ebaeff4b9071"
+  },
+  "commands": {
+    "tests": "npm test",
+    "typecheck": "npm run typecheck",
+    "build": "npm run build"
+  },
+  "typecheck": "success",
+  "productionBuild": "success",
+  "resolutionGroups": [
+    {
+      "files": [
+        "scripts/catalog-apply-partial-classification-v1.mjs",
+        "tests/catalog-apply-partial-classification-v1.test.ts"
+      ],
+      "kind": "code_fix",
+      "reason": "Replace hard-coded four decisions with validated current decisions; preserve evidence, current date and paused markets; reject duplicates, invalid classes and publication grants."
+    },
+    {
+      "files": [
+        "apps/web/lib/catalog/presentation.ts",
+        "tests/catalog-preview-presentation-20260812.test.ts"
+      ],
+      "kind": "code_fix",
+      "reason": "Omit explicit unknown Chinese manufacturer placeholders without guessing a brand."
+    },
+    {
+      "files": [
+        "package.json",
+        ".github/workflows/ci.yml",
+        "tests/catalog.test.ts"
+      ],
+      "kind": "test_execution_and_fixture_fix",
+      "reason": "Serialize shared local-storage tests; run full suite in CI; chunk test uses isolated local data and 501 source-bound rows distributed across model-year quotas."
+    },
+    {
+      "files": [
+        "tests/catalog-autopapa-detail-refresh.test.ts",
+        "tests/catalog-public-markets.test.ts",
+        "tests/georgia-canonical-source-policy-20260812.test.ts",
+        "tests/catalog-v3-source-input-policy.test.ts",
+        "tests/catalog-v3-throughput.test.ts"
+      ],
+      "kind": "outdated_contract",
+      "reason": "Current detail-price refresh, canonical sources, year limits, delivered-price priority and gallery settings replace historical assertions. No adapters, registries or market workflows changed."
+    },
+    {
+      "files": [
+        "tests/catalog-card-contract.test.ts",
+        "tests/catalog-filter-layout-regression.test.ts",
+        "tests/catalog-filter-ui.test.ts",
+        "tests/catalog-current-read-generation-guard.test.ts",
+        "tests/catalog-mass-market-applied.test.ts",
+        "tests/home-initial-catalog.test.ts",
+        "tests/model-seo-gallery.test.ts",
+        "tests/route-preloader-candy.test.ts"
+      ],
+      "kind": "outdated_contract",
+      "reason": "Assertions now cover existing qualified selection, all needs-data statuses, labelled range controls, current server snapshot, sourced gallery without bogus FAQ specifications, and zero artificial route delay."
+    },
+    {
+      "files": [
+        "tests/catalog-compact-public-card-quality.test.ts",
+        "tests/georgia-public-card-visibility-20260812.test.ts"
+      ],
+      "kind": "outdated_fixture",
+      "reason": "Use canonical source provenance for full rows; only V3 attested priced public DTOs can omit private provenance; unverified and preliminary DTOs remain rejected."
+    },
+    {
+      "files": [
+        "tests/catalog-encyclopedia-identity-resolver.test.ts",
+        "tests/catalog-presentation.test.ts",
+        "tests/encyclopedia-verified-corpus.test.ts"
+      ],
+      "kind": "outdated_contract",
+      "reason": "Current explicit-safe identity aliases, withholding untranslated Korean public labels, and V2 brand replacement coexist with unchanged calculator corpus. No variant confidence or source permissions upgraded."
+    }
+  ],
+  "boundaries": {
+    "productionWrites": false,
+    "parsersRestarted": false,
+    "sourceRegistriesChanged": false,
+    "japanControlsChanged": false,
+    "vehicleVariantsChanged": false
+  },
+  "remaining": [
+    "Source-bound exact displacement and compatible variants for China; last saved audit accepted 0 Chinese calculations.",
+    "Source evidence recovery for UAE and Georgia.",
+    "Browser acceptance, independent calculation spot-checks, listing freshness and permitted source access.",
+    "Controlled non-Japan parser restart only after readiness checks."
+  ],
+  "lastSavedAudit": {
+    "runId": 34034721225,
+    "automatic": 6319,
+    "input": 16054,
+    "selectors": 0,
+    "rerunThisStep": false
+  },
+  "buildLogSha256": "4a56bd60a1f1095cf59c1e6033b34df03a6ebf428afc4707cfd44c98e9ca5668"
+}

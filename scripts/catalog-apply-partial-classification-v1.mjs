@@ -6,22 +6,34 @@ const DECISIONS = process.env.CATALOG_SOURCE_PARTIAL_CLASSIFICATION || 'data/cat
 
 export function applyDecisions(ledger, decisionFile) {
   if (ledger.productionWrites !== false) throw new Error('ledger productionWrites must remain false');
-  const byId = new Map((decisionFile.decisions || []).map((row) => [row.sourceId, row]));
-  if (byId.size !== 4) throw new Error(`expected 4 decisions, got ${byId.size}`);
+  if (decisionFile.productionWrites !== false || decisionFile.publishAllowedMutations !== false) {
+    throw new Error('decisions must remain no-write and non-publishing');
+  }
+  const decisions = decisionFile.decisions;
+  if (!Array.isArray(decisions) || !decisions.length) throw new Error('decisions must be nonempty');
+  const byId = new Map();
+  for (const decision of decisions) {
+    if (!decision.sourceId || byId.has(decision.sourceId)) throw new Error('missing or duplicate decision source');
+    if (!ledger.allowedClasses?.includes(decision.class)) throw new Error(`invalid class: ${decision.class}`);
+    if (decision.publishAllowed !== false) throw new Error(`${decision.sourceId}: publishAllowed must remain false`);
+    byId.set(decision.sourceId, decision);
+  }
+  const pausedMarkets = new Set([...(ledger.pausedMarkets || []), ...(decisionFile.pausedMarkets || [])]);
   const seen = new Set();
   const next = structuredClone(ledger);
   next.candidates = next.candidates.map((row) => {
     const decision = byId.get(row.sourceId);
     if (!decision) return row;
     seen.add(row.sourceId);
-    if (decision.publishAllowed !== false) throw new Error(`${row.sourceId}: publishAllowed must remain false`);
+    if (decision.market !== row.market) throw new Error(`${row.sourceId}: decision market mismatch`);
+    if (pausedMarkets.has(row.market)) {
+      if (decision.class !== row.class || row.publishAllowed !== false) throw new Error(`${row.sourceId}: paused market decision changed`);
+      return row;
+    }
     const updated = {
       ...row,
-      class: decision.class,
+      ...structuredClone(decision),
       publishAllowed: false,
-      evidence: typeof decision.evidence === 'string'
-        ? decision.evidence
-        : `manual qualification after runs ${(decisionFile.evidenceRuns || []).join(', ')}; see data/catalog/source-partial-classification-v1.json`,
       qualificationDecision: `data/catalog/source-partial-classification-v1.json#${row.sourceId}`,
     };
     for (const key of ['exactScope', 'useScope', 'blockersBeforePublication']) {
@@ -30,8 +42,7 @@ export function applyDecisions(ledger, decisionFile) {
     return updated;
   });
   for (const id of byId.keys()) if (!seen.has(id)) throw new Error(`decision source missing from ledger: ${id}`);
-  next.updatedAt = '2026-09-03';
-  next.next = 'build and no-write test a dedicated adapter for chngoodcar_china_candidate; continue source qualification on the remaining research_pending candidates; no publishAllowed=true until explicit publication gate';
+  next.updatedAt = [ledger.updatedAt, decisionFile.updatedAt, decisionFile.decidedAt].filter(Boolean).sort().at(-1);
   return next;
 }
 

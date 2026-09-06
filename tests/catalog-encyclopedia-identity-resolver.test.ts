@@ -31,7 +31,7 @@ function resolver() {
         brandId: "aito",
         canonicalName: "M9",
         aliases: [{ value: "问界 M9", safe: true }],
-        sourceNames: ["Seller M9 Name", { value: "Raw M9 Source", safe: true }],
+        sourceNames: ["Seller M9 Name", { value: "Raw M9 Source", safe: false }],
       },
       { id: "changan/cs75-plus", brandId: "changan", canonicalName: "CS75 Plus", aliases: [{ value: "CS75 PLUS", safe: true }] },
       { id: "baw/m7", brandId: "baw", canonicalName: "M7" },
@@ -91,7 +91,7 @@ test("raw string aliases are discovery input, not automatic merge authority", ()
   assert.equal(result.resolved, false);
 });
 
-test("sourceNames stay audit-only even when a source record carries a safe-looking flag", () => {
+test("raw and explicitly unsafe sourceNames stay audit-only", () => {
   const identity = resolver();
   for (const model of ["Seller M9 Name", "Raw M9 Source"]) {
     const result = identity.resolve({ make: "AITO", model });

@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { catalogImportSources } from "../apps/web/lib/catalog/importer";
+import { REQUIRED_CATALOG_SOURCES } from "../apps/web/lib/catalog/required-catalog-sources";
 import {
   BeForwardMarketAdapter,
   PUBLIC_CATALOG_SOURCE_IDS,
@@ -51,7 +52,7 @@ test("market-specific BE FORWARD adapter keeps the configured source market", ()
   assert.equal(offer?.mileageKm, 12_500);
 });
 
-test("public source set covers every AvtoCena market without credentials", () => {
+test("legacy public parsers cannot expand the active canonical source registry", () => {
   const byMarket = new Set(publicMarketSources.map((source) => source.market));
   assert.ok(byMarket.has("japan"));
   assert.ok(byMarket.has("uae"));
@@ -60,6 +61,7 @@ test("public source set covers every AvtoCena market without credentials", () =>
   assert.ok(PUBLIC_CATALOG_SOURCE_IDS.includes("che168_global"));
 
   const importIds = new Set(catalogImportSources.map((source) => source.sourceId));
-  for (const sourceId of PUBLIC_CATALOG_SOURCE_IDS) assert.ok(importIds.has(sourceId), sourceId);
+  for (const source of Object.values(REQUIRED_CATALOG_SOURCES).flat()) assert.ok(importIds.has(source.sourceId), source.sourceId);
+  assert.equal(importIds.has("che168_global"), false);
   assert.equal(importIds.has("beforward_public"), false);
 });

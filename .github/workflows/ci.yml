@@ -18,6 +18,8 @@ jobs:
           node-version: 24
           cache: npm
       - run: npm ci
+      - name: Complete regression suite
+        run: npm test
       - name: Customs tests
         run: node --import tsx --test tests/russia-customs.test.ts
       - name: Catalog modification recovery contract tests

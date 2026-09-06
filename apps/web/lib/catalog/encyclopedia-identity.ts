@@ -81,8 +81,8 @@ function aliasValue(alias: EncyclopediaAlias) {
 
 /**
  * Fail closed. V2's canonical identity contract uses structured aliases with an
- * explicit safe flag. Raw string aliases and sourceNames are discovery/audit
- * material only and must not silently become merge authority.
+ * explicit safe flag. Raw strings and unapproved sourceNames are discovery/audit
+ * material only; structured sourceNames require the same explicit approval.
  */
 function aliasSafe(alias: EncyclopediaAlias) {
   return typeof alias !== "string" && alias?.safe === true;

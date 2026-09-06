@@ -38,7 +38,7 @@ test("Georgia scale source definitions contain AutoPapa but no banned fallback s
 
 test("Georgia canonical quality permanently rejects non-company sources", () => {
   assert.equal(isCatalogMarketSourceAllowed({ market: "georgia", sourceId: "myauto_georgia_list" } as any), true);
-  assert.equal(isCatalogMarketSourceAllowed({ market: "georgia", sourceId: "myauto_georgia_exact" } as any), true);
+  assert.equal(isCatalogMarketSourceAllowed({ market: "georgia", sourceId: "myauto_georgia_exact" } as any), false);
   assert.equal(isCatalogMarketSourceAllowed({ market: "georgia", sourceId: "autopapa_georgia_open" } as any), true);
   for (const sourceId of bannedGeorgiaSources) {
     assert.equal(isCatalogMarketSourceAllowed({ market: "georgia", sourceId } as any), false);

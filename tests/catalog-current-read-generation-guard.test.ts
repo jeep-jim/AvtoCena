@@ -33,7 +33,7 @@ test("deploy calculation audit reads the public projection and classifies curren
   assert.doesNotMatch(deployAudit, /readAllOffersForMaintenance/);
   assert.doesNotMatch(deployAudit, /findVehicleModel/);
   assert.match(deployAudit, /status === "ready" \|\| status === "estimated"/);
-  assert.match(deployAudit, /status === "needs_data" \|\| status === "preliminary_power_pending"/);
+  assert.match(deployAudit, /status === "needs_data" \|\| status === "needs_power_data" \|\| status === "preliminary_power_pending"/);
   assert.match(deployAudit, /noPreliminaryPublicPrices/);
   assert.match(deployAudit, /noNeedsDataPublicCards/);
   assert.match(deployAudit, /noInvalidSpecifications/);
