@@ -48,7 +48,7 @@ test("DubiCars exact specs own make, model and trim instead of marketing h1 text
   assert.equal(row.make, "Nissan");
   assert.equal(row.model, "Patrol");
   assert.equal(row.trim, "LE T1 5.6L");
-  assert.equal(row.engineCc, 5600);
+  assert.equal(row.engineCc, undefined);
   assert.equal(row.powerHp, 400);
   assert.equal(row.price, 215_000);
   assert.equal(row.images.length, 2);

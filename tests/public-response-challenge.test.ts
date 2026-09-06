@@ -8,5 +8,6 @@ test('visible access challenges still stop the pilot', () => {
   assert.equal(publicResponseChallenge('<title>Security check</title>'), true);
   assert.equal(publicResponseChallenge('<main>Please verify you are human</main>'), true);
   assert.equal(publicResponseChallenge('<title>安全验证</title>'), true);
+  assert.equal(publicResponseChallenge('<meta http-equiv="refresh" content="0; url=/has_been_cr_blocked_AWS.html">'), true);
   assert.equal(publicResponseChallenge('<iframe src="/_Incapsula_Resource?incident=example"></iframe>'), true);
 });

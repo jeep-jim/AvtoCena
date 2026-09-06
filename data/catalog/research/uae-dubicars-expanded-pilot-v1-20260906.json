@@ -1,0 +1,1789 @@
+{
+  "version": 1,
+  "checkedAt": "2026-09-06T15:51:10.746Z",
+  "productionWrites": false,
+  "japanRequests": 0,
+  "detailsRequested": true,
+  "pricesCalculated": true,
+  "maxRequestsPerSource": 45,
+  "sampleLimit": 20,
+  "markets": [
+    {
+      "market": "uae",
+      "requests": [
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/uae/used",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2021-lexus-ls500-platinum-ls-500-twin-turbo-american-specs-luxury-package-994147.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2019-lexus-is350-1014045.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2025-land-rover-range-rover-sport-low-milage-960236.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2022-land-rover-discovery-sport-20l-range-rover-p250-se-american-spec-960232.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2023-mercedes-benz-eqe-350-std-350-european-spec-electric-978418.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2024-mercedes-benz-c300-american-specs-21344-km-aed-138000-978420.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2024-chevrolet-malibu-983633.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2022-porsche-macan-american-spec-2630-month-978426.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2018-bmw-750li-2018-gcc-130000-km-90000-aed-988842.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2020-lexus-lx570-2020-lexus-lx-570-platinum-gcc-61000-km-v8-995740.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2025-hyundai-santa-fe-1001065.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2016-porsche-cayenne-1004032.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2023-bmw-330i-1004028.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2025-nissan-kicks-1005109.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2020-dodge-ram-1005113.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2023-mclaren-artura-performance-gcc-spec-warranty-and-service-contract-carbon-package-953569.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2023-porsche-911-top-spec-953575.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2021-porsche-911-turbo-38l-580-hp-coupe-970514.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2022-brabus-800-mercedes-amg-g-63-969942.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2024-nissan-kicks-20-996609.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2025-chery-tiggo-8-pro-max-20-996611.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2024-mg-rx8-20-996642.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2024-zeekr-x-20-996619.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2025-chery-tiggo-9-20-996672.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2024-nissan-kicks-20-996651.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2024-chery-tiggo-8-pro-max-20-996669.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2023-infiniti-qx60-20-996683.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2015-land-rover-range-rover-land-rover-range-rover-evoque-20l-petrol-automatic-transmission-2015-model-year-962432.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2024-kia-seltos-20-996708.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        },
+        {
+          "origin": "https://www.dubicars.com",
+          "path": "/2025-renault-koleos-20-996686.html",
+          "method": "GET",
+          "status": 200,
+          "contentType": "text/html; charset=UTF-8"
+        }
+      ],
+      "sourceId": "dubicars_uae_exact",
+      "listingRows": 24,
+      "normalizedRows": 20,
+      "details": [
+        {
+          "sourceOfferId": "994147",
+          "before": {
+            "year": 2021,
+            "sourcePrice": 43300,
+            "sourceCurrency": "USD"
+          },
+          "images": 26,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2021,
+            "sourcePrice": 43300,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "960236",
+          "before": {
+            "year": 2025,
+            "sourcePrice": 109600,
+            "sourceCurrency": "USD"
+          },
+          "images": 30,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2025,
+            "sourcePrice": 109600,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "960232",
+          "before": {
+            "year": 2022,
+            "sourcePrice": 23000,
+            "sourceCurrency": "USD"
+          },
+          "images": 28,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "sourcePrice": 23000,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "978418",
+          "before": {
+            "year": 2023,
+            "sourcePrice": 37000,
+            "sourceCurrency": "USD"
+          },
+          "images": 28,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2023,
+            "sourcePrice": 37000,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "978420",
+          "before": {
+            "year": 2024,
+            "sourcePrice": 138000,
+            "sourceCurrency": "AED"
+          },
+          "images": 30,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2024,
+            "sourcePrice": 138000,
+            "sourceCurrency": "AED"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "983633",
+          "before": {
+            "year": 2024,
+            "sourcePrice": 8500,
+            "sourceCurrency": "USD"
+          },
+          "images": 26,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2024,
+            "sourcePrice": 8500,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "978426",
+          "before": {
+            "year": 2022,
+            "sourcePrice": 36400,
+            "sourceCurrency": "USD"
+          },
+          "images": 26,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2022,
+            "sourcePrice": 36400,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "995740",
+          "before": {
+            "year": 2020,
+            "sourcePrice": 77800,
+            "sourceCurrency": "USD"
+          },
+          "images": 28,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2020,
+            "sourcePrice": 77800,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "1001065",
+          "before": {
+            "year": 2025,
+            "sourcePrice": 24100,
+            "sourceCurrency": "USD"
+          },
+          "images": 30,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2025,
+            "sourcePrice": 24100,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "1004028",
+          "before": {
+            "year": 2023,
+            "sourcePrice": 32300,
+            "sourceCurrency": "USD"
+          },
+          "images": 8,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2023,
+            "sourcePrice": 32300,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "1005113",
+          "before": {
+            "year": 2020,
+            "sourcePrice": 21900,
+            "sourceCurrency": "USD"
+          },
+          "images": 26,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2020,
+            "sourcePrice": 21900,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "953569",
+          "before": {
+            "year": 2023,
+            "sourcePrice": 172300,
+            "sourceCurrency": "USD"
+          },
+          "images": 30,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2023,
+            "sourcePrice": 172300,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "953575",
+          "before": {
+            "year": 2023,
+            "sourcePrice": 147700,
+            "sourceCurrency": "USD"
+          },
+          "images": 30,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2023,
+            "sourcePrice": 147700,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "970514",
+          "before": {
+            "year": 2021,
+            "sourcePrice": 180500,
+            "sourceCurrency": "USD"
+          },
+          "images": 30,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2021,
+            "sourcePrice": 180500,
+            "sourceCurrency": "USD"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "996609",
+          "before": {
+            "year": 2024,
+            "sourcePrice": 50900,
+            "sourceCurrency": "AED"
+          },
+          "images": 24,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2024,
+            "sourcePrice": 50900,
+            "sourceCurrency": "AED"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "996611",
+          "before": {
+            "year": 2025,
+            "sourcePrice": 79900,
+            "sourceCurrency": "AED"
+          },
+          "images": 30,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2025,
+            "sourcePrice": 79900,
+            "sourceCurrency": "AED"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "996642",
+          "before": {
+            "year": 2024,
+            "sourcePrice": 79900,
+            "sourceCurrency": "AED"
+          },
+          "images": 28,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2024,
+            "sourcePrice": 79900,
+            "sourceCurrency": "AED"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "996619",
+          "before": {
+            "year": 2024,
+            "sourcePrice": 99900,
+            "sourceCurrency": "AED"
+          },
+          "images": 28,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2024,
+            "sourcePrice": 99900,
+            "sourceCurrency": "AED"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "996672",
+          "before": {
+            "year": 2025,
+            "sourcePrice": 89900,
+            "sourceCurrency": "AED"
+          },
+          "images": 30,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2025,
+            "sourcePrice": 89900,
+            "sourceCurrency": "AED"
+          },
+          "changedFields": []
+        },
+        {
+          "sourceOfferId": "996651",
+          "before": {
+            "year": 2024,
+            "sourcePrice": 57900,
+            "sourceCurrency": "AED"
+          },
+          "images": 24,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          },
+          "error": "verified_specifications_required",
+          "detailNetworkRequests": 0,
+          "after": {
+            "year": 2024,
+            "sourcePrice": 57900,
+            "sourceCurrency": "AED"
+          },
+          "changedFields": []
+        }
+      ],
+      "samples": [
+        {
+          "sourceOfferId": "994147",
+          "make": "Lexus",
+          "model": "year 2021 Kilometers 115,000 Km",
+          "year": 2021,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "960236",
+          "make": "Land Rover",
+          "model": "year 2025 Kilometers 20,000 Km",
+          "year": 2025,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "960232",
+          "make": "Land Rover",
+          "model": "year 2022 Kilometers 41,000 Km",
+          "year": 2022,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "978418",
+          "make": "Mercedes-Benz",
+          "model": "year 2023 Kilometers 49,192 Km",
+          "year": 2023,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "978420",
+          "make": "Mercedes-Benz",
+          "model": "year 2024 Kilometers 21,344 Km",
+          "year": 2024,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "983633",
+          "make": "Chevrolet",
+          "model": "year 2024 Kilometers 141,421 Km",
+          "year": 2024,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "978426",
+          "make": "Porsche",
+          "model": "year 2022 Kilometers 61,830 Km",
+          "year": 2022,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "995740",
+          "make": "Lexus",
+          "model": "year 2020 Kilometers 61,000 Km",
+          "year": 2020,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "1001065",
+          "make": "Hyundai",
+          "model": "year 2025 Kilometers 5,273 Km",
+          "year": 2025,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "1004028",
+          "make": "BMW",
+          "model": "year 2023 Kilometers 142,030 Km",
+          "year": 2023,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "1005113",
+          "make": "Dodge",
+          "model": "year 2020 Kilometers 180,000 Km",
+          "year": 2020,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "953569",
+          "make": "McLaren",
+          "model": "year 2023 Kilometers 18,000 Km",
+          "year": 2023,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "953575",
+          "make": "Porsche",
+          "model": "year 2023 Kilometers 27,000 Km",
+          "year": 2023,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "missing",
+              "reason": "engine_cc_missing",
+              "provenance": "none"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "970514",
+          "make": "Porsche",
+          "model": "year 2021 Kilometers 26,000 Km",
+          "year": 2021,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "996609",
+          "make": "Nissan",
+          "model": "year 2024 Kilometers 63,844 Km",
+          "year": 2024,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "996611",
+          "make": "Chery",
+          "model": "year 2025 Kilometers 25,792 Km",
+          "year": 2025,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "996642",
+          "make": "MG",
+          "model": "year 2024 Kilometers 37,834 Km",
+          "year": 2024,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "996619",
+          "make": "Zeekr",
+          "model": "year 2024 Kilometers 11,352 Km",
+          "year": 2024,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "996672",
+          "make": "Chery",
+          "model": "year 2025 Kilometers 35,423 Km",
+          "year": 2025,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        },
+        {
+          "sourceOfferId": "996651",
+          "make": "Nissan",
+          "model": "year 2024 Kilometers 75,515 Km",
+          "year": 2024,
+          "fields": {
+            "year": {
+              "state": "exact",
+              "reason": "valid_source_year",
+              "provenance": "source_evidence"
+            },
+            "fuelPowertrain": {
+              "state": "missing",
+              "reason": "fuel_or_powertrain_missing",
+              "provenance": "none"
+            },
+            "engineCc": {
+              "state": "ambiguous",
+              "reason": "explicit_semantic_ambiguity",
+              "provenance": "source_evidence"
+            },
+            "powerHp": {
+              "state": "missing",
+              "reason": "peak_power_missing",
+              "provenance": "none"
+            },
+            "certifiedPower": {
+              "state": "not_applicable",
+              "reason": "combustion_vehicle",
+              "provenance": "none"
+            }
+          }
+        }
+      ],
+      "status": "listing_received"
+    },
+    {
+      "market": "korea",
+      "status": "not_attempted",
+      "reason": "Not selected for this run; no inference about source availability."
+    }
+  ],
+  "limitation": "Bounded sample per source; local repository business settings, not an attestation of production settings. Not a complete collection or publication acceptance test. Network/proxy errors do not prove source unavailability.",
+  "currencyRequests": 0
+}

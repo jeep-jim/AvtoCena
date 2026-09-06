@@ -164,7 +164,7 @@ test("DubiCars source typo 1,997 HP is retained as source reality but not publis
   assert.ok(row);
   assert.equal(row?.make, "Lexus");
   assert.match(String(row?.model || ""), /RX300/i);
-  assert.equal(row?.engineCc, 2000);
+  assert.equal(row?.engineCc, undefined);
   assert.equal(row?.powerHp, undefined);
 });
 

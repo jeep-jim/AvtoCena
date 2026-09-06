@@ -10,7 +10,7 @@ import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specifica
 
 const source = new AutoPapaGeorgiaAdapter();
 
-test("AutoPapa listing card preserves exact year fuel and engine evidence", () => {
+test("AutoPapa listing card preserves exact year/fuel but rejects rounded engine evidence", () => {
   const rows = parseAutoPapaGeorgiaListing(`
     <a href="/en/usd/chevrolet/captiva/932906">Chevrolet Captiva</a>
     <div>minivan $13 000 2023 year, Rustavi, 22 K. km automatic 1.5 l, petrol</div>
@@ -19,11 +19,11 @@ test("AutoPapa listing card preserves exact year fuel and engine evidence", () =
   assert.equal(rows.length, 1);
   assert.equal(rows[0].semanticEvidence?.year.status, "exact");
   assert.equal(rows[0].semanticEvidence?.fuel.status, "exact");
-  assert.equal(rows[0].semanticEvidence?.engineCc.status, "exact");
+  assert.equal(rows[0].semanticEvidence?.engineCc.status, "ambiguous");
   const offer = source.normalizeOffer(rows[0]);
   assert.ok(offer);
   assert.equal(classifySpecificationEvidence(offer, "fuelPowertrain").state, "exact");
-  assert.equal(classifySpecificationEvidence(offer, "engineCc").state, "exact");
+  assert.equal(classifySpecificationEvidence(offer, "engineCc").state, "ambiguous");
   assert.equal(classifySpecificationEvidence(offer, "powerHp").state, "missing");
 });
 
@@ -31,7 +31,7 @@ test("AutoPapa conflicts and ranges never select the first metric", () => {
   const evidence = autoPapaSpecificationEvidence({
     years: ["2023", "2024"],
     fuels: ["Petrol", "Diesel"],
-    engines: ["1.5 l", "2.0 l"],
+    engines: ["1498 cc", "1998 cc"],
     power: ["100 hp", "150 hp"],
   });
   assert.equal(evidence.year.status, "conflict");

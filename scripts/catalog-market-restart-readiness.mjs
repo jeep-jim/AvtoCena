@@ -17,6 +17,8 @@ const batch = await read(ciPath);
 const pilot = await read('data/catalog/research/public-listing-pilot-v1-20260906.json');
 const specPilot = await read('data/catalog/research/public-listing-spec-pilot-v1-20260906.json');
 const probes = new Map([...pilot.markets, ...specPilot.markets].map(row => [row.market, row]));
+const completePass = await read('data/catalog/research/non-japan-complete-pass-v1-20260906.json');
+const detailProbes = new Map(completePass.markets.map(row => [row.market, row]));
 const markets = ['europe', 'korea', 'china', 'uae', 'georgia'];
 const report = {
   version: 1, advisoryOnly: true, productionWrites: false, workflowDispatches: 0,
@@ -29,16 +31,17 @@ const report = {
     return {
       market,
       publicProbe: probes.get(market) || null,
+      detailProbe: detailProbes.get(market) || null,
       savedInput: saved.matchedSavedRows,
       savedAutomatic: saved.automaticAccepted,
       savedRecoveryShare: saved.matchedSavedRows ? saved.automaticAccepted / saved.matchedSavedRows : null,
       // This is a registry qualification count, not evidence of working credentials.
       publicationQualifiedSources: sources.filter(source => source.class === 'exact_catalog' && source.publishAllowed === true).map(source => source.sourceId),
       sourceDecisions: sources.map(source => ({ sourceId: source.sourceId, class: source.class, publishAllowed: source.publishAllowed })),
-      controlledPilot: { status: 'not_ready', remaining: [
-        'Verify a working public route without login, challenge bypass or blocked-request retries; official API partnership is not a prerequisite under the owner decision of 2026-09-06.',
-        'Verify the corrected adapter is the actual code used by the isolated market runner.',
-        'Define bounded collection without catalog publication; preserve the production pause.',
+      controlledPilot: { status: detailProbes.has(market) ? 'measured_without_publication' : 'not_ready', remaining: [
+        'Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.',
+        'Keep the measured adapter and source identifiers fixed for the next isolated collection.',
+        'Close the measured missing fields and business-settings differences before approving publication; preserve the production pause.',
       ] },
       catalogPublication: { status: 'not_ready', remaining: [
         'Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.',

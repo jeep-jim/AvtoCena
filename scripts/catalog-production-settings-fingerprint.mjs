@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises';
 import crypto from 'node:crypto';
+import { calculateAvtocenaFromBusinessConfig } from '../packages/engine/src/calculation/calculateAvtocena.ts';
 import { getJsonStorage } from '../apps/web/lib/data.ts';
 import { resolveCatalogMarketConfig } from '../apps/web/lib/catalog/estimated-market-config.ts';
 import { selectActiveMarketVersion } from '../apps/web/lib/business-settings.ts';
@@ -32,6 +33,23 @@ for (const marketId of ['europe','korea','china','uae','georgia']) {
 }
 report.limitation = 'Resolution uses this branch code and job environment, not attested deployed code or deployment environment overrides.';
 
+report.replayedCalculations = [];
+for (const path of ['data/catalog/research/europe-kcar-expanded-pilot-v1-20260906.json', 'data/catalog/research/china-georgia-uae-repaired-pilot-v1-20260906.json']) {
+  let pilot; try { pilot = JSON.parse(await fs.readFile(path, 'utf8')); } catch { continue; }
+  for (const sample of pilot.markets || []) {
+    const market = (Array.isArray(marketData.value) ? marketData.value : []).find(row => row.id === sample.market);
+    if (!['europe','korea','china','uae','georgia'].includes(sample.market)) continue;
+    const resolved = resolveCatalogMarketConfig(sample.market, selectActiveMarketVersion(market));
+    for (const row of sample.details || []) {
+      if (!(row.totalRub > 0) || !Array.isArray(row.breakdown)) continue;
+      const lineAmount = id => row.breakdown.find(line => line.id === id)?.amountRub || 0;
+      const calculated = calculateAvtocenaFromBusinessConfig({ marketId: sample.market, marketConfig: resolved.config,
+        sourcePriceRub: lineAmount('car') + lineAmount('security-deposit'), customsRub: lineAmount('customs'), utilizationFeeRub: lineAmount('utilization-fee') });
+      report.replayedCalculations.push({ market: sample.market, sourceOfferId: row.sourceOfferId,
+        originalTotalRub: row.totalRub, replayedTotalRub: calculated.totalRub, deltaRub: calculated.totalRub - row.totalRub });
+    }
+  }
+}
 report.site = { activeVersionId: siteData.value?.activeVersionId || null };
 await fs.writeFile(process.env.SETTINGS_FINGERPRINT_OUTPUT || 'settings-fingerprint.json', JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report));

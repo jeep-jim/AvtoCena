@@ -173,4 +173,5 @@ test("Che168 litre-only details do not manufacture exact displacement", () => {
     assert.equal(che168GlobalSpecificationEvidence({ detailEngine }).engineCc.value, undefined);
   }
   assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "1.5L 1498 cc 150 hp" }).engineCc.value, 1498);
+  assert.equal(che168GlobalSpecificationEvidence({ detailEngine: "2.4L 1498 cc 150 hp" }).engineCc.status, "conflict");
 });

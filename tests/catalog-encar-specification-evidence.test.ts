@@ -1,6 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import {
+  EncarCompleteAdapter,
   extractEncarExactEngineCc,
   extractEncarExactPowerHp,
   mergeEncarCompleteDetail,
@@ -44,9 +45,9 @@ test("Encar metric evidence accepts one repeated exact source value", () => {
   });
 });
 
-test("Encar metric evidence converts explicit litres and kW only with units", () => {
-  assert.equal(extractEncarExactEngineCc({ displacement: "1.998 L" }).value, 1998);
-  assert.equal(extractEncarExactEngineCc({ engineVolume: 2.0 }).value, 2000);
+test("Encar metric evidence rejects litres while accepting explicit kW", () => {
+  assert.equal(extractEncarExactEngineCc({ displacement: "1.998 L" }).status, "ambiguous");
+  assert.equal(extractEncarExactEngineCc({ engineVolume: 2.0 }).status, "ambiguous");
   assert.equal(extractEncarExactEngineCc({ displacement: "2.0" }).status, "ambiguous");
   assert.equal(extractEncarExactPowerHp({ power: "110 kW" }).value, 149.6);
   assert.equal(extractEncarExactPowerHp({ powerHp: 150, powerKw: 110 }).status, "exact");
@@ -100,4 +101,15 @@ test("Encar merge does not promote free text without a keyed source field", () =
   assert.equal((row.operational as any).semanticEvidence.engineCc.status, "missing");
   assert.equal((row.operational as any).semanticEvidence.powerHp.status, "missing");
   assert.equal(row.calculationStatus, "needs_data");
+});
+
+
+test("Encar block page returned as 404 stops without retries", async () => {
+  const originalFetch = globalThis.fetch;
+  let calls = 0;
+  globalThis.fetch = async () => { calls++; return new Response('<meta http-equiv="refresh" content="0; url=/has_been_cr_blocked_AWS.html">', {status:404,headers:{'content-type':'text/html'}}); };
+  try {
+    await assert.rejects(new EncarCompleteAdapter().fetchPage(), (error: any) => error.blocked === true && /encar_access_block_page/.test(error.message));
+    assert.equal(calls,1);
+  } finally { globalThis.fetch = originalFetch; }
 });

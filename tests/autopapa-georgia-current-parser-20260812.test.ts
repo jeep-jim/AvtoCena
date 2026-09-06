@@ -38,7 +38,7 @@ test("AutoPapa binds price, year, mileage and image to one exact listing and rej
   assert.equal(captiva.year, 2023);
   assert.equal(captiva.price, 13_000);
   assert.equal(captiva.mileageKm, 22_000);
-  assert.equal(captiva.engineCc, 1_500);
+  assert.equal(captiva.engineCc, undefined);
   assert.equal(captiva.fuel?.toLowerCase(), "petrol");
   assert.equal(captiva.transmission?.toLowerCase(), "automatic");
   assert.equal(captiva.bodyType?.toLowerCase(), "minivan");

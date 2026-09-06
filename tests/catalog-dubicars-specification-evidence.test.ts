@@ -26,13 +26,13 @@ function detail(specifications: string, after = "") {
 test("DubiCars promotes exact values only from the bounded specification block", () => {
   const row = parseDubicarsCurrentListing(
     detail(
-      "Kilometers 12,000 Km Engine capacity 3.5 L Horsepower 301 HP Fuel Type Petrol",
+      "Kilometers 12,000 Km Engine capacity 3456 cc Horsepower 301 HP Fuel Type Petrol",
       "<h2>Similar cars</h2><div>Engine capacity 5.6 L Horsepower 400 HP Fuel Type Diesel</div>",
     ),
     url,
   );
   assert.ok(row);
-  assert.equal(row.engineCc, 3500);
+  assert.equal(row.engineCc, 3456);
   assert.equal(row.powerHp, 301);
   assert.equal(row.fuel, "petrol");
   assert.equal(row.semanticEvidence?.year.status, "exact");
@@ -113,4 +113,40 @@ test("DubiCars keeps an identity-bound EREV as a series hybrid", () => {
   assert.ok(offer);
   assert.equal(offer.powertrainKind, "series_hybrid");
   assert.equal(offer.fuel, "hybrid");
+});
+
+
+test("DubiCars rejects rounded litres and accept explicit mL", () => {
+  assert.equal(dubicarsSpecificationEvidence({ engine: "3.5 L" }).engineCc.status, "ambiguous");
+  assert.equal(dubicarsSpecificationEvidence({ engine: "3456 mL" }).engineCc.value, 3456);
+});
+
+
+test("DubiCars reads the current specifications section after description and never borrows a price", () => {
+  const row = parseDubicarsCurrentListing(`<h1>Toyota Camry</h1>
+    <section id="title-bar">Price on request</section>
+    <div>Model year 2024 Kilometers 12000 Km Specs GCC Description Seller comments</div>
+    <section id="item-specifications">Make Toyota Model Camry Engine capacity 2494 cc Horsepower 181 HP Fuel Type Petrol Service history Yes</section>
+    <section>Similar cars AED 99000</section>${gallery}`, url);
+  assert.ok(row);
+  assert.equal(row.price, undefined);
+  assert.equal(row.currency, undefined);
+  assert.equal(row.engineCc, 2494);
+  assert.equal(row.powerHp, 181);
+  assert.equal(row.fuel, "petrol");
+});
+
+test("DubiCars source URL mode returns the gallery without image requests", async () => {
+  const previous = process.env.CATALOG_IMAGE_STORAGE_MODE;
+  process.env.CATALOG_IMAGE_STORAGE_MODE = "source_urls_only";
+  const fetchOriginal = globalThis.fetch;
+  globalThis.fetch = async () => { throw new Error("unexpected_image_download"); };
+  try {
+    const row = parseDubicarsCurrentListing(detail("Engine capacity 3456 cc Horsepower 301 HP Fuel Type Petrol"),url);
+    const offer = source.normalizeOffer(row)!;
+    const photos = await source.fetchImages(offer);
+    assert.equal(photos.length,5);
+    assert.equal(photos[0].size,0);
+    assert.match(photos[0].url,/cdn.dubicars.com/);
+  } finally { globalThis.fetch = fetchOriginal; if (previous === undefined) delete process.env.CATALOG_IMAGE_STORAGE_MODE; else process.env.CATALOG_IMAGE_STORAGE_MODE = previous; }
 });

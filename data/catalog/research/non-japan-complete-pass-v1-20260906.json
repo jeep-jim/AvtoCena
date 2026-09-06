@@ -1,0 +1,111 @@
+{
+  "version": 1,
+  "productionWrites": false,
+  "japanRequests": 0,
+  "inputs": [
+    {
+      "path": "data/catalog/research/europe-kcar-expanded-pilot-v1-20260906.json",
+      "sha256": "de578ea8300c5ad8d9e1785f4a6431c9145d1ea57d0c27c1380f73b91a2e6f72"
+    },
+    {
+      "path": "data/catalog/research/china-georgia-uae-repaired-pilot-v1-20260906.json",
+      "sha256": "11be64668a44d54788232e1d458c39126827d4a1142aec02df74419a4131925a"
+    }
+  ],
+  "markets": [
+    {
+      "market": "korea",
+      "sourceId": "kcar_korea_open",
+      "sourceRequests": 21,
+      "returnedRows": 11,
+      "normalizedExamined": 11,
+      "calculated": 10,
+      "allBreakdownsMatch": true,
+      "eligibleYearSamples": 8,
+      "calculatedEligibleYear": 7,
+      "calculatedEligibleYearUnder15m": 7,
+      "galleryAtLeast5": 11,
+      "fieldChanges": []
+    },
+    {
+      "market": "europe",
+      "sourceId": "mobile_de_open",
+      "sourceRequests": 21,
+      "returnedRows": 21,
+      "normalizedExamined": 20,
+      "calculated": 19,
+      "allBreakdownsMatch": true,
+      "eligibleYearSamples": 20,
+      "calculatedEligibleYear": 19,
+      "calculatedEligibleYearUnder15m": 19,
+      "galleryAtLeast5": 17,
+      "fieldChanges": []
+    },
+    {
+      "market": "china",
+      "sourceId": "autohome_used_china_open",
+      "sourceRequests": 41,
+      "returnedRows": 24,
+      "normalizedExamined": 20,
+      "calculated": 13,
+      "allBreakdownsMatch": true,
+      "eligibleYearSamples": 11,
+      "calculatedEligibleYear": 5,
+      "calculatedEligibleYearUnder15m": 4,
+      "galleryAtLeast5": 20,
+      "fieldChanges": [
+        "engineCc",
+        "powerHp"
+      ]
+    },
+    {
+      "market": "uae",
+      "sourceId": "dubicars_uae_exact",
+      "sourceRequests": 29,
+      "returnedRows": 21,
+      "normalizedExamined": 20,
+      "calculated": 0,
+      "allBreakdownsMatch": true,
+      "eligibleYearSamples": 20,
+      "calculatedEligibleYear": 0,
+      "calculatedEligibleYearUnder15m": 0,
+      "galleryAtLeast5": 20,
+      "fieldChanges": []
+    },
+    {
+      "market": "georgia",
+      "sourceId": "autopapa_georgia_open",
+      "sourceRequests": 11,
+      "returnedRows": 10,
+      "normalizedExamined": 10,
+      "calculated": 0,
+      "allBreakdownsMatch": true,
+      "eligibleYearSamples": 10,
+      "calculatedEligibleYear": 0,
+      "calculatedEligibleYearUnder15m": 0,
+      "galleryAtLeast5": 10,
+      "fieldChanges": [
+        "powerHp"
+      ]
+    }
+  ],
+  "validation": {
+    "fullTests": 1057,
+    "passed": 1057,
+    "failed": 0,
+    "skipped": 0,
+    "build": "success",
+    "typecheck": "success",
+    "finalChinaCompatibilityTargetedTests": 12,
+    "remoteCi": "pending"
+  },
+  "settingsComparison": "data/catalog/research/settings-comparison-v1-20260906.json",
+  "limitations": [
+    "Sample counts are not a publication acceptance test or whole-market coverage. KCar drops incomplete rows before returning them.",
+    "Prices calculated with local settings; a read-only business-settings replay is pending.",
+    "China raw calculated count includes cars before 2020 and one above 15m; these are not counted as new accepted inventory.",
+    "Encar endpoint is current, but returns a block page using HTTP404.",
+    "DubiCars first expanded run predates the specification-section and source-price fix; its price values must not be reused.",
+    "No merge/deploy, catalog writes, schedule restart or Japan requests."
+  ]
+}

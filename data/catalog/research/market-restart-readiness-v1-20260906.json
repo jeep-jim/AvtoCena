@@ -23,6 +23,10 @@
     {
       "path": "data/catalog/research/public-listing-spec-pilot-v1-20260906.json",
       "sha256": "1bf284d8547f1608554359d7d66b79da99fd831207a709c19cb2ca6a28e13b07"
+    },
+    {
+      "path": "data/catalog/research/non-japan-complete-pass-v1-20260906.json",
+      "sha256": "4d30b6acfb4092c34120072e59d20130e7c92619e55be9fb42263aa4efd2c3b4"
     }
   ],
   "auditCheckedAt": "2026-09-06T12:59:54.341Z",
@@ -781,6 +785,20 @@
         ],
         "status": "listing_received"
       },
+      "detailProbe": {
+        "market": "europe",
+        "sourceId": "mobile_de_open",
+        "sourceRequests": 21,
+        "returnedRows": 21,
+        "normalizedExamined": 20,
+        "calculated": 19,
+        "allBreakdownsMatch": true,
+        "eligibleYearSamples": 20,
+        "calculatedEligibleYear": 19,
+        "calculatedEligibleYearUnder15m": 19,
+        "galleryAtLeast5": 17,
+        "fieldChanges": []
+      },
       "savedInput": 5259,
       "savedAutomatic": 4808,
       "savedRecoveryShare": 0.914242251378589,
@@ -808,11 +826,11 @@
         }
       ],
       "controlledPilot": {
-        "status": "not_ready",
+        "status": "measured_without_publication",
         "remaining": [
-          "Verify a working public route without login, challenge bypass or blocked-request retries; official API partnership is not a prerequisite under the owner decision of 2026-09-06.",
-          "Verify the corrected adapter is the actual code used by the isolated market runner.",
-          "Define bounded collection without catalog publication; preserve the production pause."
+          "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
+          "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
+          "Close the measured missing fields and business-settings differences before approving publication; preserve the production pause."
         ]
       },
       "catalogPublication": {
@@ -850,6 +868,20 @@
         "status": "blocked_or_failed",
         "error": "non_json_response status=404 content-type=text/html url=[url] bodyPreview=<!DOCTYPE html> <html> <head> <meta http-equiv=\"refresh\" content=\"0; url=[url] /> </head> <body></body> </html> "
       },
+      "detailProbe": {
+        "market": "korea",
+        "sourceId": "kcar_korea_open",
+        "sourceRequests": 21,
+        "returnedRows": 11,
+        "normalizedExamined": 11,
+        "calculated": 10,
+        "allBreakdownsMatch": true,
+        "eligibleYearSamples": 8,
+        "calculatedEligibleYear": 7,
+        "calculatedEligibleYearUnder15m": 7,
+        "galleryAtLeast5": 11,
+        "fieldChanges": []
+      },
       "savedInput": 2840,
       "savedAutomatic": 1511,
       "savedRecoveryShare": 0.5320422535211268,
@@ -877,11 +909,11 @@
         }
       ],
       "controlledPilot": {
-        "status": "not_ready",
+        "status": "measured_without_publication",
         "remaining": [
-          "Verify a working public route without login, challenge bypass or blocked-request retries; official API partnership is not a prerequisite under the owner decision of 2026-09-06.",
-          "Verify the corrected adapter is the actual code used by the isolated market runner.",
-          "Define bounded collection without catalog publication; preserve the production pause."
+          "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
+          "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
+          "Close the measured missing fields and business-settings differences before approving publication; preserve the production pause."
         ]
       },
       "catalogPublication": {
@@ -1602,6 +1634,23 @@
         ],
         "status": "listing_received"
       },
+      "detailProbe": {
+        "market": "china",
+        "sourceId": "autohome_used_china_open",
+        "sourceRequests": 41,
+        "returnedRows": 24,
+        "normalizedExamined": 20,
+        "calculated": 13,
+        "allBreakdownsMatch": true,
+        "eligibleYearSamples": 11,
+        "calculatedEligibleYear": 5,
+        "calculatedEligibleYearUnder15m": 4,
+        "galleryAtLeast5": 20,
+        "fieldChanges": [
+          "engineCc",
+          "powerHp"
+        ]
+      },
       "savedInput": 3092,
       "savedAutomatic": 0,
       "savedRecoveryShare": 0,
@@ -1639,11 +1688,11 @@
         }
       ],
       "controlledPilot": {
-        "status": "not_ready",
+        "status": "measured_without_publication",
         "remaining": [
-          "Verify a working public route without login, challenge bypass or blocked-request retries; official API partnership is not a prerequisite under the owner decision of 2026-09-06.",
-          "Verify the corrected adapter is the actual code used by the isolated market runner.",
-          "Define bounded collection without catalog publication; preserve the production pause."
+          "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
+          "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
+          "Close the measured missing fields and business-settings differences before approving publication; preserve the production pause."
         ]
       },
       "catalogPublication": {
@@ -1683,6 +1732,20 @@
         "status": "blocked_or_failed",
         "error": "pilot_request_outside_envelope"
       },
+      "detailProbe": {
+        "market": "uae",
+        "sourceId": "dubicars_uae_exact",
+        "sourceRequests": 29,
+        "returnedRows": 21,
+        "normalizedExamined": 20,
+        "calculated": 0,
+        "allBreakdownsMatch": true,
+        "eligibleYearSamples": 20,
+        "calculatedEligibleYear": 0,
+        "calculatedEligibleYearUnder15m": 0,
+        "galleryAtLeast5": 20,
+        "fieldChanges": []
+      },
       "savedInput": 4647,
       "savedAutomatic": 0,
       "savedRecoveryShare": 0,
@@ -1720,11 +1783,11 @@
         }
       ],
       "controlledPilot": {
-        "status": "not_ready",
+        "status": "measured_without_publication",
         "remaining": [
-          "Verify a working public route without login, challenge bypass or blocked-request retries; official API partnership is not a prerequisite under the owner decision of 2026-09-06.",
-          "Verify the corrected adapter is the actual code used by the isolated market runner.",
-          "Define bounded collection without catalog publication; preserve the production pause."
+          "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
+          "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
+          "Close the measured missing fields and business-settings differences before approving publication; preserve the production pause."
         ]
       },
       "catalogPublication": {
@@ -1761,6 +1824,22 @@
         "status": "blocked_or_failed",
         "error": "pilot_challenge_stop"
       },
+      "detailProbe": {
+        "market": "georgia",
+        "sourceId": "autopapa_georgia_open",
+        "sourceRequests": 11,
+        "returnedRows": 10,
+        "normalizedExamined": 10,
+        "calculated": 0,
+        "allBreakdownsMatch": true,
+        "eligibleYearSamples": 10,
+        "calculatedEligibleYear": 0,
+        "calculatedEligibleYearUnder15m": 0,
+        "galleryAtLeast5": 10,
+        "fieldChanges": [
+          "powerHp"
+        ]
+      },
       "savedInput": 216,
       "savedAutomatic": 0,
       "savedRecoveryShare": 0,
@@ -1783,11 +1862,11 @@
         }
       ],
       "controlledPilot": {
-        "status": "not_ready",
+        "status": "measured_without_publication",
         "remaining": [
-          "Verify a working public route without login, challenge bypass or blocked-request retries; official API partnership is not a prerequisite under the owner decision of 2026-09-06.",
-          "Verify the corrected adapter is the actual code used by the isolated market runner.",
-          "Define bounded collection without catalog publication; preserve the production pause."
+          "Use latest detailProbe: successful requests do not prove complete specifications; Encar currently returns an access-block page.",
+          "Keep the measured adapter and source identifiers fixed for the next isolated collection.",
+          "Close the measured missing fields and business-settings differences before approving publication; preserve the production pause."
         ]
       },
       "catalogPublication": {
