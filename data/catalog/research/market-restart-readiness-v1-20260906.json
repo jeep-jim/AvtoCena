@@ -1,0 +1,324 @@
+{
+  "version": 1,
+  "advisoryOnly": true,
+  "productionWrites": false,
+  "workflowDispatches": 0,
+  "inputs": [
+    {
+      "path": "data/catalog/source-qualification-v1.json",
+      "sha256": "6df32eedae1f8d7dfe5820bfd55b09247529f0c69f9ebd4cf65ef331adc0252d"
+    },
+    {
+      "path": "data/catalog/research/china-saved-recovery-v1-20260906.json",
+      "sha256": "496d10df41b7fc275ff65ff96c87d716e98620ee6e8b22534ab8e0f983d013d6"
+    },
+    {
+      "path": "data/catalog/research/non-japan-recovery-batch-v1-20260906.json",
+      "sha256": "4f2c3bb47bca04511d70ceae72a9c2f37f84db78bbe908834e60cd19f1b90026"
+    }
+  ],
+  "auditCheckedAt": "2026-09-06T12:59:54.341Z",
+  "codeValidation": {
+    "runId": 34039140044,
+    "jobId": 101502577500,
+    "commit": "ffe9985abd8c9a35a0d607abbc4507f4ca5f42ff",
+    "conclusion": "success",
+    "fullSuite": "success",
+    "profileChecks": "success",
+    "typecheck": "success",
+    "productionBuild": "success",
+    "tests": 1047,
+    "passCount": 1047,
+    "fail": 0
+  },
+  "limitation": "Saved recovery is not a fresh pilot. Unverified gates remain blocked; this report grants no permissions and changes no market controls.",
+  "markets": [
+    {
+      "market": "europe",
+      "savedInput": 5259,
+      "savedAutomatic": 4808,
+      "savedRecoveryShare": 0.914242251378589,
+      "publicationQualifiedSources": [],
+      "sourceDecisions": [
+        {
+          "sourceId": "mobile_de_open",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "autoscout_europe_open",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "lacentrale_europe_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "autouncle_europe_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        }
+      ],
+      "controlledPilot": {
+        "status": "not_ready",
+        "remaining": [
+          "Confirm source-specific automated collection permission and working access for this project.",
+          "Verify the corrected adapter is the actual code used by the isolated market runner.",
+          "Define bounded collection without catalog publication; preserve the production pause."
+        ]
+      },
+      "catalogPublication": {
+        "status": "not_ready",
+        "remaining": [
+          "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
+          "Verify independent calculation examples and browser list/detail/selection behavior.",
+          "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
+          "Confirm publication permission and production deployment; retain rollback generation."
+        ]
+      },
+      "specificationBlockers": {
+        "fuelPowertrain:fuel_or_powertrain_missing": 274,
+        "certifiedPower:certified_30min_power_missing": 276,
+        "engineCc:engine_cc_missing": 36,
+        "powerHp:peak_power_missing": 2,
+        "fuelPowertrain:unclassified_field_provenance": 139,
+        "engineCc:unclassified_field_provenance": 139
+      }
+    },
+    {
+      "market": "korea",
+      "savedInput": 2840,
+      "savedAutomatic": 1511,
+      "savedRecoveryShare": 0.5320422535211268,
+      "publicationQualifiedSources": [],
+      "sourceDecisions": [
+        {
+          "sourceId": "encar_direct",
+          "class": "research_pending",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "kcar_korea_open",
+          "class": "research_pending",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "kbchachacha_korea_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "bobaedream_korea_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        }
+      ],
+      "controlledPilot": {
+        "status": "not_ready",
+        "remaining": [
+          "Confirm source-specific automated collection permission and working access for this project.",
+          "Verify the corrected adapter is the actual code used by the isolated market runner.",
+          "Define bounded collection without catalog publication; preserve the production pause."
+        ]
+      },
+      "catalogPublication": {
+        "status": "not_ready",
+        "remaining": [
+          "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
+          "Verify independent calculation examples and browser list/detail/selection behavior.",
+          "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
+          "Confirm publication permission and production deployment; retain rollback generation."
+        ]
+      },
+      "specificationBlockers": {
+        "powerHp:peak_power_missing": 17,
+        "certifiedPower:certified_30min_power_missing": 17,
+        "listing_identity_photo_price_or_calculation_gate": 17,
+        "fuelPowertrain:unclassified_field_provenance": 1295,
+        "engineCc:unclassified_field_provenance": 1185,
+        "powerHp:non_exact_power_provenance": 941
+      }
+    },
+    {
+      "market": "china",
+      "savedInput": 3092,
+      "savedAutomatic": 0,
+      "savedRecoveryShare": 0,
+      "publicationQualifiedSources": [],
+      "sourceDecisions": [
+        {
+          "sourceId": "autohome_used_china_open",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "dongchedi_china_open",
+          "class": "research_pending",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "guazi_china_open",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "autohome_new_china_open",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "chngoodcar_china_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "iautos_china_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        }
+      ],
+      "controlledPilot": {
+        "status": "not_ready",
+        "remaining": [
+          "Confirm source-specific automated collection permission and working access for this project.",
+          "Verify the corrected adapter is the actual code used by the isolated market runner.",
+          "Define bounded collection without catalog publication; preserve the production pause."
+        ]
+      },
+      "catalogPublication": {
+        "status": "not_ready",
+        "remaining": [
+          "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
+          "Verify independent calculation examples and browser list/detail/selection behavior.",
+          "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
+          "Confirm publication permission and production deployment; retain rollback generation."
+        ]
+      },
+      "specificationBlockers": {
+        "fuelPowertrain:unclassified_field_provenance": 1642,
+        "engineCc:unclassified_field_provenance": 1766,
+        "engineCc:engine_cc_missing": 1319,
+        "fuelPowertrain:fuel_or_powertrain_missing": 176,
+        "certifiedPower:certified_30min_power_missing": 51,
+        "powerHp:non_exact_power_provenance": 53,
+        "powerHp:powertrain_identity_conflict": 93,
+        "powerHp:peak_power_missing": 32
+      }
+    },
+    {
+      "market": "uae",
+      "savedInput": 4647,
+      "savedAutomatic": 0,
+      "savedRecoveryShare": 0,
+      "publicationQualifiedSources": [],
+      "sourceDecisions": [
+        {
+          "sourceId": "dubizzle_uae_open",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "dubicars_uae_exact",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "carswitch_uae_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "yallamotor_uae_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "automarket_uae_candidate",
+          "class": "research_pending",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "cars24_uae_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        }
+      ],
+      "controlledPilot": {
+        "status": "not_ready",
+        "remaining": [
+          "Confirm source-specific automated collection permission and working access for this project.",
+          "Verify the corrected adapter is the actual code used by the isolated market runner.",
+          "Define bounded collection without catalog publication; preserve the production pause."
+        ]
+      },
+      "catalogPublication": {
+        "status": "not_ready",
+        "remaining": [
+          "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
+          "Verify independent calculation examples and browser list/detail/selection behavior.",
+          "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
+          "Confirm publication permission and production deployment; retain rollback generation."
+        ]
+      },
+      "specificationBlockers": {
+        "fuelPowertrain:unclassified_field_provenance": 4639,
+        "engineCc:unclassified_field_provenance": 4646,
+        "powerHp:non_exact_power_provenance": 4531,
+        "powerHp:powertrain_identity_conflict": 9,
+        "fuelPowertrain:fuel_or_powertrain_missing": 8
+      }
+    },
+    {
+      "market": "georgia",
+      "savedInput": 216,
+      "savedAutomatic": 0,
+      "savedRecoveryShare": 0,
+      "publicationQualifiedSources": [],
+      "sourceDecisions": [
+        {
+          "sourceId": "myauto_georgia_list",
+          "class": "research_pending",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "autopapa_georgia_open",
+          "class": "research_pending",
+          "publishAllowed": false
+        },
+        {
+          "sourceId": "worldauto_georgia_candidate",
+          "class": "lead_only",
+          "publishAllowed": false
+        }
+      ],
+      "controlledPilot": {
+        "status": "not_ready",
+        "remaining": [
+          "Confirm source-specific automated collection permission and working access for this project.",
+          "Verify the corrected adapter is the actual code used by the isolated market runner.",
+          "Define bounded collection without catalog publication; preserve the production pause."
+        ]
+      },
+      "catalogPublication": {
+        "status": "not_ready",
+        "remaining": [
+          "Complete permitted pilot and measure exact source-bound specifications, freshness and rejection reasons.",
+          "Verify independent calculation examples and browser list/detail/selection behavior.",
+          "Measure >=80% automatic calculations on the accepted deduplicated inventory, excluding customer scenarios.",
+          "Confirm publication permission and production deployment; retain rollback generation."
+        ]
+      },
+      "specificationBlockers": {
+        "fuelPowertrain:unclassified_field_provenance": 216,
+        "engineCc:unclassified_field_provenance": 215,
+        "powerHp:non_exact_power_provenance": 161
+      }
+    }
+  ],
+  "japan": {
+    "status": "excluded_by_owner",
+    "includedInPilot": false
+  }
+}
