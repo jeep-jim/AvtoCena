@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises';
 import crypto from 'node:crypto';
 import { getJsonStorage } from '../apps/web/lib/data.ts';
+import { resolveCatalogMarketConfig } from '../apps/web/lib/catalog/estimated-market-config.ts';
 import { selectActiveMarketVersion } from '../apps/web/lib/business-settings.ts';
 
 // Exactly two reads. No catalog, credentials, contacts or setting values in output.
@@ -20,10 +21,17 @@ const [marketData, siteData] = await Promise.all([
   storage.readJsonWithMeta('settings/site-business.json', null),
 ]);
 report.reads = [ ['markets/markets.json',marketData], ['settings/site-business.json',siteData] ].map(([path,result]) => ({ path, found: result.found, hash: result.found ? digest(result.value) : null }));
-for (const market of (Array.isArray(marketData.value) ? marketData.value : []).filter(row => ['europe','korea','china','uae','georgia'].includes(row.id))) {
+for (const marketId of ['europe','korea','china','uae','georgia']) {
+  const market = (Array.isArray(marketData.value) ? marketData.value : []).find(row => row.id === marketId);
   const active = selectActiveMarketVersion(market);
-  report.markets.push({ market: market.id, configVersion: active?.id || null, effectiveFrom: active?.effectiveFrom || null, activeHash: active ? digest(active) : null });
+  const resolved = resolveCatalogMarketConfig(marketId, active);
+  const calculationFields = Object.fromEntries(Object.entries(resolved.config).filter(([key]) => /Rub$/.test(key) || ['currency','percentExpenses','exchangeRateReservePercent'].includes(key)));
+  report.markets.push({ market: marketId, configVersion: active?.id || null, effectiveFrom: active?.effectiveFrom || null,
+    activeHash: active ? digest(active) : null, resolvedCalculationHash: digest(calculationFields), estimatedFields: resolved.estimatedFields,
+    calculationFieldHashes: Object.fromEntries(Object.entries(calculationFields).map(([key,value]) => [key,digest(value)])) });
 }
+report.limitation = 'Resolution uses this branch code and job environment, not attested deployed code or deployment environment overrides.';
+
 report.site = { activeVersionId: siteData.value?.activeVersionId || null };
 await fs.writeFile(process.env.SETTINGS_FINGERPRINT_OUTPUT || 'settings-fingerprint.json', JSON.stringify(report,null,2)+'\n');
 console.log(JSON.stringify(report));

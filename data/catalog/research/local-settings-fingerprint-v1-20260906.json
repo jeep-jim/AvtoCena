@@ -1,5 +1,5 @@
 {
-  "checkedAt": "2026-09-06T15:51:57.737Z",
+  "checkedAt": "2026-09-06T16:00:44.515Z",
   "storageDriver": "local",
   "productionWrites": false,
   "reads": [
@@ -16,36 +16,132 @@
   ],
   "markets": [
     {
-      "market": "china",
-      "configVersion": "market_china_v2",
+      "market": "europe",
+      "configVersion": "market_europe_v2",
       "effectiveFrom": "2026-07-27T00:00:00.000Z",
-      "activeHash": "6871d15eaa696261032cdb8cd1ac1575b9e0c7bf07524dbf746fdeaa35102ca8"
+      "activeHash": "0b0b475582144f1164edb014200a3c223aeb045f1ebd8bfaf26711704b39361f",
+      "resolvedCalculationHash": "fc4cbf14d72b79a2cec344dfba3cb2b76cce30da5caf3406f6412899c24d8861",
+      "estimatedFields": [],
+      "calculationFieldHashes": {
+        "currency": "87ef325635aa32dd785d818665ee8fe141d7fae0566c7ea09701c82a524452ba",
+        "topAvtoCommissionRub": "ac911e4a8f2b48c071ce0fbb434c039c48e60e8d96dff768f69daa740af0c3bb",
+        "securityDepositRub": "e9126f469646506b8e82b4214d075bf72d9d324d357650ba670ed6f6fbbf2a75",
+        "contractInitialPaymentRub": "b552e632666bbf6125e3109e28a4fecc08340d017e44109dadbf497a280b8f82",
+        "exchangeRateReservePercent": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "exportExpensesRub": "3bb78535cc9555ff19fe3556aaa41c78a0a45c64d49ba2bc564507648a8e77a1",
+        "logisticsRub": "95b088a8f8966bd6ec5e2742936f8ecf24ad5416474986fa5a2af6496979c299",
+        "brokerRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "svhRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "laboratoryRub": "d4c999ae43633bd2036188d2bca68e1be8202b2cc1f3a1c42a728eaff7d2483d",
+        "sbktsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "eptsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "rfDeliveryRub": "4f9f73b34c5b89879aad65a48025f3187dd9ce6dc3d4e88eecb2fc79227350f1",
+        "otherFixedExpensesRub": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "percentExpenses": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
     },
     {
       "market": "korea",
       "configVersion": "market_korea_v2",
       "effectiveFrom": "2026-07-27T00:00:00.000Z",
-      "activeHash": "6455e5590bfb79c406d2b85ea0854bf117df5f676dd3a5c9ea6eca3310d245a7"
+      "activeHash": "6455e5590bfb79c406d2b85ea0854bf117df5f676dd3a5c9ea6eca3310d245a7",
+      "resolvedCalculationHash": "46a0c5bb4b8b416724844c5802f4999a09c5afa3bc6b7bac0b2894f7e9554feb",
+      "estimatedFields": [],
+      "calculationFieldHashes": {
+        "currency": "4143405c2726e710098fa18a6101b87b3d8a00eac390aa06bd7456fa844ec19c",
+        "topAvtoCommissionRub": "ac911e4a8f2b48c071ce0fbb434c039c48e60e8d96dff768f69daa740af0c3bb",
+        "securityDepositRub": "e9126f469646506b8e82b4214d075bf72d9d324d357650ba670ed6f6fbbf2a75",
+        "contractInitialPaymentRub": "b552e632666bbf6125e3109e28a4fecc08340d017e44109dadbf497a280b8f82",
+        "exchangeRateReservePercent": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "exportExpensesRub": "265f10e1bf87701b7aa597c197b6a25b0984777f3443a289d7a92aedd31fddcf",
+        "logisticsRub": "f5b32f00fe05eee941f38440cb4208f97bd5af9e5613e7386d60666548060d23",
+        "brokerRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "svhRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "laboratoryRub": "d4c999ae43633bd2036188d2bca68e1be8202b2cc1f3a1c42a728eaff7d2483d",
+        "sbktsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "eptsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "rfDeliveryRub": "4f9f73b34c5b89879aad65a48025f3187dd9ce6dc3d4e88eecb2fc79227350f1",
+        "otherFixedExpensesRub": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "percentExpenses": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
+    },
+    {
+      "market": "china",
+      "configVersion": "market_china_v2",
+      "effectiveFrom": "2026-07-27T00:00:00.000Z",
+      "activeHash": "6871d15eaa696261032cdb8cd1ac1575b9e0c7bf07524dbf746fdeaa35102ca8",
+      "resolvedCalculationHash": "43410fc695c007b48a5ff4c470189506a8a2227b1f4c1d37375c7dc771a04fca",
+      "estimatedFields": [],
+      "calculationFieldHashes": {
+        "currency": "8e06735c89d493d78ff5f12b2e47a5f055f1334b7a540bd6c58345195ee9c153",
+        "topAvtoCommissionRub": "ac911e4a8f2b48c071ce0fbb434c039c48e60e8d96dff768f69daa740af0c3bb",
+        "securityDepositRub": "cb0b20f98ee49533666fadc53dd6702a19d66e14ea2bb2bdc2474e305e40ada3",
+        "contractInitialPaymentRub": "f5b32f00fe05eee941f38440cb4208f97bd5af9e5613e7386d60666548060d23",
+        "exchangeRateReservePercent": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "exportExpensesRub": "47b25095a0fe135a688b20614771dbb445ad5e27e9cd4f2c2089c5af216e305b",
+        "logisticsRub": "f5b32f00fe05eee941f38440cb4208f97bd5af9e5613e7386d60666548060d23",
+        "brokerRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "svhRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "laboratoryRub": "d4c999ae43633bd2036188d2bca68e1be8202b2cc1f3a1c42a728eaff7d2483d",
+        "sbktsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "eptsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "rfDeliveryRub": "4f9f73b34c5b89879aad65a48025f3187dd9ce6dc3d4e88eecb2fc79227350f1",
+        "otherFixedExpensesRub": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "percentExpenses": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
     },
     {
       "market": "uae",
       "configVersion": "market_uae_v2",
       "effectiveFrom": "2026-07-27T00:00:00.000Z",
-      "activeHash": "b33bc51a3ba8e8ac731247b417f48edc5de9519fb19cb89819573e117a14bf1a"
-    },
-    {
-      "market": "europe",
-      "configVersion": "market_europe_v2",
-      "effectiveFrom": "2026-07-27T00:00:00.000Z",
-      "activeHash": "0b0b475582144f1164edb014200a3c223aeb045f1ebd8bfaf26711704b39361f"
+      "activeHash": "b33bc51a3ba8e8ac731247b417f48edc5de9519fb19cb89819573e117a14bf1a",
+      "resolvedCalculationHash": "b79edb0d1d34beb1588e811cda9058ab4849a4147aa827cadaede7666c3aa5d4",
+      "estimatedFields": [],
+      "calculationFieldHashes": {
+        "currency": "a02a8fac8fe645256291b77c9781bda64b7963e2dbe47eb7639fb259af96c6b4",
+        "topAvtoCommissionRub": "ac911e4a8f2b48c071ce0fbb434c039c48e60e8d96dff768f69daa740af0c3bb",
+        "securityDepositRub": "e9126f469646506b8e82b4214d075bf72d9d324d357650ba670ed6f6fbbf2a75",
+        "contractInitialPaymentRub": "b552e632666bbf6125e3109e28a4fecc08340d017e44109dadbf497a280b8f82",
+        "exchangeRateReservePercent": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "exportExpensesRub": "4f9f73b34c5b89879aad65a48025f3187dd9ce6dc3d4e88eecb2fc79227350f1",
+        "logisticsRub": "7ae410ba957c79d1650a1cbcbb9acfa1e6d23944dc91d1676e70dba7c6551b76",
+        "brokerRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "svhRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "laboratoryRub": "d4c999ae43633bd2036188d2bca68e1be8202b2cc1f3a1c42a728eaff7d2483d",
+        "sbktsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "eptsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "rfDeliveryRub": "4f9f73b34c5b89879aad65a48025f3187dd9ce6dc3d4e88eecb2fc79227350f1",
+        "otherFixedExpensesRub": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "percentExpenses": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
     },
     {
       "market": "georgia",
       "configVersion": "market_georgia_v2",
       "effectiveFrom": "2026-07-27T00:00:00.000Z",
-      "activeHash": "151cd452d48ec325f1c2465bb07ecea5b656ab5b2c15dba39ff15d0b20cd1f34"
+      "activeHash": "151cd452d48ec325f1c2465bb07ecea5b656ab5b2c15dba39ff15d0b20cd1f34",
+      "resolvedCalculationHash": "286d9f13f01eb4b51973bddad5d7d033f5dadcc806175f5ae3cdbf9d845f53ce",
+      "estimatedFields": [],
+      "calculationFieldHashes": {
+        "currency": "967aad6ecdf16cc40f2828ac7ca095b80731641aa7f751a3e6657f246297eb0a",
+        "topAvtoCommissionRub": "ac911e4a8f2b48c071ce0fbb434c039c48e60e8d96dff768f69daa740af0c3bb",
+        "securityDepositRub": "e9126f469646506b8e82b4214d075bf72d9d324d357650ba670ed6f6fbbf2a75",
+        "contractInitialPaymentRub": "b552e632666bbf6125e3109e28a4fecc08340d017e44109dadbf497a280b8f82",
+        "exchangeRateReservePercent": "d4735e3a265e16eee03f59718b9b5d03019c07d8b6c51f90da3a666eec13ab35",
+        "exportExpensesRub": "60734f174b2035e5b2ba85fef8c648cc0cb18c5995b419d3cd1c025c5b09d0c7",
+        "logisticsRub": "c3c8204aec16162abf29b505bfdc8fe2b911b95b4a351da1664b0ac8a6771f6b",
+        "brokerRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "svhRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "laboratoryRub": "d4c999ae43633bd2036188d2bca68e1be8202b2cc1f3a1c42a728eaff7d2483d",
+        "sbktsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "eptsRub": "e846a3867ee2598139c1957e15fafe06f2357059c177aaa944cb5769bf1a5ae1",
+        "rfDeliveryRub": "4f9f73b34c5b89879aad65a48025f3187dd9ce6dc3d4e88eecb2fc79227350f1",
+        "otherFixedExpensesRub": "5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+        "percentExpenses": "4f53cda18c2baa0c0354bb5f9a3ecbe5ed12ab4d8e11ba873c2f11161202b945"
+      }
     }
   ],
+  "limitation": "Resolution uses this branch code and job environment, not attested deployed code or deployment environment overrides.",
   "site": {
     "activeVersionId": "site_business_v1"
   }
