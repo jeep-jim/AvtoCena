@@ -514,7 +514,13 @@
         "browser_interaction_not_verified",
         "source_permission_and_inventory_freshness_not_requalified",
         "independent_calculation_spot_checks_pending"
-      ]
+      ],
+      "ciRunId": 34025558568,
+      "ciCommit": "1818f0b0120e79a23e00b241f9a6a4aa1f8f2b08",
+      "ciConclusion": "success",
+      "draftPullRequest": 831,
+      "temporaryWorkflowRemoved": true,
+      "workflowRemovalCommit": "5117ee560a824416e45abc273ba7aec2b1240be6"
     }
   }
 }
