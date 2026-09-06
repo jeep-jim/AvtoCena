@@ -16,7 +16,20 @@
     "typecheck": "success",
     "productionBuild": "success",
     "isolatedCompilerBefore": "success",
-    "isolatedCompilerAfter": "success"
+    "isolatedCompilerAfter": "success",
+    "finalCi": {
+      "runId": 34039140044,
+      "jobId": 101502577500,
+      "commit": "ffe9985abd8c9a35a0d607abbc4507f4ca5f42ff",
+      "conclusion": "success",
+      "fullSuite": "success",
+      "profileChecks": "success",
+      "typecheck": "success",
+      "productionBuild": "success",
+      "tests": 1047,
+      "passCount": 1047,
+      "fail": 0
+    }
   },
   "compilerComparison": {
     "before": {
