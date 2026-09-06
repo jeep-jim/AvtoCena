@@ -1,0 +1,52 @@
+{
+  "checkedAt": "2026-09-06T15:51:57.737Z",
+  "storageDriver": "local",
+  "productionWrites": false,
+  "reads": [
+    {
+      "path": "markets/markets.json",
+      "found": true,
+      "hash": "fb01fc49857e4cc0d9a05be1eed4841a9aadd8a72bf5b7d42c73c826edef66a1"
+    },
+    {
+      "path": "settings/site-business.json",
+      "found": true,
+      "hash": "cc9de68b4510c6af1aa8f8d03ab3ffc120cfcb5043cb807ac077e0c40fedf520"
+    }
+  ],
+  "markets": [
+    {
+      "market": "china",
+      "configVersion": "market_china_v2",
+      "effectiveFrom": "2026-07-27T00:00:00.000Z",
+      "activeHash": "6871d15eaa696261032cdb8cd1ac1575b9e0c7bf07524dbf746fdeaa35102ca8"
+    },
+    {
+      "market": "korea",
+      "configVersion": "market_korea_v2",
+      "effectiveFrom": "2026-07-27T00:00:00.000Z",
+      "activeHash": "6455e5590bfb79c406d2b85ea0854bf117df5f676dd3a5c9ea6eca3310d245a7"
+    },
+    {
+      "market": "uae",
+      "configVersion": "market_uae_v2",
+      "effectiveFrom": "2026-07-27T00:00:00.000Z",
+      "activeHash": "b33bc51a3ba8e8ac731247b417f48edc5de9519fb19cb89819573e117a14bf1a"
+    },
+    {
+      "market": "europe",
+      "configVersion": "market_europe_v2",
+      "effectiveFrom": "2026-07-27T00:00:00.000Z",
+      "activeHash": "0b0b475582144f1164edb014200a3c223aeb045f1ebd8bfaf26711704b39361f"
+    },
+    {
+      "market": "georgia",
+      "configVersion": "market_georgia_v2",
+      "effectiveFrom": "2026-07-27T00:00:00.000Z",
+      "activeHash": "151cd452d48ec325f1c2465bb07ecea5b656ab5b2c15dba39ff15d0b20cd1f34"
+    }
+  ],
+  "site": {
+    "activeVersionId": "site_business_v1"
+  }
+}
