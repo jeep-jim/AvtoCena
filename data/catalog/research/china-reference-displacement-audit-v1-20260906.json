@@ -186,5 +186,240 @@
     "Obtain permitted config evidence for exact specIds, retaining explicit displacement parameter and source identity.",
     "Independently verify specification market, model year and variant linkage before calculation.",
     "Re-run saved listing audit after evidenced variant updates; keep Japan paused."
-  ]
+  ],
+  "duplicateSpecIds": [
+    {
+      "specId": 76207,
+      "count": 2,
+      "differingFields": [
+        "marketDate",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5061,
+        8710
+      ],
+      "titles": [
+        "探岳 PHEV 2026款 探岳L PRO",
+        "探岳 PHEV 2026款 PRO"
+      ]
+    },
+    {
+      "specId": 76208,
+      "count": 2,
+      "differingFields": [
+        "marketDate",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5061,
+        8710
+      ],
+      "titles": [
+        "探岳 PHEV 2026款 探岳L PRIME",
+        "探岳 PHEV 2026款 PRIME"
+      ]
+    },
+    {
+      "specId": 1023346,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 捷运型平顶6座",
+        "王 2026款 捷运型平顶6座 CNG"
+      ]
+    },
+    {
+      "specId": 1023347,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 享型平顶9座",
+        "王 2026款 享型平顶9座 CNG"
+      ]
+    },
+    {
+      "specId": 1023348,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 捷运型高顶6座",
+        "王 2026款 捷运型高顶6座 CNG"
+      ]
+    },
+    {
+      "specId": 1023349,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 享型高顶9座",
+        "王 2026款 享型高顶9座 CNG"
+      ]
+    },
+    {
+      "specId": 1023350,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 悦享型平顶7座",
+        "王 2026款 悦享型平顶7座 CNG"
+      ]
+    },
+    {
+      "specId": 1023351,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 悦享型平顶9座",
+        "王 2026款 悦享型平顶9座 CNG"
+      ]
+    },
+    {
+      "specId": 1023352,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 悦享型高顶7座",
+        "王 2026款 悦享型高顶7座 CNG"
+      ]
+    },
+    {
+      "specId": 1023353,
+      "count": 2,
+      "differingFields": [
+        "energy",
+        "engine",
+        "enginePowerHp",
+        "enginePowerKw",
+        "imageUrl",
+        "seriesId",
+        "seriesName",
+        "sourceUrl",
+        "title"
+      ],
+      "seriesIds": [
+        5877,
+        8299
+      ],
+      "titles": [
+        "王 2026款 悦享型高顶9座",
+        "王 2026款 悦享型高顶9座 CNG"
+      ]
+    }
+  ],
+  "previousChangeCi": {
+    "runId": 34037647982,
+    "commit": "d362ca7fbfb1e8691a1f8bf1e5a772c20ec1d377",
+    "conclusion": "success"
+  },
+  "compilerFollowup": {
+    "change": "Autohome litre fallback removed; explicit engineCc preserved",
+    "profileTests": 13,
+    "passed": 13,
+    "corpusRebuilt": false
+  }
 }

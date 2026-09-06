@@ -117,7 +117,8 @@ function evidenceYear(row) {
 function directFacts(row) {
   const powertrainKind = normalizedPowertrain(row);
   const engineLiters = positive(row.engineLiters);
-  const engineCc = positive(row.engineCc) || (engineLiters ? Math.round(engineLiters * 1000) : null);
+  // Autohome marketing litres do not attest exact displacement.
+  const engineCc = positive(row.engineCc) || (row.sourceId !== "autohome-china" && engineLiters ? Math.round(engineLiters * 1000) : null);
   const directPowerKw = positive(row.powerKw);
   const systemPowerKw = positive(row.systemPowerKw);
   const motorTotalKw = positive(row.motorTotalKw);
