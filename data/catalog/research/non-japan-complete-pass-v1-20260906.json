@@ -25,7 +25,8 @@
       "calculatedEligibleYear": 7,
       "calculatedEligibleYearUnder15m": 7,
       "galleryAtLeast5": 11,
-      "fieldChanges": []
+      "fieldChanges": [],
+      "calculatedEligibleYearUnder15mGallery5": 7
     },
     {
       "market": "europe",
@@ -39,7 +40,8 @@
       "calculatedEligibleYear": 19,
       "calculatedEligibleYearUnder15m": 19,
       "galleryAtLeast5": 17,
-      "fieldChanges": []
+      "fieldChanges": [],
+      "calculatedEligibleYearUnder15mGallery5": 16
     },
     {
       "market": "china",
@@ -56,7 +58,8 @@
       "fieldChanges": [
         "engineCc",
         "powerHp"
-      ]
+      ],
+      "calculatedEligibleYearUnder15mGallery5": 4
     },
     {
       "market": "uae",
@@ -70,7 +73,8 @@
       "calculatedEligibleYear": 0,
       "calculatedEligibleYearUnder15m": 0,
       "galleryAtLeast5": 20,
-      "fieldChanges": []
+      "fieldChanges": [],
+      "calculatedEligibleYearUnder15mGallery5": 0
     },
     {
       "market": "georgia",
@@ -86,7 +90,8 @@
       "galleryAtLeast5": 10,
       "fieldChanges": [
         "powerHp"
-      ]
+      ],
+      "calculatedEligibleYearUnder15mGallery5": 0
     }
   ],
   "validation": {
@@ -97,15 +102,68 @@
     "build": "success",
     "typecheck": "success",
     "finalChinaCompatibilityTargetedTests": 12,
-    "remoteCi": "pending"
+    "remoteCi": {
+      "run": 34045116840,
+      "commit": "20b7f2676990d586cd3f51a388628fcc7914a520",
+      "conclusion": "success",
+      "report": "data/catalog/research/complete-pass-ci-v1-20260906.json"
+    }
   },
   "settingsComparison": "data/catalog/research/settings-comparison-v1-20260906.json",
   "limitations": [
     "Sample counts are not a publication acceptance test or whole-market coverage. KCar drops incomplete rows before returning them.",
-    "Prices calculated with local settings; a read-only business-settings replay is pending.",
+    "Read-only replay with Object Storage settings matches Europe/Korea; China totals are 100000 RUB lower. Deployed environment overrides remain unverified.",
     "China raw calculated count includes cars before 2020 and one above 15m; these are not counted as new accepted inventory.",
     "Encar endpoint is current, but returns a block page using HTTP404.",
     "DubiCars first expanded run predates the specification-section and source-price fix; its price values must not be reused.",
     "No merge/deploy, catalog writes, schedule restart or Japan requests."
-  ]
+  ],
+  "settingsReplay": {
+    "path": "data/catalog/research/production-settings-replay-v1-20260906.json",
+    "workflowRun": 34044950813,
+    "count": 42,
+    "markets": [
+      {
+        "market": "europe",
+        "count": 19,
+        "deltaRubValues": [
+          0
+        ]
+      },
+      {
+        "market": "korea",
+        "count": 10,
+        "deltaRubValues": [
+          0
+        ]
+      },
+      {
+        "market": "china",
+        "count": 13,
+        "deltaRubValues": [
+          -100000
+        ]
+      }
+    ]
+  },
+  "hostedChecks": {
+    "runtimeCommit": "20b7f2676990d586cd3f51a388628fcc7914a520",
+    "europeKcarRun": 34045114273,
+    "europe": {
+      "samples": 10,
+      "basicFiltersPassing": 9,
+      "status": "success"
+    },
+    "korea": {
+      "samples": 10,
+      "basicFiltersPassing": 7,
+      "status": "success"
+    },
+    "che168": {
+      "run": 34045114260,
+      "outputCards": 3,
+      "problems": [],
+      "status": "success"
+    }
+  }
 }

@@ -23,7 +23,8 @@ const markets = ['europe', 'korea', 'china', 'uae', 'georgia'];
 const report = {
   version: 1, advisoryOnly: true, productionWrites: false, workflowDispatches: 0,
   inputs, auditCheckedAt: audit.checkedAt,
-  codeValidation: batch.validation.finalCi,
+  previousBaselineValidation: batch.validation.finalCi,
+  codeValidation: completePass.validation,
   limitation: 'Saved recovery is not a fresh pilot. Unverified gates remain blocked; this report grants no permissions and changes no market controls.',
   markets: markets.map(market => {
     const saved = audit.recovery[market];

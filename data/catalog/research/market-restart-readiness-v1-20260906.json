@@ -26,11 +26,11 @@
     },
     {
       "path": "data/catalog/research/non-japan-complete-pass-v1-20260906.json",
-      "sha256": "4d30b6acfb4092c34120072e59d20130e7c92619e55be9fb42263aa4efd2c3b4"
+      "sha256": "d9cdb3be15d14f4dd2d696b52c6fb82e1586ec1cb20a82fcd0c849eb12882716"
     }
   ],
   "auditCheckedAt": "2026-09-06T12:59:54.341Z",
-  "codeValidation": {
+  "previousBaselineValidation": {
     "runId": 34039140044,
     "jobId": 101502577500,
     "commit": "ffe9985abd8c9a35a0d607abbc4507f4ca5f42ff",
@@ -42,6 +42,21 @@
     "tests": 1047,
     "passCount": 1047,
     "fail": 0
+  },
+  "codeValidation": {
+    "fullTests": 1057,
+    "passed": 1057,
+    "failed": 0,
+    "skipped": 0,
+    "build": "success",
+    "typecheck": "success",
+    "finalChinaCompatibilityTargetedTests": 12,
+    "remoteCi": {
+      "run": 34045116840,
+      "commit": "20b7f2676990d586cd3f51a388628fcc7914a520",
+      "conclusion": "success",
+      "report": "data/catalog/research/complete-pass-ci-v1-20260906.json"
+    }
   },
   "limitation": "Saved recovery is not a fresh pilot. Unverified gates remain blocked; this report grants no permissions and changes no market controls.",
   "markets": [
@@ -797,7 +812,8 @@
         "calculatedEligibleYear": 19,
         "calculatedEligibleYearUnder15m": 19,
         "galleryAtLeast5": 17,
-        "fieldChanges": []
+        "fieldChanges": [],
+        "calculatedEligibleYearUnder15mGallery5": 16
       },
       "savedInput": 5259,
       "savedAutomatic": 4808,
@@ -880,7 +896,8 @@
         "calculatedEligibleYear": 7,
         "calculatedEligibleYearUnder15m": 7,
         "galleryAtLeast5": 11,
-        "fieldChanges": []
+        "fieldChanges": [],
+        "calculatedEligibleYearUnder15mGallery5": 7
       },
       "savedInput": 2840,
       "savedAutomatic": 1511,
@@ -1649,7 +1666,8 @@
         "fieldChanges": [
           "engineCc",
           "powerHp"
-        ]
+        ],
+        "calculatedEligibleYearUnder15mGallery5": 4
       },
       "savedInput": 3092,
       "savedAutomatic": 0,
@@ -1744,7 +1762,8 @@
         "calculatedEligibleYear": 0,
         "calculatedEligibleYearUnder15m": 0,
         "galleryAtLeast5": 20,
-        "fieldChanges": []
+        "fieldChanges": [],
+        "calculatedEligibleYearUnder15mGallery5": 0
       },
       "savedInput": 4647,
       "savedAutomatic": 0,
@@ -1838,7 +1857,8 @@
         "galleryAtLeast5": 10,
         "fieldChanges": [
           "powerHp"
-        ]
+        ],
+        "calculatedEligibleYearUnder15mGallery5": 0
       },
       "savedInput": 216,
       "savedAutomatic": 0,
