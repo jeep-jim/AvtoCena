@@ -6,7 +6,7 @@ import { hasModificationSelection, isModificationScenario, modificationBinding, 
 import { catalogOfferVisibleRub } from "../apps/web/lib/catalog/public-priority";
 import { calculateSelectedModification, conditionalModificationRub, prepareModificationRecovery } from "../apps/web/lib/catalog/modification-recovery";
 import { restoreSavedSourceEvidence } from "../apps/web/lib/catalog/saved-source-recovery";
-import { calculateOfferWithResolvedModification } from "../apps/web/lib/catalog/customs-pricing";
+import { calculateOfferWithResolvedModification, requireFreshRecoveryRates } from "../apps/web/lib/catalog/customs-pricing";
 import { catalogSearchProjectionMatches, catalogSearchProjectionSort, projectionCanRenderCard, searchProjectionFromOffer, compactPublicStorageOffer, persistCatalogOffers } from "../apps/web/lib/catalog/storage";
 import { LocalJsonStorage } from "../apps/web/lib/data";
 
@@ -38,10 +38,23 @@ test("only verified, fully evidenced, compatible variants are offered; no defaul
   assert.deepEqual(compatibleModificationOptions(known, [variant, diesel], variant.modelId).map(x => x.id), [diesel.id]);
   assert.equal(compatibleModificationOptions(offer({ engineCc: 1800, operational: { semanticEvidence: { engineCc: { status: "exact" } } } }), [variant], variant.modelId).length, 0);
   assert.equal(compatibleModificationOptions(offer({ drive: "awd" }), [variant], variant.modelId).length, 0);
+  const partialHybrid = offer({ fuel: "hybrid", powertrainKind: "unknown", operational: { semanticEvidence: { fuel: { status: "exact" }, powertrainKind: { status: "missing" } } } });
+  assert.equal(compatibleModificationOptions(partialHybrid, [variant, diesel], variant.modelId).length, 0);
 });
 
 test("electric peak power cannot make a modification calculable without certified power", () => {
   assert.equal(compatibleModificationOptions(offer(), [{ ...variant, fuel: "electric", powertrainKind: "electric", engineCc: undefined }], variant.modelId).length, 0);
+});
+
+test("a complete-looking scenario with stale official rates has no delivered total", () => {
+  const old = offer({ totalRub: 2500000, calculationSnapshot: {
+    currencyRate: { rateSource: "cbr", rateDate: "2026-08-30" }, eurRate: { rateSource: "cbr", rateDate: "2026-08-30" },
+    breakdown: [{ id: "car", amountRub: 1000000 }] } });
+  const result = requireFreshRecoveryRates(old, Date.parse("2026-09-06"));
+  assert.equal(result.totalRub, null);
+  assert.equal(result.calculationStatus, "needs_currency_rate");
+  assert.deepEqual(result.calculationSnapshot.breakdown, []);
+  assert.equal(old.totalRub, 2500000);
 });
 
 test("selectors survive projections and compaction, with no stale price or budget match", () => {

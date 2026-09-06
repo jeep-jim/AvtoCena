@@ -37,6 +37,9 @@ export function isModificationScenario(offer: any) {
 export function hasModificationSelection(offer: any): boolean {
   const selection = offer?.modificationSelection;
   return offer?.market !== "japan"
+    && offer?.recoveryQualification?.status === "selection_required"
+    && (!offer?.status || offer.status === "active") && offer?.priceMode !== "auction_start"
+    && Number(offer?.sourcePrice) > 0 && /^[A-Z]{3}$/.test(String(offer?.sourceCurrency || ""))
     && selection?.version === 1 && selection.status === "selection_required"
     && selection.binding === modificationBinding(offer)
     && Array.isArray(selection.options) && selection.options.length > 0

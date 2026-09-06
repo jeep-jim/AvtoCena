@@ -22,6 +22,9 @@ export function compatibleModificationOptions(offer: VehicleOffer, variants: Kno
   if (offer.market === "japan" || !modelId || !Number.isInteger(offer.year)) return [];
   if (SPECIFICATION_AUDIT_FIELDS.some(field => classifySpecificationEvidence(offer, field).state === "conflict")) return [];
   const exact = (field: typeof SPECIFICATION_AUDIT_FIELDS[number]) => classifySpecificationEvidence(offer, field).state === "exact";
+  const semantic = (offer.operational as any)?.semanticEvidence || {};
+  const knownFuel = exact("fuelPowertrain") || ["exact", "verified"].includes(semantic.fuel?.status);
+  const knownKind = exact("fuelPowertrain") || ["exact", "verified"].includes(semantic.powertrainKind?.status);
   const options: CatalogModificationOption[] = [];
   for (const variant of variants) {
     if (variant.modelId !== modelId || variant.status !== "verified" || /japan|^jp$/i.test(String(variant.market))) continue;
@@ -37,7 +40,8 @@ export function compatibleModificationOptions(offer: VehicleOffer, variants: Kno
     const powerKw = evidenced(variant, "powerKw") ? number(variant.powerKw) : undefined;
     const powerHp = evidenced(variant, "powerHp") ? number(variant.powerHp) : undefined;
     if (!powerHp && !powerKw) continue;
-    if (exact("fuelPowertrain") && (fuelName(offer.fuel) !== fuel || offer.powertrainKind !== powertrainKind)) continue;
+    if (knownFuel && fuelName(offer.fuel) !== fuel) continue;
+    if (knownKind && offer.powertrainKind !== powertrainKind) continue;
     if (exact("engineCc") && offer.engineCc !== engineCc) continue;
     if (exact("powerHp") && Math.abs(Number(offer.powerHp || Number(offer.powerKw) / 0.73549875) - Number(powerHp || Number(powerKw) / 0.73549875)) > 1) continue;
     // Known gearbox, drive and generation are constraints, never score penalties.

@@ -12,9 +12,14 @@ const bucket = process.env.YC_OBJECT_STORAGE_BUCKET;
 const prefix = (process.env.YC_OBJECT_STORAGE_PREFIX || '').replace(/^\/+|\/+$/g, '');
 let requestCount = 0;
 let deniedRequests = 0;
+let currencyRequestCount = 0;
 globalThis.fetch = async (input, init = {}) => {
   const url = new URL(input instanceof Request ? input.url : String(input));
   const method = init.method || (input instanceof Request ? input.method : 'GET');
+  if (method === 'GET' && url.href === 'https://www.cbr.ru/scripts/XML_daily.asp' && currencyRequestCount === 0) {
+    currencyRequestCount++; requestCount++;
+    return originalFetch(input, { ...init, redirect: 'error' });
+  }
   if (method !== 'GET' || url.origin !== endpoint.origin || !allowed.has(url.pathname) || url.search || ++requestCount > 1500) {
     deniedRequests++;
     throw new Error('saved_audit_outside_read_only_envelope');
@@ -93,13 +98,42 @@ try {
   for (const key of ['fees/exchange-rates.json', 'markets/markets.json']) {
     internalAllowed.add(key); cachedPricing.set(key, await read(key));
   }
+  // One documented official XML request refreshes only the in-memory snapshot.
+  // The Object Storage currency cache remains unchanged.
+  report.currencyEvidence = { url: 'https://www.cbr.ru/scripts/XML_daily.asp', documentation: 'https://www.cbr.ru/development/sxml/' };
+  try {
+    const response = await fetch(report.currencyEvidence.url, { method: 'GET', signal: AbortSignal.timeout(20000) });
+    const bytes = new Uint8Array(await response.arrayBuffer());
+    Object.assign(report.currencyEvidence, { status: response.status, finalUrl: response.url,
+      contentType: response.headers.get('content-type'), bytes: bytes.length, bodyHash: crypto.createHash('sha256').update(bytes).digest('hex') });
+    if (!response.ok || bytes.length > 250000) throw new Error('official_currency_response_invalid');
+    const xml = new TextDecoder().decode(bytes);
+    const date = xml.match(/<ValCurs[^>]*Date=["'](\d{2})\.(\d{2})\.(\d{4})["']/i);
+    if (!date) throw new Error('official_currency_date_missing');
+    const rateDate = `${date[3]}-${date[2]}-${date[1]}`;
+    const age = Date.now() - Date.parse(rateDate);
+    if (!Number.isFinite(age) || age > 4 * 86400000 || age < -86400000) throw new Error('official_currency_date_not_fresh');
+    const rates = [];
+    for (const match of xml.matchAll(/<Valute\b[^>]*>([\s\S]*?)<\/Valute>/gi)) {
+      const value = tag => match[1].match(new RegExp(`<${tag}>([^<]+)</${tag}>`, 'i'))?.[1]?.trim();
+      const currency = value('CharCode');
+      if (!['EUR','USD','CNY','KRW','AED','GEL'].includes(currency)) continue;
+      const nominal = Number(value('Nominal')), cbrRate = Number(String(value('Value')).replace(',', '.'));
+      if (!(nominal > 0) || !(cbrRate > 0)) throw new Error('official_currency_value_invalid');
+      rates.push({ currency, nominal, cbrRate, effectiveRate: cbrRate / nominal, rateDate, rateSource: 'cbr', fetchedAt: new Date().toISOString() });
+    }
+    if (!rates.some(x => x.currency === 'EUR')) throw new Error('official_eur_rate_missing');
+    cachedPricing.set('fees/exchange-rates.json', { updatedAt: new Date().toISOString(), rates });
+    Object.assign(report.currencyEvidence, { rateDate, currencies: rates.map(x => x.currency), fresh: true });
+  } catch (error) { report.currencyEvidence.fresh = false; report.currencyEvidence.error = String(error.message || error).slice(0, 160); }
   // Every calculation uses the same captured settings; repeated cache lookups
   // generate no requests. No fallback to a marketplace or live currency endpoint.
   const calculationStorage = getJsonStorage();
   const underlyingRead = calculationStorage.readJsonWithMeta.bind(calculationStorage);
   calculationStorage.readJsonWithMeta = async (key, fallback) => cachedPricing.has(key)
     ? { found: true, value: cachedPricing.get(key) } : underlyingRead(key, fallback);
-  report.pricingSnapshot = { ratesUpdatedAt: cachedPricing.get('fees/exchange-rates.json').updatedAt, liveRatesRequested: false };
+  report.pricingSnapshot = { ratesUpdatedAt: cachedPricing.get('fees/exchange-rates.json').updatedAt, liveRatesRequested: currencyRequestCount > 0 };
+  report.unrestoredBindingSamples = {};
   report.recovery = Object.fromEntries(MARKETS.map(market => [market, { matchedSavedRows: 0, sourceEvidenceRestored: 0,
     specificationComplete: 0, recalculated: 0, automaticBeforeDedup: 0, selectorBeforeDedup: 0,
     missingInternal: 0, changedFuel: 0, changedEngineCc: 0, changedPowerHp: 0, blockers: {}, examples: [] }]));
@@ -116,6 +150,16 @@ try {
     const joined = { ...published, operational: saved.operational };
     let restored = restoreSavedSourceEvidence(joined);
     if (restored.operational?.savedSourceRecovery) summary.sourceEvidenceRestored++;
+    else {
+      const samples = report.unrestoredBindingSamples[saved.sourceId] ||= [];
+      const op = saved.operational || {}, raw = op.raw || {};
+      if (samples.length < 2) samples.push({ id: saved.id, sourceOfferId: saved.sourceOfferId,
+        parsedId: raw.parsed?.id, listingSpecId: raw.listing?.specId, configSpecId: raw.configSpecId,
+        detailInfoId: raw.detail?.infoid, listingInfoId: raw.listing?.infoid,
+        exactDetail: op.exactDetail, detailIdentityVerified: raw.detailIdentityVerified,
+        fieldIdentityVerified: op.fieldIdentityVerified, sourceExactFields: op.sourceExactFields,
+        parsedEngine: raw.parsed?.engineCc, parsedFuel: raw.parsed?.fuel, parsedPower: raw.parsed?.powerHp });
+    }
     if (restored.fuel !== published.fuel) summary.changedFuel++;
     if (restored.engineCc !== published.engineCc) summary.changedEngineCc++;
     if (restored.powerHp !== published.powerHp) summary.changedPowerHp++;
@@ -194,6 +238,7 @@ try {
 } finally {
   report.requestCount = requestCount;
   report.deniedRequests = deniedRequests;
+  report.currencyRequestCount = currencyRequestCount;
   report.complete = report.failures.length === 0 && deniedRequests === 0;
   await fs.writeFile(OUTPUT, JSON.stringify(report, null, 2) + '\n');
   globalThis.fetch = originalFetch;

@@ -47,7 +47,11 @@ export async function prepareModificationRecovery(offer: VehicleOffer): Promise<
   let safe: VehicleOffer = withoutDeliveredPrice({ ...offer, modificationSelection: undefined });
   // Ranges and old guessed fields are not listing constraints or visible facts.
   if (classifySpecificationEvidence(offer, "engineCc").state !== "exact") safe.engineCc = undefined;
-  if (classifySpecificationEvidence(offer, "fuelPowertrain").state !== "exact") { safe.fuel = undefined; safe.powertrainKind = "unknown"; }
+  if (classifySpecificationEvidence(offer, "fuelPowertrain").state !== "exact") {
+    const evidence = (offer.operational as any)?.semanticEvidence || {};
+    if (!["exact", "verified"].includes(evidence.fuel?.status)) safe.fuel = undefined;
+    if (!["exact", "verified"].includes(evidence.powertrainKind?.status)) safe.powertrainKind = "unknown";
+  }
   if (classifySpecificationEvidence(offer, "powerHp").state !== "exact") { safe.powerHp = undefined; safe.powerKw = undefined; }
   if (classifySpecificationEvidence(offer, "certifiedPower").state !== "exact") {
     safe.power30MinKw = undefined; safe.power30MinKwByMotor = undefined; safe.utilizationPowerKw = undefined;

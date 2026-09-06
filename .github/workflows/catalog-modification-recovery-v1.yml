@@ -29,7 +29,7 @@ jobs:
           cache: npm
       - run: npm ci
       - name: Verify modification isolation and existing calculation contracts
-        run: node --import tsx --test tests/catalog-modification-recovery.test.ts tests/catalog-editable-power-scenario.test.ts tests/customs-representative-power-safety.test.ts tests/catalog-source-fuel-evidence.test.ts tests/catalog-customs-identity.test.ts tests/catalog-public-offer-deduplication.test.ts tests/catalog-filter-search.test.ts tests/catalog-autoscout-specification-evidence.test.ts tests/catalog-che168-specification-evidence.test.ts tests/catalog-encar-specification-evidence.test.ts tests/catalog-dubizzle-specification-evidence.test.ts
+        run: node --import tsx --test tests/catalog-knowledge-core-contract.test.ts tests/catalog-modification-recovery.test.ts tests/catalog-editable-power-scenario.test.ts tests/customs-representative-power-safety.test.ts tests/catalog-source-fuel-evidence.test.ts tests/catalog-customs-identity.test.ts tests/catalog-public-offer-deduplication.test.ts tests/catalog-filter-search.test.ts tests/catalog-autoscout-specification-evidence.test.ts tests/catalog-che168-specification-evidence.test.ts tests/catalog-encar-specification-evidence.test.ts tests/catalog-dubizzle-specification-evidence.test.ts
       - run: npm run typecheck
       - run: npm run build
   saved-audit:

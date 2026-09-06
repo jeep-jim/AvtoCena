@@ -439,14 +439,27 @@ export async function calculateOfferWithResolvedModification(input: VehicleOffer
     calculationSnapshot: { modificationScenario: { version: 1, source: "customer_selection", variantId: option.id,
       evidenceIds: option.evidenceIds, requiresConfirmation: true } },
   };
-  const result = await calculateOfferWithRussiaCustomsInternal(conditional, false, undefined, true);
+  const result = requireFreshRecoveryRates(await calculateOfferWithRussiaCustomsInternal(conditional, false, undefined, true));
   return { ...result, calculationSnapshot: { ...result.calculationSnapshot,
     modificationScenario: conditional.calculationSnapshot.modificationScenario } };
 }
 
 export async function calculateOfferWithVerifiedSpecifications(input: VehicleOffer): Promise<VehicleOffer> {
   if (input.market === "japan" || !specificationEvidenceComplete(input)) throw new Error("verified_specifications_required");
-  return calculateOfferWithRussiaCustomsInternal(withoutDeliveredPrice(input), false, undefined, true);
+  return requireFreshRecoveryRates(await calculateOfferWithRussiaCustomsInternal(withoutDeliveredPrice(input), false, undefined, true));
+}
+
+export function requireFreshRecoveryRates(offer: VehicleOffer, now = Date.now()): VehicleOffer {
+  const snapshot = offer.calculationSnapshot || {};
+  const rates = [snapshot.currencyRate, snapshot.eurRate];
+  const fresh = rates.every(rate => {
+    const date = Date.parse(String(rate?.rateDate || ""));
+    return isOfficialCustomsCurrencyRate(rate) && Number.isFinite(date)
+      && now - date <= 4 * 86400000 && date - now <= 86400000;
+  });
+  if (fresh || !(Number(offer.totalRub) > 0)) return offer;
+  return { ...withoutDeliveredPrice(offer), calculationStatus: "needs_currency_rate",
+    calculationSnapshot: { ...snapshot, breakdown: [], pricingConfidence: "unavailable", missing: ["fresh_official_currency_rates"] } };
 }
 
 // Recovery imports may publish a clearly marked lower bound when an exact sold

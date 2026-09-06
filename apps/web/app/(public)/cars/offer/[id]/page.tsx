@@ -390,7 +390,7 @@ export default async function OfferPage({ params, searchParams }: { params: Prom
 
         <div className="min-w-0 xl:sticky xl:top-[92px] xl:self-start">
           {selectionRequired
-            ? <ModificationSelector options={offer.modificationSelection!.options} selectedId={selectedModification ? query.modificationId : undefined} scenarioRub={modificationRub} failed={Boolean(query.modificationId && !selectedModification)} />
+            ? <ModificationSelector key={offer.id} options={offer.modificationSelection!.options} selectedId={selectedModification ? query.modificationId : undefined} scenarioRub={modificationRub} failed={Boolean(query.modificationId && !selectedModification)} />
             : japanAuction
             ? <AuctionResultPrice offer={o} label="Завершённый аукцион" priceClassName="text-3xl md:text-4xl" className="ac-offer-price-panel" panel />
             : preliminaryPricing
