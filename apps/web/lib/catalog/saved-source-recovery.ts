@@ -21,6 +21,17 @@ function fuelEvidence(value: unknown, source: string): Evidence {
   return { status: valueFuel && !alternative ? "exact" : "ambiguous", value: valueFuel, source, rawValues: [raw.slice(0, 160)] };
 }
 
+function singleExplicitMetric(value: unknown, pattern: RegExp) {
+  const raw = text(value);
+  // A range's last number is not an exact specification.
+  if (/\d\s*(?:(?:cc|cm3|cm³|hp|ps|bhp)\s*)?(?:[-–—/~]|\bto\b)\s*\d/i.test(raw)
+    || /(?:[<>≤≥]|\b(?:up to|over|under|at least)\s*)\s*\d/i.test(raw)) return undefined;
+  const values = [...raw.matchAll(pattern)].map(match => Number(String(match[1]).replace(",", ".")))
+    .filter(Number.isFinite);
+  const unique = [...new Set(values)];
+  return unique.length === 1 ? unique[0] : undefined;
+}
+
 /** Replays retained source fields only. No network, model inference or writes. */
 export function restoreSavedSourceEvidence(input: VehicleOffer): VehicleOffer {
   if (input.market === "japan") return input;
@@ -56,6 +67,19 @@ export function restoreSavedSourceEvidence(input: VehicleOffer): VehicleOffer {
     // A marketing label such as 1.5L does not prove 1500 rather than 1498 cc.
     const cc = text(fields.engine).match(/\b(\d{3,5})\s*(?:cc|cm3|cm³)\b/i);
     engine = cc?.[1]; bound = true;
+  } else if (input.sourceId === "autohome_used_china_open" && input.market === "china"
+    && raw.detailIdentityVerified === true
+    && text(input.sourceOfferId) !== ""
+    && text(raw.detail?.infoid) === text(input.sourceOfferId)
+    && text(raw.listing?.infoid) === text(input.sourceOfferId)) {
+    // Retained Che168 global detail rows are useful only when both list and
+    // detail identify the same offer. A litre label (for example 1.6L) is not
+    // silently rounded to cc; only an explicitly unit-labelled cc value is kept.
+    const detail = raw.detail || {};
+    engine = singleExplicitMetric(detail.engine, /\b(\d{3,5})\s*(?:cc|cm3|cm³)(?![a-z0-9³])/gi);
+    hp = singleExplicitMetric(detail.engine, /\b(\d{2,4}(?:[.,]\d+)?)\s*(?:hp|ps|bhp)\b/gi);
+    fuel = detail.fuelname;
+    bound = true;
   }
   if (!bound) return input;
   const evidence: Record<string, Evidence> = {

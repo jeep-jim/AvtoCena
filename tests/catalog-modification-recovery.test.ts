@@ -113,6 +113,32 @@ test("retained listing fields repair fuel; ranges, guesses and wrong identity do
   const marketing = restoreSavedSourceEvidence(offer({ market: "china", sourceId: "autohome_new_china_open", operational: {
     raw: { detailIdentityVerified: true, configSpecId: "1", listing: { specId: "1" }, configFields: { engine: "1.5L 140HP", energy: "汽油", engineMaxHp: "140" } } } }));
   assert.equal(marketing.engineCc, undefined);
+  const usedChina = restoreSavedSourceEvidence(offer({ market: "china", sourceId: "autohome_used_china_open", sourceOfferId: "59609193", operational: {
+    raw: { detailIdentityVerified: true, listing: { infoid: 59609193 }, detail: { infoid: 59609193, fuelname: "Gasoline", engine: "1998 cc 156hp L4" } } } }));
+  assert.equal(usedChina.fuel, "petrol"); assert.equal(usedChina.powertrainKind, "combustion");
+  assert.equal(usedChina.engineCc, 1998); assert.equal(usedChina.powerHp, 156);
+  const roundedUsedChina = restoreSavedSourceEvidence(offer({ market: "china", sourceId: "autohome_used_china_open", sourceOfferId: "59609193", operational: {
+    raw: { detailIdentityVerified: true, listing: { infoid: 59609193 }, detail: { infoid: 59609193, fuelname: "Gasoline", engine: "2.0L 156hp L4" } } } }));
+  assert.equal(roundedUsedChina.engineCc, undefined); assert.equal(roundedUsedChina.powerHp, 156);
+  const wrongUsedChina = restoreSavedSourceEvidence(offer({ market: "china", sourceId: "autohome_used_china_open", sourceOfferId: "59609193", operational: {
+    raw: { detailIdentityVerified: true, listing: { infoid: 59609193 }, detail: { infoid: 1, fuelname: "Gasoline", engine: "1998 cc 156hp L4" } } } }));
+  assert.equal(wrongUsedChina.operational.savedSourceRecovery, undefined);
+  for (const engine of ["1500-2000 cc 156hp", "1998 cc 100–156hp", "1500/2000 cc 156hp", "1500 cc–2000 cc 156hp", "<2000 cc 156hp"]) {
+    const row = structuredClone(usedChina);
+    row.operational.raw.detail.engine = engine;
+    const restored = restoreSavedSourceEvidence(row);
+    assert.equal(restored.engineCc, undefined, engine);
+    assert.equal(restored.powerHp, undefined, engine);
+  }
+  const cubic = structuredClone(usedChina);
+  cubic.operational.raw.detail.engine = "1998 cm³ 156hp";
+  assert.equal(restoreSavedSourceEvidence(cubic).engineCc, 1998);
+  const missingIdentity = structuredClone(usedChina);
+  missingIdentity.sourceOfferId = "";
+  delete missingIdentity.operational.savedSourceRecovery;
+  delete missingIdentity.operational.raw.listing.infoid;
+  delete missingIdentity.operational.raw.detail.infoid;
+  assert.equal(restoreSavedSourceEvidence(missingIdentity).operational.savedSourceRecovery, undefined);
   assert.equal(unprovenEnginePrecision(offer({ engineCc: 1500, operational: { semanticEvidence: {
     engineCc: { status: "exact", rawValues: ["1.5L 140HP"] } } } })), true);
 });

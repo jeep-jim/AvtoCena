@@ -1,0 +1,55 @@
+{
+  "date": "2026-09-06",
+  "baseCommit": "bf294520",
+  "fullSuite": {
+    "tests": 1035,
+    "pass": 1007,
+    "fail": 28,
+    "mode": "serial",
+    "failures": [
+      "partial classification assigns exactly the four evidence-backed classes and never publishes (0.880498ms)",
+      "Good Car exact classification is explicitly gated before publication (0.12622ms)",
+      "unrelated source classes are byte-semantically preserved (0.175064ms)",
+      "already powered AutoPapa combustion rows do not force an extra detail request (2.014159ms)",
+      "electrified AutoPapa rows never use the seller peak-power detail refresh gate (0.357279ms)",
+      "catalog card never bypasses the validated public ruble price (2.859504ms)",
+      "compact public projection cards do not rerun source-gallery coherence (2.292299ms)",
+      "deploy calculation audit reads the public projection and classifies current statuses (2.274752ms)",
+      "sourceNames stay audit-only even when a source record carries a safe-looking flag (2.175242ms)",
+      "redesigned desktop filters keep their own nested layout (2.300031ms)",
+      "catalog filters use direct range inputs, quick presets and a real mobile bottom sheet (2.520193ms)",
+      "preliminary electrified cards show a compact 30-minute-power status (0.519825ms)",
+      "mass-market catalog is applied to production code (2.85912ms)",
+      "Korea presentation preserves verified native model identity when no canonical translation exists (2.54769ms)",
+      "China title omits an actually unresolved make rather than publishing placeholder copy (5.694773ms)",
+      "public source set covers every AvtoCena market without credentials (1.540835ms)",
+      "tests/catalog-source-qualification-contract.test.ts (171.258735ms)",
+      "source price, year and power qualify a recent <=160 hp offer before knowledge enrichment (2.584109ms)",
+      "Smoke10 publishes collected real offers without the full-market priority gate (0.614087ms)",
+      "10k rebuild requires a buyer-usable five-photo gallery and caps galleries at 30 (2.756489ms)",
+      "catalog generation chunks stay under 500 and search loads indexed chunks only (5372.855664ms)",
+      "full verified corpus remains read-only and cannot expand calculator runtime (765.143881ms)",
+      "Georgia canonical quality permanently rejects non-company sources (1.641056ms)",
+      "server-vetted Georgia public DTO remains visible after sourceId is omitted (2.151337ms)",
+      "home page does not block its first render on catalog storage (2.28656ms)",
+      "model page adds customer-facing SEO content and FAQ structured data (2.274663ms)",
+      "route loader covers the complete public header with moving red-white candy stripes (2.727796ms)",
+      "loader does not artificially keep a completed route on screen (1.04102ms)"
+    ]
+  },
+  "targetedSuite": {
+    "tests": 54,
+    "pass": 54,
+    "fail": 0
+  },
+  "limitations": [
+    "Full suite ran before the new range regression fix; targeted suite ran after it.",
+    "Source qualification test blocked by missing source-field-audit-v1-summary.json.",
+    "GitHub push rejected by automatic approval review; no saved-data audit was launched.",
+    "No browser acceptance or live parser run performed."
+  ],
+  "productionWrites": false,
+  "parsersRestarted": false,
+  "typecheck": "success",
+  "productionBuildAfterFix": "success"
+}
