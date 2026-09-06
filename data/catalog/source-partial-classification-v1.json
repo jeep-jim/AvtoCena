@@ -30,7 +30,8 @@
     33938264745,
     33938425009,
     34018339034,
-    34018481311
+    34018481311,
+    34018844475
   ],
   "decisions": [
     {
@@ -94,8 +95,21 @@
       "sourceId": "iautos_china_candidate",
       "class": "lead_only",
       "publishAllowed": false,
-      "useScope": "public lead/search only; no automatic full calculation",
-      "evidence": "Public detail exposes identity/year/price/body and 2.0L, but source-bound fuel/power and listing gallery were not proven; the discovered same-offer configuration route redirects to login."
+      "useScope": "manual public reference only; no automated commercial inventory/detail/API collection or republication while permission is unproven; prior exact-field gaps and login boundary remain",
+      "evidence": "Public detail exposes identity/year/price/body and 2.0L, but source-bound fuel/power and listing gallery were not proven; the discovered same-offer configuration route redirects to login.",
+      "accessPolicyEvidence": {
+        "probeRun": 34018844475,
+        "artifactId": 9984794280,
+        "artifactDigest": "sha256:429e35cbfe96fae48108ce09c048861b4f1a05801fb92cdc7493aa597b404d4d",
+        "evidenceFile": "data/catalog/source-access-policy-evidence/iautos-20260906.json",
+        "robots": "HTTP 200 text/plain; 282 bytes; no disallow match for the public homepage",
+        "home": "HTTP 200 text/html; 51,425 captured bytes; not truncated",
+        "sourceDeclaredLegalLinks": 0,
+        "permissionProven": false,
+        "meaning": "No legal/policy anchor was found in the captured static homepage. This proves neither blanket prohibition nor permission for automated commercial reuse.",
+        "boundary": "Exactly 2 GET requests: robots and home. No redirects followed; policy/listing/detail/API/pagination/Japan requests = 0. No raw HTML retained."
+      },
+      "blockerBeforeAutomatedUse": "public_automation_permission_unproven_and_source_bound_fuel_power_gallery_incomplete"
     },
     {
       "market": "japan",

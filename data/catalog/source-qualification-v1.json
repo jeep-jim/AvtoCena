@@ -292,9 +292,22 @@
       "url": "https://m.iautos.cn/",
       "class": "lead_only",
       "publishAllowed": false,
-      "evidence": "Public detail exposes identity/year/price/body and 2.0L, but source-bound fuel/power and listing gallery were not proven; the discovered same-offer configuration route redirects to login.",
+      "evidence": "Public detail exposes identity/year/price/body and 2.0L, but source-bound fuel/power and listing gallery were not proven; the discovered same-offer configuration route redirects to login. Permission-first run 34018844475: robots and mobile home are reachable (HTTP 200), but no source-declared legal/policy link was detected in the captured home HTML. Automated commercial reuse permission remains unproven; prior field-based lead_only blockers remain.",
       "qualificationDecision": "data/catalog/source-partial-classification-v1.json#iautos_china_candidate",
-      "useScope": "public lead/search only; no automatic full calculation"
+      "useScope": "manual public reference only; no automated commercial inventory/detail/API collection or republication while permission is unproven; prior exact-field gaps and login boundary remain",
+      "qualificationBlocker": "public_automation_permission_unproven_and_source_bound_fuel_power_gallery_incomplete",
+      "accessPolicyEvidence": {
+        "probeRun": 34018844475,
+        "artifactId": 9984794280,
+        "artifactDigest": "sha256:429e35cbfe96fae48108ce09c048861b4f1a05801fb92cdc7493aa597b404d4d",
+        "evidenceFile": "data/catalog/source-access-policy-evidence/iautos-20260906.json",
+        "robots": "HTTP 200 text/plain; 282 bytes; no disallow match for the public homepage",
+        "home": "HTTP 200 text/html; 51,425 captured bytes; not truncated",
+        "sourceDeclaredLegalLinks": 0,
+        "permissionProven": false,
+        "meaning": "No legal/policy anchor was found in the captured static homepage. This proves neither blanket prohibition nor permission for automated commercial reuse.",
+        "boundary": "Exactly 2 GET requests: robots and home. No redirects followed; policy/listing/detail/API/pagination/Japan requests = 0. No raw HTML retained."
+      }
     },
     {
       "market": "japan",
@@ -440,7 +453,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan permission-first/no-write research; next inspect iAutos China access policy, whose historical lead_only decision was field-based; keep Good Car commercial crawling blocked until prior written approval. Do not rebuild the existing Good Car adapter/pagination work from roadmap 40.27-40.29. Japan remains paused.",
+  "next": "continue non-Japan permission-first research on documented official partner/API/feed routes; next inspect the published scope of Encar price/data partnership (price@encar.com): inventory fields, image rights, retention and republication must be explicit before any dataset request. Existing blocked public routes stay closed. Do not send contacts or sign agreements from this registry instruction. Japan remains paused; productionWrites=false and all publishAllowed=false.",
   "pausedMarkets": [
     "japan"
   ],
