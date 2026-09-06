@@ -47,7 +47,7 @@ test("Every market publish emits a live knowledge-gap report", () => {
   assert.match(workflow, /Verify offer detail read models/);
 });
 
-test("Compiled source corpus is connected to the production Knowledge CORE", async () => {
+test("Compiled source corpus supplies research context without an automatic variant claim", async () => {
   const compiledRoot = "data/catalog/knowledge-core";
   const compiled = JSON.parse(fs.readFileSync(path.join(compiledRoot, "manifest.json"), "utf8"));
   const sourceMaster = JSON.parse(fs.readFileSync("data/catalog/knowledge-source-snapshots/master/manifest.json", "utf8"));
@@ -110,9 +110,10 @@ test("Compiled source corpus is connected to the production Knowledge CORE", asy
     updatedAt: "2026-08-22T00:00:00.000Z",
     operational: {},
   } as any);
-  assert.equal((enriched.operational as any).knowledgeCore.source, "knowledge-source-corpus");
+  assert.equal((enriched.operational as any).knowledgeCore.variantId, null);
   assert.equal((enriched.operational as any).knowledgeCore.sourceCorpusConnected, true);
-  assert.equal(enriched.powerKw, 128);
+  assert.equal(enriched.powerKw, undefined);
+  assert.equal(enriched.powerHp, undefined);
   assert.equal(enriched.power30MinKw, undefined);
 });
 

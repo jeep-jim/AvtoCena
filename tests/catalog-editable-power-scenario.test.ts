@@ -72,10 +72,10 @@ test("an electrified horsepower scenario cannot replace certified 30-minute powe
   assert.equal(catalogRequiredSpecificationRejectionReason(scenario), "unconfirmed_power_scenario");
 });
 
-test("power is the only editable offer specification on desktop and mobile", () => {
+test("existing power control remains available alongside linked modification selection", () => {
   assert.match(offerPage, /EditablePowerTile/);
   assert.match(offerPage, /calculateOfferWithUserPowerScenario/);
-  assert.match(offerPage, /searchParams\?: Promise<\{ powerHp\?: string \}>/);
+  assert.match(offerPage, /searchParams\?: Promise<\{ powerHp\?: string; modificationId\?: string \}>/);
   assert.match(editableTile, /Выбрать или ввести мощность в лошадиных силах/);
   assert.match(editableTile, /setTimeout\(\(\) => commitManual\(value\), 500\)/);
   assert.doesNotMatch(editableTile, /type="submit"|Пересчитать по введённой мощности/);

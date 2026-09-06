@@ -20,6 +20,8 @@ jobs:
       - run: npm ci
       - name: Customs tests
         run: node --import tsx --test tests/russia-customs.test.ts
+      - name: Catalog modification recovery contract tests
+        run: node --import tsx --test tests/catalog-modification-recovery.test.ts
       - name: Catalog calculation integrity tests
         run: node --import tsx --test tests/catalog-calculation-integrity.test.ts
       - name: CRM market defaults and live pricing tests

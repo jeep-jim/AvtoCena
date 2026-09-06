@@ -4,6 +4,7 @@ import { getDataRoot } from "../data";
 import type { VehicleOffer } from "./types";
 import { readEncyclopediaIdentityDataset } from "./encyclopedia-identity-data";
 import { enrichOfferWithVehicleKnowledge } from "./vehicle-knowledge";
+import { compatibleModificationOptions } from "./modification-matching";
 
 export type KnowledgeCoreVariant = {
   id: string;
@@ -372,7 +373,16 @@ export async function enrichOfferWithKnowledgeCore<T extends VehicleOffer>(offer
       modelImageBinaryVerified: false,
     };
     const variants = modelId ? index.variantsByModel.get(modelId) || [] : [];
-    const match = variants.length ? matchCoreVariant(variants, offer) : null;
+    const identity = (offer.operational as any)?.knowledgeIdentity;
+    // A score, or the sole surviving reference row, does not prove a listing's
+    // modification. Automatic non-Japan enrichment requires a source/document
+    // link to that exact variant and no contradiction with known specifications.
+    const linked = offer.market !== "japan" && identity?.sourceOfferId === offer.sourceOfferId
+      && ["source_variant_id", "document_variant_id"].includes(identity?.proof)
+      ? compatibleModificationOptions(offer, variants, modelId || "").find(x => x.id === identity.variantId) : null;
+    const match = offer.market === "japan"
+      ? (variants.length ? matchCoreVariant(variants, offer) : null)
+      : linked ? { variant: variants.find(x => x.id === linked.id)!, score: 100 } : null;
     if (match) {
       current = applyTrustedVariant(offer, match.variant, match.score);
       current = {
@@ -408,6 +418,9 @@ export async function enrichOfferWithKnowledgeCore<T extends VehicleOffer>(offer
   // Legacy knowledge is now a compatibility fallback behind one CORE API. It can
   // fill gaps that the V2 corpus has not migrated yet, but callers no longer
   // need to know which physical dataset supplied the fact.
+  // Unreviewed legacy matching remains research material for these markets.
+  // Its averages and heuristic winner must not refill fields rejected above.
+  if (offer.market !== "japan") return current as T;
   const enriched = await enrichOfferWithVehicleKnowledge(current);
   if (matched || index) {
     return {

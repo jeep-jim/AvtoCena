@@ -453,7 +453,7 @@
       "useScope": "manual public reference/link-out only; no automated or commercial catalog reuse/republication unless WorldAuto grants an explicitly permitted API/partner feed or written authorization"
     }
   ],
-  "next": "continue non-Japan permission-first research on documented official partner/API/feed routes; next inspect the published scope of Encar price/data partnership (price@encar.com): inventory fields, image rights, retention and republication must be explicit before any dataset request. Existing blocked public routes stay closed. Do not send contacts or sign agreements from this registry instruction. Japan remains paused; productionWrites=false and all publishAllowed=false.",
+  "next": "Continue saved non-Japan recovery from confirmed run 34024932984 / draft PR 831: 6319 of 16054 rows pass the technical calculation gate (Europe 4808, Korea 1511), zero real modification selectors. Prioritize listing-bound exact China engine displacement and provenance, then evidence-backed compatible variants for frequently occurring incomplete models; do not promote review/observed reference rows or use rounded liters as exact cc. Validate browser interaction before release. Source commercial permission, listing freshness and independent calculation spot checks remain separate gates. No production writes, publishing, cleanup, schedule resume or Japan work.",
   "pausedMarkets": [
     "japan"
   ],
@@ -467,5 +467,60 @@
       "note": "Fixed-price/export-stock candidates do not satisfy the completed-auction-lot requirement."
     }
   },
-  "publishAllowedMutations": false
+  "publishAllowedMutations": false,
+  "recoveryProgram": {
+    "version": 1,
+    "ownerDecisionDate": "2026-09-06",
+    "mode": "saved_catalog_repair_no_write",
+    "markets": [
+      "korea",
+      "china",
+      "uae",
+      "europe",
+      "georgia"
+    ],
+    "minimumAutomaticCalculatedShare": 0.8,
+    "manualScenarioCountsAsAutomatic": false,
+    "databasePurchaseRequired": false,
+    "contract": "docs/catalog-modification-recovery-v1.md",
+    "productionWrites": false,
+    "publishAllowedMutations": false,
+    "checkpoint": {
+      "runId": 34024932984,
+      "commit": "b9e6e65b48a69293fd5334ae2766a678a63b0c36",
+      "artifactId": 9986770190,
+      "artifactSha256": "2163c8aca9649c2fdb73f4a15490480aca49f0e35af26fa29a7215c1df4e3117",
+      "evidence": "data/catalog/research/saved-recovery-final-v1-20260906.json",
+      "publicGenerationId": "gen_1788253861283_69bb1d29",
+      "inputNonJapanRows": 16054,
+      "technicalAutomaticRows": 6319,
+      "technicalAutomaticByMarket": {
+        "korea": 1511,
+        "china": 0,
+        "uae": 0,
+        "europe": 4808,
+        "georgia": 0
+      },
+      "realSelectionRows": 0,
+      "technicalSubsetAutomaticShare": 1,
+      "sourceInventoryRecoveryShare": 0.39360906939080603,
+      "productionReleaseReady": false,
+      "sourceRequests": 0,
+      "japanRequests": 0,
+      "currencyRateDate": "2026-09-05",
+      "remaining": [
+        "missing_source_bound_specs_and_exact_engine_cc",
+        "insufficient_verified_compatible_reference_variants",
+        "browser_interaction_not_verified",
+        "source_permission_and_inventory_freshness_not_requalified",
+        "independent_calculation_spot_checks_pending"
+      ],
+      "ciRunId": 34025558568,
+      "ciCommit": "1818f0b0120e79a23e00b241f9a6a4aa1f8f2b08",
+      "ciConclusion": "success",
+      "draftPullRequest": 831,
+      "temporaryWorkflowRemoved": true,
+      "workflowRemovalCommit": "5117ee560a824416e45abc273ba7aec2b1240be6"
+    }
+  }
 }
