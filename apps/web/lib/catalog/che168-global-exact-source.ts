@@ -391,6 +391,11 @@ export class Che168GlobalExactAdapter implements CatalogSourceAdapter {
       if (pageParameters.engineCc.status === "conflict") evidence.engineCc = pageParameters.engineCc;
       if (pageParameters.powerHp.status === "conflict") evidence.powerHp = pageParameters.powerHp;
     }
+    // Preserve the literal API witness alongside the combined parameter evidence.
+    // Source-only collectors verify this exact original text, not a rewritten label.
+    for (const field of ["engineCc", "powerHp"] as const) {
+      evidence[field].rawValues = [...new Set([text(detail.engine), ...evidence[field].rawValues].filter(Boolean))];
+    }
     const gallery = exactGallery(detail);
     const minimum = Math.max(5, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5));
     const verifiedGallery = gallery.length >= minimum;

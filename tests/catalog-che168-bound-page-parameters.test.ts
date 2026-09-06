@@ -36,6 +36,8 @@ test('Che168 adapter uses its bound page table and retains provenance', async ()
     assert.equal(offer.engineCc,2356);
     assert.equal(offer.powerHp,208);
     assert.equal((offer.operational.raw as any).boundPageParameters.specId,32677);
+    assert.ok((offer.operational as any).semanticEvidence.engineCc.rawValues.includes('2.4L 208hp L4'));
+    assert.ok((offer.operational as any).semanticEvidence.powerHp.rawValues.includes('2.4L 208hp L4'));
     assert.equal((offer.operational as any).semanticEvidence.engineCc.source,'che168_global_identity_bound_parameters');
   } finally { globalThis.fetch = originalFetch; }
 });
