@@ -65,8 +65,11 @@ export function restoreSavedSourceEvidence(input: VehicleOffer): VehicleOffer {
     const fields = raw.configFields || {};
     fuel = fields.energy; hp = fields.engineMaxHp; kw = fields.engineMaxKw;
     // A marketing label such as 1.5L does not prove 1500 rather than 1498 cc.
-    const cc = text(fields.engine).match(/\b(\d{3,5})\s*(?:cc|cm3|cm³)\b/i);
-    engine = cc?.[1]; bound = true;
+    const retained = Array.isArray(fields.displacementCcValues) && fields.displacementCcValues.length
+      ? [...fields.displacementCcValues, ...(/\d\s*(?:cc|cm3|cm³|mL)/i.test(text(fields.engine)) ? [fields.engine] : [])] : [fields.engine];
+    const values = retained.map((value: unknown) => singleExplicitMetric(value, /\b(\d{3,5})\s*(?:cc|cm3|cm³|mL)(?![a-z0-9³])/gi));
+    engine = values.length && values.every((value: unknown) => value !== undefined && value === values[0]) ? values[0] : undefined;
+    bound = true;
   } else if (input.sourceId === "autohome_used_china_open" && input.market === "china"
     && raw.detailIdentityVerified === true
     && text(input.sourceOfferId) !== ""

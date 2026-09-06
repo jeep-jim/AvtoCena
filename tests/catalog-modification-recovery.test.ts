@@ -172,3 +172,16 @@ test("new recovery preserves Japan and cannot pass the production freeze", async
   try { await assert.rejects(persistCatalogOffers([], { modificationRecovery: true }), /catalog_production_writes_paused/); }
   finally { if (previous === undefined) delete process.env.JSON_STORAGE_DRIVER; else process.env.JSON_STORAGE_DRIVER = previous; }
 });
+
+
+test("saved Autohome displacement keeps exact cc, rejects conflicts and mismatched spec IDs", () => {
+  const make = (values: string[], engine = "1.5T", configSpecId = "1") => offer({ market: "china", sourceId: "autohome_new_china_open", operational: { raw: {
+    detailIdentityVerified: true, configSpecId, listing: { specId: "1" }, configFields: { energy: "汽油", engine, displacementCcValues: values },
+  } } });
+  assert.equal(restoreSavedSourceEvidence(make(["1498 cc"])).engineCc, 1498);
+  assert.equal(restoreSavedSourceEvidence(make(["1498 cc", "1499 cc"])).engineCc, undefined);
+  assert.equal(restoreSavedSourceEvidence(make(["1498 cc"], "1499 cc")).engineCc, undefined);
+  assert.equal(restoreSavedSourceEvidence(make(["1498-1998 cc"])).engineCc, undefined);
+  const wrong = make(["1498 cc"], "1.5T", "2");
+  assert.equal(restoreSavedSourceEvidence(wrong), wrong);
+});

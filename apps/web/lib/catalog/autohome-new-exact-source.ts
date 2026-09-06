@@ -32,6 +32,7 @@ export type ExactConfigFields = {
   msrpWan?: string;
   energy?: string;
   engine?: string;
+  displacementCcValues?: string[];
   engineMaxHp?: string;
   engineMaxKw?: string;
   overallMaxKw?: string;
@@ -102,10 +103,10 @@ function hasRange(value: string) {
   return /\d\s*(?:-|–|—|至|到|~|～)\s*\d/.test(value);
 }
 function exactEngineCc(value: string) {
-  if (!value || hasRange(value)) return undefined;
+  if (!value || hasRange(value) || /[<>≤≥/~]|\b(?:to|up to|over|under)\b/i.test(value)) return undefined;
   const matches = [
-    ...[...value.matchAll(/(\d{3,5})\s*(?:cc|cm3|cm³)\b/gi)].map((match) => Number(match[1])),
-    ...[...value.matchAll(/(\d+(?:\.\d+)?)\s*[LT]\b/gi)].map((match) => Math.round(Number(match[1]) * 1_000)),
+    ...[...value.matchAll(/(\d{3,5})\s*(?:cc|cm3|cm³|mL)(?![a-z0-9³])/gi)].map((match) => Number(match[1])),
+
   ].filter((number) => Number.isFinite(number) && number >= 300 && number <= 10_000);
   const unique = [...new Set(matches)];
   return unique.length === 1 ? unique[0] : undefined;
@@ -131,6 +132,7 @@ export function autohomeNewSpecificationEvidence(input: {
   detailYear?: unknown;
   energy?: unknown;
   engine?: unknown;
+  displacementCcValues?: string[];
   engineMaxHp?: unknown;
   engineMaxKw?: unknown;
 }): AutohomeNewSpecificationEvidence {
@@ -143,7 +145,10 @@ export function autohomeNewSpecificationEvidence(input: {
   const identities = energy.map(energyIdentity);
   const fuel = exactEvidence(energy, identities.map((value) => value?.fuel));
   const powertrainKind = exactEvidence(energy, identities.map((value) => value?.powertrainKind));
-  let engineCc = exactEvidence(engines, engines.map(exactEngineCc));
+  const displacement = uniqueRaw(input.displacementCcValues || []);
+  const explicitEngine = engines.filter(value => /\d\s*(?:cc|cm3|cm³|mL)/i.test(value));
+  const ccValues = displacement.length ? uniqueRaw([...displacement, ...explicitEngine]) : engines;
+  let engineCc = exactEvidence(ccValues, ccValues.map(exactEngineCc));
 
   let powerHp: AutohomeEvidence<number> = { rawValues: hpValues, status: hpValues.length ? "ambiguous" : "missing" };
   let powerKw: AutohomeEvidence<number> = { rawValues: kwValues, status: kwValues.length ? "ambiguous" : "missing" };
@@ -169,7 +174,7 @@ export function autohomeNewSpecificationEvidence(input: {
     powerHp = { rawValues: hpValues, status: "missing" };
     powerKw = { rawValues: kwValues, status: "missing" };
   }
-  if (powertrainKind.status === "exact" && powertrainKind.value === "electric" && engineCc.status === "exact") {
+  if (powertrainKind.status === "exact" && powertrainKind.value === "electric" && (engineCc.status === "exact" || engines.some(value => /\d+(?:\.\d+)?\s*[LT]\b/i.test(value)))) {
     engineCc = { rawValues: engines, status: "conflict" };
   }
   return { year, fuel, powertrainKind, engineCc, powerHp, powerKw };
@@ -287,6 +292,11 @@ function exactConfigFields(config: any, specId: string): ExactConfigFields {
     msrpWan: anySection([{ re: /厂.*指导价/ }]),
     energy: anySection([{ id: 1149 }, { re: /能源类型/ }]),
     engine: anySection([{ id: 1150 }, { re: /^发动机$/ }]),
+    displacementCcValues: (config?.result?.paramtypeitems || [])
+      .filter((section: any) => clean(section.name || section.typename || section.title) === "发动机")
+      .flatMap((section: any) => (section.paramitems || []).filter((p: any) => /^排量\s*[（(]\s*(?:mL|cc|cm3|cm³)\s*[）)]$/i.test(clean(p.name)))
+        .flatMap((p: any) => (p.valueitems || []).filter((item: any) => String(item.specid) === specId)
+          .map((item: any) => { const raw = clean(item.value) || (item.sublist || []).map((x: any) => clean(x.subvalue)).join(" / "); return /^\d{3,5}$/.test(raw) ? `${raw} cc` : raw || "missing"; }))),
     engineMaxHp: engineSection([{ id: 1294 }, { re: /^最大马力\(Ps\)$/ }]),
     engineMaxKw: engineSection([{ id: 1185 }, { re: /^最大功率\(kW\)$/ }]),
     overallMaxKw: basicSection([{ id: 1185 }, { re: /^最大功率\(kW\)$/ }]),
@@ -399,6 +409,7 @@ export class AutohomeNewExactAdapter implements CatalogSourceAdapter {
       detailYear: yearFrom(identity.trim),
       energy: fields.energy,
       engine: fields.engine,
+      displacementCcValues: fields.displacementCcValues,
       engineMaxHp: fields.engineMaxHp,
       engineMaxKw: fields.engineMaxKw,
     });
