@@ -106,7 +106,10 @@ async function readBounded(response, max) {
   const buffer = Buffer.concat(chunks);
   return { text: buffer.toString('utf8'), capturedBytes: bytes, truncated, bodyHashSha256: crypto.createHash('sha256').update(buffer).digest('hex'), hashScope: truncated ? 'captured_prefix' : 'complete_response_body' };
 }
-export async function runProbe({ registry, fetchImpl = fetch, policyEvidence = null } = {}) {
+export async function runProbe({ registry, fetchImpl = fetch, policyEvidence = null, candidateKey = SOURCE_ID, origin = ORIGIN } = {}) {
+  const SOURCE_ID = candidateKey, ORIGIN = origin;
+  assert([['chngoodcar_china_candidate', 'https://www.chngoodcar.com'], ['iautos_china_candidate', 'https://m.iautos.cn']]
+    .some(([id, url]) => id === SOURCE_ID && url === ORIGIN), 'source_or_origin_outside_reviewed_envelope');
   assert.equal(registry.productionWrites, false);
   assert(registry.candidates.every(c => c.publishAllowed === false));
   assert(registry.pausedMarkets.includes('japan'));
@@ -147,6 +150,7 @@ export async function runProbe({ registry, fetchImpl = fetch, policyEvidence = n
   const stop = reason => { report.decisionSignal = reason; report.completed = true; return report; };
   try {
     if (policyEvidence) {
+      assert.equal(SOURCE_ID, 'chngoodcar_china_candidate');
       assert.equal(policyEvidence.sourceId, SOURCE_ID);
       assert.equal(policyEvidence.rawBodiesStored, false);
       const url = policyEvidence.selectedPolicyLink?.url;
@@ -227,7 +231,12 @@ async function selfTest() {
     fetchImpl: fake([[ORIGIN + '/robots.txt', 404], [ORIGIN + '/Home/Qualification?id=4', 200, sample]]) });
   assert.equal(r.requestCount, 2); assert.equal(r.policy.explicitPriorWrittenApprovalClauseObserved, true);
   assert(policySnippets(sample).snippets.some(s => s.includes('商业性利用')));
-  console.log('Access-policy safety self-test: 13 checks passed; live requests: 0');
+  const iaRegistry = { ...registry, candidates: [...registry.candidates, { sourceId: 'iautos_china_candidate', market: 'china', url: 'https://m.iautos.cn/', publishAllowed: false }] };
+  r = await runProbe({ registry: iaRegistry, candidateKey: 'iautos_china_candidate', origin: 'https://m.iautos.cn', fetchImpl: fake([
+    ['https://m.iautos.cn/robots.txt', 200, 'User-agent: *\nDisallow: /private'], ['https://m.iautos.cn/', 200, '<a href="/private/terms">Terms</a>']]) });
+  assert.equal(r.sourceId, 'iautos_china_candidate'); assert.equal(r.requestCount, 2); assert.equal(r.policyRobotsDecision.allowed, false);
+  await assert.rejects(runProbe({ registry: iaRegistry, candidateKey: 'iautos_china_candidate', origin: 'https://www.chngoodcar.com' }));
+  console.log('Access-policy safety self-test: 15 checks passed; live requests: 0');
 }
 if (process.argv[1] && pathToFileURL(process.argv[1]).href === import.meta.url) {
   if (process.argv.includes('--self-test')) await selfTest();
