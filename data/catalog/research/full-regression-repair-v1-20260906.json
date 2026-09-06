@@ -113,5 +113,43 @@
     "selectors": 0,
     "rerunThisStep": false
   },
-  "buildLogSha256": "4a56bd60a1f1095cf59c1e6033b34df03a6ebf428afc4707cfd44c98e9ca5668"
+  "buildLogSha256": "4a56bd60a1f1095cf59c1e6033b34df03a6ebf428afc4707cfd44c98e9ca5668",
+  "offlineGithubMode": {
+    "command": "GITHUB_ACTIONS=true npm test",
+    "tests": 1040,
+    "pass": 1040,
+    "fail": 0,
+    "skipped": 0,
+    "durationMs": 117154.886269,
+    "logSha256": "dd086ab7fb2d83b6c670514763b9516f5576c49dbf2db90bfcb0d5cc47ec1ae0"
+  },
+  "firstCi": {
+    "runId": 34036645381,
+    "commit": "4f6f7f9fe2b95ba738ba4f6a605d01d8159459df",
+    "conclusion": "failure",
+    "tests": 1040,
+    "pass": 1039,
+    "fail": 1,
+    "reason": "AutoPapa registry test called live healthCheck; GitHub bridge returned Yandex autopapa bridge page 1: 9 instead of the local static health label.",
+    "remediation": "Replaced probe with source normalization fixture and zero-fetch assertion; default fetch blocked for full npm test."
+  },
+  "unexpectedDiagnosticRead": {
+    "bridgeHealthCheckObserved": true,
+    "returnedOffers": 9,
+    "market": "georgia",
+    "marketWorkflowRestarted": false,
+    "catalogPublicationWorkflowStarted": false,
+    "limitation": "CI log does not establish downstream request count or any service-cache side effects."
+  },
+  "repeatCi": {
+    "runId": 34036928775,
+    "commit": "fd62dc7576f52c1cbccb438f367b7c69d4167ac7",
+    "conclusion": "success",
+    "jobId": 101496587514,
+    "fullRegressionSuite": "success",
+    "profileChecks": "success",
+    "webTypecheck": "success",
+    "engineTypecheck": "success",
+    "productionBuild": "success"
+  }
 }
