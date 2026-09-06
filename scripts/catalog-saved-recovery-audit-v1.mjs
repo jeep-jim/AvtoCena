@@ -26,8 +26,10 @@ const { classifySpecificationEvidence, SPECIFICATION_AUDIT_FIELDS } = await impo
 const { catalogOfferVisibleRub, catalogRequiredSpecificationRejectionReason } = await import('../apps/web/lib/catalog/public-priority.ts');
 const storage = new ObjectJsonStorage();
 const reads = [];
+const internalAllowed = new Set();
+const sourceMarkets = new Map();
 async function read(key) {
-  if (key !== 'catalog/manifest.json' && !/^catalog\/generations\/[^/]+\/offers\/(korea|china|uae|europe|georgia)\/[^/]+\.json$/.test(key)) throw new Error('saved_audit_invalid_key');
+  if (!internalAllowed.has(key) && key !== 'catalog/manifest.json' && !/^catalog\/generations\/[^/]+\/offers\/(korea|china|uae|europe|georgia)\/[^/]+\.json$/.test(key)) throw new Error('saved_audit_invalid_key');
   if (key.split('/').some(x => x === '..' || x === '.')) throw new Error('saved_audit_invalid_key');
   const p = '/' + [bucket, prefix, key].filter(Boolean).join('/').split('/').map(encodeURIComponent).join('/');
   allowed.add(p);
@@ -38,7 +40,7 @@ async function read(key) {
 }
 const inc = (o, k) => { o[k] = (o[k] || 0) + 1; };
 const manifest = await read('catalog/manifest.json');
-const report = { version: 1, phase: 'baseline', checkedAt: new Date().toISOString(), commit: process.env.GITHUB_SHA || null, productionWrites: false, publishAllowedMutations: false, sourceRequests: 0, japanRequests: 0, generationId: manifest.generationId, generationUpdatedAt: manifest.updatedAt, markets: {}, failures: [], reads, limits: { maxHttpRequests: 1500, concurrency: 1, samplePerMarket: 8 }, limitation: 'Saved evidence only. No fresh source availability check and no independent verification of all customs formula results; legacy displayed totals are not automatically confirmed.' };
+const report = { version: 1, phase: 'saved_evidence_inspection', checkedAt: new Date().toISOString(), commit: process.env.GITHUB_SHA || null, productionWrites: false, publishAllowedMutations: false, sourceRequests: 0, japanRequests: 0, generationId: manifest.generationId, generationUpdatedAt: manifest.updatedAt, markets: {}, failures: [], reads, limits: { maxHttpRequests: 1500, concurrency: 1, samplePerMarket: 8 }, limitation: 'Saved evidence only. No fresh source availability check and no independent verification of all customs formula results; legacy displayed totals are not automatically confirmed.' };
 try {
   for (const market of MARKETS) {
     const entry = manifest.markets?.[market];
@@ -53,6 +55,7 @@ try {
       for (const offer of rows) {
         summary.readRows++;
         if (offer.market !== market) throw new Error('saved_audit_cross_market_offer');
+        sourceMarkets.set(offer.sourceId, market);
         if (ids.has(offer.id)) continue;
         ids.add(offer.id); summary.uniqueRows++;
         const fields = Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(f => [f, classifySpecificationEvidence(offer, f)]));
@@ -70,6 +73,38 @@ try {
     if (summary.readRows !== summary.manifestCount) report.failures.push(`${market}:manifest_count_mismatch`);
     console.log(JSON.stringify({ market, readRows: summary.readRows, legacyPriced: summary.legacyPriced, evidenceCompleteAndPriced: summary.evidenceCompleteAndPriced }));
   }
+  // Read only source IDs observed in the non-Japan public chunks, one declared
+  // internal chunk per source. Never list the bucket or read Japanese archives.
+  internalAllowed.add('catalog/internal/manifest.json');
+  const internal = await read('catalog/internal/manifest.json');
+  report.internalEvidence = {};
+  function boundedFields(value, prefix = '', depth = 0, result = {}) {
+    if (!value || typeof value !== 'object' || depth > 4) return result;
+    for (const [key, item] of Object.entries(value).slice(0, 100)) {
+      if (Object.keys(result).length >= 100 || /vin|frame|phone|email|address|contact|html|description/i.test(key)) continue;
+      const field = prefix ? `${prefix}.${key}` : key;
+      if (item && typeof item === 'object') boundedFields(item, field, depth + 1, result);
+      else if (/engine|fuel|power|displac|year|capacity|model|make|brand|hrspow|engdis|spec|variant|confidence|detailIdentity|photoIdentity|listingBound/i.test(field)
+        && ['string', 'number', 'boolean'].includes(typeof item) && String(item).length <= 160 && !/[<>]/.test(String(item))) result[field] = item;
+    }
+    return result;
+  }
+  for (const [sourceId, market] of sourceMarkets) {
+    if (!/^[a-z0-9_-]+$/.test(sourceId) || /japan|jpauc|prestige|jpcenter/.test(sourceId)) throw new Error('internal_source_scope_invalid');
+    const entry = internal.sources?.[sourceId];
+    if (!entry?.chunks?.length) { report.internalEvidence[sourceId] = { market, available: false }; continue; }
+    const key = entry.chunks[0];
+    if (!String(key).startsWith(`catalog/internal/offers/${sourceId}/`) || !String(key).endsWith('.json')) throw new Error('internal_chunk_scope_invalid');
+    internalAllowed.add(key);
+    const rows = await read(key);
+    if (!Array.isArray(rows) || rows.some(x => x.market !== market || x.sourceId !== sourceId)) throw new Error('internal_rows_scope_invalid');
+    report.internalEvidence[sourceId] = { market, available: true, totalCount: entry.count, sampledRows: rows.length,
+      samples: rows.slice(0, 2).map(x => ({ id: x.id, make: x.make, model: x.model, year: x.year,
+        operationalKeys: Object.keys(x.operational || {}).slice(0, 60), rawKeys: Object.keys(x.operational?.raw || {}).slice(0, 60),
+        fields: boundedFields(x.operational) })) };
+  }
+  const internalAfter = await read('catalog/internal/manifest.json');
+  if (JSON.stringify(internalAfter) !== JSON.stringify(internal)) report.failures.push('internal_manifest_changed_during_audit');
   const after = await read('catalog/manifest.json');
   if (JSON.stringify(after) !== JSON.stringify(manifest)) report.failures.push('manifest_changed_during_audit');
 } catch (error) {
