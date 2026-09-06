@@ -13,7 +13,15 @@ function evidenced(variant: KnowledgeCoreVariant, field: string) {
     && x.status === "verified" && ["official", "high"].includes(String(x.confidence)) && x.fields?.includes(field));
 }
 
+export function unprovenEnginePrecision(offer: Partial<VehicleOffer>) {
+  const item = (offer.operational as any)?.semanticEvidence?.engineCc;
+  const values = (Array.isArray(item?.rawValues) ? item.rawValues : item?.rawValue ? [item.rawValue] : []).map(String);
+  return values.length > 0 && values.every(value => /\b\d+[.,]\d{1,2}\s*[lt]\b/i.test(value)
+    && !/\b\d{3,5}\s*(?:cc|ccm|cm3|cm³|ml)\b/i.test(value));
+}
+
 export function specificationEvidenceComplete(offer: Partial<VehicleOffer>) {
+  if (unprovenEnginePrecision(offer)) return false;
   return SPECIFICATION_AUDIT_FIELDS.every(field => ["exact", "not_applicable"].includes(classifySpecificationEvidence(offer, field).state));
 }
 
@@ -42,7 +50,9 @@ export function compatibleModificationOptions(offer: VehicleOffer, variants: Kno
     if (!powerHp && !powerKw) continue;
     if (knownFuel && fuelName(offer.fuel) !== fuel) continue;
     if (knownKind && offer.powertrainKind !== powertrainKind) continue;
-    if (exact("engineCc") && offer.engineCc !== engineCc) continue;
+    if (unprovenEnginePrecision(offer)) {
+      if (!engineCc || Math.abs(Number(offer.engineCc) - engineCc) > 50) continue;
+    } else if (exact("engineCc") && offer.engineCc !== engineCc) continue;
     if (exact("powerHp") && Math.abs(Number(offer.powerHp || Number(offer.powerKw) / 0.73549875) - Number(powerHp || Number(powerKw) / 0.73549875)) > 1) continue;
     // Known gearbox, drive and generation are constraints, never score penalties.
     if (["transmission", "drive"].some(field => {

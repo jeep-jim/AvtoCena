@@ -32,7 +32,9 @@ export function restoreSavedSourceEvidence(input: VehicleOffer): VehicleOffer {
   if (["mobile_de_open", "autoscout_europe_open"].includes(input.sourceId)
     && input.market === "europe" && parsed
     && text(parsed.id) === text(input.sourceOfferId)
-    && (raw.detailIdentityVerified === true || op.exactDetail === true)) {
+    && (raw.detailIdentityVerified === true || op.exactDetail === true
+      || (input.sourceId === "autoscout_europe_open" && raw.listingBoundSearchImages === true
+        && text(parsed.raw?.id) === text(input.sourceOfferId)))) {
     engine = parsed.engineCc; hp = parsed.powerHp; kw = parsed.powerKw;
     fuel = parsed.raw?.vehicle?.fuel || parsed.fuel; bound = true;
   } else if (input.sourceId === "kcar_korea_open" && input.market === "korea"

@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test, { mock } from "node:test";
 import fs from "node:fs";
-import { compatibleModificationOptions, specificationEvidenceComplete } from "../apps/web/lib/catalog/modification-matching";
+import { compatibleModificationOptions, specificationEvidenceComplete, unprovenEnginePrecision } from "../apps/web/lib/catalog/modification-matching";
 import { hasModificationSelection, isModificationScenario, modificationBinding, limitModificationInventory } from "../apps/web/lib/catalog/modification-contract";
 import { catalogOfferVisibleRub } from "../apps/web/lib/catalog/public-priority";
 import { calculateSelectedModification, conditionalModificationRub, prepareModificationRecovery } from "../apps/web/lib/catalog/modification-recovery";
@@ -103,11 +103,18 @@ test("retained listing fields repair fuel; ranges, guesses and wrong identity do
   assert.equal(specificationEvidenceComplete(restored), false);
   const valid = restoreSavedSourceEvidence(offer({ operational: { raw: { ...raw, parsed: { ...raw.parsed, fuel: "Benzin" } } } }));
   assert.equal(specificationEvidenceComplete(valid), true);
+  const listBound = offer({ sourceId: "autoscout_europe_open", operational: { raw: { detailIdentityVerified: false,
+    listingBoundSearchImages: true, parsed: { ...raw.parsed, fuel: "Gasoline", raw: { id: "1" } } } } });
+  assert.equal(specificationEvidenceComplete(restoreSavedSourceEvidence(listBound)), true);
+  listBound.operational.raw.parsed.raw.id = "another-listing";
+  assert.equal(specificationEvidenceComplete(restoreSavedSourceEvidence(listBound)), false);
   assert.equal(restoreSavedSourceEvidence(offer({ sourceOfferId: "2", operational: { raw } })).operational.savedSourceRecovery, undefined);
   assert.equal(restoreSavedSourceEvidence(offer({ operational: { raw: { ...raw, parsed: { ...raw.parsed, engineCc: "1500-2000" } } } })).engineCc, undefined);
   const marketing = restoreSavedSourceEvidence(offer({ market: "china", sourceId: "autohome_new_china_open", operational: {
     raw: { detailIdentityVerified: true, configSpecId: "1", listing: { specId: "1" }, configFields: { engine: "1.5L 140HP", energy: "汽油", engineMaxHp: "140" } } } }));
   assert.equal(marketing.engineCc, undefined);
+  assert.equal(unprovenEnginePrecision(offer({ engineCc: 1500, operational: { semanticEvidence: {
+    engineCc: { status: "exact", rawValues: ["1.5L 140HP"] } } } })), true);
 });
 
 test("selected modification calculates a full isolated scenario using existing engine", async () => {

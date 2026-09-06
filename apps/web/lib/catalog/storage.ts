@@ -1096,7 +1096,11 @@ async function canonicalizePublicCatalogOffers(storedOffers: VehicleOffer[], _sk
   // by the caller; only that market's own refresh may revalidate them.
   const protectedRows = storedOffers.filter((offer) => protectedPublicIds.has(String(offer.id)) && hasAllowedCatalogSourceProvenance(offer));
   const mutableRows = storedOffers.filter((offer) => !protectedPublicIds.has(String(offer.id)));
-  const identifiedOffers = await applyEncyclopediaDisplayIdentityBatch(mutableRows);
+  const identityRows = await applyEncyclopediaDisplayIdentityBatch(mutableRows);
+  // Canonical display aliases can change a selector's identity binding. Resolve
+  // it again against the canonical model instead of carrying unrelated options.
+  const identifiedOffers = await Promise.all(identityRows.map(offer => offer.modificationSelection
+    ? prepareModificationRecovery(offer) : offer));
   const qualityRejected = identifiedOffers.filter((offer) => !isPublicOffer(offer));
   const qualityEligibleOffers = identifiedOffers.filter(isPublicOffer);
   const identityRejected = qualityEligibleOffers.filter((offer) => !isSupportedPublicCatalogIdentity(offer));

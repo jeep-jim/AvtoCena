@@ -94,6 +94,13 @@ try {
   const { calculateOfferWithVerifiedSpecifications } = await import('../apps/web/lib/catalog/customs-pricing.ts');
   const { limitModificationInventory } = await import('../apps/web/lib/catalog/modification-contract.ts');
   const { previewCanonicalPublicCatalogOffers } = await import('../apps/web/lib/catalog/storage.ts');
+  const { readKnowledgeCoreIndex } = await import('../apps/web/lib/catalog/knowledge-core.ts');
+  const index = await readKnowledgeCoreIndex();
+  const nonJapanVariants = [...(index?.variantsByModel.values() || [])].flat().filter(x => !/japan|^jp$/i.test(String(x.market || '')));
+  report.referenceCoverage = { nonJapanVariants: nonJapanVariants.length,
+    verified: nonJapanVariants.filter(x => x.status === 'verified').length,
+    review: nonJapanVariants.filter(x => x.status === 'review').length,
+    note: 'Reference counts are not listing compatibility or calculation coverage; no review promotion.' };
   const cachedPricing = new Map();
   for (const key of ['fees/exchange-rates.json', 'markets/markets.json']) {
     internalAllowed.add(key); cachedPricing.set(key, await read(key));

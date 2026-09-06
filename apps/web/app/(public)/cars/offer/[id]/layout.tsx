@@ -20,7 +20,7 @@ function offerStructuredData(id: string, offer: any) {
   const model = clean(presented.modelLabel || offer.model);
   const displayTitle = clean(presented.title) || [make, model, offer.trim, offer.year].filter(Boolean).join(" ");
   const canonical = catalogOfferUrl(id);
-  const totalRub = catalogOfferVisibleRub(offer);
+  const totalRub = offer.market === "japan" ? Number(offer.totalRub || 0) : catalogOfferVisibleRub(offer);
   const mileageKm = Number(offer.mileageKm || 0);
   const engineCc = Number(offer.engineCc || 0);
   const safePowerHp = publicCatalogPowerHp(offer);
@@ -90,7 +90,7 @@ export async function generateMetadata({ params }: { params: Promise<{ id: strin
   const displayTitle = clean(presented.title) || [make, model].filter(Boolean).join(" ");
   const year = Number(offer.year || 0);
   const title = `${displayTitle}${year ? ` ${year}` : ""} — цена автомобиля под ключ`;
-  const totalRub = catalogOfferVisibleRub(offer);
+  const totalRub = offer.market === "japan" ? Number(offer.totalRub || 0) : catalogOfferVisibleRub(offer);
   const market = catalogMarketLabel(offer.market);
   const priceText = totalRub > 0 ? `${money(totalRub)} ₽` : "рассчитывается";
   const description = `Цена автомобиля ${make} ${model}${year ? ` ${year} года` : ""} из рынка ${market}: ${priceText}. Полный расчёт под ключ включает автомобиль, логистику, таможенные платежи, оформление и доставку по РФ.`;

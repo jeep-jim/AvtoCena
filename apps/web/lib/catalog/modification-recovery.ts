@@ -1,5 +1,5 @@
 import { readKnowledgeCoreIndex } from "./knowledge-core";
-import { compatibleModificationOptions, specificationEvidenceComplete } from "./modification-matching";
+import { compatibleModificationOptions, specificationEvidenceComplete, unprovenEnginePrecision } from "./modification-matching";
 import { hasModificationSelection, isModificationScenario, modificationBinding, withoutDeliveredPrice } from "./modification-contract";
 import { catalogOfferVisibleRub } from "./public-priority";
 import { hasCredibleOfferContent } from "./offer-quality";
@@ -41,12 +41,13 @@ export async function prepareModificationRecovery(offer: VehicleOffer): Promise<
   if (offer.market === "japan") return offer;
   const reasons = SPECIFICATION_AUDIT_FIELDS.map(field => ({ field, ...classifySpecificationEvidence(offer, field) }))
     .filter(x => !["exact", "not_applicable"].includes(x.state)).map(x => `${x.field}:${x.reason}`);
+  if (unprovenEnginePrecision(offer)) reasons.push("engineCc:rounded_litre_label_not_exact_cc");
   const qualify = (value: VehicleOffer, status: "automatic" | "selection_required" | "blocked") => ({ ...value,
     recoveryQualification: { version: 1 as const, status, reasons } });
   if (specificationEvidenceComplete(offer) && catalogOfferVisibleRub(offer) > 0 && hasCredibleOfferContent(offer)) return qualify(offer, "automatic");
   let safe: VehicleOffer = withoutDeliveredPrice({ ...offer, modificationSelection: undefined });
   // Ranges and old guessed fields are not listing constraints or visible facts.
-  if (classifySpecificationEvidence(offer, "engineCc").state !== "exact") safe.engineCc = undefined;
+  if (classifySpecificationEvidence(offer, "engineCc").state !== "exact" || unprovenEnginePrecision(offer)) safe.engineCc = undefined;
   if (classifySpecificationEvidence(offer, "fuelPowertrain").state !== "exact") {
     const evidence = (offer.operational as any)?.semanticEvidence || {};
     if (!["exact", "verified"].includes(evidence.fuel?.status)) safe.fuel = undefined;
