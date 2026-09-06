@@ -1,3 +1,4 @@
+import { hasModificationSelection } from "./modification-contract";
 import type { CatalogImage, VehicleOffer } from "./types";
 import { catalogImageScore, isLikelyVehicleImage } from "./image-quality";
 import { REQUIRED_CATALOG_SOURCES, isAllowedCatalogSourceId, isAllowedCatalogSourceUrl } from "./required-catalog-sources";
@@ -302,6 +303,7 @@ export function isCrediblePublicOffer(offer: VehicleOffer) {
  * quality checks against a compact card row.
  */
 export function isRenderablePublicCatalogOffer(offer: VehicleOffer | any) {
+  if (hasModificationSelection(offer)) return offer?.recoveryQualification?.status === "selection_required";
   if (Number(offer?.cardProjectionVersion || 0) >= 3) {
     return offer?.publicSpecificationVerified === true
       && catalogOfferVisibleRub(offer) > 0

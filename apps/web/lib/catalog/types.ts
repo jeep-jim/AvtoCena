@@ -61,6 +61,8 @@ export type VehicleOffer = {
   utilizationPowerKw?: number;
   powerDataConfidence?: PowerDataConfidence;
   powerDataSource?: string;
+  modificationSelection?: import("./modification-contract").CatalogModificationSelection;
+  recoveryQualification?: { version: 1; status: "automatic" | "selection_required" | "blocked"; reasons: string[] };
   color?: string;
   vin?: string;
   frameNumber?: string;

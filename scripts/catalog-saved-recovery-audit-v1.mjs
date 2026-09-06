@@ -28,6 +28,9 @@ const storage = new ObjectJsonStorage();
 const reads = [];
 const internalAllowed = new Set();
 const sourceMarkets = new Map();
+const publicRows = new Map();
+const recoveredRows = [];
+const recoveredIds = new Set();
 async function read(key) {
   if (!internalAllowed.has(key) && key !== 'catalog/manifest.json' && !/^catalog\/generations\/[^/]+\/offers\/(korea|china|uae|europe|georgia)\/[^/]+\.json$/.test(key)) throw new Error('saved_audit_invalid_key');
   if (key.split('/').some(x => x === '..' || x === '.')) throw new Error('saved_audit_invalid_key');
@@ -40,7 +43,7 @@ async function read(key) {
 }
 const inc = (o, k) => { o[k] = (o[k] || 0) + 1; };
 const manifest = await read('catalog/manifest.json');
-const report = { version: 1, phase: 'saved_evidence_inspection', checkedAt: new Date().toISOString(), commit: process.env.GITHUB_SHA || null, productionWrites: false, publishAllowedMutations: false, sourceRequests: 0, japanRequests: 0, generationId: manifest.generationId, generationUpdatedAt: manifest.updatedAt, markets: {}, failures: [], reads, limits: { maxHttpRequests: 1500, concurrency: 1, samplePerMarket: 8 }, limitation: 'Saved evidence only. No fresh source availability check and no independent verification of all customs formula results; legacy displayed totals are not automatically confirmed.' };
+const report = { version: 1, phase: 'saved_recovery_dry_run', checkedAt: new Date().toISOString(), commit: process.env.GITHUB_SHA || null, productionWrites: false, publishAllowedMutations: false, sourceRequests: 0, japanRequests: 0, generationId: manifest.generationId, generationUpdatedAt: manifest.updatedAt, markets: {}, failures: [], reads, limits: { maxHttpRequests: 1500, concurrency: 1, samplePerMarket: 8 }, limitation: 'Saved evidence only. No fresh source availability check and no independent verification of all customs formula results; legacy displayed totals are not automatically confirmed.' };
 try {
   for (const market of MARKETS) {
     const entry = manifest.markets?.[market];
@@ -56,6 +59,7 @@ try {
         summary.readRows++;
         if (offer.market !== market) throw new Error('saved_audit_cross_market_offer');
         sourceMarkets.set(offer.sourceId, market);
+        publicRows.set(offer.id, offer);
         if (ids.has(offer.id)) continue;
         ids.add(offer.id); summary.uniqueRows++;
         const fields = Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(f => [f, classifySpecificationEvidence(offer, f)]));
@@ -73,11 +77,64 @@ try {
     if (summary.readRows !== summary.manifestCount) report.failures.push(`${market}:manifest_count_mismatch`);
     console.log(JSON.stringify({ market, readRows: summary.readRows, legacyPriced: summary.legacyPriced, evidenceCompleteAndPriced: summary.evidenceCompleteAndPriced }));
   }
-  // Read only source IDs observed in the non-Japan public chunks, one declared
-  // internal chunk per source. Never list the bucket or read Japanese archives.
+  // Read only source IDs observed in the non-Japan public chunks and their
+  // manifest-declared internal chunks. Never list the bucket or read Japanese archives.
   internalAllowed.add('catalog/internal/manifest.json');
   const internal = await read('catalog/internal/manifest.json');
   report.internalEvidence = {};
+  const { getJsonStorage } = await import('../apps/web/lib/data.ts');
+  const { restoreSavedSourceEvidence } = await import('../apps/web/lib/catalog/saved-source-recovery.ts');
+  const { specificationEvidenceComplete } = await import('../apps/web/lib/catalog/modification-matching.ts');
+  const { prepareModificationRecovery } = await import('../apps/web/lib/catalog/modification-recovery.ts');
+  const { calculateOfferWithVerifiedSpecifications } = await import('../apps/web/lib/catalog/customs-pricing.ts');
+  const { limitModificationInventory } = await import('../apps/web/lib/catalog/modification-contract.ts');
+  const { previewCanonicalPublicCatalogOffers } = await import('../apps/web/lib/catalog/storage.ts');
+  const cachedPricing = new Map();
+  for (const key of ['fees/exchange-rates.json', 'markets/markets.json']) {
+    internalAllowed.add(key); cachedPricing.set(key, await read(key));
+  }
+  // Every calculation uses the same captured settings; repeated cache lookups
+  // generate no requests. No fallback to a marketplace or live currency endpoint.
+  const calculationStorage = getJsonStorage();
+  const underlyingRead = calculationStorage.readJsonWithMeta.bind(calculationStorage);
+  calculationStorage.readJsonWithMeta = async (key, fallback) => cachedPricing.has(key)
+    ? { found: true, value: cachedPricing.get(key) } : underlyingRead(key, fallback);
+  report.pricingSnapshot = { ratesUpdatedAt: cachedPricing.get('fees/exchange-rates.json').updatedAt, liveRatesRequested: false };
+  report.recovery = Object.fromEntries(MARKETS.map(market => [market, { matchedSavedRows: 0, sourceEvidenceRestored: 0,
+    specificationComplete: 0, recalculated: 0, automaticBeforeDedup: 0, selectorBeforeDedup: 0,
+    missingInternal: 0, changedFuel: 0, changedEngineCc: 0, changedPowerHp: 0, blockers: {}, examples: [] }]));
+  async function recover(saved) {
+    const published = publicRows.get(saved.id);
+    if (!published || recoveredIds.has(saved.id)) return;
+    const summary = report.recovery[saved.market];
+    summary.matchedSavedRows++;
+    recoveredIds.add(saved.id);
+    if (saved.sourceId !== published.sourceId || saved.sourceOfferId !== published.sourceOfferId
+      || saved.year !== published.year || saved.sourcePrice !== published.sourcePrice || saved.sourceCurrency !== published.sourceCurrency) {
+      inc(summary.blockers, 'saved_public_source_identity_or_price_mismatch'); return;
+    }
+    const joined = { ...published, operational: saved.operational };
+    let restored = restoreSavedSourceEvidence(joined);
+    if (restored.operational?.savedSourceRecovery) summary.sourceEvidenceRestored++;
+    if (restored.fuel !== published.fuel) summary.changedFuel++;
+    if (restored.engineCc !== published.engineCc) summary.changedEngineCc++;
+    if (restored.powerHp !== published.powerHp) summary.changedPowerHp++;
+    if (specificationEvidenceComplete(restored)) {
+      summary.specificationComplete++;
+      restored = await calculateOfferWithVerifiedSpecifications(restored);
+      if (catalogOfferVisibleRub(restored) > 0) summary.recalculated++;
+    }
+    const prepared = await prepareModificationRecovery(restored);
+    const qualification = prepared.recoveryQualification;
+    if (qualification.status === 'automatic') summary.automaticBeforeDedup++;
+    else if (qualification.status === 'selection_required') summary.selectorBeforeDedup++;
+    else for (const reason of qualification.reasons.length ? qualification.reasons : ['listing_identity_photo_price_or_calculation_gate']) inc(summary.blockers, reason);
+    if (qualification.status !== 'blocked') recoveredRows.push(prepared);
+    if (summary.examples.length < 4) summary.examples.push({ id: published.id, make: published.make, model: published.model,
+      status: qualification.status, previous: { fuel: published.fuel, engineCc: published.engineCc, powerHp: published.powerHp },
+      recovered: { fuel: prepared.fuel, engineCc: prepared.engineCc, powerHp: prepared.powerHp }, reasons: qualification.reasons });
+  }
+
   function boundedFields(value, prefix = '', depth = 0, result = {}) {
     if (!value || typeof value !== 'object' || depth > 4) return result;
     for (const [key, item] of Object.entries(value).slice(0, 100)) {
@@ -93,16 +150,41 @@ try {
     if (!/^[a-z0-9_-]+$/.test(sourceId) || /japan|jpauc|prestige|jpcenter/.test(sourceId)) throw new Error('internal_source_scope_invalid');
     const entry = internal.sources?.[sourceId];
     if (!entry?.chunks?.length) { report.internalEvidence[sourceId] = { market, available: false }; continue; }
-    const key = entry.chunks[0];
+    let sourceRowsRead = 0;
+    for (const key of entry.chunks) {
     if (!String(key).startsWith(`catalog/internal/offers/${sourceId}/`) || !String(key).endsWith('.json')) throw new Error('internal_chunk_scope_invalid');
     internalAllowed.add(key);
     const rows = await read(key);
     if (!Array.isArray(rows) || rows.some(x => x.market !== market || x.sourceId !== sourceId)) throw new Error('internal_rows_scope_invalid');
-    report.internalEvidence[sourceId] = { market, available: true, totalCount: entry.count, sampledRows: rows.length,
+    sourceRowsRead += rows.length;
+    for (const row of rows) await recover(row);
+    if (!report.internalEvidence[sourceId]) report.internalEvidence[sourceId] = { market, available: true, totalCount: entry.count, sampledRows: rows.length,
       samples: rows.slice(0, 2).map(x => ({ id: x.id, make: x.make, model: x.model, year: x.year,
         operationalKeys: Object.keys(x.operational || {}).slice(0, 60), rawKeys: Object.keys(x.operational?.raw || {}).slice(0, 60),
         fields: boundedFields(x.operational) })) };
   }
+      if (sourceRowsRead !== entry.count) report.failures.push(`${sourceId}:internal_count_mismatch`);
+      report.internalEvidence[sourceId].readRows = sourceRowsRead;
+    }
+  for (const row of publicRows.values()) if (!recoveredIds.has(row.id)) report.recovery[row.market].missingInternal++;
+  const canonical = await previewCanonicalPublicCatalogOffers(recoveredRows);
+  const accepted = limitModificationInventory(canonical.offers, catalogOfferVisibleRub);
+  for (const market of MARKETS) {
+    const rows = accepted.filter(x => x.market === market);
+    const automatic = rows.filter(x => x.recoveryQualification.status === 'automatic' && catalogOfferVisibleRub(x) > 0).length;
+    Object.assign(report.recovery[market], { accepted: rows.length, automaticAccepted: automatic,
+      selectorAccepted: rows.length - automatic, automaticShare: rows.length ? automatic / rows.length : null });
+  }
+  report.recoveryTotals = { input: publicRows.size, accepted: accepted.length,
+    automatic: accepted.filter(x => x.recoveryQualification.status === 'automatic').length,
+    selectors: accepted.filter(x => x.recoveryQualification.status === 'selection_required').length,
+    duplicatesRemoved: canonical.deduplicated.removed.length, identityRejected: canonical.identityRejected.length,
+    qualityRejected: canonical.qualityRejected.length, priceOutliers: canonical.priceOutliers.length,
+    modelQuotaRemoved: canonical.quota.removed.length, selectorQuotaRemoved: canonical.offers.length - accepted.length,
+    publishAllowed: false, productionReleaseReady: false };
+  report.recoveryTotals.automaticShare = accepted.length ? report.recoveryTotals.automatic / accepted.length : null;
+  console.log(JSON.stringify({ recovery: report.recovery, totals: report.recoveryTotals }));
+  calculationStorage.readJsonWithMeta = underlyingRead;
   const internalAfter = await read('catalog/internal/manifest.json');
   if (JSON.stringify(internalAfter) !== JSON.stringify(internal)) report.failures.push('internal_manifest_changed_during_audit');
   const after = await read('catalog/manifest.json');

@@ -16,6 +16,22 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
+  code-checks:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    env:
+      CATALOG_LIVE_RATE_DISABLED: 'true'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Verify modification isolation and existing calculation contracts
+        run: node --import tsx --test tests/catalog-modification-recovery.test.ts tests/catalog-editable-power-scenario.test.ts tests/customs-representative-power-safety.test.ts tests/catalog-source-fuel-evidence.test.ts tests/catalog-customs-identity.test.ts tests/catalog-public-offer-deduplication.test.ts tests/catalog-filter-search.test.ts tests/catalog-autoscout-specification-evidence.test.ts tests/catalog-che168-specification-evidence.test.ts tests/catalog-encar-specification-evidence.test.ts tests/catalog-dubizzle-specification-evidence.test.ts
+      - run: npm run typecheck
+      - run: npm run build
   saved-audit:
     runs-on: ubuntu-latest
     timeout-minutes: 20
