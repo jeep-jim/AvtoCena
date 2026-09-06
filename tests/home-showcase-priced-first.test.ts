@@ -13,7 +13,7 @@ test("homepage prefers safe delivered-price projections before pending inventory
   assert.match(storage, /const diverse = selectHomepageShowcase\(candidates, limit\)/);
 });
 
-test("pending inventory is not rendered as a public card", () => {
+test("unqualified pending inventory is not rendered as a public card", () => {
   assert.match(card, /const visibleRub = catalogOfferVisibleRub\(normalizedOffer\)/);
-  assert.match(card, /if \(!visibleRub\) return null/);
+  assert.match(card, /if \(!visibleRub && !selectionRequired\) return null/);
 });
