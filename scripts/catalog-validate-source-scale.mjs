@@ -13,12 +13,12 @@ const configuredMinimumProductiveSources = Number(process.env.CATALOG_PUBLISH_MI
 const targetPerMarket = Math.max(1_000, Number(process.env.CATALOG_PUBLISH_TARGET_PER_MARKET || 1_000));
 
 const defaultMinimumProductiveSources = {
-  korea: 2,
-  china: 2,
+  korea: 1,
+  china: 1,
   japan: 2,
-  uae: 2,
-  europe: 2,
-  georgia: 2,
+  uae: 1,
+  europe: 1,
+  georgia: 1,
 };
 
 const defaultMinimumFresh = {
@@ -240,8 +240,9 @@ const blockingMarkets = markets.filter((market) => {
   // adapter must be registered and attempted. A temporary external 403/429 or
   // zero-fresh result is degraded telemetry, not a reason to throw away a
   // multi-source run that still contains valid verified inventory. We still
-  // require multiple productive independent sources and at least one productive
-  // canonical source before a new generation may publish.
+  // require at least one productive canonical source. For the five-market
+  // restart the owner accepts any nonempty quality inventory; a second website
+  // and fresh inventory from every Georgian website are not release gates.
   return !row
     || row.artifacts === 0
     || row.sourceProbeArtifacts === 0
@@ -249,7 +250,6 @@ const blockingMarkets = markets.filter((market) => {
     || row.valid <= 0
     || !row.requiredSourcesAttempted
     || !row.requiredSourceContinuity
-    || (market === "georgia" && row.requiredFreshUnproductiveSourceIds.length > 0)
     || !row.sourceTargetReached;
 });
 const report = {

@@ -8,6 +8,7 @@ const { hasAllowedCatalogSourceProvenance, isCatalogMarketSourceAllowed, isCredi
 const { compareCatalogPublicPriority, japanAuctionSoldIdentityVerified } = await import("../apps/web/lib/catalog/public-priority.ts");
 const { classifyCatalogV2Offer, selectCatalogV2MarketOffers } = await import("../apps/web/lib/catalog/catalog-v2-policy.ts");
 const { normalizeVehicleOfferSpecs } = await import("../apps/web/lib/catalog/spec-normalization.ts");
+const { catalogDescriptionRejectionReason } = await import("../apps/web/lib/catalog/description-completeness.ts");
 const { catalogRetentionDecision, catalogSourceRefreshStates, catalogConfirmedWithdrawalIndex, catalogOfferWithdrawnByReport } = await import("../apps/web/lib/catalog/source-retention.ts");
 const { catalogOfferFreshness, catalogOfferWithinRetention, catalogMarketRetentionMs, preserveCatalogOfferObservation } = await import("../apps/web/lib/catalog/refresh-policy.ts");
 const { persistCatalogOffers, previewCanonicalPublicCatalogOffers, readAllOffersForMaintenance, readMarketOffers } = await import("../apps/web/lib/catalog/storage.ts");
@@ -281,6 +282,8 @@ async function auditCandidate(sourceOffer) {
     if (!offer.make || !offer.model || !Number.isFinite(Number(offer.year))) return { offer: null, reason: "specs" };
     if (!offer.operational?.sourceUrl || !Number.isFinite(Number(offer.sourcePrice)) || Number(offer.sourcePrice) <= 0) return { offer: null, reason: "source" };
     if (offer.images.length < minimumImagesPerOffer) return { offer: null, reason: "images" };
+    const descriptionReason = catalogDescriptionRejectionReason(offer);
+    if (descriptionReason) return { offer: null, reason: descriptionReason };
     offer = normalizeVehicleOfferSpecs(await calculateOfferWithRussiaCustoms(offer));
     const calculationStatus = String(offer.calculationStatus || "");
     const calculationPending = calculationStatus === "needs_data"
@@ -383,7 +386,15 @@ for (let start = 0; start < orderedCandidates.length && selected.length < select
 // remaining market capacity instead of being discarded by a power-mix quota.
 const v2Selection = selectCatalogV2MarketOffers(selected.sort(qualityOrder), v2Policy);
 const selectedMarketOffersById = new Map();
-for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) selectedMarketOffersById.set(String(offer.id), offer);
+for (const offer of v2Selection.selected.slice(0, maximumPerMarket)) {
+  // Check after V2 normalization, which may clear a contradictory body value.
+  const reason = catalogDescriptionRejectionReason(offer);
+  if (reason) {
+    rejectionReasons[reason] = Number(rejectionReasons[reason] || 0) + 1;
+    continue;
+  }
+  selectedMarketOffersById.set(String(offer.id), offer);
+}
 const selectedMarketOffers = [...selectedMarketOffersById.values()].slice(0, maximumPerMarket);
 const preservedByMarket = {};
 const preservedPublicHashByMarket = {};
