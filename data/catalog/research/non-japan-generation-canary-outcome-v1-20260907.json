@@ -635,6 +635,7 @@
     "AVIF must successfully decode to WebP; malformed AVIF and HTML remain rejected."
   ],
   "limitations": [
+    "This binary-image canary did not meet the owner source-URL-only storage contract. Its serializer/calculation evidence is historical; use the superseding URL-only result.",
     "Different source-order samples and code checkpoints; their counts are not a before/after experiment or full-inventory coverage.",
     "Europe latest live run returned 39 image/jpeg and one image/webp; the AVIF decoding contract was verified with a generated AVIF fixture. The earlier run actually observed 45 image/avif responses.",
     "Five distinct binary hashes do not prove visual variety or absence of advertisements.",
@@ -704,5 +705,12 @@
     "status": "excluded_by_owner",
     "requests": 0,
     "liveDataChanged": false
+  },
+  "ownerImageStorageContractAcceptance": false,
+  "supersededBy": "non-japan-source-url-generation-outcome-v1-20260907.json",
+  "binaryAssetsRemoved": {
+    "report": "canary-image-copy-removal-outcome-v1-20260907.json",
+    "historicalJsonReportsRetained": true,
+    "oldBinaryGithubArtifactsDeleted": true
   }
 }

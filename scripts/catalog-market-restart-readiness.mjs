@@ -22,13 +22,17 @@ const detailProbes = new Map(completePass.markets.map(row => [row.market, row]))
 const configurationReview = await read('data/catalog/research/configurable-costs-review-v1-20260906.json');
 const multipagePass = await read('data/catalog/research/non-japan-multipage-outcome-v1-20260907.json');
 const publicDisplayPass = await read('data/catalog/research/non-japan-public-display-outcome-v1-20260907.json');
-const generationCanary = await read('data/catalog/research/non-japan-generation-canary-outcome-v1-20260907.json');
+const previousBinaryCanary = await read('data/catalog/research/non-japan-generation-canary-outcome-v1-20260907.json');
+const generationCanary = await read('data/catalog/research/non-japan-source-url-generation-outcome-v1-20260907.json');
 const markets = ['europe', 'korea', 'china', 'uae', 'georgia'];
 const report = {
   version: 1, advisoryOnly: true, productionWrites: false, workflowDispatches: 0,
   inputs, auditCheckedAt: audit.checkedAt,
   previousBaselineValidation: batch.validation.finalCi,
   codeValidation: generationCanary.validation,
+  imageStorageMode: generationCanary.imageStorageMode,
+  ownerImageStorageContractAcceptance: generationCanary.ownerImageStorageContractAcceptance,
+  previousBinaryCanaryValidation: previousBinaryCanary.validation,
   previousPublicDisplayValidation: publicDisplayPass.validation,
   visualReview: generationCanary.visualReview,
   previousMultipageValidation: multipagePass.validation,

@@ -42,7 +42,11 @@
     },
     {
       "path": "data/catalog/research/non-japan-generation-canary-outcome-v1-20260907.json",
-      "sha256": "9dde0c8ce4c5e13a0bfc2756662c4144cda6b4440e3818fa5c5c4b1ccce97b86"
+      "sha256": "4a2f15477fcac36cd66e771d1e89435a077f315e38d6ba9d203b45fbdb8a2453"
+    },
+    {
+      "path": "data/catalog/research/non-japan-source-url-generation-outcome-v1-20260907.json",
+      "sha256": "a1a4a6303aa981ece9902ce894815dca022756b7925373e395337529a0afbdfe"
     }
   ],
   "auditCheckedAt": "2026-09-06T12:59:54.341Z",
@@ -60,6 +64,21 @@
     "fail": 0
   },
   "codeValidation": {
+    "codeSha": "ec0536f9b77bcd8881f064c06039a51d48c077c6",
+    "gitTree": "2d9ac1260e4e50a53259fad0611824d6d8dddc6a",
+    "ciRunId": 34076910568,
+    "ciUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/34076910568",
+    "status": "success",
+    "tests": 1085,
+    "passed": 1085,
+    "failed": 0,
+    "typecheck": "passed",
+    "productionBuild": "passed",
+    "staticPages": 55
+  },
+  "imageStorageMode": "source_urls_only",
+  "ownerImageStorageContractAcceptance": true,
+  "previousBinaryCanaryValidation": {
     "codeSha": "944f2ae1f5493a164685619d88ad65e4de192d04",
     "gitTree": "772f03a6c9ca6cfb11e11977cf9ff99deb8c22f9",
     "ciRunId": 34074195855,
@@ -316,7 +335,8 @@
         "sourceOfferId": "EC61387808",
         "finding": "Four of five saved frames show very similar dashboard views; exact checksums differ."
       }
-    ]
+    ],
+    "appliesTo": "Historical image review remains unresolved; current URL-only run does not inspect image bytes."
   },
   "previousMultipageValidation": {
     "checkedAt": "2026-09-07T00:17:55.228Z",
@@ -1259,37 +1279,32 @@
       "latestGenerationCanary": {
         "market": "europe",
         "sourceId": "mobile_de_open",
-        "runId": 34074192666,
-        "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/34074192666",
-        "codeSha": "944f2ae1f5493a164685619d88ad65e4de192d04",
-        "artifactId": 10001519426,
-        "reportSha256": "a889ec10b46cf8a61f88ac2a1f5927e90836f89d902b9a67ef7d40a1645a86e0",
-        "archiveSha256": "9b949c2f37558630df43776261141e4611fa393f830e0ec396a3a51a6c1a793e",
+        "runId": 34076908088,
+        "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/34076908088",
+        "codeSha": "ec0536f9b77bcd8881f064c06039a51d48c077c6",
+        "artifactId": 10002384838,
+        "reportSha256": "f9331db488af114df16b44af7da51e28320e7441b5b4460277bd0f78e77513f1",
+        "archiveSha256": "dedab6642bafa1323373f6e813a889fc0e8d356f4703e1a3c0f5570ef84b1ccd",
         "technicalAcceptance": true,
-        "page": {
-          "returnedRows": 21,
-          "diagnostics": {
-            "listingRows": 26,
-            "rejectedRows": 5
-          },
-          "health": {
-            "ok": true,
-            "message": "mobile.de BFF power_001_085_2026 page=1/25 parsed=21 total=26058",
-            "checkedAt": "2026-09-07T01:48:55.493Z",
-            "httpStatus": 200,
-            "contentType": "application/json; charset=utf-8"
-          }
-        },
+        "imageStorageMode": "source_urls_only",
         "examined": 8,
+        "storedCount": 8,
         "storedCards": [
           {
-            "id": "a202dac89cd399e86431936c",
-            "sourceOfferId": "462255582",
-            "totalRub": 6568562,
-            "cardRub": 6568562,
-            "breakdownSumRub": 6568562,
+            "id": "6b19e96912452882ae29a15e",
+            "sourceOfferId": "443130682",
+            "totalRub": 5014011,
+            "cardRub": 5014011,
+            "breakdownSumRub": 5014011,
             "businessConfigVersion": "market_europe_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.classistatic.de/api/v1/mo-prod/images/70/70d53ac6-fef9-4bb2-b5cd-93d36fb72af3?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/41/4160612d-f8b6-4318-8a95-507fdc5b5f00?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/d2/d2bd090a-54f2-4a73-942a-6a062a448b7e?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/9f/9fd63d56-eb72-4668-90a4-7353deeb7dc7?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/8d/8dcd12c3-dcb4-4dc9-be43-73703d379070?rule=mo-1600"
+            ]
           },
           {
             "id": "9673936dd0e9e9dcc20cbfc3",
@@ -1298,7 +1313,14 @@
             "cardRub": 4983387,
             "breakdownSumRub": 4983387,
             "businessConfigVersion": "market_europe_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.classistatic.de/api/v1/mo-prod/images/09/09a77411-9189-468e-b500-9213049ddd03?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/24/240ee074-9668-4063-ac89-109fb221208f?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/e4/e41fae05-7d31-40b0-8e74-ce00f2ff38a3?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/b7/b750ccc8-7bfd-448a-8697-97f7b8c7da09?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/71/71002058-c255-4d7e-8fa6-f5e57f88fb42?rule=mo-1600"
+            ]
           },
           {
             "id": "8a71c8d000d549658c670cd9",
@@ -1307,7 +1329,14 @@
             "cardRub": 4676756,
             "breakdownSumRub": 4676756,
             "businessConfigVersion": "market_europe_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.classistatic.de/api/v1/mo-prod/images/a3/a394db99-dd13-42c3-a34b-b3f1cb1542fb?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/46/4690388c-c7e2-4d4f-be47-2163523f6ebc?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/0b/0be8f575-a212-468a-bd7c-630ceff35726?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/3b/3b3853ee-db73-426e-a81c-0e3eb0653e91?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/3d/3d0a5f1c-df87-4962-bfa5-096ca3a9b2ea?rule=mo-1600"
+            ]
           },
           {
             "id": "8a98122ce84e0a9798e51cb5",
@@ -1316,7 +1345,14 @@
             "cardRub": 5134243,
             "breakdownSumRub": 5134243,
             "businessConfigVersion": "market_europe_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.classistatic.de/api/v1/mo-prod/images/83/837ff49d-6920-4c9c-959a-951b670516ce?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/a0/a0a345ce-9a42-4480-96ec-064aee288600?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/ff/fff38933-2919-4cc3-86de-859ceb403ea9?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/3f/3f25bbdf-f35d-4a30-b71d-d676dc8e1613?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/99/99a06f87-c4ad-4913-a4c0-ba3aa853a628?rule=mo-1600"
+            ]
           },
           {
             "id": "30623d37b6f5472deeecf2ad",
@@ -1325,7 +1361,14 @@
             "cardRub": 4887294,
             "breakdownSumRub": 4887294,
             "businessConfigVersion": "market_europe_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.classistatic.de/api/v1/mo-prod/images/58/583652c5-fe02-4888-85fc-bb7b894edc63?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/b9/b95c53fc-7e5e-4af1-802a-32a6b79690bd?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/7e/7ee5b022-1692-4ab2-b946-c81ba0504f7d?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/8b/8bacc51b-6013-410e-ace2-ee39b972b122?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/88/88771c7b-1ab0-4552-a988-7e76f328a3c9?rule=mo-1600"
+            ]
           },
           {
             "id": "4a7d5a144fd8fdd60be2f77b",
@@ -1334,7 +1377,14 @@
             "cardRub": 4134134,
             "breakdownSumRub": 4134134,
             "businessConfigVersion": "market_europe_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.classistatic.de/api/v1/mo-prod/images/75/75eb8d9a-9ade-490b-84e1-60a55e43c38b?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/96/963ce24d-10c5-4786-b7cf-3a23cf0afa45?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/26/26787962-64e8-4f9a-8e38-02a70d544b53?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/56/561dcfe3-d293-470b-b6ec-554f275c326f?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/fc/fc22322c-3623-4e6c-bfcd-c7ae2628135a?rule=mo-1600"
+            ]
           },
           {
             "id": "57f2b4b0def822bd489b441e",
@@ -1343,7 +1393,14 @@
             "cardRub": 3679913,
             "breakdownSumRub": 3679913,
             "businessConfigVersion": "market_europe_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.classistatic.de/api/v1/mo-prod/images/61/61655b0f-2b2c-44bb-b51f-2d2914ec3ead?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/d6/d6e46581-c178-4d2e-8136-e607f0d3d6d0?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/98/98e5413d-9dbc-4dfa-bc00-73e29b5c843a?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/d5/d5f4684f-d2fe-4832-be49-c3b936a319e7?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/14/149e2dbb-770f-448f-b452-d65908bb614b?rule=mo-1600"
+            ]
           },
           {
             "id": "31561bc072c58ce8cb0ba950",
@@ -1352,46 +1409,23 @@
             "cardRub": 4908412,
             "breakdownSumRub": 4908412,
             "businessConfigVersion": "market_europe_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.classistatic.de/api/v1/mo-prod/images/75/75e784b2-398d-4ccc-a697-5f28616278a7?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/d8/d87585df-eded-4734-846d-fb86b76427f5?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/a0/a0c7e334-f5b7-4d49-8b5c-b77e7f8e4a71?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/5c/5cb2850c-21ce-477e-9688-e227d76fe680?rule=mo-1600",
+              "https://img.classistatic.de/api/v1/mo-prod/images/72/72855003-9f80-4a39-a9c7-1b7820a5a716?rule=mo-1600"
+            ]
           }
         ],
-        "storedCount": 8,
-        "acceptedImageCount": 40,
-        "visibleImageCounts": [
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5
-        ],
-        "decodedImageResponses": 40,
-        "imageResponseTypes": {
-          "image/jpeg": 39,
-          "image/webp": 1
-        },
+        "sourceImageUrls": 40,
+        "binaryImageRequests": 0,
+        "binaryImageWrites": 0,
         "sourceRequests": 17,
-        "rowRejections": {},
-        "deduplicatedOffersRemoved": 0,
-        "diagnosticObjectsVerified": 119,
-        "diagnosticBytesVerified": 5567498,
-        "diagnosticReportKey": "catalog/canaries/34074192666-1/europe/report.json",
-        "generation": {
-          "version": 2,
-          "generationId": "gen_1788745775242_72c37929",
-          "updatedAt": "2026-09-07T01:49:35.242Z",
-          "markets": {
-            "europe": {
-              "count": 8,
-              "chunks": [
-                "chunk-0001"
-              ],
-              "updatedAt": "2026-09-07T01:49:35.242Z"
-            }
-          }
-        },
+        "diagnosticObjectsVerified": 40,
+        "diagnosticBytesVerified": 1079084,
+        "compressedTextFeedObjects": 1,
         "businessSettings": {
           "rawActiveVersion": null,
           "effectiveVersion": "market_europe_system_average_v2",
@@ -1421,124 +1455,6 @@
             "provisional": true
           }
         },
-        "rollback": {
-          "productionManifest": {
-            "version": 2,
-            "generationId": "gen_1788253861283_69bb1d29",
-            "updatedAt": "2026-09-01T09:11:01.283Z",
-            "markets": {
-              "korea": {
-                "count": 2840,
-                "chunks": [
-                  "chunk-0001",
-                  "chunk-0002",
-                  "chunk-0003",
-                  "chunk-0004",
-                  "chunk-0005",
-                  "chunk-0006"
-                ],
-                "updatedAt": "2026-09-01T09:11:01.283Z"
-              },
-              "china": {
-                "count": 3092,
-                "chunks": [
-                  "chunk-0001",
-                  "chunk-0002",
-                  "chunk-0003",
-                  "chunk-0004",
-                  "chunk-0005",
-                  "chunk-0006",
-                  "chunk-0007"
-                ],
-                "updatedAt": "2026-09-01T09:11:01.283Z"
-              },
-              "japan": {
-                "count": 10190,
-                "chunks": [
-                  "chunk-0001",
-                  "chunk-0002",
-                  "chunk-0003",
-                  "chunk-0004",
-                  "chunk-0005",
-                  "chunk-0006",
-                  "chunk-0007",
-                  "chunk-0008",
-                  "chunk-0009",
-                  "chunk-0010",
-                  "chunk-0011",
-                  "chunk-0012",
-                  "chunk-0013",
-                  "chunk-0014",
-                  "chunk-0015",
-                  "chunk-0016",
-                  "chunk-0017",
-                  "chunk-0018",
-                  "chunk-0019",
-                  "chunk-0020",
-                  "chunk-0021"
-                ],
-                "updatedAt": "2026-09-01T09:11:01.283Z"
-              },
-              "uae": {
-                "count": 4647,
-                "chunks": [
-                  "chunk-0001",
-                  "chunk-0002",
-                  "chunk-0003",
-                  "chunk-0004",
-                  "chunk-0005",
-                  "chunk-0006",
-                  "chunk-0007",
-                  "chunk-0008",
-                  "chunk-0009",
-                  "chunk-0010"
-                ],
-                "updatedAt": "2026-09-01T09:11:01.283Z"
-              },
-              "europe": {
-                "count": 5259,
-                "chunks": [
-                  "chunk-0001",
-                  "chunk-0002",
-                  "chunk-0003",
-                  "chunk-0004",
-                  "chunk-0005",
-                  "chunk-0006",
-                  "chunk-0007",
-                  "chunk-0008",
-                  "chunk-0009",
-                  "chunk-0010",
-                  "chunk-0011"
-                ],
-                "updatedAt": "2026-09-01T09:11:01.283Z"
-              },
-              "georgia": {
-                "count": 216,
-                "chunks": [
-                  "chunk-0001"
-                ],
-                "updatedAt": "2026-09-01T09:11:01.283Z"
-              },
-              "kyrgyzstan": {
-                "count": 2647,
-                "chunks": [
-                  "chunk-0001",
-                  "chunk-0002",
-                  "chunk-0003",
-                  "chunk-0004",
-                  "chunk-0005",
-                  "chunk-0006"
-                ],
-                "updatedAt": "2026-09-01T09:11:01.283Z"
-              }
-            }
-          },
-          "productionManifestEtag": "\"e9273393415fdc23936ee345bb00652d\"",
-          "productionSwitchPerformed": false,
-          "isolatedRollbackPassed": true,
-          "baselineGeneration": "gen_1788745775192_bd36108b",
-          "candidateGeneration": "gen_1788745775242_72c37929"
-        },
         "productionBaseline": {
           "catalog/manifest.json": {
             "etag": "\"e9273393415fdc23936ee345bb00652d\"",
@@ -1554,8 +1470,14 @@
           }
         },
         "productionInputsUnchanged": true,
-        "productionCatalogWrites": 0,
-        "japanRequests": 0
+        "rollback": {
+          "productionManifestEtag": "\"e9273393415fdc23936ee345bb00652d\"",
+          "productionSwitchPerformed": false,
+          "isolatedRollbackPassed": true,
+          "baselineGeneration": "gen_1788748692096_faaa1f71",
+          "candidateGeneration": "gen_1788748692139_1198b477"
+        },
+        "diagnosticReportKey": "catalog/canaries/34076908088-1/europe/report.json"
       },
       "latestRemaining": [
         "Remove advertising panels and select clean exterior covers; retain original source evidence.",
@@ -1774,31 +1696,16 @@
       "latestGenerationCanary": {
         "market": "korea",
         "sourceId": "kcar_korea_open",
-        "runId": 34073795968,
-        "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/34073795968",
-        "codeSha": "3e30bd78f0a17c6461346b3ac446b59a087079c8",
-        "artifactId": 10001412782,
-        "reportSha256": "9a8f398c85643e591fe485b1432f78014845f28bfe7f1b2841897640c297a03c",
-        "archiveSha256": "8fd35b8dd174a5e6e603c2a33a29d1007b71385d3ed2dbdbc977b462ae3b6c61",
+        "runId": 34076908088,
+        "runUrl": "https://github.com/jeep-jim/AvtoCena/actions/runs/34076908088",
+        "codeSha": "ec0536f9b77bcd8881f064c06039a51d48c077c6",
+        "artifactId": 10002395303,
+        "reportSha256": "e8d93a881db2a21aa593b366ec729db56447134339814b2e4a79d71d6aa5f70a",
+        "archiveSha256": "e81c43c69c68e075c65dce7068f748482645b7743de2233d7f315c30c77ea573",
         "technicalAcceptance": true,
-        "page": {
-          "returnedRows": 20,
-          "diagnostics": {
-            "listingRows": 20,
-            "rejectedRows": 0,
-            "failedDetailRows": 0,
-            "rejectionReasons": {},
-            "rejectionSamples": []
-          },
-          "health": {
-            "ok": true,
-            "message": "K Car exact page 1: 20/20; total=7352",
-            "checkedAt": "2026-09-07T01:41:41.500Z",
-            "httpStatus": 200,
-            "contentType": "application/json"
-          }
-        },
-        "examined": 11,
+        "imageStorageMode": "source_urls_only",
+        "examined": 8,
+        "storedCount": 8,
         "storedCards": [
           {
             "id": "050ff763d3d64c6bd9af90ea",
@@ -1807,7 +1714,14 @@
             "cardRub": 7453298,
             "breakdownSumRub": 7453298,
             "businessConfigVersion": "market_korea_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61366045_2/main/main780.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61366045_2/extra/extra_0_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61366045_2/extra/extra_1_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61366045_2/extra/extra_2_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61366045_2/extra/extra_3_hq.jpg"
+            ]
           },
           {
             "id": "1f5ff7fa982a2dbe25682d1a",
@@ -1816,7 +1730,14 @@
             "cardRub": 7285300,
             "breakdownSumRub": 7285300,
             "businessConfigVersion": "market_korea_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.kcar.com/3dcarpicture/2026/09/173/61369793_1/main/main780.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/09/173/61369793_1/extra/extra_0_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/09/173/61369793_1/extra/extra_1_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/09/173/61369793_1/extra/extra_2_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/09/173/61369793_1/extra/extra_3_hq.jpg"
+            ]
           },
           {
             "id": "57344512380fc02549c51d03",
@@ -1825,7 +1746,14 @@
             "cardRub": 8946009,
             "breakdownSumRub": 8946009,
             "businessConfigVersion": "market_korea_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.kcar.com/3dcarpicture/2026/05/173/61367794_1/main/main780.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/05/173/61367794_1/extra/extra_0_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/05/173/61367794_1/extra/extra_1_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/05/173/61367794_1/extra/extra_2_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/05/173/61367794_1/extra/extra_3_hq.jpg"
+            ]
           },
           {
             "id": "9ae93f6687608b0f87585f15",
@@ -1834,7 +1762,14 @@
             "cardRub": 6421289,
             "breakdownSumRub": 6421289,
             "businessConfigVersion": "market_korea_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61369851_4/main/main780.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61369851_4/extra/extra_0_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61369851_4/extra/extra_1_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61369851_4/extra/extra_2_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61369851_4/extra/extra_3_hq.jpg"
+            ]
           },
           {
             "id": "0560d0c32166897da4e99ab6",
@@ -1843,7 +1778,14 @@
             "cardRub": 4607948,
             "breakdownSumRub": 4607948,
             "businessConfigVersion": "market_korea_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.kcar.com/3dcarpicture/2026/06/173/61371688_1/main/main780.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/06/173/61371688_1/extra/extra_0_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/06/173/61371688_1/extra/extra_1_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/06/173/61371688_1/extra/extra_2_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/06/173/61371688_1/extra/extra_3_hq.jpg"
+            ]
           },
           {
             "id": "3aff9d0aa019ae69d88105fe",
@@ -1852,66 +1794,55 @@
             "cardRub": 6716846,
             "breakdownSumRub": 6716846,
             "businessConfigVersion": "market_korea_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61387808_1/main/main780.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61387808_1/extra/extra_0_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61387808_1/extra/extra_1_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61387808_1/extra/extra_2_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61387808_1/extra/extra_3_hq.jpg"
+            ]
           },
           {
-            "id": "fe61a3d057909b3c6d513f37",
-            "sourceOfferId": "EC61369784",
-            "totalRub": 8005437,
-            "cardRub": 8005437,
-            "breakdownSumRub": 8005437,
+            "id": "0a79e06e8f666028f1b5995c",
+            "sourceOfferId": "EC61382017",
+            "totalRub": 9270825,
+            "cardRub": 9270825,
+            "breakdownSumRub": 9270825,
             "businessConfigVersion": "market_korea_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61382017_1/main/main780.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61382017_1/extra/extra_0_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61382017_1/extra/extra_1_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61382017_1/extra/extra_2_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61382017_1/extra/extra_3_hq.jpg"
+            ]
           },
           {
-            "id": "fd4f8e8fdbe9996132f9c8f6",
-            "sourceOfferId": "EC61392289",
-            "totalRub": 2347190,
-            "cardRub": 2347190,
-            "breakdownSumRub": 2347190,
+            "id": "eda227483c606c91185562a1",
+            "sourceOfferId": "EC61387815",
+            "totalRub": 8852218,
+            "cardRub": 8852218,
+            "breakdownSumRub": 8852218,
             "businessConfigVersion": "market_korea_system_average_v2",
-            "images": 5
+            "images": 5,
+            "imageUrls": [
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61387815_4/main/main780.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61387815_4/extra/extra_0_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61387815_4/extra/extra_1_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61387815_4/extra/extra_2_hq.jpg",
+              "https://img.kcar.com/3dcarpicture/2026/08/173/61387815_4/extra/extra_3_hq.jpg"
+            ]
           }
         ],
-        "storedCount": 8,
-        "acceptedImageCount": 40,
-        "visibleImageCounts": [
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5,
-          5
-        ],
-        "decodedImageResponses": 50,
-        "imageResponseTypes": {
-          "image/jpg": 50
-        },
-        "sourceRequests": 31,
-        "rowRejections": {
-          "canary_public_quality_failed": 2,
-          "verified_specifications_required": 1
-        },
-        "deduplicatedOffersRemoved": 0,
-        "diagnosticObjectsVerified": 142,
-        "diagnosticBytesVerified": 4980546,
-        "diagnosticReportKey": "catalog/canaries/34073795968-1/korea/report.json",
-        "generation": {
-          "version": 2,
-          "generationId": "gen_1788745413032_53f7a468",
-          "updatedAt": "2026-09-07T01:43:33.032Z",
-          "markets": {
-            "korea": {
-              "count": 8,
-              "chunks": [
-                "chunk-0001"
-              ],
-              "updatedAt": "2026-09-07T01:43:33.032Z"
-            }
-          }
-        },
+        "sourceImageUrls": 40,
+        "binaryImageRequests": 0,
+        "binaryImageWrites": 0,
+        "sourceRequests": 29,
+        "diagnosticObjectsVerified": 41,
+        "diagnosticBytesVerified": 525473,
+        "compressedTextFeedObjects": 1,
         "businessSettings": {
           "rawActiveVersion": null,
           "effectiveVersion": "market_korea_system_average_v2",
@@ -1941,124 +1872,6 @@
             "provisional": true
           }
         },
-        "rollback": {
-          "productionManifest": {
-            "version": 2,
-            "generationId": "gen_1788253861283_69bb1d29",
-            "updatedAt": "2026-09-01T09:11:01.283Z",
-            "markets": {
-              "korea": {
-                "count": 2840,
-                "chunks": [
-                  "chunk-0001",
-                  "chunk-0002",
-                  "chunk-0003",
-                  "chunk-0004",
-                  "chunk-0005",
-                  "chunk-0006"
-                ],
-                "updatedAt": "2026-09-01T09:11:01.283Z"
-              },
-              "china": {
-                "count": 3092,
-                "chunks": [
-                  "chunk-0001",
-                  "chunk-0002",
-                  "chunk-0003",
-                  "chunk-0004",
-                  "chunk-0005",
-                  "chunk-0006",
-                  "chunk-0007"
-                ],
-                "updatedAt": "2026-09-01T09:11:01.283Z"
-              },
-              "japan": {
-                "count": 10190,
-                "chunks": [
-                  "chunk-0001",
-                  "chunk-0002",
-                  "chunk-0003",
-                  "chunk-0004",
-                  "chunk-0005",
-                  "chunk-0006",
-                  "chunk-0007",
-                  "chunk-0008",
-                  "chunk-0009",
-                  "chunk-0010",
-                  "chunk-0011",
-                  "chunk-0012",
-                  "chunk-0013",
-                  "chunk-0014",
-                  "chunk-0015",
-                  "chunk-0016",
-                  "chunk-0017",
-                  "chunk-0018",
-                  "chunk-0019",
-                  "chunk-0020",
-                  "chunk-0021"
-                ],
-                "updatedAt": "2026-09-01T09:11:01.283Z"
-              },
-              "uae": {
-                "count": 4647,
-                "chunks": [
-                  "chunk-0001",
-                  "chunk-0002",
-                  "chunk-0003",
-                  "chunk-0004",
-                  "chunk-0005",
-                  "chunk-0006",
-                  "chunk-0007",
-                  "chunk-0008",
-                  "chunk-0009",
-                  "chunk-0010"
-                ],
-                "updatedAt": "2026-09-01T09:11:01.283Z"
-              },
-              "europe": {
-                "count": 5259,
-                "chunks": [
-                  "chunk-0001",
-                  "chunk-0002",
-                  "chunk-0003",
-                  "chunk-0004",
-                  "chunk-0005",
-                  "chunk-0006",
-                  "chunk-0007",
-                  "chunk-0008",
-                  "chunk-0009",
-                  "chunk-0010",
-                  "chunk-0011"
-                ],
-                "updatedAt": "2026-09-01T09:11:01.283Z"
-              },
-              "georgia": {
-                "count": 216,
-                "chunks": [
-                  "chunk-0001"
-                ],
-                "updatedAt": "2026-09-01T09:11:01.283Z"
-              },
-              "kyrgyzstan": {
-                "count": 2647,
-                "chunks": [
-                  "chunk-0001",
-                  "chunk-0002",
-                  "chunk-0003",
-                  "chunk-0004",
-                  "chunk-0005",
-                  "chunk-0006"
-                ],
-                "updatedAt": "2026-09-01T09:11:01.283Z"
-              }
-            }
-          },
-          "productionManifestEtag": "\"e9273393415fdc23936ee345bb00652d\"",
-          "productionSwitchPerformed": false,
-          "isolatedRollbackPassed": true,
-          "baselineGeneration": "gen_1788745413002_5c69b6ac",
-          "candidateGeneration": "gen_1788745413032_53f7a468"
-        },
         "productionBaseline": {
           "catalog/manifest.json": {
             "etag": "\"e9273393415fdc23936ee345bb00652d\"",
@@ -2074,8 +1887,14 @@
           }
         },
         "productionInputsUnchanged": true,
-        "productionCatalogWrites": 0,
-        "japanRequests": 0
+        "rollback": {
+          "productionManifestEtag": "\"e9273393415fdc23936ee345bb00652d\"",
+          "productionSwitchPerformed": false,
+          "isolatedRollbackPassed": true,
+          "baselineGeneration": "gen_1788748715591_24e604b3",
+          "candidateGeneration": "gen_1788748715610_da2ab0ee"
+        },
+        "diagnosticReportKey": "catalog/canaries/34076908088-1/korea/report.json"
       },
       "latestRemaining": [
         "Improve gallery view diversity; do not equate different bytes with different useful viewpoints.",
