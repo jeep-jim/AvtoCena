@@ -15,25 +15,40 @@ const timeoutMs = Math.max(1000, Math.min(45000, Number(process.env.PILOT_TIMEOU
 process.env.CATALOG_SOURCE_RETRY_ATTEMPTS = '1';
 process.env.CATALOG_ENCAR_DIRECT_LIST_RETRIES = '1';
 let currencyRequests = 0;
+let imageRequestsBlocked = 0;
+let nextSourceRequestAt = 0;
+const requestIntervalMs = Math.max(0, Math.min(3000, Number(process.env.PILOT_REQUEST_INTERVAL_MS || 0)));
 let active;
 globalThis.fetch = async (input, init = {}) => {
   const url = new URL(input instanceof Request ? input.url : String(input));
-  if (/\.(?:jpe?g|png|webp|avif)(?:$|\?)/i.test(url.pathname)) throw new Error('diagnostic_image_download_blocked');
+  if (/\.(?:jpe?g|png|webp|avif|gif|svg)(?:$|\/)/i.test(url.pathname) || /^(?:img|image|images)\./i.test(url.hostname)) {
+    imageRequestsBlocked++; throw new Error('diagnostic_image_download_blocked');
+  }
   const method = init.method || (input instanceof Request ? input.method : 'GET');
   if (url.href === 'https://www.cbr.ru/scripts/XML_daily.asp' && method === 'GET' && currencyRequests++ === 0) return fetchOriginal(url, { redirect: 'error', signal: AbortSignal.timeout(timeoutMs) });
-  if (!active || active.stopped || active.requests.length >= requestLimit || (method !== 'GET' && !(method === 'POST' && url.hostname.endsWith('.kcar.com') && url.pathname === '/bc/search/list/drct'))
-    || url.protocol !== 'https:' || !active.hosts.some(host => url.hostname === host || url.hostname.endsWith(`.${host}`))) {
+  if (!active || active.stopped || active.requests.length >= requestLimit || (method !== 'GET' && !(method === 'POST' && url.hostname === 'api.kcar.com' && url.pathname === '/bc/search/list/drct'))
+    || url.protocol !== 'https:' || url.username || url.password || url.port || !active.hosts.some(host => url.hostname === host || url.hostname.endsWith(`.${host}`))) {
     throw new Error('pilot_request_outside_envelope');
   }
   const headers = new Headers(init.headers || (input instanceof Request ? input.headers : {}));
   if (headers.has('authorization') || headers.has('cookie')) throw new Error('pilot_credentials_not_allowed');
   const event = { origin: url.origin, path: url.pathname, method, status: null };
   active.requests.push(event);
-  const response = await fetchOriginal(url, { ...init, headers, redirect: 'manual', signal: AbortSignal.timeout(timeoutMs) });
+  const waitMs = Math.max(0, nextSourceRequestAt - Date.now());
+  nextSourceRequestAt = Date.now() + waitMs + requestIntervalMs;
+  if (waitMs) await new Promise(resolve => setTimeout(resolve, waitMs));
+  if (active.stopped) { event.cancelled = true; throw new Error('pilot_source_stopped'); }
+  let response;
+  try { response = await fetchOriginal(url, { ...init, headers, redirect: 'manual', signal: AbortSignal.timeout(timeoutMs) }); }
+  catch (error) { event.error = String(error?.name || 'network_error'); throw error; }
   event.status = response.status;
   event.contentType = response.headers.get('content-type');
   if ([401, 403, 429].includes(response.status)) { active.stopped = true; throw new Error(`pilot_stop_http_${response.status}`); }
   if (response.status >= 300 && response.status < 400) throw new Error('pilot_redirect_requires_review');
+  if (/^image\//i.test(event.contentType || '')) {
+    await response.body?.cancel();
+    imageRequestsBlocked++; throw new Error('diagnostic_image_response_blocked');
+  }
   const body = await response.clone().text();
   if (process.env.PILOT_RESPONSE_EVIDENCE === '1') {
     event.bodyEvidence = { bytes: Buffer.byteLength(body), sha256: crypto.createHash('sha256').update(body).digest('hex'),
@@ -60,6 +75,7 @@ const report = { version: 3, completed: false, checkedAt: new Date().toISOString
 const outputPath = process.env.PILOT_REPORT || 'data/catalog/research/public-detail-calculation-pilot-v1-20260906.json';
 async function checkpoint(snapshot = report) {
   report.currencyRequests = currencyRequests;
+  snapshot.imageRequestsBlocked = imageRequestsBlocked;
   await fs.writeFile(outputPath, JSON.stringify(snapshot, null, 2) + '\n');
 }
 const requestedMarkets = new Set(String(process.env.PILOT_MARKETS || 'europe,china,uae').split(','));
@@ -114,6 +130,8 @@ for (const [market, module, name, hosts] of sources.filter(([market]) => request
         try {
           offer.images = await source.fetchImages(offer);
           item.images = offer.images.length;
+          item.sourceUrl = offer.operational?.sourceUrl;
+          item.galleryUrls = offer.images.map(image => image.url);
           if (process.env.PILOT_RESPONSE_EVIDENCE === '1' && market === 'china') {
             const raw = offer.operational?.raw || {};
             item.sourceWitness = { detailId: raw.detail?.infoid, specId: raw.detail?.specid,
@@ -180,4 +198,4 @@ for (const [market, module, name, hosts] of sources.filter(([market]) => request
 if (!requestedMarkets.has('korea')) report.markets.push({ market: 'korea', status: 'not_attempted', reason: 'Not selected for this run; no inference about source availability.' });
 report.completed = true;
 await checkpoint();
-console.log(JSON.stringify(report, null, 2));
+if (process.env.PILOT_QUIET !== '1') console.log(JSON.stringify(report, null, 2));

@@ -27,12 +27,11 @@ test("Object Storage publication fails before any catalog write", async () => {
   }
 });
 
-test("future six-market refreshes retain non-Japan listings for fourteen days", () => {
+test("future five-market refreshes retain listings for fourteen days", () => {
   const queue = fs.readFileSync(".github/workflows/catalog-v3-sequential-queue.yml", "utf8");
   const retentionValues = [...queue.matchAll(/retention_ms:\s*"(\d+)"/g)].map((match) => match[1]);
 
   assert.deepEqual(retentionValues, [
-    "2592000000",
     "1209600000",
     "1209600000",
     "1209600000",

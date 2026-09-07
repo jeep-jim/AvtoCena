@@ -7,6 +7,8 @@ import path from 'node:path';
 import { canaryPrefix, PRODUCTION_INPUTS, assertCanaryObjectRequest, assertProductionInputsUnchanged,
   assertStoredCardParity, assertCanaryJsonKey, assertCanaryTextFeed, CANARY_TEXT_FEED_KEY, assertCanarySourceRequest, assertSourceUrlGallery } from '../scripts/lib/catalog-generation-canary.mjs';
 import { kcarKoreaExactSource } from '../apps/web/lib/catalog/kcar-exact-source';
+import { autoGeorgiaEnrichedSource } from '../apps/web/lib/catalog/auto-georgia-enriched-source';
+import type { VehicleOffer } from '../apps/web/lib/catalog/types';
 import { assertSafeImageUrl, cacheImageFromUrl } from '../apps/web/lib/catalog/storage';
 import { resetJsonStorageForTests, getJsonStorage } from '../apps/web/lib/data';
 
@@ -34,9 +36,19 @@ test('source URL mode never fetches images or reads/writes binary caches, includ
         assert.deepEqual(assertSourceUrlGallery([image]), [url]);
         assert.equal(image.width, undefined);
       }
+      // The Georgia adapter used to write binaries directly and bypass this
+      // contract. Empty image ids must not collapse distinct source URLs.
+      const urls = Array.from({ length: 30 }, (_, index) => `https://cdn.auto.ge/listings/test/${index}.jpg`);
+      const offer = { market: 'georgia', engineCc: 1984, fuel: 'petrol',
+        operational: { raw: { images: [...urls, urls[0]] } } } as unknown as VehicleOffer;
+      const images = await autoGeorgiaEnrichedSource.fetchImages(offer);
+      assert.deepEqual(assertSourceUrlGallery(images), urls.slice(0, images.length));
+      assert.ok(images.length >= 6);
     }
     process.env.CATALOG_IMAGE_STORAGE_MODE = 'mistyped-mode';
     assert.equal(await cacheImageFromUrl('https://img.kcar.com/gallery/a.jpg', 'korea'), null);
+    assert.deepEqual(await autoGeorgiaEnrichedSource.fetchImages({ market: 'georgia', engineCc: 1984, fuel: 'petrol',
+      operational: { raw: { images: Array.from({ length: 30 }, (_, i) => `https://cdn.auto.ge/listings/test/${i}.jpg`) } } } as unknown as VehicleOffer), []);
     assert.equal(calls, 0);
     assert.deepEqual(await fs.readdir(path.join(temp, 'data')), []);
     assert.equal(await cacheImageFromUrl('https://127.0.0.1/a.jpg', 'europe'), null);

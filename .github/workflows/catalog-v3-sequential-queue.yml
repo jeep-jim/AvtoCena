@@ -7,10 +7,12 @@ on:
       - main
     paths:
       - ".github/catalog-v3-run-all"
-  # Production collection is intentionally paused while the six-market
+  # Production collection is intentionally paused while the five-market
   # identity/specification pipeline is being repaired. Re-enabling automation
   # requires a separate reviewed change; workflow_dispatch remains available
-  # for non-publishing diagnostics only while the central writer freeze is on.
+  # but the preflight refuses collection while the central writer freeze is on.
+  # Resume cadence after acceptance: weekly (Sunday 20:17 UTC), five markets.
+  # Japan is excluded; non-Japan retention is fourteen days.
 
 permissions:
   contents: read
@@ -22,42 +24,26 @@ concurrency:
 jobs:
   plan:
     runs-on: ubuntu-latest
-    outputs:
-      run_japan: ${{ steps.plan.outputs.run_japan }}
     steps:
-      - id: plan
-        shell: bash
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+      - run: npm ci
+      - name: Refuse a production crawl while publication is paused
         run: |
-          local_day="$(TZ=Asia/Bangkok date +%d)"
-          case "$local_day" in
-            01|08|15|22) run_japan=true ;;
-            *) run_japan=false ;;
-          esac
-          if [ "${{ github.event_name }}" = "workflow_dispatch" ] || [ "${{ github.event_name }}" = "push" ]; then run_japan=true; fi
-          echo "run_japan=$run_japan" >> "$GITHUB_OUTPUT"
-          echo "Local day: $local_day; Japan: $run_japan" >> "$GITHUB_STEP_SUMMARY"
-
-  japan:
-    needs: plan
-    if: needs.plan.outputs.run_japan == 'true'
-    uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
-    with:
-      market: japan
-      display_name: Япония
-      retention_ms: "2592000000"
-      target_per_source: "30000"
-      target_per_market: "30000"
-      maximum_per_market: "30000"
-      priority_target: "24000"
-      page_partition_count: "5"
-      # Weekly automation must continue from persisted source cursors so the
-      # 30-day Japan inventory expands instead of re-reading the first pages.
-      reset_cursor: false
-    secrets: inherit
+          node --import tsx --input-type=module -e '
+            const { CATALOG_PRODUCTION_WRITES_PAUSED } = await import("./apps/web/lib/catalog/storage.ts");
+            if (CATALOG_PRODUCTION_WRITES_PAUSED) {
+              console.error("Production refresh is paused. Run catalog-five-market-restart-check-branch.yml for fresh diagnostics.");
+              process.exit(1);
+            }
+          '
 
   korea:
-    needs: [plan, japan]
-    if: always() && needs.plan.result == 'success'
+    needs: plan
+    if: needs.plan.result == 'success'
     uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: korea
@@ -71,8 +57,8 @@ jobs:
     secrets: inherit
 
   china:
-    needs: korea
-    if: always()
+    needs: [plan, korea]
+    if: always() && needs.plan.result == 'success'
     uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: china
@@ -86,8 +72,8 @@ jobs:
     secrets: inherit
 
   uae:
-    needs: china
-    if: always()
+    needs: [plan, china]
+    if: always() && needs.plan.result == 'success'
     uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: uae
@@ -101,8 +87,8 @@ jobs:
     secrets: inherit
 
   europe:
-    needs: uae
-    if: always()
+    needs: [plan, uae]
+    if: always() && needs.plan.result == 'success'
     uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: europe
@@ -116,8 +102,8 @@ jobs:
     secrets: inherit
 
   georgia:
-    needs: europe
-    if: always()
+    needs: [plan, europe]
+    if: always() && needs.plan.result == 'success'
     uses: ./.github/workflows/catalog-v3-market-10k-reusable.yml
     with:
       market: georgia

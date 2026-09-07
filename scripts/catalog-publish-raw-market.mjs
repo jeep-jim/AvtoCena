@@ -15,7 +15,7 @@ const inputDir = process.env.CATALOG_REBUILD_INPUT_DIR || "catalog-v4-input";
 const reportFile = process.env.CATALOG_REBUILD_PUBLISH_REPORT || "catalog-raw-market-publish-report.json";
 const market = String(process.env.CATALOG_REBUILD_MARKETS || "").split(",")[0]?.trim();
 const maximumPerMarket = Math.max(1, Math.min(30_000, Number(process.env.CATALOG_PUBLISH_MAX_PER_MARKET || 30_000)));
-const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 3 * 24 * 60 * 60 * 1_000));
+const retentionMs = Math.max(60_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || 14 * 24 * 60 * 60 * 1_000));
 const currentYear = new Date().getFullYear();
 const priorityYear = currentYear - 6;
 

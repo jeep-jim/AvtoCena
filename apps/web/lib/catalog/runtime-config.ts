@@ -37,7 +37,7 @@ export const CATALOG_DAILY_TARGET_PER_MARKET = 100_000;
 export const CATALOG_DAILY_TARGET_PER_SOURCE = 100_000;
 export const CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET = 100_000;
 export const CATALOG_DAILY_TARGET_TOTAL = PUBLIC_CATALOG_MARKETS.length * CATALOG_DAILY_TARGET_PER_MARKET;
-export const CATALOG_RETENTION_MS = 3 * 24 * 60 * 60 * 1_000;
+export const CATALOG_RETENTION_MS = 14 * 24 * 60 * 60 * 1_000;
 
 export function catalogMarketLabel(value: unknown) {
   return CATALOG_MARKET_LABELS[String(value || "").toLowerCase() as CatalogMarket]

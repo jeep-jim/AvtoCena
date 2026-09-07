@@ -23,7 +23,7 @@ const maxPerMarket = Math.max(1, Math.min(CATALOG_MAX_PUBLIC_OFFERS_PER_MARKET |
 const preferredMaxRub = Math.max(500_000, Number(process.env.RECOVERY_PREFERRED_MAX_RUB || 8_000_000));
 const maxOffersPerModelYear = CATALOG_MAX_OFFERS_PER_MODEL_YEAR;
 const minImagesPerOffer = Math.max(1, Math.min(30, Number(process.env.CATALOG_REBUILD_MIN_IMAGES_PER_OFFER || 5)));
-const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || CATALOG_RETENTION_MS || 259_200_000));
+const retentionMs = Math.max(60 * 60 * 1_000, Number(process.env.CATALOG_OFFER_RETENTION_MS || CATALOG_RETENTION_MS || 1_209_600_000));
 const retentionCutoff = Date.now() - retentionMs;
 
 if (!markets.length || markets.some((market) => !PUBLIC_CATALOG_MARKETS.includes(market))) {

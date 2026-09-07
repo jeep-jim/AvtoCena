@@ -230,6 +230,11 @@ async function detailData(offer: VehicleOffer) {
 async function cacheAutoGeImage(rawUrl: string, offer: VehicleOffer): Promise<CatalogImage | null> {
   const safeUrl = safeAutoGeImageUrl(rawUrl);
   if (!safeUrl) return null;
+  const mode = (process.env.CATALOG_IMAGE_STORAGE_MODE || "source_urls_only").trim().toLowerCase();
+  if (mode === "source_urls_only") {
+    return { id: "", url: safeUrl, objectKey: "", checksum: "", mimeType: "", size: 0 };
+  }
+  if (mode !== "binary") return null;
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), Number(process.env.CATALOG_IMAGE_TIMEOUT_MS || 12_000));
   try {
@@ -269,7 +274,7 @@ async function cachePool(urls: string[], offer: VehicleOffer, limit: number) {
       const index = cursor++;
       if (index >= urls.length) return;
       const image = await cacheAutoGeImage(urls[index], offer);
-      if (image && !result.some((row) => row.id === image.id)) result.push(image);
+      if (image && !result.some((row) => (row.id || row.url) === (image.id || image.url))) result.push(image);
     }
   }));
   return result.slice(0, limit);
