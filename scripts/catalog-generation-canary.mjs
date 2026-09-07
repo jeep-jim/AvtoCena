@@ -107,11 +107,17 @@ try {
   const before = await readInputs();
   const { selectActiveMarketVersion } = await import('../apps/web/lib/business-settings.ts');
   const { resolveEffectiveMarketVersion } = await import('../apps/web/lib/effective-market-settings.ts');
+  if (!Array.isArray(before['markets/markets.json'].value)) throw new Error('canary_crm_snapshot_invalid');
   const rawMarket = before['markets/markets.json'].value.find(row => row.id === market);
   const activeVersion = selectActiveMarketVersion(rawMarket);
-  if (!activeVersion?.id) throw new Error('canary_active_crm_version_missing');
   const effective = resolveEffectiveMarketVersion(market, activeVersion);
-  report.businessSettings = { rawActiveVersion: activeVersion.id, effectiveVersion: effective.id,
+  // The product intentionally uses a provisional runtime profile when CRM has
+  // no active version. Attest that real behavior, without importing checkout CRM
+  // or mislabelling the average profile as owner-configured commercial terms.
+  report.businessSettings = { rawActiveVersion: activeVersion?.id || null, effectiveVersion: effective.id,
+    profileSource: activeVersion ? 'production_crm_version' : 'runtime_average_defaults',
+    provisional: effective.provisional, marketPresentInProduction: Boolean(rawMarket),
+    configuredMarketIds: before['markets/markets.json'].value.map(row => row.id),
     rawActiveHash: jsonHash(activeVersion), effectiveHash: jsonHash(effective),
     effectiveExpenses: Object.fromEntries(Object.entries(effective).filter(([key]) => /Rub$|Percent$|^provisional$/.test(key))) };
   report.productionBaseline = Object.fromEntries(PRODUCTION_INPUTS.map(key => [key,
