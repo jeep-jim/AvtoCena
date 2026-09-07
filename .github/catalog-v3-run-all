@@ -1,2 +1,7 @@
-requestedAt=2026-08-27T10:04:00Z
-reason=recalculate all six markets with proven power and zero fallback100 public cards
+requestedAt=2026-09-07
+reason=owner-approved five-market refresh after PR833 and verified deployment 39efa1a9
+markets=korea,china,uae,europe,georgia
+policy=retain suitable existing inventory within retention; collect fresh; publish only accepted nonempty markets
+ci=34096085334
+deploy=34096458515
+japan=excluded
