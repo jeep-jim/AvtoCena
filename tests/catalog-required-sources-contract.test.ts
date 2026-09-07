@@ -7,7 +7,7 @@ import {
   catalogV2RequiredSourceIds,
   catalogV2SourceIds,
 } from "../apps/web/lib/catalog/catalog-v2-source-registry";
-import { REQUIRED_CATALOG_SOURCES } from "../apps/web/lib/catalog/required-catalog-sources";
+import { REQUIRED_CATALOG_SOURCES, requiredCatalogSourceIds, requiredCatalogSourceUrls, isAllowedCatalogSourceId, isAllowedCatalogSourceUrl } from "../apps/web/lib/catalog/required-catalog-sources";
 import type { CatalogMarket } from "../apps/web/lib/catalog/types";
 
 const APPROVED_SOURCES: Record<CatalogMarket, readonly (readonly [string, string])[]> = {
@@ -88,4 +88,16 @@ test("Autohome new cars and JP Center are parser sources, not knowledge-only exc
     CATALOG_V2_SOURCE_SLOTS.japan.find((source) => source.sourceId === "jpcenter_japan_catalog_open")?.role,
     "knowledge",
   );
+});
+
+
+test("retired and malformed persisted markets fail closed without crashing publication", () => {
+  for (const market of ["kyrgyzstan", "", undefined, null, "constructor", "toString", "__proto__"] as unknown as CatalogMarket[]) {
+    assert.equal(isAllowedCatalogSourceId(market, "encar_direct"), false);
+    assert.equal(isAllowedCatalogSourceUrl(market, "encar_direct", "https://www.encar.com/"), false);
+    assert.deepEqual(requiredCatalogSourceIds(market), []);
+    assert.deepEqual(requiredCatalogSourceUrls(market), []);
+  }
+  assert.equal(isAllowedCatalogSourceId("korea", "encar_direct"), true);
+  assert.equal(isAllowedCatalogSourceId("china", "encar_direct"), false);
 });

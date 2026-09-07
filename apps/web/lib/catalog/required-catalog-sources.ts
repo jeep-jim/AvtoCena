@@ -50,13 +50,20 @@ export const REQUIRED_CATALOG_SOURCES: Record<CatalogMarket, readonly RequiredCa
   ],
 };
 
+// Persisted maintenance rows may belong to retired or malformed markets.
+// Unknown markets have no approved sources and must fail closed, not crash.
+function sourcesForMarket(market: CatalogMarket) {
+  const sources = REQUIRED_CATALOG_SOURCES[market];
+  return Array.isArray(sources) ? sources : [];
+}
+
 export function requiredCatalogSourceIds(market: CatalogMarket) {
-  return REQUIRED_CATALOG_SOURCES[market].map((source) => source.sourceId);
+  return sourcesForMarket(market).map((source) => source.sourceId);
 }
 
 export function isAllowedCatalogSourceId(market: CatalogMarket, sourceId: unknown) {
   const id = String(sourceId || "").trim();
-  return REQUIRED_CATALOG_SOURCES[market].some((source) => source.sourceId === id);
+  return sourcesForMarket(market).some((source) => source.sourceId === id);
 }
 
 function registrableHost(hostname: string) {
@@ -70,7 +77,7 @@ function registrableHost(hostname: string) {
 
 export function isAllowedCatalogSourceUrl(market: CatalogMarket, sourceId: unknown, urlValue: unknown) {
   const id = String(sourceId || "").trim();
-  const allowed = REQUIRED_CATALOG_SOURCES[market].find((source) => source.sourceId === id);
+  const allowed = sourcesForMarket(market).find((source) => source.sourceId === id);
   if (!allowed) return false;
   try {
     const actual = new URL(String(urlValue || ""));
@@ -82,5 +89,5 @@ export function isAllowedCatalogSourceUrl(market: CatalogMarket, sourceId: unkno
 }
 
 export function requiredCatalogSourceUrls(market: CatalogMarket) {
-  return REQUIRED_CATALOG_SOURCES[market].map((source) => source.canonicalUrl);
+  return sourcesForMarket(market).map((source) => source.canonicalUrl);
 }
