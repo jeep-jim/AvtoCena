@@ -5,7 +5,7 @@ import {
   mobileDeBodyEvidence,
   mobileDeSpecificationEvidence,
 } from "../apps/web/lib/catalog/mobile-de-exact-source";
-import { catalogSemanticEvidenceRejectionReason } from "../apps/web/lib/catalog/offer-quality";
+import { catalogSemanticEvidenceRejectionReason, isCrediblePublicOffer } from "../apps/web/lib/catalog/offer-quality";
 import { classifySpecificationEvidence } from "../apps/web/lib/catalog/specification-evidence-audit";
 
 const source = new MobileDeExactAdapter();
@@ -224,7 +224,24 @@ test("Mobile.de VIP category plus sale condition agrees with the SRP OffRoad buc
   assert.deepEqual(evidence.rawValues, ["OffRoad", "SUV/Geländewagen/Pickup, Jahreswagen"]);
   assert.equal(mobileDeBodyEvidence(["Cabrio", "Cabrio, Gebrauchtfahrzeug"]).value, "convertible");
   assert.equal(mobileDeBodyEvidence(["Van", "Van/Minibus, Tageszulassung"]).value, "van");
+  assert.equal(mobileDeBodyEvidence(["EstateCar", "Kombi, Jahreswagen"]).value, "wagon");
   assert.equal(mobileDeBodyEvidence(["OffRoad", "Coupé, Neufahrzeug"]).status, "conflict");
   assert.equal(mobileDeBodyEvidence(["Limousine, Gebrauchtfahrzeug"]).status, "ambiguous");
   assert.equal(mobileDeBodyEvidence(["SUV/Geländewagen/Pickup, unknown"]).status, "ambiguous");
+});
+
+
+test("unassigned optional body does not discard an otherwise credible car; invented bodies and pricing ambiguity still fail", () => {
+  const offer = source.normalizeOffer({ ...base, bodyType: undefined, bodyEvidence: mobileDeBodyEvidence(["Limousine"]) })!;
+  offer.images = Array.from({ length: 5 }, (_, index) => ({ id: "", url: `https://img.classistatic.de/api/v1/mo-prod/images/body-test-${index}.jpg`, mimeType: "image/jpeg", size: 0 }));
+  assert.equal(offer.bodyType, undefined);
+  assert.equal(catalogSemanticEvidenceRejectionReason(offer), "");
+  assert.equal(isCrediblePublicOffer(offer), true);
+  assert.equal(isCrediblePublicOffer({ ...offer, bodyType: "sedan" }), false);
+  const contradiction = structuredClone(offer);
+  (contradiction.operational as any).semanticEvidence.bodyType.status = "conflict";
+  assert.equal(isCrediblePublicOffer(contradiction), false);
+  const missingSpecs = structuredClone(offer);
+  (missingSpecs.operational as any).semanticEvidence.engineCc.status = "ambiguous";
+  assert.equal(isCrediblePublicOffer(missingSpecs), false);
 });

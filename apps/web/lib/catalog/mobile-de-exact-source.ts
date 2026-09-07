@@ -168,7 +168,7 @@ function exactMobileDeBody(value: unknown) {
   if (normalized === "suv/geländewagen/pickup") return "offroad";
   if (/^(?:cabrio|cabriolet|roadster)$/.test(normalized)) return "convertible";
   if (/^(?:coupé|coupe)$/.test(normalized)) return "coupe";
-  if (/^(?:kombi|estate|station wagon)$/.test(normalized)) return "wagon";
+  if (/^(?:kombi|estate|estatecar|station wagon)$/.test(normalized)) return "wagon";
   if (/^(?:suv|crossover)$/.test(normalized)) return "suv";
   if (/^(?:geländewagen|offroad)$/.test(normalized)) return "offroad";
   if (/^(?:pickup|pick-up)$/.test(normalized)) return "pickup";
