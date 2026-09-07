@@ -1,3 +1,4 @@
+import { enforceCatalogModelYearQuota, isCatalogCombustionLowPower, selectCatalogShowcaseDiversity } from "./inventory-quota";
 import type { VehicleOffer } from "./types";
 
 export type CatalogV2Tier = "japan_auction" | "priority" | "recent" | "extended" | "rejected";
@@ -21,7 +22,7 @@ export const CATALOG_V2_DEFAULT_POLICY: CatalogV2PolicyOptions = {
   recentMaxAgeYears: 15,
   priorityMaxPowerHp: 160,
   priorityMaxTotalRub: 6_000_000,
-  hardMaxTotalRub: Number.MAX_SAFE_INTEGER,
+  hardMaxTotalRub: 15_000_000,
   lowPowerMinShare: 0.8,
 };
 
@@ -54,13 +55,13 @@ export function isCatalogPriorityOffer(offer: Partial<VehicleOffer>, options: Ca
   return totalRub !== undefined
     && totalRub <= options.priorityMaxTotalRub
     && powerHp !== undefined
-    && powerHp <= options.priorityMaxPowerHp;
+    && isCatalogCombustionLowPower(offer, options.priorityMaxPowerHp);
 }
 
 /** <=160 hp remains a ranking/coverage target, never an admission gate. */
 export function isCatalogLowPowerOffer(offer: Partial<VehicleOffer>, options: CatalogV2PolicyOptions = CATALOG_V2_DEFAULT_POLICY) {
   const powerHp = number(offer.powerHp);
-  return powerHp !== undefined && powerHp <= options.priorityMaxPowerHp;
+  return powerHp !== undefined && isCatalogCombustionLowPower(offer, options.priorityMaxPowerHp);
 }
 
 export function classifyCatalogV2Offer(offer: Partial<VehicleOffer>, options: CatalogV2PolicyOptions = CATALOG_V2_DEFAULT_POLICY): CatalogV2Classification {
@@ -69,7 +70,7 @@ export function classifyCatalogV2Offer(offer: Partial<VehicleOffer>, options: Ca
   const minimumYear = offer.market === "japan" ? 2010 : 2020;
   if (!year || year < minimumYear || year > new Date().getFullYear() + 1) return { tier: "rejected", eligible: false, reason: "year", ageYears, powerHp, totalRub, popularityDecile: popularity };
   if (!hasExplicitSourcePrice(offer)) return { tier: "rejected", eligible: false, reason: REQUEST_PRICE.test(priceText(offer)) ? "price_on_request" : "source_price_missing", ageYears, powerHp, totalRub, popularityDecile: popularity };
-  if (totalRub !== undefined && totalRub > options.hardMaxTotalRub) return { tier: "rejected", eligible: false, reason: "hard_price_cap", ageYears, powerHp, totalRub, popularityDecile: popularity };
+  if (totalRub !== undefined && totalRub > Math.min(15_000_000, options.hardMaxTotalRub)) return { tier: "rejected", eligible: false, reason: "hard_price_cap", ageYears, powerHp, totalRub, popularityDecile: popularity };
   if (offer.market === "japan" && isJapanAuctionOffer(offer)) {
     if (!isCompletedJapanAuction(offer)) return { tier: "rejected", eligible: false, reason: "japan_auction_not_completed", ageYears, powerHp, totalRub, popularityDecile: popularity };
     return isCatalogPriorityOffer(offer, options)
@@ -117,7 +118,9 @@ export function selectCatalogV2MarketOffers(offers: VehicleOffer[], options: Cat
   accepted.sort((left, right) => order(left, right, options));
   const maximum = Math.max(1, Number(options.maximumPerMarket || 30_000));
   const requestedPriorityTarget = Math.max(0, Math.min(maximum, Number(options.priorityTarget || 0)));
-  const selected = accepted.slice(0, maximum);
+  const quota = enforceCatalogModelYearQuota(accepted);
+  if (quota.removed.length) rejected.model_year_quota = quota.removed.length;
+  const selected = selectCatalogShowcaseDiversity(quota.rows, maximum);
 
   const priorityCount = selected.filter((offer) => isCatalogPriorityOffer(offer, options)).length;
   const lowPowerCount = selected.filter((offer) => isCatalogLowPowerOffer(offer, options)).length;

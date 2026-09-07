@@ -1,3 +1,4 @@
+import { isCatalogCombustionLowPower } from "./inventory-quota";
 import type { VehicleOffer } from "./types";
 import { isCatalogPowerScenario } from "./power-scenario";
 import { catalogPowerSanity } from "./power-sanity";
@@ -352,7 +353,7 @@ export function catalogPublicPriority(offer: Partial<VehicleOffer> | any): Catal
   if (!visibleRub) return { eligible: false, tier: 99, reason: "missing_ruble_price", ...base };
 
   const recent = ageYears <= maximumAgeYears;
-  const economicalPower = powerHp > 0 && powerHp <= maximumPowerHp;
+  const economicalPower = isCatalogCombustionLowPower(offer, maximumPowerHp);
   const popular = popularityDecile <= popularDecile;
   const preferredPrice = rawTotalRub <= preferredMaximumRub;
   let tier = preferredPrice ? 6 : 7;

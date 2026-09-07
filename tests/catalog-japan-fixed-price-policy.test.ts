@@ -23,6 +23,8 @@ function japanOffer(id: string, overrides: Record<string, unknown> = {}) {
     sourceCurrency: "JPY",
     totalRub: 2_100_000,
     powerHp: 125,
+    fuel: "petrol",
+    powertrainKind: "combustion",
     status: "active",
     ...overrides,
   } as any;

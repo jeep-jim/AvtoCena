@@ -98,7 +98,7 @@ test("Japan scale workflow is approved-source-only and cannot publish below 8700
   assert.match(collector, /"auctionDate", "auctionVenue", "lotNumber", "make", "model", "chassis", "year", "engineCc"/);
   assert.match(recovery, /raw\?\.exactJoinVersion === 1/);
   assert.match(quota, /process\.env\.CATALOG_MAX_OFFERS_PER_MODEL_YEAR \|\| 20/);
-  assert.match(quota, /Math\.min\(100/);
+  assert.match(quota, /Math\.min\(20/);
   assert.match(workflow, /RECOVERY_PUBLISH_MIN_COUNT: "8700"/);
   assert.match(publisher, /recovery_canonical_preview_count_gate_failed/);
   assert.doesNotMatch(`${workflow}\n${collector}\n${recovery}`, /goo-?net_exchange|goonet-exact-source/i);
