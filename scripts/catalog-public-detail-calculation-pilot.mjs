@@ -104,6 +104,10 @@ const { getJsonStorage } = await import('../apps/web/lib/data.ts');
 const storage = getJsonStorage();
 for (const method of ['writeJson', 'writeJsonIfMatch', 'deleteObject', 'deleteObjects', 'deletePrefix', 'putBinary']) storage[method] = async () => { throw new Error('diagnostic_storage_write_blocked'); };
 const { calculateOfferWithVerifiedSpecifications } = await import('../apps/web/lib/catalog/customs-pricing.ts');
+const { enrichOfferWithKnowledgeCore } = await import('../apps/web/lib/catalog/knowledge-core.ts');
+const { enrichOfferWithCertifiedPower } = await import('../apps/web/lib/catalog/power-reference.ts');
+const { normalizeVehicleOfferSpecs } = await import('../apps/web/lib/catalog/spec-normalization.ts');
+report.calculationPreparation = 'knowledge_core_then_certified_power_then_verified_specifications';
 for (const [market, module, name, hosts] of sources.filter(([market]) => requestedMarkets.has(market))) {
   active = { market, hosts, requests: [] };
   try {
@@ -153,8 +157,15 @@ for (const [market, module, name, hosts] of sources.filter(([market]) => request
               apiEngine: raw.detail?.engine, apiFuel: raw.detail?.fuelname,
               boundParameters: raw.boundPageParameters || null, semanticEvidence: offer.operational?.semanticEvidence };
           }
-          item.fields = Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(field => [field, classifySpecificationEvidence(offer, field)]));
-          const priced = await calculateOfferWithVerifiedSpecifications(offer);
+          item.sourceFields = Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(field => [field, classifySpecificationEvidence(offer, field)]));
+          // Match collection's knowledge preparation before the exact-evidence
+          // gate. Representative guesses and unresolved variants still fail it.
+          const calculationInput = normalizeVehicleOfferSpecs(await enrichOfferWithCertifiedPower(
+            await enrichOfferWithKnowledgeCore(structuredClone(offer))));
+          item.fields = Object.fromEntries(SPECIFICATION_AUDIT_FIELDS.map(field => [field, classifySpecificationEvidence(calculationInput, field)]));
+          item.calculationInput = Object.fromEntries(Object.keys(before).map(key => [key, calculationInput[key]]));
+          item.knowledgeEnrichment = calculationInput.operational?.knowledgeCore || null;
+          const priced = await calculateOfferWithVerifiedSpecifications(calculationInput);
           item.totalRub = priced.totalRub;
           item.calculationStatus = priced.calculationStatus;
           item.breakdown = priced.calculationSnapshot?.breakdown;

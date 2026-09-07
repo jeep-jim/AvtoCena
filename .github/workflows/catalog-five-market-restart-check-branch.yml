@@ -1,4 +1,4 @@
-name: Existing production bridge restart diagnostics v3
+name: Production bridge calculation preparation check v4
 on:
   push:
     branches: [feat/catalog-europe-kcar-generation-canary-20260907]
@@ -19,7 +19,6 @@ jobs:
       matrix:
         include:
           - { market: korea, source: encar_direct }
-          - { market: china, source: guazi_china_open }
           - { market: georgia, source: myauto_georgia_list }
     env:
       PILOT_ALLOW_EXISTING_BRIDGE: '1'
